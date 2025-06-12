@@ -1,0 +1,8 @@
+# requirements.txt
+# List of dependencies for the Azure Monitor MCP Agent project
+azure-identity
+azure-monitor-query
+flask
+click
+openai
+azure-ai-openai

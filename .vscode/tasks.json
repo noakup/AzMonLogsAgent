@@ -1,0 +1,21 @@
+{
+    // ...existing code...
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run CLI",
+            "type": "shell",
+            "command": "python main.py --help",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Run Web Service",
+            "type": "shell",
+            "command": "python web_service.py",
+            "group": "build",
+            "problemMatcher": []
+        }
+    ]
+    // ...existing code...
+}
