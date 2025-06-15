@@ -72,8 +72,6 @@ def query(workspace_id, query, ask, timespan):
 def translate_nl_to_kql(nl_question):
     """
     Translate a natural language question to KQL using Azure OpenAI Service REST API.
-    Always check the usage_kql_examples.md file for a matching example before calling the LLM. If a matching example is found, return its KQL directly.
-    Never return or run a KQL query that is only a table name (e.g., 'Usage').
     Requires the following environment variables to be set:
     - AZURE_OPENAI_ENDPOINT: The endpoint URL of your Azure OpenAI resource
     - AZURE_OPENAI_KEY: The key for your Azure OpenAI resource
@@ -83,20 +81,6 @@ def translate_nl_to_kql(nl_question):
     import requests
     import json
     # First, check the examples file for a matching prompt
-    examples_path = os.path.join(os.path.dirname(__file__), 'usage_kql_examples.md')
-    if os.path.exists(examples_path):
-        with open(examples_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-            # Look for a matching prompt (case-insensitive, strip whitespace)
-            import re
-            pattern = re.compile(r'\*\*Prompt:\*\*\s*(.+?)\n\n\*\*KQL:\*\*\s*(.+?)(?:\n|$)', re.DOTALL | re.IGNORECASE)
-            matches = pattern.findall(content)
-            for prompt, kql in matches:
-                if prompt.strip().lower() == nl_question.strip().lower():
-                    # Never return a query that is only a table name
-                    if kql.strip().lower() in ["usage", "heartbeat", "event"]:
-                        return "// Error: Refusing to run a query that is only a table name. Please ask a more specific question."
-                    return kql.strip()
     endpoint = os.environ.get("AZURE_OPENAI_ENDPOINT")
     api_key = os.environ.get("AZURE_OPENAI_KEY")
     deployment = os.environ.get("AZURE_OPENAI_DEPLOYMENT", "gpt-35-turbo")
@@ -110,8 +94,8 @@ def translate_nl_to_kql(nl_question):
     prompt = f"""
 You are an expert in Azure Log Analytics and Kusto Query Language (KQL).
 Translate the following natural language question into a valid KQL query that can be run on a Log Analytics workspace. If the question asks for totals, counts, averages, or similar aggregations, use the appropriate summarize/aggregation operator in KQL. Only return the KQL query, no explanation, no comments, no extra text.
-If the natural language question is related to ingestion volume, billing, usage or something similar, refer to the file "usage_kql_examples.md" to extend your knowledge on this.
-If the questions is about Application Insights, exceptions, requests, traces, dependencies, or events - it is CRITICAL that you refer to "kql_examples_app_insights_over_la.md" to extend your knowledge on this. This is because Application Insights data stored in a Log Analytics workspace has different table and column names when they run on Log Analytics worksaces.
+If the natural language question is about Application Insights, exceptions, requests, traces, dependencies, or events - it is CRITICAL that you refer to "kql_examples_app_insights_over_la.md" to review query examples and learn how to query the relevant tables. 
+This is because Application Insights data stored in a Log Analytics workspace has different table and column names when they run on Log Analytics workspaces.
 Use that file to extend your knowledge on this. For example, instead of using timestamp, these tables use TimeGenerated. Similarly, table names are AppRequests instead of requests etc. Similarly, the column names are different.
 
 Metadata:
