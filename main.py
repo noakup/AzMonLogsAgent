@@ -30,7 +30,7 @@ def query(workspace_id, query, ask, timespan):
 
     # If --ask is provided, use OpenAI to translate NL to KQL
     if ask:
-        kql_query = translate_nl_to_kql(ask)
+        kql_query = translate_nl_to_kql_with_retries(ask, workspace_id)
         click.echo({'generated_kql': kql_query})  # Show the generated KQL for debugging
         # Check if KQL is valid (not empty or error)
         if not kql_query or kql_query.strip() == '' or kql_query.strip().startswith('// Error'):
@@ -240,6 +240,8 @@ AppRequests
   ) on OperationId
 | project exceptionType = Type, failedMethod = Method, requestName = Name, requestDuration = DurationMs, _ResourceId
 
+see more examples in the kql_examples_app_insights_over_la.md file.
+
 if the question is unclear or cannot be answered with KQL, return an error message starting with "// Error: " and do not return a KQL query.
 
 Question: {nl_question}
@@ -263,6 +265,40 @@ KQL:"""
         return kql
     except Exception as e:
         return f"// Error translating NL to KQL: {str(e)}"
+
+def is_valid_kql(workspace_id, kql_query):
+    """
+    Checks if a KQL query is valid by attempting to run it with a very short timespan and catching syntax errors.
+    Returns True if valid, False otherwise.
+    """
+    from azure_agent.monitor_client import AzureMonitorAgent
+    agent = AzureMonitorAgent()
+    # Use a short timespan to minimize data scanned
+    try:
+        result = agent.query_log_analytics(workspace_id, kql_query, timespan=("2024-01-01T00:00:00Z", "2024-01-01T01:00:00Z"))
+        # If the result contains an error related to syntax, return False
+        if isinstance(result, dict) and 'error' in result and result['error']:
+            error_msg = str(result['error']).lower()
+            if 'syntax' in error_msg or 'parse' in error_msg or 'invalid' in error_msg:
+                return False
+        return True
+    except Exception as e:
+        if 'syntax' in str(e).lower() or 'parse' in str(e).lower() or 'invalid' in str(e).lower():
+            return False
+        return True
+
+def translate_nl_to_kql_with_retries(nl_question, workspace_id, max_attempts=3):
+    """
+    Attempts to generate a valid KQL query from a natural language question, up to max_attempts times.
+    Returns the valid KQL query or an error message after 3 failed attempts.
+    """
+    for attempt in range(max_attempts):
+        kql_query = translate_nl_to_kql(nl_question)
+        if not kql_query or kql_query.strip() == '' or kql_query.strip().startswith('// Error'):
+            continue
+        if is_valid_kql(workspace_id, kql_query):
+            return kql_query
+    return f"// Error: Failed to generate a valid KQL query for: '{nl_question}' after {max_attempts} attempts."
 
 if __name__ == '__main__':
     cli()
