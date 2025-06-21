@@ -76,13 +76,13 @@ AppTraces
 | where SeverityLevel == 3
 ```
 
-**Show traces with cloud_Role name containing "term" and a message with text "given text"**
+**Show traces with role name containing "term" and a message with text "given text"**
 ```kql
 AppTraces
 | where AppRoleName contains "term" and Message contains "given text"
 ```
 
-**Show all traces with cloud role name "the name"**
+**Show all traces with role name "the name"**
 ```kql
 AppTraces
 | where AppRoleName == "the name"

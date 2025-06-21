@@ -3,8 +3,8 @@ Application exceptions are logged in the "AppExceptions" Log analytics table.
 The information in this table can be used to analyze exception types, counts, imapcted users, and distribution across problems, operations, roles, client types etc.
 
 ## AppExceptions Table structure
-| Column | Type | Description |
-|---|---|---|
+| Column name | Data Type | Description |
+|-------------|-----------|-------------|
 | AppRoleInstance | string | Role instance of the application. |
 | AppRoleName | string | Role name of the application. |
 | AppVersion | string | Version of the application. |

@@ -3,8 +3,8 @@
  The information in this table can be used to analyze request duration, success rates, operations, origin, number of users impacted etc.
 
 ## AppRequests Table structure
-| Column | Type | Description |
-|---|---|---|
+| Column name | Data Type | Description |
+|-------------|-----------|-------------|
 | AppRoleInstance | string | Role instance of the application. |
 | AppRoleName | string | Role name of the application. |
 | AppVersion | string | Version of the application. |

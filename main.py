@@ -1,8 +1,8 @@
 # main.py
 """
 CLI entry point for the Azure Monitor MCP Agent.
-Uses Click for argument parsing and command-line interface.
 """
+
 import click
 from azure_agent.monitor_client import AzureMonitorAgent
 import openai  # Add this import at the top
@@ -92,21 +92,30 @@ def translate_nl_to_kql(nl_question):
         "api-key": api_key
     }
     system_prompt = """You are an expert in Azure Log Analytics and Kusto Query Language (KQL).
-    your task is to translate natural language questions into valid KQL queries that can be run on a Log Analytics
-    workspace. If the user asks for totals, counts, averages, or similar aggregations, use the appropriate 
-    summarize/aggregation operator in KQL. 
+    Your task is to translate natural language questions into valid KQL queries that can be run on a Log Analytics workspace.
+    If the user asks for totals, counts, averages, or similar aggregations, use the appropriate summarize/aggregation operator in KQL.
     Only return the KQL query, no explanation, no comments, no extra text.
-    If the natural language question is about Application Insights exceptions, performance, requests, traces, 
-    dependencies, page views or events - it is CRITICAL that you refer to relevant metadate file 
-    (e.g. "app_requests_metadata.md") to learn about the table and columns capturing that information. 
-    It is also critical that you refer to the relevant kql examples file in this repo 
-    (e.g. "app_custom_events_kql_examples.md") to review relevant query examples.
-    This is because Application Insights data stored in a Log Analytics workspace has different table and column names 
-    when they run on Log Analytics workspaces. For example, instead of using timestamp, these tables use TimeGenerated.
-    Similarly, table names are AppRequests/AppTraces instead of requests/traces etc.
-    Note that some tables have a column called 'ItemCount' which denotes the number of telemetry items represented by a single sample item. When performing aggregations, you should sum by ItemCount to get the total number of items.
-    Remember not to use tables and columns of Appliation Insights that are not defined in the metadata file. These are not valid here.
-    if the question is unclear or cannot be answered with KQL, return an error message starting with "// Error: " and do not return a KQL query."""
+
+    Scenario-Specific NL-to-KQL Routing:
+    ------------------------------------
+    - When a user provides a natural language (NL) question, you should:
+      1. Analyze the NL question to determine which Application Insights entity or scenario it relates to (e.g., requests, exceptions, traces).
+      2. Route the NL question to the appropriate specialized NL-to-KQL tool:
+         - For requests-related questions (AppRequests): use the logic and examples from `nl_to_kql_requests.py` and `kql_examples_requests.md`.
+         - For exceptions-related questions (AppExceptions): use the logic and examples from `nl_to_kql_exceptions.py` and `kql_examples_exceptions.md`.
+         - For traces/logs-related questions (AppTraces): use the logic and examples from `nl_to_kql_traces.py` and `kql_examples_traces.md`.
+         - For other scenarios/entities, use the generic OpenAI-based translation logic.
+      3. Each specialized tool should reference the corresponding KQL example and metadata files (e.g., `kql_examples_requests.md`, `app_exceptions_metadata.md`).
+      4. If the scenario is ambiguous or cannot be answered with KQL, don't create a kql query, and return an error message indicating ambiguity and starting with "// Error: ".
+
+    Important Notes:
+    - When adding new entities/scenarios, create a new NL-to-KQL tool and KQL example file, and update this routing logic accordingly.
+    - Do NOT implement the routing logic in code unless specifically requested. These are instructions for future maintainers and agent developers.
+    - Always return a valid KQL query that can be run against a Log Analytics workspace.
+    - Do not return any explanations, comments, or additional text in the response.
+    - Use the metadata files (e.g., `app_exceptions_metadata.md`) to understand the structure of the Application Insights tables and columns.
+    - Use the KQL examples files (e.g., `kql_examples_requests.md`, `kql_examples_exceptions.md`, `kql_examples_traces.md`) to understand how to construct queries for specific scenarios.
+    - some tables have a column named 'ItemCount' which denotes the number of telemetry items represented by a single sample item. When performing aggregations, you should sum by ItemCount to get the total number of items. """
 
     prompt = f"""
 
