@@ -4,5 +4,4 @@ azure-identity
 azure-monitor-query
 flask
 click
-openai
-azure-ai-openai
+openai>=1.0.0

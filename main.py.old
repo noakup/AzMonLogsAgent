@@ -92,10 +92,15 @@ def translate_nl_to_kql(nl_question):
     endpoint = os.environ.get("AZURE_OPENAI_ENDPOINT")
     api_key = os.environ.get("AZURE_OPENAI_KEY")
     deployment = os.environ.get("AZURE_OPENAI_DEPLOYMENT", "gpt-35-turbo")
-    
-    if not endpoint or not api_key:
+      if not endpoint or not api_key:
         return "// Error: AZURE_OPENAI_ENDPOINT and AZURE_OPENAI_KEY must be set in the environment. Create a .env file with your Azure OpenAI credentials."
-    url = f"{endpoint}/openai/deployments/{deployment}/chat/completions?api-version=2024-12-01-preview"
+      # Use compatible API version for o1-mini models
+    if "o1" in deployment.lower() or "o4" in deployment.lower():
+        api_version = "2024-12-01-preview"  # o4-mini requires this version or later
+    else:
+        api_version = "2024-08-01-preview"
+    
+    url = f"{endpoint}/openai/deployments/{deployment}/chat/completions?api-version={api_version}"
     headers = {
         "Content-Type": "application/json",
         "api-key": api_key
@@ -125,18 +130,28 @@ def translate_nl_to_kql(nl_question):
     - Do not return any explanations, comments, or additional text in the response.
     - Use the metadata files (e.g., `app_exceptions_metadata.md`) to understand the structure of the Application Insights tables and columns.
     - Use the KQL examples files (e.g., `app_requests_kql_examples.md`, `app_exceptions_kql_examples.md`, `app_traces_kql_examples.md`) to understand how to construct queries for specific scenarios.
-    - some tables have a column named 'ItemCount' which denotes the number of telemetry items represented by a single sample item. When performing aggregations, you should sum by ItemCount to get the total number of items. """
-
-    prompt = f"""
+    - some tables have a column named 'ItemCount' which denotes the number of telemetry items represented by a single sample item. When performing aggregations, you should sum by ItemCount to get the total number of items. """    prompt = f"""
 
 Question: {nl_question}
 KQL:"""
-    data = {
-        "messages": [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": prompt}
-        ]
-    }
+    
+    # o1-mini models have different parameter requirements
+    if "o1" in deployment.lower() or "o4" in deployment.lower():
+        data = {
+            "messages": [
+                {"role": "user", "content": f"{system_prompt}\n\n{prompt}"}
+            ],
+            "max_completion_tokens": 500
+        }
+    else:
+        data = {
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": prompt}
+            ],
+            "temperature": 0.1,
+            "max_tokens": 500
+        }
     try:
         response = requests.post(url, headers=headers, data=json.dumps(data))
         response.raise_for_status()

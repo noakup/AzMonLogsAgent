@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "kql-server": {
+      "command": "python",
+      "args": ["c:\\GitHub\\NoaAzMonAgent\\my-first-mcp-server\\mcp_server.py"],
+      "env": {
+        "PYTHONPATH": "c:\\GitHub\\NoaAzMonAgent"
+      }
+    }
+  }
+}
