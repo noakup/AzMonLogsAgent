@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Language KQL Agent</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            padding: 30px;
+        }
+
+        .setup-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+
+        .setup-section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .status-indicator {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-left: 10px;
+        }
+
+        .status-connected {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-disconnected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .query-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .query-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .question-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            resize: vertical;
+            min-height: 60px;
+            transition: border-color 0.3s ease;
+        }
+
+        .question-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .suggestions {
+            margin-bottom: 20px;
+        }
+
+        .suggestions h3 {
+            color: #555;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .suggestion-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .suggestion-pill {
+            background: #e9f4ff;
+            color: #0066cc;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #b3d9ff;
+        }
+
+        .suggestion-pill:hover {
+            background: #0066cc;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .examples-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .example-btn {
+            padding: 8px 15px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .example-btn:hover {
+            background: #e9ecef;
+            transform: translateY(-1px);
+        }
+
+        .results-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            min-height: 100px;
+            display: none;
+        }
+
+        .results-section.visible {
+            display: block;
+        }
+
+        .results-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .result-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-steps {
+            text-align: left;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .current-step {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .progress-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .step {
+            padding: 8px 12px;
+            border-radius: 6px;
+            background: #f8f9fa;
+            color: #6c757d;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border-left: 3px solid #dee2e6;
+        }
+
+        .step.active {
+            background: #e8f4fd;
+            color: #0066cc;
+            border-left-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .step.completed {
+            background: #d4edda;
+            color: #155724;
+            border-left-color: #28a745;
+        }
+
+        .step.retry {
+            background: #fff3cd;
+            color: #856404;
+            border-left-color: #ffc107;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #dc3545;
+            margin-top: 15px;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            margin-top: 15px;
+        }
+
+        .timestamp {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 10px;
+            text-align: right;
+        }
+
+        .progress-container {
+            margin: 15px 0;
+            background: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 6px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .timing-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .loading-stats {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        /* Table styling for query results */
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .result-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .result-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .result-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0 10px 0;
+            padding: 10px 0;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .table-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .table-info {
+            font-size: 0.9rem;
+            color: #666;
+            background: #f8f9fa;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .kql-query {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #495057;
+            white-space: pre-wrap;
+        }
+
+        .query-header {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .no-data-message {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .result-container {
+            max-height: 500px;
+            overflow-y: auto;
+            border-radius: 8px;
+        }
+
+        /* Enhanced responsive design for tables */
+        @media (max-width: 768px) {
+            .result-table {
+                font-size: 0.8rem;
+            }
+            
+            .result-table th,
+            .result-table td {
+                padding: 8px 10px;
+            }
+            
+            .table-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+            
+            .result-container {
+                overflow-x: auto;
+            }
+        }
+
+        /* Enhanced table features */
+        .result-table tbody tr:nth-child(odd) {
+            background-color: #f8f9fa;
+        }
+
+        .result-table tbody tr:nth-child(even) {
+            background-color: white;
+        }
+
+        .cell-number {
+            text-align: right;
+            font-family: 'Courier New', monospace;
+        }
+
+        .cell-boolean {
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .cell-boolean.true {
+            color: #28a745;
+        }
+
+        .cell-boolean.false {
+            color: #dc3545;
+        }
+
+        .cell-null {
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        .table-stats {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: #e9ecef;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #495057;
+        }
+
+        /* Explain button styling */
+        .explain-section {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .btn-explain {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-explain:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-explain:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .explain-loading {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .explain-spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .explain-result {
+            margin-top: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+            border-left: 4px solid #28a745;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .explain-result h4 {
+            margin: 0 0 10px 0;
+            color: #28a745;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            .suggestion-pills,
+            .examples-section {
+                flex-direction: column;
+            }
+        }        /* Example suggestions styling */
+        .example-suggestions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .example-suggestion {
+            background: #f8f9fa;
+            color: #333;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #dee2e6;
+            text-align: left;
+            font-weight: 500;
+        }
+
+        .example-suggestion:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Dedicated example suggestions section */
+        .example-suggestions-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #667eea;
+        }        .example-suggestions-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .example-suggestions-content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Natural Language KQL Agent</h1>
+            <p>Ask questions about your Azure Log Analytics data in plain English</p>
+        </div>
+
+        <div class="main-content">
+            <!-- Setup Section -->
+            <div class="setup-section">
+                <h2>🔧 Workspace Setup</h2>
+                <div class="input-group">
+                    <input type="text" id="workspaceId" placeholder="Enter your Log Analytics Workspace ID" value="">
+                    <button class="btn btn-primary" onclick="setupWorkspace()">Connect</button>
+                    <button class="btn btn-secondary" onclick="testConnection()">Test Connection</button>
+                </div>
+                <div id="setupStatus">
+                    <span class="status-indicator status-disconnected">Not Connected</span>
+                </div>
+            </div>            <!-- Query Section -->
+            <div class="query-section">
+                <div class="suggestions">
+                    <h3>💡 Quick Suggestions:</h3>
+                    <div class="suggestion-pills">
+                        <div class="suggestion-pill" onclick="setQuestion('Show me failed requests from the last hour')">Failed Requests</div>
+                        <div class="suggestion-pill" onclick="setQuestion('What are the top 5 slowest API calls?')">Slowest APIs</div>
+                        <div class="suggestion-pill" onclick="setQuestion('Show me recent exceptions')">Recent Exceptions</div>
+                        <div class="suggestion-pill" onclick="setQuestion('Get heartbeat data from the last 30 minutes')">Heartbeat Data</div>
+                        <div class="suggestion-pill" onclick="setQuestion('Show me dependency failures')">Dependency Failures</div>
+                        <div class="suggestion-pill" onclick="setQuestion('What is the error rate in the last 24 hours?')">Error Rate</div>
+                    </div>
+                </div>                <div class="examples-section">
+                    <h3>📚 Get Examples:</h3>
+                    <div class="example-btn" onclick="getExamples('requests')">Requests</div>
+                    <div class="example-btn" onclick="getExamples('exceptions')">Exceptions</div>
+                    <div class="example-btn" onclick="getExamples('traces')">Traces</div>
+                    <div class="example-btn" onclick="getExamples('dependencies')">Dependencies</div>
+                    <div class="example-btn" onclick="getExamples('performance')">Performance</div>
+                    <div class="example-btn" onclick="getExamples('usage')">Usage</div>
+                </div>
+
+                <!-- Example Suggestions Section -->
+                <div id="exampleSuggestionsSection" class="example-suggestions-section" style="display: none;">
+                    <h3 id="exampleSuggestionsTitle">💡 Example Suggestions</h3>
+                    <div id="exampleSuggestionsContent" class="example-suggestions-content">
+                        <!-- Example suggestions will be populated here -->
+                    </div>
+                </div>
+
+                <h2>💬 Ask Your Question</h2>
+                <textarea 
+                    id="questionInput" 
+                    class="question-input" 
+                    placeholder="Type your question here... (e.g., 'Show me failed requests from the last hour')"
+                ></textarea>
+
+                <div style="background: #e8f4fd; border: 1px solid #b3d9ff; border-radius: 8px; padding: 12px; margin-bottom: 15px; font-size: 0.9rem; color: #0066cc;">
+                    <strong>🔄 Smart Translation:</strong> The system automatically retries translation if the first attempt fails, improving success rates for complex questions.
+                </div>
+
+                <button class="btn btn-success" onclick="enhancedAskQuestion()" style="width: 100%; margin-top: 15px;">
+                    🚀 Ask Question
+                </button>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="results-section">
+                <h3>📊 Results</h3>
+                <div id="resultContent" class="result-content"></div>
+                <div id="timestamp" class="timestamp"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isConnected = false;
+        let currentQueryResult = null; // Store current query result for explain feature
+        let currentOriginalQuestion = '';
+
+        function updateStatus(connected, message = '') {
+            isConnected = connected;
+            const statusElement = document.getElementById('setupStatus');
+            
+            if (connected) {
+                statusElement.innerHTML = `<span class="status-indicator status-connected">✅ Connected</span>`;
+                if (message) {
+                    statusElement.innerHTML += `<div class="success">${message}</div>`;
+                }
+            } else {
+                statusElement.innerHTML = `<span class="status-indicator status-disconnected">❌ Not Connected</span>`;
+                if (message) {
+                    statusElement.innerHTML += `<div class="error">${message}</div>`;
+                }
+            }
+        }        function showLoading(step = 'Initializing...') {
+            const resultsSection = document.getElementById('resultsSection');
+            const resultContent = document.getElementById('resultContent');
+            
+            resultsSection.classList.add('visible');
+            resultContent.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <div class="loading-steps">
+                        <div id="currentStep" class="current-step">${step}</div>
+                        
+                        <div class="progress-container">
+                            <div id="progressBar" class="progress-bar"></div>
+                        </div>
+                        
+                        <div class="timing-info">
+                            <span id="progressPercent">0%</span>
+                            <span id="estimatedTime">Estimating...</span>
+                        </div>
+                        
+                        <div class="progress-steps">
+                            <div class="step" id="step-translate">🔄 Translating to KQL...</div>
+                            <div class="step" id="step-validate">✅ Validating query...</div>
+                            <div class="step" id="step-execute">⚡ Executing query...</div>
+                            <div class="step" id="step-format">📊 Formatting results...</div>
+                        </div>
+                        
+                        <div class="loading-stats">
+                            <div>✨ <strong>Smart Retry Logic:</strong> Automatic retries for better results</div>
+                            <div>🕐 <strong>Timespan Detection:</strong> Intelligent time filter handling</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Analytics and metrics for enhanced loading
+        let loadingMetrics = {
+            startTime: null,
+            retryCount: 0,
+            totalSteps: 4,
+            currentStep: 0,
+            estimatedDuration: 8000 // 8 seconds baseline
+        };
+
+        function initializeMetrics() {
+            loadingMetrics.startTime = Date.now();
+            loadingMetrics.retryCount = 0;
+            loadingMetrics.currentStep = 0;
+        }
+
+        function trackRetry() {
+            loadingMetrics.retryCount++;
+            // Adjust estimated duration based on retries
+            loadingMetrics.estimatedDuration += 2000; // Add 2s per retry
+        }
+
+        function calculateProgress(phase) {
+            const phaseProgress = {
+                'translate': 25,
+                'validate': 60, 
+                'execute': 80,
+                'format': 95,
+                'complete': 100
+            };
+            
+            let baseProgress = phaseProgress[phase] || 0;
+            
+            // Adjust for retries
+            if (loadingMetrics.retryCount > 0) {
+                baseProgress = Math.max(15, baseProgress - (loadingMetrics.retryCount * 5));
+            }
+            
+            return Math.min(100, baseProgress);
+        }
+
+        function getSmartEstimate() {
+            const elapsed = Date.now() - loadingMetrics.startTime;
+            const remaining = Math.max(0, loadingMetrics.estimatedDuration - elapsed);
+            return Math.ceil(remaining / 1000);
+        }
+
+        function updateProgress(percentage, stepName = '') {
+            const progressBar = document.getElementById('progressBar');
+            const progressPercent = document.getElementById('progressPercent');
+            const currentStep = document.getElementById('currentStep');
+            
+            if (progressBar) {
+                progressBar.style.width = `${percentage}%`;
+            }
+            
+            if (progressPercent) {
+                progressPercent.textContent = `${percentage}%`;
+            }
+            
+            if (stepName && currentStep) {
+                currentStep.textContent = stepName;
+            }
+        }
+
+        function updateEstimatedTime(seconds) {
+            const estimatedTime = document.getElementById('estimatedTime');
+            if (estimatedTime) {
+                if (seconds > 0) {
+                    estimatedTime.textContent = `~${seconds}s remaining`;
+                } else {
+                    estimatedTime.textContent = 'Almost done...';
+                }
+            }
+        }
+
+        function updateLoadingStep(stepId, status = 'active') {
+            const stepElement = document.getElementById(stepId);
+            const currentStepElement = document.getElementById('currentStep');
+            
+            if (stepElement) {
+                // Remove previous status classes
+                document.querySelectorAll('.step').forEach(step => {
+                    step.classList.remove('active', 'completed', 'retry');
+                });
+                
+                // Update current step
+                stepElement.classList.add(status);
+                
+                // Update current step text
+                const stepTexts = {
+                    'step-translate': '🔄 Translating your question to KQL...',
+                    'step-validate': '✅ Validating generated query...',
+                    'step-execute': '⚡ Executing query on Azure Log Analytics...',
+                    'step-format': '📊 Formatting results for display...'
+                };
+                
+                if (currentStepElement && stepTexts[stepId]) {
+                    currentStepElement.textContent = stepTexts[stepId];
+                    
+                    // Add retry indication if needed
+                    if (status === 'retry') {
+                        currentStepElement.textContent += ' (retrying for better results...)';
+                    }
+                }
+            }
+        }        function showResult(result, timestamp) {
+            const resultContent = document.getElementById('resultContent');
+            const timestampElement = document.getElementById('timestamp');
+            
+            // Store current result for explain feature
+            currentQueryResult = result;
+            
+            // Handle both old text format and new structured format
+            if (typeof result === 'string') {
+                // Legacy text format
+                resultContent.innerHTML = `<pre style="white-space: pre-wrap; font-family: 'Courier New', monospace;">${result}</pre>`;
+            } else if (result && typeof result === 'object') {
+                // New structured format
+                let html = '';
+                
+                if (result.type === 'query_success') {
+                    // Show the generated KQL query
+                    html += `<div class="query-header">📝 Generated KQL Query:</div>`;
+                    html += `<div class="kql-query">${result.kql_query}</div>`;
+                    
+                    // Show the data tables
+                    if (result.data && result.data.type === 'table_data') {
+                        const tables = result.data.tables;
+                        
+                        if (tables && tables.length > 0) {
+                            tables.forEach(table => {
+                                html += createTableHTML(table);
+                            });
+                            
+                            // Add explain section after all tables
+                            html += createExplainSection();
+                        } else {
+                            html += `<div class="no-data-message">No data returned from query</div>`;
+                        }                    } else if (result.data && result.data.type === 'no_data') {
+                        html += `<div class="no-data-message">${result.data.message}</div>`;
+                    }
+                } else if (result.type === 'query_error') {
+                    html += `<div class="query-header">📝 Generated KQL Query:</div>`;
+                    html += `<div class="kql-query">${result.kql_query}</div>`;
+                    html += `<div class="error">❌ Error: ${result.error}</div>`;
+                } else {
+                    // Fallback for other structured data
+                    html += `<pre style="white-space: pre-wrap;">${JSON.stringify(result, null, 2)}</pre>`;
+                }
+                
+                resultContent.innerHTML = html;
+            } else {
+                // Fallback for unexpected formats
+                resultContent.innerHTML = `<pre style="white-space: pre-wrap;">${String(result)}</pre>`;
+            }
+            
+            timestampElement.textContent = `Response received at: ${timestamp}`;
+        }
+
+        function createTableHTML(table) {
+            let html = '';
+            
+            // Table header with info
+            html += `<div class="table-header">`;
+            html += `<div class="table-title">📊 Table ${table.table_number}</div>`;
+            html += `<div class="table-info">${table.row_count} rows</div>`;
+            html += `</div>`;
+            
+            if (table.has_data && table.columns && table.rows) {
+                html += `<div class="result-container">`;
+                html += `<table class="result-table">`;
+                
+                // Table header
+                html += `<thead><tr>`;
+                table.columns.forEach(column => {
+                    html += `<th>${escapeHtml(column)}</th>`;
+                });
+                html += `</tr></thead>`;
+                  // Table body
+                html += `<tbody>`;
+                table.rows.forEach(row => {
+                    html += `<tr>`;
+                    row.forEach((cell, index) => {
+                        const cellValue = cell === null || cell === undefined ? 'NULL' : String(cell);
+                        const cellClass = getCellClass(cell);
+                        html += `<td class="${cellClass}">${escapeHtml(cellValue)}</td>`;
+                    });
+                    html += `</tr>`;
+                });
+                html += `</tbody>`;
+                  html += `</table>`;
+                html += `</div>`;
+                
+                // Add table statistics
+                if (table.has_data) {
+                    html += `<div class="table-stats">`;
+                    html += `📊 ${table.columns.length} columns • ${table.row_count} rows`;
+                    if (table.row_count !== table.rows.length) {
+                        html += ` • Showing ${table.rows.length} of ${table.row_count}`;
+                    }
+                    html += `</div>`;
+                }
+            } else {
+                html += `<div class="no-data-message">No data in this table</div>`;
+            }
+            
+            return html;
+        }
+
+        function createExplainSection() {
+            return `
+                <div class="explain-section">
+                    <button class="btn-explain" onclick="explainResults()" id="explainBtn">
+                        🧠 Explain Results
+                    </button>
+                    <div id="explainContent"></div>
+                </div>
+            `;
+        }
+
+        async function explainResults() {
+            const explainBtn = document.getElementById('explainBtn');
+            const explainContent = document.getElementById('explainContent');
+            
+            // Check if we have current results to explain
+            if (!currentQueryResult || currentQueryResult.type !== 'query_success') {
+                explainContent.innerHTML = `<div class="explain-result"><h4>❌ No Results to Explain</h4><p>Please run a successful query first.</p></div>`;
+                return;
+            }
+            
+            // Disable button and show loading
+            explainBtn.disabled = true;
+            explainContent.innerHTML = `
+                <div class="explain-loading">
+                    <div class="explain-spinner"></div>
+                    Analyzing query results with AI...
+                </div>
+            `;
+            
+            try {
+                // Make API call to explain endpoint
+                const response = await fetch('/api/explain', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        query_result: currentQueryResult,
+                        original_question: currentOriginalQuestion
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    explainContent.innerHTML = `
+                        <div class="explain-result">
+                            <h4>🧠 AI Analysis</h4>
+                            <p>${data.explanation.replace(/\n/g, '<br>')}</p>
+                            <small style="color: #666;">Analysis generated at: ${data.timestamp}</small>
+                        </div>
+                    `;
+                } else {
+                    explainContent.innerHTML = `
+                        <div class="explain-result">
+                            <h4>❌ Explanation Failed</h4>
+                            <p>${data.error}</p>
+                        </div>
+                    `;
+                }
+                
+            } catch (error) {
+                explainContent.innerHTML = `
+                    <div class="explain-result">
+                        <h4>❌ Error</h4>
+                        <p>Failed to explain results: ${error.message}</p>
+                    </div>
+                `;
+            } finally {
+                // Re-enable the button
+                explainBtn.disabled = false;
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function showError(error) {
+            const resultContent = document.getElementById('resultContent');
+            const timestampElement = document.getElementById('timestamp');
+            
+            resultContent.innerHTML = `<div class="error">❌ Error: ${error}</div>`;
+            timestampElement.textContent = `Error occurred at: ${new Date().toLocaleString()}`;
+        }
+
+        async function setupWorkspace() {
+            const workspaceId = document.getElementById('workspaceId').value.trim();
+            
+            if (!workspaceId) {
+                updateStatus(false, 'Please enter a workspace ID');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/setup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ workspace_id: workspaceId })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    updateStatus(true, data.message);
+                } else {
+                    updateStatus(false, data.error);
+                }
+            } catch (error) {
+                updateStatus(false, `Connection failed: ${error.message}`);
+            }
+        }
+
+        async function testConnection() {
+            if (!isConnected) {
+                updateStatus(false, 'Please setup workspace first');
+                return;
+            }
+
+            showLoading();
+
+            try {
+                const response = await fetch('/api/test-connection', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    showResult(data.result, data.timestamp);
+                } else {
+                    showError(data.error);
+                }
+            } catch (error) {
+                showError(`Connection test failed: ${error.message}`);
+            }
+        }        async function askQuestion() {
+            const question = document.getElementById('questionInput').value.trim();
+            
+            if (!question) {
+                showError('Please enter a question');
+                return;
+            }
+
+            if (!isConnected) {
+                showError('Please setup workspace first');
+                return;
+            }
+
+            // Show initial loading
+            showLoading('🚀 Starting query process...');
+            
+            // Simulate progress steps
+            setTimeout(() => updateLoadingStep('step-translate', 'active'), 200);
+            
+            try {
+                const response = await fetch('/api/query', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question: question })
+                });
+
+                // Show validation step
+                updateLoadingStep('step-translate', 'completed');
+                updateLoadingStep('step-validate', 'active');
+                
+                const data = await response.json();
+                
+                // Show execution step
+                updateLoadingStep('step-validate', 'completed');
+                updateLoadingStep('step-execute', 'active');
+                
+                // Small delay to show execution step
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
+                // Show formatting step
+                updateLoadingStep('step-execute', 'completed');
+                updateLoadingStep('step-format', 'active');
+                
+                // Small delay to show formatting step
+                await new Promise(resolve => setTimeout(resolve, 300));
+                
+                if (data.success) {
+                    updateLoadingStep('step-format', 'completed');
+                    showResult(data.result, data.timestamp);
+                } else {
+                    showError(data.error);
+                }
+            } catch (error) {
+                showError(`Query failed: ${error.message}`);
+            }
+        }
+
+        function simulateRetry() {
+            // Show retry indication
+            updateLoadingStep('step-translate', 'retry');
+            
+            setTimeout(() => {
+                updateLoadingStep('step-translate', 'completed');
+                updateLoadingStep('step-validate', 'active');
+            }, 1500);
+        }        function enhancedAskQuestion() {
+            const question = document.getElementById('questionInput').value.trim();
+            
+            if (!question) {
+                showError('Please enter a question');
+                return;
+            }
+
+            if (!isConnected) {
+                showError('Please setup workspace first');
+                return;
+            }
+
+            // Store the original question for explain feature
+            currentOriginalQuestion = question;
+
+            // Show initial loading
+            showLoading('🚀 Preparing to process your question...');
+            
+            // Start with translation step
+            setTimeout(() => {
+                updateLoadingStep('step-translate', 'active');
+                processQuestionWithRetry(question);
+            }, 300);
+        }async function processQuestionWithRetry(question) {
+            let retryCount = 0;
+            const maxRetries = 2;
+            const startTime = Date.now();
+            
+            // Initialize progress
+            updateProgress(10, '🔄 Starting translation process...');
+            updateEstimatedTime(8);
+            
+            while (retryCount <= maxRetries) {
+                try {
+                    if (retryCount > 0) {
+                        // Show retry indication
+                        updateProgress(15 + (retryCount * 5), `🔄 Retry attempt ${retryCount}...`);
+                        updateLoadingStep('step-translate', 'retry');
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+                    }
+                    
+                    // Translation phase
+                    updateProgress(25, '🔄 Translating to KQL...');
+                    updateLoadingStep('step-translate', 'active');
+                    updateEstimatedTime(6);
+                    
+                    // Simulate translation time
+                    await new Promise(resolve => setTimeout(resolve, 800 + (retryCount * 500)));
+                    
+                    // Make the actual API call
+                    updateProgress(40, '📡 Sending request to server...');
+                    const response = await fetch('/api/query', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ question: question })
+                    });
+
+                    // Validation phase
+                    updateProgress(60, '✅ Validating generated query...');
+                    updateLoadingStep('step-translate', 'completed');
+                    updateLoadingStep('step-validate', 'active');
+                    updateEstimatedTime(4);
+                    await new Promise(resolve => setTimeout(resolve, 400));
+                    
+                    const data = await response.json();
+                    
+                    // Check if we need to retry (simulate retry logic)
+                    if (!data.success && retryCount < maxRetries && data.error.includes('translation')) {
+                        retryCount++;
+                        updateLoadingStep('step-validate', 'retry');
+                        continue;
+                    }
+                    
+                    // Execution phase
+                    updateProgress(80, '⚡ Executing query on Azure...');
+                    updateLoadingStep('step-validate', 'completed');
+                    updateLoadingStep('step-execute', 'active');
+                    updateEstimatedTime(2);
+                    await new Promise(resolve => setTimeout(resolve, 600));
+                    
+                    // Formatting phase
+                    updateProgress(95, '📊 Formatting results...');
+                    updateLoadingStep('step-execute', 'completed');
+                    updateLoadingStep('step-format', 'active');
+                    updateEstimatedTime(1);
+                    await new Promise(resolve => setTimeout(resolve, 300));
+                    
+                    // Complete
+                    updateProgress(100, '✅ Complete!');
+                    updateEstimatedTime(0);
+                    
+                    if (data.success) {
+                        updateLoadingStep('step-format', 'completed');
+                        const totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
+                        
+                        // Show completion with stats
+                        setTimeout(() => {
+                            showResult(data.result, data.timestamp);
+                        }, 500);
+                    } else {
+                        showError(data.error);
+                    }
+                    break;
+                    
+                } catch (error) {
+                    if (retryCount < maxRetries) {
+                        retryCount++;
+                        updateProgress(20 + (retryCount * 5), `🔄 Retrying... (${retryCount}/${maxRetries})`);
+                        updateLoadingStep('step-translate', 'retry');
+                        continue;
+                    } else {
+                        showError(`Query failed after ${maxRetries + 1} attempts: ${error.message}`);
+                        break;
+                    }
+                }
+            }
+        }        async function getExamples(scenario) {
+            if (!isConnected) {
+                showError('Please setup workspace first');
+                return;
+            }
+
+            // Show loading in the dedicated section
+            showExampleSuggestionsLoading(scenario);
+
+            try {
+                const response = await fetch(`/api/examples/${scenario}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    showExampleSuggestions(data.result);
+                } else {
+                    showExampleSuggestionsError(data.error);
+                }
+            } catch (error) {
+                showExampleSuggestionsError(`Failed to get examples: ${error.message}`);
+            }
+        }
+
+        function showExampleSuggestionsLoading(scenario) {
+            const section = document.getElementById('exampleSuggestionsSection');
+            const title = document.getElementById('exampleSuggestionsTitle');
+            const content = document.getElementById('exampleSuggestionsContent');
+            
+            title.textContent = `💫 Loading ${scenario.charAt(0).toUpperCase() + scenario.slice(1)} Examples...`;
+            content.innerHTML = `
+                <div style="text-align: center; padding: 20px; color: #666;">
+                    <div class="spinner" style="margin: 0 auto 10px;"></div>
+                    Loading example suggestions...
+                </div>
+            `;
+            section.style.display = 'block';
+        }
+
+        function showExampleSuggestions(result) {
+            if (result.type === 'example_suggestions') {
+                const section = document.getElementById('exampleSuggestionsSection');
+                const title = document.getElementById('exampleSuggestionsTitle');
+                const content = document.getElementById('exampleSuggestionsContent');
+                
+                title.textContent = `💡 ${result.scenario.charAt(0).toUpperCase() + result.scenario.slice(1)} Examples`;
+                
+                let html = '';
+                result.suggestions.forEach(suggestion => {
+                    html += `<div class="example-suggestion" onclick="setQuestion('${escapeHtml(suggestion)}')">${escapeHtml(suggestion)}</div>`;
+                });
+                html += `<div style="margin-top: 15px; font-size: 0.9rem; color: #666; text-align: center;">💡 Click any suggestion above to add it to your question box</div>`;
+                
+                content.innerHTML = html;
+                section.style.display = 'block';
+            }
+        }
+
+        function showExampleSuggestionsError(error) {
+            const section = document.getElementById('exampleSuggestionsSection');
+            const title = document.getElementById('exampleSuggestionsTitle');
+            const content = document.getElementById('exampleSuggestionsContent');
+            
+            title.textContent = '❌ Error Loading Examples';
+            content.innerHTML = `
+                <div style="text-align: center; padding: 20px; color: #dc3545;">
+                    ${error}
+                </div>
+            `;
+            section.style.display = 'block';
+        }
+
+        function setQuestion(question) {
+            document.getElementById('questionInput').value = question;
+        }        // Allow Enter key to submit question
+        document.getElementById('questionInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                enhancedAskQuestion();
+            }
+        });
+
+        // Allow Enter key to setup workspace
+        document.getElementById('workspaceId').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                setupWorkspace();
+            }
+        });
+
+        // Load status on page load
+        window.onload = async function() {
+            try {
+                const response = await fetch('/api/status');
+                const data = await response.json();
+                
+                if (data.initialized && data.workspace_id) {
+                    document.getElementById('workspaceId').value = data.workspace_id;
+                    updateStatus(true, 'Agent already initialized');
+                }
+            } catch (error) {
+                console.log('Could not load initial status');
+            }
+        };
+
+        function getCellClass(cell) {
+            if (cell === null || cell === undefined) {
+                return 'cell-null';
+            }
+            
+            if (typeof cell === 'boolean') {
+                return `cell-boolean ${cell.toString()}`;
+            }
+            
+            if (typeof cell === 'number') {
+                return 'cell-number';
+            }
+            
+            // Check if string looks like a number
+            if (typeof cell === 'string' && !isNaN(cell) && !isNaN(parseFloat(cell))) {
+                return 'cell-number';
+            }
+            
+            // Check if string looks like a boolean
+            if (typeof cell === 'string' && (cell.toLowerCase() === 'true' || cell.toLowerCase() === 'false')) {
+                return `cell-boolean ${cell.toLowerCase()}`;
+            }
+            
+            return '';
+        }
+    </script>
+</body>
+</html>
