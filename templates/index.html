@@ -667,9 +667,7 @@
             color: white;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-        }
-
-        /* Dedicated example suggestions section */
+        }        /* Dedicated example suggestions section */
         .example-suggestions-section {
             background: white;
             border-radius: 15px;
@@ -677,7 +675,17 @@
             margin-bottom: 30px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             border-left: 4px solid #667eea;
-        }        .example-suggestions-section h3 {
+        }
+
+        /* Explain Results Section */
+        .explain-results-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #28a745;
+        }.example-suggestions-section h3 {
             color: #333;
             margin-bottom: 20px;
             font-weight: 500;
@@ -753,13 +761,21 @@
                 <button class="btn btn-success" onclick="enhancedAskQuestion()" style="width: 100%; margin-top: 15px;">
                     🚀 Ask Question
                 </button>
-            </div>
-
-            <!-- Results Section -->
+            </div>            <!-- Results Section -->
             <div id="resultsSection" class="results-section">
                 <h3>📊 Results</h3>
                 <div id="resultContent" class="result-content"></div>
                 <div id="timestamp" class="timestamp"></div>
+            </div>
+
+            <!-- Explain Results Section -->
+            <div id="explainResultsSection" class="explain-results-section" style="display: none;">
+                <div class="explain-section">
+                    <button class="btn-explain" onclick="explainResults()" id="explainBtn">
+                        🧠 Explain Results
+                    </button>
+                    <div id="explainContent"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -818,6 +834,9 @@
                     </div>
                 </div>
             `;
+            
+            // Hide explain section during loading
+            hideExplainSection();
         }
 
         // Analytics and metrics for enhanced loading
@@ -931,11 +950,12 @@
             
             // Store current result for explain feature
             currentQueryResult = result;
-            
-            // Handle both old text format and new structured format
+              // Handle both old text format and new structured format
             if (typeof result === 'string') {
                 // Legacy text format
                 resultContent.innerHTML = `<pre style="white-space: pre-wrap; font-family: 'Courier New', monospace;">${result}</pre>`;
+                // Hide explain section for legacy format
+                hideExplainSection();
             } else if (result && typeof result === 'object') {
                 // New structured format
                 let html = '';
@@ -948,32 +968,40 @@
                     // Show the data tables
                     if (result.data && result.data.type === 'table_data') {
                         const tables = result.data.tables;
-                        
-                        if (tables && tables.length > 0) {
+                          if (tables && tables.length > 0) {
                             tables.forEach(table => {
                                 html += createTableHTML(table);
                             });
                             
-                            // Add explain section after all tables
-                            html += createExplainSection();
-                        } else {
+                            // Show explain section for successful queries with data
+                            showExplainSection();                        } else {
                             html += `<div class="no-data-message">No data returned from query</div>`;
+                            // Hide explain section for no data
+                            hideExplainSection();
                         }                    } else if (result.data && result.data.type === 'no_data') {
                         html += `<div class="no-data-message">${result.data.message}</div>`;
+                        // Hide explain section for no data
+                        hideExplainSection();
                     }
                 } else if (result.type === 'query_error') {
                     html += `<div class="query-header">📝 Generated KQL Query:</div>`;
                     html += `<div class="kql-query">${result.kql_query}</div>`;
                     html += `<div class="error">❌ Error: ${result.error}</div>`;
+                    // Hide explain section for errors
+                    hideExplainSection();
                 } else {
                     // Fallback for other structured data
                     html += `<pre style="white-space: pre-wrap;">${JSON.stringify(result, null, 2)}</pre>`;
+                    // Hide explain section for unknown formats
+                    hideExplainSection();
                 }
                 
                 resultContent.innerHTML = html;
             } else {
                 // Fallback for unexpected formats
                 resultContent.innerHTML = `<pre style="white-space: pre-wrap;">${String(result)}</pre>`;
+                // Hide explain section for unexpected formats
+                hideExplainSection();
             }
             
             timestampElement.textContent = `Response received at: ${timestamp}`;
@@ -1027,9 +1055,7 @@
             }
             
             return html;
-        }
-
-        function createExplainSection() {
+        }        function createExplainSection() {
             return `
                 <div class="explain-section">
                     <button class="btn-explain" onclick="explainResults()" id="explainBtn">
@@ -1038,6 +1064,24 @@
                     <div id="explainContent"></div>
                 </div>
             `;
+        }
+
+        function showExplainSection() {
+            const explainSection = document.getElementById('explainResultsSection');
+            const explainContent = document.getElementById('explainContent');
+            
+            // Clear any previous content
+            explainContent.innerHTML = '';
+            
+            // Show the explain section
+            explainSection.style.display = 'block';
+        }
+
+        function hideExplainSection() {
+            const explainSection = document.getElementById('explainResultsSection');
+            if (explainSection) {
+                explainSection.style.display = 'none';
+            }
         }
 
         async function explainResults() {
@@ -1106,14 +1150,15 @@
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
-        }
-
-        function showError(error) {
+        }        function showError(error) {
             const resultContent = document.getElementById('resultContent');
             const timestampElement = document.getElementById('timestamp');
             
             resultContent.innerHTML = `<div class="error">❌ Error: ${error}</div>`;
             timestampElement.textContent = `Error occurred at: ${new Date().toLocaleString()}`;
+            
+            // Hide explain section when showing errors
+            hideExplainSection();
         }
 
         async function setupWorkspace() {

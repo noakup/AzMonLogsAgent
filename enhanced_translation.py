@@ -106,9 +106,10 @@ IMPORTANT RULES:
 1. Return ONLY the KQL query, no explanation or markdown formatting
 2. Use proper KQL syntax and functions
 3. Handle time ranges appropriately (ago(), datetime(), etc.)
-4. Use correct table names (AppRequests, AppExceptions, AppTraces, etc.)
-5. Include proper aggregations and sorting for meaningful results
-6. Consider performance by limiting results when appropriate (take, top)"""
+4. Use correct table names (AppRequests, AppExceptions, AppTraces, etc.) and the correct columns (e.g., DurationMs for AppRequests)
+5. NEVER use the classic Application Insights query syntax (request, exception, traces, or duration columns)
+6. Include proper aggregations and sorting for meaningful results
+7. Consider performance by limiting results when appropriate (take, top)"""
 
     print(f"🔍 Loaded .env file")
     print(f"🔍 Endpoint: {endpoint}")
