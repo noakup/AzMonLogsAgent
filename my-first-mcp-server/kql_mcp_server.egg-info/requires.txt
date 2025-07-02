@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+python-dotenv
+azure-identity
+azure-monitor-query
+mcp
+pydantic

@@ -3,18 +3,14 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Run CLI",
+            "label": "Start Web App",
             "type": "shell",
-            "command": "python main.py --help",
+            "command": "python",
+            "args": [
+                "web_app.py"
+            ],
             "group": "build",
-            "problemMatcher": []
-        },
-        {
-            "label": "Run Web Service",
-            "type": "shell",
-            "command": "python web_service.py",
-            "group": "build",
-            "problemMatcher": []
+            "isBackground": true
         }
     ]
     // ...existing code...
