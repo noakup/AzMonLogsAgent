@@ -1,17 +1,31 @@
 {
-    // ...existing code...
     "version": "2.0.0",
     "tasks": [
         {
             "label": "Start Web App",
             "type": "shell",
-            "command": "python",
-            "args": [
-                "web_app.py"
-            ],
+            "command": "source venv/bin/activate && python -c \"from web_app import app; app.run(debug=True, host='0.0.0.0', port=8080)\"",
             "group": "build",
-            "isBackground": true
+            "isBackground": true,
+            "options": {
+                "shell": {
+                    "executable": "/bin/zsh",
+                    "args": ["-c"]
+                }
+            }
+        },
+        {
+            "label": "Start Web App (with environment)",
+            "type": "shell",
+            "command": "./activate_env.sh && python -c \"from web_app import app; app.run(debug=True, host='0.0.0.0', port=8080)\"",
+            "group": "build",
+            "isBackground": true,
+            "options": {
+                "shell": {
+                    "executable": "/bin/zsh",
+                    "args": ["-c"]
+                }
+            }
         }
     ]
-    // ...existing code...
 }
