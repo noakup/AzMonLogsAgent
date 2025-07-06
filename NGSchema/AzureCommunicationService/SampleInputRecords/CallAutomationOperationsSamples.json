@@ -1,0 +1,64 @@
+[
+    {
+        "level": "Informational",
+        "time": "2022-09-26T15:58:30.100Z",
+        "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/ACS-RECORDING-E2E-SAMPLE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/ACS-RECORDING-RUNNER-US-R0",
+        "correlationId": "b30b0915-3e9f-4b12-85ec-b011aef6ba8c",
+        "operationName": "Play",
+        "operationVersion": "2022-04-07-preview",
+        "uri": "https://acs-recording-runner-us-r0.communication.azure.com/calling/callConnections/d5596715-ab0b-4684-8ed8-575c250e4234:play?api-version=2022-04-07-preview",
+        "resultType": "Succeeded",
+        "resultSignature": 202,
+        "durationMs": 130,
+        "callerIpAddress": "127.0.0.1",
+        "properties": {
+            "callConnectionId": "d5596715-ab0b-4684-8ed8-575c250e4234",
+            "serverCallId": "aHR0cHM6Ly9hcGkuZmxpZ2h0cHJveHkuc2t5cGUuY29tL2FwaS92Mi9jcC9jb252LXVzZWEtMDguY29udi5za3lwZS5jb20vY29udi9Qdk84WEllbFFrZXF3ejlMMTVQd2pRP2k9OTMmZT02Mzc5OTQ3MzQxMDAzNDUwMzg",
+            "sdkVersion": "1.0.0-alpha.20220829.1",
+            "sdkType": "dotnet",
+            "subOperationName": "File",
+            "operationId": "59983d4e-2bf4-4419-84f8-5db563c98701"
+        }
+    },
+    {
+        "level": "Error",
+        "time": "2022-09-26T15:58:30.100Z",
+        "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/ACS-RECORDING-E2E-SAMPLE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/ACS-RECORDING-RUNNER-US-R0",
+        "correlationId": "b30b0915-3e9f-4b12-85ec-b011aef6ba8c",
+        "operationName": "Recognize",
+        "operationVersion": "2022-04-07-preview",
+        "uri": "https://acs-recording-runner-us-r0.communication.azure.com/calling/callConnections/d5596715-ab0b-4684-8ed8-575c250e4234:recognize?api-version=2022-04-07-preview",
+        "resultType": "Failed",
+        "resultSignature": 404,
+        "durationMs": 55,
+        "callerIpAddress": "127.0.0.1",
+        "properties": {
+            "callConnectionId": "d5596715-ab0b-4684-8ed8-575c250e4234",
+            "serverCallId": "aHR0cHM6Ly9hcGkuZmxpZ2h0cHJveHkuc2t5cGUuY29tL2FwaS92Mi9jcC9jb252LXVzZWEtMDguY29udi5za3lwZS5jb20vY29udi9Qdk84WEllbFFrZXF3ejlMMTVQd2pRP2k9OTMmZT02Mzc5OTQ3MzQxMDAzNDUwMzg",
+            "sdkVersion": "1.0.0-alpha.20220829.1",
+            "sdkType": "dotnet",
+            "subOperationName": "Dtmf",
+            "operationId": "59983d4e-2bf4-4419-84f8-5db563c98701"
+        }
+    },
+    {
+        "time":"2022-10-28T22:08:38.7343926Z",
+        "level":"Informational",
+        "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/ACS-RECORDING-E2E-SAMPLE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/ACS-RECORDING-RUNNER-US-R0",
+        "durationMs":1664,
+        "callerIpAddress":"97.113.67.31",
+        "correlationId":"6e1f227b-3a0b-4951-a2c0-cdb59eeeb845",
+        "operationName":"CreateCall",
+        "operationVersion":"2022-04-07-preview",
+        "resultType":"Succeeded",
+        "resultSignature":201,
+        "properties": {
+            "callConnectionId": "401f8f00-73cb-49f7-b369-4dee0bbd462b",
+            "serverCallId": null,
+            "sdkVersion": "1.0.0-alpha.20221012.1",
+            "sdkType": "dotnet",
+            "subOperationName ": null
+        },
+        "uri":"https://pma-dev-edwardho.plat-dev.skype.net/calling/callConnections?api-version=2022-04-07-preview"
+    }
+]

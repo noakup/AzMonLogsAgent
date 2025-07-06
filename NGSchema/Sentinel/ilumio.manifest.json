@@ -1,0 +1,275 @@
+{
+    "type": "Microsoft.SecurityInsights/Ilumio",
+    "displayName": "Azure Sentinel Ilumio",
+    "description": "All Ilumio tables related to Azure Sentinel.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Microsoft Sentinel Data Connectors/Ingestion Pipeline (Raw data only, not alerts)",
+    "contactDL": "asipolarbearseng@microsoft.com",
+    "tables": [
+        {
+            "name": "IlumioInsights",
+            "description": "Ilumio Insights data connector provides the capability to ingest audit and event logs from the Ilumio Insight API into Microsoft Sentinel. The data connector is built on Microsoft Sentinel Codeless Connector Platform and uses the Ilumio Insight API to fetch the events. The connector supports DCR-based [ingestion time transformations](https://docs.microsoft.com/azure/azure-monitor/logs/custom-logs-overview) that parses the received security event data into a custom columns so that queries don't need to parse it again, thus resulting in better performance.",
+            "categories": [
+                "security"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 1,
+            "dataTypeId": "ILUMIO_INSIGHTS",
+            "intelligencePacks": [
+                "SecurityInsights"
+            ],
+            "isResourceCentric": false,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "Insights",
+                    "type": "dynamic"
+                },
+                {
+                    "name": "ResourceId",
+                    "type": "string"
+                },
+                {
+                    "name": "ResourceInternalId",
+                    "type": "string"
+                },
+                {
+                    "name": "IllumioTenantId",
+                    "type": "string"
+                },
+                {
+                    "name": "ResourceTenantId",
+                    "type": "string"
+                },
+                {
+                    "name": "ResourceSubId",
+                    "type": "string"
+                },
+                {
+                    "name": "ResourceRegion",
+                    "type": "string"
+                },
+                {
+                    "name": "ResourceVnetId",
+                    "type": "string"
+                },
+                {
+                    "name": "IllumioUrl",
+                    "type": "string"
+                }
+            ],
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "The timestamp when the record or event was logged."
+                },
+                {
+                    "name": "Name",
+                    "type": "String",
+                    "description": "The name or type of the insight or event."
+                },
+                {
+                    "name": "AzureResourceId",
+                    "type": "String",
+                    "description": "The Azure resource ID associated with the event."
+                },
+                {
+                    "name": "ResourceInternalId",
+                    "type": "String",
+                    "description": "Internal identifier for the monitored resource within Illumio."
+                },
+                {
+                    "name": "IllumioTenantId",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "description": "Tenant ID assigned by Illumio for multi-tenant environments."
+                },
+                {
+                    "name": "ResourceTenantId",
+                    "type": "String",
+                    "description": "Azure tenant ID to which the resource belongs."
+                },
+                {
+                    "name": "ResourceSubId",
+                    "type": "String",
+                    "description": "Azure subscription ID that contains the resource."
+                },
+                {
+                    "name": "ResourceRegion",
+                    "type": "String",
+                    "description": "The Azure region where the resource is deployed."
+                },
+                {
+                    "name": "ResourceVnetId",
+                    "type": "String",
+                    "description": "Identifier for the Virtual Network (VNet) associated with the resource."
+                },
+                {
+                    "name": "IllumioUrl",
+                    "type": "String",
+                    "description": "URL to view the record or associated details in the Illumio console."
+                },
+                {
+                    "name": "Service",
+                    "type": "String",
+                    "description": "The name of the detected or used service (e.g., HTTP, SSH)."
+                },
+                {
+                    "name": "Port",
+                    "type": "Int",
+                    "description": "Source or service port involved in the communication."
+                },
+                {
+                    "name": "DestLabel",
+                    "type": "String",
+                    "description": "Label or tag assigned to the destination entity."
+                },
+                {
+                    "name": "TotalReceivedBytes",
+                    "type": "Int",
+                    "description": "Total number of bytes received during the communication flow."
+                },
+                {
+                    "name": "DestCountry",
+                    "type": "String",
+                    "description": "Country where the destination IP is located."
+                },
+                {
+                    "name": "DestPort",
+                    "type": "Int",
+                    "description": "Port number on the destination endpoint."
+                },
+                {
+                    "name": "SrcThreatLevel",
+                    "type": "String",
+                    "description": "Threat level (e.g., Low, Medium, High) associated with the source IP."
+                },
+                {
+                    "name": "SrcCity",
+                    "type": "String",
+                    "description": "City where the source IP is geolocated."
+                },
+                {
+                    "name": "DestThreatLevel",
+                    "type": "String",
+                    "description": "Threat level associated with the destination IP."
+                },
+                {
+                    "name": "SrcPort",
+                    "type": "Int",
+                    "description": "Port number used by the source entity."
+                },
+                {
+                    "name": "VEScore",
+                    "type": "Double",
+                    "description": "Vulnerability exposure score indicating the risk level."
+                },
+                {
+                    "name": "DestIsWellKnown",
+                    "type": "Bool",
+                    "description": "Indicates if the destination is a known/trusted entity."
+                },
+                {
+                    "name": "FlowCount",
+                    "type": "Int",
+                    "description": "Number of flows or sessions detected for this event."
+                },
+                {
+                    "name": "CvssSeverity",
+                    "type": "String",
+                    "description": "CVSS (Common Vulnerability Scoring System) severity rating."
+                },
+                {
+                    "name": "SrcIP",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "description": "IP address of the source."
+                },
+                {
+                    "name": "DestIP",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "description": "IP address of the destination."
+                },
+                {
+                    "name": "UniqueId",
+                    "type": "String",
+                    "description": "A unique identifier for the specific insight or event.",
+                    "dataTypeHint": "GUID"
+                },
+                {
+                    "name": "DestCity",
+                    "type": "String",
+                    "description": "City where the destination IP is geolocated."
+                },
+                {
+                    "name": "SrcIsWellKnown",
+                    "type": "Bool",
+                    "description": "Indicates if the source is a known/trusted entity."
+                },
+                {
+                    "name": "Status",
+                    "type": "String",
+                    "description": "Current status of the insight (e.g., Active, Resolved)."
+                },
+                {
+                    "name": "SrcLabel",
+                    "type": "String",
+                    "description": "Label or tag assigned to the source entity."
+                },
+                {
+                    "name": "Proto",
+                    "type": "String",
+                    "description": "Protocol used in the communication (e.g., TCP, UDP)."
+                },
+                {
+                    "name": "TotalSentBytes",
+                    "type": "Int",
+                    "description": "Total number of bytes sent during the communication flow."
+                },
+                {
+                    "name": "SrcCountry",
+                    "type": "String",
+                    "description": "Country where the source IP is located."
+                }
+            ],
+            "transformFilePath": "KQL/IlumioInsightsTransform.kql",
+            "sampleInputRecordsFilePath": "SampleInputRecords/IlumioInsightsSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/IlumioInsightsSample.json"
+        }
+    ],
+    "functions": [],
+    "queries": [
+        {
+            "id": "32e805e5-fe72-4141-aac4-f49c8ae6d03c",
+            "displayName": "Ilumio Insights multiple deny events",
+            "description": "Display Ilumio Insights multiple deny events.",
+            "bodyFilePath": "KQL/IlumioInsightsdeny.kql",
+            "categories": [
+                "security"
+            ],
+            "relatedTables": [
+                "IlumioInsights"
+            ],
+            "tags": {
+                "Topic": [
+                    "Security"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": false
+                }
+            }
+        }
+    ],
+    "relatedTables": [],
+    "relatedFunctions": []
+}

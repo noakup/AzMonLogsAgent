@@ -1,0 +1,2 @@
+EGNSuccessfulMqttConnections
+| summarize count() by SessionName

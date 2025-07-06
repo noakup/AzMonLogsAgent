@@ -1,0 +1,14 @@
+source
+| project
+    TimeGenerated = todatetime(['time']),
+    LogicalServerName = LogicalServerName,
+    ReplicaRole = ReplicaRole,
+    UserId = toint(properties.Userid),
+    DatabaseId = toint(properties.Dbid),
+    QueryId = tostring(properties.Queryid_str),
+    StartTime = todatetime(properties.Start_time),
+    EndTime = todatetime(properties.End_time),
+    EventType = tostring(properties.Event_type),
+    Event = tostring(properties.Event),    
+    Calls = tolong(properties.Calls),
+    Location = location

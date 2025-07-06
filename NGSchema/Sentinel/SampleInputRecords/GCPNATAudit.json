@@ -1,0 +1,136 @@
+[
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "scuba@np-lab.co.il",
+        "principalSubject": "user:scuba@np-lab.co.il"
+      },
+      "requestMetadata": {
+        "callerIp": "34.87.98.227",
+        "callerSuppliedUserAgent": "google-cloud-sdk gcloud/522.0.0 command/gcloud.compute.routers.delete invocation-id/838bd029021446bfa08eef2d04a5fdfa environment/devshell environment-version/None client-os/LINUX client-os-ver/6.6.87 client-pltf-arch/x86_64 interactive/True from-script/False python/3.12.10 term/screen (Linux 6.6.87+),gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "compute.googleapis.com",
+      "methodName": "v1.compute.routers.delete",
+      "resourceName": "projects/msccp-test/regions/us-central1/routers/my-cloud-router3",
+      "request": {
+        "@type": "type.googleapis.com/compute.routers.delete"
+      }
+    },
+    "insertId": "-m642lmd6h1o",
+    "resource": {
+      "type": "gce_router",
+      "labels": {
+        "region": "us-central1",
+        "project_id": "msccp-test",
+        "router_id": "5492224715979972313"
+      }
+    },
+    "timestamp": "2025-05-28T11:42:03.890109Z",
+    "severity": "NOTICE",
+    "labels": {
+      "compute.googleapis.com/root_trigger_id": "6f5c37cb-73fc-41d0-b441-49cb2aad92d0"
+    },
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Factivity",
+    "operation": {
+      "id": "operation-1748432522615-63630ab6c9983-70ce1d57-d2234830",
+      "producer": "compute.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2025-05-28T11:42:04.489510887Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "scuba@np-lab.co.il",
+        "principalSubject": "user:scuba@np-lab.co.il"
+      },
+      "requestMetadata": {
+        "callerIp": "34.87.98.227",
+        "callerSuppliedUserAgent": "google-cloud-sdk gcloud/522.0.0 command/gcloud.compute.routers.create invocation-id/ae4efbbb3a504897bd90664b916c84b1 environment/devshell environment-version/None client-os/LINUX client-os-ver/6.6.87 client-pltf-arch/x86_64 interactive/True from-script/False python/3.12.10 term/screen (Linux 6.6.87+),gzip(gfe)",
+        "requestAttributes": {
+          "time": "2025-05-28T11:42:13.799116Z",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "compute.googleapis.com",
+      "methodName": "v1.compute.routers.insert",
+      "authorizationInfo": [
+        {
+          "resource": "projects/msccp-test/regions/us-central1/routers/my-cloud-router3",
+          "permission": "compute.routers.create",
+          "granted": true,
+          "resourceAttributes": {
+            "service": "compute",
+            "name": "projects/msccp-test/regions/us-central1/routers/my-cloud-router3",
+            "type": "compute.routers"
+          },
+          "permissionType": "ADMIN_WRITE"
+        },
+        {
+          "resource": "projects/msccp-test/global/networks/default",
+          "permission": "compute.networks.updatePolicy",
+          "granted": true,
+          "resourceAttributes": {
+            "service": "compute",
+            "name": "projects/msccp-test/global/networks/default",
+            "type": "compute.networks"
+          },
+          "permissionType": "ADMIN_WRITE"
+        }
+      ],
+      "resourceName": "projects/msccp-test/regions/us-central1/routers/my-cloud-router3",
+      "request": {
+        "name": "my-cloud-router3",
+        "@type": "type.googleapis.com/compute.routers.insert",
+        "network": "https://compute.googleapis.com/compute/v1/projects/msccp-test/global/networks/default"
+      },
+      "response": {
+        "id": "7512622145707133050",
+        "name": "operation-1748432533354-63630ac1079f0-8967dcfd-672e5c0d",
+        "operationType": "insert",
+        "targetLink": "https://www.googleapis.com/compute/v1/projects/msccp-test/regions/us-central1/routers/my-cloud-router3",
+        "targetId": "6018077001051228282",
+        "status": "RUNNING",
+        "user": "scuba@np-lab.co.il",
+        "progress": "0",
+        "insertTime": "2025-05-28T04:42:13.762-07:00",
+        "startTime": "2025-05-28T04:42:13.766-07:00",
+        "selfLink": "https://www.googleapis.com/compute/v1/projects/msccp-test/regions/us-central1/operations/operation-1748432533354-63630ac1079f0-8967dcfd-672e5c0d",
+        "region": "https://www.googleapis.com/compute/v1/projects/msccp-test/regions/us-central1",
+        "selfLinkWithId": "https://www.googleapis.com/compute/v1/projects/msccp-test/regions/us-central1/operations/7512622145707133050",
+        "@type": "type.googleapis.com/operation"
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "us-central1"
+        ]
+      }
+    },
+    "insertId": "-2phkfbe7rnj0",
+    "resource": {
+      "type": "gce_router",
+      "labels": {
+        "project_id": "msccp-test",
+        "router_id": "6018077001051228282",
+        "region": "us-central1"
+      }
+    },
+    "timestamp": "2025-05-28T11:42:13.395889Z",
+    "severity": "NOTICE",
+    "labels": {
+      "compute.googleapis.com/root_trigger_id": "2442490a-a4cc-47cd-a66f-733f690d2f74"
+    },
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Factivity",
+    "operation": {
+      "id": "operation-1748432533354-63630ac1079f0-8967dcfd-672e5c0d",
+      "producer": "compute.googleapis.com",
+      "first": true
+    },
+    "receiveTimestamp": "2025-05-28T11:42:14.744823193Z"
+  }
+]

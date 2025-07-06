@@ -1,0 +1,3 @@
+AFDAccessLog 
+| summarize RequestCount = count() by ClientIp, HttpVersion, _ResourceId
+|top 100 by RequestCount  

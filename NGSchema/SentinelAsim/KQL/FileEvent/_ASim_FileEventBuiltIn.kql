@@ -1,0 +1,20 @@
+let DisabledParsers=materialize(_GetWatchlist('ASimDisabledParsers') 
+| where SearchKey in ('Any', 'Exclude_ASim_FileEvent') 
+| extend SourceSpecificParser=column_ifexists('SourceSpecificParser','') 
+| where isnotempty(SourceSpecificParser) 
+| summarize list = make_set(SourceSpecificParser));
+let builtInDisabled = 0 != array_length(set_intersect(toscalar(DisabledParsers),dynamic(['Exclude_ASim_FileEventBuiltIn', 'Exclude_ASim_FileEvent', 'Any'])));
+union isfuzzy=true
+_ASim_FileEvent_AzureBlobStorageV01(disabled= (builtInDisabled or('Exclude_ASim_FileEvent_AzureBlobStorage' in (DisabledParsers)))),
+_ASim_FileEvent_AzureFileStorageV01(disabled= (builtInDisabled or('Exclude_ASim_FileEvent_AzureFileStorage' in (DisabledParsers)))),
+_ASim_FileEvent_AzureQueueStorageV01(disabled= (builtInDisabled or('Exclude_ASim_FileEvent_AzureQueueStorage' in (DisabledParsers)))),
+_ASim_FileEvent_AzureTableStorageV01(disabled= (builtInDisabled or('Exclude_ASim_FileEvent_AzureTableStorage' in (DisabledParsers)))),
+_ASim_FileEvent_GoogleWorkspaceV01(disabled= (builtInDisabled or('Exclude_ASim_FileEvent_GoogleWorkspace' in (DisabledParsers)))),
+_ASim_FileEvent_LinuxSysmonFileCreatedV02(disabled= (builtInDisabled or('Exclude_ASim_FileEvent_LinuxSysmonFileCreated' in (DisabledParsers)))),
+_ASim_FileEvent_LinuxSysmonFileDeletedV02(disabled= (builtInDisabled or('Exclude_ASim_FileEvent_LinuxSysmonFileDeleted' in (DisabledParsers)))),
+_ASim_FileEvent_Microsoft365DV02(disabled= (builtInDisabled or('Exclude_ASim_FileEvent_Microsoft365D' in (DisabledParsers)))),
+_ASim_FileEvent_MicrosoftSharePointV03(disabled= (builtInDisabled or('Exclude_ASim_FileEvent_MicrosoftSharePoint' in (DisabledParsers)))),
+_ASim_FileEvent_MicrosoftSysmonV04(disabled= (builtInDisabled or('Exclude_ASim_FileEvent_MicrosoftSysmon' in (DisabledParsers)))),
+_ASim_FileEvent_MicrosoftWindowsEventsV01(disabled= (builtInDisabled or('Exclude_ASim_FileEvent_MicrosoftWindowsEvents' in (DisabledParsers)))),
+_ASim_FileEvent_NativeV01(disabled= (builtInDisabled or('Exclude_ASim_FileEvent_Native' in (DisabledParsers)))),
+_Im_FileEvent_EmptyV01

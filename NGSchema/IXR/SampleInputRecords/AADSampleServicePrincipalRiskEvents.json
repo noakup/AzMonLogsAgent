@@ -1,0 +1,23 @@
+[
+    {
+        "PreciseTimeStamp": "2022-01-25T19:36:22.0516211Z",
+        "time": "1/25/2022 7:23:28 PM",
+        "TIMESTAMP": "2022-01-25T19:36:22.0516211Z",
+        "resourceId": "/tenants/06b3ccb8-1384-4bcc-aec7-852f6d57161b/providers/microsoft.aadiam",
+        "operationName": "Service Principal Risk Detection",
+        "operationVersion": "1.0",
+        "category": "ServicePrincipalRiskEvents",
+        "tenantId": "06b3ccb8-1384-4bcc-aec7-852f6d57161b",
+        "resultType": "",
+        "resultSignature": "None",
+        "resultDescription": "",
+        "durationMs": "0",
+        "callerIpAddress": "",
+        "correlationId": "23ef663d-f7a4-4820-9fc1-8cf1fd1cb944",
+        "identity": "testapp",
+        "Level": "4",
+        "location": "wus",
+        "properties": "{\"id\":\"23ef663d-f7a4-4820-9fc1-8cf1fd1cb944\",\"requestId\":null,\"correlationId\":null,\"riskType\":\"generic\",\"riskEventType\":\"generic\",\"riskState\":\"atRisk\",\"riskLevel\":\"high\",\"riskDetail\":\"none\",\"source\":\"IdentityProtection\",\"detectionTimingType\":\"offline\",\"activity\":\"user\",\"ipAddress\":null,\"location\":null,\"activityDateTime\":\"2022-01-25T19:23:28.655Z\",\"detectedDateTime\":\"2022-01-25T19:23:28.655Z\",\"lastUpdatedDateTime\":\"2022-01-25T19:23:28.655Z\",\"servicePrincipalId\":\"d009ec88-9765-44b5-98b9-68afcc9eaaaf\",\"servicePrincipalDisplayName\":\"TestApp\",\"appId\":\"af23024b-171a-4661-a765-07fb77015f27\",\"keyIds\":[],\"additionalInfo\":\"[{\\\"Key\\\":\\\"alertUrl\\\",\\\"Value\\\":\\\"www.microsoft.com\\\"}]\",\"tokenIssuerType\":\"UnknownFutureValue\"}",
+        "RowKey": "6acf0332-7d97-11ec-be04-00224879c7c4___4295776477"
+    }
+]

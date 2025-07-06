@@ -1,0 +1,4 @@
+PGSQLServerLogs
+| where Message has "vacuum of table"
+| order by TimeGenerated desc 
+| take 100

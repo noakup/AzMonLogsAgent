@@ -1,0 +1,18 @@
+source
+| project
+    TimeGenerated = todatetime(['time']),
+    StartTime = todatetime(properties.start_time),
+    QueryDurationMs = tolong(toreal(properties.query_time)*1000),
+    LockDurationMs = tolong(toreal(properties.lock_time)*1000),
+    Host = tostring(properties.host),
+    RowsSent = toint(properties.rows_sent),
+    RowsExamined = toint(properties.rows_examined),
+    LastInsertId = toint(properties.last_insert_id),
+    InsertId = toint(properties.insert_id),
+    SqlText = tostring(properties.sql_text),
+    ServerId = toint(properties.server_id),
+    ThreadId = toint(properties.thread_id),
+    Db = tostring(properties.db),
+    Category = tostring(properties.category),
+    EventClass = tostring(properties.event_class),
+    ReplicationSetRole = tostring(properties.replication_set_role)

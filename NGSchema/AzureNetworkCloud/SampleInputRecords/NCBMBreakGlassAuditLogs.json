@@ -1,0 +1,20 @@
+[
+  {
+      "category": "NexusBreakGlassAudit",
+      "clusterManagerName": "sim-cluster-mgr-ceygktgvvbfbw",
+      "clusterName": "simdev-1570066-cluster",
+      "date": "2024-01-23T16:46:1706028382+0000",
+      "host": "rack1control01",
+      "location": "eastus",
+      "message": "[MAT Event - Correlation] LOGIN 1. 01/23/2024 16:46:22 deployer 10.23.25.1 sshd /usr/sbin/sshd no 2369",
+      "mode": "LOGIN 1",
+      "msg": "10.23.25.1 sshd /usr/sbin/sshd no",
+      "onbehalfAnnotations": "<Config onBehalfFields=\"resourceId,category\" priority=\"Normal\" primaryPartitionField=\"resourceId\" excludeFields=\"Tenant,Role,RoleInstance,BMServerName,PreciseTimeStamp,FluentdIngestTimestamp,TIMESTAMP,environment,clusterID,clusterManagedResourceGroupName,clusterManagerID,clusterManagerResourceGroupName,clusterResourceGroupName,Tag,tenantID\" containerSuffix=\"$category\" />",
+      "onbehalfServiceId": "Microsoft.NetworkCloud",
+      "operationName": "LOGIN 1",
+      "pid": "2369",
+      "resourceId": "/SUBSCRIPTIONS/A3EEB848-665A-4DBF-80A4-EB460930FB23/RESOURCEGROUPS/SIMDEV-1570066-CLUSTER-HOSTEDRESOURCES-5A688487/PROVIDERS/MICROSOFT.NETWORKCLOUD/BAREMETALMACHINES/RACK1CONTROL01",
+      "subscriptionID": "a3eeb848-665a-4dbf-80a4-eb460930fb23",
+      "user": "deployer"
+  }
+]

@@ -1,0 +1,2 @@
+ACSCallClientMediaStatsTimeSeries
+| distinct MetricName, MediaStreamType

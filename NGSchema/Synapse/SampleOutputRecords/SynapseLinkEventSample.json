@@ -1,0 +1,20 @@
+[
+    {
+        "TimeGenerated": "2022-08-01T08:42:51.4056796Z",
+        "Category": "SynapseLinkEvent",
+        "OperationName": "TableAdd",
+        "Level": 4,
+        "Location": "wu2",
+        "LinkConnectionName": "adfcdctipwu2-new-20220801083653",
+        "Properties": "{\"TableName\":\"[dbo].[source_new_20220801082222]\"}"
+    },
+    {
+        "TimeGenerated": "2022-08-01T08:42:51.4056796Z",
+        "Category": "SynapseLinkEvent",
+        "OperationName": "LinkConnectionStart",
+        "Level": 4,
+        "Location": "wu2",
+        "LinkConnectionName": "adfcdctipwu2-new-20220801083653",
+        "Properties": ""
+    }
+]

@@ -1,0 +1,5 @@
+AADServicePrincipalSignInLogs
+| where TimeGenerated > ago(90d)
+| where ResultType == 0
+| summarize LastSignIn = max(TimeGenerated) by ServicePrincipalId
+| where LastSignIn < ago(30d)

@@ -1,0 +1,577 @@
+{
+	"type": "Microsoft.KeyVault/vaults",
+	"displayName": "Key Vaults",
+	"description": "Cloud applications and services use cryptographic keys and secrets to help keep information secure. Azure Key Vault safeguards these keys and secrets. When you use Key Vault, you can encrypt authentication keys, storage account keys, data encryption keys, .pfx files, and passwords by using keys that are protected by hardware security modules (HSMs).",
+	"tags": {},
+	"properties": {},
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "AZUREKEYVAULT/Triage",
+	"contactDL": "kmspls@microsoft.com",
+	"relatedTables": [
+		"AzureActivity",
+		"AzureMetrics"
+	],
+	"relatedFunctions": [],
+	"tables": [
+		{
+			"name": "AZKVAuditLogs",
+			"description": "Audit logs can be used to monitor how and when your key vaults are accessed, and by whom. Customers will be able to log all authentication api requests. Operations on the key vault itself, including creation, deletion, setting key vault access policies, and updating key vault attributes such as tags.Operation on keys and secrets in keyvault including creating, deleting, signing.",
+			"categories": [ "resources", "audit" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 7,
+			"dataTypeId": "AZUREKEYVAULT_AUDITEVENT",
+			"intelligencePacks": [],
+			"isResourceCentric": true,
+			"tableState": "Production",
+			"isLakeAllowed": true,
+			"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "resultType",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "resultDescription",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "callerIpAddress",
+					"type": "String"
+				},
+				{
+					"name": "identity",
+					"type": "Dynamic"
+				},
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				},
+				{
+					"name": "nsp",
+					"type": "Dynamic"
+				},
+				{
+					"name": "operationVersion",
+					"type": "String"
+				},
+				{
+					"name": "resultSignature",
+					"type": "String"
+				},
+				{
+					"name": "durationMs",
+					"type": "String"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/AZKVAuditLogsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"description": "Timestamp (in UTC) when operation occured."
+				},
+				{
+					"name": "ResultType",
+					"type": "String",
+					"description": "Result of the REST API request."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"description": "Name of the operation"
+				},
+				{
+					"name": "ResultDescription",
+					"type": "String",
+					"description": "Additional description about the result, when available."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"description": "An optional GUID that the client can pass to correlate client-side logs with service-side (Key Vault) logs.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "CallerIpAddress",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"description": "IP address of the client that made the request"
+				},
+				{
+					"name": "OperationVersion",
+					"type": "String",
+					"description": "REST api version requested by the client."
+				},
+				{
+					"name": "Identity",
+					"type": "Dynamic",
+					"description": "Identity from the token that was presented in the REST API request. This is usually a user, a service principal, or the combination user+appId, as in the case of a request that results from an Azure PowerShell cmdlet."
+				},
+				{
+					"name": "Properties",
+					"type": "Dynamic",
+					"description": "Information that varies based on the operation (Operationname). In most cases, this field contains client information (the user agent string passed by the client), the exact REST API request URI, and the HTTP status code. In addition, when an object is returned as a result of a request (for example, KeyCreate or VaultGet), it also contains the key URI (as id), vault URI, or secret URI."
+				},
+				{
+					"name": "Nsp",
+					"type": "Dynamic",
+					"description": "Network security perimeter properties including access control list, nsp id's associated with profiles."
+				},
+				{
+					"name": "KeyProperties",
+					"type": "Dynamic",
+					"description": "Information about key properties including type, size, curve"
+				},
+				{
+					"name": "SecretProperties",
+					"type": "Dynamic",
+					"description": "Information about secret properties including type, atttributes"
+				},
+				{
+					"name": "CertificateProperties",
+					"type": "Dynamic",
+					"description": "Information about certificate audit properties including atttributes, subject, hashing algorithm"
+				},
+				{
+					"name": "CertificatePolicyProperties",
+					"type": "Dynamic",
+					"description": "Information about certificate policy properties including keyproperties, secretproperties, issuerproperties"
+				},
+				{
+					"name": "CertificateIssuerProperties",
+					"type": "Dynamic",
+					"description": "Information about certificate issuer properties including provider, id"
+				},
+				{
+					"name": "CertificateRequestProperties",
+					"type": "Dynamic",
+					"description": "Boolean value indicating if certificate request operation was cancelled"
+				},
+				{
+					"name": "StorageAccountProperties",
+					"type": "Dynamic",
+					"description": "Information about storage account properties including activekeyname, resourceid"
+				},
+				{
+					"name": "StorageSasDefinitionProperties",
+					"type": "Dynamic",
+					"description": "Information about storage sas definition properties including sastype, validityperiod"
+				},
+				{
+					"name": "Id",
+					"type": "String",
+					"description": "Resourceidentifier (Key ID or secret ID)"
+				},
+				{
+					"name": "Algorithm",
+					"type": "String",
+					"description": "Algorithm used to generate the key"
+				},
+				{
+					"name": "ClientInfo",
+					"type": "String",
+					"description": "User agent information"
+				},
+				{
+					"name": "SubnetId",
+					"type": "String",
+					"description": "Id of subnet if request comes from a known subnet"
+				},
+				{
+					"name": "HttpStatusCode",
+					"type": "Int",
+					"description": "HTTP status code of the request"
+				},
+				{
+					"name": "RequestUri",
+					"type": "String",
+					"dataTypeHint": "URI",
+					"description": "URI of the request"
+				},
+				{
+					"name": "IsAddressAuthorized",
+					"type": "Bool",
+					"description": "Specifies whether request came from an authorized entity"
+				},
+				{
+					"name": "AddressAuthorizationType",
+					"type": "String",
+					"description": "Address type (Public IP, subnet, private connection)"
+				},
+				{
+					"name": "IsAccessPolicyMatch",
+					"type": "Bool",
+					"description": "True if the tenant matches vault tenant, and if the policy explicitly gives permission to the principal attempting the access."
+				},
+				{
+					"name": "IsRbacAuthorized",
+					"type": "Bool",
+					"description": "Specifies whether an access was granted or not as part of an access check"
+				},
+				{
+					"name": "AppliedAssignmentId",
+					"type": "String",
+					"description": "AssignmentId that eiher granted or denied access as part of access check"
+				},
+				{
+					"name": "TrustedService",
+					"type": "String",
+					"description": "Specifies whether the principal access the service is a trusted Service. If this field is null, principal is not a trusted service"
+				},
+				{
+					"name": "Tlsversion",
+					"type": "String",
+					"description": "Network crypto protocol"
+				},
+				{
+					"name": "VaultProperties",
+					"type": "Dynamic",
+					"description": "Detailed vault properties containing accesspolicy, iprule, virtualnetwork etc"
+				},
+				{
+					"name": "Sku",
+					"type": "Dynamic",
+					"description": "Information about vault including family, name and capacity"
+				},
+				{
+					"name": "NetworkAcls",
+					"type": "Dynamic",
+					"description": "Information about network acls that govern access to the vault"
+				},
+				{
+					"name": "EnabledForDeployment",
+					"type": "Bool",
+					"description": "Specifies if the vault is enabled for deployment"
+				},
+				{
+					"name": "EnabledForDiskEncryption",
+					"type": "Bool",
+					"description": "Specifes if disk encryption is enabled"
+				},
+				{
+					"name": "EnabledForTemplateDeployment",
+					"type": "Bool",
+					"description": "Specifies whether template deployment is enabled"
+				},
+				{
+					"name": "EnableSoftDelete",
+					"type": "Bool",
+					"description": "Specified is the vault is enabled for soft delete"
+				},
+				{
+					"name": "SoftDeleteRetentionInDays",
+					"type": "Int",
+					"description": "Specifies soft delete retention in days"
+				},
+				{
+					"name": "EnableRbacAuthorization",
+					"type": "Bool",
+					"description": "Specifies if RBAC authorization is enabled"
+				},
+				{
+					"name": "EnablePurgeProtection",
+					"type": "Bool",
+					"description": "Specifies if purge protection is enabled"
+				},
+				{
+					"name": "HsmPoolResourceId",
+					"type": "String",
+					"description": "Resource ID of the HSM pool"
+				},
+				{
+					"name": "ResultSignature",
+					"type": "String",
+					"description": "HTTP status of the request/response"
+				},
+				{
+					"name": "DurationMs",
+					"type": "Int",
+					"description": "Time it took to service the REST API request, in milliseconds. This does not include the network latency, so the time you measure on the client side might not match this time"
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/AZKVAuditLogsInputSample.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/AZKVAuditLogsOutputSample.json"
+		},
+		{
+			"name": "AZKVPolicyEvaluationDetailsLogs",
+			"description": "Contains details of Azure Policy Evaluation including the outcome and details of what checks were performed.",
+			"categories": [ "resources", "audit" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 7,
+			"dataTypeId": "AZUREKEYVAULT_AZUREPOLICYEVALUATIONDETAILS",
+			"isResourceCentric": true,
+			"tableState": "Production",
+			"isLakeAllowed": true,
+			"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "resultType",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "resultDescription",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				},
+				{
+					"name": "resultSignature",
+					"type": "String"
+				},
+				{
+					"name": "durationMs",
+					"type": "String"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/AZKVEvaluationLogsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"description": "Timestamp (in UTC) when operation occured."
+				},
+				{
+					"name": "ResultType",
+					"type": "String",
+					"description": "Result of the REST API request"
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"description": "Name of the operation"
+				},
+				{
+					"name": "ResultDescription",
+					"type": "String",
+					"description": "Additional description about the result, when available"
+				},
+				{
+					"name": "Properties",
+					"type": "Dynamic",
+					"description": "Information that varies based on the operation (operationName). In most cases, this field contains client information (the user agent string passed by the client), the exact REST API request URI, and the HTTP status code. In addition, when an object is returned as a result of a request (for example, KeyCreate or VaultGet), it also contains the key URI (as id), vault URI, or secret URI"
+				},
+				{
+					"name": "ObjectName",
+					"type": "String",
+					"description": "Name of the object"
+				},
+				{
+					"name": "ObjectType",
+					"type": "String",
+					"description": "Type of object"
+				},
+				{
+					"name": "IsComplianceCheck",
+					"type": "Bool",
+					"description": "Is Compliance check enabled"
+				},
+				{
+					"name": "EvaluationDetails",
+					"type": "Dynamic",
+					"description": "Details of evaluation"
+				},
+				{
+					"name": "ResultSignature",
+					"type": "String",
+					"description": "HTTP status of the request/response"
+				},
+				{
+					"name": "DurationMs",
+					"type": "Int",
+					"description": "Time it took to service the REST API request, in milliseconds. This does not include the network latency, so the time you measure on the client side might not match this time"
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/AZKVEvaluationLogsInputSample.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/AZKVEvaluationLogsOutputSample.json"
+		}
+	],
+	"functions": [],
+	"queries": [
+		{
+			"id": "126a5c26-d357-4b03-a4bc-5e8fbd26a1b8",
+			"displayName": "Are there any failures?",
+			"description": "Count of failed keyvault requests by status code.",
+			"bodyFilePath": "Query/FailedRequestCountQuery.kql",
+			"categories": [
+				"audit",
+				"resources"
+			],
+			"tags": {
+				"Topic": [
+					"Alerts",
+					"Usage and Diagnostics"
+				]				 
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			},
+			"relatedTables": [
+				"AZKVAuditLogs"
+			]
+		},
+		{
+			"id": "d196c718-afdf-4eb1-9849-4f236030f51b",
+			"displayName": "Are there any slow requests?",
+			"description": "List of keyvault requests taking longer than 1 second.",
+			"bodyFilePath": "Query/SlowRequestQuery.kql",
+			"categories": [
+				"audit",
+				"resources"
+			],
+			"tags": {
+				"Topic": [
+					"Alerts",
+					"Usage and Diagnostics"
+			    ]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			},
+			"relatedTables": [
+				"AZKVAuditLogs"
+			]
+		},
+		{
+			"id": "10026928-5243-4850-82e5-e1c4c175bc15",
+			"displayName": "How active has this KeyVault been?",
+			"description": "Line chart showing trend of KeyVault requests volume, per operation over time.",
+			"bodyFilePath": "Query/ActivityQuery.kql",
+			"categories": [
+				"audit",
+				"resources"
+			],
+			"tags": {
+				"Topic": [
+					"Usage and Diagnostics"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			},
+			"relatedTables": [
+				"AZKVAuditLogs"
+			]
+		},
+		{
+			"id": "163b3a0a-e23d-4648-aec6-72906be0c027",
+			"displayName": "How fast is this KeyVault serving requests?",
+			"description": "Line chart showing trend of request duration over time using different aggregations.",
+			"bodyFilePath": "Query/RequestDurationQuery.kql",
+			"categories": [
+				"audit",
+				"resources"
+			],
+			"tags": {
+				"Topic": [
+					"Usage and Diagnostics"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			},
+			"relatedTables": [
+				"AZKVAuditLogs"
+			]
+		},
+		{
+			"id": "dcfebdea-1637-46b9-8452-1979e9e30251",
+			"displayName": "What changes occurred last month?",
+			"description": "Lists all update and patch requests from the last 30 days.",
+			"bodyFilePath": "Query/AggregatedRequestQuery.kql",
+			"categories": [
+				"audit",
+				"resources"
+			],
+			"tags": {
+				"Topic": [
+					"Usage and Diagnostics"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			},
+			"relatedTables": [
+				"AZKVAuditLogs"
+			]
+		},
+		{
+			"id": "79cf6219-a0c3-4cac-a011-e5c02fc7cada",
+			"displayName": "Who is calling this KeyVault?",
+			"description": "List of callers identified by their IP address with their request count.",
+			"bodyFilePath": "Query/CallerQuery.kql",
+			"categories": [
+				"audit",
+				"resources"
+			],
+			"tags": {
+				"Topic": [
+					"Usage and Diagnostics"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			},
+			"relatedTables": [
+				"AZKVAuditLogs"
+			]
+		}
+	]
+}

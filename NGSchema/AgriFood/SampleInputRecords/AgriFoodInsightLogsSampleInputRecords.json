@@ -1,0 +1,43 @@
+[
+  {
+    "time": "2021-09-20T11:47:36.510360751Z",
+    "resourceId": "/SUBSCRIPTIONS/5464F7EE3875-12C9-C654-F81D-CE1909AD/RESOURCEGROUPS/sample-INSTANCES/PROVIDERS/MICROSOFT.AGFOODPLATFORM/FARMBEATS/sample-EUS-1",
+    "category": "InsightLogs",
+    "operationName": "Microsoft.AgFoodPlatform/insights/read",
+    "callerIpAddress": "106.222.35.6",
+    "Level": "Information",
+    "identity": {
+      "claims": {
+        "TenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+        "ApplicationId": "39d176c5-91b6-454b-854d-55813c17d92d",
+        "ObjectId": "9002b50e-dc98-445e-a865-72dce38ecafd"
+      }
+    },
+    "properties": {
+      "requestUri": "https://sample-1.farmbeats.azure.net/farmers/sample-farmer/models/Microsoft.Biomass/resource-types/Farmer/resources/sample/insights?api-version=2021-07-31-preview",
+      "farmerId": "sample-farmer",
+      "dataPlaneResourceId": "/farmers/sample-farmer/models/Microsoft.Biomass/resource-types/Farmer/resources/sample/insights",
+      "requestBody": {
+        "modelVersion": "sample",
+        "insightStartDateTime": "sample",
+        "insightEndDateTime": "sample",
+        "measures": {
+          "additionalProp1": {
+            "unit": "string",
+            "value": 0
+          }
+        },
+        "status": "sample",
+        "name": "sample",
+        "description": "sample-description",
+        "properties": { "sample-key": "sample-value" }
+      }
+    },
+    "resultSignature": "200",
+    "resultType": "Success",
+    "resultDescription": "",
+    "location": "eastus",
+    "correlationId": "4c13e2bc-5416-4347-a7d7-426d61bc7f0c",
+    "durationMs": 988
+  }
+]

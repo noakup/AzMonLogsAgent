@@ -1,0 +1,11 @@
+ACSCallRecordingSummary
+// To filter out recordings made over a week ago, uncomment the next line
+// | where TimeGenerated > ago(7d)
+// Get the distinct combinations of RecordingId and CallStartTime
+| distinct RecordingId, TimeGenerated
+// Adds a new column with the call start day
+| extend day = floor(TimeGenerated, 1d)
+// Count the number of calls per day
+| summarize event_count=count() by day
+| sort by day asc
+| render columnchart title="Number of recordings per day"

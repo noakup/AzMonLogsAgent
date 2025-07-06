@@ -1,0 +1,106 @@
+{
+    "name": "AWSCloudTrail",
+    "description": "CloudTrail logs, which ingested from Sentinel's connector, holds all your data and management events of your Amazon Wev Services account.",
+    "input": [
+        {
+            "name": "eventVersion",
+            "type": "String"
+        },
+        {
+            "name": "userIdentity",
+            "type": "Dynamic"
+        },
+        {
+            "name": "eventTime",
+            "type": "DateTime"
+        },
+        {
+            "name": "eventSource",
+            "type": "String"
+        },
+        {
+            "name": "eventName",
+            "type": "String"
+        },
+        {
+            "name": "awsRegion",
+            "type": "String"
+        },
+        {
+            "name": "sourceIPAddress",
+            "type": "String"
+        },
+        {
+            "name": "userAgent",
+            "type": "String"
+        },
+        {
+            "name": "errorCode",
+            "type": "String"
+        },
+        {
+            "name": "errorMessage",
+            "type": "String"
+        },
+        {
+            "name": "requestParameters",
+            "type": "Dynamic"
+        },
+        {
+            "name": "responseElements",
+            "type": "String"
+        },
+        {
+            "name": "additionalEventData",
+            "type": "String"
+        },
+        {
+            "name": "requestID",
+            "type": "String"
+        },
+        {
+            "name": "resources",
+            "type": "String"
+        },
+        {
+            "name": "apiVersion",
+            "type": "String"
+        },
+        {
+            "name": "eventID",
+            "type": "String"
+        },
+        {
+            "name": "readOnly",
+            "type": "Bool"
+        },
+        {
+            "name": "eventType",
+            "type": "String"
+        },
+        {
+            "name": "managementEvent",
+            "type": "Bool"
+        },
+        {
+            "name": "recipientAccountId",
+            "type": "String"
+        },
+        {
+            "name": "serviceEventDetails",
+            "type": "String"
+        },
+        {
+            "name": "sharedEventID",
+            "type": "String"
+        },
+        {
+            "name": "vpcEndpointId",
+            "type": "String"
+        },
+        {
+            "name": "tlsDetails",
+            "type": "Dynamic"
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+AEWComputePipelinesLogs
+| where EventName =~ "ScorecardRequestSucceeded" or EventName =~ "ScorecardRequestFailed"
+| where Properties.ExperimentationGroup =~ "test~ExperimentationGroup"
+| summarize
+  ScorecardRequestTimeInHoursP99 = percentile(todouble(Properties.ScorecardProcessingInSeconds) / 60 / 60, 99)
+  ,ScorecardRequestTimeInHoursAvg = avg(todouble(Properties.ScorecardProcessingInSeconds) / 60 / 60)
+  by Date = bin(TimeGenerated, 1d), ExperimentationGroup = tostring(Properties.ExperimentationGroup)
+| sort by Date, ExperimentationGroup

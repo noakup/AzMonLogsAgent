@@ -1,0 +1,42 @@
+[
+	{
+		"time": "2021-03-21T02:33:02.0583751Z",
+		"resourceId": "/SUBSCRIPTIONS/1338DDED-42F5-4CAE-8ED2-36C19680A7A1/RESOURCEGROUPS/ACCNT_RG/PROVIDERS/MICROSOFT.DOCUMENTDB/DATABASEACCOUNTS/ACCNT-METRICS-TEST",
+		"category": "DataPlaneRequests5M",
+		"operationName": "Read",
+		"properties": {
+			"requestResourceType": "Permission",
+			"requestResourceId": "KbwiAA2gEAA=",
+			"collectionRid": "",
+			"statusCode": "204",
+			"durationSum": "19",
+			"durationAvg": "19",
+			"durationMax": "19",
+			"userAgent": "cosmos-netstandard-sdk/3.39.1P|2|X64|Microsoft Windows 10.0.20348 |.NET Framework 4.8.9266.0|N|",
+			"clientIpAddress": "52.254.40.143",
+			"requestChargeSum": "4.952381",
+			"requestChargeAvg": "4.952381",
+			"requestChargeMax": "4.952381",
+			"requestLengthSum": "0",
+			"requestLengthAvg": "0",
+			"requestLengthMax": "0",
+			"responseLengthSum": "0",
+			"responseLengthAvg": "0",
+			"responseLengthMax": "0",
+			"resourceTokenPermissionId": "",
+			"resourceTokenPermissionMode": "",
+			"resourceTokenUserRid": "",
+			"region": "East US 2",
+			"partitionId": "00822bcf-149b-4161-b1cd-80b3997ea920",
+			"keyType": "PrimaryMasterKey",
+			"aadAppliedRoleAssignmentId": "",
+			"aadPrincipalId": "",
+			"databaseName": "DdbStgSqlCTCAccountCrudSynthetic-cdb-ms-stage-eastus2-fe2-Prod-f3b3801c-75e3-43aa-8c70-2e0865640c2d",
+			"collectionName": "",
+			"callerId": "Anonymous",
+			"transportLayerSecurityProtocol": "4096",
+			"connectionMode": "Direct",
+			"sampleCount": "1"
+		}
+	}
+]

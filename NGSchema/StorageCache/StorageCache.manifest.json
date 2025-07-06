@@ -1,0 +1,397 @@
+{
+  "type": "Microsoft.StorageCache/caches",
+  "displayName": "Azure HPC Cache",
+  "description": "Log Analytics tables for Microsoft Azure HPC Cache",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Avere Azure Storage Cache/ASC Service Team",
+  "contactDL": "asc-rp-devs@microsoft.com",
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "name": "StorageCacheOperationEvents",
+      "description": "Logs for Azure HPC Cache API requests.",
+      "categories": [ "resources" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 2,
+      "dataTypeId": "MICROSOFTSTORAGECACHE_ASCCACHEOPERATIONEVENT",
+      "intelligencePacks": [],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/StorageCacheOperationEventTransformation.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the log was created."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation name for which the log entry was created."
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Unique identifier to be used to correlate logs, if available.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ResponseCode",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "HTTP status of API request."
+        },
+        {
+          "name": "ResultType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Result of the REST API request."
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Details about the result, if available."
+        },
+        {
+          "name": "StorageTargetName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the storage target associated with the operation, if available."
+        },
+        {
+          "name": "PrimingJobName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the priming job associated with the operation, if available."
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The region of the resource associated with the event."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/StorageCacheOperationEventSample.json"
+    },
+    {
+      "name": "StorageCacheUpgradeEvents",
+      "description": "Logs for Azure HPC Cache firmware upgrade events.",
+      "categories": [ "resources" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 2,
+      "dataTypeId": "MICROSOFTSTORAGECACHE_ASCUPGRADEEVENT",
+      "intelligencePacks": [],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/StorageCacheUpgradeEventTransformation.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the log was created."
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Unique identifier to be used to correlate logs, if available.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "CurrentFirmwareVersion",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The firmware version currently running."
+        },
+        {
+          "name": "AvailableFirmwareVersion",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The firmware version for upgrade, if available."
+        },
+        {
+          "name": "Description",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The description of the upgrade event."
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The region of the resource associated with the event."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/StorageCacheUpgradeEventSample.json"
+    },
+    {
+      "name": "StorageCacheWarningEvents",
+      "description": "Logs for Azure HPC Cache warning events.",
+      "categories": [ "resources" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 2,
+      "dataTypeId": "MICROSOFTSTORAGECACHE_ASCWARNINGEVENT",
+      "intelligencePacks": [],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "level",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/StorageCacheWarningEventTransformation.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the log was created."
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Unique identifier to be used to correlate logs, if available.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "State",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The state of the warning: Active or Cleared."
+        },
+        {
+          "name": "Description",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The description of the warning event."
+        },
+        {
+          "name": "Level",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The severity level of the event: Informational, Warning, Error, or Critical."
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The region of the resource associated with the event."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/StorageCacheWarningEventSample.json"
+    }
+  ],
+  "functions": [],
+  "queries": [
+    {
+      "id": "84dd84da-6817-4482-92a6-4bcb3ec96cb6",
+      "displayName": "Failed operation",
+      "description": "Retrieves a list of operation that returned a failed response code.",
+      "bodyFilePath": "KQL/FailedOperationRequestsQuery.kql",
+      "categories": ["resources"],
+      "relatedTables": [
+        "StorageCacheOperationEvents"
+      ],
+      "tags": {
+        "Topic": ["diagnostics"]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "cee04e51-5743-4b8e-9913-6d50f3813742",
+      "displayName": "Failed priming job",
+      "description": "Retrieves a list of failed priming jobs.",
+      "bodyFilePath": "KQL/FailedPrimingJobRequestsQuery.kql",
+      "categories": ["resources"],
+      "relatedTables": [
+        "StorageCacheOperationEvents"
+      ],
+      "tags": {
+        "Topic": ["diagnostics"]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "1d18a296-9f63-4753-a271-cc9e38e32e5a",
+      "displayName": "Completed long-running asynchronous operations",
+      "description": "Retrieves a list of long-running operations that have completed.",
+      "bodyFilePath": "KQL/CompletedLongRunningOperationsQuery.kql",
+      "categories": ["resources"],
+      "relatedTables": [
+        "StorageCacheOperationEvents"
+      ],
+      "tags": {
+        "Topic": ["diagnostics"]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "aa3b3c6e-70e0-4d36-89d3-8ff32afb2c09",
+      "displayName": "Upgrade events",
+      "description": "Retrieves a list of upgrade events.",
+      "bodyFilePath": "KQL/UpgradeEventsQuery.kql",
+      "categories": ["resources"],
+      "relatedTables": [
+        "StorageCacheUpgradeEvents"
+      ],
+      "tags": {
+        "Topic": ["diagnostics"]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "4b6de6c1-0bc4-4056-bb4b-07feaea2b6f3",
+      "displayName": "Active warning events",
+      "description": "Retrieves a list of warning events that have not cleared.",
+      "bodyFilePath": "KQL/ActiveWarningEventsQuery.kql",
+      "categories": ["resources"],
+      "relatedTables": [
+        "StorageCacheWarningEvents"
+      ],
+      "tags": {
+        "Topic": ["diagnostics"]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    }
+  ]
+}

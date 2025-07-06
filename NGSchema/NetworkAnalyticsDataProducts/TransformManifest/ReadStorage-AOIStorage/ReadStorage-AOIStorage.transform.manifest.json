@@ -1,0 +1,14 @@
+{
+    "name" : "ReadStorage",
+    "description": "These are Audit logs related to read access of files on the output storage account.",
+    "transformVersion" : "1",
+    "dataTypeId" : "MICROSOFTNETWORKANALYTICSDATAPRODUCTS_READSTORAGE",
+    "inputFilePath" : "ReadStorage-AOIStorage.json",
+    "transformState" : "Production",
+    "icmTeam" : "Azure Operator Insights/Triage",
+    "contactDL": "A4OAINASWE@microsoft.com",
+    "relatedTable" : "AOIStorage",
+    "kqlFilePath" : "KQL/ReadStorageTransform.kql",
+    "sampleInputRecordsFilePath" : "SampleInputRecords/ReadStorageSamples.json",
+    "sampleOutputRecordsFilePath" : "SampleOutputRecords/ReadStorageSamples.json"
+}

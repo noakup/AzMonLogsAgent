@@ -1,0 +1,17 @@
+[
+{
+         "TimeGenerated": "2022-12-28T07:20:12.51047229Z",
+         "Location": "eastus",
+         "ServiceName": "workflow.audit",
+         "OperationName": "Create Workflow",
+         "DataPartitionId": "audittesting-dp1",
+         "Action": "CREATE",
+         "ActionId": "WF001",
+         "Puid": "2f59abbc-7b40-4d0e-91b2-22ca3084bc84",
+         "ResultType": "Success",
+         "OperationDescription": "[WorkflowMetadata(workflowId=csv-parser, workflowName=csv-parser, description=This is csv parser workflow, createdBy=2f59abbc-7b40-4d0e-91b2-22ca3084bc84, creationTimestamp=1671536903568, version=1, isDeployedThroughWorkflowService=false, registrationInstructions={dagName=csv-parser}, isSystemWorkflow=false)]",
+         "RequestId":"8205f465-80d9-4999-8370-aae2fdde203b-0",
+         "Message":"Successfully created workflow",
+         "Category":"AuditEvent"
+ }
+] 

@@ -1,0 +1,9 @@
+let GranularityInterval = 30m; // Time resolution for query results (min value is 30s).
+WVDAgentHealthStatus // Fires every ~30s
+// Ensure only one data point is provided per host in the pool
+| summarize PeakSessionsByHost=max(toint(ActiveSessions)) by SessionHostName, bin(TimeGenerated, 30s), _ResourceId
+// Sum up the values for all of the hosts in each pool
+| summarize SessionsByHostPool=sum(PeakSessionsByHost) by TimeGenerated, _ResourceId
+// Reduce time resolution to desired GranularityInterval and report the peak session count for each pool in that time window
+| summarize max(SessionsByHostPool) by bin(TimeGenerated, GranularityInterval), _ResourceId
+| render timechart

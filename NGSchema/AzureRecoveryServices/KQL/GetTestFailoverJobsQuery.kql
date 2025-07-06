@@ -1,0 +1,5 @@
+ASRJobs
+//| where TimeGenerated >= ago(30d) // uncomment this line to view last 30 days
+| summarize arg_max(TimeGenerated,*) by JobUniqueId
+| where OperationName == "Test failover"
+| project StartTime, EndTime, SourceResourceId, SourceFriendlyName, DurationMs, ResultDescription

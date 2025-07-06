@@ -1,0 +1,11 @@
+[
+  {
+    "time": "2018-10-24T02:23:45.000Z",
+    "operationName": "Microsoft.SecurityInsights/alertRules/write",
+    "resourceId": "subscriptions/bd794837-91bd-91bd-9105-6339bfdb4e6a/resourceGroups/contoso/providers/Microsoft.OperationalInsights/workspaces/contoso/providers/Microsoft.SecurityInsights/alertRules/MalwareScan",
+    "category": "AlertRules",
+    "resultType": "Failure",
+    "resultDescription": "Failed to update analytic rule.",
+    "properties": "{}"
+  }
+]

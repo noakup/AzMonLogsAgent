@@ -1,0 +1,11 @@
+[
+  {
+    "TimeGenerated": "2022-11-02T14:33:52.3099080Z",
+    "OperationName": "Microsoft.DevCenter/projects/users/devboxes/delete",
+    "TargetResourceId": "/TENANTS/72F988BF-86F1-41AF-91AB-2D7CD011DB47/DEVCENTERS/DELVISSANTOSEASTDC/PROJECTS/DELVISPROJ/USERS/D7C82F4C-0139-40D3-88B5-1EB68E702D27/DEVBOXES/DELVISDB1",
+    "CallerIdentity": "{\"ObjectID\":[{\"Identity\":\"d7c82f4c-0139-40d3-88b5-1eb68e702d27\"}]}",
+    "OperationResult": "Success",
+    "ResponseCode": 201,
+    "CorrelationId": "0d7d3d60-2557-4db7-b091-ac81ac25ac0a"
+  }
+]

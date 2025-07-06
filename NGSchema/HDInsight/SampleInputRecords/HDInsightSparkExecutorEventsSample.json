@@ -1,0 +1,17 @@
+[{
+	"ApplicationId": "application_1594593978119_15508",
+	"ExecutorId": "1",
+	"ExecutorCores": "2",
+	"AddedTime": "2020-07-13T21:04:01.044+0000",
+	"RemovedTime": "2020-07-13T21:05:01.044+0000",
+	"RemovedReason" : "Container container_e24_1594664241172_0521_01_000091 exited from explicit termination request.",
+	"ExecutorHost": "wn0-ntb-7.5c4yhjcbs2de5avsfsdfbtkske.cx.internal.cloudapp.net",
+	"Dim5" : "0c4fa397-46da-4d91-a03c-b1a508e17735",
+	"Tenant": "bf597230450a4ea08cf5d46f097c6b51",
+	"Role": "workernode",
+	"Host": "wn0-ntb-7.5c4yhjcbs2de5avsfsdfbtkske.cx.internal.cloudapp.net",
+	"ClusterDnsName": "primary-hdsparkcluster-v3-eus2",
+	"Region": "East US",
+	"IpAddress": "10.0.0.9",
+	"UserSubscriptionId": "8p26a622-df78-4a27-a907-1ec2384d4f1va"
+}]

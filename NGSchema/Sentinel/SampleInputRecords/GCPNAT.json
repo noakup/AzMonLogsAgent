@@ -1,0 +1,62 @@
+[
+  {
+    "insertId": "15og6lef26pmr9",
+    "jsonPayload": {
+      "vpc": {
+        "subnetwork_name": "default",
+        "project_id": "msccp-test",
+        "vpc_name": "default"
+      },
+      "endpoint": {
+        "vm_name": "test-nat-vm",
+        "project_id": "msccp-test",
+        "zone": "us-central1-a",
+        "region": "us-central1"
+      },
+      "allocation_status": "OK",
+      "connection": {
+        "nat_ip": "34.59.200.179",
+        "protocol": 6,
+        "dest_port": 443,
+        "nat_port": 1571,
+        "dest_ip": "23.192.228.80",
+        "src_port": 58228,
+        "src_ip": "10.128.15.206"
+      },
+      "gateway_identifiers": {
+        "gateway_name": "test-nat-config",
+        "region": "us-central1",
+        "router_name": "my-router"
+      },
+      "destination": {
+        "geo_location": {
+          "country": "usa",
+          "continent": "America",
+          "region": "California",
+          "asn": 20940,
+          "city": "San Jose"
+        }
+      }
+    },
+    "resource": {
+      "type": "nat_gateway",
+      "labels": {
+        "region": "us-central1",
+        "gateway_name": "test-nat-config",
+        "router_id": "4411441447715745939",
+        "project_id": "msccp-test"
+      }
+    },
+    "timestamp": "2025-05-29T10:52:42.025805563Z",
+    "labels": {
+      "nat.googleapis.com/nat_ip": "34.59.200.179",
+      "nat.googleapis.com/router_name": "my-router",
+      "nat.googleapis.com/instance_zone": "us-central1-a",
+      "nat.googleapis.com/subnetwork_name": "default",
+      "nat.googleapis.com/instance_name": "test-nat-vm",
+      "nat.googleapis.com/network_name": "default"
+    },
+    "logName": "projects/msccp-test/logs/compute.googleapis.com%2Fnat_flows",
+    "receiveTimestamp": "2025-05-29T10:52:57.091617576Z"
+  }
+]

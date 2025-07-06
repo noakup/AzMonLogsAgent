@@ -1,0 +1,86 @@
+[  
+  {
+    "Computer": "aks-lpool-39842404-vmss000000",
+    "ContainerId": "32135ec0d37c0bb3aec3dda045e54f778bd8e5386e4cfee203288ff6fa57786b",
+    "ContainerName": "ubuntu1804",
+    "PodName": "1logmin-linux-replicas-6cffbb9f97-qtnqh",
+    "PodNamespace": "linux-logs",
+    "LogMessage": "{\"LogType\":\"Info\",\"Message\":\"Container started.\"}",
+    "LogSource": "stdout",
+    "TimeGenerated": "2021-01-12T00:30:13.206735456Z",
+    "KubernetesMetadata": "{\"podUid\":\"93bf47d2-5c1a-42bc-9a22-481939a93a66\",\"podLabels\":{\"app\":\"defender\",\"controller-revision-hash\":\"f48799794\",\"dsName\":\"microsoft-defender-publisher-ds\",\"kubernetes.azure.com/managedby\":\"aks\",\"pod-template-generation\":\"2\"},\"podAnnotations\":{\"kubernetes.io/config.seen\":\"2023-10-02T08:21:49.954540360Z\",\"kubernetes.io/config.source\":\"api\"},\"image_hash\":\"mcr.microsoft.com/azuredefender/stable/security-publisher@sha256:1234566789\",\"image\":\"mcr.microsoft.com/azuredefender/stable/security-publisher:6.6.66\"}",
+    "LogLevel": "info"
+  },
+  {
+    "Computer": "aks-hpool-39842404-vmss000002",
+    "ContainerId": "f12345ec0d37c0bb3aec3dda045e54f778bd8e5386e4cfee203288ff6fa5789c",
+    "ContainerName": "nginx-custom",
+    "PodName": "nginx-replicas-6cffbb9f97-n4bvx",
+    "PodNamespace": "web-apps",
+    "LogMessage": "{\"level\":\"WARN\",\"Message\":\"High memory usage detected.\"}",
+    "LogSource": "stdout",
+    "TimeGenerated": "2021-01-12T01:45:13.206735456Z",
+    "KubernetesMetadata": "{\"podUid\":\"f3bf47d2-5c1a-42bc-9a22-481939a93b77\",\"podLabels\":{\"app\":\"nginx\",\"pod-template-hash\":\"4dff99794\"},\"podAnnotations\":{},\"image\":\"nginx:latest\",\"image_hash\":\"nginx@sha256:abcdef123456\"}",
+    "LogLevel": "warning"
+  },
+  {
+    "Computer": "aks-hpool-39842404-vmss000002",
+    "ContainerId": "d78945ec0d37c0bb3aec3dda045e54f778bd8e5386e4cfee203288ff6fa5789d",
+    "ContainerName": "api-server",
+    "PodName": "api-server-replicas-4dffbb9f97-plk8j",
+    "PodNamespace": "backend-services",
+    "LogMessage": "CRITICAL: Database connection failed.",
+    "LogSource": "stderr",
+    "TimeGenerated": "2021-01-12T02:30:24.306735456Z",
+    "KubernetesMetadata": "{\"podUid\":\"g4cf48d3-6d2b-52cd-a9b3-582940b94b88\",\"podLabels\":{\"app\":\"api-server\",\"tier\":\"backend\"},\"podAnnotations\":{},\"image\":\"custom-api-server:1.2.3\",\"image_hash\":\"custom-api-server@sha256:9876543210\"}",
+    "LogLevel": "critical"
+  },
+  {
+    "Computer": "aks-lpool-39842404-vmss000003",
+    "ContainerId": "a65435ec0d37c0bb3aec3dda045e54f778bd8e5386e4cfee203288ff6fa5790b",
+    "ContainerName": "worker-task",
+    "PodName": "worker-task-replicas-8cffbb9f97-r5ghy",
+    "PodNamespace": "task-queue",
+    "LogMessage": "DEBUG: Task execution started.",
+    "LogSource": "stdout",
+    "TimeGenerated": "2021-01-12T03:15:33.506735456Z",
+    "KubernetesMetadata": "{\"podUid\":\"h5dg59e4-7e3c-63de-bac4-693951c95c99\",\"podLabels\":{\"app\":\"worker-task\",\"task\":\"processing\"},\"podAnnotations\":{},\"image\":\"worker-task:4.5.6\",\"image_hash\":\"worker-task@sha256:abcdef1234567890\"}",
+    "LogLevel": "debug"
+  },
+  {
+    "Computer": "aks-lpool-39842404-vmss000004",
+    "ContainerId": "b32135ec0d37c0bb3aec3dda045e54f778bd8e5386e4cfee203288ff6fa5710c",
+    "ContainerName": "data-processor",
+    "PodName": "data-processor-replicas-9cffbb9f97-zxvcn",
+    "PodNamespace": "data-processing",
+    "LogMessage": "TRACE: Entering function processData().",
+    "LogSource": "stdout",
+    "TimeGenerated": "2021-01-12T04:00:42.106735456Z",
+    "KubernetesMetadata": "{\"podUid\":\"i6eh60f5-8f4d-74ef-cbd5-7a492d6a6b00\",\"podLabels\":{\"app\":\"data-processor\",\"stage\":\"initial\"},\"podAnnotations\":{},\"image\":\"data-processor:7.8.9\",\"image_hash\":\"data-processor@sha256:123456abcdef\"}",
+    "LogLevel": "trace"
+  },
+  {
+    "Computer": "aks-lpool-39842404-vmss000005",
+    "ContainerId": "c43245ec0d37c0bb3aec3dda045e54f778bd8e5386e4cfee203288ff6fa5721d",
+    "ContainerName": "event-listener",
+    "PodName": "event-listener-replicas-2cffbb9f97-aqws1",
+    "PodNamespace": "event-handling",
+    "LogMessage": "{\"LogType\":\"ERROR\",\"Message\":\"Failed to connect to event stream.\"}",
+    "LogSource": "stderr",
+    "TimeGenerated": "2021-01-12T05:30:51.806735456Z",
+    "KubernetesMetadata": "{\"podUid\":\"j7fi71g6-9g5e-85fg-dbe6-8b4c3d7e7c11\",\"podLabels\":{\"app\":\"event-listener\",\"function\":\"streaming\"},\"podAnnotations\":{},\"image\":\"event-listener:10.11.12\",\"image_hash\":\"event-listener@sha256:abcdef1234567890\"}",
+    "LogLevel": "error"
+  },
+  {
+    "Computer": "aks-lpool-39842404-vmss000005",
+    "ContainerId": "c43245ec0d37c0bb3aec3dda045e54f778bd8e5386e4cfee203288ff6fa5721d",
+    "ContainerName": "event-listener",
+    "PodName": "event-listener-replicas-2cffbb9f97-aqws1",
+    "PodNamespace": "event-handling",
+    "LogMessage": "Test message for logsource",
+    "LogSource": "stderr",
+    "TimeGenerated": "2021-01-12T05:30:51.806735456Z",
+    "KubernetesMetadata": "{\"podUid\":\"j7fi71g6-9g5e-85fg-dbe6-8b4c3d7e7c11\",\"podLabels\":{\"app\":\"event-listener\",\"function\":\"streaming\"},\"podAnnotations\":{},\"image\":\"event-listener:10.11.12\",\"image_hash\":\"event-listener@sha256:abcdef1234567890\"}",
+    "LogLevel": "error"
+  }
+]

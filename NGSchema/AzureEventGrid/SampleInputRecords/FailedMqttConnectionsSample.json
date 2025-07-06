@@ -1,0 +1,23 @@
+[
+  {
+    "time": "2023-11-06T22:45:02.6829930Z",
+    "resourceId": "/SUBSCRIPTIONS/D8560037-8993-40AC-B191-4B2D877A9359/RESOURCEGROUPS/MCHAICANARYTEST/PROVIDERS/MICROSOFT.EVENTGRID/NAMESPACES/MCHAI1010",
+    "location": "eastus",
+    "operationName": "Microsoft.EventGrid/topicspaces/connect",
+    "category": "FailedMqttConnections",
+    "resultType": "Failed",
+    "resultSignature": "AuthenticationError",
+    "resultDescription": "Client could not be found",
+    "identity": {
+      "authenticationType": "CertificateThumbprintMatch",
+      "clientIdentitySource": "UserName",
+      "authenticationAuthority": "Local",
+      "clientIdentity": "testclient-1"
+    },
+    "properties": {
+      "sessionName": "testclient1",
+      "protocol": "MQTT5",
+      "traceId": "pwu5p3uuvzbyzpe4vyygij3it4"
+    }
+  }
+]

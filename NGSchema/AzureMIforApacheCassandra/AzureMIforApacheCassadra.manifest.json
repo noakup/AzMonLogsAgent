@@ -1,0 +1,531 @@
+{
+	"type": "Microsoft.DocumentDB/cassandraClusters",
+	"displayName": "Azure Managed Instance for Apache Cassandra",
+	"description": "All tables related to Azure Managed Instance for Apache Cassandra.",
+	"tags": {},
+	"properties": {},
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "Azure Cosmos DB/MI for Apache Cassandra",
+	"relatedTables": [
+		"AzureActivity"
+	],
+	"relatedFunctions": [],
+	"tables": [
+		{
+			"name": "CassandraAudit",
+			"description": "Detailed audit records for CQL operations and login attempts.",
+			"categories": [
+				"audit"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 2,
+			"dataTypeId": "MICROSOFTAZURECOSMOSDB_CASSANDRAAUDIT",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+            "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "time",
+					"type": "String"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/CassandraAuditTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Date and time the record was created."
+				},
+				{
+					"name": "ClusterName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Cluster name."
+				},
+				{
+					"name": "ClientIP",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Client IP address.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "ClientPort",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Client port."
+				},
+				{
+					"name": "CoordinatorIP",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Host address of the coordinator node.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "User",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Username of the authenticated user."
+				},
+				{
+					"name": "BatchId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Internal identifier shared by all statements in a batch operation."
+				},
+				{
+					"name": "Status",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Value is either ATTEMPT or FAILED."
+				},
+				{
+					"name": "Operation",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The CQL statement or a textual description of the operation."
+				},
+				{
+					"name": "OperationNaked",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The CQL statement or a textual description of the operation, without bound values appended to prepared statements."
+				},
+				{
+					"name": "ExternalUserId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "External user identity."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/CassandraAuditSample.json"
+		},
+		{
+			"name": "CassandraLogs",
+			"description": "Cassandra general logging messages (system.log).",
+			"categories": [],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"dataTypeId": "MICROSOFTAZURECOSMOSDB_CASSANDRALOGS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+			"isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "time",
+					"type": "String"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				}
+			],
+			"transformFilePath": "Kql/CassandraLogsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Date and time the record was created."
+				},
+				{
+					"name": "ClusterName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Cluster name."
+				},
+				{
+					"name": "Level",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Severity level of the event, will be one of INFO, WARM, ERROR, or OFF."
+				},
+				{
+					"name": "AddressIp",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "IP address of the node that generated the logging event.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "ThreadName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Name of the thread that generated the logging event."
+				},
+				{
+					"name": "ThreadId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "ID of the thread that generated the logging event."
+				},
+				{
+					"name": "SourceFile",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "File name where the logging request was issued."
+				},
+				{
+					"name": "SourceLine",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "Line number where the logging request was issued."
+				},
+				{
+					"name": "Message",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Application supplied message associated with the logging event."
+				},
+				{
+					"name": "Exception",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Throwable trace bound to the logging event, by default this will output the full trace as one would normally find with a call to Throwable.printStackTrace()."
+				},
+				{
+					"name": "EventProduct",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Product of the logging event, e.g. cassandra, dse, solr."
+				},
+				{
+					"name": "EventCategory",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Category of the logging event, e.g. startup, garbage_collection, compaction."
+				},
+				{
+					"name": "EventType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "type of the logging event, e.g. commit_log_replay_skipped, unknown_table."
+				},
+				{
+					"name": "CassandraKeyspace",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Cassandra keyspace."
+				},
+				{
+					"name": "CassandraTable",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Cassandra table."
+				},
+				{
+					"name": "PartitionKey",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Partition key."
+				},
+				{
+					"name": "PartitionSize",
+					"type": "Int",
+					"isDefaultDisplay": false,
+					"description": "Partition size."
+				},
+				{
+					"name": "TombstonedCells",
+					"type": "Int",
+					"isDefaultDisplay": false,
+					"description": "The number of tombstoned cells."
+				},
+				{
+					"name": "LiveCells",
+					"type": "Int",
+					"isDefaultDisplay": false,
+					"description": "The number of live cells."
+				},
+				{
+					"name": "CassandraKey",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Cassandra key."
+				},
+				{
+					"name": "RequestedColumns",
+					"type": "Int",
+					"isDefaultDisplay": false,
+					"description": "The number of columns requested."
+				},
+				{
+					"name": "SliceStart",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The start of the column slice inclusive."
+				},
+				{
+					"name": "SliceEnd",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The end of the the column slice inclusive."
+				},
+				{
+					"name": "DeletionInfo",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Deletion info."
+				},
+				{
+					"name": "CodeCacheBefore",
+					"type": "BigInt",
+					"isDefaultDisplay": false,
+					"description": "Code cache before garbage collection (in bytes). Code cache stores native code generated by JVM."
+				},
+				{
+					"name": "CodeCacheAfter",
+					"type": "BigInt",
+					"isDefaultDisplay": false,
+					"description": "Code cache after garbage collection (in bytes). Code cache stores native code generated by JVM."
+				},
+				{
+					"name": "Collections",
+					"type": "Int",
+					"isDefaultDisplay": false,
+					"description": "The number of garbage collections."
+				},
+				{
+					"name": "CompressedClassSpaceAfter",
+					"type": "BigInt",
+					"isDefaultDisplay": false,
+					"description": "Compressed class space after garbage collection (in bytes). Compressed class space stores class information referred to by the objects in the JavaHeap."
+				},
+				{
+					"name": "CompressedClassSpaceBefore",
+					"type": "BigInt",
+					"isDefaultDisplay": false,
+					"description": "Compressed class space before garbage collection (in bytes). Compressed class space stores class information referred to by the objects in the JavaHeap."
+				},
+				{
+					"name": "DurationMs",
+					"type": "Int",
+					"isDefaultDisplay": false,
+					"description": "Duration."
+				},
+				{
+					"name": "EdenSpaceBefore",
+					"type": "BigInt",
+					"isDefaultDisplay": false,
+					"description": "Eden space before garbage collection (in bytes). Eden space is the memory region where objects are allocated when they are created."
+				},
+				{
+					"name": "EdenSpaceAfter",
+					"type": "BigInt",
+					"isDefaultDisplay": false,
+					"description": "Eden space after garbage collection (in bytes). Eden space is the memory region where objects are allocated when they are created."
+				},
+				{
+					"name": "GCType",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The type of garbage collection, e.g. ParNew, MarkSweepCompact, G1 Old."
+				},
+				{
+					"name": "MaxMemory",
+					"type": "BigInt",
+					"isDefaultDisplay": false,
+					"description": "The maximum amount of memory (in bytes) that can be used for memory management."
+				},
+				{
+					"name": "MetaspaceBefore",
+					"type": "BigInt",
+					"isDefaultDisplay": false,
+					"description": "Metaspace before garbage collection (in bytes). Metaspace stores classes metadata."
+				},
+				{
+					"name": "MetaspaceAfter",
+					"type": "BigInt",
+					"isDefaultDisplay": false,
+					"description": "Metaspace after garbage collection (in bytes). Metaspace stores classes metadata."
+				},
+				{
+					"name": "OldGenAfter",
+					"type": "BigInt",
+					"isDefaultDisplay": false,
+					"description": "Old Generation after garbage collection (in bytes). Old Generation is used to store long surviving objects."
+				},
+				{
+					"name": "OldGenBefore",
+					"type": "BigInt",
+					"isDefaultDisplay": false,
+					"description": "Old Generation before garbage collection (in bytes). Old Generation is used to store long surviving objects."
+				},
+				{
+					"name": "PercentFull",
+					"type": "Double",
+					"isDefaultDisplay": false,
+					"description": "The percentage of full heap."
+				},
+				{
+					"name": "PermGenAfter",
+					"type": "BigInt",
+					"isDefaultDisplay": false,
+					"description": "Permanent Generation space after garbage collection (in bytes). Permanent generation stores classes metadata (renamed to Metaspace in Java 8)."
+				},
+				{
+					"name": "PermGenBefore",
+					"type": "BigInt",
+					"isDefaultDisplay": false,
+					"description": "Permanent Generation space before garbage collection (in bytes). Permanent generation stores classes metadata (renamed to Metaspace in Java 8)."
+				},
+				{
+					"name": "SurvivorSpaceBefore",
+					"type": "BigInt",
+					"isDefaultDisplay": false,
+					"description": "Survivor space before garbage collection (in bytes). Survivor space stores the objects that have survived the garbage collection of the Eden space."
+				},
+				{
+					"name": "SurvivorSpaceAfter",
+					"type": "BigInt",
+					"isDefaultDisplay": false,
+					"description": "Survivor space after garbage collection (in bytes). Survivor space stores the objects that have survived the garbage collection of the Eden space."
+				},
+				{
+					"name": "UsedMemory",
+					"type": "BigInt",
+					"isDefaultDisplay": false,
+					"description": "The amount of memory currently used (in bytes)."
+				},
+				{
+					"name": "DroppedCrossNodeTimeout",
+					"type": "Int",
+					"isDefaultDisplay": false,
+					"description": "The number of messages dropped due to cross node timeout in last 5000ms."
+				},
+				{
+					"name": "DroppedInternalTimeout",
+					"type": "Int",
+					"isDefaultDisplay": false,
+					"description": "The number of messages dropped due to internal timeout in last 5000ms."
+				},
+				{
+					"name": "DroppedMessagesType",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The type of messages dropped in last 5000ms."
+				},
+				{
+					"name": "DroppedMessages",
+					"type": "Int",
+					"isDefaultDisplay": false,
+					"description": "The number of messages dropped in last 5000ms."
+				},
+				{
+					"name": "Endpoint",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "IP address of an endpoint.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "HostId",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The GUID assigned in the Cassandra cluster to uniquely identify this node. See the system.local table or nodetool status to find information about the host by its HostId.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "PendingTasks",
+					"type": "Int",
+					"isDefaultDisplay": false,
+					"description": "The number of pending tasks in gossip stage."
+				},
+				{
+					"name": "SessionId",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Unique string identifying what query was running when this log was emitted. Use SHOW SESSION <SessionId> to find details of the query's activity.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "SSTableName",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "SSTable name."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/CassandraLogsSample.json"
+		}
+	],
+	"functions": [],
+	"queries": [
+		{
+			"id": "7f99e5e3-4b53-4ac2-8b96-3f2a5f92c7f9",
+			"displayName": "Cassandra logs",
+			"description": "Cassandra logs for a specific node, sorted by time (latest logs shown first).",
+			"bodyFilePath": "KQL/Queries/CassandraLogs.kql",
+			"categories": [],
+			"relatedTables": [
+				"CassandraLogs"
+			],
+			"tags": {
+				"Topic": [
+					"Diagnostics",
+					"Usage"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		},
+		{
+			"id": "d2752945-c33f-4a6b-9128-e2f8e2dbf6a1",
+			"displayName": "Cassandra errors or warnings",
+			"description": "Error or warning logs from Cassandra, sorted by time (latest logs shown first).",
+			"bodyFilePath": "KQL/Queries/CassandraErrorsOrWarnings.kql",
+			"categories": [],
+			"relatedTables": [
+				"CassandraLogs"
+			],
+			"tags": {
+				"Topic": [
+					"Errors"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		}
+	]
+}

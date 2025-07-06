@@ -1,0 +1,13 @@
+source
+| project
+TimeGenerated = todatetime(['time']),
+Category = category,
+OperationName = operationName,
+Content = tostring(properties.message),
+Namespace = tostring(properties.namespace),
+PodName = tostring(properties.podName),
+Duration = tostring(properties.took),
+TotalHits = tostring(properties.total_hits),
+Source = tostring(properties.source),
+Type = tostring(properties.type),
+Location = location

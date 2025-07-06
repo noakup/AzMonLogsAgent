@@ -1,0 +1,4 @@
+AHDSMedTechDiagnosticLogs
+| where LogType == "HealthCheckException"
+| order by TimeGenerated desc
+| take 100

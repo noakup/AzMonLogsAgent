@@ -1,0 +1,20 @@
+let DisabledParsers=materialize(_GetWatchlist('ASimDisabledParsers') 
+| where SearchKey in ('Any', 'Exclude_ASim_WebSession') 
+| extend SourceSpecificParser=column_ifexists('SourceSpecificParser','') 
+| where isnotempty(SourceSpecificParser) 
+| summarize list = make_set(SourceSpecificParser));
+let builtInDisabled = 0 != array_length(set_intersect(toscalar(DisabledParsers),dynamic(['Exclude_ASim_WebSessionBuiltIn', 'Exclude_ASim_WebSession', 'Any'])));
+union isfuzzy=true
+_ASim_WebSession_ApacheHTTPServerV01(disabled= (builtInDisabled or('Exclude_ASim_WebSession_ApacheHTTPServer' in (DisabledParsers)))),
+_ASim_WebSession_BarracudaWAFV01(disabled= (builtInDisabled or('Exclude_ASim_WebSession_BarracudaWAF' in (DisabledParsers)))),
+_ASim_WebSession_CiscoFirepowerV01(disabled= (builtInDisabled or('Exclude_ASim_WebSession_CiscoFirepower' in (DisabledParsers)))),
+_ASim_WebSession_CiscoMerakiV01(disabled= (builtInDisabled or('Exclude_ASim_WebSession_CiscoMeraki' in (DisabledParsers)))),
+_ASim_WebSession_F5ASMV01(disabled= (builtInDisabled or('Exclude_ASim_WebSession_F5ASM' in (DisabledParsers)))),
+_ASim_WebSession_FortinetFortiGateV01(disabled= (builtInDisabled or('Exclude_ASim_WebSession_FortinetFortiGate' in (DisabledParsers)))),
+_ASim_WebSession_IISV02(disabled= (builtInDisabled or('Exclude_ASim_WebSession_IIS' in (DisabledParsers)))),
+_ASim_WebSession_NativeV01(disabled= (builtInDisabled or('Exclude_ASim_WebSession_Native' in (DisabledParsers)))),
+_ASim_WebSession_PaloAltoCEFV02(disabled= (builtInDisabled or('Exclude_ASim_WebSession_PaloAltoCEF' in (DisabledParsers)))),
+_ASim_WebSession_SquidProxyV03(disabled= (builtInDisabled or('Exclude_ASim_WebSession_SquidProxy' in (DisabledParsers)))),
+_ASim_WebSession_VectraAIV02(disabled= (builtInDisabled or('Exclude_ASim_WebSession_VectraAI' in (DisabledParsers))), pack= pack),
+_ASim_WebSession_ZscalerZIAV04(disabled= (builtInDisabled or('Exclude_ASim_WebSession_ZscalerZIA' in (DisabledParsers)))),
+_Im_WebSession_EmptyV03

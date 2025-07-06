@@ -1,0 +1,19 @@
+source
+| extend props = parse_json(properties)
+| extend identityObj = parse_json(identity)
+| extend claims = parse_json(identityObj.claims)
+| project
+  TimeGenerated = todatetime(["time"]),
+  OperationName = operationName,
+  OperationType = typeOperation,
+  ProviderName = resourceProvider,
+  CorrelationId = correlationId,
+  OperationVersion = operationVersion,
+  Category = category,
+  ResultType = resultType,
+  ResultSignature = toint(resultSignature),
+  DurationMs = tolong(durationMs),
+  CallerIpAddress = tostring(callerIpAddress),
+  Uri = tostring(uri),
+  PrivateLinkAssociationIds = todynamic(props.privateLinkAssociationIds),
+  ObjectIdentifier = tostring(claims.["http://schemas.microsoft.com/identity/claims/objectidentifier"])

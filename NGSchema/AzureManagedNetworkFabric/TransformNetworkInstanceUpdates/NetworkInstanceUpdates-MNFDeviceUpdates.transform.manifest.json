@@ -1,0 +1,14 @@
+{
+  "name" : "NetworkInstanceUpdates",
+  "description": "Network instance updates events happened in Nexus network fabric devices.",
+  "transformVersion" : 3,
+  "dataTypeId": "MICROSOFTMANAGEDNETWORKFABRIC_NETWORKINSTANCEUPDATES",
+  "inputFilePath" : "NetworkInstanceUpdates-MNFDeviceUpdates.json",
+  "transformState" : "Production",
+  "icmTeam": "NETWORKFABRICAUTOMATION/Triage",
+  "contactDL": "afo-nf-all@microsoft.com",
+  "relatedTable" : "MNFDeviceUpdates",
+  "kqlFilePath" : "KQL/TransformNetworkInstanceUpdates.kql",
+  "sampleInputRecordsFilePath" : "SampleInputRecords/NetworkInstanceUpdates.json",
+  "sampleOutputRecordsFilePath" : "SampleOutputRecords/NetworkInstanceUpdates.json"
+}

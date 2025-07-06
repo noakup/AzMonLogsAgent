@@ -1,0 +1,30 @@
+{
+    "name" : "ConsumptionLogicApp",
+    "description": "Logs generated during Logic Apps workflow runtime - consumption SKU.",
+    "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "workflowId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        }
+      ]
+}

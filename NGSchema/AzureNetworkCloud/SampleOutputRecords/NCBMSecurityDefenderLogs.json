@@ -1,0 +1,17 @@
+{
+    "TimeGenerated": "2023-05-29T16:55:00+0000",
+    "ContainerName": "cluster-state-collector",
+    "NamespaceName": "mdc",
+    "Node": "b37dev03a1c005",
+    "PodName": "microsoft-defender-collectors-k7h2g",
+    "ClusterManagerName": "dev03-xmof2wbpkgg5i",
+    "ClusterName": "dev03-f543be440954",
+    "ComponentName": "ClusterStateCollector",
+    "ComponentVersion": "mcr.microsoft.com/azuredefender/stable/cluster-state-collector:1.3.12",
+    "Location": "eastus",
+    "LogType": "Trace",
+    "Severity": "error",
+    "Message": "Failed to get memory usage open /sys/fs/cgroup/memory/memory.usage_in_bytes: no such file or directory",
+    "_ResourceId": "/SUBSCRIPTIONS/FCA2E8EE-1179-48B8-9532-428ED0873A2E/RESOURCEGROUPS/DEV03-F543BE440954-HOSTEDRESOURCES-18D9C49B/PROVIDERS/MICROSOFT.NETWORKCLOUD/BAREMETALMACHINES/B37DEV03A1C001",
+    "_SubscriptionID": "fca2e8ee-1179-48b8-9532-428ed0873a2e"
+}

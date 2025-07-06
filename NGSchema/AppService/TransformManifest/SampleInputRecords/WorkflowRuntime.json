@@ -1,0 +1,1034 @@
+[
+    {
+      "time": "2023-12-12T16:46:57.9378839Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072677113539330454743CU25/ACTIONS/TRANSFORM_XML",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowActionStarted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:57.9378231Z",
+          "status": "Running",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072677113539330454743CU25",
+              "location": "westus2",
+              "actionName": "Transform_XML"
+          },
+          "correlation": {
+              "actionTrackingId": "17b67f0a-552f-4b2c-baf8-030da7de8e32",
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "api": {},
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": -1,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:58.0203169Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072677113539330454743CU25/ACTIONS/TRANSFORM_XML",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowActionCompleted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:57.9378231Z",
+          "endTime": "2023-12-12T16:46:57.9888291Z",
+          "status": "Succeeded",
+          "code": "OK",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072677113539330454743CU25",
+              "location": "westus2",
+              "actionName": "Transform_XML"
+          },
+          "correlation": {
+              "actionTrackingId": "17b67f0a-552f-4b2c-baf8-030da7de8e32",
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "api": {},
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": 0,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:58.0278691Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072677113539330454743CU25/ACTIONS/RESPONSE",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowActionStarted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:58.0278083Z",
+          "status": "Running",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072677113539330454743CU25",
+              "location": "westus2",
+              "actionName": "Response"
+          },
+          "correlation": {
+              "actionTrackingId": "e60c384c-5edc-46ce-942b-59e180e20375",
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "api": {},
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": -1,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:58.0350934Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072677113539330454743CU25/ACTIONS/RESPONSE",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowActionCompleted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:58.0278083Z",
+          "endTime": "2023-12-12T16:46:58.0285386Z",
+          "status": "Skipped",
+          "code": "ActionResponseSkipped",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072677113539330454743CU25",
+              "location": "westus2",
+              "actionName": "Response"
+          },
+          "correlation": {
+              "actionTrackingId": "e60c384c-5edc-46ce-942b-59e180e20375",
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "error": {
+              "code": "ActionResponseSkipped",
+              "message": "The execution of template action 'Response' is skipped: the client application is not waiting for a response from service."
+          },
+          "api": {},
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": 0,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:58.0502495Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072677113539330454743CU25",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowRunCompleted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:57.7750524Z",
+          "endTime": "2023-12-12T16:46:58.0501811Z",
+          "status": "Succeeded",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072677113539330454743CU25",
+              "originRunId": "08584992072677113539330454743CU25",
+              "location": "westus2"
+          },
+          "correlation": {
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "metadataOverflowContentLength": 0,
+          "actionCount": 3
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:52.0848156Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072734303378362879182CU00",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowRunStarted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:52.0550206Z",
+          "status": "Running",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072734303378362879182CU00",
+              "originRunId": "08584992072734303378362879182CU00",
+              "location": "westus2"
+          },
+          "correlation": {
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "metadataOverflowContentLength": -1,
+          "actionCount": -1
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:52.0901951Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072734303378362879182CU00/TRIGGERS/WHEN_A_HTTP_REQUEST_IS_RECEIVED",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowTriggerStarted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:52.0519803Z",
+          "status": "Succeeded",
+          "fired": true,
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072734303378362879182CU00",
+              "location": "westus2",
+              "triggerName": "When_a_HTTP_request_is_received",
+              "sourceTriggerHistoryName": "08584992673262420329700583709CU07"
+          },
+          "correlation": {
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": -1,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:52.1047819Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072734303378362879182CU00/TRIGGERS/WHEN_A_HTTP_REQUEST_IS_RECEIVED",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowTriggerCompleted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:52.0519803Z",
+          "endTime": "2023-12-12T16:46:52.0987926Z",
+          "status": "Succeeded",
+          "fired": true,
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072734303378362879182CU00",
+              "location": "westus2",
+              "triggerName": "When_a_HTTP_request_is_received",
+              "sourceTriggerHistoryName": "08584992673262420329700583709CU07"
+          },
+          "correlation": {
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": -1,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:52.1586618Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072734303378362879182CU00/ACTIONS/TRANSFORM_XML",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowActionStarted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:52.1585977Z",
+          "status": "Running",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072734303378362879182CU00",
+              "location": "westus2",
+              "actionName": "Transform_XML"
+          },
+          "correlation": {
+              "actionTrackingId": "77ee146b-fbda-4a66-ba8d-cc40bbcbe84f",
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "api": {},
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": -1,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:53.8449869Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072734303378362879182CU00/ACTIONS/TRANSFORM_XML",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowActionCompleted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:52.1585977Z",
+          "endTime": "2023-12-12T16:46:53.80616Z",
+          "status": "Succeeded",
+          "code": "OK",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072734303378362879182CU00",
+              "location": "westus2",
+              "actionName": "Transform_XML"
+          },
+          "correlation": {
+              "actionTrackingId": "77ee146b-fbda-4a66-ba8d-cc40bbcbe84f",
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "api": {},
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": 0,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:53.8540067Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072734303378362879182CU00/ACTIONS/RESPONSE",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowActionStarted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:53.8539165Z",
+          "status": "Running",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072734303378362879182CU00",
+              "location": "westus2",
+              "actionName": "Response"
+          },
+          "correlation": {
+              "actionTrackingId": "a5facc07-3cb3-4720-98a9-e21307e0ff9a",
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "api": {},
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": -1,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:53.8606581Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072734303378362879182CU00/ACTIONS/RESPONSE",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowActionCompleted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:53.8539165Z",
+          "endTime": "2023-12-12T16:46:53.8547821Z",
+          "status": "Skipped",
+          "code": "ActionResponseSkipped",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072734303378362879182CU00",
+              "location": "westus2",
+              "actionName": "Response"
+          },
+          "correlation": {
+              "actionTrackingId": "a5facc07-3cb3-4720-98a9-e21307e0ff9a",
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "error": {
+              "code": "ActionResponseSkipped",
+              "message": "The execution of template action 'Response' is skipped: the client application is not waiting for a response from service."
+          },
+          "api": {},
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": 0,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:53.8800581Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072734303378362879182CU00",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowRunCompleted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:52.0550206Z",
+          "endTime": "2023-12-12T16:46:53.8799932Z",
+          "status": "Succeeded",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072734303378362879182CU00",
+              "originRunId": "08584992072734303378362879182CU00",
+              "location": "westus2"
+          },
+          "correlation": {
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "metadataOverflowContentLength": 0,
+          "actionCount": 3
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:57.8292555Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072677113539330454743CU25",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowRunStarted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:57.7750524Z",
+          "status": "Running",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072677113539330454743CU25",
+              "originRunId": "08584992072677113539330454743CU25",
+              "location": "westus2"
+          },
+          "correlation": {
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "metadataOverflowContentLength": -1,
+          "actionCount": -1
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:57.8341655Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072677113539330454743CU25/TRIGGERS/WHEN_A_HTTP_REQUEST_IS_RECEIVED",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowTriggerStarted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:57.764822Z",
+          "status": "Succeeded",
+          "fired": true,
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072677113539330454743CU25",
+              "location": "westus2",
+              "triggerName": "When_a_HTTP_request_is_received",
+              "sourceTriggerHistoryName": "08584992673262420329700583709CU07"
+          },
+          "correlation": {
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": -1,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:57.8406196Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072677113539330454743CU25/TRIGGERS/WHEN_A_HTTP_REQUEST_IS_RECEIVED",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowTriggerCompleted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:57.764822Z",
+          "endTime": "2023-12-12T16:46:57.8273108Z",
+          "status": "Succeeded",
+          "fired": true,
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072677113539330454743CU25",
+              "location": "westus2",
+              "triggerName": "When_a_HTTP_request_is_received",
+              "sourceTriggerHistoryName": "08584992673262420329700583709CU07"
+          },
+          "correlation": {
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": -1,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:53.8789600Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072793140265971064797CU24",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowRunCompleted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:46.2049183Z",
+          "endTime": "2023-12-12T16:46:53.8789022Z",
+          "status": "Succeeded",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072793140265971064797CU24",
+              "originRunId": "08584992072793140265971064797CU24",
+              "location": "westus2"
+          },
+          "correlation": {
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "metadataOverflowContentLength": 0,
+          "actionCount": 3
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:46.3268954Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072793140265971064797CU24/ACTIONS/TRANSFORM_XML",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowActionStarted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:46.3267828Z",
+          "status": "Running",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072793140265971064797CU24",
+              "location": "westus2",
+              "actionName": "Transform_XML"
+          },
+          "correlation": {
+              "actionTrackingId": "785246ab-251e-4773-8372-83e987830bf3",
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "api": {},
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": -1,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:53.8447891Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072793140265971064797CU24/ACTIONS/TRANSFORM_XML",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowActionCompleted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:46.3267828Z",
+          "endTime": "2023-12-12T16:46:53.8121103Z",
+          "status": "Succeeded",
+          "code": "OK",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072793140265971064797CU24",
+              "location": "westus2",
+              "actionName": "Transform_XML"
+          },
+          "correlation": {
+              "actionTrackingId": "785246ab-251e-4773-8372-83e987830bf3",
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "api": {},
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": 0,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:53.8529458Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072793140265971064797CU24/ACTIONS/RESPONSE",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowActionStarted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:53.8528884Z",
+          "status": "Running",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072793140265971064797CU24",
+              "location": "westus2",
+              "actionName": "Response"
+          },
+          "correlation": {
+              "actionTrackingId": "a75f1667-c98c-4fc8-bf48-a15fdc3d6ed3",
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "api": {},
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": -1,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:53.8631540Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072793140265971064797CU24/ACTIONS/RESPONSE",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowActionCompleted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:53.8528884Z",
+          "endTime": "2023-12-12T16:46:53.8535872Z",
+          "status": "Skipped",
+          "code": "ActionResponseSkipped",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072793140265971064797CU24",
+              "location": "westus2",
+              "actionName": "Response"
+          },
+          "correlation": {
+              "actionTrackingId": "a75f1667-c98c-4fc8-bf48-a15fdc3d6ed3",
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "error": {
+              "code": "ActionResponseSkipped",
+              "message": "The execution of template action 'Response' is skipped: the client application is not waiting for a response from service."
+          },
+          "api": {},
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": 0,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:55.3541589Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072701553725476290648CU03",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowRunStarted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:55.329297Z",
+          "status": "Running",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072701553725476290648CU03",
+              "originRunId": "08584992072701553725476290648CU03",
+              "location": "westus2"
+          },
+          "correlation": {
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "metadataOverflowContentLength": -1,
+          "actionCount": -1
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:55.3603911Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072701553725476290648CU03/TRIGGERS/WHEN_A_HTTP_REQUEST_IS_RECEIVED",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowTriggerStarted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:55.3235566Z",
+          "status": "Succeeded",
+          "fired": true,
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072701553725476290648CU03",
+              "location": "westus2",
+              "triggerName": "When_a_HTTP_request_is_received",
+              "sourceTriggerHistoryName": "08584992673262420329700583709CU07"
+          },
+          "correlation": {
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": -1,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:46:55.3667036Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072701553725476290648CU03/TRIGGERS/WHEN_A_HTTP_REQUEST_IS_RECEIVED",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowTriggerCompleted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:46:55.3235566Z",
+          "endTime": "2023-12-12T16:46:55.3548064Z",
+          "status": "Succeeded",
+          "fired": true,
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072701553725476290648CU03",
+              "location": "westus2",
+              "triggerName": "When_a_HTTP_request_is_received",
+              "sourceTriggerHistoryName": "08584992673262420329700583709CU07"
+          },
+          "correlation": {
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": -1,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:47:06.6130961Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072589047075728407894CU22",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowRunStarted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:47:06.5783672Z",
+          "status": "Running",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072589047075728407894CU22",
+              "originRunId": "08584992072589047075728407894CU22",
+              "location": "westus2"
+          },
+          "correlation": {
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "metadataOverflowContentLength": -1,
+          "actionCount": -1
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:47:06.6192415Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072589047075728407894CU22/TRIGGERS/WHEN_A_HTTP_REQUEST_IS_RECEIVED",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowTriggerStarted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:47:06.5618478Z",
+          "status": "Succeeded",
+          "fired": true,
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072589047075728407894CU22",
+              "location": "westus2",
+              "triggerName": "When_a_HTTP_request_is_received",
+              "sourceTriggerHistoryName": "08584992673262420329700583709CU07"
+          },
+          "correlation": {
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": -1,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:47:06.6268622Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072589047075728407894CU22/TRIGGERS/WHEN_A_HTTP_REQUEST_IS_RECEIVED",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowTriggerCompleted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:47:06.5618478Z",
+          "endTime": "2023-12-12T16:47:06.6243513Z",
+          "status": "Succeeded",
+          "fired": true,
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072589047075728407894CU22",
+              "location": "westus2",
+              "triggerName": "When_a_HTTP_request_is_received",
+              "sourceTriggerHistoryName": "08584992673262420329700583709CU07"
+          },
+          "correlation": {
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": -1,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:47:06.8095038Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072589047075728407894CU22",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowRunCompleted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:47:06.5783672Z",
+          "endTime": "2023-12-12T16:47:06.8094282Z",
+          "status": "Succeeded",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072589047075728407894CU22",
+              "originRunId": "08584992072589047075728407894CU22",
+              "location": "westus2"
+          },
+          "correlation": {
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "metadataOverflowContentLength": 0,
+          "actionCount": 3
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:47:06.6759886Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072589047075728407894CU22/ACTIONS/TRANSFORM_XML",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowActionStarted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:47:06.6759042Z",
+          "status": "Running",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072589047075728407894CU22",
+              "location": "westus2",
+              "actionName": "Transform_XML"
+          },
+          "correlation": {
+              "actionTrackingId": "8824832e-7a2b-4524-85c5-884873a470cd",
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "api": {},
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": -1,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:47:06.7784084Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072589047075728407894CU22/ACTIONS/TRANSFORM_XML",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowActionCompleted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:47:06.6759042Z",
+          "endTime": "2023-12-12T16:47:06.7361042Z",
+          "status": "Succeeded",
+          "code": "OK",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072589047075728407894CU22",
+              "location": "westus2",
+              "actionName": "Transform_XML"
+          },
+          "correlation": {
+              "actionTrackingId": "8824832e-7a2b-4524-85c5-884873a470cd",
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "api": {},
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": 0,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:47:06.7873199Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072589047075728407894CU22/ACTIONS/RESPONSE",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowActionStarted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:47:06.7872317Z",
+          "status": "Running",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072589047075728407894CU22",
+              "location": "westus2",
+              "actionName": "Response"
+          },
+          "correlation": {
+              "actionTrackingId": "22d60a6f-1d47-494d-b7d3-54e03a66cc37",
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "api": {},
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": -1,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  },
+  {
+      "time": "2023-12-12T16:47:06.7947314Z",
+      "workflowId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM",
+      "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/XSLPARAM_GROUP-8F3F/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/XSLPARAM/RUNS/08584992072589047075728407894CU22/ACTIONS/RESPONSE",
+      "category": "WorkflowRuntime",
+      "level": "Information",
+      "operationName": "Microsoft.Logic/workflows/workflowActionCompleted",
+      "properties": {
+          "$schema": "2016-06-01",
+          "startTime": "2023-12-12T16:47:06.7872317Z",
+          "endTime": "2023-12-12T16:47:06.7883591Z",
+          "status": "Skipped",
+          "code": "ActionResponseSkipped",
+          "executionClusterType": "AppService",
+          "resource": {
+              "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+              "resourceGroupName": "xslparam_group-8f3f",
+              "workflowId": "4bc7ba20bee042e18c6eb898d962a01e",
+              "workflowName": "xslparam",
+              "runId": "08584992072589047075728407894CU22",
+              "location": "westus2",
+              "actionName": "Response"
+          },
+          "correlation": {
+              "actionTrackingId": "22d60a6f-1d47-494d-b7d3-54e03a66cc37",
+              "clientTrackingId": "08585001445352081648358063347CU23"
+          },
+          "error": {
+              "code": "ActionResponseSkipped",
+              "message": "The execution of template action 'Response' is skipped: the client application is not waiting for a response from service."
+          },
+          "api": {},
+          "isV2Threshold": false,
+          "metadataOverflowContentLength": 0,
+          "actionCount": 0
+      },
+      "location": "westus2"
+  }
+  ]

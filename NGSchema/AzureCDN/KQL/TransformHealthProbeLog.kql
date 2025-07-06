@@ -1,0 +1,15 @@
+source
+| project 
+    TimeGenerated = todatetime(["time"]), 
+    OperationName = operationName, 
+    HealthProbeId = tostring(properties.healthProbeId), 
+    HttpMethod = tostring(properties.httpVerb), 
+    Result = tostring(properties.result), 
+    HttpStatusCode = toint(properties.httpStatusCode), 
+    ProbeUrl = tostring(properties.probeURL), 
+    OriginName = tostring(properties.originName), 
+    Pop = tostring(properties.POP), 
+    OriginIp = tostring(properties.originIP), 
+    TotalLatency = tolong(properties.totalLatencyMilliseconds), 
+    ConnectionLatency = tostring(properties.connectionLatencyMilliseconds), 
+    DnsResolutionLatency = tostring(properties.DNSLatencyMicroseconds)

@@ -1,0 +1,98 @@
+[
+    { "Tenant": "AsgardRCore-Prod-uscentraleuap-R-181", 
+"time": "2024-12-16T18:17:24.9148287Z", 
+"location": "centraluseuap", 
+"resourceId": "/SUBSCRIPTIONS/8CF6C1B6-C80F-437C-87AD-45FBAFF54F73/RESOURCEGROUPS/BCOLLIN-TEST-SHOEBOX/PROVIDERS/MICROSOFT.STANDBYPOOL/STANDBYVIRTUALMACHINEPOOLS/SHOEBOXT2367-STANDBYPOOL", 
+"category": "Execution", 
+"operationName": "MICROSOFT.STANDBYPOOL/STANDBYVIRTUALMACHINEPOOLS/WRITE",
+"properties" :{
+    "EventName": "StandbyPoolReuseSuccess"
+    }
+},
+{ "Tenant": "AsgardRCore-Prod-uscentraleuap-R-181", 
+"time": "2024-12-16T18:19:24.9148287Z", 
+"location": "centraluseuap", 
+"resourceId": "/SUBSCRIPTIONS/8CF6C1B6-C80F-437C-87AD-45FBAFF54F73/RESOURCEGROUPS/BCOLLIN-TEST-SHOEBOX/PROVIDERS/MICROSOFT.STANDBYPOOL/STANDBYVIRTUALMACHINEPOOLS/SHOEBOXT2367-STANDBYPOOL", 
+"category": "Execution", 
+"operationName": "MICROSOFT.STANDBYPOOL/STANDBYVIRTUALMACHINEPOOLS/WRITE",
+"properties" :{
+    "EventName": "StandbyPoolReuseFailure"
+    }
+},
+{ "Tenant": "AsgardRCore-Prod-uscentraleuap-R-181", 
+"time": "2024-12-16T18:23:24.9148287Z", 
+"location": "centraluseuap", 
+"resourceId": "/SUBSCRIPTIONS/8CF6C1B6-C80F-437C-87AD-45FBAFF54F73/RESOURCEGROUPS/BCOLLIN-TEST-SHOEBOX/PROVIDERS/MICROSOFT.STANDBYPOOL/STANDBYVIRTUALMACHINEPOOLS/SHOEBOXT2367-STANDBYPOOL", 
+"category": "Execution", 
+"operationName": "MICROSOFT.STANDBYPOOL/STANDBYVIRTUALMACHINEPOOLS/WRITE",
+"properties" :{
+    "EventName": "StandbyPoolExhausted"
+    }
+},
+{ "Tenant": "AsgardRCore-Prod-uscentraleuap-R-181", 
+"time": "2024-12-16T18:25:24.9148287Z", 
+"location": "centraluseuap", 
+"resourceId": "/SUBSCRIPTIONS/8CF6C1B6-C80F-437C-87AD-45FBAFF54F73/RESOURCEGROUPS/BCOLLIN-TEST-SHOEBOX/PROVIDERS/MICROSOFT.STANDBYPOOL/STANDBYVIRTUALMACHINEPOOLS/SHOEBOXT2367-STANDBYPOOL", 
+"category": "Execution", 
+"operationName": "MICROSOFT.STANDBYPOOL/STANDBYVIRTUALMACHINEPOOLS/WRITE",
+"properties" :{
+    "EventName": "StandbyPoolMaxReadyPool",
+    "Message" : "StandbyPool moving to max ready"
+    }
+},
+{ "Tenant": "AsgardRCore-Prod-uscentraleuap-R-181", 
+"time": "2024-12-16T18:27:24.9148287Z", 
+"location": "centraluseuap", 
+"resourceId": "/SUBSCRIPTIONS/8CF6C1B6-C80F-437C-87AD-45FBAFF54F73/RESOURCEGROUPS/BCOLLIN-TEST-SHOEBOX/PROVIDERS/MICROSOFT.STANDBYPOOL/STANDBYVIRTUALMACHINEPOOLS/SHOEBOXT2367-STANDBYPOOL", 
+"category": "Execution", 
+"operationName": "MICROSOFT.STANDBYPOOL/STANDBYVIRTUALMACHINEPOOLS/WRITE",
+"properties" :{
+    "EventName": "StandbyPoolDegradedPool",
+    "ErrorMessage": "StandbyPool is in a degraded state with error(s): ConfidentialContainerGroupSkuIsNotSupported"
+    }
+},
+{ "Tenant": "AsgardRCore-Prod-uscentraleuap-R-181", 
+"time": "2024-12-16T18:27:27.9148287Z", 
+"location": "centraluseuap", 
+"resourceId": "/SUBSCRIPTIONS/8CF6C1B6-C80F-437C-87AD-45FBAFF54F73/RESOURCEGROUPS/BCOLLIN-TEST-SHOEBOX/PROVIDERS/MICROSOFT.STANDBYPOOL/STANDBYVIRTUALMACHINEPOOLS/SHOEBOXT2367-STANDBYPOOL", 
+"category": "Execution", 
+"operationName": "MICROSOFT.STANDBYPOOL/STANDBYVIRTUALMACHINEPOOLS/WRITE",
+"properties" :{
+    "EventName": "StandbyPoolDegradedPool",
+    "ErrorMessage": "StandbyPool is in a degraded state with error(s): LinkedAuthorizationFailed"
+    }
+},
+{ "Tenant": "AsgardRCore-Prod-uscentraleuap-R-181", 
+"time": "2024-12-16T18:27:29.9148287Z", 
+"location": "centraluseuap", 
+"resourceId": "/SUBSCRIPTIONS/8CF6C1B6-C80F-437C-87AD-45FBAFF54F73/RESOURCEGROUPS/BCOLLIN-TEST-SHOEBOX/PROVIDERS/MICROSOFT.STANDBYPOOL/STANDBYVIRTUALMACHINEPOOLS/SHOEBOXT2367-STANDBYPOOL", 
+"category": "Execution", 
+"operationName": "MICROSOFT.STANDBYPOOL/STANDBYVIRTUALMACHINEPOOLS/WRITE",
+"properties" :{
+    "EventName": "StandbyPoolDegradedPool",
+    "ErrorMessage": "StandbyPool is in a degraded state with error(s): "
+    }
+},
+{ "Tenant": "AsgardRCore-Prod-uscentraleuap-R-181", 
+"time": "2024-12-16T18:27:31.9148287Z", 
+"location": "centraluseuap", 
+"resourceId": "/SUBSCRIPTIONS/8CF6C1B6-C80F-437C-87AD-45FBAFF54F73/RESOURCEGROUPS/BCOLLIN-TEST-SHOEBOX/PROVIDERS/MICROSOFT.STANDBYPOOL/STANDBYVIRTUALMACHINEPOOLS/SHOEBOXT2367-STANDBYPOOL", 
+"category": "Execution", 
+"operationName": "MICROSOFT.STANDBYPOOL/STANDBYVIRTUALMACHINEPOOLS/WRITE",
+"properties" :{
+    "EventName": "StandbyPoolDegradedPool",
+    "ErrorMessage": "StandbyPool is in a degraded state with error(s): InvalidContainerGroupProfileReference"
+    }
+},
+{ "Tenant": "AsgardRCore-Prod-uscentraleuap-R-181", 
+"time": "2024-12-16T18:27:24.9148287Z", 
+"location": "centraluseuap", 
+"resourceId": "/SUBSCRIPTIONS/8CF6C1B6-C80F-437C-87AD-45FBAFF54F73/RESOURCEGROUPS/BCOLLIN-TEST-SHOEBOX/PROVIDERS/MICROSOFT.STANDBYPOOL/STANDBYVIRTUALMACHINEPOOLS/SHOEBOXT2367-STANDBYPOOL", 
+"category": "Execution", 
+"operationName": "MICROSOFT.STANDBYPOOL/STANDBYVIRTUALMACHINEPOOLS/WRITE",
+"properties" :{
+    "EventName": "StandbyPoolExitDegradedPool",
+    "Message": "StandbyPool is no longer in a degraded state."
+    }
+}
+]

@@ -1,0 +1,12 @@
+source
+| extend properties = parse_json(properties)
+| project
+    TimeGenerated = ['time'],
+    OperationName = operationName,
+    EntityName = tostring(properties.entityName),
+    EntityType = tostring(properties.entityType),
+    CallerIdentities = callerIdentities,
+    ResultType = resultType,
+    ResultDescription = resultDescription,
+    Location = location,
+    Properties = properties

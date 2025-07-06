@@ -1,0 +1,20 @@
+[
+   {
+      "time":"2022-03-14T00:05:38.552089493Z",
+      "resourceId":"/SUBSCRIPTIONS/C99E2BF3-1777-412B-BABA-D823676589C2/RESOURCEGROUPS/AZURE-MONITOR-TESTING-ANKIT/PROVIDERS/MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/MONITORTEST",
+      "location":"eastus",
+      "operationName":"MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/AIRFLOW/ACTION",
+      "category":"AirFlowTaskLogs",
+      "properties":{
+         "LogLevel":"DEBUG",
+         "DagName":"wellbore_ingestion_wf_gsm",
+         "RunID":"fa3a99a7-4d12-49bc-bae2-0cf4e649b7cc",
+         "CodePath":"base_job.py:227",
+         "TryNumber":"N/A",
+         "log":"",
+         "DagTaskName":"wellbore-ingestion-kubernetes-task",
+         "Content":"[heartbeat]"
+      },
+      "correlationId": "1b80ca5f-2a14-4525-846c-ed68a69bb553" 
+   }
+]

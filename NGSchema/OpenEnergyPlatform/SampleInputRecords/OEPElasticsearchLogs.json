@@ -1,0 +1,50 @@
+[
+    {
+        "time": "2022-04-12T01:30:00.002169129Z",
+        "resourceId": "/SUBSCRIPTIONS/C99E2BF3-1777-412B-BABA-D823676589C2/RESOURCEGROUPS/SISHIV/PROVIDERS/MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/ANU275",
+        "location": "eastus",
+        "operationName": "MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/ELASTICSEARCH/ACTION",
+        "category": "ElasticsearchLogs",
+        "properties": {
+            "message": "triggering scheduled [ML] maintenance tasks",
+            "namespace": "es-anu275-275",
+            "podName": "elasticsearch-es-default-0",
+            "took": null,
+            "total_hits": null,
+            "source": null,
+            "type": "server"
+        }
+    },
+    {
+        "time": "2022-04-07T09:45:51.923190987Z",
+        "resourceId": "/SUBSCRIPTIONS/C99E2BF3-1777-412B-BABA-D823676589C2/RESOURCEGROUPS/SISHIV/PROVIDERS/MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/ANU275",
+        "location": "eastus",
+        "operationName": "MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/ELASTICSEARCH/ACTION",
+        "category": "ElasticsearchLogs",
+        "properties": {
+            "message": "[hotels-quickstart][0]",
+            "namespace": "es-anueus31-dp",
+            "podName": "elasticsearch-es-default-1",
+            "took": "1.3ms",
+            "total_hits": "3 hits",
+            "source": "{\"query\":{\"query_string\":{\"query\":\"Category:Boutique AND \\\\\\\"extraordinary\\\\\\\"\",\"fields\":[],\"type\":\"best_fields\",\"default_operator\":\"or\",\"max_determinized_states\":10000,\"enable_position_increments\":true,\"fuzziness\":\"AUTO\",\"fuzzy_prefix_length\":0,\"fuzzy_max_expansions\":50,\"phrase_slop\":0,\"analyze_wildcard\":false,\"escape\":false,\"auto_generate_synonyms_phrase_query\":true,\"fuzzy_transpositions\":true,\"boost\":1.0}}}",
+            "type": "index_search_slowlog"
+        }
+    },
+    {
+        "time": "2022-04-07T09:45:51.929535864Z",
+        "resourceId": "/SUBSCRIPTIONS/C99E2BF3-1777-412B-BABA-D823676589C2/RESOURCEGROUPS/SISHIV/PROVIDERS/MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/ANU275",
+        "location": "eastus",
+        "operationName": "MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/ELASTICSEARCH/ACTION",
+        "category": "ElasticsearchLogs",
+        "properties": {
+            "message": "[hotels-quickstart][1]",
+            "namespace": "es-anueus31-dp",
+            "podName": "elasticsearch-es-default-2",
+            "took": "478.9micros",
+            "total_hits": "-1",
+            "source": "{\"query\":{\"query_string\":{\"query\":\"Category:Boutique AND \\\\\\\"extraordinary\\\\\\\"\",\"fields\":[],\"type\":\"best_fields\",\"default_operator\":\"or\",\"max_determinized_states\":10000,\"enable_position_increments\":true,\"fuzziness\":\"AUTO\",\"fuzzy_prefix_length\":0,\"fuzzy_max_expansions\":50,\"phrase_slop\":0,\"analyze_wildcard\":false,\"escape\":false,\"auto_generate_synonyms_phrase_query\":true,\"fuzzy_transpositions\":true,\"boost\":1.0}}}",
+            "type": "index_search_slowlog"
+        }
+    }
+]

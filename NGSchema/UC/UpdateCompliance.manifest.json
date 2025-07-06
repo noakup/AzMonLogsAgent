@@ -1,0 +1,488 @@
+{
+  "type": "microsoft.updatecompliance/updatecompliance",
+  "displayName": "Update Compliance",
+  "description": "Update compliance tables. A complete list of Update Compliance tables can be viewed when filtering by solution.",
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Azure LogAnalytics/update compliance",
+  "contactDL": "ucsupport@microsoft.com",
+  "tags": {},
+  "properties": {},
+  "relatedTables": [],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "description": "Update Compliance - provides information, for a single device, on their bandwidth utilization across content types in the event they use delivery optimization.",
+      "name": "UCDOStatus",
+      "artifactVersion": 3,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "isResourceCentric": false,
+      "tags": {},
+      "properties": {},
+      "intelligencePacks": [ "WaaSUpdateInsights", "LogManagement" ],
+      "categories": [ "desktopanalytics" ],
+      "dataTypeId": "UCDOStatus_API",
+      "input": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime"
+        },
+        {
+          "name": "AzureADTenantId",
+          "type": "String"
+        },
+        {
+          "name": "AzureADDeviceId",
+          "type": "String"
+        },
+        {
+          "name": "GlobalDeviceId",
+          "type": "String"
+        },
+        {
+          "name": "DeviceName",
+          "type": "String"
+        },
+        {
+          "name": "GroupID",
+          "type": "String"
+        },
+        {
+          "name": "OSVersion",
+          "type": "String"
+        },
+        {
+          "name": "DownloadMode",
+          "type": "String"
+        },
+        {
+          "name": "DownloadModeSrc",
+          "type": "String"
+        },
+        {
+          "name": "ContentDownloadMode",
+          "type": "Int"
+        },
+        {
+          "name": "DOStatusDescription",
+          "type": "String"
+        },
+        {
+          "name": "Country",
+          "type": "String"
+        },
+        {
+          "name": "City",
+          "type": "String"
+        },
+        {
+          "name": "ISP",
+          "type": "String"
+        },
+        {
+          "name": "PeeringStatus",
+          "type": "String"
+        },
+        {
+          "name": "ContentType",
+          "type": "String"
+        },
+        {
+          "name": "TotalTimeForDownload",
+          "type": "String"
+        },
+        {
+          "name": "TotalTransfers",
+          "type": "Long"
+        },
+        {
+          "name": "PeerEligibleTransfers",
+          "type": "Long"
+        },
+        {
+          "name": "NoPeersCount",
+          "type": "Long"
+        },
+        {
+          "name": "PeersUnknownCount",
+          "type": "Long"
+        },
+        {
+          "name": "PeersSuccessCount",
+          "type": "Long"
+        },
+        {
+          "name": "PeersCannotConnectCount",
+          "type": "Long"
+        },
+        {
+          "name": "BytesFromCDN",
+          "type": "Long"
+        },
+        {
+          "name": "BytesFromIntPeers",
+          "type": "Long"
+        },
+        {
+          "name": "BytesFromPeers",
+          "type": "Long"
+        },
+        {
+          "name": "BytesFromGroupPeers",
+          "type": "Long"
+        },
+        {
+          "name": "BytesFromCache",
+          "type": "Long"
+        },
+        {
+          "name": "BWOptPercent28Days",
+          "type": "Double"
+        },
+        {
+          "name": "BWOptPercent7Days",
+          "type": "Double"
+        },
+        {
+          "name": "LastCensusSeenTimeUTC",
+          "type": "DateTime"
+        }
+      ],
+      "transformFilePath": "KQL/UCDOStatusTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "description": "Time at which this event was generated.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+
+        {
+          "name": "AzureADTenantId",
+          "description": "A GUID corresponding to this device's AAD device ID.",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AzureADDeviceId",
+          "description": "A GUID corresponding to the AAD tenant to which the device belongs.",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DeviceName",
+          "description": "User or organization-provided device name. If this appears as '#', then you may need to configure devices to send device name.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "GlobalDeviceId",
+          "description": "Microsoft global device identifier. This is a identifier used by Microsoft internally.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "GroupID",
+          "description": "The delivery optimization group ID.",
+          "type": "String"
+        },
+        {
+          "name": "OSVersion",
+          "description": "The version of Windows 10. This typically is of the format of the year of the version's release, following the month. In this example, `1909` corresponds to 2019-09 (September). This maps to the `Major` portion of OSBuild.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DownloadMode",
+          "description": "Device's delivery optimization download mode as configured on the device.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DownloadModeSrc",
+          "description": "The source of the download mode configuration.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ContentDownloadMode",
+          "description": "Device's delivery optimization download mode that was used for this content.",
+          "type": "Int",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DOStatusDescription",
+          "description": "A short description of DO's status, if any.",
+          "type": "String"
+        },
+        {
+          "name": "Country",
+          "description": "Approximate country device was in while downloading content, based on IP address.",
+          "type": "String"
+        },
+        {
+          "name": "City",
+          "description": "Approximate city device was in while downloading content, based on IP address.",
+          "type": "String"
+        },
+        {
+          "name": "ISP",
+          "description": "The internet service provider estimation.",
+          "type": "String"
+        },
+        {
+          "name": "PeeringStatus",
+          "description": "The DO peering status.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ContentType",
+          "description": "The type of content being downloaded.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TotalTimeForDownload",
+          "description": "The total time it took to download the content.",
+          "type": "String"
+        },
+        {
+          "name": "TotalTransfers",
+          "description": "The total count of data transfers to download this content.",
+          "type": "BigInt"
+        },
+        {
+          "name": "PeerEligibleTransfers",
+          "description": "Total count of eligible transfers by peers.",
+          "type": "BigInt"
+        },
+        {
+          "name": "NoPeersCount",
+          "description": "The count of peers this device interacted with.",
+          "type": "BigInt"
+        },
+        {
+          "name": "PeersUnknownCount",
+          "description": "The count of peers for which there is an unknown relation.",
+          "type": "BigInt"
+        },
+        {
+          "name": "PeersSuccessCount",
+          "description": "The count of peers this device successfully connected to.",
+          "type": "BigInt"
+        },
+        {
+          "name": "PeersCannotConnectCount",
+          "description": "The count of peers this device was unable to connect to.",
+          "type": "BigInt"
+        },
+        {
+          "name": "BytesFromCDN",
+          "description": "Total number of bytes downloaded from a CDN versus a peer. This counts against bandwidth optimization.",
+          "type": "BigInt"
+        },
+        {
+          "name": "BytesFromIntPeers",
+          "description": "Total number of bytes downloaded from internet peers.",
+          "type": "BigInt"
+        },
+        {
+          "name": "BytesFromPeers",
+          "description": "Total number of bytes downloaded from peers.",
+          "type": "BigInt"
+        },
+        {
+          "name": "BytesFromGroupPeers",
+          "description": "Total number of bytes downloaded from group peers.",
+          "type": "BigInt"
+        },
+        {
+          "name": "BytesFromCache",
+          "description": "Total number of bytes downloaded from cache.",
+          "type": "BigInt"
+        },
+        {
+          "name": "BWOptPercent7Days",
+          "description": "Bandwidth optimization (as a percentage of savings of total bandwidth otherwise incurred) as a result of using delivery optimization for this device, computed on a rolling 7-day basis.",
+          "type": "Double"
+        },
+        {
+          "name": "BWOptPercent28Days",
+          "description": "Bandwidth optimization (as a percentage of savings of total bandwidth otherwise incurred) as a result of using delivery optimization for this device, computed on a rolling 28-day basis.",
+          "type": "Double"
+        },
+        {
+          "name": "LastCensusSeenTime",
+          "description": "A DateTime corresponding to the last time the device sent data to Microsoft. Indicates freshness of any fields of this record.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/UCDOStatusSample.json"
+    },
+    {
+      "description": "Update Compliance - aggregates all individual UCDOStatus records across the tenant and summarizes bandwidth savings across all devices enrolled to delivery.",
+      "name": "UCDOAggregatedStatus",
+      "artifactVersion": 3,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "isResourceCentric": false,
+      "tags": {},
+      "properties": {},
+      "intelligencePacks": [ "WaaSUpdateInsights", "LogManagement" ],
+      "categories": [ "desktopanalytics" ],
+      "dataTypeId": "UCDOAggregatedStatus_API",
+      "input": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime"
+        },
+        {
+          "name": "AzureADTenantId",
+          "type": "String"
+        },
+        {
+          "name": "AzureADDeviceId",
+          "type": "String"
+        },
+        {
+          "name": "DeviceCount",
+          "type": "Long"
+        },
+        {
+          "name": "ContentType",
+          "type": "String"
+        },
+        {
+          "name": "BytesFromCDN",
+          "type": "Long"
+        },
+        {
+          "name": "BytesFromIntPeers",
+          "type": "Long"
+        },
+        {
+          "name": "BytesFromPeers",
+          "type": "Long"
+        },
+        {
+          "name": "BytesFromGroupPeers",
+          "type": "Long"
+        },
+        {
+          "name": "BytesFromCache",
+          "type": "Long"
+        },
+        {
+          "name": "BWOptPercent28Days",
+          "type": "Double"
+        }
+      ],
+      "transformFilePath": "KQL/UCDOAggregatedStatusTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "description": "Time at which this event was generated.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AzureADTenantId",
+          "description": "A GUID corresponding to this device's AAD device ID.",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AzureADDeviceId",
+          "description": "A GUID corresponding to the AAD tenant to which the device belongs.",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DeviceCount",
+          "description": "Total count of devices.",
+          "type": "BigInt",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ContentType",
+          "description": "The type of content being downloaded.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "BytesFromCDN",
+          "description": "Total number of bytes downloaded from a CDN versus a peer. This counts against bandwidth optimization.",
+          "type": "BigInt"
+        },
+        {
+          "name": "BytesFromIntPeers",
+          "description": "Total number of bytes downloaded from internet peers.",
+          "type": "BigInt"
+        },
+        {
+          "name": "BytesFromPeers",
+          "description": "Total number of bytes downloaded from peers.",
+          "type": "BigInt",
+          "dataSourcePropertyName": "BytesFromPeers"
+        },
+        {
+          "name": "BytesFromGroupPeers",
+          "description": "Total number of bytes downloaded from group peers.",
+          "type": "BigInt"
+        },
+        {
+          "name": "BytesFromCache",
+          "description": "Total number of bytes downloaded from cache.",
+          "type": "BigInt"
+        },
+        {
+          "name": "BWOptPercent28Days",
+          "description": "Bandwidth optimization (as a percentage of savings of total bandwidth otherwise incurred) as a result of using delivery optimization for this device, computed on a rolling 28-day basis.",
+          "type": "Double"
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/UCDOAggregatedStatusSample.json"
+    }
+  ],
+  "functions": [],
+  "queries": [
+    {
+      "id": "6c73ae0a-50af-46ee-9ff1-e19b1d3d9a0b",
+      "displayName": "Content distribution in Gigabytes",
+      "description": "Get the content distribution in Gigabytes for all the devices.",
+      "bodyFilePath": "KQL/ContentDistribution.kql",
+      "categories": [ "desktopanalytics" ],
+      "tags": {
+      },
+      "relatedTables": [ "UCDOAggregatedStatus" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "367b4e64-9488-45f8-94fa-88905a332c73",
+      "displayName": "Device configuration",
+      "description": "Get the count of device by download mode in DO status.",
+      "bodyFilePath": "KQL/DeviceConfiguration.kql",
+      "categories": [ "desktopanalytics" ],
+      "tags": {
+      },
+      "relatedTables": [ "UCDOStatus" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    }
+  ]
+}

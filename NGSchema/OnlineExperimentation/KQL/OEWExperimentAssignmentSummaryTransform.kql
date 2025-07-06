@@ -1,0 +1,14 @@
+source 
+| project
+    TimeGenerated = todatetime(TimeGenerated),
+    FeatureFlagReference = FeatureFlagReference,
+    FeatureName = FeatureName,
+    AllocationId = AllocationId,
+    Variant = Variant,
+    VariantAssignmentPercentage = toreal(VariantAssignmentPercentage),
+    IsControlVariant = tobool(IsControlVariant),
+    AssignmentEventCount = tolong(AssignmentEventCount),
+    FirstAssignmentTimestamp = todatetime(FirstAssignmentTimestamp),
+    LastAssignmentTimestamp = todatetime(LastAssignmentTimestamp),
+    BinStartTime = todatetime(BinStartTime),
+    BinSize = tolong(BinSize)

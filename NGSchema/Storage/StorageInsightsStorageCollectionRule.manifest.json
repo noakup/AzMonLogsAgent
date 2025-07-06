@@ -1,0 +1,178 @@
+{
+  "type": "Microsoft.StorageInsights/storageCollectionRules",
+  "displayName": "Storage Collection Rules",
+  "description": "All tables related to Storage Insights Service",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Azure Storage Insights/Triage",
+  "contactDL": "xdmichalnirgross@microsoft.com",
+  "relatedTables": [],
+  "relatedFunctions": [],
+
+  "tables": [
+    {
+      "name": "StorageInsightsAccountPropertiesDaily",
+      "description": "Storage Accounts daily properties for Storage Insights.",
+      "categories": [ "resources" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 1,
+      "dataTypeId": "XDM_STORAGEACCOUNTINFO_MICROSOFTSTORAGEINSIGHTS",
+      "isResourceCentric": true,
+      "tableState": "Validation",
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime"
+        },
+        {
+          "name": "TimePeriod",
+          "type": "DateTime"
+        },
+        {
+          "name": "StorageAccountName",
+          "type": "String"
+        },
+        {
+          "name": "StorageAccountSubscriptionId",
+          "type": "String"
+        },
+        {
+          "name": "SubscriptionName",
+          "type": "String"
+        },
+        {
+          "name": "Region",
+          "type": "String"
+        },
+        {
+          "name": "PerformanceType",
+          "type": "String"
+        },
+        {
+          "name": "EncryptionType",
+          "type": "String"
+        },
+        {
+          "name": "RedundancyType",
+          "type": "String"
+        },
+        {
+          "name": "AccessTier",
+          "type": "String"
+        },
+        {
+          "name": "StorageType",
+          "type": "String"
+        },
+        {
+          "name": "ResourceTags",
+          "type": "Dynamic"
+        },
+        {
+          "name": "ResourceGroup",
+          "type": "String"
+        },
+        {
+          "name": "ManagementGroupIds",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/StorageInsightsAccountPropertiesDailyTransform.kql",
+      "columns": [
+        {
+          "name": "TimePeriod",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The date and time that represents the latest captured Storage Account properties of the past day."
+        },
+        {
+          "name": "StorageAccountName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the storage account."
+        },
+        {
+          "name": "StorageAccountSubscriptionId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The ID of the subscription the storage account is located in."
+        },
+        {
+          "name": "SubscriptionName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The subscription friendly name."
+        },
+        {
+          "name": "ResourceGroup",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The resource group name the storage account is located in."
+        },
+        {
+          "name": "Region",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The region of the storage account."
+        },
+        {
+          "name": "PerformanceType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The default performance type of the storage account."
+        },
+        {
+          "name": "EncryptionType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The default encryption type of the storage account."
+        },
+        {
+          "name": "RedundancyType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The default redundancy type of the storage account."
+        },
+        {
+          "name": "AccessTier",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The default access tier of the storage account."
+        },
+        {
+          "name": "StorageType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Determines if hierarchical namespace is enabled on the storage account."
+        },
+        {
+          "name": "ResourceTags",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "The resource tags of the storage account."
+        },
+        {
+          "name": "ManagementGroupIds",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "The management group tree (list of Ids) the subscription is located under."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The Universal Time Coordinated (UTC) time when the metric was generated."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/StorageInsightsAccountPropertiesDailySamples.json",
+      "sampleOutputRecordsFilePath":  "SampleOutputRecords/StorageInsightsAccountPropertiesDailySamples.json"
+    }
+  ],
+
+  "functions": [],
+
+  "queries": []
+}

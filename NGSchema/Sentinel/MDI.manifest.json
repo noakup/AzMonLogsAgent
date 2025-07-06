@@ -1,0 +1,660 @@
+{
+  "type": "Microsoft.SecurityInsights/MDI",
+  "displayName": "Azure Sentinel MDI",
+  "description": "All Microsoft Defender for Endpoints (MDI) tables related to Azure Sentinel.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Microsoft Azure Sentinel/Data Collection and Processing",
+  "contactDL": "asipolarbearseng@microsoft.com",
+  "relatedTables": [],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "name": "IdentityLogonEvents",
+      "description": "Authentication activities made through your on-premises Active Directory.",
+      "categories": [
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 7,
+      "dataTypeId": "TENANTMICROSOFTWINDOWSDEFENDERATP_ADVANCEDHUNTINGIDENTITYLOGONEVENTS",
+      "intelligencePacks": [
+        "SecurityInsights"
+      ],
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "tenantId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/IdentityLogonEventsTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Date and time (UTC) when the record was generated",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Timestamp",
+          "type": "DateTime",
+          "description": "Date and time (UTC) when the record was generated",
+          "isHidden": true,
+          "isDefaultDisplay": false
+        },
+        {
+          "name": "ActionType",
+          "type": "String",
+          "description": "Type of activity that triggered the event"
+        },
+        {
+          "name": "Application",
+          "type": "String",
+          "description": "Application that performed the recorded action"
+        },
+        {
+          "name": "LogonType",
+          "type": "String",
+          "description": "Type of logon session"
+        },
+        {
+          "name": "Protocol",
+          "type": "String",
+          "description": "Network protocol used"
+        },
+        {
+          "name": "FailureReason",
+          "type": "String",
+          "description": "Information explaining why the recorded action failed"
+        },
+        {
+          "name": "AccountName",
+          "type": "String",
+          "description": "User name of the account"
+        },
+        {
+          "name": "AccountDomain",
+          "type": "String",
+          "description": "Domain of the account"
+        },
+        {
+          "name": "AccountUpn",
+          "type": "String",
+          "description": "User principal name (UPN) of the account"
+        },
+        {
+          "name": "AccountSid",
+          "type": "String",
+          "description": "Security Identifier (SID) of the account"
+        },
+        {
+          "name": "AccountObjectId",
+          "type": "String",
+          "description": "Unique identifier for the account in Azure AD",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "AccountDisplayName",
+          "type": "String",
+          "description": "Name of the account user displayed in the address book"
+        },
+        {
+          "name": "DeviceName",
+          "type": "String",
+          "description": "Fully qualified domain name (FQDN) of the device",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "DeviceType",
+          "type": "String",
+          "description": "Type of device"
+        },
+        {
+          "name": "OSPlatform",
+          "type": "String",
+          "description": "Platform of the operating system running on the machine"
+        },
+        {
+          "name": "IPAddress",
+          "type": "String",
+          "description": "IP address assigned to the endpoint and used during related network communications",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "Port",
+          "type": "String",
+          "description": "TCP port used during communication"
+        },
+        {
+          "name": "DestinationDeviceName",
+          "type": "String",
+          "description": "Name of the device running the server application that processed the recorded action"
+        },
+        {
+          "name": "DestinationIPAddress",
+          "type": "String",
+          "description": "IP address of the device running the server application that processed the recorded action",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "DestinationPort",
+          "type": "String",
+          "description": "Destination port of related network communications"
+        },
+        {
+          "name": "TargetDeviceName",
+          "type": "String",
+          "description": "Fully qualified domain name (FQDN) of the device that the recorded action was applied to",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "TargetAccountDisplayName",
+          "type": "String",
+          "description": "Display name of the account that the recorded action was applied to"
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "City, country, or other geographic location associated with the event"
+        },
+        {
+          "name": "ISP",
+          "type": "String",
+          "description": "Internet service provider (ISP) associated with the endpoint IP address"
+        },
+        {
+          "name": "ReportId",
+          "type": "String",
+          "description": "Unique identifier for the event"
+        },
+        {
+          "name": "AdditionalFields",
+          "type": "Dynamic",
+          "description": "Additional information about the entity or event"
+        },
+        {
+          "name": "LastSeenForUser",
+          "type": "Dynamic",
+          "description": "Number of days since each statistical feature for the user was last seen"
+        },
+        {
+          "name": "UncommonForUser",
+          "type": "Dynamic",
+          "description": "List of features observed to be statistically uncommon for the user that performed the activity"
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/IdentityLogonEventsSample.json"
+    },
+    {
+      "name": "IdentityQueryEvents",
+      "description": "Information about queries performed against Active Directory objects, such as users, groups, devices, and domains.",
+      "categories": [
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 5,
+      "dataTypeId": "TENANTMICROSOFTWINDOWSDEFENDERATP_ADVANCEDHUNTINGIDENTITYQUERYEVENTS",
+      "intelligencePacks": [
+        "SecurityInsights"
+      ],
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "tenantId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/IdentityQueryEventsTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Date and time (UTC) when the record was generated",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Timestamp",
+          "type": "DateTime",
+          "description": "Date and time (UTC) when the record was generated",
+          "isHidden": true,
+          "isDefaultDisplay": false
+        },
+        {
+          "name": "ActionType",
+          "type": "String",
+          "description": "Type of activity that triggered the event"
+        },
+        {
+          "name": "Application",
+          "type": "String",
+          "description": "Application that performed the recorded action"
+        },
+        {
+          "name": "QueryType",
+          "type": "String",
+          "description": "Type of query, such as QueryGroup, QueryUser, or EnumerateUsers"
+        },
+        {
+          "name": "QueryTarget",
+          "type": "String",
+          "description": "Name of user, group, device, domain, or any other entity type being queried"
+        },
+        {
+          "name": "Query",
+          "type": "String",
+          "description": "String used to run the query"
+        },
+        {
+          "name": "Protocol",
+          "type": "String",
+          "description": "Protocol used during the communication"
+        },
+        {
+          "name": "AccountName",
+          "type": "String",
+          "description": "User name of the account"
+        },
+        {
+          "name": "AccountDomain",
+          "type": "String",
+          "description": "Domain of the account"
+        },
+        {
+          "name": "AccountUpn",
+          "type": "String",
+          "description": "User principal name (UPN) of the account"
+        },
+        {
+          "name": "AccountSid",
+          "type": "String",
+          "description": "Security Identifier (SID) of the account"
+        },
+        {
+          "name": "AccountObjectId",
+          "type": "String",
+          "description": "Unique identifier for the account in Azure AD",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "AccountDisplayName",
+          "type": "String",
+          "description": "Name of the account user displayed in the address book"
+        },
+        {
+          "name": "DeviceName",
+          "type": "String",
+          "description": "Fully qualified domain name (FQDN) of the device",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "IPAddress",
+          "type": "String",
+          "description": "IP address assigned to the endpoint and used during related network communications",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "Port",
+          "type": "String",
+          "description": "TCP port used during communication"
+        },
+        {
+          "name": "DestinationDeviceName",
+          "type": "String",
+          "description": "Name of the device running the server application that processed the recorded action"
+        },
+        {
+          "name": "DestinationIPAddress",
+          "type": "String",
+          "description": "IP address of the device running the server application that processed the recorded action",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "DestinationPort",
+          "type": "String",
+          "description": "Destination port of related network communications"
+        },
+        {
+          "name": "TargetDeviceName",
+          "type": "String",
+          "description": "Fully qualified domain name (FQDN) of the device that the recorded action was applied to",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "TargetAccountUpn",
+          "type": "String",
+          "description": "User principal name (UPN) of the account that the recorded action was applied to"
+        },
+        {
+          "name": "TargetAccountDisplayName",
+          "type": "String",
+          "description": "Display name of the account that the recorded action was applied to"
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "City, country, or other geographic location associated with the event"
+        },
+        {
+          "name": "ReportId",
+          "type": "String",
+          "description": "Unique identifier for the event"
+        },
+        {
+          "name": "AdditionalFields",
+          "type": "Dynamic",
+          "description": "Additional information about the entity or event"
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/IdentityQueryEventsSample.json"
+    },
+    {
+      "name": "IdentityDirectoryEvents",
+      "description": "Captures various identity-related events, like password changes, password expiration, and user principal name (UPN) changes.",
+      "categories": [
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 7,
+      "dataTypeId": "TENANTMICROSOFTWINDOWSDEFENDERATP_ADVANCEDHUNTINGIDENTITYDIRECTORYEVENTS",
+      "intelligencePacks": [
+        "SecurityInsights"
+      ],
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "tenantId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/IdentityDirectoryEventsTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Date and time (UTC) when the record was generated",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Timestamp",
+          "type": "DateTime",
+          "description": "Date and time (UTC) when the record was generated",
+          "isHidden": true,
+          "isDefaultDisplay": false
+        },
+        {
+          "name": "ActionType",
+          "type": "String",
+          "description": "Type of activity that triggered the event"
+        },
+        {
+          "name": "Application",
+          "type": "String",
+          "description": "Application that performed the recorded action"
+        },
+        {
+          "name": "Protocol",
+          "type": "String",
+          "description": "Protocol used during the communication"
+        },
+        {
+          "name": "AccountName",
+          "type": "String",
+          "description": "User name of the account"
+        },
+        {
+          "name": "AccountDomain",
+          "type": "String",
+          "description": "Domain of the account"
+        },
+        {
+          "name": "AccountUpn",
+          "type": "String",
+          "description": "User principal name (UPN) of the account"
+        },
+        {
+          "name": "AccountSid",
+          "type": "String",
+          "description": "Security Identifier (SID) of the account"
+        },
+        {
+          "name": "AccountObjectId",
+          "type": "String",
+          "description": "Unique identifier for the account in Azure AD",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "AccountDisplayName",
+          "type": "String",
+          "description": "Name of the account user displayed in the address book"
+        },
+        {
+          "name": "DeviceName",
+          "type": "String",
+          "description": "Fully qualified domain name (FQDN) of the device",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "IPAddress",
+          "type": "String",
+          "description": "IP address assigned to the endpoint and used during related network communications",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "Port",
+          "type": "String",
+          "description": "TCP port used during communication"
+        },
+        {
+          "name": "DestinationDeviceName",
+          "type": "String",
+          "description": "Name of the device running the server application that processed the recorded action"
+        },
+        {
+          "name": "DestinationIPAddress",
+          "type": "String",
+          "description": "IP address of the device running the server application that processed the recorded action",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "DestinationPort",
+          "type": "String",
+          "description": "Destination port of related network communications"
+        },
+        {
+          "name": "TargetDeviceName",
+          "type": "String",
+          "description": "Fully qualified domain name (FQDN) of the device that the recorded action was applied to",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "TargetAccountUpn",
+          "type": "String",
+          "description": "User principal name (UPN) of the account that the recorded action was applied to"
+        },
+        {
+          "name": "TargetAccountDisplayName",
+          "type": "String",
+          "description": "Display name of the account that the recorded action was applied to"
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "City, country, or other geographic location associated with the event"
+        },
+        {
+          "name": "ISP",
+          "type": "String",
+          "description": "Internet service provider (ISP) associated with the endpoint IP address"
+        },
+        {
+          "name": "ReportId",
+          "type": "String",
+          "description": "Unique identifier for the event"
+        },
+        {
+          "name": "AdditionalFields",
+          "type": "Dynamic",
+          "description": "Additional information about the entity or event"
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/IdentityDirectoryEventsSample.json"
+    }
+  ],
+  "functions": [],
+  "queries": [
+    {
+      "id": "6c605c9c-6eca-4945-8a42-18833ad3cf42",
+      "displayName": "LDAP authentication processes with cleartext passwords",
+      "description": "Find processes that performed LDAP authentication with cleartext passwords.",
+      "bodyFilePath": "KQL/LDAPAuthenticationWithCleartextPasswordsQuery.kql",
+      "categories": [
+        "security"
+      ],
+      "relatedTables": [
+        "IdentityLogonEvents"
+      ],
+      "tags": {
+        "Topic": [
+          "Security"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": false
+        }
+      }
+    },
+    {
+      "id": "68b79dce-2343-49e7-a1a1-1e9c61cc9888",
+      "displayName": "SAMR queries to Active Directory",
+      "description": "Find processes that sent SAMR queries to Active Directory.",
+      "bodyFilePath": "KQL/SAMRqueriesToActiveDirectoryQuery.kql",
+      "categories": [
+        "security"
+      ],
+      "relatedTables": [
+        "IdentityQueryEvents"
+      ],
+      "tags": {
+        "Topic": [
+          "Security"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": false
+        }
+      }
+    },
+    {
+      "id": "09be64ab-51be-4f8c-8c03-17243fbfdfbc",
+      "displayName": "Group Membership changed",
+      "description": "Group Membership changed.",
+      "bodyFilePath": "KQL/GroupMembershipChangedQuery.kql",
+      "categories": [
+        "security"
+      ],
+      "relatedTables": [
+        "IdentityDirectoryEvents"
+      ],
+      "tags": {
+        "Topic": [
+          "Security"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": false
+        }
+      }
+    },
+    {
+      "id": "67e621ec-0a84-412a-ac48-1cfd80f30a43",
+      "displayName": "Password change event",
+      "description": "Find the latest password change event for a specific account.",
+      "bodyFilePath": "KQL/PasswordChangePerAccountQuery.kql",
+      "categories": [
+        "security"
+      ],
+      "relatedTables": [
+        "IdentityDirectoryEvents"
+      ],
+      "tags": {
+        "Topic": [
+          "Security"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": false
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+[
+    {
+        "TimeGenerated": "2021-03-22T01:05:15Z",
+        "AccountName": "ACCNT-METRICS-TEST",
+        "ActivityId": "f3fa74a3-d86c-4332-a979-a8769f5b220a",
+        "PartitionKey": [
+            "Anahi"
+        ],
+        "PartitionKeyRangeId": "1",
+        "OperationName": "Read",
+        "RegionName": "West US",
+        "DatabaseName": "AggregationsWithChangeFeedV2",
+        "CollectionName": "Employee",
+        "RequestCharge": "1.333333"
+    }
+]

@@ -1,0 +1,15 @@
+[
+    {
+        "Environment": "PROD",
+        "Region": "West India",
+        "ScaleUnit": "PROD-BM1-001",
+        "TaskName": "RelayUserOperationalLog",
+        "resourceId": "/SUBSCRIPTIONS/A70B8550-49B1-4C60-B9F9-86B7EDBF31E4/RESOURCEGROUPS/VIJAYSHARMA-DEV/PROVIDERS/MICROSOFT.RELAY/NAMESPACES/SHARMAVIJAY-RELAY",
+        "ActivityId": "0e4c49c2-d4b9-4724-a8d9-68ffb2659043",
+        "endpoint": "sharmavijay-relay.servicebus.windows.net:shamavijay-relay-hybconn/0e4c49c2-d4b9-4724-a8d9-68ffb2659043_G7",
+        "operationName": "Microsoft.Relay/HybridConnections/SenderSentHttpRequest",
+        "EventTimeString": "2023-03-16T09:00:11.9633941Z",
+        "message": "HTTP request received from sender: GET",
+        "category": "HybridConnectionsEvent"
+    }
+]

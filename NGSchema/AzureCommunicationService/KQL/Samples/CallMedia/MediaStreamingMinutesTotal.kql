@@ -1,0 +1,3 @@
+ACSCallAutomationStreamingUsage 
+    | where StreamingModality contains "AudioStreaming" 
+    | summarize TotalMinutesStreamed = sum(StreamingDurationInMs)/60000

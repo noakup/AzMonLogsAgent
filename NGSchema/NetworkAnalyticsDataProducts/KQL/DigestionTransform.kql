@@ -1,0 +1,7 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    Level = level,
+    Message = tostring(properties.message),
+    FilePath = tostring(properties.filePath),
+    Datatype = tostring(properties.datatype)

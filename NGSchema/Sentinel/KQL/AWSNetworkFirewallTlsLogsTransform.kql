@@ -1,0 +1,14 @@
+source 
+| project TimeGenerated = now(), 
+FirewallName = tostring(firewall_name), 
+AvailabilityZone = tostring(availability_zone),
+EventTimestamp = todatetime(event_timestamp), 
+SrcIp = tostring(event.src_ip), 
+SrcPort = tostring(event.src_port), 
+DestIp = tostring(event.dest_ip), 
+DestPort = tostring(event.dest_port), 
+Sni = tostring(event.sni), 
+LeafCertificateFingerprint = tostring(event.leaf_cert_fpr), 
+Status = tostring(event.status), 
+Action = tostring(event.action), 
+ErrorMessage = tostring(event.tls_error.error_message)

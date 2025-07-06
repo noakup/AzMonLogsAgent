@@ -1,0 +1,7 @@
+let function = (CallerContext:string) {
+  _ASIM_GetWatchlistRaw ('ASimDisabledParsers', pack_array('Any',CallerContext))
+  | extend SourceSpecificParser = tostring(WatchlistItem.SourceSpecificParser)
+  | where isnotempty(SourceSpecificParser)
+  | distinct SourceSpecificParser 
+};
+function (CallerContext)

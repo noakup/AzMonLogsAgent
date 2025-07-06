@@ -1,0 +1,14 @@
+{
+    "TimeGenerated": "2023-05-29T16:55:19+0000",
+    "Node": "j18r650mgr1",
+    "ProcessName": "audit",
+    "ProcessId": 2940617,
+    "Message": "NETFILTER_CFG table=nat family=2 entries=105 op=xt_replace pid=2940617 subj=system_u:system_r:spc_t:s0 comm=iptables-restor",
+    "Facility": "auth",
+    "Severity": "notice",
+    "Location": "eastus2euap",
+    "ClusterManagerName": "j18-qvduxzffwnrxy",
+    "ClusterName": "j18-c0d28c8f7cd3",  
+    "_ResourceId": "/SUBSCRIPTIONS/A3EEB848-665A-4DBF-80A4-EB460930FB23/RESOURCEGROUPS/J18-C0D28C8F7CD3-HOSTEDRESOURCES-3781AC00/PROVIDERS/MICROSOFT.NETWORKCLOUD/BAREMETALMACHINES/J18R650MGR1",
+    "_SubscriptionID": "a3eeb848-665a-4dbf-80a4-eb460930fb23"
+}

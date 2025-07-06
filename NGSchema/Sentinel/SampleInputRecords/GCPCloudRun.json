@@ -1,0 +1,77 @@
+[
+  {
+    "textPayload": "LIVENESS GRPC probe failed 3 times consecutively for container \"hello-1\" on port 8080. The instance has been shut down.\nGRPC call to grpc.health.v1.Health.Check(service = \"\") returned GRPC error UNAVAILABLE: Transport closed.",
+    "insertId": "683f4a1d0008c59f6fda6985",
+    "resource": {
+      "type": "cloud_run_revision",
+      "labels": {
+        "configuration_name": "cloudrun",
+        "project_id": "msccp-test",
+        "location": "us-east1",
+        "revision_name": "cloudrun-00004-84z",
+        "service_name": "cloudrun"
+      }
+    },
+    "timestamp": "2025-06-03T19:16:45.574879Z",
+    "severity": "ERROR",
+    "labels": {
+      "container_name": "hello-1",
+      "instanceId": "0069c7a988f815f8f9171a5abf49f61cfac83f790f08172d1d300d37b38331d5a781fa79d40acd99ed7dde82e247d178e3b8d542b45b67e87e6d21fb7838e35954d5a57d63"
+    },
+    "logName": "projects/msccp-test/logs/run.googleapis.com%2Fvarlog%2Fsystem",
+    "receiveTimestamp": "2025-06-03T19:16:45.578079656Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "prisma-cloud-serv-fabur@msccp-test.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/msccp-test/serviceAccounts/prisma-cloud-serv-fabur@msccp-test.iam.gserviceaccount.com/keys/711d0583951468a4c27f724399f859fe83b788fd",
+        "principalSubject": "serviceAccount:prisma-cloud-serv-fabur@msccp-test.iam.gserviceaccount.com"
+      },
+      "requestMetadata": {
+        "callerIp": "99.81.226.57",
+        "callerSuppliedUserAgent": "Vert.x-WebClient/4.5.11,gzip(gfe)",
+        "requestAttributes": {
+          "time": "2025-06-04T03:07:57.415243Z",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "run.googleapis.com",
+      "methodName": "google.cloud.run.v2.Jobs.ListJobs",
+      "authorizationInfo": [
+        {
+          "resource": "projects/msccp-test/locations/me-central1/jobs",
+          "permission": "run.jobs.list",
+          "granted": true,
+          "resourceAttributes": {},
+          "permissionType": "ADMIN_READ"
+        }
+      ],
+      "resourceName": "projects/msccp-test/locations/me-central1/jobs",
+      "request": {
+        "parent": "projects/msccp-test/locations/me-central1",
+        "@type": "type.googleapis.com/google.cloud.run.v2.ListJobsRequest"
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "me-central1"
+        ]
+      }
+    },
+    "insertId": "17act7yd8m2s",
+    "resource": {
+      "type": "cloud_run_job",
+      "labels": {
+        "location": "me-central1",
+        "job_name": "",
+        "project_id": "msccp-test"
+      }
+    },
+    "timestamp": "2025-06-04T03:07:57.390167Z",
+    "severity": "INFO",
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "receiveTimestamp": "2025-06-04T03:07:58.084425540Z"
+  }
+]

@@ -1,0 +1,29 @@
+[
+    {
+        "time": "2023-03-23T05:50:00.0364185Z",
+        "resourceId": "/SUBSCRIPTIONS/9A898385-EDE8-4235-8E3D-8750200575C1/RESOURCEGROUPS/AFD-DEFAULT/PROVIDERS/MICROSOFT.CDN/PROFILES/AZUREPORTAL",
+        "category": "FrontDoorWebApplicationFirewallLog",
+        "operationName": "Microsoft.Cdn/Profiles/WebApplicationFirewallLog/Write",
+        "properties": {
+            "clientIP": "20.114.123.207",
+            "clientPort": "1044",
+            "socketIP": "20.114.123.207",
+            "requestUri": "https://canary.portal.azure.com:443/Content/Dynamic/ghX-Is1vdE-g.js?-type=DefaultPartitioner&bundlingKind=DefaultPartitioner&root=*ShellWorkerImpl/GlobalResourceFiltersProvider",
+            "ruleName": "Microsoft_BotManagerRuleSet-1.0-UnknownBots-Bot300200",
+            "policy": "azureportalwafpolicy01",
+            "action": "Log",
+            "host": "canary.portal.azure.com",
+            "trackingReference": "0iOgbZAAAAABTU8x/UPJJSp7XnDsnRV0QU04xRURHRTIxMDgAMzViNjM2MGItYjYxYi00Yzc2LWJmN2QtZjU4M2Y4ODQxOWY5",
+            "policyMode": "prevention",
+            "details": {
+                "matches": [
+                    {
+                        "matchVariableName": "HeaderValue:user-agent",
+                        "matchVariableValue": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/111.0.5563.110 Safari/537.36"
+                    }
+                ],
+                "msg": "Tools and frameworks for web crawling and attacks"
+            }
+        }
+    }
+]

@@ -1,0 +1,11 @@
+[
+    {
+        "TimeGenerated": "2022-09-20T06:42:00Z",
+        "JobRunName": "6bad29ef-6488-468e-abb6-1803f956a3f9",
+        "ItemPath": "dir1/dir2/dir3/fail.txt",
+        "ItemType": "F",
+        "TransferResult": "Failed",
+        "StatusCode": "AZSM1001",
+        "Details": "Failed to access source folder due to permission issues"
+    }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "TimeGenerated": "2022-08-01T08:42:51.4056796Z",
+    "LogicalServerName": "chgettyscanaryeasttest",
+    "ResourceGroup": "synapseworkspace-managedrg-f620de46-da56-40e6-bce1-ee02e640e61b",
+    "OperationName": "ExecRequestsEvent",
+    "Category": "ExecRequests",
+    "RequestId": "QID1640",
+    "SessionId": "SID41",
+    "Status": "Suspended",
+    "StartTime": "2020-10-06T20:20:21.1967748Z",
+    "SubmitTime": "2020-10-06T20:20:21.1967748Z",
+    "EndCompileTime": "1601-01-01T00:00:00Z",
+    "EndTime": "1601-01-01T00:00:00Z",
+    "Label": "",
+    "ErrorId": "",
+    "DatabaseId": "58",
+    "Command": "USE [DWShellDb]",
+    "ResourceClass": "",
+    "StatementType": "",
+    "ScopeDepth": 0,
+    "RootQueryId": "",
+    "ClientCorrelationId": "3f9d9b33-e08c-4cde-8d21-218e43d5601f",
+    "ExplainOutput": "",
+    "GroupName": "",
+    "ClassifierName": "",
+    "ResourceAllocationPercent": "-1.000000",
+    "ResultCacheHit": "-16",
+    "Type": "SynapseSqlPoolExecRequests",
+    "_ResourceId": "/SUBSCRIPTIONS/845C8E99-1ACB-444D-B815-5975CBC12AC3/RESOURCEGROUPS/CHGETTYS/PROVIDERS/MICROSOFT.SYNAPSE/WORKSPACES/CHGETTYSCANARYEASTTEST/SQLPOOLS/CHGWORKSPACE"
+  }
+]

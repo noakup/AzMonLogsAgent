@@ -1,0 +1,4 @@
+CIEventsAudit
+| where Level has "Error"
+| sort by TimeGenerated desc
+| limit 100 // You can adjust the limit value to the number of logs you would like to retrieve.

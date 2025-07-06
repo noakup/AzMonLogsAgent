@@ -1,0 +1,10 @@
+source
+| where category == "NginxSecurityLogs"
+| project 
+    TimeGenerated = todatetime(["time"]),
+    Location = location,
+    Message = tostring(properties.message),
+    FilePath = tostring(properties.filePath),
+    Tag = tostring(properties.tag),
+    Severity = tostring(properties.severity),
+    Facility = tostring(properties.facility)

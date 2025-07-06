@@ -1,0 +1,74 @@
+[
+    {
+        "itemType": "Event",
+        "item": {
+            "name": "exception",
+            "timeUnixNano": 1690321254836322800,
+            "droppedAttributesCount": 0,
+            "attributes": {
+                "exception.type": "Error",
+                "exception.message": "Exception!",
+                "exception.stacktrace": "Error: Exception!\n    at IncomingMessage.<anonymous> (C:\\OtelTest\\server.js:96:51)\n    at C:\\OtelTest\\node_modules\\@opentelemetry\\context-async-hooks\\build\\src\\AbstractAsyncHooksContextManager.js:50:55\n    at AsyncLocalStorage.run (node:async_hooks:322:14)\n    at AsyncLocalStorageContextManager.with (C:\\OtelTest\\node_modules\\@opentelemetry\\context-async-hooks\\build\\src\\AsyncLocalStorageContextManager.js:33:40)\n    at IncomingMessage.contextWrapper (C:\\OtelTest\\node_modules\\@opentelemetry\\context-async-hooks\\build\\src\\AbstractAsyncHooksContextManager.js:50:32)\n    at IncomingMessage.emit (node:events:532:35)\n    at endReadableNT (node:internal/streams/readable:1346:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)"
+            },
+            "resourceAttributes": {
+                "timeUnixNano": 1690321254808000000,
+                "observedTimeUnixNano": 1690321254808000000,
+                "itemName": "OpenTelemetryEvents"
+            }
+        },
+        "parent": {
+            "itemType": "Span",
+            "item": {
+                "itemId": "9706006a-7975-4d66-9ac8-e086d029fc59",
+                "traceId": "31617d70ea7dba341c22b58e4dde9177",
+                "spanId": "75910886a9854139",
+                "parentSpanId": "4801528cc138b7ef",
+                "name": "GET",
+                "kind": 3,
+                "startTimeUnixNano": 1690321254810000000,
+                "endTimeUnixNano": 1690321254835636500,
+                "status": {
+                    "code": 0
+                },
+                "droppedAttributesCount": 0,
+                "droppedEventsCount": 0,
+                "droppedLinksCount": 0,
+                "attributes": {
+                    "http.method": "GET",
+                    "http.scheme": "https",
+                    "http.host": "my-helloworld-service",
+                    "http.target": "/hello-world",
+                    "http.flavor": "1.1",
+                    "http.status_code": "200",
+                    "http.status_text": "OK",
+                    "http.route": "/hello-world",
+                    "http.server_name": "my-helloworld-service"
+                },
+                "links": [],
+                "events": []
+            },
+            "parent": {
+                "itemType": "Scope",
+                "item": {
+                    "name": "@opentelemetry/instrumentation-http",
+                    "version": "0.41.1"
+                },
+                "parent": {
+                    "itemType": "Resource",
+                    "item": {
+                        "itemId": "ad876e50-b6bd-442e-8b5d-e5bfe3e5eb9b",
+                        "timestamp": "2023-08-12T00:14:31.2357816Z",
+                        "attributes": {
+                            "service.name": "my-helloworld-service",
+                            "telemetry.sdk.language": "nodejs",
+                            "telemetry.sdk.name": "opentelemetry",
+                            "telemetry.sdk.version": "1.15.1",
+                            "service.namespace": "my-namespace",
+                            "service.instance.id": "my-instance"
+                        }
+                    }
+                }
+            }
+        }    
+    }
+]

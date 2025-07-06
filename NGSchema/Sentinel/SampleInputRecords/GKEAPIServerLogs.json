@@ -1,0 +1,28 @@
+[{
+    "insertId": "rq91gtn78bq2tbmw",
+    "jsonPayload": {
+      "pid": "12",
+      "message": "\"HTTP\" verb=\"PUT\" URI=\"/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/cluster-autoscaler?timeout=5s\" latency=\"8.431365ms\" userAgent=\"cluster-autoscaler/v0.0.0 (linux/amd64) kubernetes/$Format/leader-election\" audit-ID=\"8c2be8f5-4de8-4d78-9f12-ab09827f3648\" srcIP=\"172.16.0.5:40388\" apf_pl=\"leader-election\" apf_fs=\"gke-components-leader-election-common\" apf_iseats=1 apf_fseats=0 apf_additionalLatency=\"0s\" apf_execution_time=\"7.835451ms\" resp=200"
+    },
+    "resource": {
+      "type": "k8s_control_plane_component",
+      "labels": {
+        "component_location": "us-central1-b",
+        "project_id": "msccp-test",
+        "cluster_name": "kubernetesalekhya",
+        "component_name": "apiserver",
+        "location": "us-central1"
+      }
+    },
+    "timestamp": "2025-05-08T11:43:12.547212Z",
+    "severity": "INFO",
+    "labels": {
+      "compute.googleapis.com/resource_name": "gke-961cde8a3d894189be3f-0cfb-7b80-vm"
+    },
+    "logName": "projects/msccp-test/logs/container.googleapis.com%2Fapiserver",
+    "sourceLocation": {
+      "file": "httplog.go",
+      "line": "134"
+    },
+    "receiveTimestamp": "2025-05-08T11:43:14.962610663Z"
+  }]

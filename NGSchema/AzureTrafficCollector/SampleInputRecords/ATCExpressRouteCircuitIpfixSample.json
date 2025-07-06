@@ -1,0 +1,42 @@
+[
+	{
+		"time": "2021-09-09T22:20:42.9008782Z",
+		"resourceId": "/SUBSCRIPTIONS/AEB5B02A-0F18-45A4-86D6-81808115CACF/RESOURCEGROUPS/ATCTEST/PROVIDERS/MICROSOFT.NETWORKFUNCTION/AZURETRAFFICCOLLECTORS/ATC-TEST",
+		"operationName": "MicrosoftNetworkFunction/AzureTrafficCollector/ExpressRouteCircuit/Read",
+		"category": "ExpressRouteCircuitIpfix",
+		"location": "East Asia",
+		"operationVersion": "1.0",
+		"properties": {
+			"ExRCircuitId": "/subscriptions/05f401ac-885f-4ba4-b2d6-7c5444596230/resourcegroups/sea-cust10/providers/microsoft.network/expressroutecircuits/sea-cust10-er",
+			"ExRCircuitServiceKey": "dca7fcc4-b3e2-4b67-aada-d62595c74cdc",
+			"ExRCircuitDirectPortId": "/subscriptions/05f401ac-885f-4ba4-b2d6-7c5444596230/resourcegroups/sea-cust40/providers/microsoft.network/expressrouteports/sea-bvt-100g-portpair-01",
+			"TimeStamp": "2021-09-09T22:17:08.0000000Z",
+			"SourceIp": "10.17.10.4",
+			"DestinationIp": "10.1.10.12",
+			"SourcePort": 5201,
+			"DestinationPort": 62510,
+			"Protocol": 6,
+			"NumberOfBytes": 80,
+			"NumberOfPackets": 2,
+			"Flowsequence": 22900345,
+			"IpClassOfService": 0,
+			"IpProtocolIdentifier": 6,
+			"IcmpType": 0,
+			"SrcMask": 32,
+			"DstMask": 25,
+			"SrcAsn": 12076,
+			"DstAsn": 65020,
+			"NextHop": "192.168.10.17",
+			"TcpFlag": 16,
+			"MinTtl": 127,
+			"MaxTtl": 127,
+			"SrcSubnet": "10.17.10.4",
+			"DstSubnet": "10.1.10.0",
+			"IpVerCode": 4,
+			"BgpNextHop": "192.168.10.17",
+			"PeeringType": "Private",
+			"Dot1qVlanId": 3,
+			"Dot1qCustomerVlanId": 100
+		}
+	}
+]

@@ -1,0 +1,17 @@
+source
+| project
+    TimeGenerated = todatetime(Timestamp),
+    BehaviorId = tostring(BehaviorId),
+    ActionType = tostring(ActionType),
+    Description = tostring(Description),
+    Categories = tostring(Categories),
+    AttackTechniques = tostring(AttackTechniques),
+    ServiceSource = tostring(ServiceSource),
+    DetectionSource = tostring(DetectionSource),
+    DataSources = tostring(DataSources),
+    DeviceId = tostring(DeviceId),
+    AccountUpn = tostring(AccountUpn),
+    AccountObjectId = tostring(AccountObjectId),
+    StartTime = todatetime(StartTime),
+    EndTime = todatetime(EndTime),
+    AdditionalFields = tostring(AdditionalFields)

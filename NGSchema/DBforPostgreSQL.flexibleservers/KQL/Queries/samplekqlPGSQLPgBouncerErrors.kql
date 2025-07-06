@@ -1,0 +1,4 @@
+PGSQLPgBouncer
+| where Message contains 'error' or Message contains 'fatal'
+| order by TimeGenerated desc
+| take 100

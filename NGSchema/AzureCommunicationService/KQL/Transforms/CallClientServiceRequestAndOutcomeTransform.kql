@@ -1,0 +1,11 @@
+source
+| project
+    TimeGenerated = todatetime(PreciseTimeStamp),
+    OperationName = operationName,
+    Category = category,
+    CorrelationId = correlationId,
+    Level = level,
+    DurationMs = toint(durationMs),
+    Properties = properties,
+    ResultType = resultType,
+    ResultSignature = toint(resultSignature)

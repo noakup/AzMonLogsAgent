@@ -1,0 +1,307 @@
+let ParamTimeStart = iff((isnull(TimeStart)), ago(1d), TimeStart);
+let ParamTimeEnd = iff((isnull(TimeEnd)), now(), TimeEnd);
+let ParamResourceId = iff(isnull(ResourceId) or trim(" ", ResourceId) == "", "", ResourceId);
+let existsResource=iff( ParamResourceId == "" , false, true);
+let existsGenericTableData = toscalar(
+    AzureDiagnostics
+    | where TimeGenerated >= ParamTimeStart and TimeGenerated <= ParamTimeEnd
+    | where Category == 'PostgreSQLFlexQueryStoreRuntime'
+    | where iff(existsResource,_ResourceId =~ ParamResourceId, true)
+    | take 1
+    | summarize count()
+    | project iff(count_ == 0, false, true)
+);
+let existsDedicatedTableData = toscalar(
+    PGSQLQueryStoreRuntime
+    | where TimeGenerated >= ParamTimeStart and TimeGenerated <= ParamTimeEnd
+    | where iff(existsResource,_ResourceId =~ ParamResourceId, true)
+    | take 1
+    | summarize count()
+    | project iff(count_ == 0, false, true)
+);
+let GenericData = AzureDiagnostics
+| where TimeGenerated >= ParamTimeStart and TimeGenerated <= ParamTimeEnd
+| where Category == 'PostgreSQLFlexQueryStoreRuntime'
+| where iff(existsGenericTableData==true, true, false)
+| where iff(existsResource,_ResourceId =~ ParamResourceId, true)
+| project
+TimeGenerated,
+_ResourceId,
+// building columns to match the dedicated table
+RuntimeStatsEntryId = tolong(
+    iff(isnotempty(AdditionalFields.Runtime_stats_entry_id), AdditionalFields.Runtime_stats_entry_id,
+        column_ifexists('Runtime_stats_entry_id_d',
+            column_ifexists('Runtime_stats_entry_id',
+                column_ifexists('Runtime_stats_entry_id_s', "")
+            )
+        )
+    )
+),
+UserId = toint(
+    iff(isnotempty(AdditionalFields.Userid), AdditionalFields.Userid,
+        column_ifexists('Userid_d',
+            column_ifexists('Userid',
+                column_ifexists('Userid_s', "")
+            )
+        )
+    )
+),
+DatabaseId = toint(
+    iff(isnotempty(AdditionalFields.Dbid), AdditionalFields.Dbid,
+        column_ifexists('Dbid_d',
+            column_ifexists('Dbid',
+                column_ifexists('Dbid_s', "")
+            )
+        )
+    )
+),
+QueryId = iff(isnotempty(AdditionalFields.Queryid_str), tostring(AdditionalFields.Queryid_str), 
+    iff(isnotempty(AdditionalFields.Queryid), tostring(AdditionalFields.Queryid), 
+        iff(isnotempty(column_ifexists('Queryid_str_s', "")), tostring(column_ifexists('Queryid_str_s', "")), 
+            iff(isnotempty(column_ifexists('Queryid_d', "")), tostring(column_ifexists('Queryid_d', "")), 
+                iff(isnotempty(column_ifexists('Queryid', "")), tostring(column_ifexists('Queryid', "")), tostring(column_ifexists('Queryid_s', "")))
+            )
+        )
+    )
+),
+PlanId = tolong(
+    iff(isnotempty(AdditionalFields.Plan_id), AdditionalFields.Plan_id,
+        column_ifexists('Plan_id_d',
+            column_ifexists('Plan_id_s',
+                column_ifexists('Plan_id', "")
+            )
+        )
+    )
+),
+StartTime = todatetime(
+    iff(isnotempty(AdditionalFields.Start_time), AdditionalFields.Start_time,
+        column_ifexists('Start_time_t',
+            column_ifexists('Start_time',
+                column_ifexists('Start_time_s', "")
+            )
+        )
+    )
+),
+EndTime = todatetime(
+    iff(isnotempty(AdditionalFields.End_time), AdditionalFields.End_time,
+        column_ifexists('End_time_t',
+            column_ifexists('End_time',
+                column_ifexists('End_time_s', "")
+            )
+        )
+    )
+),
+Calls = tolong(
+    iff(isnotempty(AdditionalFields.Calls), AdditionalFields.Calls,
+        column_ifexists('Calls_d',
+            column_ifexists('Calls',
+                column_ifexists('Calls_s', "")
+            )
+        )
+    )
+),
+TotalExecDurationMs = todouble(
+    iff(isnotempty(AdditionalFields.Total_time), AdditionalFields.Total_time,
+        column_ifexists('Total_time_d',
+            column_ifexists('Total_time',
+                column_ifexists('Total_time_s', "")
+            )
+        )
+    )
+),
+MinExecDurationMs = todouble(
+    iff(isnotempty(AdditionalFields.Min_time), AdditionalFields.Min_time,
+        column_ifexists('Min_time_d',
+            column_ifexists('Min_time',
+                column_ifexists('Min_time_s', "")
+            )
+        )
+    )
+),
+MaxExecDurationMs = todouble(
+    iff(isnotempty(AdditionalFields.Max_time), AdditionalFields.Max_time,
+        column_ifexists('Max_time_d',
+            column_ifexists('Max_time',
+                column_ifexists('Max_time_s', "")
+            )
+        )
+    )
+),
+MeanExecDurationMs = todouble(
+    iff(isnotempty(AdditionalFields.Mean_time), AdditionalFields.Mean_time,
+        column_ifexists('Mean_time_d',
+            column_ifexists('Mean_time',
+                column_ifexists('Mean_time_s', "")
+            )
+        )
+    )
+),
+StdDevExecDurationMs = todouble(
+    iff(isnotempty(AdditionalFields.Stddev_time), AdditionalFields.Stddev_time,
+        column_ifexists('Stddev_time_d',
+            column_ifexists('Stddev_time',
+                column_ifexists('Stddev_time_s', "")
+            )
+        )
+    )
+),
+Rows = tolong(
+    iff(isnotempty(AdditionalFields.Rows), AdditionalFields.Rows,
+        column_ifexists('Rows_d',
+            column_ifexists('Rows',
+                column_ifexists('Rows_s', "")
+            )
+        )
+    )
+),
+SharedBlksHit = tolong(
+    iff(isnotempty(AdditionalFields.Shared_blks_hit), AdditionalFields.Shared_blks_hit,
+        column_ifexists('Shared_blks_hit_d',
+            column_ifexists('Shared_blks_hit',
+                column_ifexists('Shared_blks_hit_s', "")
+            )
+        )
+    )
+),
+SharedBlksRead = tolong(
+    iff(isnotempty(AdditionalFields.Shared_blks_read), AdditionalFields.Shared_blks_read,
+        column_ifexists('Shared_blks_read_d',
+            column_ifexists('Shared_blks_read',
+                column_ifexists('Shared_blks_read_s', "")
+            )
+        )
+    )
+),
+SharedBlksDirtied = tolong(
+    iff(isnotempty(AdditionalFields.Shared_blks_dirtied), AdditionalFields.Shared_blks_dirtied,
+        column_ifexists('Shared_blks_dirtied_d',
+            column_ifexists('Shared_blks_dirtied',
+                column_ifexists('Shared_blks_dirtied_s', "")
+            )
+        )
+    )
+),
+SharedBlksWritten = tolong(
+    iff(isnotempty(AdditionalFields.Shared_blks_written), AdditionalFields.Shared_blks_written,
+        column_ifexists('Shared_blks_written_d',
+            column_ifexists('Shared_blks_written',
+                column_ifexists('Shared_blks_written_s', "")
+            )
+        )
+    )
+),
+LocalBlksHit = tolong(
+    iff(isnotempty(AdditionalFields.Local_blks_hit), AdditionalFields.Local_blks_hit,
+        column_ifexists('Local_blks_hit_d',
+            column_ifexists('Local_blks_hit',
+                column_ifexists('Local_blks_hit_s', "")
+            )
+        )
+    )
+),
+LocalBlksRead = tolong(
+    iff(isnotempty(AdditionalFields.Local_blks_read), AdditionalFields.Local_blks_read,
+        column_ifexists('Local_blks_read_d',
+            column_ifexists('Local_blks_read',
+                column_ifexists('Local_blks_read_s', "")
+            )
+        )
+    )
+),
+LocalBlksDirtied = tolong(
+    iff(isnotempty(AdditionalFields.Local_blks_dirtied), AdditionalFields.Local_blks_dirtied,
+        column_ifexists('Local_blks_dirtied_d',
+            column_ifexists('Local_blks_dirtied',
+                column_ifexists('Local_blks_dirtied_s', "")
+            )
+        )
+    )
+),
+LocalBlksWritten = tolong(
+    iff(isnotempty(AdditionalFields.Local_blks_written), AdditionalFields.Local_blks_written,
+        column_ifexists('Local_blks_written_d',
+            column_ifexists('Local_blks_written',
+                column_ifexists('Local_blks_written_s', "")
+            )
+        )
+    )
+),
+TempBlksRead = tolong(
+    iff(isnotempty(AdditionalFields.Temp_blks_read), AdditionalFields.Temp_blks_read,
+        column_ifexists('Temp_blks_read_d',
+            column_ifexists('Temp_blks_read',
+                column_ifexists('Temp_blks_read_s', "")
+            )
+        )
+    )
+),
+TempBlksWritten = tolong(
+    iff(isnotempty(AdditionalFields.Temp_blks_written), AdditionalFields.Temp_blks_written,
+        column_ifexists('Temp_blks_written_d',
+            column_ifexists('Temp_blks_written',
+                column_ifexists('Temp_blks_written_s', "")
+            )
+        )
+    )
+),
+BlkReadTime = todouble(
+    iff(isnotempty(AdditionalFields.Blk_read_time), AdditionalFields.Blk_read_time,
+        column_ifexists('Blk_read_time_d',
+            column_ifexists('Blk_read_time',
+                column_ifexists('Blk_read_time_s', "")
+            )
+        )
+    )
+),
+BlkWriteTime = todouble(
+    iff(isnotempty(AdditionalFields.Blk_write_time), AdditionalFields.Blk_write_time,
+        column_ifexists('Blk_write_time_d',
+            column_ifexists('Blk_write_time',
+                column_ifexists('Blk_write_time_s', "")
+            )
+        )
+    )
+),
+IsSystemQuery = tobool(
+    iff(isnotempty(AdditionalFields.Is_system_query), AdditionalFields.Is_system_query,
+        column_ifexists('Is_system_query_b',
+            column_ifexists('Is_system_query',
+                column_ifexists('Is_system_query_s', false)
+            )
+        )
+    )
+),
+QueryType = tostring(
+    iff(isnotempty(AdditionalFields.Query_type), AdditionalFields.Query_type,
+        column_ifexists('Query_type_s',
+            column_ifexists('Query_type', "")
+        )
+    )
+),
+SearchPath = tostring(
+    iff(isnotempty(AdditionalFields.Search_path), AdditionalFields.Search_path,
+        column_ifexists('Search_path_s',
+            column_ifexists('Search_path', "")
+        )
+    )
+),
+SearchPathCaptureStatus = tostring(
+    iff(isnotempty(AdditionalFields.Search_path_capture_status), AdditionalFields.Search_path_capture_status,
+        column_ifexists('Search_path_capture_status_s',
+            column_ifexists('Search_path_capture_status', "")
+        )
+    )
+),
+ParametersCaptureStatus = tostring(
+    iff(isnotempty(AdditionalFields.Parameters_capture_status), AdditionalFields.Parameters_capture_status,
+        column_ifexists('Parameters_capture_status_s',
+            column_ifexists('Parameters_capture_status', "")
+        )
+    )
+);
+let DedicatedData = PGSQLQueryStoreRuntime
+| where TimeGenerated >= ParamTimeStart and TimeGenerated <= ParamTimeEnd
+| where iff(existsDedicatedTableData==true, true, false)
+| where iff(existsResource,_ResourceId =~ ParamResourceId, true);
+DedicatedData
+| union isfuzzy=true GenericData

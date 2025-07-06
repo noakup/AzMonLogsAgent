@@ -1,0 +1,14 @@
+source
+| extend properties = parse_json(properties)
+| project
+	TimeGenerated = todatetime(['time']),
+	OperationName = operationName,
+	ATCResourceId = resourceId,
+	ATCRegion = location,
+	SchemaVersion = operationVersion,
+	IpSubnet = tostring(properties.IpSubnet),
+	IpMask = tostring(properties.IpMask),
+	ServiceName = tostring(properties.ServiceName), 
+	PrefixRegion = tostring(properties.PrefixRegion),
+	ServiceBgpCommunity = tostring(properties.ServiceBgpCommunity),
+	RegionalBgpCommunity = tostring(properties.RegionalBgpCommunity)

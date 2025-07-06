@@ -1,0 +1,316 @@
+{
+    "type": "Microsoft.OpenLogisticsPlatform/Workspaces",
+    "displayName": "Microsoft.OpenLogisticsPlatform/Workspaces",
+    "description": "This manifest holds schemas related to Open Logistics Platform.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Project Mangrove/Open Logistics Platform",
+    "contactDL": "aglogeng@microsoft.com",
+    "relatedFunctions": [],
+    "tables": [
+      {
+        "name": "OLPSupplyChainEvents",
+        "description": "The events table captures every event that was dispatched from the Open Logistics Platform workspace. Events can be a result of a data plane API call (e.g. Shipment Created, Item Deleted, Notification sent, etc.) or a long running job operation completion (e.g. Data ingestion results in NewDataAvailable event).",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENLOGISTICSPLATFORM_SUPPLYCHAINEVENTLOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": false,
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "String"
+          },
+          {
+            "name": "correlationId",
+            "type": "String"
+          },
+          {
+            "name": "durationMs",
+            "type": "Double"
+          }
+        ],
+        "transformFilePath": "KQL/SupplyChainEventLogsTransform.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs with OLPSupplyChainEntityOperations.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "RequestId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate request logs.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "DurationMs",
+            "type": "Double",
+            "isDefaultDisplay": true,
+            "description": "Time it took to service the REST API request, in milliseconds."
+          },
+          {
+            "name": "EventId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier for each event."
+          },
+          {
+            "name": "EventBody",
+            "type": "Dynamic",
+            "isDefaultDisplay": true,
+            "description": "The event body."
+          },
+          {
+            "name": "EventType",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The type of the event, can be Microsoft.OpenLogisticsPlatform.EntityCreated, Microsoft.OpenLogisticsPlatform.EntityUpdated etc."
+          },
+          {
+            "name": "SupplyChainResourceType",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The type of supplychain resource for which the event is generated, can be Item, Warehouse, WarehouseItem etc."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/SupplyChainEventLogsSampleInputRecords.json"
+      },
+      {
+        "name": "OLPSupplyChainEntityOperations",
+        "description": "The OLPSupplyChainEntityOperations table captures every data plane operation performed on a supplychain entity in the workspace. Data Plane requests are operations executed to create, update, delete or retrieve supplychain entities such as Warehouse, Item, DeliveryNode, Shipment etc. within a workspace.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 5,
+        "dataTypeId": "MICROSOFTOPENLOGISTICSPLATFORM_SUPPLYCHAINENTITYOPERATIONS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": false,
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "String"
+          },
+          {
+            "name": "correlationId",
+            "type": "String"
+          },
+          {
+            "name": "durationMs",
+            "type": "Double"
+          },
+          {
+            "name": "identity",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/SupplyChainEntityOperationLogsTransform.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "RequestUri",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "URI of the API request.",
+            "dataTypeHint": "URI"
+          },
+
+          {
+            "name": "RequestMethod",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "HTTP method of the API request."
+          },
+          {
+            "name": "HttpStatusCode",
+            "type": "Int",
+            "isDefaultDisplay": true,
+            "description": "HTTP status code of the API response."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "RequestId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate request logs.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "DurationMs",
+            "type": "Double",
+            "isDefaultDisplay": true,
+            "description": "Time it took to service the REST API request, in milliseconds."
+          },
+          {
+            "name": "ClientTenantId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Tenant ID of the client making the API request."
+          },
+          {
+            "name": "ClientObjectId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Object ID of the client making the API request."
+          },
+          {
+            "name": "ClientName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Name of the client making the API request."
+          },
+          {
+            "name": "ClientApplicationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Application ID of the client making the API request."
+          },
+          {
+            "name": "RequestBody",
+            "type": "Dynamic",
+            "isDefaultDisplay": true,
+            "description": "Request body of the API calls."
+          },
+          {
+            "name": "ResponseBody",
+            "type": "Dynamic",
+            "isDefaultDisplay": true,
+            "description": "Request body of the API calls."
+          },
+          {
+            "name": "CustomRequestAttributes",
+            "type": "Dynamic",
+            "isDefaultDisplay": true,
+            "description": "Client defined arbitrary data in the API request."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/SupplyChaintEntityOperationLogsSampleInputRecords.json"
+      }
+    ],
+    "functions": [],
+    "queries": [
+      {
+        "id": "a4d5c564-f185-450d-9024-ac003c123456",
+        "displayName": "Count of successful warehouse delete requests",
+        "description": "Evaluates the count of successful warehouse delete requests.",
+        "bodyFilePath": "KQL/WarehouseDeleteSuccessCountQuery.kql",
+        "categories": [
+          "resources"
+        ],
+        "tags": {
+          "Topic": [
+            "Diagnostics",
+            "Audit"
+          ]
+        },
+        "relatedTables": [
+          "OLPSupplyChainEntityOperations"
+        ],
+        "properties": {
+          "ExampleQuery": true,
+          "QueryAttributes": {
+            "IsMultiResource": true
+          }
+        }
+      },
+      {
+        "id": "a4d5c564-f185-450d-9024-ac003c456789",
+        "displayName": "Count of item update events",
+        "description": "Count of item entity update events by EventId.",
+        "bodyFilePath": "KQL/ItemUpdatesCountQuery.kql",
+        "categories": [
+          "resources"
+        ],
+        "tags": {
+          "Topic": [
+            "Diagnostics",
+            "Audit"
+          ]
+        },
+        "relatedTables": [
+          "OLPSupplyChainEventLogs"
+        ],
+        "properties": {
+          "ExampleQuery": true,
+          "QueryAttributes": {
+            "IsMultiResource": true
+          }
+        }
+      }
+    ]
+}

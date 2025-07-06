@@ -1,0 +1,17 @@
+[
+	{
+		"category":"AZFWFlowTrace",
+		"time":"2022-11-04T20:48:24.1904350Z",
+		"resourceId":"/SUBSCRIPTIONS/AEB5B02A-0F18-45A4-86D6-81808115CACF/RESOURCEGROUPS/JAGANGUL-TEST-FW-SYN-ACK-LOGGING-ATTEMPT-3/PROVIDERS/MICROSOFT.NETWORK/AZUREFIREWALLS/FIREWALL1",
+		"properties": {
+			"Protocol":"TCP",
+			"SourceIp":"74.125.132.113",
+			"SourcePort":80,
+			"DestinationIp":"10.0.2.4",
+			"DestinationPort":49906,
+			"Action":"Log",
+			"ActionReason":"Additional TCP Log",
+			"Flag":"FIN"
+		}
+	}
+]

@@ -1,0 +1,3 @@
+ACSBillingUsage
+| summarize Usage=sum(Quantity) by UsageType, bin(TimeGenerated, 1h) // count the number of units for each type of usage, per hour
+| render columnchart

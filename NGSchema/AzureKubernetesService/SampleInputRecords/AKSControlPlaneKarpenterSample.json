@@ -1,0 +1,38 @@
+[
+    {
+        "operationName": "Microsoft.ContainerService/managedClusters/diagnosticLogs/Read",
+        "category": "karpenter-controller",
+        "resourceId": "/SUBSCRIPTIONS/26FE00F8-9173-4872-9134-BB1D2E00343A/RESOURCEGROUPS/NAPTEST/PROVIDERS/MICROSOFT.CONTAINERSERVICE/MANAGEDCLUSTERS/NAPCLUSTER",
+        "properties": {
+            "pod": "karpenter-7696644d59-brfvz",
+            "log": "{\"level\":\"INFO\",\"time\":\"2025-06-18T18:50:51.033Z\",\"logger\":\"controller.nodeclass.kubernetesversion\",\"caller\":\"status/controller.go:83\",\"message\":\"starting reconcile\",\"commit\":\"7ce04e4\",\"controller\":\"nodeclass.status\",\"controllerGroup\":\"karpenter.azure.com\",\"controllerKind\":\"AKSNodeClass\",\"AKSNodeClass\":{\"name\":\"default\"},\"namespace\":\"\",\"name\":\"default\",\"reconcileID\":\"87a0bd22-236f-47f6-a37a-c768b36a03d8\"}",
+            "stream": "stdout",
+            "containerID": "4853fbd2e3b79e9ce2743a8a52fccc8f10e3aebb41fad66acf395f6a0a40c0ee"
+        },
+        "time": "2025-06-18T18:50:51.033Z"
+    },
+    {
+        "operationName": "Microsoft.ContainerService/managedClusters/diagnosticLogs/Read",
+        "category": "karpenter-controller",
+        "resourceId": "/SUBSCRIPTIONS/26FE00F8-9173-4872-9134-BB1D2E00343A/RESOURCEGROUPS/NAPTEST/PROVIDERS/MICROSOFT.CONTAINERSERVICE/MANAGEDCLUSTERS/NAPCLUSTER",
+        "properties": {
+            "pod": "karpenter-7696644d59-brfvz",
+            "log": "{\"level\":\"WARN\",\"time\":\"2025-06-18T18:55:55.887Z\",\"logger\":\"controller\",\"caller\":\"instancetype/instancetypes.go:108\",\"message\":\"Discovered 1004 SKUs\",\"commit\":\"7ce04e4\",\"controller\":\"disruption\",\"namespace\":\"\",\"name\":\"\",\"reconcileID\":\"189a7daa-95b7-48f8-af28-c7f534dc3b61\"}",
+            "stream": "stdout",
+            "containerID": "4853fbd2e3b79e9ce2743a8a52fccc8f10e3aebb41fad66acf395f6a0a40c0ee"
+        },
+        "time": "2025-06-18T18:55:55.887Z"
+    },
+    {
+        "operationName": "Microsoft.ContainerService/managedClusters/diagnosticLogs/Read",
+        "category": "karpenter-controller",
+        "resourceId": "/SUBSCRIPTIONS/26FE00F8-9173-4872-9134-BB1D2E00343A/RESOURCEGROUPS/NAPTEST/PROVIDERS/MICROSOFT.CONTAINERSERVICE/MANAGEDCLUSTERS/NAPCLUSTER",
+        "properties": {
+            "pod": "karpenter-7696644d59-brfvz",
+            "log": "{\"level\":\"DEBUG\",\"time\":\"2025-06-18T19:00:51.069Z\",\"logger\":\"controller.nodeclass.images\",\"caller\":\"status/controller.go:83\",\"message\":\"success\",\"commit\":\"7ce04e4\",\"controller\":\"nodeclass.status\",\"controllerGroup\":\"karpenter.azure.com\",\"controllerKind\":\"AKSNodeClass\",\"AKSNodeClass\":{\"name\":\"system-surge\"},\"namespace\":\"\",\"name\":\"system-surge\",\"reconcileID\":\"90b0f30b-095b-4927-ba9b-e054a316d264\"}",
+            "stream": "stdout",
+            "containerID": "4853fbd2e3b79e9ce2743a8a52fccc8f10e3aebb41fad66acf395f6a0a40c0ee"
+        },
+        "time": "2025-06-18T19:00:51.069Z"
+    }
+]

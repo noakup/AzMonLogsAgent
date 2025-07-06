@@ -1,0 +1,29 @@
+source
+| extend status = tostring(properties.resultType)
+| where status !in~ ("In progress") and status !in~ ("User input required")
+| project
+    TimeGenerated = todatetime(['time']),
+	Category = category,
+	VaultName = tostring(split(resourceId, '/')[8]),
+	VaultType = strcat(tostring(split(resourceId, '/')[6]), "/", tostring(split(resourceId, '/')[7])),
+	OperationName = operationName,
+	Status = iff(status =~ "Successful", "Completed", status),
+	CorrelationId = tostring(properties.correlationId),
+	ResultDescription = tostring(properties.resultDescription),
+	DurationMs = toint(properties.durationMS),
+	StartTime = todatetime(properties.startTime),
+	EndTime = todatetime(properties.endTime),
+	VaultLocation = tostring(properties.vaultLocation),
+	SourceFriendlyName = tostring(properties.affectedResourceName),
+	Version = "V2",
+	SourceResourceId = tostring(properties.sourceResourceId),
+	SourceType = tostring(properties.affectedResourceType),
+	ReplicatedItemFriendlyName = tostring(properties.replicatedItemFriendlyName),
+	ReplicatedItemId = tostring(properties.replicatedItemArmId),
+	ReplicatedItemUniqueId = tostring(properties.replicatedItemUniqueId),
+	PolicyUniqueId = tostring(properties.policyUniqueId),
+	PolicyId = tostring(properties.policyArmId),
+	PolicyFriendlyName = tostring(properties.policyFriendlyName),
+	JobUniqueId = tostring(properties.jobUniqueId),
+	ReplicationScenario = tostring(properties.replicationScenario),
+	SourceResourceGroup = tostring(split(tostring(properties.sourceResourceId), '/')[4])

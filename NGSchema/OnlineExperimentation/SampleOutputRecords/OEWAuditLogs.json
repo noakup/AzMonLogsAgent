@@ -1,0 +1,42 @@
+[
+  {
+    "TimeGenerated": "2025-03-28T18:17:17.0644110Z",
+    "CallerIpAddress": "10.0.32.212",
+    "Category": "Audit",
+    "Level": "Error",
+    "CorrelationId": "071212bb-01c8-4582-b1bc-5d6177d5145d",
+    "DurationMs": 271,
+    "Identity": {
+      "Claims": {
+        "oid": "d262c157-9062-4153-8b1c-f8bdcb5f7838"
+      }
+    },
+    "Location": "eastus2",
+    "OperationName": "Microsoft.OnlineExperimentation/workspaces/Read",
+    "HttpStatusCode": 403,
+    "ResultType": "Failed",
+    "ResultDescription": "Forbidden",
+    "URI": "https://264eefde-f580-4736-9cd5-abab2d798dfc.eastus2.exp.azure.net/experiment-metrics",
+    "WorkspaceId": "264eefde-f580-4736-9cd5-abab2d798dfc"
+  },
+  {
+    "TimeGenerated": "2025-03-29T05:02:21.2336980Z",
+    "CallerIpAddress": "10.0.32.232",
+    "Category": "Audit",
+    "Level": "Error",
+    "CorrelationId": "620fd1f3-3db2-49b5-9c11-a1de74133423",
+    "DurationMs": 19,
+    "Identity": {
+      "Claims": {
+        "oid": "706c281d-721f-49ea-9f2a-58c8d624ef6f"
+      }
+    },
+    "Location": "eastus2",
+    "OperationName": "Microsoft.OnlineExperimentation/workspaces/Read",
+    "HttpStatusCode": 404,
+    "ResultType": "Failed",
+    "ResultDescription": "NotFound",
+    "URI": "https://fd03a0aa-5843-4c83-8b89-0ddc18abf2df.eastus2.exp.azure.net/experiment-metrics/test_metric_fixed_id",
+    "WorkspaceId": "fd03a0aa-5843-4c83-8b89-0ddc18abf2df"
+  }
+]

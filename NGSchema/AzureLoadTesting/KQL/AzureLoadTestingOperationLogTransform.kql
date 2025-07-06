@@ -1,0 +1,21 @@
+source 
+| project
+    TimeGenerated = todatetime(["time"]),
+    ServiceLocation = tostring(properties.serviceLocation),
+    ResourceRegion = tostring(properties.region),
+    OperationName = tostring(operationName),
+    ResultType = tostring(resultType),
+    HttpStatusCode = toint(resultSignature),
+    DurationMs = todouble(durationMs),
+    CallerIpAddress = tostring(callerIpAddress),
+    Identity = identity,
+    CorrelationId = tostring(correlationId),
+    FailureDetails = tostring(properties.failureDetails),
+    UserAgent= tostring(properties.userAgent),
+    OperationId= tostring(properties.operationId),
+    RequestBody= properties.requestBody,
+    RequestMethod = tostring(properties.requestMethod),
+    RequestId = tostring(properties.requestId),
+    RequestUri = tostring(properties.requestUri),
+    OperationVersion = tostring(operationVersion)
+

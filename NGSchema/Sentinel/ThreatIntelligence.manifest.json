@@ -1,0 +1,496 @@
+{
+  "type": "Microsoft.SecurityInsights/ThreatIntelligence",
+  "displayName": "Microsoft Sentinel Threat Intelligence.",
+  "description": "All tables related to Microsoft Sentinel Threat Intelligence.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "USX Threat Intelligence/Threat Intelligence",
+  "contactDL": "sentineltidev@microsoft.com",
+  "relatedTables": [],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "workflowName": "ThreatIntelligenceWorkflow",
+      "transformName": "ThreatIntelligence",
+      "physicalName": "ThreatIntelObjects",
+      "logicalName": "ThreatIntelObjects",
+      "description": "Threat Intelligence Generic STIX Object Table.",
+      "categories": [ "security" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 5,
+      "dataTypeId": "THREAT_INTEL_OBJECTS",
+      "intelligencePacks": [ "SecurityInsights" ],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "isLakeAllowed": false,
+
+      "input": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime"
+        },
+        {
+          "name": "WorkspaceId",
+          "type": "Guid"
+        },
+        {
+          "name": "AzureTenantId",
+          "type": "Guid"
+        },
+        {
+          "name": "Id",
+          "type": "String"
+        },
+        {
+          "name": "SourceSystem",
+          "type": "String"
+        },
+        {
+          "name": "StixType",
+          "type": "String"
+        },
+        {
+          "name": "LastUpdateMethod",
+          "type": "String"
+        },
+        {
+          "name": "IsDeleted",
+          "type": "Bool"
+        },
+        {
+          "name": "AdditionalFields",
+          "type": "Dynamic"
+        },
+        {
+          "name": "Data",
+          "type": "Dynamic"
+        }
+      ],
+
+      "transformFilePath": "Kql/ThreatIntelObjectsTransform.kql",
+
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The time of STIX object ingestion."
+        },
+        {
+          "name": "WorkspaceId",
+          "type": "Guid",
+          "description": "The workspace that submitted the STIX object.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "AzureTenantId",
+          "type": "Guid",
+          "description": "The tenant that submitted the STIX object.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "Id",
+          "type": "String",
+          "description": "A value that uniquely identifies the STIX object. This value is usable with Sentinel APIs."
+        },
+        {
+          "name": "SourceSystem",
+          "type": "String",
+          "description": "The name of the source."
+        },
+        {
+          "name": "StixType",
+          "type": "String",
+          "description": "The name of this STIX Object."
+        },
+        {
+          "name": "LastUpdateMethod",
+          "type": "String",
+          "description": "The component that last updated the record."
+        },
+        {
+          "name": "IsDeleted",
+          "type": "Bool",
+          "description": "A value that indicates whether the data was deleted from Sentinel or not."
+        },
+        {
+          "name": "AdditionalFields",
+          "type": "Dynamic",
+          "description": "The type specifc fields that Sentinel adds. Contains the TLPLevel: white, green, amber, or red."
+        },
+        {
+          "name": "Data",
+          "type": "Dynamic",
+          "description": "All object properties, formatted according to STIX specification (https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.pdf)."
+        }
+      ],
+
+      "sampleInputRecordsFilePath": "SampleInputRecords/ThreatIntelObjectsSample.json",
+
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/ThreatIntelObjectsSample.json"
+    },
+    {
+      "workflowName": "ThreatIntelligenceDetectionsWorkflow",
+      "transformName": "ThreatIntelligenceDetections",
+      "physicalName": "ThreatIntelIndicators",
+      "logicalName": "ThreatIntelIndicators",
+      "description": "Threat Intelligence table that contains STIX indicators.",
+      "categories": [ "security" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 5,
+      "dataTypeId": "THREAT_INTEL_INDICATORS",
+      "intelligencePacks": [ "SecurityInsights" ],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "isLakeAllowed": false,
+
+      "input": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime"
+        },
+        {
+          "name": "WorkspaceId",
+          "type": "Guid"
+        },
+        {
+          "name": "AzureTenantId",
+          "type": "Guid"
+        },
+        {
+          "name": "Id",
+          "type": "String"
+        },
+        {
+          "name": "SourceSystem",
+          "type": "String"
+        },
+        {
+          "name": "LastUpdateMethod",
+          "type": "String"
+        },
+        {
+          "name": "IsDeleted",
+          "type": "Bool"
+        },
+        {
+          "name": "AdditionalFields",
+          "type": "Dynamic"
+        },
+        {
+          "name": "Data",
+          "type": "Dynamic"
+        },
+        {
+          "name": "IsActive",
+          "type": "Bool"
+        },
+        {
+          "name": "Revoked",
+          "type": "Bool"
+        },
+        {
+          "name": "ValidUntil",
+          "type": "DateTime"
+        },
+        {
+          "name": "ValidFrom",
+          "type": "DateTime"
+        },
+        {
+          "name": "Created",
+          "type": "DateTime"
+        },
+        {
+          "name": "Modified",
+          "type": "DateTime"
+        },
+        {
+          "name": "Tags",
+          "type": "String"
+        },
+        {
+          "name": "Confidence",
+          "type": "Int"
+        },
+        {
+          "name": "Pattern",
+          "type": "String"
+        },
+        {
+          "name": "ObservableKey",
+          "type": "String"
+        },
+        {
+          "name": "ObservableValue",
+          "type": "String"
+        }
+      ],
+
+      "transformFilePath": "Kql/ThreatIntelIndicatorsTransform.kql",
+
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The time of indicator ingestion."
+        },
+        {
+          "name": "WorkspaceId",
+          "type": "Guid",
+          "description": "The workspace that submitted the indicator.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "AzureTenantId",
+          "type": "Guid",
+          "description": "The tenant that submitted the indicator.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "Id",
+          "type": "String",
+          "description": "A value that uniquely identifies the indicator STIX object. This value is usable with Sentinel APIs."
+        },
+        {
+          "name": "SourceSystem",
+          "type": "String",
+          "description": "The name of the source."
+        },
+        {
+          "name": "LastUpdateMethod",
+          "type": "String",
+          "description": "The component that last updated the indicator."
+        },
+        {
+          "name": "IsDeleted",
+          "type": "Bool",
+          "description": "A value that indicates whether the data was deleted from Sentinel or not."
+        },
+        {
+          "name": "AdditionalFields",
+          "type": "Dynamic",
+          "description": "The type specifc fields that Sentinel adds. Contains the TLPLevel: white, green, amber, or red."
+        },
+        {
+          "name": "Data",
+          "type": "Dynamic",
+          "description": "All object properties, formatted according to the STIX specification (https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.pdf)."
+        },
+        {
+          "name": "IsActive",
+          "type": "Bool",
+          "description": "A value that specifies if an indicator is active and valid for detections."
+        },
+        {
+          "name": "Revoked",
+          "type": "Bool",
+          "description": "A value that specifies whether the indicator was revoked."
+        },
+        {
+          "name": "ValidUntil",
+          "type": "DateTime",
+          "description": "The time at which this indicator should no longer be considered a valid indicator of the bahviors it is related to or represents."
+        },
+        {
+          "name": "ValidFrom",
+          "type": "DateTime",
+          "description": "The time from which this indicator is considered a valid indicator of the behaviors it is related or represents."
+        },
+        {
+          "name": "Created",
+          "type": "DateTime",
+          "description": "The date when the indicator was created."
+        },
+        {
+          "name": "Modified",
+          "type": "DateTime",
+          "description": "The date when the indicator was modified."
+        },
+        {
+          "name": "Tags",
+          "type": "String",
+          "description": "Sentinel defined tags for the indicator."
+        },
+        {
+          "name": "Confidence",
+          "type": "Int",
+          "description": "The confidence that the creator has in the correctness of their data. The value must be a number in the range of 0-100."
+        },
+        {
+          "name": "Pattern",
+          "type": "String",
+          "description": "The detection pattern for this indicator MAY be expressed as a STIX pattern."
+        },
+        {
+          "name": "ObservableKey",
+          "type": "String",
+          "description": "The entire left-hand side of an equality comparison from the pattern."
+        },
+        {
+          "name": "ObservableValue",
+          "type": "String",
+          "description": "The entire right-hand side of an equality comparison from the pattern."
+        }
+      ],
+
+      "sampleInputRecordsFilePath": "SampleInputRecords/ThreatIntelIndicatorsSample.json",
+
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/ThreatIntelIndicatorsSample.json"
+    },
+    {
+      "name": "ThreatIntelExportOperation",
+      "description": "Threat Intelligence Export Operation Logs.",
+      "categories": [ "security" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 5,
+      "dataTypeId": "THREAT_INTEL_EXPORT_OPERATIONS",
+      "intelligencePacks": [ "SecurityInsights" ],
+      "isResourceCentric": true,
+      "tableState": "Validation",
+      "isTroubleshootingAllowed": false,
+      "isLakeAllowed": true,
+      "isChangeColumnInternalNameAllowed": false,
+
+      "input": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime"
+        },
+        {
+          "name": "TimeExported",
+          "type": "DateTime"
+        },
+        {
+          "name": "Id",
+          "type": "String"
+        },
+        {
+          "name": "StixId",
+          "type": "String"
+        },
+        {
+          "name": "ExternallyExportedId",
+          "type": "String"
+        },
+        {
+          "name": "SourceSystem",
+          "type": "String"
+        },
+        {
+          "name": "ExportedBy",
+          "type": "String"
+        },
+        {
+          "name": "ExportDuration",
+          "type": "Int"
+        },
+        {
+          "name": "ExportId",
+          "type": "Guid"
+        },
+        {
+          "name": "ExportType",
+          "type": "String"
+        },
+        {
+          "name": "Status",
+          "type": "String"
+        },
+        {
+          "name": "ErrorDetails",
+          "type": "String"
+        },
+        {
+          "name": "DestinationInfo",
+          "type": "Dynamic"
+        }
+      ],
+
+      "transformFilePath": "Kql/ThreatIntelExportOperationTransform.kql",
+
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The timestamp of when the log entry was generated (UTC)."
+        },
+        {
+          "name": "TimeExported",
+          "type": "DateTime",
+          "description": "The time of export to destination (UTC)."
+        },
+        {
+          "name": "Id",
+          "type": "String",
+          "description": "A Sentinel internal unique identifier that identifies a STIX object and can be used with Sentinel APIs."
+        },
+        {
+          "name": "StixId",
+          "type": "String",
+          "description": "A globally unique identifier that identifies a STIX object."
+        },
+        {
+          "name": "ExternallyExportedId",
+            "type": "String",
+            "description": "The unique identifier of the exported object."
+        },
+        {
+          "name": "SourceSystem",
+          "type": "String",
+          "description": "The name of the STIX object source."
+        },
+        {
+          "name": "ExportedBy",
+          "type": "String",
+          "description": "The user who initiated the export operation (email address)."
+        },
+        {
+          "name": "ExportDuration",
+          "type": "Int",
+          "description": "The total time, in milliseconds, taken to complete the export operation."
+        },
+        {
+          "name": "ExportId",
+          "type": "Guid",
+          "description": "A value that uniquely identifies the Export operation."
+        },
+        {
+          "name": "ExportType",
+          "type": "String",
+          "description": "Represents the export destination type. e.g. TAXII"
+        },
+        {
+          "name": "Status",
+          "type": "String",
+          "description": "Status of the export operation, possible values: 'Success', 'Failure', 'Timeout'."
+        },
+        {
+          "name": "ErrorDetails",
+          "type": "String",
+          "description": "Additional information when Status is 'Failure' / 'Timeout'."
+        },
+        {
+          "name": "DestinationInfo",
+          "type": "Dynamic",
+          "description": "Additional information about the export destination depending on ExportType."
+        }
+      ],
+
+      "sampleInputRecordsFilePath": "SampleInputRecords/ThreatIntelExportOperationSample.json",
+
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/ThreatIntelExportOperationSample.json"
+    }
+  ],
+
+  "functions": [],
+
+  "queries": []
+}

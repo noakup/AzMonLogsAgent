@@ -1,0 +1,3 @@
+ACSSMSIncomingOperations
+| summarize Count = count() by OperationName, NumberType 
+| order by OperationName asc, NumberType asc, Count desc

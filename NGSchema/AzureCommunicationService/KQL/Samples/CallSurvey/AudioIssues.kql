@@ -1,0 +1,7 @@
+ACSCallSurvey
+| where isempty(AudioIssues) == false
+//Comma separated issues when multiple issues are reported
+| project audio =  split(AudioIssues,',')
+| mv-expand audio to typeof(string)
+| summarize frequency=count() by audio
+| render columnchart

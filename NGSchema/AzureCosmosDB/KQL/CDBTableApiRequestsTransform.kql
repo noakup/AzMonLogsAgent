@@ -1,0 +1,22 @@
+source  
+| extend properties = parse_json(properties)
+| extend resourceIdArray = split(resourceId, "/") 
+| extend numElementsInResourceId = array_length(resourceIdArray)
+| extend accountNameExtracted = resourceIdArray[numElementsInResourceId - 1] 
+| project 
+	TimeGenerated = todatetime(['time']),    
+	AccountName = tostring(accountNameExtracted), 
+	OperationName = operationName, 
+	UserAgent = tostring(properties.userAgent), 
+	ActivityId = tostring(properties.activityId), 
+	ErrorCode = tostring(properties.errorCode), 
+	DurationMs = todouble(properties.durationInMs), 
+	RequestCharge = todouble(properties.requestCharge), 
+	TableName = tostring(properties.tableName), 
+	AuthorizationTokenType = tostring(properties.authorizationTokenType), 
+	Address = tostring(properties.address), 
+	ClientRequestId = tostring(properties.clientRequestId), 
+	PIICommandText = tostring(properties.piiCommandText), 
+	RegionName = tostring(properties.region), 
+	RequestLength = todouble(properties.requestLength), 
+	ResponseLength = todouble(properties.responseLength) 

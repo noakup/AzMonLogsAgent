@@ -1,0 +1,79 @@
+[
+    {
+        "TimeGenerated": "2023-10-18T07:51:05Z",
+        "Location": "eastus2euap",
+        "OperationName": "connectivityConfigurations/write",
+        "ResultType": "Success",
+        "CorrelationId": "bb80f89a-6078-4311-9937-219bacbf08bb",
+        "LogLevel": "Info",
+        "AppliedConnectivityConfigurations": [
+        
+        ],
+        "NetworkResourceIds": [
+        "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana-rg/providers/Microsoft.Network/virtualNetworks/vnet1"
+        ],
+        "Message": "Connectivity configuration change successful.",
+        "SelfDiagnosis":""
+      },
+      {
+        "TimeGenerated": "2023-10-18T07:04:07Z",
+        "Location": "eastus2euap",
+        "OperationName": "connectivityConfigurations/write",
+        "ResultType": "Success",
+        "CorrelationId": "89e807f5-1963-48a1-b8e3-898ff63ba077",
+        "LogLevel": "Info",
+        "AppliedConnectivityConfigurations": [
+        {
+            "ConfigurationId": "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana-rg/providers/Microsoft.Network/networkManagers/Sanjana_Slice3NM/connectivityConfigurations/MeshConfig",
+            "Topology": "Mesh"
+        }
+        ],
+        "NetworkResourceIds": [
+        "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana-rg/providers/Microsoft.Network/virtualNetworks/vnet1"
+        ],
+        "Message": "Connectivity configuration change successful.",
+        "SelfDiagnosis":""
+      },
+      {
+        "TimeGenerated": "2023-10-18T07:51:05Z",
+        "Location": "eastus2euap",
+        "OperationName": "connectivityConfigurations/write",
+        "ResultType": "Success",
+        "CorrelationId": "bb80f89a-6078-4311-9937-219bacbf08bb",
+        "LogLevel": "Info",
+        "AppliedConnectivityConfigurations": [
+        {
+            "ConfigurationId": "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana-rg/providers/Microsoft.Network/networkManagers/Sanjana_Slice3NM/connectivityConfigurations/HubSpokeConfig",
+            "Topology": "HubAndSpoke"
+        }
+        ],
+        "NetworkResourceIds": [
+        "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana-rg/providers/Microsoft.Network/virtualNetworks/vnet3"
+        ],
+        "Message": "Connectivity configuration change successful.",
+        "SelfDiagnosis":""
+      },
+      {
+        "TimeGenerated": "2023-10-18T08:20:00Z",
+        "Location": "eastus2euap",
+        "OperationName": "connectivityConfigurations/write",
+        "ResultType": "Success",
+        "CorrelationId": "c792d6e8-2d11-401d-a227-debabbc2fd83",
+        "LogLevel": "Info",
+        "AppliedConnectivityConfigurations": [
+        {
+            "ConfigurationId": "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana-rg/providers/Microsoft.Network/networkManagers/Sanjana_Slice3NM/connectivityConfigurations/HubSpokeConfig",
+            "Topology": "HubAndSpoke"
+        },
+        {
+            "ConfigurationId": "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana-rg/providers/Microsoft.Network/networkManagers/Sanjana_Slice3NM/connectivityConfigurations/MeshConfig",
+            "Topology": "Mesh"
+        }
+        ],
+        "NetworkResourceIds": [
+        "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana-rg/providers/Microsoft.Network/virtualNetworks/vnet3"
+        ],
+        "Message": "Connectivity configuration change successful.",
+        "SelfDiagnosis":""
+      }
+]

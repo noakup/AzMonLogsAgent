@@ -1,0 +1,18 @@
+[
+	{
+		"time": "2023-06-10T09:28:47.6448335Z",
+		"operationName": "MICROSOFT.AADIAM/SITES/WRITE",
+		"category": "EnrichedOffice365AuditLogs",
+		"properties": "{\"CreationTime\":\"2023-06-10T09:28:47.6448335Z\",\"OrganizationId\":\"cdc5aeea-15c5-4db6-b079-fcadd2505dc2\",\"UniqueTokenId\":\"qsShESgJ_kSxsRCduq8tAA\",\"Id\":\"39eb6b63-15c9-424d-d916-08db6673bbd8\",\"Operation\":\"TeamsAdminAction\",\"AdminActionDetail\":\"POST /Skype.TelephoneNumberMgmt/v2.1/tenants/18aaab5d-b2cf-47a7-aad6-22f0ba702cc7/searches/1520dc1a-e444-429d-bbe4-01fbd08dc44d\",\"ClientApplication\":\"\\u003Cunknown\\u003E\",\"UserClaims\":\"ApplicationAccess\",\"ExtraProperties\":[{\"Key\":\"CorrelationId\",\"\\u003CValue\\u003E\":\"d2ee927a-cb13-45c5-9486-b99281d6bd00\"}],\"\\u003CUserId\\u003E\":\"11e95dfd-523d-4be6-ab7e-94fadb398162\",\"\\u003CClientIP\\u003E\":\"13.69.183.36\",\"RecordType\":57,\"UserType\":0,\"UserKey\":\"0ebbe273-af55-47c6-b1fd-ac3cff383f54\",\"Workload\":\"MicrosoftTeams\",\"ResultStatus\":\"Succeeded\",\"AppAccessContext\":{\"UniqueTokenId\":\"qsShESgJ_kSxsRCduq8tAA\",\"IssuedAtTime\":\"2023-06-06T08:26:43\"},\"Version\":1}",
+		"location": "eastus",
+		"tenantId": "TENANT-ID"
+	},
+	{
+		"time": "2023-06-10T09:28:47.6448335Z",
+		"operationName": "MICROSOFT.AADIAM/SITES/WRITE",
+		"category": "EnrichedOffice365AuditLogs",
+		"properties": "{\"CreationTime\":\"2023-06-10T09:28:47.6448335Z\",\"OrganizationId\":\"135a0f48-eb72-4859-8509-0ef1a2791f1a\",\"UniqueTokenId\":\"JdUrywTJpkiTGyeC2GgJAA\",\"Id\":\"13874699-393c-45cd-2066-08db6674823c\",\"Operation\":\"FileUploaded\",\"NetworkAccess\":{\"DeviceId\":\"07970eea-ccfe-4486-956b-258278775ea7\",\"DeviceOs\":\"Windows 11 Pro\",\"DeviceOsVersion\":\"10.0.22000\",\"SourceIp\":\"20.3.201.134\"},\"SiteUrl\":\"https://contosonow2022.sharepoint.com/\",\"SourceRelativeUrl\":\"Shared Documents\",\"SourceFileName\":\"TestDoc0dfc6726-076c-40e2-a769-60622a8e2fda.docx\",\"SourceFileExtension\":\"docx\",\"Site\":\"ebd73e80-3488-4892-bb73-e21f8588d57d\",\"ItemType\":\"File\",\"EventSource\":\"SharePoint\",\"UserAgent\":\"ZTNA_SyntheticTraffic\",\"WebId\":\"369523f9-bd78-4a90-8672-fda370f9401d\",\"ListItemUniqueId\":\"9f7609f1-e827-41c3-8196-1a88e889ffe8\",\"CustomUniqueId\":false,\"ListId\":\"c973cfc7-ab3e-4a98-94bc-7f304f481843\",\"CorrelationId\":\"1225baa0-a074-3000-9a3c-90cde0e0b3fd\",\"ApplicationId\":\"c33a109a-4663-47df-b377-5f4c8b50c73b\",\"DoNotDistributeEvent\":false,\"CTypeId\":\"00000000-0000-0000-0000-000000000000\",\"SGId\":\"00000000-0000-0000-0000-000000000000\",\"ObjectId\":\"https://contosonow2022.sharepoint.com/Shared Documents/TestDoc0dfc6726-076c-40e2-a769-60622a8e2fda.docx\",\"UserId\":\"dstestinguser@contosonow.com\",\"ClientIp\":\"147.243.242.118\",\"RecordType\":6,\"UserType\":0,\"UserKey\":\"i:0h.f|membership|1003200296fad86a@live.com\",\"Workload\":\"SharePoint\",\"Version\":1,\"Scope\":0,\"Purpose\":0}",
+		"location": "eastus",
+		"tenantId": "TENANT-ID"
+	}
+]

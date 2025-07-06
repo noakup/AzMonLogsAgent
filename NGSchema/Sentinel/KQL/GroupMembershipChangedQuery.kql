@@ -1,0 +1,9 @@
+let group = '<insert your group>';
+IdentityDirectoryEvents
+| where ActionType == 'Group Membership changed'
+| extend AddedToGroup = AdditionalFields['TO.GROUP']
+| extend RemovedFromGroup = AdditionalFields['FROM.GROUP']
+| extend TargetAccount = AdditionalFields['TARGET_OBJECT.USER']
+| where AddedToGroup == group or RemovedFromGroup == group
+| project-reorder Timestamp, ActionType, AddedToGroup, RemovedFromGroup, TargetAccount
+| limit 100

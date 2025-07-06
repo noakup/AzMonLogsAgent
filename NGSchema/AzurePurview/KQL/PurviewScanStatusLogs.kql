@@ -1,0 +1,19 @@
+source
+| extend properties = parse_json(tostring(properties))
+| project
+    TimeGenerated = FluentdIngestTimestamp,
+    Category = category,
+    OperationName = operationName,
+    CorrelationId = iif((correlationId)=="empty_value", "", correlationId),
+    LogLevel = level,
+    DataSourceName = tostring(properties.dataSourceName),
+    DataSourceType = tostring(properties.dataSourceType),
+    ScanName = tostring(properties.scanName),
+    AssetsDiscovered = tolong(properties.assetsDiscovered),
+    AssetsClassified = tolong(properties.assetsClassified),
+    ScanQueueTimeInSeconds = tolong(properties.scanQueueTimeInSeconds),
+    ScanTotalRunTimeInSeconds = tolong(properties.scanTotalRunTimeInSeconds),
+    RunType = tostring(properties.runType),
+    ErrorDetails =  iif(tostring(properties.errorDetails)=="empty_value", "", tostring(properties.errorDetails)),
+    ScanResultId = tostring(properties.scanResultId),
+    ResultType = resultType

@@ -1,0 +1,7 @@
+ChaosStudioExperimentEventLogs
+| lookup kind=inner (
+    ChaosStudioExperimentEventLogs
+    | top 1 by TimeGenerated desc
+    | project CorrelationId
+) on CorrelationId
+| order by TimeGenerated asc

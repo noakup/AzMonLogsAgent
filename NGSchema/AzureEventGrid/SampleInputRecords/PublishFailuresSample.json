@@ -1,0 +1,9 @@
+[
+  {
+    "time": "2019-11-01T00:17:13.4389048Z",
+    "resourceId": "/SUBSCRIPTIONS/SAMPLE-SUBSCTIPTION-ID/RESOURCEGROUPS/SAMPLE-RESOURCEGROUP-NAME/PROVIDERS/MICROSOFT.EVENTGRID/TOPICS/SAMPLE-TOPIC-NAME ",
+    "category": "PublishFailures",
+    "operationName": "POST",
+    "message": "inputEventsCount=null, requestUri=https://microsoft-storage-storageaccounts.eastus-1.eventgrid.azure.net/eventGrid/api/events, publisherInfo=publisherName=MICROSOFT-STORAGE-STORAGEACCOUNTS.EASTUS-1.EVENTGRID.AZURE.NET, category=System, inputSchema=EventGridEvent, resourceProviderName=MICROSOFT.STORAGE, filteringPolicy:ArmLastThree, httpStatusCode=Unauthorized, errorType=Unauthorized, errorMessage=The certificate presented with the incoming request didn't have a valid subject according to its' Topic. PresentedCertificate.Subject=CN=xxxx. Allowed Subjects for this Publisher=CN=xxx,CN=xxx,CN=xxxx"
+  }
+]

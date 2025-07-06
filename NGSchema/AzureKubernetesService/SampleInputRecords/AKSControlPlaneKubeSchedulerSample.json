@@ -1,0 +1,26 @@
+[
+    {
+        "operationName": "Microsoft.ContainerService/managedClusters/diagnosticLogs/Read",
+        "category": "kube-scheduler",
+        "resourceId": "/SUBSCRIPTIONS/08CE8FA2-9E5E-4D66-AB08-C0C13F360144/RESOURCEGROUPS/MIKEKEESEY-TEST/PROVIDERS/MICROSOFT.CONTAINERSERVICE/MANAGEDCLUSTERS/MIKEKEESEY-TEST",
+        "properties": {
+            "log": "I0110 23:12:42.047964       1 server.go:214] \"Requested to terminate, exiting\"\n",
+            "stream": "stderr",
+            "pod": "kube-scheduler-v2-7546f74884-rsf2d",
+            "containerID": "cdc37ba10d52cb397e579981e5f1007ceff04ff73dcb8746cc0efc3809845309"
+        },
+        "time": "2023-01-10T23:12:42.0000000Z"
+    },
+    {
+        "operationName": "Microsoft.ContainerService/managedClusters/diagnosticLogs/Read",
+        "category": "kube-scheduler",
+        "resourceId": "/SUBSCRIPTIONS/08CE8FA2-9E5E-4D66-AB08-C0C13F360144/RESOURCEGROUPS/MIKEKEESEY-TEST/PROVIDERS/MICROSOFT.CONTAINERSERVICE/MANAGEDCLUSTERS/MIKEKEESEY-TEST",
+        "properties": {
+            "log": "I0110 23:12:42.059594       1 secure_serving.go:255] Stopped listening on 172.31.76.42:10259\n",
+            "stream": "stderr",
+            "pod": "kube-scheduler-v2-7546f74884-46jnm",
+            "containerID": "3f930d79f5e9aacc9a6221ccca21dbf65d428e868b264d3187dcf1826af0ef27"
+        },
+        "time": "2023-01-10T23:12:42.0000000Z"
+    }
+]

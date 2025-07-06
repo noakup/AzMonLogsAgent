@@ -1,0 +1,13 @@
+[
+    {
+    "time": "2023-02-23T05:09:08.7639880Z",
+    "location": "global",
+    "resourceId": "/SUBSCRIPTIONS/3DE261DF-F2D8-4C00-A0EE-A0BE30F1E48E/RESOURCEGROUPS/DELVISSANTOSRG/PROVIDERS/MICROSOFT.DEVCENTER/DEVCENTERS/DELVISCEUAPDC",
+    "category": "ResourceOperation",
+    "operationName": "CreateDeviceImage",
+    "resultDescription": "Setting image validation status to Succeeded.",
+    "correlationId": "",
+    "properties": "{\"DevCenterId\":\"/subscriptions/dbf77359-2037-45ca-aa27-a3df4fae9251/resourceGroups/DataplaneTestFixtureResourceGroup-0z2ad-0524234518/providers/Microsoft.DevCenter/devcenters/IntTest-1zb4j-0524234518\",\"SubResourceId\":\"/subscriptions/dbf77359-2037-45ca-aa27-a3df4fae9251/resourceGroups/DataplaneTestFixtureResourceGroup-0z2ad-0524234518/providers/Microsoft.DevCenter/devcenters/IntTest-1zb4j-0524234518/devboxdefinitions/IntTest-4zemd-0524234518\"}",
+    "MdsdMachineName": "mdsd-hpqzr"
+    }
+]

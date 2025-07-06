@@ -1,0 +1,10 @@
+source
+| project 
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    Location = location,
+    Level = tostring(properties.Level),
+    SessionPoolName = tostring(properties.SessionPoolName),
+    NodeName = tostring(properties.NodeName),
+    PodName = tostring(properties.PodName),
+    Log = tostring(properties.Log)

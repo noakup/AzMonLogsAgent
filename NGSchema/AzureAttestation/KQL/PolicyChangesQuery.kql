@@ -1,0 +1,19 @@
+// To create an alert for this query, click '+ New alert rule'
+let policyOperations = pack_array(
+    "AddPolicyCertificate",
+    "AddPolicyManagementCertificate",
+    "AddPolicyManagementCertificates",
+    "RemovePolicyCertificate",
+    "RemovePolicyManagementCertificate",
+    "RemovePolicyManagementCertificates",
+    "ResetAttestationPolicy",
+    "SetCurrentPolicy",
+    "SetCurrentPolicyWithHttpMessagesAsync",
+    "SetEffectiveAttestationPolicy",
+    "DeleteCurrentPolicy",
+    "DeletePolicy"
+);
+AzureAttestationDiagnostics
+| where toint(ResultSignature) == 200
+| where policyOperations contains OperationName
+| take 100

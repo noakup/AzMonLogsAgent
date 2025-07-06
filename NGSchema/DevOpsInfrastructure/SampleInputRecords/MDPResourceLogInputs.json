@@ -1,0 +1,126 @@
+[
+    {
+        "time": "2024-07-17T06:19:16.8061868Z",
+        "resourceId": "/SUBSCRIPTIONS/21AF6CF1-77AD-42CD-AD19-E193DE033071/RESOURCEGROUPS/GAKAMA-POOLS/PROVIDERS/MICROSOFT.DEVOPSINFRASTRUCTURE/POOLS/GAKAMA-MDO-PROD",
+        "location": "eastus2",
+        "operationName": "Provision",
+        "category": "ProvisioningLogs",
+        "properties": {
+            "RequestId": "5b6a3408-87cf-4a0a-81fe-671c4e01002d",
+            "AgentName": "5b6a3408c",
+            "Image": "/canonical/0001-com-ubuntu-server-focal/20_04-lts-gen2/20.04.202407150",
+            "Sku": "Standard_D2ads_v5",
+            "Status": "Completed"
+        }
+    },
+    {
+        "time": "2024-07-17T06:21:15.1118034Z",
+        "resourceId": "/SUBSCRIPTIONS/21AF6CF1-77AD-42CD-AD19-E193DE033071/RESOURCEGROUPS/GAKAMA-POOLS/PROVIDERS/MICROSOFT.DEVOPSINFRASTRUCTURE/POOLS/GAKAMA-MDO-PROD",
+        "location": "eastus2",
+        "operationName": "Reimage",
+        "category": "ProvisioningLogs",
+        "properties": {
+            "Status": "Completed"
+        }
+    },
+    {
+        "time": "2024-07-17T06:26:47.5771358Z",
+        "resourceId": "/SUBSCRIPTIONS/21AF6CF1-77AD-42CD-AD19-E193DE033071/RESOURCEGROUPS/GAKAMA-POOLS/PROVIDERS/MICROSOFT.DEVOPSINFRASTRUCTURE/POOLS/GAKAMA-MDO-PROD",
+        "location": "eastus2",
+        "operationName": "Reimage",
+        "category": "ProvisioningLogs",
+        "properties": {
+            "Status": "Completed"
+        }
+    },
+    {
+        "time": "2024-07-17T06:30:15.1557129Z",
+        "resourceId": "/SUBSCRIPTIONS/21AF6CF1-77AD-42CD-AD19-E193DE033071/RESOURCEGROUPS/GAKAMA-POOLS/PROVIDERS/MICROSOFT.DEVOPSINFRASTRUCTURE/POOLS/GAKAMA-MDO-PROD",
+        "location": "eastus2",
+        "operationName": "Reimage",
+        "category": "ProvisioningLogs",
+        "properties": {
+            "Status": "Completed"
+        }
+    },
+    {
+        "time": "2024-07-17T06:34:44.8799376Z",
+        "resourceId": "/SUBSCRIPTIONS/21AF6CF1-77AD-42CD-AD19-E193DE033071/RESOURCEGROUPS/GAKAMA-POOLS/PROVIDERS/MICROSOFT.DEVOPSINFRASTRUCTURE/POOLS/GAKAMA-MDO-PROD",
+        "location": "eastus2",
+        "operationName": "Reimage",
+        "category": "ProvisioningLogs",
+        "properties": {
+            "Status": "Completed"
+        }
+    },
+    {
+        "time": "2024-07-17T06:40:15.1501657Z",
+        "resourceId": "/SUBSCRIPTIONS/21AF6CF1-77AD-42CD-AD19-E193DE033071/RESOURCEGROUPS/GAKAMA-POOLS/PROVIDERS/MICROSOFT.DEVOPSINFRASTRUCTURE/POOLS/GAKAMA-MDO-PROD",
+        "location": "eastus2",
+        "operationName": "Reimage",
+        "category": "ProvisioningLogs",
+        "properties": {
+            "Status": "Completed"
+        }
+    },
+    {
+        "time": "2024-07-17T06:43:44.9916391Z",
+        "resourceId": "/SUBSCRIPTIONS/21AF6CF1-77AD-42CD-AD19-E193DE033071/RESOURCEGROUPS/GAKAMA-POOLS/PROVIDERS/MICROSOFT.DEVOPSINFRASTRUCTURE/POOLS/GAKAMA-MDO-PROD",
+        "location": "eastus2",
+        "operationName": "Reimage",
+        "category": "ProvisioningLogs",
+        "properties": {
+            "Status": "Completed"
+        }
+    },
+    {
+        "time": "2024-07-17T06:48:14.9970015Z",
+        "resourceId": "/SUBSCRIPTIONS/21AF6CF1-77AD-42CD-AD19-E193DE033071/RESOURCEGROUPS/GAKAMA-POOLS/PROVIDERS/MICROSOFT.DEVOPSINFRASTRUCTURE/POOLS/GAKAMA-MDO-PROD",
+        "location": "eastus2",
+        "operationName": "Reimage",
+        "category": "ProvisioningLogs",
+        "properties": {
+            "Status": "Completed"
+        }
+    },
+    {
+        "time": "2024-07-17T06:53:45.3875141Z",
+        "resourceId": "/SUBSCRIPTIONS/21AF6CF1-77AD-42CD-AD19-E193DE033071/RESOURCEGROUPS/GAKAMA-POOLS/PROVIDERS/MICROSOFT.DEVOPSINFRASTRUCTURE/POOLS/GAKAMA-MDO-PROD",
+        "location": "eastus2",
+        "operationName": "Reimage",
+        "category": "ProvisioningLogs",
+        "properties": {
+            "Status": "Completed"
+        }
+    },
+    {
+        "time": "2024-07-17T06:57:15.3537719Z",
+        "resourceId": "/SUBSCRIPTIONS/21AF6CF1-77AD-42CD-AD19-E193DE033071/RESOURCEGROUPS/GAKAMA-POOLS/PROVIDERS/MICROSOFT.DEVOPSINFRASTRUCTURE/POOLS/GAKAMA-MDO-PROD",
+        "location": "eastus2",
+        "operationName": "Reimage",
+        "category": "ProvisioningLogs",
+        "properties": {
+            "Status": "Completed"
+        }
+    },
+    {
+        "time": "2024-07-17T07:01:45.2424092Z",
+        "resourceId": "/SUBSCRIPTIONS/21AF6CF1-77AD-42CD-AD19-E193DE033071/RESOURCEGROUPS/GAKAMA-POOLS/PROVIDERS/MICROSOFT.DEVOPSINFRASTRUCTURE/POOLS/GAKAMA-MDO-PROD",
+        "location": "eastus2",
+        "operationName": "Reimage",
+        "category": "ProvisioningLogs",
+        "properties": {
+            "Status": "Completed"
+        }
+    },
+    {
+        "time": "2024-07-17T07:04:49.5049201Z",
+        "resourceId": "/SUBSCRIPTIONS/21AF6CF1-77AD-42CD-AD19-E193DE033071/RESOURCEGROUPS/GAKAMA-POOLS/PROVIDERS/MICROSOFT.DEVOPSINFRASTRUCTURE/POOLS/GAKAMA-MDO-PROD",
+        "location": "eastus2",
+        "category": "ProvisioningLogs",
+        "operationName": "Return",
+        "properties": {
+            "Status": "Completed"
+        }
+    }
+]

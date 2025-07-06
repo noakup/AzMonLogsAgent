@@ -1,0 +1,6 @@
+AADNonInteractiveUserSignInLogs
+| where TimeGenerated > ago(1d)
+| extend City = parse_json(LocationDetails).city
+| summarize CountPerCity = dcount(tostring(City)) by UserId
+| where CountPerCity > 1
+| order by CountPerCity desc

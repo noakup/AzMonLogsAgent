@@ -1,0 +1,37 @@
+source
+| project
+    TimeGenerated = todatetime(['time']),
+    OperationName = tostring(operationName),
+    ListenerName = tostring(listenerName),
+    RuleName = tostring(ruleName),
+    BackendPoolName = tostring(backendPoolName),
+    BackendSettingName = tostring(backendSettingName),
+    InstanceId = tostring(properties.instanceId),
+    ClientIp = tostring(properties.clientIP),
+    HttpMethod = tostring(properties.httpMethod),
+    RequestUri = tostring(properties.requestUri),
+    UserAgent = tostring(properties.userAgent),
+    HttpStatus = toint(properties.httpStatus),
+    HttpVersion = tostring(properties.httpVersion),
+    ReceivedBytes = toint(properties.receivedBytes),
+    SentBytes = toint(properties.sentBytes),
+    ClientResponseTime = todouble(properties.clientResponseTime),
+    TimeTaken = todouble(properties.timeTaken),
+    WafEvaluationTime = todouble(properties.WAFEvaluationTime),
+    WafMode = tostring(properties.WAFMode),
+    TransactionId = tostring(properties.transactionId),
+    SslEnabled = tostring(properties.sslEnabled),
+    SslCipher = tostring(properties.sslCipher),
+    SslProtocol = tostring(properties.sslProtocol),
+    ServerRouted = tostring(properties.serverRouted),
+    ServerStatus = toint(properties.serverStatus),
+    ErrorInfo = tostring(properties.error_info),
+    ServerResponseLatency = todouble(properties.serverResponseLatency),
+    Host = tostring(properties.host),
+    OriginalRequestUriWithArgs = tostring(properties.originalRequestUriWithArgs),
+    UpstreamSourcePort = toint(properties.upstreamSourcePort),
+    OriginalHost = tostring(properties.originalHost)
+
+
+
+    

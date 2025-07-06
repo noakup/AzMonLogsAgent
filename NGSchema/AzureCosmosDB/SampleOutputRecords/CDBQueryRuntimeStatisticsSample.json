@@ -1,0 +1,12 @@
+[
+	{
+		"TimeGenerated" : "2021-03-21T05:53:05.6379968Z",
+		"AccountName" : "ACCNT-METRICS-TEST",
+		"DatabaseName" : "AggregationsWithChangeFeedV2",
+		"CollectionName" : "Employee",
+		"PartitionKeyRangeId" : "3",
+		"QueryText" : "{\"query\":\"SELECT c.id, c._self, c._rid, c._ts, c[\\\"p1__12\\\"] AS p2__18\\nFROM c\",\"parameters\":[]}",
+		"ActivityId" : "79b428ce-218a-43b5-85a9-b1eb54ab5d39",
+		"CorrelatedActivityId" : "fb44c645-150d-4524-9db5-372fe64d0d91"
+	}
+]

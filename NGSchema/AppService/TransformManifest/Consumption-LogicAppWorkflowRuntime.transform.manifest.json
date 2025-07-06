@@ -1,0 +1,13 @@
+{
+    "name" : "ConsumptionLogicApp",
+    "description": "Logs generated during Logic Apps workflow runtime - consumption SKU.",
+    "transformVersion" : 1,
+    "dataTypeId": "MICROSOFTLOGIC_WORKFLOWRUNTIME",
+    "inputFilePath" : "Consumption-LogicAppWorkflowRuntime.json",
+    "transformState" : "Production",
+    "icmTeam": "LogicApps/Logic Apps Service",
+    "contactDL": "flowhot@microsoft.com",
+    "relatedTable" : "LogicAppWorkflowRuntime",
+    "kqlFilePath" : "KQL/WorkflowRuntime.kql",
+    "sampleInputRecordsFilePath" : "SampleInputRecords/WorkflowRuntime.json"
+  }

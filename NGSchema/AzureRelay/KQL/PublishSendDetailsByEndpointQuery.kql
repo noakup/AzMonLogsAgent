@@ -1,0 +1,7 @@
+//Endpoint needs to be replaced with client specific endpoint.
+AZMSHybridConnectionsEvents
+| extend NamespaceName = tostring(split(_ResourceId, "/")[8])
+| where OperationName == "Microsoft.Relay/HybridConnections/SenderSentHttpRequest"
+| where Endpoint contains "shamavijay-relay-hybconn"
+| project NamespaceName, TaskName, Message, OperationName
+| summarize by NamespaceName, TaskName

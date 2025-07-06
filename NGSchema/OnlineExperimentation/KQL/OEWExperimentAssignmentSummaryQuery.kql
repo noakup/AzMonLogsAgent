@@ -1,0 +1,10 @@
+// Variant assignment counts by features
+OEWExperimentAssignmentSummary
+| summarize
+    IsControlVariant = take_any(IsControlVariant),
+    AllocationPercentage = take_any(AllocationPercentage),
+    AssignmentEventCount = sum(AssignmentEventCount),
+    FirstAssignmentTimestamp = min(FirstAssignmentTimestamp),
+    LastAssignmentTimestamp = max(LastAssignmentTimestamp)
+    by FeatureName, AllocationId, Variant
+| order by FeatureName asc, LatestAssignment desc, Variant asc

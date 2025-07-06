@@ -1,0 +1,43 @@
+[{
+	"ApplicationId": "application_1597185387740_0006",
+	"JobId": "184",
+	"SubmissionTime": "",
+	"CompletionTime": "2020-08-13T23:04:47.656+0000",
+	"JobResult": "JobSucceeded",
+	"StageIds": "",
+	"Tenant": "c8ca59f6892e4c05a10a33dd2d9a7029",
+	"Role": "headnode",
+	"RoleInstance": "hn1-becohe.tqfujmd4n24ujewmpfdiatlc5c.cbnx.internal.cloudapp.net",
+	"Region": "East US 2 Euap",
+	"UserSubscriptionId": "c36fd9e7-e5b1-4d3e-bb85-2e538040258b",
+	"ClusterDnsName": "becohen-spark-canary",
+	"IpAddress": "10.0.0.18"
+}, {
+	"ApplicationId": "application_1597185387740_0006",
+	"JobId": "185",
+	"SubmissionTime": "2020-08-13T23:04:47.660+0000",
+	"CompletionTime": "",
+	"JobResult": "",
+	"StageIds": "242, 243",
+	"Tenant": "c8ca59f6892e4c05a10a33dd2d9a7029",
+	"Role": "headnode",
+	"Host": "hn1-becohe.tqfujmd4n24ujewmpfdiatlc5c.cbnx.internal.cloudapp.net",
+	"Region": "East US 2 Euap",
+	"UserSubscriptionId": "c36fd9e7-e5b1-4d3e-bb85-2e538040258b",
+	"ClusterDnsName": "becohen-spark-canary",
+	"IpAddress": "10.0.0.18"
+}, {
+	"ApplicationId": "application_1597185387740_0006",
+	"JobId": "185",
+	"SubmissionTime": "",
+	"CompletionTime": "2020-08-13T23:04:47.776+0000",
+	"JobResult": "JobSucceeded",
+	"StageIds": "",
+	"Tenant": "c8ca59f6892e4c05a10a33dd2d9a7029",
+	"Role": "headnode",
+	"RoleInstance": "hn1-becohe.tqfujmd4n24ujewmpfdiatlc5c.cbnx.internal.cloudapp.net",
+	"Region": "East US 2 Euap",
+	"UserSubscriptionId": "c36fd9e7-e5b1-4d3e-bb85-2e538040258b",
+	"ClusterDnsName": "becohen-spark-canary",
+	"IpAddress": "10.0.0.18"
+}]

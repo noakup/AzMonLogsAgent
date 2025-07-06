@@ -1,0 +1,30 @@
+source
+| extend properties = parse_json(properties)
+| project
+    AADTenantId = tostring(split(resourceId, '/', 2)[0]),
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    OperationVersion = operationVersion,
+    Category = category,
+    ResultType = resultType,
+    ResultSignature = resultSignature,
+    ResultDescription = resultDescription,
+    DurationMs = tolong(durationMs),
+    CorrelationId = correlationId,
+    Action = tostring(properties.action),
+    ChangeId = tostring(properties.changeId),
+    CycleId = tostring(properties.cycleId),
+    Id = tostring(properties.id),
+    InitiatedBy = tostring(properties.initiatedBy),
+    JobId = tostring(properties.jobId),
+    ModifiedProperties = tostring(properties.modifiedProperties),
+    ProvisioningSteps = tostring(properties.provisioningSteps),
+    ServicePrincipal = tostring(properties.servicePrincipal),
+    SourceIdentity = tostring(properties.sourceIdentity),
+    SourceSystem = tostring(properties.sourceSystem),
+    StatusInfo = tostring(properties.statusInfo),
+    TargetIdentity = tostring(properties.targetIdentity),
+    TargetSystem = tostring(properties.targetSystem),
+    ProvisioningStatusInfo = tostring(properties.provisioningStatusInfo),
+    ProvisioningAction = tostring(properties.provisioningAction)
+    

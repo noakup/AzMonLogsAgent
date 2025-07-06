@@ -1,0 +1,12 @@
+source  
+| extend properties = parse_json(properties)
+| project 
+	TimeGenerated = todatetime(['time']),    
+	Fqdn = tostring(properties.Fqdn), 
+	ServerIp = tostring(properties.ServerIp), 
+	ServerPort = toint(properties.ServerPort), 
+	Policy = tostring(properties.Policy),
+	RuleCollectionGroup = tostring(properties.RuleCollectionGroup), 
+	RuleCollection = tostring(properties.RuleCollection), 
+	Rule = tostring(properties.Rule), 
+	Error = tostring(properties.Error)

@@ -1,0 +1,13 @@
+source
+| project 
+    TimeGenerated = todatetime(["time"]),
+    EventName = name,
+    ExperimentWorkspaceId = tostring(ExperimentWorkspaceId),
+    ExperimentationGroup = ExperimentationGroup,
+    ExperimentId = tostring(ExperimentId),
+    ExperimentStepId = tostring(ExperimentStepId),
+    AnalysisId = AnalysisId,
+    ScorecardId = ScorecardId,
+    FeatureId = tostring(FeatureId),
+    AnalysisType = AnalysisType,
+    Properties = todynamic(Properties)

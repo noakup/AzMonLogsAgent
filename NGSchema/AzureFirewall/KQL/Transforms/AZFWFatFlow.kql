@@ -1,0 +1,10 @@
+source
+| extend properties = parse_json(properties)
+| project
+    TimeGenerated = todatetime(['time']),
+    Protocol = tostring(properties.Protocol),
+    SourceIp = tostring(properties.SourceIp),
+    SourcePort = toint(properties.SourcePort),
+    DestinationIp = tostring(properties.DestinationIp),
+    DestinationPort = toint(properties.DestinationPort),
+    FlowRate = todouble(properties.FlowRate)

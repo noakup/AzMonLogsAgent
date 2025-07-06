@@ -1,0 +1,131 @@
+[
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "scuba@np-lab.co.il"
+      },
+      "requestMetadata": {
+        "callerIp": "::1",
+        "requestAttributes": {
+          "time": "2025-03-12T07:44:54.637785815Z",
+          "reason": "8uSywAYQGg5Db2xpc2V1bSBGbG93cw",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "ids.googleapis.com",
+      "methodName": "google.cloud.ids.v1.IDS.DeleteEndpoint",
+      "authorizationInfo": [
+        {
+          "resource": "projects/msccp-test/locations/us-east1-b/endpoints/endpointtest",
+          "permission": "ids.endpoints.delete",
+          "granted": true,
+          "resourceAttributes": {
+            "service": "ids.googleapis.com",
+            "name": "projects/msccp-test/locations/us-east1-b/endpoints/endpointtest"
+          },
+          "permissionType": "ADMIN_WRITE"
+        }
+      ],
+      "resourceName": "projects/msccp-test/locations/us-east1-b/endpoints/endpointtest",
+      "request": {
+        "name": "projects/msccp-test/locations/us-east1-b/endpoints/endpointtest",
+        "@type": "type.googleapis.com/google.cloud.ids.v1.DeleteEndpointRequest"
+      },
+      "response": {
+        "@type": "type.googleapis.com/google.longrunning.Operation"
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "us-east1-b"
+        ]
+      }
+    },
+    "insertId": "1ipi4uid7v8c",
+    "resource": {
+      "type": "audited_resource",
+      "labels": {
+        "service": "ids.googleapis.com",
+        "project_id": "msccp-test",
+        "method": "google.cloud.ids.v1.IDS.DeleteEndpoint"
+      }
+    },
+    "timestamp": "2025-03-12T07:44:54.665219873Z",
+    "severity": "NOTICE",
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Factivity",
+    "operation": {
+      "id": "projects/msccp-test/locations/us-east1-b/operations/operation-1741765494640-6302061970fd4-9676973c-9e7ef24e",
+      "producer": "ids.googleapis.com",
+      "first": true
+    },
+    "receiveTimestamp": "2025-03-12T07:44:54.992704181Z"
+  },
+  {
+    "insertId": "630ce1da7dfac3e04da7403f23382a0c-1@a1",
+    "jsonPayload": {
+      "destination_port": "22",
+      "session_id": "18614",
+      "category": "brute-force",
+      "application": "ssh",
+      "name": "SSH User Authentication Brute Force Attempt",
+      "source_port": "35346",
+      "alert_time": "2025-03-20T23:01:19Z",
+      "cves": [
+        "CVE-2024-6387"
+      ],
+      "direction": "client-to-server",
+      "type": "vulnerability",
+      "repeat_count": "1",
+      "threat_id": "40015",
+      "details": "This signature triggers when the child signature, ID 31914, SSH2 Login Attempt is triggered 20 times in 60 seconds. Customers can adjust the timing of brute force signatures if the parent signatures trigger too often. Refer to Palo Alto Networks documentation to learn more about brute force signatures and customizing the action and trigger conditions for a brute force signature.",
+      "alert_severity": "HIGH",
+      "source_ip_address": "217.154.9.120",
+      "uri_or_filename": "",
+      "ip_protocol": "tcp",
+      "network": "projects/msccp-test/global/networks/vpc-idscloud",
+      "destination_ip_address": "10.10.0.2"
+    },
+    "resource": {
+      "type": "ids.googleapis.com/Endpoint",
+      "labels": {
+        "location": "us-central1-a",
+        "id": "cloudidsendpoint",
+        "resource_container": "projects/135492226944"
+      }
+    },
+    "timestamp": "2025-03-20T23:01:19Z",
+    "logName": "projects/msccp-test/logs/ids.googleapis.com%2Fthreat",
+    "receiveTimestamp": "2025-03-20T23:01:21.613167595Z"
+  },
+  {
+    "insertId": "630e8c3bc7cf96447e200ccbcbad4248-1@a3",
+    "jsonPayload": {
+      "total_bytes": "412",
+      "session_id": "92245",
+      "ip_protocol": "tcp",
+      "destination_port": "80",
+      "total_packets": "6",
+      "destination_ip_address": "192.168.0.11",
+      "start_time": "2025-03-22T06:48:36Z",
+      "source_ip_address": "35.191.208.135",
+      "source_port": "51396",
+      "network": "projects/msccp-test/global/networks/vpc-idscloud",
+      "elapsed_time": "0",
+      "application": "incomplete",
+      "repeat_count": "1"
+    },
+    "resource": {
+      "type": "ids.googleapis.com/Endpoint",
+      "labels": {
+        "id": "cloudidsendpoint",
+        "location": "us-central1-a",
+        "resource_container": "projects/135492226944"
+      }
+    },
+    "timestamp": "2025-03-22T06:48:54Z",
+    "logName": "projects/msccp-test/logs/ids.googleapis.com%2Ftraffic",
+    "receiveTimestamp": "2025-03-22T06:48:57.743740465Z"
+  }
+]

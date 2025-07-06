@@ -1,0 +1,254 @@
+{
+	"type": "Microsoft.MachineLearningServices/registries",
+	"displayName": "Machine Learning",
+	"description": "All tables related to Registries.",
+	"tags": {},
+	"properties": {},
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "Project Vienna Services/AssetManagement",
+	"contactDL": "amlassetsdev@microsoft.com",
+	"relatedTables": ["AzureActivity"],
+	"relatedFunctions": [],
+	"tables": [
+		{
+			"name": "AmlRegistryReadEventsLog",
+			"description": "Azure ML Registry Read events log. It keeps records of Read operations with registries data access (data plane), including user identity, asset name and version for each access event.",
+			"categories": [ "audit", "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 1,
+			"dataTypeId": "MICROSOFTMACHINELEARNINGSERVICES_REGISTRYASSETREADEVENT",
+			"isResourceCentric": true,
+			"tableState": "Production",
+			"isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "CorrelationId",
+					"type": "String"
+				},
+				{
+					"name": "Identity",
+					"type": "String"
+				},
+				{
+					"name": "Level",
+					"type": "String"
+				},
+				{
+					"name": "ResultType",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "time",
+					"type": "DateTime"
+				}
+			],
+			"transformFilePath": "KQL/RegistryReadEventLogsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The correlation ID associated with log record."
+				},
+				{
+					"name": "RegistryResourceId",
+					"description": "ARM ResourceId of the registry that generated this log record.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UserName",
+					"description": "User name who initialized the event.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UserObjectId",
+					"description": "User AAD object ID who initialized the event.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "RegistryTenantId",
+					"description": "TenantId associated with log record.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "AssetName",
+					"description": "AzureML Asset name associated with log record.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "AssetVersion",
+					"description": "AzureML Asset version associated with log record.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Labels",
+					"description": "Labels associated with log record.",
+					"type": "String",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/RegistryReadEventLogSample.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/RegistryWriteEventLogSample.json"
+		},
+		{
+			"name": "AmlRegistryWriteEventsLog",
+			"description": "Azure ML Registry Write events log. It keeps records of Write operations with registries data access (data plane), including user identity, asset name and version for each access event.",
+			"categories": [ "audit", "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 1,
+			"dataTypeId": "MICROSOFTMACHINELEARNINGSERVICES_REGISTRYASSETWRITEEVENT",
+			"isResourceCentric": true,
+			"tableState": "Production",
+			"isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "CorrelationId",
+					"type": "String"
+				},
+				{
+					"name": "Identity",
+					"type": "String"
+				},
+				{
+					"name": "Level",
+					"type": "String"
+				},
+				{
+					"name": "ResultType",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "time",
+					"type": "DateTime"
+				}
+			],
+			"transformFilePath": "KQL/RegistryWriteEventLogsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The correlation ID associated with log record."
+				},
+				{
+					"name": "RegistryResourceId",
+					"description": "ARM ResourceId of the registry that generated this log record.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UserName",
+					"description": "User name who initialized the event.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UserObjectId",
+					"description": "User AAD object ID who initialized the event.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "RegistryTenantId",
+					"description": "TenantId associated with log record.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "AssetName",
+					"description": "AzureML Asset name associated with log record.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "AssetVersion",
+					"description": "AzureML Asset version associated with log record.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Labels",
+					"description": "Labels associated with log record.",
+					"type": "String",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/RegistryWriteEventLogSample.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/RegistryWriteEventLogSample.json"
+		}
+	],
+	"functions": [],
+	"queries": [
+		{
+			"id": "efb1f6c6-6498-4eba-9f42-71ca1b4ae3ee",
+			"displayName": "All WRITE events",
+			"description": "Retrieves a list of events of WRITE.",
+			"bodyFilePath": "KQL/RegistryWriteEventsQuery.kql",
+			"categories": [ "resources" ],
+			"relatedTables": [
+				"AmlRegistryWriteEventsLog"
+			],
+			"tags": {
+				"Topic": [ "Usage", "Audit" ]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		}
+	]
+}

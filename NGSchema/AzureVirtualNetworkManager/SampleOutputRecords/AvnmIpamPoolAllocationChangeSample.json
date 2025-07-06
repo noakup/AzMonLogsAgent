@@ -1,0 +1,30 @@
+[
+    {
+        "TimeGenerated": "2023-10-16T19:36:10.0000000Z",
+        "Location": "eastus",
+        "OperationName": "Microsoft.Network/networkManagers/ipamPools/Action",
+        "CorrelationId": "75367f91-8a11-40b6-beda-73d3fdb03ef4",
+        "LogLevel": "Informational",
+        "ResultType":"Success",
+        "ChangeType": "Add",
+        "ChangeReason": "ResourceAddedToPool",
+        "Message":"Vnet successfully added to pool",
+        "AllocationResources": [
+            {"ResourceId":"/subscriptions/c9295b92-3574-4021-95a1-26c8f74f8359/resourceGroups/ipam-test-rg/providers/Microsoft.Network/virtualNetworks/vnetA","ResourceCidrs":["10.0.0.0"],"CompliancyProperties":{"InScope":"Compliant","Overlapping":"Compliant"}}
+        ]
+    },
+    {
+        "TimeGenerated": "2023-10-16T19:37:51.0000000Z",
+        "Location": "eastus",
+        "OperationName": "MICROSOFT.NETWORK/NETWORKMANAGERS/IPAMPOOLS/Action",
+        "CorrelationId": "9646291d-c20b-4586-9c75-affffe3efafe",
+        "LogLevel": "Informational",
+        "ResultType":"Success",
+        "ChangeType": "Add",
+        "ChangeReason": "ResourceAddedToPool",
+        "Message":"Child pool successfully added to parent",
+        "AllocationResources": [
+            {"ResourceId": "/subscriptions/c9295b92-3574-4021-95a1-26c8f74f8359/resourceGroups/ipam-test-rg/providers/Microsoft.Network/networkManagers/test-ipam-nm/ipamPools/iancp10","ResourceCidrs": [ "10.0.0.72/29" ],"CompliancyProperties": {}}
+        ]
+    }
+]

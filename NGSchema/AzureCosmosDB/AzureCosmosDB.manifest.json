@@ -1,0 +1,2023 @@
+{
+	"type": "Microsoft.DocumentDb/databaseAccounts",
+	"displayName": "Azure Cosmos DB",
+	"description": "All tables related to Azure CosmosDB Service.",
+	"tags": {},
+	"properties": {},
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "Azure Cosmos DB/Monitoring",
+	"relatedTables": [
+		"AzureActivity"
+	],
+	"relatedFunctions": [],
+	"tables": [
+		{
+			"name": "CDBDataPlaneRequests",
+			"description": "The DataPlaneRequests table captures every data plane operation for the Cosmos DB account. Data Plane requests are operations executed to create, update, delete or retrieve data within the account.",
+			"categories": [
+				"resources",
+				"audit"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 5,
+			"dataTypeId": "MICROSOFTAZURECOSMOSDB_DATAPLANEREQUESTS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Validation",
+			"isLakeAllowed": true,
+      		"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "String"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/CDBDataPlaneRequestsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Timestamp (in UTC) when the data plane request was issued."
+				},
+				{
+					"name": "AccountName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB account."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The specific data plane operation executed against the account."
+				},
+				{
+					"name": "ConnectionMode",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The connection mode used by the client issuing the request – (Direct or Gateway mode)."
+				},
+				{
+					"name": "ActivityId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The unique identifier (GUID) for this data plane operation",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "UserAgent",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the user specified user agent suffix (as specified when initializing the Cosmos DB client) when running in Direct mode."
+				},
+				{
+					"name": "RequestResourceType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Cosmos DB resource type within the account against which the data plane request was executed, can be one of Database, Collection, Document, Attachment, User, Permission, StoredProcedure, Trigger, UserDefinedFunction, Offer."
+				},
+				{
+					"name": "RequestResourceId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the specific Cosmos DB resource within the account against which the data plane request was executed."
+				},
+				{
+					"name": "StatusCode",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The HTTP status code response for the data plane request, highlighting details of the success/failure of the request."
+				},
+				{
+					"name": "ClientIpAddress",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The IP address of the client VM issuing the request.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "RequestCharge",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The RUs (Request Units) consumed by this operation."
+				},
+				{
+					"name": "DurationMs",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The server-side execution time (in milliseconds) for this request."
+				},
+				{
+					"name": "RequestLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The payload size (in bytes) for the request."
+				},
+				{
+					"name": "ResponseLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The payload size (in bytes) of the server response."
+				},
+				{
+					"name": "RegionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Azure region to which this request was issued."
+				},
+				{
+					"name": "PartitionId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The physical partition ID for the Cosmos DB container against which the request was issued."
+				},
+				{
+					"name": "AadAppliedRoleAssignmentId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the applied role assignment for the caller issuing the data plane request."
+				},
+				{
+					"name": "AadPrincipalId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The AAD Principal ID of the caller issuing the data plane request."
+				},
+				{
+					"name": "DatabaseName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Cosmos DB database against which the request was issued."
+				},
+				{
+					"name": "CollectionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Cosmos DB container against which the request was issued."
+				},
+				{
+					"name": "ResourceTokenPermissionId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the resource token associated with the resource accessed by this request."
+				},
+				{
+					"name": "ResourceTokenPermissionMode",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The permission mode of the resource token associated with the resource accessed by this request."
+				},
+				{
+					"name": "ResourceTokenUserRid",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The user ID associated with the resource token for the resource accessed by this request."
+				},
+				{
+					"name": "KeyType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The authorization type (Primary/Secondary Read/Write key) for this request when running in Direct mode."
+				},
+				{
+					"name": "AuthTokenType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The authorization type (System Read/Write key) for this request by the Cosmos DB Gateway service when running in Gateway mode or using the REST API."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/CDBDataPlaneRequestsSample.json"
+		},
+		{
+			"name": "CDBDataPlaneRequests5M",
+			"description": "The CDBDataPlaneRequests5M table consolidates logs for data-plane requests every five minutes. These logs are aggregated based on the columns in the CDBDataPlaneRequests table. For detailed information about the log context, please refer to the CDBDataPlaneRequests table.",
+			"categories": [
+				"resources",
+				"audit"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 4,
+			"dataTypeId": "MICROSOFTAZURECOSMOSDB_DATAPLANEREQUESTS5M",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Validation",
+			"isLakeAllowed": true,
+      		"isTroubleshootingAllowed": true,
+			"isChangeColumnInternalNameAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "String"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/CDBDataPlaneRequests5MTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Timestamp (in UTC) of the 5 minute interval for the aggregation."
+				},
+				{
+					"name": "AccountName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB account."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The specific data plane operation executed against the account."
+				},
+				{
+					"name": "ConnectionMode",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The connection mode used by the client issuing the requests in the interval – (Direct or Gateway mode)."
+				},
+				{
+					"name": "UserAgent",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the user specified user agent suffix (as specified when initializing the Cosmos DB client) when running in Direct mode."
+				},
+				{
+					"name": "RequestResourceType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Cosmos DB resource type within the account against which the data plane requests in the interval were executed, can be one of Database, Collection, Document, Attachment, User, Permission, StoredProcedure, Trigger, UserDefinedFunction, Offer."
+				},
+				{
+					"name": "RequestResourceId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the specific Cosmos DB resource within the account against which the data plane requests in the interval were executed."
+				},
+				{
+					"name": "StatusCode",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The HTTP status code response for the data plane request, highlighting details of the success/failure of the request."
+				},
+				{
+					"name": "ClientIpAddress",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The IP address of the client VM issuing the requests in the interval.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "TotalRequestCharge",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The total RUs (Request Units) consumed by all operations in this interval."
+				},
+				{
+					"name": "AvgRequestCharge",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The average RUs (Request Units) consumed by an operation in this interval."
+				},
+				{
+					"name": "MaxRequestCharge",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The maximum number of RUs (Request Units) consumed by an operation in this interval."
+				},
+				{
+					"name": "TotalDurationMs",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The sum of the server-side execution times (in milliseconds) for the requests in this interval."
+				},
+				{
+					"name": "AvgDurationMs",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The average server-side execution times (in milliseconds) for the requests in this interval."
+				},
+				{
+					"name": "MaxDurationMs",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The highest server-side execution time (in milliseconds) of a request in this interval."
+				},
+				{
+					"name": "TotalRequestLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The total payload size (in bytes) for the all requests in this interval."
+				},
+				{
+					"name": "AvgRequestLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The average payload size (in bytes) for the requests in this interval."
+				},
+				{
+					"name": "MaxRequestLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The highest payload size (in bytes) for a request in this interval."
+				},
+				{
+					"name": "TotalResponseLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The total payload size (in bytes) of the server response in this interval."
+				},
+				{
+					"name": "AvgResponseLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The average payload size (in bytes) of the server response in this interval."
+				},
+				{
+					"name": "MaxResponseLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The highest payload size (in bytes) of the server response in this aggregation."
+				},
+				{
+					"name": "RegionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Azure region to which the requests in this interval were issued."
+				},
+				{
+					"name": "PartitionId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The physical partition ID for the Cosmos DB container against which the requests in this interval were issued.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "AadAppliedRoleAssignmentId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the applied role assignment for the caller issuing the data plane requests in this interval."
+				},
+				{
+					"name": "AadPrincipalId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The AAD Principal ID of the caller issuing the data plane requests in this interval."
+				},
+				{
+					"name": "DatabaseName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Cosmos DB database against which the requests in this interval were issued."
+				},
+				{
+					"name": "CollectionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Cosmos DB container against which the requests in this interval were issued."
+				},
+				{
+					"name": "ResourceTokenPermissionId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the resource token associated with the resource accessed by the requests in this interval."
+				},
+				{
+					"name": "ResourceTokenPermissionMode",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The permission mode of the resource token associated with the resource accessed by this requests in this interval."
+				},
+				{
+					"name": "ResourceTokenUserRid",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The user ID associated with the resource token for the resource accessed by the requests in this interval."
+				},
+				{
+					"name": "KeyType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The authorization type (Primary/Secondary Read/Write key) for this request set when running in Direct mode."
+				},
+				{
+					"name": "AuthTokenType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The authorization type (System Read/Write key) for this request set by the Cosmos DB Gateway service when running in Gateway mode or using the REST API."
+				},
+				{
+					"transformName": "RequestCount",
+					"physicalName": "RequestCount_Internal",
+					"logicalName": "RequestCount",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The number of requests aggregated in this interval."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/CDBDataPlaneRequests5MSample.json"
+		},
+		{
+			"name": "CDBDataPlaneRequests15M",
+			"description": "The CDBDataPlaneRequests5M table consolidates logs for data-plane requests every fifteen minutes. These logs are aggregated based on the columns in the CDBDataPlaneRequests table. For detailed information about the log context, please refer to the CDBDataPlaneRequests table.",
+			"categories": [
+				"resources",
+				"audit"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 4,
+			"dataTypeId": "MICROSOFTAZURECOSMOSDB_DATAPLANEREQUESTS15M",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Validation",
+			"isLakeAllowed": true,
+      		"isTroubleshootingAllowed": true,
+			"isChangeColumnInternalNameAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "String"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/CDBDataPlaneRequests15MTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Timestamp (in UTC) of the 15 minute interval for the aggregation."
+				},
+				{
+					"name": "AccountName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB account."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The specific data plane operation executed against the account."
+				},
+				{
+					"name": "ConnectionMode",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The connection mode used by the client issuing the requests in the interval – (Direct or Gateway mode)."
+				},
+				{
+					"name": "UserAgent",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the user specified user agent suffix (as specified when initializing the Cosmos DB client) when running in Direct mode."
+				},
+				{
+					"name": "RequestResourceType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Cosmos DB resource type within the account against which the data plane requests in the interval were executed, can be one of Database, Collection, Document, Attachment, User, Permission, StoredProcedure, Trigger, UserDefinedFunction, Offer."
+				},
+				{
+					"name": "RequestResourceId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the specific Cosmos DB resource within the account against which the data plane requests in the interval were executed."
+				},
+				{
+					"name": "StatusCode",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The HTTP status code response for the data plane request set, highlighting details of the success/failure of the request set."
+				},
+				{
+					"name": "ClientIpAddress",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The IP address of the client VM issuing the requests in the interval.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "TotalRequestCharge",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The total RUs (Request Units) consumed by all operations in this interval."
+				},
+				{
+					"name": "AvgRequestCharge",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The average RUs (Request Units) consumed by an operation in this interval."
+				},
+				{
+					"name": "MaxRequestCharge",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The maximum number of RUs (Request Units) consumed by an operation in this interval."
+				},
+				{
+					"name": "TotalDurationMs",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The sum of the server-side execution times (in milliseconds) for the requests in this interval."
+				},
+				{
+					"name": "AvgDurationMs",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The average server-side execution times (in milliseconds) for the requests in this interval."
+				},
+				{
+					"name": "MaxDurationMs",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The highest server-side execution time (in milliseconds) of a request in this interval."
+				},
+				{
+					"name": "TotalRequestLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The total payload size (in bytes) for the all requests in this interval."
+				},
+				{
+					"name": "AvgRequestLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The average payload size (in bytes) for the requests in this interval."
+				},
+				{
+					"name": "MaxRequestLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The highest payload size (in bytes) for a request in this interval."
+				},
+				{
+					"name": "TotalResponseLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The total payload size (in bytes) of the server response in this interval."
+				},
+				{
+					"name": "AvgResponseLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The average payload size (in bytes) of the server response in this interval."
+				},
+				{
+					"name": "MaxResponseLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The highest payload size (in bytes) of the server response in this aggregation."
+				},
+				{
+					"name": "RegionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Azure region to which the requests in this interval were issued."
+				},
+				{
+					"name": "PartitionId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The physical partition ID for the Cosmos DB container against which the requests in this interval were issued.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "AadAppliedRoleAssignmentId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the applied role assignment for the caller issuing the data plane requests in this interval."
+				},
+				{
+					"name": "AadPrincipalId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The AAD Principal ID of the caller issuing the data plane requests in this interval."
+				},
+				{
+					"name": "DatabaseName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Cosmos DB database against which the requests in this interval were issued."
+				},
+				{
+					"name": "CollectionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Cosmos DB container against which the requests in this interval were issued."
+				},
+				{
+					"name": "ResourceTokenPermissionId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the resource token associated with the resource accessed by the requests in this interval."
+				},
+				{
+					"name": "ResourceTokenPermissionMode",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The permission mode of the resource token associated with the resource accessed by this requests in this interval."
+				},
+				{
+					"name": "ResourceTokenUserRid",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The user ID associated with the resource token for the resource accessed by the requests in this interval."
+				},
+				{
+					"name": "KeyType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The authorization type (Primary/Secondary Read/Write key) for this request set when running in Direct mode."
+				},
+				{
+					"name": "AuthTokenType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The authorization type (System Read/Write key) for this request set by the Cosmos DB Gateway service when running in Gateway mode or using the REST API."
+				},
+				{
+					"transformName": "RequestCount",
+					"physicalName": "RequestCount_Internal",
+					"logicalName": "RequestCount",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The number of requests aggregated in this interval."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/CDBDataPlaneRequests15MSample.json"
+		},
+		{
+			"name": "CDBPartitionKeyStatistics",
+			"description": "This table provides outlier logical partition keys that have consumed more storage space than others. Statistics are based on a sub-sampling of partition keys within the collection and hence these are approximate. Partition keys that are below 1GB of storage may not show up in the reported statistics.",
+			"categories": [
+				"resources",
+				"audit"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 5,
+			"dataTypeId": "MICROSOFTAZURECOSMOSDB_PARTITIONKEYSTATISTICS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Validation",
+			"isLakeAllowed": true,
+      		"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "String"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/CDBPartitionKeyStatisticsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Timestamp (in UTC) when statistics for this logical partition key were generated."
+				},
+				{
+					"name": "AccountName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB account containing the dataset for which partition key stats were generated."
+				},
+				{
+					"name": "RegionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Azure region from which statistics for this partition were retrieved."
+				},
+				{
+					"name": "PartitionKey",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The logical partition key for which storage statistics were retrieved."
+				},
+				{
+					"name": "SizeKb",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The storage size (in KB) for the logical partition key within the physical partition."
+				},
+				{
+					"name": "DatabaseName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB database, which contains the partition."
+				},
+				{
+					"name": "CollectionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB collection, which contains the partition."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/CDBPartitionKeyStatisticsSample.json"
+		},
+		{
+			"name": "CDBPartitionKeyRUConsumption",
+			"description": "This table details the RU (Request Unit) consumption for logical partition keys in each region, within each of their physical partitions. This data can be used to identify hot partitions from a request volume perspective.",
+			"categories": [
+				"resources",
+				"audit"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 6,
+			"dataTypeId": "MICROSOFTAZURECOSMOSDB_PARTITIONKEYRUCONSUMPTION",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Validation",
+			"isLakeAllowed": true,
+      		"isTroubleshootingAllowed": true,
+			"isChangeColumnInternalNameAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "String"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "activityId",
+					"type": "String"
+				},
+				{
+					"name": "category",   
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/CDBPartitionKeyRUConsumptionTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Timestamp (in UTC) when the request against the physical partition was issued."
+				},
+				{
+					"name": "AccountName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB account containing the physical partition."
+				},
+				{
+					"name": "ActivityId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The unique identifier (GUID) which can be correlated with the CDBDataPlaneRequests table for additional debugging.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "PartitionKey",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The logical partition key for which RU (Request Unit) consumption statistics were retrieved."
+				},
+				{
+					"name": "PartitionKeyRangeId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The physical partition containing the logical partition key against which the RU (Request Unit) consuming operation was issued."
+				},
+				{
+					"transformName": "OperationName",
+					"physicalName": "OperationType",
+					"logicalName": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The data plane operation that consumed RUs (Request Units) for this logical partition key."
+				},
+				{
+					"name": "RegionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Azure region from which statistics for this partition were retrieved."
+				},
+				{
+					"name": "DatabaseName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB database, which contains the partition."
+				},
+				{
+					"name": "CollectionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB collection, which contains the partition."
+				},
+				{
+					"name": "RequestCharge",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The RUs (Request Units) consumed by this request."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/CDBPartitionKeyRUConsumptionSample.json"
+		},
+		{
+			"name": "CDBQueryRuntimeStatistics",
+			"description": "This table details query operations executed against a SQL API account. By default, the query text and its parameters are obfuscated to avoid logging PII data with full text query logging available by request.",
+			"categories": [
+				"resources",
+				"audit"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 6,
+			"dataTypeId": "MICROSOFTAZURECOSMOSDB_QUERYRUNTIMESTATISTICS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Validation",
+			"isLakeAllowed": true,
+      		"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "String"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/CDBQueryRuntimeStatisticsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Timestamp (in UTC) when this query operation was executed."
+				},
+				{
+					"name": "AccountName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB account against which the query operation was issued."
+				},
+				{
+					"name": "DatabaseName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB database containing the Cosmos DB container against which this query was issued."
+				},
+				{
+					"name": "CollectionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB container against which this query was issued."
+				},
+				{
+					"name": "PartitionKeyRangeId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The physical partition to which this query was issued."
+				},
+				{
+					"name": "QueryText",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The query text (obfuscated by default, full query string provided upon request) for the operation."
+				},
+				{
+					"name": "ActivityId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The unique identifier (GUID) for each execution of this query, which can be correlating with the CDBDataPlaneRequests table for additional debugging.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "CorrelatedActivityId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The unique identifier (GUID) for this query operation, which can be used to link multiple executions of the same query.",
+					"dataTypeHint": "GUID"
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/CDBQueryRuntimeStatisticsSample.json"
+		},
+		{
+			"name": "CDBMongoRequests",
+			"description": "This table details data plane operations, specifically for Mongo API accounts.",
+			"categories": [
+				"resources",
+				"audit"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 5,
+			"dataTypeId": "MICROSOFTAZURECOSMOSDB_MONGOREQUESTS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Validation",
+			"isLakeAllowed": true,
+      		"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "String"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				}
+			],
+			"transformFilePath": "Kql/CDBMongoRequestsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Timestamp (in UTC) of the Mongo API data plane request."
+				},
+				{
+					"name": "AccountName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB account against which this Mongo API request was issued."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Mongo API operation that was executed "
+				},
+				{
+					"name": "UserAgent",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The user agent suffix associated with the client issuing the request."
+				},
+				{
+					"name": "OpCode",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation code for the Mongo API request."
+				},
+				{
+					"name": "ActivityId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The unique identifier (GUID) for this Mongo API request.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "ErrorCode",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The error code (if applicable) for this request."
+				},
+				{
+					"name": "DurationMs",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The server-side execution time (in ms) for this request."
+				},
+				{
+					"name": "RequestCharge",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The RU (Request Unit) consumption for this request."
+				},
+				{
+					"name": "DatabaseName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB database against which this request was issued."
+				},
+				{
+					"name": "CollectionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB container against which this request was issued."
+				},
+				{
+					"name": "AuthorizationTokenType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The authorization token used  for this request."
+				},
+				{
+					"name": "RetryCount",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The number of server side retries executed for this request."
+				},
+				{
+					"name": "Address",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The IP address of the client VM which issued the request.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "PIICommandText",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Full text query (if opted in) for this Mongo API request."
+				},
+				{
+					"name": "RateLimitingDelayMs",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The estimated time (in ms) spent retrying due to rate limited operations."
+				},
+				{
+					"name": "RetriedDueToRateLimiting",
+					"type": "Bool",
+					"isDefaultDisplay": true,
+					"description": "Boolean flag indicating if this request was retried server side due to throttles."
+				},
+				{
+					"name": "RegionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The region against which this request was issued."
+				},
+				{
+					"name": "RequestLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The payload size (in bytes) of the request."
+				},
+				{
+					"name": "ResponseLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The payload size (in bytes) of the server response."
+				},
+				{
+					"name": "UserId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The user ID associated with the client issuing the request."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/CDBMongoRequestsSample.json"
+		},
+		{
+			"name": "CDBCassandraRequests",
+			"description": "This table details data plane operations, specifically for Cassandra API accounts.",
+			"categories": [
+				"resources",
+				"audit"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 5,
+			"dataTypeId": "MICROSOFTAZURECOSMOSDB_CASSANDRAREQUESTS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Validation",
+			"isLakeAllowed": true,
+      		"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "String"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/CDBCassandraRequestsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Timestamp (in UTC) of the Cassandra API data plane request."
+				},
+				{
+					"name": "AccountName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB account against which this request was issued."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Cassandra API operation that was executed."
+				},
+				{
+					"name": "UserAgent",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The user agent suffix of the client issuing the request."
+				},
+				{
+					"name": "ActivityId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The unique identifier (GUID) for this Cassandra API request.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "ErrorCode",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The error code (if applicable) for this request."
+				},
+				{
+					"name": "DurationMs",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The server side execution time (in ms) for this request."
+				},
+				{
+					"name": "RequestCharge",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The RU (Request Unit) consumption for this request."
+				},
+				{
+					"name": "DatabaseName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB database against which this request was issued."
+				},
+				{
+					"name": "CollectionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB table/container against which this request was issued."
+				},
+				{
+					"name": "AuthorizationTokenType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The authorization token used for this request."
+				},
+				{
+					"name": "RetryCount",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The number of server side retries issued for this request."
+				},
+				{
+					"name": "Address",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The IP address of the client that issued this request.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "PIICommandText",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Full query text with parameters (if opted in) for this request."
+				},
+				{
+					"name": "RateLimitingDelayMs",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The estimated time (in ms) spent in retrying due to rate limited operations."
+				},
+				{
+					"name": "RetriedDueToRateLimiting",
+					"type": "Bool",
+					"isDefaultDisplay": true,
+					"description": "Boolean flag indicating if this request was retried server side due to throttles."
+				},
+				{
+					"name": "RegionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The region against which this request was issued."
+				},
+				{
+					"name": "RequestLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The payload size (in bytes) of the request."
+				},
+				{
+					"name": "ResponseLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The payload size (in bytes) of the server response."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/CDBCassandraRequestsSample.json"
+		},
+		{
+			"name": "CDBGremlinRequests",
+			"description": "This table details data plane operations, specifically for Graph API accounts.",
+			"categories": [
+				"resources",
+				"audit"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 5,
+			"dataTypeId": "MICROSOFTAZURECOSMOSDB_GREMLINREQUESTS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Validation",
+			"isLakeAllowed": true,
+      		"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "String"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/CDBGremlinRequestsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Timestamp (in UTC) when this Graph API operation was executed on the server."
+				},
+				{
+					"name": "AccountName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB account against which this request was issued."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Gremlin operation that was executed."
+				},
+				{
+					"name": "UserAgent",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The user agent suffix of the client issuing the request."
+				},
+				{
+					"name": "ErrorCode",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The error code (if applicable) for this request."
+				},
+				{
+					"name": "AuthorizationTokenType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The authorization token used  for this request."
+				},
+				{
+					"name": "RetryCount",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The number of server side retries issued for this request."
+				},
+				{
+					"name": "Address",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The IP address of the client, which issued this request.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "PIICommandText",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Full query with parameters (if opted in) for this request."
+				},
+				{
+					"name": "RateLimitingDelayMs",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The estimated time (in ms) spent retrying due to rate limited operations."
+				},
+				{
+					"name": "RetriedDueToRateLimiting",
+					"type": "Bool",
+					"isDefaultDisplay": true,
+					"description": "Boolean flag indicating if this request was retried server side due to throttles."
+				},
+				{
+					"name": "DatabaseName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB database against which this request was issued."
+				},
+				{
+					"name": "CollectionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB table/container against which this request was issued."
+				},
+				{
+					"name": "DurationMs",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The server-side execution time (in ms) for this request."
+				},
+				{
+					"name": "RequestCharge",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The RUs (Request Units) consumed by this operation."
+				},
+				{
+					"name": "RequestLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The payload size (in bytes) of the request."
+				},
+				{
+					"name": "ResponseLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The payload size (in bytes) of the server response."
+				},
+				{
+					"name": "RegionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The region against which this request was issued."
+				},
+				{
+					"name": "ActivityId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The unique identifier (GUID) for this Graph API request.",
+					"dataTypeHint": "GUID"
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/CDBGremlinRequestsSample.json"
+		},
+		{
+			"name": "CDBTableApiRequests",
+			"description": "This table details data plane operations, specifically for Table API accounts.",
+			"categories": [
+				"resources",
+				"audit"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"dataTypeId": "MICROSOFTAZURECOSMOSDB_TABLEAPIREQUESTS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Validation",
+			"isLakeAllowed": true,
+      		"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "String"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/CDBTableApiRequestsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Timestamp (in UTC) of the Table API data plane request."
+				},
+				{
+					"name": "AccountName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB account against which this request was issued."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Table API operation that was executed."
+				},
+				{
+					"name": "UserAgent",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The user agent suffix of the client issuing the request."
+				},
+				{
+					"name": "ActivityId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The unique identifier (GUID) for this Table API request.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "ErrorCode",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The error code (if applicable) for this request."
+				},
+				{
+					"name": "DurationMs",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The server side execution time (in ms) for this request."
+				},
+				{
+					"name": "RequestCharge",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The RU (Request Unit) consumption for this request."
+				},
+				{
+					"name": "TableName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB table against which this request was issued."
+				},
+				{
+					"name": "AuthorizationTokenType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The authorization token used for this request."
+				},
+				{
+					"name": "Address",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The IP address of the client that issued this request.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "ClientRequestId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The unique client request identifier (GUID) for this Table API request.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "PIICommandText",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Full query text with parameters (if opted in) for this request."
+				},
+				{
+					"name": "RegionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The region against which this request was issued."
+				},
+				{
+					"name": "RequestLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The payload size (in bytes) of the request."
+				},
+				{
+					"name": "ResponseLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The payload size (in bytes) of the server response."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/CDBTableApiRequestsSample.json"
+		},
+		{
+			"name": "CDBControlPlaneRequests",
+			"description": "This table details all control plane operations executed on the account, which include modifications to the regional failover policy, indexing policy, IAM role assignments, backup/restore policies, VNet and firewall rules, private links as well as updates and deletes of the account.",
+			"categories": [
+				"resources",
+				"audit"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 9,
+			"dataTypeId": "MICROSOFTAZURECOSMOSDB_CONTROLPLANEREQUESTS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Validation",
+      		"isTroubleshootingAllowed": true,
+			 "isLakeAllowed": true,
+			"isChangeColumnInternalNameAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "String"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "subscriptionId",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/CDBControlPlaneRequestsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Timestamp (in UTC) when this Control Plane operation was executed against the Cosmos DB account."
+				},
+				{
+					"name": "AccountName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB account."
+				},
+				{
+					"name": "ActivityId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Activity ID of the operation."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Control Plane Operation that was executed."
+				},
+				{
+					"name": "HttpStatusCode",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The HTTP status code of the control plane operation."
+				},
+				{
+					"name": "Result",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The result of the operation indicating either success or failure."
+				},
+				{
+					"name": "RegionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The region in which this control plan operation was executed."
+				},
+				{
+					"name": "HttpMethod",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The HTTP method issued for this control plane operation."
+				},
+				{
+					"name": "CurrentWriteRegion",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The current write region for this account (applies when a regional failover is triggered to choose a new write region)."
+				},
+				{
+					"name": "NewWriteRegion",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The new write region for the Cosmos DB account (after a user-initiated failover operation is executed)."
+				},
+				{
+					"name": "IpRangeFilter",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The IP range filter specified as part of the VNet rules for the Cosmos DB account."
+				},
+				{
+					"name": "EnableVirtualNetworkFilter",
+					"type": "Bool",
+					"isDefaultDisplay": true,
+					"description": "Boolean flag indicating if VNet filters were enabled for the account."
+				},
+				{
+					"name": "VirtualNetworkResourceEntries",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The list of IP addresses being included as part of the VNet rule for the account."
+				},
+				{
+					"name": "EnablePrivateEndpointConnection",
+					"type": "Bool",
+					"isDefaultDisplay": true,
+					"description": "Boolean flag to enable private endpoints for the Cosmos DB account."
+				},
+				{
+					"name": "PrivateEndpointConnections",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The list of private endpoints for the Cosmos DB account (in each region)."
+				},
+				{
+					"name": "PrivateEndpointArmUrl",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ARM URL of the private endpoint created for the account."
+				},
+				{
+					"name": "DefaultConsistencyLevel",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The default consistency level for the Cosmos DB account."
+				},
+				{
+					"name": "EnableAutomaticFailover",
+					"type": "Bool",
+					"isDefaultDisplay": true,
+					"description": "Boolean flag to enable automatic failover for the Cosmos DB account."
+				},
+				{
+					"name": "MaxStalenessIntervalInSeconds",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The maximum staleness value (in seconds) for the Cosmos DB account when using the Bounded Staleness consistency setting."
+				},
+				{
+					"name": "MaxStalenessPrefix",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The max staleness prefix for the Cosmos DB account when using the Bounded Staleness consistency setting."
+				},
+				{
+					"name": "MultipleWriteLocations",
+					"type": "Bool",
+					"isDefaultDisplay": true,
+					"description": "Boolean flag indicating if the Cosmos DB account is a multi-master account."
+				},
+				{
+					"name": "Cors",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Collection of account’s Cross Origin Resource Sharing Rules"
+				},
+				{
+					"transformName": "BackupIntervalInMinutes",
+					"physicalName": "BackupIntervalInMinutes_Internal",
+					"logicalName": "BackupIntervalInMinutes",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The time (in minutes) between consecutive backup snapshots for the Cosmos DB account. Valid range: 60 - 1440 minutes."
+				},
+				{
+					"transformName": "BackupRetentionIntervalInHours",
+					"physicalName": "BackupRetentionIntervalInHours_Internal",
+					"logicalName": "BackupRetentionIntervalInHours",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The duration of time (in hours) for which backup snapshots are retained for the Cosmos DB account. Valid range: 8 - 720 hours."
+				},
+				{
+					"name": "BackupStorageRedundancy",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The type of backup storage redundancy for the Cosmos DB account."
+				},
+				{
+					"name": "TargetBackupMode",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The backup mode after update. This can be either Continuous or Periodic."
+				},
+				{
+					"name": "TargetContinuousTier",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The continuous tier after updating. This can be either Continuous7Days or Continuous30Days."
+				},
+				{
+					"name": "VnetResourceGroupName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the resource group within which the VNet is created."
+				},
+				{
+					"name": "VirtualNetworkName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Vnet for the account."
+				},
+				{
+					"name": "VnetDatabaseAccountEntries",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The list of virtual networks specified for the account."
+				},
+				{
+					"name": "AcledSubnets",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ACL’d subnets for the account."
+				},
+				{
+					"name": "VnetLocation",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Azure region in which the VNet for the account is location."
+				},
+				{
+					"name": "VnetArmUrl",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ARM URL for the VNet for the account."
+				},
+				{
+					"name": "SqlQueryTextTraceType",
+					"type": "Bool",
+					"isDefaultDisplay": true,
+					"description": "Boolean flag indicating if full query text logging is enabled."
+				},
+				{
+					"name": "EnableDataPlaneRequestsTrace",
+					"type": "Bool",
+					"isDefaultDisplay": true,
+					"description": "Boolean flag indicating if diagnostic logs are enabled for all Data Plane Operations."
+				},
+				{
+					"name": "EnableControlPlaneRequestsTrace",
+					"type": "Bool",
+					"isDefaultDisplay": true,
+					"description": "Boolean flag indicting if diagnostic logs are enabled for Control Plane operations."
+				},
+				{
+					"name": "EnableMongoRequestsTrace",
+					"type": "Bool",
+					"isDefaultDisplay": true,
+					"description": "Boolean flag indicating if diagnostic logs are enabled for all Mongo API operations."
+				},
+				{
+					"name": "EnableCassandraRequestsTrace",
+					"type": "Bool",
+					"isDefaultDisplay": true,
+					"description": "Boolean flag indicating if diagnostic logs are enabled for all Cassandra API operations."
+				},
+				{
+					"name": "EnableGremlinRequestsTrace",
+					"type": "Bool",
+					"isDefaultDisplay": true,
+					"description": "Boolean flag indicating if diagnostic logs are enabled for Gremlin operations."
+				},
+				{
+					"name": "DurationMs",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The time taken (in milliseconds) for this control plane operation to complete."
+				},
+				{
+					"name": "RoleDefinitionId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Id of the IAM role created for the account."
+				},
+				{
+					"name": "RoleDefinitionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the IAM role created for the account."
+				},
+				{
+					"name": "RoleDefinitionType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The type of IAM role created for the account."
+				},
+				{
+					"name": "RoleDefinitionAssignableScopes",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The assignable scopes for the IAM role created for the account."
+				},
+				{
+					"name": "RoleDefinitionPermissions",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The permissions associated with the IAM role created for the account."
+				},
+				{
+					"name": "RoleAssignmentId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The role assignment Id for the IAM role created for the account."
+				},
+				{
+					"name": "AssociatedRoleDefinitionId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the IAM role definition for the IAM role created for the account."
+				},
+				{
+					"name": "RoleAssignmentPrincipalId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Principal ID associated with the IAM Role Assignment created for the account."
+				},
+				{
+					"name": "RoleAssignmentPrincipalType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Principal type of the IAM role assignment created for the account."
+				},
+				{
+					"name": "RoleAssignmentScope",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The scope of access for the IAM role created for the account."
+				},
+				{
+					"name": "ApiKind",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The API kind for the account (SQL, Graph, Mongo, Cassanda, Table) that is specified during account creation."
+				},
+				{
+					"name": "ApiKindResourceType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The resource against which this Control Plane operation was executed (e.g. Database, Container etc.)"
+				},
+				{
+					"name": "OperationType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The type of control plane operation, which was executed. Examples of operations included Add/Remove region, Indexing Policy updates, VNet and firewall rule creation, Backup Retention Policy changes etc."
+				},
+				{
+					"name": "ResourceUri",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The URI of the Cosmos DB resource (e.g. Database, Container) against which the control plane operation was execution.",
+					"dataTypeHint": "URI"
+				},
+				{
+					"name": "ResourceDetails",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The specific resource within the account against which the Control Plane Operation was executed. For e.g. the index for the container for which the indexing policy was created or updated."
+				},
+				{
+					"name": "IsServiceManagedFailover",
+					"type": "Bool",
+					"isDefaultDisplay": true,
+					"description": "Boolean flag to indicate if the failover event was initiated by the service or by the customer."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/CDBControlPlaneRequestsSample.json"
+		}
+	],
+	"functions": [],
+	"queries": []
+}

@@ -1,0 +1,3 @@
+SynapseLinkEvent
+| where OperationName == "TableFail"
+| limit 100

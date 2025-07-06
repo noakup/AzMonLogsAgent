@@ -1,0 +1,3 @@
+AHDSMedTechDiagnosticLogs
+| order by TimeGenerated desc
+| take 100

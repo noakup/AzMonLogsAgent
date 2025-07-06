@@ -1,0 +1,719 @@
+{
+	"contactDL": "asipolarbearseng@microsoft.com",
+	"type": "Microsoft.SecurityInsights/MicrosoftPurview",
+	"displayName": "Microsoft Purview",
+	"description": "Audit logs for Microsoft Purview solutions collected by Azure Sentinel.",
+	"tags": {},
+	"properties": {},
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "Microsoft Azure Sentinel/Data Collection and Processing",
+	"relatedTables": [],
+	"relatedFunctions": [],
+	"tables": [
+		{
+			"name": "MicrosoftPurviewInformationProtection",
+			"description": "Microsoft Purview Information Protection audit logs.",
+			"categories": [
+				"security",
+				"audit"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 7,
+			"dataTypeId": "MICROSOFTPURVIEWINFORMATIONPROTECTION_RESTAPI",
+			"intelligencePacks": [
+				"SecurityInsights"
+			],
+			"isResourceCentric": false,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+			"isChangeColumnInternalNameAllowed": true,
+			"input": [
+				{
+					"name": "Id",
+					"type": "String"
+				},
+				{
+					"name": "RecordType",
+					"type": "Int"
+				},
+				{
+					"name": "CreationTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "Operation",
+					"type": "String"
+				},
+				{
+					"name": "OrganizationId",
+					"type": "String"
+				},
+				{
+					"name": "UserType",
+					"type": "Int"
+				},
+				{
+					"name": "UserKey",
+					"type": "String"
+				},
+				{
+					"name": "Workload",
+					"type": "String"
+				},
+				{
+					"name": "ResultStatus",
+					"type": "String"
+				},
+				{
+					"name": "ObjectId",
+					"type": "String"
+				},
+				{
+					"name": "UserId",
+					"type": "String"
+				},
+				{
+					"name": "ClientIP",
+					"type": "String"
+				},
+				{
+					"name": "Scope",
+					"type": "Int"
+				},
+				{
+					"name": "AppAccessContext",
+					"type": "String"
+				},
+				{
+					"name": "Application",
+					"type": "String"
+				},
+				{
+					"name": "Platform",
+					"type": "String"
+				},
+				{
+					"name": "DeviceName",
+					"type": "String"
+				},
+				{
+					"name": "EmailInfo",
+					"type": "Dynamic"
+				},
+				{
+					"name": "TargetLocation",
+					"type": "Int"
+				},
+				{
+					"name": "IrmContentId",
+					"type": "String"
+				},
+				{
+					"name": "ProtectionEventType",
+					"type": "Int"
+				},
+				{
+					"name": "ContentType",
+					"type": "String"
+				},
+				{
+					"name": "SensitivityLabelEventData",
+					"type": "Dynamic"
+				},
+				{
+					"name": "SensitiveInfoTypeData",
+					"type": "Dynamic"
+				},
+				{
+					"name": "ProtectionEventData",
+					"type": "Dynamic"
+				},
+				{
+					"name": "Common",
+					"type": "Dynamic"
+				},
+				{
+					"name": "DataState",
+					"type": "String"
+				},
+				{
+					"name": "Sender",
+					"type": "String"
+				},
+				{
+					"name": "Receivers",
+					"type": "Dynamic"
+				},
+				{
+					"name": "ItemName",
+					"type": "String"
+				},
+				{
+					"name": "LabelId",
+					"type": "String"
+				},
+				{
+					"name": "LabelName",
+					"type": "String"
+				},
+				{
+					"name": "LabelAction",
+					"type": "String"
+				},
+				{
+					"name": "LabelAppliedDateTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "ApplicationMode",
+					"type": "String"
+				},
+				{
+					"name": "ExchangeMetaData",
+					"type": "Dynamic"
+				},
+				{
+					"name": "ConditionMatch",
+					"type": "Dynamic"
+				},
+				{
+					"name": "RuleActions",
+					"type": "Dynamic"
+				},
+				{
+					"name": "WorkLoadItemId",
+					"type": "String"
+				},
+				{
+					"name": "OverriddenActions",
+					"type": "Dynamic"
+				},
+				{
+					"name": "SensitiveInfoDetectionIsIncluded",
+					"type": "Bool"
+				},
+				{
+					"name": "IsViewableByExternalUsers",
+					"type": "Bool"
+				},
+				{
+					"name": "OverRideType",
+					"type": "String"
+				},
+				{
+					"name": "ItemCreationTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "ItemLastModifiedTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "ItemSize",
+					"type": "String"
+				},
+				{
+					"name": "OverRideReason",
+					"type": "String"
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String"
+				},
+				{
+					"name": "ScopedLocationId",
+					"type": "String"
+				},
+				{
+					"name": "MachineName",
+					"type": "String"
+				},
+				{
+					"name": "PolicyId",
+					"type": "String"
+				},
+				{
+					"name": "PolicyName",
+					"type": "String"
+				},
+				{
+					"name": "PolicyVersion",
+					"type": "String"
+				},
+				{
+					"name": "ExecutionRuleId",
+					"type": "String"
+				},
+				{
+					"name": "ExecutionRuleName",
+					"type": "String"
+				},
+				{
+					"name": "ExecutionRuleVersion",
+					"type": "String"
+				},
+				{
+					"name": "RuleMode",
+					"type": "String"
+				},
+				{
+					"name": "Severity",
+					"type": "String"
+				},
+				{
+					"name": "LabelVersion",
+					"type": "String"
+				},
+				{
+					"name": "MgtRuleId",
+					"type": "String"
+				},
+				{
+					"name": "SharePointMetaData",
+					"type": "Dynamic"
+				},
+				{
+					"name": "CurrentProtectionType",
+					"type": "Dynamic"
+				},
+				{
+					"name": "PreviousProtectionType",
+					"type": "Dynamic"
+				},
+				{
+					"name": "SensitivityLabelEventFailureData",
+					"type": "Dynamic"
+				},
+				{
+					"name": "AutoSensitivityLabelPolicyInfo",
+					"type": "Dynamic"
+				}
+			],
+			"transformFilePath": "KQL/MicrosoftPurviewInformationProtectionTransform.kql",
+			"columns": [
+				{
+					"name": "Id",
+					"type": "String",
+					"description": "Unique identifier of an audit record.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"transformName": "RecordType",
+					"physicalName": "RecordType_Int",
+					"logicalName": "RecordType",
+					"type": "Int",
+					"description": "The type of operation indicated by the record."
+				},
+				{
+					"name": "RecordTypeName",
+					"type": "String",
+					"description": "The record type name."
+				},
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"description": "The date and time when the user performed the activity."
+				},
+				{
+					"name": "Operation",
+					"type": "String",
+					"description": "The name of the user or admin activity."
+				},
+				{
+					"name": "OrganizationId",
+					"type": "String",
+					"description": "The GUID for your organization's Office 365 tenant. This value will always be the same for your organization, regardless of the Office 365 service in which it occurs.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "UserType",
+					"type": "String",
+					"description": "The type of user that performed the operation."
+				},
+				{
+					"name": "UserKey",
+					"type": "String",
+					"description": "An alternative ID for the user identified in the UserId property. This property is populated with the passport unique ID (PUID) for events performed by users in SharePoint, OneDrive for Business, and Exchange."
+				},
+				{
+					"name": "Workload",
+					"type": "String",
+					"description": "The Office 365 service where the activity occurred."
+				},
+				{
+					"name": "ResultStatus",
+					"type": "String",
+					"description": "Indicates whether the action (specified in the Operation property) was successful or not. Possible values are Succeeded, PartiallySucceeded, or Failed. For Exchange admin activity, the value is either True or False."
+				},
+				{
+					"name": "ObjectId",
+					"type": "String",
+					"description": "For SharePoint and OneDrive for Business activity, the full path name of the file or folder accessed by the user. For Exchange admin audit logging, the name of the object that was modified by the cmdlet.",
+					"dataTypeHint": "URI"
+				},
+				{
+					"name": "UserId",
+					"type": "String",
+					"description": "The UPN (User Principal Name) of the user who performed the action (specified in the Operation property) that resulted in the record being logged."
+				},
+				{
+					"name": "ClientIP",
+					"type": "String",
+					"description": "The IP address of the device that was used when the activity was logged. The IP address is displayed in either an IPv4 or IPv6 address format.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "Scope",
+					"type": "String",
+					"description": "Was this event created by a hosted O365 service or an on-premises server."
+				},
+				{
+					"name": "AppAccessContext",
+					"type": "Dynamic",
+					"description": "The application context for the user or service principal that performed the action."
+				},
+				{
+					"name": "Application",
+					"type": "String",
+					"description": "The application that where the activity happened."
+				},
+				{
+					"name": "Platform",
+					"type": "String",
+					"description": "The platform on which the activity happened."
+				},
+				{
+					"name": "DeviceName",
+					"type": "String",
+					"description": "The device on which the activity happened."
+				},
+				{
+					"name": "EmailInfo",
+					"type": "Dynamic",
+					"description": "The information required when the internalTarget is an email."
+				},
+				{
+					"name": "CurrentProtectionTypeName",
+					"type": "String",
+					"description": "The type of protection applied."
+				},
+				{
+					"name": "PreviousProtectionTypeName",
+					"type": "String",
+					"description": "Previous protection type."
+				},
+				{
+					"name": "ContentType",
+					"type": "String",
+					"description": "Content type."
+				},
+				{
+					"name": "TargetLocation",
+					"type": "String",
+					"description": "The location of the document with respect to the user' device."
+				},
+				{
+					"name": "IrmContentId",
+					"type": "String",
+					"description": "The unique ID used for identifying the encrypted document after the operation is complete.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "SensitivityLabelId",
+					"type": "String",
+					"description": "The identifier for the sensitivity label recommended, as per the policy that was matched based on the contents of the document.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "SensitivityLabelOwnerEmail",
+					"type": "String",
+					"description": "The email address of the owner of the sensitivity label."
+				},
+				{
+					"name": "OldSensitivityLabelId",
+					"type": "String",
+					"description": "The identifier of the sensitivity label previously applied to the document before the operation to change/remove the label was triggered.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "OldSensitivityLabelOwnerEmail",
+					"type": "String",
+					"description": "The email address of the owner of the old sensitivity label."
+				},
+				{
+					"name": "SensitivityLabelPolicyId",
+					"type": "String",
+					"description": "The identifier for the sensitivity labeling policy that was matched based on the content of the document.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "LabelEventType",
+					"type": "String",
+					"description": "The label operation."
+				},
+				{
+					"name": "ActionSource",
+					"type": "String",
+					"description": "The source of the label action."
+				},
+				{
+					"name": "ActionSourceDetail",
+					"type": "String",
+					"description": "More details about the source of the label action."
+				},
+				{
+					"name": "JustificationText",
+					"type": "String",
+					"description": "The justification to be provided, when configured by the admin in the sensitivity label policy, only when the sensitivity label is downgraded or removed by the user."
+				},
+				{
+					"name": "SensitiveInfoTypeData",
+					"type": "Dynamic",
+					"description": "Azure Information Protection - sensitive information types."
+				},
+				{
+					"name": "ProtectionEventData",
+					"type": "Dynamic",
+					"description": "Azure Information Protection - protection event data."
+				},
+				{
+					"name": "Common",
+					"type": "Dynamic",
+					"description": "Azure Information Protection - common event data."
+				},
+				{
+					"name": "DataState",
+					"type": "String",
+					"description": "Azure Information Protection - data state."
+				},
+				{
+					"name": "ProtectionEventTypeName",
+					"type": "String",
+					"description": "Protection event type name."
+				},
+				{
+					"name": "Sender",
+					"type": "String",
+					"description": "The email address of the sender."
+				},
+				{
+					"name": "Receivers",
+					"type": "Dynamic",
+					"description": "The email addresses of the receivers."
+				},
+				{
+					"name": "ItemName",
+					"type": "String",
+					"description": "The item name."
+				},
+				{
+					"name": "LabelName",
+					"type": "String",
+					"description": "The label name applied to the item."
+				},
+				{
+					"name": "LabelAction",
+					"type": "String",
+					"description": "The action applied by the label."
+				},
+				{
+					"name": "LabelAppliedDateTime",
+					"type": "DateTime",
+					"description": "The date and time the label was applied."
+				},
+				{
+					"name": "ApplicationMode",
+					"type": "String",
+					"description": "The label application mode, how the label was applied."
+				},
+				{
+					"name": "ExchangeMetaData",
+					"type": "Dynamic",
+					"description": "Exchange auto labeling metadata."
+				},
+				{
+					"name": "ConditionMatch",
+					"type": "Dynamic",
+					"description": "The condition match that triggered the auto labeling."
+				},
+				{
+					"name": "RuleActions",
+					"type": "Dynamic",
+					"description": "Actions defined by the rules."
+				},
+				{
+					"name": "WorkLoadItemId",
+					"type": "String",
+					"description": "The workload item id."
+				},
+				{
+					"name": "OverriddenActions",
+					"type": "Dynamic",
+					"description": "Actions that were overridden by the rule actions."
+				},
+				{
+					"name": "SensitiveInfoDetectionIsIncluded",
+					"type": "Bool",
+					"description": "Determines if sensitive info detection is included."
+				},
+				{
+					"name": "IsViewableByExternalUsers",
+					"type": "Bool",
+					"description": "Is viewable by external users."
+				},
+				{
+					"name": "OverRideType",
+					"type": "String",
+					"description": "Override type."
+				},
+				{
+					"name": "ItemCreationTime",
+					"type": "DateTime",
+					"description": "The date and time the item was created."
+				},
+				{
+					"name": "ItemLastModifiedTime",
+					"type": "DateTime",
+					"description": "The date and time the item was last modified."
+				},
+				{
+					"name": "ItemSize",
+					"type": "String",
+					"description": "The item size."
+				},
+				{
+					"name": "OverRideReason",
+					"type": "String",
+					"description": "The reason the sensitivity label was overridden."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"description": "Correlation ID."
+				},
+				{
+					"name": "ScopedLocationId",
+					"type": "String",
+					"description": "The address that triggered the policy match."
+				},
+				{
+					"name": "MachineName",
+					"type": "String",
+					"description": "The machine name."
+				},
+				{
+					"name": "PolicyId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"description": "Policy ID."
+				},
+				{
+					"name": "PolicyName",
+					"type": "String",
+					"description": "Policy name."
+				},
+				{
+					"name": "PolicyVersion",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"description": "Policy version."
+				},
+				{
+					"name": "ExecutionRuleId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"description": "The ID of the rule that was executed."
+				},
+				{
+					"name": "ExecutionRuleName",
+					"type": "String",
+					"description": "The name of the rule that was executed."
+				},
+				{
+					"name": "ExecutionRuleVersion",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"description": "The version of the rule that was executed."
+				},
+				{
+					"name": "RuleMode",
+					"type": "String",
+					"description": "The current mode of the rule."
+				},
+				{
+					"name": "Severity",
+					"type": "String",
+					"description": "The severity of the auto label policy match."
+				},
+				{
+					"name": "LabelVersion",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"description": "The label version applied by the auto labeling policy."
+				},
+				{
+					"name": "MgtRuleId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"description": "Management rule ID."
+				},
+				{
+					"name": "SharePointMetaData",
+					"type": "Dynamic",
+					"description": "SharePoint auto labeling metadata."
+				},
+				{
+					"name": "CurrentProtectionType",
+					"type": "Dynamic",
+					"description": "Current protection event information."
+				},
+				{
+					"name": "PreviousProtectionType",
+					"type": "Dynamic",
+					"description": "Previous protection event information."
+				},
+				{
+					"name": "SensitivityLabelEventFailureData",
+					"type": "Dynamic",
+					"description": "Sensitivity Label Event Failure Data"
+				},
+				{
+					"name": "AutoSensitivityLabelPolicyInfo",
+					"type": "Dynamic",
+					"description": "Auto Sensitivity Label Policy Info"
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/MicrosoftPurviewInformationProtectionSample.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/MicrosoftPurviewInformationProtectionSample.json"
+		}
+	],
+	"functions": [],
+	"queries": [
+		{
+			"id": "4e7a449a-ae3f-4100-9598-197f4a43abc1",
+			"displayName": "Microsoft Purview Information Protection events",
+			"description": "Microsoft Purview Information Protection events summarized by label event type and workload.",
+			"bodyFilePath": "KQL/MPIPSummarizeByLabelEventTypeWorkload.kql",
+			"categories": [
+				"security"
+			],
+			"relatedTables": [
+				"MicrosoftPurviewInformationProtection"
+			],
+			"tags": {
+				"Topic": [
+					"Security"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": false
+				}
+			}
+		}
+	]
+}

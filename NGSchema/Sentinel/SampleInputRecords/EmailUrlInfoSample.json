@@ -1,0 +1,30 @@
+[
+  {
+    "time": "2021-03-05T16:10:22.1270356Z",
+    "tenantId": "5b5a146c-eba8-46af-96f8-e31b50d15a3f",
+    "operationName": "Publish",
+    "category": "AdvancedHunting-EmailUrlInfo",
+    "properties": {
+      "ReportId": "c7eb95c0-e6de-4d1c-e2b4-08d8dff101f1-11223071425655433003",
+      "NetworkMessageId": "c7eb95c0-e6de-4d1c-e2b4-08d8dff101f1",
+      "Timestamp": "3/5/2021 4:09:09 PM",
+      "Url": "https://docs.microsoft.com/microsoft-365/commerce/billing-and-payments/manage-payment-methods"
+    },
+    "Tenant": "PRD",
+    "DC": "WEU"
+  },
+  {
+    "time": "2021-03-05T16:10:22.1270446Z",
+    "tenantId": "5b5a146c-eba8-46af-96f8-e31b50d15a3f",
+    "operationName": "Publish",
+    "category": "AdvancedHunting-EmailUrlInfo",
+    "properties": {
+      "ReportId": "3d66b85b-0cc7-493b-8dde-08d8dff10279-511094207338351635",
+      "NetworkMessageId": "3d66b85b-0cc7-493b-8dde-08d8dff10279",
+      "Timestamp": "3/5/2021 4:09:09 PM",
+      "Url": "https://products.office.com/en-us/CMSImages/Office365Logo_Orange.png?version=b8d100a9-0a8b-8e6a-88e1-ef488fee0470"
+    },
+    "Tenant": "PRD",
+    "DC": "WEU"
+  }
+]

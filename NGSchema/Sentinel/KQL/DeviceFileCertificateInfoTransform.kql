@@ -1,0 +1,23 @@
+source
+| extend propertiesTable = properties
+| project
+    CertificateSerialNumber = tostring(propertiesTable["CertificateSerialNumber"]),
+    CrlDistributionPointUrls = tostring(propertiesTable["CrlDistributionPointUrls"]),
+    DeviceId = tostring(propertiesTable["DeviceId"]),
+    DeviceName = tostring(propertiesTable["DeviceName"]),
+    IsRootSignerMicrosoft = tobool(propertiesTable["IsRootSignerMicrosoft"]),
+    IsSigned = tobool(propertiesTable["IsSigned"]),
+    IsTrusted = tobool(propertiesTable["IsTrusted"]),
+    Issuer = tostring(propertiesTable["Issuer"]),
+    IssuerHash = tostring(propertiesTable["IssuerHash"]),
+    MachineGroup = tostring(propertiesTable["MachineGroup"]),
+    ReportId = tolong(propertiesTable["ReportId"]),
+    SHA1 = tostring(propertiesTable["SHA1"]),
+    SignatureType = tostring(propertiesTable["SignatureType"]),
+    Signer = tostring(propertiesTable["Signer"]),
+    SignerHash = tostring(propertiesTable["SignerHash"]),
+    TimeGenerated = todatetime(propertiesTable["Timestamp"]),
+    Timestamp = todatetime(propertiesTable["Timestamp"]),
+    CertificateCountersignatureTime = todatetime(propertiesTable["CertificateCountersignatureTime"]),
+    CertificateCreationTime = todatetime(propertiesTable["CertificateCreationTime"]),
+    CertificateExpirationTime = todatetime(propertiesTable["CertificateExpirationTime"])

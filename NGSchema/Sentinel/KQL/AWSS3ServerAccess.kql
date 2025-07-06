@@ -1,0 +1,30 @@
+source
+| extend dateTimeParts = extract_all(@'\[(?P<date>[^:]+):(?P<time>.*)', Field3)
+| extend requestTime = strcat_delim(' ', dateTimeParts[0][0], dateTimeParts[0][1], trim_end(@'\]', Field4))
+| project 
+    TimeGenerated        = todatetime(requestTime),
+    BucketOwner          = tostring(Field1),
+    Bucket               = tostring(Field2),
+    RemoteIp             = tostring(Field5),
+    Requester            = tostring(Field6),
+    RequestId            = tostring(Field7),
+    Operation            = tostring(Field8),
+    Key                  = tostring(Field9),
+    RequestUri           = tostring(Field10),
+    HttpStatus           = toint(Field11),
+    ErrorCode            = tostring(Field12),
+    BytesSent            = toint(Field13),
+    ObjectSize           = toint(Field14),
+    TotalTime            = toint(Field15),
+    TurnAroundTime       = tostring(Field16),
+    Referer              = tostring(Field17),
+    UserAgent            = tostring(Field18),
+    VersionId            = tostring(Field19),
+    HostId               = tostring(Field20),
+    SignatureVersion     = tostring(Field21),
+    CipherSuite          = tostring(Field22),
+    AuthenticationType   = tostring(Field23),
+    HostHeader           = tostring(Field24),
+    TLSVersion           = tostring(Field25),
+    AccessPointARN       = tostring(Field26),
+    ACLRequired          = tostring(Field27)

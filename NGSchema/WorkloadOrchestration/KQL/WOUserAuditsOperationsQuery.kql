@@ -1,0 +1,5 @@
+WOUserAudits
+| where Message !startswith_cs "Request" 
+| order by EdgeLocation, TimeGenerated desc
+| project EdgeLocation, TimeGenerated, User, Message, OperatingResourceId, OperatingResourceK8SId, OperationName
+| take 100

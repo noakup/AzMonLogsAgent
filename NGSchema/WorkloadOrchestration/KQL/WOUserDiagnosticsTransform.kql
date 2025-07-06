@@ -1,0 +1,15 @@
+source
+| project
+TimeGenerated=todatetime(["time"]),
+OperationName=operationName,
+Category=category,
+Location=location,
+Properties=properties,
+OperatingResourceId=operatingResourceId,
+OperatingResourceK8SId=operatingResourceK8SId,
+Message=body,
+User=toguid(callerId),
+CorrelationId=toguid(correlationId),
+WOServiceName=serviceName,
+WOServiceInstance=instance,
+EdgeLocation=edgeLocation

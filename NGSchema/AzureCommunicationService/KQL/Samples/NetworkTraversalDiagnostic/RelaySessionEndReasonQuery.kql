@@ -1,0 +1,4 @@
+ACSNetworkTraversalDiagnostics
+| where OperationName == "RelaySessionEnd"
+| summarize Count = count() by Reason
+| sort by Count desc

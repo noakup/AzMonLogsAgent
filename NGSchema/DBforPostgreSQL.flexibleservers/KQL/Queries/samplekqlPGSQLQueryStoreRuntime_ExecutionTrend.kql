@@ -1,0 +1,7 @@
+// By default, entries are aggregated in QueryStore every 15 mins (see pg_qs.interval_length_minutes)
+// AgregationWindow was set to 15min, but you may modify it based on your needs, however should not be less than pg_qs.interval_length_minutes. 
+let AgregationWindow=15m;
+PGSQLQueryStoreRuntime
+| where IsSystemQuery==false //excludes azure managed user
+| summarize sum(Calls) by bin(EndTime,AgregationWindow)
+| render columnchart

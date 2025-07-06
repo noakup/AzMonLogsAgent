@@ -1,0 +1,12 @@
+[{
+	"utcTime": "2020-08-03 20:56:29,798",
+	"logLevel": "INFO",
+	"message": "Services:520 - SERVER[] Running with JARs for Hadoop version [3.1.1.4.1.0.26]",
+	"logType": "Oozie",
+	"clusterName": "becohen-hadoop-test2",
+	"hostName": "hn0-becohe",
+	"clusterType": "hadoop",
+	"operationName": "LogCollection",
+	"correlationId": "OozieLogs",
+	"FluentdIngestTimestamp": "2020-06-30 03:53:00.0000000"
+}]

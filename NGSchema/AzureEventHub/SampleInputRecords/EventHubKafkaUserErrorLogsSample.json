@@ -1,0 +1,17 @@
+[
+    {
+      "Environment": "PROD",
+      "Region": "East US",
+      "ScaleUnit": "PROD-BL-VAZ704",
+      "TaskName": "EventHubKafkaUserErrorLog",
+      "ActivityId": "0000000000-0000-0000-0000-00000000000000",
+      "trackingId": "4d8c8ba4-fbca-4043-a813-36cf8cd1843f_B9",
+      "EventName": "Create Queue",
+      "resourceId": "/SUBSCRIPTIONS/<AZURE SUBSCRPTION ID>/RESOURCEGROUPS/<RESOURCE GROUP NAME>/PROVIDERS/MICROSOFT.SERVICEBUS/NAMESPACES/<SERVICE BUS NAMESPACE NAME>",
+      "namespaceName": "VijayEHTest",
+      "requestId": "0000000000-0000-0000-0000-00000000000000",
+      "message": "Kafka Error Message",
+      "category": "KafkaUserErrorLogs",
+      "eventTimestamp": "1/1/2021 8:40:06:0000"
+    }
+]

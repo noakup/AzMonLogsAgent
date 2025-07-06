@@ -1,0 +1,16 @@
+[
+    {
+        "TimeGenerated": "2024-03-07T15:19:14Z",
+        "EventCategory": "SystemSessionHistoryUpdates",
+        "FabricId": "/subscriptions/962219bd-33e8-461a-aa01-2ea9236a2b07/resourceGroups/Fab1LabNF-5-3/providers/microsoft.managednetworkfabric/networkfabrics/nffab1-5-3",
+        "DeviceId": "/subscriptions/962219bd-33e8-461a-aa01-2ea9236a2b07/resourceGroups/Fab1LabNF-5-3/providers/Microsoft.ManagedNetworkFabric/networkDevices/nffab1-5-3-CompRack1-TOR1",
+        "DeviceName": "nffab1-5-3-fab1-cp1-tor1",
+        "DiffTimeStamp": "1709787589223184640",
+        "GnmiTimeStamp": "1709824754742485001",
+        "SessionUpdateTimeStamp": "1709790720324292352",
+        "SessionUpdateSize": "930",
+        "SessionUpdateUser": "admin",
+        "SessionUpdateSessionId": "session136846748739387",
+        "SessionDiffs": "--- +++ @@ -1,15 +1,14 @@-! The checkpoint file saved at Thu Mar  7 04:59:49 2024 by admin ! device: Fab1-CP1-TOR1 (DCS-7280DR3-24, EOS-4.31.2FX-NX) ! ! boot system flash:/EOS1.swi ! no aaa root !-username AzureOperatorRO role network-operator secret sha512 $6$cegxmqwbob$SVt/ZHS86irZ/uvzmSQpxx9.FHM3p9copq2MlhS1QLpF0VZKJJPe4Gejii57xKhPVAu0os9LrDZzh6sQ.zvKF.-username AzureOperatorRW privilege 15 role network-admin secret sha512 $6$ibivbptvjb$AlIPuf6BnYERCWLQtNtkfvxnm7nrR3bcrfZvXnDqAaXFhimbDCsKmxNiGZox9f4h/UK.fmQ7VxLWmcid1lKR/.-username TelcoRO role network-operator secret sha512 $6$dvbaiayauy$rHdmY0Z1alZK8Enr.zUcIvelh2PpIHpzZsIjla2hcv35ijhxWf9prX9iSauGlgRVKtjIsC32YlNgmqXtCg0Ib/-username TelcoRW privilege 15 role network-admin secret sha512 $6$plkqqvjugn$H4UZN6JV6dOmiDPS/eaCufx07FtqHt2ZqZkU78l7sGLGsXuOcPxllzW017E3U4ggLlCeZwKw1FxZxrz6WN2qV0-username admin privilege 15 role network-admin secret sha512 $6$qtvhiwfvsu$kHxkINHpzIo9l3q.KK6PJMa8p8VqQNUGeUzbRSlGBATy9kysfQtik5unOrMoEDqZd4PUiAzXrZmZ42mFOg8/2/+username AzureOperatorRO role network-operator secret sha512 $6$tpnrpfymmx$AjBFhnUo3R9SE1SxjFN7.D6t/lo6AJ/qKg9IY5HJMfbR1ZbReqnyNJMJmg0jtrti5ydxFj3F2yBBUmVxsR91p.+username AzureOperatorRW privilege 15 role network-admin secret sha512 $6$aqtrsmfaoc$M1MmhIVfRPmC8Fb.nLqr5EwdkApS65F.z1H52oCeRLUSAeV.Tsx5RVXpxHnqmNj5pYP9BXlOIYAKYsikkeYnq1+username TelcoRO role network-operator secret sha512 $6$ovauuvrphh$68gmm1wLTZMVTCzrUw7liGijwraziqr9JzVHI10FjL174TTRt5QfsJ7mqqtakR5o9li3CNT94gj3GKR9HrQKr0+username TelcoRW privilege 15 role network-admin secret sha512 $6$tusarlchop$00DQcrk66IieBLGHWofUFtUfgtohVJ4f/qzNmult/F8rtLAMrYkCk7sbn4DKy9WwUMNwVHmT9KZn0EoeRFcIp0+username admin privilege 15 role network-admin secret sha512 $6$wehgkcboxa$4Y.YTpJ8pweRH7G9a9.zGYcFTbazMqksnQNzkAItvpYx8hb49I0FYPKtuyetjOPOCQ77fgLJmbQKk0GHwh7vG0 ! hardware counter feature subinterface out hardware counter feature subinterface in@@ -620,7 +619,7 @@ interface Management1    description \"Management port M1\"    vrf Mgmt-   ip address 10.2.2.8/24+   ip address 10.2.2.8/26    ipv6 address fda0:d59c:da02:2::8/64 ! interface Vlan2@@ -650,7 +649,7 @@ ip prefix-list loopback    seq 10 permit 10.2.14.0/32    seq 20 permit 10.2.14.64/32-   seq 30 permit 10.2.2.64/27+   seq 30 permit 10.2.2.64/27 le 32 ! ipv6 prefix-list loopback_v6    seq 10 permit fda0:d59c:da02:2::/64 eq 128"
+    }
+]

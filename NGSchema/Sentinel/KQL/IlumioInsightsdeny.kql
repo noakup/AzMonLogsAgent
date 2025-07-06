@@ -1,0 +1,4 @@
+IlumioInsights
+| where status == "DENIED"
+| summarize count() by Port
+| where count_> 40

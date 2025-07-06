@@ -1,0 +1,3764 @@
+{
+  "type": "Microsoft.Network/NetworkSecurityPerimeters",
+  "displayName": "Network Security Perimeters",
+  "description": "Network Security Perimeters allow administrators to define logical network isolation boundaries and configure common external access controls for PaaS resources.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Cloudnet/AzureVirtualNetworkManager",
+  "contactDL": "avnmidc@microsoft.com",
+  "relatedFunctions": [],
+  "relatedTables": [],
+  "tables": [
+    {
+      "workflowName": "NspPublicInboundPerimeterRulesAllowed",
+      "transformName": "NspPublicInboundPerimeterRulesAllowed",
+      "physicalName": "NSPAccessLogs",
+      "logicalName": "NSPAccessLogs",
+      "description": "Logs of Network Security Perimeter (NSP) inbound access allowed based on NSP access rules.",
+      "categories": [
+        "resources",
+        "network",
+        "audit",
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 11,
+      "dataTypeId": "MICROSOFTNETWORKSECURITYPERIMETERS_NSPPUBLICINBOUNDPERIMETERRULESALLOWED",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "timeGeneratedEndTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "count",
+          "type": "Int"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/PublicInboundPerimeterRulesAllowedTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Timestamp marking the start of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TimeGeneratedEndTime",
+          "type": "DateTime",
+          "description": "Timestamp indicating the end of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Count",
+          "type": "Int",
+          "description": "Total number of aggregated events.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "description": "Indicates top-level PaaS operation name.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationVersion",
+          "type": "String",
+          "description": "The API version associated with the operation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "description": "NSP access log categories.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "Indicates the region of NSP.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "description": "Additional description about the operation result, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Profile",
+          "type": "String",
+          "description": "Name of the NSP profile associated to the resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Parameters",
+          "type": "String",
+          "description": "List of optional PaaS resource properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceResourceId",
+          "type": "String",
+          "description": "Resource ID of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain Name (FQDN) of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of resource in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "MatchedRule",
+          "type": "String",
+          "description": "JSON property bag containing matched access rule name. It can be either NSP access rule name or resource rule name (not it's resource ID).",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceResourceId",
+          "type": "String",
+          "description": "Resource ID of source PaaS resource for an inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceIpAddress",
+          "type": "String",
+          "description": "IP address of source making inbound connection, when available.",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SourcePort",
+          "type": "String",
+          "description": "Port number of inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for inbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourcePerimeterGuids",
+          "type": "String",
+          "description": "List of perimeter GUIDs of source resource. It should be specified only if allowed based on perimeter GUID.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceAppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of source in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceParameters",
+          "type": "String",
+          "description": "List of optional source properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationResourceId",
+          "type": "String",
+          "description": "Resource ID of destination PaaS resource for an outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain(FQDN) name of the destination.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationParameters",
+          "type": "String",
+          "description": "List of optional destination properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPort",
+          "type": "String",
+          "description": "Port number of outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for outbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationEmailAddress",
+          "type": "String",
+          "description": "Email address of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPhoneNumber",
+          "type": "String",
+          "description": "Phone number of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AccessRuleVersion",
+          "type": "String",
+          "description": "Access rule version of the NSP profile to which PaaS resource is associated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDirection",
+          "type": "String",
+          "description": "Direction of evaluation result whether 'Inbound' or 'Outbound'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultAction",
+          "type": "String",
+          "description": "Indicates whether the result of evaluation is 'Approved' or 'Denied'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RuleType",
+          "type": "String",
+          "description": "Indicates where the rule is defined: NSP or PaaS resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TrafficType",
+          "type": "String",
+          "description": "Indicates whether traffic is 'Private', 'Public', 'Intra' or 'Cross' perimeter.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/NspPublicInboundPerimeterRulesAllowedSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/NspPublicInboundPerimeterRulesAllowedOutputSample.json"
+    },
+    {
+      "workflowName": "NspPublicOutboundPerimeterRulesAllowed",
+      "transformName": "NspPublicOutboundPerimeterRulesAllowed",
+      "physicalName": "NSPAccessLogs",
+      "logicalName": "NSPAccessLogs",
+      "description": "Logs of Network Security Perimeter (NSP) outbound access allowed based on NSP access rules.",
+      "categories": [
+        "resources",
+        "network",
+        "audit",
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 12,
+      "dataTypeId": "MICROSOFTNETWORKSECURITYPERIMETERS_NSPPUBLICOUTBOUNDPERIMETERRULESALLOWED",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "outputSchema": {
+        "name": "NSPAccessLogs",
+        "version": 11
+      },
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "timeGeneratedEndTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "count",
+          "type": "Int"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/PublicOutboundPerimeterRulesAllowedTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Timestamp marking the start of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TimeGeneratedEndTime",
+          "type": "DateTime",
+          "description": "Timestamp indicating the end of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Count",
+          "type": "Int",
+          "description": "Total number of aggregated events.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "description": "Indicates top-level PaaS operation name.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationVersion",
+          "type": "String",
+          "description": "The API version associated with the operation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "description": "NSP access log categories.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "Indicates the region of NSP.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "description": "Additional description about the operation result, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Profile",
+          "type": "String",
+          "description": "Name of the NSP profile associated to the resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Parameters",
+          "type": "String",
+          "description": "List of optional PaaS resource properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceResourceId",
+          "type": "String",
+          "description": "Resource ID of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain Name (FQDN) of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of resource in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "MatchedRule",
+          "type": "String",
+          "description": "JSON property bag containing matched access rule name. It can be either NSP access rule name or resource rule name (not it's resource ID).",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceResourceId",
+          "type": "String",
+          "description": "Resource ID of source PaaS resource for an inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceIpAddress",
+          "type": "String",
+          "description": "IP address of source making inbound connection, when available.",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SourcePort",
+          "type": "String",
+          "description": "Port number of inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for inbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourcePerimeterGuids",
+          "type": "String",
+          "description": "List of perimeter GUIDs of source resource. It should be specified only if allowed based on perimeter GUID.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceAppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of source in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceParameters",
+          "type": "String",
+          "description": "List of optional source properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationResourceId",
+          "type": "String",
+          "description": "Resource ID of destination PaaS resource for an outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain(FQDN) name of the destination.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationParameters",
+          "type": "String",
+          "description": "List of optional destination properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPort",
+          "type": "String",
+          "description": "Port number of outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for outbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationEmailAddress",
+          "type": "String",
+          "description": "Email address of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPhoneNumber",
+          "type": "String",
+          "description": "Phone number of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AccessRuleVersion",
+          "type": "String",
+          "description": "Access rule version of the NSP profile to which PaaS resource is associated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDirection",
+          "type": "String",
+          "description": "Direction of evaluation result whether 'Inbound' or 'Outbound'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultAction",
+          "type": "String",
+          "description": "Indicates whether the result of evaluation is 'Approved' or 'Denied'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RuleType",
+          "type": "String",
+          "description": "Indicates where the rule is defined: NSP or PaaS resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TrafficType",
+          "type": "String",
+          "description": "Indicates whether traffic is 'Private', 'Public', 'Intra' or 'Cross' perimeter.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/NspPublicOutboundPerimeterRulesAllowedSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/NspPublicOutboundPerimeterRulesAllowedOutputSample.json"
+    },
+    {
+      "workflowName": "NspPublicInboundPerimeterRulesDenied",
+      "transformName": "NspPublicInboundPerimeterRulesDenied",
+      "physicalName": "NSPAccessLogs",
+      "logicalName": "NSPAccessLogs",
+      "description": "Logs of public inbound access denied by NSP.",
+      "categories": [
+        "resources",
+        "network",
+        "audit",
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 12,
+      "dataTypeId": "MICROSOFTNETWORKSECURITYPERIMETERS_NSPPUBLICINBOUNDPERIMETERRULESDENIED",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "outputSchema": {
+        "name": "NSPAccessLogs",
+        "version": 11
+      },
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "timeGeneratedEndTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "count",
+          "type": "Int"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/PublicInboundPerimeterRulesDeniedTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Timestamp marking the start of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TimeGeneratedEndTime",
+          "type": "DateTime",
+          "description": "Timestamp indicating the end of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Count",
+          "type": "Int",
+          "description": "Total number of aggregated events.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "description": "Indicates top-level PaaS operation name.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationVersion",
+          "type": "String",
+          "description": "The API version associated with the operation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "description": "NSP access log categories.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "Indicates the region of NSP.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "description": "Additional description about the operation result, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Profile",
+          "type": "String",
+          "description": "Name of the NSP profile associated to the resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Parameters",
+          "type": "String",
+          "description": "List of optional PaaS resource properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceResourceId",
+          "type": "String",
+          "description": "Resource ID of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain Name (FQDN) of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of resource in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "MatchedRule",
+          "type": "String",
+          "description": "JSON property bag containing matched access rule name. It can be either NSP access rule name or resource rule name (not it's resource ID).",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceResourceId",
+          "type": "String",
+          "description": "Resource ID of source PaaS resource for an inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceIpAddress",
+          "type": "String",
+          "description": "IP address of source making inbound connection, when available.",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SourcePort",
+          "type": "String",
+          "description": "Port number of inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for inbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourcePerimeterGuids",
+          "type": "String",
+          "description": "List of perimeter GUIDs of source resource. It should be specified only if allowed based on perimeter GUID.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceAppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of source in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceParameters",
+          "type": "String",
+          "description": "List of optional source properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationResourceId",
+          "type": "String",
+          "description": "Resource ID of destination PaaS resource for an outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain(FQDN) name of the destination.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationParameters",
+          "type": "String",
+          "description": "List of optional destination properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPort",
+          "type": "String",
+          "description": "Port number of outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for outbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationEmailAddress",
+          "type": "String",
+          "description": "Email address of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPhoneNumber",
+          "type": "String",
+          "description": "Phone number of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AccessRuleVersion",
+          "type": "String",
+          "description": "Access rule version of the NSP profile to which PaaS resource is associated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDirection",
+          "type": "String",
+          "description": "Direction of evaluation result whether 'Inbound' or 'Outbound'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultAction",
+          "type": "String",
+          "description": "Indicates whether the result of evaluation is 'Approved' or 'Denied'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RuleType",
+          "type": "String",
+          "description": "Indicates where the rule is defined: NSP or PaaS resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TrafficType",
+          "type": "String",
+          "description": "Indicates whether traffic is 'Private', 'Public', 'Intra' or 'Cross' perimeter.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/NspPublicInboundPerimeterRulesDeniedSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/NspPublicInboundPerimeterRulesDeniedOutputSample.json"
+    },
+    {
+      "workflowName": "NspPublicOutboundPerimeterRulesDenied",
+      "transformName": "NspPublicOutboundPerimeterRulesDenied",
+      "physicalName": "NSPAccessLogs",
+      "logicalName": "NSPAccessLogs",
+      "description": "Logs of public outbound access denied by NSP.",
+      "categories": [
+        "resources",
+        "network",
+        "audit",
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 12,
+      "dataTypeId": "MICROSOFTNETWORKSECURITYPERIMETERS_NSPPUBLICOUTBOUNDPERIMETERRULESDENIED",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "outputSchema": {
+        "name": "NSPAccessLogs",
+        "version": 11
+      },
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "timeGeneratedEndTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "count",
+          "type": "Int"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/PublicOutboundPerimeterRulesDeniedTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Timestamp marking the start of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TimeGeneratedEndTime",
+          "type": "DateTime",
+          "description": "Timestamp indicating the end of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Count",
+          "type": "Int",
+          "description": "Total number of aggregated events.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "description": "Indicates top-level PaaS operation name.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationVersion",
+          "type": "String",
+          "description": "The API version associated with the operation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "description": "NSP access log categories.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "Indicates the region of NSP.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "description": "Additional description about the operation result, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Profile",
+          "type": "String",
+          "description": "Name of the NSP profile associated to the resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Parameters",
+          "type": "String",
+          "description": "List of optional PaaS resource properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceResourceId",
+          "type": "String",
+          "description": "Resource ID of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain Name (FQDN) of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of resource in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "MatchedRule",
+          "type": "String",
+          "description": "JSON property bag containing matched access rule name. It can be either NSP access rule name or resource rule name (not it's resource ID).",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceResourceId",
+          "type": "String",
+          "description": "Resource ID of source PaaS resource for an inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceIpAddress",
+          "type": "String",
+          "description": "IP address of source making inbound connection, when available.",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SourcePort",
+          "type": "String",
+          "description": "Port number of inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for inbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourcePerimeterGuids",
+          "type": "String",
+          "description": "List of perimeter GUIDs of source resource. It should be specified only if allowed based on perimeter GUID.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceAppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of source in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceParameters",
+          "type": "String",
+          "description": "List of optional source properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationResourceId",
+          "type": "String",
+          "description": "Resource ID of destination PaaS resource for an outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain(FQDN) name of the destination.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationParameters",
+          "type": "String",
+          "description": "List of optional destination properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPort",
+          "type": "String",
+          "description": "Port number of outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for outbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationEmailAddress",
+          "type": "String",
+          "description": "Email address of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPhoneNumber",
+          "type": "String",
+          "description": "Phone number of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AccessRuleVersion",
+          "type": "String",
+          "description": "Access rule version of the NSP profile to which PaaS resource is associated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDirection",
+          "type": "String",
+          "description": "Direction of evaluation result whether 'Inbound' or 'Outbound'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultAction",
+          "type": "String",
+          "description": "Indicates whether the result of evaluation is 'Approved' or 'Denied'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RuleType",
+          "type": "String",
+          "description": "Indicates where the rule is defined: NSP or PaaS resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TrafficType",
+          "type": "String",
+          "description": "Indicates whether traffic is 'Private', 'Public', 'Intra' or 'Cross' perimeter.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/NspPublicOutboundPerimeterRulesDeniedSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/NspPublicOutboundPerimeterRulesDeniedOutputSample.json"
+    },
+    {
+      "workflowName": "NspIntraPerimeterOutboundAllowed",
+      "transformName": "NspIntraPerimeterOutboundAllowed",
+      "physicalName": "NSPAccessLogs",
+      "logicalName": "NSPAccessLogs",
+      "description": "Logs for an outbound attempt made in hope of destination being in same NSP.",
+      "categories": [
+        "resources",
+        "network",
+        "audit",
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 12,
+      "dataTypeId": "MICROSOFTNETWORKSECURITYPERIMETERS_NSPINTRAPERIMETEROUTBOUNDALLOWED",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "outputSchema": {
+        "name": "NSPAccessLogs",
+        "version": 11
+      },
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "timeGeneratedEndTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "count",
+          "type": "Int"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/IntraPerimeterOutboundAllowedTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Timestamp marking the start of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TimeGeneratedEndTime",
+          "type": "DateTime",
+          "description": "Timestamp indicating the end of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Count",
+          "type": "Int",
+          "description": "Total number of aggregated events.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "description": "Indicates top-level PaaS operation name.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationVersion",
+          "type": "String",
+          "description": "The API version associated with the operation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "description": "NSP access log categories.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "Indicates the region of NSP.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "description": "Additional description about the operation result, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Profile",
+          "type": "String",
+          "description": "Name of the NSP profile associated to the resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Parameters",
+          "type": "String",
+          "description": "List of optional PaaS resource properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceResourceId",
+          "type": "String",
+          "description": "Resource ID of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain Name (FQDN) of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of resource in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "MatchedRule",
+          "type": "String",
+          "description": "JSON property bag containing matched access rule name. It can be either NSP access rule name or resource rule name (not it's resource ID).",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceResourceId",
+          "type": "String",
+          "description": "Resource ID of source PaaS resource for an inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceIpAddress",
+          "type": "String",
+          "description": "IP address of source making inbound connection, when available.",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SourcePort",
+          "type": "String",
+          "description": "Port number of inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for inbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourcePerimeterGuids",
+          "type": "String",
+          "description": "List of perimeter GUIDs of source resource. It should be specified only if allowed based on perimeter GUID.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceAppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of source in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceParameters",
+          "type": "String",
+          "description": "List of optional source properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationResourceId",
+          "type": "String",
+          "description": "Resource ID of destination PaaS resource for an outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain(FQDN) name of the destination.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationParameters",
+          "type": "String",
+          "description": "List of optional destination properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPort",
+          "type": "String",
+          "description": "Port number of outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for outbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationEmailAddress",
+          "type": "String",
+          "description": "Email address of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPhoneNumber",
+          "type": "String",
+          "description": "Phone number of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AccessRuleVersion",
+          "type": "String",
+          "description": "Access rule version of the NSP profile to which PaaS resource is associated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDirection",
+          "type": "String",
+          "description": "Direction of evaluation result whether 'Inbound' or 'Outbound'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultAction",
+          "type": "String",
+          "description": "Indicates whether the result of evaluation is 'Approved' or 'Denied'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RuleType",
+          "type": "String",
+          "description": "Indicates where the rule is defined: NSP or PaaS resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TrafficType",
+          "type": "String",
+          "description": "Indicates whether traffic is 'Private', 'Public', 'Intra' or 'Cross' perimeter.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/NspIntraPerimeterOutboundAllowedSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/NspIntraPerimeterOutboundAllowedOutputSample.json"
+    },
+    {
+      "workflowName": "NspIntraPerimeterInboundAllowed",
+      "transformName": "NspIntraPerimeterInboundAllowed",
+      "physicalName": "NSPAccessLogs",
+      "logicalName": "NSPAccessLogs",
+      "description": "Logs of inbound access allowed within same NSP.",
+      "categories": [
+        "resources",
+        "network",
+        "audit",
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 12,
+      "dataTypeId": "MICROSOFTNETWORKSECURITYPERIMETERS_NSPINTRAPERIMETERINBOUNDALLOWED",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "outputSchema": {
+        "name": "NSPAccessLogs",
+        "version": 11
+      },
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "timeGeneratedEndTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "count",
+          "type": "Int"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/IntraPerimeterInboundAllowedTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Timestamp marking the start of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TimeGeneratedEndTime",
+          "type": "DateTime",
+          "description": "Timestamp indicating the end of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Count",
+          "type": "Int",
+          "description": "Total number of aggregated events.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "description": "Indicates top-level PaaS operation name.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationVersion",
+          "type": "String",
+          "description": "The API version associated with the operation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "description": "NSP access log categories.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "Indicates the region of NSP.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "description": "Additional description about the operation result, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Profile",
+          "type": "String",
+          "description": "Name of the NSP profile associated to the resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Parameters",
+          "type": "String",
+          "description": "List of optional PaaS resource properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceResourceId",
+          "type": "String",
+          "description": "Resource ID of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain Name (FQDN) of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of resource in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "MatchedRule",
+          "type": "String",
+          "description": "JSON property bag containing matched access rule name. It can be either NSP access rule name or resource rule name (not it's resource ID).",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceResourceId",
+          "type": "String",
+          "description": "Resource ID of source PaaS resource for an inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceIpAddress",
+          "type": "String",
+          "description": "IP address of source making inbound connection, when available.",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SourcePort",
+          "type": "String",
+          "description": "Port number of inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for inbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourcePerimeterGuids",
+          "type": "String",
+          "description": "List of perimeter GUIDs of source resource. It should be specified only if allowed based on perimeter GUID.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceAppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of source in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceParameters",
+          "type": "String",
+          "description": "List of optional source properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationResourceId",
+          "type": "String",
+          "description": "Resource ID of destination PaaS resource for an outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain(FQDN) name of the destination.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationParameters",
+          "type": "String",
+          "description": "List of optional destination properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPort",
+          "type": "String",
+          "description": "Port number of outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for outbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationEmailAddress",
+          "type": "String",
+          "description": "Email address of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPhoneNumber",
+          "type": "String",
+          "description": "Phone number of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AccessRuleVersion",
+          "type": "String",
+          "description": "Access rule version of the NSP profile to which PaaS resource is associated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDirection",
+          "type": "String",
+          "description": "Direction of evaluation result whether 'Inbound' or 'Outbound'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultAction",
+          "type": "String",
+          "description": "Indicates whether the result of evaluation is 'Approved' or 'Denied'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RuleType",
+          "type": "String",
+          "description": "Indicates where the rule is defined: NSP or PaaS resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TrafficType",
+          "type": "String",
+          "description": "Indicates whether traffic is 'Private', 'Public', 'Intra' or 'Cross' perimeter.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/NspIntraPerimeterInboundAllowedSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/NspIntraPerimeterInboundAllowedOutputSample.json"
+    },
+    {
+      "workflowName": "NspPublicInboundResourceRulesAllowed",
+      "transformName": "NspPublicInboundResourceRulesAllowed",
+      "physicalName": "NSPAccessLogs",
+      "logicalName": "NSPAccessLogs",
+      "description": "Logs of inbound access allowed based on PaaS resource rules.",
+      "categories": [
+        "resources",
+        "network",
+        "audit",
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 12,
+      "dataTypeId": "MICROSOFTNETWORKSECURITYPERIMETERS_NSPPUBLICINBOUNDRESOURCERULESALLOWED",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "outputSchema": {
+        "name": "NSPAccessLogs",
+        "version": 11
+      },
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "timeGeneratedEndTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "count",
+          "type": "Int"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/PublicInboundResourceRulesAllowedTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Timestamp marking the start of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TimeGeneratedEndTime",
+          "type": "DateTime",
+          "description": "Timestamp indicating the end of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Count",
+          "type": "Int",
+          "description": "Total number of aggregated events.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "description": "Indicates top-level PaaS operation name.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationVersion",
+          "type": "String",
+          "description": "The API version associated with the operation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "description": "NSP access log categories.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "Indicates the region of NSP.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "description": "Additional description about the operation result, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Profile",
+          "type": "String",
+          "description": "Name of the NSP profile associated to the resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Parameters",
+          "type": "String",
+          "description": "List of optional PaaS resource properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceResourceId",
+          "type": "String",
+          "description": "Resource ID of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain Name (FQDN) of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of resource in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "MatchedRule",
+          "type": "String",
+          "description": "JSON property bag containing matched access rule name. It can be either NSP access rule name or resource rule name (not it's resource ID).",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceResourceId",
+          "type": "String",
+          "description": "Resource ID of source PaaS resource for an inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceIpAddress",
+          "type": "String",
+          "description": "IP address of source making inbound connection, when available.",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SourcePort",
+          "type": "String",
+          "description": "Port number of inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for inbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourcePerimeterGuids",
+          "type": "String",
+          "description": "List of perimeter GUIDs of source resource. It should be specified only if allowed based on perimeter GUID.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceAppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of source in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceParameters",
+          "type": "String",
+          "description": "List of optional source properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationResourceId",
+          "type": "String",
+          "description": "Resource ID of destination PaaS resource for an outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain(FQDN) name of the destination.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationParameters",
+          "type": "String",
+          "description": "List of optional destination properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPort",
+          "type": "String",
+          "description": "Port number of outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for outbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationEmailAddress",
+          "type": "String",
+          "description": "Email address of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPhoneNumber",
+          "type": "String",
+          "description": "Phone number of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AccessRuleVersion",
+          "type": "String",
+          "description": "Access rule version of the NSP profile to which PaaS resource is associated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDirection",
+          "type": "String",
+          "description": "Direction of evaluation result whether 'Inbound' or 'Outbound'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultAction",
+          "type": "String",
+          "description": "Indicates whether the result of evaluation is 'Approved' or 'Denied'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RuleType",
+          "type": "String",
+          "description": "Indicates where the rule is defined: NSP or PaaS resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TrafficType",
+          "type": "String",
+          "description": "Indicates whether traffic is 'Private', 'Public', 'Intra' or 'Cross' perimeter.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/NspPublicInboundResourceRulesAllowedSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/NspPublicInboundResourceRulesAllowedOutputSample.json"
+    },
+    {
+      "workflowName": "NspPublicInboundResourceRulesDenied",
+      "transformName": "NspPublicInboundResourceRulesDenied",
+      "physicalName": "NSPAccessLogs",
+      "logicalName": "NSPAccessLogs",
+      "description": "Logs of inbound access denied by PaaS resource rules.",
+      "categories": [
+        "resources",
+        "network",
+        "audit",
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 12,
+      "dataTypeId": "MICROSOFTNETWORKSECURITYPERIMETERS_NSPPUBLICINBOUNDRESOURCERULESDENIED",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "outputSchema": {
+        "name": "NSPAccessLogs",
+        "version": 11
+      },
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "timeGeneratedEndTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "count",
+          "type": "Int"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/PublicInboundResourceRulesDeniedTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Timestamp marking the start of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TimeGeneratedEndTime",
+          "type": "DateTime",
+          "description": "Timestamp indicating the end of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Count",
+          "type": "Int",
+          "description": "Total number of aggregated events.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "description": "Indicates top-level PaaS operation name.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationVersion",
+          "type": "String",
+          "description": "The API version associated with the operation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "description": "NSP access log categories.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "Indicates the region of NSP.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "description": "Additional description about the operation result, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Profile",
+          "type": "String",
+          "description": "Name of the NSP profile associated to the resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Parameters",
+          "type": "String",
+          "description": "List of optional PaaS resource properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceResourceId",
+          "type": "String",
+          "description": "Resource ID of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain Name (FQDN) of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of resource in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "MatchedRule",
+          "type": "String",
+          "description": "JSON property bag containing matched access rule name. It can be either NSP access rule name or resource rule name (not it's resource ID).",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceResourceId",
+          "type": "String",
+          "description": "Resource ID of source PaaS resource for an inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceIpAddress",
+          "type": "String",
+          "description": "IP address of source making inbound connection, when available.",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SourcePort",
+          "type": "String",
+          "description": "Port number of inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for inbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourcePerimeterGuids",
+          "type": "String",
+          "description": "List of perimeter GUIDs of source resource. It should be specified only if allowed based on perimeter GUID.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceAppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of source in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceParameters",
+          "type": "String",
+          "description": "List of optional source properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationResourceId",
+          "type": "String",
+          "description": "Resource ID of destination PaaS resource for an outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain(FQDN) name of the destination.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationParameters",
+          "type": "String",
+          "description": "List of optional destination properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPort",
+          "type": "String",
+          "description": "Port number of outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for outbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationEmailAddress",
+          "type": "String",
+          "description": "Email address of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPhoneNumber",
+          "type": "String",
+          "description": "Phone number of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AccessRuleVersion",
+          "type": "String",
+          "description": "Access rule version of the NSP profile to which PaaS resource is associated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDirection",
+          "type": "String",
+          "description": "Direction of evaluation result whether 'Inbound' or 'Outbound'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultAction",
+          "type": "String",
+          "description": "Indicates whether the result of evaluation is 'Approved' or 'Denied'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RuleType",
+          "type": "String",
+          "description": "Indicates where the rule is defined: NSP or PaaS resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TrafficType",
+          "type": "String",
+          "description": "Indicates whether traffic is 'Private', 'Public', 'Intra' or 'Cross' perimeter.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/NspPublicInboundResourceRulesDeniedSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/NspPublicInboundResourceRulesDeniedOutputSample.json"
+    },
+    {
+      "workflowName": "NspPublicOutboundResourceRulesAllowed",
+      "transformName": "NspPublicOutboundResourceRulesAllowed",
+      "physicalName": "NSPAccessLogs",
+      "logicalName": "NSPAccessLogs",
+      "description": "Logs of outbound access allowed by PaaS resource rules.",
+      "categories": [
+        "resources",
+        "network",
+        "audit",
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 12,
+      "dataTypeId": "MICROSOFTNETWORKSECURITYPERIMETERS_NSPPUBLICOUTBOUNDRESOURCERULESALLOWED",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "outputSchema": {
+        "name": "NSPAccessLogs",
+        "version": 11
+      },
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "timeGeneratedEndTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "count",
+          "type": "Int"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/PublicOutboundResourceRulesAllowedTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Timestamp marking the start of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TimeGeneratedEndTime",
+          "type": "DateTime",
+          "description": "Timestamp indicating the end of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Count",
+          "type": "Int",
+          "description": "Total number of aggregated events.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "description": "Indicates top-level PaaS operation name.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationVersion",
+          "type": "String",
+          "description": "The API version associated with the operation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "description": "NSP access log categories.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "Indicates the region of NSP.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "description": "Additional description about the operation result, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Profile",
+          "type": "String",
+          "description": "Name of the NSP profile associated to the resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Parameters",
+          "type": "String",
+          "description": "List of optional PaaS resource properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceResourceId",
+          "type": "String",
+          "description": "Resource ID of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain Name (FQDN) of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of resource in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "MatchedRule",
+          "type": "String",
+          "description": "JSON property bag containing matched access rule name. It can be either NSP access rule name or resource rule name (not it's resource ID).",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceResourceId",
+          "type": "String",
+          "description": "Resource ID of source PaaS resource for an inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceIpAddress",
+          "type": "String",
+          "description": "IP address of source making inbound connection, when available.",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SourcePort",
+          "type": "String",
+          "description": "Port number of inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for inbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourcePerimeterGuids",
+          "type": "String",
+          "description": "List of perimeter GUIDs of source resource. It should be specified only if allowed based on perimeter GUID.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceAppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of source in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceParameters",
+          "type": "String",
+          "description": "List of optional source properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationResourceId",
+          "type": "String",
+          "description": "Resource ID of destination PaaS resource for an outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain(FQDN) name of the destination.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationParameters",
+          "type": "String",
+          "description": "List of optional destination properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPort",
+          "type": "String",
+          "description": "Port number of outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for outbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationEmailAddress",
+          "type": "String",
+          "description": "Email address of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPhoneNumber",
+          "type": "String",
+          "description": "Phone number of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AccessRuleVersion",
+          "type": "String",
+          "description": "Access rule version of the NSP profile to which PaaS resource is associated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDirection",
+          "type": "String",
+          "description": "Direction of evaluation result whether 'Inbound' or 'Outbound'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultAction",
+          "type": "String",
+          "description": "Indicates whether the result of evaluation is 'Approved' or 'Denied'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RuleType",
+          "type": "String",
+          "description": "Indicates where the rule is defined: NSP or PaaS resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TrafficType",
+          "type": "String",
+          "description": "Indicates whether traffic is 'Private', 'Public', 'Intra' or 'Cross' perimeter.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/NspPublicOutboundResourceRulesAllowedSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/NspPublicOutboundResourceRulesAllowedOutputSample.json"
+    },
+    {
+      "workflowName": "NspPublicOutboundResourceRulesDenied",
+      "transformName": "NspPublicOutboundResourceRulesDenied",
+      "physicalName": "NSPAccessLogs",
+      "logicalName": "NSPAccessLogs",
+      "description": "Logs of outbound access denied by PaaS resource rules.",
+      "categories": [
+        "resources",
+        "network",
+        "audit",
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 12,
+      "dataTypeId": "MICROSOFTNETWORKSECURITYPERIMETERS_NSPPUBLICOUTBOUNDRESOURCERULESDENIED",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "outputSchema": {
+        "name": "NSPAccessLogs",
+        "version": 11
+      },
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "timeGeneratedEndTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "count",
+          "type": "Int"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/PublicOutboundResourceRulesDeniedTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Timestamp marking the start of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TimeGeneratedEndTime",
+          "type": "DateTime",
+          "description": "Timestamp indicating the end of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Count",
+          "type": "Int",
+          "description": "Total number of aggregated events.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "description": "Indicates top-level PaaS operation name.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationVersion",
+          "type": "String",
+          "description": "The API version associated with the operation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "description": "NSP access log categories.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "Indicates the region of NSP.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "description": "Additional description about the operation result, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Profile",
+          "type": "String",
+          "description": "Name of the NSP profile associated to the resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Parameters",
+          "type": "String",
+          "description": "List of optional PaaS resource properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceResourceId",
+          "type": "String",
+          "description": "Resource ID of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain Name (FQDN) of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of resource in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "MatchedRule",
+          "type": "String",
+          "description": "JSON property bag containing matched access rule name. It can be either NSP access rule name or resource rule name (not it's resource ID).",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceResourceId",
+          "type": "String",
+          "description": "Resource ID of source PaaS resource for an inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceIpAddress",
+          "type": "String",
+          "description": "IP address of source making inbound connection, when available.",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SourcePort",
+          "type": "String",
+          "description": "Port number of inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for inbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourcePerimeterGuids",
+          "type": "String",
+          "description": "List of perimeter GUIDs of source resource. It should be specified only if allowed based on perimeter GUID.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceAppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of source in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceParameters",
+          "type": "String",
+          "description": "List of optional source properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationResourceId",
+          "type": "String",
+          "description": "Resource ID of destination PaaS resource for an outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain(FQDN) name of the destination.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationParameters",
+          "type": "String",
+          "description": "List of optional destination properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPort",
+          "type": "String",
+          "description": "Port number of outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for outbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationEmailAddress",
+          "type": "String",
+          "description": "Email address of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPhoneNumber",
+          "type": "String",
+          "description": "Phone number of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AccessRuleVersion",
+          "type": "String",
+          "description": "Access rule version of the NSP profile to which PaaS resource is associated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDirection",
+          "type": "String",
+          "description": "Direction of evaluation result whether 'Inbound' or 'Outbound'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultAction",
+          "type": "String",
+          "description": "Indicates whether the result of evaluation is 'Approved' or 'Denied'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RuleType",
+          "type": "String",
+          "description": "Indicates where the rule is defined: NSP or PaaS resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TrafficType",
+          "type": "String",
+          "description": "Indicates whether traffic is 'Private', 'Public', 'Intra' or 'Cross' perimeter.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/NspPublicOutboundResourceRulesDeniedSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/NspPublicOutboundResourceRulesDeniedOutputSample.json"
+    },
+    {
+      "workflowName": "NspPrivateInboundAllowed",
+      "transformName": "NspPrivateInboundAllowed",
+      "physicalName": "NSPAccessLogs",
+      "logicalName": "NSPAccessLogs",
+      "description": "NSP Access logs of Private Endpoint traffic.",
+      "categories": [
+        "resources",
+        "network",
+        "audit",
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 12,
+      "dataTypeId": "MICROSOFTNETWORKSECURITYPERIMETERS_NSPPRIVATEINBOUNDALLOWED",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "outputSchema": {
+        "name": "NSPAccessLogs",
+        "version": 11
+      },
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "timeGeneratedEndTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "count",
+          "type": "Int"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/PrivateInboundAllowedTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Timestamp marking the start of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TimeGeneratedEndTime",
+          "type": "DateTime",
+          "description": "Timestamp indicating the end of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Count",
+          "type": "Int",
+          "description": "Total number of aggregated events.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "description": "Indicates top-level PaaS operation name.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationVersion",
+          "type": "String",
+          "description": "The API version associated with the operation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "description": "NSP access log categories.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "Indicates the region of NSP.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "description": "Additional description about the operation result, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Profile",
+          "type": "String",
+          "description": "Name of the NSP profile associated to the resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Parameters",
+          "type": "String",
+          "description": "List of optional PaaS resource properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceResourceId",
+          "type": "String",
+          "description": "Resource ID of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain Name (FQDN) of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of resource in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "MatchedRule",
+          "type": "String",
+          "description": "JSON property bag containing matched access rule name. It can be either NSP access rule name or resource rule name (not it's resource ID).",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceResourceId",
+          "type": "String",
+          "description": "Resource ID of source PaaS resource for an inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceIpAddress",
+          "type": "String",
+          "description": "IP address of source making inbound connection, when available.",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SourcePort",
+          "type": "String",
+          "description": "Port number of inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for inbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourcePerimeterGuids",
+          "type": "String",
+          "description": "List of perimeter GUIDs of source resource. It should be specified only if allowed based on perimeter GUID.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceAppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of source in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceParameters",
+          "type": "String",
+          "description": "List of optional source properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationResourceId",
+          "type": "String",
+          "description": "Resource ID of destination PaaS resource for an outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain(FQDN) name of the destination.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationParameters",
+          "type": "String",
+          "description": "List of optional destination properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPort",
+          "type": "String",
+          "description": "Port number of outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for outbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationEmailAddress",
+          "type": "String",
+          "description": "Email address of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPhoneNumber",
+          "type": "String",
+          "description": "Phone number of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AccessRuleVersion",
+          "type": "String",
+          "description": "Access rule version of the NSP profile to which PaaS resource is associated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDirection",
+          "type": "String",
+          "description": "Direction of evaluation result whether 'Inbound' or 'Outbound'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultAction",
+          "type": "String",
+          "description": "Indicates whether the result of evaluation is 'Approved' or 'Denied'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RuleType",
+          "type": "String",
+          "description": "Indicates where the rule is defined: NSP or PaaS resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TrafficType",
+          "type": "String",
+          "description": "Indicates whether traffic is 'Private', 'Public', 'Intra' or 'Cross' perimeter.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/NspPrivateInboundAllowedSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/NspPrivateInboundAllowedOutputSample.json"
+    },
+    {
+      "workflowName": "NspCrossPerimeterInboundAllowed",
+      "transformName": "NspCrossPerimeterInboundAllowed",
+      "physicalName": "NSPAccessLogs",
+      "logicalName": "NSPAccessLogs",
+      "description": "Logs for NSP perimeter link allowing cross perimeter inbound access.",
+      "categories": [
+        "resources",
+        "network",
+        "audit",
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 12,
+      "dataTypeId": "MICROSOFTNETWORKSECURITYPERIMETERS_NSPCROSSPERIMETERINBOUNDALLOWED",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "outputSchema": {
+        "name": "NSPAccessLogs",
+        "version": 11
+      },
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "timeGeneratedEndTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "count",
+          "type": "Int"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/CrossPerimeterInboundAllowedTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Timestamp marking the start of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TimeGeneratedEndTime",
+          "type": "DateTime",
+          "description": "Timestamp indicating the end of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Count",
+          "type": "Int",
+          "description": "Total number of aggregated events.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "description": "Indicates top-level PaaS operation name.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationVersion",
+          "type": "String",
+          "description": "The API version associated with the operation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "description": "NSP access log categories.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "Indicates the region of NSP.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "description": "Additional description about the operation result, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Profile",
+          "type": "String",
+          "description": "Name of the NSP profile associated to the resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Parameters",
+          "type": "String",
+          "description": "List of optional PaaS resource properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceResourceId",
+          "type": "String",
+          "description": "Resource ID of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain Name (FQDN) of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of resource in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "MatchedRule",
+          "type": "String",
+          "description": "JSON property bag containing matched access rule name. It can be either NSP access rule name or resource rule name (not it's resource ID).",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceResourceId",
+          "type": "String",
+          "description": "Resource ID of source PaaS resource for an inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceIpAddress",
+          "type": "String",
+          "description": "IP address of source making inbound connection, when available.",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SourcePort",
+          "type": "String",
+          "description": "Port number of inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for inbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourcePerimeterGuids",
+          "type": "String",
+          "description": "List of perimeter GUIDs of source resource. It should be specified only if allowed based on perimeter GUID.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceAppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of source in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceParameters",
+          "type": "String",
+          "description": "List of optional source properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationResourceId",
+          "type": "String",
+          "description": "Resource ID of destination PaaS resource for an outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain(FQDN) name of the destination.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationParameters",
+          "type": "String",
+          "description": "List of optional destination properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPort",
+          "type": "String",
+          "description": "Port number of outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for outbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationEmailAddress",
+          "type": "String",
+          "description": "Email address of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPhoneNumber",
+          "type": "String",
+          "description": "Phone number of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AccessRuleVersion",
+          "type": "String",
+          "description": "Access rule version of the NSP profile to which PaaS resource is associated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDirection",
+          "type": "String",
+          "description": "Direction of evaluation result whether 'Inbound' or 'Outbound'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultAction",
+          "type": "String",
+          "description": "Indicates whether the result of evaluation is 'Approved' or 'Denied'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RuleType",
+          "type": "String",
+          "description": "Indicates where the rule is defined: NSP or PaaS resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TrafficType",
+          "type": "String",
+          "description": "Indicates whether traffic is 'Private', 'Public', 'Intra' or 'Cross' perimeter.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/NspCrossPerimeterInboundAllowedSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/NspCrossPerimeterInboundAllowedOutputSample.json"
+    },
+    {
+      "workflowName": "NspCrossPerimeterOutboundAllowed",
+      "transformName": "NspCrossPerimeterOutboundAllowed",
+      "physicalName": "NSPAccessLogs",
+      "logicalName": "NSPAccessLogs",
+      "description": "Log category for NSP perimeter link allowing cross perimeter outbound access.",
+      "categories": [
+        "resources",
+        "network",
+        "audit",
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 12,
+      "dataTypeId": "MICROSOFTNETWORKSECURITYPERIMETERS_NSPCROSSPERIMETEROUTBOUNDALLOWED",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "outputSchema": {
+        "name": "NSPAccessLogs",
+        "version": 11
+      },
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "timeGeneratedEndTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "count",
+          "type": "Int"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/CrossPerimeterOutboundAllowedTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Timestamp marking the start of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TimeGeneratedEndTime",
+          "type": "DateTime",
+          "description": "Timestamp indicating the end of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Count",
+          "type": "Int",
+          "description": "Total number of aggregated events.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "description": "Indicates top-level PaaS operation name.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationVersion",
+          "type": "String",
+          "description": "The API version associated with the operation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "description": "NSP access log categories.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "Indicates the region of NSP.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "description": "Additional description about the operation result, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Profile",
+          "type": "String",
+          "description": "Name of the NSP profile associated to the resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Parameters",
+          "type": "String",
+          "description": "List of optional PaaS resource properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceResourceId",
+          "type": "String",
+          "description": "Resource ID of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain Name (FQDN) of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of resource in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "MatchedRule",
+          "type": "String",
+          "description": "JSON property bag containing matched access rule name. It can be either NSP access rule name or resource rule name (not it's resource ID).",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceResourceId",
+          "type": "String",
+          "description": "Resource ID of source PaaS resource for an inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceIpAddress",
+          "type": "String",
+          "description": "IP address of source making inbound connection, when available.",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SourcePort",
+          "type": "String",
+          "description": "Port number of inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for inbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourcePerimeterGuids",
+          "type": "String",
+          "description": "List of perimeter GUIDs of source resource. It should be specified only if allowed based on perimeter GUID.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceAppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of source in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceParameters",
+          "type": "String",
+          "description": "List of optional source properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationResourceId",
+          "type": "String",
+          "description": "Resource ID of destination PaaS resource for an outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain(FQDN) name of the destination.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationParameters",
+          "type": "String",
+          "description": "List of optional destination properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPort",
+          "type": "String",
+          "description": "Port number of outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for outbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationEmailAddress",
+          "type": "String",
+          "description": "Email address of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPhoneNumber",
+          "type": "String",
+          "description": "Phone number of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AccessRuleVersion",
+          "type": "String",
+          "description": "Access rule version of the NSP profile to which PaaS resource is associated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDirection",
+          "type": "String",
+          "description": "Direction of evaluation result whether 'Inbound' or 'Outbound'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultAction",
+          "type": "String",
+          "description": "Indicates whether the result of evaluation is 'Approved' or 'Denied'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RuleType",
+          "type": "String",
+          "description": "Indicates where the rule is defined: NSP or PaaS resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TrafficType",
+          "type": "String",
+          "description": "Indicates whether traffic is 'Private', 'Public', 'Intra' or 'Cross' perimeter.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/NspCrossPerimeterInboundAllowedSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/NspCrossPerimeterInboundAllowedOutputSample.json"
+    },
+    {
+      "workflowName": "NspOutboundAttempt",
+      "transformName": "NspOutboundAttempt",
+      "physicalName": "NSPAccessLogs",
+      "logicalName": "NSPAccessLogs",
+      "description": "Logs for an outbound attempt in hope of destination being in same perimeter or different perimeters connected by link.",
+      "categories": [
+        "resources",
+        "network",
+        "audit",
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 12,
+      "dataTypeId": "MICROSOFTNETWORKSECURITYPERIMETERS_NSPOUTBOUNDATTEMPT",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "outputSchema": {
+        "name": "NSPAccessLogs",
+        "version": 11
+      },
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "timeGeneratedEndTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "count",
+          "type": "Int"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/OutboundAttemptTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Timestamp marking the start of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TimeGeneratedEndTime",
+          "type": "DateTime",
+          "description": "Timestamp indicating the end of event aggregation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Count",
+          "type": "Int",
+          "description": "Total number of aggregated events.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "description": "Indicates top-level PaaS operation name.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationVersion",
+          "type": "String",
+          "description": "The API version associated with the operation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "description": "NSP access log categories.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "Indicates the region of NSP.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "description": "Additional description about the operation result, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Profile",
+          "type": "String",
+          "description": "Name of the NSP profile associated to the resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Parameters",
+          "type": "String",
+          "description": "List of optional PaaS resource properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceResourceId",
+          "type": "String",
+          "description": "Resource ID of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServiceFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain Name (FQDN) of PaaS resource emitting NSP access logs.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of resource in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "MatchedRule",
+          "type": "String",
+          "description": "JSON property bag containing matched access rule name. It can be either NSP access rule name or resource rule name (not it's resource ID).",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceResourceId",
+          "type": "String",
+          "description": "Resource ID of source PaaS resource for an inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceIpAddress",
+          "type": "String",
+          "description": "IP address of source making inbound connection, when available.",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SourcePort",
+          "type": "String",
+          "description": "Port number of inbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for inbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourcePerimeterGuids",
+          "type": "String",
+          "description": "List of perimeter GUIDs of source resource. It should be specified only if allowed based on perimeter GUID.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceAppId",
+          "type": "String",
+          "description": "Unique GUID representing the app ID of source in the Azure Active Directory.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceParameters",
+          "type": "String",
+          "description": "List of optional source properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationResourceId",
+          "type": "String",
+          "description": "Resource ID of destination PaaS resource for an outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationFqdn",
+          "type": "String",
+          "description": "Fully Qualified Domain(FQDN) name of the destination.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationParameters",
+          "type": "String",
+          "description": "List of optional destination properties in key-value pair format. For example: [ {Param1}: {value1}, {Param2}: {value2}, ...].",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPort",
+          "type": "String",
+          "description": "Port number of outbound connection, when available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationProtocol",
+          "type": "String",
+          "description": "Application layer protocol and transport layer protocol used for outbound connection in the format {AppProtocol}:{TransportProtocol}. For example: 'HTTPS:TCP'. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationEmailAddress",
+          "type": "String",
+          "description": "Email address of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationPhoneNumber",
+          "type": "String",
+          "description": "Phone number of destination receiver. It be must specified if available.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AccessRuleVersion",
+          "type": "String",
+          "description": "Access rule version of the NSP profile to which PaaS resource is associated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDirection",
+          "type": "String",
+          "description": "Direction of evaluation result whether 'Inbound' or 'Outbound'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultAction",
+          "type": "String",
+          "description": "Indicates whether the result of evaluation is 'Approved' or 'Denied'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RuleType",
+          "type": "String",
+          "description": "Indicates where the rule is defined: NSP or PaaS resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TrafficType",
+          "type": "String",
+          "description": "Indicates whether traffic is 'Private', 'Public', 'Intra' or 'Cross' perimeter.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/NspOutboundAttemptSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/NspOutboundAttemptOutputSample.json"
+    }
+  ],
+  "functions": [],
+  "queries": []
+}

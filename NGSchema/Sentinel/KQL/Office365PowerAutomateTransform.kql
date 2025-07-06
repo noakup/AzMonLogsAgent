@@ -1,0 +1,53 @@
+let recordTypeMap = parse_json('{ '
+' "1": "ExchangeAdmin", '
+' "2": "ExchangeItem", '
+' "3": "ExchangeItemGroup", '
+' "4": "SharePoint", '
+' "6": "SharePointFileOperation", '
+' "8": "AzureActiveDirectory", '
+' "9": "AzureActiveDirectoryAccountLogon",'
+' "10": "DataCenterSecurityCmdlet", '
+' "11": "ComplianceDLPSharePoint", '
+' "14": "SharePointSharingOperation", '
+' "15": "AzureActiveDirectoryStsLogon", '
+' "20": "PowerBIAudit", '
+' "25": "MicrosoftTeams", '
+' "30": "MicrosoftFlow" '
+' "35": "MicrosoftProjectEvents" '
+' }');
+let actorUserTypeMap = parse_json('{ '
+' "1": "User" ,'
+' "2": "Admin" '
+' }'); 
+let eventResultMap = parse_json('{ '
+' "Succeeded": "Success", '
+' "Failed": "Failure", '
+' "PartiallySucceeded ": "Partial" ,'
+' "": "" '
+' }');
+let sharingPermissionMap = parse_json('{ '
+' "1": "None", '
+' "2": "ReadOnly", '
+' "3": "ReadWrite" '
+' }');
+source
+| project
+ActorName = tostring(UserId),
+UserUpn = tostring(UserUPN),
+ActorUserId = tostring(UserKey),
+Workload = tostring(Workload),
+ActorUserType = tostring(actorUserTypeMap[tostring(UserTypeInitiated)]),
+EventOriginalType = tostring(Operation),
+EventOriginalUid = tostring(Id),
+EventResult = tostring(eventResultMap[tostring(ResultStatus)]),
+LicenseDisplayName = tostring(LicenseDisplayName),
+FlowDetailsUrl = tostring(FlowDetailsUrl),
+SharingPermission = tostring(sharingPermissionMap[tostring(SharingPermission)]),
+ObjectId = tostring(ObjectId),
+OrganizationId = tostring(OrganizationId),
+FlowConnectorNames = tostring(FlowConnectorNames),
+RecordType = tostring(recordTypeMap[tostring(RecordType)]),
+RecipientUpn = tostring(RecipientUPN),
+SrcIpAddr = tostring(ClientIP),
+TimeGenerated = todatetime(CreationTime),
+AdditionalInfo

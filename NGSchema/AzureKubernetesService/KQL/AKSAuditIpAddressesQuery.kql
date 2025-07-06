@@ -1,0 +1,5 @@
+AKSAudit
+| where ResponseStatus.code != 401  // Exclude unauthorized responses
+| mv-expand SourceIps               // Expand the list of SourceIp entries into individual rows
+| summarize Count = count() by SourceIp = tostring(SourceIps), ResourceId = _ResourceId
+| sort by Count desc

@@ -1,0 +1,9 @@
+source
+| extend Properties = parse_json(properties)
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    Level = level,
+    Location = location,
+    LinkConnectionName = linkConnectionName,
+    Properties

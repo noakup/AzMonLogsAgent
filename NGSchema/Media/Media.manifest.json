@@ -1,0 +1,640 @@
+{
+    "type": "Microsoft.Media/mediaservices",
+    "displayName": "Media Services",
+    "description": "All tables related to Azure Media Services",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Media Services/2nd Tier - Common Platform",
+    "contactDL": "amscisenc@microsoft.com",
+    "relatedTables": [
+        "AzureActivity",
+        "AzureMetrics"
+    ],
+    "tables": [
+        {
+            "name": "AMSKeyDeliveryRequests",
+            "description": "Key delivery requests logs from Azure Media Services. This table captures details for every HTTP request for key or license acquisition sent to Azure Media Services. It can be used to monitor encrypted content playback, and to diagnose issues with DRM license acquisition or Clear Key acquisition.",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "MICROSOFTMEDIA_KEYDELIVERYREQUESTS",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resultType",
+                    "type": "String"
+                },
+                {
+                    "name": "resultSignature",
+                    "type": "String"
+                },
+                {
+                    "name": "durationMs",
+                    "type": "Int"
+                },
+                {
+                    "name": "identity",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "level",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/AMSKeyDeliveryRequestsTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the event was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The name of the operation that triggered the event."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Azure Media Services operation version."
+                },
+                {
+                    "name": "ResultType",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Azure Media Services operation result type."
+                },
+                {
+                    "name": "ResultSignature",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Azure Media Services operation result signature."
+                },
+                {
+                    "name": "DurationMs",
+                    "type": "Int",
+                    "isDefaultDisplay": true,
+                    "description": "Azure Media Services operation duration in milli-seconds."
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Message level. Possible values are Informational, Warning, Error, Critical and Verbose."
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Location of the service sending the log."
+                },
+                {
+                    "name": "RequestId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Id of the request.",
+                    "dataTypeHint": "GUID"
+                },
+                {
+                    "name": "KeyType",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Could be one of the following values: Clear (no encryption), FairPlay, PlayReady, or Widevine."
+                },
+                {
+                    "name": "KeyId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The ID of the requested key.",
+                    "dataTypeHint": "GUID"
+                },
+                {
+                    "name": "TokenType",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The token type."
+                },
+                {
+                    "name": "PolicyName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The Azure Resource Manager name of the policy."
+                },
+                {
+                    "name": "StatusMessage",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The status message."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AMSKeyDeliveryRequestsSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AMSKeyDeliveryRequestsOutputSample.json"
+        },
+        {
+            "name": "AMSMediaAccountHealth",
+            "description": "Media Account Health Status. This table captures the Azure Media Services account health status. It can be used to diagnose issues for unhealthy accounts.",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "MICROSOFTMEDIA_MEDIAACCOUNT",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "level",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/AMSMediaAccountHealthTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the event was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The name of the operation that triggered the event."
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Message level. Possible values are Informational, Warning, Error, Critical and Verbose."
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Location of the service sending the log."
+                },
+                {
+                    "name": "EventCode",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The event code."
+                },
+                {
+                    "name": "EventMessage",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The event status message."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AMSMediaAccountHealthSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AMSMediaAccountHealthOutputSample.json"
+        },
+        {
+            "name": "AMSLiveEventOperations",
+            "description": "Contains logs related to a Live Event. Logs are sent when an encoder connects, disconnects, or if there is a discontinuity in the media data.",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "MICROSOFTMEDIA_LIVEEVENTSTATE",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "level",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/AMSLiveEventOperationsTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) when the event was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The name of the operation that triggered the event."
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Message level. Possible values are Informational, Warning, Error, Critical and Verbose."
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Location of the service sending the event."
+                },
+                {
+                    "name": "Properties",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true,
+                    "description": "Operation details."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AMSLiveEventOperationsSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AMSLiveEventOperationsOutputSample.json"
+        },
+        {
+            "name": "AMSStreamingEndpointRequests",
+            "description": "Contains information about requests to streaming endpoints. A streaming endpoint receives HTTP requests needed to stream video content. These requests usually come from video players or from the CDN.",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "MICROSOFTMEDIA_STREAMINGENDPOINTREQUESTS",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "level",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/AMSStreamingEndpointRequestsTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) when the event was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The name of the operation that triggered the event."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Azure Media Services operation version."
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Message level. Possible values are Informational, Warning, Error, Critical and Verbose."
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Location of the service sending the event."
+                },
+                {
+                    "name": "ClientIP",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "IP address of the client.",
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "URL",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The streaming URL from Azure Media Services.",
+                    "dataTypeHint": "URI"
+                },
+                {
+                    "name": "Status",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Status code of the request."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AMSStreamingEndpointRequestsSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AMSStreamingEndpointRequestsOutputSample.json"
+        }
+    ],
+    "functions": [],
+    "queries": [
+        {
+            "id": "8b5511d4-2df9-445f-ac8c-183615aeff4f",
+            "displayName":"Key delivery successful request count by key type",
+            "description": "Summarizes the count of successful key delivery requests by different key types.",
+            "bodyFilePath": "KQL/AMSKeyDeliverySuccessfulRequestCountQuery.kql",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "tags": {
+                "Topic": [ "Usage" ]
+            },
+            "relatedTables": [
+                "AMSKeyDeliveryRequests"
+            ],
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        },
+        {
+            "id": "b098e967-079a-4467-898a-8568b6f96f6a",
+            "displayName":"Key delivery failed requests",
+            "description": "Lists the details of failed key delivery requests.",
+            "bodyFilePath": "KQL/AMSKeyDeliveryFailedRequestsQuery.kql",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "tags": {
+                "Topic": [ "Diagnostics" ]
+            },
+            "relatedTables": [
+                "AMSKeyDeliveryRequests"
+            ],
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        },
+        {
+            "id": "e5d93d90-7ff9-4c4d-b46f-5bc037afa284",
+            "displayName":"Key delivery requests latency at 95 and 99 percentiles",
+            "description": "Estimates the key delivery requests latency at 95th and 99th percentiles.",
+            "bodyFilePath": "KQL/AMSKeyDeliveryLatency95and99PercentilesQuery.kql",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "tags": {
+                "Topic": [ "Performance" ]
+            },
+            "relatedTables": [
+                "AMSKeyDeliveryRequests"
+            ],
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        },
+        {
+            "id": "7308fa13-7b01-48d3-b9b6-8ac464ba5b3f",
+            "displayName":"Media account health events",
+            "description": "Lists Media account health events details.",
+            "bodyFilePath": "KQL/AMSMediaAccountHealthEventsQuery.kql",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "tags": {
+                "Topic": [
+                    "Audit",
+                    "Diagnostics"
+                ]
+            },
+            "relatedTables": [
+                "AMSMediaAccountHealth"
+            ],
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        },
+        {
+            "id": "fba0fd35-f822-4df0-bc10-2ca0d9041d63",
+            "displayName":"Live event ingest discontinuity operation count",
+            "description": "Summarizes the count of ingest discontinuities by different live events.",
+            "bodyFilePath": "KQL/AMSLiveEventDiscCountQuery.kql",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "tags": {
+                "Topic": [
+                    "Audit"
+                ]
+            },
+            "relatedTables": [
+                "AMSLiveEventOperations"
+            ],
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        },
+        {
+            "id": "ecdcd5a9-ac4e-4e24-9ce6-bcb9b2e0cfa6",
+            "displayName":"Live event error operations",
+            "description": "Lists the live event error operations.",
+            "bodyFilePath": "KQL/AMSLiveEventErrorQuery.kql",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "tags": {
+                "Topic": [
+                    "Diagnostics"
+                ]
+            },
+            "relatedTables": [
+                "AMSLiveEventOperations"
+            ],
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        },
+        {
+            "id": "1b582828-0234-4b71-9949-c9e08be3bc04",
+            "displayName":"Streaming endpoint successful request count by client IP",
+            "description": "Summarizes the count of successful streaming endpoint requests by different client IPs.",
+            "bodyFilePath": "KQL/AMSStreamingEndpointSuccessfulRequestCountQuery.kql",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "tags": {
+                "Topic": [
+                    "Usage"
+                ]
+            },
+            "relatedTables": [
+                "AMSStreamingEndpointRequests"
+            ],
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        },
+        {
+            "id": "3a2a2aea-8ada-497f-8ff1-e3a01c2469da",
+            "displayName":"Streaming endpoint informational requests",
+            "description": "Lists details of streaming endpoint requests with log level equal to informational.",
+            "bodyFilePath": "KQL/AMSStreamingEndpointRequestInformationalQuery.kql",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "tags": {
+                "Topic": [
+                    "Audit"
+                ]
+            },
+            "relatedTables": [
+                "AMSStreamingEndpointRequests"
+            ],
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        }
+    ]
+}

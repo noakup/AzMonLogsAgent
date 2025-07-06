@@ -1,0 +1,32 @@
+[
+    {
+        "ContainerName": "syslog",
+        "NamespaceName": "nc-system",
+        "Node": "j18r650mgr1",
+        "PodName": "strgmgmt-5dbb9f8d8c-w65zw",
+        "arrayId": "3d4ada38-40dd-44ca-8752-9f338488c3ab",
+        "arrayName": "b37j18purestor1",
+        "arrayUTCtime": "2023 Jun 18 18:00:32",
+        "caArrayId": "2904085-92959676-4679654599754611586",
+        "category": "StorageApplianceAlert",
+        "clusterManagerName": "j18-qvduxzffwnrxy",
+        "clusterName": "j18-c0d28c8f7cd3",
+        "controller": "ct1",
+        "controllerSerial": "PCTFJ214900F9",
+        "domain": "example.com",
+        "ipaddress": "172.27.255.254:47484",
+        "knowledgeBaseArticle": "https://support.purestorage.com/?cid=Alert_0184",
+        "location": "eastus2euap",
+        "logtext": "<180>Jun 18 18:00:33 B37CAN01A1PU01-ct0 purity.alert[12671]: WARNING High CRC and/or Phy error count [184] The interface(s) has/have an increasing high CRC and/or Phy error count. This may indicate an issue with the cable(s). A high count of CRC and/or Phy errors can lead to increased latency and reduced throughput. Severity: Warning  UTC Time: 2023 Jun 18 18:00:32 Array Time: 2023 Jun 18 18:00:32 UTC Array Name: B37CAN01A1PU01 Domain: example.com Suggested Action: Contact Pure Storage Support. Have the text of the electronic mail or SNMP trap available.  Knowledge Base Article: https://support.purestorage.com/?cid=Alert_0184 Purity Version: 6.1.14 Array ID: 3d4ada38-40dd-44ca-8752-9f338488c3ab CA Array ID: 2904085-92959676-4679654599754611586 Controller Name: ct0 Controller Serial: PCTFJ214900F9  Chassis Serial: PCHFJ2207002E UUIDs: ['29a6f9f826a54d19b0cc646f6a006716'] Variables: (below) Output: 15 PHY errors increase count on CT0.ETH19",
+        "message": "WARNING High CRC and/or Phy error count [184] The interface(s) has/have an increasing high CRC and/or Phy error count. This may indicate an issue with the cable(s). A high count of CRC and/or Phy errors can lead to increased latency and reduced throughput.",
+        "onbehalfAnnotations": "<Config onBehalfFields=\"resourceId,category\" priority=\"Normal\" primaryPartitionField=\"resourceId\" validJsonColumns=\"originalRecord\" excludeFields=\"Tenant,Role,RoleInstance,BMServerName,PreciseTimeStamp,FluentdIngestTimestamp,TIMESTAMP,ContainerImage,GenevaPodName,environment,clusterID,clusterManagedResourceGroupName,clusterManagerID,clusterManagerResourceGroupName,clusterResourceGroupName,Tag,tenantID\" containerSuffix=\"$category\" />",
+        "onbehalfServiceId": "Microsoft.NetworkCloud",
+        "operationName": "Microsoft.NetworkCloud/storageAppliances/read",
+        "purityVersion": "6.1.14",
+        "resourceId": "/SUBSCRIPTIONS/A3EEB848-665A-4DBF-80A4-EB460930FB23/RESOURCEGROUPS/J18-C0D28C8F7CD3-HOSTEDRESOURCES-3781AC00/PROVIDERS/MICROSOFT.NETWORKCLOUD/STORAGEAPPLIANCES/B37J18PURESTOR1",
+        "severity": "Success",
+        "subscriptionID": "a3eeb848-665a-4dbf-80a4-eb460930fb23",
+        "suggestedAction": "Contact Pure Storage Support. Have the text of the electronic mail or SNMP trap available.",
+        "user": "lma"
+    }
+]

@@ -1,0 +1,19 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    Location = location,
+    ContainerName = tostring(properties.ContainerName),
+    EnvironmentName = tostring(properties.EnvironmentName),
+    Log = tostring(properties.Log),
+    RevisionName = tostring(properties.RevisionName),
+    Type = tostring(properties.Type),
+    ContainerAppName = tostring(properties.ContainerAppName),
+    ReplicaName = tostring(properties.ReplicaName),
+    Reason = tostring(properties.Reason),
+    EventSource = tostring(properties.EventSource),
+    Count = toint(properties.Count),
+    JobName = tostring(properties.ContainerJobName),
+    ComponentType = tostring(properties.ComponentType),
+    ComponentName = tostring(properties.ComponentName)
+    

@@ -1,0 +1,4 @@
+AMSLiveEventOperations
+| where Level == "Error"
+| project _ResourceId, OperationName
+| limit 100

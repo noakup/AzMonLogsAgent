@@ -1,0 +1,124 @@
+[
+    {
+        "time": "2023-12-14T02:24:13.1322916Z",
+        "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/LOGICAPPINTEGRATIONACCOUNT/PROVIDERS/MICROSOFT.LOGIC/INTEGRATIONACCOUNTS/IALOGICAPPLEARN",
+        "operationName": "Microsoft.Logic/integrationAccounts/trackingEvents",
+        "operationVersion": "2015-08-01-preview",
+        "category": "IntegrationAccountTrackingEvents",
+        "correlationId": "ba169c3b-e907-4cb8-a785-5008629d18bb",
+        "properties": {
+            "trackingId": "1e306413-33dd-4431-8273-3f2394d3b783",
+            "sourceType": "Microsoft.Logic/workflows",
+            "source": {
+                "workflow": {
+                    "systemId": "5d1d563213114162b38b4c2c351e2a28",
+                    "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+                    "resourceGroup": "xslparam_group",
+                    "name": "x12roundtrip",
+                    "version": "08584990862826028661"
+                },
+                "runInstance": {
+                    "runId": "08584990862326307445020194186CU16",
+                    "trackingId": "5270ab99-3268-492e-99cf-0552b5cc92c3",
+                    "clientTrackingId": "08584990862326307445020194186CU16"
+                },
+                "operation": {
+                    "operationName": "Decode_X12_message",
+                    "repeatItemScopeName": "",
+                    "trackingId": "ba169c3b-e907-4cb8-a785-5008629d18bb",
+                    "correlationId": "9c72fd3a-f319-4755-9083-a347efc2d122",
+                    "clientRequestId": "ba169c3b-e907-4cb8-a785-5008629d18bb",
+                    "operationTrackingId": "fac5ae5f-3e64-4af0-959f-dd8b21bba577"
+                }
+            },
+            "event": {
+                "record": {
+                    "agreementProperties": {
+                        "senderPartnerName": "",
+                        "receiverPartnerName": "",
+                        "senderQualifier": "",
+                        "senderIdentifier": "",
+                        "receiverQualifier": "",
+                        "receiverIdentifier": "",
+                        "agreementName": ""
+                    },
+                    "messageProperties": {
+                        "direction": "Receive",
+                        "interchangeControlNumber": "",
+                        "isTechnicalAcknowledgmentExpected": false,
+                        "isMessageFailed": true
+                    }
+                },
+                "eventLevel": "Informational",
+                "eventTime": "2023-12-14T02:24:13.1125367Z",
+                "recordType": "X12Interchange",
+                "error": {
+                    "message": "Error: 1 (Field level error)\r\n\tSegmentID: ISA\r\n\tPosition in TS: 1\r\n\tData Element ID: ISA11\r\n\tPosition in Segment: 11\r\n\tData Value:  \r\n\t7: Invalid code value\r\n\r\n",
+                    "code": "BadRequest"
+                }
+            }
+        },
+        "location": "westus2"
+    },
+    {
+        "time": "2023-12-14T02:31:43.2698759Z",
+        "resourceId": "/SUBSCRIPTIONS/A1A62E35-66D7-4123-BAAA-6D478829F390/RESOURCEGROUPS/LOGICAPPINTEGRATIONACCOUNT/PROVIDERS/MICROSOFT.LOGIC/INTEGRATIONACCOUNTS/IALOGICAPPLEARN",
+        "operationName": "Microsoft.Logic/integrationAccounts/trackingEvents",
+        "operationVersion": "2015-08-01-preview",
+        "category": "IntegrationAccountTrackingEvents",
+        "correlationId": "ecb38d56-d385-4052-b858-c2775b11f287",
+        "properties": {
+            "trackingId": "6b5d7eca-94de-4f5a-8a48-e1781d52e7f7",
+            "sourceType": "Microsoft.Logic/workflows",
+            "source": {
+                "workflow": {
+                    "systemId": "5d1d563213114162b38b4c2c351e2a28",
+                    "subscriptionId": "a1a62e35-66d7-4123-baaa-6d478829f390",
+                    "resourceGroup": "xslparam_group",
+                    "name": "x12roundtrip",
+                    "version": "08584990858961098998"
+                },
+                "runInstance": {
+                    "runId": "08584990857824145211343454361CU08",
+                    "trackingId": "471b3ac0-58a0-42e3-90db-437a65a703dc",
+                    "clientTrackingId": "08584990857824145211343454361CU08"
+                },
+                "operation": {
+                    "operationName": "Decode_X12_message",
+                    "repeatItemScopeName": "",
+                    "trackingId": "ecb38d56-d385-4052-b858-c2775b11f287",
+                    "correlationId": "a5b9e76d-ad4f-46bc-83b8-0a60c89b4f92",
+                    "clientRequestId": "ecb38d56-d385-4052-b858-c2775b11f287",
+                    "operationTrackingId": "4b788f1d-6a46-4da6-97eb-45da9c92a603"
+                }
+            },
+            "event": {
+                "record": {
+                    "agreementProperties": {
+                        "senderPartnerName": "",
+                        "receiverPartnerName": "",
+                        "senderQualifier": "",
+                        "senderIdentifier": "",
+                        "receiverQualifier": "",
+                        "receiverIdentifier": "",
+                        "agreementName": ""
+                    },
+                    "messageProperties": {
+                        "direction": "Receive",
+                        "interchangeControlNumber": "",
+                        "isTechnicalAcknowledgmentExpected": false,
+                        "isMessageFailed": true
+                    }
+                },
+                "eventLevel": "Informational",
+                "eventTime": "2023-12-14T02:31:43.2559542Z",
+                "recordType": "X12Interchange",
+                "error": {
+                    "message": "Error: 1 (Field level error)\r\n\tSegmentID: ISA\r\n\tPosition in TS: 1\r\n\tData Element ID: ISA11\r\n\tPosition in Segment: 11\r\n\tData Value:  \r\n\t7: Invalid code value\r\n\r\n",
+                    "code": "BadRequest"
+                }
+            }
+        },
+        "location": "westus2"
+    }
+]

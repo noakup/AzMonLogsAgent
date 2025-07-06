@@ -1,0 +1,4 @@
+AZMSDiagnosticErrorLogs
+| where Provider =~ "ServiceBus"
+| project  ActivityName, _ResourceId, OperationResult,ErrorMessage
+| summarize by ActivityName

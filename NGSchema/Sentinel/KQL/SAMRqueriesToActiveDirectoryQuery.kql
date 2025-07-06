@@ -1,0 +1,15 @@
+// Find processes that sent SAMR queries to Active Directory
+IdentityQueryEvents
+| where ActionType == "SAMR query"
+//    and isnotempty(AccountName)
+| project QueryTime = Timestamp, DeviceName, AccountName, Query, QueryTarget
+| join kind=inner (
+DeviceProcessEvents
+| extend DeviceName = toupper(trim(@"\..*$",DeviceName))
+//| where InitiatingProcessCommandLine contains "net.exe"
+| project ProcessCreationTime = Timestamp, DeviceName, AccountName,
+     InitiatingProcessFileName , InitiatingProcessCommandLine
+    ) on DeviceName//, AccountName
+| where ProcessCreationTime - QueryTime between (-2m .. 2m)
+| project QueryTime, DeviceName, InitiatingProcessFileName, InitiatingProcessCommandLine, Query, QueryTarget //,AccountName
+ | limit 100

@@ -1,0 +1,4 @@
+AzureAttestationDiagnostics
+| where TimeGenerated > ago(1d)
+| summarize count() by bin(TimeGenerated, 1h), OperationName // Aggregate by hour
+| render timechart

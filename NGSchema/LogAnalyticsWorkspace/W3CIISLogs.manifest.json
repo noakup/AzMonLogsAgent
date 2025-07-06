@@ -1,0 +1,519 @@
+{
+  "type": "Microsoft.Compute/VirtualMachines",
+  "displayName": "Virtual machines",
+  "description": "",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Azure Log Analytics/Data Puller",
+  "relatedTables": [],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "workflowName": "W3CIISLogV2Workflow",
+      "transformName": "W3CIISLog",
+      "physicalName": "W3CIISLog",
+      "logicalName": "W3CIISLog",
+      "outputSchema": {
+        "name": "W3CIISLog",
+        "version": 13
+      },
+      "description": "Internet Information Server (IIS) log on Windows computers using the Log Analytics agent.",
+      "categories": [
+        "management"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 9,
+      "dataTypeId": "ONPREM_IIS_BLOB_V2",
+      "intelligencePacks": [ "LogManagement" ],
+      "isResourceCentric": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "tableState": "Production",
+		  "input": [
+        {
+          "name": "SourceSystem",
+          "type": "String"
+        },
+        {
+          "name": "FileUri",
+          "type": "String"
+        },
+        {
+          "name": "FileOffset",
+          "type": "Int"
+        },
+        {
+          "name": "StorageAccount",
+          "type": "String"
+        },
+        {
+          "name": "AzureDeploymentID",
+          "type": "String"
+        },
+        {
+          "name": "Role",
+          "type": "String"
+        },
+        {
+          "name": "RoleInstance",
+          "type": "String"
+        },
+        {
+          "name": "Date",
+          "type": "String"
+        },
+        {
+          "name": "Time",
+          "type": "String"
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "String"
+        },
+        {
+          "name": "sSiteName",
+          "type": "String"
+        },
+        {
+          "name": "sComputerName",
+          "type": "String"
+        },
+        {
+          "name": "sIP",
+          "type": "String"
+        },
+        {
+          "name": "csMethod",
+          "type": "String"
+        },
+        {
+          "name": "csUriStem",
+          "type": "String"
+        },
+        {
+          "name": "csUriQuery",
+          "type": "String"
+        },
+        {
+          "name": "sPort",
+          "type": "String"
+        },
+        {
+          "name": "csUserName",
+          "type": "String"
+        },
+        {
+          "name": "cIP",
+          "type": "String"
+        },
+        {
+          "name": "csVersion",
+          "type": "String"
+        },
+        {
+          "name": "csUserAgent",
+          "type": "String"
+        },
+        {
+          "name": "csCookie",
+          "type": "String"
+        },
+        {
+          "name": "csReferer",
+          "type": "String"
+        },
+        {
+          "name": "csHost",
+          "type": "String"
+        },
+        {
+          "name": "scStatus",
+          "type": "String"
+        },
+        {
+          "name": "scSubStatus",
+          "type": "String"
+        },
+        {
+          "name": "scWin32Status",
+          "type": "String"
+        },
+        {
+          "name": "scBytes",
+          "type": "String"
+        },
+        {
+          "name": "csBytes",
+          "type": "String"
+        },
+        {
+          "name": "TimeTaken",
+          "type": "String"
+        },
+        {
+          "name": "Computer",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/W3CIISLogTransform.kql",
+      "columns": [
+        {
+          "name": "TenantId",
+          "description": "ID of the workspace that stores this record.",
+          "isPreferredFacet": false,
+          "isHidden": true,
+          "type": "Guid"
+        },
+        {
+          "name": "SourceSystem",
+          "description": "Type of agent the event was collected from. Possible values are OpsManager and AzureStorage.",
+          "isPreferredFacet": true,
+          "isDefaultDisplay": false,
+          "type": "String"
+        },
+        {
+          "name": "FileUri",
+          "description": "Only populated for IIS logs collected from Azure Cloud Services (through Azure Diagnostics Extension).",
+          "isPreferredFacet": false,
+          "isHidden": true,
+          "isDefaultDisplay": false,
+          "type": "String"
+        },
+        {
+          "name": "FileOffset",
+          "description": "Only populated for IIS logs collected from Azure Cloud Services (through Azure Diagnostics Extension).",
+          "isPreferredFacet": false,
+          "isHidden": true,
+          "isDefaultDisplay": false,
+          "type": "Int"
+        },
+        {
+          "name": "StorageAccount",
+          "description": "Only populated for IIS logs collected from Azure Cloud Services through Azure Diagnostics Extension.",
+          "isPreferredFacet": true,
+          "isDefaultDisplay": true,
+          "type": "String"
+        },
+        {
+          "name": "AzureDeploymentID",
+          "description": "Azure deployment ID of the cloud service the log belongs to. Only populated when events are collected using Azure Diagnostics agent  when data is pulled from Azure storage.",
+          "isPreferredFacet": true,
+          "isDefaultDisplay": true,
+          "type": "String"
+        },
+        {
+          "name": "Role",
+          "description": "Role instance of the cloud service the log belongs to. Only populated when events are collected using Azure Diagnostics agent and data is pulled from Azure storage.",
+          "isPreferredFacet": true,
+          "isDefaultDisplay": true,
+          "type": "String"
+        },
+        {
+          "name": "RoleInstance",
+          "description": "Role of the cloud service the log belongs to. Only populated when events are collected using Azure Diagnostics agent and data is pulled from Azure storage.",
+          "isPreferredFacet": true,
+          "isDefaultDisplay": true,
+          "type": "String"
+        },
+        {
+          "name": "Date",
+          "description": "Date the activity occurred.",
+          "isPreferredFacet": false,
+          "isHidden": true,
+          "isDefaultDisplay": false,
+          "type": "String"
+        },
+        {
+          "name": "Time",
+          "description": "The time the activity occurred in UTC.",
+          "isPreferredFacet": false,
+          "isHidden": true,
+          "isDefaultDisplay": false,
+          "type": "String"
+        },
+        {
+          "name": "TimeGenerated",
+          "description": "Date and time the record was created.",
+          "isPreferredFacet": false,
+          "isDefaultDisplay": false,
+          "type": "DateTime"
+        },
+        {
+          "name": "sSiteName",
+          "description": "Name of the IIS site.",
+          "isPreferredFacet": true,
+          "isDefaultDisplay": true,
+          "type": "String"
+        },
+        {
+          "name": "sComputerName",
+          "description": "Name of the server on which the log file entry was generated.",
+          "isPreferredFacet": true,
+          "isHidden": true,
+          "isDefaultDisplay": false,
+          "type": "String"
+        },
+        {
+          "name": "sIP",
+          "description": "IP address of the server on which the log file entry was generated.",
+          "isPreferredFacet": true,
+          "isDefaultDisplay": true,
+          "type": "String",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "csMethod",
+          "description": "Method of the request such as GET or POST.",
+          "isPreferredFacet": true,
+          "isDefaultDisplay": true,
+          "type": "String"
+        },
+        {
+          "name": "csUriStem",
+          "description": "Target of the action such as a web page for example Default.htm.",
+          "isPreferredFacet": true,
+          "isDefaultDisplay": false,
+          "type": "String"
+        },
+        {
+          "name": "csUriQuery",
+          "description": "The query if any that the client was trying to perform. A Universal Resource Identifier (URI) query is necessary only for dynamic pages.",
+          "isPreferredFacet": true,
+          "isDefaultDisplay": false,
+          "type": "String"
+        },
+        {
+          "name": "sPort",
+          "description": "Server port number that is configured for the service.",
+          "isPreferredFacet": true,
+          "isDefaultDisplay": false,
+          "type": "Int"
+        },
+        {
+          "name": "csUserName",
+          "description": "Name of the authenticated user that accessed the server. Anonymous users are indicated by a hyphen.",
+          "isPreferredFacet": true,
+          "isDefaultDisplay": false,
+          "type": "String"
+        },
+        {
+          "name": "cIP",
+          "description": "IP address of the client that accessed the web server.",
+          "isPreferredFacet": true,
+          "isDefaultDisplay": true,
+          "type": "String",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "csVersion",
+          "description": "Protocol version that the client used.",
+          "isPreferredFacet": true,
+          "isDefaultDisplay": false,
+          "type": "String"
+        },
+        {
+          "name": "csUserAgent",
+          "description": "Browser type of the client.",
+          "isPreferredFacet": true,
+          "isDefaultDisplay": true,
+          "type": "String"
+        },
+        {
+          "name": "csCookie",
+          "description": "Content of the cookie sent or received if any.",
+          "isPreferredFacet": false,
+          "isDefaultDisplay": false,
+          "type": "String"
+        },
+        {
+          "name": "csReferer",
+          "description": "Site that the user last visited. This site provided a link to the current site.",
+          "isPreferredFacet": true,
+          "isDefaultDisplay": false,
+          "type": "String",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "csHost",
+          "description": "Host header name if any.",
+          "isPreferredFacet": true,
+          "isDefaultDisplay": false,
+          "type": "String"
+        },
+        {
+          "name": "scStatus",
+          "description": "HTTP status code.",
+          "isPreferredFacet": true,
+          "isDefaultDisplay": true,
+          "type": "String"
+        },
+        {
+          "name": "scSubStatus",
+          "description": "Substatus error code.",
+          "isPreferredFacet": true,
+          "isDefaultDisplay": false,
+          "type": "String"
+        },
+        {
+          "name": "scWin32Status",
+          "description": "Windows status code.",
+          "isPreferredFacet": true,
+          "isDefaultDisplay": false,
+          "type": "String"
+        },
+        {
+          "name": "scBytes",
+          "description": "Number of bytes that the server sent.",
+          "isPreferredFacet": false,
+          "isDefaultDisplay": false,
+          "type": "BigInt"
+        },
+        {
+          "name": "csBytes",
+          "description": "Number of bytes that the server received.",
+          "isPreferredFacet": false,
+          "isDefaultDisplay": false,
+          "type": "BigInt"
+        },
+        {
+          "name": "TimeTaken",
+          "description": "Length of time to process the request in milliseconds.",
+          "isPreferredFacet": false,
+          "isDefaultDisplay": true,
+          "type": "BigInt"
+        },
+        {
+          "name": "Computer",
+          "description": "Name of the computer that the event was collected from.",
+          "isPreferredFacet": true,
+          "isDefaultDisplay": true,
+          "type": "String"
+        },
+        {
+          "name": "MG",
+          "description": "Id of the management group for System Center Operations Manager agents.",
+          "isHidden": true,
+          "type": "Guid"
+        },
+        {
+          "name": "ManagementGroupName",
+          "description": "Name of the management group for Operations Manager agents. For other agents this is AOI-<workspace ID>.",
+          "isPreferredFacet": true,
+          "type": "String"
+        },
+        {
+          "name": "MaliciousIP",
+          "description": "Only populated for IIS logs collected from Azure Cloud Services (through Azure Diagnostics Extension).",
+          "isPreferredFacet": true,
+          "isHidden": false,
+          "isDefaultDisplay": true,
+          "type": "String",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "IndicatorThreatType",
+          "description": "Only populated for IIS logs collected from Azure Cloud Services (through Azure Diagnostics Extension).",
+          "isPreferredFacet": true,
+          "isHidden": false,
+          "type": "String"
+        },
+        {
+          "name": "Description",
+          "description": "Only populated for IIS logs collected from Azure Cloud Services (through Azure Diagnostics Extension).",
+          "isPreferredFacet": false,
+          "isHidden": false,
+          "isDefaultDisplay": true,
+          "type": "String"
+        },
+        {
+          "name": "TLPLevel",
+          "description": "Only populated for IIS logs collected from Azure Cloud Services through Azure Diagnostics Extension.",
+          "isPreferredFacet": true,
+          "isHidden": false,
+          "type": "String"
+        },
+        {
+          "name": "Confidence",
+          "description": "Only populated for IIS logs collected from Azure Cloud Services through Azure Diagnostics Extension.",
+          "isPreferredFacet": true,
+          "isHidden": false,
+          "type": "String"
+        },
+        {
+          "name": "Severity",
+          "description": "Only populated for IIS logs collected from Azure Cloud Services through Azure Diagnostics Extension.",
+          "isPreferredFacet": true,
+          "isHidden": false,
+          "isDefaultDisplay": true,
+          "type": "Int"
+        },
+        {
+          "name": "FirstReportedDateTime",
+          "description": "Only populated for IIS logs collected from Azure Cloud Services (through Azure Diagnostics Extension).",
+          "isPreferredFacet": false,
+          "isHidden": false,
+          "type": "String"
+        },
+        {
+          "name": "LastReportedDateTime",
+          "description": "Only populated for IIS logs collected from Azure Cloud Services (through Azure Diagnostics Extension).",
+          "isPreferredFacet": false,
+          "isHidden": false,
+          "type": "String"
+        },
+        {
+          "name": "IsActive",
+          "description": "Only populated for IIS logs collected from Azure Cloud Services (through Azure Diagnostics Extension).",
+          "isPreferredFacet": true,
+          "isHidden": false,
+          "type": "String"
+        },
+        {
+          "name": "ReportReferenceLink",
+          "description": "Only populated for IIS logs collected from Azure Cloud Services (through Azure Diagnostics Extension)",
+          "isPreferredFacet": false,
+          "isHidden": true,
+          "type": "String",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "AdditionalInformation",
+          "description": "Only populated for IIS logs collected from Azure Cloud Services through Azure Diagnostics Extension.",
+          "isPreferredFacet": false,
+          "isHidden": true,
+          "type": "String"
+        },
+        {
+          "transformName": "RemoteIPLongitude",
+          "physicalName": "RemoteIPLongitude_Internal",
+          "logicalName": "RemoteIPLongitude",
+          "description": "Longitude of the client IP address.",
+          "isPreferredFacet": false,
+          "isHidden": false,
+          "type": "Float"
+        },
+        {
+          "transformName": "RemoteIPLatitude",
+          "physicalName": "RemoteIPLatitude_Internal",
+          "logicalName": "RemoteIPLatitude",
+          "description": "Latitude of the client IP address.",
+          "isPreferredFacet": false,
+          "isHidden": false,
+          "type": "Float"
+        },
+        {
+          "name": "RemoteIPCountry",
+          "description": "Country/region of the IP address of the client.",
+          "isPreferredFacet": true,
+          "isHidden": false,
+          "isDefaultDisplay": true,
+          "type": "String"
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/W3CIISLogSample1.json"
+    }
+  ],
+  "functions": [],
+  "queries": []
+}

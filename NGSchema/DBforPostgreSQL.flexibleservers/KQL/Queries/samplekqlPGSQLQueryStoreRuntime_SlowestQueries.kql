@@ -1,0 +1,5 @@
+// PlanId is captured only if pg_qs.store_query_plans=ON
+PGSQLQueryStoreRuntime
+| where IsSystemQuery==false //excludes azure managed user
+| summarize AvgMeanExecDuration=avg(MeanExecDurationMs),MaxExecDuration=max(MaxExecDurationMs) by QueryId, PlanId, QueryType, UserId, DatabaseId
+| top 10 by AvgMeanExecDuration desc

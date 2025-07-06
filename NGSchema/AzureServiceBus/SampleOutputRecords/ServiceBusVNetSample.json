@@ -1,0 +1,11 @@
+[
+    {
+        "NamespaceName": "namespace-name",
+        "TimeGenerated" :"1/1/2021 8:40:06 PM +00:00",
+        "AddressIp": "1.2.3.4",
+        "Action": "Accept Connection",
+        "Message": "IP is accepted by IPAddress filter.",
+        "Count": 1,
+        "Provider": "servicebus"
+    }
+]

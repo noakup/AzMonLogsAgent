@@ -1,0 +1,41 @@
+[
+    {
+        "time": "2022-02-01T13:31:28.707199Z",
+        "resourceId": "/SUBSCRIPTIONS/00001111-0000-0000-0000-000022220000/RESOURCEGROUPS/TESTRESOURCEGROUP/PROVIDERS/MICROSOFT.OPENLOGISTICSPLATFORM/WORKSPACES/WORKSPACEID",
+        "operationName": "Microsoft.OpenLogisticsPlatform.EntityUpdated",
+        "category": "SupplyChainEventLog",
+        "durationMs": 1540,
+        "correlationId": "20220201023529",
+        "properties": {
+            "requestId": "20220201023529",
+            "eventId":"5ab10b11-b889-40e0-937f-c31c6668b9d1",
+            "eventBody": {
+                "id": "5ab10b11-b889-40e0-937f-c31c6668b9d1",
+                "subject": "/openlogisticsplatform/workspaces/workspaceid/items/item1",
+                "data": {
+                    "EntityType": "Item",
+                    "EntityId": "item1",
+                    "UpdatedEntityStatus": null,
+                    "TriggerId": null,
+                    "OlpEntityOperationType": "Updated",
+                    "WorkspaceId": "workspaceid",
+                    "RequestId": "20220201023529",
+                    "OriginWorkspaceId": null,
+                    "Url": "https:/workspaceid-workspace.supplychain.azure.com/supplychainentities/items/item1",
+                    "Labels": null,
+                    "CorrelationIds": [
+                        "20220201023529"
+                    ],
+                    "ABACAttributeName": null
+                },
+                "eventType": "Microsoft.OpenLogisticsPlatform.EntityUpdated",
+                "dataVersion": "1.0-beta",
+                "metadataVersion": "1",
+                "eventTime": "2022-02-01T13:31:28.707199Z",
+                "topic": "/SUBSCRIPTIONS/00001111-0000-0000-0000-000022220000/RESOURCEGROUPS/TESTRESOURCEGROUP/PROVIDERS/MICROSOFT.OPENLOGISTICSPLATFORM/WORKSPACES/INTEGRATIONITEMTESTV2_4RSFMM2MNQG8GUDU"
+            },
+            "eventType":"Microsoft.OpenLogisticsPlatform.EntityUpdated",
+            "resourceType":"Item"
+        }
+    }
+]

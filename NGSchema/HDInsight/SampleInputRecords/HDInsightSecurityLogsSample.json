@@ -1,0 +1,22 @@
+[{
+	"message": "Aug  4 19:02:57 hn1-becohe sudo: pam_unix(sudo:session): session opened for user root by (uid=0)",
+	"logType": "AuthLog",
+	"clusterName": "becohen-spark-test3",
+	"hostName": "hn1-becohe",
+	"clusterType": "spark",
+	"operationName": "LogCollection",
+	"correlationId": "SecurityLogs",
+    "FluentdIngestTimestamp" : "2019-07-13T01:05:06.0000000Z"
+},
+{
+	"utcTime": "2020-08-04T18:29:39.017Z,",
+	"message": "User(hdinsightwatchdog), RemoteIp(10.0.0.15), Operation(User login), Roles(",
+	"logType": "AmbariAuditLog",
+	"clusterName": "becohen-spark-test3",
+	"hostName": "hn1-becohe",
+	"clusterType": "spark",
+	"operationName": "LogCollection",
+	"correlationId": "SecurityLogs",
+    "FluentdIngestTimestamp" : "2019-07-13T01:05:06.0000000Z"
+}
+]

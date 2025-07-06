@@ -1,0 +1,56 @@
+[
+    {
+        "time": "2023-11-07T01:22:05.2804980Z",
+        "resourceId": "/SUBSCRIPTIONS/D8560037-8993-40AC-B191-4B2D877A9359/RESOURCEGROUPS/MCHAICANARYTEST/PROVIDERS/MICROSOFT.EVENTGRID/NAMESPACES/MCHAI1010",
+        "location": "eastus",
+        "operationName": "Microsoft.EventGrid/events/send",
+        "category": "SuccessfulHttpDataPlaneOperations",
+        "properties": {
+            "aggregatedRequests": [
+                {
+                    "totalOperations": 1,
+                    "networkAccess": "PublicAccess",
+                    "tlsVersion": "1.3",
+                    "callerIpAddress": "10.101.1.22",
+                    "identity": {
+                        "authenticationType": "EntraIdAccessToken",
+                        "clientIdentity": "a0f774e5-406d-4342-bd71-7c2d7c18b3c2"
+                    },
+                    "resultType": "Succeeded"
+                },
+                {
+                    "totalOperations": 1,
+                    "networkAccess": "PublicAccess",
+                    "tlsVersion": "1.3",
+                    "callerIpAddress": "10.101.1.17",
+                    "identity": {
+                        "authenticationType": "EntraIdAccessToken",
+                        "clientIdentity": "a0f774e5-406d-4342-bd71-7c2d7c18b3c2"
+                    },
+                    "resultType": "Succeeded"
+                }
+            ]
+        }
+    },
+    {
+        "time": "2023-11-07T01:22:05.2804980Z",
+        "resourceId": "/SUBSCRIPTIONS/D8560037-8993-40AC-B191-4B2D877A9359/RESOURCEGROUPS/MCHAICANARYTEST/PROVIDERS/MICROSOFT.EVENTGRID/NAMESPACES/MCHAI1010",
+        "location": "eastus",
+        "operationName": "Microsoft.EventGrid/events/send",
+        "category": "SuccessfulHttpDataPlaneOperations",
+        "properties": {
+            "aggregatedRequests": [
+                {
+                    "totalOperations": 1,
+                    "networkAccess": "PublicAccess",
+                    "tlsVersion": "1.3",
+                    "callerIpAddress": "10.101.1.22",
+                    "identity": {
+                        "authenticationType": "SharedAccessKey"
+                    },
+                    "resultType": "Succeeded"
+                }
+            ]
+        }
+    }
+]

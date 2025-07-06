@@ -1,0 +1,11 @@
+[
+    {
+        "TimeGenerated":"2022-03-14T00:05:38.552089493Z",
+        "Category":"ReservoirDDMSServerLogs",
+        "OperationName":"MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/RESERVOIRDDMSSERVER/ACTION",
+        "message":"Running Reservoir DDMS Service",
+        "nameSpaceName":"reservoir-server",
+        "Location":"eastus",
+        "CorrelationId": "1b80ca5f-2a14-4525-846c-ed68a69bb553" 
+    }
+]

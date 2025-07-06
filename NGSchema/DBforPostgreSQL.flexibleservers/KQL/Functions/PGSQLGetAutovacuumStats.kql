@@ -1,0 +1,230 @@
+let ParamTimeStart = iff((isnull(TimeStart)), ago(1d), TimeStart);
+let ParamTimeEnd = iff((isnull(TimeEnd)), now(), TimeEnd);
+let ParamResourceId = iff(isnull(ResourceId) or trim(" ", ResourceId) == "", "", ResourceId);
+let existsResource=iff( ParamResourceId == "" , false, true);
+let existsGenericTableData = toscalar(
+    AzureDiagnostics
+    | where TimeGenerated >= ParamTimeStart and TimeGenerated <= ParamTimeEnd
+    | where Category == 'PostgreSQLFlexTableStats'
+    | where iff(existsResource,_ResourceId =~ ParamResourceId, true)
+    | take 1
+    | summarize count()
+    | project iff(count_ == 0, false, true)
+);
+let existsDedicatedTableData = toscalar(
+    PGSQLAutovacuumStats
+    | where TimeGenerated >= ParamTimeStart and TimeGenerated <= ParamTimeEnd
+    | where iff(existsResource,_ResourceId =~ ParamResourceId, true)
+    | take 1
+    | summarize count()
+    | project iff(count_ == 0, false, true)
+);
+let GenericData = AzureDiagnostics
+| where TimeGenerated >= ParamTimeStart and TimeGenerated <= ParamTimeEnd
+| where Category == 'PostgreSQLFlexTableStats'
+| where iff(existsGenericTableData==true, true, false)
+| where iff(existsResource,_ResourceId =~ ParamResourceId, true)
+| project
+TimeGenerated,
+_ResourceId,
+// building columns to match the dedicated table
+DatabaseName = tostring(
+    iff(isnotempty(AdditionalFields.DatabaseName), AdditionalFields.DatabaseName,
+        column_ifexists('DatabaseName_s',
+            column_ifexists('DatabaseName', "")
+        )
+    )
+),
+SchemaName = tostring(
+    iff(isnotempty(AdditionalFields.Schemaname), AdditionalFields.Schemaname,
+        column_ifexists('Schemaname_s',
+            column_ifexists('Schemaname', "")
+        )
+    )
+),
+LiveRowsCount = tolong(
+    iff(isnotempty(AdditionalFields.N_live_tup), AdditionalFields.N_live_tup,
+        column_ifexists('N_live_tup_d',
+            column_ifexists('N_live_tup',
+                column_ifexists('N_live_tup_s', "")
+            )
+        )
+    )
+),
+DeadRowsCount = tolong(
+    iff(isnotempty(AdditionalFields.N_dead_tup), AdditionalFields.N_dead_tup,
+        column_ifexists('N_dead_tup_d',
+            column_ifexists('N_dead_tup',
+                column_ifexists('N_dead_tup_s', "")
+            )
+        )
+    )
+),
+SeqentialScansCount = tolong(
+    iff(isnotempty(AdditionalFields.Seq_scan), AdditionalFields.Seq_scan,
+        column_ifexists('Seq_scan_d',
+            column_ifexists('Seq_scan',
+                column_ifexists('Seq_scan_s', "")
+            )
+        )
+    )
+),
+RowsFromSeqentialScansCount = tolong(
+    iff(isnotempty(AdditionalFields.Seq_tup_read), AdditionalFields.Seq_tup_read,
+        column_ifexists('Seq_tup_read_d',
+            column_ifexists('Seq_tup_read',
+                column_ifexists('Seq_tup_read_s', "")
+            )
+        )
+    )
+),
+IndexScansCount = tolong(
+    iff(isnotempty(AdditionalFields.Idx_scan), AdditionalFields.Idx_scan,
+        column_ifexists('Idx_scan_d',
+            column_ifexists('Idx_scan',
+                column_ifexists('Idx_scan_s', "")
+            )
+        )
+    )
+),
+RowsFromIndexScansCount = tolong(
+    iff(isnotempty(AdditionalFields.Idx_tup_fetch), AdditionalFields.Idx_tup_fetch,
+        column_ifexists('Idx_tup_fetch_d',
+            column_ifexists('Idx_tup_fetch',
+                column_ifexists('Idx_tup_fetch_s', "")
+            )
+        )
+    )
+),
+RowsInsertedCount = tolong(
+    iff(isnotempty(AdditionalFields.N_tup_ins), AdditionalFields.N_tup_ins,
+        column_ifexists('N_tup_ins_d',
+            column_ifexists('N_tup_ins',
+                column_ifexists('N_tup_ins_s', "")
+            )
+        )
+    )
+),
+RowsUpdatedCount = tolong(
+    iff(isnotempty(AdditionalFields.N_tup_upd), AdditionalFields.N_tup_upd,
+        column_ifexists('N_tup_upd_d',
+            column_ifexists('N_tup_upd',
+                column_ifexists('N_tup_upd_s', "")
+            )
+        )
+    )
+),
+RowsDeletedCount = tolong(
+    iff(isnotempty(AdditionalFields.N_tup_del), AdditionalFields.N_tup_del,
+        column_ifexists('N_tup_del_d',
+            column_ifexists('N_tup_del',
+                column_ifexists('N_tup_del_s', "")
+            )
+        )
+    )
+),
+RowsHotUpdatedCount = tolong(
+    iff(isnotempty(AdditionalFields.N_tup_hot_upd), AdditionalFields.N_tup_hot_upd,
+        column_ifexists('N_tup_hot_upd_d',
+            column_ifexists('N_tup_hot_upd',
+                column_ifexists('N_tup_hot_upd_s', "")
+            )
+        )
+    )
+),
+ModificationsSinceAnalyzeCount = tolong(
+    iff(isnotempty(AdditionalFields.N_mod_since_analyze), AdditionalFields.N_mod_since_analyze,
+        column_ifexists('N_mod_since_analyze_d',
+            column_ifexists('N_mod_since_analyze',
+                column_ifexists('N_mod_since_analyze_s', "")
+            )
+        )
+    )
+),
+VacuumCount = tolong(
+    iff(isnotempty(AdditionalFields.Vacuum_count), AdditionalFields.Vacuum_count,
+        column_ifexists('Vacuum_count_d',
+            column_ifexists('Vacuum_count',
+                column_ifexists('Vacuum_count_s', "")
+            )
+        )
+    )
+),
+AutovacuumCount = tolong(
+    iff(isnotempty(AdditionalFields.Autovacuum_count), AdditionalFields.Autovacuum_count,
+        column_ifexists('Autovacuum_count_d',
+            column_ifexists('Autovacuum_count',
+                column_ifexists('Autovacuum_count_s', "")
+            )
+        )
+    )
+),
+AnalyzeCount = tolong(
+    iff(isnotempty(AdditionalFields.Analyze_count), AdditionalFields.Analyze_count,
+        column_ifexists('Analyze_count_d',
+            column_ifexists('Analyze_count',
+                column_ifexists('Analyze_count_s', "")
+            )
+        )
+    )
+),
+AutoanalyzeCount = tolong(
+    iff(isnotempty(AdditionalFields.Autoanalyze_count), AdditionalFields.Autoanalyze_count,
+        column_ifexists('Autoanalyze_count_d',
+            column_ifexists('Autoanalyze_count',
+                column_ifexists('Autoanalyze_count_s', "")
+            )
+        )
+    )
+),
+TablesCount = tolong(
+    iff(isnotempty(AdditionalFields.Tables_counter), AdditionalFields.Tables_counter,
+        column_ifexists('Tables_counter_d',
+            column_ifexists('Tables_counter',
+                column_ifexists('Tables_counter_s', "")
+            )
+        )
+    )
+),
+TablesVacuumedCount = tolong(
+    iff(isnotempty(AdditionalFields.Tables_vacuumed), AdditionalFields.Tables_vacuumed,
+        column_ifexists('Tables_vacuumed_d',
+            column_ifexists('Tables_vacuumed',
+                column_ifexists('Tables_vacuumed_s', "")
+            )
+        )
+    )
+),
+TablesAutovacuumedCount = tolong(
+    iff(isnotempty(AdditionalFields.Tables_autovacuumed), AdditionalFields.Tables_autovacuumed,
+        column_ifexists('Tables_autovacuumed_d',
+            column_ifexists('Tables_autovacuumed',
+                column_ifexists('Tables_autovacuumed_s', "")
+            )
+        )
+    )
+),
+TablesAnalyzedCount = tolong(
+    iff(isnotempty(AdditionalFields.Tables_analyzed), AdditionalFields.Tables_analyzed,
+        column_ifexists('Tables_analyzed_d',
+            column_ifexists('Tables_analyzed',
+                column_ifexists('Tables_analyzed_s', "")
+            )
+        )
+    )
+),
+TablesAutoanalyzedCount = tolong(
+    iff(isnotempty(AdditionalFields.Tables_autoanalyzed), AdditionalFields.Tables_autoanalyzed,
+        column_ifexists('Tables_autoanalyzed_d',
+            column_ifexists('Tables_autoanalyzed',
+                column_ifexists('Tables_autoanalyzed_s', "")
+            )
+        )
+    )
+);
+let DedicatedData = PGSQLAutovacuumStats
+| where TimeGenerated >= ParamTimeStart and TimeGenerated <= ParamTimeEnd
+| where iff(existsDedicatedTableData==true, true, false)
+| where iff(existsResource,_ResourceId =~ ParamResourceId, true);
+DedicatedData
+| union isfuzzy=true GenericData

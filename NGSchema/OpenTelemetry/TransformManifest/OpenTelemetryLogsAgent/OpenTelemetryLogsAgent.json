@@ -1,0 +1,18 @@
+{
+    "name": "OTelLogs",
+    "description": "Logs emitted by an OpenTelemetry source.",
+    "input": [
+        {
+            "name": "itemType",
+            "type": "String"
+        },
+        {
+            "name": "item",
+            "type": "Dynamic"
+        },
+        {
+            "name": "parent",
+            "type": "Dynamic"
+        }
+    ]
+}

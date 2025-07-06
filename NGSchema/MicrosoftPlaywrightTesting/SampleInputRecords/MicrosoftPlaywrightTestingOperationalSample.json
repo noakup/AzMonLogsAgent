@@ -1,0 +1,66 @@
+[
+    {
+        "time": "2023-09-15T18:41:33.420Z",
+        "location": "eastus",
+        "operationName": "Microsoft.AzurePlaywrightService/accounts/write",
+        "category": "Operational",
+        "properties": {
+            "requestUri": "http://eastus.api.playwright.microsoft.com/accounts/eastus_d7e00ff9-f2fe-4274-8057-4357f36e3700/access-tokens/d8722eda-bdf1-4a77-8fb6-5646a27a1e5f?api-version=1.0",
+            "requestBody": {
+                "name": "contoso",
+                "expiryAt": "2024-10-09T17:29:32.228Z"
+            },
+            "requestMethod": "PUT",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 Edg/117.0.2045.60",
+            "operationId": "AccessToken_PUT",
+            "accountId": "eastus_d7e00ff9-f2fe-4274-8057-4357f36e3700"
+        },
+        "resultType": "Succeeded",
+        "resultSignature": "200",
+        "resultDescription": "Create an access token for the workspace",
+        "durationMs": 2219,
+        "identity": {
+            "Claims": {
+                "tid": "eb037973-02ff-4abf-8162-1acb12ffdd3a",
+                "oid": "c1935ed3-bf58-416d-834e-65695d639774",
+                "name": "Siddharth Singha Roy",
+                "appid": "b1fd4ebf-2bed-4162-be84-97e0fe523f64"
+            }
+        },
+        "correlationId": "fcc4d0e5-2482-4eab-af79-469be4684f64",
+        "level": "Informational",
+        "operationVersion": "1.0",
+        "callerIpAddress": "::ffff:172.18.64.15",
+        "uri": "http://eastus.api.playwright.microsoft.com/accounts/eastus_d7e00ff9-f2fe-4274-8057-4357f36e3700/access-tokens/d8722eda-bdf1-4a77-8fb6-5646a27a1e5f?api-version=1.0"
+    },
+    {
+        "time": "2023-09-15T18:43:11.610Z",
+        "location": "eastus",
+        "operationName": "Microsoft.AzurePlaywrightService/accounts/write",
+        "category": "Operational",
+        "properties": {
+            "requestUri": "http://eastus.api.playwright.microsoft.com/accounts/eastus_d7e00ff9-f2fe-4274-8057-4357f36e3700/access-tokens/500528ca-79d1-45d5-b582-6b01389680d6?api-version=1.0",
+            "requestMethod": "DELETE",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 Edg/117.0.2045.60",
+            "operationId": "AccessToken_DELETE",
+            "accountId": "eastus_d7e00ff9-f2fe-4274-8057-4357f36e3700"
+        },
+        "resultType": "Succeeded",
+        "resultSignature": "204",
+        "resultDescription": "Revoke an access token for the workspace",
+        "durationMs": 754,
+        "identity": {
+            "Claims": {
+                "tid": "eb037973-02ff-4abf-8162-1acb12ffdd3a",
+                "oid": "c1935ed3-bf58-416d-834e-65695d639774",
+                "name": "Siddharth Singha Roy",
+                "appid": "b1fd4ebf-2bed-4162-be84-97e0fe523f64"
+            }
+        },
+        "correlationId": "34cfd17b-de36-4c07-ab86-359cbdab55f9",
+        "level": "Informational",
+        "operationVersion": "1.0",
+        "callerIpAddress": "::ffff:172.18.64.15",
+        "uri": "http://eastus.api.playwright.microsoft.com/accounts/eastus_d7e00ff9-f2fe-4274-8057-4357f36e3700/access-tokens/500528ca-79d1-45d5-b582-6b01389680d6?api-version=1.0"
+    }
+]

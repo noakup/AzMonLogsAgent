@@ -1,0 +1,77 @@
+[
+  {
+    "level": "Informational",
+    "time": "2020-10-02T23:32:32.7473289Z",
+    "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/TELEPHONYSERVICE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/SMS-E2E-PROD",
+    "correlationId": "dDRmubfpN06a9a/nxBtw3Q",
+    "category": "SMSOperational",
+    "operationName": "SMSMessagesSent",
+    "operationVersion": "2020-07-20-preview1",
+    "uri": "https://sms-e2e-prod.communication.azure.com/sms?api-version=2020-07-20-preview1",
+    "resultType": "Succeeded",
+    "resultSignature": "200",
+    "durationMs": 7227,
+    "properties": {
+      "outgoingMessageLength": 151,
+      "incomingMessageLength": 0,
+      "deliveryAttempts": 0,
+      "phoneNumber": "+18445791704",
+      "numberType": "LongCodeNumber",
+      "sdkType": "azsdk-net-Communication.Sms",
+      "platformType": "Microsoft Windows 10.0.17763",
+      "method": "POST",
+      "messageId": "Outgoing_20230118181300ff00e5c9-876d-4958-86e3-4637484fe5bd_noam",
+      "country": "US"
+    }
+  },
+  {
+    "level": "Informational",
+    "time": "2020-10-02T23:32:44.1017484Z",
+    "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/TELEPHONYSERVICE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/SMS-E2E-PROD",
+    "correlationId": "PRWWU6ishUWQDeRnZPDsSQ",
+    "callerIpAddress": "23.99.181.80",
+    "category": "SMSOperational",
+    "operationName": "SMSDeliveryReportsReceived",
+    "uri": "https://global.smsgw.prod.communication.microsoft.com/rtc/telephony/sms/DeliveryReport",
+    "resultType": "Succeeded",
+    "resultSignature": "200",
+    "durationMs": 1227,
+    "properties": {
+      "outgoingMessageLength": 0,
+      "incomingMessageLength": 0,
+      "deliveryAttempts": 1,
+      "phoneNumber": "+18445791704",
+      "numberType": "LongCodeNumber",
+      "sdkType": "",
+      "platformType": "",
+      "method": "POST",
+      "messageId": "Outgoing_20230118181300ff00e5c9-876d-4958-86e3-4637484fe5bd_noam",
+      "country": "US"
+    }
+  },
+  {
+    "level": "Informational",
+    "time": "2020-10-02T23:32:33.8296985Z",
+    "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/TELEPHONYSERVICE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/SMS-E2E-PROD",
+    "correlationId": "/XL/nvUU90ST0YhlVqO5vQ",
+    "callerIpAddress": "40.76.55.216",
+    "category": "SMSOperational",
+    "operationName": "SMSMessagesReceived",
+    "uri": "https://global.smsgw.prod.communication.microsoft.com/rtc/telephony/sms/inbound",
+    "resultType": "Succeeded",
+    "resultSignature": "200",
+    "durationMs": 522,
+    "properties": {
+      "outgoingMessageLength": 0,
+      "incomingMessageLength": 422,
+      "deliveryAttempts": 0,
+      "phoneNumber": "+18445791704",
+      "numberType": "LongCodeNumber",
+      "sdkType": "",
+      "platformType": "",
+      "method": "POST",
+      "messageId": "Incoming_2023011818121211c6ee31-63fe-477c-8d51-f800543c6694",
+      "country": "US"
+    }
+  }
+]

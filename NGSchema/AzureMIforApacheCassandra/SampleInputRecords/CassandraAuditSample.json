@@ -1,0 +1,19 @@
+[
+  {
+    "time": "2021-10-06T00:31:21.0000000Z",
+    "resourceId": "/SUBSCRIPTIONS/DD31ECAE-4522-468E-8B27-5BEFD051DD53/RESOURCEGROUPS/WENTING-MONITOR-TEST-RG/PROVIDERS/MICROSOFT.DOCUMENTDB/CASSANDRACLUSTERS/WENTING-MONITORING-TEST",
+    "operationName": "Authentication attempt",
+    "category": "CassandraAudit",
+    "properties": {
+      "CLIENT_IP": "127.0.0.1",
+      "CLIENT_PORT": "",
+      "COORDINATOR_IP": "",
+      "USER": "unknown",
+      "BATCH_ID": "",
+      "STATUS": "ATTEMPT",
+      "OPERATION": "Authentication attempt",
+      "OPERATION_NAKED": "",
+      "SUBJECT": ""
+    }
+  }
+]

@@ -1,0 +1,5 @@
+ACSCallAutomationIncomingOperations
+// Filter OperationName to view results for each API. 
+    | where OperationName in ("StartMediaStreaming", "StopMediaStreaming")
+    | where tostring(ResultSignature) matches regex "2.."
+    | summarize MediaStreamingSuccess=count() by ResultSignature

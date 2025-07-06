@@ -1,0 +1,14 @@
+[
+    {
+        "TimeGenerated": "2025-03-31T08:55:42.8650595Z",
+        "LogCreationTime": "2025-03-31T08:52:54.8872890Z",
+        "Message": "2025-03-31T08:52:54.8872890Z esx20-r17.p01.eastus2.avsstage.azure.com nsx-exporter 2025-03-31T08:52:54Z|05332|coverage|INFO|Skipping details of duplicate event coverage for hash=91df94ae",
+        "Severity": "notice",
+        "Facility": "daemon",
+        "HostName": "esx20-r17.p01.eastus2.avsstage.azure.com",
+        "AppName": "nsx-exporter",
+        "ProcId": "",
+        "MsgId": "",
+        "ResourceId": "/SUBSCRIPTIONS/97EACE9E-DA69-4CEB-A21A-04B400E34259/RESOURCEGROUPS/MATUDOBN9/PROVIDERS/MICROSOFT.AVS/PRIVATECLOUDS/MATUDOSDDC9" 
+    }
+]

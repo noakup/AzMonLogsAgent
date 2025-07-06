@@ -1,0 +1,7 @@
+source
+| project
+	TimeGenerated = todatetime(['time']),
+	OperationName = tostring(split(operationName, '/')[2]),
+	ResultSignature = resultSignature,
+	ResultDescription = resultDescription,
+	TopicFilters = tostring(properties.topicFilters)

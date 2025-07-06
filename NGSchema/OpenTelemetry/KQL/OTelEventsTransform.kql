@@ -1,0 +1,73 @@
+source
+| where itemType == "Event"
+| where isnotnull(parent) and isnotnull(parent.parent) and isnotnull(parent.parent.parent)
+// Helper extends (not in table output)
+| extend span = parent.item
+| extend scope = parent.parent.item
+| extend resource = parent.parent.parent.item
+| extend _ipAddr = case(
+    isnotempty(item.attributes["client.address"]), tostring(item.attributes["client.address"]),
+    isnotempty(item.attributes["http.client_ip"]), tostring(item.attributes["http.client_ip"]),
+    isnotempty(item.attributes["net.peer.ip"]), tostring(item.attributes["net.peer.ip"]),
+    "")
+| extend _ipInfo = geo_location(_ipAddr)
+| extend _stackTraceFirstLine = split(split(tostring(item.attributes["exception.stacktrace"]), "\r")[0], "\n")[0]
+| extend _stackTraceFirstLineAtParts = split(tostring(split(tostring(split(tostring(item.attributes["exception.stacktrace"]), "\r")[0]), "\n")[0]), "at ")
+| extend _userAgentString = case(
+    isnotempty(item.attributes["user_agent.original"]), tostring(item.attributes["user_agent.original"]),
+    isnotempty(item.attributes["http.user_agent"]), tostring(item.attributes["http.user_agent"]),
+    "")
+| extend _userAgent = iff(isnotempty(_userAgentString), parse_user_agent_client(_userAgentString, parse_json('["browser", "os"]')), parse_json('{browser: "", os: ""}'))
+// Create user-facing output columns
+| project
+    ReferencedItemId = tostring(span.itemId), // todo: this is an assumption on where pipeline will place this generated field.
+    SpanId = tostring(span.spanId),
+    TraceId = tostring(span.traceId),
+    TimeGenerated = unixtime_nanoseconds_todatetime(toreal(item.timeUnixNano)),
+    Name = tostring(item.name),
+    DroppedAttributesCount = toint(item.droppedAttributesCount),
+    ResourceAttributes = item.resourceAttributes,
+    ServiceNamespace = tostring(resource.attributes["service.namespace"]),
+    ServiceName = tostring(resource.attributes["service.name"]),
+    ServiceInstanceId = tostring(resource.attributes["service.instance.id"]),
+    Attributes = item.attributes,
+    SDKVersion = strcat(
+        "otlp:",
+        iff(isnotempty(resource.attributes["telemetry.sdk.name"]), tostring(resource.attributes["telemetry.sdk.name"]), "unknown"),":",
+        iff(isnotempty(resource.attributes["telemetry.sdk.language"]), tostring(resource.attributes["telemetry.sdk.language"]), "unknown"),":",
+        iff(isnotempty(resource.attributes["telemetry.sdk.version"]), tostring(resource.attributes["telemetry.sdk.version"]), "unknown")
+    ),
+    ServiceVersion = tostring(resource.attributes["service.version"]),
+    EndUserId = tostring(span.attributes["enduser.id"]),
+    ClientType = "PC",
+    UserId = tostring(item.attributes["microsoft.user.id"]),
+    UserAccountId = tostring(item.attributes["microsoft.user.account_id"]),
+    OperationName = tostring(item.attributes["microsoft.operation.name"]),
+    ClientModel = tostring(item.attributes["microsoft.client.model"]),
+    SessionId = tostring(item.attributes["microsoft.session.id"]),
+    Measurements = parse_json("{}"),
+    SyntheticSource = tostring(item.attributes["microsoft.synthetic_source"]),
+    ClientBrowser = tostring(_userAgent.browser),
+    ClientOS = tostring(_userAgent.os),
+    ClientIP = "0.0.0.0", // IP is always masked by default
+    ClientCity = tostring(_ipInfo.city),
+    ClientStateOrProvince = tostring(_ipInfo.state),
+    ClientCountryOrRegion = tostring(_ipInfo.country),
+    ItemCount = iff(isnotempty(item.attributes["_MS.sampleRate"]), toint(100/todouble(item.attributes["_MS.sampleRate"])), toint(1)),
+    ExceptionProblem = strcat(
+        tostring(item.attributes["exception.type"]),
+        " at ",
+        tostring(split(tostring(iff(array_length(_stackTraceFirstLineAtParts) > 1, _stackTraceFirstLineAtParts[1], _stackTraceFirstLineAtParts[0])), " (")[0])
+    ),
+    ExceptionType = tostring(item.attributes["exception.type"]),
+    ExceptionMessage = tostring(item.attributes["exception.message"]),
+    ExceptionStackTrace = tostring(item.attributes["exception.stacktrace"])
+// Last stage enrichment
+// Sanitize / Normalize / Deduplicate output attributes
+| extend Attributes = bag_remove_keys(Attributes, parse_json('["client.address", "http.client_ip", "net.peer.ip"]')) // incoming IP addresses
+| extend Attributes = bag_remove_keys(Attributes, parse_json('["exception.message", "exception.stacktrace", "exception.type"]')) // exception details with dedicated columns
+| extend Attributes = bag_remove_keys(Attributes, parse_json('["microsoft.user.id", "microsoft.user.account_id", "microsoft.operation.name", "microsoft.client.model", "microsoft.session.id", "microsoft.synthetic_source", "_MS.sampleRate"]')) // ms-convention column overrides
+| extend RoleName = case(
+    isnotempty(ServiceName) and isnotempty(ServiceNamespace), strcat("[", ServiceNamespace, "]/", ServiceName),
+    isnotempty(ServiceNamespace), strcat("[", ServiceNamespace, "]"),
+    ServiceName)

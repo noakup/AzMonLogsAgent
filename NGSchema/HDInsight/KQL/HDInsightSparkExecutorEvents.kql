@@ -1,0 +1,17 @@
+source
+| project
+    TimeGenerated = iff(isnull(RemovedTime), AddedTime, RemovedTime),
+    ApplicationId = ApplicationId,
+    ExecutorId = ExecutorId,
+    ExecutorCores = toint(ExecutorCores),
+    AddedTime = AddedTime,
+    RemovedTime = RemovedTime,
+    RemovedReason = RemovedReason,
+    ClusterTenantId = Tenant,
+	Role = Role,
+	Host = iff(isempty(Host), RoleInstance, Host),
+	ClusterDnsName = ClusterDnsName,
+	Region = Region,
+	IpAddress = IpAddress,
+	UserSubscriptionId = UserSubscriptionId,
+	ExecutorHost = ExecutorHost

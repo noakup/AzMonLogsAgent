@@ -1,0 +1,14 @@
+HDInsightSparkSQLExecutionEvents 
+//| where ClusterDnsName == '<your cluster name>' // remove the preceding "//" and specify your cluster name to see its logs
+//| where ApplicationId == '<your application id>'
+| where isnotnull(StartTime)
+| join kind=fullouter (
+    HDInsightSparkSQLExecutionEvents
+//| where ClusterDnsName == '<your cluster name>' // remove the preceding "//" and specify your cluster name to see its logs
+//| where ApplicationId == '<your application id>'
+    | where isnotnull(EndTime) 
+) on ClusterDnsName, ApplicationId, ExecutionId
+|order by ApplicationId, ExecutionId asc 
+| extend EndTime = EndTime1
+| extend Duration = iff(isempty(EndTime), "In Progress", tostring(datetime_diff("Millisecond",EndTime, StartTime)))
+| project TimeGenerated, ApplicationId, ExecutionId, Duration, PhysicalPlanDescription, SparkPlanInfo

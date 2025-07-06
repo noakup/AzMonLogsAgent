@@ -1,0 +1,115 @@
+{
+    "type": "Microsoft.ConfidentialLedger/ManagedCCFs",
+    "displayName": "Azure Managed CCF",
+    "description": "Managed CCF is a platform service that runs the Confidential Consortium Framework(CCF). Customers can host confidential applications on it.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "AZURECONFIDENTIALCOMPUTINGLEDGER/ACCLedger",
+    "contactDL": "accledgerdevs@microsoft.com",
+    "relatedTables": [],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "CCFApplicationLogs",
+            "description": "Contains the logs generated in the CCF application.",
+            "categories": [
+                "resources","audit"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 7,
+            "dataTypeId": "MICROSOFTCONFIDENTIALLEDGER_APPLICATIONLOGS",
+            "intelligencePacks": ["LogManagement"],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "Kql/CCFApplicationLogs.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Date and time the record was created."
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "An error or informational message indicating if the service processed the request."
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "The Log message."
+                },
+                {
+                    "name": "File",
+                    "type": "String",
+                    "description": "The file name that generated the log message."
+                },
+                {
+                    "name": "LineNumber",
+                    "type": "Int",
+                    "description": "The line number in the file that the message refers to."
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "description": "The Azure datacenter region where the pod is deployed."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/CCFApplicationLogs.json"
+        }
+    ],
+    "functions": [],
+    "queries": [
+        {
+            "id": "3d08f663-9b40-4dcb-824c-e073806d5257",
+            "displayName": "CCF application errors",
+            "description": "View the latest Confidential Consortium Framework application errors.",
+            "bodyFilePath": "KQL/ApplicationErrorsQuery.kql",
+            "categories": [
+                "applications", "audit"
+            ],
+            "relatedTables": [ "CCFApplicationLogs" ],
+            "tags": {
+                "Topic": [
+                    "Diagnostics",
+                    "Alerts"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        }
+    ]
+}

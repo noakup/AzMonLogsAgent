@@ -1,0 +1,163 @@
+[
+  {
+    "hoboWorkspaceId": "8dfd19c6-6aa6-4f21-916a-2ab0e1f37892",
+    "correlationId": "8ef0f85d-27e4-4243-9919-bd2b16bfb3d2",
+    "time": "2020-04-17T02:44:48.0242769Z",
+    "resourceId": "/providers/Microsoft.Management/managementGroups/testChildMG1",
+    "category": "Administrative",
+    "operationName": "Microsoft.Management",
+    "resultType": "Succeeded",
+    "level": "INFORMATIONAL",
+    "resultDescription": "Alert: StorageAccountAdminOperations called on action groups : RealTimeMonitor-CloudService",
+    "properties": {
+      "entity": "testChildMG1",
+      "message": "Entity testChildMG5 has changed the parent entity value from testChildMG3 to testChildMG1",
+      "hierarchy": "72f988bf-86f1-41af-91ab-2d7cd011db47/testMgmtGroupAdmukhty/testChildMG1",
+      "eventCategory": "Administrative",
+      "caller": "a71aee6a-d8c9-4e9c-9cb7-424f69bf7f08",
+      "eventDataId": "e9ebce2a-4146-496e-9981-480b3b781a7d",
+      "eventSubmissionTimestamp": "2021-02-23T07:08:31.6809649Z",
+      "httpRequest": "{\"clientIpAddress\":\"40.74.56.30\"}",
+      "resource": "tstorejfr2mmg5g5osq",
+      "resourceGroup": "LMVNETPEERINGNSGRGEASTUS2EUAPPROD",
+      "resourceProviderValue": "MICROSOFT.STORAGE",
+      "subscriptionId": "4FE3424E-E0FE-427D-B63A-1A46285D0F0B",
+      "activityStatusValue": "Accepted",
+      "activitySubstatusValue": "Created",
+      "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+      "eventName": "Update",
+      "resourceType": "Microsoft.Network/networksecuritygroups/securityrules"
+    },
+    "properties_backcompat": {
+      "entity": "testChildMG1",
+      "message": "Entity testChildMG5 has changed the parent entity value from testChildMG3 to testChildMG1",
+      "hierarchy": "72f988bf-86f1-41af-91ab-2d7cd011db47/testMgmtGroupAdmukhty/testChildMG1",
+      "eventCategory": "Administrative"
+    },
+    "legacyProperties": {
+      "legacyResourceType": "",
+      "legacyResourceProviderName": "",
+      "legacyResourceGroup": "",
+      "legacyResourceId": "/subscriptions/d105b8ae-e943-4393-9787-45887adaa336",
+      "legacySubscriptionId": "d105b8ae-e943-4393-9787-45887adaa336",
+      "legacyChannels": "ADMIN",
+      "legacyEventDataId": "ce2c701b-b4b0-847b-d77d-195837dd34b9",
+      "legacySubStatus": "Succeeded",
+      "legacyEventProperties": {
+        "title": "Notification for Scheduled Maintenance to Azure Database for PostgreSQL Flexible Server",
+        "service": "Azure Database for PostgreSQL",
+        "region": "East US 2",
+        "communication": "This notification is for previously scheduled maintenance to your Azure Database for PostgreSQL Flexible Server instance <a href=\"https://portal.azure.com/#resource/subscriptions/f30f32e1-0e8e-48ac-bc05-833e62ff6ad3/resourceGroups/customerrg0122sqlbld0lqvhc/providers/Microsoft.DBforPostgreSQL/flexibleServers/postgresql0122sqlbld0cjvur/overview\">postgresql0122sqlbld0cjvur</a> in East US 2. The maintenance is now in progress. During this maintenance, your instance will experience a brief drop in connectivity. Feel free to refer to your <a href=\"https://aka.ms/servicehealthpm\">portal</a> for more information. For any additional questions, please contact <a href=\"https://aka.ms/azuresupportrequest\">support</a>.",
+        "incidentType": "Maintenance",
+        "trackingId": "CMMY-HC8",
+        "impactStartTime": "2022-01-22T12:28:00.0000000Z",
+        "impactMitigationTime": "2022-01-22T13:28:00.0000000Z",
+        "impactedServices": "[{\"ImpactedRegions\":[{\"RegionName\":\"East US 2\"}],\"ServiceName\":\"Azure Database for PostgreSQL\"}]",
+        "impactedServicesTableRows": "<tr>\\\\r\\\\n<td align='center' style='padding: 5px 10px; border-right:1px solid black; border-bottom:1px solid black'>Azure Database for PostgreSQL</td>\\\\r\\\\n<td align='center' style='padding: 5px 10px; border-bottom:1px solid black'>East US 2<br></td>\\\\r\\\\n</tr>\\\\r\\\\n",
+        "defaultLanguageTitle": "Notification for Scheduled Maintenance to Azure Database for PostgreSQL Flexible Server",
+        "defaultLanguageContent": "This notification is for previously scheduled maintenance to your Azure Database for PostgreSQL Flexible Server instance <a href=\"https://portal.azure.com/#resource/subscriptions/f30f32e1-0e8e-48ac-bc05-833e62ff6ad3/resourceGroups/customerrg0122sqlbld0lqvhc/providers/Microsoft.DBforPostgreSQL/flexibleServers/postgresql0122sqlbld0cjvur/overview\">postgresql0122sqlbld0cjvur</a> in East US 2. The maintenance is now in progress. During this maintenance, your instance will experience a brief drop in connectivity. Feel free to refer to your <a href=\"https://aka.ms/servicehealthpm\">portal</a> for more information. For any additional questions, please contact <a href=\"https://aka.ms/azuresupportrequest\">support</a>.",
+        "stage": "InProgress",
+        "communicationId": "11000051216629",
+        "maintenanceId": "a1385b97-b0c4-49bc-ab77-95d73c92d5ac",
+        "isHIR": "false",
+        "isSynthetic": "False",
+        "impactType": "SubscriptionList",
+        "emailTemplateId": "tem_jCfXGkcx9fMD8p4hq6XVdGv9",
+        "emailTemplateFullVersion": "ver_D7KKW83HcDxFHfRgKtbbxYhW",
+        "emailTemplateLocale": "en-US",
+        "smsText": "Active:Notification for Scheduled Maintenance to Azure Database for PostgreSQL Flexible Server",
+        "impactCategory": "NoImpact",
+        "impactDuration": "0.0",
+        "version": "0.1.1"
+      }
+    },
+    "identity": {
+      "authorization": {
+        "scope": "/subscriptions/16e16adc-211d-471f-8802-3389896744b1/resourceGroups/ADF/providers/Microsoft.DataFactory/factories/kcmv2-prod-eus2p01-snapshots/linkedservices/linked_docdb_BackupWorkspaceSchemaDocumentPerClusterHandler_oiprdeus2p01",
+        "action": "Microsoft.DataFactory/factories/linkedservices/write",
+        "evidence": {
+          "role": "Contributor",
+          "roleAssignmentScope": "/subscriptions/16e16adc-211d-471f-8802-3389896744b1",
+          "roleAssignmentId": "e8d60beba464455b8f9cc4518f8ce764",
+          "roleDefinitionId": "b24988ac618042a0ab8820f7382dd24c",
+          "principalId": "07dbb57a11804b888183e211e668fcff",
+          "principalType": "ServicePrincipal"
+        }
+      },
+      "claims": {
+        "aud": "https://management.core.windows.net/",
+        "iss": "https://sts.windows.net/33e01921-4d64-4f8c-a055-5bdaffd5e33d/",
+        "iat": "1610881204",
+        "nbf": "1610881204",
+        "exp": "1610967904",
+        "aio": "E2JgYGguPJW/QVP0XZI8V/Hbf1d3AAA=",
+        "appid": "83793cbf-5e62-4940-a445-6ccb8f3c107c",
+        "appidacr": "2",
+        "groups": "aa5d7806-a05d-4300-af5b-16d7785d2f04",
+        "http://schemas.microsoft.com/identity/claims/identityprovider": "https://sts.windows.net/33e01921-4d64-4f8c-a055-5bdaffd5e33d/",
+        "http://schemas.microsoft.com/identity/claims/objectidentifier": "07dbb57a-1180-4b88-8183-e211e668fcff",
+        "rh": "0.AAAAIRngM2RNjE-gVVva_9XjPb88eYNiXkBJpEVsy488EHwzAAA.",
+        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": "07dbb57a-1180-4b88-8183-e211e668fcff",
+        "http://schemas.microsoft.com/identity/claims/tenantid": "33e01921-4d64-4f8c-a055-5bdaffd5e33d",
+        "uti": "3y3Et6Zc2Uim8gOvlEQ_AA",
+        "ver": "1.0",
+        "xms_tcdt": "1461214402"
+      }
+    }
+  },
+  {
+    "hoboWorkspaceId": "8dfd19c6-6aa6-4f21-916a-2ab0e1f37892",
+    "correlationId": "8ef0f85d-27e4-4243-9919-bd2b16bfb3d2",
+    "time": "2020-04-17T02:44:48.0242769Z",
+    "resourceId": "/subscriptions/16e16adc-211d-471f-8802-3389896744b1/resourceGroups/ADF/providers/Microsoft.DataFactory/factories/kcmv2-prod-eus2p01-snapshots/linkedservices/linked_docdb_BackupWorkspaceSchemaDocumentPerClusterHandler_oiprdeus2p01",
+    "resourceProviderName": "Microsoft.DataFactory",
+    "category": "Administrative",
+    "operationName": "Microsoft.Management",
+    "eventName": "BeginRequest",
+    "resultType": "Succeeded",
+    "resourceType": "Microsoft.DataFactory/factories/pipelines",
+    "callerIpAddress": "52.143.197.0",
+    "properties": {
+      "entity": "testChildMG1",
+      "message": "Entity testChildMG5 has changed the parent entity value from testChildMG3 to testChildMG1",
+      "hierarchy": "72f988bf-86f1-41af-91ab-2d7cd011db47/testMgmtGroupAdmukhty/testChildMG1",
+      "resourceGroup": "ADF",
+      "operationId": "86bc9513-98f4-4ca1-89fa-9620ae23c3e2",
+      "httpRequest": {
+        "clientRequestId": "c1bc3f3d-1d15-4ba7-a361-d88474a9dece",
+        "clientIpAddress": "52.143.197.0",
+        "method": "POST",
+        "url": "https://management.azure.com/providers/Microsoft.Resources/notifyResourceJobs?api-version=2018-02-01"
+      }
+    },
+    "eventTimeTicks": 637466653801534000,
+    "eventTimestamp": "2021-02-02T16:22:41.3538416Z",
+    "rawLog": {
+      "hoboWorkspaceId": "8dfd19c6-6aa6-4f21-916a-2ab0e1f37892",
+      "correlationId": "8ef0f85d-27e4-4243-9919-bd2b16bfb3d2",
+      "time": "2020-04-17T02:44:48.0242769Z",
+      "resourceId": "/subscriptions/16e16adc-211d-471f-8802-3389896744b1/resourceGroups/ADF/providers/Microsoft.DataFactory/factories/kcmv2-prod-eus2p01-snapshots/linkedservices/linked_docdb_BackupWorkspaceSchemaDocumentPerClusterHandler_oiprdeus2p01",
+      "resourceProviderName": "Microsoft.DataFactory",
+      "category": "Administrative",
+      "operationName": "Microsoft.Management",
+      "eventDataId": "5e09cf7c-7707-43e6-aee1-a3fd0ca2c431",
+      "eventName": "BeginRequest",
+      "resultType": "Succeeded",
+      "resourceType": "Microsoft.DataFactory/factories/pipelines",
+      "properties": {
+        "entity": "testChildMG1",
+        "message": "Entity testChildMG5 has changed the parent entity value from testChildMG3 to testChildMG1",
+        "hierarchy": "72f988bf-86f1-41af-91ab-2d7cd011db47/testMgmtGroupAdmukhty/testChildMG1",
+        "operationId": "86bc9513-98f4-4ca1-89fa-9620ae23c3e2",
+        "httpRequest": {
+          "clientRequestId": "c1bc3f3d-1d15-4ba7-a361-d88474a9dece",
+          "clientIpAddress": "52.143.197.0",
+          "method": "POST",
+          "url": "https://management.azure.com/providers/Microsoft.Resources/notifyResourceJobs?api-version=2018-02-01"
+        }
+      },
+      "eventTimeTicks": 637466653801534000,
+      "eventTimestamp": "2021-02-02T16:22:41.3538416Z"
+    }
+  }
+]

@@ -1,0 +1,249 @@
+{
+    "type": "Microsoft.Dashboard/grafana",
+    "displayName": "Azure Managed Workspace for Grafana",
+    "description": "Azure Managed Workspace for Grafana is a joint-1st party solution from Microsoft and Grafana Labs which provides the monitoring and observability from Grafana Labs with reliable, secure, and seamless integration into Azure cloud platform.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Azure Managed Workspace for Grafana/Triage",
+    "contactDL": "ad4g@microsoft.com",
+    "relatedTables": [
+        "AzureActivity"
+    ],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "AGSGrafanaLoginEvents",
+            "description": "Login events for an instance of Azure Managed Workspace for Grafana including user identity, user Grafana role (in success) and detailed message (in failure).",
+            "categories": [
+                "resources",
+                "audit"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "MICROSOFTDASHBOARD_GRAFANALOGINEVENTS",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": false,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "level",
+                    "type": "String"
+                },
+                {
+                    "name": "correlationId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "traceContext",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/AGSGrafanaLoginEventsTransform.kql",
+            "sampleInputRecordsFilePath": "SampleInputRecords/AGSGrafanaLoginEvents.json",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "Timestamp (UTC) when the log record was generated."
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The location (region) the Azure Managed Grafana instance was accessed in."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The Grafana operation associated with the log record."
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The category of the log record."
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The severity level of the log record."
+                },
+                {
+                    "name": "CorrelationId",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true,
+                    "description": "GUID for the correlated logs."
+                },
+                {
+                    "name": "TargetResource",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The corresponding resource name of the log record."
+                },
+                {
+                    "name": "ResourceGroup",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The resource group containing the resource corresponding to the log record."
+                },
+                {
+                    "name": "User",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The user identity of the login event."
+                },
+                {
+                    "name": "UserRole",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The Grafana role of the user for the login event."
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The inner message of the log record."
+                },
+                {
+                    "name": "TraceContext",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true,
+                    "description": "The W3C distributed tracing context for the log record."
+                }
+            ]
+        },
+        {
+            "name": "AGSGrafanaUsageInsightsEvents",
+            "description": "Usage insights events for an instance of Azure Managed Workspace for Grafana.",
+            "categories": [
+                "resources",
+                "audit"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "MICROSOFTDASHBOARD_GRAFANAUSAGEINSIGHTSEVENTS",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": false,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "level",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/AGSGrafanaUsageInsightsEventsTransform.kql",
+            "sampleInputRecordsFilePath": "SampleInputRecords/AGSGrafanaUsageInsightsEvents.json",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "Timestamp (UTC) when the log record was generated."
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The location (region) the Azure Managed Grafana instance was accessed in."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The Grafana operation associated with the log record."
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The category of the log record."
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The severity level of the log record."
+                },
+                {
+                    "name": "Details",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true,
+                    "description": "The usage insights details"
+                }
+            ]
+        }
+    ],
+    "functions": [],
+    "queries": [
+        {
+            "id": "b2bd1ca4-8a33-11ec-8fd3-00155dd7661c",
+            "displayName": "Show login error events",
+            "description": "A list of login error event sorted by time.",
+            "bodyFilePath": "KQL/AGSGrafanaLoginErrorEvents.kql",
+            "categories": [
+                "resources",
+                "audit"
+            ],
+            "relatedTables": [
+                "AGSGrafanaLoginEvents"
+            ],
+            "tags": {
+                "Topic": [
+                    "Audit"
+                ]
+            },
+            "properties": {
+              "ExampleQuery": true
+            }
+        }
+    ]
+}

@@ -1,0 +1,5 @@
+MNFSystemStateMessageUpdates
+| where Properties has "error"
+| project EventName, EventCategory, DeviceId, TimeGenerated, Properties
+| sort by TimeGenerated desc
+| limit 100

@@ -1,0 +1,13 @@
+source
+| extend ProviderInfo = tostring(split(split(ResourceId,"/")[6], '.')[1])
+| project
+    TimeGenerated = todatetime(EventTimestamp),
+    ActivityId = tostring(ActivityId),
+	ActivityName = tostring(ActivityName),
+    OperationResult = tostring(OperationResult),
+    ErrorCount = toint(ErrorCount),
+	ErrorMessage = tostring(ErrorMessage),
+	Provider = ProviderInfo,
+    NamespaceName = tostring(NamespaceName),
+    EntityName = tostring(EntityName),
+    EntityType = tostring(EntityType)

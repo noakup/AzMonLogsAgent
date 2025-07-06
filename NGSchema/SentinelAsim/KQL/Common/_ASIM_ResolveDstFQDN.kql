@@ -1,0 +1,7 @@
+T
+| invoke _ASIM_ResolveFQDN (field)
+| project-rename 
+    DstHostname = ExtractedHostname,
+    DstDomain = Domain,
+    DstFQDN = FQDN,
+    DstDomainType = DomainType

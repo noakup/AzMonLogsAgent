@@ -1,0 +1,309 @@
+[
+  {
+    "action": "ALLOW",
+    "args": "user=test&password=1234",
+    "captchaResponse": {
+      "responseCode": "CAPTCHA",
+      "responseType": "FAIL",
+      "failureReason": "incorrect_response",
+      "solveTimestamp": "2024-08-20T10:25:43Z"
+    },
+    "challengeResponse": {
+      "responseCode": "CHALLENGE",
+      "responseType": "FAIL",
+      "failureReason": "browser_invalid",
+      "solveTimestamp": "2024-08-20T10:25:43Z"
+    },
+    "clientIp": "192.0.2.1",
+    "country": "US",
+    "excludedRules": [
+      {
+        "exclusionType": "Count",
+        "ruleId": "rule-id-12345"
+      }
+    ],
+    "formatVersion": "1.0",
+    "headers": [
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+      },
+      {
+        "name": "Host",
+        "value": "www.example.com"
+      }
+    ],
+    "httpMethod": "POST",
+    "httpRequest": {
+      "clientIp": "192.0.2.1",
+      "country": "US",
+      "uri": "/login",
+      "args": "?user=test&password=1234",
+      "httpVersion": "HTTP/1.1",
+      "httpMethod": "POST",
+      "requestId": "abcd1234-5678-90ab-cdef-1234567890ab",
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+        },
+        {
+          "name": "Host",
+          "value": "www.example.com"
+        }
+      ]
+    },
+    "httpSourceId": "arn:aws:elasticloadbalancing:us-east-1:123456789012:loadbalancer/app/load-balancer-name/load-balancer-id",
+    "httpSourceName": "ALB",
+    "httpVersion": "HTTP/1.1",
+    "ja3Fingerprint": "d4c74c92dacf5abefc9d781b5d2d40e2",
+    "labels": [
+      {
+        "name": "BadBot"
+      }
+    ],
+    "nonTerminatingMatchingRules": [
+      {
+        "action": "COUNT",
+        "ruleId": "rule-id-67890",
+        "ruleMatchDetails": [
+          {
+            "matchType": "SQLiMatch",
+            "matchData": "SELECT * FROM"
+          }
+        ]
+      }
+    ],
+    "oversizeFields": [
+      "REQUEST_BODY",
+      "REQUEST_HEADERS"
+    ],
+    "rateBasedRuleList": [
+      {
+        "rateBasedRuleId": "rate-rule-id-11111",
+        "rateBasedRuleName": "RateLimitRule",
+        "limitKey": "IP",
+        "limitValue": "VALID",
+        "maxRateAllowed": 1000,
+        "evaluationWindowSec": 60,
+        "customValues": [
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0"
+          }
+        ]
+      }
+    ],
+    "requestHeadersInserted": [
+      {
+        "name": "X-Custom-Header",
+        "value": "CustomValue"
+      }
+    ],
+    "requestId": "abcd1234-5678-90ab-cdef-1234567890ab",
+    "responseCodeSent": "200",
+    "ruleGroupId": "rule-group-id-22222",
+    "ruleGroupList": [
+      {
+        "ruleGroupId": "rule-group-id-22222",
+        "terminatingRule": {
+          "action": "BLOCK",
+          "ruleId": "rule-id-33333",
+          "ruleMatchDetails": [
+            {
+              "matchType": "XSSMatch",
+              "matchData": "<script>alert('xss')</script>"
+            }
+          ]
+        },
+        "nonTerminatingMatchingRules": [
+          {
+            "action": "COUNT",
+            "ruleId": "rule-id-44444",
+            "ruleMatchDetails": [
+              {
+                "matchType": "SizeConstraint",
+                "matchData": "body > 5120 bytes"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "terminatingRule": {
+      "action": "BLOCK",
+      "ruleId": "rule-id-55555",
+      "ruleMatchDetails": [
+        {
+          "matchType": "GeoMatch",
+          "matchData": "CountryCode = CN"
+        }
+      ]
+    },
+    "terminatingRuleId": "default_action",
+    "terminatingRuleMatchDetails": [
+      {
+        "conditionType": "SQLiMatch",
+        "location": "BODY",
+        "matchedData": "SELECT * FROM"
+      }
+    ],
+    "terminatingRuleType": "REGULAR",
+    "timestamp": "2024-08-20T10:25:43Z",
+    "uri": "/login",
+    "webaclId": "arn:aws:wafv2:us-east-1:123456789012:regional/webacl/sample-web-acl/12345678-1234-1234-1234-123456789012"
+    },
+    {
+      "action": "BLOCK",
+      "args": "search=query&sort=asc",
+      "captchaResponse": {
+        "responseCode": "CAPTCHA",
+        "responseType": "PASS",
+        "failureReason": null,
+        "solveTimestamp": "2024-08-21T14:32:17Z"
+      },
+      "challengeResponse": {
+        "responseCode": "CHALLENGE",
+        "responseType": "PASS",
+        "failureReason": null,
+        "solveTimestamp": "2024-08-21T14:32:17Z"
+      },
+      "clientIp": "203.0.113.5",
+      "country": "JP",
+      "excludedRules": [
+        {
+          "exclusionType": "Bypass",
+          "ruleId": "rule-id-67890"
+        }
+      ],
+      "formatVersion": "1.1",
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+        },
+        {
+          "name": "Accept-Language",
+          "value": "en-US,en;q=0.9"
+        }
+      ],
+      "httpMethod": "GET",
+      "httpRequest": {
+        "clientIp": "203.0.113.5",
+        "country": "JP",
+        "uri": "/search",
+        "args": "?search=query&sort=asc",
+        "httpVersion": "HTTP/2",
+        "httpMethod": "GET",
+        "requestId": "efgh5678-1234-5678-abcd-0987654321ab",
+        "headers": [
+          {
+            "name": "User-Agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
+          },
+          {
+            "name": "Accept-Language",
+            "value": "en-US,en;q=0.9"
+          }
+        ]
+      },
+      "httpSourceId": "arn:aws:elasticloadbalancing:us-west-2:098765432109:loadbalancer/app/another-load-balancer-name/another-load-balancer-id",
+      "httpSourceName": "ALB",
+      "httpVersion": "HTTP/2",
+      "ja3Fingerprint": "f3cdb9d5fabc1234d567f9f1234d567f",
+      "labels": [
+        {
+          "name": "GoodBot"
+        }
+      ],
+      "nonTerminatingMatchingRules": [
+        {
+          "action": "COUNT",
+          "ruleId": "rule-id-99999",
+          "ruleMatchDetails": [
+            {
+              "matchType": "SizeConstraint",
+              "matchData": "header > 1024 bytes"
+            }
+          ]
+        }
+      ],
+      "oversizeFields": [
+        "REQUEST_BODY"
+      ],
+      "rateBasedRuleList": [
+        {
+          "rateBasedRuleId": "rate-rule-id-77777",
+          "rateBasedRuleName": "RequestRateLimit",
+          "limitKey": "User-Agent",
+          "limitValue": "VALID",
+          "maxRateAllowed": 500,
+          "evaluationWindowSec": 120,
+          "customValues": [
+            {
+              "key": "referer",
+              "value": "https://www.example.com"
+            }
+          ]
+        }
+      ],
+      "requestHeadersInserted": [
+        {
+          "name": "X-Forwarded-For",
+          "value": "203.0.113.5"
+        }
+      ],
+      "requestId": "efgh5678-1234-5678-abcd-0987654321ab",
+      "responseCodeSent": "403",
+      "ruleGroupId": "rule-group-id-33333",
+      "ruleGroupList": [
+        {
+          "ruleGroupId": "rule-group-id-33333",
+          "terminatingRule": {
+            "action": "ALLOW",
+            "ruleId": "rule-id-44444",
+            "ruleMatchDetails": [
+              {
+                "matchType": "IPMatch",
+                "matchData": "IP = 203.0.113.5"
+              }
+            ]
+          },
+          "nonTerminatingMatchingRules": [
+            {
+              "action": "COUNT",
+              "ruleId": "rule-id-55555",
+              "ruleMatchDetails": [
+                {
+                  "matchType": "SQLiMatch",
+                  "matchData": "DROP TABLE users"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "terminatingRule": {
+        "action": "BLOCK",
+        "ruleId": "rule-id-88888",
+        "ruleMatchDetails": [
+          {
+            "matchType": "IPMatch",
+            "matchData": "IP = 203.0.113.5"
+          }
+        ]
+      },
+      "terminatingRuleId": "manual_block",
+      "terminatingRuleMatchDetails": [
+        {
+          "conditionType": "IPMatch",
+          "location": "HEADER",
+          "matchedData": "203.0.113.5"
+        }
+      ],
+      "terminatingRuleType": "RATE_BASED",
+      "timestamp": "2024-08-21T14:32:17Z",
+      "uri": "/search",
+      "webaclId": "arn:aws:wafv2:us-west-2:098765432109:regional/webacl/another-web-acl/09876543-1234-5678-9876-543210987654"
+    }    
+]

@@ -1,0 +1,129 @@
+[
+  {
+    "TimeGenerated": "2024-09-22T19:15:52.0207696Z",
+    "JobType": "Export",
+    "CorrelationId": "3203c144-3aa7-4e1d-9f8a-c14e1685fe70",
+    "Status": "Started",
+    "JobId": "3daa5a63-8957-4822-9773-03fbb6b91762",
+    "SourceTable": "BermudianDollar",
+    "Destination": {
+      "container": "gardenClothing",
+      "storageAccounts": [
+        "https://turn-key.blob.core.windows.net"
+      ]
+    },
+    "ResultsRecordCount": null,
+    "ResultsGB": null,
+    "Message": ""
+  },
+  {
+    "TimeGenerated": "2024-09-26T00:57:31.6567867Z",
+    "JobType": "Export",
+    "CorrelationId": "3203c144-3aa7-4e1d-9f8a-c14e1685fe70",
+    "Status": "Succeeded",
+    "JobId": "3daa5a63-8957-4822-9773-03fbb6b91762",
+    "SourceTable": "BermudianDollar",
+    "Destination": {
+      "container": "gardenClothing",
+      "storageAccounts": [
+        "https://turn-key.blob.core.windows.net"
+      ]
+    },
+    "ResultsRecordCount": 569,
+    "ResultsGB": "95.09140370335894",
+    "Message": "Job '3daa5a63-8957-4822-9773-03fbb6b91762' in workspace 'b95c4109-0ea0-4bc5-bcb0-435fc3bcbca9' Completed Successfully"
+  },
+  {
+    "TimeGenerated": "2024-11-24T19:15:52.0388602Z",
+    "JobType": "Export",
+    "CorrelationId": "10aa8cc3-f6a0-439d-9055-d44baad4d1ae",
+    "Status": "Started",
+    "JobId": "30411e79-88de-4e2f-ab64-734277702777",
+    "SourceTable": "Tunnel",
+    "Destination": {
+      "container": "asymmetric",
+      "storageAccounts": [
+        "https://rubber.blob.core.windows.net",
+        "https://unbrandedrubbersoap.blob.core.windows.net",
+        "https://games-home.blob.core.windows.net"
+      ]
+    },
+    "ResultsRecordCount": null,
+    "ResultsGB": null,
+    "Message": ""
+  },
+  {
+    "TimeGenerated": "2024-11-25T21:27:57.6761558Z",
+    "JobType": "Export",
+    "CorrelationId": "10aa8cc3-f6a0-439d-9055-d44baad4d1ae",
+    "Status": "Failed",
+    "JobId": "30411e79-88de-4e2f-ab64-734277702777",
+    "SourceTable": "Tunnel",
+    "Destination": {
+      "container": "asymmetric",
+      "storageAccounts": [
+        "https://rubber.blob.core.windows.net",
+        "https://unbrandedrubbersoap.blob.core.windows.net",
+        "https://games-home.blob.core.windows.net"
+      ]
+    },
+    "ResultsRecordCount": 1206,
+    "ResultsGB": "28.195753152283572",
+    "Message": "Job '30411e79-88de-4e2f-ab64-734277702777' in workspace '685838b1-1571-44df-a112-22e1acaa3828' Failed"
+  },
+  {
+    "TimeGenerated": "2024-11-18T19:15:52.0396944Z",
+    "JobType": "Export",
+    "CorrelationId": "56a888e0-2d1d-45c1-9312-764d7f6cecd5",
+    "Status": "Started",
+    "JobId": "e298b744-f5af-43e3-bac8-42628ae35858",
+    "SourceTable": "PracticalGraniteSoap",
+    "Destination": {
+      "container": "architect",
+      "storageAccounts": [
+        "https://auxiliary.blob.core.windows.net",
+        "https://upward-trending.blob.core.windows.net",
+        "https://gorgeoussteelpants.blob.core.windows.net"
+      ]
+    },
+    "ResultsRecordCount": null,
+    "ResultsGB": null,
+    "Message": ""
+  },
+  {
+    "TimeGenerated": "2024-09-23T19:15:52.0400541Z",
+    "JobType": "Export",
+    "CorrelationId": "e49909ba-9e95-44a8-bd7d-3e0146316ffa",
+    "Status": "Started",
+    "JobId": "c717fda5-0b5a-459c-affd-9b959dcd174f",
+    "SourceTable": "TCP",
+    "Destination": {
+      "container": "personalloanaccount",
+      "storageAccounts": [
+        "https://re-contextualized.blob.core.windows.net",
+        "https://plastic.blob.core.windows.net"
+      ]
+    },
+    "ResultsRecordCount": null,
+    "ResultsGB": null,
+    "Message": ""
+  },
+  {
+    "TimeGenerated": "2024-09-26T05:30:07.2978780Z",
+    "JobType": "Export",
+    "CorrelationId": "e49909ba-9e95-44a8-bd7d-3e0146316ffa",
+    "Status": "Succeeded",
+    "JobId": "c717fda5-0b5a-459c-affd-9b959dcd174f",
+    "SourceTable": "TCP",
+    "Destination": {
+      "container": "personalloanaccount",
+      "storageAccounts": [
+        "https://re-contextualized.blob.core.windows.net",
+        "https://plastic.blob.core.windows.net"
+      ]
+    },
+    "ResultsRecordCount": 1109,
+    "ResultsGB": "56.01046864438759",
+    "Message": "Job 'c717fda5-0b5a-459c-affd-9b959dcd174f' in workspace 'b95c4109-0ea0-4bc5-bcb0-435fc3bcbca9' Completed Successfully"
+  }
+]

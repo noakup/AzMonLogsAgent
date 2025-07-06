@@ -1,0 +1,32 @@
+[
+    {
+      "TimeGenerated": "2025-04-21T15:14:59.0000000Z",
+      "BucketOwner": "ba9294f0516b06ae45084d8a384a079eb21568495ec451274e58c1476c1b0605",
+      "Bucket": "testingawss3serveraccesslogsstack9",
+      "RemoteIp": "-",
+      "Requester": "svc:s3.amazonaws.com",
+      "RequestId": "KKYRWJJFW715HWRS",
+      "Operation": "REST.PUT.OBJECT",
+      "Key": "server-logs/2025-04-21-15-14-59-11A3192BDD02B782",
+      "RequestUri": "PUT /testingawss3serveraccesslogsstack9/server-logs/2025-04-21-15-14-59-11A3192BDD02B782 HTTP/1.1",
+      "HttpStatus": 200,
+      "ErrorCode": "",
+      "BytesSent": 115,
+      "ObjectSize": 0,
+      "TotalTime": 35,
+      "TurnAroundTime": "",
+      "Referer": "",
+      "UserAgent": "",
+      "VersionId": "",
+      "HostId": "XgMPCDX9u/pYh5V1SGckHNw94WQMxFEMVjLqm/7mgDqx5qDTaXQmHa02rDb4ZgKrl7TnMSI21Lw=",
+      "SignatureVersion": "SigV4",
+      "CipherSuite": "TLS_AES_128_GCM_SHA256",
+      "AuthenticationType": "AuthHeader",
+      "HostHeader": "s3.eu-west-2.amazonaws.com",
+      "TLSVersion": "TLSv1.3",
+      "AccessPointARN": "",
+      "ACLRequired": "",
+      "TenantId": "92958a6a-745a-4d5f-b088-7c7f6ef73a6d",
+      "Type": "AWSAccessLogsV2_CL"
+    }
+  ]

@@ -1,0 +1,15 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    Level = level,
+    CorrelationId = correlationId,
+    ResultType = resultType,
+    OperationName = operationName,
+    OperationId = tostring(properties.operationId),
+    RecognizePromptSubOperationName = tostring(properties.recognizePromptSubOperationName),
+    PlayInLoop = tobool(properties.playInLoop),
+    PlayToParticipant = tobool(properties.playToParticipant),
+    PlayInterrupted = tobool(properties.interrupted),
+    ResultCode = toint(properties.resultCode),
+    ResultSubcode = toint(properties.resultSubcode),
+    ResultMessage = tostring(properties.resultMessage)

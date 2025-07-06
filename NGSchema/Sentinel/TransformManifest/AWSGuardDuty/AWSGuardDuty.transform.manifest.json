@@ -1,0 +1,14 @@
+{
+  "name": "AwsGuardDutyCCP",
+  "description": "Transform used for AWS GuardDuty in CCP Resource cases",
+  "transformVersion": "1",
+  "dataTypeId": "SENTINEL_AWSGUARDDUTY_CCP",
+  "transformState": "Validation",
+  "icmTeam": "Microsoft Azure Sentinel/Data Collection and Processing",
+  "contactDL": "asipolarbearslive@microsoft.com",
+  "relatedTable": "AWSGuardDuty",
+  "inputFilePath": "AWSGuardDuty-input.json",
+  "kqlFilePath": "../../KQL/AWSGuardDutyTransform.kql",
+  "sampleInputRecordsFilePath": "../../SampleInputRecords/AWSGuardDutySample.json",
+  "sampleOutputRecordsFilePath": "../../SampleOutputRecords/AWSGuardDutySample.json"
+}

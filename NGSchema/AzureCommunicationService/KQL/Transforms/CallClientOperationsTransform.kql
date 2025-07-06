@@ -1,0 +1,17 @@
+source
+| project
+    OperationName                           = operationName,
+    TimeGenerated                           = todatetime(["time"]),
+    CallClientTimeStamp                     = todatetime(properties.callClientTimeStamp),
+    OperationType                           = tostring(properties.operationType),
+    CallId                                  = tostring(properties.callId),
+    OperationId                             = tostring(properties.operationId),
+    DurationMs                              = tolong(properties.durationMs),
+    ResultType                              = tostring(properties.resultType),
+    ResultSignature                         = toint(properties.resultSignature),
+    SdkVersion                              = tostring(properties.sdkVersion),
+    UserAgent                               = tostring(properties.userAgent),
+    ClientInstanceId                        = tostring(properties.clientInstanceId),
+    EndpointId                              = tostring(properties.endpointId),
+    ParticipantId                           = tostring(properties.participantId),
+    OperationPayload                        = properties.operationPayload

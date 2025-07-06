@@ -1,0 +1,8 @@
+source
+| project
+    TimeGenerated = TimeGenerated,
+    Computer = Computer,
+    Category = Category,
+    Status = Status,
+    Message = Message,
+    Tags = parse_json(Tags)

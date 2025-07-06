@@ -1,0 +1,29 @@
+[
+    {
+        "TimeGenerated": "4/8/2025, 2:07:19.371 PM",
+        "FirewallName": "Firewall",
+        "AvailabilityZone": "ap-south-1a",
+        "TxId": "",
+        "EventTimestamp": 1744120683,
+        "AppProto": "",
+        "SrcIp": "45.33.95.64",
+        "SrcPort": 48805,
+        "EventType": "alert",
+        "Severity": 3,
+        "SignatureId": 10005,
+        "Rev": 0,
+        "Signature": "Possible suspicious activity",
+        "AlertAction": "allowed",
+        "Category": "",
+        "FlowId": 1082152764231569,
+        "DestIp": "10.0.2.132",
+        "Proto": "TCP",
+        "VerdictAction": "pass",
+        "Sni": "",
+        "Version": "",
+        "DestPort": 4431,
+        "PktSrc": "geneve encapsulation",
+        "Direction": "to_server",
+        "Timestamp": ""
+    }
+]

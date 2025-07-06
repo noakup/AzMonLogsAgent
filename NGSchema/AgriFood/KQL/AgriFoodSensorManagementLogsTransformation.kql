@@ -1,0 +1,20 @@
+source
+| project
+TimeGenerated = todatetime(['time']),
+Category = category,
+OperationName = operationName,
+RequestUri = tostring(properties.requestUri),
+FarmerId = tostring(properties.farmerId),
+DataPlaneResourceId = tostring(properties.dataPlaneResourceId),
+RequestBody = todynamic(properties.requestBody),
+CallerIpAddress = callerIpAddress,
+Level = Level,
+ResultType = resultType,
+ResultSignature = toint(resultSignature),
+ResultDescription = resultDescription,
+Location = location,
+CorrelationId = correlationId,
+DurationMs = durationMs,
+ApplicationId = tostring(identity.claims.ApplicationId),
+ObjectId = tostring(identity.claims.ObjectId),
+ClientTenantId = tostring(identity.claims.TenantId)

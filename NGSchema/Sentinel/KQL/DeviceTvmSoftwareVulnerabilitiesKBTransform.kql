@@ -1,0 +1,12 @@
+source
+| project
+TimeGenerated = OriginFolderCreationTime,
+Timestamp = OriginFolderCreationTime,
+CveId = CveId,
+CvssScore = CvssScore,
+IsExploitAvailable = IsExploitAvailable,
+VulnerabilitySeverityLevel = VulnerabilitySeverityLevel,
+LastModifiedTime = LastModifiedTime,
+PublishedDate = PublishedDate,
+VulnerabilityDescription = VulnerabilityDescription,
+AffectedSoftware = AffectedSoftware

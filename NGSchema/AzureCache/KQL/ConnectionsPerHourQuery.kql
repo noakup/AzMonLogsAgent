@@ -1,0 +1,5 @@
+let IpRange = "10.1.1.0/24";
+ACRConnectedClientList
+// For particular datetime filtering, add '| where TimeGenerated between (StartTime .. EndTime)'
+| where ipv4_is_in_range(ClientIp, IpRange)
+| summarize ConnectionCount = sum(ClientCount) by TimeRange = bin(TimeGenerated, 1h)

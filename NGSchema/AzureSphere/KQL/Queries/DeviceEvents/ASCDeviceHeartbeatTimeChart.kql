@@ -1,0 +1,7 @@
+let Interval = timespan(1d); // Interval for the Chart 
+ASCDeviceEvents
+| where OperationName == "DeviceCertificateEvent" and 
+        Properties.EventType == "DeviceCertificatesGenerate" and 
+        ResultType == "Success"
+| summarize Device_Heartbeat_Events=count() by bin(TimeGenerated, Interval)
+| render timechart

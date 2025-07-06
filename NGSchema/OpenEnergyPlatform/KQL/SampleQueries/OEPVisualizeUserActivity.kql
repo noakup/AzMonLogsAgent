@@ -1,0 +1,9 @@
+OEPDataplaneLogs
+// Extract UserId from the Message field using a regular expression
+| extend UserId = extract(@"user-id=([a-zA-Z0-9_-@.]+)", 1, Message)
+// Filter out logs without a UserId
+| where UserId != ""
+// Summarize the count of logs per user over the last day
+| summarize Count = count() by bin(TimeGenerated, 1d), UserId
+// Render a pie chart to visualize user activity
+| render piechart

@@ -1,0 +1,4 @@
+ACSCallRecordingSummary
+// Count distinct calls (dcount(CorrelationId)) per call type
+| summarize call_types=dcount(RecordingId) by RecordingEndReason
+| render piechart title="Recording End Reason Ratio"

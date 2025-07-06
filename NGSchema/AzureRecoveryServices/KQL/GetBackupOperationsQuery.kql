@@ -1,0 +1,5 @@
+AzureBackupOperations
+//| where TimeGenerated >= ago(30d) // uncomment this line to view last 30 days
+| where OperationType == "ChangePassphrase"
+| project TimeGenerated, OperationType, OperationStartTime, ExtendedProperties, BackupManagementType
+| limit 10

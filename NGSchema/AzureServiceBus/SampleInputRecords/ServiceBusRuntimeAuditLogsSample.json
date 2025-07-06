@@ -1,0 +1,25 @@
+[
+  {
+    "Environment": "PROD",
+    "Region": "West India",
+    "ScaleUnit": "PROD-BM1-401",
+    "TaskName": "RuntimeAuditLogShoebox",
+    "ActivityId": "eb21994e-ecf5-4d41-86ad-74cc21488f6f",
+    "SubscriptionId": "XXXX-YYYY-ZZZZ",
+    "NamespaceName": "vijaysharma-premium-sb-namespace",
+    "EntityType": "Queue",
+    "EntityName": "vijaysharma-premium-sbq",
+    "ActivityName": "SendMessage",
+    "ResourceId": "/SUBSCRIPTIONS/XXXX-YYYY-ZZZZ/RESOURCEGROUPS/VIJAYSHARMA-TESTGROUP/PROVIDERS/MICROSOFT.SERVICEBUS/NAMESPACES/VIJAYSHARMA-PREMIUM-SB-NAMESPACE",
+    "Status": "Success",
+    "Protocol": "AMQP",
+    "AuthType": "SAS",
+    "AuthId": "vijaysharma-premium-sbq-policy",
+    "NetworkType": "Public",
+    "ClientIp": "167.220.238.223",
+    "Count": 56,
+    "Properties": "{}",
+    "category": "RuntimeAuditLogs",
+    "eventTimestamp": "1/1/2021 8:40:06 PM +00:00"
+  }
+]

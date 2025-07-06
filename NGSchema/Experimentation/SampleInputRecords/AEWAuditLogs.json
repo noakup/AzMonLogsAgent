@@ -1,0 +1,24 @@
+[
+  {
+    "Tenant": "ExpAPI",
+    "message": "Action is succeeded, commit database transaction.",
+    "time": "2020-12-07T23:48:10.0877900Z",
+    "resourceId": "/SUBSCRIPTIONS/DAD45786-32E5-4EF3-B90E-8E0838FBADB6/RESOURCEGROUPS/EXPAPI-PROD-RG/PROVIDERS/MICROSOFT.EXPERIMENTATION/EXPERIMENTWORKSPACES/AZUREEXPTEST",
+    "category": "Request",
+    "ActionName": "CreateFeatureAsync",
+    "properties_uri": "/workspaces/d0b5adff-df5f-4199-bdd9-31b28eb33507/features",
+    "User": "ravanhof@microsoft.com",
+    "WorkspaceId": "d0b5adff-df5f-4199-bdd9-31b28eb33507"
+  },
+  {
+    "Tenant": "ExpAPI",
+    "message": "Action is succeeded, commit database transaction.",
+    "time": "2020-12-08T00:00:06.1562230Z",
+    "resourceId": "/SUBSCRIPTIONS/DAD45786-32E5-4EF3-B90E-8E0838FBADB6/RESOURCEGROUPS/EXPAPI-PROD-RG/PROVIDERS/MICROSOFT.EXPERIMENTATION/EXPERIMENTWORKSPACES/AZUREEXPTEST",
+    "category": "Request",
+    "ActionName": "CreateFeatureAsync",
+    "properties_uri": "/workspaces/d0b5adff-df5f-4199-bdd9-31b28eb33507/features",
+    "User": "f19c3013-7635-45de-988d-99e58be554d7",
+    "WorkspaceId": "d0b5adff-df5f-4199-bdd9-31b28eb33507"
+  }
+]

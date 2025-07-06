@@ -1,0 +1,20 @@
+source
+| extend props = parse_json(properties)
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    OperationVersion = operationVersion,
+    Category = category,
+    ResultType = resultType,
+    ResultSignature = resultSignature,
+    ResultDescription = resultDescription,
+    DurationMs = toint(durationMs),
+    CallerIpAddress = callerIpAddress,
+    CorrelationId = correlationId,
+    Level = level,
+    URI = uri,
+    UserId = tostring(props.userId),
+    ChatThreadId = tostring(props.threadId),
+    ChatMessageId = toint(props.messageId),
+    SdkType = tostring(props.sdkType),
+    PlatformType = tostring(props.platformType)

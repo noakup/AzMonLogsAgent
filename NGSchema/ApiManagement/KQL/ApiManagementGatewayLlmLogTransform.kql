@@ -1,0 +1,18 @@
+source
+| extend properties = parse_json(properties)
+| project 
+    TimeGenerated = todatetime(properties.timestamp),
+    OperationName = operationName,
+    CorrelationId = correlationId,
+    Region = Region,
+    SequenceNumber = toint(properties.sequenceNumber),
+    PromptTokens = toint(properties.promptTokens),
+    CompletionTokens = toint(properties.completionTokens),
+    TotalTokens = toint(properties.totalTokens),
+    ModelName = tostring(properties.modelName),
+    IsStreamCompletion = tobool(properties.isStreamCompletion),
+    RequestId = tostring(properties.requestId),
+    DeploymentName = tostring(properties.deploymentName),
+    ApiVersion = tostring(properties.apiVersion),
+    RequestMessages = todynamic(properties.requestMessages),
+    ResponseMessages = todynamic(properties.responseMessages)

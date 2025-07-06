@@ -1,0 +1,153 @@
+{
+    "type": "microsoft.cognitiveservices/accounts",
+    "displayName": "Cognitive Services",
+    "description": "Account for Cognitive Services resources",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "COGNITIVESERVICES/PlatformEngineer-T1",
+    "contactDL": "cigpf@microsoft.com",
+    "relatedTables": [],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "CSARequestResponse",
+            "description": "Request and response logs for Cognitive Services.",
+            "categories": [],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 1,
+            "dataTypeId": "MICROSOFTCOGNITIVESERVICES_REQUESTRESPONSE",
+            "isResourceCentric": true,
+            "isTroubleshootingAllowed": true,
+            "tableState": "Validation",
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resultSignature",
+                    "type": "String"
+                },
+                {
+                    "name": "durationMs",
+                    "type": "Int"
+                },
+                {
+                    "name": "callerIpAddress",
+                    "type": "String"
+                },
+                {
+                    "name": "correlationId",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "KQL/Transforms/RequestResponseTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Time for the record to be logged."
+                },
+                {
+                    "name": "RequestTime",
+                    "type": "DateTime",
+                    "description": "Time for the request to start."
+                },
+                {
+                    "name": "ResponseTime",
+                    "type": "DateTime",
+                    "description": "Time for the response to return."
+                },
+                {
+                    "name": "ApiName",
+                    "type": "String",
+                    "description": "Api name of the http request."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "description": "Operation name of the http request."
+                },
+                {
+                    "name": "ResponseCode",
+                    "type": "Int",
+                    "description": "Response code for the http request."
+                },
+                {
+                    "name": "DurationMs",
+                    "type": "Int",
+                    "description": "The duration of the http request in milliseconds."
+                },
+                {
+                    "name": "RequestLength",
+                    "type": "Int",
+                    "description": "The length of the request in bytes."
+                },
+                {
+                    "name": "ResponseLength",
+                    "type": "Int",
+                    "description": "The length of the response in bytes."
+                },
+                {
+                    "name": "RequestId",
+                    "type": "String",
+                    "description": "The id of the http request, corresponding to apim-request-id header.",
+                    "dataTypeHint": "GUID"
+                },
+                {
+                    "name": "CallerIpAddress",
+                    "type": "String",
+                    "description": "IP address of the client to the service.",
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "description": "Location name of the account."
+                },
+                {
+                    "name": "ModelName",
+                    "type": "String",
+                    "description": "Azure OpenAI model name if this is an inference call."
+                },
+                {
+                    "name": "ModelVersion",
+                    "type": "String",
+                    "description": "Azure OpenAI model version if this is an inference call."
+                },
+                {
+                    "name": "ModelDeploymentName",
+                    "type": "String",
+                    "description": "Azure OpenAI model deployment name if this is an inference call."
+                },
+                {
+                    "name": "StreamType",
+                    "type": "String",
+                    "description": "Azure OpenAI request stream type if this is an inference call."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/RequestResponseSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/RequestResponseSample.json"
+        }
+    ],
+    "functions": [],
+    "queries": []
+}

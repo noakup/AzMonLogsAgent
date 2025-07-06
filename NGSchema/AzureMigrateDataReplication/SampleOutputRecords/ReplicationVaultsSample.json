@@ -1,0 +1,10 @@
+[
+    {
+        "TimeGenerated": "2024-07-04T23:31:45.1224849Z",
+        "OperationName": "Create",
+        "Category": "ReplicationVaults",
+        "Location": "centraluseuap",
+        "ServiceResourceId": "84ac57d6-7189-438f-9759-2e441a36dd5e",
+        "ProvisioningState": "Creating"
+    }
+]

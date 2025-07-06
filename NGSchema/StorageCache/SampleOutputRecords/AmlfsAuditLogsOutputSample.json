@@ -1,0 +1,14 @@
+[
+    {
+        "TimeGenerated": "2023/06/16 4:16:24 PM",
+        "OperationName": "TraceAmlFilesystem.POST",
+        "ActivityId": "bc3356b1-a496-42d8-953d-801c712a4bb0",
+        "ResultSignature": "200",
+        "ResultDescription": "TraceAmlFilesystem response received.",
+        "Identity": {
+            "applicationId": "1950a258-4e31-a9cf-XXXXXXXXXXXX",
+            "clientRole": "PlatformServiceOperatorOrViewer"
+        },
+        "Location": "eastus"
+    }
+]

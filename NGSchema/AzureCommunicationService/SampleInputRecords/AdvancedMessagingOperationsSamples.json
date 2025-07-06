@@ -1,0 +1,44 @@
+[
+  {
+    "time": "2024-04-23T22:19:41.5127690Z",
+    "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/ACSXPLATMSGTEST/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/ACSXPLATMSG-TEST",
+    "location": "unitedstates",
+    "operationName": "SendMessage",
+    "category": "AdvancedMessagingOperational",
+    "operationVersion": "2024-02-01",
+    "resultType": "Succeeded",
+    "resultSignature": "202",
+    "resultDescription": "Accepted",
+    "durationMs": 385,
+    "callerIpAddress": "20.118.109.112",
+    "correlationId": "428404cc990cdbb9f9e9c3e717f97b76",
+    "level": "Informational",
+    "uri": "https://centralus.prod.acs-xplatmsg.trafficmanager.net/messages/notifications:send",
+    "properties": {
+      "channelId": "b045be8c-45cd-492a-b2a2-47bae7c36959",
+      "messageType": "text",
+      "messageStatus": "Unknown"
+    }
+  },
+  {
+      "time": "2024-04-23T22:56:07.6104190Z",
+      "resourceId": "/SUBSCRIPTIONS/D206C0A8-DFAD-4165-A870-A21054B5660C/RESOURCEGROUPS/ACS-CPM-PPE-RESOURCES/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/ACSCPM-WHATSUP-PPERESOURCE-EU",
+      "location": "europe",
+      "operationName": "SendMessage",
+      "category": "AdvancedMessagingOperational",
+      "operationVersion": "2023-08-24-preview",
+      "resultType": "Succeeded",
+      "resultSignature": "202",
+      "resultDescription": "Accepted",
+      "durationMs": 537,
+      "callerIpAddress": "20.160.243.253",
+      "correlationId": "132066f4507970ceb6b7510af888a799",
+      "level": "Informational",
+      "uri": "https://a-euwe.ppe.acs-xplatmsg.trafficmanager.net/messages/notifications/:send",
+      "properties": {
+          "channelId": "3ae56308-ae4f-4ef6-bd1d-2ab6f2c4d75c",
+          "messageType": "text",
+          "messageStatus": "Accepted"
+      }
+  }
+]

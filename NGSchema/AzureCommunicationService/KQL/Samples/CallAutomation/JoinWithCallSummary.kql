@@ -1,0 +1,6 @@
+ACSCallAutomationIncomingOperations 
+//| where CorrelationId == "<correlation ID>" // This can be uncommented to filter on a specific correlation ID
+| join kind=inner
+    (ACSCallSummary)
+    on CorrelationId
+| limit 100

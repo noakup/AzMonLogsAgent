@@ -1,0 +1,10 @@
+source
+| extend properties = parse_json(properties)
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    TargetResourceId = tostring(properties.DataPlaneResourceIdKey),
+    CallerIdentity = identity,
+    OperationResult = resultType,
+    ResponseCode = resultSignature,
+    CorrelationId = correlationId

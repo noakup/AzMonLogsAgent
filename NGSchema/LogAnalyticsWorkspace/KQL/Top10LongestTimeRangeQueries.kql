@@ -1,0 +1,3 @@
+LAQueryLogs
+| extend DataProcessedTimeRange = format_timespan(StatsDataProcessedEnd - StatsDataProcessedStart, 'dd.hh:mm:ss:FF')
+| top 10 by DataProcessedTimeRange desc nulls last 

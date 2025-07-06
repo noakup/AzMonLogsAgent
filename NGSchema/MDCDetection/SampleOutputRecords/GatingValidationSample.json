@@ -1,0 +1,55 @@
+[
+    {
+        "AzureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm",
+        "Region": "eastus2",
+        "Action": "Allow",
+        "RuleProperties": [
+            {
+                "ruleType": "VulnerabilityAssessment",
+                "ruleName": "default-1",
+                "ruleScope": {
+                    "matcherType": "Namespace",
+                    "anyOf": [
+                        "my-namespace"
+                    ]
+                },
+                "objectMetadata": {},
+                "ruleConfiguration": {
+                    "maxSeverities": {
+                        "critical": 5,
+                        "high": 10,
+                        "medium": 20,
+                        "low": 30
+                    }
+                },
+                "detected": {
+                    "severities": {
+                        "high": 5
+                    }
+                },
+                "status": "Allow"
+            }
+        ],
+        "AdmissionControlVersions": {
+            "admissionControl": "v1.0.0",
+            "ruleTemplates": "v1.0.0",
+            "verifierPlugin": "v1.0.0",
+            "policySynchronizer": "v1.0.0"
+        },
+        "EvaluatedResourceKind": "pod",
+        "EvaluatedResourceName": "hello-world",
+        "EvaluatedResourceParentKind": "replicaset",
+        "EvaluatedResourceParentName": "hello-world",
+        "EvaluatedResourceDetails": {
+            "registryHost": "mdcsredev.azurecr.io",
+            "repositoryName": "defenders/sag-internalattackpath",
+            "mediaType": "json",
+            "digest": "sha256:95ae24b37eae0ad3d014ef14cd9ee9e2b093ec09928ada78ac1c720784f6d222",
+            "tags": "20240820.5",
+            "osType": "linux",
+            "osDistribution": "mariner_2"
+        },
+        "Namespace": "my-namespace",
+        "TimeGenerated": "2024-03-01T00:00:00Z"
+    }
+]

@@ -1,0 +1,87 @@
+[
+   {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "scuba@np-lab.co.il"
+      },
+      "requestMetadata": {
+        "callerIp": "2409:40f0:fb:b2f1:39b6:a550:2cc2:eec8",
+        "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)"
+      },
+      "serviceName": "compute.googleapis.com",
+      "methodName": "beta.compute.backendServices.insert",
+      "resourceName": "projects/msccp-test/global/backendServices/v-dg",
+      "request": {
+        "@type": "type.googleapis.com/compute.backendServices.insert"
+      }
+    },
+    "insertId": "-t4ixxwd49ou",
+    "resource": {
+      "type": "gce_backend_service",
+      "labels": {
+        "backend_service_id": "7121129159394711219",
+        "location": "global",
+        "project_id": "msccp-test"
+      }
+    },
+    "timestamp": "2025-03-05T15:06:42.674370Z",
+    "severity": "NOTICE",
+    "labels": {
+      "compute.googleapis.com/root_trigger_id": "624a68a0-ee87-46f6-9177-88600176ff33"
+    },
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Factivity",
+    "operation": {
+      "id": "operation-1741187163586-62f99ba5f8146-26af9fe9-cd513e9a",
+      "producer": "compute.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2025-03-05T15:06:43.474921061Z"
+  },
+  {
+    "insertId": "1mbujtqfq9kq3p",
+    "jsonPayload": {
+      "@type": "type.googleapis.com/google.cloud.loadbalancing.type.LoadBalancerLogEntry",
+      "backendTargetProjectNumber": "projects/135492226944",
+      "cacheDecision": [
+        "RESPONSE_HAS_CACHE_CONTROL",
+        "RESPONSE_CACHE_CONTROL_DISALLOWED_CACHING",
+        "RESPONSE_HAS_EXPIRES",
+        "RESPONSE_HAS_CONTENT_TYPE",
+        "CACHE_MODE_CACHE_ALL_STATIC"
+      ],
+      "remoteIp": "204.76.203.15",
+      "cacheId": "AMS-5232d789",
+      "statusDetails": "response_sent_by_backend"
+    },
+    "httpRequest": {
+      "requestMethod": "GET",
+      "requestUrl": "http://34.13.76.82/",
+      "requestSize": "422",
+      "status": "200",
+      "responseSize": "809",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36 Edg/90.0.818.46",
+      "remoteIp": "204.76.203.15",
+      "cacheLookup": true,
+      "serverIp": "2002:a05:6664:3145::",
+      "latency": "0.123040s"
+    },
+    "resource": {
+      "type": "http_load_balancer",
+      "labels": {
+        "target_proxy_name": "cdn-vgudivya-bblb-target-proxy",
+        "forwarding_rule_name": "cdn-vgudivya-bblb-forwarding-rule-ipv4",
+        "backend_service_name": "cdn-vgudivya-bb",
+        "project_id": "msccp-test",
+        "url_map_name": "cdn-vgudivya-bblb",
+        "zone": "global"
+      }
+    },
+    "timestamp": "2025-03-17T19:11:55.869163Z",
+    "severity": "INFO",
+    "logName": "projects/msccp-test/logs/requests",
+    "trace": "projects/msccp-test/traces/9838e4371c84efa41e74854ca3d1677b",
+    "receiveTimestamp": "2025-03-17T19:11:56.608068532Z",
+    "spanId": "fff6914311245ba2"
+  }
+]

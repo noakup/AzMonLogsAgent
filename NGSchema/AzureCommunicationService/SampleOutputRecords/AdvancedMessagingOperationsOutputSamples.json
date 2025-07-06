@@ -1,0 +1,38 @@
+[
+  {
+    "TimeGenerated": "2024-04-23T22:19:41.5127690Z",
+    "Location": "unitedstates",
+    "OperationName": "SendMessage",
+    "Category": "AdvancedMessagingOperational",
+    "OperationVersion": "2024-02-01",
+    "ResultType": "Succeeded",
+    "ResultSignature": "202",
+    "ResultDescription": "Accepted",
+    "DurationMs": 385,
+    "CallerIpAddress": "20.118.109.112",
+    "CorrelationId": "428404cc990cdbb9f9e9c3e717f97b76",
+    "Level": "Informational",
+    "URI": "https://centralus.prod.acs-xplatmsg.trafficmanager.net/messages/notifications:send",
+    "ChannelId": "b045be8c-45cd-492a-b2a2-47bae7c36959",
+    "MessageType": "text",
+    "MessageStatus": "Unknown"
+  },
+  {
+      "TimeGenerated": "2024-04-23T22:56:07.6104190Z",
+      "Location": "europe",
+      "OperationName": "SendMessage",
+      "Category": "AdvancedMessagingOperational",
+      "OperationVersion": "2023-08-24-preview",
+      "ResultType": "Succeeded",
+      "ResultSignature": "202",
+      "ResultDescription": "Accepted",
+      "DurationMs": 537,
+      "CallerIpAddress": "20.160.243.253",
+      "CorrelationId": "132066f4507970ceb6b7510af888a799",
+      "Level": "Informational",
+      "URI": "https://a-euwe.ppe.acs-xplatmsg.trafficmanager.net/messages/notifications/:send",
+      "ChannelId": "3ae56308-ae4f-4ef6-bd1d-2ab6f2c4d75c",
+      "MessageType": "text",
+      "MessageStatus": "Accepted"
+  }
+]

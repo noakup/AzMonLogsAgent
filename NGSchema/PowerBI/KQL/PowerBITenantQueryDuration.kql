@@ -1,0 +1,4 @@
+// Average query duration by hour
+PowerBIDatasetsWorkspace
+| where OperationName == 'QueryEnd'
+| summarize avg(Duration) by bin(TimeGenerated, 1h)

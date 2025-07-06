@@ -1,0 +1,14 @@
+[
+    {
+        "TimeGenerated": "2022-08-10T21:00:17.6263600Z",
+        "OperationName": "Normalization",
+        "Message": "The HealthCheck [ExternalEventHub:IsAuthenticated] did not pass",
+        "LogType": "HealthCheckException"
+    },
+    {
+        "TimeGenerated": "2022-08-10T21:00:23.3534800Z",
+        "OperationName": "FHIRConversion",
+        "Message": "The HealthCheck [FhirService:IsAuthenticated] did not pass",
+        "LogType": "HealthCheckException"
+    }
+]

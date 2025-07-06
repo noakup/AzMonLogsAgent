@@ -1,0 +1,4 @@
+ContainerAppConsoleLogs_CL
+| where Log_s contains "error"
+| summarize LastOcurrTime = max(TimeGenerated), CountErrorMessages = count() by Log_s
+| top 10 by LastOcurrTime desc

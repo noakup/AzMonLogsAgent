@@ -1,0 +1,14 @@
+{
+    "name" : "IngestionDelete",
+    "description": "These are Audit logs related to deletion of files on the input storage account.",
+    "transformVersion" : "1",
+    "dataTypeId" : "MICROSOFTNETWORKANALYTICSDATAPRODUCTS_INGESTIONDELETE",
+    "inputFilePath" : "IngestionDelete-AOIStorage.json",
+    "transformState" : "Production",
+    "icmTeam" : "Azure Operator Insights/Triage",
+    "contactDL": "A4OAINASWE@microsoft.com",
+    "relatedTable" : "AOIStorage",
+    "kqlFilePath" : "KQL/IngestionDeleteTransform.kql",
+    "sampleInputRecordsFilePath" : "SampleInputRecords/IngestionDeleteSamples.json",
+    "sampleOutputRecordsFilePath" : "SampleOutputRecords/IngestionDeleteSamples.json"
+}

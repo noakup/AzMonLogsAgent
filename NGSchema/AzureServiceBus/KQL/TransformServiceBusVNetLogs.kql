@@ -1,0 +1,10 @@
+source
+| extend ProviderInfo = tostring(split(split(resourceId,"/")[6], '.')[1])
+| project
+    NamespaceName = tostring(namespaceName),
+    TimeGenerated = todatetime(eventTimestamp),
+    AddressIp = tostring(ipAddress),
+    Action = tostring(action),
+    Message = tostring(reason),
+    Count = toint(["count"]),
+	Provider = ProviderInfo

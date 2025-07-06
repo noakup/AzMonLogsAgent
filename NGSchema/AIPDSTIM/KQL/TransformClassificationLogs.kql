@@ -1,0 +1,11 @@
+source 
+| project
+	TimeGenerated=TimeGenerated,
+	Uri=Uri,
+	Classification=Classification,
+	CorrelationId=CorrelationId,
+	SourceType=SourceType,
+	AssetType=AssetType,
+	AssetLastScanTime=AssetLastScanTime,
+	ClassificationDetails=todynamic(ClassificationDetails),
+	Classifications=todynamic(Classifications)

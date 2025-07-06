@@ -1,0 +1,10 @@
+source
+| extend ProviderInfo = tostring(split(split(resourceId,"/")[6], '.')[1])
+| project
+    ActivityId = ActivityId,
+    EventName = EventName,
+    TimeGenerated = todatetime(EventTimeString),
+    EventProperties = EventProperties,
+    Status = Status,
+    Caller = Caller,
+	Provider = ProviderInfo

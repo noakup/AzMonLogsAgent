@@ -1,0 +1,9 @@
+((AgriFoodFarmManagementLogs | where FarmerId != "" | summarize AgriFoodFarmManagementLogsCount=count() by FarmerId, ResultType))
+| join kind=fullouter (( AgriFoodSatelliteLogs | where FarmerId != "" | summarize AgriFoodSatelliteLogsCount=count() by FarmerId, ResultType)) on FarmerId, ResultType
+| join kind=fullouter (( AgriFoodWeatherLogs | where FarmerId != "" | summarize AgriFoodWeatherLogsCount=count() by FarmerId, ResultType)) on FarmerId, ResultType
+| join kind=fullouter (( AgriFoodJobProcessedLogs | where FarmerId != "" | summarize AgriFoodJobProcessedLogsCount=count() by FarmerId, ResultType)) on FarmerId, ResultType
+| join kind=fullouter (( AgriFoodFarmOperationLogs | where FarmerId != "" | summarize AgriFoodFarmOperationLogsCount=count() by FarmerId, ResultType)) on FarmerId, ResultType
+| join kind=fullouter (( AgriFoodInsightLogs | where FarmerId != "" | summarize AgriFoodInsightLogsCount=count() by FarmerId, ResultType)) on FarmerId, ResultType
+| join kind=fullouter (( AgriFoodProviderAuthLogs | where FarmerId != "" | summarize AgriFoodProviderAuthLogsCount=count() by FarmerId, ResultType)) on FarmerId, ResultType
+| join kind=fullouter (( AgriFoodModelInferenceLogs | where FarmerId != "" | summarize AgriFoodModelInferenceLogsCount=count() by FarmerId, ResultType)) on FarmerId, ResultType
+| project FarmerId = coalesce(FarmerId, FarmerId1, FarmerId2, FarmerId3, FarmerId4, FarmerId5, FarmerId6, FarmerId7), AgriFoodFarmManagementLogsCount, AgriFoodSatelliteLogsCount, AgriFoodWeatherLogsCount, AgriFoodJobProcessedLogsCount, AgriFoodFarmOperationLogsCount, AgriFoodInsightLogsCount, AgriFoodProviderAuthLogsCount, AgriFoodModelInferenceLogsCount, ResultType = coalesce(ResultType, ResultType1, ResultType2, ResultType3, ResultType4, ResultType5, ResultType6, ResultType7)

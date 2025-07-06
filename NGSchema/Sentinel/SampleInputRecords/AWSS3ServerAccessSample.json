@@ -1,0 +1,34 @@
+[
+    
+    {
+  
+    "Field1": "ba9294f0516b06ae45084d8a384a079eb21568495ec451274e58c1476c1b0605",  
+    "Field2": "alekhya-s3-buckect",
+    "Field3": "2025-01-23T13:24:22",
+    "Field4": "+0000",
+    "Field5": "157.50.41.198",
+    "Field6": "arn:aws:iam::072643944673:user/CATTeamIDC",
+    "Field7": "RJHBNZDD1W3F6GCX",
+    "Field8": "REST.GET.NOTIFICATION",
+    "Field9": "-",
+    "Field10": "GET /alekhya-s3-buckect?notification HTTP/1.1",
+    "Field11": 200,
+    "Field12": "-",
+    "Field13": 115,
+    "Field14": "-",
+    "Field15": 35,
+    "Field16": "-",
+    "Field17": "https://eu-central-1.console.aws.amazon.com/",
+    "Field18": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0",
+    "Field19": "-",
+    "Field20": "Lc6stqjwBbGiq9myHjTBzrOfHBN/BjsIaWanLrQp6Qt7LPjvMyhuosGXXwaJCO/aAFC4H14sOxjULVP7ntkl+60sDLDBzrw+Hx5McIc0NL0=",
+    "Field21": "SigV4",
+    "Field22": "TLS_AES_128_GCM_SHA256",
+    "Field23": "AuthHeader",
+    "Field24": "s3.eu-central-1.amazonaws.com",
+    "Field25": "TLSv1.3",
+    "Field26": "-",
+    "Field27": "-"
+    }
+  ]
+   

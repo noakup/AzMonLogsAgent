@@ -1,0 +1,53 @@
+[
+    {
+        "time": "2023-08-10T08:00:00.0027320Z",
+        "properties": {
+            "ComponentName": "UserSettingController",
+            "ActivityId": "00000000-0000-0000-0000-000000000000",
+            "RelatedActivityId": "00000000-0000-0000-0000-000000000000",
+            "SessionId": "00000000-0000-0000-0000-000000000000",
+            "ScenarioId": "None",
+            "ScenarioInstanceId": "00000000-0000-0000-0000-000000000000",
+            "ServiceName": "CloudPC Service",
+            "ApplicationName": "auditFunction",
+            "BuildVersion": "1.0.02403.115",
+            "Pid": 14960,
+            "Tid": 80,
+            "ResourceExtendedProperties": "",
+            "CallerExtendedProperties": "",
+            "OtherExtendedProperties": "componentName:UserSettingControllerÆoperationType:CreateÆcategory:CloudPCÆactivityDateTime:8/11/2023 8:11:59 AMÆauditEvenId:f8328447-3d0c-41a1-80a3-8368959163fcÆcorrelationId:5725616e-1537-45ff-8f14-0336d6010c0cÆshoeboxCategory:Windows365AuditLogsÆresources:[{\"DisplayName\":\"testShoebox\",\"Type\":\"CloudPcUserSetting\",\"ResourceId\":\"298f3c1e-6dce-4bfd-8929-339bc9ffec38\",\"ModifiedProperty\":[{\"Name\":\"Id\",\"OldValue\":null,\"NewValue\":\"298f3c1e-6dce-4bfd-8929-339bc9ffec38\"},{\"Name\":\"DisplayName\",\"OldValue\":null,\"NewValue\":\"testShoebox\"},{\"Name\":\"SelfServiceEnabled\",\"OldValue\":null,\"NewValue\":\"False\"},{\"Name\":\"LocalAdminEnabled\",\"OldValue\":null,\"NewValue\":\"False\"},{\"Name\":\"ResetEnabled\",\"OldValue\":null,\"NewValue\":\"False\"},{\"Name\":\"RestorePointSetting.FrequencyInHours\",\"OldValue\":null,\"NewValue\":\"12\"},{\"Name\":\"RestorePointSetting.UserRestoreEnabled\",\"OldValue\":null,\"NewValue\":\"False\"},{\"Name\":\"LastModifiedDateTime\",\"OldValue\":null,\"NewValue\":\"8/11/2023 8:11:59 AM\"}]}]Æ"
+        },
+        "operationName": "TestOperationName",
+        "resultType": "Success",
+        "identity": {
+            "TenantId": [
+                {
+                    "Identity": "00000000-0000-0000-0000-000000000000"
+                }
+            ],
+            "UPN": [
+                {
+                    "Identity": "NoUPN@NoUPN.com"
+                }
+            ],
+            "ObjectID": [
+                {
+                    "Identity": "00000000-0000-0000-0000-000000000000"
+                }
+            ],
+            "ApplicationID": [
+                {
+                    "Identity": "00000000-0000-0000-0000-000000000000"
+                }
+            ],
+            "Other": [
+                {
+                    "Identity": "{\"Type\":4,\"UserPermission\":[\"CloudPC.ReadWrite.All DeviceManagementApps.Read.All email Group.Read.All GroupMember.Read.All openid Organization.Read.All profile User.Read.All\"],\"ApplicationId\":\"00000000-0000-0000-0000-000000000000\",\"ApplicationDisplayName\":\"Windows 365 Ibiza Extension\",\"ServicePrincipleName\":null,\"UserScopeTags\":[],\"RemoteTenantId\":null,\"RemoteUserId\":null}",
+                    "Description": "OtherProperties"
+                }
+            ]
+        },
+        "tenantId": "00000000-0000-0000-0000-000000000000",
+        "category": "Windows365AuditLogs"
+    }
+]

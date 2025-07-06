@@ -1,0 +1,10 @@
+{
+  "name": "AWSCloudWatch",
+  "description": "The CloudWatch Logs provide performance and billing data from the AWS CloudWatch service which helps the user better understand and operate the AWS system and application.",
+  "input": [
+    {
+      "name": "Field1",
+      "type": "String"
+    }
+  ]
+}

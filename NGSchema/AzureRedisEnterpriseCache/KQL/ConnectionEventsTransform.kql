@@ -1,0 +1,31 @@
+let convertLast4BitsToDecimal = (arg: string) {
+     let hextoint = toint(strcat('0x',arg));
+     binary_and(hextoint, 255);
+};
+let convertFirst4BitsToDecimal = (arg: string) {
+    let hextoint = toint(strcat('0x',arg));
+    binary_and(binary_shift_right(hextoint,8), 255);
+};
+let convertPrivateLinkIP6ToIP4 = (arg: string) {
+    let ip = substring(arg, 1, strlen(arg)-2);
+    let ip_subsets = split(ip, ":");
+    let sub1last4bits = convertLast4BitsToDecimal(ip_subsets[array_length(ip_subsets) - 1]);
+    let sub1first4bits = convertFirst4BitsToDecimal(ip_subsets[array_length(ip_subsets) - 1]);
+    let sub2last4bits = convertLast4BitsToDecimal(ip_subsets[array_length(ip_subsets) - 2]);
+    let sub2first4bits = convertFirst4BitsToDecimal(ip_subsets[array_length(ip_subsets) - 2]);
+    strcat(sub2first4bits, '.', sub2last4bits, '.' , sub1first4bits, '.', sub1last4bits);
+};
+source
+| extend EventEpochTime = tolong(properties.eventEpochTime)
+| extend ClientIp = iff (tostring(properties.clientIP) contains ":", convertPrivateLinkIP6ToIP4(tostring(properties.clientIP)), tostring(properties.clientIP))
+| extend PrivateLinkIPv6 = substring(tostring(properties.clientIP), 1, strlen(tostring(properties.clientIP))-2)
+| project
+    TimeGenerated = todatetime(['time']),
+    EventEpochTime,
+    Location = location,
+    OperationName = operationName,
+    ConnectionId = tolong(properties.id),
+    ClientIp,
+    PrivateLinkIPv6 = iff (tostring(properties.clientIP) contains ":", PrivateLinkIPv6, ""),
+    EventType = tostring(properties.eventType),
+    EventStatus = toint(properties.eventStatus)

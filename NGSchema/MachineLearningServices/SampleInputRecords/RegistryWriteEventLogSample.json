@@ -1,0 +1,20 @@
+[	
+	{
+		"CorrelationId": "6395957d-4421-4759-9aac-9f4c5a1e9022",
+		"Identity": "{\"UserName\":\"Sergey Grudskiy\",\"UserObjectId\":\"fb39f6a5-d833-4ff0-bdc1-e8df8d815034\"}",
+		"Level": "Informational",
+		"ResultType": "Started",
+		"category": "RegistryAssetWriteEvent",
+		"operationName": "MICROSOFT.MACHINELEARNINGSERVICES/REGISTRIES/ASSETS/WRITE",
+		"properties": {
+			"tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+			"assetName": "point1",
+			"assetVersion": "1",
+			"buildNumber": "",
+			"labels": "",
+			"Sequence": "732692"
+		},
+		"resourceId": "/SUBSCRIPTIONS/C0AFEA91-FABA-4D71-BCB6-B08134F69982/RESOURCEGROUPS/SHARED_STATIC_TEST_RESOURCES/PROVIDERS/MICROSOFT.MACHINELEARNINGSERVICES/REGISTRIES/CANARYTEST638126787649737794",
+		"time": "2023-02-23T20:23:49.5268126Z"
+	}
+]

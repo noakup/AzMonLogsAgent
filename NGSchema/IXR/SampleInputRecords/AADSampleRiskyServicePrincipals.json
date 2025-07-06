@@ -1,0 +1,23 @@
+[
+    {
+        "PreciseTimeStamp": "2022-01-25T19:36:22.5834287Z",
+        "time": "1/25/2022 7:36:21 PM",
+        "TIMESTAMP": "2022-01-25T19:36:22.5834287Z",
+        "resourceId": "/tenants/06b3ccb8-1384-4bcc-aec7-852f6d57161b/providers/microsoft.aadiam",
+        "operationName": "Risky Service Principal",
+        "operationVersion": "1.0",
+        "category": "RiskyServicePrincipals",
+        "tenantId": "06b3ccb8-1384-4bcc-aec7-852f6d57161b",
+        "resultType": "",
+        "resultSignature": "None",
+        "resultDescription": "",
+        "durationMs": "0",
+        "callerIpAddress": "",
+        "correlationId": "d009ec88-9765-44b5-98b9-68afcc9eaaaf",
+        "identity": "testapp",
+        "Level": "4",
+        "location": "wus",
+        "properties": "{\"id\":\"d009ec88-9765-44b5-98b9-68afcc9eaaaf\",\"accountEnabled\":true,\"isProcessing\":false,\"riskLastUpdatedDateTime\":\"2022-01-25T19:36:21.569Z\",\"riskState\":\"atRisk\",\"riskDetail\":\"none\",\"riskLevel\":\"high\",\"displayName\":\"TestApp\",\"appId\":\"af23024b-171a-4661-a765-07fb77015f27\",\"servicePrincipalType\":\"Application\"}",
+        "RowKey": "bb7348b5-7d89-11ec-be04-000d3afe8b2c___4295736283"
+    }
+]

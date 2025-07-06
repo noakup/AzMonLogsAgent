@@ -1,0 +1,5 @@
+MNFSystemSessionHistoryUpdates
+| where EventCategory == "SystemSessionHistoryUpdates"
+| project EventName, EventCategory, DeviceId, DeviceName, FabricId, TimeGenerated, DiffTimeStamp, GnmiTimeStamp, SessionUpdateSessionId, SessionUpdateUser, SessionDiffs
+| sort by TimeGenerated desc
+| limit 100

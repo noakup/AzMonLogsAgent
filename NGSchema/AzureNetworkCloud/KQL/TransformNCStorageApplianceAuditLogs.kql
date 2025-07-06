@@ -1,0 +1,16 @@
+source
+| project
+    TimeGenerated      = todatetime(["arrayDatetime"]),
+    ArrayName          = arrayName,
+    ArrayController    = arrayController,
+    Node               = Node,
+    PodName            = PodName,
+    ContainerName      = ContainerName,
+    Message            = message,
+    Action             = action,
+    Session            = session,
+    User               = user,
+    Result             = result,
+    Location           = location,
+    ClusterManagerName = clusterManagerName,
+    ClusterName        = clusterName

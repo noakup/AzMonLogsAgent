@@ -1,0 +1,4 @@
+AMSKeyDeliveryRequests
+| where ResultType != "Succeeded"
+| project KeyId, PolicyName, ResultSignature, StatusMessage, _ResourceId
+| limit 100

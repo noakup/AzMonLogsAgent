@@ -1,0 +1,4 @@
+AHDSMedTechDiagnosticLogs
+| where OperationName == "FHIRConversion"
+| order by TimeGenerated desc
+| take 100

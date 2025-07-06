@@ -1,0 +1,6 @@
+ACSCallClientOperations
+| where ResultType !in ('Succeeded', 'Success')
+| where OperationName in ('Join', 'StartCall')
+| where OperationPayload.CallDirection == 'Outgoing'
+| summarize Count=count() by FailureReason = tostring(OperationPayload.FailureReason)
+| render columnchart title="Failure reasons for outgoing call"

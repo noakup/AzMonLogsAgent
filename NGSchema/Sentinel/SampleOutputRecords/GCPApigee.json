@@ -1,0 +1,58 @@
+[
+  {
+    "InsertId": "jpqa3ae1gj2i",
+    "LogName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "ReceiveTimestamp": "5/16/2025, 2:55:19.721 PM",
+    "JsonPayload": "",
+    "Operation": "",
+    "ProtoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "service-135492226944@gcp-sa-apigee.iam.gserviceaccount.com",
+        "principalSubject": "serviceAccount:service-135492226944@gcp-sa-apigee.iam.gserviceaccount.com"
+      },
+      "authorizationInfo": [
+        {
+          "granted": true,
+          "permission": "apigee.environments.get",
+          "permissionType": "ADMIN_READ",
+          "resource": "organizations/msccp-test/environments/test-env/deployedConfig",
+          "resourceAttributes": {
+            "service": "apigee.googleapis.com"
+          }
+        }
+      ],
+      "methodName": "google.cloud.apigee.v1.EnvironmentService.GetDeployedConfig",
+      "requestMetadata": {
+        "callerIp": "gce-internal-ip",
+        "callerSuppliedUserAgent": "okhttp/4.11.0,gzip(gfe)",
+        "destinationAttributes": {},
+        "requestAttributes": {
+          "auth": {},
+          "time": "2025-05-16T09:25:19.3823105Z"
+        }
+      },
+      "resourceLocation": {},
+      "resourceName": "organizations/msccp-test/environments/test-env/deployedConfig",
+      "serviceName": "apigee.googleapis.com",
+      "status": {
+        "code": 9,
+        "message": "config not modified"
+      }
+    },
+    "Resource": {
+      "labels": {
+        "method": "google.cloud.apigee.v1.EnvironmentService.GetDeployedConfig",
+        "project_id": "msccp-test",
+        "service": "apigee.googleapis.com"
+      },
+      "type": "audited_resource"
+    },
+    "Severity": "ERROR",
+    "TimeGenerated": "5/16/2025, 2:55:19.721 PM",
+    "Timestamp": "5/16/2025, 2:55:19.721 PM",
+    "TenantId": "e288ca4a-cfcc-47b7-ba31-f2d5ad088d3d",
+    "Type": "GoogleApigeeXV2_CL",
+    "_ResourceId": ""
+  }
+]

@@ -1,0 +1,4 @@
+// This query helps retrieve logs for throttled requests during past one hour.
+AACHttpRequest
+| where StatusCode == 429 and TimeGenerated > ago(1h)
+| sort by TimeGenerated desc

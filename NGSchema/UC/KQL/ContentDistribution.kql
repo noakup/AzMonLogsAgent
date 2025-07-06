@@ -1,0 +1,11 @@
+UCDOAggregatedStatus 
+|extend   
+LanGB =  todouble(BytesFromPeers)/pow(1024,3),
+GroupGB = todouble(BytesFromGroupPeers)/pow(1024,3),
+NonPeerGB = todouble(BytesFromCDN)/pow(1024,3)
+|project 
+Content = ContentType,
+LanGB,
+GroupGB, 
+NonPeerGB, 
+DeviceCount

@@ -1,0 +1,10 @@
+source
+| project  
+    TimeGenerated = todatetime(properties.additionalDetails.timeCreated), 
+    OperationName = operationName,
+    ResultDescription = tostring(properties.message),
+    Level = level,
+    Location = location,
+    LifeCycleState = tostring(properties.additionalDetails.lifecycleState),
+    DisplayName = tostring(properties.stateChange.current.displayName),
+    Shape = tostring(properties.additionalDetails.shape)

@@ -1,0 +1,5 @@
+// Count computers heartbeats in the last hour. 
+// Normally, agents on VMs generate Heartbeat event every minute.
+Heartbeat
+| where TimeGenerated > ago(1h)
+| summarize count() by Computer

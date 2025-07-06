@@ -1,0 +1,28 @@
+[
+    {
+        "TimeGenerated": "2024-03-03T00:42:15.5563788Z",
+        "OperationName": "Microsoft.ApiManagement/ApiManagementGatewayLlmLogs",
+        "CorrelationId": "a558c39c-592c-4ec1-9146-ce447b753530",
+        "Region": "West US 2",
+        "SequenceNumber": 0,
+        "PromptTokens": 20,
+        "CompletionTokens": 50,
+        "TotalTokens": 70,
+        "ModelName": "gpt-4",
+        "IsStreamCompletion": 0,
+        "RequestId": "chatcmpl-9qoTtNVzvTHL2OVDuwqXQaaSvQ1zg",
+        "DeploymentName": "gpt-4",
+        "ApiVersion": "2023-05-15",
+        "RequestMessages": "[{\"role\":\"user\", \"content\":\"Hello\"}]invalidJsonWillBeString",
+        "ResponseMessages": [
+            {
+                "finish_reason": "stop",
+                "index": 0,  
+                "message": {
+                    "content": "Hello! How can I help you today?",
+                    "role": "assistant" 
+                }
+            }
+        ]
+    }
+]

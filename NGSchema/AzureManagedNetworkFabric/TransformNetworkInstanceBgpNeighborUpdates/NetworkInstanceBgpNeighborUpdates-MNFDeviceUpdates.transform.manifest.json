@@ -1,0 +1,14 @@
+{
+  "name" : "NetworkInstanceBgpNeighborUpdates",
+  "description": "Network instance neighbor updates that happened between routers during a BGP communication.",
+  "transformVersion" : 3,
+  "dataTypeId": "MICROSOFTMANAGEDNETWORKFABRIC_NETWORKINSTANCEBGPNEIGHBORUPDATES",
+  "inputFilePath" : "NetworkInstanceBgpNeighborUpdates-MNFDeviceUpdates.json",
+  "transformState" : "Production",
+  "icmTeam": "NETWORKFABRICAUTOMATION/Triage",
+  "contactDL": "afo-nf-all@microsoft.com",
+  "relatedTable" : "MNFDeviceUpdates",
+  "kqlFilePath" : "KQL/TransformNetworkInstanceBgpNeighborUpdates.kql",
+  "sampleInputRecordsFilePath" : "SampleInputRecords/NetworkInstanceBgpNeighborUpdates.json",
+  "sampleOutputRecordsFilePath" : "SampleOutputRecords/NetworkInstanceBgpNeighborUpdates.json"
+}

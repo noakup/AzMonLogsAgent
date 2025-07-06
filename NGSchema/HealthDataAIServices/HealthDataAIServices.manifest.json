@@ -1,0 +1,113 @@
+{
+  "type": "Microsoft.HealthDataAIServices/deidServices",
+  "displayName": "Azure Health Data Services de-identification service",
+  "description": "Logs generated through Azure Health Data Services de-identification service and pushed to Azure Monitoring.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Azure Healthcare APIs/DeID Service",
+  "contactDL": "hlsaci@microsoft.com",
+  "tables": [
+    {
+      "name": "AHDSDeidAuditLogs",
+      "description": "Data plane audit logs of privileged actions made against Azure Health Data Services de-identificiation service, such as initiating a de-identification job.",
+      "categories": [
+        "audit",
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "dataTypeId": "HEALTHCAREAPIS_DEIDAUDITLOGS",
+      "artifactVersion": 2,
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "tableState": "Production",
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "identity",
+          "type": "Dynamic"
+        },
+        {
+          "name": "uri",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/Transforms/AHDSDeidAuditLogs.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "description": "Time (UTC) when the log was created.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "description": "The operation name for which the log entry was generated.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "StatusCode",
+          "description": "HTTP status code returned for the request.",
+          "type": "Int",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "CorrelationId",
+          "description": "An identifier used to group together a set of related events.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Identity",
+          "description": "Identity of the issuer of the request.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Uri",
+          "description": "URI of the request.",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "URI"
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AHDSDeidAuditLogsSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AHDSDeidAuditLogsSample.json"
+    }
+  ],
+  "functions": [],
+  "queries": []
+}

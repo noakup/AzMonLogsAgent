@@ -1,0 +1,4 @@
+AFDWebApplicationFirewallLog 
+| extend ParsedUrl = parseurl(RequestUri) 
+| summarize RequestCount = count() by Host = tostring(ParsedUrl.Host), Path = tostring(ParsedUrl.Path), RuleName = toupper(RuleName), Action = toupper(Action), _ResourceId 
+| order by RequestCount desc 

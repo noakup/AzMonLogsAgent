@@ -1,0 +1,3 @@
+CloudHsmServiceOperationAuditLogs
+| where ResultType == "Failure"
+| summarize count() by ResultSignature, _ResourceId

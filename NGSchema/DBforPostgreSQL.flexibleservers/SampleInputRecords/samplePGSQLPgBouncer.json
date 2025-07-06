@@ -1,0 +1,2 @@
+[{"time":"2022-05-09T06:29:50.9218760Z","resourceId":"/SUBSCRIPTIONS/929287AE-832A-4946-8006-A6CC2A3F7244/RESOURCEGROUPS/HAKASHYA-RG/PROVIDERS/MICROSOFT.DBFORPOSTGRESQL/FLEXIBLESERVERS/HASERVER12","source":"stdout","log":"2022-05-09 06:29:50.921 UTC [1] LOG C-0x556b87c2bcb0: postgres/azuresu@unix(12859):6432 login attempt: db=postgres user=azuresu tls=no","location":"eastus2", "category":"PiiOBpgbouncerlog", "operationName":"LogEvent"}
+]

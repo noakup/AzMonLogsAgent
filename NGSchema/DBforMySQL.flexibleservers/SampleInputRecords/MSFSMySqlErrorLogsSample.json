@@ -1,0 +1,26 @@
+[
+    {
+        "time": "2023-05-18T00:17:40.372067Z",
+        "resourceId": "/SUBSCRIPTIONS/2941A09D-7BCF-42FE-91CA-1765F521C829/RESOURCEGROUPS/ZHQU-GROUP/PROVIDERS/MICROSOFT.DBFORMYSQL/FLEXIBLESERVERS/ZHQU-SERVER-V57",
+        "properties": "2023-05-18T00:17:40.372030Z 0 [Note] Reloaded 1 records of replica information.",
+        "location": "global",
+        "category": "MySqlErrorLogs",
+        "operationName": "MySQL error log"
+    },
+    {
+        "time": "2023-05-18T00:17:40.372150Z",
+        "resourceId": "/SUBSCRIPTIONS/2941A09D-7BCF-42FE-91CA-1765F521C829/RESOURCEGROUPS/ZHQU-GROUP/PROVIDERS/MICROSOFT.DBFORMYSQL/FLEXIBLESERVERS/ZHQU-SERVER-V57",
+        "properties": "2023-05-18T00:17:40.372138Z 0 [Note] replication_state_init completed.",
+        "location": "global",
+        "category": "MySqlErrorLogs",
+        "operationName": "MySQL error log"
+    },
+    {
+        "time": "2023-05-18T00:17:40.399394Z",
+        "resourceId": "/SUBSCRIPTIONS/2941A09D-7BCF-42FE-91CA-1765F521C829/RESOURCEGROUPS/ZHQU-GROUP/PROVIDERS/MICROSOFT.DBFORMYSQL/FLEXIBLESERVERS/ZHQU-SERVER-V57",
+        "properties": "2023-05-18T00:17:40.399358Z 0 [Note] servers_init function completed.",
+        "location": "global",
+        "category": "MySqlErrorLogs",
+        "operationName": "MySQL error log"
+    }
+]

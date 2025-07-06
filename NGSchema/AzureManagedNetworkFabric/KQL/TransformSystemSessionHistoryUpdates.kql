@@ -1,0 +1,14 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    EventCategory = tostring(category),
+    FabricId = tostring(properties.FabricID),
+    DeviceId = tostring(properties.DeviceId),
+    DeviceName = tostring(properties.DeviceName),
+    DiffTimeStamp = tolong(properties.DiffTimestamp),
+    GnmiTimeStamp = tolong(properties.GnmiTimestamp),
+    SessionUpdateTimeStamp = tolong(properties.SessionUpdateTimeStamp),
+    SessionUpdateSize = tolong(properties.SessionUpdateSize),
+    SessionUpdateUser = tostring(properties.SessionUpdateUser),
+    SessionUpdateSessionId = tostring(properties.SessionUpdateSessionId),
+    SessionDiffs = tostring(properties.Value)

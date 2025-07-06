@@ -1,0 +1,26 @@
+[
+    {
+        "operationName": "Microsoft.Kubernetes/connectedClusters/diagnosticLogs/Read",
+        "category": "csi-aksarcsmb-controller",
+        "resourceId": "/SUBSCRIPTIONS/08CE8FA2-9E5E-4D66-AB08-C0C13F360144/RESOURCEGROUPS/MIKEKEESEY-TEST/PROVIDERS/MICROSOFT.KUBERNETES/CONNECTEDCLUSTERS/MIKEKEESEY-TEST",
+        "properties": {
+            "log": "W0112 17:48:08.080934       1 main.go:72] nodeid is empty\n",
+            "stream": "stderr",
+            "pod": "csi-aksarcsmb-controller-64889d5bdd-w7bhj",
+            "containerID": "7793f544ce781f83ca90462bd7f6015b98160d434e1fed8ec42abbf2b2930fe6"
+        },
+        "time": "2023-01-12T17:48:08.0000000Z"
+    },
+    {
+        "operationName": "Microsoft.Kubernetes/connectedClusters/diagnosticLogs/Read",
+        "category": "csi-aksarcsmb-controller",
+        "resourceId": "/SUBSCRIPTIONS/08CE8FA2-9E5E-4D66-AB08-C0C13F360144/RESOURCEGROUPS/MIKEKEESEY-TEST/PROVIDERS/MICROSOFT.KUBERNETES/CONNECTEDCLUSTERS/MIKEKEESEY-TEST",
+        "properties": {
+            "log": "I0112 17:48:08.081316       1 main.go:115] set up prometheus server on [::]:29614\n",
+            "stream": "stderr",
+            "pod": "csi-aksarcsmb-controller-64889d5bdd-w7bhj",
+            "containerID": "7793f544ce781f83ca90462bd7f6015b98160d434e1fed8ec42abbf2b2930fe6"
+        },
+        "time": "2023-01-12T17:48:08.0000000Z"
+    }
+]

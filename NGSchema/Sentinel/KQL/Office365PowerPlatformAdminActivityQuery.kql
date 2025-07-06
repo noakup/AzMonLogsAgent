@@ -1,0 +1,2 @@
+PowerPlatformAdministratorActivity
+| summarize count() by EventOriginalType, ActorName

@@ -1,0 +1,118 @@
+{
+	"type": "Microsoft.PlayFab/titles",
+	"displayName": "Azure PlayFab",
+	"description": "All tables related to Azure PlayFab Services.",
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "PlayFab/PlayFab Resource Provider",
+	"tables": [
+		{
+			"name": "PFTitleAuditLogs",
+			"description": "Provides audit logs for various types of action performed on Azure PlayFab Title.",
+			"categories": [
+				"audit",
+				"resources"
+			],
+			"artifactVersion": 1,
+			"dataTypeId": "MICROSOFTPLAYFAB_AUDITLOGS",
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "time",
+					"type": "String"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				},
+				{
+					"name": "level",
+					"type": "String"
+				},
+				{
+					"name": "location",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "KQL/PFTitleAuditLogsTransformer.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Timestamp (UTC) when the log was generated."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation name combined with operation type represents the action performed for which the log was generated."
+				},
+				{
+					"name": "OperationType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation name combined with operation type represents the action performed for which the log was generated."
+				},
+				{
+					"name": "Level",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The severity level of the log, will be one of Informational, Warning, Error, or Critical."
+				},
+				{
+					"name": "Location",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The region of the Azure PlayFab Title, generating the log."
+				},
+				{
+					"name": "PlayFabTitleId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "ID of Azure PlayFab Title for which the log was generated."
+				},
+				{
+					"name": "PlayFabPlayerAccountPoolId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "ID of Azure PlayFab PlayerAccountPool associated with the Azure PlayFab Title for which the log was generated."
+				},
+				{
+					"name": "UserId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "ID of the user who performed the action which generated the log."
+				},
+				{
+					"name": "UserName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Name or Email of the user who performed the action which generated the log."
+				},
+				{
+					"name": "ModifiedPlayerId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Player ID on which the action taken."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/PFTitleAuditLogsSample.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/PFTitleAuditLogsOutputSample.json"
+		}
+	],
+	"functions": [],
+	"queries": []
+}

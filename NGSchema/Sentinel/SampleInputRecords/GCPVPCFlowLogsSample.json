@@ -1,0 +1,189 @@
+[
+  {
+    "timestamp": "2025-03-28T10:30:00Z",
+    "insertId": "abc123xyz",
+    "jsonPayload": {
+      "bytes_sent": "2048",
+      "packets_sent": "50",
+      "reporter": "SRC",
+      "rtt_msec": "15",
+      "start_time": "2025-03-28T10:25:00Z",
+      "end_time": "2025-03-28T10:30:00Z",
+      "connection": {
+        "dest_ip": "192.168.1.10",
+        "dest_port": "443",
+        "protocol": "TCP",
+        "src_ip": "10.0.0.1",
+        "src_port": "56789"
+      },
+      "psc": {
+        "psc_attachment": {
+          "project_id": "psc-attachment-project",
+          "region": "us-west1",
+          "vpc": {
+            "name": "psc-attachment-vpc",
+            "id": "vpc-attachment-123"
+          }
+        },
+        "psc_endpoint": {
+          "project_id": "psc-endpoint-project",
+          "psc_connection_id": "psc-conn-456",
+          "region": "us-west1",
+          "target_service_type": "LOAD_BALANCER",
+          "vpc": {
+            "name": "psc-endpoint-vpc",
+            "id": "vpc-endpoint-789"
+          }
+        }
+      },
+      "src_google_service": {
+        "type": "Compute Engine"
+      },
+      "dest_google_service": {
+        "type": "Cloud Storage"
+      },
+      "src_location": {
+        "asn": "12345",
+        "continent": "Asia",
+        "country": "India",
+        "city": "Bangalore",
+        "region": "Karnataka"
+      },
+      "dest_location": {
+        "asn": "67890",
+        "continent": "North America",
+        "country": "USA",
+        "city": "San Francisco",
+        "region": "California"
+      },
+      "dest_instance": {
+        "project_id": "dest-project",
+        "region": "us-central1",
+        "vm_name": "dest-vm",
+        "zone": "us-central1-a",
+        "managed_instance_group": {
+          "name": "dest-mig",
+          "zone": "us-central1-a",
+          "region": "us-central1"
+        }
+      },
+      "src_instance": {
+        "project_id": "src-project",
+        "region": "us-east1",
+        "vm_name": "src-vm",
+        "zone": "us-east1-b",
+        "managed_instance_group": {
+          "name": "src-mig",
+          "zone": "us-east1-b",
+          "region": "us-east1"
+        }
+      },
+      "src_vpc": {
+        "project_id": "src-vpc-project",
+        "subnetwork_name": "src-subnet",
+        "subnetwork_region": "us-east1",
+        "vpc_name": "src-vpc-network"
+      },
+      "dest_vpc": {
+        "project_id": "dest-vpc-project",
+        "subnetwork_name": "dest-subnet",
+        "subnetwork_region": "us-central1",
+        "vpc_name": "dest-vpc-network"
+      },
+      "src_gke_details": {
+        "cluster": {
+          "cluster_name": "src-cluster",
+          "cluster_location": "us-east1"
+        },
+        "pod": {
+          "pod_name": "src-pod-123",
+          "pod_namespace": "default",
+          "workload": {
+            "name": "src-workload",
+            "type": "Deployment"
+          }
+        }
+      },
+      "dest_gke_details": {
+        "cluster": {
+          "cluster_name": "dest-cluster",
+          "cluster_location": "us-central1"
+        },
+        "pod": {
+          "pod_name": "dest-pod-456",
+          "pod_namespace": "default",
+          "workload": {
+            "name": "dest-workload",
+            "type": "StatefulSet"
+          }
+        }
+      },
+      "internet_routing_details": {
+        "egress_as_path": [
+          {
+            "as_details": [
+              {
+                "asn": "64512",
+                "name": "ExampleISP"
+              }
+            ]
+          }
+        ]
+      },
+      "dest_gateway": {
+        "project_id": "dest-gateway-project",
+        "location": "us-central1",
+        "name": "dest-gateway",
+        "type": "INTERNET_GATEWAY",
+        "vpc": {
+          "name": "dest-vpc",
+          "id": "vpc-dest-123"
+        },
+        "interconnect_name": "dest-interconnect",
+        "interconnect_project_number": "987654321"
+      },
+      "src_gateway": {
+        "project_id": "src-gateway-project",
+        "location": "us-east1",
+        "name": "src-gateway",
+        "type": "INTERNET_GATEWAY",
+        "vpc": {
+          "name": "src-vpc",
+          "id": "vpc-src-123"
+        },
+        "interconnect_name": "src-interconnect",
+        "interconnect_project_number": "123456789"
+      },
+      "network_service": {
+        "dscp": "34"
+      },
+      "load_balancing": {
+        "backend_group_name": "example-backend-group",
+        "backend_group_type": "TARGET_POOL",
+        "forwarding_rule_name": "example-forwarding-rule",
+        "forwarding_rule_project_id": "forwarding-rule-project",
+        "reporter": "SRC",
+        "scheme": "EXTERNAL",
+        "url_map_name": "example-url-map",
+        "backend_service_name": "example-backend-service",
+        "type": "HTTP",
+        "backend_group_location": "us-central1",
+        "vpc": {
+          "name": "loadbalancer-vpc",
+          "id": "vpc-lb-123"
+        }
+      }
+    },
+    "logName": "projects/project-id/logs/vpc_flow_logs",
+    "receiveTimestamp": "2025-03-28T10:31:00Z",
+    "resource": {
+      "type": "gce_instance",
+      "labels": {
+        "location": "us-central1",
+        "project_id": "project-id",
+        "subnetwork_id": "subnet-123",
+        "subnetwork_name": "subnet-1"
+      }
+    }
+  }
+]

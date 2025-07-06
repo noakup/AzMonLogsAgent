@@ -1,0 +1,40 @@
+[
+    {
+        "TimeGenerated": "2023-08-29T08:00:59.299979Z",
+        "OperationName": "DevBoxUsage",
+        "StartTime": "2023-08-29T07:00:00.000000Z",
+        "EndTime": "2023-08-29T08:00:00.000000Z",
+        "BillingRegion": "eastus",
+        "_ResourceId": "/subscriptions/f141e9f2-4778-45a4-9aa0-8b31e6469454/resourceGroups/test-rg/providers/Microsoft.DevCenter/devcenters/test-dc",
+        "BilledResourceId": "/subscriptions/f141e9f2-4778-45a4-9aa0-8b31e6469454/resourceGroups/test-rg/providers/Microsoft.DevCenter/projects/test-project/pools/test-pool-eastus-win11",
+        "UsageResourceUniqueId": "c8f08935-ada1-47bf-ae6c-01cd591bd416",
+        "UsageResourceName": "test-devbox",
+        "UserId": "ba42a493-ba73-42c1-916d-eaa368d9f614",
+        "Sku": "DZH3197V2ZFQ",
+        "UsageType": "Compute",
+        "UnitType": "Hourly",
+        "Quantity": 1,
+        "MeterId": "50212165-46bb-5af5-8a26-eb7021c118dd",
+        "IsOverMonthlyBillingCap": "True",
+        "EventId": "cb127aee-336e-4090-b18b-a7d40d7ca9ec"
+    },
+    {
+        "TimeGenerated": "2023-08-29T08:00:59.299979Z",
+        "OperationName": "DevBoxUsage",
+        "StartTime": "2023-08-29T07:00:00.000000Z",
+        "EndTime": "2023-08-29T08:00:00.000000Z",
+        "BillingRegion": "eastus",
+        "_ResourceId": "/subscriptions/f141e9f2-4778-45a4-9aa0-8b31e6469454/resourceGroups/test-rg/providers/Microsoft.DevCenter/devcenters/test-dc",
+        "BilledResourceId": "/subscriptions/f141e9f2-4778-45a4-9aa0-8b31e6469454/resourceGroups/test-rg/providers/Microsoft.DevCenter/projects/test-project/pools/test-pool-eastus-win11",
+        "UsageResourceUniqueId": "c8f08935-ada1-47bf-ae6c-01cd591bd416",
+        "UsageResourceName": "test-devbox",
+        "UserId": "ba42a493-ba73-42c1-916d-eaa368d9f614",
+        "Sku": "DZH3197V2ZFQ",
+        "UsageType": "Storage",
+        "UnitType": "Monthly",
+        "Quantity": 0.001344,
+        "MeterId": "97d89030-53c9-5089-a0b0-ed6a8aa05caf",
+        "IsOverMonthlyBillingCap": "False",
+        "EventId": "801fbbce-7f41-4ee3-93f9-94479b1027e2"
+    }
+]

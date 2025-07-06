@@ -1,0 +1,22 @@
+[
+    {
+        "time": "2021-07-16T15:46:22.998Z",
+        "resourceId": "SUBSCRIPTIONS/3029FF8E-D089-44B8-A90F-438A265A960B/RESOURCEGROUPS/ACS-PROD-CCTS-TESTS/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/ACS-PROD-CCTS-TESTS",
+        "operationName": "RecordingSummary",
+        "category": "CallRecordingSummary",
+        "correlationId": "23cb464f-1183-4a54-aa06-7adc0cd73336",
+        "level": "Informational",
+        "resultType": "Succeeded",
+        "properties": {
+            "recordingId": "eyJQbGF0Zm9ybUVuZHBvaW50SWQiOiI0MDFmNmUwMC01MWQyLTQ0YjAtODAyZi03N2RlNTA2YTI3NGYiLCJSZXNvdXJjZVNwZWNpZmljSWQiOiIzOTc0NmE1Ny1lNzBkLTRhMTctYTI2Yi1hM2MzZTEwNTk0MjEifQ",
+            "recordingEndReason": "CallEnded",
+            "chunkCount": "1",
+            "recordingStartTime": "2021-07-16T15:46:22.998Z",
+            "recordingLength": "3.26",
+            "contentType": "Audio - Video",
+            "channelType": "mixed",
+            "formatType": "mp4",
+            "audioChannelsCount": "1"
+        }
+    }
+]

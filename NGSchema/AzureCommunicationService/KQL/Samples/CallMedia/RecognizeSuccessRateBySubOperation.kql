@@ -1,0 +1,5 @@
+ACSCallAutomationIncomingOperations
+| join ACSCallAutomationMediaSummary on OperationId
+| where OperationName == "Recognize"
+| summarize recognizeCount=count() by SubOperationName, ResultType1
+| project SubOperationName, EventResultType = ResultType1, recognizeCount

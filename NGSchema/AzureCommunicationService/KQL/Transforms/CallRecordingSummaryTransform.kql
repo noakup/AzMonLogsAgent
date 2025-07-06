@@ -1,0 +1,17 @@
+source
+| extend properties = parse_json(properties)
+| project 
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    CorrelationId = correlationId,
+    ResultType = resultType,
+    Level = level,
+    RecordingId = tostring(properties.recordingId),
+    RecordingEndReason  = tostring(properties.recordingEndReason),
+    RecordingStartTime  = todatetime(properties.recordingStartTime),
+    RecordingLength     = todouble(properties.recordingLength),
+    ChunkCount          = toint(properties.chunkCount),
+    ContentType         = tostring(properties.contentType),
+    ChannelType         = tostring(properties.channelType),
+    FormatType          = tostring(properties.formatType),
+    AudioChannelsCount  = toint(properties.audioChannelsCount)

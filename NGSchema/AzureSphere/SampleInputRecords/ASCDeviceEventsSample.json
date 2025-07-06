@@ -1,0 +1,24 @@
+[
+	{
+		"time": "2022-12-15T14:44:08.182629735Z",
+		"resourceId": "/SUBSCRIPTIONS/D1CD48F9-B94B-4645-9632-634B440DB393/RESOURCEGROUPS/TEST-SATANEJA-10/PROVIDERS/MICROSOFT.AZURESPHERE/CATALOGS/TESTCATALOG1X5_CATALOG",
+		"location": "eastus2",
+		"operationName": "DeviceTelemetryEvent",
+		"category": "DeviceEvents",
+		"resultType": "Success",
+		"resultDescription": "Device insights were successfully processed",
+		"correlationId": "726118a9162929438614b391905ec9fe",
+		"durationMs": "100",
+		"properties": {
+            "DeviceId": "EC56D635479E2AA14E446AE80C14C96B2E9653ABC353194F7044AB640A2C9359868D5293C8AA22E8BD8341B0B6A37441A929E4799F4D97283B25439A225282DE452F",
+            "CatalogId": "00000000-0000-0000-0000-000000000000",
+            "StartTimeStamp": "2022-12-15T13:45:30.6170000Z",
+            "EndTimeStamp": "2022-12-15T13:45:32.5275000Z",
+            "EventType": "Unplanned",
+            "EventCount": 12,
+            "EventClass": "Application",
+            "EventCategory": "AppCrash",
+            "EventDescription": "AppCrash (exit_status=11; signal_status=11; signal_code=2; component_id=4c1226cd-3484-42ee-93dc-805fdfa12e7e; image_id=403aba37-825b-406e-8afb-6bbce733d961)"
+        }
+	}
+]

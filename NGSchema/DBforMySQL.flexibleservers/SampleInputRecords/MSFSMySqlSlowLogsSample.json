@@ -1,0 +1,11 @@
+[
+    {
+        "time": "2023-03-08T06:27:04Z",
+        "resourceId": "/SUBSCRIPTIONS/FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF/RESOURCEGROUPS/TESTGROUP_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.DBFORMYSQL/FLEXIBLESERVERS/E2E57IQHGGRLE",
+        "Tenant": "7fec3109-5b78-4a24-b834-5d47d63e2596",
+        "properties": "{\"category\":\"MySqlSlowLogs\",\"event_class\":\"slow_log\",\"replication_set_role\":\"single\",\"start_time\":\"2023-03-08T06:27:04Z\",\"query_time\":0.001,\"lock_time\":0.001,\"rows_sent\":3,\"rows_examined\":3,\"last_insert_id\":0,\"insert_id\":0,\"server_id\":1729292544,\"thread_id\":69,\"host\":\"cloudsa[cloudsa] @  [66.119.150.201]\",\"db\":\"\",\"sql_text\":\"SELECT * FROM WORLD.NATION\"}",
+        "location": "global",
+        "category": "MySqlSlowLogs",
+        "operationName": "MySQL slow log"
+    }
+]

@@ -1,0 +1,7 @@
+// All the API calls that clients make to Direct Line channel
+// e.g. Generate a Token, Refresh a Token, Post an Activity, Get Activities, GetAttachments, etc.
+// You can adjust the limit value to the number of logs you would like to retrieve.
+ABSBotRequests
+| where OperationName contains "ClientToDirectLine"
+| sort by TimeGenerated desc
+| limit 100

@@ -1,0 +1,11 @@
+source
+| project
+    TimeGenerated = FluentdIngestTimestamp,
+    LogLevel = logLevel,
+    Message = message,
+    LogType = logType,
+    ClusterName = clusterName,
+	ClusterType = clusterType,
+    HostName = hostName,
+    OperationName = operationName,
+    CorrelationId = correlationId

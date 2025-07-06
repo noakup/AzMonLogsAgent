@@ -1,0 +1,44 @@
+[
+	{
+		"time": "2022-08-23T02:20:56.3839202Z",
+		"category": "AzurePolicyEvaluationDetails",
+		"operationName": "AzurePolicyEvaulation",
+		"resultType": "Success",
+		"resultDescription": "EvaluationDetails",
+		"resultSignature": "OK",
+		"properties": {
+			"ObjectName": "test",
+			"ObjectType": "Secret",
+			"IsComplianceCheck": true,
+			"EvaluationDetails": [
+				{
+					"AssignmentId": "/subscriptions/c2619f08-57f7-492b-a9c3-45dee233805b/resourceGroups/brihicks-policy-logging/providers/Microsoft.Authorization/policyAssignments/5abda47fb879410eb35b71ee",
+					"AssignmentDisplayName": "Key Vault secrets should have an expiration date",
+					"DefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/98728c90-32c7-4049-8429-847dc0f4fe37",
+					"DefinitionDisplayName": "Key Vault secrets should have an expiration date",
+					"Outcome": "NonCompliant",
+					"ExpressionEvaluationDetails": [
+						{
+							"Result": "True",
+							"Expression": "type",
+							"ExpressionKind": "Field",
+							"ExpressionValue": "Microsoft.KeyVault.Data/vaults/secrets",
+							"TargetValue": "Microsoft.KeyVault.Data/vaults/secrets",
+							"Operator": "Equals"
+						},
+						{
+							"Result": "True",
+							"Expression": "Microsoft.KeyVault.Data/vaults/secrets/attributes.expiresOn",
+							"ExpressionKind": "Field",
+							"ExpressionValue": "******",
+							"TargetValue": "False",
+							"Operator": "Exists"
+						}
+					]
+				}
+			]
+		},
+		"resourceId": "/SUBSCRIPTIONS/C2619F08-57F7-492B-A9C3-45DEE233805B/RESOURCEGROUPS/BRIHICKS-POLICY-LOGGING/PROVIDERS/MICROSOFT.KEYVAULT/VAULTS/BRIHICKS-POLICY-LOGGING",
+		"durationMs": "953"
+	}
+]

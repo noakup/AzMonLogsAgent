@@ -1,0 +1,32 @@
+[
+  {
+    "TimeGenerated": "2023-05-17T08:55:37.671260000Z",
+    "SourceSystem": "OpsManager",
+    "Account": "N/A",
+    "AccountType": "User",
+    "Computer": "MyComputer",
+    "EventSourceName": "Microsoft-Windows-Security-Auditing",
+    "Channel": "Security",
+    "Task": 12544,
+    "Level": "16",
+    "EventID": 4625,
+    "EventOriginId": "894c4cdd-52a4-4543-9d15-1f0df339016b",
+    "Activity": "4625 - An account failed to log on.",
+    "SourceComputerId": "2f30ac72-73c6-49c4-a5ef-ca1bc9421ec0",
+    "MG": "00000000-0000-0000-0000-000000000001",
+    "TimeCollected": "2023-05-17T08:55:37.671260000Z",
+    "SubjectDomainName": "WORKGROUP",
+    "SubjectUserSid": "S-1-5-18",
+    "SubjectUserName": "MyUserName",
+    "SubjectLogonId": "0x3e7",
+    "SystemUserId": "N/A",
+    "Version": 2,
+    "Opcode": "0",
+    "Keywords": "0x8020000000000000",
+    "Correlation" "{B9883B63-AF77-0001-2105-88379D88D901}",
+    "SystemProcessId": 4,
+    "SystemThreadId": 32,
+    "EventRecordId": "9625579",
+    "Type": "SecurityEvent"
+  }
+]

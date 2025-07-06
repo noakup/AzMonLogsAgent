@@ -1,0 +1,15 @@
+// Video Indexer top 10 users by operations 
+// Render timechart of top 10 users by operations, with an optional account id for filtering. 
+// Trend of top 10 active Upn's
+VIIndexing
+// | where AccountId == "<AccountId>"  // to filter on a specific accountId, uncomment this line
+| where OperationName in ("IndexingStarted", "ReindexingStarted")
+| summarize count() by Upn
+| top 10 by count_ desc
+| project Upn
+| join (VIIndexing
+| where TimeGenerated > ago(30d)
+| where OperationName in ("IndexingStarted", "ReindexingStarted")
+| summarize count() by Upn, bin(TimeGenerated,1d)) on Upn
+| project TimeGenerated, Upn, count_
+| render timechart

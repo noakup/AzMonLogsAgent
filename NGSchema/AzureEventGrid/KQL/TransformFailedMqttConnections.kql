@@ -1,0 +1,11 @@
+source
+| project
+	TimeGenerated = todatetime(['time']),
+	OperationName = tostring(split(operationName, '/')[2]),
+	ResultSignature = resultSignature,
+	ResultDescription = resultDescription,
+	AuthenticationType = tostring(identity.authenticationType),
+	ClientIdentitySource = tostring(identity.clientIdentitySource),
+	ClientIdentity = tostring(identity.clientIdentity),
+	SessionName = tostring(properties.sessionName),
+	Protocol = tostring(properties.protocol)

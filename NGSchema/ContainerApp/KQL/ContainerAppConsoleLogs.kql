@@ -1,0 +1,16 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    Location = location,
+    ContainerName = tostring(properties.ContainerName),
+    ContainerGroupName = tostring(properties.ContainerGroupName),
+    ContainerImage = tostring(properties.ContainerImage),
+    Stream = tostring(properties.Stream),
+    ContainerGroupId = tostring(properties.ContainerGroupId),
+    EnvironmentName = tostring(properties.EnvironmentName),
+    Log = tostring(properties.Log),
+    ContainerAppName = tostring(properties.ContainerAppName),
+    ContainerId = tostring(properties.ContainerId),
+    RevisionName = tostring(properties.RevisionName),
+    JobName = tostring(properties.ContainerJobName)

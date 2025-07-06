@@ -1,0 +1,20 @@
+[
+    {
+        "category": "SyslogInfo",
+        "clusterManagerName": "j18-qvduxzffwnrxy",
+        "clusterName": "j18-c0d28c8f7cd3",
+        "facility": "daemon",
+        "host": "j18r650mgr1",
+        "ident": "systemd",
+        "location": "eastus2euap",
+        "message": "run-containerd-runc-k8s.io-5b754a60b7482978e377db3e2c80d2900e1f9c37959628c007595ae7dbfb092b-runc.qOtXO5.mount: Deactivated successfully.",
+        "onbehalfAnnotations": "<Config onBehalfFields=\"resourceId,category\" priority=\"Normal\" primaryPartitionField=\"resourceId\" validJsonColumns=\"message\" excludeFields=\"Tenant,Role,RoleInstance,BMServerName,PreciseTimeStamp,FluentdIngestTimestamp,TIMESTAMP,ContainerImage,GenevaPodName,environment,clusterID,clusterManagedResourceGroupName,clusterManagerID,clusterManagerResourceGroupName,clusterResourceGroupName,Tag,tenantID\" containerSuffix=\"$category\" />",
+        "onbehalfServiceId": "Microsoft.NetworkCloud",
+        "operationName": "Microsoft.NetworkCloud/bareMetalMachines/read",
+        "pid": "1",
+        "resourceId": "/SUBSCRIPTIONS/A3EEB848-665A-4DBF-80A4-EB460930FB23/RESOURCEGROUPS/J18-C0D28C8F7CD3-HOSTEDRESOURCES-3781AC00/PROVIDERS/MICROSOFT.NETWORKCLOUD/BAREMETALMACHINES/J18R650MGR1",
+        "severity": "info",
+        "subscriptionID": "a3eeb848-665a-4dbf-80a4-eb460930fb23",
+        "time": "2023-05-29T16:55:00+0000"
+    }
+]

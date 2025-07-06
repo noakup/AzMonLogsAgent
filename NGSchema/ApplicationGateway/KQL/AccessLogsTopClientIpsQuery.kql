@@ -1,0 +1,3 @@
+AGWAccessLogs
+| summarize AggregatedValue = count() by ClientIp
+| top 10 by AggregatedValue

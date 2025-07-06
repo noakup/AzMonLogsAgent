@@ -1,0 +1,162 @@
+{
+    "type": "Microsoft.StorageCache/amlFilesytems",
+    "displayName": "Azure Managed Lustre",
+    "description": "Azure Managed Lustre provides an easy-to-deploy, fully managed Lustre file system for on-demand use with data stored in Azure Blob.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Avere Azure Storage Cache/ASC Service Team",
+    "contactDL": "asc-rp-devs@microsoft.com",
+    "relatedTables": [
+        "AzureActivity",
+        "AzureMetrics"
+    ],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "AFSAuditLogs",
+            "description": "This table contains audit logs retrieved from your Azure Managed Lustre filesystem resource. These logs capture all priviledged operations performed on each Azure Managed Lustre resource. They can be used to monitor events and configure alerts on your resource.",
+            "categories": [
+                "audit", "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "MICROSOFTSTORAGECACHE_AMLFSAUDITEVENT",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "identity",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "resultSignature",
+                    "type": "String"
+                },
+                {
+                    "name": "resultDescription",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "KQL/AmlfsAuditLogsTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "Timestamp (UTC) when the log was created."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation name for which the log entry was created."
+                },
+                {
+                    "name": "ActivityId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Internal identifier used for tracking.",
+                    "dataTypeHint": "GUID"
+                },
+                {
+                    "name": "ResultSignature",
+                    "type": "Int",
+                    "isDefaultDisplay": true,
+                    "description": "HTTP status of API request."
+                },
+                {
+                    "name": "ResultDescription",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Details about the result of the operation, if available."
+                },
+                {
+                    "name": "Identity",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": false,
+                    "description": "JSON structure that describes the identity of the user or application that performed the operation."
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The region of the resource associated with the event."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AmlfsAuditEventSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AmlfsAuditLogsOutputSample.json"
+        }
+    ],
+    "functions": [],
+    "queries": [
+        {
+            "id": "c4cdf677-7d39-4fc9-9894-e2264e719916",
+            "displayName": "Aggregate operations query",
+            "description": "List all the UnsuspendAmlFilesystem requests for a givein time duration.",
+            "bodyFilePath": "KQL/Queries/OperationsRequestsQuery.kql",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "relatedTables": [
+                "AFSAuditLogs"
+            ],
+            "tags": {},
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        },
+        {
+            "id": "1ef86e81-77c6-467a-a7a6-f5769f1df2f2",
+            "displayName": "Unauthorized requests query",
+            "description": "Count of failed AMLFilesystems requests due to unathorized access.",
+            "bodyFilePath": "KQL/Queries/UnauthorizedRequestCountQuery.kql",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "relatedTables": [
+                "AFSAuditLogs"
+            ],
+            "tags": {},
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        }
+    ]
+}

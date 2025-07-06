@@ -1,0 +1,35 @@
+let parser=(disabled:bool=false) 
+{
+  ASimDnsActivityLogs  | where not(disabled)
+    | project-rename
+        EventUid = _ItemId,
+        DvcScopeId = _SubscriptionId
+    | extend
+        EventEndTime = TimeGenerated,
+        EventStartTime = TimeGenerated,
+        Dvc = iff (isempty(Dvc), coalesce (DvcFQDN, DvcHostname, SrcIpAddr, DvcId, _ResourceId), Dvc),
+        Dst = coalesce (DstFQDN, DstHostname, DstIpAddr, DstDvcId),
+        Src = coalesce (SrcFQDN, SrcHostname, SrcIpAddr, SrcDvcId),
+        EventSchema = "Dns"
+    // -- Type fixes
+    | extend
+        ThreatConfidence = toint(ThreatConfidence),
+        ThreatFirstReportedTime = todatetime(ThreatFirstReportedTime),
+        ThreatIsActive = tobool(ThreatIsActive),
+        ThreatLastReportedTime = todatetime(ThreatLastReportedTime),
+        ThreatOriginalRiskLevel = tostring(ThreatOriginalRiskLevel),
+        ThreatRiskLevel = toint(ThreatRiskLevel)    
+    //  -- Aliases
+    | extend
+        DnsResponseCodeName=EventResultDetails,
+        Domain=DnsQuery,
+        IpAddr=SrcIpAddr,
+        Duration = DnsNetworkDuration,
+        Process = SrcProcessName,
+        SessionId = DnsSessionId,
+        User = SrcUsername,
+        Hostname = SrcHostname
+    | project-away
+        TenantId, SourceSystem, _ResourceId
+};
+parser  (disabled=disabled)

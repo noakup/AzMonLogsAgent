@@ -1,0 +1,55 @@
+let _RangeStart = iff((isnull(RangeStart)), startofday(ago(1d)), startofday(RangeStart));
+let _RangeEnd = iff((isnull(RangeEnd)), now(), RangeEnd + 1d);
+let _VaultSubscriptionList = split(VaultSubscriptionList, ',');
+let _VaultLocationList = split(VaultLocationList, ',');
+let _VaultList = split(VaultList, ',');
+let _VaultTypeList = split(VaultTypeList, ',');
+let _DatasourceTypeList = split(DatasourceTypeList,',');
+let _ReplicatedItemName = ReplicatedItemName;
+let _JobStatusList = split(JobStatusList,',');
+let _JobOperationList = split(JobOperationList,',');
+let AsonDay =  _RangeEnd-1d;
+let ASRJobsUnderResourceSpecificHistory = ()
+{
+ASRJobs
+// Take records until previous day
+| where TimeGenerated >= _RangeStart and TimeGenerated <= _RangeEnd //and TimeGenerated < startofday(now())
+| where tostring(split(_ResourceId,'/')[2]) in~ (_VaultSubscriptionList) or '*' in (_VaultSubscriptionList)
+| where VaultLocation  in~ (_VaultLocationList) or '*' in (_VaultLocationList)
+| where VaultName in~  (_VaultList) or '*' in (_VaultList)
+| where VaultType in~ (_VaultTypeList) or '*' in (_VaultTypeList)
+| where SourceType in~ (_DatasourceTypeList) or "*" in (_DatasourceTypeList)
+| where isempty(_ReplicatedItemName) or (_ReplicatedItemName) == "*" or  ReplicatedItemFriendlyName contains (_ReplicatedItemName)
+| where Status  in~ (_JobStatusList) or "*" in (_JobStatusList)
+| where OperationName  in~ (_JobOperationList) or "*" in (_JobOperationList)
+| project TimeGenerated, UniqueId = JobUniqueId, ResourceId = toupper(_ResourceId), ResourceGroup = toupper(tostring(split(_ResourceId,'/')[4])),SubscriptionId = toupper(tostring(split(_ResourceId,'/')[2])), VaultName, VaultType, Operation = OperationName, Status, CorrelationId, ResultDescription, JobDurationMs = todouble(DurationMs), StartTime, EndTime, SourceType, SourceFriendlyName, Version, SourceResourceId, SourceResourceGroup, ReplicatedItemFriendlyName, ReplicatedItemId = toupper(ReplicatedItemId), ReplicatedItemUniqueId, PolicyUniqueId, PolicyId = toupper(PolicyId), PolicyFriendlyName, VaultLocation, ReplicationScenario
+| summarize arg_max(TimeGenerated, *) by UniqueId, TimeRangeEndDay = startofday(TimeGenerated)
+| project TimeGenerated, UniqueId, ResourceId, ResourceGroup, SubscriptionId, VaultName, VaultType, Operation, Status,CorrelationId, ResultDescription, JobDurationMs, StartTime, EndTime, SourceType, SourceFriendlyName, Version, SourceResourceId, SourceResourceGroup, ReplicatedItemFriendlyName, ReplicatedItemId, ReplicatedItemUniqueId, PolicyUniqueId,PolicyId, PolicyFriendlyName,VaultLocation, ReplicationScenario
+};
+let ASRJobsUnderResourceSpecific = ()
+{
+ASRJobs
+// Take records until previous day
+| where TimeGenerated >= _RangeStart and TimeGenerated <= _RangeEnd //and TimeGenerated < startofday(now())
+| where tostring(split(_ResourceId,'/')[2]) in~ (_VaultSubscriptionList) or '*' in (_VaultSubscriptionList)
+| where VaultLocation  in~ (_VaultLocationList) or '*' in (_VaultLocationList)
+| where VaultName in~  (_VaultList) or '*' in (_VaultList)
+| where VaultType in~ (_VaultTypeList) or '*' in (_VaultTypeList)
+| where split(_ResourceId,'/')[2] in~ (_VaultSubscriptionList) or "*" in (_VaultSubscriptionList)
+| where SourceType in~ (_DatasourceTypeList) or "*" in (_DatasourceTypeList)
+| where isempty(_ReplicatedItemName) or (_ReplicatedItemName) == "*" or  ReplicatedItemFriendlyName contains (_ReplicatedItemName)
+| where Status  in~ (_JobStatusList) or "*" in (_JobStatusList)
+| where OperationName  in~ (_JobOperationList) or "*" in (_JobOperationList)
+| project TimeGenerated, UniqueId = JobUniqueId, ResourceId = toupper(_ResourceId), ResourceGroup = toupper(tostring(split(_ResourceId,'/')[4])),SubscriptionId = toupper(tostring(split(_ResourceId,'/')[2])), VaultName, VaultType, Operation = OperationName, Status, CorrelationId, ResultDescription, JobDurationMs = todouble(DurationMs), StartTime, EndTime, SourceType, DatasourceFriendlyName = SourceFriendlyName, Version, SourceResourceId, DatasourceResourceGroup = SourceResourceGroup, ReplicatedItemFriendlyName, ReplicatedItemId = toupper(ReplicatedItemId), ReplicatedItemUniqueId, PolicyUniqueId, PolicyId = toupper(PolicyId), PolicyFriendlyName, VaultLocation,ReplicationScenario
+| summarize arg_max(TimeGenerated, *) by UniqueId
+| project TimeGenerated, UniqueId, ResourceId, ResourceGroup, SubscriptionId, VaultName, VaultType, Operation, Status,CorrelationId, ResultDescription, JobDurationMs, StartTime, EndTime, SourceType, DatasourceFriendlyName, Version, SourceResourceId, DatasourceResourceGroup, ReplicatedItemFriendlyName, ReplicatedItemId, ReplicatedItemUniqueId, PolicyUniqueId,PolicyId, PolicyFriendlyName,VaultLocation,ReplicationScenario
+};
+let FinalTable_ASRJobs= ()
+{
+union (ASRJobsUnderResourceSpecific | where (_RangeEnd-_RangeStart == 1d)), (ASRJobsUnderResourceSpecificHistory | where (_RangeEnd-_RangeStart > 1d))
+};
+let FinalTable_Reporting = ()
+{
+FinalTable_ASRJobs | where "Microsoft.RecoveryServices/vaults" in~ (_VaultTypeList) or '*' in (_VaultTypeList)
+};
+FinalTable_Reporting

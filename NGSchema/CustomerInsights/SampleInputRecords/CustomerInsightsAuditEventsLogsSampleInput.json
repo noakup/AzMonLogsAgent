@@ -1,0 +1,23 @@
+[
+  {
+    "TIMESTAMP": "2021-10-06T06:54:17.4633641Z",
+    "PreciseTimeStamp": "2021-10-06T06:54:17.4633641Z",
+    "Tenant": "test-wus2-01",
+    "Role": "Frontend",
+    "RoleInstance": "FRONTEND000000",
+    "CorrelationId": "91b0c34a-0000-0000-0000-3b11f1ba7806",
+    "time": "2021-10-06T06:54:17.4633641Z",
+    "resourceId": "/SUBSCRIPTIONS/000099B8-0000-0000-0000-000000000000/RESOURCEGROUPS/TIP-WUS2-01-INSTANCES-RG/PROVIDERS/MICROSOFT.D365CUSTOMERINSIGHTS/INSTANCES/21BB40AF-0000-0000-0000-000000000000",
+    "category": "Audit",
+    "operationName": "SegmentManagement.CreateSegmentAsync",
+    "properties": "{\"eventType\":\"ApiEvent\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 Edg/94.0.992.38\",\"method\":\"POST\",\"path\":\"/api/instances/21bb40af-0000-0000-0000-00007f590000/manage/segments\",\"origin\":\"https://test.ci.dynamics.com\",\"operationStatus\":\"Success\",\"tenantId\":\"72f988bf-86f1-41af-91ab-2d7cd011db47\",\"tenantName\":\"contoso.com\",\"callerObjectId\":\"eef8240b-0000-0000-0000-00003715c7fb\",\"instanceId\":\"21bb40af-0000-0000-0000-00007f59d235\"}",
+    "resultType": "Success",
+    "resultSignature": "200",
+    "durationMs": 2365,
+    "callerIpAddress": "24.00.000.000",
+    "identity": "{\"Authorization\":{\"UserRole\":\"LimitedContributor\",\"RequiredRoles\":[\"Contributor\",\"LimitedContributor\"]},\"Claims\":{\"aud\":\"0bfc4568-0000-0000-0000-5d3e76bd7fff\",\"iss\":\"https://sts.windows.net/72f988bf-0000-0000-0000-2d7cd011db47/\",\"iat\":\"1633500899\",\"nbf\":\"1633500899\",\"exp\":\"1633504799\",\"_claim_names\":\"{\\\"groups\\\":\\\"src1\\\"}\",\"_claim_sources\":\"{\\\"src1\\\":{\\\"endpoint\\\":\\\"https://graph.windows.net/72f988bf-0000-0000-0000-2d7cd011db47/users/eef8240b-0000-0000-0000-ce203715c7fb/getMemberObjects\\\"}}\",\"acr\":\"1\",\"aio\":\"AVQAq/8TAAAA8SG1sQ9/hGJsS0zRBKwxbOevVUJ0d2DR29YbzWGldBTO7aFJ4u6CJ5v2r0xc54F2LS/pbuXBX7joh7DSdn0MYi0otQMQEsSrM/9OIof5McU=\",\"amr\":\"rsa\",\"appid\":\"14a2598c-0000-0000-0000-7ac32d24a2cc\",\"appidacr\":\"0\",\"deviceid\":\"1f5bd787-0000-0000-8406-7ff02dab6d40\",\"family_name\":\"Jon Doe\",\"given_name\":\"Jon\",\"Doe\":\"24.22.140.145\",\"name\":\"Jon Doe\",\"oid\":\"eef8240b-0000-0000-0000-ce203715c7fb\",\"onprem_sid\":\"S-1-5-21-2127521184-1604012920-1887927527-32702851\",\"puid\":\"10037FFE995C115F\",\"rh\":\"0.ARoAv4j5cvGGr0GRqy180BHbR4xZohRzqp1AvkJ6wy0koswaAG8.\",\"scp\":\"user_impersonation\",\"sub\":\"AhnPTkboqLcGiFJCsqduUoPq2VvC9l799f6XDSoPEDk\",\"tid\":\"72f988bf-86f1-41af-91ab-2d7cd011db47\",\"unique_name\":\"j-doe@contoso.com\",\"upn\":\"j-doe@contoso.com\",\"uti\":\"5i7_lPoMzUGISRY2-6e0AA\",\"ver\":\"1.0\",\"wids\":\"b79fbf4d-3ef9-4689-8143-76b194e85509\"}}",
+    "level": "Informational",
+    "uri": "https://test-wus2-01.api.ci.ai.dynamics.com/api/instances/21bb40af-0000-0000-0000-0eda7f59d235/manage/segments",
+    "RowKey": "8ad75a8c-0000-0000-0000-000d3a6d2f1b___12885402073"
+  }
+]

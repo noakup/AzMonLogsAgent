@@ -1,0 +1,68 @@
+[
+  {
+    "level": "Informational",
+    "time": "2025-01-01T23:32:32.7473289Z",
+    "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/TELEPHONYSERVICE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/SMS-E2E-PROD",
+    "correlationId": "dDRmubfpN06a9a/nxBtw3Q",
+    "category": "SMSOptOutOperational",
+    "operationName": "CheckOptOutStatus",
+    "operationVersion": "2024-12-10-preview1",
+    "uri": "https://sms-e2e-prod.communication.azure.com/sms/optouts:check?api-version=2024-12-10-preview1",
+    "resultType": "Succeeded",
+    "resultSignature": "200",
+    "resultDescription": "",
+    "durationMs": 7227,
+    "callerIpAddress": "192.168.0.1",
+    "properties": {
+      "phoneNumber": "+18445791704",
+      "sdkType": "azsdk-net-Communication.Sms",
+      "platformType": "Microsoft Windows 10.0.17763",
+      "method": "POST",
+      "country": "US"
+    }
+  },
+  {
+    "level": "Informational",
+    "time": "2025-01-01T23:32:32.7473289Z",
+    "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/TELEPHONYSERVICE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/SMS-E2E-PROD",
+    "correlationId": "dDRmubfpN06a9a/nxBtw3Q",
+    "category": "SMSOptOutOperational",
+    "operationName": "AddOptOutEntry",
+    "operationVersion": "2024-12-10-preview1",
+    "uri": "https://sms-e2e-prod.communication.azure.com/sms/optouts:add?api-version=2024-12-10-preview1",
+    "resultType": "Succeeded",
+    "resultSignature": "200",
+    "resultDescription": "",
+    "durationMs": 7247,
+    "callerIpAddress": "192.168.0.1",
+    "properties": {
+      "phoneNumber": "+18445791704",
+      "sdkType": "azsdk-net-Communication.Sms",
+      "platformType": "Microsoft Windows 10.0.17763",
+      "method": "POST",
+      "country": "US"
+    }
+  },
+  {
+    "level": "Informational",
+    "time": "2025-01-01T23:32:32.7473289Z",
+    "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/TELEPHONYSERVICE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/SMS-E2E-PROD",
+    "correlationId": "dDRmubfpN06a9a/nxBtw3Q",
+    "category": "SMSOptOutOperational",
+    "operationName": "RemoveOptOutEntry",
+    "operationVersion": "2024-12-10-preview1",
+    "uri": "https://sms-e2e-prod.communication.azure.com/sms/optouts:remove?api-version=2024-12-10-preview1",
+    "resultType": "Succeeded",
+    "resultSignature": "200",
+    "resultDescription": "",
+    "durationMs": 1227,
+    "callerIpAddress": "192.168.0.1",
+    "properties": {
+      "phoneNumber": "+18445791704",
+      "sdkType": "azsdk-net-Communication.Sms",
+      "platformType": "Microsoft Windows 10.0.17763",
+      "method": "POST",
+      "country": "US"
+    }
+  }
+]

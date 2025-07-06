@@ -1,0 +1,19 @@
+OEPDataplaneLogs
+// Filter logs to the last 30 minutes
+| where TimeGenerated >= ago(30m)
+// | extend UserId = extract(@"user-id=([a-zA-Z0-9_-@.]+)", 1, Message) // Uncomment if you want to only display user actions
+// | where notempty(UserId) //// Uncomment if you want to only display user actions
+// Categorize messages based on HTTP response codes
+| extend ResponseCode = case(
+    Message has_any ("Status=500", "Internal Server Error"), "500",
+    Message has_any ("Status=401", "Unauthorized"), "401",
+    Message has_any ("Status=403", "Forbidden"), "403",
+    Message has_any ("Status=429", "RequestBodyTooLarge"), "429",
+    ""
+)
+// Mark entries as errors if they match specific response codes
+| extend ErrorCount = ResponseCode has_any ("500", "401", "403", "429")
+// Summarize total logs and errors in 15-second intervals
+| summarize Total = count(), Errors = count(ErrorCount) by bin(TimeGenerated, 15s)
+// Render a timechart for visual analysis
+| render timechart with (ysplit=axes)

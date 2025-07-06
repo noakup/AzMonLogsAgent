@@ -1,0 +1,3 @@
+ACSCallAutomationIncomingOperations
+//| where CallConnectionId == "<callConnectionId>" // This can be uncommented to filter on a specific call connection ID
+| limit 100

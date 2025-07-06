@@ -1,0 +1,18 @@
+[
+    {
+        "TimeGenerated": "2023-01-12T17:47:13.0000000Z",
+        "Category": "csi-aksarcnfs-controller",
+        "Level": "WARNING",
+        "Message": "nodeid is empty",
+        "Stream": "stderr",
+        "PodName": "csi-aksarcnfs-controller-6949c65c6f-hn9nz"
+    },
+    {
+        "TimeGenerated": "2023-01-12T17:47:13.0000000Z",
+        "Category": "csi-aksarcnfs-controller",
+        "Level": "INFO",
+        "Message": "set up prometheus server on [::]:29604",
+        "Stream": "stderr",
+        "PodName": "csi-aksarcnfs-controller-6949c65c6f-hn9nz"
+    }
+]

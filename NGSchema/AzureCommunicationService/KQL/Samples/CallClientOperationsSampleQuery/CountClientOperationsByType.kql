@@ -1,0 +1,2 @@
+ACSCallClientOperations
+| summarize count() by OperationName

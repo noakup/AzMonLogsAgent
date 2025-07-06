@@ -1,0 +1,18 @@
+[
+    {
+        "TimeGenerated": "2025-06-18T18:50:51.033Z",
+        "Category": "karpenter-controller",
+        "Level": "INFO",
+        "Message": "{\"level\":\"INFO\",\"time\":\"2025-06-18T18:50:51.033Z\",\"logger\":\"controller.nodeclass.kubernetesversion\",\"caller\":\"status/controller.go:83\",\"message\":\"starting reconcile\",\"commit\":\"7ce04e4\",\"controller\":\"nodeclass.status\",\"controllerGroup\":\"karpenter.azure.com\",\"controllerKind\":\"AKSNodeClass\",\"AKSNodeClass\":{\"name\":\"default\"},\"namespace\":\"\",\"name\":\"default\",\"reconcileID\":\"87a0bd22-236f-47f6-a37a-c768b36a03d8\"}",
+        "Stream": "stdout",
+        "PodName": "karpenter-7696644d59-brfvz"
+    },
+    {
+        "TimeGenerated": "2025-06-18T18:55:55.887Z",
+        "Category": "karpenter-controller",
+        "Level": "WARNING",
+        "Message": "{\"level\":\"WARN\",\"time\":\"2025-06-18T18:55:55.887Z\",\"logger\":\"controller\",\"caller\":\"instancetype/instancetypes.go:108\",\"message\":\"Discovered 1004 SKUs\",\"commit\":\"7ce04e4\",\"controller\":\"disruption\",\"namespace\":\"\",\"name\":\"\",\"reconcileID\":\"189a7daa-95b7-48f8-af28-c7f534dc3b61\"}",
+        "Stream": "stdout",
+        "PodName": "karpenter-7696644d59-brfvz"
+    }
+] 

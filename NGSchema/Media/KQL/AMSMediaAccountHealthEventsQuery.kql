@@ -1,0 +1,3 @@
+AMSMediaAccountHealth
+| project EventCode, EventMessage, _ResourceId
+| limit 100

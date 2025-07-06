@@ -1,0 +1,877 @@
+{
+  "type": "Microsoft.OnlineExperimentation/workspaces",
+  "displayName": "Online Experiment Workspace",
+  "description": "All tables related to Online Experimentation service.",
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Azure ExP/ExP - Public",
+  "tags": {},
+  "properties": {},
+  "relatedTables": ["AzureActivity", "AzureMetric"],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "name": "OEWAuditLogs",
+      "description": "Audit, activity and status for the Online Experiment Workspace.",
+      "categories": ["resources", "audit"],
+      "dataTypeId": "MICROSOFTONLINEEXPERIMENTATION_AUDIT",
+      "artifactVersion": 3,
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "level",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "durationMs",
+          "type": "Int"
+        },
+        {
+          "name": "uri",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "callerIpAddress",
+          "type": "String"
+        },
+        {
+          "name": "identity",
+          "type": "Dynamic"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "workspaceId",
+          "type": "String"
+        }
+      ],
+      
+      "transformFilePath": "KQL/OEWAuditLogsTransform.kql",
+
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "description": "The timestamp (UTC) of when the log was generated.",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "Category",
+          "description": "The event category.",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+       {
+          "name": "Level",
+          "description": "The log level.",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "OperationName",
+          "description": "The name of the operation.",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },       
+        {
+          "name": "ResultType",
+          "description": "The result of the operation.",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "HttpStatusCode",
+          "description": "The HTTP status code of the operation.",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "ResultDescription",
+          "description": "The description of the result of the operation.",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "DurationMs",
+          "description": "The duration of the operation in milliseconds.",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "URI",
+          "description": "The URI of the operation.",
+          "dataTypeHint": "URI",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "Location",
+          "description": "The location of the resource.",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },                 
+        {
+          "name": "CallerIpAddress",
+          "description": "The IP address of the caller.",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "Identity",
+          "description": "The identity triggering the operation.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },       
+        {
+          "name": "CorrelationId",
+          "description": "The correlation Id of the operation.",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },  
+        {
+          "name": "WorkspaceId",
+          "description": "The workspace Id of the online experimentation resource.",
+          "dataTypeHint": "GUID",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/OEWAuditLogs.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/OEWAuditLogs.json"
+    },
+    {
+      "name": "OEWExperimentAssignmentSummary",
+      "description": "Experiment variant assignment summary from feature evaluation events. Used to monitor experiment activities.",
+      "categories": ["applications"],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 2,
+      "dataTypeId": "MICROSOFTONLINEEXPERIMENTATION_EXPERIMENTASSIGNMENTSUMMARY",
+      "intelligencePacks": [],
+      "isResourceCentric": true, 
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+
+      "input": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime"
+        },
+        {
+          "name": "FeatureFlagReference",
+          "type": "String"
+        },
+        {
+          "name": "FeatureName",
+          "type": "String"
+        },
+        {
+          "name": "AllocationId",
+          "type": "String"
+        },
+        {
+          "name": "Variant",
+          "type": "String"
+        },
+        {
+          "name": "VariantAssignmentPercentage",
+          "type": "Double"
+        },
+        {
+          "name": "IsControlVariant",
+          "type": "Bool"
+        },
+        {
+          "name": "AssignmentEventCount",
+          "type": "Long"
+        },
+        {
+          "name": "FirstAssignmentTimestamp",
+          "type": "DateTime"
+        },
+        {
+          "name": "LastAssignmentTimestamp",
+          "type": "DateTime"
+        },
+        {
+          "name": "BinStartTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "BinSize",
+          "type": "Long"
+        }
+      ],
+  
+      "transformFilePath": "KQL/OEWExperimentAssignmentSummaryTransform.kql",
+  
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The ingestion time of the experiment assignment summary.",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "FeatureFlagReference",
+          "type": "String",
+          "description": "The fully qualified Id of the feature flag.",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "FeatureName",
+          "type": "String",
+          "description": "The name of the feature flag.",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "AllocationId",
+          "type": "String",
+          "description": "The Id of the allocation used for the feature evaluation.",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "Variant",
+          "type": "String",
+          "description": "The Id of the feature variant assigned.",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "VariantAssignmentPercentage",
+          "type": "Double",
+          "description": "The variant assignment percentage of the feature variant.",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "IsControlVariant",
+          "type": "Bool",
+          "description": "Whether the feature variant assigned is the control for the experiment.",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "AssignmentEventCount",
+          "type": "BigInt",
+          "description": "Total number of assignment events.",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "FirstAssignmentTimestamp",
+          "type": "DateTime",
+          "description": "The timestamp of earliest assignment event in time range.",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "LastAssignmentTimestamp",
+          "type": "DateTime",
+          "description": "The timestamp of latest assignment event in time range.",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "BinStartTime",
+          "type": "DateTime",
+          "description": "The bin start time of assignment summary.",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "BinSize",
+          "type": "BigInt",
+          "description": "The duration of assignment summary time range (in minutes).",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        }
+      ],
+  
+      "sampleInputRecordsFilePath": "SampleInputRecords/OEWExperimentAssignmentSummarySample.json",
+  
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/OEWExperimentAssignmentSummarySample.json"
+  },
+  {
+    "name": "OEWExperimentScorecards",
+    "description": "Experimet scorecard metadata and insights.",
+    "categories": ["applications"],
+    "tags": {},
+    "properties": {},
+    "artifactVersion": 2,
+    "dataTypeId": "MICROSOFTONLINEEXPERIMENTATION_EXPERIMENTSCORECARDS",
+    "intelligencePacks": [],
+    "isResourceCentric": true,
+    "tableState": "Production",
+    "isTroubleshootingAllowed": false,
+
+    "input": [
+      {
+        "name": "TimeGenerated",
+        "type": "DateTime"
+      },
+      {
+        "name": "FeatureName",
+        "type": "String"
+      },
+      {
+        "name": "Label",
+        "type": "String"
+      },
+      {
+        "name": "FeatureFlagReference",
+        "type": "String"
+      },
+      {
+        "name": "AllocationId",
+        "type": "String"
+      },
+      {
+        "name": "ScorecardId",
+        "type": "String"
+      },
+      {
+        "name": "AnalysisStartTime",
+        "type": "DateTime"
+      },
+      {
+        "name": "AnalysisEndTime",
+        "type": "DateTime"
+      },
+      {
+        "name": "Insights",
+        "type": "String"
+      }
+    ],
+
+    "transformFilePath": "KQL/OEWExperimentScorecardsTransform.kql",
+
+    "columns": [
+      {
+        "name": "TimeGenerated",
+        "type": "DateTime",
+        "description": "The timestamp when the scorecard results were ingested.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "FeatureName",
+        "type": "String",
+        "description": "The name of the feature.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "Label",
+        "type": "String",
+        "description": "The name of the label for the feature (if exists).",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "FeatureFlagReference",
+        "type": "String",
+        "description": "The fully qualified Id of the feature.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "AllocationId",
+        "type": "String",
+        "description": "The Id of the allocation used for the feature evaluation.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "ScorecardId",
+        "type": "String",
+        "description": "The Id of the experiment scorecard.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "AnalysisStartTime",
+        "type": "DateTime",
+        "description": "The start time of the scorecard analysis.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "AnalysisEndTime",
+        "type": "DateTime",
+        "description": "The end name of the scorecard analysis.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "Insights",
+        "type": "Dynamic",
+        "description": "Scorecard-level Insights derived from the analysis results in JSON format.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      }
+    ],
+
+    "sampleInputRecordsFilePath": "SampleInputRecords/OEWExperimentScorecardsSample.json",
+
+    "sampleOutputRecordsFilePath": "SampleOutputRecords/OEWExperimentScorecardsSample.json"
+  },
+  {
+    "name": "OEWExperimentScorecardMetricPairs",
+    "description": "Detailed experiment results including metric comparisons and any metric-level derived insights.",
+    "categories": ["applications"],
+    "tags": {},
+    "properties": {},
+    "artifactVersion": 1,
+    "dataTypeId": "MICROSOFTONLINEEXPERIMENTATION_EXPERIMENTSCORECARDMETRICPAIRS",
+    "intelligencePacks": [],
+    "isResourceCentric": true,
+    "tableState": "Production",
+    "isTroubleshootingAllowed": false,
+
+    "input": [
+      {
+        "name": "TimeGenerated",
+        "type": "DateTime"
+      },
+      {
+        "name": "ScorecardId",
+        "type": "String"
+      },
+      {
+        "name": "MetricId",
+        "type": "String"
+      },
+      {
+        "name": "MetricDisplayName",
+        "type": "String"
+      },
+      {
+        "name": "MetricDescription",
+        "type": "String"
+      },
+      {
+        "name": "MetricType",
+        "type": "String"
+      },
+      {
+        "name": "MetricLifecycle",
+        "type": "String"
+      },
+      {
+        "name": "MetricCategories",
+        "type": "String"
+      },
+      {
+        "name": "DesiredDirection",
+        "type": "String"
+      },
+      {
+        "name": "MetricETag",
+        "type": "String"
+      },
+      {
+        "name": "TreatmentVariant",
+        "type": "String"
+      },
+      {
+        "name": "TreatmentCount",
+        "type": "Long"
+      },
+      {
+        "name": "TreatmentMetricValue",
+        "type": "Double"
+      },
+      {
+        "name": "TreatmentMetricValueNormalized",
+        "type": "Double"
+      },
+      {
+        "name": "TreatmentStandardErrorNormalized",
+        "type": "Double"
+      },
+      {
+        "name": "ControlVariant",
+        "type": "String"
+      },
+      {
+        "name": "ControlCount",
+        "type": "Long"
+      },
+      {
+        "name": "ControlMetricValue",
+        "type": "Double"
+      },
+      {
+        "name": "ControlMetricValueNormalized",
+        "type": "Double"
+      },
+      {
+        "name": "ControlStandardErrorNormalized",
+        "type": "Double"
+      },
+      {
+        "name": "PValue",
+        "type": "Double"
+      },
+      {
+        "name": "TreatmentEffect",
+        "type": "String"
+      },
+      {
+        "name": "RelativeDifference",
+        "type": "Double"
+      },
+      {
+        "name": "Insights",
+        "type": "String"
+      }
+    ],
+
+    "transformFilePath": "KQL/OEWExperimentScorecardMetricPairsTransform.kql",
+
+    "columns": [
+      {
+        "name": "TimeGenerated",
+        "type": "DateTime",
+        "description": "The timestamp when the scorecard results were ingested.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "ScorecardId",
+        "type": "String",
+        "description": "The Id of the experiment scorecard.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "MetricId",
+        "type": "String",
+        "description": "The Id of the metric.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "MetricDisplayName",
+        "type": "String",
+        "description": "The display name of the metric.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "MetricDescription",
+        "type": "String",
+        "description": "The description of the metric.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "MetricType",
+        "type": "String",
+        "description": "The metric type. Possible values include EventCount, UserCount, EventRate, UserRate, Sum, Average, Percentile.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "MetricLifecycle",
+        "type": "String",
+        "description": "The lifecycle stage of the metric. Possible values include Active, Inactive",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "MetricCategories",
+        "type": "Dynamic",
+        "description": "Metric categories in the form of string array.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "DesiredDirection",
+        "type": "String",
+        "description": "Desirable direction for the metric. Possible values: Increase, Decrease, Neutral",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "MetricETag",
+        "type": "String",
+        "description": "The ETag of the metric.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "TreatmentVariant",
+        "type": "String",
+        "description": "The Id of the treatment variant.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "TreatmentCount",
+        "type": "BigInt",
+        "description": "The sample count of the treatment variant.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "TreatmentMetricValue",
+        "type": "Double",
+        "description": "The metric value for the treatment variant.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "TreatmentMetricValueNormalized",
+        "type": "Double",
+        "description": "The normalized metric value for the treatment variant. Used by metric comparisons, which accounts for unequal traffic allocation.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "TreatmentStandardErrorNormalized",
+        "type": "Double",
+        "description": "The standard error (StandardDeviation / sqrt(Count)) of the metric for the control variant.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "ControlVariant",
+        "type": "String",
+        "description": "The Id of the control variant.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "ControlCount",
+        "type": "BigInt",
+        "description": "The sample count of the control variant.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "ControlMetricValue",
+        "type": "Double",
+        "description": "The metric value for the control variant.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "ControlMetricValueNormalized",
+        "type": "Double",
+        "description": "The normalized metric value for the control variant. Used by metric comparisons, which accounts for unequal traffic allocation.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "ControlStandardErrorNormalized",
+        "type": "Double",
+        "description": "The standard error (StandardDeviation / sqrt(Count)) of the metric for the control variant.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "PValue",
+        "type": "Double",
+        "description": "The P-Value of the comparison. Used to indicate if the difference between the variants is significant.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "TreatmentEffect",
+        "type": "String",
+        "description": "The effect of the treatment variant on the metric. Possible values: Zero samples, Too few samples, Inconclusive, Changed, Improved, Degraded.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "RelativeDifference",
+        "type": "Double",
+        "description": "The relative difference of the comparison based on TreatmentMetricValueNormalized and ControlMetricValueNormalized.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "Insights",
+        "type": "Dynamic",
+        "description": "Metric-level Insights derived from the analysis results in JSON format.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      }
+    ],
+
+    "sampleInputRecordsFilePath": "SampleInputRecords/OEWExperimentScorecardMetricPairsSample.json",
+
+    "sampleOutputRecordsFilePath": "SampleOutputRecords/OEWExperimentScorecardMetricPairsSample.json"
+  }
+  ],
+  "functions": [],
+  "queries": [
+    {
+      "id": "a7cb524f-2347-4ed2-a9ff-3ce04cb87913",
+      "displayName": "Variant assignment counts by features",
+      "description": "List the total number of assignments for each variant in feature allocations.",
+      "bodyFilePath": "KQL/OEWExperimentAssignmentSummaryQuery.kql",
+      "categories": ["applications"],
+      "relatedTables": ["OEWExperimentAssignmentSummary"],
+      "tags": {
+        "Topic": ["Usage"]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "3964f9a7-6371-445c-924f-9efdaef758ca",
+      "displayName": "Latest scorecard metadata for a given feature",
+      "description": "Query the latest experimentscorecard metadata for a given feature.",
+      "bodyFilePath": "KQL/OEWExperimentLatestScorecardMetadataQuery.kql",
+      "categories": ["applications"],
+      "relatedTables": ["OEWExperimentAssignmentSummary", "OEWExperimentScorecards"],
+      "tags": {
+        "Topic": ["Usage"]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "1e349818-951d-456b-b4b5-90dc93330b98",
+      "displayName": "Latest scorecard results for a given feature",
+      "description": "Query the latest experiment scorecard result for a given feature.",
+      "bodyFilePath": "KQL/OEWExperimentLatestScorecardResultsQuery.kql",
+      "categories": ["applications"],
+      "relatedTables": ["OEWExperimentAssignmentSummary", "OEWExperimentScorecards", "OEWExperimentScorecardMetricPairs"],
+      "tags": {
+        "Topic": ["Usage"]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+[
+    {
+      "TimeGenerated": "2024-08-22T23:48:10.0877900Z",
+      "FeatureName": "TestNewModel",
+      "FeatureFlagReference": "https://exp-copilot-test-app-config.azconfig.io/kv/.appconfig.featureflag/TestNewModel",
+      "AllocationId": "alloc987654",
+      "ScorecardId": "1234567",
+      "AnalysisStartTime": "2024-08-20T00:00:00.0000000Z",
+      "AnalysisEndTime": "2024-08-22T00:00:00.0000000Z",
+      "Insights": 
+      { 
+        "SampleInsightKey1": "Sample insight value 1",
+        "SampleInsightKey2": "Sample insight value 2"
+      }
+    }
+  ]

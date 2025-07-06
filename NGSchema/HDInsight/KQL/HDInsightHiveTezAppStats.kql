@@ -1,0 +1,11 @@
+source
+| extend parsedMetrics = parse_json(metrics)
+| extend parsedTags = parse_json(tags)
+| mvexpand parsedMetrics
+| extend nameValuePair = tostring(parsedMetrics)
+| extend nameValueDelim = indexof(nameValuePair, ":")
+| where isnotnull(nameValueDelim)
+| extend MetricName = substring(nameValuePair, 2, nameValueDelim - 3)
+| extend MetricValue = todouble(substring(nameValuePair, nameValueDelim + 1, strlen(nameValuePair) - nameValueDelim - 2))
+| where isnotnull(MetricValue)
+| project TimeGenerated = FluentdIngestTimestamp, MetricName, MetricValue, Tags = parsedTags, HostName = hostName, ClusterName = clusterName, ClusterType = clusterType, ApplicationId = id, User = user, ApplicationName = name, Queue = queue, State = state, FinalStatus = finalStatus, TrackingUI = trackingUI, ClusterId = tolong(clusterId), ApplicationType = applicationType, StartedTime = tolong(startedTime), FinishedTime = tolong(finishedTime), ElapsedTime = tolong(elapsedTime), AMContainerLogs = amContainerLogs, LogAggregationStatus = logAggregationStatus, UnmanagedApplication = tobool(unmanagedApplication), OperationName = operationName, CorrelationId = correlationId

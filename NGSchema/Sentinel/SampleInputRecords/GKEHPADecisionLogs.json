@@ -1,0 +1,59 @@
+[
+    {
+    "insertId": "csw4twf7s629e9m0",
+    "jsonPayload": {
+      "atomicRecommendation": {
+        "podCount": {
+          "total": 1,
+          "ready": 1
+        },
+        "startTime": "2025-05-12T09:07:07.752445187Z",
+        "metric": {
+          "spec": {
+            "name": "memory",
+            "target": {
+              "averageValue": "400Mi"
+            }
+          },
+          "status": {
+            "averageValue": "38604800"
+          },
+          "type": "Resource",
+          "newestSampleAgeSeconds": -34.752445187,
+          "newestSampleTime": "2025-05-12T09:06:33Z"
+        },
+        "summary": {
+          "dampening": "none",
+          "override": "none",
+          "replicas": 1
+        },
+        "hpa": "gke-managed-cim/kube-state-metrics"
+      },
+      "instance": {
+        "zone": "us-central1-a",
+        "vm_name": "gke-961cde8a3d894189be3f-89f7-0b88-vm"
+      }
+    },
+    "resource": {
+      "type": "k8s_control_plane_component",
+      "labels": {
+        "component_name": "hpa-controller",
+        "project_id": "msccp-test",
+        "cluster_name": "kubernetesalekhya",
+        "location": "us-central1",
+        "component_location": "us-central1-a"
+      }
+    },
+    "timestamp": "2025-05-12T09:07:07.772235332Z",
+    "severity": "INFO",
+    "labels": {
+      "compute.googleapis.com/resource_name": "gke-961cde8a3d894189be3f-89f7-0b88-vm"
+    },
+    "logName": "projects/msccp-test/logs/container.googleapis.com%2Fhpa-controller",
+    "sourceLocation": {
+      "file": "event_logger.go",
+      "line": "61"
+    },
+    "receiveTimestamp": "2025-05-12T09:07:08.131379153Z"
+  }
+]

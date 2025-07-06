@@ -1,0 +1,8 @@
+ACSCallDiagnostics
+// Calculate the average value for each of the six telemetry fields
+| summarize Avg_JitterAvg=avg(JitterAvg),
+            Avg_JitterMax=avg(JitterMax),
+            Avg_RoundTripTimeAvg=avg(RoundTripTimeAvg),
+            Avg_RoundTripTimeMax=avg(RoundTripTimeMax),
+            Avg_PacketLossRateAvg=avg(PacketLossRateAvg),
+            Avg_PacketLossRateMax=avg(PacketLossRateMax)

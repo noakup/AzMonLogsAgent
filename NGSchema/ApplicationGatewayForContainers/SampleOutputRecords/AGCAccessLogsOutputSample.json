@@ -1,0 +1,30 @@
+[
+    {
+        "TimeGenerated": "2021-10-14T22:17:11Z",
+        "OperationName": "ReqRespLogs",
+        "Region": "EastUS2",
+        "BackendHost": "10.1.0.15:80",
+        "BackendIp": "10.1.0.15",
+        "BackendPort": 80,
+        "BackendResponseLatency": 2,
+        "BackendTimeTaken": "-",
+        "ClientIp": "xxx.xxx.xxx.xxx:52526",
+        "FrontendName": "frontend-primary",
+        "FrontendPort": 80,
+        "HostName": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.fzXX.alb.azure.com",
+        "HttpMethod": "GET",
+        "HttpStatusCode": 200,
+        "HttpVersion": "HTTP\/1.1",
+        "Referrer": "-",
+        "RequestBodyBytes": 0,
+        "RequestHeaderBytes": 223,
+        "RequestUri": "\/index.php",
+        "ResponseBodyBytes": 91,
+        "ResponseHeaderBytes": 190,
+        "TimeTaken": 2,
+        "TlsCipher": "-",
+        "TlsProtocol": "-",
+        "TrackingId": "0ef125db-7fb7-48a0-b3fe-03fe0ffed873",
+        "UserAgent": "curl\/7.81.0"
+    }
+]

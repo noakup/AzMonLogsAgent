@@ -1,0 +1,14 @@
+[
+    {
+        "time": "2022-09-05T06:54:33.2132487Z",
+        "resourceId": "/SUBSCRIPTIONS/00000000-0000-0000-0000-000000000001/RESOURCEGROUPS/CONTOSORG/PROVIDERS/MICROSOFT.MEDIA/MEDIASERVICES/CONTOSOMEDIA",
+        "operationName": "MICROSOFT.MEDIA/MEDIASERVICES/CUSTOMERMANAGEDKEY/READ",
+        "category": "MediaAccount",
+        "level": "Error",
+        "location": "US_West_Central",
+        "properties": {
+            "eventCode": "AccountKeyError",
+            "statusMessage": "Customer managed key is inaccessible. Key URI: https://contoso.vault.azure.net/keys/accountkey"
+        }
+    }
+]

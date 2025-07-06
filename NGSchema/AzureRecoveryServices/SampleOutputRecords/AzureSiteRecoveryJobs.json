@@ -1,0 +1,28 @@
+[
+  {
+    "TimeGenerated": "2023-02-06T18:07:28.0564441Z",
+    "Category": "AzureSiteRecoveryJobs"
+    "VaultType": "MICROSOFT.RECOVERYSERVICES/VAULTS"
+    "VaultName": "RCMGIPRECVAULTCCY",
+    "OperationName": "Enable replication",
+    "Status": "In progress",
+    "CorrelationId": "",
+    "ResultDescription": "Azure Site Recovery Job 'Enable replication' InProgress.",
+    "DurationMs": null,
+    "StartTime": "2023-02-06T18:07:27.4551849Z",
+    "EndTime": "2023-02-06T18:07:27.6316706Z",
+    "VaultLocation": "Central US EUAP",
+    "SourceFriendlyName": "rcmgipprivmecy",
+    "Version": "05-12-2016 00:00:00",
+    "SourceResourceId": "/subscriptions/f597fb58-1326-45a6-bd46-d5246d966400/resourcegroups/rcmgipprirgecy/providers/microsoft.compute/virtualmachines/rcmgipprivmecy",
+    "SourceType": "Vm",
+    "ReplicatedItemFriendlyName": "",
+    "ReplicatedItemId": "",
+    "ReplicatedItemUniqueId": "",
+    "PolicyUniqueId": "4dc33ff6-39f1-5d33-93c2-9030e5aa63f3",
+    "PolicyId": "/subscriptions/f597fb58-1326-45a6-bd46-d5246d966400/resourceGroups/RcmGipRecRgccy/providers/Microsoft.RecoveryServices/vaults/RcmGipRecVaultccy/replicationPolicies/RcmGipRecPolicyccy",
+    "PolicyFriendlyName": "RcmGipRecPolicyccy",
+    "JobUniqueId": "524c2888-5157-47ce-918f-6797e156273d",
+    "ReplicationScenario": "Azure"
+  }
+]

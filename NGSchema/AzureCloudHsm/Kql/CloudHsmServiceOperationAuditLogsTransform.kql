@@ -1,0 +1,15 @@
+source
+| project
+	TimeGenerated = todatetime(['time']),
+	OperationName = tostring(operationName),
+	ResultType = tostring(resultType),
+	CallerIpAddress = tostring(callerIpAddress),
+	ClientSdkPackageVersion = tostring(properties.ClientSdkPackageVersion),
+	MemberId = tostring(properties.MemberId),
+	Opcode = tostring(properties.Opcode),
+	ClientInfo = tostring(properties.clientInfo),
+	Sku = todynamic(properties.sku),
+	PoolType = tostring(properties.PoolType),
+	ResultSignature = tostring(resultSignature),
+	ResultDescription = tostring(resultDescription),
+	DurationMs = toint(durationMs)

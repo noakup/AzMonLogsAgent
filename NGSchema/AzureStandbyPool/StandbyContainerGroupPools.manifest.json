@@ -1,0 +1,245 @@
+{
+    "type": "microsoft.standbypool/standbycontainergrouppools",
+    "displayName": "Microsoft.StandbyPool",
+    "description": "Standby pools improve scaling performance by pre-provisioning containers, which can be quickly moved into the container group, either in a running or stopped state, significantly reducing the time needed to scale out.",
+    "simplifiedSchemaVersion": "3", 
+    "icmTeam": "AzureRT/Pool Management Service (PMaaS)",
+    "contactDL": "pmaashot@microsoft.com",
+    "relatedTables": [],
+    "relatedFunctions": [],
+    "tables": [
+      {
+        "name": "SCGPoolExecutionLog",
+        "description": "Contains Execution Logs for a StandbyContainerGroupPool, which can be used for audit and troubleshooting.",
+        "categories": [ "audit", "monitor" ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 3,
+        "dataTypeId": "MICROSOFTSTANDBYPOOL_CONTAINERGROUPEXECUTION",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isLakeAllowed": true,
+        "isTroubleshootingAllowed": true,
+        "input": [
+          {
+            "name": "Tenant",
+            "type": "String"
+          },
+          {
+            "name": "time",
+            "type": "DateTime"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          }
+        ],
+        "transformFilePath": "Kql/Transforms/cgexecuteTransform.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "description": "Time (UTC) when the log was created.",
+            "type": "DateTime",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "OperationName",
+            "description": "The resource operation name for the log.",
+            "type": "String",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "EventName",
+            "description": "The event that occurred during the operation.",
+            "type": "String",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "Location",
+            "description": "The region where the event occurred during the operation.",
+            "type": "String",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "ErrorMessage",
+            "description": "The message associated with an error that occurred during the operation.",
+            "type": "String",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "Message",
+            "description": "A non-Error message associated with an event that occurred during the operation.",
+            "type": "String",
+            "isDefaultDisplay": true
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/ContainerGroupExecuteSample.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/ContainerGroupExecuteSample.json"
+      },
+      {
+        "name": "SCGPoolRequestLog",
+        "description": "Contains Request Logs for a StandbyContainerGroupPool, which can be used for audit and troubleshooting.",
+        "categories": [ "audit" ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 4,
+        "dataTypeId": "MICROSOFTSTANDBYPOOL_CONTAINERGROUPREQUEST",
+        "isChangeColumnInternalNameAllowed": true,
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isLakeAllowed": true,
+        "isTroubleshootingAllowed": true,
+        "input": [
+          {
+            "name": "Tenant",
+            "type": "String"
+          },
+          {
+            "name": "time",
+            "type": "DateTime"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          }
+        ],
+        "transformFilePath": "Kql/Transforms/cgrequestTransform.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "description": "Time (UTC) when the log was created.",
+            "type": "DateTime",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "OperationName",
+            "description": "The resource operation name for the log.",
+            "type": "String",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "EventName",
+            "description": "The event that occurred during the operation.",
+            "type": "String",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "Location",
+            "description": "The region where the event occurred during the operation.",
+            "type": "String",
+            "isDefaultDisplay": true
+          },
+          {
+            "transformName": "NewMinCapacity",
+            "physicalName": "NewMinCapacity_Internal",
+            "logicalName": "NewMinCapacity",
+            "description": "The new minimum number of containers for the standbypool as set by the user.",
+            "type": "Int",
+            "isDefaultDisplay": true
+          },
+          {
+            "transformName": "NewMaxCapacity",
+            "physicalName": "NewMaxCapacity_Internal",
+            "logicalName": "NewMaxCapacity",
+            "description": "The new maximum number of containers for the standbypool as set by the user.",
+            "type": "Int",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "NewResourceState",
+            "description": "The new resource state for the containers in the standbypool as set by the user.",
+            "type": "String",
+            "isDefaultDisplay": true
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/ContainerGroupRequestSample.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/ContainerGroupRequestSample.json"
+      }
+        
+    ],
+
+    "functions": [],
+
+  "queries": [
+    {
+      "id": "aed2e616-52ae-4c8e-8562-af62c017718a", 
+      "displayName": "Exhausted Pool Events",
+      "description": "A list of times when the pool was exhausted.",
+      "bodyFilePath": "KQL/Queries/CGExhausted.kql",
+      "categories": [
+        "monitor"
+      ],
+      "relatedTables": [
+        "SCGPoolRequestLog"
+      ],
+      "tags": {
+        "Topic": [
+          "Exhausted"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "6f2a51a0-449a-4578-b715-4f634a4d084a", 
+      "displayName": "Settings Updated Pool Events",
+      "description": "A list of the last 10 settings updates.",
+      "bodyFilePath": "KQL/Queries/CGSettingsUpdated.kql",
+      "categories": [
+        "audit"
+      ],
+      "relatedTables": [
+        "SCGPoolExecutionLog"
+      ],
+      "tags": {
+        "Topic": [
+          "Settings"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    }
+  ]
+}

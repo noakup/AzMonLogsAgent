@@ -1,0 +1,12 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    Location = location,
+    OperationName = strcat(split(operationName, '/')[2], '/', split(operationName, '/')[3]),
+    ResultType = resultType,
+    CorrelationId = correlationId,
+    LogLevel = level,
+    NetworkResourceIds = properties.TargetResourceIds,
+    Message = tostring(properties.Message),
+    SelfDiagnosis = tostring(properties.SelfDiagnosis),
+    AppliedConnectivityConfigurations = properties.AppliedConnectivityConfigurations

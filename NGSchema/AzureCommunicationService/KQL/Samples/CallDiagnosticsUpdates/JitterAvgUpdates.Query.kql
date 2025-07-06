@@ -1,0 +1,7 @@
+ACSCallDiagnosticsUpdates
+// Filter null values
+| where isnotnull(JitterAvg)
+// Count jitter values by 10 millisecond intervals
+| summarize JitterAvg_counts=count() by bin(JitterAvg, 10)
+| order by JitterAvg asc
+| render columnchart with (xcolumn = JitterAvg, title="JitterAvg histogram")

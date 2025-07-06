@@ -1,0 +1,20 @@
+T
+| extend ExtractedHostname = column_ifexists (field,'')
+| extend DotSplitHostname = split(ExtractedHostname,".")
+| extend SlashSplitHostname = split(ExtractedHostname,"\\")
+| extend DomainType = case(
+    array_length(SlashSplitHostname) > 1, "Windows",
+    array_length(DotSplitHostname) > 1, "FQDN",
+    ""
+)
+| extend 
+    FQDN = iif (DomainType == '', '', ExtractedHostname),
+    Domain = case (
+        DomainType == "Windows", SlashSplitHostname[0],
+        DomainType == "FQDN", tostring(strcat_array(array_slice(DotSplitHostname, 1, -1), '.')),
+        ""),
+    ExtractedHostname = case (
+        DomainType == "Windows", SlashSplitHostname[1],
+        DomainType == "FQDN", DotSplitHostname[0],
+        ExtractedHostname)   
+| project-away DotSplitHostname, SlashSplitHostname

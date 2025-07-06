@@ -1,0 +1,5 @@
+AADNonInteractiveUserSignInLogs
+| where TimeGenerated > ago(1d)
+| summarize CountPerIPAddress = count() by IPAddress
+| order by CountPerIPAddress desc
+| take 100

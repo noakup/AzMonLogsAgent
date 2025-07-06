@@ -1,0 +1,12 @@
+[
+  {
+    "ident": "CEF:",
+    "Timestamp": "2020-03-11T20:25:11.228Z",
+    "EventTime": "2020-03-11T20:25:11.208Z",
+    "Host": "zweess10500waf00",
+    "HostIP": "127.0.0.1",
+    "Facility": "local0",
+    "Severity": "alert",
+    "Message": "CEF: 0|Barracuda|WAF|921|154|PARAM_LENGTH_EXCEEDED|1| cat=WF dst=10.166.1.132 dpt=443 act=LOG src=135.84.167.61 spt=32102 requestMethod=POST app=TLSv1.2 request=dev-subscriptions.bpglobal.com/.auth/login/aad/callback dvchost=zweess10500waf00 cn2=32102 cn2Label=ProxyPort cs1=security-policy cs1Label=RuleID cs2=NONE cs2Label=FollowUpAction cs3=GLOBAL cs3Label=RuleType cs4=Limits Violation cs4Label=AttackGroup cs5=135.84.167.61 cs5Label=ProxyIP cs6Label=SessionID destinationServiceName=dev-subscriptions_ContentRule deviceDirection=external outcome=success start=2020-03-11T20:12:11.208Z end=2020-03-11T20:14:11.208Z cat=Monitor reason=unknown user"
+  }
+]

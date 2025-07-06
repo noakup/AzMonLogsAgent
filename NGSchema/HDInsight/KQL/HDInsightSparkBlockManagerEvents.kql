@@ -1,0 +1,19 @@
+source
+| project
+    TimeGenerated = iff(isnull(RemovedTime), AddedTime, RemovedTime),
+    ApplicationId = ApplicationId,
+    ExecutorId = ExecutorId,
+    AddedTime = AddedTime,
+    RemovedTime= RemovedTime,
+    MaxMemory = tolong(MaxMemory),
+    MaxOnHeapMemory = tolong(MaxOnHeapMemory),
+	MaxOffHeapMemory = tolong(MaxOffHeapMemory),
+    ClusterTenantId = Tenant,
+	Role = Role,
+	Host = iff(isempty(Host), RoleInstance, Host),
+	ClusterDnsName = ClusterDnsName,
+	Region = Region,
+	IpAddress = IpAddress,
+	UserSubscriptionId = UserSubscriptionId,
+	BlockHost = BlockHost,
+	BlockManagerHost = BlockManagerHost

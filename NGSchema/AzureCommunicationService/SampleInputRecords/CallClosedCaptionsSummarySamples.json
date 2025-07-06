@@ -1,0 +1,20 @@
+[
+    {
+        "time": "2021-07-16T15:46:22.998Z",
+        "category": "CallClosedCaptionsSummary",
+        "location": "global",
+        "resourceId": "/SUBSCRIPTIONS/2250B161-3C0C-4F22-8703-31B4E9D57250/RESOURCEGROUPS/STREAMANALYTICSTIPTESTRESOURCEGROUP/PROVIDERS/MICROSOFT.STREAMANALYTICS/STREAMINGJOBS/TIPJOB_FF1F3062-F8B4-4233-948C-C22C636053BB",        
+        "operationName": "ClosedCaptionsSummary", 
+        "correlationId": "336a0049-d98f-48ca-8b21-d39244c34486", 
+        "resultType": "Succeeded",
+        "level": "Informational",
+        "properties": {
+            "speechRecognitionSessionId": "eyJQbGF0Zm9ybUVuZHBvaW50SWQiOiI0MDFmNmUwMC01MWQyLTQ0YjAtODAyZi03N2RlNTA2YTI3NGYiLCJSZXNvdXJjZVNwZWNpZmljSWQiOiIzOTc0NmE1Ny1lNzBkLTRhMTctYTI2Yi1hM2MzZTEwNTk0MjEifQ",
+            "spokenLanguage": "cn-zh",
+            "endReason": "Stopped", 
+            "cancelReason": "", 
+            "startTime": "2021-07-16T15:46:22.998Z",
+            "duration": "3.26"
+        }
+    }
+]

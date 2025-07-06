@@ -1,0 +1,23 @@
+[
+    {
+        "PreciseTimeStamp": "2021-07-11T17:16:38.5474733Z",
+        "time": "4/3/2021 1:56:58 PM",
+        "TIMESTAMP": "2021-07-11T17:16:38.5474733Z",
+        "resourceId": "/tenants/536279f6-15cc-45f2-be2d-61e352b51eef/providers/microsoft.aadiam",
+        "operationName": "Risky user",
+        "operationVersion": "1.0",
+        "category": "RiskyUsers",
+        "tenantId": "536279f6-15cc-45f2-be2d-61e352b51eef",
+        "resultType": "",
+        "resultSignature": "None",
+        "resultDescription": "",
+        "durationMs": "0",
+        "callerIpAddress": "",
+        "correlationId": "6dc74d0a-f171-4cb4-b57c-fa93d339dbaa",
+        "identity": "nyawira njoroge",
+        "Level": "4",
+        "location": "wus",
+        "properties": "{\"id\":\"6dc74d0a-f171-4cb4-b57c-fa93d339dbaa\",\"userDisplayName\":\"Nyawira Njoroge\",\"userPrincipalName\":\"nnjoroge@woodgrove.ms\",\"riskLastUpdatedDateTime\":\"2021-04-03T13:56:58.031Z\",\"riskState\":\"dismissed\",\"riskDetail\":\"hidden\",\"riskLevel\":\"hidden\",\"isGuest\":false,\"isDeleted\":false,\"isProcessing\":false}",
+        "RowKey": "6b50150f-deb0-11eb-86d5-000d3a5a0d2d___42950312357"
+    }
+]

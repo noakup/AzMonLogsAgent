@@ -1,0 +1,18 @@
+[
+  {
+    "LogicalServerName": "chgettyscanaryeasttest",
+    "SubscriptionId": "845c8e99-1acb-444d-b815-5975cbc12ac3",
+    "ResourceGroup": "synapseworkspace-managedrg-f620de46-da56-40e6-bce1-ee02e640e61b",
+    "time": "2020-10-16T22:46:08.2391946Z",
+    "resourceId": "/SUBSCRIPTIONS/845C8E99-1ACB-444D-B815-5975CBC12AC3/RESOURCEGROUPS/CHGETTYS/PROVIDERS/MICROSOFT.SYNAPSE/WORKSPACES/CHGETTYSCANARYEASTTEST/SQLPOOLS/PERFINSTANCE",
+    "category": "Waits",
+    "operationName": "WaitsEvent",
+    "properties": {
+      "SessionId": "SID3435",
+      "RequestId": "QID15886",
+      "State": "Requested",
+      "Priority": -1,
+      "ResourceType": "Shared-xlargerc"
+    }
+  }
+]

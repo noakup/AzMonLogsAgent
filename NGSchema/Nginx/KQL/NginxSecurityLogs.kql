@@ -1,0 +1,4 @@
+NGXSecurityLogs
+| where FilePath == "/var/log/nginx/security.log"
+| sort by TimeGenerated asc
+| take 100

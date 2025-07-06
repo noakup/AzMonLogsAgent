@@ -1,0 +1,5 @@
+ACSCallSummary
+// Get the distinct combinations of CorrelationId, CallDuration
+| distinct CorrelationId, CallDuration
+// Calculate average and percentiles (50%, 90%, and 99%) of call durations (in seconds)
+| summarize avg(CallDuration), percentiles(CallDuration, 50, 90, 99)

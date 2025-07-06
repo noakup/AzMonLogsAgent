@@ -1,0 +1,21 @@
+[
+    {
+        "resourceId": "/SUBSCRIPTIONS/54BEA8A5-78DB-4B41-AF39-9E2A11B29561/RESOURCEGROUPS/TEST-RG/PROVIDERS/MICROSOFT.APP/MANAGEDENVIRONMENTS/TEST-LOG",
+        "properties": {
+            "ContainerId": "f27bf54efb5d4a02811c7825aebb05bf",
+            "Log": "info: Microsoft.Hosting.Lifetime[0]",
+            "EnvironmentName": "test-session-pool-54bea8a5-78db-4b41-af39-9e2a11b29561-test-rg-20241231101603",
+            "SessionPoolName": "test-session-pool",
+            "SessionIdentifier": "test-identifier",
+            "Stream": "stdout",
+            "ContainerImage": "mcr.microsoft.com/dotnet/samples:aspnetapp",
+            "ContainerGroupName": "4fa280c8-db9d-4244-958a-6a26dcfe078b",
+            "ContainerGroupId": "4fa280c8-db9d-4244-958a-6a26dcfe078b",
+            "ContainerName": "sessionlog"
+        },
+        "category": "AppEnvSessionConsoleLogs",
+        "time": "2024-12-30T06:54:39.7280658Z",
+        "operationName": "Microsoft.App/managedEnvironments/WRITE",
+        "location": "eastus"
+    }
+]

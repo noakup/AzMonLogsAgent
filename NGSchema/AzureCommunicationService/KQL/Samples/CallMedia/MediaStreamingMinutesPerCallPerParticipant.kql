@@ -1,0 +1,15 @@
+// Get total number of minutes of streams recorded per participant in each call. This applies only to the unmixed MediaStreaming cases.
+// For Media Streaming, Streams would be defined as and calculated per call as follows:
+//  - Unmixed MediaStreaming: Total number of minutes streamed in each session between a start request and stop request/call-end/error.
+//      or joining and leaving events per participant in that session.
+//      eg: In a single call,
+//          if streaming session (1) was 10 minutes participant (a) and (b) were in that session;
+//          if streaming session (2) was 05 minutes participant (b) and (c) were in that session;
+//          if streaming session (3) was 07 minutes participant (a), (b) and (c) were in that session;
+//          then the total minutes per participant would be: 
+//              participant (a) = 17 minutes,
+//              participant (b) = 22 minutes,
+//              participant (c) = 12 minutes
+ACSCallAutomationStreamingUsage
+| where StreamingModality == "AudioStreamingUnmixed"
+| summarize TotalMinutesStreamedPerParticipant = sum(StreamingDurationInMs)/60000 by CallConnectionId, ParticipantId 

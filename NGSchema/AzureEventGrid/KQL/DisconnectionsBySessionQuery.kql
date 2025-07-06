@@ -1,0 +1,2 @@
+EGNMqttDisconnections
+| summarize count() by SessionName

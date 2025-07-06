@@ -1,0 +1,30 @@
+[
+    {
+        "TimeGenerated": "2022-05-10T05:25:21.7376293Z",
+        "Location": "eastus2euap",
+        "OperationName": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/score/action",
+        "Method": "GET",
+        "Path": "\/score",
+        "AzureMLWorkspaceId": "d1a068cc-cd23-4066-8dbc-bf32d850583d",
+        "AzureMLWorkspaceName": "frontdoor-workspace-1",
+        "EndpointName": "frontdoor-eastus2useuap",
+        "DeploymentName": "blue",
+        "Protocol": "HTTP\/1.1",
+        "ResponseCode": "200",
+        "ResponseCodeReason": "via_upstream",
+        "ModelStatusCode": "",
+        "ModelStatusReason": "-",
+        "RequestPayloadSize": "0",
+        "ResponsePayloadSize": "2",
+        "UserAgent": "-",
+        "XRequestId": "cd8fd46e-ae77-44ad-87e9-a7873528ef8f",
+        "XMSClientRequestId": "-",
+        "TotalDurationMs": "13",
+        "RequestDurationMs": "0",
+        "ResponseDurationMs": "13",
+        "RequestThrottlingDelayMs": "",
+        "ResponseThrottlingDelayMs": "",
+        "AuthType": "AMLToken",
+        "IdentityData": "cd8fd46e-ae77-44ad-87e9-a7873528ef8f"
+    }
+]

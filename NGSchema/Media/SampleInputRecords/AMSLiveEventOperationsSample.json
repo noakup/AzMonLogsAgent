@@ -1,0 +1,38 @@
+[
+    {
+        "time": "2022-10-11T06:02:13.4730825Z",
+        "resourceId": "/SUBSCRIPTIONS/00000000-0000-0000-0000-000000000001/RESOURCEGROUPS/CONTOSORG/PROVIDERS/MICROSOFT.MEDIA/MEDIASERVICES/CONTOSOMEDIA/LIVEEVENTS/CONTOSOLIVE",
+        "operationName": "MICROSOFT.MEDIA/MEDIASERVICES/LIVEEVENTS/INGESTBEGIN",
+        "category": "LiveEventState",
+        "level": "Informational",
+        "location": "westcentralus",
+        "properties": {"liveEventName":"CONTOSOLIVE","streamName":"1234","remoteIP":"10.0.0.xxx","remotePort":"35091"}
+    },
+    {
+        "time": "2022-10-11T06:02:19.8229491Z",
+        "resourceId": "/SUBSCRIPTIONS/00000000-0000-0000-0000-000000000001/RESOURCEGROUPS/CONTOSORG/PROVIDERS/MICROSOFT.MEDIA/MEDIASERVICES/CONTOSOMEDIA/LIVEEVENTS/CONTOSOLIVE",
+        "operationName": "MICROSOFT.MEDIA/MEDIASERVICES/LIVEEVENTS/STREAMINFO",
+        "category": "LiveEventState",
+        "level": "Informational",
+        "location": "westcentralus",
+        "properties": {"liveEventName":"CONTOSOLIVE","remoteIP":"10.0.0.xxx","remotePort":"35091","trackName":"audio_160000","trackType":"audio","bitrate":160000,"timestamp":66,"timescale":1000,"resolution":"n/a"}
+    },
+    {
+        "time": "2022-10-11T06:04:41.1375866Z",
+        "resourceId": "/SUBSCRIPTIONS/00000000-0000-0000-0000-000000000001/RESOURCEGROUPS/CONTOSORG/PROVIDERS/MICROSOFT.MEDIA/MEDIASERVICES/CONTOSOMEDIA/LIVEEVENTS/CONTOSOLIVE",
+        "operationName": "MICROSOFT.MEDIA/MEDIASERVICES/LIVEEVENTS/INGESTEND",
+        "category": "LiveEventState",
+        "level": "Informational",
+        "location": "westcentralus",
+        "properties": {"liveEventName":"CONTOSOLIVE","streamName":"1234","remoteIP":"10.0.0.xxx","remotePort":"35091","resultCode":"MPE_CLIENT_TERMINATED_SESSION"}
+    },
+    {
+        "time": "2022-10-11T06:07:01.0446756Z",
+        "resourceId": "/SUBSCRIPTIONS/00000000-0000-0000-0000-000000000001/RESOURCEGROUPS/CONTOSORG/PROVIDERS/MICROSOFT.MEDIA/MEDIASERVICES/CONTOSOMEDIA/LIVEEVENTS/CONTOSOLIVE",
+        "operationName": "MICROSOFT.MEDIA/MEDIASERVICES/LIVEEVENTS/INGESTDISCONTINUITY",
+        "category": "LiveEventState",
+        "level": "Warning",
+        "location": "westcentralus",
+        "properties": {"liveEventName":"CONTOSOLIVE","trackName":"audio","timestamp":156777,"discontinuityGap":12605}
+    }
+]

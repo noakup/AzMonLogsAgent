@@ -1,0 +1,35 @@
+[
+    { 
+        "time":"2023-04-12T14:21:35.0700920Z", 
+        "correlationId":"91c3369f-ca5c-40b0-a4ba-f5f4d93419f9",
+        "resourceId":"/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/ACS-DATALYTICS-SPGW-RG/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/ACS-DATALYTICS-ALLTELEMETRY", 
+        "operationName":"CallSurvey", 
+        "operationVersion":"0.0", 
+        "properties": 
+        {
+            "callId":"fcc87f7f-ce69-446f-b73f-b036051faea4",
+            "surveyId":"a6dd61c4-b924-4885-96a4-a991d4c09e8b",
+            "participantId":"91c3369f-ca5c-40b0-a4ba-f5f4d93419f9",
+            "overallCallIssues":"CallCannotJoin",
+            "audioIssues":"NoRemoteAudio",
+            "videoIssues":"NoVideoReceived",
+            "screenshareIssues":"StoppedUnexpectedly,DarkVideoReceived,CannotPresent",
+            "overallRatingScore":7,
+            "overallRatingScoreLowerBound":0,
+            "overallRatingScoreUpperBound":10,
+            "overallRatingScoreThreshold":5,
+            "audioRatingScore":6,
+            "audioRatingScoreLowerBound":0,
+            "audioRatingScoreUpperBound":10,
+            "audioRatingScoreThreshold":4,
+            "videoRatingScore":9,
+            "videoRatingScoreLowerBound":0,
+            "videoRatingScoreUpperBound":10,
+            "videoRatingScoreThreshold":7,
+            "screenshareRatingScore":2,
+            "screenshareRatingScoreLowerBound":0,
+            "screenshareRatingScoreUpperBound":10,
+            "screenshareRatingScoreThreshold":3
+        }
+    }
+]

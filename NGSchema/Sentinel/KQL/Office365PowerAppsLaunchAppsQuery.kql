@@ -1,0 +1,4 @@
+PowerAppsActivity
+| where EventOriginalType == "LaunchPowerApp"
+| extend Environment = tostring(AdditionalData.environmentName)
+| summarize count() by ActorName, TargetAppName, Environment

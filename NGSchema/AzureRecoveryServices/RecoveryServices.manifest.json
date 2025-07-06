@@ -1,0 +1,596 @@
+{
+  "type": "Microsoft.RecoveryServices/Vaults",
+  "displayName": "Recovery Services Vaults",
+  "description": "All tables related to Azure site recovery service.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Azure Site Recovery/Microsoft Azure Site Recovery Engineering",
+  "contactDL": "vijami@microsoft.com",
+  "relatedFunctions": [],
+  "relatedTables": [ "AzureActivity" ],
+  "tables": [
+    {
+      "workflowName": "AzureSiteRecoveryJobsWorkflow",
+      "transformName": "AzureSiteRecoveryJobs",
+      "physicalName": "ASRJobs",
+      "logicalName": "ASRJobs",
+      "isChangeColumnInternalNameAllowed": true,
+      "description": "This table contains records of Azure Site Recovery (ASR) jobs such as failover, test failover, reprotection etc., with key details for monitoring and diagnostics, such as the replicated item information, duration, status, description and so on. Whenever an ASR job is completed (i.e., succeeded or failed), a corresponding record for the job is sent to this table. You can view history of ASR jobs by querying this table over a larger time range, provided your workspace has the required retention configured.",
+      "categories": [ "audit" ],
+      "tags": {},
+      "properties": {},
+      "dataTypeId": "AZURERECOVERYSERVICES_AZURESITERECOVERYJOBS",
+      "artifactVersion": 13,
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) when the log was generated."
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The category of the log."
+        },
+        {
+          "name": "VaultType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Type of the vault associated with the ASR job."
+        },
+        {
+          "name": "VaultName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the vault associated with the ASR job."
+        },
+        {
+          "name": "OperationName",
+          "description": "Type of ASR job, for example, Test failover.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Status",
+          "description": "Status of the ASR job.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "CorrelationId",
+          "description": "Correlation ID associated with the ASR job for debugging purposes.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDescription",
+          "description": "Result of the ASR job.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DurationMs",
+          "description": "Duration of the ASR job.",
+          "type": "Int",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "StartTime",
+          "description": "Start time of the ASR job.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "EndTime",
+          "description": "End time of the ASR job.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceFriendlyName",
+          "description": "Friendly name of the resource on which the ASR job was executed.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Version",
+          "description": "The API version.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceResourceId",
+          "description": "ARM ID of the resource on which the ASR job was executed.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceResourceGroup",
+          "description": "Resource Group of the source.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Type of resource on which the ASR job was executed."
+        },
+        {
+          "name": "ReplicatedItemFriendlyName",
+          "description": "Friendly name of replicated item associated with the ASR job (if applicable).",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ReplicatedItemId",
+          "description": "ARM ID of the replicated item associated with the ASR job (if applicable).",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ReplicationScenario",
+          "description": "Field used to identify whether the replication is being done for an Azure resource or an on-premises resource.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ReplicatedItemUniqueId",
+          "description": "Unique ID of the replicated item associated with the ASR job (if applicable).",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "PolicyUniqueId",
+          "description": "Unique ID of the replication policy applied to the replicated item (if applicable).",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "PolicyId",
+          "description": "ARM ID of the replication policy applied to the replicated item (if applicable).",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "PolicyFriendlyName",
+          "description": "Friendly name of the replication policy applied to the replicated item (if applicable).",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "VaultLocation",
+          "description": "Location of the vault associated with the ASR job.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "JobUniqueId",
+          "description": "Unique ID of the ASR job.",
+          "type": "String",
+          "isDefaultDisplay": true
+        }
+      ],
+      "transformFilePath": "KQL/AzureSiteRecoveryJobsTransform.kql",
+      "sampleInputRecordsFilePath": "SampleInputRecords/AzureSiteRecoveryJobsSample.json"
+    },
+    {
+      "name": "ASRReplicatedItems",
+      "description": "This table contains details of Azure Site Recovery (ASR) replicated items, such as associated vault, policy, replication health, failover readiness. etc. Data is pushed once a day to this table for all replicated items, to provide the latest information for each item.",
+      "categories": [ "audit" ],
+      "tags": {},
+      "properties": {},
+      "dataTypeId": "AZURERECOVERYSERVICES_ASRREPLICATEDITEMS",
+      "artifactVersion": 12,
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) when the log was generated."
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The category of the log."
+        },
+        {
+          "name": "VaultType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Type of the vault associated with the replicated item."
+        },
+        {
+          "name": "VaultName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the vault associated with the replicated item."
+        },
+        {
+          "name": "OperationName",
+          "description": "The name of the operation.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ReplicationHealthErrors",
+          "description": "List of issues that might be affecting the recovery point generation for the replicated item.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RecoveryRegion",
+          "description": "Target region to which the resource is replicated.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "MultiVMGroupId",
+          "description": "For scenarios where multi-VM consistency feature is enabled for replicated VMs, this field specifies the ID of the multi-VM group associated with the replicated VM.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "LastSuccessfulTestFailoverTime",
+          "description": "Time of the last successful faliover performed on the replicated item.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "LastHeartbeat",
+          "description": "Time at which the ASR agent associated with the replicated item last made a call to the ASR service. Useful for debugging error scenarios where you wish to identify the time at which issues started arising.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ReplicationStatus",
+          "description": "Status of replication for the ASR replicated item.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "FailoverReadiness",
+          "description": "Denotes whether there are any configuration issues that could affect the failover operation success for the ASR replicated item.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DatasourceFriendlyName",
+          "description": "Friendly name of the datasource being replicated.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DatasourceUniqueId",
+          "description": "Unique ID of the datasource being replicated.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "PrimaryFabricName",
+          "description": "Represents the source region of the replicated item. By default, the value is the name of the source region, however if you have specified a custom name for the primary fabric while enabling replication, then that custom name shows up under this field.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RecoveryFabricName",
+          "description": "Represents the target region of the replicated item. By default, the value is the name of the target region, however if you have specified a custom name for the recovery fabric while enabling replication, then that custom name shows up under this field.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "PrimaryFabricType",
+          "description": "Fabric type associated with the source region of the replicated item. Depending on whether the replicated item is an Azure VM, Hyper-V VM or VMWare VM, the value for this field varies.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RecoveryFabricType",
+          "description": "Fabric type associated with the target region of the replicated item. Depending on whether the replicated item is an Azure VM, Hyper-V VM or VMWare VM, the value for this field varies.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ProtectionInfo",
+          "description": "Protection status of the replicated item.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ActiveLocation",
+          "description": "Current active location for the replicated item. If the item is in failed over state, the active location will be the secondary (target) region. Otherwise, it will be the primary region.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "PolicyFriendlyName",
+          "description": "Friendly name of the replication policy applied to the replicated item.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OSFamily",
+          "description": "OS family of the resource being replicated.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "IRProgressPercentage",
+          "description": "Progress percentage of the initial replication phase for the replicated item.",
+          "type": "Int",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DatasourceType",
+          "description": "ARM type of the resource configured for replication.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "LastRpoCalculatedTime",
+          "description": "Time at which the RPO was last calculated by the ASR service for the replicated item.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Version",
+          "description": "The API version.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ReplicatedItemId",
+          "description": "ARM ID of the replicated item.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ReplicatedItemUniqueId",
+          "description": "Unique ID of the replicated item.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceResourceId",
+          "description": "ARM ID of the datasource being replicated.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "PolicyUniqueId",
+          "description": "Unique ID of the replication policy applied for the replicated item.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "PolicyId",
+          "description": "ARM ID of the replication policy applied to the replicated item.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ReplicatedItemFriendlyName",
+          "description": "Friendly name of the resource being replicated.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "VaultLocation",
+          "description": "Location of the vault associated with the replicated item.",
+          "type": "String",
+          "isDefaultDisplay": true
+        }
+      ],
+      "transformFilePath": "KQL/AzureSiteRecoveryReplicatedItemsTransform.kql",
+      "sampleInputRecordsFilePath": "SampleInputRecords/AzureSiteRecoveryReplicatedItemsSample.json"
+    },
+    {
+      "name": "AzureBackupOperations",
+      "description": "This table contains details of Azure Backup operations.",
+      "categories": [ "audit" ],
+      "tags": {},
+      "properties": {},
+      "dataTypeId": "AZURERECOVERYSERVICES_AZUREBACKUPOPERATIONS",
+      "artifactVersion": 13,
+      "isResourceCentric": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) when the log was generated."
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Category of the log, for example, AzureBackupOperations."
+        },
+        {
+          "name": "OperationName",
+          "description": "High-level name of the action that is logged to this table, for example, DataOperations.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+		{
+          "name": "OperationType",
+          "description": "Type of the Azure Backup operation executed, for example, stop backup with delete data, modify policy, change passphrase.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationStartTime",
+          "description": "The start time of the operation.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SchemaVersion",
+          "description": "The schema version.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ExtendedProperties",
+          "description": "Additional properties applicable to the operation, for example, the associated backup item or server.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true
+        },
+		{
+          "name": "BackupManagementType",
+          "description": "Type of workload associated with the operation, for example, DPM, Azure Backup Server, Azure Backup Agent (MAB).",
+          "type": "String",
+          "isDefaultDisplay": true
+        }
+      ],
+      "transformFilePath": "KQL/AzureBackupOperationsTransform.kql",
+      "sampleInputRecordsFilePath": "SampleInputRecords/AzureBackupOperationsSample.json"
+    }
+  ],
+  "functions": [
+   {
+      "id": "b65a317e-7513-4379-b5fc-a467d3daa1d9",
+      "displayName": "_AzureSiteRecovery_GetJobs",
+	  "name": "_AzureSiteRecovery_GetJobs",
+      "description": "Returns a list of all site recovery and failover related jobs that were triggered in a specified time range, along with detailed information about each job, such as job status, job duration etc.",
+      "parameters": "RangeStart:datetime = datetime(null), RangeEnd:datetime = datetime(null), VaultSubscriptionList:string=\"*\", VaultLocationList:string=\"*\", VaultList:string=\"*\", VaultTypeList:string=\"*\", DatasourceTypeList:string=\"*\",ReplicatedItemName:string=\"*\",JobStatusList:string=\"*\",JobOperationList:string=\"*\"",
+      "bodyFilePath": "KQL/AzureSiteRecovery_GetJobs.kql",
+      "relatedTables" : ["ASRJobs"],
+      "categories" : ["management"],
+      "solutions": [ "LogManagement" ]
+    },
+	{
+      "id": "29112523-50d8-4bb9-931f-47b8b3da558f",
+      "displayName": "_AzureSiteRecovery_GetReplicatedItems",
+	  "name": "_AzureSiteRecovery_GetReplicatedItems",
+      "description": "Returns the list of replicated items that are associated with your Recovery Services vaults, along with detailed information about each replicated item, such as replication status, failover readiness etc.",
+      "parameters": "RangeStart:datetime = datetime(null), RangeEnd:datetime = datetime(null), VaultSubscriptionList:string=\"*\", VaultLocationList:string=\"*\", VaultList:string=\"*\", VaultTypeList:string=\"*\", DatasourceTypeList:string=\"*\",ReplicatedItemName:string=\"*\"",
+      "bodyFilePath": "KQL/AzureSiteRecovery_GetReplicatedItems.kql",
+      "relatedTables" : ["ASRReplicatedItems"],
+      "categories" : ["management"],
+      "solutions": [ "LogManagement" ]
+    }
+  ],
+  "queries": [
+    {
+      "id": "d7328548-c02f-4461-a86d-ddea98534a3c",
+      "displayName": "Get replication health status history",
+      "description": "Get replication health status history for a virtual machine.",
+      "bodyFilePath": "KQL/GetReplicationHealthStatusHistoryQuery.kql",
+      "categories": [ "audit" ],
+      "relatedTables": [ "ASRReplicatedItems" ],
+      "properties": {
+        "ExampleQuery": true
+      }
+    },
+    {
+      "id": "8ae09b10-bba7-4059-a179-4dd802f9dd28",
+      "displayName": "Get all test failover jobs run",
+      "description": "Get all test failover jobs run for your ASR protected items to verify if recoverability is being tested regularly for all your important resources.",
+      "bodyFilePath": "KQL/GetTestFailoverJobsQuery.kql",
+      "categories": [ "audit" ],
+      "relatedTables": [ "ASRJobs" ],
+      "properties": {
+        "ExampleQuery": true
+      }
+    },
+    {
+      "id": "4e376b4a-24d9-4110-9640-4c427e80af43",
+      "displayName": "Get all backup operations",
+      "description": "Get all backup operations for change passphrase.",
+      "bodyFilePath": "KQL/GetBackupOperationsQuery.kql",
+      "categories": [ "audit" ],
+      "relatedTables": [ "AzureBackupOperations" ],
+      "properties": {
+        "ExampleQuery": true
+      }
+    }
+  ]
+}

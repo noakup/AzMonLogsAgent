@@ -1,0 +1,5 @@
+source
+| project
+ExtractedTime = todatetime(substring(tostring(Field1), 0, 24)),
+Message = tostring(Field1)
+| extend TimeGenerated = todatetime(now())

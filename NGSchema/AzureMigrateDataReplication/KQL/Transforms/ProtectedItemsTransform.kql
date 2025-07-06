@@ -1,0 +1,21 @@
+source
+| extend properties = parse_json(properties)
+| project
+    TimeGenerated = todatetime(['time']),
+    OperationName = operationName,
+    Category = category,
+    CorrelationId = tostring(properties.correlationId),
+    ProviderId = tostring(properties.providerId),
+    PolicyName = tostring(properties.policyName),
+    ReplicationExtensionName = tostring(properties.replicationExtensionName),
+    SourceFabricProviderId = tostring(properties.sourceFabricProviderId),
+    TargetFabricProviderId = tostring(properties.targetFabricProviderId),
+    FabricAgentId = tostring(properties.fabricAgentId),
+    TargetFabricAgentId = tostring(properties.targetFabricAgentId),
+    FabricObjectId = tostring(properties.fabricObjectId),
+    FabricObjectName = tostring(properties.fabricObjectName),
+    FabricId = tostring(properties.fabricId),
+    TargetFabricId = tostring(properties.targetFabricId),
+    ProtectionState = tostring(properties.protectionState),
+    LastSuccessfulPlannedFailoverTime = todatetime(properties.lastSuccessfulPlannedFailoverTime),
+    ReplicationHealth = tostring(properties.replicationHealth)

@@ -1,0 +1,1405 @@
+{
+    "type": "Microsoft.DBForPostgreSQL/flexibleServers",
+    "displayName": "Azure Database for PostgreSQL Flexible Servers",
+    "description": "All tables related to Azure Database for PostgreSQL Flexible Servers.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Azure Database for PostgreSQL - Flexible Server / PostgreSQL - DRI",
+    "contactDL": "FlexPGEngr@service.microsoft.com",
+    "relatedTables": [
+        "AzureActivity",
+        "AzureDiagnostics",
+        "AzureMetrics"
+    ],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "PGSQLPgStatActivitySessions",
+            "description": "Session's data collected from PostgreSQL pg_stat_activity system view of an Azure Database for PostgreSQL Flexible Server. Contains one row per connection referred here as a backend and the data is collected at an interval of 5-minutes.",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "MICROSOFTORCASBREADTHSERVERS_POSTGRESQLFLEXSESSIONS",
+            "intelligencePacks": [
+                "LogManagement"
+            ],
+            "isResourceCentric": true,
+            "tableState": "Validation",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "LogicalServerName",
+                    "type": "String"
+                },
+                {
+                    "name": "ReplicaRole",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "Kql/Transforms/transformPGSQLPgStatActivitySessions.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "LogicalServerName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Logical name of the instance."
+                },
+                {
+                    "name": "ReplicaRole",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Replica role example. Primary or secondary."
+                },
+                {
+                    "name": "DatabaseId",
+                    "description": "ID (OID) of the database this backend is connected to.",
+                    "type": "Int",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DatabaseName",
+                    "description": "Name of the database this backend is connected to.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ProcessId",
+                    "description": "Process ID (PID) of this backend.",
+                    "type": "Int",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserId",
+                    "description": "ID (OID) of the user logged into this backend.",
+                    "type": "Int",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ApplicationName",
+                    "description": "Name of the application that is connected to this backend.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ClientIpAddress",
+                    "description": "IP address of the client connected to this backend. If this field is empty, it indicates either that the client is connected via a Unix socket on the server machine or that this is an internal process such as autovacuum. The last octet of the IP is obfuscated.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "State",
+                    "description": "State of this backend at the collection time.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "WaitEventType",
+                    "description": "The type of event for which the backend is waiting, if any, otherwise empty string.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "WaitEvent",
+                    "description": "Wait event name if backend is currently waiting, otherwise empty string.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "BackendStartTime",
+                    "description": "Time when this process was started. For client backends, this is the time the client connected to the server.",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TransactionStartTime",
+                    "description": "Time when this process' current transaction was started, or empty if no transaction is active.",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "QueryStartTime",
+                    "description": "Time when the currently active query was started, or if state is not active, when the last query was started.",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "StateChangeTime",
+                    "description": "Time when the state was last changed.",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "CollectionTime",
+                    "description": "The collection time indicating the time when the information was collected.",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TransactionId",
+                    "description": "Top-level transaction identifier of this backend, if any.",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OldestTransactionId",
+                    "description": "The oldest transaction ID that a backend is currently seeing.",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "BackendType",
+                    "description": "Type of current backend.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Location",
+                    "description": "Location of Azure Database for PostgreSQL Flexible server.",
+                    "type": "String",
+                    "isDefaultDisplay": false
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/samplePGSQLPgStatActivitySessions.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/sampleOutPGSQLPgStatActivitySessions.json"
+        },
+        {
+            "name": "PGSQLDbTransactionsStats",
+            "description": "Remaining transactions and multixact IDs for each database of an Azure Database for PostgreSQL Flexible Server.",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "MICROSOFTORCASBREADTHSERVERS_POSTGRESQLFLEXDATABASEXACTS",
+            "intelligencePacks": [
+                "LogManagement"
+            ],
+            "isResourceCentric": true,
+            "tableState": "Validation",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "LogTarget",
+                    "type": "String"
+                },
+                {
+                    "name": "LogLevel",
+                    "type": "Int"
+                },
+                {
+                    "name": "LogType",
+                    "type": "String"
+                },
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "LogicalServerName",
+                    "type": "String"
+                },
+                {
+                    "name": "ReplicaRole",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "Kql/Transforms/transformPGSQLDbTransactionsStats.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "LogicalServerName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Logical name of the instance."
+                },
+                {
+                    "name": "ReplicaRole",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Replica role example. Primary or secondary."
+                },
+                {
+                    "name": "DatabaseName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Name of the database."
+                },
+                {
+                    "name": "UserId",
+                    "type": "Int",
+                    "isDefaultDisplay": true,
+                    "description": "Owner of the database, usually the user who created it."
+                },
+                {
+                    "name": "ConnectionsLimit",
+                    "type": "Int",
+                    "isDefaultDisplay": true,
+                    "description": "Maximum number of concurrent connections that can be made to this database, -1 means no limit."
+                },
+                {
+                    "name": "MinMultixactId",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "All multixact IDs before this one have been replaced with a transaction ID in this database."
+                },
+                {
+                    "name": "MinMultixactIdAge",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Age in transactions of multixact ID in this database."
+                },
+                {
+                    "name": "TransactionIdFrozen",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "All transaction IDs before this one have been replaced with a permanent ('frozen') transaction ID in this database."
+                },
+                {
+                    "name": "TransactionIdFrozenAge",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Age in transactions of TransactionIdFrozen in this database."
+                },
+                {
+                    "name": "VacuumFreezeMinAge",
+                    "type": "Int",
+                    "isDefaultDisplay": true,
+                    "description": "Value of the parameter vacuum_freeze_min_age at the collection time."
+                },
+                {
+                    "name": "AutovacuumFreezeMaxAge",
+                    "type": "Int",
+                    "isDefaultDisplay": true,
+                    "description": "Value of the parameter autovacuum_freeze_max_age at the collection time."
+                },
+                {
+                    "name": "RemainingTransactionIds",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Remaining transaction IDs in this database."
+                },
+                {
+                    "name": "RemainingTransactionIdsTillEmergencyAV",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Remaining transaction IDs in this database till emergency autovacuum is triggered."
+                },
+                {
+                    "name": "RemainingTransactionIdsTillWraparound",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Remaining transaction IDs in this database till wraparound protection will be triggered."
+                },
+                {
+                    "name": "VacuumMultixactFreezeMinAge",
+                    "type": "Int",
+                    "isDefaultDisplay": true,
+                    "description": "Value of the parameter vacuum_multixact_freeze_min_age at the collection time."
+                },
+                {
+                    "name": "AutovacuumMultixactFreezeMaxAge",
+                    "type": "Int",
+                    "isDefaultDisplay": true,
+                    "description": "Value of the parameter autovacuum_multixact_freeze_max_age at the collection time."
+                },
+                {
+                    "name": "RemainingMultixactIds",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Remaining multixact IDs in this database."
+                },
+                {
+                    "name": "RemainingMultixactIdsTillEmergencyAV",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Remaining multixact IDs in this database till emergency autovacuum is triggered."
+                },
+                {
+                    "name": "RemainingMultixactIdsTillWraparound",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Remaining multixact IDs in this database till wraparound protection will be triggered."
+                },
+                {
+                    "name": "Location",
+                    "description": "Location of Azure Database for PostgreSQL Flexible server.",
+                    "type": "String",
+                    "isDefaultDisplay": false
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/samplePGSQLDbTransactionsStats.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/sampleOutPGSQLDbTransactionsStats.json"
+        },
+        {
+            "name": "PGSQLQueryStoreRuntime",
+            "description": "Query Store runtime statistics related to query execution information of an Azure Database for PostgreSQL Flexible Server.",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "MICROSOFTORCASBREADTHSERVERS_POSTGRESQLFLEXQUERYSTORERUNTIME",
+            "intelligencePacks": [
+                "LogManagement"
+            ],
+            "isResourceCentric": true,
+            "tableState": "Validation",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "isChangeColumnInternalNameAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "LogicalServerName",
+                    "type": "String"
+                },
+                {
+                    "name": "ReplicaRole",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "Kql/Transforms/transformPGSQLQueryStoreRuntime.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "LogicalServerName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Logical name of the instance."
+                },
+                {
+                    "name": "ReplicaRole",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Replica role example. Primary or secondary."
+                },
+                {
+                    "name": "RuntimeStatsEntryId",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "ID of the runtime entry."
+                },
+                {
+                    "name": "UserId",
+                    "type": "Int",
+                    "isDefaultDisplay": true,
+                    "description": "ID (OID) of the user that executed the statement."
+                },
+                {
+                    "name": "DatabaseId",
+                    "type": "Int",
+                    "isDefaultDisplay": true,
+                    "description": "ID (OID) of database in which the statement was executed."
+                },
+                {
+                    "transformName": "QueryId",
+                    "physicalName": "QueryId_Internal",
+                    "logicalName": "QueryId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Unique query ID of the statement that is an internal hash code, computed from the statement's parse tree."
+                },
+                {
+                    "name": "PlanId",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "ID of the plan corresponding to this query if plan store is enabled, otherwise the field is empty."
+                },
+                {
+                    "name": "StartTime",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The start time corresponding to the time bucket for this entry. Queries are aggregated by time buckets."
+                },
+                {
+                    "name": "EndTime",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The end time corresponding to the time bucket for this entry. Queries are aggregated by time buckets."
+                },
+                {
+                    "name": "Calls",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Number of times the query executed within this time bucket."
+                },
+                {
+                    "name": "TotalExecDurationMs",
+                    "type": "Double",
+                    "isDefaultDisplay": true,
+                    "description": "Total query execution duration in milliseconds for all calls in this time bucket."
+                },
+                {
+                    "name": "MinExecDurationMs",
+                    "type": "Double",
+                    "isDefaultDisplay": true,
+                    "description": "Minimum query execution duration in milliseconds in this time bucket."
+                },
+                {
+                    "name": "MaxExecDurationMs",
+                    "type": "Double",
+                    "isDefaultDisplay": true,
+                    "description": "Maximum query execution duration in milliseconds in this time bucket."
+                },
+                {
+                    "name": "MeanExecDurationMs",
+                    "type": "Double",
+                    "isDefaultDisplay": true,
+                    "description": "Mean query execution duration in milliseconds in this time bucket."
+                },
+                {
+                    "name": "StdDevExecDurationMs",
+                    "type": "Double",
+                    "isDefaultDisplay": true,
+                    "description": "Standard deviation of the query execution duration time in milliseconds in this time bucket."
+                },
+                {
+                    "name": "Rows",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Total number of rows retrieved or affected by the statement for all calls in this time bucket."
+                },
+                {
+                    "name": "SharedBlksHit",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Total number of shared block cache hits by the statement for all calls in this time bucket."
+                },
+                {
+                    "name": "SharedBlksRead",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Total number of shared blocks read by the statement for all calls in this time bucket."
+                },
+                {
+                    "name": "SharedBlksDirtied",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Total number of shared blocks dirtied by the statement for all calls in this time bucket."
+                },
+                {
+                    "name": "SharedBlksWritten",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Total number of shared blocks written by the statement for all calls in this time bucket."
+                },
+                {
+                    "name": "LocalBlksHit",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Total number of local block cache hits by the statement for all calls in this time bucket."
+                },
+                {
+                    "name": "LocalBlksRead",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Total number of local blocks read by the statement for all calls in this time bucket."
+                },
+                {
+                    "name": "LocalBlksDirtied",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Total number of local blocks dirtied by the statement for all calls in this time bucket."
+                },
+                {
+                    "name": "LocalBlksWritten",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Total number of local blocks written by the statement for all calls in this time bucket."
+                },
+                {
+                    "name": "TempBlksRead",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Total number of temporary file blocks read by the statement for all calls in this time bucket."
+                },
+                {
+                    "name": "TempBlksWritten",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Total number of temporary file blocks written by the statement for all calls in this time bucket."
+                },
+                {
+                    "name": "BlkReadTime",
+                    "type": "Double",
+                    "isDefaultDisplay": true,
+                    "description": "Total time the statement spent reading blocks in milliseconds for all calls in this time bucket. Only available if track_io_timing is enabled, otherwise zero."
+                },
+                {
+                    "name": "BlkWriteTime",
+                    "type": "Double",
+                    "isDefaultDisplay": true,
+                    "description": "Total time the statement spent writing blocks in milliseconds for all calls in this time bucket. Only available if track_io_timing is enabled, otherwise zero."
+                },
+                {
+                    "name": "IsSystemQuery",
+                    "type": "Bool",
+                    "isDefaultDisplay": true,
+                    "description": "Boolean value indicating if the query is run by Azure managed system user."
+                },
+                {
+                    "name": "QueryType",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Indicates the query type of the statement. Possible values: select, update, insert, delete, utility, nothing, unknown."
+                },
+                {
+                    "name": "SearchPath",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Value of search_path set at the time the query was captured."
+                },
+                {
+                    "name": "SearchPathCaptureStatus",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Indicates the status of capturing the search_path."
+                },
+                {
+                    "name": "ParametersCaptureStatus",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Indicates the status of capturing parameters of a parameterized query."
+                },
+                {
+                    "name": "Location",
+                    "description": "Location of Azure Database for PostgreSQL Flexible server.",
+                    "type": "String",
+                    "isDefaultDisplay": false
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/samplePGSQLQueryStoreRuntime.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/sampleOutPGSQLQueryStoreRuntime.json"
+        },
+        {
+            "name": "PGSQLQueryStoreWaits",
+            "description": "Query Store wait statistics sampled of an Azure Database for PostgreSQL Flexible Server. Wait event types combine different wait events into buckets by similarity.",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "MICROSOFTORCASBREADTHSERVERS_POSTGRESQLFLEXQUERYSTOREWAITSTATS",
+            "intelligencePacks": [
+                "LogManagement"
+            ],
+            "isResourceCentric": true,
+            "tableState": "Validation",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "isChangeColumnInternalNameAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "LogicalServerName",
+                    "type": "String"
+                },
+                {
+                    "name": "ReplicaRole",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "Kql/Transforms/transformPGSQLQueryStoreWaits.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "LogicalServerName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Logical name of the instance."
+                },
+                {
+                    "name": "ReplicaRole",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Replica role example. Primary or secondary."
+                },
+                {
+                    "name": "UserId",
+                    "type": "Int",
+                    "isDefaultDisplay": true,
+                    "description": "ID (OID) of the user that executed the statement. 0 indicates it is a background worker or a system call."
+                },
+                {
+                    "name": "DatabaseId",
+                    "type": "Int",
+                    "isDefaultDisplay": true,
+                    "description": "ID (OID) of database in which the statement was executed. 0 indicates it is a background worker or a system call."
+                },
+                {
+                    "transformName": "QueryId",
+                    "physicalName": "QueryId_Internal",
+                    "logicalName": "QueryId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Unique query ID of the statement that is an internal hash code, computed from the statement's parse tree. 0 indicates it was a background worker or system call."
+                },
+                {
+                    "name": "StartTime",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The start time corresponding to the time bucket for this entry. Entries are aggregated by time buckets."
+                },
+                {
+                    "name": "EndTime",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The end time corresponding to the time bucket for this entry. Entries are aggregated by time buckets."
+                },
+                {
+                    "name": "EventType",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The PostgreSQL type of event for which the backend is waiting."
+                },
+                {
+                    "name": "Event",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The PostgreSQL wait event name if backend is currently waiting."
+                },
+                {
+                    "name": "Calls",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Number of the same event captured for this entry. Entries are aggregated by time buckets."
+                },
+                {
+                    "name": "Location",
+                    "description": "Location of Azure Database for PostgreSQL Flexible server.",
+                    "type": "String",
+                    "isDefaultDisplay": false
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/samplePGSQLQueryStoreWaits.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/sampleOutPGSQLQueryStoreWaits.json"
+        },
+        {
+            "name": "PGSQLAutovacuumStats",
+            "description": "Information related to autovacuum and schema level statistics of an Azure Database for PostgreSQL Flexible Servers.",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "MICROSOFTORCASBREADTHSERVERS_POSTGRESQLFLEXTABLESTATS",
+            "intelligencePacks": [
+                "LogManagement"
+            ],
+            "isResourceCentric": true,
+            "tableState": "Validation",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "LogicalServerName",
+                    "type": "String"
+                },
+                {
+                    "name": "ReplicaRole",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "Kql/Transforms/transformPGSQLAutovacuumStats.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "LogicalServerName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Logical name of the instance."
+                },
+                {
+                    "name": "ReplicaRole",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Replica role example. Primary or secondary."
+                },
+                {
+                    "name": "DatabaseName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Name of the database the schema belongs to."
+                },
+                {
+                    "name": "SchemaName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Name of the schema the statistics were collected from."
+                },
+                {
+                    "name": "LiveRowsCount",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Estimated number of live rows of all tables in this schema."
+                },
+                {
+                    "name": "DeadRowsCount",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Estimated number of dead rows of all tables in this schema."
+                },
+                {
+                    "name": "SeqentialScansCount",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Number of sequential scans initiated on all tables in this schema."
+                },
+                {
+                    "name": "RowsFromSeqentialScansCount",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Number of live rows fetched by sequential scans on all tables in this schema."
+                },
+                {
+                    "name": "IndexScansCount",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Number of index scans initiated on all tables in this schema."
+                },
+                {
+                    "name": "RowsFromIndexScansCount",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Number of live rows fetched by index scans on all tables in this schema."
+                },
+                {
+                    "name": "RowsInsertedCount",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Number of rows inserted in all tables in this schema."
+                },
+                {
+                    "name": "RowsUpdatedCount",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Number of rows updated from all tables in this schema (includes HOT updated rows)."
+                },
+                {
+                    "name": "RowsDeletedCount",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Number of rows deleted from all tables in this schema."
+                },
+                {
+                    "name": "RowsHotUpdatedCount",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Number of rows HOT updated from all tables in this schema (i.e., with no separate index update required)."
+                },
+                {
+                    "name": "ModificationsSinceAnalyzeCount",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Estimated number of rows modified from all tables since last analyzed of each individual table in this schema."
+                },
+                {
+                    "name": "VacuumCount",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Number of times tables have been manually vacuumed in this schema (not counting VACUUM FULL)."
+                },
+                {
+                    "name": "AutovacuumCount",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Number of times tables have been vacuumed by the autovacuum daemon in this schema."
+                },
+                {
+                    "name": "AnalyzeCount",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Number of times tables have been manually analyzed in this schema."
+                },
+                {
+                    "name": "AutoanalyzeCount",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Number of times tables have been analyzed by the autovacuum daemon in this schema."
+                },
+                {
+                    "name": "TablesCount",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Number of tables in this schema."
+                },
+                {
+                    "name": "TablesVacuumedCount",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Number of tables that were manually vacuumed in this schema."
+                },
+                {
+                    "name": "TablesAutovacuumedCount",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Number of tables that were vacuumed by the autovacuum daemon in this schema."
+                },
+                {
+                    "name": "TablesAnalyzedCount",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Number of tables that were manually analyzed in this schema."
+                },
+                {
+                    "name": "TablesAutoanalyzedCount",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Number of tables that were analyzed by the autovacuum daemon in this schema."
+                },
+                {
+                    "name": "Location",
+                    "description": "Location of Azure Database for PostgreSQL Flexible server.",
+                    "type": "String",
+                    "isDefaultDisplay": false
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/samplePGSQLAutovacuumStats.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/sampleOutPGSQLAutovacuumStats.json"
+        },
+        {
+            "name": "PGSQLServerLogs",
+            "description": "PostgreSQL Server logs of an Azure Database for PostgreSQL Flexible Server.",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 5,
+            "dataTypeId": "MICROSOFTORCASBREADTHSERVERS_POSTGRESQLLOGS",
+            "intelligencePacks": [
+                "LogManagement"
+            ],
+            "isResourceCentric": true,
+            "tableState": "Validation",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "LogicalServerName",
+                    "type": "String"
+                },
+                {
+                    "name": "ReplicaRole",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "Kql/Transforms/transformPGSQLServerLogs.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "LogicalServerName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Logical name of the instance."
+                },
+                {
+                    "name": "ReplicaRole",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Replica role example. Primary or secondary."
+                },
+                {
+                    "name": "ProcessId",
+                    "type": "Int",
+                    "isDefaultDisplay": true,
+                    "description": "Process ID of the PostgreSQL backend."
+                },
+                {
+                    "name": "ErrorLevel",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Logging level, example: LOG, ERROR, NOTICE."
+                },
+                {
+                    "name": "SqlErrorCode",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "PostgreSQL Error code that follows the SQL standard's conventions for SQLSTATE codes."
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Primary log message."
+                },
+                {
+                    "name": "Detail",
+                    "type": "String",
+                    "isDefaultDisplay": false,
+                    "description": "Detail log message (if applicable)."
+                },
+                {
+                    "name": "DetailLog",
+                    "type": "String",
+                    "isDefaultDisplay": false,
+                    "description": "Extended detail log message (if applicable)."
+                },
+                {
+                    "name": "Hint",
+                    "type": "String",
+                    "isDefaultDisplay": false,
+                    "description": "Message hint (if applicable)."
+                },
+                {
+                    "name": "Query",
+                    "type": "String",
+                    "isDefaultDisplay": false,
+                    "description": "Internal query that led to the error (if applicable)."
+                },
+                {
+                    "name": "Context",
+                    "type": "String",
+                    "isDefaultDisplay": false,
+                    "description": "Error context (if applicable)."
+                },
+                {
+                    "name": "Statement",
+                    "type": "String",
+                    "isDefaultDisplay": false,
+                    "description": "Query string (if applicable)."
+                },
+                {
+                    "name": "SchemaName",
+                    "type": "String",
+                    "isDefaultDisplay": false,
+                    "description": "Name of the schema (if applicable)."
+                },
+                {
+                    "name": "TableName",
+                    "type": "String",
+                    "isDefaultDisplay": false,
+                    "description": "Name of the table (if applicable)."
+                },
+                {
+                    "name": "ColumnName",
+                    "type": "String",
+                    "isDefaultDisplay": false,
+                    "description": "Name of the column (if applicable)."
+                },
+                {
+                    "name": "DatatypeName",
+                    "type": "String",
+                    "isDefaultDisplay": false,
+                    "description": "Name of the datatype (if applicable)."
+                },
+                {
+                    "name": "ConstraintName",
+                    "type": "String",
+                    "isDefaultDisplay": false,
+                    "description": "Name of the constraint (if applicable)."
+                },
+                {
+                    "name": "BackendType",
+                    "description": "Type of current backend. Available for PostgreSQL 14 and later.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Location",
+                    "description": "Location of Azure Database for PostgreSQL Flexible server.",
+                    "type": "String",
+                    "isDefaultDisplay": false
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/samplePGSQLServerLogs.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/sampleOutPGSQLServerLogs.json"
+        },
+        {
+            "workflowName": "FSPGPGBouncerWorkflow",
+            "transformName": "FSPGPGBouncer",
+            "physicalName": "PGSQLPgBouncer",
+            "logicalName": "PGSQLPgBouncer",
+            "description": "PgBouncer logs of an Azure Database for PostgreSQL Flexible Server.",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 4,
+            "dataTypeId": "MICROSOFTORCASBREADTHSERVERS_POSTGRESQLFLEXPGBOUNCER",
+            "intelligencePacks": [
+                "LogManagement"
+            ],
+            "isResourceCentric": true,
+            "tableState": "Validation",
+            "isTroubleshootingAllowed": false,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "log",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "source",
+                    "type": "String"
+                },
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "Kql/Transforms/transformPGSQLPgBouncer.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "LogLevel",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Log level, Error or Informational."
+                },
+                {
+                    "name": "Message",
+                    "description": "Message from PG Bouncer log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Location",
+                    "description": "Location of PG server.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/samplePGSQLPgBouncer.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/sampleOutPGSQLPgBouncer.json"
+        }
+    ],
+    "queries": [],
+    "functions": [
+        {
+            "id": "bd5b5b75-dad2-40f2-b2f1-a58a0b41106d",
+            "name": "_PGSQL_GetPostgresServerLogs",
+            "displayName": "_PGSQL_GetPostgresServerLogs",
+            "parameters": "TimeStart:datetime = datetime(null), TimeEnd:datetime = datetime(null), ResourceId:string = \"\"",
+            "description": "Returns the PostgreSQL server logs for the specified time range and resource ID. If no time range is specified, the function returns the last 24 hours of logs. If no resource ID is specified, it returns logs for all PostgreSQL servers.",
+            "bodyFilePath": "KQL/Functions/PGSQLGetServerLogs.kql",
+            "categories": [
+                "resources",
+                "audit"
+            ],
+            "relatedTables": [
+                "PGSQLServerLogs"
+            ],
+            "solutions" : [
+                "AzureResources"
+            ]
+        },
+        {
+            "id": "7625213e-e8e7-433c-9f64-fdc984ad7ee0",
+            "name": "_PGSQL_GetQueryStoreRuntime",
+            "displayName": "_PGSQL_GetQueryStoreRuntime",
+            "parameters": "TimeStart:datetime = datetime(null), TimeEnd:datetime = datetime(null), ResourceId:string = \"\"",
+            "description": "Returns the Query Store runtime statistics for the specified time range and resource ID. If no time range is specified, the function returns the last 24 hours of logs. If no resource ID is specified, it returns logs for all PostgreSQL servers.",
+            "bodyFilePath": "KQL/Functions/PGSQLGetQueryStoreRuntime.kql",
+            "categories": [
+                "resources",
+                "audit"
+            ],
+            "relatedTables": [
+                "PGSQLQueryStoreRuntime"
+            ],
+            "solutions" : [
+                "AzureResources"
+            ]
+        },
+        {
+            "id": "cd3f45c0-2b70-42d9-bbad-cbbe7f3ee715",
+            "name": "_PGSQL_GetQueryStoreWaits",
+            "displayName": "_PGSQL_GetQueryStoreWaits",
+            "parameters": "TimeStart:datetime = datetime(null), TimeEnd:datetime = datetime(null), ResourceId:string = \"\"",
+            "description": "Returns the Query Store waits statistics for the specified time range and resource ID. If no time range is specified, the function returns the last 24 hours of logs. If no resource ID is specified, it returns logs for all PostgreSQL servers.",
+            "bodyFilePath": "KQL/Functions/PGSQLGetQueryStoreWaits.kql",
+            "categories": [
+                "resources",
+                "audit"
+            ],
+            "relatedTables": [
+                "PGSQLQueryStoreWaits"
+            ],
+            "solutions" : [
+                "AzureResources"
+            ]
+        },
+        {
+            "id": "86401b72-78ca-46bd-a1ef-2f63d9230a5c",
+            "name": "_PGSQL_GetPgStatActivitySessions",
+            "displayName": "_PGSQL_GetPgStatActivitySessions",
+            "parameters": "TimeStart:datetime = datetime(null), TimeEnd:datetime = datetime(null), ResourceId:string = \"\"",
+            "description": "Returns the session's data collected from PostgreSQL pg_stat_activity system view for the specified time range and resource ID. If no time range is specified, the function returns the last 24 hours of logs. If no resource ID is specified, it returns logs for all PostgreSQL servers.",
+            "bodyFilePath": "KQL/Functions/PGSQLGetPgStatActivitySessions.kql",
+            "categories": [
+                "resources",
+                "audit"
+            ],
+            "relatedTables": [
+                "PGSQLPgStatActivitySessions"
+            ],
+            "solutions" : [
+                "AzureResources"
+            ]
+        },
+        {
+            "id": "d6dad52a-5669-4cb4-bbbe-d5d1e4f9435d",
+            "name": "_PGSQL_GetPgBouncerLogs",
+            "displayName": "_PGSQL_GetPgBouncerLogs",
+            "parameters": "TimeStart:datetime = datetime(null), TimeEnd:datetime = datetime(null), ResourceId:string = \"\"",
+            "description": "Returns the PgBouncer logs for the specified time range and resource ID. If no time range is specified, the function returns the last 24 hours of logs. If no resource ID is specified, it returns logs for all PostgreSQL servers.",
+            "bodyFilePath": "KQL/Functions/PGSQLGetPgBouncerLogs.kql",
+            "categories": [
+                "resources",
+                "audit"
+            ],
+            "relatedTables": [
+                "PGSQLPgBouncer"
+            ],
+            "solutions" : [
+                "AzureResources"
+            ]
+        },
+        {
+            "id": "2d003852-e92b-49b3-b12e-164332b0edab",
+            "name": "_PGSQL_GetDbTransactionsStats",
+            "displayName": "_PGSQL_GetDbTransactionsStats",
+            "parameters": "TimeStart:datetime = datetime(null), TimeEnd:datetime = datetime(null), ResourceId:string = \"\"",
+            "description": "Returns the remaining transactions and multixact IDs for the specified time range and resource ID. If no time range is specified, the function returns the last 24 hours of logs. If no resource ID is specified, it returns logs for all PostgreSQL servers.",
+            "bodyFilePath": "KQL/Functions/PGSQLGetDbTransactionsStats.kql",
+            "categories": [
+                "resources",
+                "audit"
+            ],
+            "relatedTables": [
+                "PGSQLDbTransactionsStats"
+            ],
+            "solutions" : [
+                "AzureResources"
+            ]
+        },
+        {
+            "id": "f7a72ca9-df71-4cfb-811a-ea70469f3e3f",
+            "name": "_PGSQL_GetAutovacuumStats",
+            "displayName": "_PGSQL_GetAutovacuumStats",
+            "parameters": "TimeStart:datetime = datetime(null), TimeEnd:datetime = datetime(null), ResourceId:string = \"\"",
+            "description": "Returns the autovacuum and schema level statistics for the specified time range and resource ID. If no time range is specified, the function returns the last 24 hours of logs. If no resource ID is specified, it returns logs for all PostgreSQL servers.",
+            "bodyFilePath": "KQL/Functions/PGSQLGetAutovacuumStats.kql",
+            "categories": [
+                "resources",
+                "audit"
+            ],
+            "relatedTables": [
+                "PGSQLAutovacuumStats"
+            ],
+            "solutions" : [
+                "AzureResources"
+            ]
+        }
+    ]
+}

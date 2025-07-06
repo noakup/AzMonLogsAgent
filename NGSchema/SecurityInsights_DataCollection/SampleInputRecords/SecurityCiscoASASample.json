@@ -1,0 +1,12 @@
+[
+  {
+    "ident": "%ASA-2-106001",
+    "Timestamp": "2020-03-11T20:25:11.228Z",
+    "EventTime": "2020-03-11T20:25:11.208Z",
+    "Host": "MyHostName",
+    "HostIP": "127.0.0.1",
+    "Facility": "local0",
+    "Severity": "alert",
+    "Message": "%ASA-2-106001: Inbound TCP connection denied from 183.60.23.164/58098 to 131.107.193.171/23 flags SYN on interface inet"
+  }
+]

@@ -1,0 +1,273 @@
+{
+    "type": "Microsoft.ConnectedVehicle/platformAccounts",
+    "displayName": "Microsoft Connected Vehicle Platform",
+    "description": "Microsoft.ConnectedVehicle diagnostic log export, LogAnalytics tables",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Azure Mobility - MCVP Service/Core Platform",
+    "relatedTables": [
+        "AzureActivity",
+        "AzureMetrics" 
+    ],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "MCVPOperationLogs",
+            "description": "The MCVP Azure monitor logs. This table will include logs for vehicle provision, connection and activities sending command and receiving telemetry messages.",
+            "categories": [
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "MICROSOFTCONNECTEDVEHICLE_LOGS",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": false,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "String"
+                },
+                {
+                    "name": "message",
+                    "type": "String"
+                },
+                {
+                    "name": "exception",
+                    "type": "String"
+                },
+                {
+                    "name": "traceContext",
+                    "type": "String"
+                },
+                {
+                    "name": "severityText",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "Kql/McvpLogsTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "Timestamp (in UTC) when the log was created."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation name where the log was created."
+                },
+                {
+                    "name": "VehicleId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Unique vehicle identifier."
+                },
+                {
+                    "name": "DeviceName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Device friendly name."
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The general log message."
+                },
+                {
+                    "name": "TraceId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "An identifier for distributed tracing through a system (W3C TraceContext)."
+                },
+                {
+                    "name": "SpanId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "An identifier of the request as known by the caller."
+                },
+                {
+                    "name": "SeverityText",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The log severity."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/McvpLogsSampleInputRecords.json"
+        },
+        {
+            "name": "MCVPAuditLogs",
+            "description": "The MCVP audit logs. This table will include audit logs for MCVP service transactions.",
+            "categories": [
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "MICROSOFTCONNECTEDVEHICLE_AUDIT",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": false,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "String"
+                },
+                {
+                    "name": "operationCategories",
+                    "type": "String"
+                },
+                {
+                    "name": "operationCategoryDescription",
+                    "type": "String"
+                },
+                {
+                    "name": "operationResult",
+                    "type": "String"
+                },
+                {
+                    "name": "operationResultDescription",
+                    "type": "String"
+                },
+                {
+                    "name": "operationAccessLevel",
+                    "type": "String"
+                },
+                {
+                    "name": "callerIdentities",
+                    "type": "String"
+                },
+                {
+                    "name": "callerIpAddress",
+                    "type": "String"
+                },
+                {
+                    "name": "callerAccessLevels",
+                    "type": "String"
+                },
+                {
+                    "name": "traceContext",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "Kql/McvpAuditTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "Timestamp (in UTC) when the audit log was created."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation request name where the audit log was created."
+                },
+                {
+                    "name": "OperationCategories",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation request categories like Provision, Connection or Claims."
+                },
+                {
+                    "name": "OperationCategoryDescription",
+                    "type": "String",
+                    "isDefaultDisplay": false,
+                    "description": "The operation request category general description."
+                },
+                {
+                    "name": "OperationResult",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation request result - Success or Fail."
+                },
+                {
+                    "name": "OperationResultDescription",
+                    "type": "String",
+                    "isDefaultDisplay": false,
+                    "description": "The operation request result description. The column will contain information if the OperationResult value is other than Success or Fail."
+                },
+                {
+                    "name": "OperationAccessLevel",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation access level of the request - Administrator, Writer or Reader."
+                },
+                {
+                    "name": "CallerIdentities",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The caller identity, user alias or email address."
+                },
+                {
+                    "name": "CallerIpAddress",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "IP",
+                    "description": "IPV4 caller ip address."
+                },
+                {
+                    "name": "CallerAccessLevels",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The caller access level - Administrator, Writer or Reader."
+                },
+                {
+                    "name": "TraceId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "An identifier for distributed tracing through a system (W3C TraceContext)."
+                },
+                {
+                    "name": "SpanId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "An identifier of the request as known by the caller."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/McvpAuditSampleInputRecords.json"
+        }
+    ],
+    "functions": [],
+    "queries": []
+}

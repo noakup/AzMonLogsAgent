@@ -1,0 +1,27 @@
+[
+    {
+        "time": "12/29/2021 9:55:34 PM",
+        "resourceId": "/SUBSCRIPTIONS/8C39D797-D54A-4A41-9ADE-2EEA7C88F549/RESOURCEGROUPS/MAGUERRRES0/PROVIDERS/MICROSOFT.STORAGECACHE/CACHES/MAGUERR-DEV0-HPCCACHE01",
+        "location": "eastus",
+        "operationName": "UpgradeEvent",
+        "category": "AscUpgradeEvent",
+        "properties": {
+            "CurrentFirmwareVersion": "11.0.0",
+            "AvailableFirmwareVersion": "12.0.0",
+            "Description": "There is a new version of firmware available"
+        },
+        "correlationId": "d9c5f734-7602-4362-a93c-26a62abd89b4"
+    },
+    {
+        "time": "12/29/2021 10:07:35 PM",
+        "resourceId": "/SUBSCRIPTIONS/8C39D797-D54A-4A41-9ADE-2EEA7C88F549/RESOURCEGROUPS/MAGUERRRES0/PROVIDERS/MICROSOFT.STORAGECACHE/CACHES/MAGUERR-DEV0-HPCCACHE01",
+        "location": "eastus",
+        "operationName": "UpgradeEvent",
+        "category": "AscUpgradeEvent",
+        "properties": {
+            "CurrentFirmwareVersion": "12.0.0",
+            "Description": "The firmware has been upgraded"
+        },
+        "correlationId": "315d9f85-741e-40c4-9c4c-8d296002c678"
+    }
+]

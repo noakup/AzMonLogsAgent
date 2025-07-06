@@ -1,0 +1,54 @@
+[
+  {
+    "time": "2021-09-20T11:47:36.510360751Z",
+    "resourceId": "/SUBSCRIPTIONS/5464F7EE3875-12C9-C654-F81D-CE1909AD/RESOURCEGROUPS/sample-INSTANCES/PROVIDERS/MICROSOFT.AGFOODPLATFORM/FARMBEATS/sample-EUS-1",
+    "category": "JobProcessedLogs",
+    "operationName": "Microsoft.AgFoodPlatform/ingestionJobs/satelliteDataIngestionJobs/processed",
+    "callerIpAddress": "",
+    "Level": "Information",
+    "identity": {
+      "claims": {
+        "TenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+        "ApplicationId": "39d176c5-91b6-454b-854d-55813c17d92d",
+        "ObjectId": "9002b50e-dc98-445e-a865-72dce38ecafd"
+      }
+    },
+    "properties": {
+      "farmerId": "sample-farmer",
+      "jobId": "test-satellite123",
+      "jobRunType": "OneTime",
+      "initiatedBy": "User"
+    },
+    "resultSignature": "",
+    "resultType": "Succeeded",
+    "resultDescription": "Satellite data is available for 73 days from provider in the requested date range. Successfully fetched data for 73 days.",
+    "location": "eastus",
+    "correlationId": "4c13e2bc-5416-4347-a7d7-426d61bc7f0c",
+    "durationMs": 988
+  },
+  {
+    "time": "2021-09-22T03:46:14.067861106Z",
+    "resourceId": "/SUBSCRIPTIONS/5464F7EE3875-12C9-C654-F81D-CE1909AD/RESOURCEGROUPS/sample-INSTANCES/PROVIDERS/MICROSOFT.AGFOODPLATFORM/FARMBEATS/sample-EUS-1",
+    "category": "JobProcessedLogs",
+    "operationName": "Microsoft.AgFoodPlatform/ingestionJobs/weatherDataIngestionJobs/processed",
+    "Level": "Information",
+    "identity": {
+      "claims": {
+        "TenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+        "ApplicationId": "39d176c5-91b6-454b-854d-55813c17d92d",
+        "ObjectId": "9002b50e-dc98-445e-a865-72dce38ecafd"
+      }
+    },
+    "properties": {
+      "farmerId": "sample-farmer",
+      "jobId": "sample-weatr-job3",
+      "jobRunType": "OneTime",
+      "initiatedBy": "User"
+    },
+    "resultType": "Failed",
+    "resultDescription": "Weather data job failed with status code 'Forbidden' and error 'Authentication failed'.",
+    "location": "eastus",
+    "correlationId": "d522928d-d2ca-4e58-a933-208009470f9d",
+    "durationMs": 24139.3755
+  }
+]

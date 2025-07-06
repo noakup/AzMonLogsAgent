@@ -1,0 +1,15 @@
+source
+| project
+    AccountEnabled = tobool(properties.accountEnabled),
+    AppId = tostring(properties.appId),
+    DisplayName = tostring(properties.displayName),
+    Id = tostring(properties.id),
+    IsProcessing = tobool(properties.isProcessing),
+    RiskDetail = tostring(properties.riskDetail),
+    RiskLastUpdatedDateTime = todatetime(properties.riskLastUpdatedDateTime),
+    RiskLevel = tostring(properties.riskLevel),
+    RiskState = tostring(properties.riskState),
+    ServicePrincipalType = tostring(properties.servicePrincipalType),
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    CorrelationId = correlationId

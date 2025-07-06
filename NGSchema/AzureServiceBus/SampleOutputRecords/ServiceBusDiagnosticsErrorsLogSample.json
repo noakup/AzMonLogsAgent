@@ -1,0 +1,16 @@
+[
+  {
+    "TimeGenerated": "2021-01-01T8:40:06:0000Z",
+    "ActivityId": "<activity id>",
+    "ActivityName": "<Operation name>",
+    "ResourceId": "/SUBSCRIPTIONS/xxx/RESOURCEGROUPS/<Resource Group Name>/PROVIDERS/MICROSOFT.SERVICEBUS/NAMESPACES/<Service Bus namespace>/servicebus/<service bus name>",
+    "Namespace Name": "<Namespace Name>",
+    "EntityName": "Entity name",
+    "EntityType": "Entity Type",
+    "Time": "1/1/2021 8:40:06 PM +00:00",
+    "OperationResult": "ClientError | ServerBusy | QuotaExceeded",
+    "ErrorCount": 1,
+    "ErrorMessage": "Entity not found",
+    "Provider": "servicebus"
+  }
+]

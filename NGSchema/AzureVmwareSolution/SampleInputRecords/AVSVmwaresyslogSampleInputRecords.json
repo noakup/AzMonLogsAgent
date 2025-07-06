@@ -1,0 +1,73 @@
+[   
+    {
+        "time": "2025-03-31T08:51:42.2234790Z",
+        "resourceId": "/SUBSCRIPTIONS/97EACE9E-DA69-4CEB-A21A-04B400E34259/RESOURCEGROUPS/MATUDOBN9/PROVIDERS/MICROSOFT.AVS/PRIVATECLOUDS/MATUDOSDDC9",
+        "operationName": "Microsoft.AVS/vcenter/vmwaresyslog",
+        "category": "vmwaresyslog",
+        "properties": {"severity":"info","facility":"local1","HostName":"hcx","AppName":"hcx-app","message":"2025-03-31T08:51:42.2234790Z hcx hcx-app [TopologyService_SvcThread-72905] [LEVEL=INFO] c.v.v.h.vsphere.UpdateInventoryJob 10.225.200.2: Time taken to process 7 raw updates: 9707 ms (includes wait time as well, if any.). Version: 71466 Truncated: false."}
+    },  
+    {  
+        "resourceId": "/SUBSCRIPTIONS/1D4A7BC7-6378-420F-900B-D1C7F8BE28B7/RESOURCEGROUPS/FCT-CT-PROD-CHI21-FULL-818/PROVIDERS/MICROSOFT.AVS/PRIVATECLOUDS/FCT-CT-P01-CHI21-FULL-818", 
+        "operationName": "Microsoft.AVS/vcenter/vmwaresyslog",
+        "category": "vmwaresyslog", 
+        "properties": "{\"message\": \"2022-07-19T20:51:46.258Z esx17-r02.p01.northcentralus.avs.azure.com Rhttpproxy: verbose rhttpproxy[2099199] [Originator@6876 sub=Proxy Req 01130] Resolved endpoint : [N7Vmacore4Http16LocalServiceSpecE:0x0000001085c5c150] _serverNamespace = /sdk action = Allow _port = 8307\", \"severity\": \"debug\", \"facility\": \"local4\" }"
+    },
+    {  
+        "resourceId": "/SUBSCRIPTIONS/1D4A7BC7-6378-420F-900B-D1C7F8BE28B7/RESOURCEGROUPS/FCT-CT-PROD-CHI21-FULL-818/PROVIDERS/MICROSOFT.AVS/PRIVATECLOUDS/FCT-CT-P01-CHI21-FULL-818", 
+        "operationName": "Microsoft.AVS/vcenter/vmwaresyslog",
+        "category": "vmwaresyslog", 
+        "properties": {
+            "message": "2022-07-19T20:51:46.258Z esx17-r02.p01.northcentralus.avs.azure.com Rhttpproxy: verbose rhttpproxy[2099199] [Originator@6876 sub=Proxy Req 01130] Resolved endpoint : [N7Vmacore4Http16LocalServiceSpecE:0x0000001085c5c150] _serverNamespace = /sdk action = Allow _port = 8307", 
+            "severity": "debug", 
+            "facility": "local4"
+        }
+    },
+    { 
+        "resourceId": "/SUBSCRIPTIONS/1D4A7BC7-6378-420F-900B-D1C7F8BE28B7/RESOURCEGROUPS/FCT-CT-PROD-CHI21-FULL-818/PROVIDERS/MICROSOFT.AVS/PRIVATECLOUDS/FCT-CT-P01-CHI21-FULL-818", 
+        "operationName": "Microsoft.AVS/vcenter/vmwaresyslog", 
+        "category": "vmwaresyslog", 
+        "properties": "{\"message\": \"1 2022-07-19T20:51:46.408093+00:00 TNT29-EVM02 dnsmasq_42869e9b-27f0-43a7-84a0-615800abd383 22 PLACEHOLDER -  Failed DNS Query. record_type: 2, address: , error_type: TIMEOUT, client_ip: 10.0.112.62, forwarder_ip: 10.0.112.192, source_ip: 10.0.112.192, upstream_server_ip: 1.1.1.1, time_spent: 29, error_message: None,\", \"severity\": \"warn\", \"facility\": \"daemon\" }"
+    },
+    { 
+        "resourceId": "/SUBSCRIPTIONS/1D4A7BC7-6378-420F-900B-D1C7F8BE28B7/RESOURCEGROUPS/FCT-CT-PROD-CHI21-FULL-818/PROVIDERS/MICROSOFT.AVS/PRIVATECLOUDS/FCT-CT-P01-CHI21-FULL-818", 
+        "operationName": "Microsoft.AVS/vcenter/vmwaresyslog", 
+        "category": "vmwaresyslog", 
+        "properties": {
+            "message": "1 2022-07-19T20:51:46.408093+00:00 TNT29-EVM02 dnsmasq_42869e9b-27f0-43a7-84a0-615800abd383 22 PLACEHOLDER -  Failed DNS Query. record_type: 2, address: , error_type: TIMEOUT, client_ip: 10.0.112.62, forwarder_ip: 10.0.112.192, source_ip: 10.0.112.192, upstream_server_ip: 1.1.1.1, time_spent: 29, error_message: None,", 
+            "severity": "warn", 
+            "facility": "daemon"
+        }
+    },
+    { 
+        "resourceId": "/SUBSCRIPTIONS/1D4A7BC7-6378-420F-900B-D1C7F8BE28B7/RESOURCEGROUPS/FCT-CT-PROD-CHI21-FULL-818/PROVIDERS/MICROSOFT.AVS/PRIVATECLOUDS/FCT-CT-P01-CHI21-FULL-818", 
+        "operationName": "Microsoft.AVS/vcenter/vmwaresyslog", 
+        "category": "vmwaresyslog", 
+        "properties": "{\"message\": \"1 2022-07-19T20:51:46.408093+00:00 TNT29-EVM02 dnsmasq_42869e9b-27f0-43a7-84a0-615800abd383 - - -  Failed DNS Query. record_type: 2, address: , error_type: TIMEOUT, client_ip: 10.0.112.62, forwarder_ip: 10.0.112.192, source_ip: 10.0.112.192, upstream_server_ip: 1.1.1.1, time_spent: 29, error_message: None,\", \"severity\": \"warn\", \"facility\": \"daemon\"}"
+    },
+    { 
+        "resourceId": "/SUBSCRIPTIONS/1D4A7BC7-6378-420F-900B-D1C7F8BE28B7/RESOURCEGROUPS/FCT-CT-PROD-CHI21-FULL-818/PROVIDERS/MICROSOFT.AVS/PRIVATECLOUDS/FCT-CT-P01-CHI21-FULL-818", 
+        "operationName": "Microsoft.AVS/vcenter/vmwaresyslog", 
+        "category": "vmwaresyslog", 
+        "properties": {
+            "message": "1 2022-07-19T20:51:46.408093+00:00 TNT29-EVM02 dnsmasq_42869e9b-27f0-43a7-84a0-615800abd383 - - -  Failed DNS Query. record_type: 2, address: , error_type: TIMEOUT, client_ip: 10.0.112.62, forwarder_ip: 10.0.112.192, source_ip: 10.0.112.192, upstream_server_ip: 1.1.1.1, time_spent: 29, error_message: None,", 
+            "severity": "warn", 
+            "facility": "daemon"
+        }
+    },
+    { 
+        "resourceId": "/SUBSCRIPTIONS/1D4A7BC7-6378-420F-900B-D1C7F8BE28B7/RESOURCEGROUPS/FCT-CT-PROD-CHI21-FULL-818/PROVIDERS/MICROSOFT.AVS/PRIVATECLOUDS/FCT-CT-P01-CHI21-FULL-818", 
+        "operationName": "Microsoft.AVS/vcenter/vmwaresyslog", 
+        "category": "vmwaresyslog", 
+        "properties": "{\"message\": \"19 Jul 2022 vc eam-access - - - 127.0.0.1 10.0.112.2 - - [19/Jul/2022:20:58:14 +0000] [tomcat-http--40] \"POST /eam/sdk HTTP/1.1\" 200 271 [Processing time 4 msec] \"Go-http-client/1.1\"\", \"severity\": \"info\", \"facility\": \"local0\"}"
+    },
+    { 
+        "resourceId": "/SUBSCRIPTIONS/1D4A7BC7-6378-420F-900B-D1C7F8BE28B7/RESOURCEGROUPS/FCT-CT-PROD-CHI21-FULL-818/PROVIDERS/MICROSOFT.AVS/PRIVATECLOUDS/FCT-CT-P01-CHI21-FULL-818", 
+        "operationName": "Microsoft.AVS/vcenter/vmwaresyslog", 
+        "category": "vmwaresyslog", 
+        "properties": {
+            "message": "19 Jul 2022 vc eam-access - - - 127.0.0.1 10.0.112.2 - - [19/Jul/2022:20:58:14 +0000] [tomcat-http--40] \"POST /eam/sdk HTTP/1.1\" 200 271 [Processing time 4 msec] \"Go-http-client/1.1\"", 
+            "severity": "info", 
+            "facility": "local0"
+        }
+    }
+]

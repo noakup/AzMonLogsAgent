@@ -1,0 +1,4 @@
+ALBHealthEvent
+| where TimeGenerated > ago(1d)
+| where HealthEventType == "SnatPortExhaustion"
+| summarize arg_max(TimeGenerated, *) by LoadBalancerResourceId, FrontendIP

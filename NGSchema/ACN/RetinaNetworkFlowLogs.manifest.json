@@ -1,0 +1,321 @@
+{
+  "type": "Microsoft.ContainerService/managedClusters",
+  "displayName": "Kubernetes Services",
+  "description": "Tables used by Azure Monitor for Containers.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "CloudNet/ContainerNetworking",
+  "relatedTables": [],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "name": "RetinaNetworkFlowLogs",
+      "description": "Network flow logs for Azure Container Networking Services.",
+      "categories": ["container"],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 1,
+      "dataTypeId": "RETINA_NETWORK_FLOW_LOGS",
+      "intelligencePacks": [],
+      "isResourceCentric": true,
+      "isTroubleshootingAllowed": true,
+      "tableState": "Production",
+      "input": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime"
+        },
+        {
+          "name": "UUID",
+          "type": "String"
+        },
+        {
+          "name": "Verdict",
+          "type": "String"
+        },
+        {
+          "name": "DropReason",
+          "type": "String"
+        },
+        {
+          "name": "IP",
+          "type": "Dynamic"
+        },
+        {
+          "name": "Layer4",
+          "type": "Dynamic"
+        },
+        {
+          "name": "SourceIdentity",
+          "type": "Int"
+        },
+        {
+          "name": "SourceClusterName",
+          "type": "String"
+        },
+        {
+          "name": "SourceNamespace",
+          "type": "String"
+        },
+        {
+          "name": "SourcePodName",
+          "type": "String"
+        },
+        {
+          "name": "SourceWorkloads",
+          "type": "Dynamic"
+        },
+        {
+          "name": "DestinationIdentity",
+          "type": "Int"
+        },
+        {
+          "name": "DestinationClusterName",
+          "type": "String"
+        },
+        {
+          "name": "DestinationNamespace",
+          "type": "String"
+        },
+        {
+          "name": "DestinationPodName",
+          "type": "String"
+        },
+        {
+          "name": "DestinationWorkloads",
+          "type": "Dynamic"
+        },
+        {
+          "name": "FlowType",
+          "type": "String"
+        },
+        {
+          "name": "NodeName",
+          "type": "String"
+        },
+        {
+          "name": "Layer7",
+          "type": "Dynamic"
+        },
+        {
+          "name": "Reply",
+          "type": "Bool"
+        },
+        {
+          "name": "EventType",
+          "type": "Dynamic"
+        },
+        {
+          "name": "Service",
+          "type": "Dynamic"
+        },
+        {
+          "name": "TrafficDirection",
+          "type": "String"
+        },
+        {
+          "name": "TraceObservationPoint",
+          "type": "String"
+        },
+        {
+          "name": "PacketsSent",
+          "type": "Int"
+        },
+        {
+          "name": "PacketsReceived",
+          "type": "Int"
+        },
+        {
+          "name": "Policies",
+          "type": "Dynamic"
+        },
+        {
+          "name": "AdditionalFlowData",
+          "type": "Dynamic"
+        }
+      ],
+			"transformFilePath": "KQL/RetinaNetworkFlowLogs.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "description": "The date and time the flow was recorded (flow.time)",
+          "type": "DateTime"
+        },
+        {
+          "name": "UUID",
+          "description": "The UUID of the flow (flow.uuid)",
+          "type": "String"
+        },
+        {
+          "name": "Verdict",
+          "description": "The verdict of the flow (e.g., FORWARDED, DROPPED) (flow.verdict)",
+          "type": "String"
+        },
+        {
+          "name": "DropReason",
+          "description": "The description of the drop reason if the verdict is DROPPED. (flow.drop_reason_desc)",
+          "type": "String"
+        },
+        {
+          "name": "IP",
+          "description": "The IP values of the flow. Including ip source, ip destination, ip is encrypted and ip version.",
+          "type": "Dynamic"
+        },
+        {
+          "name": "Layer4",
+          "description": "The layer 4 information of the flow such as the protocol, source port, destination port, and TCP flags.",
+          "type": "Dynamic"
+        },
+        {
+          "name": "SourceIdentity",
+          "description": "The security identity number for the source (flow.source.identity)",
+          "type": "Int"
+        },
+        {
+          "name": "SourceClusterName",
+          "description": "The name of the source cluster (flow.source.cluster_name)",
+          "type": "String"
+        },
+        {
+          "name": "SourceNamespace",
+          "description": "The namespace of the source (flow.source.namespace)",
+          "type": "String"
+        },
+        {
+          "name": "SourcePodName",
+          "description": "The name of the source pod (flow.source.pod_name)",
+          "type": "String"
+        },
+        {
+          "name": "SourceWorkloads",
+          "description": "Array of workloads associated with the source, including name and kind (flow.source.workloads)",
+          "type": "Dynamic"
+        },
+        {
+          "name": "DestinationIdentity",
+          "description": "Security identity number for the destination (flow.destination.identity)",
+          "type": "Int"
+        },
+        {
+          "name": "DestinationClusterName",
+          "description": "The name of the destination cluster (flow.destination.cluster_name)",
+          "type": "String"
+        },
+        {
+          "name": "DestinationNamespace",
+          "description": "The namespace of the destination (flow.destination.namespace)",
+          "type": "String"
+        },
+        {
+          "name": "DestinationPodName",
+          "description": "The name of the destination pod (flow.destination.pod_name)",
+          "type": "String"
+        },
+        {
+          "name": "DestinationWorkloads",
+          "description": "Array of workloads associated with the destination, including name and kind (flow.destination.workloads)",
+          "type": "Dynamic"
+        },
+        {
+          "name": "FlowType",
+          "description": "Type of the flow (e.g., L3_L4, L7 SOCK) (flow.Type)",
+          "type": "String"
+        },
+        {
+          "name": "NodeName",
+          "description": "Name of the node where the flow was captured (flow.node_name)",
+          "type": "String"
+        },
+        {
+          "name": "Layer7",
+          "description": "L7 flow type if Flow_Type is L7 (e.g., DNS, HTTP, Kafka) (flow.l7.type)",
+          "type": "Dynamic"
+        },
+        {
+          "name": "Reply",
+          "description": "Indicates if the flow is a reply (flow.is_reply.value)",
+          "type": "Bool"
+        },
+        {
+          "name": "EventType",
+          "description": "Event type details (flow.event_type).",
+          "type": "Dynamic"
+        },
+        {
+          "name": "Service",
+          "description": "Service details of the flow.",
+          "type": "Dynamic"
+        },
+        {
+          "name": "TrafficDirection",
+          "description": "Direction of the traffic (e.g., INGRESS, EGRESS) (flow.traffic_direction)",
+          "type": "String"
+        },
+        {
+          "name": "TraceObservationPoint",
+          "description": "Point of observation in the trace (e.g., TO_ENDPOINT) (flow.trace_observation_point)",
+          "type": "String"
+        },
+        {
+          "name": "PacketsSent",
+          "description": "Number of packets sent from the source to the destination since the last update.",
+          "type": "Int"
+        },
+        {
+          "name": "PacketsReceived",
+          "description": "Number of packets sent from the destination to the source since the last update.",
+          "type": "Int"
+        },
+        {
+          "name": "Policies",
+          "description": "Combined entry for all policies that allowed or denied ingress/egress (flow.egress_allowed_by, flow.ingress_allowed_by, flow.egress_denied_by, flow.ingress_denied_by)",
+          "type": "Dynamic"
+        },
+        {
+          "name": "AdditionalFlowData",
+          "description": "Additional flow data.",
+          "type": "Dynamic"
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/RetinaNetworkFlowLogsSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/RetinaNetworkFlowLogsSample.json"
+    }
+  ],
+  "queries": [
+    {
+      "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+      "displayName": "Dropped network low Logs",
+      "description": "Get all the network flow logs that were dropped.",
+      "bodyFilePath": "KQL/RetinaNetworkFlowLogsDropped.kql",
+      "categories": ["container"],
+      "relatedTables": ["RetinaNetworkFlowLogs"],
+      "tags": {
+        "Topic": ["Security", "Availability"]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "d3b07384-d9a0-4c9d-8f00-6e7a9e7a8b0d",
+      "displayName": "Top 10 network flow log metrics",
+      "description": "Get the network flow log metrics for the top 10 source and destination ips by total bytes sent and received.",
+      "bodyFilePath": "KQL/RetinaNetworkFlowLogsTopMetrics.kql",
+      "categories": ["container"],
+      "relatedTables": ["RetinaNetworkFlowLogs"],
+      "tags": {
+        "Topic": ["Security", "Availability"]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    }
+  ]
+}

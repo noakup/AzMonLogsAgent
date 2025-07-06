@@ -1,0 +1,8 @@
+PGSQLPgStatActivitySessions
+| where UserId != 10 and State !='idle' //exclude azure managed user and idle sessions
+| where BackendType =='client backend'
+| where isnotempty(DatabaseId) and DatabaseName !in('azure_sys','azure_maintenance')
+| extend QueryExecDurationMs = datetime_diff('millisecond',CollectionTime,QueryStartTime)
+| summarize MaxQueryExecDurationMs=max(QueryExecDurationMs),arg_max(LastSampledTime=TimeGenerated,lastState=State) by ProcessId,BackendStartTime,DatabaseName,UserId,ApplicationName,ClientIpAddress
+| order by MaxQueryExecDurationMs desc
+| take 100

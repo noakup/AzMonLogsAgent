@@ -1,0 +1,4 @@
+AFDWebApplicationFirewallLog 
+| where Action == "Block" 
+| summarize RequestCount = count() by ClientIp, UserAgent, RuleName, _ResourceId
+| top 100 by RequestCount  

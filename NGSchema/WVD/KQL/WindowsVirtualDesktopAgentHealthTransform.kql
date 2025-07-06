@@ -1,0 +1,22 @@
+source
+| extend propertiesTable = parse_json(properties)
+| extend parsedHealthChecks = parse_json(propertiesTable.SessionHostHealthCheckResult)
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    SessionHostName = tostring(propertiesTable.SessionHostName),
+    SessionHostResourceId = tostring(propertiesTable.SessionHostResourceId),
+    AgentVersion = tostring(propertiesTable.AgentVersion),
+    OSVersion = tostring(propertiesTable.OsVersion),
+    SxSStackVersion = tostring(propertiesTable.SxSStackVersion),
+    AllowNewSessions = tostring(propertiesTable.AllowNewSessions),
+    Status = tostring(propertiesTable.Status),
+    StatusTimeStamp = todatetime(propertiesTable.StatusTimeStamp),
+    LastHeartBeat = todatetime(propertiesTable.LastHeartBeat),
+    EndpointState = tostring(propertiesTable.EndpointState),
+    UpgradeState = tostring(propertiesTable.UpgradeState),
+    UpgradeErrorMsg = tostring(propertiesTable.UpgradeErrorMsg),
+    LastUpgradeTimeStamp = todatetime(propertiesTable.LastUpgradeTimeStamp),
+    SessionHostHealthCheckResult = parsedHealthChecks,
+    ActiveSessions = tostring(propertiesTable.ActiveSessions),
+    InactiveSessions = tostring(propertiesTable.InactiveSessions)

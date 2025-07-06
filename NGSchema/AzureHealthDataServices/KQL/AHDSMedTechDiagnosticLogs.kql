@@ -1,0 +1,9 @@
+source
+| extend resultTypeArray = split(resultType, ".")
+| extend numElementsInResultType = array_length(resultTypeArray)
+| extend logTypeExtracted = resultTypeArray[numElementsInResultType - 1]
+| project 
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    LogType = tostring(logTypeExtracted),
+    Message = resultDescription

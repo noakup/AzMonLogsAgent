@@ -1,0 +1,26 @@
+[
+    {
+        "operationName": "Microsoft.Kubernetes/connectedClusters/diagnosticLogs/Read",
+        "category": "guard",
+        "resourceId": "/SUBSCRIPTIONS/08CE8FA2-9E5E-4D66-AB08-C0C13F360144/RESOURCEGROUPS/MIKEKEESEY-TEST/PROVIDERS/MICROSOFT.KUBERNETES/CONNECTEDCLUSTERS/MIKEKEESEY-TEST",
+        "properties": {
+            "log": "I0110 23:44:47.323521       1 log.go:195] FLAG: --vmodule=\"\"\n",
+            "stream": "stderr",
+            "pod": "guard-5f8fffc689-wpzmh",
+            "containerID": "f70ed92fea7eb4c5020f80b92c7ec0062f3609f847abff7b7a7ee01c4cd1da2a"
+        },
+        "time": "2023-01-10T23:44:47.0000000Z"
+    },
+    {
+        "operationName": "Microsoft.Kubernetes/connectedClusters/diagnosticLogs/Read",
+        "category": "guard",
+        "resourceId": "/SUBSCRIPTIONS/08CE8FA2-9E5E-4D66-AB08-C0C13F360144/RESOURCEGROUPS/MIKEKEESEY-TEST/PROVIDERS/MICROSOFT.KUBERNETES/CONNECTEDCLUSTERS/MIKEKEESEY-TEST",
+        "properties": {
+            "log": "I0110 23:44:47.323872       1 server.go:170] setting up authz providers\n",
+            "stream": "stderr",
+            "pod": "guard-5f8fffc689-wpzmh",
+            "containerID": "f70ed92fea7eb4c5020f80b92c7ec0062f3609f847abff7b7a7ee01c4cd1da2a"
+        },
+        "time": "2023-01-10T23:44:47.0000000Z"
+    }
+]

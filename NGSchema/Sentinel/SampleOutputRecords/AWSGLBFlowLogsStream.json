@@ -1,0 +1,20 @@
+[
+  {
+    "TimeGenerated": "2025-06-10T03:24:35.000Z",
+    "Version": "2",
+    "AccountId": "072643944673",
+    "InterfaceId": "eni-0e08c7ffb192bce0f",
+    "SourceAddress": "-",
+    "DestinationAddress": "-",
+    "SourcePort": "-",
+    "DestinationPort": "-",
+    "Protocol": "-",
+    "Packets": "-",
+    "Bytes": "-",
+    "SStartTime": "2025-06-10T03:24:35.000Z",
+    "EndTime": "2025-06-10T03:24:35.000Z",
+    "Action": "-",
+    "LogStatus": "NODATA",
+    "LogType": "GLBFlowLogs"
+  }
+]

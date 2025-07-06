@@ -1,0 +1,97 @@
+[
+    {
+        "level": "Informational",
+        "time": "2023-05-09T15:58:30.100Z",
+        "resourceId": "/SUBSCRIPTIONS/50AD1522-5C2C-4D9A-A6C8-67C11ECB75B8/RESOURCEGROUPS/RG-ACS-QA/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/ACS-CALLAUTOMATION",
+        "correlationId": "2d60b354-284f-4e6b-8e3a-7ca938b31378",
+        "operationName": "StartCallRecording",
+        "operationVersion": "2023-01-15-preview",
+        "uri": "https://acs-recording-runner-us-r0.communication.azure.com/calling/recordings?api-version=2023-01-15-preview",
+        "resultType": "Succeeded",
+        "resultSignature": 200,
+        "durationMs": 130,
+        "callerIpAddress": "127.0.0.1",
+        "properties": {
+            "callConnectionId": "",
+            "serverCallId": "",
+            "sdkVersion": "",
+            "sdkType": ""
+        }
+    },
+    {
+        "level": "Informational",
+        "time": "2023-05-09T15:58:30.100Z",
+        "resourceId": "/SUBSCRIPTIONS/50AD1522-5C2C-4D9A-A6C8-67C11ECB75B8/RESOURCEGROUPS/RG-ACS-QA/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/ACS-CALLAUTOMATION",
+        "correlationId": "a999f996-b4e1-44a5-ac04-a59bdf887d97",
+        "operationName": "StopCallRecording",
+        "operationVersion": "2023-01-15-preview",
+        "uri": "https://acs-recording-runner-us-r0.communication.azure.com/calling/recordings/eyJQbGF0Zm9ybUVuZHBvaW50SWQiOiI0MjFmMTIwMC04MjhiLTRmZGItOTZjYi0xM2JjMDBhMDg4ODciLCJSZXNvdXJjZVNwZWNpZmljSWQiOiJhZGEzN2IzYi02N2M4LTQzOTQtYjFlOS1mMGZkNTAxZWIxYTEifQ?api-version=2023-01-15-preview",
+        "resultType": "Succeeded",
+        "resultSignature": 204,
+        "durationMs": 55,
+        "callerIpAddress": "127.0.0.1",
+        "properties": {
+            "callConnectionId": "421f1200-828b-4fdb-96cb-13bc00a08887",
+            "serverCallId": "aHR0cHM6Ly9hcGkuZmxpZ2h0cHJveHkuc2t5cGUuY29tL2FwaS92Mi9jcC94LWNvbnYtZXVuby0wMS5jb252LnNreXBlLmNvbS9jb252LzJvRGlYUXJtZ2tlLVBfMlhJcUZ5Rnc_aT0yJmU9NjM4MTg2NDk5MTYzNjExMzM1",
+            "sdkVersion": "1.0.0-alpha.20220829.1",
+            "sdkType": "dotnet"
+        }
+    },
+    {
+        "level":"Informational",
+        "time":"2023-05-09T15:58:30.100Z",
+        "resourceId": "/SUBSCRIPTIONS/50AD1522-5C2C-4D9A-A6C8-67C11ECB75B8/RESOURCEGROUPS/RG-ACS-QA/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/ACS-CALLAUTOMATION",
+        "correlationId":"a999f996-b4e1-44a5-ac04-a59bdf887d97",
+        "operationName":"PauseCallRecording",
+        "operationVersion":"2023-01-15-preview",
+        "uri":"https://acs-recording-runner-us-r0.communication.azure.com/calling/recordings/eyJQbGF0Zm9ybUVuZHBvaW50SWQiOiI0MjFmMTIwMC04MjhiLTRmZGItOTZjYi0xM2JjMDBhMDg4ODciLCJSZXNvdXJjZVNwZWNpZmljSWQiOiJhZGEzN2IzYi02N2M4LTQzOTQtYjFlOS1mMGZkNTAxZWIxYTEifQ:pause?api-version=2023-01-15-preview",
+        "resultType":"Succeeded",
+        "resultSignature":202,
+        "durationMs":1664,
+        "callerIpAddress":"97.113.67.31",
+        "properties": {
+            "callConnectionId": "421f1200-828b-4fdb-96cb-13bc00a08887",
+            "serverCallId": "aHR0cHM6Ly9hcGkuZmxpZ2h0cHJveHkuc2t5cGUuY29tL2FwaS92Mi9jcC94LWNvbnYtZXVuby0wMS5jb252LnNreXBlLmNvbS9jb252LzJvRGlYUXJtZ2tlLVBfMlhJcUZ5Rnc_aT0yJmU9NjM4MTg2NDk5MTYzNjExMzM1",
+            "sdkVersion": "1.0.0-alpha.20221012.1",
+            "sdkType": "dotnet"
+        }
+    },
+    {
+        "level":"Informational",
+        "time":"2023-05-09T15:58:30.100Z",
+        "resourceId": "/SUBSCRIPTIONS/50AD1522-5C2C-4D9A-A6C8-67C11ECB75B8/RESOURCEGROUPS/RG-ACS-QA/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/ACS-CALLAUTOMATION",
+        "correlationId":"a999f996-b4e1-44a5-ac04-a59bdf887d97",
+        "operationName":"ResumeCallRecording",
+        "operationVersion":"2023-01-15-preview",
+        "uri":"https://acs-recording-runner-us-r0.communication.azure.com/calling/recordings/eyJQbGF0Zm9ybUVuZHBvaW50SWQiOiI0MjFmMTIwMC04MjhiLTRmZGItOTZjYi0xM2JjMDBhMDg4ODciLCJSZXNvdXJjZVNwZWNpZmljSWQiOiJhZGEzN2IzYi02N2M4LTQzOTQtYjFlOS1mMGZkNTAxZWIxYTEifQ:resume?api-version=2023-01-15-preview",
+        "resultType":"Succeeded",
+        "resultSignature":202,
+        "durationMs":1664,
+        "callerIpAddress":"97.113.67.31",
+        "properties": {
+            "callConnectionId": "421f1200-828b-4fdb-96cb-13bc00a08887",
+            "serverCallId": "aHR0cHM6Ly9hcGkuZmxpZ2h0cHJveHkuc2t5cGUuY29tL2FwaS92Mi9jcC94LWNvbnYtZXVuby0wMS5jb252LnNreXBlLmNvbS9jb252LzJvRGlYUXJtZ2tlLVBfMlhJcUZ5Rnc_aT0yJmU9NjM4MTg2NDk5MTYzNjExMzM1",
+            "sdkVersion": "1.0.0-alpha.20221012.1",
+            "sdkType": "dotnet"
+        }
+    },
+    {
+        "level":"Informational",
+        "time":"2023-05-09T15:58:30.100Z",
+        "resourceId": "/SUBSCRIPTIONS/50AD1522-5C2C-4D9A-A6C8-67C11ECB75B8/RESOURCEGROUPS/RG-ACS-QA/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/ACS-CALLAUTOMATION",
+        "correlationId":"a999f996-b4e1-44a5-ac04-a59bdf887d97",
+        "operationName":"GetCallRecordingState",
+        "operationVersion":"2023-01-15-preview",
+        "uri":"https://pma-dev-v-moirf.plat-dev.skype.net/calling/recordings/d5596715-ab0b-4684-8ed8-575c250e4234?api-version=2023-01-15-preview",
+        "resultType":"Succeeded",
+        "resultSignature":200,
+        "durationMs":1664,
+        "callerIpAddress":"97.113.67.31",
+        "properties": {
+            "callConnectionId": "421f1200-828b-4fdb-96cb-13bc00a08887",
+            "serverCallId": "aHR0cHM6Ly9hcGkuZmxpZ2h0cHJveHkuc2t5cGUuY29tL2FwaS92Mi9jcC94LWNvbnYtZXVuby0wMS5jb252LnNreXBlLmNvbS9jb252LzJvRGlYUXJtZ2tlLVBfMlhJcUZ5Rnc_aT0yJmU9NjM4MTg2NDk5MTYzNjExMzM1",
+            "sdkVersion": "1.0.0-alpha.20221012.1",
+            "sdkType": "dotnet"
+        }
+    }
+]

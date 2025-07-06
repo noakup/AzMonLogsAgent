@@ -1,0 +1,17 @@
+[
+  {
+    "ExtractedTime": "2022-11-20T08:49:35.000Z",
+    "TimeGenerated": "2022-11-20T08:49:35.000Z",
+    "Message": "Example Event 1"
+  },
+  {
+    "ExtractedTime": "2022-11-20T08:49:36.000Z",
+    "TimeGenerated": "2022-11-20T08:49:36.000Z",
+    "Message": "Example Event 2"
+  },
+  {
+    "ExtractedTime": "2022-11-20T08:49:37.000Z",
+    "TimeGenerated": "2022-11-20T08:49:37.000Z",
+    "Message": "Example Event 3"
+  }
+]

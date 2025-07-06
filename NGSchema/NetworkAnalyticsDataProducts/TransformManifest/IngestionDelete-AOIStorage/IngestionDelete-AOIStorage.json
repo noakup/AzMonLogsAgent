@@ -1,0 +1,30 @@
+{
+    "name" : "IngestionDelete",
+    "description": "These are Audit logs related to deletion of files on the input storage account.",
+    "input": [
+        {
+            "name": "time",
+            "type": "String"
+        },
+        {
+            "name": "resourceId",
+            "type": "String"
+        },
+        {
+            "name": "location",
+            "type": "String"
+        },
+        {
+            "name": "operationName",
+            "type": "String"
+        },
+        {
+            "name": "category",
+            "type": "String"
+        },
+        {
+            "name": "properties",
+            "type": "Dynamic"
+        }
+    ]
+}

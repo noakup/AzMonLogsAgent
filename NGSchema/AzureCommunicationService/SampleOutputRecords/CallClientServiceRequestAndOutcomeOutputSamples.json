@@ -1,0 +1,38 @@
+[
+    {
+        "TimeGenerated": "2024-12-10T22:00:17.1659771Z",
+        "OperationName": "StartCall",
+        "Category": "ClientCallingOperationalLogRequest",
+        "CorrelationId": "75724f2c-ea6a-44a4-9fa3-2ee9492ddcf4",
+        "Level": "1",
+        "DurationMs": "349",
+        "Identifier": "8:acs:a04d09ad-aaa9-4e25-90de-475594b0fb52_00000006-96d3-e818-0e04-343a0d00066d",
+        "Properties": "{\"OperationId\":\"56896b96-f187-4d21-aa8c-efe50a44b363\",\"From\":{\"Id\":\"8:acs:a04d09ad-aaa9-4e25-90de-475594b0fb52_00000006-96d3-e818-0e04-343a0d00066d\",\"EndpointId\":\"f2694047-95ec-496a-aa6e-e74dd6ac9b4c\",\"ParticipantId\":\"8d1f7cbb-8184-4832-9806-8bcc36e05e1e\"},\"To\":[],\"ThreadId\":\"19:meeting_NGM2OTEyZmQtM2Y5MS00ODM4LWI3NTUtNGQ1ZjNkZWUzMTNj@thread.v2\",\"OrganizerId\":\"eca3a738-6292-41ee-a17a-17bbd0d86912\",\"MessageId\":\"0\",\"TenantId\":\"3d247915-ed36-4a1c-9db1-ec0360e98c61\",\"UserAgent\":\"Microsoft.Skype.Calling.Test.Ccts/1.19.4738.0\",\"Region\":\"amer\"}",
+        "ResultType": "Success",
+        "ResultSignature": "200"
+    },
+    {
+        "TimeGenerated": "2024-12-10T22:00:30.1213645Z",
+        "OperationName": "HangUp",
+        "Category": "ClientCallingOperationalLogRequest",
+        "CorrelationId": "75724f2c-ea6a-44a4-9fa3-2ee9492ddcf4",
+        "Level": "1",
+        "DurationMs": "10",
+        "Identifier": "8:acs:a04d09ad-aaa9-4e25-90de-475594b0fb52_00000006-96d3-e818-0e04-343a0d00066d",
+        "Properties": "{\"OperationId\":\"8aa629f7-4f6d-4f34-8006-fae538a7645a\",\"From\":{\"Id\":\"8:acs:a04d09ad-aaa9-4e25-90de-475594b0fb52_00000006-96d3-e818-0e04-343a0d00066d\",\"EndpointId\":\"f2694047-95ec-496a-aa6e-e74dd6ac9b4c\",\"ParticipantId\":\"8d1f7cbb-8184-4832-9806-8bcc36e05e1e\"},\"ThreadId\":\"19:meeting_NGM2OTEyZmQtM2Y5MS00ODM4LWI3NTUtNGQ1ZjNkZWUzMTNj@thread.v2\",\"OrganizerId\":\"eca3a738-6292-41ee-a17a-17bbd0d86912\",\"MessageId\":\"0\",\"TenantId\":\"3d247915-ed36-4a1c-9db1-ec0360e98c61\",\"RoomsId\":\"281197854860\",\"UserAgent\":\"Microsoft.Skype.Calling.Test.Ccts/1.19.4738.0\",\"Region\":\"amer\"}",
+        "ResultType": "Success",
+        "ResultSignature": "204"
+    },
+    {
+        "TimeGenerated": "2024-12-10T22:00:30.1465967Z",
+        "OperationName": "ParticipantStateUpdated",
+        "Category": "ClientCallingOperationalLogOutcome",
+        "CorrelationId": "75724f2c-ea6a-44a4-9fa3-2ee9492ddcf4",
+        "Level": "1",
+        "DurationMs": "0",
+        "Identifier": "8:acs:a04d09ad-aaa9-4e25-90de-475594b0fb52_00000006-96d3-e818-0e04-343a0d00066d",
+        "Properties": "{\"To\":{\"Id\":\"8:acs:a04d09ad-aaa9-4e25-90de-475594b0fb52_00000006-96d3-e818-0e04-343a0d00066d\",\"EndpointId\":\"f2694047-95ec-496a-aa6e-e74dd6ac9b4c\",\"ParticipantId\":\"8d1f7cbb-8184-4832-9806-8bcc36e05e1e\"},\"State\":\"Disconnected\"}",
+        "ResultType": "Success",
+        "ResultSignature": "0"
+    }
+]

@@ -1,0 +1,593 @@
+{
+  "type": "Microsoft.Purview/accounts",
+  "displayName": "Microsoft.Purview/accounts",
+  "description": "All tables related to Azure Purview service offerings such as data discovery, sensitive data classification, and end-to-end data lineage.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Azure Purview/Babylon DRI",
+  "relatedTables": [
+    "AzureActivity",
+    "AzureMetric"
+  ],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "name": "PurviewScanStatusLogs",
+      "description": "Status of the scan on the data sources.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 1,
+      "dataTypeId": "PROJECTBABYLON_SCANSTATUSLOGEVENT",
+      "intelligencePacks": [],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "durationMs",
+          "type": "Int"
+        },
+        {
+          "name": "callerIpAddress",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "traceContext",
+          "type": "String"
+        },
+        {
+          "name": "identity",
+          "type": "String"
+        },
+        {
+          "name": "level",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "uri",
+          "type": "String"
+        },
+        {
+          "name": "EventName",
+          "type": "String"
+        },
+        {
+          "name": "env_seqNum",
+          "type": "Long"
+        },
+        {
+          "name": "env_popSample",
+          "type": "Double"
+        },
+        {
+          "name": "env_flags",
+          "type": "Long"
+        },
+        {
+          "name": "ContainerName",
+          "type": "String"
+        },
+        {
+          "name": "NamespaceName",
+          "type": "String"
+        },
+        {
+          "name": "PodName",
+          "type": "String"
+        },
+        {
+          "name": "Node",
+          "type": "String"
+        },
+        {
+          "name": "MasterUrl",
+          "type": "String"
+        },
+        {
+          "name": "FluentdIngestTimestamp",
+          "type": "DateTime"
+        },
+        {
+          "name": "Tenant",
+          "type": "String"
+        },
+        {
+          "name": "GenevaPodName",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "Kql/PurviewScanStatusLogs.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) when the log was generated."
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Log type category."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation associated with log record."
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The ID for correlated events. Can be used to identify correlated events between multiple tables."
+        },
+        {
+          "name": "LogLevel",
+          "description": "Log level of message (INFO, WARN, ERROR, etc.).",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DataSourceName",
+          "description": "Name of the data source where the scan is run.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DataSourceType",
+          "description": "Type of data source where the scan is run. For example: AzureDataExplorer, SQLServer etc.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ScanName",
+          "description": "Name of the scan associated with the scan status log event.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AssetsDiscovered",
+          "description": "Number of assets discovered from the scan.",
+          "type": "BigInt",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AssetsClassified",
+          "description": "Number of assets classified from the scan.",
+          "type": "BigInt",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ScanQueueTimeInSeconds",
+          "description": "Time spent by this scan waiting in the queue.",
+          "type": "BigInt",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ScanTotalRunTimeInSeconds",
+          "description": "Total time to complete the scan.",
+          "type": "BigInt",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RunType",
+          "description": "Run Type of the scan. For example: Manual, Scheduled etc.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ErrorDetails",
+          "description": "Error detail while running the scan.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ScanResultId",
+          "description": "Guid of the Scan Result.",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ResultType",
+          "description": "Result of the scan at the current state. For example: Throttled, Queued etc.",
+          "type": "String",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/PurviewScanStatusLogsSample.json"
+    },
+    {
+      "name": "PurviewDataSensitivityLogs",
+      "description": "Data Sensitivity information for assets scanned using Purview.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 4,
+      "dataTypeId": "PROJECTBABYLON_DATASENSITIVITYLOGEVENT",
+      "intelligencePacks": [ "LogManagement" ],
+      "isResourceCentric": true,
+      "tableState": "Validation",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "Kql/PurviewDataSensitivityLogs.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Time (UTC) when the log was generated."
+        },
+        {
+          "name": "PurviewTenantId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Tenant ID associated with the Purview account.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "PurviewAccountName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the Purview account."
+        },
+        {
+          "name": "PurviewRegion",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Region of the Purview account."
+        },
+        {
+          "name": "SourceName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the data source scanned as registered in Purview."
+        },
+        {
+          "name": "SourceType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Type of data source scanned: azuredatalakegen1, azureblob, azuredataexplorer, amazons3 etc."
+        },
+        {
+          "name": "SourcePath",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Resource Path of the data source. Ex: ARM path for Azure resources and ARN for AWS resources.",
+          "dataTypeHint": "ARMPath"
+        },
+        {
+          "name": "SourceSubscriptionId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Subscription ID associated with the data source. Account ID for AWS resources.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "SourceRegion",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The location of the data source that was scanned."
+        },
+        {
+          "name": "SourceCollectionName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the data source collection name in Purview."
+        },
+        {
+          "name": "SourceScanId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The associated Purview scan ID for the source.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "AssetName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the asset scanned."
+        },
+        {
+          "name": "AssetPath",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Path of the asset scanned in a source."
+        },
+        {
+          "name": "AssetType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Type of asset that was scanned: file, column, table, generic."
+        },
+        {
+          "name": "AssetCreationTime",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Time (UTC) at which the asset was created."
+        },
+        {
+          "name": "AssetModifiedTime",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Time (UTC) at which the asset was last modified."
+        },
+        {
+          "name": "AssetLastScanTime",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Time (UTC) at which the asset was last scanned."
+        },
+        {
+          "name": "FileExtension",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "File extension of the asset scanned. Only populated when asset type is a file."
+        },
+        {
+          "name": "FileSize",
+          "type": "BigInt",
+          "isDefaultDisplay": true,
+          "description": "File size of the asset scanned in bytes. Only populated when asset type is a file."
+        },
+        {
+          "name": "ActivityType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The type of data sensitivity event: classification, labeling."
+        },
+        {
+          "name": "ClassificationTrigger",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The trigger for the classification event."
+        },
+        {
+          "name": "Classification",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Names of the classifications found."
+        },
+        {
+          "name": "ClassificationDetails",
+          "type": "Dynamic",
+          "isDefaultDisplay": false,
+          "description": "List of classification details: ID, name, count, uniquecount, confidence."
+        },
+        {
+          "name": "SensitivityLabelTrigger",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The trigger for the sensitivity label event."
+        },
+        {
+          "name": "SensitivityLabel",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Names for the labels found."
+        },
+        {
+          "name": "SensitivityLabelDetails",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "List of label details: ID, name, order."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/PurviewDataSensitivityLogsSample.json"
+    },
+    {
+      "name": "PurviewSecurityLogs",
+      "description": "Table containing audit events for the Purview account, such as role assignments to a collection or creation or deletion of a collection.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 3,
+      "dataTypeId": "PROJECTBABYLON_SECURITY",
+      "intelligencePacks": [ "LogManagement" ],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "resourceType",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "callerIdentities",
+          "type": "Dynamic"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "Kql/PurviewSecurityLogs.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation associated with log record."
+        },
+        {
+          "name": "EntityName",
+          "description": "Name of the entity for which the operation was performed.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "EntityType",
+          "description": "Type of the entity for which the operation was performed.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "CallerIdentities",
+          "description": "Contains information about the identity that performed the operation. May contain the objectId, username, PUID etc. of the identity.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultType",
+          "description": "Result of the operation.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDescription",
+          "description": "Description of the result of the operation. May also contain the error description if the operation failed.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "description": "Location of the Purview account.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Properties",
+          "description": "Additional properties of the operation.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/PurviewSecurityLogsSample.json"
+    }
+  ],
+  "functions": [],
+  "queries": [
+    {
+      "id": "5a5e640c-37d6-4f21-93c2-3287fd420ea3",
+      "displayName": "Audit collection delete events",
+      "description": "Display audit logs for collection delete events.",
+      "bodyFilePath": "KQL/PurviewSecurity_GetCollectionDeletes_Query.kql",
+      "categories": [
+        "resources",
+        "audit"
+      ],
+      "relatedTables": [
+        "PurviewSecurityLogs"
+      ],
+      "tags": {
+        "Topic": [
+          "Audit"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": false
+        }
+      }
+    }
+  ]
+}

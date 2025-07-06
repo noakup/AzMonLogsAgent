@@ -71,3 +71,8 @@ instance/
 
 # Azure
 .azure/
+claude_desktop_config.json
+AI_INSTRUCTIONS.md
+azure_agent/__pycache__/__init__.cpython-312.pyc
+azure_agent/__pycache__/__init__.cpython-312.pyc
+azure_agent/__pycache__/monitor_client.cpython-312.pyc

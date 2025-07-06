@@ -1,0 +1,4 @@
+OracleCloudVMCluster
+ | where TimeGenerated > ago(1h)
+ | where level == "Error"
+ | summarize count()

@@ -1,0 +1,36 @@
+[
+    {
+        "category": "OperationalLogs",
+        "correlationId": "fece6a71-5c86-405f-9674-c4416ad9e35c",
+        "location": "westus2",
+        "operationName": "InTransit",
+        "properties": {
+            "FlowId": "a3af5d12-15bd-4aa0-b61a-a65b7bf04416",
+            "ObjectName": "testfile - Copy (2).txt",
+            "ObjectLastUpdated": "2023-04-11T16:28:36+00:00",
+            "Status": "InTransit",
+            "Description": "The object is being sent."
+        },
+        "resourceId": "/SUBSCRIPTIONS/C1407BC8-A493-47DB-BBB1-722955B2FAFB/RESOURCEGROUPS/SHARKS-CNS-RG/PROVIDERS/MICROSOFT.AZUREDATATRANSFER/CONNECTIONS/SHARKS-PREPROD-CONNNECTION-LOW/FLOWS/SHARKSFLOWLOW-EASTUS",
+        "resultDescription": "The object is being sent.",
+        "resultType": "InTransit",
+        "time": "04/11/2023 16:31:27 +00:00"
+    },
+    {
+        "category": "OperationalLogs",
+        "correlationId": "fece6a71-5c86-405f-9674-c4416ad9e35c",
+        "location": "westus2",
+        "operationName": "SenderProcessing",
+        "properties": {
+            "FlowId": "a3af5d12-15bd-4aa0-b61a-a65b7bf04416",
+            "ObjectName": "testfile - Copy (2).txt",
+            "ObjectLastUpdated": "2023-04-11T16:28:36+00:00",
+            "Status": "SenderProcessing",
+            "Description": "The object has been discovered and is being processed for transfer."
+        },
+        "resourceId": "/SUBSCRIPTIONS/C1407BC8-A493-47DB-BBB1-722955B2FAFB/RESOURCEGROUPS/SHARKS-CNS-RG/PROVIDERS/MICROSOFT.AZUREDATATRANSFER/CONNECTIONS/SHARKS-PREPROD-CONNNECTION-LOW/FLOWS/SHARKSFLOWLOW-EASTUS",
+        "resultDescription": "The object has been discovered and is being processed for transfer.",
+        "resultType": "SenderProcessing",
+        "time": "04/11/2023 16:30:09 +00:00"
+    }
+]

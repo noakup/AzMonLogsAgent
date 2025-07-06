@@ -1,0 +1,5814 @@
+{
+	"type": "Microsoft.HDInsight/Clusters",
+	"displayName": "HDInsight Clusters",
+	"description": "All tables related to HDInsight Service.",
+	"tags": {},
+	"properties": {},
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "HDInsight/Streaming & Store",
+	"relatedTables": ["AzureActivity" , "AzureMetric"],
+	"relatedFunctions": [],
+	"tables": [
+		{
+			"name": "HDInsightKafkaLogs",
+			"description": "All logs from HDInsight Kafka Logs.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 5,
+			"dataTypeId": "MICROSOFTHDINSIGHT_KAFKALOGS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "logLevel",
+					"type": "String"
+				},
+				{
+					"name": "message",
+					"type": "String"
+				},
+				{
+					"name": "clusterName",
+					"type": "String"
+				},
+				{
+					"name": "hostName",
+					"type": "String"
+				},
+				{
+					"name": "logType",
+					"type": "String"
+				},
+				{
+					"name": "FluentdIngestTimestamp",
+					"type": "DateTime"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightKafkaLogs.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation associated with log record."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID for correlated events. Can be used to identify correlated events between multiple tables."
+				},
+				{
+					"name": "LogLevel",
+					"description": "log level of message (INFO, WARN, ERROR, etc.).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Message",
+					"description": "message from Kafka log.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterName",
+					"description": "Name of cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "HostName",
+					"description": "Name of host where log was emitted.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "LogType",
+					"description": "The name of the log file that a record came from (e.g. KafkaServer, KafkaController).",
+					"type": "String",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightKafkaLogsSample.json"
+		},
+		{
+			"name": "HDInsightKafkaMetrics",
+			"description": "All metrics from Kafka clusters.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 6,
+			"dataTypeId": "MICROSOFTHDINSIGHT_KAFKAMETRICS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "metricNamespace",
+					"type": "String"
+				},
+				{
+					"name": "metricName",
+					"type": "String"
+				},
+				{
+					"name": "metricValue",
+					"type": "String"
+				},
+				{
+					"name": "metricDataType",
+					"type": "String"
+				},
+				{
+					"name": "tags",
+					"type": "String"
+				},
+				{
+					"name": "clusterName",
+					"type": "String"
+				},
+				{
+					"name": "hostName",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "FluentdIngestTimestamp",
+					"type": "DateTime"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightKafkaMetrics.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "MetricNamespace",
+					"description": "Category of metric (e.g. RequestMetrics, BrokerTopicMetrics, KafkaController, etc). ",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "MetricName",
+					"description": "Name of the metric for the record (e.g. OfflinePartitionsCount, UnderReplicatedPartitions, LeaderCount, etc).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "MetricValue",
+					"description": "Value of metric in the record.",
+					"type": "Double",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "MetricDataType",
+					"description": "CollectD datatype of the metric (e.g. gauge, counter, etc.). Determines how metric is portrayed over time. Please reference CollectD documentation for more information: https://collectd.org/wiki/index.php/Data_source .",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Tags",
+					"description": "Information about the record. For example a record may be tagged with 'kafka.network' if it is a network related metric.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterName",
+					"description": "Name of cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "HostName",
+					"description": "Name of host where log was emitted.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation associated with log record."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID for correlated events. Can be used to identify correlated events between multiple tables."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightKafkaMetricsSample.json"
+		},
+		{
+			"name": "HDInsightHBaseLogs",
+			"description": "All logs from HDInsight HBase Logs.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 5,
+			"dataTypeId": "MICROSOFTHDINSIGHT_HBASELOGS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "utcTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "logLevel",
+					"type": "String"
+				},
+				{
+					"name": "message",
+					"type": "String"
+				},
+				{
+					"name": "clusterName",
+					"type": "String"
+				},
+				{
+					"name": "clusterType",
+					"type": "String"
+				},
+				{
+					"name": "hostName",
+					"type": "String"
+				},
+				{
+					"name": "logType",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "FluentdIngestTimestamp",
+					"type": "DateTime"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightHBaseLogs.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "LogLevel",
+					"description": "log level of message (INFO, WARN, ERROR, etc.).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Message",
+					"description": "message from HBase log.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterName",
+					"description": "Name of cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterType",
+					"description": "Name of cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "HostName",
+					"description": "Name of host where log was emitted.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "LogType",
+					"description": "The name of the log file that a record came from (e.g. RegionServer, HMaster).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID for correlated events. Can be used to identify correlated events between multiple tables."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation associated with log record."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDinsightHBaseLogsSample.json"
+		},
+		{
+			"name": "HDInsightHBaseMetrics",
+			"description": "JMX metrics from HBase clusters.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"dataTypeId": "MICROSOFTHDINSIGHT_HBASEMETRICS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "name",
+					"type": "String"
+				},
+				{
+					"name": "metrics",
+					"type": "String"
+				},
+				{
+					"name": "tags",
+					"type": "String"
+				},
+				{
+					"name": "clusterName",
+					"type": "String"
+				},
+				{
+					"name": "clusterType",
+					"type": "String"
+				},
+				{
+					"name": "hostName",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "FluentdIngestTimestamp",
+					"type": "DateTime"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightHBaseMetrics.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "MetricNamespace",
+					"description": "Category of metric (value of the jmx query string e.g. Hadoop:service=HBase,name=Master,sub=IPC, etc). ",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "MetricName",
+					"description": "Name of the metric for the record (e.g. queueSize, receivedBytes, numActiveHandler, etc).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "MetricValue",
+					"description": "Value of metric in the record.",
+					"type": "Double",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Tags",
+					"description": "Information about the record. For example a record may be tagged with 'master' if it is in the HMaster context.",
+					"type": "Dynamic",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterName",
+					"description": "Name of cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterType",
+					"description": "Type of the cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "HostName",
+					"description": "Name of host where log was emitted.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation associated with log record."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID for correlated events. Can be used to identify correlated events between multiple tables."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightHBaseMetricsSample.json"
+		},
+		{
+			"name": "HDInsightStormLogs",
+			"description": "All Logs from Storm cluster nodes.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"dataTypeId": "MICROSOFTHDINSIGHT_STORMLOGS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "utcTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "message",
+					"type": "String"
+				},
+				{
+					"name": "clusterName",
+					"type": "String"
+				},
+				{
+					"name": "hostName",
+					"type": "String"
+				},
+				{
+					"name": "logType",
+					"type": "String"
+				},
+				{
+					"name": "logLevel",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "FluentdIngestTimestamp",
+					"type": "DateTime"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightStormLogs.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID for correlated events. Can be used to identify correlated events between multiple tables."
+				},
+				{
+					"name": "Message",
+					"description": "message from Storm log.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterName",
+					"description": "Name of cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "HostName",
+					"description": "Name of host where log was emitted.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "LogType",
+					"description": "The name of the log file that a record came from (e.g. StormNimbus, StormSupervisor).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "LogLevel",
+					"description": "The severity level of the log (e.g. INFO,WARN, ERROR, etc.)",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation associated with log record."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightStormLogsSample.json"
+		},
+		{
+			"name": "HDInsightStormMetrics",
+			"description": "Cluster Level Metrics from Storm clusters.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 2,
+			"dataTypeId": "MICROSOFTHDINSIGHT_STORMMETRICS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "metricNamespace",
+					"type": "String"
+				},
+				{
+					"name": "metricName",
+					"type": "String"
+				},
+				{
+					"name": "metricValue",
+					"type": "String"
+				},
+				{
+					"name": "metricDataType",
+					"type": "String"
+				},
+				{
+					"name": "clusterName",
+					"type": "String"
+				},
+				{
+					"name": "hostName",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "FluentdIngestTimestamp",
+					"type": "DateTime"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightStormMetrics.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "MetricNamespace",
+					"description": "Category of metric(e.g. StormNimbusMetrics, StormSupervisorMetrics, etc). ",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "MetricName",
+					"description": "Name of the metric for the record (e.g. num-submitTopology-calls-Count).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "MetricValue",
+					"description": "Value of metric in the record.",
+					"type": "Double",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "MetricDataType",
+					"description": "CollectD datatype of the metric (e.g. gauge, counter, etc.). Determines how metric is portrayed over time. Please reference CollectD documentation for more information: https://collectd.org/wiki/index.php/Data_source .",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterName",
+					"description": "Name of cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "HostName",
+					"description": "Name of host where log was emitted.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation associated with log record."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID for correlated events. Can be used to identify correlated events between multiple tables."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightStormMetricsSample.json"
+		},
+		{
+			"name": "HDInsightStormTopologyMetrics",
+			"description": "Topology Level Metrics from Storm clusters.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"dataTypeId": "MICROSOFTHDINSIGHT_STORMTOPOLOGYMETRICS",
+			"isChangeColumnInternalNameAllowed": true,
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "acked",
+					"type": "String"
+				},
+				{
+					"name": "assignedCpu",
+					"type": "String"
+				},
+				{
+					"name": "assignedMemOffHeap",
+					"type": "String"
+				},
+				{
+					"name": "assignedMemOnHeap",
+					"type": "String"
+				},
+				{
+					"name": "assignedTotalMem",
+					"type": "String"
+				},
+				{
+					"name": "boltId",
+					"type": "String"
+				},
+				{
+					"name": "capacity",
+					"type": "String"
+				},
+				{
+					"name": "clusterName",
+					"type": "String"
+				},
+				{
+					"name": "clusterType",
+					"type": "String"
+				},
+				{
+					"name": "completeLatency",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "debug",
+					"type": "String"
+				},
+				{
+					"name": "emitted",
+					"type": "String"
+				},
+				{
+					"name": "encodedBoltId",
+					"type": "String"
+				},
+				{
+					"name": "encodedId",
+					"type": "String"
+				},
+				{
+					"name": "encodedSpoutId",
+					"type": "String"
+				},
+				{
+					"name": "errorHost",
+					"type": "String"
+				},
+				{
+					"name": "errorPort",
+					"type": "String"
+				},
+				{
+					"name": "errorWorkerLogLink",
+					"type": "String"
+				},
+				{
+					"name": "executed",
+					"type": "String"
+				},
+				{
+					"name": "executeLatency",
+					"type": "String"
+				},
+				{
+					"name": "executors",
+					"type": "String"
+				},
+				{
+					"name": "executorsTotal",
+					"type": "String"
+				},
+				{
+					"name": "failed",
+					"type": "String"
+				},
+				{
+					"name": "FluentdIngestTimestamp",
+					"type": "DateTime"
+				},
+				{
+					"name": "hostName",
+					"type": "String"
+				},
+				{
+					"name": "id",
+					"type": "String"
+				},
+				{
+					"name": "InstanceName",
+					"type": "String"
+				},
+				{
+					"name": "lastError",
+					"type": "String"
+				},
+				{
+					"name": "msgTimeout",
+					"type": "String"
+				},
+				{
+					"name": "name",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "owner",
+					"type": "String"
+				},
+				{
+					"name": "processLatency",
+					"type": "String"
+				},
+				{
+					"name": "replicationCount",
+					"type": "String"
+				},
+				{
+					"name": "requestedCpu",
+					"type": "String"
+				},
+				{
+					"name": "requestMemOffHeap",
+					"type": "String"
+				},
+				{
+					"name": "requestMemOnHeap",
+					"type": "String"
+				},
+				{
+					"name": "samplingPct",
+					"type": "String"
+				},
+				{
+					"name": "schedulerDisplayResource",
+					"type": "String"
+				},
+				{
+					"name": "spoutId",
+					"type": "String"
+				},
+				{
+					"name": "status",
+					"type": "String"
+				},
+				{
+					"name": "tasks",
+					"type": "String"
+				},
+				{
+					"name": "tasksTotal",
+					"type": "String"
+				},
+				{
+					"name": "topologyId",
+					"type": "String"
+				},
+				{
+					"name": "transferred",
+					"type": "String"
+				},
+				{
+					"name": "uptime",
+					"type": "String"
+				},
+				{
+					"name": "uptimeSeconds",
+					"type": "String"
+				},
+				{
+					"name": "window",
+					"type": "String"
+				},
+				{
+					"name": "windowHint",
+					"type": "String"
+				},
+				{
+					"name": "windowPretty",
+					"type": "String"
+				},
+				{
+					"name": "workers",
+					"type": "String"
+				},
+				{
+					"name": "workersTotal",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightStormTopologyMetrics.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"transformName": "Acked",
+					"physicalName": "AckedDouble",
+					"logicalName": "Acked",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The number of Tuple “trees” successfully processed. A value of 0 is expected if no acking is done."
+				},
+				{
+					"name": "AssignedCPUPercent",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Percent of CPU cores assigned to the topology."
+				},
+				{
+					"name": "AssignedMemOffHeapMB",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "MB of off heap memory assigned to the topology."
+				},
+				{
+					"name": "AssignedMemOnHeapMB",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "MB of on heap memory assigned to the topology."
+				},
+				{
+					"name": "AssignedTotalMemMB",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "MB of total memory assigned to the topology."
+				},
+				{
+					"name": "BoltId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the bolt."
+				},
+				{
+					"name": "Capacity",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "If this is around 1.0, the corresponding Bolt is running as fast as it can, so you may want to increase the Bolt’s parallelism. This is (number executed * average execute latency) / measurement time."
+				},
+				{
+					"name": "ClusterName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the cluster."
+				},
+				{
+					"name": "ClusterType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The type of the cluster."
+				},
+				{
+					"name": "CompleteLatencyMs",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The average time (millisecond) a Tuple “tree” takes to be completely processed by the Topology. A value of 0 is expected if no acking is done."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID for correlated events. Can be used to identify correlated events between multiple tables."
+				},
+				{
+					"name": "Debug",
+					"type": "Bool",
+					"isDefaultDisplay": true,
+					"description": "Boolean representing whether debug tracing is activated."
+				},
+				{
+					"transformName": "Emitted",
+					"physicalName": "EmittedDouble",
+					"logicalName": "Emitted",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The number of Tuples emitted."
+				},
+				{
+					"name": "EncodedBoltId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The encoded ID of the bolt."
+				},
+				{
+					"name": "EncodedId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The enocded ID of the topology."
+				},
+				{
+					"name": "EncodedSpoutId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The encoded ID of the Spout."
+				},
+				{
+					"name": "ErrorHost",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Host where the error occurred."
+				},
+				{
+					"name": "ErrorPort",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Port associated with the error."
+				},
+				{
+					"name": "ErrorWorkerLogLink",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Link to the log of the worker where an error occurred.",
+					"dataTypeHint": "URI"
+				},
+				{
+					"transformName": "Executed",
+					"physicalName": "ExecutedDouble",
+					"logicalName": "Executed",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": " The number of incoming Tuples processed."
+				},
+				{
+					"name": "ExecuteLatencyMs",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The average time (millisecond) a Tuple spends in the execute method. The execute method may complete without sending an Ack for the tuple."
+				},
+				{
+					"name": "Executors",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The number of threads being used to execute a task."
+				},
+				{
+					"name": "ExecutorsTotal",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The total amount of executors currently used and already used to execute a task."
+				},
+				{
+					"transformName": "Failed",
+					"physicalName": "FailedDouble",
+					"logicalName": "Failed",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The number of Tuple “trees” that were explicitly failed or timed out before acking was completed. A value of 0 is expected if no acking is done."
+				},
+				{
+					"name": "HostName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Hostname of the host the record came from."
+				},
+				{
+					"name": "Id",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the component the record is from (could be spout, bolt, or name of topology)."
+				},
+				{
+					"name": "InstanceName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Type of record shape (there are bolt, spout, topology, and topology_stats record shapes)."
+				},
+				{
+					"name": "LastError",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Last error to occur in the component."
+				},
+				{
+					"name": "MsgTimeout",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The number of seconds until a message times out."
+				},
+				{
+					"name": "TopologyName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Name of the topology."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation associated with log record."
+				},
+				{
+					"name": "Owner",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Name of the user that owns the topology."
+				},
+				{
+					"name": "ProcessLatencyMs",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The average time (millisecond) it takes to Ack a Tuple after it is first received. Bolts that join, aggregate or batch may not Ack a tuple until a number of other Tuples have been received(."
+				},
+				{
+					"name": "ReplicationCount",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The amount of replicas kept by the topology."
+				},
+				{
+					"name": "RequestedCpuPercent",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The percent of CPU requested by the topology."
+				},
+				{
+					"name": "RequestMemOffHeapMB",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "MB of off heap memory requested by the topology."
+				},
+				{
+					"name": "RequestMemOnHeapMB",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "MB of on heap memory requested by the topology."
+				},
+				{
+					"name": "SamplingPct",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Percentage of messages sampled to calculate metrics."
+				},
+				{
+					"name": "SchedulerDisplayResource",
+					"type": "Bool",
+					"isDefaultDisplay": true,
+					"description": "Boolean describing the scheduler display setting."
+				},
+				{
+					"name": "SpoutId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the spout."
+				},
+				{
+					"name": "Status",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The status of the topology."
+				},
+				{
+					"name": "Tasks",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The number of tasks running."
+				},
+				{
+					"name": "TasksTotal",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The total amount of tasks run."
+				},
+				{
+					"name": "TopologyId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the topology."
+				},
+				{
+					"transformName": "Transferred",
+					"physicalName": "TransferredDouble",
+					"logicalName": "Transferred",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The number of Tuples emitted that sent to one or more bolts."
+				},
+				{
+					"name": "Uptime",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The length of time an Executor (thread) has been alive."
+				},
+				{
+					"name": "UptimeSeconds",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The amount of time the topology has been running in seconds."
+				},
+				{
+					"name": "Window",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The time window for the metrics in the record in seconds."
+				},
+				{
+					"name": "WindowHint",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The time window for the metrics in the record in hours, minutes, seconds format."
+				},
+				{
+					"name": "WindowPretty",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "String description of the time window for the metrics in the record."
+				},
+				{
+					"name": "Workers",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "JSON with worker specific metrics."
+				},
+				{
+					"name": "WorkersTotal",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The total amount of workers."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightStormTopologyMetricsSample.json"
+		},
+		{
+			"name": "HDInsightGatewayAuditLogs",
+			"description": "Authentication audit logs from HDInsight Gateway nodes.",
+			"categories": [ "resources", "audit" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"dataTypeId": "MICROSOFTHDINSIGHT_GATEWAYAUDITLOGS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "UserName",
+					"type": "String"
+				},
+				{
+					"name": "Status",
+					"type": "String"
+				},
+				{
+					"name": "ClusterDnsName",
+					"type": "String"
+				},
+				{
+					"name": "AccessRequestCount",
+					"type": "Double"
+				},
+				{
+					"name": "ErrorMessage",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightGatewayAuditLogs.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "UserName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The username used for the login attempt."
+				},
+				{
+					"name": "Status",
+					"description": "The outcome of the login attempt.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterDnsName",
+					"description": "The DNS name of the cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "AccessRequestCount",
+					"description": "Number of login requests associated with the user.",
+					"type": "Double",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ErrorMessage",
+					"description": "Any error message associated with the login attempt.",
+					"type": "String",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightGatewayAuditLogsSample.json"
+		},
+		{
+			"name": "HDInsightAmbariSystemMetrics",
+			"description": "System metrics from each individual node generated by Ambari.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 2,
+			"dataTypeId": "MICROSOFTHDINSIGHT_AMBARISYSTEMMETRICS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "cpu_idle",
+					"type": "String"
+				},
+				{
+					"name": "cpu_nice",
+					"type": "String"
+				},
+				{
+					"name": "cpu_num",
+					"type": "String"
+				},
+				{
+					"name": "cpu_system",
+					"type": "String"
+				},
+				{
+					"name": "cpu_user",
+					"type": "String"
+				},
+				{
+					"name": "cpu_wio",
+					"type": "String"
+				},
+				{
+					"name": "disk_free",
+					"type": "String"
+				},
+				{
+					"name": "disk_total",
+					"type": "String"
+				},
+				{
+					"name": "read_bytes",
+					"type": "String"
+				},
+				{
+					"name": "read_count",
+					"type": "String"
+				},
+				{
+					"name": "read_time",
+					"type": "String"
+				},
+				{
+					"name": "write_bytes",
+					"type": "String"
+				},
+				{
+					"name": "write_count",
+					"type": "String"
+				},
+				{
+					"name": "write_time",
+					"type": "String"
+				},
+				{
+					"name": "load_fifteen",
+					"type": "String"
+				},
+				{
+					"name": "load_five",
+					"type": "String"
+				},
+				{
+					"name": "load_one",
+					"type": "String"
+				},
+				{
+					"name": "mem_cached",
+					"type": "String"
+				},
+				{
+					"name": "mem_free",
+					"type": "String"
+				},
+				{
+					"name": "mem_shared",
+					"type": "String"
+				},
+				{
+					"name": "mem_total",
+					"type": "String"
+				},
+				{
+					"name": "swap_free",
+					"type": "String"
+				},
+				{
+					"name": "bytes_in",
+					"type": "String"
+				},
+				{
+					"name": "bytes_out",
+					"type": "String"
+				},
+				{
+					"name": "pkts_in",
+					"type": "String"
+				},
+				{
+					"name": "pkts_out",
+					"type": "String"
+				},
+				{
+					"name": "proc_run",
+					"type": "String"
+				},
+				{
+					"name": "proc_total",
+					"type": "String"
+				},
+				{
+					"name": "clusterName",
+					"type": "String"
+				},
+				{
+					"name": "hostName",
+					"type": "String"
+				},
+				{
+					"name": "clusterType",
+					"type": "String"
+				},
+				{
+					"name": "FluentdIngestTimestamp",
+					"type": "DateTime"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightAmbariSystemMetrics.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "CpuIdle",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Percent of CPU time spent in idle state in past cycle."
+				},
+				{
+					"name": "CpuNice",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Percent of CPU time spent running processes with positive nice values."
+				},
+				{
+					"name": "NumberOfCpu",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Number of CPU cores running on the node."
+				},
+				{
+					"name": "CpuSystem",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Percent of CPU time spent running system level processes in past cycle."
+				},
+				{
+					"name": "CpuUser",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Percent of CPU time spent running user level processes in past cycle."
+				},
+				{
+					"name": "CpuIOWait",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Percent of CPU time spent waiting for I/O requests in past cycle."
+				},
+				{
+					"name": "DiskFree",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Amount of free disk space (in GB)."
+				},
+				{
+					"name": "DiskTotal",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Total disk space (in GB)."
+				},
+				{
+					"name": "ReadBytes",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Number of bytes read."
+				},
+				{
+					"name": "ReadCount",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Number of read operations."
+				},
+				{
+					"name": "ReadTime",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Time spent on read operations."
+				},
+				{
+					"name": "WriteBytes",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Number of bytes written."
+				},
+				{
+					"name": "WriteCount",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Number of write operations."
+				},
+				{
+					"name": "WriteTime",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Time spent on write operations."
+				},
+				{
+					"name": "FifteenMinutLoad",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "load over past 15 minutes."
+				},
+				{
+					"name": "FiveMinuteLoad",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "load over past five minutes."
+				},
+				{
+					"name": "OneMinuteLoad",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "load over past one minute."
+				},
+				{
+					"name": "CachedMemory",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "amount of cached memory in KB."
+				},
+				{
+					"name": "FreeMemory",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "amount of free memory in KB."
+
+				},
+				{
+					"name": "SharedMemory",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "amount of sharedmemory in KB."
+				},
+				{
+					"name": "TotalMemory",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "total amount of memory in KB."
+				},
+				{
+					"name": "FreeSwapMemory",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "amount of free swap memory in KB."
+				},
+				{
+					"name": "BytesIn",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Bytes ingested in last timeframe."
+				},
+				{
+					"name": "BytesOut",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Bytes sent out."
+				},
+				{
+					"name": "PacketsIn",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Packets ingest in last timeframe."
+				},
+				{
+					"name": "PacketsOut",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Packets sent out in last timeframe."
+				},
+				{
+					"name": "ProcessesRun",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Processes run in last timeframe."
+				},
+				{
+					"name": "TotalProcesses",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Total amount of processes run on host."
+				},
+				{
+					"name": "ClusterName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Name of the cluster the host belongs to."
+				},
+				{
+					"name": "HostName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Name of the host the record came from."
+				},
+				{
+					"name": "ClusterType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Type of cluster the record came from."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightAmbariSystemMetricsSample.json"
+		},
+		{
+			"name": "HDInsightAmbariClusterAlerts",
+			"description": "Cluster Alerts generated by Ambari.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"dataTypeId": "MICROSOFTHDINSIGHT_AMBARICLUSTERALERTS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "href",
+					"type": "String"
+				},
+				{
+					"name": "Alert_cluster_name",
+					"type": "String"
+				},
+				{
+					"name": "Alert_component_name",
+					"type": "String"
+				},
+				{
+					"name": "Alert_definition_id",
+					"type": "String"
+				},
+				{
+					"name": "Alert_definition_name",
+					"type": "String"
+				},
+				{
+					"name": "Alert_firmness",
+					"type": "String"
+				},
+				{
+					"name": "Alert_host_name",
+					"type": "String"
+				},
+				{
+					"name": "Alert_id",
+					"type": "String"
+				},
+				{
+					"name": "Alert_instance",
+					"type": "String"
+				},
+				{
+					"name": "Alert_label",
+					"type": "String"
+				},
+				{
+					"name": "Alert_latest_timestamp",
+					"type": "String"
+				},
+				{
+					"name": "Alert_maintenance_state",
+					"type": "String"
+				},
+				{
+					"name": "Alert_occurrences",
+					"type": "String"
+				},
+				{
+					"name": "Alert_original_timestamp",
+					"type": "String"
+				},
+				{
+					"name": "Alert_repeat_tolerance",
+					"type": "String"
+				},
+				{
+					"name": "Alert_repeat_tolerance_remaining",
+					"type": "String"
+				},
+				{
+					"name": "Alert_scope",
+					"type": "String"
+				},
+				{
+					"name": "Alert_service_name",
+					"type": "String"
+				},
+				{
+					"name": "Alert_state",
+					"type": "String"
+				},
+				{
+					"name": "Alert_text",
+					"type": "String"
+				},
+				{
+					"name": "hostName",
+					"type": "String"
+				},
+				{
+					"name": "clusterType",
+					"type": "String"
+				},
+				{
+					"name": "FluentdIngestTimestamp",
+					"type": "DateTime"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightAmbariClusterAlerts.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "ReferenceURI",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The URI to the alert.",
+					"dataTypeHint": "URI"
+				},
+				{
+					"name": "ClusterName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the cluster the alert came from."
+				},
+				{
+					"name": "ComponentName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The component that generated the alert."
+				},
+				{
+					"name": "DefinitionId",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "Id of the alert definition."
+				},
+				{
+					"name": "DefinitionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Name of the alert definition"
+				},
+				{
+					"name": "AlertFirmness",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The firmness of the alert."
+				},
+				{
+					"name": "HostFQDN",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The FQDN of the host where the alert was generated."
+				},
+				{
+					"name": "HostName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the host where the alert was generated."
+				},
+				{
+					"name": "AlertID",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The ID of the alert message."
+				},
+				{
+					"name": "AlertInstance",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Instance number of the alert."
+				},
+				{
+					"name": "Label",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The label of the alert."
+				},
+				{
+					"name": "LatestTimestamp",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "The latest time the alert occurred."
+				},
+				{
+					"name": "OriginalTimestamp",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "The timestamp the alert first occurred."
+				},
+				{
+					"name": "MaintenanceState",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The maintenance classifaction state of the alert."
+				},
+				{
+					"name": "Occurences",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The number of times an alert has occurred."
+				},
+				{
+					"name": "RepeatTolerance",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The total number of occurences an alert can have before being escalated."
+				},
+				{
+					"name": "RepeatToleranceRemaining",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The amount of occurences left before an alert gets escalted."
+				},
+				{
+					"name": "Scope",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The scope of the alert."
+				},
+				{
+					"name": "ServiceName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the service that generated the alert."
+				},
+				{
+					"name": "State",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The state of the alert."
+				},
+				{
+					"name": "Text",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The informational text of the alert."
+				},
+				{
+					"name": "ClusterType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The type of cluster where the alert was generated."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightAmbariClusterAlertsSample.json"
+		},
+		{
+      "name": "HDInsightSparkApplicationEvents",
+			"description": "Spark Application Events.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"dataTypeId": "MICROSOFTHDINSIGHT_SPARKAPPLICATIONEVENTS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "ApplicationId",
+					"type": "String"
+				},
+				{
+					"name": "SparkUser",
+					"type": "String"
+				},
+				{
+					"name": "AppAttemptId",
+					"type": "String"
+				},
+				{
+					"name": "AppName",
+					"type": "String"
+				},
+				{
+					"name": "SubmissionTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "CompletionTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "Tenant",
+					"type": "String"
+				},
+				{
+					"name": "Role",
+					"type": "String"
+				},
+				{
+					"name": "Host",
+					"type": "String"
+				},
+				{
+					"name": "RoleInstance",
+					"type": "String"
+				},
+				{
+					"name": "ClusterDnsName",
+					"type": "String"
+				},
+				{
+					"name": "Region",
+					"type": "String"
+				},
+				{
+					"name": "IpAddress",
+					"type": "String"
+				},
+				{
+					"name": "UserSubscriptionId",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightSparkApplicationEvents.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "ApplicationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The application id of the application producing the record."
+				},
+				{
+					"name": "SparkUser",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Spark User associated with the record."
+				},
+				{
+					"name": "AppAttemptId",
+					"description": "The application attempt id.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "AppName",
+					"description": "The application name.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "SubmissionTime",
+					"description": "The time (UTC) the application was submitted.",
+					"type": "DateTime",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "CompletionTime",
+					"description": "The time (UTC) the application submission completed.",
+					"type": "DateTime",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterTenantId",
+					"description": "The tenant ID of the cluster running the application.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Role",
+					"description": "The type of node running the application.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Host",
+					"description": "The fqdn the node was run on.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterDnsName",
+					"description": "The DNS name of the cluster running the application.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Region",
+					"description": "The region of the cluster running the application.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "IpAddress",
+					"description": "The IP Address of the node running the application.",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UserSubscriptionId",
+					"isDefaultDisplay": true,
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"description": "The subscription ID of the cluster running the application"
+
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightSparkApplicationEventsSample.json"
+		},
+		{
+
+			"name": "HDInsightSparkBlockManagerEvents",
+			"description": "Spark Block Manager Events.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"dataTypeId": "MICROSOFTHDINSIGHT_SPARKBLOCKMANAGEREVENTS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "ApplicationId",
+					"type": "String"
+				},
+				{
+					"name": "ExecutorId",
+					"type": "String"
+				},
+				{
+					"name": "Host",
+					"type": "String"
+				},
+				{
+					"name": "AddedTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "RemovedTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "MaxMemory",
+					"type": "String"
+				},
+				{
+					"name": "MaxOnHeapMemory",
+					"type": "String"
+				},
+				{
+					"name": "MaxOffHeapMemory",
+					"type": "String"
+				},
+				{
+					"name": "Tenant",
+					"type": "String"
+				},
+				{
+					"name": "Role",
+					"type": "String"
+				},
+				{
+					"name": "RoleInstance",
+					"type": "String"
+				},
+				{
+					"name": "ClusterDnsName",
+					"type": "String"
+				},
+				{
+					"name": "Region",
+					"type": "String"
+				},
+				{
+					"name": "IpAddress",
+					"type": "String"
+				},
+				{
+					"name": "UserSubscriptionId",
+					"type": "String"
+				},
+				{
+					"name": "BlockHost",
+					"type": "String"
+				},
+				{
+					"name": "BlockManagerHost",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightSparkBlockManagerEvents.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "ApplicationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The application ID of the application producing the record."
+				},
+				{
+					"name": "ExecutorId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the executor running the application."
+				},
+				{
+					"name": "Host",
+					"description": "The FQDN of the host.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "AddedTime",
+					"description": "The time (UTC) the event was added.",
+					"type": "DateTime",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "RemovedTime",
+					"description": "The time (UTC) the application was removed.",
+					"type": "DateTime",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "MaxMemory",
+					"description": "The max memory usage from the event.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "MaxOnHeapMemory",
+					"description": "The max on heap memory usage from the event.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "MaxOffHeapMemory",
+					"description": "The max off heap memory usage from the event.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterTenantId",
+					"description": "The tenant ID of the cluster the Block Manager is running on.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Role",
+					"description": "The type of node the Block Manager is running on.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterDnsName",
+					"description": "The DNS name of the cluster the Block Manager is running on.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Region",
+					"description": "The region of the cluster the Block Manager is running on.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "IpAddress",
+					"description": "The IP Address of the node the Block Manager is running on.",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UserSubscriptionId",
+					"description": "The subscription ID of the cluster the Block Manager is running on.",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "BlockHost",
+					"description": "The block host.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "BlockManagerHost",
+					"description": "The host where the Block Manager is running.",
+					"type": "String",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightSparkBlockManagerEventsSample.json"
+		},
+		{
+
+			"name": "HDInsightSparkEnvironmentEvents",
+			"description": "Spark Environment Events.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"dataTypeId": "MICROSOFTHDINSIGHT_SPARKENVIRONMENTEVENTS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "ApplicationId",
+					"type": "String"
+				},
+				{
+					"name": "SparkDeployMode",
+					"type": "String"
+				},
+				{
+					"name": "SparkMaster",
+					"type": "String"
+				},
+				{
+					"name": "YarnMaxAttempts",
+					"type": "String"
+				},
+				{
+					"name": "SparkExecutorInstances",
+					"type": "String"
+				},
+				{
+					"name": "SparkExecutorMemory",
+					"type": "String"
+				},
+				{
+					"name": "SparkExecutorCores",
+					"type": "String"
+				},
+				{
+					"name": "YarnTags",
+					"type": "String"
+				},
+				{
+					"name": "YarnQueue",
+					"type": "String"
+				},
+				{
+					"name": "Tenant",
+					"type": "String"
+				},
+				{
+					"name": "Role",
+					"type": "String"
+				},
+				{
+					"name": "Host",
+					"type": "String"
+				},
+				{
+					"name": "RoleInstance",
+					"type": "String"
+				},
+				{
+					"name": "ClusterDnsName",
+					"type": "String"
+				},
+				{
+					"name": "Region",
+					"type": "String"
+				},
+				{
+					"name": "IpAddress",
+					"type": "String"
+				},
+				{
+					"name": "UserSubscriptionId",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightSparkEnvironmentEvents.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "ApplicationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The application ID of the application producing the record."
+				},
+				{
+					"name": "SparkDeployMode",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The spark deployment mode of the application."
+				},
+				{
+					"name": "SparkMaster",
+					"description": "The master mode of the Spark Application",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "YarnMaxAttempts",
+					"description": "The max number of attempts Yarn will make for the application.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "SparkExecutorInstances",
+					"description": "The number of Spark Executor instances.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "SparkExecutorMemory",
+					"description": "The memory usage of the Spark Executor",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "SparkExecutorCores",
+					"description": "The number of Executor cores.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "YarnTags",
+					"description": "The YARN tag of the application.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "YarnQueue",
+					"description": "The type of YARN queue for the application.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterTenantId",
+					"description": "The tenant ID of the cluster running the application.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Role",
+					"description": "The type of node running the application.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Host",
+					"description": "The FQDN of the host.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterDnsName",
+					"description": "The DNS name of the cluster running the application.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Region",
+					"description": "The region of the cluster running the application.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "IpAddress",
+					"description": "The IP Address of the node running the application.",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UserSubscriptionId",
+					"description": "The subscription ID of the cluster running the application",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightSparkEnvironmentEventsSample.json"
+		},
+		{
+
+			"name": "HDInsightJupyterNotebookEvents",
+			"description": "Spark Events Log.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"dataTypeId": "MICROSOFTHDINSIGHT_JUPYTERNOTEBOOKEVENTS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "EventName",
+					"type": "String"
+				},
+				{
+					"name": "Dim0",
+					"type": "String"
+				},
+				{
+					"name": "Dim1",
+					"type": "DateTime"
+				},
+				{
+					"name": "Dim2",
+					"type": "String"
+				},
+				{
+					"name": "Dim3",
+					"type": "String"
+				},
+				{
+					"name": "Dim4",
+					"type": "String"
+				},
+				{
+					"name": "Dim5",
+					"type": "String"
+				},
+				{
+					"name": "Dim6",
+					"type": "String"
+				},
+				{
+					"name": "Dim7",
+					"type": "String"
+				},
+				{
+					"name": "Dim8",
+					"type": "String"
+				},
+				{
+					"name": "Dim9",
+					"type": "String"
+				},
+				{
+					"name": "Dim10",
+					"type": "String"
+				},
+				{
+					"name": "Tenant",
+					"type": "String"
+				},
+				{
+					"name": "Role",
+					"type": "String"
+				},
+				{
+					"name": "Host",
+					"type": "String"
+				},
+				{
+					"name": "RoleInstance",
+					"type": "String"
+				},
+				{
+					"name": "ClusterDnsName",
+					"type": "String"
+				},
+				{
+					"name": "Region",
+					"type": "String"
+				},
+				{
+					"name": "IpAddress",
+					"type": "String"
+				},
+				{
+					"name": "UserSubscriptionId",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightJupyterNotebookEvents.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "EventName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the event."
+				},
+				{
+					"name": "Dim0",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Varies based of of type of event."
+				},
+				{
+					"name": "Dim1",
+					"description": "Varies based of of type of event.",
+					"type": "DateTime",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Dim2",
+					"description": "Varies based of of type of event.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Dim3",
+					"description": "Varies based of of type of event.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Dim4",
+					"description": "Varies based of of type of event.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Dim5",
+					"description": "Varies based of of type of event.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Dim6",
+					"description": "Varies based of of type of event.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Dim7",
+					"description": "Varies based of of type of event.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Dim8",
+					"description": "Varies based of of type of event.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Dim9",
+					"description": "Varies based of of type of event.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Dim10",
+					"description": "Varies based of of type of event.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterTenantId",
+					"description": "The tenant ID of the cluster running the application.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Role",
+					"description": "The type of node the application running the application.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Host",
+					"description": "The FQDN of the host.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterDnsName",
+					"description": "The DNS name of the cluster running the application.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Region",
+					"description": "The region of the cluster running the application.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "IpAddress",
+					"description": "The IP Address of the node running the application.",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UserSubscriptionId",
+					"description": "The subscription ID of the cluster running the application",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightJupyterNotebookEventsSample.json"
+		},
+		{
+
+			"name": "HDInsightSparkExecutorEvents",
+			"description": "Spark Executor Events.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"dataTypeId": "MICROSOFTHDINSIGHT_SPARKEXECUTOREVENTS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "ApplicationId",
+					"type": "String"
+				},
+				{
+					"name": "ExecutorId",
+					"type": "String"
+				},
+				{
+					"name": "ExecutorCores",
+					"type": "String"
+				},
+				{
+					"name": "AddedTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "RemovedTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "RemovedReason",
+					"type": "String"
+				},
+				{
+					"name": "Tenant",
+					"type": "String"
+				},
+				{
+					"name": "Role",
+					"type": "String"
+				},
+				{
+					"name": "Host",
+					"type": "String"
+				},
+				{
+					"name": "RoleInstance",
+					"type": "String"
+				},
+				{
+					"name": "ClusterDnsName",
+					"type": "String"
+				},
+				{
+					"name": "Region",
+					"type": "String"
+				},
+				{
+					"name": "IpAddress",
+					"type": "String"
+				},
+				{
+					"name": "UserSubscriptionId",
+					"type": "String"
+				},
+				{
+					"name": "ExecutorHost",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightSparkExecutorEvents.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "ApplicationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The application ID of the application producing the record."
+				},
+				{
+					"name": "ExecutorId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the Spark Executor."
+				},
+				{
+					"name": "ExecutorCores",
+					"description": "The number of cores the Spark Executor has.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "AddedTime",
+					"description": "The time (UTC) the Executor was added.",
+					"type": "DateTime",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "RemovedTime",
+					"description": "The time (UTC) the Executor was removed.",
+					"type": "DateTime",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "RemovedReason",
+					"description": "The reason the Executor was removed.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterTenantId",
+					"description": "The tenant ID of the cluster running the Executor.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Role",
+					"description": "The type of node  running the Executor.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Host",
+					"description": "The FQDN of the host.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterDnsName",
+					"description": "The DNS name of the cluster running the Executor.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Region",
+					"description": "The region of the cluster running the Executor.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "IpAddress",
+					"description": "The IP Address of the node running the Executor.",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UserSubscriptionId",
+					"description": "The subscription ID of the cluster running the Executor.",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ExecutorHost",
+					"description": "The host the Executor ran on",
+					"type": "String",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightSparkExecutorEventsSample.json"
+		},
+		{
+
+			"name": "HDInsightSparkExtraEvents",
+			"description": "Spark Extra Events.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"dataTypeId": "MICROSOFTHDINSIGHT_SPARKEXTRAEVENTS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "ApplicationId",
+					"type": "String"
+				},
+				{
+					"name": "EventTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "EventJson",
+					"type": "String"
+				},
+				{
+					"name": "Tenant",
+					"type": "String"
+				},
+				{
+					"name": "Role",
+					"type": "String"
+				},
+				{
+					"name": "Host",
+					"type": "String"
+				},
+				{
+					"name": "RoleInstance",
+					"type": "String"
+				},
+				{
+					"name": "ClusterDnsName",
+					"type": "String"
+				},
+				{
+					"name": "Region",
+					"type": "String"
+				},
+				{
+					"name": "IpAddress",
+					"type": "String"
+				},
+				{
+					"name": "UserSubscriptionId",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightSparkExtraEvents.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "ApplicationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The application ID of the application producing the record."
+				},
+				{
+					"name": "EventJson",
+					"description": "Json with information about the event.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterTenantId",
+					"description": "The tenant  ID of the cluster running the application.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Role",
+					"description": "The type of node  running the application.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Host",
+					"description": "The FQDN of the host.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterDnsName",
+					"description": "The DNS name of the cluster running the application.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Region",
+					"description": "The region of the cluster running the application.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "IpAddress",
+					"description": "The IP Address of the node running the application.",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UserSubscriptionId",
+					"description": "The subscription ID of the cluster running the application.",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightSparkExtraEventsSample.json"
+		},
+		{
+
+			"name": "HDInsightSparkJobEvents",
+			"description": "Spark Job Events.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"dataTypeId": "MICROSOFTHDINSIGHT_SPARKJOBEVENTS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "ApplicationId",
+					"type": "String"
+				},
+				{
+					"name": "JobId",
+					"type": "String"
+				},
+				{
+					"name": "SubmissionTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "CompletionTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "JobResult",
+					"type": "String"
+				},
+				{
+					"name": "StageIds",
+					"type": "String"
+				},
+				{
+					"name": "Tenant",
+					"type": "String"
+				},
+				{
+					"name": "Role",
+					"type": "String"
+				},
+				{
+					"name": "Host",
+					"type": "String"
+				},
+				{
+					"name": "RoleInstance",
+					"type": "String"
+				},
+				{
+					"name": "ClusterDnsName",
+					"type": "String"
+				},
+				{
+					"name": "Region",
+					"type": "String"
+				},
+				{
+					"name": "IpAddress",
+					"type": "String"
+				},
+				{
+					"name": "UserSubscriptionId",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightSparkJobEvents.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "ApplicationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The application ID of the application producing the record."
+				},
+				{
+					"name": "JobId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the job."
+				},
+				{
+					"name": "SubmissionTime",
+					"description": "The time (UTC) the job was submitted.",
+					"type": "DateTime",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "CompletionTime",
+					"description": "The time (UTC) the job was completed.",
+					"type": "DateTime",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "JobResult",
+					"description": "The result of the job.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "StageIds",
+					"description": "The stages included in the job.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterTenantId",
+					"description": "The tenant  ID of the cluster running the job.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Role",
+					"description": "The type of node  running the job.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Host",
+					"description": "The FQDN of the host.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterDnsName",
+					"description": "The DNS name of the cluster running the job.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Region",
+					"description": "The region of the cluster running the job.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "IpAddress",
+					"description": "The IP Address of the node running the job.",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UserSubscriptionId",
+					"description": "The subscription ID of the cluster running the job.",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightSparkJobEventsSample.json"
+		},
+		{
+
+			"name": "HDInsightSparkSQLExecutionEvents",
+			"description": "Spark SQL Execution Events.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"dataTypeId": "MICROSOFTHDINSIGHT_SPARKSQLEXECUTIONEVENTS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "ApplicationId",
+					"type": "String"
+				},
+				{
+					"name": "ExecutionId",
+					"type": "String"
+				},
+				{
+					"name": "StartTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "EndTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "PhysicalPlanDescription",
+					"type": "String"
+				},
+				{
+					"name": "SparkPlanInfo",
+					"type": "String"
+				},
+				{
+					"name": "Tenant",
+					"type": "String"
+				},
+				{
+					"name": "Role",
+					"type": "String"
+				},
+				{
+					"name": "Host",
+					"type": "String"
+				},
+				{
+					"name": "RoleInstance",
+					"type": "String"
+				},
+				{
+					"name": "ClusterDnsName",
+					"type": "String"
+				},
+				{
+					"name": "Region",
+					"type": "String"
+				},
+				{
+					"name": "IpAddress",
+					"type": "String"
+				},
+				{
+					"name": "UserSubscriptionId",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightSparkSQLExecutionEvents.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "ApplicationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The application ID of the application producing the record."
+				},
+				{
+					"name": "ExecutionId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the Spark SQL execution."
+				},
+				{
+					"name": "StartTime",
+					"description": "The time (UTC) the Spark SQL execution started.",
+					"type": "DateTime",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "EndTime",
+					"description": "The time (UTC) the Spark SQL execution ended.",
+					"type": "DateTime",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "PhysicalPlanDescription",
+					"description": "The description of the Physical/Logical plan of the Spark SQL execution.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "SparkPlanInfo",
+					"description": "Json object containing information on the Spark SQL execution.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterTenantId",
+					"description": "The tenant ID of the cluster running the Spark SQL execution.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Role",
+					"description": "The type of node  running the Spark SQL execution.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Host",
+					"description": "The FQDN of the host.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterDnsName",
+					"description": "The DNS name of the cluster running the Spark SQL execution.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Region",
+					"description": "The region of the cluster running the Spark SQL execution.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "IpAddress",
+					"description": "The IP Address of the node running the Spark SQL execution.",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UserSubscriptionId",
+					"description": "The subscription ID of the cluster running the Spark SQL execution.",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightSparkSQLExecutionEventsSample.json"
+		},
+		{
+			"name": "HDInsightSparkStageEvents",
+			"description": "Spark Stage Events.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 4,
+			"dataTypeId": "MICROSOFTHDINSIGHT_SPARKSTAGEEVENTS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "ApplicationId",
+					"type": "String"
+				},
+				{
+					"name": "StageId",
+					"type": "String"
+				},
+				{
+					"name": "StageName",
+					"type": "String"
+				},
+				{
+					"name": "AttemptId",
+					"type": "String"
+				},
+				{
+					"name": "TaskCount",
+					"type": "String"
+				},
+				{
+					"name": "SubmissionTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "CompletionTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "FailureReason",
+					"type": "String"
+				},
+				{
+					"name": "Details",
+					"type": "String"
+				},
+				{
+					"name": "RDDInfo",
+					"type": "String"
+				},
+				{
+					"name": "Tenant",
+					"type": "String"
+				},
+				{
+					"name": "Role",
+					"type": "String"
+				},
+				{
+					"name": "Host",
+					"type": "String"
+				},
+				{
+					"name": "RoleInstance",
+					"type": "String"
+				},
+				{
+					"name": "ClusterDnsName",
+					"type": "String"
+				},
+				{
+					"name": "Region",
+					"type": "String"
+				},
+				{
+					"name": "IpAddress",
+					"type": "String"
+				},
+				{
+					"name": "UserSubscriptionId",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightSparkStageEvents.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "ApplicationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The application ID of the application producing the record."
+				},
+				{
+					"name": "StageId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the stage."
+				},
+				{
+					"name": "StageName",
+					"description": "The name of the stage.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "AttemptId",
+					"description": "The Id of the stage attempt.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "TaskCount",
+					"description": "The count of tasks associated with the stage.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "SubmissionTime",
+					"description": "The time (UTC) the stage was submitted.",
+					"type": "DateTime",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "CompletionTime",
+					"description": "The time (UTC) the stage was completed.",
+					"type": "DateTime",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "FailureReason",
+					"description": "The reason for failure if the stage failed.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Details",
+					"description": "The exception details for any stage failures.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "RDDInfo",
+					"description": "Json containing information about RDDs used in the stage.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterTenantId",
+					"description": "The tenant ID of the cluster running the stage.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Role",
+					"description": "The type of node  running the stage.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Host",
+					"description": "The FQDN of the host.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterDnsName",
+					"description": "The DNS name of the cluster running the stage.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Region",
+					"description": "The region of the cluster running the stage.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "IpAddress",
+					"description": "The IP Address of the node running the stage.",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UserSubscriptionId",
+					"description": "The subscription ID of the cluster running the stage.",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightSparkStageEventsSample.json"
+		},
+		{
+
+			"name": "HDInsightSparkStageTaskAccumulables",
+			"description": "Spark Stage Task Accumulables.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 4,
+			"dataTypeId": "MICROSOFTHDINSIGHT_SPARKSTAGETASKACCUM",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "ApplicationId",
+					"type": "String"
+				},
+				{
+					"name": "Entity",
+					"type": "String"
+				},
+				{
+					"name": "EntityId",
+					"type": "String"
+				},
+				{
+					"name": "ParentId",
+					"type": "String"
+				},
+				{
+					"name": "MetricId",
+					"type": "String"
+				},
+				{
+					"name": "MetricName",
+					"type": "String"
+				},
+				{
+					"name": "Value",
+					"type": "String"
+				},
+				{
+					"name": "Tenant",
+					"type": "String"
+				},
+				{
+					"name": "Role",
+					"type": "String"
+				},
+				{
+					"name": "Host",
+					"type": "String"
+				},
+				{
+					"name": "RoleInstance",
+					"type": "String"
+				},
+				{
+					"name": "ClusterDnsName",
+					"type": "String"
+				},
+				{
+					"name": "Region",
+					"type": "String"
+				},
+				{
+					"name": "IpAddress",
+					"type": "String"
+				},
+				{
+					"name": "UserSubscriptionId",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightSparkStageTaskAccumulables.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "ApplicationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The application ID of the application producing the record."
+				},
+				{
+					"name": "Entity",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the entity being described."
+				},
+				{
+					"name": "EntityId",
+					"description": "The ID of the entity.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ParentId",
+					"description": "The ID of the parent entity.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "MetricId",
+					"description": "The ID of the metric.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "MetricName",
+					"description": "The name of the metric.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "MetricValue",
+					"description": "The value of the metric.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterTenantId",
+					"description": "The tenant ID of the cluster where the metric was collected.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Role",
+					"description": "The type of node where the metric was collected.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Host",
+					"description": "The FQDN of the host where the metric was collected.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterDnsName",
+					"description": "The DNS name of the cluster where the metric was collected.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Region",
+					"description": "The region of the cluster where the metric was collected.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "IpAddress",
+					"description": "The IP Address of the node where the metric was collected.",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UserSubscriptionId",
+					"description": "The subscription ID of the cluster where the metric was collected.",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightSparkStageTaskAccumulablesSample.json"
+		},
+		{
+
+			"name": "HDInsightSparkTaskEvents",
+			"description": "Spark Task Events.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"dataTypeId": "MICROSOFTHDINSIGHT_SPARKTASKEVENTS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "ApplicationId",
+					"type": "String"
+				},
+				{
+					"name": "StageId",
+					"type": "String"
+				},
+				{
+					"name": "TaskId",
+					"type": "String"
+				},
+				{
+					"name": "AttemptId",
+					"type": "String"
+				},
+				{
+					"name": "ExecutorId",
+					"type": "String"
+				},
+				{
+					"name": "LaunchTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "FinishTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "Failed",
+					"type": "String"
+				},
+				{
+					"name": "Killed",
+					"type": "String"
+				},
+				{
+					"name": "EndReason",
+					"type": "String"
+				},
+				{
+					"name": "TaskType",
+					"type": "String"
+				},
+				{
+					"name": "M_DiskBytesSpilled",
+					"type": "String"
+				},
+				{
+					"name": "M_ExecutorCPUTime",
+					"type": "String"
+				},
+				{
+					"name": "M_ExecutorDeserializeCPUTime",
+					"type": "String"
+				},
+				{
+					"name": "M_ExecutorDeserializeTime",
+					"type": "String"
+				},
+				{
+					"name": "M_ExecutorRunTime",
+					"type": "String"
+				},
+				{
+					"name": "M_JvmGcTime",
+					"type": "String"
+				},
+				{
+					"name": "M_MemoryBytesSpilled",
+					"type": "String"
+				},
+				{
+					"name": "M_ResultSerializationTime",
+					"type": "String"
+				},
+				{
+					"name": "M_ResultSize",
+					"type": "String"
+				},
+				{
+					"name": "M_ShuffleReadMetrics",
+					"type": "String"
+				},
+				{
+					"name": "M_ShuffleWriteMetrics",
+					"type": "String"
+				},
+				{
+					"name": "M_InputMetrics",
+					"type": "String"
+				},
+				{
+					"name": "M_OutputMetrics",
+					"type": "String"
+				},
+				{
+					"name": "M_UpdatedBlocks",
+					"type": "String"
+				},
+				{
+					"name": "M_PeakExecutionMemory",
+					"type": "String"
+				},
+				{
+					"name": "M_SchedulerDelay",
+					"type": "String"
+				},
+				{
+					"name": "M_RecordsRead",
+					"type": "String"
+				},
+				{
+					"name": "M_BytesRead",
+					"type": "String"
+				},
+				{
+					"name": "M_RecordsWritten",
+					"type": "String"
+				},
+				{
+					"name": "M_BytesWritten",
+					"type": "String"
+				},
+				{
+					"name": "M_ShuffleFetchWaitTime",
+					"type": "String"
+				},
+				{
+					"name": "M_ShuffleTotalBytesRead",
+					"type": "String"
+				},
+				{
+					"name": "M_ShuffleTotalBlocksFetched",
+					"type": "String"
+				},
+				{
+					"name": "M_ShuffleLocalBlocksFetched",
+					"type": "String"
+				},
+				{
+					"name": "M_ShuffleRemoteBlocksFetched",
+					"type": "String"
+				},
+				{
+					"name": "M_ShuffleWriteTime",
+					"type": "String"
+				},
+				{
+					"name": "M_ShuffleBytesWritten",
+					"type": "String"
+				},
+				{
+					"name": "M_ShuffleRecordsWritten",
+					"type": "String"
+				},
+				{
+					"name": "M_NumUpdatedBlockStatuses",
+					"type": "String"
+				},
+				{
+					"name": "Tenant",
+					"type": "String"
+				},
+				{
+					"name": "Role",
+					"type": "String"
+				},
+				{
+					"name": "Host",
+					"type": "String"
+				},
+				{
+					"name": "RoleInstance",
+					"type": "String"
+				},
+				{
+					"name": "ClusterDnsName",
+					"type": "String"
+				},
+				{
+					"name": "Region",
+					"type": "String"
+				},
+				{
+					"name": "IpAddress",
+					"type": "String"
+				},
+				{
+					"name": "UserSubscriptionId",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightSparkTaskEvents.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "ApplicationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The application ID of the application producing the record."
+				},
+				{
+					"name": "StageId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the stage associated with the task."
+				},
+				{
+					"name": "TaskId",
+					"description": "The ID of the task.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "AttemptId",
+					"description": "The ID of task attempt.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ExecutorId",
+					"description": "The ID executor.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "LaunchTime",
+					"description": "The time (UTC) the task was launched.",
+					"type": "DateTime",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "FinishTime",
+					"description": "The time (UTC) the task finished.",
+					"type": "DateTime",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Failed",
+					"description": "Boolean describing whether the task failed.",
+					"type": "Bool",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Killed",
+					"description": "Boolean describing whether the task was killed.",
+					"type": "Bool",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "EndReason",
+					"description": "Reason why the task ended.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "TaskType",
+					"description": "The task type.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "DiskBytesSpilled",
+					"description": "The number of disk bytes spilled.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ExecutorCPUTime",
+					"description": "The CPU time consumed by the task executor.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ExecutorDeserializeCPUTime",
+					"description": "The CPU time the task executor spent deserializing.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ExecutorDeserializeTime",
+					"description": "The time the task executor spent deserializing.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ExecutorRunTime",
+					"description": "The time task executor spent running.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "JvmGcTime",
+					"description": "The time the JVM spent garbage collecting.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "MemoryBytesSpilled",
+					"description": "The bytes of memory spilled.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ResultSerializationTime",
+					"description": "The serialization time spent while getting the result.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ResultSize",
+					"description": "Size of the result.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ShuffleReadMetrics",
+					"description": "The metrics associated with shuffle reads.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ShuffleWriteMetrics",
+					"description": "The metrics associated with shuffle writes.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "InputMetrics",
+					"description": "The metrics associated with the task input.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "OutputMetrics",
+					"description": "The metrics associated with the task output.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UpdatedBlocks",
+					"description": "The number of updated blocks.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "PeakExecutionMemory",
+					"description": "The peak amount of memory used during execution.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "SchedulerDelay",
+					"description": "The amount of delay the scheduler experienced.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "RecordsRead",
+					"description": "The number of records read during the task.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "BytesRead",
+					"description": "The number bytes read during the task.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "RecordsWritten",
+					"description": "The number of records written by the task.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "BytesWritten",
+					"description": "The number of bytes written by the task.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ShuffleFetchWaitTime",
+					"description": "The time spent waitng for fetching.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ShuffleTotalBytesRead",
+					"description": "The number bytes read during the shuffle task.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ShuffleTotalBlocksFetched",
+					"description": "The number of blocks fethced during the shuffle task.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ShuffleLocalBlocksFetched",
+					"description": "The number of local blocks fethced during the shuffle task.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ShuffleRemoteBlocksFetched",
+					"description": "The number of remote blocks fethced during the shuffle task.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ShuffleWriteTime",
+					"description": "The time spent writing during the shuffle task.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ShuffleBytesWritten",
+					"description": "The bytes written during the shuffle task.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ShuffleRecordsWritten",
+					"description": "The number of records written during the shuffle task.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "NumUpdatedBlockStatuses",
+					"description": "The number updated block statuses during the task.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterTenantId",
+					"description": "The tenant ID of the cluster running the task.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Role",
+					"description": "The type of node running the task.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Host",
+					"description": "The FQDN of the host running the task.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterDnsName",
+					"description": "The DNS name of the cluster running the task.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Region",
+					"description": "The region of the cluster running the task.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "IpAddress",
+					"description": "The IP Address of the node running the task.",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UserSubscriptionId",
+					"description": "The subscription ID of the cluster running the task",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightSparkTaskEventsSample.json"
+		},
+		{
+			"name": "HDInsightSparkLogs",
+			"description": "All logs from related to Spark including Jupyter and Livy logs.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 1,
+			"dataTypeId": "MICROSOFTHDINSIGHT_SPARKLOGS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "logLevel",
+					"type": "String"
+				},
+				{
+					"name": "message",
+					"type": "String"
+				},
+				{
+					"name": "clusterName",
+					"type": "String"
+				},
+				{
+					"name": "hostName",
+					"type": "String"
+				},
+				{
+					"name": "logType",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "FluentdIngestTimestamp",
+					"type": "DateTime"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightSparkLogs.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID for correlated events. Can be used to identify correlated events between multiple tables."
+				},
+				{
+					"name": "LogLevel",
+					"description": "log level of message (INFO, WARN, ERROR, etc.).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Message",
+					"description": "message from HBase log.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterName",
+					"description": "Name of cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "HostName",
+					"description": "Name of host where log was emitted.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "LogType",
+					"description": "The name of the log file that a record came from (e.g. SparkExecutorLog, SparkDriverLog).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation associated with log record."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightSparkLogsSample.json"
+		},
+		{
+			"name": "HDInsightSecurityLogs",
+			"description": "Security related logs including Ambari Audit and Auth Log.",
+			"categories": [ "resources", "security" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 1,
+			"dataTypeId": "MICROSOFTHDINSIGHT_SECURITYLOGS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "utcTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "message",
+					"type": "String"
+				},
+				{
+					"name": "clusterName",
+					"type": "String"
+				},
+				{
+					"name": "hostName",
+					"type": "String"
+				},
+				{
+					"name": "logType",
+					"type": "String"
+				},
+				{
+					"name": "FluentdIngestTimestamp",
+					"type": "DateTime"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightSecurityLogs.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation associated with log record."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID for correlated events. Can be used to identify correlated events between multiple tables."
+				},
+				{
+					"name": "Message",
+					"description": "message from log file.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterName",
+					"description": "Name of cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "HostName",
+					"description": "Name of host where log was emitted.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "LogType",
+					"description": "The name of the log file that a record came from (e.g. AmbariAuditLog, AuthLog).",
+					"type": "String",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightSecurityLogsSample.json"
+		},
+		{
+			"name": "HDInsightRangerAuditLogs",
+			"description": "Audit logs from the Ranger component (only for ESP clusters).",
+			"categories": [ "resources", "audit" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 2,
+			"dataTypeId": "MICROSOFTHDINSIGHT_RANGERAUDITLOGS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "repoType",
+					"type": "String"
+				},
+				{
+					"name": "repo",
+					"type": "String"
+				},
+				{
+					"name": "reqUser",
+					"type": "String"
+				},
+				{
+					"name": "evtTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "access",
+					"type": "String"
+				},
+				{
+					"name": "resource",
+					"type": "String"
+				},
+				{
+					"name": "resType",
+					"type": "String"
+				},
+				{
+					"name": "action",
+					"type": "String"
+				},
+				{
+					"name": "result",
+					"type": "String"
+				},
+				{
+					"name": "policy",
+					"type": "String"
+				},
+				{
+					"name": "enforcer",
+					"type": "String"
+				},
+				{
+					"name": "sess",
+					"type": "String"
+				},
+				{
+					"name": "cliType",
+					"type": "String"
+				},
+				{
+					"name": "cliIP",
+					"type": "String"
+				},
+				{
+					"name": "reqData",
+					"type": "String"
+				},
+				{
+					"name": "agentHost",
+					"type": "String"
+				},
+				{
+					"name": "logType",
+					"type": "String"
+				},
+				{
+					"name": "id",
+					"type": "String"
+				},
+				{
+					"name": "seq_num",
+					"type": "String"
+				},
+				{
+					"name": "event_count",
+					"type": "String"
+				},
+				{
+					"name": "event_dur_ms",
+					"type": "String"
+				},
+				{
+					"name": "tags",
+					"type": "String"
+				},
+				{
+					"name": "additional_info",
+					"type": "String"
+				},
+				{
+					"name": "clusterName",
+					"type": "String"
+				},
+				{
+					"name": "hostName",
+					"type": "String"
+				},
+				{
+					"name": "clusterType",
+					"type": "String"
+				},
+				{
+					"name": "FluentdIngestTimestamp",
+					"type": "DateTime"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightRangerAuditLogs.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation associated with log record."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID for correlated events. Can be used to identify correlated events between multiple tables."
+				},
+				{
+					"name": "ClusterName",
+					"description": "Name of cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "HostName",
+					"description": "Name of host where log was emitted.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterType",
+					"description": "Type of the cluster that emitted the record.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "RepoType",
+					"description": "Integer representing the repo type.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Repo",
+					"description": "Name the repo.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "RequestUser",
+					"description": "Username associated with the event.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "AccessName",
+					"description": "Name of the access method.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterResource",
+					"description": "Resource involved in request event.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterResourceType",
+					"description": "The type of resource accessed.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Action",
+					"description": "Type of action made by the event.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Result",
+					"description": "Status code of the event result.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Policy",
+					"description": "Code representing the policy.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Enforcer",
+					"description": "Name of the policy enforcer.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "RequestData",
+					"description": "Source that provides the request data.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "SessionId",
+					"description": "ID associated witht the user session.",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "CliType",
+					"description": "Type of CLI used to create request.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "CliIpAddress",
+					"description": "IP address of where CLI request was made.",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "LogType",
+					"description": "Type of log the record came from.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Id",
+					"description": "ID of the event request.",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "SequenceNumber",
+					"description": "Sequence number of the event.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "EventCount",
+					"description": "Number of events associated with the request.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "EventDurationMs",
+					"description": "Duration of the event in milliseconds.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Tags",
+					"description": "List of tags associated with the event.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "AdditionalInfo",
+					"description": "Additional info about the request including the remote and forwarded IPs",
+					"type": "String",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightRangerAuditLogsSample.json"
+		},
+		{
+			"name": "HDInsightHiveAndLLAPLogs",
+			"description": "All logs from HDInsight Hive and LLAP Clusters.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 1,
+			"dataTypeId": "MICROSOFTHDINSIGHT_HIVEANDLLAPLOGS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "utcTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "logLevel",
+					"type": "String"
+				},
+				{
+					"name": "message",
+					"type": "String"
+				},
+				{
+					"name": "clusterName",
+					"type": "String"
+				},
+				{
+					"name": "clusterType",
+					"type": "String"
+				},
+				{
+					"name": "hostName",
+					"type": "String"
+				},
+				{
+					"name": "logType",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "FluentdIngestTimestamp",
+					"type": "DateTime"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightHiveAndLLAPLogs.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID for correlated events. Can be used to identify correlated events between multiple tables."
+				},
+				{
+					"name": "LogLevel",
+					"description": "log level of message (INFO, WARN, ERROR, etc.).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Message",
+					"description": "message from Hive or LLAP log.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterName",
+					"description": "Name of cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterType",
+					"description": "Type of the cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "HostName",
+					"description": "Name of host where log was emitted.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "LogType",
+					"description": "The name of the log file that a record came from (e.g. HiveServerLog, WebHCatLog, etc.).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation associated with log record."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightHiveAndLLAPLogsSample.json"
+		},
+		{
+			"name": "HDInsightHiveAndLLAPMetrics",
+			"description": "JMX metrics from Hive and LLAP clusters.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 2,
+			"dataTypeId": "MICROSOFTHDINSIGHT_HIVEANDLLAPMETRICS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "name",
+					"type": "String"
+				},
+				{
+					"name": "metrics",
+					"type": "String"
+				},
+				{
+					"name": "tags",
+					"type": "String"
+				},
+				{
+					"name": "clusterName",
+					"type": "String"
+				},
+				{
+					"name": "clusterType",
+					"type": "String"
+				},
+				{
+					"name": "hostName",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "FluentdIngestTimestamp",
+					"type": "DateTime"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightHiveAndLLAPMetrics.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "MetricNamespace",
+					"description": "Category of metric (value of jmx query string  e.g. Hadoop:service=LlapDaemon,name=LlapDaemonCacheMetrics, etc). ",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "MetricName",
+					"description": "Name of the metric for the record (e.g. CacheCapacityRemaining, CacheCapacityRemainingPercentage,CacheCapacityTotal, etc).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "MetricValue",
+					"description": "Value of metric in the record.",
+					"type": "Double",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Tags",
+					"description": "Information about the record. For example a record may be tagged with 'LlapDaemon' if it came from that process.",
+					"type": "Dynamic",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterName",
+					"description": "Name of cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterType",
+					"description": "Type of the cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "HostName",
+					"description": "Name of host where log was emitted.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation associated with log record."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID for correlated events. Can be used to identify correlated events between multiple tables."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightHiveAndLLAPMetricsSample.json"
+		},
+		{
+			"name": "HDInsightHadoopAndYarnLogs",
+			"description": "Logs from HDInsight Hadoop Clusters and YARN-related logs such as ResourceManager, NodeManager, and TimelineServer logs from all cluster types that use YARN.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 1,
+			"dataTypeId": "MICROSOFTHDINSIGHT_HADOOPANDYARNLOGS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "utcTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "logLevel",
+					"type": "String"
+				},
+				{
+					"name": "message",
+					"type": "String"
+				},
+				{
+					"name": "clusterName",
+					"type": "String"
+				},
+				{
+					"name": "clusterType",
+					"type": "String"
+				},
+				{
+					"name": "hostName",
+					"type": "String"
+				},
+				{
+					"name": "logType",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "FluentdIngestTimestamp",
+					"type": "DateTime"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightHadoopAndYarnLogs.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID for correlated events. Can be used to identify correlated events between multiple tables."
+				},
+				{
+					"name": "LogLevel",
+					"description": "log level of message (INFO, WARN, ERROR, etc.).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Message",
+					"description": "message from Hadoop or YARN log.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterName",
+					"description": "Name of cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterType",
+					"description": "Type of the cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "HostName",
+					"description": "Name of host where log was emitted.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "LogType",
+					"description": "The name of the log file that a record came from (e.g. YarnTimeLineServer, YarnResourceManager, etc.).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation associated with log record."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightHadoopAndYarnLogsSample.json"
+		},
+		{
+			"name": "HDInsightHadoopAndYarnMetrics",
+			"description": "JMX metrics from Hadoop clusters and Yarn JMX metrics from any YARN-based cluster type.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 2,
+			"dataTypeId": "MICROSOFTHDINSIGHT_HADOOPANDYARNMETRICS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "name",
+					"type": "String"
+				},
+				{
+					"name": "metrics",
+					"type": "String"
+				},
+				{
+					"name": "tags",
+					"type": "String"
+				},
+				{
+					"name": "clusterName",
+					"type": "String"
+				},
+				{
+					"name": "clusterType",
+					"type": "String"
+				},
+				{
+					"name": "hostName",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "FluentdIngestTimestamp",
+					"type": "DateTime"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightHadoopAndYarnMetrics.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "MetricNamespace",
+					"description": "Category of metric (value of jmx query URIs e.g. Hadoop:service=ResourceManager,name=QueueMetrics, etc).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "MetricName",
+					"description": "Name of the metric for the record (e.g. AppsCompleted, AppsKilled, AppsFailed , etc).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "MetricValue",
+					"description": "Value of metric in the record.",
+					"type": "Double",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Tags",
+					"description": "Information about the record. For example a record may be tagged with 'yarn' if it is in the yarn context.",
+					"type": "Dynamic",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterName",
+					"description": "Name of cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterType",
+					"description": "Name of cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "HostName",
+					"description": "Name of host where log was emitted.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation associated with log record."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID for correlated events. Can be used to identify correlated events between multiple tables."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightHadoopAndYarnMetricsSample.json"
+		},
+		{
+			"name": "HDInsightOozieLogs",
+			"description": "All logs from Oozie component.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 1,
+			"dataTypeId": "MICROSOFTHDINSIGHT_OOZIELOGS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "utcTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "logLevel",
+					"type": "String"
+				},
+				{
+					"name": "message",
+					"type": "String"
+				},
+				{
+					"name": "clusterName",
+					"type": "String"
+				},
+				{
+					"name": "clusterType",
+					"type": "String"
+				},
+				{
+					"name": "hostName",
+					"type": "String"
+				},
+				{
+					"name": "logType",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "FluentdIngestTimestamp",
+					"type": "DateTime"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightOozieLogs.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "LogLevel",
+					"description": "log level of message (INFO, WARN, ERROR, etc.).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Message",
+					"description": "message from Oozie log.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterName",
+					"description": "Name of cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterType",
+					"description": "Name of cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "HostName",
+					"description": "Name of host where log was emitted.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "LogType",
+					"description": "The name of the log file that a record came from.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID for correlated events. Can be used to identify correlated events between multiple tables."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation associated with log record."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightOozieLogsSample.json"
+		},
+		{
+			"name": "HDInsightHiveQueryAppStats",
+			"description": "Hive Query Metrics emitted from the YARN Timeline Server.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 1,
+			"dataTypeId": "MICROSOFTHDINSIGHT_HIVEQUERYSTATS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "entitytype",
+					"type": "String"
+				},
+				{
+					"name": "entity",
+					"type": "String"
+				},
+				{
+					"name": "metrics",
+					"type": "String"
+				},
+				{
+					"name": "QUERY_COMPLETED",
+					"type": "String"
+				},
+				{
+					"name": "QUERY_SUBMITTED",
+					"type": "String"
+				},
+				{
+					"name": "domain",
+					"type": "String"
+				},
+				{
+					"name": "primaryfilters_requestuser_0",
+					"type": "String"
+				},
+				{
+					"name": "primaryfilters_executionmode_0",
+					"type": "String"
+				},
+				{
+					"name": "primaryfilters_user_0",
+					"type": "String"
+				},
+				{
+					"name": "primaryfilters_queue_0",
+					"type": "String"
+				},
+				{
+					"name": "primaryfilters_tablesread_0",
+					"type": "String"
+				},
+				{
+					"name": "otherinfo_CLIENT_IP_ADDRESS",
+					"type": "String"
+				},
+				{
+					"name": "otherinfo_TEZ",
+					"type": "String"
+				},
+				{
+					"name": "otherinfo_MAPRED",
+					"type": "String"
+				},
+				{
+					"name": "otherinfo_THREAD_NAME",
+					"type": "String"
+				},
+				{
+					"name": "otherinfo_HIVE_INSTANCE_TYPE",
+					"type": "String"
+				},
+				{
+					"name": "otherinfo_SESSION_ID",
+					"type": "String"
+				},
+				{
+					"name": "tags",
+					"type": "String"
+				},
+				{
+					"name": "clusterName",
+					"type": "String"
+				},
+				{
+					"name": "clusterType",
+					"type": "String"
+				},
+				{
+					"name": "hostName",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "FluentdIngestTimestamp",
+					"type": "DateTime"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightHiveQueryAppStats.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "Entity",
+					"description": "Name of the query's entity.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "EntityType",
+					"description": "The type of the query's entity.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "MetricName",
+					"description": "Name of the metric for the record (e.g. AppsCompleted, AppsKilled, AppsFailed , etc).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "MetricValue",
+					"description": "Value of metric in the record.",
+					"type": "Double",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Tags",
+					"description": "Information about the record. For example a record may be tagged with 'yarn' if it is in the yarn context.",
+					"type": "Dynamic",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterName",
+					"description": "Name of cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterType",
+					"description": "Type of cluster (e.g. LLAP or Hadoop).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "HostName",
+					"description": "Name of host where log was emitted.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "QuerySubmissionTime",
+					"description": "Time that query was submitted.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "QueryCompletionTime",
+					"description": "Time that query was completed.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Domain",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The domain associated with the query.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "RequestUser",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The client user that submitted the request."
+				},
+				{
+					"name": "ExecutionMode",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The execution mode of the query."
+				},
+				{
+					"name": "User",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The user of the Hive instance executing the query."
+				},
+				{
+					"name": "Queue",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The queue the query was served from."
+				},
+				{
+					"name": "TablesRead",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The tables read by the query."
+				},
+				{
+					"name": "ClientIpAddress",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The query client's IP address.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "IsTez",
+					"type": "Bool",
+					"isDefaultDisplay": true,
+					"description": "True if the query is a Tez query."
+				},
+				{
+					"name": "IsMapReduce",
+					"type": "Bool",
+					"isDefaultDisplay": true,
+					"description": "True if the query is a MapReduce query."
+				},
+				{
+					"name": "ThreadName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the thread running the query."
+				},
+				{
+					"name": "HiveInstanceType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The type of hive instance running the query."
+				},
+				{
+					"name": "SessionId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "The session ID of the query."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation associated with log record."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID for correlated events. Can be used to identify correlated events between multiple tables."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightHiveQueryAppStatsSample.json"
+		},
+		{
+			"name": "HDInsightHiveTezAppStats",
+			"description": "Tez Application Metrics emitted from the YARN Resource Manager.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 1,
+			"dataTypeId": "MICROSOFTHDINSIGHT_HIVETEZAPPSTATS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "name",
+					"type": "String"
+				},
+				{
+					"name": "metrics",
+					"type": "String"
+				},
+				{
+					"name": "tags",
+					"type": "String"
+				},
+				{
+					"name": "clusterName",
+					"type": "String"
+				},
+				{
+					"name": "clusterType",
+					"type": "String"
+				},
+				{
+					"name": "hostName",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "FluentdIngestTimestamp",
+					"type": "DateTime"
+				},
+				{
+					"name": "user",
+					"type": "String"
+				},
+				{
+					"name": "id",
+					"type": "String"
+				},
+				{
+					"name": "queue",
+					"type": "String"
+				},
+				{
+					"name": "state",
+					"type": "String"
+				},
+				{
+					"name": "finalStatus",
+					"type": "String"
+				},
+				{
+					"name": "trackingUI",
+					"type": "String"
+				},
+				{
+					"name": "clusterId",
+					"type": "String"
+				},
+				{
+					"name": "applicationType",
+					"type": "String"
+				},
+				{
+					"name": "startedTime",
+					"type": "String"
+				},
+				{
+					"name": "finishedTime",
+					"type": "String"
+				},
+				{
+					"name": "elapsedTime",
+					"type": "String"
+				},
+				{
+					"name": "amContainerLogs",
+					"type": "String"
+				},
+				{
+					"name": "logAggregationStatus",
+					"type": "String"
+				},
+				{
+					"name": "unmanagedApplication",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/HDInsightHiveTezAppStats.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "MetricName",
+					"description": "Name of the metric for the record (e.g. AppsCompleted, AppsKilled, AppsFailed , etc).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "MetricValue",
+					"description": "Value of metric in the record.",
+					"type": "Double",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Tags",
+					"description": "Information about the record. For example a record may be tagged with 'yarn' if it is in the yarn context.",
+					"type": "Dynamic",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterName",
+					"description": "Name of cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClusterType",
+					"description": "Name of cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "HostName",
+					"description": "Name of host where log was emitted.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ApplicationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the application that the metrics describe."
+				},
+				{
+					"name": "ApplicationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the Application that the metrics describe."
+				},
+				{
+					"name": "User",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the user of the application."
+				},
+				{
+					"name": "Queue",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The queue of the application."
+				},
+				{
+					"name": "State",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The state of the application."
+				},
+				{
+					"name": "FinalStatus",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The final status of the application if it has reached a terminal state."
+				},
+				{
+					"name": "TrackingUI",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "?."
+				},
+				{
+					"name": "ClusterId",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "The final status of the application if it has reached a terminal state."
+				},
+				{
+					"name": "ApplicationType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The type of application."
+				},
+				{
+					"name": "StartedTime",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "The time the application started."
+				},
+				{
+					"name": "FinishedTime",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "The time the application finished."
+				},
+				{
+					"name": "ElapsedTime",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "The time elapsed while the application was running."
+				},
+				{
+					"name": "AMContainerLogs",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Application Master? container logs."
+				},
+				{
+					"name": "LogAggregationStatus",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The log aggregation status."
+				},
+				{
+					"name": "UnmanagedApplication",
+					"type": "Bool",
+					"isDefaultDisplay": true,
+					"description": "True if application is unmanaged, false if otherwise."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation associated with log record."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID for correlated events. Can be used to identify correlated events between multiple tables."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/HDInsightHiveTezAppStatsSample.json"
+		}
+	],
+	"functions": [],
+	"queries": []
+}

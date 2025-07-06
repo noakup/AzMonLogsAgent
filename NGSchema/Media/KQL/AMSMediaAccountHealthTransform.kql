@@ -1,0 +1,8 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = tostring(split(operationName, "/MEDIASERVICES/")[1]),
+    Level = level,
+    Location = location,
+    EventCode = tostring(properties.eventCode),
+    EventMessage = tostring(properties.statusMessage)

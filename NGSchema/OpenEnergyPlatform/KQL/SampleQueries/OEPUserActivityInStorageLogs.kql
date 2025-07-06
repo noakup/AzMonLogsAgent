@@ -1,0 +1,21 @@
+OEPDataplaneLogs
+// Extract UserId from the Message field using a regular expression
+| extend UserId = extract(@"user-id=([a-zA-Z0-9_-@.]+)", 1, Message)
+// Filter out logs without a UserId
+| where UserId != ""
+// Filter logs to include only those in the "StorageLogs" category
+| where Category == "StorageLogs"
+// Filter logs to include only those with specific HTTP methods
+| where Message has_any (  
+  "GET",
+  "POST",
+  "PUT",
+  "DELETE",
+  "PATCH",
+  "HEAD",
+  "OPTIONS" 
+)
+// Summarize the count of logs per user over daily intervals
+| summarize Count = count() by bin(TimeGenerated, 1d), UserId
+// Render a pie chart for visualization
+| render piechart

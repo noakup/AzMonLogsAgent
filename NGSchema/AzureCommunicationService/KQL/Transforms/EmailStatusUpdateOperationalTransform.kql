@@ -1,0 +1,19 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    Location = location,
+    OperationName = operationName,
+    OperationVersion = operationVersion,
+    Category = category,
+    CorrelationId = correlationId,
+    RecipientId = tostring(properties.RecipientId),
+    DeliveryStatus = tostring(properties.DeliveryStatus),
+    SmtpStatusCode = tostring(properties.SmtpStatusCode),
+    EnhancedSmtpStatusCode = tostring(properties.EnhancedSmtpStatusCode),
+    RecipientMailServerHostName = tostring(properties.RecipientMailServerHostName),
+    SenderDomain = tostring(properties.SenderDomain),
+    SenderUsername = tostring(properties.SenderUsername),
+    IsHardBounce = tostring(properties.IsHardBounce),
+    FailureReason = tostring(properties.FailureReason),
+    FailureMessage = tostring(properties.FailureMessage),
+    InternetMessageId = tostring(properties.InternetMessageId)

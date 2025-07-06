@@ -1,0 +1,15 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    operationName = operationName,
+    operationVersion = operationVersion,
+    resultDescription = resultDescription,
+    Source = tostring(properties.EventData.Source),
+    EventType = tostring(properties.EventData.Type),
+    Name = tostring(iff(isnull(properties.EventData.Name), properties.EventData.NAME, properties.EventData.Name)),
+    Ttl = toint(properties.EventData.TTL),
+    BufferSize = toint(properties.EventData.BufferSize),
+    RData = tostring(properties.EventData.RDATA),
+    Zone = tostring(properties.EventData.Zone),
+    ZoneScope = tostring(properties.EventData.ZoneScope),
+    RecordId = tostring(properties.RecordId)

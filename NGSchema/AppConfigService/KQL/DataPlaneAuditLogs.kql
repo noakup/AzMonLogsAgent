@@ -1,0 +1,6 @@
+// This query helps retrieve the most recent 10 audit logs for deleting key-value operations in App Configuration data plane.
+AACAudit
+| where EventCategory == "ApplicationManagement" and OperationName == "delete-keyvalue"
+| where TimeGenerated > ago(1h)
+| sort by TimeGenerated desc
+| limit 10

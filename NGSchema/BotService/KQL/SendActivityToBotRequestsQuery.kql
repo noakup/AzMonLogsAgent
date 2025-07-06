@@ -1,0 +1,5 @@
+// This query displays logs of requests sent from a client such as WebChat to Direct Line channel.
+// Replace 'SendAnActivity:ClientToDirectLine' with any operation name whose logs you would like to retrieve.
+ABSBotRequests
+| where OperationName == 'SendAnActivity:ClientToDirectLine'
+| sort by TimeGenerated desc

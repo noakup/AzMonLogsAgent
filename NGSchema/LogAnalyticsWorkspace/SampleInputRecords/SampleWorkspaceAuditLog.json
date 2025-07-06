@@ -1,0 +1,20 @@
+[
+    {
+        "timeGenerated": "2020-08-13T16:05:57.078Z",
+        "resourceId": "/SUBSCRIPTIONS/AD2F1A83-CAAC-4E21-9D2A-9CA3F87105E2/RESOURCEGROUPS/QUERYAUDITTIPTEST/PROVIDERS/MICROSOFT.OPERATIONALINSIGHTS/WORKSPACES/TIPTEST",
+        "operationName": "microsoft.operationalinsights/workspaces/query/read",
+        "category": "Audit",
+        "correlationId": "9a6cbd19-9252-42a6-b157-b45b1cc3580a",
+        "properties": "{\"aadObjectId\":\"00000000-0000-0000-0000-000000000000\",\"aadEmail\":\"test@microsoft.com\",\"aadTenantId\":\"72f988bf-86f1-41af-91ab-2d7cd011db47\",\"aadClientId\":\"00000000-0000-0000-0000-000000000000\",\"conditionalDataAccess\":\"Condition applied\",\"queryText\":\"set query_take_max_records=10001;set truncationmaxsize=67108864;\\nAzureActivity\\r\\n| summarize count() by _ResourceId\\n\",\"queryTimeRangeStart\":\"2020-08-12T16:05:57.092Z\",\"queryTimeRangeEnd\":\"2020-08-13T16:05:57.092Z\",\"requestClientApp\":\"AppAnalytics\",\"requestTarget\":\"/subscriptions/ad2f1a83-caac-4e21-9d2a-9ca3f87105e2/resourceGroups/queryaudittiptest/providers/microsoft.operationalinsights/workspaces/tipTest\",\"requestContext\":\"{\\\"workspaces\\\":[\\\"/subscriptions/ad2f1a83-caac-4e21-9d2a-9ca3f87105e2/resourcegroups/queryaudittiptest/providers/microsoft.operationalinsights/workspaces/tiptest\\\"]}\",\"responseDurationMs\":\"320\",\"responseCode\":\"200\",\"responseRowCount\":\"18\",\"statsCPUTimeMs\":\"141\",\"statsDataProcessedKB\":\"0.1\",\"statsDataProcessedStart\":\"2020-08-12T10:48:56.5205332Z\",\"statsDataProcessedEnd\":\"2020-08-13T15:58:43.1380009Z\",\"statsWorkspaceCount\":\"1\",\"statsRegionCount\":\"1\",\"isBillable\":true,\"scannedGB\":\"123\",\"workspaceRegion\":\"eastus\",\"isWorkspaceInFailover\":true}",
+        "time": "2020-08-13T16:05:57.078Z"
+    },
+    {
+        "timeGenerated": "2020-08-13T16:05:42.805Z",
+        "resourceId": "/SUBSCRIPTIONS/AD2F1A83-CAAC-4E21-9D2A-9CA3F87105E2/RESOURCEGROUPS/QUERYAUDITTIPTEST/PROVIDERS/MICROSOFT.OPERATIONALINSIGHTS/WORKSPACES/TIPTEST",
+        "operationName": "microsoft.operationalinsights/workspaces/query/read",
+        "category": "Audit",
+        "correlationId": "fb946bf1-3c04-4ffb-b7b4-010a4ffb3dc4",
+        "properties": "{\"aadObjectId\":\"00000000-0000-0000-0000-000000000000\",\"aadEmail\":\"test@microsoft.com\",\"aadTenantId\":\"72f988bf-86f1-41af-91ab-2d7cd011db47\",\"aadClientId\":\"00000000-0000-0000-0000-000000000000\",\"conditionalDataAccess\":\"Condition applied\",\"queryText\":\"set query_take_max_records=10001;set truncationmaxsize=67108864;\\nunion *\\r\\n| distinct Type\\n\",\"queryTimeRangeStart\":\"2020-08-12T16:05:42.911Z\",\"queryTimeRangeEnd\":\"2020-08-13T16:05:42.911Z\",\"requestClientApp\":\"AppAnalytics\",\"requestTarget\":\"/subscriptions/ad2f1a83-caac-4e21-9d2a-9ca3f87105e2/resourceGroups/queryaudittiptest/providers/microsoft.operationalinsights/workspaces/tipTest\",\"requestContext\":\"{\\\"workspaces\\\":[\\\"/subscriptions/ad2f1a83-caac-4e21-9d2a-9ca3f87105e2/resourcegroups/queryaudittiptest/providers/microsoft.operationalinsights/workspaces/tiptest\\\"]}\",\"responseDurationMs\":\"1453\",\"responseCode\":\"200\",\"responseRowCount\":\"2\",\"statsCPUTimeMs\":\"16\",\"statsDataProcessedKB\":\"0.1\",\"statsDataProcessedStart\":\"2020-08-12T08:17:51.7437970Z\",\"statsDataProcessedEnd\":\"2020-08-13T16:00:44.0746405Z\",\"statsWorkspaceCount\":\"1\",\"statsRegionCount\":\"1\",\"isBillable\":true,\"scannedGB\":\"0.123\",\"workspaceRegion\":\"eastus\",\"isWorkspaceInFailover\":true}",
+        "time": "2020-08-13T16:05:42.805Z"
+    }
+]

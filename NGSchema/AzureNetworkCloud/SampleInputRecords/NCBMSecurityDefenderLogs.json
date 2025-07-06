@@ -1,0 +1,24 @@
+[
+    {
+        "ContainerName": "cluster-state-collector",
+        "NamespaceName": "mdc",
+        "Node": "b37dev03a1c005",
+        "PodName": "microsoft-defender-collectors-k7h2g",
+        "category": "DefenderSecurity",
+        "clusterManagerName": "dev03-xmof2wbpkgg5i",
+        "clusterName": "dev03-f543be440954",
+        "componentName": "ClusterStateCollector",
+        "componentVersion": "mcr.microsoft.com/azuredefender/stable/cluster-state-collector:1.3.12",
+        "host": "b37dev03a1c001",
+        "location": "eastus",
+        "logType": "Trace",
+        "message": "Failed to get memory usage open /sys/fs/cgroup/memory/memory.usage_in_bytes: no such file or directory",
+        "onbehalfAnnotations": "<Config onBehalfFields=\"resourceId,category\" priority=\"Normal\" primaryPartitionField=\"resourceId\" excludeFields=\"Tenant,Role,RoleInstance,BMServerName,PreciseTimeStamp,FluentdIngestTimestamp,TIMESTAMP,ContainerImage,GenevaPodName,environment,clusterID,clusterManagedResourceGroupName,clusterManagerID,clusterManagerResourceGroupName,clusterResourceGroupName,Tag,tenantID,originalRecord\" containerSuffix=\"$category\" />",
+        "onbehalfServiceId": "Microsoft.NetworkCloud",
+        "operationName": "Microsoft.NetworkCloud/bareMetalMachines/read",
+        "resourceId": "/SUBSCRIPTIONS/FCA2E8EE-1179-48B8-9532-428ED0873A2E/RESOURCEGROUPS/DEV03-F543BE440954-HOSTEDRESOURCES-18D9C49B/PROVIDERS/MICROSOFT.NETWORKCLOUD/BAREMETALMACHINES/B37DEV03A1C001",
+        "severity": "error",
+        "subscriptionID": "fca2e8ee-1179-48b8-9532-428ed0873a2e",
+        "time": "2023-09-01T21:10:01.169142437Z"
+    }
+]

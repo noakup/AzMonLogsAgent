@@ -1,0 +1,335 @@
+{
+    "type": "microsoft.intune/operations",
+    "displayName": "Intune Specialist Reports.",
+    "description": "Intune Specialist Reports.",
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "MicrosoftIntune/InsightsAndAnalyticsEngg",
+    "tags": {},
+    "properties": {},
+    "relatedTables": [],
+    "relatedFunctions": [],
+    "tables": [
+      {
+        "name": "IntuneDevices",
+        "description": "Intune devices specialist report.",
+        "dataTypeId": "TENANTMICROSOFTINTUNE_DEVICES",
+        "isResourceCentric": false,
+        "categories": [ "management" ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "isLakeAllowed": true,
+        "input": [
+          {
+            "name": "time",
+            "type": "DateTime"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "resultType",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "String"
+          },
+          {
+            "name": "tenantId",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/IntuneDevicesTransform.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isPreferredFacet": true,
+            "isDefaultDisplay": true,
+            "description": "Date and time when the report was generated (UTC)"
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isPreferredFacet": false,
+            "isDefaultDisplay": false,
+            "description": "The name of the operation"
+          },
+          {
+            "name": "Result",
+            "type": "String",
+            "isPreferredFacet": false,
+            "isDefaultDisplay": true,
+            "description": "The result of the operation"
+          },
+          {
+            "name": "SourceSystem",
+            "type": "String",
+            "isPreferredFacet": true,
+            "isDefaultDisplay": false,
+            "description": "Details of source system of the object being provisioned"
+          },
+          {
+            "name": "DeviceId",
+            "type": "String",
+            "dataTypeHint": "GUID",
+            "description": "The ID of the device",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "DeviceName",
+            "type": "String",
+            "description": "The name of the device",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "UPN",
+            "type": "String",
+            "description": "The user principal name",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "LastContact",
+            "type": "String",
+            "description": "The date and time of last contact",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "OSVersion",
+            "type": "String",
+            "description": "The version of the operating system",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "OS",
+            "type": "String",
+            "description": "The operating system of the device",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "CompliantState",
+            "type": "String",
+            "description": "The compliant state of the device",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "Ownership",
+            "type": "String",
+            "description": "The ownership of the device",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "ManagedBy",
+            "type": "String",
+            "description": "The authority that the device is managed by",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "Model",
+            "type": "String",
+            "description": "The model of the device",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "SerialNumber",
+            "type": "String",
+            "description": "The serial number of the device",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "Manufacturer",
+            "type": "String",
+            "description": "The manufacturer of the device",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "CreatedDate",
+            "type": "String",
+            "description": "The date and time of the device entry was created",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "DeviceState",
+            "type": "String",
+            "description": "The state of the device",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "UserEmail",
+            "type": "String",
+            "description": "The user email address",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "UserName",
+            "type": "String",
+            "description": "The user name",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "IMEI",
+            "type": "String",
+            "description": "The international mobile equipment identifier of the device",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "PhoneNumber",
+            "type": "String",
+            "description": "The phone number",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "DeviceRegistrationState",
+            "type": "String",
+            "description": "The registration state of the device",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "ReferenceId",
+            "type": "String",
+            "dataTypeHint": "GUID",
+            "description": "The AAD Device ID",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "ManagedDeviceName",
+            "type": "String",
+            "description": "The managed device name",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "GraphDeviceIsManaged",
+            "type": "Bool",
+            "description": "Boolean describing whether the graph device is managed",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "CategoryName",
+            "type": "String",
+            "description": "The category name of the device",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "EncryptionStatusString",
+            "type": "String",
+            "description": "String describing whether the device is encrypted",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "SubscriberCarrierNetwork",
+            "type": "String",
+            "description": "The subscriber carrier network",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "JoinType",
+            "type": "String",
+            "description": "The device join type",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "SupervisedStatusString",
+            "type": "String",
+            "description": "String describing whether the device is supervised",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "WifiMacAddress",
+            "type": "String",
+            "description": "The WiFi MAC address of the device",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "StorageTotal",
+            "type": "BigInt",
+            "description": "The total storage size of the device",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "StorageFree",
+            "type": "BigInt",
+            "description": "The free storage size of the device",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "AndroidPatchLevel",
+            "type": "String",
+            "description": "The Android patch level of the device",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "MEID",
+            "type": "String",
+            "description": "The mobile equipment identifier of the device",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "InGracePeriodUntil",
+            "type": "String",
+            "description": "The device grace period end time",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "JailBroken",
+            "type": "String",
+            "description": "String describing whether the device is jail broken",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "SkuFamily",
+            "type": "String",
+            "description": "The stock-keeping unit family of the device",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "EasID",
+            "type": "String",
+            "description": "The Emergency Alert System Identification of the device",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "PrimaryUser",
+            "type": "String",
+            "dataTypeHint": "GUID",
+            "description": "The ID of the primary user",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "BatchId",
+            "type": "Guid",
+            "description": "The unique ID for the exported report",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "IntuneAccountId",
+            "type": "Guid",
+            "description": "The Intune Account ID",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "AADTenantId",
+            "type": "Guid",
+            "description": "The AAD Tenant ID",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "Stats",
+            "type": "Dynamic",
+            "description": "Statistics about the export, including the number of records exported per export",
+            "isDefaultDisplay": false
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/IntuneSampleDevices.json"
+      }
+    ],
+    "functions": [],
+    "queries": []
+}

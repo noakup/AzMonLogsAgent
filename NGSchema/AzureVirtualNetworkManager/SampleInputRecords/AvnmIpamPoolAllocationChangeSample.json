@@ -1,0 +1,38 @@
+[
+    {
+        "time": "2023-10-16T19:36:10.0000000Z",
+        "resourceId": "/SUBSCRIPTIONS/C9295B92-3574-4021-95A1-26C8F74F8359/RESOURCEGROUPS/IPAM-TEST-RG/PROVIDERS/MICROSOFT.NETWORK/NETWORKMANAGERS/TEST-IPAM-NM/IPAMPOOLS/IANPOOLTWOEASTUS",
+        "location": "eastus",
+        "category": "PoolAllocationChange",
+        "operationName": "Microsoft.Network/networkManagers/ipamPools/Action",
+        "correlationId": "75367f91-8a11-40b6-beda-73d3fdb03ef4",
+        "level": "Informational",
+        "properties": {
+            "message":"Vnet successfully added to pool",
+            "changeType":"Add",
+            "changeReason":"ResourceAddedToPool",
+            "resultType":"Success",
+            "allocationResources": [
+                {"ResourceId":"/subscriptions/c9295b92-3574-4021-95a1-26c8f74f8359/resourceGroups/ipam-test-rg/providers/Microsoft.Network/virtualNetworks/vnetA","ResourceCidrs":["10.0.0.0"],"CompliancyProperties":{"InScope":"Compliant","Overlapping":"Compliant"}}
+            ]
+        }
+    },
+    {
+        "time": "2023-10-16T19:37:51.0000000Z",
+        "resourceId": "/SUBSCRIPTIONS/C9295B92-3574-4021-95A1-26C8F74F8359/RESOURCEGROUPS/IPAM-TEST-RG/PROVIDERS/MICROSOFT.NETWORK/NETWORKMANAGERS/TEST-IPAM-NM/IPAMPOOLS/IANPOOLTWOEASTUS",
+        "location": "eastus",
+        "category": "PoolAllocationChange",
+        "operationName": "MICROSOFT.NETWORK/NETWORKMANAGERS/IPAMPOOLS/Action",
+        "correlationId": "9646291d-c20b-4586-9c75-affffe3efafe",
+        "level": "Informational",
+        "properties": {
+            "message":"Child pool successfully added to parent",
+            "changeType":"Add",
+            "changeReason":"ResourceAddedToPool",
+            "resultType":"Success",
+            "allocationResources": [
+                {"ResourceId": "/subscriptions/c9295b92-3574-4021-95a1-26c8f74f8359/resourceGroups/ipam-test-rg/providers/Microsoft.Network/networkManagers/test-ipam-nm/ipamPools/iancp10","ResourceCidrs": [ "10.0.0.72/29" ],"CompliancyProperties": {}}
+            ]
+        }
+    }
+]

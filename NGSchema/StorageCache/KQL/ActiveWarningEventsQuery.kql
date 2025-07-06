@@ -1,0 +1,9 @@
+StorageCacheWarningEvents
+| where State == "Active"
+| project TimeGenerated, CorrelationId, Description, _ResourceId, State
+| join kind=leftanti (StorageCacheWarningEvents
+    | where State == "Cleared"
+        | project TimeGenerated, CorrelationId, Description, _ResourceId, State)
+    on CorrelationId
+| project TimeGenerated, CorrelationId, Description, _ResourceId, State
+| take 100

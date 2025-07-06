@@ -1,0 +1,43 @@
+[
+    {
+        "TimeGenerated": "2023-01-31T19:59:00.0000000Z",
+        "SourceSystem": "Platform",
+        "_resourceId": "/subscriptions/b8622aea-1346-4cfc-b7fd-d9d26a374606/resourceGroups/dcrtestcuseuap/providers/Microsoft.Cache/Redis/redisdcrcuseuap",
+        "_subscriptionId": "b8622aea-1346-4cfc-b7fd-d9d26a374606",
+        "MetricResourceType": "Microsoft.Cache/Redis",
+        "MetricName": "allcachehits",
+        "MetricCategories": "",
+        "Total": 0,
+        "Count": 2,
+        "Maximum": 0,
+        "Minimum": 0,
+        "Average": 0,
+        "TimeGrain": "PT1M",
+        "UnitName": "Count",
+        "Dimension": {
+            "Port": "15001",
+            "Primary": "False",
+            "RegionName": "centraluseuap",
+            "ShardId": "0"
+        }
+    },
+    {
+        "TimeGenerated": "2023-03-17T20:47:00.0000000Z",
+        "SourceSystem": "Platform",
+        "_resourceId": "/subscriptions/b8622aea-1346-4cfc-b7fd-d9d26a374606/resourceGroups/dcrtest/providers/Microsoft.Compute/virtualMachineScaleSets/testvmss",
+        "_subscriptionId": "b8622aea-1346-4cfc-b7fd-d9d26a374606",
+        "MetricResourceType": "Microsoft.Compute/virtualMachineScaleSets",
+        "MetricName": "Disk Read Operations/Sec",
+        "MetricCategories": "",
+        "Total": 1.79,
+        "Count": 4,
+        "Maximum": 1.79,
+        "Minimum": 0,
+        "Average": 0.4475,
+        "TimeGrain": "PT1M",
+        "UnitName": "CountPerSecond",
+        "Dimension": {
+            "VMName": "testvmss_1"
+        }
+    }
+]

@@ -1,0 +1,3 @@
+AVSSyslog
+| where Message has "RoleAddedEvent"
+| take 100

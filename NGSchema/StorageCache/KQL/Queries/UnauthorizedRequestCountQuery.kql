@@ -1,0 +1,5 @@
+AFSAuditLogs
+// 401 below could be replaced by other result signatures to obtain different operation results.
+// For example, 'ResultSignature == 202' to obtain accepted requests.
+| where ResultSignature == 401
+| summarize count() by _ResourceId, OperationName

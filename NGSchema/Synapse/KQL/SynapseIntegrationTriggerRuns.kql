@@ -1,0 +1,23 @@
+source
+| extend Properties = parse_json(tostring(properties))
+| extend Type = tostring("SynapseIntegrationTriggerRunsEnded")
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    Category = category,
+    CorrelationId = correlationId,
+    Level = level,
+    Location = location,
+    Tags = todynamic(tags),
+    Status = status,
+    UserProperties = todynamic(Properties["UserProperties"]),
+    Annotations = todynamic(Properties["Annotations"]),
+    TriggerId = triggerId,
+    TriggerName = triggerName,
+    TriggerType = triggerType,
+    TriggerEvent = triggerEvent,
+    Start = todatetime(start),
+    Parameters = todynamic(Properties["Parameters"]),
+    SystemParameters = todynamic(Properties["SystemParameters"]),
+    Type = Type,
+    PipelineTenantId = ''

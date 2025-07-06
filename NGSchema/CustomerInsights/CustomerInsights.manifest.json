@@ -1,0 +1,689 @@
+{
+	"type": "Microsoft.D365CustomerInsights/instances",
+	"displayName": "Dynamics 365 Customer Insights",
+	"description": "All tables related to Customer Insights",
+	"tags": {},
+	"properties": {},
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "DEV - Dynamics 365 Customer Insights (Customer 360)",
+	"relatedTables": [
+		"AzureActivity"
+	],
+	"contactDL": "D365CI-RP-Contacts@microsoft.com",
+	"relatedFunctions": [],
+	"tables": [
+		{
+			"name": "CIEventsAudit",
+			"isChangeColumnInternalNameAllowed": true,
+			"description": "All API requests in the context of the Customer Insights instance, for example all user actions while configuring and using the instance. POST|PUT|DELETE|PATCH operations go into this category.",
+			"categories": [
+				"resources",
+				"audit"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 5,
+			"dataTypeId": "MICROSOFTD365CUSTOMERINSIGHTS_AUDIT",
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "string"
+				},
+				{
+					"name": "resultType",
+					"type": "String"
+				},
+				{
+					"name": "resultSignature",
+					"type": "String"
+				},
+				{
+					"name": "durationMs",
+					"type": "Long"
+				},
+				{
+					"name": "callerIpAddress",
+					"type": "String"
+				},
+				{
+					"name": "identity",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				},
+				{
+					"name": "level",
+					"type": "String"
+				},
+				{
+					"name": "uri",
+					"type": "String"
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "KQL/CustomerInsightsAuditEventsLogsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "EventType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Always ApiEvent, marking the log event as API event."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Name of the operation represented by this event."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"dataTypeHint": "GUID",
+					"description": "The ID for the correlated events. Can be used to identify correlated events between multiple tables."
+				},
+				{
+					"name": "Category",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Log category of the event. Either Operational or Audit. All POST/PUT/PATCH/DELETE HTTP Requests are tagged with Audit, everything else with Operational."
+				},
+				{
+					"name": "ResultType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Status of the event. Running, Skipped, Successful, Failure."
+				},
+				{
+					"name": "ResultSignature",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Sub status of the event. If the operation corresponds to a REST API call, it's the HTTP status code."
+				},
+				{
+					"name": "DurationMs",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "Duration of the operation in milliseconds."
+				},
+				{
+					"name": "CallerIPAddress",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"dataTypeHint": "IP",
+					"description": "Caller IP address, if the operation corresponds to an API call that would come from an entity with a publicly available IP address."
+				},
+				{
+					"name": "UserAgent",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Browser agent sending the request or unknown."
+				},
+				{
+					"name": "Method",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "HTTP method: GET/POST/PUT/PATCH/HEAD"
+				},
+				{
+					"name": "Path",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"dataTypeHint": "URI",
+					"description": "Relative path of the request."
+				},
+				{
+					"name": "Origin",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"dataTypeHint": "URI",
+					"description": "URI indicating where a fetch originates from or unknown."
+				},
+				{
+					"name": "OperationStatus",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Success for HTTP status code < 400, ClientError for HTTP status code < 500, Error for HTTP Status >= 500."
+				},
+				{
+					"name": "CallerObjectId",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Azure Active Directory ObjectId of the caller."
+				},
+				{
+					"name": "InstanceId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Customer Insights instanceId."
+				},
+				{
+					"name": "UserRole",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Assigned role for the user or app."
+				},
+				{
+					"name": "RequiredRoles",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Required roles to do the operation. Admin role is allowed to do all operations."
+				},
+				{
+					"name": "Claims",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Claims of the user or app JSON web token (JWT). Claim properties vary per organization and the Azure Active Directory configuration."
+				},
+				{
+					"name": "UserPrincipalName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The UserPrincipalName is the Azure AD username for the user accounts."
+				},
+				{
+					"name": "Audience",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The audience for which the accessToken was requested for."
+				},
+				{
+					"name": "Level",
+					"description": "Severity level of the event, is one of: Informational, Warning, Error, or Critical.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Uri",
+					"description": "Absolute request URI.",
+					"type": "String",
+					"dataTypeHint": "URI",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/CustomerInsightsAuditEventsLogsSampleInput.json"
+		},
+		{
+			"name": "CIEventsOperational",
+			"isChangeColumnInternalNameAllowed": true,
+			"description": "Events generated using the service, for example GET requests or the execution events of a workflow.",
+			"categories": [
+				"resources"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 5,
+			"dataTypeId": "MICROSOFTD365CUSTOMERINSIGHTS_OPERATIONAL",
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "string"
+				},
+				{
+					"name": "resultType",
+					"type": "String"
+				},
+				{
+					"name": "resultSignature",
+					"type": "String"
+				},
+				{
+					"name": "durationMs",
+					"type": "Long"
+				},
+				{
+					"name": "callerIpAddress",
+					"type": "String"
+				},
+				{
+					"name": "identity",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				},
+				{
+					"name": "level",
+					"type": "String"
+				},
+				{
+					"name": "uri",
+					"type": "String"
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "KQL/CustomerInsightsOperationalEventsLogsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Timestamp of the event (UTC)."
+				},
+				{
+					"name": "EventType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The type of the event. Either ApiEvent or WorkflowEvent"
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Name of the operation represented by this event. {OperationType}.[WorkFlow|Task][Started|Completed]."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"dataTypeHint": "GUID",
+					"description": "The ID for the correlated events. Can be used to identify correlated events between multiple tables."
+				},
+				{
+					"name": "ResultType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Status of the event. Running, Skipped, Successful, Failure."
+				},
+				{
+					"name": "DurationMs",
+					"description": "Duration of the operation in milliseconds.",
+					"type": "BigInt",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Level",
+					"description": "Severity level of the event, is one of: Informational, Warning or Error.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "WorkflowJobId",
+					"description": "Identifier of the workflow run. All Workflow and Tasks events within the workflow execution have the same workflowJobId.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "OperationType",
+					"description": "Identifier of the operation.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "OperationStatus",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Success for HTTP Status code < 400, ClientError for HTTP Status code < 500, Error for HTTP Status >= 500."
+				},
+				{
+					"name": "TasksCount",
+					"description": "Workflow only. Number of tasks the Workflow triggers.",
+					"type": "Int",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "SubmittedBy",
+					"description": "Workflow events only. The Azure Active Directory objectId of the user who triggered the workflow, see also properties.workflowSubmissionKinds.",
+					"type": "String",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "WorkflowType",
+					"description": "Full or incremental refresh.",
+					"type": "String",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "WorkflowSubmissionKind",
+					"description": "OnDemand or Scheduled.",
+					"type": "String",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "WorkflowStatus",
+					"description": "Running, Successful.",
+					"type": "String",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "StartTime",
+					"description": "Specifies the date and time that the workflow job was started (UTC)",
+					"type": "DateTime",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "EndTime",
+					"description": "Specifies the date and time that the workflow job ended (UTC)",
+					"type": "DateTime",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "SubmittedTime",
+					"description": "Specifies the date and time that the workflow job was submitted (UTC)",
+					"type": "DateTime",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "InstanceId",
+					"description": "Customer Insights instance ID.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Identifier",
+					"description": "Depending on the OperationType in can be: the guid of the export configuration, the guid of the Enrichment, the Entity Name.",
+					"type": "String",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "FriendlyName",
+					"description": "User friendly Name of the Export or the Entity which is processed.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Error",
+					"description": "Error Message with more details.",
+					"type": "String",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "AdditionalInformation",
+					"description": "Contains AffectedEntities, MessageCode and entityCount.",
+					"type": "String",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "Category",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Log category of the event. Either Operational or Audit. All POST/PUT/PATCH/DELETE HTTP Requests are tagged with Audit, everything else with Operational."
+				},
+				{
+					"name": "ResultSignature",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Sub status of the event. If the operation corresponds to a REST API call, it's the HTTP status code."
+				},
+				{
+					"name": "CallerIPAddress",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"dataTypeHint": "IP",
+					"description": "Caller IP address, if the operation corresponds to an API call that would come from an entity with a publicly available IP address."
+				},
+				{
+					"name": "UserAgent",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Browser agent sending the request or unknown."
+				},
+				{
+					"name": "Method",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "HTTP method: GET/POST/PUT/PATCH/HEAD"
+				},
+				{
+					"name": "Path",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"dataTypeHint": "URI",
+					"description": "Relative path of the request."
+				},
+				{
+					"name": "Origin",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"dataTypeHint": "URI",
+					"description": "URI indicating where a fetch originates from or unknown."
+				},
+				{
+					"name": "CallerObjectId",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Azure Active Directory ObjectId of the caller."
+				},
+				{
+					"name": "UserRole",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Assigned role for the user or app."
+				},
+				{
+					"name": "RequiredRoles",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Required roles to do the operation. Admin role is allowed to do all operations."
+				},
+				{
+					"name": "Claims",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Claims of the user or app JSON web token (JWT). Claim properties vary per organization and the Azure Active Directory configuration."
+				},
+				{
+					"name": "UserPrincipalName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The UserPrincipalName is the Azure AD username for the user accounts."
+				},
+				{
+					"name": "Audience",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The audience for which the accessToken was requested for."
+				},
+				{
+					"name": "Uri",
+					"description": "Absolute request URI.",
+					"type": "String",
+					"dataTypeHint": "URI",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/CustomerInsightsOperationalEventsLogsSampleInput.json"
+		}
+	],
+	"queries": [
+		{
+			"id": "d42180dc-be37-4b53-9c02-302848dfff5f",
+			"displayName": "CIEventsAudit - API response codes line chart",
+			"description": "Line chart showing requests response duration per operation.",
+			"bodyFilePath": "KQL/CIEventsAuditLineChartRequestDurationQuery.kql",
+			"categories": [
+				"audit"
+			],
+			"tags": {
+				"Topic": [
+					"Diagnostics"
+				]
+			},
+			"relatedTables": [
+				"CIEventsAudit"
+			],
+			"properties": {
+				"ExampleQuery": true
+			}
+		},
+		{
+			"id": "6fabff7b-d466-43a6-b5e4-e91acd00a155",
+			"displayName": "CIEventsOperational - event type ApiEvent",
+			"description": "Gets a list of operational events with eventType as APIEvent.",
+			"bodyFilePath": "KQL/CIEventsOperationalAPIEventsQuery.kql",
+			"categories": [
+				"audit"
+			],
+			"tags": {
+				"Topic": [
+					"Diagnostics"
+				]
+			},
+			"relatedTables": [
+				"CIEventsOperational"
+			],
+			"properties": {
+				"ExampleQuery": true
+			}
+		},
+		{
+			"id": "5de254d1-fd54-4468-a243-6756670c51ca",
+			"displayName": "CIEventsOperational- event type WorkflowEvent",
+			"description": "Gets a list of operational events with eventType as WorkflowEvent.",
+			"bodyFilePath": "KQL/CIEventsOperationalWorkflowEventsQuery.kql",
+			"categories": [
+				"audit"
+			],
+			"tags": {
+				"Topic": [
+					"Diagnostics"
+				]
+			},
+			"relatedTables": [
+				"CIEventsOperational"
+			],
+			"properties": {
+				"ExampleQuery": true
+			}
+		},
+		{
+			"id": "c72b0389-6dc7-40de-9e90-ce5ade614d46",
+			"displayName": "CIEventsAudit - result type ClientError",
+			"description": "Gets a list of operational events request that finished with result type ClientError: HTTP status code < 500.",
+			"bodyFilePath": "KQL/CIEventsAuditResultTypeClientErrorQuery.kql",
+			"categories": [
+				"audit"
+			],
+			"tags": {
+				"Topic": [
+					"Diagnostics"
+				]
+			},
+			"relatedTables": [
+				"CIEventsAudit"
+			],
+			"properties": {
+				"ExampleQuery": true
+			}
+		},
+		{
+			"id": "427943d1-85ad-4fc2-b268-3da41e4a6c1a",
+			"displayName": "CIEventsAudit - security level Error",
+			"description": "Gets a list of API requests that finished with Error severity level.",
+			"bodyFilePath": "KQL/CIEventsAuditLevelErrorQuery.kql",
+			"categories": [
+				"audit"
+			],
+			"tags": {
+				"Topic": [
+					"Diagnostics"
+				]
+			},
+			"relatedTables": [
+				"CIEventsAudit"
+			],
+			"properties": {
+				"ExampleQuery": true
+			}
+		},
+		{
+			"id": "e71bcfbf-4518-41ea-b013-80e249d62c28",
+			"displayName": "CIEvents - all events for a specific correlation id",
+			"description": "Gets a list of all events request for a specific correlation id",
+			"bodyFilePath": "KQL/CIEventsAllEventsForCorrelationIdQuery.kql",
+			"categories": [
+				"audit"
+			],
+			"tags": {
+				"Topic": [
+					"Diagnostics"
+				]
+			},
+			"relatedTables": [
+				"CIEventsAudit",
+				"CIEventsOperational"
+			],
+			"properties": {
+				"ExampleQuery": true
+			}
+		},	
+		{
+			"id": "bd46892d-853b-4b2e-a72d-040189673031",
+			"displayName": "CIEventsAudit - all events for a specific instance ID",
+			"description": "Gets a list of API events requests for a specific instance ID.",
+			"bodyFilePath": "KQL/CIEventsAuditForInstanceIdQuery.kql",
+			"categories": [
+				"audit"
+			],
+			"tags": {
+				"Topic": [
+					"Diagnostics"
+				]
+			},
+			"relatedTables": [
+				"CIEventsAudit"
+			],
+			"properties": {
+				"ExampleQuery": true
+			}
+		},
+		{
+			"id": "3888a9d5-61f3-43e1-af05-40cf805d0dc2",
+			"displayName": "CIEventsOperational - all events for a specific instance ID",
+			"description": "Gets a list of API events requests for a specific instance ID.",
+			"bodyFilePath": "KQL/CIEventsOperationalForInstanceIdQuery.kql",
+			"categories": [
+				"audit"
+			],
+			"tags": {
+				"Topic": [
+					"Diagnostics"
+				]
+			},
+			"relatedTables": [
+				"CIEventsOperational"
+			],
+			"properties": {
+				"ExampleQuery": true
+			}
+		}
+	],
+	"functions": []
+}

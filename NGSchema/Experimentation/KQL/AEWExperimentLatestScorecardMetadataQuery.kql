@@ -1,0 +1,12 @@
+// Latest scorecard metadata for a given feature
+// set the feature flag name to query
+let QueryFeature = "MyFeatureFlag";
+AEWExperimentAssignmentSummary
+| where FeatureName == QueryFeature
+| summarize MaxTimeGenerated=max(MaxTimeGenerated), Variants=make_set(Variant, 1000) by AllocationId
+| summarize arg_max(MaxTimeGenerated, *)
+| join kind=inner AEWExperimentScorecards on AllocationId
+| summarize arg_max(TimeGenerated, ScorecardId)
+| project
+    FeatureName, AllocationId, Variants,
+    ScorecardId, AnalysisStartTime, AnalysisEndTime, Insights

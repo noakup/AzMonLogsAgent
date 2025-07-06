@@ -1,0 +1,35 @@
+[
+    {
+        "time": "2024-07-04 23:31:45.1224849",
+        "resourceId": "869fe446-6f2b-4ee9-a557-d0d5c1c6773f",
+        "operationName": "HealthEvents",
+        "category": "HealthEvents",
+        "location": "centraluseuap",
+        "level": "Critical",
+        "properties": {
+            "correlationId": "869fe446-6f2b-4ee9-a557-d0d5c1c6773f",
+            "affectedResourceId": "869fe446-6f2b-4ee9-a557-d0d5c1c6773f",
+            "affectedResourceName": "c2268325-0f38-4b71-87ff-da8702e40c76",
+            "eventType": "ProtectedItemHealth",
+            "eventName": "HyperVToAzStackHCIGatewayServiceSnapshotReplicationDiskError",
+            "timeOfOccurrence": "2024-07-04T23:31:45.1224849Z",
+            "eventSeverity": "Critical",
+            "healthErrors": [
+                {
+                    "version": "2021-02-16-preview",
+                    "code": 1800126,
+                    "severity": "Error",
+                    "category": "SystemError",
+                    "source": "ASR",
+                    "creationTime": "2024-07-17T23:31:45.1224849Z",
+                    "message": "ErrorMessage",
+                    "causes": "PossibleCauses",
+                    "recommendation": "RecommendedActions",
+                    "childErrors": []
+                }
+            ],
+            "logId": "HyperVToAzStackHCIGatewayServiceSnapshotReplicationDiskError",
+            "version": "2021-02-16-preview"
+        }
+    }
+]

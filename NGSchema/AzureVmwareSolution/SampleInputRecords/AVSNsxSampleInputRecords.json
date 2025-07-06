@@ -1,0 +1,9 @@
+[
+    {
+        "time": "2025-03-31T08:52:49.9809070Z",
+        "resourceId": "/SUBSCRIPTIONS/97EACE9E-DA69-4CEB-A21A-04B400E34259/RESOURCEGROUPS/MATUDOBN9/PROVIDERS/MICROSOFT.AVS/PRIVATECLOUDS/MATUDOSDDC9",
+        "operationName": "Microsoft.AVS/vcenter/vmwaresyslog",
+        "category": "nsx",
+        "properties": {"severity":"info","facility":"daemon","HostName":"TNT89-NSX-APP02","AppName":"systemd","message":"2025-03-31T08:52:49.9809070Z TNT89-NSX-APP02 systemd systemd-timedated.service: Succeeded."}
+    }
+]

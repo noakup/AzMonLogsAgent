@@ -1,0 +1,9 @@
+HDInsightHBaseMetrics
+//| where ClusterName == '<your cluster name>' // remove the preceding "//" and specify your cluster name to see its logs
+| where TimeGenerated > ago(30m)
+| where MetricNamespace == "Hadoop:service=HBase,name=Master,sub=Server" //specifies namespace of metric
+| where MetricName == "numDeadRegionServers"   
+| extend TagsJson = parse_json(Tags) //parsing the Tags to find the Active HMaster
+| where TagsJson["tag.isActiveMaster"] == true
+| summarize arg_max(TimeGenerated, *)
+

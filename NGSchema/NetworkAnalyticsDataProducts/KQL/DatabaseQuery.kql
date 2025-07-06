@@ -1,0 +1,3 @@
+AOIDatabaseQuery
+| where DatabaseName has_cs "edrdp" and User has_cs "username@domain.com"
+| take 100

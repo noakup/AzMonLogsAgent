@@ -1,0 +1,62 @@
+{
+  "name": "AWSGuardDuty",
+  "description": "Guard Duty Findings, which ingested from Sentinel's connector, represents a potential security issue detected within your network. GuardDuty generates a finding whenever it detects unexpected and potentially malicious activity in your AWS environment.",
+  "input": [
+    {
+      "name": "schemaVersion",
+      "type": "String"
+    },
+    {
+      "name": "accountId",
+      "type": "String"
+    },
+    {
+      "name": "region",
+      "type": "String"
+    },
+    {
+      "name": "partition",
+      "type": "String"
+    },
+    {
+      "name": "id",
+      "type": "String"
+    },
+    {
+      "name": "arn",
+      "type": "String"
+    },
+    {
+      "name": "type",
+      "type": "String"
+    },
+    {
+      "name": "description",
+      "type": "String"
+    },
+    {
+      "name": "resource",
+      "type": "String"
+    },
+    {
+      "name": "service",
+      "type": "String"
+    },
+    {
+      "name": "severity",
+      "type": "Int"
+    },
+    {
+      "name": "createdAt",
+      "type": "DateTime"
+    },
+    {
+      "name": "updatedAt",
+      "type": "DateTime"
+    },
+    {
+      "name": "title",
+      "type": "String"
+    }
+  ]
+}

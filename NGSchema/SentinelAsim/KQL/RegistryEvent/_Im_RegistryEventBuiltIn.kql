@@ -1,0 +1,12 @@
+let DisabledParsers=materialize(_GetWatchlist('ASimDisabledParsers') 
+| where SearchKey in ('Any', 'Exclude_Im_RegistryEvent') 
+| extend SourceSpecificParser=column_ifexists('SourceSpecificParser','') 
+| where isnotempty(SourceSpecificParser) 
+| summarize list = make_set(SourceSpecificParser));
+let builtInDisabled = 0 != array_length(set_intersect(toscalar(DisabledParsers),dynamic(['Exclude_Im_RegistryEventBuiltIn', 'Exclude_Im_RegistryEvent', 'Any'])));
+union isfuzzy=true
+_Im_RegistryEvent_EmptyV01,
+_Im_RegistryEvent_Microsoft365DV01(starttime= starttime, endtime= endtime, eventtype_in= eventtype_in, actorusername_has_any= actorusername_has_any, registrykey_has_any= registrykey_has_any, registryvalue_has_any= registryvalue_has_any, registrydata_has_any= registrydata_has_any, dvchostname_has_any= dvchostname_has_any, disabled= (builtInDisabled or('Exclude_Im_RegistryEvent_Microsoft365D' in (DisabledParsers)))),
+_Im_RegistryEvent_MicrosoftSysmonV02(starttime= starttime, endtime= endtime, eventtype_in= eventtype_in, actorusername_has_any= actorusername_has_any, registrykey_has_any= registrykey_has_any, registryvalue_has_any= registryvalue_has_any, registrydata_has_any= registrydata_has_any, dvchostname_has_any= dvchostname_has_any, disabled= (builtInDisabled or('Exclude_Im_RegistryEvent_MicrosoftSysmon' in (DisabledParsers)))),
+_Im_RegistryEvent_MicrosoftWindowsEventV02(starttime= starttime, endtime= endtime, eventtype_in= eventtype_in, actorusername_has_any= actorusername_has_any, registrykey_has_any= registrykey_has_any, registryvalue_has_any= registryvalue_has_any, registrydata_has_any= registrydata_has_any, dvchostname_has_any= dvchostname_has_any, disabled= (builtInDisabled or('Exclude_Im_RegistryEvent_MicrosoftWindowsEvent' in (DisabledParsers)))),
+_Im_RegistryEvent_NativeV01(starttime= starttime, endtime= endtime, eventtype_in= eventtype_in, actorusername_has_any= actorusername_has_any, registrykey_has_any= registrykey_has_any, registryvalue_has_any= registryvalue_has_any, registrydata_has_any= registrydata_has_any, dvchostname_has_any= dvchostname_has_any, disabled= (builtInDisabled or('Exclude_Im_RegistryEvent_Native' in (DisabledParsers))))

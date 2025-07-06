@@ -1,0 +1,15 @@
+source
+| extend propertiesTable = parse_json(properties)
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    Status = resultType,
+    Description = resultDescription,
+    Reason = tostring(propertiesTable.Reason),
+    SentinelResourceId = tostring(propertiesTable.SentinelResourceId),
+    SentinelResourceName = tostring(propertiesTable.SentinelResourceName),
+    SentinelResourceType = tostring(propertiesTable.SentinelResourceType),
+    SentinelResourceKind = tostring(propertiesTable.SentinelResourceKind),
+    WorkspaceId = tostring(propertiesTable.WorkspaceId),
+    RecordId = tostring(propertiesTable.RecordId),
+    ExtendedProperties = todynamic(propertiesTable.ExtendedProperties)

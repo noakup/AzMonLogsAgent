@@ -1,0 +1,26 @@
+{
+    "name": "ClusterAutoscaler",
+    "description": "Input of ClusterAutoscaler data to ArcK8sControlPlane schema.",
+    "input": [
+        {
+            "name": "time",
+            "type": "DateTime"
+        },
+        {
+            "name": "operationName",
+            "type": "String"
+        },
+        {
+            "name": "category",
+            "type": "String"
+        },
+        {
+            "name": "resourceId",
+            "type": "String"
+        },
+        {
+            "name": "properties",
+            "type": "Dynamic"
+        }
+    ]
+  }

@@ -1,0 +1,5 @@
+ContainerAppSystemLogs_CL
+| where Log_s contains "error" or Log_s contains "exception"
+| project Time=TimeGenerated, EnvName=EnvironmentName_s, AppName=ContainerAppName_s, Revision=RevisionName_s, Message=Log_s
+| summarize count_per_app = count() by EnvName, AppName, Revision
+| sort by count_per_app desc

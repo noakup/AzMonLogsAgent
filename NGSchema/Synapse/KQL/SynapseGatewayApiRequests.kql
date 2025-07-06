@@ -1,0 +1,15 @@
+source
+| extend Properties = parse_json(tostring(properties))
+| project
+    TimeGenerated = todatetime(['time']),
+    OperationName = operationName,
+    OperationVersion = operationVersion,
+    Category = category,
+    ResultType = resultType,
+    ResultSignature = resultSignature,
+    ResultDescription = resultDescription,
+    CorrelationId = correlationId,
+	Identity = todynamic(identity),
+	Location = location,
+	RequestUri = tostring(Properties["requestUri"]),
+    ClientCorrelationId = tostring(Properties["clientCorrelationId"])

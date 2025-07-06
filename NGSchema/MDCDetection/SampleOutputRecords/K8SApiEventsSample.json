@@ -1,0 +1,43 @@
+[
+    {
+        "AzureResourceId": "/subscriptions/12345678-9abc-def0-1234-56789abcdef0/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/managedClusters/myAKSCluster",
+        "Region": "EastUS",
+        "Timestamp": "2024-09-25T14:45:30Z",
+        "K8SClusterName": "myAKSCluster",
+        "K8SNamespaceName": "production",
+        "K8SDeploymentName": "",
+        "K8SDaemonsetName": "fluentd-daemonset",
+        "K8SStatefulsetName": "",
+        "K8SNodeName": "aks-nodepool1-12345678-0",
+        "K8SPodName": "nginx-deployment-5d7f5f89b7-abcde",
+        "RequestId": "abc12345-def6-7890-gh12-3456ijklmnop",
+        "IsRequest": true,
+        "Method": "POST",
+        "Url": "https://api.example.com/upload",
+        "StatusCode": 200,
+        "Payload": "{\"data\": \"sample payload data\"}",
+        "PayloadLength": 1024,
+        "ChunkNum": 1,
+        "IsLastChunk": true,
+        "PayloadType": "application/json",
+        "PayloadEncoding": "UTF-8",
+        "AuthenticationTypes": ["Header:Authorization", "Header:Cookie"],
+        "ContainsAuthentication": true,
+        "ClientIPs": ["192.168.1.1", "10.0.0.1"],
+        "ContainsPublicIp": true,
+        "Elapsed": 350,
+        "TimeGenerated": "2019-03-01T00:00:00Z",
+        "DataPipelineMetadata": null,
+        "AdditionalMetadata": { 
+          "CloudNativeIdentifiers": { 
+          "clusterDistribution":"eks", 
+          "accountId": "628005628784", 
+          "clusterArn":"arn:aws:eks:us-east-1:628005628784:cluster/onetrust-prod-1", 
+          "clusterName":"onetrust-prod-1", 
+          "instanceArn":"arn:aws:ec2:us-east-1:628005628784:instance/i-012df8e6dd3fb611e", 
+          "instanceId":"i-012df8e6dd3fb611e", 
+          "region":"us-east-1" 
+          } 
+        } 
+      }
+]

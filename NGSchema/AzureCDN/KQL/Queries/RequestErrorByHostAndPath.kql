@@ -1,0 +1,5 @@
+AFDAccessLog 
+| where HttpStatusCode >= 400 
+| extend ParsedUrl = parseurl(RequestUri) 
+| summarize RequestCount = count() by Host = tostring(ParsedUrl.Host), Path = tostring(ParsedUrl.Path), StatusCode = HttpStatusCode, _ResourceId 
+| order by RequestCount desc 

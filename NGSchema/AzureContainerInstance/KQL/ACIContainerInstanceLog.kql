@@ -1,0 +1,11 @@
+source
+| project
+	TimeGenerated = todatetime(["time"]),
+	ContainerGroup = tostring(properties.ContainerGroup),
+	ContainerID = tostring(properties.ContainerID),
+	ContainerImage = tostring(properties.ContainerImage),
+	ContainerName = tostring(properties.ContainerName),
+	Location = tostring(properties.Location),
+	Message = tostring(properties.Message),
+	OSType = tostring(properties.OSType),
+	Source = tostring(properties.Source)

@@ -1,0 +1,4 @@
+ACSAdvancedMessagingOperations
+| where TimeGenerated > ago(24h)
+| summarize Count = count() by MessageType, MessageStatus
+| order by MessageType asc, Count desc

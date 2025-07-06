@@ -1,0 +1,4 @@
+AADCustomSecurityAttributeAuditLogs
+| extend targetUPN = parse_json(TargetResources)[0].userPrincipalName
+| where targetUPN == 'CSALogTester@tenant.com'
+| limit 100

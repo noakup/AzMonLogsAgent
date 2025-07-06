@@ -1,0 +1,26 @@
+[
+    {
+        "operationName": "Microsoft.ContainerService/managedClusters/diagnosticLogs/Read",
+        "category": "fleet-member-agent",
+        "resourceId": "/SUBSCRIPTIONS/8ECADFC9-D1A3-4EA4-B844-0D9F87E4D7C8/RESOURCEGROUPS/CHENYU1-EXP/PROVIDERS/MICROSOFT.CONTAINERSERVICE/MANAGEDCLUSTERS/BRAVELION",
+        "properties": {
+            "log": "I0513 11:12:09.502251       1 v1beta1/member_controller.go:202] \"InternalMemberCluster reconciliation starts\" internalMemberCluster=\"fleet-member-bravelion\/bravelion\"\n",
+            "stream": "stderr",
+            "pod": "fleet-member-agent-59c8f766cc-qn69q",
+            "containerID": "d810c63f9c1bc36ed3c12ca3514ce265f309f97108d7704190b6bdf511580dec"
+        },
+        "time": "2025-05-13T11:12:09.5024137Z"
+    },
+    {
+        "operationName": "Microsoft.ContainerService/managedClusters/diagnosticLogs/Read",
+        "category": "fleet-member-agent",
+        "resourceId": "/SUBSCRIPTIONS/8ECADFC9-D1A3-4EA4-B844-0D9F87E4D7C8/RESOURCEGROUPS/CHENYU1-EXP/PROVIDERS/MICROSOFT.CONTAINERSERVICE/MANAGEDCLUSTERS/BRAVELION",
+        "properties": {
+            "log": "I0513 11:12:09.502351       1 v1beta1/member_controller.go:570] \"Updating Internal member cluster heartbeat\" internalMemberCluster=\"fleet-member-bravelion\/bravelion\"\n",
+            "stream": "stderr",
+            "pod": "fleet-member-agent-59c8f766cc-qn69q",
+            "containerID": "d810c63f9c1bc36ed3c12ca3514ce265f309f97108d7704190b6bdf511580dec"
+        },
+        "time": "2025-05-13T11:12:09.5024381Z"
+    }
+]

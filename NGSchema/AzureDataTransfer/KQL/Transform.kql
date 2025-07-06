@@ -1,0 +1,9 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    CorrelationId = correlationId,
+    FlowId = tostring(properties.FlowId),
+    ObjectName = tostring(properties.ObjectName),
+    ObjectLastUpdated = todatetime(properties.ObjectLastUpdated),
+    Status = tostring(properties.Status),
+    Description = tostring(properties.Description)

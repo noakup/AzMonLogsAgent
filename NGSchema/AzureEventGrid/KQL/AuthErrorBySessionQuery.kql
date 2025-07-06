@@ -1,0 +1,3 @@
+EGNFailedMqttConnections
+| where ResultSignature == "AuthenticationError"
+| summarize count() by SessionName

@@ -1,0 +1,12 @@
+source
+| project
+    TimeGenerated       = todatetime(["time"]),
+    Node                = host,
+    ProcessName         = ident,
+    ProcessId           = toint(pid),
+    Message             = message,
+    Facility            = facility,
+    Severity            = severity,
+    Location            = location,
+    ClusterManagerName  = clusterManagerName,
+    ClusterName         = clusterName

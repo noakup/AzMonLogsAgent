@@ -1,0 +1,4 @@
+WorkloadDiagnosticLogs
+| where Status in ("Warning", "Error")
+| sort by TimeGenerated desc
+| take 100

@@ -1,0 +1,23 @@
+[
+    {
+        "DeploymentName": "bvt-devportal-88658620-1.current.int-azure-api.net",
+        "Region": "West US 2",
+        "Tenant": "7df8205a-8b87-4e52-b0ae-4662d097b7ef",
+        "DeploymentVersion": "0.42.17843.0",
+        "category": "Audit",
+        "resultType": "Succeeded",
+        "operationName": "Microsoft.ApiManagement/CustomerDevPortalAuditDiagnosticLogs",
+        "activityId": "a558c39c-592c-4ec1-9146-ce447b753530",
+        "properties": {
+            "hashedUserId": null,
+            "timestamp": "2024-03-03T00:42:15.5563788Z",
+            "requestPath": "/apis",
+            "requestMethod": "GET",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/120.0.6099.28 Safari/537.36",
+            "responseCode": 200,
+            "region": "West US 2",
+            "serviceName": "bvt-devportal-88658620-1.current.int-azure-api.net"
+        },
+        "apimClient": "dev-portal|bvt-devportal-88658620-1.developer.current.int-azure-api.net|getApis-unauthorized"
+    }
+]

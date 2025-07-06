@@ -1,0 +1,17 @@
+[
+    {
+        "TimeGenerated": "2023-03-23T05:50:00.5446615Z",
+        "OperationName": "Microsoft.Cdn/Profiles/FrontDoorHealthProbeLog/Write",
+        "HealthProbeId": "6411C37FFAF948D889F14E94A829F074",
+        "HttpMethod": "GET",
+        "Result": "OriginError",
+        "HttpStatusCode": 401,
+        "ProbeUrl": "https://eafd-prod-ama-ph-sni-atm.aksroxy.azureedge.net:443/health",
+        "OriginName": "eafd-prod-ama-ph-sni-atm.aksroxy.azureedge.net",
+        "Pop": "YVR",
+        "OriginIp": "40.74.30.65",
+        "TotalLatency": 169,
+        "ConnectionLatency": "n/a",
+        "DNSResolutionLatency": "n/a"
+    }
+]

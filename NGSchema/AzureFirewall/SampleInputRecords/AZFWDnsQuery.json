@@ -1,0 +1,25 @@
+[
+	{
+		"category": "AZFWDnsQuery",
+		"time": "2021-10-19T23:01:59.723496Z",
+		"resourceId": "/subscriptions/aeb5b02a-0f18-45a4-86d6-81808115cacf/resourcegroups/manuelberger-new-logs-test-2/providers/microsoft.network/azurefirewalls/fw",
+		"properties": {
+			"SourceIp": "38.219.47.38",
+			"SourcePort": 59581,
+			"QueryId": 56818,
+			"QueryType": "A",
+			"QueryClass": "IN",
+			"QueryName": "kko.vdocgvvfzubkfmigfwmr.net.",
+			"Protocol": "TCP",
+			"RequestSize": 63622,
+			"DnssecOkBit": true,
+			"EDNS0BufferSize": 10737,
+			"ResponseCode": "NOERROR",
+			"ResponseFlags": "aasyirxdtkmfeaybxcavrznmm",
+			"ResponseSize": 54004,
+			"RequestDurationSecs": 0.0019422,
+			"ErrorNumber": 0,
+			"ErrorMessage": ""
+		}
+	}
+]

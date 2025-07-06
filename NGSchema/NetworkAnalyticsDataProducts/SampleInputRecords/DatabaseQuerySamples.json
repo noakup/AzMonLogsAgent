@@ -1,0 +1,68 @@
+[
+    {
+        "time": "2023-11-16T16:24:26.7426749Z",
+        "resourceId": "/SUBSCRIPTIONS/9A021C4C-DDCD-4E80-9155-A5B0E872F4C2/RESOURCEGROUPS/SAMTARVER/PROVIDERS/MICROSOFT.NETWORKANALYTICS/DATAPRODUCTS/DPSAMTARVER4",
+        "location": "eastus",
+        "category": "DatabaseQuery",
+        "operationName": "MICROSOFT.KUSTO/CLUSTERS/QUERY/ACTION",
+        "properties": {
+            "StartedOn": "2023-11-10T17:55:53.8210935Z",
+            "LastUpdatedOn": "2023-11-10T17:55:53.8210935Z",
+            "Database": "enzymedp",
+            "State": "Completed",
+            "RootActivityId": "3181210c-8f9f-4d89-8c28-26842c0b39f7",
+            "FailureReason": "[none]",
+            "ComponentFault": "[none]",
+            "TotalCpu": "00:00:00",
+            "Application": "Kusto.Web.KWE:2.121.0-4|embeddedIn:https://azurekusto.hosting.portal.azure.net/",
+            "MemoryPeak": 1573200,
+            "Duration": "00:00:00",
+            "User": "sharathk@microsoft.com",
+            "Principal": "aaduser=4306c7bd-0c0c-4736-81a0-027b8807f7fb;72f988bf-86f1-41af-91ab-2d7cd011db47",
+            "ScannedExtentsStatistics": {
+                "MinDataScannedTime": "2023-11-10T17:55:41.0742491",
+                "MaxDataScannedTime": "2023-11-10T17:55:41.0742491",
+                "TotalExtentsCount": 6,
+                "ScannedExtentsCount": 1,
+                "TotalRowsCount": 284237,
+                "ScannedRowsCount": 500
+            },
+            "CacheStatistics": {
+                "Memory": {
+                    "Hits": 0,
+                    "Misses": 0
+                },
+                "Disk": {
+                    "Hits": 0,
+                    "Misses": 0
+                },
+                "Shards": {
+                    "Hot": {
+                        "HitBytes": 5129,
+                        "MissBytes": 0,
+                        "RetrieveBytes": 0
+                    },
+                    "Cold": {
+                        "HitBytes": 0,
+                        "MissBytes": 0,
+                        "RetrieveBytes": 0
+                    },
+                    "BypassBytes": 0
+                }
+            },
+            "ResultSetStatistics": {
+                "TableCount": 1,
+                "TablesStatistics": [
+                    {
+                        "RowCount": 10,
+                        "TableSize": 660
+                    }
+                ]
+            },
+            "WorkloadGroup": "default",
+            "Text": "_quality_edr\r\n| limit 10",
+            "time": "2023-11-10T17:55:53.8318231Z",
+            "correlationId": "Kusto.Web.KWE.Query;d8768e3e-8479-499c-ae8e-5a2c9e3f7fb3;0fc9c3b2-0bf4-47f1-82fd-8f625ea5a1ef"
+        }
+    }
+]

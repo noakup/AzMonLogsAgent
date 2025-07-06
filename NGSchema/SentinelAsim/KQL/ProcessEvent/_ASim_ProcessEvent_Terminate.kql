@@ -1,0 +1,4 @@
+union isfuzzy=true
+_ASim_ProcessEvent_TerminateBuiltIn,
+ASim_ProcessEvent_TerminateSolutions,
+ASim_ProcessEvent_TerminateCustom

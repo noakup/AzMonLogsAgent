@@ -1,0 +1,23 @@
+[
+    {
+        "TimeGenerated": "2023-10-13T15:59:28.150582Z",
+        "Level": "Informational",
+        "Message": "Successfully digested file",
+        "FilePath": "site1/23-10-12/00096363.v1.proto",
+        "Datatype": "edr"
+    },
+    {
+        "TimeGenerated": "2023-10-13T15:59:28.150582Z",
+        "Level": "Error",
+        "Message": "Failed to digest file",
+        "FilePath": "site1/23-10-12/00096363.v1.proto",
+        "Datatype": "edr"
+    },
+    {
+        "TimeGenerated": "2023-10-13T15:59:28.150582Z",
+        "Level": "Warning",
+        "Message": "Failed to decode row with length 361 at location: 130188776 in the file. Error: failed to decode Protobuf message: UdpProxyInfo.quic_sni: HttpTransactionRecord.udp_proxy_information: HttpRecord.http_transaction_record: EventDataRecord.http_record: invalid string value: data is not UTF-8 encoded",
+        "FilePath": "site1/23-10-12/00096363.v1.proto",
+        "Datatype": "edr"
+    }
+]

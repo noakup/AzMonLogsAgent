@@ -1,0 +1,2 @@
+UCDOStatus| 
+summarize count() by DownloadMode

@@ -1,0 +1,14 @@
+[
+    {
+        "TimeGenerated": "2025-03-31T12:35:35.4889772Z",
+        "LogCreationTime": "2025-03-31T12:32:53.9713870Z",
+        "Message": "2025-03-31T12:32:53.9713870Z TNT89-EVM01 audispd node=TNT89-EVM01 type=PROCTITLE msg=audit(1743424373.961:1837250): proctitle=6E747071002D70",
+        "Severity": "info",
+        "Facility": "local0",
+        "HostName": "TNT89-EVM01",
+        "AppName": "audispd",
+        "ProcId": "",
+        "MsgId": "",
+        "ResourceId": "/SUBSCRIPTIONS/97EACE9E-DA69-4CEB-A21A-04B400E34259/RESOURCEGROUPS/MATUDOBN9/PROVIDERS/MICROSOFT.AVS/PRIVATECLOUDS/MATUDOSDDC9" 
+    }
+]

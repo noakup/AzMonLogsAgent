@@ -1,0 +1,28 @@
+[
+  {
+    "source_path": "/var/log/customer-container-event.log",
+    "resourceId": "/SUBSCRIPTIONS/EA4FAA5B-5E44-4236-91F6-5483D5B17D14/RESOURCEGROUPS/YX-TEST/PROVIDERS/MICROSOFT.MACHINELEARNINGSERVICES/WORKSPACES/YXEASTUSWS/ONLINEENDPOINTS/USEREVENT-ENDPT",
+    "category": "AmlOnlineEndpointEventLog",
+    "properties": {
+      "message": "Stopping container inference-server",
+      "name": "Killing",
+      "instanceId": "5230da2005bd41a4a2f9a8b63f08b24600000J",
+      "deploymentName": "blue"
+    },
+    "time": "2022-05-18T14:25:33.163853Z",
+    "name": "Killing"
+  },
+  {
+    "source_path": "/var/log/customer-container-event.log",
+    "resourceId": "/SUBSCRIPTIONS/EA4FAA5B-5E44-4236-91F6-5483D5B17D14/RESOURCEGROUPS/YX-TEST/PROVIDERS/MICROSOFT.MACHINELEARNINGSERVICES/WORKSPACES/YXEASTUSWS/ONLINEENDPOINTS/USEREVENT-ENDPT",
+    "category": "AmlOnlineEndpointEventLog",
+    "properties": {
+      "message": "Start pulling container image",
+      "name": "Pulling",
+      "instanceId": "5230da2005bd41a4a2f9a8b63f08b24600000J",
+      "deploymentName": "blue"
+    },
+    "time": "2022-05-18T14:27:11.143414Z",
+    "name": "Pulling"
+  }
+]

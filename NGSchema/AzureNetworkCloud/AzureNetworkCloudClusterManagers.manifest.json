@@ -1,0 +1,197 @@
+{
+    "type": "Microsoft.NetworkCloud/clusterManagers",
+    "displayName": "Nexus Cluster Managers",
+    "description": "Azure Operator Nexus is a carrier grade hybrid cloud platform built for mission critical mobile network applications. It simplifies the provisioning of new network services and optimizes the deployment of network functions and applications into on premise data centers. This table collects the logs about deployment and upgrade performed of the cluster managed by the cluster manager.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "AFOI-Network Cloud/Triage",
+    "contactDL": "afoncnftall@microsoft.com",
+    "relatedFunctions": [],
+    "relatedTables": [
+      "AzureActivity",
+      "AzureMetrics"
+    ],
+    "tables": [
+        {
+          "name": "NCMClusterOperationsLogs",
+          "description": "Cluster Manager logs to track the deployment or upgrade of Nexus cluster.",
+          "categories": [ "resources" ],
+          "tags": {},
+          "properties": {},
+          "artifactVersion": 2,
+          "dataTypeId": "MICROSOFTNETWORKCLOUD_CLUSTERMANAGERDEPLOYORUPGRADELOGS",
+          "isResourceCentric": true,
+          "tableState": "Production",
+          "isLakeAllowed": true,
+          "isTroubleshootingAllowed": true,
+          "input": [
+            {
+              "name": "activityID",
+              "type": "String"
+            },
+            {
+              "name": "application",
+              "type": "String"
+            },
+            {
+              "name": "caller",
+              "type": "String"
+            },
+            {
+              "name": "category",
+              "type": "String"
+            },
+            {
+              "name": "clusterManagerName",
+              "type": "String"
+            },
+            {
+              "name": "clusterName",
+              "type": "String"
+            },
+            {
+              "name": "ContainerName",
+              "type": "String"
+            },
+            {
+              "name": "correlationID",
+              "type": "String"
+            },
+            {
+              "name": "eventData",
+              "type": "String"
+            },
+            {
+              "name": "eventType",
+              "type": "String"
+            },
+            {
+              "name": "error",
+              "type": "String"
+            },
+            {
+              "name": "kubernetesClusterID",
+              "type": "String"
+            },
+            {
+              "name": "level",
+              "type": "String"
+            },
+            {
+              "name": "location",
+              "type": "String"
+            },
+            {
+              "name": "logger",
+              "type": "String"
+            },
+            {
+              "name": "message",
+              "type": "String"
+            },
+            {
+              "name": "NamespaceName",
+              "type": "String"
+            },
+            {
+              "name": "Node",
+              "type": "String"
+            },
+            {
+              "name": "onbehalfAnnotations",
+              "type": "String"
+            },
+            {
+              "name": "onbehalfServiceId",
+              "type": "String"
+            },
+            {
+              "name": "operationID",
+              "type": "String"
+            },
+            {
+              "name": "operationName",
+              "type": "String"
+            },
+            {
+              "name": "PodName",
+              "type": "String"
+            },
+            {
+              "name": "properties",
+              "type": "String"
+            },
+            {
+              "name": "time",
+              "type": "String"
+            },
+            {
+              "name": "zone",
+              "type": "String"
+            }
+          ],
+          "transformFilePath": "KQL/TransformNCMClusterOperationsLogs.kql",
+          "columns": [
+            {
+              "name": "TimeGenerated",
+              "type": "DateTime",
+              "isDefaultDisplay": true,
+              "description": "Timestamp (UTC) when the log was generated."
+            },
+            {
+              "name": "ClusterManagerName",
+              "type": "String",
+              "isDefaultDisplay": true,
+              "description": "Name of the ClusterManager managing the Nexus cluster."
+            },
+            {
+              "name": "ClusterName",
+              "type": "String",
+              "isDefaultDisplay": true,
+              "description": "Name of the On-prem Nexus cluster."
+            },
+            {
+              "name": "Level",
+              "type": "String",
+              "isDefaultDisplay": true,
+              "description": "Log level of the message."
+            },
+            {
+              "name": "Location",
+              "type": "String",
+              "isDefaultDisplay": true,
+              "description": "Location of the Nexus cluster."
+            },
+            {
+              "name": "Message",
+              "type": "String",
+              "isDefaultDisplay": true,
+              "description": "Message generated by the kubernetes containers running on Nexus cluster."
+            },
+            {
+              "name": "Node",
+              "type": "String",
+              "isDefaultDisplay": true,
+              "description": "Node name of the Nexus cluster which is generating the log."
+            },
+            {
+              "name": "OperationID",
+              "type": "String",
+              "isDefaultDisplay": true,
+              "description": "Unique identifier for the operation."
+            },
+            {
+              "name": "PodName",
+              "type": "String",
+              "isDefaultDisplay": true,
+              "description": "Pod name generating the log in the Nexus cluster."
+            }
+          ],
+          "sampleInputRecordsFilePath": "SampleInputRecords/NCMClusterOperationsLogs.json",
+          "sampleOutputRecordsFilePath": "SampleOutputRecords/NCMClusterOperationsLogs.json"
+        }
+      ],
+      "functions": [],
+      "queries": []
+    }

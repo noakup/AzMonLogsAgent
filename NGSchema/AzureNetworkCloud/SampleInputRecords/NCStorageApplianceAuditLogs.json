@@ -1,0 +1,31 @@
+[
+    {
+        "ContainerName": "syslog",
+        "NamespaceName": "nc-system",
+        "Node": "j18r650mgr1",
+        "PodName": "strgmgmt-5dbb9f8d8c-w65zw",
+        "action": "session request",
+        "arrayController": "b37j18purestor1-ct1",
+        "arrayDatetime": "2023-05-25T20:51:00Z",
+        "arrayLocation": "172.27.255.213",
+        "arrayName": "b37j18purestor1",
+        "arraySublocation": "Purity_FA_Prometheus_exporter/1.0",
+        "category": "StorageApplianceAudit",
+        "clusterManagerName": "j18-qvduxzffwnrxy",
+        "clusterName": "j18-c0d28c8f7cd3",
+        "controller": "1",
+        "interface": "REST",
+        "location": "eastus2euap",
+        "message": "purity.audit[11029]: (login message ID: 747584)",
+        "method": "api_token",
+        "onbehalfAnnotations": "<Config onBehalfFields=\"resourceId,category\" priority=\"Normal\" primaryPartitionField=\"resourceId\" validJsonColumns=\"originalRecord\" excludeFields=\"Tenant,Role,RoleInstance,BMServerName,PreciseTimeStamp,FluentdIngestTimestamp,TIMESTAMP,ContainerImage,GenevaPodName,environment,clusterID,clusterManagedResourceGroupName,clusterManagerID,clusterManagerResourceGroupName,clusterResourceGroupName,Tag,tenantID\" containerSuffix=\"$category\" />",
+        "onbehalfServiceId": "Microsoft.NetworkCloud",
+        "operationName": "Microsoft.NetworkCloud/storageAppliances/read",
+        "resourceId": "/SUBSCRIPTIONS/A3EEB848-665A-4DBF-80A4-EB460930FB23/RESOURCEGROUPS/J18-C0D28C8F7CD3-HOSTEDRESOURCES-3781AC00/PROVIDERS/MICROSOFT.NETWORKCLOUD/STORAGEAPPLIANCES/B37J18PURESTOR1",
+        "result": "Success",
+        "session": "6a7e08fc-ed52-4e02-9174-439ce2edc3b4",
+        "subscriptionID": "a3eeb848-665a-4dbf-80a4-eb460930fb23",
+        "time": "2023-05-25T20:55:02.568093565Z",
+        "user": "lma"
+    }
+]

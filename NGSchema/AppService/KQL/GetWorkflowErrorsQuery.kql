@@ -1,0 +1,3 @@
+LogicAppWorkflowRuntime
+| where Status == "Failed"
+| summarize count() by WorkflowName

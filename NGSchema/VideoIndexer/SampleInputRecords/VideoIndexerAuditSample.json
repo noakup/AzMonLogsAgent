@@ -1,0 +1,26 @@
+[
+  {
+    "time": "2022-03-22T10:59:39.5596929Z",
+    "resourceId": "/SUBSCRIPTIONS/24237B72-8546-4DA5-B204-8C3CB76DD930/RESOURCEGROUPS/VI-RESOURCEGROUP-DORON/PROVIDERS/MICROSOFT.VIDEOINDEXER/ACCOUNTS/DORONNEWVERDEV1",
+    "operationName": "Audit-Thumbnails-GetVideoThumbnail",
+    "category": "Audit",
+    "location": "westus2",
+    "durationMs": "192",
+    "resultSignature": "200",
+    "resultType": "Success",
+    "resultDescription": "Thumbnails-GetVideoThumbnail : Success",
+    "correlationId": "0bf73437-d02e-40e8-ae86-f003092f1c7e",
+    "callerIpAddress": "46.*****",
+    "operationVersion": "vi-dev1-Operations",
+    "identity": {
+      "externalUserId": "4704F34286364F2*****",
+      "upn": "domazor@microsoft.com",
+      "claims": { "permission": "Reader", "scope": "Account" }
+    },
+    "properties": {
+      "accountName": "doronNewVerDev1",
+      "accountId": "c70fae86-a239-43c9-9080-7897ce66558d",
+      "videoId": "1e2ddfdd77"
+    }
+  }
+]

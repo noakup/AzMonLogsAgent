@@ -1,0 +1,14 @@
+source
+| project
+	AzureResourceId,	
+    Region,
+    Action,
+    RuleProperties,
+    AdmissionControlVersions,
+	EvaluatedResourceKind,
+	EvaluatedResourceName,
+    EvaluatedResourceParentKind,
+    EvaluatedResourceParentName,
+    EvaluatedResourceDetails,
+	Namespace,
+	TimeGenerated

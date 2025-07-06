@@ -1,0 +1,13 @@
+source
+| extend properties = parse_json(properties)
+| project 
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    Category = category,
+    DurationMs = durationMS,
+    Location = location,
+    CorrelationId = correlationId,
+    Level = level,
+    BotId = tostring(properties.botId),
+    ResultCode = toint(properties.resultCode),
+    Channel = tostring(properties.channel)

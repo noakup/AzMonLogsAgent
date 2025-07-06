@@ -1,0 +1,30 @@
+[
+	{
+        "Environment": "PROD",
+        "Region": "East US",
+        "ScaleUnit": "PROD-BL2-002",
+        "ActivityId": "5caef1dc-732b-4c9f-a940-a585a28d20e6",
+        "EventName": "Retrieve Namespace",
+        "resourceId": "/SUBSCRIPTIONS/XXXX-YYYYY-ZZZZ/RESOURCEGROUPS/VIJAYSHARMA-TESTGROUP/PROVIDERS/MICROSOFT.SERVICEBUS/NAMESPACES/VIJAYSHARMA-NAMESPACE-TEST",
+        "SubscriptionId": "XXXX-YYYYY-ZZZZ",
+        "EventTimeString": "9/7/2022 2:41:35 PM +00:00",
+        "EventProperties": "{\"SubscriptionId\":\"XXXX-YYYYY-ZZZZ\",\"Namespace\":\"vijaysharma-namespace-test\",\"Via\":\"<URL>\", \"TrackingId\":\"5caef1dc-732b-4c9f-a940-a585a28d20e6_G6\"}",
+        "Status": "Succeeded",
+        "Caller": "Resource Provider",
+        "category": "OperationalLogs"
+    },
+	{
+        "Environment": "PROD",
+        "Region": "East US",
+        "ScaleUnit": "PROD-BL2-002",
+        "ActivityId": "5caef1dc-732b-4c9f-a940-a585a28d20e6",
+        "EventName": "Retrieve Namespace",
+        "resourceId": "/SUBSCRIPTIONS/XXXX-YYYYY-ZZZZ/RESOURCEGROUPS/VIJAYSHARMA-TESTGROUP/PROVIDERS/MICROSOFT.SERVICEBUS/NAMESPACES/VIJAYSHARMA-NAMESPACE-TEST",
+        "SubscriptionId": "XXXX-YYYYY-ZZZZ",
+        "EventTimeString": "9/7/2022 2:41:35 PM +00:00",
+        "EventProperties": "{\"SubscriptionId\":\"XXXX-YYYYY-ZZZZ\",\"Namespace\":\"vijaysharma-namespace-test\",\"Via\":\"<URL>\", \"TrackingId\":\"5caef1dc-732b-4c9f-a940-a585a28d20e6_G6\", \"ErrorCode\": \"BadRequest\",\"ErrorMessage\": \"SubCode=40000. Partitioning cannot be changed for Queue. To know more visit https://aka.ms/sbResourceMgrExceptions\"}",
+        "Status": "Failed",
+        "Caller": "Resource Provider",
+        "category": "OperationalLogs"
+    }	
+]

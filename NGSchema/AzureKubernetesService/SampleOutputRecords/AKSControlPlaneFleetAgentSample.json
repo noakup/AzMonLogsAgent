@@ -1,0 +1,18 @@
+[
+    {
+        "TimeGenerated": "2024-07-01T14:45:00.0000000Z",
+        "Category": "fleet-agent",
+        "Level": "INFO",
+        "Message": "\"flag:\" name=\"enable-v1beta1-apis\" value=\"true\"",
+        "Stream": "stderr",
+        "PodName": "fleet-hub-agent-5cbdc9cd7d-p87ps"
+    },
+    {
+        "TimeGenerated": "2024-07-01T14:45:00.0000000Z",
+        "Category": "fleet-agent",
+        "Level": "INFO",
+        "Message": "\"flag:\" name=\"enable-webhook\" value=\"true\"",
+        "Stream": "stderr",
+        "PodName": "fleet-hub-agent-5cbdc9cd7d-p87ps"
+    }
+]

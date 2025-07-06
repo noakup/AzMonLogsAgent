@@ -1,0 +1,8 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    Location = location,
+    CorrelationId = correlationId,
+    Category = category,
+    Message = properties

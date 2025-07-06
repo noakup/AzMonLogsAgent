@@ -1,0 +1,192 @@
+{
+    "type": "Microsoft.InformationProtection/DataSecurityManagement",
+    "displayName": "DataSecurityManagement",
+    "description": "Data Security Threat and Incident Management.",
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "AIPDATABREACHMANAGEMENT/IncidentManager",
+    "contactDL": "sagisteam@microsoft.com",
+    "tables": [
+        {
+            "name": "DSMDataClassificationLogs",
+            "description": "Contains data classification information provided by Azure Purview and is used to correlate storage resource logs with data sensitivity information.",
+            "categories": [
+                "security",
+				"resources"
+            ],
+            "isResourceCentric": false,
+            "artifactVersion": 4,
+            "dataTypeId": "DSM_DATA_CLASSIFICATION_LOGS",
+            "tableState": "Validation",
+            "isTroubleshootingAllowed": false,
+            "input": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "Uri",
+                    "type": "String"
+                },
+                {
+                    "name": "Classification",
+                    "type": "String"
+                },
+                {
+                    "name": "Classifications",
+                    "type": "String"
+                },
+                {
+                    "name": "CorrelationId",
+                    "type": "String"
+                },
+                {
+                    "name": "SourceType",
+                    "type": "String"
+                },
+                {
+                    "name": "AssetType",
+                    "type": "String"
+                },
+                {
+                    "name": "AssetLastScanTime",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "ClassificationDetails",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "KQL/TransformClassificationLogs.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "The time (UTC) when Azure Purview scan of asset occurred.",
+                    "isHidden": false
+                },
+                {
+                    "name": "Uri",
+                    "description": "Uniform resource identifier representing the asset that was scanned.",
+                    "type": "String",
+                    "isHidden": false,
+                    "dataTypeHint": "URI"
+                },
+                {
+                    "name": "Classification",
+                    "description": "String containing the list of classifications that were discovered (Legacy column, will be removed in the future).",
+                    "type": "String",
+                    "isHidden": true
+                },
+                {
+                    "name": "Classifications",
+                    "description": "JSON containing the list of classifications that were discovered.",
+                    "type": "Dynamic",
+                    "isHidden": false
+                },
+                {
+                    "name": "CorrelationId",
+                    "description": "The ID that is used to correlate resource logs with data sensitivity logs.",
+                    "type": "String",
+                    "isHidden": false
+                },
+                {
+                    "name": "SourceType",
+                    "description": "Type of resource that was scanned by Azure Purview (Azure Blob, Azure File, etc.).",
+                    "type": "String",
+                    "isHidden": false
+                },
+                {
+                    "name": "AssetType",
+                    "description": "Type of asset that was scanned by Azure Purview (e.g., File, Table).",
+                    "type": "String",
+                    "isHidden": false
+                },
+                {
+                    "name": "AssetLastScanTime",
+                    "description": "The time (UTC) when the resource scan for sensitivity was performed by Azure Purview.",
+                    "type": "DateTime",
+                    "isHidden": false
+                },
+                {
+                    "name": "ClassificationDetails",
+                    "description": "For every classification found in the resource - corresponding Instance Count (i.e. how many occurrences of a specific type of classification was present) and Confidence (i.e. Match Accuracy) is listed.",
+                    "type": "Dynamic",
+                    "isHidden": false
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/SampleInputClassificationLogs.json"
+        },
+        {
+            "name": "DSMDataLabelingLogs",
+            "description": "Contains data sensitivity labeling information provided by Azure Purview and  is used to correlate storage resource logs with data sensitivity information.",
+            "categories": [
+                "security",
+				"resources"
+            ],
+            "isResourceCentric": false,
+            "artifactVersion": 3,
+            "dataTypeId": "DSM_DATA_LABELING_LOGS",
+            "tableState": "Validation",
+            "isTroubleshootingAllowed": false,
+            "input": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "Uri",
+                    "type": "String"
+                },
+                {
+                    "name": "SensitivityLabelName",
+                    "type": "String"
+                },
+                {
+                    "name": "CorrelationId",
+                    "type": "String"
+                },
+                {
+                    "name": "AssetLastScanTime",
+                    "type": "DateTime"
+                }
+            ],
+            "transformFilePath": "KQL/TransformLabelingLogs.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "The time (UTC) when Azure Purview scan of asset occurred.",
+                    "isHidden": false
+                },
+                {
+                    "name": "Uri",
+                    "description": "Uniform resource identifier representing the resource that was scanned.",
+                    "type": "String",
+                    "isHidden": false,
+                    "dataTypeHint": "URI"
+                },
+                {
+                    "name": "SensitivityLabelName",
+                    "description": "The name of sensitive label found and/or applied.",
+                    "type": "String",
+                    "isHidden": false
+                },
+                {
+                    "name": "CorrelationId",
+                    "description": "The ID that is used to correlate resource logs with data sensitivity logs.",
+                    "type": "String",
+                    "isHidden": false
+                },
+                {
+                    "name": "AssetLastScanTime",
+                    "description": "The time (UTC) when the resource scan for sensitivity was performed by Azure Purview.",
+                    "type": "DateTime",
+                    "isHidden": false
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/SampleInputLabelingLogs.json"
+        }
+    ],
+    "functions": [],
+    "queries": []
+}

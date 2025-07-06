@@ -1,0 +1,25 @@
+[
+  {
+    "time": "2020-11-11T23:33:41.6599084Z",
+    "resourceId": "/SUBSCRIPTIONS/562D0FAB-481B-4441-8BEA-1F0CEA929421/RESOURCEGROUPS/RG_RUNNERS_DEP/PROVIDERS/MICROSOFT.SYNAPSE/WORKSPACES/SOUTHCENTRALUSTESTSPARKRUNNERSWORKSPACEDEP2/MICROSOFT.SQLOD/testsqlod",
+    "category": "BuiltInSqlPoolRequestsEnded",
+    "operationName": "BuiltInSqlPoolRequestsEnded",
+    "durationMs": 280,
+    "resultType": "Succeeded",
+    "resultSignature": 0,
+    "correlationId": "149",
+    "identity": {
+      "loginName": "xxx@microsoft.com"
+    },
+    "properties": {
+      "distributedStatementId": "{0D094592-ED2F-4D20-8AF9-1EF2CB4863B8}",
+      "startTime": "2021-06-10T18:17:57.770",
+      "endTime": "2021-06-10T18:17:58.050",
+      "error": "",
+      "dataProcessedBytes": 10000000,
+      "command": "SELECT",
+      "queryText": "xxx",
+      "queryHash": "0x96EBB9237DA7C206"
+    }
+  }
+]

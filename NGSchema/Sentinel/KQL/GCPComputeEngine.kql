@@ -1,0 +1,3 @@
+source 
+| extend TimeGenerated = timestamp 
+| project InsertId = insertId,  Labels = labels, LogName = logName, Operation = operation, ProtoPayload = protoPayload, ReceiveTimestamp = receiveTimestamp, GCPResource = resource, Severity = severity, TimeGenerated

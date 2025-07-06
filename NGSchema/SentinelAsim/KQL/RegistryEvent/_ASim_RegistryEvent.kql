@@ -1,0 +1,4 @@
+union isfuzzy=true
+_ASim_RegistryEventBuiltIn(pack= pack),
+ASim_RegistryEventSolutions(pack= pack),
+ASim_RegistryEventCustom(pack= pack)

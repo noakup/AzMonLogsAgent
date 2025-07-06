@@ -1,0 +1,46 @@
+[
+  {
+    "AlertId": "ed637652235587489106_-2012627947",
+    "AttackTechniques": "[\"Scripting (T1064)\",\"Software Deployment Tools (T1072)\",\"System Services (T1569)\"]",
+    "Category": "Execution",
+    "DetectionSource": "Custom detection",
+    "ServiceSource": "Microsoft Defender for Endpoint",
+    "Severity": "High",
+    "Timestamp": "2021-08-22T09:25:23.4942123Z",
+    "TimeGenerated": "2021-08-22T09:25:23.4942123Z",
+    "Title": "Mark - 2 - Finds PowerShell execution events that could involve a download."
+  },
+  {
+    "AlertId": "da637652250542525573_911747482",
+    "AttackTechniques": "",
+    "Category": "Exploit",
+    "DetectionSource": "Custom TI",
+    "ServiceSource": "Microsoft Defender for Endpoint",
+    "Severity": "Low",
+    "Timestamp": "2021-08-22T10:24:09.1421877Z",
+    "TimeGenerated": "2021-08-22T10:24:09.1421877Z",
+    "Title": "[E2E] MTP Incident EUS f2fef7a8-a426-4b2d-a831-24c74e8b3066"
+  },
+  {
+    "AlertId": "da637652250917406059_62756818",
+    "AttackTechniques": "",
+    "Category": "Exploit",
+    "DetectionSource": "Custom TI",
+    "ServiceSource": "Microsoft Defender for Endpoint",
+    "Severity": "Low",
+    "Timestamp": "2021-08-22T10:26:16.4615242Z",
+    "TimeGenerated": "2021-08-22T10:26:16.4615242Z",
+    "Title": "[E2E] MTP Incident EUS 3704f969-1afa-455a-9f12-b1d3e613c69a"
+  },
+  {
+    "AlertId": "",
+    "AttackTechniques": "",
+    "Category": "",
+    "DetectionSource": "",
+    "ServiceSource": "",
+    "Severity": "",
+    "Timestamp": null,
+    "TimeGenerated": null,
+    "Title": ""
+  }
+]

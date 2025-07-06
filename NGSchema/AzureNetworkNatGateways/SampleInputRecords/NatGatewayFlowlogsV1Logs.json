@@ -1,0 +1,19 @@
+[
+  {
+    "time": "2025-01-15T19:28:44.4456583Z",
+    "category": "NatGatewayFlowlogsV1",
+    "resourceId": "/SUBSCRIPTIONS/7C4FEFFD-3B43-44CA-9182-B667CA761906/RESOURCEGROUPS/SAYGHOSH-FL-TEST/PROVIDERS/MICROSOFT.NETWORK/NATGATEWAYS/STDV2NATGW",
+    "operationName": "NatGatewayFlowlogsV1",
+    "properties": {
+      "SourceIP": "10.0.0.4",
+      "DestinationIP": "40.120.156.32",
+      "NatGatewayIP": "172.173.32.13",
+      "PacketsReceived": 5,
+      "PacketsSent": 80,
+      "BytesReceived": 5120,
+      "BytesSent": 86160,
+      "PacketsReceivedDropped": 3,
+      "PacketsSentDropped": 6
+    }
+  }
+]

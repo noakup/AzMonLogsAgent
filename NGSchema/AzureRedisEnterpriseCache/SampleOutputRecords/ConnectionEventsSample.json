@@ -1,0 +1,50 @@
+[
+    {
+        "TimeGenerated": "2023-01-24T10:00:02.3680050Z",
+        "EventEpochTime": 1674554402,
+        "OperationName": "Microsoft.Cache/redisEnterprise/databases/ConnectionEvents/Read",
+        "Location": "westus",
+        "ResourceId": "/SUBSCRIPTIONS/4A1C78C6-5CB1-422C-A34E-0DF7FCB9BD0B/RESOURCEGROUPS/TEST/PROVIDERS/MICROSOFT.CACHE/REDISENTERPRISE/AUDITING-SHOEBOX/DATABASES/DEFAULT",
+        "ConnectionId": 6185063009002,
+        "ClientIp": "20.228.16.39",
+        "PrivateLinkIPv6": "",
+        "EventType": "new_conn",
+        "EventStatus": null
+    },
+    {
+        "TimeGenerated": "2023-01-24T10:00:02.3680050Z",
+        "EventEpochTime": 1674554402,
+        "OperationName": "Microsoft.Cache/redisEnterprise/databases/ConnectionEvents/Read",
+        "Location": "westus",
+        "ResourceId": "/SUBSCRIPTIONS/4A1C78C6-5CB1-422C-A34E-0DF7FCB9BD0B/RESOURCEGROUPS/TEST/PROVIDERS/MICROSOFT.CACHE/REDISENTERPRISE/AUDITING-SHOEBOX/DATABASES/DEFAULT",
+        "ConnectionId": 6185063009002,
+        "ClientIp": "20.228.16.39",
+        "PrivateLinkIPv6": "",
+        "EventType": "auth",
+        "EventStatus": 8
+    },
+    {
+        "TimeGenerated": "2023-01-24T10:00:02.3680050Z",
+        "EventEpochTime": 1674554402,
+        "OperationName": "Microsoft.Cache/redisEnterprise/databases/ConnectionEvents/Read",
+        "Location": "westus",
+        "ResourceId": "/SUBSCRIPTIONS/4A1C78C6-5CB1-422C-A34E-0DF7FCB9BD0B/RESOURCEGROUPS/TEST/PROVIDERS/MICROSOFT.CACHE/REDISENTERPRISE/AUDITING-SHOEBOX/DATABASES/DEFAULT",
+        "ConnectionId": 6185063009002,
+        "ClientIp": "10.0.0.7",
+        "PrivateLinkIPv6": "fd40:5246:30:9da4:6b30:100:a00:7",
+        "EventType": "new_conn",
+        "EventStatus": null
+    },
+    {
+        "TimeGenerated": "2023-01-24T10:00:02.3680050Z",
+        "EventEpochTime": 1674554402,
+        "OperationName": "Microsoft.Cache/redisEnterprise/databases/ConnectionEvents/Read",
+        "Location": "westus",
+        "ResourceId": "/SUBSCRIPTIONS/4A1C78C6-5CB1-422C-A34E-0DF7FCB9BD0B/RESOURCEGROUPS/TEST/PROVIDERS/MICROSOFT.CACHE/REDISENTERPRISE/AUDITING-SHOEBOX/DATABASES/DEFAULT",
+        "ConnectionId": 6185063009002,
+        "ClientIp": "10.0.0.7",
+        "PrivateLinkIPv6": "fd40:5246:30:9da4:6b30:100:a00:7",
+        "EventType": "auth",
+        "EventStatus": 8
+    }
+]

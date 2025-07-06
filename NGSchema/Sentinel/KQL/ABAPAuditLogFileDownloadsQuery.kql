@@ -1,0 +1,6 @@
+let TableAccessTcodes= dynamic(["SE16", "SE16N", "SE11", "SE16H", "SM30", "SE12", "SM31", "SE16H", "SE14", "SE54","SE17", "SE16T", "DB01", "DB02"]);
+// get data read actions
+ABAPAuditLog
+    | where MessageID == "AU3"
+    | where TransactionCode in (TableAccessTcodes) or Variable1 in (TableAccessTcodes)
+    | summarize by TimeAccessed= bin(TimeGenerated, 1h), SystemId, ClientId, User, AbapProgramName

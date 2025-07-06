@@ -1,0 +1,4 @@
+VCoreMongoRequests
+// Time range filter:  | where TimeGenerated between (StartTime .. EndTime)
+// Resource id filter: | where _ResourceId == "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/my-resource-group-name/providers/microsoft.documentdb/mongoclusters/my-cluster-name"
+| summarize count() by bin(TimeGenerated, 1h), UserAgent

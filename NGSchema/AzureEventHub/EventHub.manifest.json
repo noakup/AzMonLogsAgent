@@ -1,0 +1,1148 @@
+{
+  "type": "Microsoft.EventHub/namespaces",
+  "displayName": "Event Hubs",
+  "description": "All tables related to Azure Event Hubs resource.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "eventhub/DRI - Queues/Topics/EventHubs",
+  "contactDL": "SBServicingLoop@microsoft.com",
+  "relatedFunctions": [],
+  "relatedTables": [
+    "AzureActivity",
+    "AzureMetrics",
+    "AzureDiagnostics",
+    "AZMSApplicationMetricLogs",
+    "AZMSOperationalLogs",
+    "AZMSRunTimeAuditLogs",
+    "AZMSDiagnosticErrorLogs"
+  ],
+  "tables": [
+    {
+      "workflowName": "AEHVNetConnectionEventsWorkflow",
+      "transformName": "AEHVNetConnectionEvents",
+      "physicalName": "AZMSVnetConnectionEvents",
+      "logicalName": "AZMSVnetConnectionEvents",
+      "description": "Captures all virtual network and IP filtering logs for Azure Event Hubs and Azure Service Bus. These would only be emitted if namespace allows access from selected networks or from specific IP address (IP Filter rules).",
+      "categories": [
+        "resources",
+        "audit"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 3,
+      "dataTypeId": "SERVICEBUS_EVENTHUBVNETCONNECTIONEVENT",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isChangeColumnInternalNameAllowed": true,
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "Environment",
+          "type": "String"
+        },
+        {
+          "name": "Region",
+          "type": "String"
+        },
+        {
+          "name": "ScaleUnit",
+          "type": "String"
+        },
+        {
+          "name": "subscriptionId",
+          "type": "String"
+        },
+        {
+          "name": "namespaceName",
+          "type": "String"
+        },
+        {
+          "name": "ipAddress",
+          "type": "String"
+        },
+        {
+          "name": "action",
+          "type": "String"
+        },
+        {
+          "name": "reason",
+          "type": "String"
+        },
+        {
+          "name": "count",
+          "type": "Int"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "eventTimestamp",
+          "type": "DateTime"
+        }
+      ],
+      "transformFilePath": "KQL/TransformEventHubVNetLogs.kql",
+      "columns": [
+        {
+          "name": "NamespaceName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of Event Hubs or Service Bus namespace."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The event generation time (UTC)."
+        },
+        {
+          "name": "AddressIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "IP address of a client connecting to the Event Hubs or Service Bus service.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "Action",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Action done by the service when evaluating connection requests. Supported actions are accept connection and deny connection."
+        },
+        {
+          "name": "Message",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Provides a reason why the action was done."
+        },
+        {
+          "name": "Count",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Number of occurrences for the given action."
+        },
+        {
+          "name": "Provider",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Event provider name. Possible values: eventhub, relay, and servicebus."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/EventHubVNetSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/EventHubVNetSample.json"
+    },
+    {
+      "workflowName": "AEHArchiveLogsWorkflow",
+      "transformName": "AEHArchiveLogs",
+      "physicalName": "AZMSArchiveLogs",
+      "logicalName": "AZMSArchiveLogs",
+      "description": "Captures information about Event Hubs capture operations, specifically, logs related to capture errors.",
+      "categories": [
+        "resources",
+        "audit"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 3,
+      "dataTypeId": "SERVICEBUS_ARCHIVELOGS",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isChangeColumnInternalNameAllowed": true,
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "Environment",
+          "type": "String"
+        },
+        {
+          "name": "Region",
+          "type": "String"
+        },
+        {
+          "name": "ScaleUnit",
+          "type": "String"
+        },
+        {
+          "name": "TaskName",
+          "type": "String"
+        },
+        {
+          "name": "ActivityId",
+          "type": "String"
+        },
+        {
+          "name": "trackingId",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "eventHub",
+          "type": "String"
+        },
+        {
+          "name": "partitionId",
+          "type": "String"
+        },
+        {
+          "name": "archiveStep",
+          "type": "String"
+        },
+        {
+          "name": "startTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "failures",
+          "type": "Int"
+        },
+        {
+          "name": "durationInSeconds",
+          "type": "Int"
+        },
+        {
+          "name": "message",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/TransformEventHubArchiveLogs.kql",
+      "columns": [
+        {
+          "name": "TaskName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The description of the task that failed."
+        },
+        {
+          "name": "ActivityId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Internal ID, used for tracking.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "TrackingId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Internal ID, used for tracking."
+        },
+        {
+          "name": "EventhubName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The Event Hubs full name(includes namespace name)."
+        },
+        {
+          "name": "PartitionId",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "The Event Hubs partition being written to."
+        },
+        {
+          "name": "ArchiveStep",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The possible values: ArchiveFlushWriter, DestinationInit."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The event generation time (UTC)."
+        },
+        {
+          "name": "Failures",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "The number of occurrence of failures."
+        },
+        {
+          "name": "DurationMs",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "The duration of failure (in Milliseconds)."
+        },
+        {
+          "name": "Message",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Error message."
+        },
+        {
+          "name": "Provider",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Event provider name. Possible values: eventhub, relay, and servicebus."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/EventHubArchiveLogsSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/EventHubArchiveLogsSample.json"
+    },
+    {
+      "workflowName": "AEHAutoscaleLogsWorkflow",
+      "transformName": "AEHAutoscaleLogs",
+      "physicalName": "AZMSAutoscaleLogs",
+      "logicalName": "AZMSAutoscaleLogs",
+      "description": "Captures auto-inflate operations done on an Event Hubs namespace.",
+      "categories": [
+        "resources",
+        "audit"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 3,
+      "dataTypeId": "SERVICEBUS_AUTOSCALELOGS",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isChangeColumnInternalNameAllowed": true,
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "Environment",
+          "type": "String"
+        },
+        {
+          "name": "Region",
+          "type": "String"
+        },
+        {
+          "name": "ScaleUnit",
+          "type": "String"
+        },
+        {
+          "name": "TaskName",
+          "type": "String"
+        },
+        {
+          "name": "ActivityId",
+          "type": "String"
+        },
+        {
+          "name": "trackingId",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "message",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "eventTimestamp",
+          "type": "DateTime"
+        }
+      ],
+      "transformFilePath": "KQL/TransformEventHubAutoscaleLogs.kql",
+      "columns": [
+        {
+          "name": "TrackingId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Internal ID, which is used for tracking purposes."
+        },
+        {
+          "name": "Message",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Informational message, which provides details about auto-inflate action. The message contains previous and current value of throughput unit for a given namespace and what triggered the inflate of the TU."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The event generation time (UTC)."
+        },
+        {
+          "name": "Provider",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Event provider name. Possible values: eventhub, relay, and servicebus."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/EventHubAutoscaleLogsSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/EventHubAutoscaleLogSample.json"
+    },
+    {
+      "workflowName": "AEHKafkaCoordinatorLogsWorkflow",
+      "transformName": "AEHKafkaCoordinatorLogs",
+      "physicalName": "AZMSKafkaCoordinatorLogs",
+      "logicalName": "AZMSKafkaCoordinatorLogs",
+      "description": "Captures kafka coordinator operations related to Event Hubs.",
+      "categories": [
+        "resources",
+        "audit"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 3,
+      "dataTypeId": "SERVICEBUS_KAFKACOORDINATORLOGS",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "Environment",
+          "type": "String"
+        },
+        {
+          "name": "Region",
+          "type": "String"
+        },
+        {
+          "name": "ScaleUnit",
+          "type": "String"
+        },
+        {
+          "name": "TaskName",
+          "type": "String"
+        },
+        {
+          "name": "ActivityId",
+          "type": "String"
+        },
+        {
+          "name": "requestId",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operation",
+          "type": "String"
+        },
+        {
+          "name": "clientId",
+          "type": "String"
+        },
+        {
+          "name": "message",
+          "type": "String"
+        },
+        {
+          "name": "namespaceName",
+          "type": "String"
+        },
+        {
+          "name": "subscriptionId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "eventTimestamp",
+          "type": "DateTime"
+        }
+      ],
+      "transformFilePath": "KQL/TransformEventHubKafkaCoordinatorLogs.kql",
+      "columns": [
+        {
+          "name": "RequestId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The request ID, which is used for tracking purposes."
+        },
+        {
+          "name": "Operation",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of operation that done during the group coordination."
+        },
+        {
+          "name": "ClientId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The client ID."
+        },
+        {
+          "name": "NamespaceName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The namespace name."
+        },
+        {
+          "name": "Message",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The Informational or warning message, which provides detailes about actions done during the group coordiantion."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The event generation time(UTC)."
+        },
+        {
+          "name": "Provider",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Event provider name. Possible values: eventhub, relay, and servicebus."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/EventHubKafkaCoordinatorLogsSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/EventHubKafkaCoordinatorLogSample.json"
+    },
+    {
+      "workflowName": "AEHKafkaUserErrorLogsWorkflow",
+      "transformName": "AEHKafkaUserErrorLogs",
+      "physicalName": "AZMSKafkaUserErrorLogs",
+      "logicalName": "AZMSKafkaUserErrorLogs",
+      "description": "Captures information about kafka APIs called on Event Hubs.",
+      "categories": [
+        "resources",
+        "audit"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 3,
+      "dataTypeId": "SERVICEBUS_KAFKAUSERERRORLOGS",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "Environment",
+          "type": "String"
+        },
+        {
+          "name": "Region",
+          "type": "String"
+        },
+        {
+          "name": "ScaleUnit",
+          "type": "String"
+        },
+        {
+          "name": "TaskName",
+          "type": "String"
+        },
+        {
+          "name": "ActivityId",
+          "type": "String"
+        },
+        {
+          "name": "requestId",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "trackingId",
+          "type": "String"
+        },
+        {
+          "name": "namespaceName",
+          "type": "String"
+        },
+        {
+          "name": "message",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "eventTimestamp",
+          "type": "DateTime"
+        }
+      ],
+      "transformFilePath": "KQL/TransformEventHubKafkaUserErrorLogs.kql",
+      "columns": [
+        {
+          "name": "TrackingId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The tracking ID, which is used for tracking purposes."
+        },
+        {
+          "name": "NamespaceName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of Event Hubs namespace."
+        },
+        {
+          "name": "EventhubName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of Event Hub."
+        },
+        {
+          "name": "Message",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The informational message, which provides details about an error."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The event start time (UTC)."
+        },
+        {
+          "name": "Provider",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Event provider name. Possible values: eventhub, relay, and servicebus."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/EventHubKafkaUserErrorLogsSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/EventHubKafkaUserErrorLogSample.json"
+    },
+    {
+      "workflowName": "AEHCustomerManagedKeyUserLogsWorkflow",
+      "transformName": "AEHCustomerManagedKeyUserLogs",
+      "physicalName": "AZMSCustomerManagedKeyUserLogs",
+      "logicalName": "AZMSCustomerManagedKeyUserLogs",
+      "description": "Captures operations related to customer-managed key.",
+      "categories": [
+        "resources",
+        "audit"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 3,
+      "dataTypeId": "SERVICEBUS_CUSTOMERMANAGEDKEYUSERLOGS",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isChangeColumnInternalNameAllowed": true,
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "Environment",
+          "type": "String"
+        },
+        {
+          "name": "Region",
+          "type": "String"
+        },
+        {
+          "name": "ScaleUnit",
+          "type": "String"
+        },
+        {
+          "name": "TaskName",
+          "type": "String"
+        },
+        {
+          "name": "ActivityId",
+          "type": "String"
+        },
+        {
+          "name": "requestId",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "keyVault",
+          "type": "String"
+        },
+        {
+          "name": "key",
+          "type": "String"
+        },
+        {
+          "name": "version",
+          "type": "String"
+        },
+        {
+          "name": "operation",
+          "type": "String"
+        },
+        {
+          "name": "code",
+          "type": "String"
+        },
+        {
+          "name": "message",
+          "type": "String"
+        },
+        {
+          "name": "eventTimestamp",
+          "type": "DateTime"
+        }
+      ],
+      "transformFilePath": "KQL/TransformEventHubCustomerManagedKeyUserLogs.kql",
+      "columns": [
+        {
+          "name": "Category",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Type of category for a message. It's one of the following values: error and info. For example, if the key from your key vault is being disabled, then it would be an information category or if a key can't be unwrapped, it could fall under error."
+        },
+        {
+          "name": "KeyVault",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the key vault resource."
+        },
+        {
+          "name": "Key",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the key-vault key that's used to encrypt the Event Hubs namespace."
+        },
+        {
+          "name": "Version",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The version of the key-vault key."
+        },
+        {
+          "name": "Operation",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation that's performed on the key in your key vault. For example, disable/enable the key, wrap, or unwrap."
+        },
+        {
+          "name": "StatusCode",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The code that's associated with the operation. Example: Error code, 404 means that key wasn't found."
+        },
+        {
+          "name": "Message",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The message, which provides detailes about an error or informational message."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The event start time(UTC)."
+        },
+        {
+          "name": "Provider",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Event provider name. Possible values: eventhub, relay, and servicebus."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/EventHubCustomerManagedKeyUserLogsSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/EventHubCustomerManagedKeyUserLogSample.json"
+    }
+  ],
+  "functions": [],
+  "queries": [
+    {
+      "id": "eaa7957b-aecb-406b-be10-f48696b0ecehdel",
+      "displayName": "Publish detailed error logs",
+      "description": "Publish detailed error logs for diagnostics.",
+      "bodyFilePath": "KQL/PublishSuccessDiagnosticErrorLogsForAmqpProtocolQuery.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "AZMSDiagnosticErrorLogs"
+      ]
+    },
+    {
+      "id": "8a0df091-26c3-4e64-a3b9-d2b2bd397c4e",
+      "displayName": "Publish success data for topics",
+      "description": "Publish success data for topics for OperationLogs.",
+      "bodyFilePath": "KQL/PublishSuccessfullOperationsLogsByTopicEventNameQuery.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "AZMSOperationalLogs"
+      ]
+    },
+    {
+      "id": "c6b1a9cd-8b76-468d-8a00-b3be3040cf2b",
+      "displayName": "Publish failures for subscription",
+      "description": "Publish management action failures for subscription.",
+      "bodyFilePath": "KQL/PublishFailedOperationsLogsForSubscriptionQuery.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "AZMSOperationalLogs"
+      ]
+    },
+    {
+      "id": "2600882e-3766-4e90-8823-4f1285d4595c",
+      "displayName": "Publish failures for namespace",
+      "description": "Publish management action failures for namespace.",
+      "bodyFilePath": "KQL/PublishFailedOperationsLogsForNamespaceQuery.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "AZMSOperationalLogs"
+      ]
+    },
+    {
+      "id": "719df79c-282d-49ff-9163-35542afe3e47",
+      "displayName": "Publish deny connection by namespace",
+      "description": "Publish deny connection by namespace on network data.",
+      "bodyFilePath": "KQL/PublishDenyConnectionByNamespaceQuery.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "AZMSVnetConnectionEvents"
+      ]
+    },
+    {
+      "id": "cc0aeb16-1fe2-43c5-b483-cc8aba72b41c",
+      "displayName": "Publish namespace vnet data",
+      "description": "Publish vnet data for namespace by action status.",
+      "bodyFilePath": "KQL/PublishNamespaceActionDataQuery.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "AZMSVnetConnectionEvents"
+      ]
+    },
+    {
+      "id": "b1101646-c48a-4f18-83b9-2a3af4cd2c2b",
+      "displayName": "Publish successful connection for AMQP protocol",
+      "description": "Publish runtime successful connection for Advanced Message Queuing Protocol(AMQP).",
+      "bodyFilePath": "KQL/PublishSuccessRuntimeAuditLogsForAmqpProtocolQuery.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "AZMSRunTimeAuditLogs"
+      ]
+    },
+    {
+      "id": "b8df4aec-7c87-46e1-a6fb-d20b9c0e0ef0",
+      "displayName": "Publish failed AAD logs",
+      "description": "Publish the failed entries for AAD auth.",
+      "bodyFilePath": "KQL/PublishFailedRuntimeAuditLogsForAuthTypeAADQuery.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "AZMSRunTimeAuditLogs"
+      ]
+    },
+    {
+      "id": "bcb23e62-59f9-4b81-b7f9-91f2157c051f",
+      "displayName": "Publish failed SAS logs",
+      "description": "Publish the failed entries for SAS auth.",
+      "bodyFilePath": "KQL/PublishFailedRuntimeAuditLogsForAuthTypeSASQuery.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "AZMSRunTimeAuditLogs"
+      ]
+    },
+    {
+      "id": "b48bce62-0ab9-4b29-9d48-fd0602f175c3",
+      "displayName": "Publish failure for send message",
+      "description": "Publish the runtime failure for send message event.",
+      "bodyFilePath": "KQL/PublishFailedRuntimeAuditLogsForSendMessageActivityQuery.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "AZMSRunTimeAuditLogs"
+      ]
+    },
+    {
+      "id": "8741ae6e-c9d1-4af4-8e8b-e139342c94cd",
+      "displayName": "Publish failure for Namespace",
+      "description": "Publish the runtime failure for multiple namespaces.",
+      "bodyFilePath": "KQL/PublishFailedRuntimeAuditLogsForNamespaceByNamespaceQuery.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "AZMSRunTimeAuditLogs"
+      ]
+    },
+    {
+      "id": "6e754b00-8d1b-4191-a332-fe3c746d64ee",
+      "displayName": "[Classic] Errors in the last 7 days",
+      "description": "This lists all the errors for the last 7 days.",
+      "bodyFilePath": "KQL/ClassicQueryErrorInOperationLogs.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "AZMSRunTimeAuditLogs"
+      ]
+    },
+    {
+      "id": "eeafb4d2-cc77-45de-8ee4-bcc7f804fa9b",
+      "displayName": "[Classic] Duration of Capture failure",
+      "description": "Summarizes the duaration of failure on Capture.",
+      "bodyFilePath": "KQL/ClassicQueryDurationOfCaptureFailure.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "AzureDiagnostics"
+      ]
+    },
+    {
+      "id": "375f9d9e-29bd-44ba-84ef-f30bbf8edbbb",
+      "displayName": "[Classic] Join request for client",
+      "description": "Summarized the status of join request for client.",
+      "bodyFilePath": "KQL/ClassicQueryJoinRequestForClient.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "AzureDiagnostics"
+      ]
+    },
+    {
+      "id": "03935bbe-6dcb-4712-a695-cba2e583784f",
+      "displayName": "[Classic] Access to keyvault - key not found",
+      "description": "Summarizes the access to keyvault when key is not found.",
+      "bodyFilePath": "KQL/ClassicQueryAccessToKeyvalutKeyNotFound.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "AzureDiagnostics"
+      ]
+    },
+    {
+      "id": "88ab8b25-c3c5-4c97-a93f-8e3158dc487e",
+      "displayName": "[Classic] Operation performed with keyvault",
+      "description": "Summarizes the operation performed with keyvault to disable or restore the key.",
+      "bodyFilePath": "KQL/ClassicQueryOperationPerformedWithKeyvalut.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "AzureDiagnostics"
+      ]
+    }
+  ]
+}

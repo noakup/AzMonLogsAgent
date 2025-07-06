@@ -1,0 +1,19 @@
+// This query identifies domains receiving uncommon about of data volume.
+// This could be an indication of adversary attempts to steal and exfiltrate data.
+let isInternal = (url_hostname:string){url_hostname endswith ".local" or url_hostname endswith ".lan" or url_hostname endswith ".home"};
+    // used to exclude internal traffic
+let top1M =  (externaldata (Position:int, Domain:string) [@"http://s3-us-west-1.amazonaws.com/umbrella-static/top-1m.csv.zip"]  with (format="csv", zipPattern="*.csv"));
+    // fetch the alexa top 1M domains
+let top2ndLevelDomain=top1M
+    | extend Domain = tolower(extract("([^.]*).{0,7}$", 1, Domain)) 
+    | distinct Domain;
+let rareDomainTraffic = NetworkSessions
+    | where isnotempty(UrlHostname) and not(isInternal(UrlHostname))
+    | extend SndLevelDomain=tolower(extract("([^.]*).{0,7}$", 1, UrlHostname))
+    | where SndLevelDomain !in (top2ndLevelDomain)
+    | summarize BytesSent=sum(SrcBytes) by SndLevelDomain, UrlHostname;
+rareDomainTraffic | summarize TotalBytes=sum(BytesSent) by SndLevelDomain
+| join kind=innerunique
+    rareDomainTraffic
+        on SndLevelDomain
+| sort by TotalBytes desc 

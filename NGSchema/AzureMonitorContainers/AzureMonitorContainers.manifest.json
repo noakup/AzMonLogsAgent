@@ -1,0 +1,180 @@
+{
+	"type": "Microsoft.ContainerService/managedClusters",
+	"displayName": "Kubernetes Services",
+	"description": "Tables used by Azure Monitor for Containers.",
+	"tags": {},
+	"properties": {},
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "Container Insights/ContainerInsightsAgent",
+	"relatedTables": ["AzureActivity"],
+	"relatedFunctions": [],
+	"tables": [
+        {
+			"name": "ContainerLogV2",
+			"description": "Kubernetes Container logs in V2 schema. This is the successor of ContainerLog. This has a friendlier schema, specifically for Kubernetes orchestrated containers in pods. With this feature enabled, previously split container logs are stitched together and sent as single entries to the ContainerLogV2 table. The schema now supports container log lines of up to to 64 KB. The schema also supports .NET and Go stack traces, which appear as single entries.",
+			"categories": ["container"],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 9,
+			"dataTypeId": "CONTAINERINSIGHTS_CONTAINERLOGV2",
+			"intelligencePacks": ["ContainerInsights","AzureResources"],
+			"isResourceCentric": true,
+			"isTroubleshootingAllowed": true,
+			"tableState": "Production",
+		    "input": [
+                {
+					"name": "Computer",
+					"type": "String"
+				},
+				{
+					"name": "ContainerId",
+					"type": "String"
+				},
+				{
+					"name": "ContainerName",
+					"type": "String"
+				},
+				{
+					"name": "PodName",
+					"type": "String"
+				},
+				{
+					"name": "PodNamespace",
+					"type": "String"
+				},
+				{
+					"name": "LogMessage",
+					"type": "String"
+                },
+                {
+					"name": "LogSource",
+					"type": "String" 
+				},
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime"
+                },
+				{
+					"name": "KubernetesMetadata",
+					"type": "String"
+                },
+				{
+					"name": "LogLevel",
+					"type": "String"
+                }
+			],
+			"transformFilePath": "KQL/AzureMonitorContainersContainerLogV2.kql",
+			"columns": [
+                {
+					"name": "Computer",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Name of the Computer/Node generating the log."
+                },
+                {
+					"name": "ContainerId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Container ID of the log source as seen by the Container engine."
+                },
+                {
+					"name": "ContainerName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Name of the Container generating the log."
+                },
+                {
+					"name": "PodName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Kubernetes Pod name for the Container generating the log."
+                },
+                {
+					"name": "PodNamespace",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Kubernetes Namespace for the container's pod."
+                },
+                {
+					"name": "LogMessage",
+					"type": "Dynamic",
+					"isDefaultDisplay": true,
+					"description": "Log message from stdout or stderr. Being a dynamic field, json log messages can be queried without parse_json."
+                },
+                {
+					"name": "LogSource",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Source of the Log message. Possible vlaues are stdout or stderr."
+				},
+                {
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "KubernetesMetadata",
+					"type": "Dynamic",
+					"isDefaultDisplay": true,
+					"description": "Kubernetes Metadata including podUid, podLabels, podAnnotations and container image details, etc."
+                },
+				{
+					"name": "LogLevel",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Categorize logs based on importance and severity. Possible values: CRITICAL, ERROR, WARNING, INFO, DEBUG, TRACE, UNKNOWN."
+                }
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/AzureMonitorContainersContainerLogV2Sample.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/AzureMonitorContainersContainerLogV2Sample.json"
+        }
+    ],
+	"functions": [],
+	"queries": [{
+		"id": "5eea8814-60dd-4d3c-bec0-3c364c88e123",
+		"displayName": "Pods in crash loop",
+		"description": "Determines whether Pods/Containers has Crash-Loop phase.",
+		"bodyFilePath": "Kql/AzureMonitorContainersPodCrashLoop.kql",
+		"categories": [
+		  "container"
+		],
+		"relatedTables": [
+		  "KubePodInventory"
+		],
+		"tags": {
+		  "Topic": [
+			"Availability"
+		  ]
+		},
+		"properties": {
+		  "ExampleQuery": true,
+		  "QueryAttributes": {
+			"IsMultiResource": true
+		  }
+		}
+	  },
+	  {
+		"id": "8146e954-5df5-4eaa-afe6-1cef6c158456",
+		"displayName": "Pods in pending state",
+		"description": "Check Pods that cannot be started and their pending time.",
+		"bodyFilePath": "Kql/AzureMonitorContainersPodPending.kql",
+		"categories": [
+		  "container"
+		],
+		"relatedTables": [
+		  "KubePodInventory"
+		],
+		"tags": {
+		  "Topic": [
+			"Availability"
+		  ]
+		},
+		"properties": {
+		  "ExampleQuery": true,
+		  "QueryAttributes": {
+			"IsMultiResource": true
+		  }
+		}
+	  }]
+}

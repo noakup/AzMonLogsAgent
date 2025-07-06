@@ -1,0 +1,58 @@
+let recordTypeMap = parse_json('{ '
+' "1": "ExchangeAdmin", '
+' "2": "ExchangeItem", '
+' "3": "ExchangeItemGroup", '
+' "4": "SharePoint", '
+' "6": "SharePointFileOperation", '
+' "8": "AzureActiveDirectory", '
+' "9": "AzureActiveDirectoryAccountLogon",'
+' "10": "DataCenterSecurityCmdlet", '
+' "11": "ComplianceDLPSharePoint", '
+' "14": "SharePointSharingOperation", '
+' "15": "AzureActiveDirectoryStsLogon", '
+' "25": "MicrosoftTeams", '
+' "35": "MicrosoftProjectEvents" '
+' }');
+let actorUserTypeMap = parse_json('{ '
+' "0": "Regular", '
+' "1": "Other" ,'
+' "2": "Admin", '
+' "3": "Admin", '
+' "4": "System", '
+' "5": "Application", '
+' "6": "Service Principal", '
+' "7": "Other", '
+' "8": "Other" '
+' }'); 
+let eventResultMap = parse_json('{ '
+' "Succeeded": "Success", '
+' "Failed": "Failure", '
+' "PartiallySucceeded ": "Partial" ,'
+' "": "" '
+' }');
+let scopeMap = parse_json('{ '
+' "0": "Online", '
+' "1": "Onprem" ,'
+' "": "" '
+' }');
+source
+| project
+ActorName = tostring(UserId),
+ActorUserId = tostring(UserKey),
+ActorUserType = tostring(actorUserTypeMap[tostring(UserType)]),
+SrcIpAddr = tostring(ClientIP),
+EventOriginalType = tostring(Operation),
+EventOriginalUid = tostring(Id),
+EventProduct = "Project",
+EventVendor = "Microsoft",
+EventResult = tostring(eventResultMap[tostring(ResultStatus)]),
+ObjectId = tostring(ObjectId),
+OnBehalfOfResId = tostring(OnBehalfOfResId),
+OrganizationId = tostring(OrganizationId),
+ProjectAction = tostring(Action),
+ProjectEntity = tostring(Entity),
+RecordType = tostring(recordTypeMap[tostring(RecordType)]),
+Scope = tostring(scopeMap[tostring(Scope)]),
+TimeGenerated = todatetime(CreationTime),
+UserType = tostring(UserType),
+Workload = tostring(Workload)

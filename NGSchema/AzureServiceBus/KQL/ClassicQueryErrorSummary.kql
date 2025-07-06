@@ -1,0 +1,4 @@
+AzureDiagnostics
+| where ResourceProvider ==\"MICROSOFT.SERVICEBUS\"
+| where Category == \"Error\"
+| summarize count() by EventName_s, _ResourceId

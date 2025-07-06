@@ -1,0 +1,15 @@
+source 
+| project 
+    TimeGenerated = todatetime(["time"]),
+    Category = category,
+    CorrelationId = tostring(properties.id),
+    Status = tostring(properties.status),
+    OperationName = operationName,
+    EventCategory = tostring(properties.eventCategory),
+    TargetResource = pack("TargetResourceType", tostring(properties.targetResourceType), "TargetResourceName", tostring(properties.targetResourceName)),
+    ResultType = resultType,
+    CallerIdentity = todynamic(replace("=>", ":", identity)),
+    CallerIPAddress = callerIpAddress,
+    RequestId = tostring(properties.requestId),
+    ETag = tostring(properties.etag)
+

@@ -1,0 +1,18 @@
+[
+    {
+    "firewall_name": "Firewall",
+    "availability_zone": "ap-south-1a",
+    "event_timestamp": "1742205442",
+    "event": {
+        "timestamp": "2025-03-17T09:57:22.346097Z",
+        "src_ip": "10.0.2.56",
+        "src_port": "38804",
+        "dest_ip": "52.95.83.19",
+        "dest_port": "443",
+        "sni": "ssm.ap-south-1.amazonaws.com",
+        "tls_error": {
+            "error_message": "Error in connection to Client: Bad certificate."
+        }
+    }
+}
+]

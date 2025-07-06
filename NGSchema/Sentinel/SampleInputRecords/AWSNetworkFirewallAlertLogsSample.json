@@ -1,0 +1,41 @@
+[
+    {
+        "firewall_name": "Firewall",
+        "availability_zone": "ap-south-1a",
+        "event_timestamp": "1742207959",
+        "event": {
+            "ssh": {
+                "client": {
+                    "proto_version": "2.0",
+                    "software_version": "OpenSSH_7.4"
+                },
+                "server": {
+                    "proto_version": "2.0",
+                    "software_version": "OpenSSH_9.6p1"
+                }
+            },
+            "app_proto": "ssh",
+            "src_ip": "98.102.148.242",
+            "src_port": "58484",
+            "event_type": "alert",
+            "alert": {
+                "severity": "3",
+                "signature_id": "4",
+                "rev": "0",
+                "signature": "aws:alert_established action",
+                "action": "blocked",
+                "category": ""
+            },
+            "flow_id": "1339769664224968",
+            "dest_ip": "10.0.2.56",
+            "proto": "TCP",
+            "verdict": {
+                "action": "drop"
+            },
+            "dest_port": "22",
+            "pkt_src": "geneve encapsulation",
+            "timestamp": "2025-03-17T10:39:19.062085+0000",
+            "direction": "to_server"
+        }
+    }
+]

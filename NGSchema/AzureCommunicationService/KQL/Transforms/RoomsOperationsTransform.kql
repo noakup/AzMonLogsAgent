@@ -1,0 +1,21 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    OperationVersion = operationVersion,
+    ResultType = resultType,
+    ResultSignature = resultSignature,
+    CorrelationId = correlationId,
+    Level = level,
+    RoomId = tostring(properties.room_id),
+    RoomLifespan = toint(properties.room_lifespan_mins),
+    RoomParticipantsCount = toint(properties.room_participants_count),
+    RoomParticipantsConsumer = toint(properties.room_participants_consumer),
+    RoomParticipantsAttendee = toint(properties.room_participants_attendee),
+    RoomParticipantsPresenter = toint(properties.room_participants_presenter),
+    RoomJoinPolicy = tostring(properties.room_join_policy),
+    AddedRoomParticipantsCount = toint(properties.added_room_participants_count),
+    RemovedRoomParticipantsCount = toint(properties.removed_room_participants_count),
+    UpsertedRoomParticipantsCount = toint(properties.upserted_room_participants_count),
+    PstnDialOutEnabled = tobool(properties.pstnDialOutEnabled)
+

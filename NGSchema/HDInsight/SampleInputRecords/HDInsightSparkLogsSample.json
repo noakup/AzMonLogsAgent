@@ -1,0 +1,12 @@
+[{
+	"utcTime": "2020-06-24 17:35:12,694",
+	"logLevel": "INFO",
+	"message": "Registered executor AppExecId{appId=application_1592270610118_0798, execId=30} with ExecutorShuffleInfo{localDirs=[/mnt/resource/hadoop/yarn/local/usercache/livy/appcache/application_1592270610118_0798/blockmgr-8ec60c33-5b97-45e8-be53-580d8e924a84], subDirsPerLocalDir=64, shuffleManager=org.apache.spark.shuffle.sort.SortShuffleManager}",
+	"logType": "SparkExecutorLog",
+	"clusterName": "becohen-spark",
+	"hostName": "wn2-becohe",
+	"clusterType": "spark",
+	"operationName": "LogCollection",
+	"correlationId": "SparkLogs",
+	"FluentdIngestTimestamp": "2019-07-13T01:05:06.0000000Z"
+}]

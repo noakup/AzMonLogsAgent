@@ -1,0 +1,5 @@
+// Resources, which stopped sending heartbeats in last 15 minutes
+Heartbeat
+| summarize LastReported=now()-max(TimeGenerated) by ResourceGroup, Resource, ResourceType 
+// Assuming that heartbeats are sent at least every minute we are looking at 1-15 minute interval
+| where LastReported between(1m..15m)

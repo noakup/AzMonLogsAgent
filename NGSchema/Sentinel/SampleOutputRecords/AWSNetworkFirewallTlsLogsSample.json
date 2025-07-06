@@ -1,0 +1,17 @@
+[
+    {
+        "TimeGenerated": "4/7/2025, 5:57:19.753 AM",
+        "FirewallName": "Firewall",
+        "AvailabilityZone": "ap-south-1a",
+        "EventTimestamp": 1744004883,
+        "SrcIp": "147.185.133.152",
+        "SrcPort": 53426,
+        "DestIp": "10.0.2.40",
+        "DestPort": 2019,
+        "Sni": "",
+        "LeafCertificateFingerprint": "",
+        "Status": "",
+        "Action": "",
+        "ErrorMessage": ""
+    }
+]

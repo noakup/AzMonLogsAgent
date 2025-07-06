@@ -1,0 +1,5 @@
+OEPDataplaneLogs
+// Summarize the count of logs by category over the last day
+| summarize Count = count() by bin(TimeGenerated, 1d), Category
+// Render a pie chart for visualization
+| render piechart

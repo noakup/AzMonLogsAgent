@@ -1,0 +1,33 @@
+let recordTypeMap = parse_json('{ '
+' "68": "ComplianceSupervisionExchange" '
+' }');
+let actorUserTypeMap = parse_json('{ '
+' "0": "Regular", '
+' "1": "Other" ,'
+' "2": "Admin", '
+' "3": "Admin", '
+' "4": "System", '
+' "5": "Application", '
+' "6": "Service Principal", '
+' "7": "Other", '
+' "8": "Other" '
+' }');
+source
+| project
+EventOriginalUid = tostring(Id),
+RecordType = tostring(recordTypeMap[tostring(RecordType)]),
+TimeGenerated = todatetime(CreationTime),
+EventOriginalType = tostring(Operation),
+OrganizationId = tostring(OrganizationId),
+UserType = tostring(UserType),
+ActorUserType = tostring(actorUserTypeMap[tostring(UserType)]),
+ActorUserId = tostring(UserKey),
+Workload = tostring(Workload),
+ObjectId = tostring(ObjectId),
+ActorName = tostring(UserId),
+EventProduct = "CommunicationCompliance",
+EventVendor = "Microsoft",
+IsPolicyHit = tobool(IsPolicyHit),
+SRPolicyId = tostring(SRPolicyMatchDetails['SRPolicyId']),
+SRPolicyName = tostring(SRPolicyMatchDetails['SRPolicyName']),
+SRRuleMatchDetails = todynamic(SRPolicyMatchDetails['SRRuleMatchDetails'])

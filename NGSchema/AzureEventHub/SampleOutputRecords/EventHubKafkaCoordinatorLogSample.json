@@ -1,0 +1,12 @@
+[
+  {
+    "TimeGenerated": "1/01/2021 8:40:06 PM +00:00",
+    "RequestId": "FE01001A89E30B020000000304620E2A_KafkaExampleConsumer#0",
+    "Operation": "Join.Start",
+    "ClientId": "KafkaExampleConsumer#0",
+    "Message": "Start join group for new member namespace-name:c:$default:I:KafkaExampleConsumer#0-cc40856f7f3c4607915a571efe994e82, current group size: 0, API version: 2, session timeout: 10000ms, rebalance timeout: 300000ms.",
+    "SubscriptionId": "0000000-0000-0000-0000-000000000000",
+    "NamespaceName": "namespace-name",
+    "Provider": "eventhub"
+  }
+]

@@ -1,0 +1,112 @@
+{
+	"type": "Microsoft.Insights/datacollectionrules",
+	"displayName": "Data Collection Rules",
+	"description": "Diagnostic logs for DCR-based data collection",
+	"tags": {},
+	"properties": {},
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "Azure Log Analytics/Ingestion",
+	"contactDL": "clouddiagdri@microsoft.com",
+	"relatedFunctions": [],
+	"tables": [
+		{
+			"name": "DCRLogErrors",
+			"description": "Errors registered during DCR-based data collection and transformation.",
+			"categories": [
+				"resources"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 2,
+			"dataTypeId": "MICROSOFTINSIGHTSDATACOLLECTIONRULES_LOGERRORS",
+			"tableState": "Production",
+            "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "category",
+					"type": "string"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "KQL/DataCollectionRulesLogErrorsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Name of the operation, Can be Ingestion or Transformation."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"dataTypeHint": "GUID",
+					"description": "The ID for the correlated events. Can be used to identify correlated events between multiple tables."
+				},
+				{
+					"name": "InputStreamId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Stream name of the input."
+				},
+				{
+					"name": "Message",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Error describing the issue."
+				},
+				{
+					"name": "ClientRequestId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Guid passed in x-ms-client-request-id header while ingesting data."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/DCRLogErrorsSampleInput.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/DCRLogErrorsSampleOutput.json"
+		}		
+	],
+	"functions": [],
+	"queries": [
+		{
+			"id": "d7d0e750-f20c-4d13-8887-2d088f25bb68",
+			"displayName": "Ingestion and Transformation errors from data collection rules",
+			"description": "Retrieves logs indicating ingestion and transformation failures during logs ingestion using data collection rules.",
+			"bodyFilePath": "KQL/DatacollectionRulesErrorQuery.kql",
+			"categories": [ "resources" ],
+			"tags": {
+			  "Topic": [
+				"Errors"
+			  ]
+			},
+			"relatedTables": [ "DCRLogErrors" ],
+			"properties": {
+			  "ExampleQuery": true,
+			  "QueryAttributes": {
+				"IsMultiResource": true
+			  }
+			}
+		}
+	]
+}

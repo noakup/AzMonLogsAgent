@@ -1,0 +1,18 @@
+[
+    {
+        "TimeGenerated": "2023-01-12T17:48:08.0000000Z",
+        "Category": "csi-aksarcsmb-controller",
+        "Level": "WARNING",
+        "Message": "nodeid is empty",
+        "Stream": "stderr",
+        "PodName": "csi-aksarcsmb-controller-64889d5bdd-w7bhj"
+    },
+    {
+        "TimeGenerated": "2023-01-12T17:48:08.0000000Z",
+        "Category": "csi-aksarcsmb-controller",
+        "Level": "INFO",
+        "Message": "set up prometheus server on [::]:29614",
+        "Stream": "stderr",
+        "PodName": "csi-azureaksarcsmbfile-controller-64889d5bdd-w7bhj"
+    }
+]

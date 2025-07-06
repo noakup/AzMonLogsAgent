@@ -1,0 +1,38 @@
+[
+  {
+    "TimeGenerated": "2022-07-20T21:53:12Z",
+    "resourceId": "/subscriptions/29c5b8a5-38a2-4223-bb2e-31f3013a4df3/resourcegroups/mms-wcus/providers/microsoft.operationalinsights/workspaces/uc-msit-demo",
+    "DeviceName": "rsbuild",
+    "GlobalDeviceId": "g:6825764862575471",
+    "OSVersion": "1909",
+    "DownloadMode": " HTTP+Group(2)",
+    "ContentType": "Apps",
+    "DownloadModeSrc": "MDM",
+    "ContentDownloadMode": 2,
+    "Country": "India",
+    "City": " hyderabad",
+    "ISP": "atria",
+    "PeeringStatus": "On",
+    "TotalTimeForDownload": "05:15:10",
+    "TotalTransfers": 249,
+    "PeerEligibleTransfers": 40,
+    "NoPeersCount": 13,
+    "PeersUnknownCount": 24,
+    "PeersSuccessCount": 3,
+    "PeersCannotConnectCount": 0,
+    "BytesFromCDN": 241495345004511,
+    "BytesFromIntPeers": 11968260005,
+    "BytesFromPeers": 63949456501487,
+    "BytesFromGroupPeers": 68414457783636,
+    "BWOptPercent28Days": 35.4,
+    "BWOptPercent7Days": 0.68,
+    "LastCensusSeenTimeUTC": "2020-03-14T23:55:01.073Z",
+    "AzureADTenantId": "69ca04b0-703d-4b3a-9184-c4e3c15d6f5e",
+    "AzureADDeviceId": "71db1a1a-f1a6-4a25-b88f-79c2f513dae0",
+    "DOStatusDescription": "DO Status",
+    "GroupId": "Group Id",
+    "BytesFromCache": 12639494565014
+  }
+]
+
+

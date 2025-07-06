@@ -1,0 +1,18 @@
+[
+    {
+        "TimeGenerated": "2023-03-23T05:50:00.0364185Z",
+        "OperationName": "Microsoft.Cdn/Profiles/WebApplicationFirewallLog/Write",
+        "RequestTime": "2023-03-23T05:50:00.0364185Z",
+        "Action": "Log",
+        "ClientIp": "20.114.123.207",
+        "ClientPort": 1044,
+        "Details": "Tools and frameworks for web crawling and attacks",
+        "Host": "canary.portal.azure.com",
+        "Policy": "azureportalwafpolicy01",
+        "PolicyMode": "prevention",
+        "RequestUri": "https://canary.portal.azure.com:443/Content/Dynamic/ghX-Is1vdE-g.js?-type=DefaultPartitioner&bundlingKind=DefaultPartitioner&root=*ShellWorkerImpl/GlobalResourceFiltersProvider",
+        "RuleName": "Microsoft_BotManagerRuleSet-1.0-UnknownBots-Bot300200",
+        "SocketIp": "20.114.123.207",
+        "TrackingReference": "0iOgbZAAAAABTU8x/UPJJSp7XnDsnRV0QU04xRURHRTIxMDgAMzViNjM2MGItYjYxYi00Yzc2LWJmN2QtZjU4M2Y4ODQxOWY5"
+    }
+]

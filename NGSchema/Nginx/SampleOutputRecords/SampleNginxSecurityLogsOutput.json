@@ -1,0 +1,16 @@
+[
+    {
+        "TimeGenerated": "2023-10-13T20:09:01Z",
+        "Location": "westus",
+        "Message": "attack_type=\"Other Aaaplication Activity,HTTP Parser Attack\"",
+        "FilPath": "/var/log/nginx/security.log"
+    },
+    {
+        "TimeGenerated": "2017-04-26T19:27:38Z",
+        "Location": "westus",
+        "Message": "attack_type=\"Other Aaaplication Activity,HTTP Parser Attack\"",
+        "Tag": "ASM",
+        "Severity": "info",
+        "Facility": "local7"
+    }
+]

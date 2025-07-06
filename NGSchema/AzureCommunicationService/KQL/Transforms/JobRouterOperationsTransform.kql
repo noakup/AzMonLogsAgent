@@ -1,0 +1,19 @@
+source
+| extend properties = parse_json(properties)
+| project
+    TimeGenerated = todatetime(["time"]),
+    Level = level,
+    OperationName = operationName,
+    OperationVersion = operationVersion,
+    ResultType = resultType,
+    ResultSignature = resultSignature,
+    ResultDescription = resultDescription,
+    DurationMs = todouble(durationMs),
+    CallerIpAddress = callerIpAddress,
+    CorrelationId = correlationId,
+    URI = uri,
+    SdkType = tostring(properties.sdkType),
+    EntityId = tostring(properties.entityId),
+    EntityType = tostring(properties.entityType)
+
+    

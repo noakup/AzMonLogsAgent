@@ -1,0 +1,19 @@
+source
+| extend properties = parse_json(properties)
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    StartTime = todatetime(tostring(properties.StartTime)),
+    EndTime = todatetime(tostring(properties.EndTime)),
+    BillingRegion = tostring(properties.BillingRegion),
+    BilledResourceId = tostring(properties.BilledResourceId),
+    UsageResourceUniqueId = tostring(properties.UsageResourceUniqueId),
+    UsageResourceName = tostring(properties.UsageResourceName),
+    UserId = identity,
+    Sku = tostring(properties.Sku),
+    UsageType = tostring(properties.UsageType),
+    UnitType = tostring(properties.UnitType),
+    Quantity = todouble(properties.Quantity),
+    MeterId = tostring(properties.MeterId),
+    EventId = tostring(properties.EventId),
+    IsOverMonthlyBillingCap = tobool(properties.IsOverMonthlyBillingCap)

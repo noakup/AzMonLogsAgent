@@ -1,0 +1,10 @@
+AEWComputePipelinesLogs
+| where EventName =~ "CosmosJobUtilization"
+| where Properties.ExperimentationGroup =~ "test~ExperimentationGroup"
+| where todouble(Properties.JobRunningInSeconds) >= 24 * 60 * 60
+| project
+    TimeGenerated
+    ,EventName
+    ,ExperimentationGroup = Properties.ExperimentationGroup
+    ,AnalysisType = Properties.AnalysisType
+| sort by TimeGenerated desc

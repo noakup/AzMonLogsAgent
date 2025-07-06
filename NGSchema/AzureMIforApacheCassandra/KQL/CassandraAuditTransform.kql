@@ -1,0 +1,17 @@
+source
+| extend properties = parse_json(properties)
+| extend resourceIdArray = split(resourceId, "/")
+| extend numElementsInResourceId = array_length(resourceIdArray)
+| extend clusterNameExtracted = resourceIdArray[numElementsInResourceId - 1]
+| project
+	TimeGenerated = todatetime(['time']),
+	ClusterName = tostring(clusterNameExtracted),
+	ClientIP = tostring(properties.CLIENT_IP),
+	ClientPort = tostring(properties.CLIENT_PORT),
+	CoordinatorIP = tostring(properties.COORDINATOR_IP),
+	User = tostring(properties.USER),
+	BatchId = tostring(properties.BATCH_ID),
+	Status = tostring(properties.STATUS),
+	Operation = tostring(properties.OPERATION),
+	OperationNaked = tostring(properties.OPERATION_NAKED),
+	ExternalUserId = tostring(properties.SUBJECT)

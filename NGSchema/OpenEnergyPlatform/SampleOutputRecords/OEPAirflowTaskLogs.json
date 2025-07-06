@@ -1,0 +1,17 @@
+[
+    {
+        "TimeGenerated":"2022-03-14T00:05:38.552089493Z",
+        "Category":"AirFlowTaskLogs",
+        "OperationName":"MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/AIRFLOW/ACTION",
+        "LogLevel":"DEBUG",
+        "DagName":"wellbore_ingestion_wf_gsm",
+        "DagTaskName":"wellbore-ingestion-kubernetes-task",
+        "RunId":"fa3a99a7-4d12-49bc-bae2-0cf4e649b7cc",
+        "CodePath":"base_job.py:227",
+        "TryNumber":"N/A",
+        "AdditionalLogContent":"",
+        "Content":"[heartbeat]",
+        "Location":"eastus",
+        "CorrelationId": "1b80ca5f-2a14-4525-846c-ed68a69bb553" 
+    }
+]

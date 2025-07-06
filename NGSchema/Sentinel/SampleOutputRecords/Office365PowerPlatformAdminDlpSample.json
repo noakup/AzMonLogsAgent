@@ -1,0 +1,48 @@
+[
+  {
+    "TimeGenerated": "2023-02-24T09:21:44",
+    "EventOriginalUid": "35efe358-574d-42c3-a65f-56fff93a5cfe",
+    "EventOriginalType": "UpdateDlpPolicy",
+    "OrganizationId": "f1a6e862-3f71-41bb-b287-8438309728a8",
+    "RecordType": "PowerPlatformAdminDlp",
+    "EventResult": "Success",
+    "ActorUserId": "f3ce6e7a-c3cc-45c5-8166-f8dfd58d870e",
+    "ActorUserType": "Regular",
+    "Workload": "PowerPlatformAdmin",
+    "ObjectId": "f3ce6e7a-c3cc-45c5-8166-f8dfd58d870e",
+    "ActorName": "wiking@sentinelbizapps.com",
+    "AdditionalInfo": "{\"policyId\":\"7ea25d4d-c18c-4a65-bad8-45759b7c7415\",\"policyType\":\"AllEnvironments\",\"defaultConnectorClassification\":\"General\"}",
+    "PolicyName": "Test DLP Policy",
+    "SrcIpAddr": "192.168.0.1"
+  },
+  {
+    "TimeGenerated": "2023-02-24T09:21:44",
+    "EventOriginalUid": "2b3f9307-fdc7-4cc1-9151-27b394d8c23f",
+    "EventOriginalType": "CreateDlpPolicy",
+    "OrganizationId": "f1a6e862-3f71-41bb-b287-8438309728a8",
+    "RecordType": "PowerPlatformAdminDlp",
+    "EventResult": "Success",
+    "ActorUserId": "f3ce6e7a-c3cc-45c5-8166-f8dfd58d870e",
+    "ActorUserType": "Regular",
+    "Workload": "PowerPlatformAdmin",
+    "ObjectId": "f3ce6e7a-c3cc-45c5-8166-f8dfd58d870e",
+    "ActorName": "wiking@sentinelbizapps.com",
+    "AdditionalInfo": "{\"policyId\":\"7ea25d4d-c18c-4a65-bad8-45759b7c7415\",\"policyType\":\"AllEnvironments\",\"defaultConnectorClassification\":\"General\"}",
+    "PolicyName": "Test DLP Policy"
+  },
+  {
+    "TimeGenerated": "2023-02-24T09:21:44",
+    "EventOriginalUid": "3e6a7c6a-e274-46e6-9e9d-039de7f556cf",
+    "EventOriginalType": "DeleteDlpPolicy",
+    "OrganizationId": "f1a6e862-3f71-41bb-b287-8438309728a8",
+    "RecordType": "PowerPlatformAdminDlp",
+    "EventResult": "Success",
+    "ActorUserId": "f3ce6e7a-c3cc-45c5-8166-f8dfd58d870e",
+    "ActorUserType": "Regular",
+    "Workload": "PowerPlatformAdmin",
+    "ObjectId": "f3ce6e7a-c3cc-45c5-8166-f8dfd58d870e",
+    "ActorName": "wiking@sentinelbizapps.com",
+    "AdditionalInfo": "{\"policyId\":\"7ea25d4d-c18c-4a65-bad8-45759b7c7415\",\"policyType\":\"AllEnvironments\",\"defaultConnectorClassification\":\"General\"}",
+    "PolicyName": "Test DLP Policy"
+  }
+]

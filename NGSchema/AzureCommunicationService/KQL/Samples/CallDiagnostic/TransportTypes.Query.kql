@@ -1,0 +1,4 @@
+ACSCallDiagnostics
+// Count the number of streams per transport type
+| summarize transport_types=count() by TransportType
+| render piechart title="Transport Type Ratio"

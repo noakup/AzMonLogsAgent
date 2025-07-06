@@ -1,0 +1,150 @@
+{
+    "type": "Microsoft.Network/NatGateways",
+    "displayName": "NAT Gateways",
+    "description": "Azure NAT Gateway is a fully managed and highly resilient Network Address Translation (NAT) service in Azure.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Cloudnet/Slb - Azure",
+    "contactDL": "slbdev@microsoft.com",
+    "relatedTables": [],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "NatGatewayFlowlogsV1",
+            "description": "Table of logs related to traffic through NAT Gateway resources.",
+            "categories": [
+                "resources",
+                "monitor"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "AZURELOADBALANCERS_NATGATEWAYFLOWLOGSV1",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "tableState": "Production",
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "KQL/NatGatewayFlowlogsV1DataTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Date and time the record was generated.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIP",
+                    "type": "String",
+                    "description": "The source IP generating the traffic through the NAT Gateway.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "DestinationIP",
+                    "type": "String",
+                    "description": "The destination IP the traffic is getting forwarded to, through the NAT Gateway.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "NatGatewayIP",
+                    "type": "String",
+                    "description": "The NAT Gateway IP address.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "PacketsReceived",
+                    "type": "BigInt",
+                    "description": "Count of packets received from the destination IP and allowed by the NAT Gateway.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PacketsSent",
+                    "type": "BigInt",
+                    "description": "Count of packets sent from the source IP and allowed by the NAT Gateway.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "BytesReceived",
+                    "type": "BigInt",
+                    "description": "Sum of the size (in bytes) of all the packets received from the destination IP and allowed by the NAT Gateway.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "BytesSent",
+                    "type": "BigInt",
+                    "description": "Sum of the size (in bytes) of all the packets sent from the source IP and allowed by the NAT Gateway.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PacketsReceivedDropped",
+                    "type": "BigInt",
+                    "description": "Count of packets received from the destination IP and dropped at the NAT Gateway.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PacketsSentDropped",
+                    "type": "BigInt",
+                    "description": "Count of packets sent from the source IP and dropped at the NAT Gateway.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/NatGatewayFlowlogsV1Logs.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/NatGatewayFlowlogsV1Logs.json"
+        }
+    ],
+    "functions": [],
+    "queries": [
+        {
+            "id": "652774ec-9662-4e1f-bc18-b223ec9ce36d",
+            "displayName": "Total allowed packets and bytes sent per NatGateway IP and Destination IP",
+            "description": "Total packets and bytes sent per NatGateway IP and Destination IP, that was allowed by the NAT Gateway.",
+            "bodyFilePath": "KQL/Query/NatGatewayFlowlogsV1PerDestinationSampleQuery.kql",
+            "categories": [ "resources", "monitor" ],
+            "tags": {
+                "Topic": [ "Diagnostics" ]
+            },
+            "properties": {
+                "ExampleQuery": true
+            },
+            "relatedTables": [ "NatGatewayFlowlogsV1" ]
+        },
+        {
+            "id": "252274ec-9662-4e3f-bc18-b225ec9ce31d",
+            "displayName": "Total allowed packets and bytes sent per NatGateway IP and Source IP",
+            "description": "Total packets and bytes sent per NatGateway IP and Source IP, that was allowed by the NAT Gateway.",
+            "bodyFilePath": "KQL/Query/NatGatewayFlowlogsV1PerSourceSampleQuery.kql",
+            "categories": [ "resources", "monitor" ],
+            "tags": {
+                "Topic": [ "Diagnostics" ]
+            },
+            "properties": {
+                "ExampleQuery": true
+            },
+            "relatedTables": [ "NatGatewayFlowlogsV1" ]
+        }
+    ]
+}

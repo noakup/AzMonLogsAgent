@@ -1,0 +1,29 @@
+[
+  {
+    "AzureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm",
+    "Region": "eastus2",
+    "Computer": "computername",
+    "TimeGenerated": "2019-03-01T00:00:00Z",
+    "EventType ": "Created",
+    "FileType ": "zip",
+    "FilePath": "C:\\Users\\user\\Desktop\\",
+    "IsDir": false,
+    "InitiatingProcessId": "2852",
+    "InitiatingProcessName": "touch",
+    "InitiatingParentProcessId": "1321",
+    "InitiatingParentProcessName": "sudo",
+    "AgentId": "2f737562-7363-7269-7074-696f6e732f62",
+    "Inode": 1234,
+    "InitiatingProcessAccountDomainName": "linuxVM",
+    "InitiatingProcessAccountName": "root",
+    "DataPipelineMetadata": {},
+    "AdditionalData": {
+      "CloudNativeIdentifiers": {
+        "clusterDistribution": "AKS"
+      }
+    }
+  },
+  {
+    "TimeGenerated": "2019-03-01T00:00:00Z"
+  }
+]

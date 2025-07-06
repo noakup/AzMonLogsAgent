@@ -1,0 +1,37 @@
+[
+    {
+      "time": "2022-03-22T10:59:39.5596929Z",
+      "resourceId": "/SUBSCRIPTIONS/24237B72-8546-4DA5-B204-8C3CB76DD930/RESOURCEGROUPS/VI-RESOURCEGROUP-DORON/PROVIDERS/MICROSOFT.VIDEOINDEXER/ACCOUNTS/DORONNEWVERDEV1",
+      "operationName": "UploadFinished",
+        "category": "IndexingLogs",
+        "correlationId": "137d3edc-ec84-497d-****-bf1ec2039bb2",
+        "resultType": "Success",
+        "resultDescription": "",
+        "resultSignature": "UnsupportedFileType",
+        "location": "westus2",
+        "operationVersion": "",
+        "durationMs": "4048",
+      "identity": {
+        "externalUserId": "4704F34286364F2*****",
+        "upn": "***@microsoft.com",
+        "claims": { "permission": "Contributor", "scope": "Account" }
+      },
+      "properties": {
+        "accountName": "doronNewVerDev1",
+        "accountId": "c70fae86-a239-43c9-9080-7897ce66558d",
+        "videoId": "b132154f-9694-4caa-8285-dad74e9499ce",
+        "indexing": {
+            "Language": "en-US",
+            "Privacy": "Private",
+            "PersonModelId": "00000000-0000-0000-0000-000000000000",
+            "LinguisticModelId": "00000000-0000-0000-0000-000000000000",
+            "AssetId": "asset-ffc9539d-1234-1234-1234-ae22be910d2e",
+            "IndexingPreset": "Default",
+            "StreamingPreset": "Default",
+            "AnimationModelId": "00000000-0000-0000-0000-000000000000",
+            "VideoUrl": "https://path/to/my/video"
+        }
+      }
+    }
+  ]
+  

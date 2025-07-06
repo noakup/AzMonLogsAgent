@@ -1,0 +1,6 @@
+source
+| project
+    TimeGenerated = todatetime(['time']),
+    LogLevel = ['source'],
+    Message = log,
+    Location = location

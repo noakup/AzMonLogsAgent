@@ -1,0 +1,8 @@
+; introduce each owner in a separate line with his/her alias (not email address)
+; prefixing an alias with * means that the owner will not be automatically added as a reviewer to pull requests to reduce noise, but can still be manually added and can sign off if necessary
+; to learn more you can read https://microsoft.sharepoint.com/teams/WAG/EngSys/EngPipeline/cdp/SitePages/Configure%20checkin%20gates.aspx
+;
+avnerl
+ikbarmen
+bebakhar
+ylivneh

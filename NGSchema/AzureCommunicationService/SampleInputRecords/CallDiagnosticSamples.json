@@ -1,0 +1,38 @@
+[
+	{
+		"time": "2021-08-12T21:16:09.435Z",
+		"resourceId": "/SUBSCRIPTIONS/D15D9AC1-6215-4F44-B7D7-22D9C6CB98AF/RESOURCEGROUPS/ANDOR_COMM_POC/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/DEV-COMM-SVCS",
+		"operationName": "CallDiagnostics",
+		"category": "CallDiagnosticsPRIVATEPREVIEW",
+		"operationVersion": "1.0",
+		"correlationId": "3ada6864-9547-4699-ab59-0190b42d267e",
+		"properties": {
+			"identifier": "acs:d1a8512b-3f57-474c-93a7-18c78df6dce8_0000000b-db5f-d2ea-b5bb-a43a0d00607a",
+			"participantId": "732dd934-2438-4cc5-9df7-6b55c9fac7c9",
+			"endpointId": "5b24822f-7e27-4844-b605-be725c2b02b0",
+			"endpointType": "VoIP",
+			"mediaType": "Audio",
+			"streamId": "618142558",
+			"transportType": "UDP",
+			"roundTripTimeAvg": "null",
+			"roundTripTimeMax": "null",
+			"jitterAvg": "null",
+			"jitterMax": "null",
+			"packetLossRateAvg": "0.001",
+			"packetLossRateMax": "0.02",
+			"healedDataRatioAvg": "0.002",
+			"healedDataRatioMax": "0.01",
+			"recvResolutionHeight": "720",
+			"recvFreezeDurationPerMinuteInMs": "2000",
+			"videoFrameRateAvg": "15.0",
+			"jitterBufferSizeAvg": "57",
+			"jitterBufferSizeMax": "102",
+			"packetUtilization": "698694",
+			"videoBitRateAvg": "345003",
+			"videoBitRateMax": "843001",
+			"streamDirection": "Inbound",
+			"codecName": "Opus",
+			"ops": true
+		}
+	}
+]

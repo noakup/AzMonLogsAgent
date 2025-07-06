@@ -1,0 +1,11 @@
+// Replace queryConditions_callId with the callId you want to investigate.
+declare query_parameters(queryConditions_callId:string = 'replace-with-your-callId');
+ACSCallClientOperations
+| where CallId == queryConditions_callId
+| where OperationName == 'UserFacingDiagnostics'
+| extend
+    UFDQuality = tostring(OperationPayload.DiagnosticQuality),
+    UFDType = tostring(OperationPayload.DiagnosticChanged)
+| extend UFDType = strcat(toupper(substring(UFDType, 0, 1)),substring(UFDType, 1))
+| project CallId, ParticipantId, CallClientTimeStamp, UFDType, UFDQuality, OperationId
+| order by OperationId, CallClientTimeStamp

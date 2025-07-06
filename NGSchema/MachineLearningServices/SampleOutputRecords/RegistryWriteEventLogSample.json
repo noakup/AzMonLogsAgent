@@ -1,0 +1,14 @@
+[
+	{
+		"TimeGenerated": "2023-02-23T20:23:49.5268126Z",
+		"CorrelationId": "6395957d-4421-4759-9aac-9f4c5a1e9022",
+		"RegistryResourceId": "/SUBSCRIPTIONS/C0AFEA91-FABA-4D71-BCB6-B08134F69982/RESOURCEGROUPS/SHARED_STATIC_TEST_RESOURCES/PROVIDERS/MICROSOFT.MACHINELEARNINGSERVICES/REGISTRIES/CANARYTEST638126787649737794",
+		"OperationType": "Write",
+		"UserName": "Sergey Grudskiy",
+		"UserObjectId": "fb39f6a5-d833-4ff0-bdc1-e8df8d815034",
+		"RegistryTenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+		"AssetName": "point1",
+		"AssetVersion": "1",
+		"Labels": ""
+	}
+]

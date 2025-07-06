@@ -1,0 +1,285 @@
+{
+  "type": "Microsoft.OperationalInsights/Workspaces",
+  "displayName": "Log Analytics workspaces",
+  "description": "All tables related to Log Analytics Workspaces.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Azure Log Analytics/Ingestion",
+  "contactDL": "rabdac@microsoft.com",
+  "relatedTables": [],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "name": "AzureMetrics",
+      "description": "Metric data emitted by Azure services that measure their health and performance.",
+      "categories": ["resources", "monitor"],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 4,
+      "dataTypeId": "AZURE_METRICS_EMBEDDEDDATA",
+      "intelligencePacks": [],
+      "isResourceCentric": true,
+      "tableState": "Validation",
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "metricName",
+          "type": "String"
+        },
+        {
+          "name": "total",
+          "type": "Double"
+        },
+        {
+          "name": "count",
+          "type": "Double"
+        },
+        {
+          "name": "maximum",
+          "type": "Double"
+        },
+        {
+          "name": "minimum",
+          "type": "Double"
+        },
+        {
+          "name": "average",
+          "type": "Double"
+        },
+        {
+          "name": "timeGrain",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/AzureMetrics/AzureMetricsTransform.kql",
+      "columns": [
+        {
+          "name": "SourceSystem",
+          "type": "String",
+          "isPreferredFacet": true,
+          "description": "Source of the record."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "isPreferredFacet": true,
+          "description": "Date and time the record was created."
+        },
+        {
+          "name": "ResourceId",
+          "type": "String",
+          "isPreferredFacet": true,
+          "description": "Resource ID of the Azure resource reporting the metric. Same as _ResourceId present for backward compatibility reasons. _ResourceId should be used."
+        },
+        {
+          "name": "ResourceGroup",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "isPreferredFacet": true,
+          "description": "Resource group name of the Azure resource running the agent."
+        },
+        {
+          "name": "ResourceProvider",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "isPreferredFacet": true,
+          "description": "Resource provider of the Azure resource reporting the metric."
+        },
+        {
+          "name": "Resource",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "isPreferredFacet": true,
+          "description": "Resource name of the Azure resource reporting the metric."
+        },
+        {
+          "name": "SubscriptionId",
+          "type": "String",
+          "isPreferredFacet": true,
+          "description": "Subscription id of the Azure resource reporting the metric."
+        },
+        {
+          "name": "MetricName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "isPreferredFacet": true,
+          "description": "Display name of the metric."
+        },
+        {
+          "name": "Total",
+          "type": "Double",
+          "isDefaultDisplay": true,
+          "description": "Sum of all of the values in the time range."
+        },
+        {
+          "name": "Count",
+          "type": "Double",
+          "isDefaultDisplay": true,
+          "description": "Number of samples collected during the time range. Can be used to determine the number of values that contributed to the average value."
+        },
+        {
+          "name": "Maximum",
+          "type": "Double",
+          "isDefaultDisplay": true,
+          "description": "Maximum value collected during in the time range."
+        },
+        {
+          "name": "Minimum",
+          "type": "Double",
+          "isDefaultDisplay": true,
+          "description": "Minimum value collected during in the time range."
+        },
+        {
+          "transformName": "Average",
+          "physicalName": "AverageValue",
+          "logicalName": "Average",
+          "type": "Double",
+          "isDefaultDisplay": true,
+          "description": "Average value collected during in the time range."
+        },
+        {
+          "name": "TimeGrain",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Time grain of the metric e.g. PT1M."
+        },
+        {
+          "name": "UnitName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "isPreferredFacet": true,
+          "description": "Unit of the metric. Examples include Seconds Percent Bytes."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "description": "Deprecated."
+        },
+        {
+          "name": "OperationVersion",
+          "type": "String",
+          "description": "Deprecated."
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "description": "Deprecated."
+        },
+        {
+          "name": "ResultType",
+          "type": "String",
+          "description": "Reduces the set of data collected. The syntax allowed depends on the operation. See the operation's description for details."
+        },
+        {
+          "name": "ResultSignature",
+          "type": "String",
+          "description": "Deprecated."
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "description": "Deprecated."
+        },
+        {
+          "name": "DurationMs",
+          "type": "BigInt",
+          "description": "Deprecated."
+        },
+        {
+          "name": "CallerIpAddress",
+          "type": "String",
+          "description": "Deprecated."
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "description": "Deprecated."
+        },
+        {
+          "name": "RemoteIPCountry",
+          "type": "String",
+          "description": "Deprecated."
+        },
+        {
+          "name": "RemoteIPLatitude",
+          "type": "Float",
+          "description": "Deprecated."
+        },
+        {
+          "name": "RemoteIPLongitude",
+          "type": "Float",
+          "description": "Deprecated."
+        },
+        {
+          "name": "MaliciousIP",
+          "type": "String",
+          "description": "Deprecated."
+        },
+        {
+          "name": "IndicatorThreatType",
+          "type": "String",
+          "description": "Deprecated."
+        },
+        {
+          "name": "Description",
+          "type": "String",
+          "description": "Deprecated."
+        },
+        {
+          "name": "TLPLevel",
+          "type": "String",
+          "description": "Deprecated."
+        },
+        {
+          "name": "Confidence",
+          "type": "String",
+          "description": "Deprecated."
+        },
+        {
+          "name": "Severity",
+          "type": "Int",
+          "description": "Deprecated."
+        },
+        {
+          "name": "FirstReportedDateTime",
+          "type": "String",
+          "description": "Deprecated."
+        },
+        {
+          "name": "LastReportedDateTime",
+          "type": "String",
+          "description": "Deprecated."
+        },
+        {
+          "name": "IsActive",
+          "type": "String",
+          "description": "Deprecated."
+        },
+        {
+          "name": "ReportReferenceLink",
+          "type": "String",
+          "description": "Deprecated."
+        },
+        {
+          "name": "AdditionalInformation",
+          "type": "String",
+          "description": "Deprecated."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AzureMetricsSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AzureMetricsSample.json"
+    }
+  ],
+  "functions": [],
+  "queries": []
+}

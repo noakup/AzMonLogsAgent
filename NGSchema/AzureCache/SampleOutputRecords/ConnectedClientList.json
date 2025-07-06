@@ -1,0 +1,22 @@
+[
+    {
+        "TimeGenerated": "2021-08-05T21:04:58.0466086Z",
+        "Location": "eastus2euap",
+        "CacheName": "cache-test-la",
+        "ClientIp": "40.123.43.36",
+        "PrivateLinkIpv6": null,
+        "ClientCount": 86,
+        "RoleInstance": "Kernel_IN_1",
+        "ResourceId": "/SUBSCRIPTIONS/E6761CE7-A7BC-442E-BBAE-950A121933B5/RESOURCEGROUPS/AZURE-CACHE/PROVIDERS/MICROSOFT.CACHE/REDIS/CACHE-TEST-LA"
+    },
+    {
+        "TimeGenerated": "2021-08-05T21:04:58.0466086Z",
+        "Location": "eastus2euap",
+        "CacheName": "cache-test-la",
+        "ClientIp": "10.1.1.4",
+        "PrivateLinkIpv6": "fd40:8913:31:6810:6c31:200:a01:104",
+        "ClientCount": 1,
+        "RoleInstance": "Kernel_IN_1",
+        "ResourceId": "/SUBSCRIPTIONS/E6761CE7-A7BC-442E-BBAE-950A121933B5/RESOURCEGROUPS/AZURE-CACHE/PROVIDERS/MICROSOFT.CACHE/REDIS/CACHE-TEST-LA"
+    }
+]

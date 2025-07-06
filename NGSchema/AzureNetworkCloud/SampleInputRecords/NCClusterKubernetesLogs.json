@@ -1,0 +1,20 @@
+[
+    {
+        "ContainerName": "calico-node",
+        "NamespaceName": "calico-system",
+        "Node": "c2r750wkr9",
+        "PodName": "calico-node-m6plz",
+        "category": "CustomerContainerLogs",
+        "clusterManagerName": "eastus-dta5rvdsd2u2g",
+        "clusterName": "pct3-8fd66ea720b9",
+        "location": "eastus",
+        "message": "Summarising 9 dataplane reconciliation loops over 1m3.3s: avg=39ms longest=247ms ()",
+        "onbehalfAnnotations": "<Config onBehalfFields=\"resourceId,category\" priority=\"Normal\" primaryPartitionField=\"resourceId\" excludeFields=\"Tenant,Role,RoleInstance,BMServerName,PreciseTimeStamp,FluentdIngestTimestamp,TIMESTAMP,ContainerImage,GenevaPodName,environment,clusterID,clusterManagedResourceGroupName,clusterManagerID,clusterManagerResourceGroupName,clusterResourceGroupName,Tag,tenantID,originalRecord\" containerSuffix=\"$category\" />",
+        "onbehalfServiceId": "Microsoft.NetworkCloud",
+        "operationName": "Microsoft.NetworkCloud/clusters/read",
+        "resourceId": "/SUBSCRIPTIONS/FCA2E8EE-1179-48B8-9532-428ED0873A2E/RESOURCEGROUPS/PCT3-CLUSTER-RG/PROVIDERS/MICROSOFT.NETWORKCLOUD/CLUSTERS/PCT3-8FD66EA720B9",
+        "severity": "Info",
+        "subscriptionID": "fca2e8ee-1179-48b8-9532-428ed0873a2e",
+        "time": "2023-06-20T20:55:02.052206707Z"
+    }
+]

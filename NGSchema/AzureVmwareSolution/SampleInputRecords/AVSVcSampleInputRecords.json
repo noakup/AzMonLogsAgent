@@ -1,0 +1,9 @@
+[
+    {  
+        "time": "2025-03-31T08:51:59.8119400Z",
+        "resourceId": "/SUBSCRIPTIONS/97EACE9E-DA69-4CEB-A21A-04B400E34259/RESOURCEGROUPS/MATUDOBN9/PROVIDERS/MICROSOFT.AVS/PRIVATECLOUDS/MATUDOSDDC9",
+        "operationName": "Microsoft.AVS/vcenter/vmwaresyslog",
+        "category": "vc",
+        "properties": {"severity":"info","facility":"authpriv","HostName":"vc","AppName":"sudo","message":"2025-03-31T08:51:59.8119400Z vc sudo pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1060)"}
+    }
+]

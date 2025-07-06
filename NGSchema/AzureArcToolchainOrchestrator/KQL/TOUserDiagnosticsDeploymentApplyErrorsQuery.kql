@@ -1,0 +1,5 @@
+TOUserDiagnostics 
+| where Message startswith "solution.(*SolutionManager).Reconcile" or Message contains ".Apply"
+| order by EdgeLocation, TimeGenerated asc
+| project EdgeLocation, TimeGenerated, User, Message, OperatingResourceId, OperatingResourceK8SId, OperationName
+| take 100

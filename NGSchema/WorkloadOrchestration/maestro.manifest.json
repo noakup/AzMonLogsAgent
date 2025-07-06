@@ -1,0 +1,404 @@
+{
+    "type": "Microsoft.Edge/diagnostics",
+    "displayName": "workload orchestration",
+    "description": "workload orchestration is a cloud-native, cross-platform orchestrator that simplifies and streamlines the deployment, management, and update of different application solutions across different edge environments.",
+    "tags": {}, 
+    "properties": {}, 
+    "simplifiedSchemaVersion": "3", 
+    "icmTeam": "TOOLCHAINORCHESTRATOR/Triage",
+    "contactDL": "symphonycoreshteamsg@microsoft.com",
+    "relatedTables": [
+        "AzureActivity",
+        "AzureDiagnostics"
+    ],
+    "relatedFunctions": [],
+
+    "tables": [
+        {
+            "name": "WOUserAudits",
+            "description": "Contains all workload orchestration API Server audit logs including the events generated as a result of interactions with any external system or toolchain. These events are useful for monitoring all the interactions with the workload orchestration API server and between workload orchestration and external orchestrated targets, e.g. Kubernetes. Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 1,
+            "dataTypeId": "MICROSOFTEDGEDIAGNOSTICS_USERAUDITS",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "operatingResourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operatingResourceK8SId",
+                    "type": "String"
+                },
+                {
+                    "name": "body",
+                    "type": "String"
+                },
+                {
+                    "name": "callerId",
+                    "type": "String"
+                },
+                {
+                    "name": "correlationId",
+                    "type": "String"
+                },
+                {
+                    "name": "serviceName",
+                    "type": "String"
+                },
+                {
+                    "name": "instance",
+                    "type": "String"
+                },
+                {
+                    "name": "edgeLocation",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "Kql/WOUserAuditsTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "description": "Operation name of the event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "description": "Category of the event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "description": "Azure region in which the workload orchestration diagnostic resource is located.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Properties",
+                    "type": "Dynamic",
+                    "description": "Properties of the event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperatingResourceId",
+                    "type": "String",
+                    "description": "The operating resource id refers to the specific operational resource that the workload orchestration is managing when this event is triggered.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperatingResourceK8SId",
+                    "type": "String",
+                    "description": "The operating resource K8s id refers to K8s resource id (namespace/name) of the specific operational resource that the workload orchestration is managing when this event is triggered.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "The audit message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "User",
+                    "type": "Guid",
+                    "dataTypeHint": "GUID",
+                    "description": "The Microsoft Entra ID object Id of the requester.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "CorrelationId",
+                    "type": "Guid",
+                    "dataTypeHint": "GUID",
+                    "description": "Correlation ID of the operation.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "WOServiceName",
+                    "type": "String",
+                    "description": "workload orchestration service name.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "WOServiceInstance",
+                    "type": "String",
+                    "description": "workload orchestration service pod name.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "EdgeLocation",
+                    "type": "String",
+                    "description": "The Azure Edge custom location resource Id on which the operation happens.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/WOUserAuditsSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/WOUserAuditsSample.json"
+        },
+        {
+            "name": "WOUserDiagnostics",
+            "description": "Contains all workload orchestration API Server user diagnostics logs. These events are useful for diagnose failed requests on workload orchestration. Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "categories": [
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 1,
+            "dataTypeId": "MICROSOFTEDGEDIAGNOSTICS_USERDIAGNOSTICS",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "operatingResourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operatingResourceK8SId",
+                    "type": "String"
+                },
+                {
+                    "name": "body",
+                    "type": "String"
+                },
+                {
+                    "name": "callerId",
+                    "type": "String"
+                },
+                {
+                    "name": "correlationId",
+                    "type": "String"
+                },
+                {
+                    "name": "serviceName",
+                    "type": "String"
+                },
+                {
+                    "name": "instance",
+                    "type": "String"
+                },
+                {
+                    "name": "edgeLocation",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "Kql/WOUserDiagnosticsTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "description": "Operation name of the event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "description": "Category of the event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "description": "Azure region in which the workload orchestration diagnostic resource is located.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Properties",
+                    "type": "Dynamic",
+                    "description": "Properties of the event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperatingResourceId",
+                    "type": "String",
+                    "description": "The operating resource id refers to the specific operational resource that the workload orchestration is managing when this event is triggered.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperatingResourceK8SId",
+                    "type": "String",
+                    "description": "The operating resource K8s id refers to K8s resource id (namespace/name) of the specific operational resource that the workload orchestration is managing when this event is triggered.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "The diagnose message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "User",
+                    "type": "Guid",
+                    "dataTypeHint": "GUID",
+                    "description": "The Microsoft Entra ID object Id of the requester.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "CorrelationId",
+                    "type": "Guid",
+                    "dataTypeHint": "GUID",
+                    "description": "Correlation ID of the operation.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "WOServiceName",
+                    "type": "String",
+                    "description": "workload orchestration service name.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "WOServiceInstance",
+                    "type": "String",
+                    "description": "workload orchestration service pod name.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "EdgeLocation",
+                    "type": "String",
+                    "description": "The Azure Edge custom location resource Id on which the operation happens.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/WOUserDiagnosticsSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/WOUserDiagnosticsSample.json"
+        }
+    ],
+
+    "functions": [],
+
+    "queries": [
+        {
+            "id": "f6dd9440-131a-478c-a85d-815c5ee81fc6",
+            "displayName": "Auditing workload orchestration Operations",
+            "description": "Lists of audit workload orchestration operations.",
+            "bodyFilePath": "KQL/WOUserAuditsOperationsQuery.kql",
+            "categories": [
+                "resources",
+                "audit"
+            ],
+            "relatedTables": [
+                "WOUserAudits"
+            ],
+            "tags": {
+                "Topic": [
+                    "Audit"
+                ]
+            },
+            "properties": {
+              "ExampleQuery": true
+            }
+        },
+        {
+            "id": "5bac9c74-6e1e-4a67-8693-9661cc3fdb1e",
+            "displayName": "Auditing workload orchestration API requests",
+            "description": "Lists of audit workload orchestration api requests.",
+            "bodyFilePath": "KQL/WOUserAuditsAPIServerRequestsQuery.kql",
+            "categories": [
+                "resources",
+                "audit"
+            ],
+            "relatedTables": [
+                "WOUserAudits"
+            ],
+            "tags": {
+                "Topic": [
+                    "Audit"
+                ]
+            },
+            "properties": {
+              "ExampleQuery": true
+            }
+        },
+        {
+            "id": "b3bdb478-5088-4179-a6f9-669e1b97f2d6",
+            "displayName": "workload orchestration target provider and solution deployment failures",
+            "description": "Lists of workload orchestration target provider and solution deployment failures.",
+            "bodyFilePath": "KQL/WOUserDiagnosticsDeploymentApplyErrorsQuery.kql",
+            "categories": [
+                "resources"
+            ],
+            "relatedTables": [
+                "WOUserDiagnostics"
+            ],
+            "tags": {
+                "Topic": [
+                    "Usage and Diagnostics"
+                ]
+            },
+            "properties": {
+              "ExampleQuery": true
+            }
+        }
+    ]
+}

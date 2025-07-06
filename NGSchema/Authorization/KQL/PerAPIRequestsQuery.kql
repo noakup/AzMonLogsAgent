@@ -1,0 +1,5 @@
+// Chart the number of calls based on the target URI.
+ResourceManagementPublicAccessLogs
+| where Category == "PublicAccessLogs"
+| summarize count() by Uri, bin(TimeGenerated, 1m)
+| render columnchart with (kind=stacked) 

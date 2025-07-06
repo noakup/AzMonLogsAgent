@@ -1,0 +1,13 @@
+source
+| project
+    AADTenantId = tenantId,
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    ResultType = resultType,
+    ResultSignature = resultSignature,
+    CorrelationId = correlationId,
+    CallerIpAddress = callerIpAddress
+    
+
+
+    

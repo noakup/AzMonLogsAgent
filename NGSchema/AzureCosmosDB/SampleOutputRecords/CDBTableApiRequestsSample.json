@@ -1,0 +1,20 @@
+[
+	{
+		"TimeGenerated" : "2024-04-22T18:00:16.5159547Z",
+		"AccountName" : "TABLEAPI-TEST",
+		"OperationName" : "InsertOrReplace",
+		"UserAgent" : "<empty>",
+		"ActivityId" : "d30a545c-1f88-4479-81d9-c6ea22fc784b",
+		"ErrorCode" : "204",
+		"DurationMs" : "51.1505",
+		"RequestCharge" : "14.48",
+		"TableName" : "<empty>",
+		"AuthorizationTokenType" : "Invalid",
+		"Address" : "104.42.195.92",
+		"ClientRequestId" : "f64cd4e7-7b61-42d6-bc4b-25d241c5da08",
+		"PIICommandText" : "<empty>",
+		"RegionName" : "East US",
+		"RequestLength" : "0",
+		"ResponseLength" : "48"
+	}
+]

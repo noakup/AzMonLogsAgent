@@ -1,0 +1,24 @@
+let parser=(disabled:bool=false) 
+{
+  ASimNetworkSessionLogs  | where not(disabled)
+  | extend
+      EventStartTime = TimeGenerated,
+      EventEndTime = TimeGenerated,
+      EventSchema = "NetworkSession"
+  //  -- Aliases
+  | extend
+      IpAddr=SrcIpAddr,
+      Src=SrcIpAddr,
+      Dst=DstIpAddr,
+      Dvc = coalesce (DvcFQDN, DvcHostname, SrcIpAddr, DvcId),
+      Rule = coalesce(NetworkRuleName, tostring(NetworkRuleNumber)),
+      Duration = NetworkDuration,
+      SessionId = NetworkSessionId,
+      User = DstUsername,
+      Hostname = DstHostname,
+      InnerVlanId = SrcVlanId,
+      OuterVlanId = DstVlanId
+  | project-away
+      TenantId, SourceSystem
+};
+parser (disabled)

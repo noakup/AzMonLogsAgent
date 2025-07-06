@@ -1,0 +1,4 @@
+AOIDigestion
+| where Message startswith_cs "Failed to digest file"
+| parse FilePath with Source:string "/" *
+| summarize count() by Source

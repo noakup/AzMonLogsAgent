@@ -1,0 +1,146 @@
+[
+    {
+      "time": "2021-10-19T20:37:59.4770423Z",
+      "ResourceId": "newsite.edwardhea.antares-test.windows-int.net",
+      "Category": "WorkflowRuntime",
+      "OperationName": "WorkflowTriggerStarted",
+      "Properties": 
+        {
+          "$schema":"2016-06-01",
+          "startTime":"2021-10-19T20:37:09.5859106Z",
+          "status":"Running",
+          "resource":
+          {
+              "workflowId":"cde9cac1f92c4f8bb2f6486861bf15fe",
+              "workflowName":"newworkflow",
+              "runId":"08585669310558916968880926479CU00",
+              "triggerName":"Recurrence"
+          },
+          "correlation":{}
+        }
+    },
+    {
+      "time": "2021-10-19T20:37:59.4770423Z",
+      "ResourceId": "newsite.edwardhea.antares-test.windows-int.net",
+      "Category": "WorkflowRuntime",
+      "OperationName": "WorkflowTriggerCompleted",
+      "Properties": 
+        {
+            "$schema":"2016-06-01",
+            "startTime":"2021-10-19T20:37:09.5859106Z",
+            "endTime":"2021-10-19T20:37:09.6091776Z",
+            "status":"Succeeded",
+            "code":"OK",
+            "resource":
+            {
+                "workflowId":"cde9cac1f92c4f8bb2f6486861bf15fe",
+                "workflowName":"newworkflow",
+                "runId":"08585669310558916968880926479CU00",
+                "triggerName":"Recurrence"
+            },
+            "correlation":
+            {
+                "clientTrackingId":"08585669310558916968880926479CU00"
+            }
+        }
+    },
+    {
+      "time": "2021-10-19T13:37:59.4770423Z",
+      "ResourceId": "newsite.edwardhea.antares-test.windows-int.net",
+      "Category": "WorkflowRuntime",
+      "OperationName": "WorkflowActionStarted",
+      "Properties": 
+        {
+          "$schema":"2016-06-01",
+          "startTime":"2021-10-19T20:37:09.612885Z",
+          "status":"Running",
+          "resource":
+          {
+              "workflowId":"cde9cac1f92c4f8bb2f6486861bf15fe",
+              "workflowName":"newworkflow",
+              "runId":"08585669310558916968880926479CU00",
+              "actionName":"Compose"
+          },
+          "correlation":
+          {
+            "actionTrackingId":"375db0c3-c105-4e57-b5d9-af948d0db556",
+            "clientTrackingId":"08585669310558916968880926479CU00"
+          }
+        }
+    },
+    {
+      "time": "2021-10-19T13:37:59.4770423Z",
+      "ResourceId": "newsite.edwardhea.antares-test.windows-int.net",
+      "Category": "WorkflowRuntime",
+      "OperationName": "WorkflowActionCompleted",
+      "Properties": 
+      {
+          "$schema":"2016-06-01",
+          "startTime":"2021-10-19T20:37:40.9878855Z",
+          "endTime":"2021-10-19T20:37:40.9894445Z",
+          "status":"Succeeded",
+          "code":"OK",
+          "resource":
+            {
+              "workflowId":"cde9cac1f92c4f8bb2f6486861bf15fe",
+              "workflowName":"newworkflow",
+              "runId":"08585669310245157313122142375CU00",
+              "actionName":"Compose"
+            },
+          "correlation":
+            {
+              "actionTrackingId":"0008de15-bf3b-44d7-bff4-d19583d5bb43",
+              "clientTrackingId":"08585669310245157313122142375CU00"
+            }
+        }
+    },
+    {
+      "time": "2021-10-19T13:37:59.4770423Z",
+      "ResourceId": "newsite.edwardhea.antares-test.windows-int.net",
+      "Category": "WorkflowRuntime",
+      "OperationName": "WorkflowRunStarted",
+      "Properties": 
+      {
+          "$schema":"2016-06-01",
+          "startTime":"2021-10-19T20:37:19.7760979Z",
+          "status":"Running",
+          "clusterType":"Classic",
+          "resource":
+          {
+              "workflowId":"cde9cac1f92c4f8bb2f6486861bf15fe",
+              "workflowName":"newworkflow",
+              "runId":"08585669310457025306370108435CU00",
+              "originRunId":"08585669310457025306370108435CU00"
+          },
+          "correlation":
+          {
+              "clientTrackingId":"08585669310457025306370108435CU00"
+          }
+        }
+    },
+    {
+      "time": "2021-10-19T13:37:59.4770423Z",
+      "ResourceId": "newsite.edwardhea.antares-test.windows-int.net",
+      "Category": "WorkflowRuntime",
+      "OperationName": "WorkflowRunCompleted",
+      "Properties": 
+      {
+          "$schema":"2016-06-01",
+          "startTime":"2021-10-19T20:37:19.7760979Z",
+          "endTime":"2021-10-19T20:37:19.8176629Z",
+          "status":"Succeeded",
+          "clusterType":"Classic",
+          "resource":
+            {
+              "workflowId":"cde9cac1f92c4f8bb2f6486861bf15fe",
+              "workflowName":"newworkflow",
+              "runId":"08585669310457025306370108435CU00",
+              "originRunId":"08585669310457025306370108435CU00"
+            },
+          "correlation":
+            {
+                "clientTrackingId":"08585669310457025306370108435CU00"
+            }
+        }
+    }
+  ]

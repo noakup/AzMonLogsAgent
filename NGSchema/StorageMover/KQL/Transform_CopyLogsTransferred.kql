@@ -1,0 +1,10 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    JobRunName = tostring(properties.jobRunName),
+    ItemPath = tostring(properties.itemPath),
+    ItemType = tostring(properties.itemType),
+    TransferResult = tostring(properties.transferResult),
+    StatusCode = tostring(properties.statusCode),
+    Details = tostring(properties.details),
+    FileSize = tolong(properties.fileSize)

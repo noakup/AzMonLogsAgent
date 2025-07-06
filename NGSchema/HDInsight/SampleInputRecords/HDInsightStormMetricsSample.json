@@ -1,0 +1,1 @@
+[{"metricDataType":"counter","metricValue":"0","metricName":"nimbus-num-getNimbusConf-calls-Count","metricNamespace":"StormNimbusMetrics","clusterName":"becohen-storm","hostName":"hn0-becohe","operationName":"MetricsCollection","correlationId":"StormMetrics", "FluentdIngestTimestamp": "2019-07-13T01:05:06.0000000Z"}]

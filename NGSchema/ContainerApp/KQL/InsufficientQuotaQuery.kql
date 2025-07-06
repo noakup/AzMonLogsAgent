@@ -1,0 +1,2 @@
+ContainerAppSystemLogs_CL
+| where Log_s contains "Maximum Allowed Cores exceeded"

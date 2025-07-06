@@ -149,11 +149,12 @@ def get_examples(scenario):
         
         try:
             result = loop.run_until_complete(
-                agent.process_natural_language(f"get examples for {scenario}")
+                agent.process_natural_language(f"show me examples for {scenario}")
             )
             return jsonify({
                 'success': True,
                 'result': result,
+                'scenario': scenario,
                 'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             })
         finally:
@@ -165,20 +166,9 @@ def get_examples(scenario):
             'error': str(e)
         })
 
-@app.route('/api/status')
-def get_status():
-    """Get the current status of the agent"""
-    global agent, workspace_id
-    
-    return jsonify({
-        'initialized': agent is not None,
-        'workspace_id': workspace_id if workspace_id else None,
-        'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    })
-
 @app.route('/api/explain', methods=['POST'])
 def explain_results():
-    """Explain query results using OpenAI analysis"""
+    """Explain the results of a previous query"""
     global agent
     
     try:
@@ -189,23 +179,26 @@ def explain_results():
             })
         
         data = request.get_json()
-        query_result = data.get('query_result')
+        query_result = data.get('query_result', '')
         original_question = data.get('original_question', '')
         
         if not query_result:
-            return jsonify({'success': False, 'error': 'Query result is required'})
+            return jsonify({'success': False, 'error': 'Query result is required for explanation'})
+        
+        # Create explanation prompt
+        explanation_prompt = f"Explain these query results for the question '{original_question}': {query_result}"
         
         # Run the async explanation
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         
         try:
-            explanation = loop.run_until_complete(
-                agent.explain_results(query_result, original_question)
+            result = loop.run_until_complete(
+                agent.process_natural_language(explanation_prompt)
             )
             return jsonify({
                 'success': True,
-                'explanation': explanation,
+                'explanation': result,
                 'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             })
         finally:
@@ -217,74 +210,140 @@ def explain_results():
             'error': str(e)
         })
 
-@app.route('/api/test-explain', methods=['GET'])
-def test_explain():
-    """Test the explain functionality with a simple example"""
-    global agent
+@app.route('/api/workspace-examples', methods=['POST'])
+def discover_workspace_examples():
+    """Discover workspace tables and map them to available example queries"""
+    global agent, workspace_id
     
     try:
-        if not agent:
-            return jsonify({
-                'success': False, 
-                'error': 'Agent not initialized. Please setup workspace first.'
-            })
+        # Allow workspace examples discovery even without agent initialization
+        # since we're just showing available example files
         
-        # Create test data
-        test_result = {
-            "type": "query_success",
-            "kql_query": "AppRequests | where ResultCode >= 400 | take 5",
-            "data": {
-                "type": "table_data",
-                "tables": [
-                    {
-                        "name": "table_0",
-                        "columns": ["TimeGenerated", "Name", "ResultCode", "DurationMs"],
-                        "rows": [
-                            ["2024-06-30T10:15:00Z", "/api/users", 404, 125],
-                            ["2024-06-30T10:16:00Z", "/api/orders", 500, 2500],
-                            ["2024-06-30T10:17:00Z", "/api/users", 404, 98]
-                        ],
-                        "row_count": 3
-                    }
-                ]
+        import os
+        import glob
+        
+        # Define table mappings to example files
+        table_examples_map = {
+            'AppRequests': {
+                'file': 'app_requests_kql_examples.md',
+                'category': 'Application Insights',
+                'description': 'HTTP requests to your application'
+            },
+            'AppExceptions': {
+                'file': 'app_exceptions_kql_examples.md', 
+                'category': 'Application Insights',
+                'description': 'Exceptions thrown by your application'
+            },
+            'AppTraces': {
+                'file': 'app_traces_kql_examples.md',
+                'category': 'Application Insights', 
+                'description': 'Custom trace logs from your application'
+            },
+            'AppDependencies': {
+                'file': 'app_dependencies_kql_examples.md',
+                'category': 'Application Insights',
+                'description': 'External dependencies called by your application'
+            },
+            'AppPageViews': {
+                'file': 'app_page_views_kql_examples.md',
+                'category': 'Application Insights',
+                'description': 'Page views in your web application'
+            },
+            'AppCustomEvents': {
+                'file': 'app_custom_events_kql_examples.md',
+                'category': 'Application Insights', 
+                'description': 'Custom events tracked by your application'
+            },
+            'AppPerformanceCounters': {
+                'file': 'app_performance_kql_examples.md',
+                'category': 'Application Insights',
+                'description': 'Performance counters and metrics'
+            },
+            'Usage': {
+                'file': 'usage_kql_examples.md',
+                'category': 'Usage Analytics',
+                'description': 'User behavior and usage patterns'
             }
         }
         
-        # Run the async explanation
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
+        # Get available example files
+        example_files = glob.glob('*_kql_examples.md')
+        available_examples = {}
         
-        try:
-            explanation = loop.run_until_complete(
-                agent.explain_results(test_result, "Show me failed requests")
-            )
-            return jsonify({
-                'success': True,
-                'explanation': explanation,
-                'test_data': test_result,
-                'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            })
-        finally:
-            loop.close()
-            
+        for table, info in table_examples_map.items():
+            if os.path.exists(info['file']):
+                available_examples[table] = info
+        
+        # Count examples by category
+        example_categories = {}
+        for table, info in available_examples.items():
+            category = info['category']
+            example_categories[category] = example_categories.get(category, 0) + 1
+        
+        # Simulate discovered tables (in a real implementation, you'd query the workspace)
+        discovered_tables = list(available_examples.keys())
+        
+        # Create summary
+        summary = {
+            'workspace_id': workspace_id or 'Not configured',
+            'total_tables': len(discovered_tables),
+            'tables_with_examples': len(available_examples),
+            'example_categories': example_categories
+        }
+        
+        # Create table details in the format expected by the frontend
+        available_examples_formatted = {}
+        for table in discovered_tables:
+            if table in available_examples:
+                info = available_examples[table]
+                available_examples_formatted[table] = {
+                    'table_info': {
+                        'record_count': 10000,  # Simulated count, would be real in production
+                        'category': info['category'],
+                        'description': info['description']
+                    },
+                    'examples': [
+                        {
+                            'source': 'Built-in Examples',
+                            'description': info['description'],
+                            'query_count': 5  # Simulated count
+                        }
+                    ]
+                }
+        
+        return jsonify({
+            'success': True,
+            'summary': summary,
+            'available_examples': available_examples_formatted,
+            'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        })
+        
     except Exception as e:
-        import traceback
         return jsonify({
             'success': False,
-            'error': str(e),
-            'traceback': traceback.format_exc()
+            'error': str(e)
         })
 
+@app.route('/static/<path:filename>')
+def static_files(filename):
+    """Serve static files"""
+    return send_from_directory('static', filename)
+
 if __name__ == '__main__':
-    print("🌐 Starting Natural Language KQL Web Interface")
-    print("=" * 60)
-    print("📍 Web interface will be available at: http://localhost:5000")
-    print("🤖 Ready to process natural language KQL questions!")
-    print("=" * 60)
+    print("🌐 Starting Natural Language KQL Agent Web Interface...")
+    print("📊 Features available:")
+    print("   - Natural language to KQL translation")
+    print("   - Interactive workspace setup")
+    print("   - Query execution and results display")
+    print("   - Example queries and suggestions")
+    print("   - Workspace table discovery")
+    print("🚀 Starting server on http://localhost:8080")
     
-    # Create templates directory if it doesn't exist
-    templates_dir = os.path.join(os.path.dirname(__file__), 'templates')
-    if not os.path.exists(templates_dir):
-        os.makedirs(templates_dir)
-    
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    try:
+        app.run(debug=True, host='0.0.0.0', port=8080)
+    except KeyboardInterrupt:
+        print("\n🛑 Web Interface stopped")
+    except Exception as e:
+        print(f"❌ Error starting web interface: {e}")
+        import traceback
+        traceback.print_exc()

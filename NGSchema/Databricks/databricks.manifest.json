@@ -1,0 +1,3162 @@
+{
+	"type": "Microsoft.Databricks/workspaces",
+	"displayName": "Azure Databricks Services",
+	"description": "Tables related to Databricks workspaces.",
+	"tags": {},
+	"properties": {},
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "Azure Databricks/Triage",
+    "relatedTables": ["AzureActivity", "AzureMetrics"],
+	"relatedFunctions": [],
+    "tables": [
+        {
+            "name": "DatabricksBrickStoreHttpGateway",
+            "description": "Contains Databricks Brick Store Http Gateway logs.",
+            "dataTypeId": "DATABRICKAUDITLOGS_BRICKSTOREHTTPGATEWAY",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "DatabricksDashboards",
+            "description": "Contains Databricks Dashboards logs.",
+            "dataTypeId": "DATABRICKAUDITLOGS_DASHBOARDS",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "DatabricksCloudStorageMetadata",
+            "description": "Contains Databricks Cloud Storage Metadata logs.",
+            "dataTypeId": "DATABRICKAUDITLOGS_CLOUDSTORAGEMETADATA",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "DatabricksPredictiveOptimization",
+            "description": "Contains Databricks Predictive Optimization logs.",
+            "dataTypeId": "DATABRICKAUDITLOGS_PREDICTIVEOPTIMIZATION",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "DatabricksDataMonitoring",
+            "description": "Contains Databricks Data Monitoring logs.",
+            "dataTypeId": "DATABRICKAUDITLOGS_DATAMONITORING",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "DatabricksIngestion",
+            "description": "Contains Databricks Ingestion logs.",
+            "dataTypeId": "DATABRICKAUDITLOGS_INGESTION",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "DatabricksMarketplaceConsumer",
+            "description": "Contains Databricks Marketplace Consumer logs.",
+            "dataTypeId": "DATABRICKAUDITLOGS_MARKETPLACECONSUMER",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "DatabricksLineageTracking",
+            "description": "Contains Databricks Lineage Tracking logs.",
+            "dataTypeId": "DATABRICKAUDITLOGS_LINEAGETRACKING",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "DatabricksFilesystem",
+            "description": "Contains Databricks Filesystem logs.",
+            "dataTypeId": "DATABRICKAUDITLOGS_FILESYSTEM",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "DatabricksApps",
+            "description": "Audit logs for Databricks lakehouse apps.",
+            "dataTypeId": "DATABRICKAUDITLOGS_APPS",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "DatabricksClusterPolicies",
+            "description": "Audit logs for Databricks cluster policies.",
+            "dataTypeId": "DATABRICKAUDITLOGS_CLUSTERPOLICIES",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "DatabricksDataRooms",
+            "description": "Audit logs for Databricks data rooms.",
+            "dataTypeId": "DATABRICKAUDITLOGS_DATAROOMS",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "DatabricksGroups",
+            "description": "Audit logs for Databricks groups.",
+            "dataTypeId": "DATABRICKAUDITLOGS_GROUPS",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "DatabricksMarketplaceProvider",
+            "description": "Audit logs for Marketplace provider in Databricks.",
+            "dataTypeId": "DATABRICKAUDITLOGS_MARKETPLACEPROVIDER",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "DatabricksOnlineTables",
+            "description": "Audit logs for online tables in Databricks.",
+            "dataTypeId": "DATABRICKAUDITLOGS_ONLINETABLES",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "DatabricksRBAC",
+            "description": "Audit logs for role based access control in Databricks.",
+            "dataTypeId": "DATABRICKAUDITLOGS_RBAC",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "DatabricksRFA",
+            "description": "Audit logs for request for access events in Databricks.",
+            "dataTypeId": "DATABRICKAUDITLOGS_RFA",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "DatabricksVectorSearch",
+            "description": "Audit logs for Vector Search in Databricks.",
+            "dataTypeId": "DATABRICKAUDITLOGS_VECTORSEARCH",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "DatabricksWebhookNotifications",
+            "description": "Audit logs for webhook notifications in Databricks.",
+            "dataTypeId": "DATABRICKAUDITLOGS_WEBHOOKNOTIFICATIONS",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "DatabricksWorkspaceFiles",
+            "description": "Audit logs for on Databricks workspace files.",
+            "dataTypeId": "DATABRICKAUDITLOGS_WORKSPACEFILES",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "DatabricksLakeviewConfig",
+            "description": "Audit logs for the Lakeview configuration service in Databricks.",
+            "dataTypeId": "DATABRICKAUDITLOGS_LAKEVIEWCONFIG",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "DatabricksFiles",
+            "description": "Audit logs for the files service in Databricks.",
+            "dataTypeId": "DATABRICKAUDITLOGS_FILES",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "DatabricksBudgetPolicyCentral",
+            "description": "Audit logs for Databricks BudgetPolicyCentral.",
+            "dataTypeId": "DATABRICKAUDITLOGS_BUDGETPOLICYCENTRAL",
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabricksGenericSample.json",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "categories": [ "resources", "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "intelligencePacks": [ "LogManagement" ],
+            "isResourceCentric": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "identities",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/DatabricksGenericTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with log record."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The API version of the operation."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "The identity of the user who performed the operation.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIpAddress",
+                    "description": "The IP address of the client that performed the operation.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LogId",
+                    "description": "The log ID in Databricks domain.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "description": "The service name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "description": "The user agent.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SessionId",
+                    "description": "The session ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActionName",
+                    "description": "The action name.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestId",
+                    "description": "The request ID.",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestParams",
+                    "description": "The request parameters.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Response",
+                    "description": "The response.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ]
+        }
+    ],
+	"functions": [],
+	"queries": [{
+            "id": "e2505eec-f620-4fbb-87e7-eb447d608a04",
+            "displayName": "List all Databricks Diagnostic Settings categories",
+            "description": "Databricks Diagnostic Settings categories used to go to separate tables. This query lists all categories that are now in the DatabricksWorkspaceLogs table and those that are still in their own tables.",
+            "bodyFilePath": "KQL/SampleQueries/GetAllCategories.kql",
+            "categories": [ "resources" ],
+            "tags": {
+            "Topic": [
+                    "Diagnostics"
+                ]
+            },
+            "relatedTables": [ "DatabricksWorkspaceLogs" ],
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        }
+    ]
+}

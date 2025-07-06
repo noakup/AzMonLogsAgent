@@ -1,0 +1,3 @@
+ACSCallAutomationMediaSummary
+| where OperationName == "Play"
+| summarize playedToCount=count() by PlayToParticipant, ResultType

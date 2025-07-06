@@ -1,0 +1,153 @@
+[{
+    "TimeGenerated": "2025-05-13T12:30:00Z",
+    "AgentLoadFlags": "1",
+    "AgentLocalTime": "2025-03-18T12:46:32.816Z",
+    "AgentVersion": "7.22.19406.0",
+    "BaseImageVersion": "Windows 10 21H2",
+    "BiosManufacturer": "LENOVO",
+    "BiosVersion": "R17ET31W (1.14 )",
+    "BuildNumber": "22631",
+    "ChassisType": "10",
+    "ChassisTypeDesc": "Notebook",
+    "Cid": "2cc98db1a47b4c98b913c94d43bfab70",
+    "ConfigIdBase": "65994767",
+    "ConfigIdBuild": "19406",
+    "ConfigIdPlatform": "3",
+    "ConnectionIp": "192.168.216.228",
+    "ConnectionMacAddress": "34-cf-f6-67-33-51",
+    "CpuSignature": "526060",
+    "CpuVendor": "0",
+    "DefaultGatewayIp": "192.168.216.248",
+    "DeploymentType": "Workstation",
+    "DetectionSuppressionStatus": "disabled",
+    "DeviceId": "845cfcc0b11d453fb4118c21520fe531",
+    "DevicePolicies": {
+        "prevention": {
+            "policy_type": "prevention",
+            "assigned_date": "2025-02-28T07:17:45.018130015Z",
+            "applied_date": "2025-02-28T07:23:58.011273299Z",
+            "rule_groups": []
+        },
+        "sensor_update": {
+            "policy_type": "sensor-update",
+            "policy_id": "3fbbd630f44a4ca0b3d7e661cda088f6",
+            "applied": true,
+            "settings_hash": "tagged|17;101",
+            "assigned_date": "2025-03-03T05:59:43.152765731Z",
+            "applied_date": "2025-03-03T06:04:33.051573064Z",
+            "uninstall_protection": "ENABLED"
+        },
+        "device_control": {
+            "policy_type": "device-control",
+            "policy_id": "61703f144a7bf2eef6ca205be1929387",
+            "applied": false,
+            "settings_hash": "62767e2b",
+            "assigned_date": "2025-02-21T12:23:09.314915215Z",
+            "applied_date": null
+        },
+        "content-update": {
+            "policy_type": "content-update",
+            "policy_id": "a050e2d7ab3842cd8bfd3f43f5777442",
+            "applied": true,
+            "settings_hash": "5639821970198380697",
+            "assigned_date": "2025-02-21T12:23:09.315036225Z",
+            "applied_date": "2025-02-21T12:23:09.315036225Z"
+        }
+    },
+    "Email": "user@contoso.com",
+    "ExternalIp": "42.104.232.8",
+    "FilesystemContainmentStatus": "normal",
+    "FirstLoginTimestamp": "2025-02-21T12:21:20Z",
+    "FirstSeen": "2025-02-21T12:21:20Z",
+    "GroupHash": "2e880e4163746ca4b769abeebc691da0f70252a18eb3255401c8c3575b2c26e5",
+    "Groups": ["9fd1b7681ff04ce992a3deba16ae217e"],
+    "HostHiddenStatus": "visible",
+    "HostUtcOffset": "+02:00",
+    "Hostname": "ASSETTAG-EID",
+    "InstanceId": "i-0123456789abcdef0",
+    "InternetExposure": "medium",
+    "K8sClusterGitVersion": "v1.24.3",
+    "K8sClusterId": "cluster-123456",
+    "K8sClusterVersion": "1.24.3",
+    "KernelVersion": "10.0.22631",
+    "LastLoginTimestamp": "2025-03-18T04:55:49Z",
+    "LastLoginUid": "1000",
+    "LastLoginUser": "Crest",
+    "LastLoginUserSid": "S-1-5-21-272789657-2074282548-1398399534-1000",
+    "LastReboot": "2025-03-17T00:00:00Z",
+    "LastSeen": "2025-03-18T12:46:32.816Z",
+    "LinuxSensorMode": "standard",
+    "LocalIp": "10.0.0.15",
+    "MacAddress": "34-cf-f6-67-33-51",
+    "MachineDomain": "contoso.local",
+    "MajorVersion": "10",
+    "ManagedApps": [
+        {
+            "name": "Microsoft Office",
+            "version": "16.0.15601.20578"
+        }
+    ],
+    "Meta": {
+        "version": "1.0",
+        "environment": "production"
+    },
+    "MigrationCompletedTime": "2025-02-21T12:25:00Z",
+    "MinorVersion": "0",
+    "ModifiedTimestamp": null,
+    "Notes": [
+        {
+            "note": "Production workstation",
+            "timestamp": "2025-02-21T12:21:20Z"
+        }
+    ],
+    "OsBuild": "22631",
+    "OsProductName": "Windows 10 Enterprise",
+    "OsVersion": "10.0.22631.2428",
+    "Ou": ["OU=Workstations,DC=contoso,DC=local"],
+    "PlatformId": "0",
+    "PlatformName": "Windows",
+    "PodAnnotations": {
+        "cluster-autoscaler.kubernetes.io/safe-to-evict": "true"
+    },
+    "PodHostIp4": "10.0.0.15",
+    "PodHostIp6": "fe80::34cf:f6ff:fe67:3351",
+    "PodHostname": "pod-845cfcc0",
+    "PodId": "845cfcc0-pod",
+    "PodIp4": "172.16.0.15",
+    "PodIp6": "fd00::172:16:0:15",
+    "PodLabels": {
+        "app": "crowdstrike-agent",
+        "environment": "production"
+    },
+    "PodName": "crowdstrike-agent-845cfcc0",
+    "PodNamespace": "security",
+    "PodServiceAccountName": "crowdstrike-agent",
+    "PointerSize": "64",
+    "Policies": [
+        {
+            "policy_type": "prevention",
+            "policy_id": "f9aaa61c700049e3a76f2d9aae0dafc9",
+            "applied": true,
+            "settings_hash": "f7b00025",
+            "assigned_date": "2025-02-28T07:17:45.018130015Z",
+            "applied_date": "2025-02-28T07:23:58.011273299Z",
+            "rule_groups": []
+        }
+    ],
+    "ProductType": "1",
+    "ProductTypeDesc": "Workstation",
+    "ProvisionStatus": "provisioned",
+    "ReducedFunctionalityMode": "no",
+    "ReleaseGroup": "production",
+    "RtrState": "enabled",
+    "SerialNumber": "PF-3ABCD2",
+    "ServicePackMajor": "0",
+    "ServicePackMinor": "0",
+    "ServiceProvider": "on-premises",
+    "ServiceProviderAccountId": "N/A",
+    "SiteName": "Headquarters",
+    "Status": "normal",
+    "SystemManufacturer": "LENOVO",
+    "SystemProductName": "ThinkPad X1 Carbon",
+    "Tags": []
+}]

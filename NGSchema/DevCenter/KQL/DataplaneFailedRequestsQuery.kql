@@ -1,0 +1,5 @@
+DevCenterDiagnosticLogs
+| where toint(ResponseCode) >= 400 
+| extend _date = bin(TimeGenerated, 1d)
+| summarize failureCount = count() by OperationName, _date
+| sort by _date desc

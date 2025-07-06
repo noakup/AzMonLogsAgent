@@ -1,0 +1,214 @@
+[
+  {
+    "TimeGenerated": "2024-01-07T08:08:11.9487096Z",
+    "TimePeriod": "2019-01-07T00:00:00Z",
+    "StorageAccountName": "0storageaccountabcdefghi",
+    "SubscriptionId": "13723929-6644-4060-a50a-cc38ebc5e8b1",
+    "SubscriptionName": "LinuxMdsd Test",
+    "Region": "westus",
+    "PerformanceType": "Premium",
+    "EncryptionType": "MMK",
+    "RedundancyType": "LRS",
+    "AccessTier": "Hot",
+    "StorageType": "FNS",
+    "ResourceTags": {
+      "k1": "K1 Value"
+    },
+    "ResourceGroup": "rg-13723929",
+    "ManagementGroupIds": [
+      "45f9252d-e27e-4ed8-ab4e-dc5054de13fa",
+      "062bf9fa-9fa9-463d-958c-b81ad162452b",
+      "CnAIOrchestrationServicePublicCorpprod"
+    ]
+  },
+  {
+    "TimeGenerated": "2024-01-07T08:08:11.9499197Z",
+    "TimePeriod": "2019-01-07T00:00:00Z",
+    "StorageAccountName": "1storageaccountabcdefghi",
+    "SubscriptionId": "b2a328a7-ffff-4c09-b643-a4758cf170bc",
+    "SubscriptionName": "AISC-DEV-02",
+    "Region": "northeurope",
+    "PerformanceType": "Standard",
+    "EncryptionType": "CMK",
+    "RedundancyType": "ZRS",
+    "AccessTier": "Cool",
+    "StorageType": "HNS",
+    "ResourceTags": {
+      "Some Key": "Some Value",
+      "Some Other Key": "Some Other Value"
+    },
+    "ResourceGroup": "rg-b2a328a7",
+    "ManagementGroupIds": [
+      "CnAIOrchestrationServicePublicCorpprod"
+    ]
+  },
+  {
+    "TimeGenerated": "2024-01-07T08:08:11.9509484Z",
+    "TimePeriod": "2019-01-07T00:00:00Z",
+    "StorageAccountName": "2storageaccountabcdefghi",
+    "SubscriptionId": "1f2d9952-01b2-4579-a550-5a6ecf48206f",
+    "SubscriptionName": "xstore_cv_dev",
+    "Region": "southeastasia",
+    "PerformanceType": "Standard",
+    "EncryptionType": "CMK",
+    "RedundancyType": "ZRS",
+    "AccessTier": "Archive",
+    "StorageType": "HNS",
+    "ResourceTags": {
+      "Some Key": "Some Value",
+      "Some Other Key": "Some Other Value"
+    },
+    "ResourceGroup": "rg-1f2d9952",
+    "ManagementGroupIds": [
+      "45f9252d-e27e-4ed8-ab4e-dc5054de13fa",
+      "062bf9fa-9fa9-463d-958c-b81ad162452b",
+      "CnAIOrchestrationServicePublicCorpprod"
+    ]
+  },
+  {
+    "TimeGenerated": "2024-01-07T08:08:11.9519951Z",
+    "TimePeriod": "2019-01-07T00:00:00Z",
+    "StorageAccountName": "3storageaccountabcdefghi",
+    "SubscriptionId": "1f2d9952-01b2-4579-a550-5a6ecf48206f",
+    "SubscriptionName": "xstore_cv_dev",
+    "Region": "southeastasia",
+    "PerformanceType": "Premium",
+    "EncryptionType": "CMK",
+    "RedundancyType": "LRS",
+    "AccessTier": "Premium",
+    "StorageType": "FNS",
+    "ResourceTags": {
+      "Some Key": "Some Value",
+      "Some Other Key": "Some Other Value"
+    },
+    "ResourceGroup": "rg-1f2d9952",
+    "ManagementGroupIds": [
+      "45f9252d-e27e-4ed8-ab4e-dc5054de13fa",
+      "062bf9fa-9fa9-463d-958c-b81ad162452b",
+      "CnAIOrchestrationServicePublicCorpprod"
+    ]
+  },
+  {
+    "TimeGenerated": "2024-01-07T08:08:11.9530889Z",
+    "TimePeriod": "2019-01-07T00:00:00Z",
+    "StorageAccountName": "4storageaccountabcdefghi",
+    "SubscriptionId": "d0fe5891-b68c-45a0-8d80-4d66d57f3859",
+    "SubscriptionName": "xStoreInsights-Dev-Playground1",
+    "Region": "westus",
+    "PerformanceType": "Standard",
+    "EncryptionType": "CMK",
+    "RedundancyType": "GRS",
+    "AccessTier": "Cold",
+    "StorageType": "HNS",
+    "ResourceTags": null,
+    "ResourceGroup": "rg-d0fe5891",
+    "ManagementGroupIds": [
+      "45f9252d-e27e-4ed8-ab4e-dc5054de13fa",
+      "062bf9fa-9fa9-463d-958c-b81ad162452b",
+      "CnAIOrchestrationServicePublicCorpprod"
+    ]
+  },
+  {
+    "TimeGenerated": "2024-01-07T08:08:11.9541052Z",
+    "TimePeriod": "2019-01-07T00:00:00Z",
+    "StorageAccountName": "5storageaccountabcdefghi",
+    "SubscriptionId": "56207a5d-4746-4a2d-9f7f-c5ac77a5ddfd",
+    "SubscriptionName": "Traffic manager Preview",
+    "Region": "westus",
+    "PerformanceType": "Standard",
+    "EncryptionType": "MMK",
+    "RedundancyType": "ZRS",
+    "AccessTier": "Hot",
+    "StorageType": "FNS",
+    "ResourceTags": null,
+    "ResourceGroup": "rg-56207a5d",
+    "ManagementGroupIds": [
+      "72f988bf-86f1-41af-91ab-2d7cd011db47",
+      "48fed3a1-0814-4847-88ce-b766155f2792"
+    ]
+  },
+  {
+    "TimeGenerated": "2024-01-07T08:08:11.9552133Z",
+    "TimePeriod": "2019-01-07T00:00:00Z",
+    "StorageAccountName": "6storageaccountabcdefghi",
+    "SubscriptionId": "f6869ac6-2a40-404f-acd3-d07461be771a",
+    "SubscriptionName": "Synthetic Testing Lab",
+    "Region": "southafricanorth",
+    "PerformanceType": "Standard",
+    "EncryptionType": "CMK",
+    "RedundancyType": "LRS",
+    "AccessTier": "Cool",
+    "StorageType": "FNS",
+    "ResourceTags": {
+      "Some Key": "Some Value",
+      "Some Other Key": "Some Other Value"
+    },
+    "ResourceGroup": "rg-f6869ac6",
+    "ManagementGroupIds": [
+      "45f9252d-e27e-4ed8-ab4e-dc5054de13fa",
+      "062bf9fa-9fa9-463d-958c-b81ad162452b",
+      "CnAIOrchestrationServicePublicCorpprod"
+    ]
+  },
+  {
+    "TimeGenerated": "2024-01-07T08:08:11.9562284Z",
+    "TimePeriod": "2019-01-07T00:00:00Z",
+    "StorageAccountName": "7storageaccountabcdefghi",
+    "SubscriptionId": "227531a4-d775-435b-a878-963ed8d0d18f",
+    "SubscriptionName": "Skype-1ES-DEV",
+    "Region": "centralindia",
+    "PerformanceType": "Premium",
+    "EncryptionType": "CMK",
+    "RedundancyType": "RA-GRS",
+    "AccessTier": "Cold",
+    "StorageType": "HNS",
+    "ResourceTags": null,
+    "ResourceGroup": "rg-227531a4",
+    "ManagementGroupIds": [
+      "6785ea1f-ac40-4244-a9ce-94b12fd832ca",
+      "556b3e3f-8a81-3472-4327-b0540f33a0f0",
+      "1233e2eb-5ea4-a7ea-63e7-7315c3172726",
+      "c92f8fe1-e3cb-47e8-a01d-0771814c0dad",
+      "CnAIOrchestrationServicePublicCorpprod",
+      "72f988bf-86f1-41af-91ab-2d7cd011db47"
+    ]
+  },
+  {
+    "TimeGenerated": "2024-01-07T08:08:11.9619144Z",
+    "TimePeriod": "2019-01-07T00:00:00Z",
+    "StorageAccountName": "8storageaccountabcdefghi",
+    "SubscriptionId": "432a7068-99ae-4975-ad38-d96b71172cdf",
+    "SubscriptionName": "Azure Profiler - Testing",
+    "Region": "southeastasia",
+    "PerformanceType": "Premium",
+    "EncryptionType": "MMK",
+    "RedundancyType": "LRS",
+    "AccessTier": "Cool",
+    "StorageType": "FNS",
+    "ResourceTags": null,
+    "ResourceGroup": "rg-432a7068",
+    "ManagementGroupIds": [
+      "CnAIOrchestrationServicePublicCorpprod"
+    ]
+  },
+  {
+    "TimeGenerated": "2024-01-07T08:08:11.9632453Z",
+    "TimePeriod": "2019-01-07T00:00:00Z",
+    "StorageAccountName": "9storageaccountabcdefghi",
+    "SubscriptionId": "432a7068-99ae-4975-ad38-d96b71172cdf",
+    "SubscriptionName": "Azure Profiler - Testing",
+    "Region": "southeastasia",
+    "PerformanceType": "Standard",
+    "EncryptionType": "MMK",
+    "RedundancyType": "RA-GRS",
+    "AccessTier": "Hot",
+    "StorageType": "HNS",
+    "ResourceTags": {
+      "k1": "K1 Value"
+    },
+    "ResourceGroup": "rg-432a7068",
+    "ManagementGroupIds": [
+      "CnAIOrchestrationServicePublicCorpprod"
+    ]
+  }
+]

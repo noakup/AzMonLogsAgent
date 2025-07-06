@@ -1,0 +1,15 @@
+[
+    {
+        "PreciseTimeStamp": "2021-02-05T00:00:40.2846445Z",
+        "time": "2021-02-04T23:56:18.0000000Z",
+        "resourceId": "/tenants/01234567-89ab-cdef-0123-456789abcdef/providers/Microsoft.aadiam",
+        "tenantId": "00234567-89ab-cdef-0123-456789abcdef",
+        "resultType": "0",
+        "resultDescription": "",
+        "callerIpAddress": "255.255.255.1",
+        "correlationId": "00034567-89ab-cdef-0123-456789abcdef",
+        "identity": "Bob Bob",
+        "location": "",
+        "properties": "{\"id\":\"01234567-89ab-cdef-0123-456789abcdef\",\"resourceId\":\"ResourceID\",\"resourceDisplayName\":\"ResourceName\",\"createdDateTime\":\"2021-02-04T23:56:18+00:00\",\"userDisplayName\":\"Bob Bob\",\"userPrincipalName\":\"bobbob@microsoft.com\",\"userId\":\"00004567-89ab-cdef-0123-456789abcdef\",\"appId\":\"urn:federation:MicrosoftOnline\",\"appDisplayName\":\"MicrosoftOnline\",\"ipAddress\":\"255.255.255.1\",\"status\":{\"errorCode\":0},\"userAgent\":\"-\",\"deviceDetail\":{\"deviceId\":\"\"},\"location\":{\"geoCoordinates\":{}},\"correlationId\":\"00004567-89ab-cdef-0123-456789abcdef\",\"conditionalAccessStatus\":\"notApplied\",\"appliedConditionalAccessPolicies\":[],\"originalRequestId\":\"00000567-89ab-cdef-0123-456789abcdef\",\"isInteractive\":true,\"tokenIssuerName\":\"sts.microsoft.com\",\"tokenIssuerType\":\"ADFederationServices\",\"authenticationProcessingDetails\":[{\"key\":\"ServerName\",\"value\":\"US-ADFSINTSRV07\"},{\"key\":\"Authentication Protocol\",\"value\":\"WSTrust\"},{\"key\":\"IPAddresses Involved in Auth Flow\",\"value\":\"255.255.255.1\"},{\"key\":\"IsCAEToken\",\"value\":\"False\"}],\"networkLocationDetails\":[{\"networkType\":\"intranet\"}],\"processingTimeInMilliseconds\":0,\"riskDetail\":\"none\",\"riskLevelAggregated\":\"none\",\"riskLevelDuringSignIn\":\"none\",\"riskState\":\"none\",\"riskEventTypes\":[],\"riskEventTypes_v2\":[],\"resourceDisplayName\":\"urn:federation:MicrosoftOnline\",\"resourceTenantId\":\"00034567-89ab-cdef-0123-456789abcdef\",\"authenticationDetails\":[{\"authenticationStepDateTime\":\"2021-02-04T23:56:18+00:00\",\"authenticationMethod\":\"Forms\",\"authenticationMethodDetail\":\"\",\"succeeded\":true,\"authenticationStepRequirement\":\"Primary or secondary authentication\",\"StatusSequence\":0,\"RequestSequence\":1},{\"authenticationStepDateTime\":\"2021-02-04T23:56:18+00:00\",\"authenticationMethod\":\"Forms\",\"authenticationMethodDetail\":\"\",\"succeeded\":true,\"authenticationStepRequirement\":\"Primary or secondary authentication\",\"StatusSequence\":0,\"RequestSequence\":1}],\"authenticationRequirementPolicies\":[],\"authenticationRequirement\":\"singleFactorAuthentication\",\"alternateSignInName\":\"bob@microsoft.com\",\"signInIdentifier\":\"bob@microsoft.com\",\"servicePrincipalId\":\"\",\"flaggedForReview\":false,'uniqueTokenIdentifier':'OTM1MWMwZGEtNDhiYS00NTg0LTk5M2UtOWQ3YzU1NzA0ZTM5'}"
+    }
+]

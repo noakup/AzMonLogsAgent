@@ -1,0 +1,54 @@
+source
+| extend clientGeoLocation = geo_location(TerminalIPv6)
+| project
+TimeGenerated = now(),
+UpdatedOn = UpdatedOn,
+SystemId = SystemID,
+SystemNumber = SystemNumber,
+ClientId = ClientID,
+Instance = Instance,
+AuditClassId = AuditClassID,
+MonitoringObjectName = MonitoringObjectName,
+SalDateChar8 = strcat(SAL_DATE, MSCDATE),
+SalTimeChar6 = strcat(SAL_TIME, MSCTIME),
+MonitorShortName = MonitorShortName,
+MessageId = MessageID,
+MessageText = MessageText,
+MessageClass = MessageClass,
+MessageContainerId = MessageContainerID,
+AlertValue = AlertValue,
+AlertSeverity = AlertSeverity,
+AlertSeverityText = AlertSeverityText,
+User = User,
+TransactionCode = TransactionCode,
+AbapProgramName = ABAPProgramName,
+SapProcessType = SAPProcesType,
+SapWorkProcessName = SAPWPName,
+Computer = Computer,
+SalIpAddress = TERM_IPV6,
+TerminalIpV6 = TerminalIPv6,
+Variable1 = Variable1,
+Variable2 = Variable2,
+Variable3 = Variable3,
+Variable4 = Variable4,
+Email = iff(isempty(Email), User, Email),
+Host = iff(isempty(Host), TerminalIPv6, Host),
+RemoteIpLongitude = tofloat(clientGeoLocation["Longitude"]),
+RemoteIpLatitude = tofloat(clientGeoLocation["Latitude"]),
+RemoteIpCountry = tostring(clientGeoLocation["Country"]),
+SystemRole = SystemRole,
+SystemUniqueId = SystemUniqueId,
+AgentId = AgentId
+
+
+
+
+
+
+
+
+
+
+
+
+

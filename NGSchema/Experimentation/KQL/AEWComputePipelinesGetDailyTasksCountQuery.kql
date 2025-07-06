@@ -1,0 +1,5 @@
+AEWComputePipelinesLogs
+| where EventName =~ "ScorecardRequestSucceeded" or EventName =~ "ScorecardRequestFailed"
+| where Properties.ExperimentationGroup =~ "test~ExperimentationGroup"
+| summarize Count = count() by Date = bin(TimeGenerated, 1d), ExperimentationGroup = tostring(Properties.ExperimentationGroup)
+| sort by Date

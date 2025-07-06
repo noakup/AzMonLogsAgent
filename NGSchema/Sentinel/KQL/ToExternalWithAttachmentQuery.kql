@@ -1,0 +1,5 @@
+EmailEvents
+| where EmailDirection == "Outbound" and AttachmentCount > 0
+| join EmailAttachmentInfo on NetworkMessageId 
+| project Timestamp, Subject, SenderFromAddress, RecipientEmailAddress, NetworkMessageId, FileName, AttachmentCount 
+| take 1000

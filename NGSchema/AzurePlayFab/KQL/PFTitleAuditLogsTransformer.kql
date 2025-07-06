@@ -1,0 +1,13 @@
+source
+| extend properties = parse_json(properties)
+| project
+TimeGenerated = todatetime(['time']),
+OperationName = operationName,
+Level = level,
+Location = location,
+OperationType = tostring(properties.operationType),
+PlayFabTitleId = tostring(properties.playFabTitleId),
+PlayFabPlayerAccountPoolId = tostring(properties.playFabPlayerAccountPoolId),
+UserId = tostring(properties.userId),
+UserName = tostring(properties.userName),
+ModifiedPlayerId = tostring(properties.modifiedPlayerId)

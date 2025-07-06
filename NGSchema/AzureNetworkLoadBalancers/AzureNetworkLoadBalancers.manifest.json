@@ -1,0 +1,119 @@
+{
+    "type": "Microsoft.Network/LoadBalancers",
+    "displayName": "Load Balancers",
+    "description": "Azure Load Balancer is a low latency and high throughput network-layer load balancer that enables you to improve the availability and scalability of your applications by distributing network traffic.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Cloudnet/Slb - Azure",
+    "contactDL": "slbdev@microsoft.com",
+    "relatedTables": [],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "ALBHealthEvent",
+            "description": "Table of events related to the availability and health of a load balancer resource.",
+            "categories": [
+                "resources",
+                "monitor"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "AZURELOADBALANCERS_LOADBALANCERHEALTHEVENT",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "tableState": "Production",
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "KQL/LoadBalancerHealthEventDataTransformation.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Date and time the record was generated.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "operationName",
+                    "type": "String",
+                    "description": "The operation when the record is generated",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "HealthEventType",
+                    "type": "String",
+                    "description": "Type of the health event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Severity",
+                    "type": "String",
+                    "description": "Severity of the health event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LoadBalancerResourceId",
+                    "type": "String",
+                    "description": "Load Balancer Resource ID of the health event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Description",
+                    "type": "String",
+                    "description": "Description of the health event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FrontendIP",
+                    "type": "String",
+                    "description": "Frontend IP of the health event.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/LoadBalancerHealthEventLogs.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/LoadBalancerHealthEventLogs.json"
+        }
+    ],
+    "functions": [],
+    "queries": [
+        {
+            "id": "8f2774ec-9662-4eff-bc18-b223ec9ce86d",
+            "displayName": "Latest Snat Port Exhaustion Per LB Frontend",
+            "description": "List the latest SNAT port exhaustion event per load balancer Frontend IP",
+            "bodyFilePath": "KQL/Query/LoadBalancerHealthEventSampleQuery.kql",
+            "categories": [ "resources", "monitor" ],
+            "tags": {
+                "Topic": [ "Diagnostics" ]
+            },
+            "properties": {
+                "ExampleQuery": true
+            },
+            "relatedTables": [ "ALBHealthEvent" ]
+        }
+    ]
+}

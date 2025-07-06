@@ -1,0 +1,256 @@
+[
+  {
+    "insertId": "1ckmsw0etwmsz",
+    "jsonPayload": {
+      "connection": {
+        "dest_ip": "10.128.0.7",
+        "dest_port": 443,
+        "protocol": 6,
+        "src_ip": "167.220.204.137",
+        "src_port": 41140
+      },
+      "disposition": "ALLOWED",
+      "instance": {
+        "project_id": "g-860588771758",
+        "region": "us-central1",
+        "vm_name": "temp-test-sentinel-data",
+        "zone": "us-central1-c"
+      },
+      "remote_location": {
+        "city": "Herzliya",
+        "continent": "Asia",
+        "country": "isr",
+        "region": "Tel Aviv District"
+      },
+      "rule_details": {
+        "action": "ALLOW",
+        "direction": "INGRESS",
+        "ip_port_info": [
+          {
+            "ip_protocol": "TCP",
+            "port_range": [
+              "443"
+            ]
+          }
+        ],
+        "priority": 1000,
+        "reference": "network:default/firewall:default-allow-https",
+        "source_range": [
+          "0.0.0.0/0"
+        ],
+        "target_tag": [
+          "https-server"
+        ]
+      },
+      "vpc": {
+        "project_id": "g-860588771758",
+        "subnetwork_name": "default",
+        "vpc_name": "default"
+      }
+    },
+    "logName": "projects/g-860588771758/logs/compute.googleapis.com%2Ffirewall",
+    "receiveTimestamp": "2024-09-10T13:21:14.603057208Z",
+    "resource": {
+      "labels": {
+        "location": "us-central1",
+        "project_id": "g-860588771758",
+        "subnetwork_id": "1187397437812470118",
+        "subnetwork_name": "default"
+      },
+      "type": "gce_subnetwork"
+    },
+    "timestamp": "2024-09-10T13:21:02.464501154Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "jhonjon@nazcore.net"
+      },
+      "requestMetadata": {
+        "callerIp": "2a02:ed0:5f9f:ef00:11f5:7d4f:1494:d255",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "cloudbilling.googleapis.com",
+      "methodName": "GetResourceBillingInfo",
+      "authorizationInfo": [
+        {
+          "resource": "projects/terraformproject-358107",
+          "permission": "resourcemanager.projects.get",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/terraformproject-358107",
+      "request": {
+        "@type": "type.googleapis.com/google.internal.cloudbilling.billingaccount.v1.GetResourceBillingInfoRequest",
+        "billingInfoOptions": {},
+        "resourceName": "projects/1029710703485"
+      }
+    },
+    "insertId": "-cgwwd7e2zfue",
+    "resource": {
+      "type": "project",
+      "labels": {
+        "project_id": "terraformproject-358107"
+      }
+    },
+    "timestamp": "2022-08-21T07:44:39.997339Z",
+    "severity": "INFO",
+    "logName": "projects/terraformproject-358107/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "receiveTimestamp": "2022-08-21T07:44:40.801195106Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "jhonjon@jhonjon-tests.iam.gserviceaccount.com",
+        "serviceAccountDelegationInfo": [
+          {
+            "principalSubject": "principal://iam.googleapis.com/projects/920385590331/locations/global/workloadIdentityPools/jhonjon/subject/a8aa26f6-f924-4481-be25-4d82d5456348"
+          }
+        ],
+        "principalSubject": "serviceAccount:jhonjon@jhonjon-tests.iam.gserviceaccount.com"
+      },
+      "requestMetadata": {
+        "callerIp": "52.180.172.65",
+        "callerSuppliedUserAgent": "grpc-csharp/2.38.1 (.NET Framework 4.7.3946.0; CLR 4.0.30319.42000; net45; x64) grpc-c/16.0.0 (windows; chttp2),gzip(gfe)",
+        "requestAttributes": {
+          "time": "2022-08-04T08:11:17.410659153Z",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "pubsub.googleapis.com",
+      "methodName": "google.pubsub.v1.Subscriber.GetSubscription",
+      "authorizationInfo": [
+        {
+          "resource": "projects/jhonjon-tests/subscriptions/AuditLogs-sub",
+          "permission": "pubsub.subscriptions.get",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/jhonjon-tests/subscriptions/AuditLogs-sub",
+      "request": {
+        "subscription": "projects/jhonjon-tests/subscriptions/AuditLogs-sub",
+        "@type": "type.googleapis.com/google.pubsub.v1.GetSubscriptionRequest"
+      }
+    },
+    "insertId": "qx2f5oc44s",
+    "resource": {
+      "type": "pubsub_subscription",
+      "labels": {
+        "subscription_id": "projects/jhonjon-tests/subscriptions/AuditLogs-sub",
+        "project_id": "jhonjon-tests"
+      }
+    },
+    "timestamp": "2022-08-04T08:11:17.402756381Z",
+    "severity": "INFO",
+    "logName": "projects/jhonjon-tests/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "receiveTimestamp": "2022-08-04T08:11:17.641953197Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "jhonjon@nazcore.net"
+      },
+      "requestMetadata": {
+        "callerIp": "2a02:ed0:5f9f:ef00:11f5:7d4f:1494:d255",
+        "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.81 Safari/537.36,gzip(gfe),gzip(gfe)",
+        "requestAttributes": {
+          "time": "2022-08-21T07:45:44.248381Z",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "cloudasset.googleapis.com",
+      "methodName": "google.cloud.asset.v1.AssetService.SearchAllResources",
+      "authorizationInfo": [
+        {
+          "resource": "projects/terraformproject-358107",
+          "permission": "cloudasset.assets.searchAllResources",
+          "granted": true,
+          "resourceAttributes": {
+            "service": "cloudresourcemanager.googleapis.com",
+            "name": "projects/terraformproject-358107",
+            "type": "cloudresourcemanager.googleapis.com/Project"
+          }
+        }
+      ],
+      "resourceName": "projects/terraformproject-358107",
+      "request": {
+        "@type": "type.googleapis.com/google.cloud.asset.v1.SearchAllResourcesRequest"
+      }
+    },
+    "insertId": "mh7avmd5fr6",
+    "resource": {
+      "type": "audited_resource",
+      "labels": {
+        "service": "cloudasset.googleapis.com",
+        "method": "google.cloud.asset.v1.AssetService.SearchAllResources",
+        "project_id": "terraformproject-358107"
+      }
+    },
+    "timestamp": "2022-08-21T07:45:44.009530Z",
+    "severity": "INFO",
+    "logName": "projects/terraformproject-358107/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "receiveTimestamp": "2022-08-21T07:45:44.279711468Z"
+  },
+  {
+    "insertId": "8m2uv7e29uxc",
+    "logName": "projects/jhonjon-tests/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "jhonjon@nazcore.net"
+      },
+      "authorizationInfo": [
+        {
+          "granted": true,
+          "permission": "container.clusters.list",
+          "resourceAttributes": {}
+        }
+      ],
+      "methodName": "google.container.v1.ClusterManager.ListClusters",
+      "policyViolationInfo": {
+        "orgPolicyViolationInfo": {}
+      },
+      "request": {
+        "@type": "type.googleapis.com/google.container.v1alpha1.ListClustersRequest",
+        "parent": "projects/jhonjon-tests/locations/-"
+      },
+      "requestMetadata": {
+        "callerIp": "87.70.173.228",
+        "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)",
+        "destinationAttributes": {},
+        "requestAttributes": {
+          "auth": {},
+          "time": "2023-05-18T12:04:37.07592675Z"
+        }
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "-"
+        ]
+      },
+      "resourceName": "projects/jhonjon-tests/zones/-",
+      "serviceName": "container.googleapis.com"
+    },
+    "receiveTimestamp": "2023-05-18T12:04:37.520274218Z",
+    "resource": {
+      "labels": {
+        "cluster_name": "",
+        "location": "-",
+        "project_id": "jhonjon-tests"
+      },
+      "type": "gke_cluster"
+    },
+    "severity": "INFO",
+    "timestamp": "2023-05-18T12:04:37.078396555Z"
+  }
+]

@@ -1,0 +1,16 @@
+[
+	{
+		"time": "2021-03-21T01:53:10.3369645Z",
+		"resourceId": "/SUBSCRIPTIONS/1338DDED-42F5-4CAE-8ED2-36C19680A7A1/RESOURCEGROUPS/ACCNT_RG/PROVIDERS/MICROSOFT.DOCUMENTDB/DATABASEACCOUNTS/ACCNT-METRICS-TEST",
+		"category": "PartitionKeyStatistics",
+		"properties": {
+			"subscriptionId": "1338dded-42f5-4cae-8ed2-36c19680a7a1",
+			"accountName": "accnt-metrics-test",
+			"regionName": "East US 2",
+			"databaseName": "AggregationsWithChangeFeedV2",
+			"collectionName": "Employee",
+			"partitionKey": "[\"AccntTest\"]",
+			"sizeKb": 41
+		}
+	}
+]

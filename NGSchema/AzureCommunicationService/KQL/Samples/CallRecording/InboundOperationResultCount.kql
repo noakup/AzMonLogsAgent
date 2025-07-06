@@ -1,0 +1,4 @@
+ACSCallRecordingIncomingOperations
+| summarize Count = count() by OperationName, ResultType //, ResultSignature // This can also be uncommented to determine the count of each ResultSignature for each ResultType 
+| order by OperationName asc, Count desc
+| limit 100

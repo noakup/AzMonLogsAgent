@@ -1,0 +1,18 @@
+{
+    "name": "MICROSOFTMANAGEDNETWORKFABRIC_NETWORKINSTANCEUPDATES",
+    "description": "Network instance updates events happened in Nexus network fabric devices.",
+    "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        }
+    ]
+}

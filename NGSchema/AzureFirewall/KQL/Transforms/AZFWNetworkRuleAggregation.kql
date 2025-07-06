@@ -1,0 +1,16 @@
+source
+| extend properties = parse_json(properties)
+| project
+	TimeGenerated = todatetime(['time']),
+	Protocol = tostring(properties.Protocol),
+	SourceIp = tostring(properties.SourceIp),
+	DestinationIp = tostring(properties.DestinationIp),
+	DestinationPort = toint(properties.DestinationPort),
+	Action = tostring(properties.Action),
+	Policy = tostring(properties.Policy),
+	RuleCollectionGroup = tostring(properties.RuleCollectionGroup),
+	RuleCollection = tostring(properties.RuleCollection),
+	Rule = tostring(properties.Rule),
+	IsDefaultRule = tobool(properties.IsDefaultRule),
+	ActionReason = tostring(properties.ActionReason),
+	NetworkRuleCount = toint(properties.NetworkRuleCount)

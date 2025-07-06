@@ -1,0 +1,310 @@
+[
+  {
+     "eventVersion": "1.08",
+     "userIdentity": {
+        "type": "AWSService",
+        "invokedBy": "cloudtrail.amazonaws.com"
+     },
+     "eventTime": "2021-04-21T19:56:42Z",
+     "eventSource": "s3.amazonaws.com",
+     "eventName": "PutObject",
+     "awsRegion": "us-west-2",
+     "sourceIPAddress": "cloudtrail.amazonaws.com",
+     "userAgent": "cloudtrail.amazonaws.com",
+     "requestParameters": {
+        "bucketName": "scuba-s3-test",
+        "x-amz-acl": "bucket-owner-full-control",
+        "x-amz-server-side-encryption-context": "eyJhd3M6Y2xvdWR0cmFpbDphcm4iOiJhcm46YXdzOmNsb3VkdHJhaWw6dXMtd2VzdC0yOjA3MjY0Mzk0NDY3Mzp0cmFpbC9zY3ViYS10ZXN0LWNsb3VkLXRyYWlsIn0=",
+        "x-amz-server-side-encryption-aws-kms-key-id": "arn:aws:kms:us-west-2:072643944673:key/b38d1241-35f5-4ea1-a7e2-8f90e8d12e87",
+        "Host": "scuba-s3-test.s3.us-west-2.amazonaws.com",
+        "x-amz-server-side-encryption": "aws:kms",
+        "key": "cloud-trail/AWSLogs/072643944673/CloudTrail/us-west-1/2021/04/21/072643944673_CloudTrail_us-west-1_20210421T1945Z_hKJcvSZrLH34Ejzw.json.gz"
+     },
+     "responseElements": {
+        "x-amz-server-side-encryption-aws-kms-key-id": "arn:aws:kms:us-west-2:072643944673:key/b38d1241-35f5-4ea1-a7e2-8f90e8d12e87",
+        "x-amz-server-side-encryption": "aws:kms",
+        "x-amz-server-side-encryption-context": "eyJhd3M6Y2xvdWR0cmFpbDphcm4iOiJhcm46YXdzOmNsb3VkdHJhaWw6dXMtd2VzdC0yOjA3MjY0Mzk0NDY3Mzp0cmFpbC9zY3ViYS10ZXN0LWNsb3VkLXRyYWlsIiwiYXdzOnMzOmFybiI6ImFybjphd3M6czM6OjpzY3ViYS1zMy10ZXN0L2Nsb3VkLXRyYWlsL0FXU0xvZ3MvMDcyNjQzOTQ0NjczL0Nsb3VkVHJhaWwvdXMtd2VzdC0xLzIwMjEvMDQvMjEvMDcyNjQzOTQ0NjczX0Nsb3VkVHJhaWxfdXMtd2VzdC0xXzIwMjEwNDIxVDE5NDVaX2hLSmN2U1pyTEgzNEVqencuanNvbi5neiJ9"
+     },
+     "additionalEventData": {
+        "SignatureVersion": "SigV4",
+        "CipherSuite": "ECDHE-RSA-AES128-GCM-SHA256",
+        "bytesTransferredIn": 5731.0,
+        "SSEApplied": "SSE_KMS",
+        "AuthenticationMethod": "AuthHeader",
+        "x-amz-id-2": "RBfM0aXHc4UPOyiA9xJDJpSrHZ50MWM4Mcx4RQCmBX4ET4b7J6cVl25kyyqDGSJdBqf+fC11Puo=",
+        "bytesTransferredOut": 0.0
+     },
+     "requestID": "161GW949ET47VNK5",
+     "eventID": "6ad86e82-56bf-4c06-8652-48710731ab6e",
+     "readOnly": false,
+     "resources":[
+        {
+           "type": "AWS::S3::Object",
+           "ARN": "arn:aws:s3:::scuba-s3-test/cloud-trail/AWSLogs/072643944673/CloudTrail/us-west-1/2021/04/21/072643944673_CloudTrail_us-west-1_20210421T1945Z_hKJcvSZrLH34Ejzw.json.gz"
+        },
+        {
+           "accountId": "072643944673",
+           "type": "AWS::S3::Bucket",
+           "ARN": "arn:aws:s3:::scuba-s3-test"
+        }
+     ],
+     "eventType": "AwsApiCall",
+     "managementEvent":false,
+     "recipientAccountId": "072643944673",
+     "sharedEventID": "ab67c105-edef-4e2b-baf3-cc4d367f4c63",
+     "eventCategory": "Data"
+  },
+  {
+     "eventVersion": "1.08",
+     "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AROARB2PKUDQTMT6JFCN6:f8488a62-77ed-44d3-be5f-37c30773b9c1",
+        "arn": "arn:aws:sts::072643944673:assumed-role/AmbaWolvesE5-Canary/f8488a62-77ed-44d3-be5f-37c30773b9c1",
+        "accountId": "072643944673",
+        "accessKeyId": "ASIARB2PKUDQ25CCOLHU",
+        "sessionContext": {
+           "sessionIssuer": {
+              "type": "Role",
+              "principalId": "AROARB2PKUDQTMT6JFCN6",
+              "arn": "arn:aws:iam::072643944673:role/AmbaWolvesE5-Canary",
+              "accountId": "072643944673",
+              "userName": "AmbaWolvesE5-Canary"
+           },
+           "webIdFederationData": {               
+           },
+           "attributes": {
+              "mfaAuthenticated": "false",
+              "creationDate": "2021-08-09T23:28:01Z"
+           }
+        }
+     },
+     "eventTime": "2021-08-09T23:54:09Z",
+     "eventSource": "cloudtrail.amazonaws.com",
+     "eventName": "LookupEvents",
+     "awsRegion": "ap-northeast-1",
+     "sourceIPAddress": "52.180.172.65",
+     "userAgent": "aws-sdk-dotnet-45/3.5.3.4 aws-sdk-dotnet-core/3.5.3.2 .NET_Runtime/4.0 .NET_Framework/4.0 OS/Microsoft_Windows_NT_6.2.9200.0 ClientSync",
+     "requestParameters": {
+        "startTime": "Aug 9, 2021 11:32:49 PM",
+        "endTime": "Aug 9, 2021 11:37:49 PM"
+     },
+     "requestID": "d1c395fb-f77c-4693-9004-4c8487496255",
+     "eventID": "c0c3ecb2-381f-4a45-9800-de8f3c5ae4d0",
+     "readOnly": true,
+     "eventType": "AwsApiCall",
+     "managementEvent": true,
+     "eventCategory": "Management",
+     "recipientAccountId": "072643944673",
+     "sharedEventID": "ab67c105-edef-4e2b-baf3-cc4d367f4c63",
+     "tlsDetails": {
+          "tlsVersion": "TLSv1.2",
+          "cipherSuite": "ECDHE-RSA-AES128-GCM-SHA256",
+          "clientProvidedHostHeader": "cloudtrail.ap-northeast-1.amazonaws.com"
+      }
+  },
+  {
+     "eventVersion": "1.05",
+     "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "AIDACKCEVSQ6C2EXAMPLE",
+        "arn":"arn:aws:iam::111122223333:user/JohnDoe",
+        "accountId": "111122223333",
+        "userName": "JohnDoe"
+     },
+     "eventTime": "2014-07-16T15:49:27Z",
+     "eventSource": "signin.amazonaws.com",
+     "eventName": "ConsoleLogin",
+     "awsRegion": "us-east-2",
+     "sourceIPAddress": "192.0.2.110",
+     "userAgent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0",
+     "responseElements": {
+        "ConsoleLogin": "Success"
+     },
+     "RequestParameters":null,
+     "additionalEventData": {
+        "MobileVersion": "No",
+        "LoginTo": "https://console.aws.amazon.com/s3/",
+        "MFAUsed": "No"
+     },
+     "eventID": "3fcfb182-98f8-4744-bd45-10a395ab61cb",
+     "sharedEventID": "ab67c105-edef-4e2b-baf3-cc4d367f4c63"
+  },
+  {
+     "eventVersion": "1.05",
+     "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "AIDACKCEVSQ6C2EXAMPLE",
+        "arn":"arn:aws:iam::111122223333:user/JaneDoe",
+        "accountId": "111122223333",
+        "userName": "JaneDoe"
+     },
+     "eventTime": "2014-07-08T17:35:27Z",
+     "eventSource": "signin.amazonaws.com",
+     "eventName": "ConsoleLogin",
+     "awsRegion": "us-east-2",
+     "sourceIPAddress": "192.0.2.100",
+     "userAgent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0",
+     "errorMessage": "Failed authentication",
+     "responseElements": {
+        "ConsoleLogin": "Failure"
+     },
+     "additionalEventData": {
+        "MobileVersion": "No",
+        "LoginTo": "https://console.aws.amazon.com/sns",
+        "MFAUsed": "No"
+     },
+     "sharedEventID": "ab67c105-edef-4e2b-baf3-cc4d367f4c63",
+     "eventID": "11ea990b-4678-4bcd-8fbe-62509088b7cf"
+  },
+  {
+     "eventVersion": "1.05",
+     "userIdentity": {
+        "type": "SAMLUser",
+        "principalId": "SampleUkh1i4+ExamplexL/jEvs=:SamlExample",
+        "userName": "SamlExample",
+        "identityProvider": "bdGOnTesti4+ExamplexL/jEvs="
+     },
+     "eventTime": "2019-11-01T19:14:36Z",
+     "eventSource": "sts.amazonaws.com",
+     "eventName": "AssumeRoleWithSAML",
+     "awsRegion": "us-east-2",
+     "sourceIPAddress": "192.0.2.101",
+     "userAgent": "aws-cli/1.16.263 Python/3.4.7 Linux/4.9.184-0.1.ac.235.83.329.metal1.x86_64 botocore/1.12.253",
+     "requestParameters": {
+        "sAMLAssertionID": "_c0046cEXAMPLEb9d4b8eEXAMPLE2619aEXAMPLE",
+        "roleSessionName": "MyAssignedRoleSessionName",
+        "sourceIdentity": "MySAMLUser",
+        "principalTags": {
+           "CostCenter": "987654",
+           "Project": "Unicorn",
+           "Department": "Engineering"
+        },
+        "transitiveTagKeys": [
+           "CostCenter",
+           "Project"
+        ],
+        "durationSeconds": 3600,
+        "roleArn": "arn:aws:iam::444455556666:role/SAMLTestRoleShibboleth",
+        "principalArn": "arn:aws:iam::444455556666:saml-provider/Shibboleth"
+     },
+     "responseElements": {
+        "subjectType": "transient",
+        "issuer": "https://server.example.com/idp/shibboleth",
+        "sourceIdentity": "MySAMLUser",
+        "credentials": {
+           "accessKeyId": "AKIAIOSFODNN7EXAMPLE",
+           "expiration": "Mar 23, 2016 2:39:57 AM",
+           "sessionToken": "<encoded session token blob>"
+        },
+        "nameQualifier": "bdGOnTesti4+ExamplexL/jEvs=",
+        "assumedRoleUser": {
+           "assumedRoleId": "AROAD35QRSTUVWEXAMPLE:MyAssignedRoleSessionName",
+           "arn": "arn:aws:sts::444455556666:assumed-role/SAMLTestRoleShibboleth/MyAssignedRoleSessionName"
+        },
+        "subject": "SamlExample",
+        "audience": "https://signin.aws.amazon.com/saml"
+     },
+     "resources": [
+        {
+           "ARN": "arn:aws:iam::444455556666:role/SAMLTestRoleShibboleth",
+           "accountId": "444455556666",
+           "type": "AWS::IAM::Role"
+        },
+        {
+           "ARN": "arn:aws:iam::444455556666:saml-provider/test-saml-provider",
+           "accountId": "444455556666",
+           "type": "AWS::IAM::SAMLProvider"
+        }
+     ],
+     "requestID": "6EXAMPLE-e595-11e5-b2c7-c974fEXAMPLE",
+     "eventID": "dEXAMPLE-265a-41e0-9352-4401bEXAMPLE",
+     "eventType": "AwsApiCall",
+     "recipientAccountId": "444455556666",
+     "sharedEventID": "ab67c105-edef-4e2b-baf3-cc4d367f4c63"
+  },
+  {
+     "eventVersion": "1.05",
+     "userIdentity": {
+        "type": "SAMLUser",
+        "principalId": "SampleUkh1i4+ExamplexL/jEvs=:SamlExample",
+        "userName": "SamlExample",
+        "identityProvider": "bdGOnTesti4+ExamplexL/jEvs="
+     },
+     "eventTime": "2019-11-01T19:14:36Z",
+     "eventSource": "sts.amazonaws.com",
+     "eventName": "AssumeRoleWithSAML",
+     "awsRegion": "us-east-2",
+     "sourceIPAddress": "192.0.2.101",
+     "userAgent": "aws-cli/1.16.263 Python/3.4.7 Linux/4.9.184-0.1.ac.235.83.329.metal1.x86_64 botocore/1.12.253",
+     "requestParameters": {
+        "sAMLAssertionID": "_c0046cEXAMPLEb9d4b8eEXAMPLE2619aEXAMPLE",
+        "roleSessionName": "MyAssignedRoleSessionName",
+        "sourceIdentity": "MySAMLUser",
+        "principalTags": {
+           "CostCenter": "987654",
+           "Project": "Unicorn",
+           "Department": "Engineering"
+        },
+        "transitiveTagKeys": [
+           "CostCenter",
+           "Project"
+        ],
+        "durationSeconds":3600,
+        "roleArn": "arn:aws:iam::444455556666:role/SAMLTestRoleShibboleth",
+        "principalArn": "arn:aws:iam::444455556666:saml-provider/Shibboleth",
+        "ipPermissions": {
+           "items": [
+              {
+                 "ipProtocol": "http",
+                 "fromPort": 8080,
+                 "toPort": 8080,
+                 "ipRanges": {
+                    "items":[
+                       {
+                          "cidrIp": "192.168.0.0/23"
+                       }
+                    ]
+                 }
+              }
+           ]
+        }
+     },
+     "responseElements": {
+        "subjectType": "transient",
+        "issuer": "https://server.example.com/idp/shibboleth",
+        "sourceIdentity": "MySAMLUser",
+        "credentials": {
+           "accessKeyId": "AKIAIOSFODNN7EXAMPLE",
+           "expiration": "Mar 23, 2016 2:39:57 AM",
+           "sessionToken": "<encoded session token blob>"
+        },
+        "nameQualifier": "bdGOnTesti4+ExamplexL/jEvs=",
+        "assumedRoleUser": {
+           "assumedRoleId": "AROAD35QRSTUVWEXAMPLE:MyAssignedRoleSessionName",
+           "arn": "arn:aws:sts::444455556666:assumed-role/SAMLTestRoleShibboleth/MyAssignedRoleSessionName"
+        },
+        "subject": "SamlExample",
+        "audience": "https://signin.aws.amazon.com/saml"
+     },
+     "resources": [
+        {
+           "ARN": "arn:aws:iam::444455556666:role/SAMLTestRoleShibboleth",
+           "accountId": "444455556666",
+           "type": "AWS::IAM::Role"
+        },
+        {
+           "ARN": "arn:aws:iam::444455556666:saml-provider/test-saml-provider",
+           "accountId": "444455556666",
+           "type": "AWS::IAM::SAMLProvider"
+        }
+     ],
+     "requestID": "6EXAMPLE-e595-11e5-b2c7-c974fEXAMPLE",
+     "eventID": "dEXAMPLE-265a-41e0-9352-4401bEXAMPLE",
+     "eventType": "AwsApiCall",
+     "recipientAccountId": "444455556666",
+     "apiVersion": "v1",
+     "sharedEventID": "ab67c105-edef-4e2b-baf3-cc4d367f4c63",
+     "serviceEventDetails": "aaaa",
+     "vpcEndpointId": "ididid"
+  }
+]

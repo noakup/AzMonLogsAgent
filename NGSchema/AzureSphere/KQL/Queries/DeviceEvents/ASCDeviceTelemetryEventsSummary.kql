@@ -1,0 +1,4 @@
+ASCDeviceEvents
+| where OperationName == "DeviceTelemetryEvent" // Filter by time by adding " | where TimeGenerated > ago(7d) " for last 7 days of data or using time picker in the UI
+| summarize count() by tostring(Properties.DeviceTelemetryEventCategory)
+| render piechart

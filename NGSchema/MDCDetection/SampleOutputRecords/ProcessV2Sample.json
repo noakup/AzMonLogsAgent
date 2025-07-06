@@ -1,0 +1,39 @@
+[
+    {
+        "Repository": "",
+        "Tag": "",
+        "Digest": "",
+        "ContainerID": "",
+        "ContainerName": "host",
+        "Cmdline": "/usr/bin/cat process_creation_events",
+        "Cwd": "/var/log/microsoft-defender-for-cloud/collectors/LowLevelCollector",
+        "Pid": "389669",
+        "Ppid": "389668",
+        "Ses": "4294967295",
+        "AgentId": "2f737562-7363-7269-7074-696f6e732f34",
+        "TimeGenerated": "2025-02-03 14:10:06.029713873",
+        "Computer": "minikube",
+        "Uid": "0",
+        "Gid": "0",
+        "Auid": "4294967295",
+        "Comm": "cat",
+        "Pname": "sudo",
+        "Exe": "/usr/bin/cat",
+        "Success": "SUCCESS",
+        "PodName": "",
+        "Namespace": "",
+        "DriftAction": "n/a",
+        "User": "root",
+        "Group": "root",
+        "Memfd": false,
+        "UpperLayer": false,
+        "AdditionalData": {
+            "CloudNativeIdentifiers": {
+                "clusterDistribution": "tivandev"
+            },
+            "Owner": {},
+            "PupperLayer": false,
+            "AntimalwarePolicyAction": "NA"
+        }
+    }
+]

@@ -1,0 +1,69 @@
+[
+    {
+        "TimeGenerated": "2023-07-13T04:44:19Z",
+        "Location": "eastus2euap",
+        "OperationName": "securityAdminRuleCollections/write",
+        "ResultType": "Success",
+        "CorrelationId": "e4916bdb-7b88-4fbd-8f0b-312d9012af85",
+        "LogLevel": "Info",
+        "NetworkResourceIds": [
+            "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana_rg/providers/Microsoft.Network/virtualNetworks/vnet1"
+        ],
+        "Message": "Security Admin rule collection change successful.",
+        "SelfDiagnosis":"",
+        "AppliedRuleCollectionIds": [
+
+        ]
+    },
+    {
+        "TimeGenerated": "2023-07-12T23:31:16Z",
+        "Location": "eastus2euap",
+        "OperationName": "securityAdminRuleCollections/write",
+        "ResultType": "Success",
+        "CorrelationId": "25e461c0-6cc0-4aec-9522-1708b51fd989",
+        "LogLevel": "Info",
+        "NetworkResourceIds": [
+            "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana_rg/providers/Microsoft.Network/virtualNetworks/vnet2"
+        ],
+        "Message": "Security Admin rule collection change successful.",
+        "SelfDiagnosis":"",
+        "AppliedRuleCollectionIds": [
+            "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana_rg/providers/Microsoft.Network/networkManagers/Shoeboxtest_Slice3/securityAdminConfigurations/secConfig1/ruleCollections/rc1"
+        ]  
+    },
+    {
+        "TimeGenerated": "2023-07-13T15:03:41Z",
+        "Location": "eastus2euap",
+        "OperationName": "securityAdminRuleCollections/write",
+        "ResultType": "Success",
+        "CorrelationId": "02fd336d-89aa-4907-82ab-fc2d818937ab",
+        "LogLevel": "Info",
+        "NetworkResourceIds": [
+            "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana_rg/providers/Microsoft.Network/virtualNetworks/vnet2"
+        ],
+        "Message": "Security Admin rule collection change successful.",
+        "SelfDiagnosis":"",
+        "AppliedRuleCollectionIds": [
+            "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana_rg/providers/Microsoft.Network/networkManagers/Shoeboxtest_Slice3/securityAdminConfigurations/secConfig1/ruleCollections/rc1",
+            "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana_rg/providers/Microsoft.Network/networkManagers/Shoeboxtest_Slice3/securityAdminConfigurations/secConfig1/ruleCollections/rc2"
+        ]
+    },
+    {
+        "TimeGenerated": "2023-07-13T15:03:41Z",
+        "Location": "eastus2euap",
+        "OperationName": "securityAdminRuleCollections/write",
+        "ResultType": "Success",
+        "CorrelationId": "02fd336d-89aa-4907-82ab-fc2d818937ab",
+        "LogLevel": "Info",
+        "NetworkResourceIds": [
+            "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana_rg/providers/Microsoft.Network/virtualNetworks/vnet2"
+        ],
+        "Message": "Security Admin rule collection change successful.",
+        "SelfDiagnosis":"",
+        "AppliedRuleCollectionIds": [
+            "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana_rg/providers/Microsoft.Network/networkManagers/Shoeboxtest_Slice3/securityAdminConfigurations/secConfig1/ruleCollections/rc1",
+            "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana_rg/providers/Microsoft.Network/networkManagers/Shoeboxtest_Slice3/securityAdminConfigurations/secConfig1/ruleCollections/rc2",
+            "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana_rg/providers/Microsoft.Network/networkManagers/Shoeboxtest_Slice3/securityAdminConfigurations/secConfig1/ruleCollections/rc3"
+        ]
+    }
+]

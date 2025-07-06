@@ -1,0 +1,30 @@
+{
+    "name" : "ReadStorage",
+    "description": "These are Audit logs related to read access of files on the output storage account.",
+    "input": [
+        {
+            "name": "time",
+            "type": "String"
+        },
+        {
+            "name": "resourceId",
+            "type": "String"
+        },
+        {
+            "name": "location",
+            "type": "String"
+        },
+        {
+            "name": "operationName",
+            "type": "String"
+        },
+        {
+            "name": "category",
+            "type": "String"
+        },
+        {
+            "name": "properties",
+            "type": "Dynamic"
+        }
+    ]
+}

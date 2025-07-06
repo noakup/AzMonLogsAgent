@@ -1,0 +1,18 @@
+[
+    {
+        "body": "k8s.(*K8sTargetProvider).removeService failed with error: services \"target-runtime-testk8starget-v1\" not found",
+        "callerId": "60de14ba-296d-4d1b-8acb-bc0d3e1fbc0b",
+        "category": "UserDiagnostics",
+        "correlationId": "59a81ad5-126e-4398-a08e-2beb02d40936",
+        "edgeLocation": "/subscriptions/af54d2ce-0dcb-48f8-9d2d-ff9c53e48c8d/resourceGroups/jiadutestk3s0722rg/providers/Microsoft.ExtendedLocation/customLocations/symphonycustest",
+        "instance": "symphony-api-bfc67f789-2xrh9",
+        "location": "eastus",
+        "operatingResourceId": "/SUBSCRIPTIONS/AF54D2CE-0DCB-48F8-9D2D-FF9C53E48C8D/RESOURCEGROUPS/JIADUTESTK3S0722RG/PROVIDERS/MICROSOFT.EDGE/TARGETS/TESTK8STARGET",
+        "operatingResourceK8SId": "symphonycustest/testk8starget",
+        "operationName": "targets.fabric.symphony/Delete",
+        "properties": {},
+        "resourceId": "/SUBSCRIPTIONS/AF54D2CE-0DCB-48F8-9D2D-FF9C53E48C8D/RESOURCEGROUPS/JIADUTESTK3S0722RG/PROVIDERS/MICROSOFT.EDGE/DIAGNOSTICS/DEFAULT",
+        "serviceName": "symphony-api",
+        "time": "2024-08-21T12:01:55.633Z"
+    }
+]

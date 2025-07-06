@@ -1,0 +1,21 @@
+source
+| extend 
+    TimeGenerated = todatetime(timestamp),
+    InsertId = tostring(insertId),
+    LogName = tostring(logName),
+    Operation = operation,
+    ProtoPayload = protoPayload,
+    ReceiveTimestamp = todatetime(receiveTimestamp),
+    GCPResource = resource,
+    Severity = tostring(severity),
+    Timestamp = todatetime(timestamp)
+| project 
+    InsertId,
+    LogName,
+    Operation,
+    ProtoPayload,
+    ReceiveTimestamp,
+    GCPResource,
+    Severity,
+    Timestamp,
+    TimeGenerated

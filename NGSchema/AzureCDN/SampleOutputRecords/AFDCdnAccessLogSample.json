@@ -1,0 +1,26 @@
+[
+    {
+        "TimeGenerated": "2023-03-23T05:50:07.0400428Z",
+        "OperationName": "Microsoft.Cdn/Profiles/AccessLog/Write",
+        "BackendHostname": "",
+        "CacheStatus": "HIT",
+        "ClientIp": "2600:6c4a:7bf0:8350:48fb:72c7:bfcf:1ba4",
+        "ClientPort": 47904,
+        "HttpMethod": "GET",
+        "HttpStatusCode": 304,
+        "HttpStatusDetails": 304,
+        "HttpVersion": "2.0.0.0",
+        "Pop": "CH",
+        "RequestBytes": 610,
+        "RequestUri": "https://pushomnimedia.azureedge.net:443/icons/f8db0472-2618-4d5e-bd17-1e2aa238f08c.png",
+        "ResponseBytes": 624,
+        "RoutingRuleName": "",
+        "RulesEngineMatchNames": "[\"rulename\"]",
+        "SecurityProtocol": "TLS 1.2",
+        "IsReceivedFromClient": true,
+        "DurationMs": 3,
+        "TrackingReference": "0j+gbZAAAAABteNkeZRk/S6WjxJYBE4WBQ0gxQUEyMDIwNjA2MDUxAGU4OGFiZjViLWJhMWYtNDEzNy05MjcwLTAzYjBiNGNjNzZmOA==",
+        "UserAgent": "Mozilla/5.0 (Linux; Android 11; Elite J55US) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.210 Mobile Safari/537.36",
+        "ErrorInfo": "NoError"
+    }
+]

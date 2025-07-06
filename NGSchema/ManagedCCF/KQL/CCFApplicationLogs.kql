@@ -1,0 +1,10 @@
+source 
+| extend transformedProps = todynamic(replace('=>', ':', properties))
+| extend parsedProps = parse_json(transformedProps)
+| project 
+    TimeGenerated = todatetime(["time"]),
+    Level = tostring(parsedProps.level),    
+    Message = tostring(parsedProps.msg),
+    File = tostring(parsedProps.file),
+    LineNumber = toint(parsedProps.number),
+    Location = location

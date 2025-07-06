@@ -105,6 +105,39 @@ def translate_nl_to_kql(nl_question):
     If the user asks for totals, counts, averages, or similar aggregations, use the appropriate summarize/aggregation operator in KQL.
     Only return the KQL query, no explanation, no comments, no extra text.
 
+    Schema and Query Reference System:
+    ---------------------------------
+    You have access to comprehensive Azure Log Analytics table schemas and example queries in the NGSchema folder:
+    
+    1. **Table Schema Discovery**: Each service folder contains .manifest.json files that define:
+       - Table names and descriptions
+       - Column schemas with data types
+       - Sample data structures
+       
+    2. **Query Template Library**: For each table, check the corresponding KQL/ subfolder for:
+       - Pre-built query examples (.kql files)
+       - Common query patterns for that table
+       - Performance-optimized query templates
+       
+    3. **Query Construction Process**:
+       - When generating KQL for a natural language question, first identify the target table(s)
+       - Look for matching .manifest.json files in NGSchema/{ServiceName}/ folders
+       - If found, check the NGSchema/{ServiceName}/KQL/ folder for relevant example queries
+       - Use these examples as templates, adapting them to the specific user question
+       - Prioritize using proven query patterns over creating entirely new queries
+       
+    4. **Template Adaptation Rules**:
+       - Modify time ranges, filters, and aggregations to match the user's intent
+       - Preserve the core query structure and performance optimizations from templates
+       - Ensure column names and table references match the manifest schemas
+
+    Special Query Handling:
+    ----------------------
+    - If the user asks about "example queries", "what examples do you have", "show me examples for tables in workspace", "what example queries do you have for the tables in that workspace", or similar meta-questions about available queries, return a workspace discovery query:
+      search * | summarize count() by $table | order by $table asc
+    
+    - This will help discover what tables exist in the workspace so appropriate examples can be provided based on the actual tables present
+
     Scenario-Specific NL-to-KQL Routing:
     ------------------------------------
     - When a user provides a natural language (NL) question, you should:

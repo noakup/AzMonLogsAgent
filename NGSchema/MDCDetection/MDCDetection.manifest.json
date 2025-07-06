@@ -1,0 +1,1335 @@
+﻿{
+  "type": "Microsoft.Security/Security",
+  "displayName": "Microsoft Defender for Cloud",
+  "description": "All tables related to Microsoft Defender for Cloud.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Rome/Detection",
+  "contactDL": "romedetectioneng@microsoft.com",
+  "relatedTables": [],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "name": "MDCDetectionFimEvents",
+      "description": "Events from this table are collected by the detection team in MDC.",
+      "categories": [
+        "security"
+      ],
+      "dataTypeId": "TIVAN_FIM_BLOB",
+      "artifactVersion": 5,
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "input": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime"
+        },
+        {
+          "name": "AzureResourceId",
+          "type": "String"
+        },
+        {
+          "name": "Computer",
+          "type": "String"
+        },
+        {
+          "name": "Region",
+          "type": "String"
+        },
+        {
+          "name": "EventType",
+          "type": "String"
+        },
+        {
+          "name": "FileType",
+          "type": "String"
+        },
+        {
+          "name": "FileName",
+          "type": "String"
+        },
+        {
+          "name": "FilePath",
+          "type": "String"
+        },
+        {
+          "name": "IsDir",
+          "type": "Bool"
+        },
+        {
+          "name": "InitiatingProcessId",
+          "type": "String"
+        },
+        {
+          "name": "InitiatingProcessName",
+          "type": "String"
+        },
+        {
+          "name": "InitiatingParentProcessId",
+          "type": "String"
+        },
+        {
+          "name": "InitiatingParentProcessName",
+          "type": "String"
+        },
+        {
+          "name": "InitiatingProcessAccountDomainName",
+          "type": "String"
+        },
+        {
+          "name": "InitiatingProcessAccountName",
+          "type": "String"
+        },
+        {
+          "name": "AdditionalData",
+          "type": "Dynamic"
+        },
+        {
+          "name": "AgentId",
+          "type": "String"
+        },
+        {
+          "name": "Inode",
+          "type": "Int"
+        },
+        {
+          "name": "DataPipelineMetadata",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/Transforms/FimTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The time (UTC) when the monitored entity was created, renamed, modified or deleted.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AzureResourceId",
+          "type": "String",
+          "description": "The Azure resource ID of the resource whose monitored entity was created, renamed, modified or deleted.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Region",
+          "type": "String",
+          "description": "The region the resource whose monitored entity was created, renamed, modified or deleted.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Computer",
+          "type": "String",
+          "description": "The name of the machine on which the monitored entity was created, renamed, modified or deleted.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "EventType",
+          "type": "String",
+          "description": "The type of change that occurred on the entity. Must be either 'Created', 'Modified', 'Renamed' or 'Deleted'.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "FileName",
+          "type": "String",
+          "description": "Holds the name of the file that was created, renamed, modified or deleted.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "FileType",
+          "type": "String",
+          "description": "Holds the type of the file that was created, renamed, modified or deleted. Example of possible values: Zip, PDF, Xar etc.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "FilePath",
+          "type": "String",
+          "description": "Holds the path of the file that was created, renamed, modified or deleted.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "IsDir",
+          "type": "Bool",
+          "description": "True if event is for a directory, false if event is for a file.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "InitiatingProcessId",
+          "type": "String",
+          "description": "Holds the process Id of the initiating process that caused the monitored entity event.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "InitiatingProcessName",
+          "type": "String",
+          "description": "Holds the name of the initiating process that caused the monitored entity event.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "InitiatingParentProcessId",
+          "type": "String",
+          "description": "Holds the process Id of the initiating parents process that caused the monitored entity event.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "InitiatingParentProcessName",
+          "type": "String",
+          "description": "Holds the name of the initiating parents process that caused the monitored entity event.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "InitiatingProcessAccountDomainName",
+          "type": "String",
+          "description": "Holds the name of the process account domain that caused the monitored entity event.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "InitiatingProcessAccountName",
+          "type": "String",
+          "description": "Holds the name of the process account that caused the monitored entity event.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AgentId",
+          "type": "String",
+          "description": "Holds the Tivan Agent Id.",
+          "isDefaultDisplay": true
+        },
+        {
+          "transformName": "Inode",
+          "physicalName": "Inode_Internal",
+          "logicalName": "Inode",
+          "type": "Int",
+          "description": "Holds the Tivan Agent Id.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DataPipelineMetadata",
+          "type": "Dynamic",
+          "description": "Holds Data PipelineMetadata.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AdditionalData",
+          "type": "Dynamic",
+          "description": "Holds Additional Data.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/FimSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/FimSample.json"
+    },
+    {
+      "name": "MDCDetectionK8SApiEvents",
+      "description": "Events from this table are collected by the detection team in MDC.",
+      "categories": [
+        "security"
+      ],
+      "dataTypeId": "TIVAN_K8S_API_BLOB",
+      "artifactVersion": 3,
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "AzureResourceId",
+          "type": "String"
+        },
+        {
+          "name": "Region",
+          "type": "String"
+        },
+        {
+          "name": "Timestamp",
+          "type": "DateTime"
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime"
+        },
+        {
+          "name": "K8SClusterName",
+          "type": "String"
+        },
+        {
+          "name": "K8SNamespaceName",
+          "type": "String"
+        },
+        {
+          "name": "K8SDeploymentName",
+          "type": "String"
+        },
+        {
+          "name": "K8SDaemonsetName",
+          "type": "String"
+        },
+        {
+          "name": "K8SStatefulsetName",
+          "type": "String"
+        },
+        {
+          "name": "K8SNodeName",
+          "type": "String"
+        },
+        {
+          "name": "K8SPodName",
+          "type": "String"
+        },
+        {
+          "name": "RequestId",
+          "type": "String"
+        },
+        {
+          "name": "IsRequest",
+          "type": "Bool"
+        },
+        {
+          "name": "Method",
+          "type": "String"
+        },
+        {
+          "name": "Url",
+          "type": "String"
+        },
+        {
+          "name": "StatusCode",
+          "type": "Int"
+        },
+        {
+          "name": "Payload",
+          "type": "String"
+        },
+        {
+          "name": "PayloadLength",
+          "type": "Int"
+        },
+        {
+          "name": "ChunkNum",
+          "type": "Int"
+        },
+        {
+          "name": "IsLastChunk",
+          "type": "Bool"
+        },
+        {
+          "name": "PayloadType",
+          "type": "String"
+        },
+        {
+          "name": "PayloadEncoding",
+          "type": "String"
+        },
+        {
+          "name": "AuthenticationTypes",
+          "type": "Dynamic"
+        },
+        {
+          "name": "ContainsAuthentication",
+          "type": "Bool"
+        },
+        {
+          "name": "ClientIPs",
+          "type": "Dynamic"
+        },
+        {
+          "name": "ContainsPublicIp",
+          "type": "Bool"
+        },
+        {
+          "name": "Elapsed",
+          "type": "Double"
+        },
+        {
+          "name": "AdditionalMetadata",
+          "type": "Dynamic"
+        },
+        {
+          "name": "DataPipelineMetadata",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/Transforms/K8SApiTransform.kql",
+      "columns": [
+        {
+          "name": "AzureResourceId",
+          "type": "String",
+          "description": "The unique identifier for the Azure resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Region",
+          "type": "String",
+          "description": "The Azure region where the resource is located.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Timestamp",
+          "type": "DateTime",
+          "description": "The time at which this event was captured.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The time (UTC) when the monitored entity was created, renamed, modified or deleted."
+        },
+        {
+          "name": "K8SClusterName",
+          "type": "String",
+          "description": "The name of the K8S cluster containing the pod from where this event was captured.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "K8SNamespaceName",
+          "type": "String",
+          "description": "The namespace containing the pod from where this event was captured.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "K8SDeploymentName",
+          "type": "String",
+          "description": "The name of the deployment containing the pod from where this event was captured.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "K8SDaemonsetName",
+          "type": "String",
+          "description": "The name of the daemonset containing the pod from where this event was captured.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "K8SStatefulsetName",
+          "type": "String",
+          "description": "The name of the stateful set containing the pod from where this event was captured.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "K8SNodeName",
+          "type": "String",
+          "description": "The name of the node that has the pod from where this event was captured.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "K8SPodName",
+          "type": "String",
+          "description": "The name of the pod from where this event was captured.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RequestId",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "description": "A unique identifier that identifies the request and response events for one specific request-response pair.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "IsRequest",
+          "type": "Bool",
+          "description": "Whether this event is for the request or the response. True if this event is for the request. False if this event is for the response.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Method",
+          "type": "String",
+          "description": "The HTTP verb for this request.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Url",
+          "type": "String",
+          "dataTypeHint": "URI",
+          "description": "The full url for this request. This will contain the scheme, host, port (if applicable), path, and query string.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "StatusCode",
+          "type": "Int",
+          "description": "The HTTP response code of the response for this request.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Payload",
+          "type": "String",
+          "description": "A chunk of payload for the request or the response in this event. The full payload for the request and/or the response may be split into multiple chunks.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "PayloadLength",
+          "type": "Int",
+          "description": "The length of the payload chunk in this event. If there is no payload, this value will be zero.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ChunkNum",
+          "type": "Int",
+          "description": "The index of the payload chunk. Starts from zero. If the full payload is broken into chunks, this value represents which chunk is in this event.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "IsLastChunk",
+          "type": "Bool",
+          "description": "Whether the payload chunk in this event is the last one or not. True if this is the last chunk; false otherwise.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "PayloadType",
+          "type": "String",
+          "description": "The value of the Content-Type header, if present.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "PayloadEncoding",
+          "type": "String",
+          "description": "The value of the Content-Encoding header, if present.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AuthenticationTypes",
+          "type": "Dynamic",
+          "description": "A list of well-known authentication mechanisms that were detected, e.g., Authorization header or API keys.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ContainsAuthentication",
+          "type": "Bool",
+          "description": "Whether a well-known authentication mechanism was detected. True if any authentication mechanism was detected, false otherwise.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ClientIPs",
+          "type": "Dynamic",
+          "description": "A list of client IPs extracted from the X-Forwarded-For header in the request.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ContainsPublicIp",
+          "type": "Bool",
+          "description": "Whether one of the IPs extracted from the X-Forwarded-For header in the request is a public IP.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Elapsed",
+          "type": "Double",
+          "description": "The time in milliseconds that have elapsed between the request and the response events.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AdditionalMetadata",
+          "type": "Dynamic",
+          "description": "Metadata related to the event.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DataPipelineMetadata",
+          "type": "Dynamic",
+          "description": "Metadata related to the data processing pipeline.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/K8SApiEventsSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/K8SApiEventsSample.json"
+    },
+    {
+      "name": "MDCDetectionDNSEvents",
+      "description": "DNS Events. This table is collected by the detection team in MDC.",
+      "categories": [
+        "security"
+      ],
+      "dataTypeId": "TIVAN_DNS_BLOB",
+      "artifactVersion": 4,
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "input": [
+        {
+          "name": "AzureResourceId",
+          "type": "String"
+        },
+        {
+          "name": "Region",
+          "type": "String"
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime"
+        },
+        {
+          "name": "ImageName",
+          "type": "String"
+        },
+        {
+          "name": "Digest",
+          "type": "String"
+        },
+        {
+          "name": "ContainerId",
+          "type": "String"
+        },
+        {
+          "name": "ContainerName",
+          "type": "String"
+        },
+        {
+          "name": "PID",
+          "type": "String"
+        },
+        {
+          "name": "Uid",
+          "type": "String"
+        },
+        {
+          "name": "Gid",
+          "type": "String"
+        },
+        {
+          "name": "Comm",
+          "type": "String"
+        },
+        {
+          "name": "PodName",
+          "type": "String"
+        },
+        {
+          "name": "NodeName",
+          "type": "String"
+        },
+        {
+          "name": "Namespace",
+          "type": "String"
+        },
+        {
+          "name": "Addresses",
+          "type": "Dynamic"
+        },
+        {
+          "name": "PacketId",
+          "type": "String"
+        },
+        {
+          "name": "Latency",
+          "type": "String"
+        },
+        {
+          "name": "NameServer",
+          "type": "String"
+        },
+        {
+          "name": "QR",
+          "type": "String"
+        },
+        {
+          "name": "Qtype",
+          "type": "String"
+        },
+        {
+          "name": "Rcode",
+          "type": "String"
+        },
+        {
+          "name": "Tid",
+          "type": "String"
+        },
+        {
+          "name": "Domain",
+          "type": "String"
+        },
+        {
+          "name": "DataPipelineMetadata",
+          "type": "Dynamic"
+        },
+        {
+          "name": "AdditionalData",
+          "type": "Dynamic"
+        },
+        {
+          "name": "EventGuid",
+          "type": "String"
+        },
+        {
+          "name": "Ppid",
+          "type": "String"
+        },
+        {
+          "name": "Cwd",
+          "type": "String"
+        },
+        {
+          "name": "Exe",
+          "type": "String"
+        },
+        {
+          "name": "Pcomm",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/Transforms/DNSTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The time (UTC) when the monitored entity was created, renamed, modified or deleted.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AzureResourceId",
+          "type": "String",
+          "description": "The Azure resource ID of the K8S cluster resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Region",
+          "type": "String",
+          "description": "The region where the K8S cluster is deployed.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ImageName",
+          "type": "String",
+          "description": "The name of the Image running in the docker container which initiated the dns lookup call.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Digest",
+          "type": "String",
+          "description": "The digest of the Image running in the docker container which initiated the dns lookup call.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ContainerId",
+          "type": "String",
+          "description": "The container id of the docker container which initiated the dns lookup call.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ContainerName",
+          "type": "String",
+          "description": "The name of the docker container which initiated the dns lookup call.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "PID",
+          "type": "String",
+          "description": "The process id of the process which initiated the dns lookup call.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Ppid",
+          "type": "String",
+          "description": "The parent process id of the process which initiated the dns lookup call.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Uid",
+          "type": "String",
+          "description": "The user id of the user who initiated the dns lookup call.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Gid",
+          "type": "String",
+          "description": "The group id of the user who initiated the dns lookup call.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Comm",
+          "type": "String",
+          "description": "The command name which initiated the dns lookup call - i.e. curl, wget etc.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "PodName",
+          "type": "String",
+          "description": "The name of the pod in which the container is running.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "NodeName",
+          "type": "String",
+          "description": "The name of the node on which the pod is running.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Namespace",
+          "type": "String",
+          "description": "The namespace of the pod in which the container is running.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Addresses",
+          "type": "Dynamic",
+          "dataTypeHint": "IP",
+          "description": "The list of IP addresses resolved by the DNS lookup call.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "PacketId",
+          "type": "String",
+          "description": "The packet id in the packet that was sent for the DNS lookup call.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Latency",
+          "type": "String",
+          "description": "The latency of the DNS lookup call.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "NameServer",
+          "type": "String",
+          "description": "The nameserver used in order to resolve the DNS lookup call.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "QR",
+          "type": "String",
+          "description": "Q for Query packets, R for Response packets.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Qtype",
+          "type": "String",
+          "description": "The type of the DNS query - i.e. A, AAAA, CNAME etc.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Rcode",
+          "type": "String",
+          "description": "A string representing Succes/Error DNS lookup result.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Tid",
+          "type": "String",
+          "description": "The thread id of the DNS lookup call.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Domain",
+          "type": "String",
+          "description": "The domain name that was queried/resolved by the DNS lookup call.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DataPipelineMetadata",
+          "type": "Dynamic",
+          "description": "Holds Data PipelineMetadata.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AdditionalData",
+          "type": "Dynamic",
+          "description": "Holds Additional Data.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "EventGuid",
+          "type": "String",
+          "description": "The unique identifier for the event.",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Cwd",
+          "type": "String",
+          "description": "The current working directory of the process which initiated the dns lookup call.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Exe",
+          "type": "String",
+          "description": "The executable path of the process which initiated the dns lookup call.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Pcomm",
+          "type": "String",
+          "description": "The parent command name which initiated the dns lookup call.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/DNSSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/DNSSample.json"
+    },
+    {
+      "name": "MDCDetectionGatingValidationEvents",
+      "description": "K8s Gating validation events. This table is collected by the detection team in MDC.",
+      "categories": [
+        "security"
+      ],
+      "dataTypeId": "GATING_VALIDATION_BLOB",
+      "artifactVersion": 4,
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "isChangeColumnInternalNameAllowed": false,
+      "input": [
+        {
+          "name": "AzureResourceId",
+          "type": "String"
+        },
+        {
+          "name": "Region",
+          "type": "String"
+        },
+        {
+          "name": "Action",
+          "type": "String"
+        },
+        {
+          "name": "RuleProperties",
+          "type": "Dynamic"
+        },
+        {
+          "name": "AdmissionControlVersions",
+          "type": "Dynamic"
+        },
+        {
+          "name": "EvaluatedResourceKind",
+          "type": "String"
+        },
+        {
+          "name": "EvaluatedResourceName",
+          "type": "String"
+        },
+        {
+          "name": "EvaluatedResourceParentKind",
+          "type": "String"
+        },
+        {
+          "name": "EvaluatedResourceParentName",
+          "type": "String"
+        },
+        {
+          "name": "EvaluatedResourceDetails",
+          "type": "Dynamic"
+        },
+        {
+          "name": "Namespace",
+          "type": "String"
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime"
+        }
+      ],
+      "transformFilePath": "KQL/Transforms/GatingValidationTransform.kql",
+      "columns": [
+        {
+          "name": "AzureResourceId",
+          "type": "String",
+          "description": "The resource ID of the K8S cluster resource.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Region",
+          "type": "String",
+          "description": "The region where the K8S cluster is deployed.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Action",
+          "type": "String",
+          "description": "The validation action that was performed.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RuleProperties",
+          "type": "Dynamic",
+          "description": "The rule properties that was applied during the validation.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AdmissionControlVersions",
+          "type": "Dynamic",
+          "description": "The gating components versions.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "EvaluatedResourceKind",
+          "type": "String",
+          "description": "The evaluated K8s resource kind.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "EvaluatedResourceName",
+          "type": "String",
+          "description": "The evaluated K8s resource name.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "EvaluatedResourceParentKind",
+          "type": "String",
+          "description": "The evaluated K8s resource's parent kind (Controlled By).",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "EvaluatedResourceParentName",
+          "type": "String",
+          "description": "The evaluated K8s resource's parent name (Controlled By).",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "EvaluatedResourceDetails",
+          "type": "Dynamic",
+          "description": "The evaluated resource details.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Namespace",
+          "type": "String",
+          "description": "The evaluated K8s resource namespace.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The time (UTC) when the monitored entity was created, renamed, modified or deleted.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/GatingValidationSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/GatingValidationSample.json"
+    },
+    {
+      "name": "MDCDetectionProcessV2Events",
+      "description": "K8s process events. This table is collected by the detection team in MDC.",
+      "categories": [
+        "security"
+      ],
+      "dataTypeId": "TIVAN_PROCESS_BLOB_V2",
+      "artifactVersion": 2,
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "isChangeColumnInternalNameAllowed": false,
+      "input": [
+        {
+          "name": "Repository",
+          "type": "String"
+        },
+        {
+          "name": "Tag",
+          "type": "String"
+        },
+        {
+          "name": "Digest",
+          "type": "String"
+        },
+        {
+          "name": "ContainerID",
+          "type": "String"
+        },
+        {
+          "name": "ContainerName",
+          "type": "String"
+        },
+        {
+          "name": "Cmdline",
+          "type": "String"
+        },
+        {
+          "name": "Cwd",
+          "type": "String"
+        },
+        {
+          "name": "Pid",
+          "type": "String"
+        },
+        {
+          "name": "Ppid",
+          "type": "String"
+        },
+        {
+          "name": "Ses",
+          "type": "String"
+        },
+        {
+          "name": "AgentId",
+          "type": "String"
+        },
+        {
+          "name": "TimeCreatedUtc",
+          "type": "DateTime"
+        },
+        {
+          "name": "Computer",
+          "type": "String"
+        },
+        {
+          "name": "Uid",
+          "type": "String"
+        },
+        {
+          "name": "Gid",
+          "type": "String"
+        },
+        {
+          "name": "Auid",
+          "type": "String"
+        },
+        {
+          "name": "Comm",
+          "type": "String"
+        },
+        {
+          "name": "Pname",
+          "type": "String"
+        },
+        {
+          "name": "Exe",
+          "type": "String"
+        },
+        {
+          "name": "Success",
+          "type": "String"
+        },
+        {
+          "name": "PodName",
+          "type": "String"
+        },
+        {
+          "name": "Namespace",
+          "type": "String"
+        },
+        {
+          "name": "DriftAction",
+          "type": "String"
+        },
+        {
+          "name": "User",
+          "type": "String"
+        },
+        {
+          "name": "Group",
+          "type": "String"
+        },
+        {
+          "name": "Memfd",
+          "type": "Bool"
+        },
+        {
+          "name": "UpperLayer",
+          "type": "Bool"
+        },
+        {
+          "name": "AdditionalData",
+          "type": "Dynamic"
+        },
+        {
+          "name": "PodLabels",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/Transforms/ProcessV2Transform.kql",
+      "columns": [
+        {
+          "name": "Repository",
+          "type": "String",
+          "description": "The container image repository."
+        },
+        {
+          "name": "Tag",
+          "type": "String",
+          "description": "The tag of the container image."
+        },
+        {
+          "name": "Digest",
+          "type": "String",
+          "description": "The SHA-256 digest of the container image."
+        },
+        {
+          "name": "ContainerID",
+          "type": "String",
+          "description": "The unique identifier of the running container."
+        },
+        {
+          "name": "ContainerName",
+          "type": "String",
+          "description": "The name of the container."
+        },
+        {
+          "name": "Cmdline",
+          "type": "String",
+          "description": "The command-line instruction that started the container."
+        },
+        {
+          "name": "Cwd",
+          "type": "String",
+          "description": "The current working directory of the container process."
+        },
+        {
+          "name": "Pid",
+          "type": "String",
+          "description": "The process ID of the containerized application."
+        },
+        {
+          "name": "Ppid",
+          "type": "String",
+          "description": "The parent process ID of the containerized application."
+        },
+        {
+          "name": "Ses",
+          "type": "String",
+          "description": "The session ID of the container process."
+        },
+        {
+          "name": "AgentId",
+          "type": "String",
+          "description": "The ID of the monitoring agent tracking the container."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The timestamp when the event was recorded in UTC."
+        },
+        {
+          "name": "Computer",
+          "type": "String",
+          "description": "The name of the node where the container is running."
+        },
+        {
+          "name": "Uid",
+          "type": "String",
+          "description": "The user ID under which the process is running."
+        },
+        {
+          "name": "Gid",
+          "type": "String",
+          "description": "The group ID under which the process is running."
+        },
+        {
+          "name": "Auid",
+          "type": "String",
+          "description": "The audit user ID associated with the container process."
+        },
+        {
+          "name": "Comm",
+          "type": "String",
+          "description": "The name of the executed command."
+        },
+        {
+          "name": "Pname",
+          "type": "String",
+          "description": "The parent process name of the containerized application."
+        },
+        {
+          "name": "Exe",
+          "type": "String",
+          "description": "The path to the executable running inside the container."
+        },
+        {
+          "name": "Success",
+          "type": "String",
+          "description": "Indicates whether the command execution was successful."
+        },
+        {
+          "name": "PodName",
+          "type": "String",
+          "description": "The name of the Kubernetes pod."
+        },
+        {
+          "name": "Namespace",
+          "type": "String",
+          "description": "The namespace where the Kubernetes pod is deployed."
+        },
+        {
+          "name": "DriftAction",
+          "type": "String",
+          "description": "Indicates if there were any modifications in the container files."
+        },
+        {
+          "name": "User",
+          "type": "String",
+          "description": "The username running the process inside the container."
+        },
+        {
+          "name": "Group",
+          "type": "String",
+          "description": "The group name associated with the process."
+        },
+        {
+          "name": "Memfd",
+          "type": "Bool",
+          "description": "Indicates if the container has memory file descriptor (memfd) execution."
+        },
+        {
+          "name": "UpperLayer",
+          "type": "Bool",
+          "description": "Indicates if the container image uses an upper layer in the overlay filesystem."
+        },
+        {
+          "name": "AdditionalData",
+          "type": "Dynamic",
+          "description": "Additional metadata about the container event."
+        },
+        {
+          "name": "PodLabels",
+          "type": "Dynamic",
+          "description": "Labels associated with the Kubernetes pod."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/ProcessV2Sample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/ProcessV2Sample.json"
+    }
+  ],
+  "functions": [],
+  "queries": [
+    {
+      "id": "ca4f4032-55e0-48c9-aac1-aa14d6ff21d3",
+      "displayName": "All FIM events for directories",
+      "description": "Get all FIM events against directories of the host.",
+      "bodyFilePath": "KQL/Queries/FimDirectoriesEvents.kql",
+      "categories": [
+        "security"
+      ],
+      "relatedTables": [
+        "MDCDetectionFimEvents"
+      ],
+      "tags": {},
+      "properties": {
+        "ExampleQuery": true
+      }
+    },
+    {
+      "id": "1e4f66c0-41e2-45ff-864f-39e9d7a4f492",
+      "displayName": "All DNS events where the domain queried was 'www.google.com' ordered by time",
+      "description": "Get all DNS events where the domain queried was 'www.google.com' ordered by time.",
+      "bodyFilePath": "KQL/Queries/GoogleDomainLookupEvents.kql",
+      "categories": [
+        "security"
+      ],
+      "relatedTables": [
+        "MDCDetectionDNSEvents"
+      ],
+      "tags": {},
+      "properties": {
+        "ExampleQuery": true
+      }
+    },
+    {
+      "id": "1558bfb7-2aa3-49e1-8386-f4f8509e514c",
+      "displayName": "All recent Gating validation events",
+      "description": "Get all Gating validation events published in the last 24 hours.",
+      "bodyFilePath": "KQL/Transforms/GatingValidationTransform.kql",
+      "categories": [
+        "security"
+      ],
+      "relatedTables": [
+        "MDCDetectionGatingValidationEvents"
+      ],
+      "tags": {},
+      "properties": {
+        "ExampleQuery": true
+      }
+    }
+  ]
+}

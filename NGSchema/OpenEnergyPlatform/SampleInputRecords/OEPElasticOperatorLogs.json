@@ -1,0 +1,24 @@
+[
+    {
+        "time": "2022-04-11T09:44:51.172230277Z",
+        "resourceId": "/SUBSCRIPTIONS/C99E2BF3-1777-412B-BABA-D823676589C2/RESOURCEGROUPS/SISHIV/PROVIDERS/MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/ANU275",
+        "location": "eastus",
+        "operationName": "MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/ECK/ACTION",
+        "category": "ElasticOperatorLogs",
+        "properties": {
+            "message": "Updating resource",
+            "namespace": "elastic-system"
+        }
+    },
+    {
+        "time": "2022-04-12T08:28:43.083432455Z",
+        "resourceId": "/SUBSCRIPTIONS/C99E2BF3-1777-412B-BABA-D823676589C2/RESOURCEGROUPS/SISHIV/PROVIDERS/MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/ANU275",
+        "location": "eastus",
+        "operationName": "MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/ECK/ACTION",
+        "category": "ElasticOperatorLogs",
+        "properties": {
+            "message": "Starting reconciliation run",
+            "namespace": "elastic-system"
+        }
+    }
+]

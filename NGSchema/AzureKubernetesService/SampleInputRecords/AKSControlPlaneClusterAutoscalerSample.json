@@ -1,0 +1,26 @@
+[
+    {
+        "operationName": "Microsoft.ContainerService/managedClusters/diagnosticLogs/Read",
+        "category": "cluster-autoscaler",
+        "resourceId": "/SUBSCRIPTIONS/08CE8FA2-9E5E-4D66-AB08-C0C13F360144/RESOURCEGROUPS/MIKEKEESEY-TEST/PROVIDERS/MICROSOFT.CONTAINERSERVICE/MANAGEDCLUSTERS/MIKEKEESEY-TEST",
+        "properties": {
+            "log": "I0110 22:53:51.176739       1 azure_scale_set.go:204] VMSS: aks-agentpool-20062077-vmss, returning in-memory size: 1\n",
+            "stream": "stderr",
+            "pod": "cluster-autoscaler-7484b4549f-mshbt",
+            "containerID": "60746835fab0ffcd63a6446006bffafb1490f9419006355eb4b71ea293b364f4"
+        },
+        "time": "2023-01-10T22:53:51.0000000Z"
+    },
+    {
+        "operationName": "Microsoft.ContainerService/managedClusters/diagnosticLogs/Read",
+        "category": "cluster-autoscaler",
+        "resourceId": "/SUBSCRIPTIONS/08CE8FA2-9E5E-4D66-AB08-C0C13F360144/RESOURCEGROUPS/MIKEKEESEY-TEST/PROVIDERS/MICROSOFT.CONTAINERSERVICE/MANAGEDCLUSTERS/MIKEKEESEY-TEST",
+        "properties": {
+            "log": "I0110 22:53:51.176762       1 scale_down.go:950] No candidates for scale down\n",
+            "stream": "stderr",
+            "pod": "cluster-autoscaler-7484b4549f-mshbt",
+            "containerID": "60746835fab0ffcd63a6446006bffafb1490f9419006355eb4b71ea293b364f4"
+        },
+        "time": "2023-01-10T22:53:51.0000000Z"
+    }
+]

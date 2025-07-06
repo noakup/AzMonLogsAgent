@@ -1,0 +1,12 @@
+source
+| project
+	TimeGenerated = todatetime(["time"]),
+	ContainerGroup = tostring(properties.ContainerGroup),
+	ContainerGroupInstanceID = tostring(properties.ContainerGroupInstanceID),
+	ContainerID = tostring(properties.ContainerID),
+	ContainerName = tostring(properties.ContainerName),
+	Count = toint(properties.Count),
+	Location = tostring(properties.Location),
+	Message = tostring(properties.Message),
+	OSType = tostring(properties.OSType),
+	Reason = tostring(properties.Reason)

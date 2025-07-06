@@ -1,0 +1,15 @@
+[
+    {
+        "PreciseTimeStamp": "2023-02-11T00:33:18.8174741Z",
+        "time": "2023-02-11T00:30:00.4216123Z",
+        "resourceId": "/TENANTS/2ed35048-dde8-4c70-9fb3-0d7555f94f0d/PROVIDERS/MICROSOFT.AADIAM",
+        "operationVersion": "v1.0",
+        "tenantId": "2ed35048-dde8-4c70-9fb3-0d7555f94f0d",
+        "resultSignature": "200",
+        "durationMs": 506702,
+        "callerIpAddress": "128.255.128.255",
+        "correlationId": "74e0b456-fa8e-4c3c-a34b-42f43cb90a6d",
+        "location": "North Central US",
+        "properties": "{\"timeGenerated\":\"2023-02-11T00:30:00.4216123Z\",\"location\":\"North Central US\",\"requestId\":\"74e0b456-fa8e-4c3c-a34b-42f43cb90a6d\",\"operationId\":\"74e0b456-fa8e-4c3c-a34b-42f43cb90a6d\",\"clientRequestId\":\"bdb1df25-311b-43d4-83c6-f42d03a44ca4\",\"apiVersion\":\"v1.0\",\"requestMethod\":\"GET\",\"responseStatusCode\":200,\"UniqueTokenId\":\"2ac23932-vs23-4c98-4b2f-0d7555f94f0d\",\"ipAddress\":\"128.255.128.255\",\"userAgent\":\"Bing\",\"requestUri\":\"https://graph.microsoft-ppe.com/v1.0/subscribedSkus\",\"durationMs\":506702,\"responseSizeBytes\":2511,\"signInActivityId\":null,\"roles\":\"TeamsActivity.Send\",\"SessionId\":\"15123ece24-8jj3-98bc-b38e-0dj2c3e3fn1\",\"DeviceId\":\"2ed35048-dde8-4c70-9fb3-1d7555f94f1d\",\"UniqueTokenId\":\"2ac23932-vs23-4c98-4b2f-0d7555f94f0d\",\"tokenIssuedAt\":\"2023-02-11T00:00:48Z\",\"appId\":\"00000009-0000-0000-c000-000000000000\",\"userId\":\"2ec51067-de1a-405c-8ab2-5edb2d013148\",\"servicePrincipalId\":null,\"scopes\":\"scope1,scope2\",\"identityProvider\":\"identityProvider1\",\"clientAuthMethod\":5,\"wids\":\"Wids1\",\"atContent\":\"atContent1\"}"
+    }
+]

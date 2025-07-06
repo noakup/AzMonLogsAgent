@@ -1,0 +1,220 @@
+{
+    "type": "Microsoft.Cache/redisEnterprise",
+    "displayName": "Azure Cache for Redis Enterprise",
+    "description": "All tables related to Azure Cache for Redis Enterprise service.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Windows Azure Cache/Redis Enterprise",
+    "contactDL": "azurecacheft@microsoft.com",
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "REDConnectionEvents",
+            "description": "Logs the connection events when client connects to redis enterprise database.",
+            "categories": [
+                "resources",
+                "audit"
+            ],
+            "tags": {},
+            "properties": {},
+            "dataTypeId": "AZUREREDISENTERPRISE_CONNECTIONEVENTS",
+            "artifactVersion": 2,
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) when event audit log was captured."
+                },
+                {
+                    "name": "EventEpochTime",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "The unix timestamp (number of seconds since January 1, 1970) when the event happened in UTC. This can be converted to datetime format using function unixtime_seconds_todatetime in log analytics workspace."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The Redis operation associated with the log record."
+                },
+                {
+                    "name": "Location",
+                    "description": "The location (i.e. region) of the Azure Cache for Redis Enterprise instance that was accessed.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ClientIp",
+                    "description": "The Redis client IP address.",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PrivateLinkIPv6",
+                    "description": "The Redis client private link IPv6 address (if applicable).",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ConnectionId",
+                    "description": "Unique connection ID assigned by Redis.",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "EventType",
+                    "description": "Type of connection event(new_conn/auth/close_conn).",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "EventStatus",
+                    "description": "Results of an authentication request as a status code (only applicable for authentication event).",
+                    "type": "Int",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "transformFilePath": "KQL/ConnectionEventsTransform.kql",
+            "sampleInputRecordsFilePath": "SampleInputRecords/ConnectionEventsSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/ConnectionEventsSample.json"
+        }
+    ],
+    "functions": [],
+    "queries": [
+        {
+            "id": "ddd81f93-5320-4626-ac94-a938757326a4",
+            "displayName": "Unique authenticated Redis client IP addresses",
+            "description": "Unique Redis client IP addresses that have successfully authenticated to the cache.",
+            "bodyFilePath": "KQL/UniqueClientIPsAuthenticatedQuery.kql",
+            "categories": [
+                "audit",
+                "network",
+                "resources"
+            ],
+            "tags": {},
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            },
+            "relatedTables": [
+                "REDConnectionEvents"
+            ]
+        },
+        {
+            "id": "42dfde83-f564-4282-854d-612dfda54abf",
+            "displayName": "Redis client authentication requests per hour",
+            "description": "Redis client authentication requests per hour within the specified IP address range. Includes both successful and unsuccessful requests.",
+            "bodyFilePath": "KQL/AuthenticationRequestsPerHourQuery.kql",
+            "categories": [
+                "audit",
+                "network",
+                "resources"
+            ],
+            "tags": {},
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            },
+            "relatedTables": [
+                "REDConnectionEvents"
+            ]
+        },
+        {
+            "id": "e1629bb4-4c6e-49a1-a826-5627804b3dcf",
+            "displayName": "Redis client connections per hour",
+            "description": "Redis client connections per hour within the specified IP address range.",
+            "bodyFilePath": "KQL/ConnectionsPerHourQuery.kql",
+            "categories": [
+                "audit",
+                "network",
+                "resources"
+            ],
+            "tags": {},
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            },
+            "relatedTables": [
+                "REDConnectionEvents"
+            ]
+        },
+        {
+            "id": "d05ffa8d-2ca3-4a6b-9d91-2cee1feafc52",
+            "displayName": "Redis client disconnections per hour",
+            "description": "Redis client disconnections per hour within the specified IP address range.",
+            "bodyFilePath": "KQL/DisconnectionsPerHourQuery.kql",
+            "categories": [
+                "audit",
+                "network",
+                "resources"
+            ],
+            "tags": {},
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            },
+            "relatedTables": [
+                "REDConnectionEvents"
+            ]
+        },
+        {
+            "id": "e4c56072-f3d4-4d90-89af-7b94cf0a80e1",
+            "displayName": "Unsuccessful authentication attempts on Redis cache",
+            "description": "Authentication attempts on Redis cache which were unsuccessful.",
+            "bodyFilePath": "KQL/UnsuccessfulAuthQuery.kql",
+            "categories": [
+                "audit",
+                "network",
+                "resources"
+            ],
+            "tags": {},
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            },
+            "relatedTables": [
+                "REDConnectionEvents"
+            ]
+        }
+    ]
+}

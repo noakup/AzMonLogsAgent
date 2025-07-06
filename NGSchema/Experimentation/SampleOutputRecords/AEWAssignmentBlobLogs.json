@@ -1,0 +1,65 @@
+[
+  {
+    "TimeGenerated": "2023-08-22T23:48:10.0877900Z",
+    "OperationName": "write",
+    "ResultType": "Succeeded",
+    "HttpStatusCode": 200,
+    "ResultDescription": "Assignment blob uploaded successfully.",
+    "DurationMs": 123,
+    "CorrelationId": "a0b0c0d0-e0f0-0a0b-0c0d-0e0f0a0b0c0d",
+    "Level": "Information",
+    "URI": "https://wstest5.blob.core.windows.net/exp-blobs/430c5cd3-13c4-4159-8bbc-45e71f55a250/currentconfig",
+    "Location": "westus2",
+    "Identity": "/SUBSCRIPTIONS/80D2C6C6-FA64-4AB1-8AA5-4E118C6B16CE/RESOURCEGROUPS/WS-TEST/PROVIDERS/MICROSOFT.MANAGEDIDENTITY/USERASSIGNEDIDENTITIES/WS-TAS-TESTING",
+    "ExperimentWorkspaceId": "430c5cd3-13c4-4159-8bbc-45e71f55a250",
+    "AssignmentBlobDataVersion": 123,
+    "AssignmentBlobSchemaVersion": "1.0.1",
+    "AssignmentBlobNewOperationIds": [
+      "81481242-b524-4590-90fe-bbcf0fad4fb2",
+      "d0331fcb-1a80-49c3-baea-a5ec3f69860d"
+    ],
+    "AssignmentBlobLastOperationId ": "fad4a853-dba0-413c-8e71-adc725d3db8b"
+  },
+  {
+    "TimeGenerated": "2023-08-22T23:48:10.0877900Z",
+    "OperationName": "write",
+    "ResultType": "Failed",
+    "HttpStatusCode": 403,
+    "ResultDescription": "Managed identity does not have access to the upload blob files.",
+    "DurationMs": 50,
+    "CorrelationId": "a0b0c0d0-e0f0-0a0b-0c0d-0e0f0a0b0c0f",
+    "Level": "Error",
+    "URI": "https://wstest5.blob.core.windows.net/exp-blobs/430c5cd3-13c4-4159-8bbc-45e71f55a250/currentconfig",
+    "Location": "westus2",
+    "Identity": "/SUBSCRIPTIONS/80D2C6C6-FA64-4AB1-8AA5-4E118C6B16CE/RESOURCEGROUPS/WS-TEST/PROVIDERS/MICROSOFT.MANAGEDIDENTITY/USERASSIGNEDIDENTITIES/WS-TAS-TESTING",
+    "ExperimentWorkspaceId": "430c5cd3-13c4-4159-8bbc-45e71f55a250",
+    "AssignmentBlobDataVersion": 123,
+    "AssignmentBlobSchemaVersion": "1.0.1",
+    "AssignmentBlobNewOperationIds": [
+      "81481242-b524-4590-90fe-bbcf0fad4fb2",
+      "d0331fcb-1a80-49c3-baea-a5ec3f69860d"
+    ],
+    "AssignmentBlobLastOperationId ": "fad4a853-dba0-413c-8e71-adc725d3db8b"
+  },
+  {
+    "TimeGenerated": "2023-08-22T23:48:10.0877900Z",
+    "OperationName": "write",
+    "ResultType": "Failed",
+    "HttpStatusCode": 500,
+    "ResultDescription": "Unable to upload assignment blob due to internal server error.",
+    "DurationMs": 50,
+    "CorrelationId": "a0b0c0d0-e0f0-0a0b-0c0d-0e0f0a0b0c0e",
+    "Level": "Error",
+    "URI": "https://wstest5.blob.core.windows.net/exp-blobs/430c5cd3-13c4-4159-8bbc-45e71f55a250/currentconfig",
+    "Location": "westus2",
+    "Identity": "/SUBSCRIPTIONS/80D2C6C6-FA64-4AB1-8AA5-4E118C6B16CE/RESOURCEGROUPS/WS-TEST/PROVIDERS/MICROSOFT.MANAGEDIDENTITY/USERASSIGNEDIDENTITIES/WS-TAS-TESTING",
+    "ExperimentWorkspaceId": "430c5cd3-13c4-4159-8bbc-45e71f55a250",
+    "AssignmentBlobDataVersion": 123,
+    "AssignmentBlobSchemaVersion": "1.0.1",
+    "AssignmentBlobNewOperationIds": [
+      "81481242-b524-4590-90fe-bbcf0fad4fb2",
+      "d0331fcb-1a80-49c3-baea-a5ec3f69860d"
+    ],
+    "AssignmentBlobLastOperationId ": "fad4a853-dba0-413c-8e71-adc725d3db8b"
+  }
+]

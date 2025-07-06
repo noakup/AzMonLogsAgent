@@ -1,0 +1,17 @@
+source
+| project
+    TimeGenerated = now(),
+	SubType = SubType,
+	FaSchemaVersion = FASchemaVersion,
+	FlowIntervalStartTime = FlowIntervalStartTime,
+	FlowIntervalEndTime = FlowIntervalEndTime,
+	FlowType = FlowType,
+	Ip = IP,
+	PublicIpDetails = PublicIPDetails,
+	ThreatType = ThreatType,
+	DnsDomain = DNSDomain,
+	ThreatDescription = ThreatDescription,
+	Location = Location,
+    Url = Url,
+    Port = Port
+    

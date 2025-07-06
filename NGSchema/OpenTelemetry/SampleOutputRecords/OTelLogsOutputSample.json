@@ -1,0 +1,47 @@
+[
+    {
+        "TimeGenerated": "2023-07-25T21:40:54.8080000Z",
+        "SpanId": "4801528cc138b7ef",
+        "TraceId": "31617d70ea7dba341c22b58e4dde9177",
+        "Body": "Example log to logs api!",
+        "DroppedAttributesCount": 0,
+        "ResourceAttributes": {
+            "timeUnixNano": 1690321254808000000,
+            "observedTimeUnixNano": 1690321254808000000,
+            "itemName": "ResourceAttributes"
+        },
+        "SeverityText": "info",
+        "SeverityNumber": 9,
+        "ScopeName": "example-logger",
+        "ScopeVersion": "",
+        "ServiceNamespace": "my-namespace",
+        "ServiceName": "my-helloworld-service",
+        "ServiceInstanceId": "my-instance",
+        "Attributes": {
+            "my-attribute": "custom"
+        },
+        "SDKVersion": "otlp:opentelemetry:nodejs:1.15.1",
+        "ServiceVersion": "",
+        "EndUserId": "",
+        "ClientType": "PC",
+        "UserId": "",
+        "UserAccountId": "",
+        "OperationName": "",
+        "ClientModel": "",
+        "SessionId": "",
+        "Measurements": {},
+        "SyntheticSource": "",
+        "ClientBrowser": "",
+        "ClientOS": "",
+        "ClientIP": "0.0.0.0",
+        "ClientCity": "",
+        "ClientStateOrProvince": "",
+        "ClientCountryOrRegion": "",
+        "ItemCount": 1,
+        "K8sPodName": "",
+        "K8sNamespaceName": "",
+        "K8sContainerName": "",
+        "SeverityLevel": 0,
+        "RoleName": "[my-namespace]/my-helloworld-service"
+    }
+]

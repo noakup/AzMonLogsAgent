@@ -1,0 +1,737 @@
+{
+  "type": "Microsoft.DevCenter/devcenters",
+  "displayName": "Dev Centers",
+  "description": "Dev Center is an Azure Service which will enable dev teams to self-serve development environments in the cloud, adhering to corporate security standards.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Azure Lab Services - DevCenter/Triage",
+  "contactDL": "tm-azurefidalgo@microsoft.com",
+  "relatedTables": ["AzureActivity", "AzureMetrics"],
+  "relatedFunctions": [],
+
+  "tables": [
+    {
+    "name": "DevCenterDiagnosticLogs",
+    "description": "Data plane audit logs related to your dev center resources. Will display information concerning stop/start/deletes on dev boxes and environments.",
+    "categories": ["audit", "resources"],
+    "tags": {},
+    "properties": {},
+    "dataTypeId": "MICROSOFTDEVCENTER_DATAPLANEAUDITEVENT",
+    "isLakeAllowed": true,
+    "artifactVersion": 2,
+    "isTroubleshootingAllowed": true,
+    "tableState": "Production",
+    "input": [
+      {
+        "name": "time",
+        "type": "DateTime"
+    },
+    {
+        "name": "operationName",
+        "type": "String"
+    },
+    {
+        "name": "category",
+        "type": "String"
+    },
+    {
+        "name": "resultType",
+        "type": "String"
+    },
+    {
+        "name": "resultSignature",
+        "type": "String"
+    },
+    {
+        "name": "correlationId",
+        "type": "String"
+    },
+    {
+        "name": "identity",
+        "type": "String"
+    },
+    {
+        "name": "location",
+        "type": "String"
+    },
+    {
+        "name": "properties",
+        "type": "Dynamic"
+    }
+    ],
+    "transformFilePath": "KQL/DevCenterDataPlaneDiagnosticLogsTransform.kql",
+    "columns": [
+        {
+            "name": "TimeGenerated",
+            "description": "Time (UTC) when the log was created.",
+            "type": "DateTime",
+            "isDefaultDisplay": true
+        },
+        {
+            "name": "OperationName",
+            "description": "The operation stage of the service from which the log entry was generated.",
+            "type": "String",
+            "isDefaultDisplay": true
+        },
+        {
+            "name": "TargetResourceId",
+            "description": "Dataplane ID of the affected resource.",
+            "type": "String",
+            "isDefaultDisplay": true
+        },
+        {
+            "name": "CallerIdentity",
+            "description": "User ID that created the request.",
+            "type": "String",
+            "dataTypeHint": "GUID",
+            "isDefaultDisplay": true
+        },
+        {
+            "name": "OperationResult",
+            "description": "Displays whether operation was successful or unsuccessful.",
+            "type": "String",
+            "isDefaultDisplay": true
+        },
+        {
+            "name": "ResponseCode",
+            "description": "HTTP status code of the completed operation.",
+            "type": "String",
+            "isDefaultDisplay": true
+        },
+        {
+            "name": "CorrelationId",
+            "description": "ID which groups operation logs for ease of debugging.",
+            "type": "String",
+            "dataTypeHint": "GUID",
+            "isDefaultDisplay": false
+        }
+    ],
+    "sampleInputRecordsFilePath": "SampleInputRecords/DevCenterDataplaneInput.json",
+    "sampleOutputRecordsFilePath": "SampleOutputRecords/DevCenterDataplaneOutput.json"
+  },
+  {
+    "name": "DevCenterResourceOperationLogs",
+    "description": "Operation logs pertaining to DevCenter resources, including information around resource health status changes.",
+    "categories": ["resources"],
+    "tags": {},
+    "properties": {},
+    "dataTypeId": "MICROSOFTDEVCENTER_RESOURCEOPERATION",
+    "isLakeAllowed": true,
+    "artifactVersion": 2,
+    "isTroubleshootingAllowed": true,
+    "tableState": "Production",
+    "input": [
+      {
+        "name": "time",
+        "type": "DateTime"
+    },
+    {
+        "name": "operationName",
+        "type": "String"
+    },
+    {
+        "name": "resultDescription",
+        "type": "String"
+    },
+    {
+        "name": "category",
+        "type": "String"
+    },
+    {
+        "name": "correlationId",
+        "type": "String"
+    },
+    {
+        "name": "location",
+        "type": "String"
+    },
+    {
+        "name": "properties",
+        "type": "Dynamic"
+    }
+    ],
+    "transformFilePath": "KQL/DevCenterResourceOperationLogsTransform.kql",
+    "columns": [
+        {
+            "name": "TimeGenerated",
+            "description": "Time (UTC) when the log was created.",
+            "type": "DateTime",
+            "isDefaultDisplay": true
+        },
+        {
+            "name": "OperationName",
+            "description": "The operation stage of the service from which the log entry was generated.",
+            "type": "String",
+            "isDefaultDisplay": true
+        },
+        {
+            "name": "SubResourceId",
+            "description": "The resource within the DevCenter that this log relates to.",
+            "type": "String",
+            "isDefaultDisplay": true
+        },
+        {
+            "name": "Message",
+            "description": "The log message which has details about the state of the resource.",
+            "type": "String",
+            "isDefaultDisplay": true
+        },
+        {
+            "name": "Region",
+            "description": "The region the resource is located in.",
+            "type": "String",
+            "isDefaultDisplay": false
+        },
+        {
+            "name": "CorrelationId",
+            "description": "ID which groups operation logs for ease of debugging.",
+            "type": "String",
+            "dataTypeHint": "GUID",
+            "isDefaultDisplay": false
+        },
+        {
+            "name": "AdditionalProperties",
+            "description": "Property bag of dimensions that are useful for this entry.",
+            "type": "Dynamic",
+            "isDefaultDisplay": true
+        }
+    ],
+    "sampleInputRecordsFilePath": "SampleInputRecords/DevCenterResourceOperationInput.json",
+    "sampleOutputRecordsFilePath": "SampleOutputRecords/DevCenterResourceOperationOutput.json"
+  },
+  {
+    "name": "DevCenterBillingEventLogs",
+    "description": "Billing event related to DevCenter resources. Logs contains information about the quantity and unit charged per meter.",
+    "categories": ["resources"],
+    "tags": {},
+    "properties": {},
+    "dataTypeId": "MICROSOFTDEVCENTER_USAGE",
+    "isLakeAllowed": true,
+    "artifactVersion": 4,
+    "isTroubleshootingAllowed": true,
+    "isLakeAllowed": true,
+    "tableState": "Production",
+    "input": [
+      {
+        "name": "time",
+        "type": "DateTime"
+    },
+    {
+        "name": "operationName",
+        "type": "String"
+    },
+    {
+        "name": "identity",
+        "type": "String"
+    },
+    {
+        "name": "category",
+        "type": "String"
+    },
+    {
+        "name": "location",
+        "type": "String"
+    },
+    {
+        "name": "properties",
+        "type": "String"
+    }
+    ],
+    "transformFilePath": "KQL/DevCenterBillingEventLogsTransform.kql",
+    "columns": [
+        {
+            "name": "TimeGenerated",
+            "description": "Time (UTC) when the log was created.",
+            "type": "DateTime",
+            "isDefaultDisplay": true
+        },
+        {
+            "name": "OperationName",
+            "description": "The resource operation name for the log.",
+            "type": "String",
+            "isDefaultDisplay": true
+        },
+        {
+            "name": "BilledResourceId",
+            "description": "The resource within the DevCenter that gets billed.",
+            "type": "String",
+            "dataTypeHint": "ARMPath",
+            "isDefaultDisplay": true
+        },
+        {
+            "name": "UsageResourceUniqueId",
+            "description": "The unique ID of the consumption resource.",
+            "type": "String",
+            "isDefaultDisplay": true
+        },
+        {
+            "name": "UsageResourceName",
+            "description": "The name of the consumption resource.",
+            "type": "String",
+            "isDefaultDisplay": true
+        },
+        {
+            "name": "BillingRegion",
+            "description": "The billing region of the consomption resource.",
+            "type": "String",
+            "isDefaultDisplay": true
+        },
+        {
+            "name": "Sku",
+            "description": "The Sku of the consumption resource. Can be DZH319G7LNXM, DZH3144F2XK5, DZH31814TZNG, etc.",
+            "type": "String",
+            "isDefaultDisplay": false
+        },
+        {
+            "name": "UserId",
+            "description": "User ID consuming the resource.",
+            "type": "String",
+            "dataTypeHint": "GUID",
+            "isDefaultDisplay": true
+        },
+        {
+            "name": "StartTime",
+            "description": "Time (UTC) when the consumption started.",
+            "type": "DateTime",
+            "isDefaultDisplay": true
+        },
+        {
+            "name": "EndTime",
+            "description": "Time (UTC) when the consumption ended.",
+            "type": "DateTime",
+            "isDefaultDisplay": true
+        },
+        {
+            "name": "Quantity",
+            "description": "The amount of usage in terms of the specified unit.",
+            "type": "Double",
+            "isDefaultDisplay": true
+        },
+        {
+            "name": "UnitType",
+            "type": "String",
+            "description": "The unit in which the type of usage is measured. Can be Hourly or Monthly.",
+            "isDefaultDisplay": false
+        },
+        {
+            "name": "UsageType",
+            "type": "String",
+            "description": "The type of resource being consumed.",
+            "isDefaultDisplay": true
+        },
+        {
+            "name": "IsOverMonthlyBillingCap",
+            "description": "Whether the consumption is included in the monthly cap.",
+            "type": "Bool",
+            "isDefaultDisplay": false
+        },
+        {
+            "name": "MeterId",
+            "description": "The meter ID for the consumption.",
+            "type": "String",
+            "dataTypeHint": "GUID",
+            "isDefaultDisplay": true
+        },
+        {
+            "name": "EventId",
+            "description": "The event ID used for deduping consumption events.",
+            "type": "String",
+            "dataTypeHint": "GUID",
+            "isDefaultDisplay": true
+        }
+    ],
+    "sampleInputRecordsFilePath": "SampleInputRecords/DevCenterBillingEventInput.json",
+    "sampleOutputRecordsFilePath": "SampleOutputRecords/DevCenterBillingEventOutput.json"
+  },
+  {
+    "name": "DevCenterAgentHealthLogs",
+    "description": "Agent health logs pertaining to the underlying Azure VM of the dev box.",
+    "categories": ["resources"],
+    "tags": {},
+    "properties": {},
+    "dataTypeId": "MICROSOFTDEVCENTER_AGENTHEALTHSTATUS",
+    "isLakeAllowed": true,
+    "artifactVersion": 2,
+    "isTroubleshootingAllowed": true,
+    "tableState": "Production",
+    "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+    ],
+    "transformFilePath": "KQL/DevCenterAgentHealthStatusLogsTransform.kql",
+    "columns": [
+        {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isPreferredFacet": true,
+            "isDefaultDisplay": true,
+            "description": "Date and time when the report was generated (UTC)"
+        },
+        {
+            "name": "ActivityId",
+            "type": "String",
+            "isPreferredFacet": false,
+            "isDefaultDisplay": true,
+            "description": "The activity ID of the event."
+        },   
+        {
+            "name": "OperationName",
+            "type": "String",
+            "isPreferredFacet": false,
+            "isDefaultDisplay": false,
+            "description": "The name of the operation"
+        },                
+        {
+            "name": "SessionHostName",
+            "type": "String",
+            "description": "Name of underlying Virtual Machine",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "SessionHostResourceId",
+            "type": "String",
+            "dataTypeHint": "ARMPath",
+            "description": "The ARM path of the session host",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "AgentVersion",
+            "type": "String",
+            "description": "The version of the WVD Agent running on the Virtual Machine",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "Status",
+            "type": "String",
+            "description": "The current status of the VM, whether its healthy or not",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "LastHeartBeat",
+            "type": "DateTime",
+            "description": "The time recorded when there was a change in the health status",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "EndpointState",
+            "type": "String",
+            "description": "The current state of the VM, whether its available or offline",
+            "isDefaultDisplay": false,
+            "isHidden" :  true
+          },
+          {
+            "name": "UpgradeState",
+            "type": "String",
+            "description": "The last known state from a previous update",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "SessionHostHealthCheckResult",
+            "type": "Dynamic",
+            "description": "The set of results on health checks",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "CloudPcId",
+            "type": "String",
+            "description": "The cloud pc id of the dev box",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "DevBoxName",
+            "type": "String",
+            "description": "The chosen display name for the dev box",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "SubnetResourceId",
+            "type": "String",
+            "description": "The subnet resource id for the network of the dev box",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "NicResourceId",
+            "type": "String",
+            "description": "The NIC resource ID for the dev box",
+            "isDefaultDisplay": true
+          }
+    ],
+    "sampleInputRecordsFilePath": "SampleInputRecords/DevCenterAgentHealthStatusInput.json",
+    "sampleOutputRecordsFilePath": "SampleOutputRecords/DevCenterAgentHealthStatusOutput.json"
+  },
+  {
+    "name": "DevCenterConnectionLogs",
+    "description": "Connection events which include information around when a dev box was connected to, if the connection was successful and what client was used in connecting.",
+    "categories": ["audit", "resources"],
+    "tags": {},
+    "properties": {},
+    "dataTypeId": "MICROSOFTDEVCENTER_CONNECTIONEVENT",
+    "isLakeAllowed": true,
+    "artifactVersion": 2,
+    "isTroubleshootingAllowed": true,
+    "tableState": "Production",
+    "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+    ],
+    "transformFilePath": "KQL/DevCenterConnectionLogsTransform.kql",
+    "columns": [
+        {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isPreferredFacet": true,
+            "isDefaultDisplay": true,
+            "description": "Date and time when the report was generated (UTC)"
+        },
+        {
+            "name": "ActivityId",
+            "type": "String",
+            "isPreferredFacet": false,
+            "isDefaultDisplay": true,
+            "description": "The activity ID of the event."
+        },   
+        {
+            "name": "OperationName",
+            "type": "String",
+            "isPreferredFacet": false,
+            "isDefaultDisplay": false,
+            "description": "The name of the operation"
+        },                
+        {
+            "name": "SessionHostName",
+            "type": "String",
+            "description": "Name of underlying Virtual Machine",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "SessionHostResourceId",
+            "type": "String",
+            "dataTypeHint": "ARMPath",
+            "description": "The ARM path of the session host",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "State",
+            "type": "String",
+            "description": "The state of the connection attempt",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "ClientType",
+            "type": "String",
+            "description": "The type of the client that is connecting (if available)",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "ClientOS",
+            "type": "String",
+            "description": "The OS of the client",
+            "isDefaultDisplay": false,
+            "isHidden" :  true
+          },
+          {
+            "name": "ClientVersion",
+            "type": "String",
+            "description": "The version of the OS of the client",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "SessionHostPoolType",
+            "type": "String",
+            "description": "The type of session host pool - either SharedDesktop or PersonalDesktop",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "SessionHostAgentVersion",
+            "type": "String",
+            "description": "The version of the WVD Agent running on the machine where the user connection was orchestrated",
+            "isDefaultDisplay": false,
+            "isHidden" :  true
+          },
+          {
+            "name": "SessionHostOSDescription",
+            "type": "String",
+            "description": "The OS SKU description of the machine where the user connection was orchestrated",
+            "isDefaultDisplay": false,
+            "isHidden" :  true
+          },
+          {
+            "name": "SessionHostOSVersion",
+            "type": "String",
+            "description": "The OS version of the machine where the user connection was orchestrated",
+            "isDefaultDisplay": false,
+            "isHidden" :  true
+          },
+          {
+            "name": "UdpType",
+            "type": "String",
+            "description": "The type of transport used by the RDP connection",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "ResultType",
+            "type": "String",
+            "description": "Whether the connection was successful or not",
+            "isDefaultDisplay": false,
+            "isHidden" :  true
+          },
+          {
+            "name": "CloudPcId",
+            "type": "String",
+            "description": "The cloud pc id of the dev box",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "DevBoxName",
+            "type": "String",
+            "description": "The chosen display name for the dev box",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "SubnetResourceId",
+            "type": "String",
+            "description": "The subnet resource id for the network of the dev box",
+            "isDefaultDisplay": false
+          },
+          {
+            "name": "NicResourceId",
+            "type": "String",
+            "description": "The NIC resource ID for the dev box",
+            "isDefaultDisplay": true
+          }
+    ],
+    "sampleInputRecordsFilePath": "SampleInputRecords/DevCenterConnectionInput.json",
+    "sampleOutputRecordsFilePath": "SampleOutputRecords/DevCenterConnectionEventOutput.json"
+  }
+],
+
+  "functions": [],
+
+  "queries": [
+    {
+        "id": "44a38a05-1147-4795-bd5e-fa808308375f",
+        "displayName": "Failed actions query",
+        "description": "Summarizes the number and type of operations that have failed.",
+        "bodyFilePath": "KQL/DataplaneFailedRequestsQuery.kql",
+        "categories": [
+            "audit",
+            "resources"
+        ],
+        "tags": {},
+        "properties": {
+            "ExampleQuery": true,
+            "QueryAttributes": {
+                "IsMultiResource": true
+            }
+        },
+        "relatedTables": [
+            "DevCenterDiagnosticLogs"
+        ]
+    },
+    {
+        "id": "51e6c592-e4f1-d373-e927-aab82f9c1044",
+        "displayName": "Hibernate Unsupported Check",
+        "description": "Returns the number of occurences of each type of inegibility check for hibernate on dev boxes.",
+        "bodyFilePath": "KQL/HibernateUnsupportedCheck.kql",
+        "categories": [
+            "resources"
+        ],
+        "tags": {},
+        "properties": {
+            "ExampleQuery": true,
+            "QueryAttributes": {
+                "IsMultiResource": true
+            }
+        },
+        "relatedTables": [
+            "DevCenterResourceOperationLogs"
+        ]
+    },
+    {
+        "id": "25f8bafd-7cf8-4eb9-a10b-b8e23442f666",
+        "displayName": "DevCenter - DevBox storage and compute usage breakdown by dev box",
+        "description": "Get the total storage and compute units for a given month.",
+        "bodyFilePath": "KQL/DevBoxUsageBreakDown.kql",
+        "categories": [
+            "resources"
+        ],
+        "tags": {},
+        "properties": {
+            "ExampleQuery": true,
+            "QueryAttributes": {
+                "IsMultiResource": true
+            }
+        },
+        "relatedTables": [
+            "DevCenterBillingEventLogs"
+        ]
+    },
+    {
+        "id": "000c951d-5d77-4590-ab98-813149c42682",
+        "displayName": "DevCenter - DevBox billing meter breakdown by Pool",
+        "description": "Get the total meter units by Pool for a given month.",
+        "bodyFilePath": "KQL/DevBoxUsageBreakDownByPoolMeterId.kql",
+        "categories": [
+            "resources"
+        ],
+        "tags": {},
+        "properties": {
+            "ExampleQuery": true,
+            "QueryAttributes": {
+                "IsMultiResource": true
+            }
+        },
+        "relatedTables": [
+            "DevCenterBillingEventLogs"
+        ]
+    },
+    {
+        "id": "be18b9bb-7cde-4b04-961a-b08db7f51882",
+        "displayName": "DevCenter - DevBoxAgent Health Status Summary",
+        "description": "Returns a summary of agent health checks across all monitored devboxes.",
+        "bodyFilePath": "KQL/AgentHealthSummaryQuery.kql",
+        "categories": [
+            "resources"
+        ],
+        "tags": {},
+        "properties": {
+            "ExampleQuery": true,
+            "QueryAttributes": {
+                "IsMultiResource": true
+            }
+        },
+        "relatedTables": [
+            "DevCenterAgentHealthLogs"
+        ]
+    }
+  ]
+}

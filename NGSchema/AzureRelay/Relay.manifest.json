@@ -1,0 +1,201 @@
+{
+  "type": "Microsoft.Relay/namespaces",
+  "displayName": "Relay",
+  "description": "All tables related to Azure Relay resource.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "servicebus/DRI - Queues/Topics/EventHubs",
+  "contactDL": "SBServicingLoop@microsoft.com",
+  "relatedFunctions": [],
+  "relatedTables": [
+    "AzureActivity",
+    "AzureMetrics",
+    "AZMSVnetConnectionEvents"
+  ],
+  "tables": [
+    {
+      "workflowName": "ARNHybridConnectionsEventsWorkflow",
+      "transformName": "ARNHybridConnectionsEvents",
+      "physicalName": "AZMSHybridConnectionsEvents",
+      "logicalName": "AZMSHybridConnectionsEvents",
+      "description": "Captures all hybrid connection events that are performed on the Azure Relay namespace.",
+      "categories": [
+        "resources",
+        "audit"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 3,
+      "dataTypeId": "SERVICEBUS_HYBRIDCONNECTIONSEVENT",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isChangeColumnInternalNameAllowed": true,
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "Environment",
+          "type": "String"
+        },
+        {
+          "name": "Region",
+          "type": "String"
+        },
+        {
+          "name": "ScaleUnit",
+          "type": "String"
+        },
+        {
+          "name": "TaskName",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "ActivityId",
+          "type": "String"
+        },
+        {
+          "name": "endpoint",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "EventTimeString",
+          "type": "DateTime"
+        },
+        {
+          "name": "message",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/TransformRelayHybridConnectionsEvents.kql",
+      "columns": [
+        {
+          "name": "ActivityId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Internal ID, used to identify the specified activity.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The log generation time (UTC)."
+        },
+        {
+          "name": "Endpoint",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The endpoint identifier. Can be sender or receiver."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The type of the Hybrid Connections operation that is being logged."
+        },
+        {
+          "name": "Message",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The details on performed task."
+        },
+        {
+          "name": "Provider",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Event provider name. Possible values: eventhub, relay, and servicebus."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/RelayHybridConnectionsEventSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/RelayHybridConnectionsEventSample.json"
+    }
+  ],
+  "functions": [],
+  "queries": [
+    {
+      "id": "07097c10-af17-46fd-b8a0-65c405f8b299",
+      "displayName": "Publish HTTP send data for hybrid connection",
+      "description": "Publish details for send events on a hybrid connection.",
+      "bodyFilePath": "KQL/PublishSendDetailsByEndpointQuery.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "AZMSHybridConnectionsEvents"
+      ]
+    },
+    {
+      "id": "d25850ef-feda-42dc-afdb-d6f527854b8b",
+      "displayName": "Publish deny connection by namespace",
+      "description": "Publish deny network connection information by namespace.",
+      "bodyFilePath": "KQL/PublishDenyConnectionByNamespaceQuery.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "AZMSVnetConnectionEvents"
+      ]
+    },
+    {
+      "id": "942c6acb-1f7e-498e-b5fa-d3c30f787f61",
+      "displayName": "Publish virtual network events by namespace",
+      "description": "Publish virtual network events with outcome for namespace.",
+      "bodyFilePath": "KQL/PublishNamespaceActionDataQuery.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "AZMSVnetConnectionEvents"
+      ]
+    }
+  ]
+}

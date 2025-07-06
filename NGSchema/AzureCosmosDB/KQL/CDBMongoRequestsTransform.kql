@@ -1,0 +1,26 @@
+source 
+| extend resourceIdArray = split(resourceId, "/")
+| extend numElementsInResourceId = array_length(resourceIdArray)
+| extend accountNameExtracted = resourceIdArray[numElementsInResourceId - 1]
+| project
+	TimeGenerated = todatetime(['time']),   
+	AccountName = tostring(accountNameExtracted),
+	OperationName = operationName,
+	UserAgent = tostring(properties.userAgent),
+	OpCode = tostring(properties.opCode),
+	ActivityId = tostring(properties.activityId),
+	ErrorCode = tostring(properties.errorCode),
+	DurationMs = todouble(properties.duration),
+	RequestCharge = todouble(properties.requestCharge),
+	DatabaseName = tostring(properties.databaseName),
+	CollectionName = tostring(properties.collectionName),
+	AuthorizationTokenType = tostring(properties.authorizationTokenType),
+	RetryCount = toint(properties.retryCount),
+	Address = tostring(properties.address),
+	PIICommandText = tostring(properties.piiCommandText),
+	RateLimitingDelayMs = todouble(properties.estimatedDelayFromRateLimitingInMilliseconds),
+	RetriedDueToRateLimiting = tobool(properties.retriedDueToRateLimiting),
+	RegionName = tostring(properties.region),
+	RequestLength = todouble(properties.requestLength),
+	ResponseLength = todouble(properties.responseLength),
+	UserId = tostring(properties.userId)

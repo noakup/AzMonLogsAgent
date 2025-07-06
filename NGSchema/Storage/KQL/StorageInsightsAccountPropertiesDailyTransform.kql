@@ -1,0 +1,16 @@
+source 
+| project
+    TimeGenerated = todatetime(TimeGenerated),
+    TimePeriod = todatetime(TimePeriod),
+    StorageAccountName = StorageAccountName,
+    StorageAccountSubscriptionId = StorageAccountSubscriptionId,
+    SubscriptionName = SubscriptionName,
+    ResourceGroup = ResourceGroup,
+    Region = Region,
+    PerformanceType = PerformanceType,
+    EncryptionType = EncryptionType,
+    RedundancyType = RedundancyType,
+    AccessTier = AccessTier,
+    StorageType = StorageType,
+    ResourceTags = todynamic(ResourceTags),
+    ManagementGroupIds = todynamic(ManagementGroupIds)

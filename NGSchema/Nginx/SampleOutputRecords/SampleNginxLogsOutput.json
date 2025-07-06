@@ -1,0 +1,16 @@
+[
+    {
+        "TimeGenerated": "2023-10-13T20:09:01Z",
+        "Location": "westus",
+        "Message": "104.219.105.84 - - [13/Oct/2023:20:09:01 +0000] \"GET / HTTP/1.1\" 200 11232 \"-\" \"curl/8.1.2\"",
+        "FilPath": "/var/log/nginx/access.log"
+    },
+    {
+        "TimeGenerated": "2017-04-26T19:27:38Z",
+        "Location": "westus",
+        "Message": "104.219.105.84 - - [13/Oct/2023:20:09:01 +0000] \"GET / HTTP/1.1\" 200 11232 \"-\" \"curl/8.1.2\"",
+        "Tag": "access_syslog",
+        "Severity": "info",
+        "Facility": "local7"
+    }
+]

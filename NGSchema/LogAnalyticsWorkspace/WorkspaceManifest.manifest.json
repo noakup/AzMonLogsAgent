@@ -1,0 +1,847 @@
+{
+  "type": "Microsoft.OperationalInsights/Workspaces",
+  "displayName": "Log Analytics workspaces",
+  "description": "All tables related to Log Analytics Workspaces.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Application Insights/Draft (API)-AI",
+  "contactDL": "draftapi@microsoft.com",
+  "relatedTables": [],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "name": "LAQueryLogs",
+      "description": "Audit logs for queries executed in Log Analytics Workspaces.",
+      "categories": [
+        "audit"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 13,
+      "dataTypeId": "MICROSOFTOPERATIONALINSIGHTS_AUDIT",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "timeGenerated",
+          "type": "DateTime"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "durationMs",
+          "type": "Int"
+        },
+        {
+          "name": "callerIpAddress",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "identity",
+          "type": "String"
+        },
+        {
+          "name": "Level",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "Kql/WorkspacesAuditTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) at which the query was submitted."
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The ID for correlated events."
+        },
+        {
+          "name": "AADObjectId",
+          "description": "AAD ObjectId of the caller.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AADTenantId",
+          "description": "AAD TenantId of the caller.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AADEmail",
+          "description": "AAD Email of the caller.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AADClientId",
+          "description": "AAD ClientId used by the caller.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ConditionalDataAccess",
+          "description": "Indicates whether the query was executed with an applicable attribute-based access control data access condition (ABAC), and if the condition had an error.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "QueryTimeRangeStart",
+          "description": "The starting time (UTC) of the time range across which the query was was requested by the caller to be executed.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "QueryTimeRangeEnd",
+          "description": "The end time (UTC) of the time range across which the query was was requested by the caller to be executed.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "QueryText",
+          "description": "The full body of the query as submitted by the user.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RequestClientApp",
+          "description": "ClientApp string in the request header (x-ms-app).",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RequestTarget",
+          "description": "ResourceId of the request URL.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RequestContext",
+          "description": "ResourceId of all referenced workspaces, applications, and resources across which the query was requested by the caller to be executed.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RequestContextFilters",
+          "description": "Filters applied to the request context.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResponseCode",
+          "description": "The HTTP response code for the request.",
+          "type": "Int",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResponseRowCount",
+          "description": "The number of rows that were returned.",
+          "type": "Int",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResponseDurationMs",
+          "description": "The duration (in ms) that the query took to execute.",
+          "type": "Double",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "StatsCPUTimeMs",
+          "description": "The CPU (in ms) used in the execution of this query.",
+          "type": "Double",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "StatsDataProcessedKB",
+          "description": "[Deprecated] - The total KB of data that was processed as part of the query.",
+          "type": "Double",
+          "isDefaultDisplay": false,
+          "isHidden": true
+        },
+        {
+          "name": "StatsDataProcessedStart",
+          "description": "The starting time (UTC) of the time range across which the data processed.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "StatsDataProcessedEnd",
+          "description": "The end time (UTC) of the time range across which the data processed.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "StatsWorkspaceCount",
+          "description": "The number of workspaces that the query accessed, either explicitly or otherwise.",
+          "type": "Int",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "StatsRegionCount",
+          "description": "The number of regions that the workspaces accessed are spread across.",
+          "type": "Int",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "IsBillableQuery",
+          "description": "Indicates whether query execution is billed.",
+          "type": "Bool",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ScannedGB",
+          "description": "For billable queries, like Basic logs queries, indicates the total GB of data scanned in the query.",
+          "type": "Double",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "WorkspaceRegion",
+          "description": "The region of the queried workspace.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "IsWorkspaceInFailover",
+          "description": "Indicates whether the queried workspace was in failover mode.",
+          "type": "Bool",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SampleWorkspaceAuditLog.json"
+    },
+    {
+      "name": "LASummaryLogs",
+      "description": "Provides Summary logs rules execution details, including run status, duration and errors. Can be used to view bins executions statuses, identify rules that take a long time to complete, and failures that could be optimized in query, or shorted bin time.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 3,
+      "dataTypeId": "MICROSOFTOPERATIONALINSIGHTS_SUMMARYLOGS",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "durationMs",
+          "type": "Int"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/SummaryLogs/WorkspacesSummaryLogsTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The bin execution start time (UTC). It represents the time bin processing started, and decoupled from bin time range. For example, TimeGenerated can be 2023-01-01T3:05:10.123Z when processing hourly bin between 2:00 - 3:00."
+        },
+        {
+          "name": "BinStartTime",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The bin start time (UTC). For example, value can be 2023-01-01T2:00:00.000Z for bin processed between 2:00 - 3:00."
+        },
+        {
+          "name": "BinSize",
+          "description": "The time ranges summarization is performed in minutes. For example, when bin is 60, summarization is performed every 60 minutes.",
+          "type": "Int",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Status",
+          "description": "The bin execution status. Can be Started, Succeeded or Failed.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "QueryDurationMs",
+          "description": "The execution duration in milliseconds.",
+          "type": "BigInt",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultsRecordCount",
+          "description": "The number of records returned in aggregation.",
+          "type": "BigInt",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Message",
+          "description": "An error message when applicable.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RuleName",
+          "description": "The rule name.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RuleLastModifiedTime",
+          "description": "The time the rule last modified. Can be used to reason changes in results, duration, etc.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SampleWorkspaceSummaryLogs.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/SampleWorkspaceSummaryLogs.json"
+    },
+    {
+      "name": "AzureMetricsV2",
+      "description": "Azure native platform metrics that can help to measure health and performance. AzureMetricsV2 includes metric categories and dimensions, improving upon legacy AzureMetrics table.",
+      "categories": [
+        "resources",
+        "monitor"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 1,
+      "dataTypeId": "AZUREMETRICSEXPORT",
+      "intelligencePacks": [],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime"
+        },
+        {
+          "name": "SourceSystem",
+          "type": "String"
+        },
+        {
+          "name": "ResourceId",
+          "type": "String"
+        },
+        {
+          "name": "MetricResourceType",
+          "type": "String"
+        },
+        {
+          "name": "MetricName",
+          "type": "String"
+        },
+        {
+          "name": "MetricCategory",
+          "type": "String"
+        },
+        {
+          "name": "Total",
+          "type": "Double"
+        },
+        {
+          "name": "Count",
+          "type": "Double"
+        },
+        {
+          "name": "Maximum",
+          "type": "Double"
+        },
+        {
+          "name": "Minimum",
+          "type": "Double"
+        },
+        {
+          "name": "Average",
+          "type": "Double"
+        },
+        {
+          "name": "TimeGrain",
+          "type": "String"
+        },
+        {
+          "name": "UnitName",
+          "type": "String"
+        },
+        {
+          "name": "Dimension",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/AzureMetricsV2/AzureMetricsV2Transform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the record was generated."
+        },
+        {
+          "name": "SourceSystem",
+          "type": "String",
+          "isDefaultDisplay": false,
+          "description": "Source of the record."
+        },
+        {
+          "name": "MetricResourceType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Resource type of the Azure resource reporting the metric."
+        },
+        {
+          "name": "MetricName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Display name of the metric."
+        },
+        {
+          "name": "MetricCategory",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Category name of the metric."
+        },
+        {
+          "name": "Total",
+          "type": "Double",
+          "isDefaultDisplay": true,
+          "description": "Sum of all of the values in the time range."
+        },
+        {
+          "name": "Count",
+          "type": "Double",
+          "isDefaultDisplay": true,
+          "description": "Number of samples collected during the time range."
+        },
+        {
+          "name": "Maximum",
+          "type": "Double",
+          "isDefaultDisplay": true,
+          "description": "Maximum value collected during in the time range."
+        },
+        {
+          "name": "Minimum",
+          "type": "Double",
+          "isDefaultDisplay": true,
+          "description": "Minimum value collected during in the time range."
+        },
+        {
+          "name": "Average",
+          "type": "Double",
+          "isDefaultDisplay": true,
+          "description": "Average value collected during in the time range."
+        },
+        {
+          "name": "TimeGrain",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Time grain of the metric."
+        },
+        {
+          "name": "UnitName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Unit of the metric."
+        },
+        {
+          "name": "Dimension",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Associated dimension of the metric in JSON format."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AzureMetricsV2Sample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AzureMetricsV2Sample.json"
+    },
+    {
+      "name": "LAJobLogs",
+      "description": "Provides information about jobs executions (e.g. Export Job) within Log Analytics workspace. Including job status, duration, and errors.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 1,
+      "dataTypeId": "MICROSOFTOPERATIONALINSIGHTS_JOBS",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "durationMs",
+          "type": "Int"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/LAJobLogs/WorkspacesJobLogsTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The time (UTC) of each status change in the job."
+        },
+        {
+          "name": "JobType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The type of the job. e.g. 'Export'."
+        },
+        {
+          "name": "CorrelationId",
+          "description": "The correlation ID of the Job action. Can be used to reference with logs from other tables, like AzureActivity, or included in support cases.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "JobId",
+          "description": "The ID of the job. Can be used as operationId in the operation resource URI (in request response) to get the job’s status or cancel a job.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceTable",
+          "description": "The table(s) used in the job's query.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Status",
+          "description": "The job's status, including 'Started', 'Succeeded', 'Canceled, 'Failed'.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultsRecordCount",
+          "description": "The number of records in the job's result.",
+          "type": "BigInt",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultsGB",
+          "description": "The results volume in Gigabytes. e.g. the number of Gigabytes exported to Storage Account.",
+          "type": "Double",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Message",
+          "description": "A message describing the job's operation or error.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Destination",
+          "description": "The destination information based on the JobType. e.g. 'Export' includes the export target container name and storage Accounts.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true
+        }        
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SampleWorkspaceJobLogs.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/SampleWorkspaceJobLogs.json"
+    }    
+  ],
+  "functions": [],
+  "queries": [
+    {
+      "id": "89e77e30-828d-4e3d-96a2-d28befa4275b",
+      "displayName": "Most Requested ResourceIds",
+      "description": "Most queried resources over the last 24 hours.",
+      "bodyFilePath": "KQL/MostRequestedResourceIds.kql",
+      "categories": [
+        "audit",
+        "monitor"
+      ],
+      "relatedTables": [
+        "LAQueryLogs"
+      ],
+      "tags": {
+        "Topic": [
+          "Audit"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "c6eb80df-d93e-451d-8a78-500adeb829ca",
+      "displayName": "Unauthorized Users",
+      "description": "Get a list of unauthorized users with their request count in last 24 hours.",
+      "bodyFilePath": "KQL/UnauthorizedUsersList.kql",
+      "categories": [
+        "audit",
+        "monitor"
+      ],
+      "relatedTables": [
+        "LAQueryLogs"
+      ],
+      "tags": {
+        "Topic": [
+          "Audit"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "4a4819f6-4d4f-4c1e-8f9f-445c957af054",
+      "displayName": "Throttled Users",
+      "description": "Get a list of throttled users with their request count in last 24 hours.",
+      "bodyFilePath": "KQL/ThrottledUsersList.kql",
+      "categories": [
+        "audit",
+        "monitor"
+      ],
+      "relatedTables": [
+        "LAQueryLogs"
+      ],
+      "tags": {
+        "Topic": [
+          "Audit"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "78b49d99-ccb7-4791-ba0c-73fbf2104daa",
+      "displayName": "Request Count by ResponseCode",
+      "description": "Request count by response code within 1 min buckets in last 1 hour.",
+      "bodyFilePath": "KQL/RequestCountByResponseCodes.kql",
+      "categories": [
+        "audit",
+        "monitor"
+      ],
+      "relatedTables": [
+        "LAQueryLogs"
+      ],
+      "tags": {
+        "Topic": [
+          "Audit"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "9edff33b-7951-4601-a50b-1da5fea7a127",
+      "displayName": "Top 10 resource intensive queries",
+      "description": "Get top 10 resource intesive queries (based on CPU consumption) in last 24 hours.",
+      "bodyFilePath": "KQL/Top10CPUConsumingQueries.kql",
+      "categories": [
+        "audit",
+        "monitor"
+      ],
+      "relatedTables": [
+        "LAQueryLogs"
+      ],
+      "tags": {
+        "Topic": [
+          "Audit"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "3b374e0c-6e5c-4367-88a8-10d265ce5e42",
+      "displayName": "Top 10 longest time range queries",
+      "description": "Get top 10 queries that scanned the longest time range in last 24 hours.",
+      "bodyFilePath": "KQL/Top10LongestTimeRangeQueries.kql",
+      "categories": [
+        "audit",
+        "monitor"
+      ],
+      "relatedTables": [
+        "LAQueryLogs"
+      ],
+      "tags": {
+        "Topic": [
+          "Audit"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "323226e0-df9e-4287-92aa-3795cf8a964e",
+      "displayName": "Bin Rules Query Duration",
+      "description": "Get a list of bin rules with their query duration.",
+      "bodyFilePath": "KQL/SummaryLogs/QueryDurationByBinRule.kql",
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "LASummaryLogs"
+      ],
+      "tags": {
+        "Topic": [
+          "SummaryLogs"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "38d33331-aba2-43f7-92c5-c527123edbf6",
+      "displayName": "Failed jobs",
+      "description": "List failed jobs with details.",
+      "bodyFilePath": "/KQL/LAJobLogs/FailedJobs.kql",
+      "categories": [
+        "monitor"
+      ],
+      "relatedTables": [
+        "LAJobLogs"
+      ],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "bd465c3f-0a2c-4ab7-ad8b-43b616528363",
+      "displayName": "Jobs in progress",
+      "description": "List jobs in progress with details.",
+      "bodyFilePath": "/KQL/LAJobLogs/JobsInProgress.kql",
+      "categories": [
+        "monitor"
+      ],
+      "relatedTables": [
+        "LAJobLogs"
+      ],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    }    
+  ]
+}

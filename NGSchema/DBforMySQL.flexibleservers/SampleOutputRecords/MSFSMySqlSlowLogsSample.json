@@ -1,0 +1,20 @@
+[
+  {
+    "TimeGenerated": "2023-03-08T06:27:04Z",
+    "StartTime": "2023-03-08T06:27:04Z",
+    "QueryDurationMs": 1,
+    "LockDurationMs": 1,
+    "Host": "cloudsa[cloudsa] @  [66.119.150.201]",
+    "RowsSent": 3,
+    "RowsExamined": 3,
+    "LastInsertId": 0,
+    "InsertId": 0,
+    "SqlText": "SELECT * FROM WORLD.NATION",
+    "ServerId": 1729292544,
+    "ThreadId": 69,
+    "Database": "test",
+    "Category": "MySqlSlowLogs",
+    "EventClass": "slow_log",
+    "ReplicationSetRole": "single"
+  }
+]

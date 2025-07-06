@@ -1,0 +1,8 @@
+source
+| project
+    TimeGenerated = todatetime(['time']),
+    CorrelationId = correlationId,
+    Location = location,
+    Description = tostring(properties.AlertMessage),
+    State = tostring(properties.AlertState),
+    Level = level

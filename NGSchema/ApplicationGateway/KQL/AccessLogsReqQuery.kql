@@ -1,0 +1,4 @@
+AGWAccessLogs
+| extend ResourceName = tostring(split(_ResourceId, '/')[8])
+| summarize AggregatedValue = count() by bin(TimeGenerated, 1h), ResourceName
+| render timechart

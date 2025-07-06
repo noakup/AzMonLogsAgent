@@ -1,0 +1,6 @@
+StorageCacheOperationEvents
+| where OperationName contains "Priming"
+| where ResultType == "Failed"
+| project  TimeGenerated, OperationName, PrimingJobName, ResultDescription, _ResourceId, CorrelationId, Location
+| sort by TimeGenerated desc
+| take 100

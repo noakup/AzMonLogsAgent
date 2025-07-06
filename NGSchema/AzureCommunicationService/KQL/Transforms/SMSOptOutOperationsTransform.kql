@@ -1,0 +1,19 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    OperationVersion = operationVersion,
+    Category = category,
+    ResultType = resultType,
+    ResultSignature = resultSignature,
+    ResultDescription = resultDescription,
+    DurationMs = toint(durationMs),
+    CallerIpAddress = callerIpAddress,
+    CorrelationId = correlationId,
+    Level = level,
+    URI = uri,
+    PhoneNumber = tostring(properties.phoneNumber),
+    SdkType = tostring(properties.sdkType),
+    PlatformType = tostring(properties.platformType),
+    Method = tostring(properties.method),
+    Country = tostring(properties.country)

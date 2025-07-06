@@ -1,0 +1,13 @@
+[
+	{
+		"TimeGenerated": "2021-08-22T08:35:08.8118575Z",
+		"Uri": "https://yogevteststorageaccount.blob.core.windows.net/containeryogev/Data.ppt",
+		"Classification": "[\"Credit Card Number\",\"EU Debit Card Number\",\"EU Driver's License Number\",\"EU National Identification Number\",\"EU Tax Identification Number (TIN)\",\"Germany Identity Card Number\",\"Japanese Residence Card Number\",\"Spain Driver's License Number\"]",
+		"Classifications": "[\"Credit Card Number\",\"EU Debit Card Number\",\"EU Driver's License Number\",\"EU National Identification Number\",\"EU Tax Identification Number (TIN)\",\"Germany Identity Card Number\",\"Japanese Residence Card Number\",\"Spain Driver's License Number\"]",
+		"CorrelationId": "C1CE3550CA3810B9925708DC0EEFD6C621E443C6AA3E5840FE3FE00D291DC890",
+		"SourceType": "AzureBlob",
+		"AssetType": "File",
+		"AssetLastScanTime": "2021-08-22T09:35:08.8118575Z",
+		"ClassificationDetails": "{\"Id\":\"957d0a45-da07-41f5-bb6b-5eea279d04c4\", \"Name\": \"Age of individual\", \"Count\":1,\"UniqueCount\":1,\"Confidence\":87}"
+	}
+]

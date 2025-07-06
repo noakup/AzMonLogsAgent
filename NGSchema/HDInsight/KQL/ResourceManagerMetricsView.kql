@@ -1,0 +1,4 @@
+HDInsightHadoopAndYarnMetrics
+//| where ClusterName == '<your cluster name>' // remove the preceding "//" and specify your cluster name to see its logs
+| where MetricNamespace contains 'Hadoop:service=ResourceManager' //switch MetricNamespace value to switch to a different MetricNamespace view
+| evaluate pivot(MetricName, avg(MetricValue), TimeGenerated)

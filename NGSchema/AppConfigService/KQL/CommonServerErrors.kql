@@ -1,0 +1,6 @@
+// This query helps retrieve logs for failed requests during past one hour by status code. 
+AACHttpRequest
+| where StatusCode >= 500 and TimeGenerated > ago(1h)
+| summarize ErrorCount=count() by StatusCode
+| project StatusCode, ErrorCount
+| sort by ErrorCount desc

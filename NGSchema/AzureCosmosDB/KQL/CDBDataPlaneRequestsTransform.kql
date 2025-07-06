@@ -1,0 +1,31 @@
+source  
+| extend properties = parse_json(properties)
+| extend resourceIdArray = split(resourceId, "/") 
+| extend numElementsInResourceId = array_length(resourceIdArray) 
+| extend accountNameExtracted = resourceIdArray[numElementsInResourceId - 1] 
+| project 
+	TimeGenerated = todatetime(['time']),    
+	AccountName = tostring(accountNameExtracted), 
+	OperationName = operationName, 
+	ConnectionMode = tostring(properties.connectionMode), 
+	UserAgent = tostring(properties.userAgent), 
+	ActivityId = tostring(properties.activityId), 
+	RequestResourceType = tostring(properties.requestResourceType), 
+	RequestResourceId = tostring(properties.requestResourceId),
+	StatusCode = toint(properties.statusCode), 
+	ClientIpAddress = tostring(properties.clientIpAddress), 
+	RequestCharge = todouble(properties.requestCharge), 
+	DurationMs = todouble(properties.duration), 
+	RequestLength = todouble(properties.requestLength), 
+	ResponseLength = todouble(properties.responseLength), 
+	RegionName = tostring(properties.region), 
+	PartitionId = tostring(properties.partitionId), 
+	AadAppliedRoleAssignmentId = tostring(properties.aadAppliedRoleAssignmentId), 
+	AadPrincipalId = tostring(properties.aadPrincipalId), 
+	DatabaseName = tostring(properties.databaseName), 
+	CollectionName = tostring(properties.collectionName), 
+	ResourceTokenPermissionId = tostring(properties.resourceTokenPermissionId), 
+	ResourceTokenPermissionMode = tostring(properties.resourceTokenPermissionMode), 
+	ResourceTokenUserRid = tostring(properties.resourceTokenUserRid), 
+	KeyType = tostring(properties.keyType), 
+	AuthTokenType = tostring(properties.authTokenType)

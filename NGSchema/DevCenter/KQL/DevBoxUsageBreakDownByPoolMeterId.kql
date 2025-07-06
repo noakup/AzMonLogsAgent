@@ -1,0 +1,10 @@
+let startSearchTime = startofmonth(now());
+let endSearchTime = startofmonth(now(), 1); // The second parameter represents the number of months to offset from the input date.
+DevCenterBillingEventLogs 
+| where OperationName == "DevBoxUsage"
+    and StartTime >= startSearchTime 
+    and StartTime < endSearchTime
+| summarize arg_min(StartTime, *) by EventId // This will remove any duplicate rows. NOTE: Usages with the same EventId are not double charged, the dupe rows are only related to double logging.
+| extend Pool = tolower(BilledResourceId)
+| summarize MeterUsage = round(sum(Quantity), 6)
+    by Pool, MeterId, UsageType

@@ -1,0 +1,15 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    Location = location,
+    OperationName = operationName,
+    OperationVersion = operationVersion,
+    Category = category,
+    CorrelationId = correlationId,
+    Size = todouble(properties.Size),
+    ToRecipientsCount = toint(properties.ToRecipientsCount),
+    CcRecipientsCount = toint(properties.CcRecipientsCount),
+    BccRecipientsCount = toint(properties.BccRecipientsCount),
+    UniqueRecipientsCount = toint(properties.UniqueRecipientsCount),
+    AttachmentsCount = toint(properties.AttachmentsCount),
+    TrafficSource = tostring(properties.TrafficSource)

@@ -1,0 +1,23 @@
+source 
+| extend operationCategoriesString = iff(isnull(operationCategories), "", tostring(operationCategories))
+| extend operationCategoryDescriptionString = iff(isnull(operationCategoryDescription), "", tostring(operationCategoryDescription))
+| extend operationResultString = iff(isnull(operationResult), "", tostring(operationResult))
+| extend operationResultDescriptionString = iff(isnull(operationResultDescription), "", tostring(operationResultDescription))
+| extend operationAccessLevelString = iff(isnull(operationAccessLevel), "", tostring(operationAccessLevel))
+| extend callerIdentitiesString = iff(isnull(callerIdentities), "", tostring(callerIdentities))
+| extend callerIpAddressString = iff(isnull(callerIpAddress), "", tostring(callerIpAddress))
+| extend callerAccessLevelsString = iff(isnull(callerAccessLevels), "", tostring(callerAccessLevels))
+| extend traceContext = parse_json(traceContext)
+| project
+    TimeGenerated = todatetime(['time']),
+    OperationName = tostring(operationName),
+    OperationCategories = operationCategoriesString,
+    OperationCategoryDescription = operationCategoryDescriptionString,
+    OperationResult = operationResultString,
+    OperationResultDescription = operationResultDescriptionString,
+    OperationAccessLevel = operationAccessLevelString,
+    CallerIdentities = callerIdentitiesString,
+    CallerIpAddress = callerIpAddressString,
+    CallerAccessLevels = callerAccessLevelsString,
+    TraceId = tostring(traceContext.traceId),
+    SpanId = tostring(traceContext.spanId)

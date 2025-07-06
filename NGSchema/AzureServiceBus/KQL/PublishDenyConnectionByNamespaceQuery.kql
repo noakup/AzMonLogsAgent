@@ -1,0 +1,6 @@
+AZMSVnetConnectionEvents
+| extend NamespaceName = tostring(split(_ResourceId, "/")[8])
+| where Provider =~ "ServiceBus"
+| where Action == "Deny Connection"
+| project Action, _SubscriptionId, NamespaceName, AddressIp, Reason, Count
+| summarize by Action, NamespaceName

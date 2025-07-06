@@ -1,0 +1,15 @@
+source
+| extend ProviderInfo = tostring(split(split(ResourceId,"/")[6], '.')[1])
+| project
+    TimeGenerated = todatetime(eventTimestamp),
+    ActivityId = tostring(ActivityId),
+	ActivityName = tostring(ActivityName),
+    Status = tostring(Status),
+    Protocol = tostring(Protocol),
+    AuthType = tostring(AuthType),
+    AuthKey = tostring(AuthId),
+    NetworkType = tostring(NetworkType),
+    ClientIp = tostring(ClientIp),
+    Count = toint(Count),
+	Properties = parse_json(properties),
+	Provider = ProviderInfo

@@ -1,0 +1,20 @@
+[
+    {
+        "time": "2020-07-01T19:45:03.2155411Z",
+        "resourceId": "/tenants/TENANT-ID/providers/Microsoft.aadiam",
+        "operationName": "Sign-in activity",
+        "operationVersion": "1.0",
+        "category": "NonInteractiveUserSignInLogs",
+        "resultType": "0",
+        "resultSignature": "None",
+        "resultDescription": "",
+        "durationMs": 0,
+        "correlationId": "CORRELATION-ID",
+        "identity": "IDENTITY-NAME",
+        "properties": "{'id':'01234567-89ab-cdef-0123-456789abcdef','createdDateTime':'2020-07-01T19:45:03.2155411Z','userDisplayName':'USER-DISPLAY-NAME','userPrincipalName':'userPrincipalName@microsoft.com','userId':'1234567-89ab-cdef-0123-456789abcdef0','appId':'234567-89ab-cdef-0123-456789abcdef01','appDisplayName':'Azure App','ipAddress':'255.255.255.255','status':{'errorCode':0},'clientAppUsed':'Browser','deviceDetail':{'deviceId':'','operatingSystem':'Windows10','browser':'Rich Client 4.7.0.0'},'location':{'city':'Washington','state':'Virginia','countryOrRegion':'US','geoCoordinates':{'latitude':38,'longitude':-78}},'correlationId':'34567-89ab-cdef-0123-456789abcdef012','conditionalAccessStatus':'notApplied','appliedConditionalAccessPolicies':[],'authenticationContextClassReferences':[],'originalRequestId':'4567-89ab-cdef-0123-456789abcdef0123','isInteractive':false,'tokenIssuerName':'','tokenIssuerType':'AzureAD','authenticationProcessingDetails':[],'networkLocationDetails':[],'processingTimeInMilliseconds':1081,'riskDetail':'none','riskLevelAggregated':'none','riskLevelDuringSignIn':'none','riskState':'none','riskEventTypes':[],'riskEventTypes_v2':[],'resourceDisplayName':'Windows Azure','resourceId':'567-89ab-cdef-0123-456789abcdef01234','authenticationDetails':[],'authenticationRequirementPolicies':[],'authenticationRequirement':'singleFactorAuthentication','servicePrincipalId':'','resourceServicePrincipalId':'','accountType':0, 'signInEventTypes':['interactive'],'resourceTenantId':'234567-89ab-cdef-0123-456789abcdef01','homeTenantId':'234567-89ab-cdef-0123-456789abcdef01','sessionLifetimePolicies':[],'uniqueTokenIdentifier':'OTM1MWMwZGEtNDhiYS00NTg0LTk5M2UtOWQ3YzU1NzA0ZTM5','autonomousSystemNumber':'5555','appliedEventListeners':[],'authenticationProtocol':'oAuth2','signInIdentifierType':'phoneNumber','userType':'member','crossTenantAccessType':'b2bDirectConnect','appOwnerTenantId':'01234567-89ab-cdef-0123-456789abcdef','resourceOwnerTenantId':'01234567-89ab-cdef-0123-456789abcdef','agent':{'agentParentAppId':'','agentType':'nonAgentic'},'userAgent': ''}",
+        "Level": "Informational",
+        "location": "US",
+        "tenantId": "TENANT-ID",
+        "sourcesystem": "Azure AD"
+    }
+]

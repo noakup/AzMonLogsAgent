@@ -1,0 +1,4 @@
+MPTOperation
+| where OperationId == "AccessToken_DELETE"
+| project TimeGenerated, Location, OperationId, MptWorkspaceId, CorrelationId, ResultType, DurationMs
+| limit 100

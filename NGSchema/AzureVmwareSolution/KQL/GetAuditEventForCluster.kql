@@ -1,0 +1,3 @@
+AVSSyslog
+| where Message has "cluster" and Message has "event"
+| take 100

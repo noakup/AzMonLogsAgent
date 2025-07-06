@@ -1,0 +1,33 @@
+[
+    {
+        "operationName": "CallingMetrics",
+        "operationVersion": "1.0",
+        "resourceId": "/SUBSCRIPTIONS/50AD1522-5C2C-4D9A-A6C8-67C11ECB75B8/RESOURCEGROUPS/CALLING-SAMPLE-APPS/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/CORERTC-TEST-APPS",
+        "properties": {
+            "TimestampMax": "2024-11-21T22:17:32.594Z",
+            "TimestampBin": "2024-11-21T00:00:00Z",
+            "MetricValueAvg": 100,
+            "Unit": "percentage",
+            "Goal": ">= 100.0",
+            "FailedLegsDcount": 0,
+            "SuccessLegsDcount": 1,
+            "CallsDcount": 1,
+            "LegsDcount": 1,
+            "SubCode": 1000,
+            "CallType": "Teams meeting",
+            "Platform": "Web",
+            "ResultType": "Succeeded",
+            "DeviceModel": "Mac",
+            "DeviceBrand": "Apple",
+            "DeviceFamily": "Mac",
+            "DeviceOsVersionMajor": "11",
+            "DeviceOsVersionMinor": "10",
+            "DeviceBrowserVersionMinor":"0",
+            "DeviceBrowserVersionMajor": "103",
+            "DeviceOsName": "Mac OS X",
+            "DeviceBrowser": "Chrome",
+            "SdkVersion": "1.22.4.0_stable",
+            "MetricName": "reliability/leg/UFD/recovery/SpeakerMuted"
+        }
+    }
+]

@@ -1,0 +1,17 @@
+source
+| extend properties = parse_json(properties)
+| project 
+    TimeGenerated = todatetime(properties.timestamp),
+    OperationName = operationName,
+    Category = category,
+    ActivityId = activityId,
+    Version = DeploymentVersion,
+    ResultType = resultType,
+    ApimClient = apimClient,
+    HashedUserId = tostring(properties.hashedUserId),
+    RequestPath = tostring(properties.requestPath),
+    RequestMethod = tostring(properties.requestMethod),
+    UserAgent = tostring(properties.userAgent),
+    ResponseCode = toint(properties.responseCode),
+    Region = tostring(properties.region),
+    ServiceName = tostring(properties.serviceName)

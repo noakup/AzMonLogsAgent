@@ -1,0 +1,14 @@
+ACSCallSummary
+// Get the distinct participants in a call
+| distinct CorrelationId, ParticipantId, EndpointId, OsVersion
+// Simplified OS version name by searching for a specific OS keyword
+// and performs a different string split operation per OS type
+| extend simple_os = case(  indexof(OsVersion, "Android") != -1, tostring(split(OsVersion, ";")[0]),
+                            indexof(OsVersion, "Darwin") != -1, tostring(split(OsVersion, ":")[0]),
+                            indexof(OsVersion, "Windows") != -1, tostring(split(OsVersion, ".")[0]),
+                            OsVersion
+                        )
+// Count the participants that are using a particular OS version
+| summarize os_counts=count() by simple_os
+| order by simple_os asc
+| render piechart title="OS Version Ratio"

@@ -1,0 +1,4 @@
+union isfuzzy=true
+_Im_DnsBuiltIn(starttime= starttime, endtime= endtime, srcipaddr= srcipaddr, domain_has_any= domain_has_any, responsecodename= responsecodename, response_has_ipv4= response_has_ipv4, response_has_any_prefix= response_has_any_prefix, eventtype= eventtype, pack= pack),
+Im_DnsSolutions(starttime= starttime, endtime= endtime, srcipaddr= srcipaddr, domain_has_any= domain_has_any, responsecodename= responsecodename, response_has_ipv4= response_has_ipv4, response_has_any_prefix= response_has_any_prefix, eventtype= eventtype, pack= pack),
+Im_DnsCustom(starttime= starttime, endtime= endtime, srcipaddr= srcipaddr, domain_has_any= domain_has_any, responsecodename= responsecodename, response_has_ipv4= response_has_ipv4, response_has_any_prefix= response_has_any_prefix, eventtype= eventtype, pack= pack)

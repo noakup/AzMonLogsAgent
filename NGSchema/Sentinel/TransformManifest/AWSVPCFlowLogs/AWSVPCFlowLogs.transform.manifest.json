@@ -1,0 +1,14 @@
+{
+    "name" : "AwsVPCFlowLogsCCP",
+    "description": "Transform used for AWS VPC FlowLogs in CCP Resource cases",
+    "transformVersion" : "1",
+    "dataTypeId" : "SENTINEL_AWSVPCFLOW_CCP",
+    "transformState" : "Validation",
+    "icmTeam" : "Microsoft Azure Sentinel/Data Collection and Processing",
+    "contactDL": "asipolarbearslive@microsoft.com",
+    "relatedTable" : "AWSVPCFlow",
+    "kqlFilePath" : "../../KQL/AWSVPCFlowTransform.kql",
+    "inputFilePath" : "AWSVPCFlowLogs-input.json",
+    "sampleInputRecordsFilePath" : "../../SampleInputRecords/AWSVPCFlowSample.json",
+    "sampleOutputRecordsFilePath" : "../../SampleOutputRecords/AWSVPCFlowSample.json"
+}

@@ -1,0 +1,4 @@
+AVNMRuleCollectionChange
+|where OperationName has("securityAdminRuleCollections")
+|top 10 by TimeGenerated desc
+|project TimeGenerated, NetworkResourceIds, AppliedRuleCollectionIds, ResultType

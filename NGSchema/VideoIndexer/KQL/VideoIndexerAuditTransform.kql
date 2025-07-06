@@ -1,0 +1,19 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    VideoIndexerResourceId = resourceId,
+    Location = location,
+    AccountName = tostring(properties.accountName),
+    AccountId = tostring(properties.accountId),
+    VideoId = tostring(properties.videoId),
+    OperationName = operationName,
+    Signature = toint(resultSignature),
+    Status = resultType,
+    Description = resultDescription,
+    ExternalUserId = tostring(identity.externalUserId),
+    Upn = tostring(identity.upn),
+    Claims = identity.claims,
+    CallerIpAddress = callerIpAddress,
+    CorrelationId = correlationId,
+    DurationMs = toint(durationMs),
+    OperationVersion = operationVersion

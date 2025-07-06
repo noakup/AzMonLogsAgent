@@ -1,0 +1,22 @@
+let startTime = ago(2h);
+let endTime = ago(1h);
+let num_toptalkers = 10;
+let portType = "Source"; // Change to "Dest" for destination port based query
+let data = ATCExpressRouteCircuitIpfix
+| where FlowRecordTime >= startTime and FlowRecordTime <= endTime
+| extend 5tuple = strcat("SrcIP:", SourceIp, " SourcePort:", SourcePort, " DestIP:", DestinationIp, " DestPort:", DestinationPort, " Protocol:", Protocol),
+    TotalBytes = (NumberOfBytes + (14 * NumberOfPackets)) * 4096 // Calculation to determine amount of circuit bandwidth used. This adds the number of payload bytes to the number of header bytes, then multiplies by 4096, the sampling rate used by ERTC 
+| summarize hint.strategy=shuffle arg_max(FlowRecordTime, *) by 5tuple, TotalBytes, SourcePort, DestinationPort, Flowsequence
+| extend port = iff(portType == "Source", SourcePort, DestinationPort);
+let topTalkers = data
+| summarize sum(TotalBytes) by port // Find top talkers port
+| order by sum_TotalBytes desc
+| take num_toptalkers; // 10 top talkers
+topTalkers
+| join kind=inner (
+    data
+    | summarize sum(TotalBytes) by bin(FlowRecordTime, 5m), port
+) on $left.port == $right.port
+| extend TotalBytes = sum_TotalBytes1, Port = strcat("Port:", port1)
+| project-away sum_TotalBytes, sum_TotalBytes1, port, port1 
+| render columnchart with(kind=unstacked)

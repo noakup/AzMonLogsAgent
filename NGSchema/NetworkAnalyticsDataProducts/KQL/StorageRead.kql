@@ -1,0 +1,3 @@
+AOIStorage
+| where Category has_cs "ReadStorage"
+| take 100

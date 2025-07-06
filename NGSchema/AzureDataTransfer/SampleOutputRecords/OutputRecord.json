@@ -1,0 +1,20 @@
+[
+  {
+    "TimeGenerated": "04/11/2023 16:31:27 +00:00",
+    "CorrelationId": "fece6a71-5c86-405f-9674-c4416ad9e35c",
+    "FlowId": "a3af5d12-15bd-4aa0-b61a-a65b7bf04416",
+    "ObjectName": "testfile - Copy (2).txt",
+    "ObjectLastUpdated": "2023-04-11T16:28:36+00:00",
+    "Status": "InTransit",
+    "Description": "The object is being sent."
+  },
+  {
+    "TimeGenerated": "04/11/2023 16:31:27 +00:00",
+    "CorrelationId": "fece6a71-5c86-405f-9674-c4416ad9e35c",
+    "FlowId": "a3af5d12-15bd-4aa0-b61a-a65b7bf04416",
+    "ObjectName": "testfile - Copy (2).txt",
+    "ObjectLastUpdated": "2023-04-11T16:28:36+00:00",
+    "Status": "SenderProcessing",
+    "Description": "The object has been discovered and is being processed for transfer."
+  }
+]

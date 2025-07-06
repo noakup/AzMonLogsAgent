@@ -1,0 +1,14 @@
+[
+    {
+        "TimeGenerated": "2022-08-08T14:31:44.0177258Z",
+        "OperationName": "Player",
+        "Level": "Informational",
+        "Location": "centralus",
+        "OperationType": "Export",
+        "PlayFabTitleId": "67FAB",
+        "PlayFabPlayerAccountPoolId": "884339428DD09857",
+        "UserId": "90829D7A707247F3",
+        "UserName": "Ritesh Jaiswal",
+        "ModifiedPlayerId": "44214038900AB993"
+    }
+]

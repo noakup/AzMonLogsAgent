@@ -1,0 +1,10 @@
+source
+| extend Properties = parse_json(tostring(properties))
+| project
+    TimeGenerated = ["time"],
+    OperationName = operationName,
+    Category = category,
+    CorrelationId = correlationId,
+    Identity = todynamic(Properties["submitter_id"]),
+    Properties = parse_json(tostring(properties))
+

@@ -1,0 +1,25 @@
+source
+| extend Properties = parse_json(tostring(properties))
+| project
+    LogicalServerName = LogicalServerName,
+    ResourceGroup = ResourceGroup,
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    Category = category,
+	RequestId = tostring(Properties["RequestId"]),
+    StepIndex = toint(Properties["StepIndex"]),
+    DmsStepIndex = toint(Properties["DmsStepIndex"]),
+    PdwNodeId = toint(Properties["PdwNodeId"]),
+    DistributionId = toint(Properties["DistributionId"]),
+    Type = tostring(Properties["Type"]),
+    Status = tostring(Properties["Status"]),
+    BytesProcessed = toint(Properties["BytesProcessed"]),
+    RowsProcessed = toint(Properties["RowsProcessed"]),
+    StartTime = todatetime(Properties["StartTime"]),
+    EndTime = todatetime(Properties["EndTime"]),
+    CpuTime = toint(Properties["CpuTime"]),
+    SqlSpId = toint(Properties["SqlSpId"]),
+    DmsCpuId = toint(Properties["DmsCpuId"]),
+    ErrorId = tostring(Properties["ErrorId"]),
+    SourceInfo = tostring(Properties["SourceInfo"]),
+    DestinationInfo = tostring(Properties["DestinationInfo"])

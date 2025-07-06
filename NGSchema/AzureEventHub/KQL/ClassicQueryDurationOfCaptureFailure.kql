@@ -1,0 +1,4 @@
+AzureDiagnostics
+| where ResourceProvider == \"MICROSOFT.EVENTHUB\"
+| where Category == \"ArchiveLogs\"
+| summarize count() by \"failures\", \"durationInSeconds\", _ResourceId

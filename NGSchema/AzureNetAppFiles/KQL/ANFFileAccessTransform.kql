@@ -1,0 +1,18 @@
+source
+| extend subproperties = parse_json(properties)
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationTime = operationTime,
+    Category = category,
+    OperationName = operationName,
+    OperationVersion = operationVersion,
+    SchemaVersion = schemaVersion,
+    ResultType = resultType,
+    CallerIpAddress = callerIpAddress,
+    Location = location,
+    Level = level,
+    ObjectName = iff(isnotnull(subproperties.fileName), tostring(split(subproperties.fileName, ";", 2)[0]), iff(isnotnull(subproperties.objectName), tostring(split(subproperties.objectName, ";", 2)[0]),iff(isnotnull(subproperties.oldPath), tostring(split(subproperties.oldPath, ";", 2)[0]),""))),
+    SubjectUnix = strcat(subproperties.subjectUnix.uid, ":", subproperties.subjectUnix.gid),
+    IsUserLocal = tobool(subproperties.subjectUnix.local),
+    ObjectType = iff(isnotnull(subproperties.objectType), tostring(subproperties.objectType), ""),
+    Properties = subproperties

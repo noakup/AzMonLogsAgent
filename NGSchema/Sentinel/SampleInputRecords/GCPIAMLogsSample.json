@@ -1,0 +1,87 @@
+[
+    {
+      "protoPayload": {
+        "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+        "status": {},
+        "authenticationInfo": {
+          "principalEmail": "scuba@np-lab.co.il",
+          "principalSubject": "user:scuba@np-lab.co.il"
+        },
+        "requestMetadata": {
+          "callerIp": "34.142.178.71",
+          "callerSuppliedUserAgent": "google-api-go-client/0.5 Terraform/1.5.7 (https://www.terraform.io) Terraform-Plugin-SDK/2.5.0 terraform-provider-google/3.73.0,gzip(gfe)",
+          "requestAttributes": {
+            "time": "2025-01-20T12:40:45.359441488Z",
+            "auth": {}
+          },
+          "destinationAttributes": {}
+        },
+        "serviceName": "iam.googleapis.com",
+        "methodName": "google.iam.admin.v1.CreateRole",
+        "authorizationInfo": [
+          {
+            "resource": "projects/msccp-test",
+            "permission": "iam.roles.create",
+            "granted": true,
+            "resourceAttributes": {},
+            "permissionType": "ADMIN_WRITE"
+          }
+        ],
+        "resourceName": "projects/msccp-test/roles/SentinelCustomRole",
+        "serviceData": {
+          "@type": "type.googleapis.com/google.iam.admin.v1.AuditData",
+          "permissionDelta": {
+            "addedPermissions": [
+              "pubsub.subscriptions.consume",
+              "pubsub.subscriptions.get"
+            ]
+          }
+        },
+        "request": {
+          "@type": "type.googleapis.com/google.iam.admin.v1.CreateRoleRequest",
+          "role_id": "SentinelCustomRole",
+          "parent": "projects/msccp-test",
+          "role": {
+            "description": "Role that allowes pulling messages from pub/sub",
+            "stage": 2,
+            "included_permissions": [
+              "pubsub.subscriptions.consume",
+              "pubsub.subscriptions.get"
+            ],
+            "title": "Sentinel Custom Role"
+          }
+        },
+        "response": {
+          "included_permissions": [
+            "pubsub.subscriptions.consume",
+            "pubsub.subscriptions.get"
+          ],
+          "group_name": "custom",
+          "stage": 2,
+          "title": "Sentinel Custom Role",
+          "@type": "type.googleapis.com/google.iam.admin.v1.Role",
+          "name": "projects/msccp-test/roles/SentinelCustomRole",
+          "etag": "BwYsIpG8bW0=",
+          "group_title": "Custom",
+          "description": "Role that allowes pulling messages from pub/sub"
+        }
+      },
+      "insertId": "104kludd3dso",
+      "resource": {
+        "type": "iam_role",
+        "labels": {
+          "project_id": "msccp-test",
+          "role_name": "projects/msccp-test/roles/SentinelCustomRole"
+        }
+      },
+      "timestamp": "2025-01-20T12:40:45.343939600Z",
+      "severity": "NOTICE",
+      "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Factivity",
+      "operation": {
+        "id": "projects/135492226944/locations/global/workloadIdentityPools/72f988bf86f141af91ab2d7cd011db47/operations/bigarmmjxg6ameha33e2iay000000000",
+        "producer": "iam.googleapis.com",
+        "last": true
+      },
+      "receiveTimestamp": "2025-01-20T12:40:46.673592928Z"
+    }
+  ]

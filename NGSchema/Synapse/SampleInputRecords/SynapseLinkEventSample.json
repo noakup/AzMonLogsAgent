@@ -1,0 +1,24 @@
+[
+{
+  "time": "2022-08-01T08:42:51.405679612Z",
+  "resourceId": "/SUBSCRIPTIONS/F8F7DF38-3886-40F3-9D38-C2C798CECCC0/RESOURCEGROUPS/CDC-TIP-WCU/PROVIDERS/MICROSOFT.SYNAPSE/WORKSPACES/ADFCDCTIPWCU",
+  "category": "SynapseLinkEvent",
+  "operationName": "TableAdd",
+  "level": 4,
+  "location": "wu2",
+  "linkConnectionName": "adfcdctipwu2-new-20220801083653",
+  "properties": {
+      "TableName": "[dbo].[source_new_20220801082222]"
+  }
+},
+{
+  "time": "2022-08-01T08:42:51.405679612Z",
+  "resourceId": "/SUBSCRIPTIONS/F8F7DF38-3886-40F3-9D38-C2C798CECCC0/RESOURCEGROUPS/CDC-TIP-WCU/PROVIDERS/MICROSOFT.SYNAPSE/WORKSPACES/ADFCDCTIPWCU",
+  "category": "SynapseLinkEvent",
+  "operationName": "LinkConnectionStart",
+  "level": 4,
+  "location": "wu2",
+  "linkConnectionName": "adfcdctipwu2-new-20220801083653",
+  "properties": ""
+}
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "TimeGenerated": "2023-02-20T16:41:53",
+    "EventOriginalUid": "b3ec621e-5666-4a99-a8c2-8e35c52f86b9",
+    "EventOriginalType": "PromotePowerAppVersion",
+    "OrganizationId": "f1a6e862-3f71-41bb-b287-8438309728a8",
+    "RecordType": "PowerAppsApp",
+    "EventResult": "Success",
+    "ActorUserId": "f3ce6e7a-c3cc-45c5-8166-f8dfd58d870e",
+    "ActorUserType": "Regular",
+    "Workload": "PowerApps",
+    "SrcIpAddr": "::ffff:82.71.12.40",
+    "ObjectId": "f3ce6e7a-c3cc-45c5-8166-f8dfd58d870e",
+    "ActorName": "wiking@sentinelbizapps.com",
+    "AdditionalInfo": "{\"environmentName\":\"3c67da1e-f86a-e6b4-9206-f9dafa09110c\"}",
+    "TargetAppName": "8186fa0a-2f6f-4607-8e41-ebe4e986f2ea"
+  },
+  {
+    "TimeGenerated": "2023-02-20T16:43:04",
+    "EventOriginalUid": "5259d812-1d70-451f-9ee8-a7fabf374b72",
+    "EventOriginalType": "PowerAppPermissionDeleted",
+    "OrganizationId": "f1a6e862-3f71-41bb-b287-8438309728a8",
+    "RecordType": "PowerAppsApp",
+    "EventResult": "Success",
+    "ActorUserId": "f3ce6e7a-c3cc-45c5-8166-f8dfd58d870e",
+    "ActorUserType": "Regular",
+    "Workload": "PowerApps",
+    "SrcIpAddr": "::ffff:82.71.12.40",
+    "ObjectId": "f3ce6e7a-c3cc-45c5-8166-f8dfd58d870e",
+    "ActorName": "wiking@sentinelbizapps.com",
+    "AdditionalInfo": "{\"environmentName\":\"3c67da1e-f86a-e6b4-9206-f9dafa09110c\"}",
+    "TargetAppName": "\/providers\/Microsoft.PowerApps\/apps\/8186fa0a-2f6f-4607-8e41-ebe4e986f2ea"
+  }
+]

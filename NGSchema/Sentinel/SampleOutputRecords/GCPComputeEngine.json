@@ -1,0 +1,48 @@
+[
+  {
+    "InsertId": "dnlk5jd2ru8",
+    "Labels": {
+      "compute.googleapis.com/root_trigger_id": "b7358b47-15ec-4a5c-8f45-915b75dfdd88"
+    },
+    "LogName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Factivity",
+    "Operation": {
+      "id": "operation-1749708368322-63759b9c11de1-1efb33a0-8473c38b",
+      "last": true,
+      "producer": "compute.googleapis.com"
+    },
+    "ProtoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "prisma-cloud-serv-fabur@msccp-test.iam.gserviceaccount.com",
+        "principalSubject": "serviceAccount:prisma-cloud-serv-fabur@msccp-test.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/msccp-test/serviceAccounts/prisma-cloud-serv-fabur@msccp-test.iam.gserviceaccount.com/keys/711d0583951468a4c27f724399f859fe83b788fd"
+      },
+      "methodName": "v1.compute.instances.delete",
+      "request": {
+        "@type": "type.googleapis.com/compute.instances.delete"
+      },
+      "requestMetadata": {
+        "callerIp": "gce-internal-ip",
+        "callerSuppliedUserAgent": "google-api-go-client/0.5,gzip(gfe)",
+        "destinationAttributes": {},
+        "requestAttributes": {}
+      },
+      "resourceName": "projects/msccp-test/zones/us-central1-c/instances/prismacloud-scan-1749707668209322149-prisma-agentless-scan",
+      "serviceName": "compute.googleapis.com"
+    },
+    "ReceiveTimestamp": "6/12/2025, 6:06:41.142 AM",
+    "Resource": {
+      "labels": {
+        "instance_id": "8957538058499511674",
+        "project_id": "msccp-test",
+        "zone": "us-central1-c"
+      },
+      "type": "gce_instance"
+    },
+    "Severity": "NOTICE",
+    "TimeGenerated": "6/12/2025, 6:06:40.633 AM",
+    "TenantId": "e288ca4a-cfcc-47b7-ba31-f2d5ad088d3d",
+    "Type": "GCPComputeEngine_CL",
+    "_ResourceId": ""
+  }
+]

@@ -1,0 +1,6 @@
+let mySender = "<insert sender email address>";
+let subject = "<insert email subject>";
+EmailEvents
+| where SenderFromAddress == mySender and Subject == subject
+| join EmailPostDeliveryEvents on NetworkMessageId, RecipientEmailAddress 
+| take 100

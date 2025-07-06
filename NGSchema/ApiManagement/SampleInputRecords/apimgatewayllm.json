@@ -1,0 +1,31 @@
+[
+    {
+        "Region": "West US 2",
+        "category": "GatewayLogs",
+        "operationName": "Microsoft.ApiManagement/ApiManagementGatewayLlmLogs",
+        "correlationId": "a558c39c-592c-4ec1-9146-ce447b753530",
+        "properties": {
+            "timestamp": "2024-03-03T00:42:15.5563788Z",
+            "sequenceNumber": 0,
+            "promptTokens": 20,
+            "completionTokens": 50,
+            "totalTokens": 70,
+            "modelName": "gpt-4",
+            "isStreamCompletion": 0,
+            "requestId": "chatcmpl-9qoTtNVzvTHL2OVDuwqXQaaSvQ1zg",
+            "deploymentName": "gpt-4",
+            "apiVersion": "2023-05-15",
+            "requestMessages": "[{\"role\":\"user\", \"content\":\"Hello\"}]invalidJsonWillBeString",
+            "responseMessages": [
+                {
+                    "finish_reason": "stop",
+                    "index": 0,  
+                    "message": {
+                        "content": "Hello! How can I help you today?",
+                        "role": "assistant" 
+                    }
+                }
+            ]
+        }
+    }
+]

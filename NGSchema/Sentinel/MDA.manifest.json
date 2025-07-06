@@ -1,0 +1,391 @@
+{
+  "type": "Microsoft.SecurityInsights/MDA",
+  "displayName": "Azure Sentinel MDA",
+  "description": "All Microsoft Defender Alerts (MDA) tables related to Azure Sentinel.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Microsoft Azure Sentinel/Data Collection and Processing",
+  "contactDL": "asipolarbearseng@microsoft.com",
+  "relatedTables": [],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "name": "AlertEvidence",
+      "description": "Includes files, IP addresses, URLs, users, or devices associated with alerts.",
+      "categories": [ "security" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 9,
+      "dataTypeId": "TENANTMICROSOFTWINDOWSDEFENDERATP_ADVANCEDHUNTINGALERTEVIDENCE",
+      "intelligencePacks": [ "SecurityInsights" ],
+      "isResourceCentric": false,
+      "isChangeColumnInternalNameAllowed": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "tenantId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/AlertEvidenceTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Date and time (UTC) when the record was generated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Timestamp",
+          "type": "DateTime",
+          "description": "Date and time when the record was generated.",
+          "isHidden": true,
+          "isDefaultDisplay": false
+        },
+        {
+          "name": "AlertId",
+          "type": "String",
+          "description": "Unique identifier for the alert.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "Title",
+          "type": "String",
+          "description": "Title of the alert."
+        },
+        {
+          "name": "Categories",
+          "type": "String",
+          "description": "List of categories that the information belongs to, in JSON array format."
+        },
+        {
+          "name": "AttackTechniques",
+          "type": "String",
+          "description": "MITRE ATT&CK techniques associated with the activity that triggered the alert."
+        },
+        {
+          "name": "ServiceSource",
+          "type": "String",
+          "description": "Product or service that provided the alert information."
+        },
+        {
+          "name": "DetectionSource",
+          "type": "String",
+          "description": "Detection technology or sensor that identified the notable component or activity."
+        },
+        {
+          "name": "EntityType",
+          "type": "String",
+          "description": "Type of object, such as a file, a process, a device, or a user."
+        },
+        {
+          "name": "EvidenceRole",
+          "type": "String",
+          "description": "How the entity is involved in an alert, indicating whether it is impacted or is merely related."
+        },
+        {
+          "name": "EvidenceDirection",
+          "type": "String",
+          "description": "Indicates whether the entity is the source or the destination of a network connection."
+        },
+        {
+          "name": "FileName",
+          "type": "String",
+          "description": "Name of the file that the recorded action was applied to."
+        },
+        {
+          "name": "FolderPath",
+          "type": "String",
+          "description": "Folder containing the file that the recorded action was applied to."
+        },
+        {
+          "name": "SHA1",
+          "type": "String",
+          "description": "SHA-1 of the file that the recorded action was applied to."
+        },
+        {
+          "name": "SHA256",
+          "type": "String",
+          "description": "SHA-256 of the file that the recorded action was applied to. This field is usually not populated—use the SHA1 column when available."
+        },
+        {
+          "name": "FileSize",
+          "type": "BigInt",
+          "description": "Size of the file in bytes."
+        },
+        {
+          "name": "ThreatFamily",
+          "type": "String",
+          "description": "Malware family that the suspicious or malicious file or process has been classified under."
+        },
+        {
+          "name": "RemoteIP",
+          "type": "String",
+          "description": "IP address that was being connected to.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "RemoteUrl",
+          "type": "String",
+          "description": "URL or fully qualified domain name (FQDN) that was being connected to.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "AccountName",
+          "type": "String",
+          "description": "User name of the account."
+        },
+        {
+          "name": "AccountDomain",
+          "type": "String",
+          "description": "Domain of the account."
+        },
+        {
+          "name": "AccountSid",
+          "type": "String",
+          "description": "Security Identifier (SID) of the account."
+        },
+        {
+          "name": "AccountObjectId",
+          "type": "String",
+          "description": "Unique identifier for the account in Azure Active Directory.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "AccountUpn",
+          "type": "String",
+          "description": "User principal name (UPN) of the account."
+        },
+        {
+          "name": "DeviceId",
+          "type": "String",
+          "description": "Unique identifier for the device in the service."
+        },
+        {
+          "name": "DeviceName",
+          "type": "String",
+          "description": "Fully qualified domain name (FQDN) of the machine."
+        },
+        {
+          "name": "LocalIP",
+          "type": "String",
+          "description": "IP address assigned to the local device used during communication.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "NetworkMessageId",
+          "type": "String",
+          "description": "Unique identifier for the email, generated by Office 365."
+        },
+        {
+          "name": "EmailSubject",
+          "type": "String",
+          "description": "Subject of the email."
+        },
+        {
+          "name": "ApplicationId",
+          "type": "Int",
+          "description": "Unique identifier for the application."
+        },
+        {
+          "name": "Application",
+          "type": "String",
+          "description": "Application that performed the recorded action."
+        },
+        {
+          "name": "OAuthApplicationId",
+          "type": "String",
+          "description": "Unique identifier of the third-party OAuth application."
+        },
+        {
+          "name": "ProcessCommandLine",
+          "type": "String",
+          "description": "Command line used to create the new process."
+        },
+        {
+          "name": "AdditionalFields",
+          "type": "Dynamic",
+          "description": "Additional information about the event in JSON array format."
+        },
+        {
+          "name": "RegistryKey",
+          "type": "String",
+          "description": "Registry key that the recorded action was applied to."
+        },
+        {
+          "name": "RegistryValueName",
+          "type": "String",
+          "description": "Name of the registry value that the recorded action was applied to."
+        },
+        {
+          "name": "RegistryValueData",
+          "type": "String",
+          "description": "Data of the registry value that the recorded action was applied to."
+        },
+        {
+          "name": "CloudPlatform",
+          "type": "String",
+          "description": "The cloud platform that the resource belongs to, can be Azure, Amazon Web Services, or Google Cloud Platform."
+        },
+        {
+          "name": "CloudResource",
+          "type": "String",
+          "description": "Cloud resource name."
+        },
+        {
+          "name": "Severity",
+          "type": "String",
+          "description": "Indicates the potential impact (high, medium, or low) of the threat indicator or breach activity identified by the alert."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AlertEvidenceSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AlertEvidenceSample.json"
+    },
+    {
+      "name": "AlertInfo",
+      "description": "Alerts from Microsoft Defender for Endpoint, Microsoft Defender for Office 365, Microsoft Cloud App Security, and Microsoft Defender for Identity, including severity information and threat categorization.",
+      "categories": [ "security" ],
+      "dataTypeId": "TENANTMICROSOFTWINDOWSDEFENDERATP_ADVANCEDHUNTINGALERTINFO",
+      "artifactVersion": 6,
+      "transformFilePath": "KQL/AlertInfoTransform.kql",
+      "isResourceCentric": false,
+      "intelligencePacks": [ "SecurityInsights" ],
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "tenantId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Date and time (UTC) when the record was generated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Timestamp",
+          "type": "DateTime",
+          "description": "Date and time when the record was generated.",
+          "isHidden": true,
+          "isDefaultDisplay": false
+        },
+        {
+          "name": "AlertId",
+          "type": "String",
+          "description": "Unique identifier for the alert.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "Title",
+          "type": "String",
+          "description": "Title of the alert."
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "description": "Type of threat indicator or breach activity identified by the alert."
+        },
+        {
+          "name": "Severity",
+          "type": "String",
+          "description": "Indicates the potential impact (high, medium, or low) of the threat indicator or breach activity identified by the alert."
+        },
+        {
+          "name": "ServiceSource",
+          "type": "String",
+          "description": "Product or service that provided the alert information."
+        },
+        {
+          "name": "DetectionSource",
+          "type": "String",
+          "description": "Detection technology or sensor that identified the notable component or activity."
+        },
+        {
+          "name": "AttackTechniques",
+          "type": "String",
+          "description": "MITRE ATT&CK techniques associated with the activity that triggered the alert."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AlertInfoSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AlertInfoSample.json"
+    }
+  ],
+  "functions": [],
+  "queries": [
+    {
+      "id": "ad9ab554-0b90-4eca-b39a-7871b96d23f4",
+      "displayName": "Alerts by MITRE ATT&CK technique",
+      "description": "List number of alerts by MITRE ATT&CK technique in descending order.",
+
+      "bodyFilePath": "KQL/AlertsByMitreQuery.kql",
+      "categories": ["security"],
+      "relatedTables": ["AlertInfo"],
+
+      "tags": {
+        "Topic": ["Security"]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": false
+        }
+      }
+    },
+    {
+      "id": "be15042c-877f-4842-8e66-5bdb4355bcde",
+      "displayName": "Alerts involving a user",
+      "description": "List 100 alerts involving a certain user.",
+      "bodyFilePath": "KQL/AlertsInvolvingAUserQuery.kql",
+      "categories": ["security"],
+      "relatedTables": ["AlertEvidence"],
+      "tags": {
+        "Topic": ["Security"]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": false
+        }
+      }
+    }
+  ]
+}

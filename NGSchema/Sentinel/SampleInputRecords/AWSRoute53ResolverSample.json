@@ -1,0 +1,29 @@
+[
+  {
+    "version": "1.100000",
+    "account_id": "072643944673",
+    "region": "us-east-1",
+    "vpc_id": "vpc-df1f7ca5",
+    "query_timestamp": "2025-04-21T00:01:17Z",
+    "query_name": "ec2messages.us-east-1.amazonaws.com.",
+    "query_type": "A",
+    "query_class": "IN",
+    "rcode": "NOERROR",
+    "answers": [
+      {
+        "Rdata": "209.54.181.108",
+        "Type": "A",
+        "Class": "IN"
+      }
+    ],
+    "srcaddr": "172.31.84.63",
+    "srcport": "34575",
+    "transport": "UDP",
+    "srcids": {
+      "instance": "i-03a45828425f45dee"
+    },
+    "firewall_rule_action": "ALERT",
+    "firewall_rule_group_id": "rslvr-frg-64bc77f07b534d48",
+    "firewall_domain_list_id": "rslvr-fdl-9ae193add044fb6"
+  }
+]

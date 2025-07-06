@@ -1,0 +1,18 @@
+[
+	{
+		"time": "2024-03-25T23:06:30.0000000Z",
+		"resourceId": "/SUBSCRIPTIONS/05F401AC-885F-4BA4-B2D6-7C5444596230/RESOURCEGROUPS/ATC-TEST1111/PROVIDERS/MICROSOFT.NETWORKFUNCTION/AZURETRAFFICCOLLECTORS/testMicrosoftPeeringMetadata",
+		"operationName": "MicrosoftNetworkFunction/AzureTrafficCollector/ExpressRouteCircuit/Read",
+		"category": "ATCMicrosoftPeeringMetadata",
+		"location": "East Asia",
+		"operationVersion": "1.0",
+		"properties": {
+			"IpSubnet": "13.68.120.64",
+			"IpMask": "28",
+			"ServiceName": "Azure Storage",
+			"PrefixRegion": "East US 2",
+			"ServiceBgpCommunity": "12076:52005",
+			"RegionalBgpCommunity": "12076:50005"
+		}
+	}
+]

@@ -1,0 +1,38 @@
+[
+    {
+        "Role": "/ASADEV/ACI_ADMIN_ROLE",
+        "RoleType": "S",
+        "UpdatedOn": "2023-09-26T12:59:32.0000000Z",
+        "TypeOfChange": "I",
+        "Authorization": "T-12345",
+        "AuthorizationGroup": "02",
+        "Object": "S_RFC",
+        "Field": "ACTVT",
+        "Low": "*",
+        "High": "",
+        "ChildRole": "",
+        "SystemRole": "P",
+        "SystemUniqueId": "f8b4hd19-9456-4aac-bc66-b211dff020a3",
+        "AgentId": "3ccb3326-3ff9-4f68-8f37-88d37c0e15d9",
+        "SystemID": "ODG",
+        "ClientID": "300"
+    },
+    {
+        "Role": "ANOTHER_ADMIN_COMPOSITE_ROLE",
+        "RoleType": "C",
+        "UpdatedOn": "2023-09-26T12:59:32.0000000Z",
+        "TypeOfChange": "U",
+        "Authorization": "",
+        "AuthorizationGroup": "",
+        "Object": "",
+        "Field": "",
+        "Low": "",
+        "High": "",
+        "ChildRole": "CHILD_ROLE_NUMBER_1",
+        "SystemRole": "P",
+        "SystemUniqueId": "f8b4hd19-9456-4aac-bc66-b211dff020a3",
+        "AgentId": "3ccb3326-3ff9-4f68-8f37-88d37c0e15d9",
+        "SystemID": "OMG",
+        "ClientID": "300"
+    }
+]

@@ -1,0 +1,23 @@
+[
+	{
+		"TimeGenerated" : "2021-03-22T19:02:09.1297992Z",
+		"AccountName" : "ACCNT-MONGO-TEST",
+		"OperationName" : "IsMaster",
+		"UserAgent" : "<empty>",
+		"ActivityId" : "76d0c6de-1788-455f-a430-21708a3dacb3",
+		"ErrorCode" : "0",
+		"DurationMs" : "0.1467",
+		"RequestCharge" : "0",
+		"DatabaseName" : "admin",
+		"CollectionName" : "<empty>",
+		"AuthorizationTokenType" : "PrimaryMasterKey",
+		"Address" : "104.42.195.92",
+		"PIICommandText" : "<empty>",
+		"RateLimitingDelayMs" : "0 ",
+		"RetriedDueToRateLimiting" : "False",
+		"RegionName" : "West US",
+		"RequestLength" : "42",
+		"ResponseLength" : "528", 
+		"UserId" : "<empty>"
+	}
+]

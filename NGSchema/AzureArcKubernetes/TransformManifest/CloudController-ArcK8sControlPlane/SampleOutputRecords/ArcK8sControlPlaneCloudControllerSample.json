@@ -1,0 +1,18 @@
+[
+    {
+        "TimeGenerated": "2023-01-10T22:13:00.0000000Z",
+        "Category": "cloud-controller-manager",
+        "Level": "INFO",
+        "Message": "successfully renewed lease kube-system/cloud-controller-manager",
+        "Stream": "stderr",
+        "PodName": "cloud-controller-manager-6578fbbd95-2rddw"
+    },
+    {
+        "TimeGenerated": "2023-01-10T22:13:01.0000000Z",
+        "Category": "cloud-controller-manager",
+        "Level": "INFO",
+        "Message": "set node aks-agentpool-20062077-vmss000002 with NodeNetworkUnavailable=false was canceled because it is already set",
+        "Stream": "stderr",
+        "PodName": "cloud-controller-manager-6578fbbd95-2rddw"
+    }
+]

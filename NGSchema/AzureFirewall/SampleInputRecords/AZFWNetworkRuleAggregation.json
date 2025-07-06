@@ -1,0 +1,21 @@
+[
+  {
+    "category": "AZFWNetworkRuleAggregation",
+    "time": "2021-10-19T23:01:59.723496Z",
+    "resourceId": "/subscriptions/aeb5b02a-0f18-45a4-86d6-81808115cacf/resourcegroups/manuelberger-new-logs-test-2/providers/microsoft.network/azurefirewalls/fw",
+    "properties": {
+      "Protocol": "TCP",
+      "SourceIp": "170.163.167.58",
+      "DestinationIp": "42.115.23.45",
+      "DestinationPort": 20476,
+      "Action": "Deny",
+      "Policy": "policy1",
+      "RuleCollectionGroup": "group1",
+      "RuleCollection": "collection1",
+      "Rule": "rule1",
+      "IsDefaultRule": false,
+      "ActionReason": "asdasfafasfasfasf",
+      "NetworkRuleCount": 300
+    }
+  }
+]

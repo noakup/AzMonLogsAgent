@@ -1,0 +1,7 @@
+ACSCallDiagnosticsUpdates
+// Filter null values
+| where isnotnull(JitterMax)
+// Count jitter values by 10 millisecond intervals
+|summarize JitterMax_counts=count() by JitterMax
+| order by JitterMax asc
+| render columnchart with (xcolumn = JitterMax, title="JitterMax histogram")

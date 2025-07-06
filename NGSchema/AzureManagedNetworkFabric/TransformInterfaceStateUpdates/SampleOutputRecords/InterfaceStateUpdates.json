@@ -1,0 +1,19 @@
+[
+    {
+        "TimeGenerated": "2023-11-16T08:15:59Z",
+        "EventName": "InterfaceOperStatus",
+        "EventCategory": "InterfaceStateUpdates",
+        "FabricId": "/subscriptions/962219bd-33e8-461a-aa01-2ea9236a2b07/resourceGroups/Fab1LabNF-4-2/providers/Microsoft.ManagedNetworkFabric/networkFabrics/nfcfab1-4-2",
+        "DeviceId": "/subscriptions/962219bd-33e8-461a-aa01-2ea9236a2b07/resourceGroups/Fab1LabNF-4-2/providers/Microsoft.ManagedNetworkFabric/networkDevices/nfcfab1-4-2-AggrRack-CE1",
+        "DeviceTime": "1699872903923130381",
+        "Properties": {
+            "DeviceId": "/subscriptions/962219bd-33e8-461a-aa01-2ea9236a2b07/resourceGroups/Fab1LabNF-4-2/providers/Microsoft.ManagedNetworkFabric/networkDevices/nfcfab1-4-2-AggrRack-CE1",
+            "DeviceName": "nfcfab1-4-2-fab1-ar-ce1",
+            "EventName": "InterfaceOperStatus",
+            "FabricID": "/subscriptions/962219bd-33e8-461a-aa01-2ea9236a2b07/resourceGroups/Fab1LabNF-4-2/providers/Microsoft.ManagedNetworkFabric/networkFabrics/nfcfab1-4-2",
+            "GnmiTimestamp": "1699872903923130381",
+            "InterfaceName": "Management1",
+            "Value": "UP"
+        }
+    }
+]

@@ -1,0 +1,4 @@
+ACSAdvancedMessagingOperations
+| where TimeGenerated > ago(24h)
+| summarize count() by ChannelId, MessageType
+| order by ChannelId asc

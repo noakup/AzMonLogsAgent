@@ -1,0 +1,16 @@
+source
+| project 
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    Location = location,
+    Log = tostring(properties.Log),
+    Stream = tostring(properties.Stream),
+    EnvironmentName = tostring(properties.EnvironmentName),
+    SessionPoolName = tostring(properties.SessionPoolName),
+    SessionIdentifier = tostring(properties.SessionIdentifier),
+    ContainerName = tostring(properties.ContainerName),
+    ContainerId = tostring(properties.ContainerId),
+    ContainerGroupName = tostring(properties.ContainerGroupName),
+    ContainerGroupId = tostring(properties.ContainerGroupId),
+    ContainerImage = tostring(properties.ContainerImage)
+    

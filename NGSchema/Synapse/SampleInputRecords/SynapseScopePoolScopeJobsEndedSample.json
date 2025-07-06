@@ -1,0 +1,23 @@
+[
+  {
+    "time": "2021-11-09T22:06:09.2868386Z",
+    "resourceId": "/SUBSCRIPTIONS/DE437458-0115-49B8-8F56-DE79ABD56298/RESOURCEGROUPS/RG_SYNTHETICS/PROVIDERS/MICROSOFT.SYNAPSE/WORKSPACES/SCOPESYNTHETICWESTCENTRALUSPROD/SCOPEPOOLS/SCOPE",
+    "category": "ScopePoolScopeJobsEnded",
+    "operationName": "ScopePoolScopeJobsEnded",
+    "correlationId": "b8e4a128-0eca-4f74-b0cd-cdf0aefbf553",
+    "identity": "{\"objectId\":\"f5ea4582-39b4-4208-acbf-9a928efe0ee5\"}",
+    "properties": {
+      "jobId": "b8e4a128-0eca-4f74-b0cd-cdf0aefbf553",
+      "schedulerState": "Scheduled",
+      "submitTime": "2021-11-09T22:04:45.8257855Z",
+      "scheduleTime": "2021-11-09T22:05:22.3598933Z",
+      "startTime": "11/9/2021 10:05:22 PM +00:00",
+      "endTime": "2021-11-09T22:06:09.2862807Z",
+      "cancellationRequestedAt": "",
+      "jobResult": "Succeeded",
+      "runtimeName": "soy__yarnpp__tez_release_20201103_scope_52f0ec3c_synapse",
+      "guaranteedTokenPNInMilliseconds": "5205.000000",
+      "submitterId": "f5ea4582-39b4-4208-acbf-9a928efe0ee5"
+    }
+  }
+]

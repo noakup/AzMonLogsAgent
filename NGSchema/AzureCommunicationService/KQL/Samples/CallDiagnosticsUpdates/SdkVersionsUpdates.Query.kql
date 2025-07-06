@@ -1,0 +1,7 @@
+ACSCallSummaryUpdates
+// Get the distinct participants in a call
+| summarize arg_max(CallUpdatesVersion, *) by CorrelationId, ParticipantId, EndpointId, SdkVersion
+// Count participants that are using a particular SDK
+| summarize sdk_counts=count() by SdkVersion
+| order by SdkVersion asc
+| render piechart title="SDK Version Ratio"

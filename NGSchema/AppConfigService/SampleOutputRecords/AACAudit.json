@@ -1,0 +1,36 @@
+[
+  {
+    "TimeGenerated": "2023-03-10T20:20:56Z",
+    "Category": "Audit",
+    "CorrelationId": "61a2f0b4-68e9-4f6c-93a3-07af4bc3abd2",
+    "Status": "Started",
+    "OperationName": "delete-keyvalue",
+    "EventCategory": "ApplicationManagement",
+    "TargetResource": {
+      "TargetResourceType": "Microsoft.AppConfiguration/keyValues",
+      "TargetResourceName": "https://eventgriddfeus.azconfig-test.io/kv/EventGridDFEUS-key-2021-04-13T00:04?api-version=1.0"
+    },
+    "ResultType": "Success",
+    "CallerIdentity": "[{\"callerIdentityType\":\"KeyName\", \"callerIdentity\":\"jWql-lt-s0:7rXfoxly4TRdXMG+FRLr\"}]",
+    "CallerIPAddress": "23.96.48.132",
+    "RequestId": "fc76475e-303e-4a5e-9214-244de9049b38",
+    "ETag": "\"QtV1TTZC4paO3Aok8FBVdmCbCkEV1ib1F0-mjGogDlQ\""
+  },
+  {
+    "TimeGenerated": "2021-04-13T00:34:28Z",
+    "Category": "Audit",
+    "CorrelationId": "c8cb155e-de85-49ab-9e3a-a0fd93e6d6e7",
+    "Status": "Finished",
+    "OperationName": "set-keyvalue",
+    "EventCategory": "ApplicationManagement",
+    "TargetResource": {
+      "TargetResourceType": "Microsoft.AppConfiguration/keyValues",
+      "TargetResourceName": "https://eventgriddfeus.azconfig-test.io/kv/EventGridDFEUS-key-2021-04-13T00:04?api-version=1.0"
+    },
+    "ResultType": "Success",
+    "CallerIdentity": "[{\"callerIdentityType\":\"ApplicationId\", \"callerIdentity\":\"c44b4083-3bb0-49c1-b47d-974e53cbdf3c\"}, {\"callerIdentityType\":\"ObjectId\", \"callerIdentity\":\"735991e8-73a9-4b99-9469-b6389e8bd35b\"}, {\"callerIdentityType\":\"TenantId\", \"callerIdentity\":\"72f988bf-86f1-41af-91ab-2d7cd011db47\"}, {\"callerIdentityType\":\"UPN\", \"callerIdentity\":\"abc@microsoft.com\"}]",
+    "CallerIPAddress": "23.96.48.132",
+    "RequestId": "0acd542b-e415-4b64-9046-c0c957122669",
+    "ETag": "\"QtV1TTZC4paO3Aok8FBVdmCbCkEV1ib1F0-mjGogDlQ\""
+  }
+]

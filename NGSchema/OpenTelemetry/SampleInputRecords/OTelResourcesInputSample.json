@@ -1,0 +1,17 @@
+[
+    {
+        "itemType": "Resource",
+        "item": {
+            "itemId": "ad876e50-b6bd-442e-8b5d-e5bfe3e5eb9b",
+            "timestamp": "2023-08-12T00:14:31.2357816Z",
+            "attributes": {
+                "service.name": "my-helloworld-service",
+                "telemetry.sdk.language": "nodejs",
+                "telemetry.sdk.name": "opentelemetry",
+                "telemetry.sdk.version": "1.15.1",
+                "service.namespace": "my-namespace",
+                "service.instance.id": "my-instance"
+            }
+        }
+    }
+]

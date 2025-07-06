@@ -1,0 +1,5 @@
+ACSCallDiagnostics
+// Count the streams and distinct calls
+| summarize num_streams=count(), num_calls=dcount(CorrelationId)
+// Calculate the average number of streams per call
+| extend avg_streams = toreal(num_streams) / toreal(num_calls)

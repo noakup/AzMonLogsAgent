@@ -1,0 +1,10 @@
+AEWComputePipelinesLogs
+| where EventName =~ "ScorecardRequestFailed"
+| where Properties.ExperimentationGroup =~ "test~ExperimentationGroup"
+| project
+    TimeGenerated
+    ,EventName
+    ,ExperimentationGroup = Properties.ExperimentationGroup
+    ,AnalysisType = Properties.AnalysisType
+| sort by TimeGenerated desc
+| take 100

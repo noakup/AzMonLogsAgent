@@ -1,0 +1,5 @@
+// To create an alert for this query, click '+ New alert rule'
+PGSQLServerLogs
+| where ErrorLevel =~ "ERROR"
+| order by TimeGenerated desc 
+| take 100

@@ -1,0 +1,14 @@
+source 
+| project 
+    TimeGenerated = todatetime(["time"]),
+    Location = location,
+    OperationName = operationName,
+    Category = category,
+    Level = level,
+    CorrelationId = correlationId,
+    TargetResource = tostring(properties.ResourceName),
+    ResourceGroup = tostring(properties.ResourceGroup),
+    User = tostring(properties.User),
+    UserRole = tostring(properties.UserRole),
+    Message = tostring(properties.Message),
+    TraceContext = traceContext

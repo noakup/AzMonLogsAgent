@@ -1,0 +1,24 @@
+[
+  {
+    "LogicalServerName": "chgettyscanaryeasttest",
+    "SubscriptionId": "845c8e99-1acb-444d-b815-5975cbc12ac3",
+    "ResourceGroup": "synapseworkspace-managedrg-f620de46-da56-40e6-bce1-ee02e640e61b",
+    "time": "2020-10-16T22:21:40.0080762Z",
+    "resourceId": "/SUBSCRIPTIONS/845C8E99-1ACB-444D-B815-5975CBC12AC3/RESOURCEGROUPS/CHGETTYS/PROVIDERS/MICROSOFT.SYNAPSE/WORKSPACES/CHGETTYSCANARYEASTTEST/SQLPOOLS/PERFINSTANCE",
+    "category": "SqlRequests",
+    "operationName": "SqlRequestsEvent",
+    "properties": {
+      "RequestId": "QID15060",
+      "StepIndex": 0,
+      "PdwNodeId": 13,
+      "DistributionId": -1,
+      "Status": "Pending",
+      "ErrorId": "",
+      "StartTime": "2020-10-16T22:21:33.5531354Z",
+      "EndTime": "1601-01-01T00:00:00Z",
+      "RowCount": 0,
+      "Spid": 167,
+      "Command": "SELECT [T1_1].[PDWExpr1000] AS [PDWExpr1000], CONCAT(CAST (SQL_VARIANT_PROPERTY([T1_1].[PDWExpr1000], N'#') AS sysname), N'#', CAST (SQL_VARIANT_PROPERTY([T1_1].[PDWExpr1000], N'#') AS TINYINT), N'#', CAST (SQL_VARIANT_PROPERTY([T1_1].[PDWExpr1000], N'#') AS TINYINT), N'#', CAST (SQL_VARIANT_PROPERTY([T1_1].[PDWExpr1000], N'#') AS sysname), N'#', CAST (SQL_VARIANT_PROPERTY([T1_1].[PDWExpr1000], N'#') AS INT)) AS [col] FROM (VALUES (CAST (CAST (N'#' AS NVARCHAR (-1)) COLLATE SQL_Latin1_General_CP1_CI_AS AS SQL_VARIANT))) AS T1_1(PDWExpr1000)  OPTION (MAXDOP 3)    "
+    }
+  }
+]

@@ -1,0 +1,8 @@
+ACSCallDiagnostics
+// Counts the number of streams per call 
+| summarize streams_per_call=count() by CorrelationId
+// Aggregates the numbers of streams per call (e.g. if there are 7 calls that have 6 streams,
+// this will produce a row [streams_per_call=6, stream_counts=7])
+| summarize stream_counts=count() by streams_per_call
+| order by streams_per_call asc
+| render columnchart title="Streams per call histogram"

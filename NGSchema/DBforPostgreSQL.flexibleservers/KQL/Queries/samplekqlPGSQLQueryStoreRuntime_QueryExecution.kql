@@ -1,0 +1,21 @@
+// Please change the threshold in milliseconds upon your requirements
+// By default, entries are aggregated every 15 mins (see pg_qs.interval_length_minutes)
+// PlanId is captured only if pg_qs.store_query_plans=ON
+let MinQueryExecutionThresholdInMilliseconds=1000;
+PGSQLQueryStoreRuntime
+| where IsSystemQuery==false //excludes azure managed user
+| where MeanExecDurationMs > MinQueryExecutionThresholdInMilliseconds
+| project
+    StartTime,
+    EndTime,
+    QueryId,
+    PlanId,
+    QueryType,
+    UserId,
+    DatabaseId,
+    MeanExecDurationMs,
+    MaxExecDurationMs,
+    Calls,
+    Rows
+| order by MeanExecDurationMs desc, QueryId asc
+| limit 100

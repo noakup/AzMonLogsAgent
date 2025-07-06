@@ -1,0 +1,13 @@
+[
+    {
+        "TimeGenerated": "2016-04-09T00:00:00Z",
+        "OperationName": "ApplicationGatewayPerformance",
+        "InstanceId": "ApplicationGatewayRole_IN_1",
+        "HealthyHostCount": 4,
+        "UnHealthyHostCount": 0,
+        "RequestCount": 185,
+        "Latency": 0,
+        "FailedRequestCount": 0,
+        "Throughput": 119427
+    }
+]

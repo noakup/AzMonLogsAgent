@@ -1,0 +1,122 @@
+{
+  "name": "AWSGuardDuty",
+  "description": "VPC Flow Logs, which ingested from Sentinel's connector, enables you to capture IP traffic going to and from your AWS VPC network interfaces.",
+  "input": [
+    {
+      "name": "version",
+      "type": "String"
+    },
+    {
+      "name": "account-id",
+      "type": "String"
+    },
+    {
+      "name": "interface-id",
+      "type": "String"
+    },
+    {
+      "name": "srcaddr",
+      "type": "String"
+    },
+    {
+      "name": "dstaddr",
+      "type": "String"
+    },
+    {
+      "name": "srcport",
+      "type": "String"
+    },
+    {
+      "name": "dstport",
+      "type": "String"
+    },
+    {
+      "name": "protocol",
+      "type": "String"
+    },
+    {
+      "name": "packets",
+      "type": "String"
+    },
+    {
+      "name": "bytes",
+      "type": "String"
+    },
+    {
+      "name": "start",
+      "type": "String"
+    },
+    {
+      "name": "end",
+      "type": "String"
+    },
+    {
+      "name": "action",
+      "type": "String"
+    },
+    {
+      "name": "log-status",
+      "type": "String"
+    },
+    {
+      "name": "vpc-id",
+      "type": "String"
+    },
+    {
+      "name": "subnet-id",
+      "type": "String"
+    },
+    {
+      "name": "instance-id",
+      "type": "String"
+    },
+    {
+      "name": "tcp-flags",
+      "type": "String"
+    },
+    {
+      "name": "type",
+      "type": "String"
+    },
+    {
+      "name": "pkt-srcaddr",
+      "type": "String"
+    },
+    {
+      "name": "pkt-dstaddr",
+      "type": "String"
+    },
+    {
+      "name": "region",
+      "type": "String"
+    },
+    {
+      "name": "az-id",
+      "type": "String"
+    },
+    {
+      "name": "sublocation-type",
+      "type": "String"
+    },
+    {
+      "name": "sublocation-id",
+      "type": "String"
+    },
+    {
+      "name": "pkt-src-aws-service",
+      "type": "String"
+    },
+    {
+      "name": "pkt-dst-aws-service",
+      "type": "String"
+    },
+    {
+      "name": "flow-direction",
+      "type": "String"
+    },
+    {
+      "name": "traffic-path",
+      "type": "String"
+    }
+  ]
+}

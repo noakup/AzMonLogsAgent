@@ -1,0 +1,7 @@
+ACSCallDiagnostics
+// Classify packet loss rate quality as Poor or Good based on
+// whether the average packet loss rate is higher than 10%
+| project PacketLossRateQuality = iff(PacketLossRateAvg > 0.1, "Poor", "Good")
+// Count the number of streams per packet loss rate quality
+| summarize count() by PacketLossRateQuality
+| render piechart title="Packet Loss Rate Quality"

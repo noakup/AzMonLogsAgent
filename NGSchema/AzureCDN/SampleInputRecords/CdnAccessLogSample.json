@@ -1,0 +1,34 @@
+[
+    {
+        "time": "2023-03-23T05:50:07.0400428Z",
+        "resourceId": "/SUBSCRIPTIONS/F0DA40CF-2C34-493A-AF4C-020BEAB713F8/RESOURCEGROUPS/OMNI/PROVIDERS/MICROSOFT.CDN/PROFILES/PUSHOMNISYSTEMCDN",
+        "category": "AzureCdnAccessLog",
+        "operationName": "Microsoft.Cdn/Profiles/AccessLog/Write",
+        "properties": {
+            "trackingReference": "0j+gbZAAAAABteNkeZRk/S6WjxJYBE4WBQ0gxQUEyMDIwNjA2MDUxAGU4OGFiZjViLWJhMWYtNDEzNy05MjcwLTAzYjBiNGNjNzZmOA==",
+            "httpMethod": "GET",
+            "httpVersion": "2.0.0.0",
+            "requestUri": "https://pushomnimedia.azureedge.net:443/icons/f8db0472-2618-4d5e-bd17-1e2aa238f08c.png",
+            "requestBytes": "610",
+            "responseBytes": "624",
+            "userAgent": "Mozilla/5.0 (Linux; Android 11; Elite J55US) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.210 Mobile Safari/537.36",
+            "clientIp": "2600:6c4a:7bf0:8350:48fb:72c7:bfcf:1ba4",
+            "socketIp": "2600:6c4a:7bf0:8350:48fb:72c7:bfcf:1ba4",
+            "clientPort": "47904",
+            "timeToFirstByte": "0.003",
+            "timeTaken": "0.003",
+            "requestProtocol": "HTTPS",
+            "securityProtocol": "TLS 1.2",
+            "endpoint": "pushomnimedia.azureedge.net",
+            "rulesEngineMatchNames": ["rulename"],
+            "backendHostname": "",
+            "isReceivedFromClient": true,
+            "httpStatusCode": "304",
+            "httpStatusDetails": "304",
+            "pop": "CH",
+            "cacheStatus": "HIT",
+            "errorInfo": "NoError",
+            "ErrorInfo": "NoError"
+        }
+    }
+]

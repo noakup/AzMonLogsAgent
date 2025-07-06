@@ -1,0 +1,15 @@
+AmlOnlineEndpointEventLog
+| where Message contains "failed"
+| parse kind=regex flags=i _ResourceId with ".*?/RESOURCEGROUPS/" ResourceGroup "/PROVIDERS/MICROSOFT.MACHINELEARNINGSERVICES/WORKSPACES/" Workspace "/ONLINEENDPOINTS/" EndpointName
+| project
+    TimeGenerated,
+    Subscription = _SubscriptionId,
+    ResourceGroup,
+    Workspace,
+    EndpointName,
+    DeploymentName,
+    InstanceId,
+    Name,
+    Message
+| order by TimeGenerated desc
+| take 100

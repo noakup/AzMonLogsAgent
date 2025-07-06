@@ -1,0 +1,21 @@
+source 
+| extend properties_p = parse_json(properties)
+| project
+    TimeGenerated =todatetime(["time"]), 
+    RequestTime = todatetime(properties_p["requestTime"]),
+    ResponseTime = todatetime(properties_p["responseTime"]),
+    ApiName = tostring(properties_p["apiName"]),
+    OperationName = operationName,
+    ResponseCode = toint(resultSignature),
+    DurationMs = toint(durationMs),
+    RequestLength = toint(properties_p["requestLength"]),
+    ResponseLength = toint(properties_p["responseLength"]),
+    RequestId = correlationId,
+    CallerIpAddress = callerIpAddress,
+    Location = location,
+    ModelName = tostring(properties_p["modelName"]),
+    ModelVersion = tostring(properties_p["modelVersion"]),
+    ModelDeploymentName = tostring(properties_p["modelDeploymentName"]),
+    StreamType = tostring(properties_p["streamType"])
+
+    

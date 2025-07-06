@@ -1,0 +1,6 @@
+ADFSSignInLogs
+| where TimeGenerated > ago(7d)
+| extend errorCode = toint(parse_json(Status).errorCode)
+| where errorCode == 300300
+| summarize Lockouts = count() by IPAddress
+| top 10 by Lockouts

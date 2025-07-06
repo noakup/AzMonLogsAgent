@@ -1,0 +1,17 @@
+source
+| project
+    TimeGenerated = now(),
+    ApplicationId = ApplicationId,
+    Entity = Entity,
+    EntityId = EntityId,
+    ParentId = ParentId,
+	MetricId = MetricId,
+    MetricName = MetricName,
+    MetricValue = tolong(Value),
+    ClusterTenantId = Tenant,
+	Role = Role,
+	Host = iff(isempty(Host), RoleInstance, Host),
+	ClusterDnsName = ClusterDnsName,
+	Region = Region,
+	IpAddress = IpAddress,
+	UserSubscriptionId = UserSubscriptionId

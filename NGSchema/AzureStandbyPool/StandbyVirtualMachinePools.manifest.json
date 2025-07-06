@@ -1,0 +1,244 @@
+{
+  "type": "microsoft.standbypool/standbyvirtualmachinepools",
+  "displayName": "Microsoft.StandbyPool",
+  "description": "Standby pools improve scaling performance by pre-provisioning virtual machines, which can be quickly moved into the scale set, either in a running or stopped state, significantly reducing the time needed to scale out.",
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "AzureRT/Pool Management Service (PMaaS)",
+  "contactDL": "pmaashot@microsoft.com",
+  "relatedTables": [ ],
+  "relatedFunctions": [ ],
+
+  "tables": [
+    {
+      "name": "SVMPoolExecutionLog",
+      "description": "Contains Execution Logs for a StandbyVirtualMachinePool, which can be used for audit and troubleshooting.",
+      "categories": [ "audit", "monitor" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 2,
+      "dataTypeId": "MICROSOFTSTANDBYPOOL_EXECUTION",
+      "intelligencePacks": [],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "Tenant",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "Kql/Transforms/vmexecuteTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "description": "Time (UTC) when the log was created.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "description": "The resource operation name for the log.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "EventName",
+          "description": "The event that occurred during the operation.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "description": "The region where the event occurred during the operation.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ErrorMessage",
+          "description": "The message associated with an error that occurred during the operation.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Message",
+          "description": "A non-Error message associated with an event that occurred during the operation.",
+          "type": "String",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/VirtualMachineExecuteSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/VirtualMachineExecuteSample.json"
+    },
+    {
+      "name": "SVMPoolRequestLog",
+      "description": "Contains Request Logs for a StandbyVirtualMachinePool, which can be used for audit and troubleshooting.",
+      "categories": [ "audit" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 3,
+      "dataTypeId": "MICROSOFTSTANDBYPOOL_REQUEST",
+      "isChangeColumnInternalNameAllowed": true,
+      "intelligencePacks": [],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "Tenant",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "Kql/Transforms/vmrequestTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "description": "Time (UTC) when the log was created.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "description": "The resource operation name for the log.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "EventName",
+          "description": "The event that occurred during the operation.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "description": "The region where the event occurred during the operation.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "transformName": "NewMinCapacity",
+          "physicalName": "NewMinCapacity_Internal",
+          "logicalName": "NewMinCapacity",
+          "description": "The new minimum number of vms for the standbypool as set by the user.",
+          "type": "Int",
+          "isDefaultDisplay": true
+        },
+        {
+          "transformName": "NewMaxCapacity",
+          "physicalName": "NewMaxCapacity_Internal",
+          "logicalName": "NewMaxCapacity",
+          "description": "The new maximum number of vms for the standbypool as set by the user.",
+          "type": "Int",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "NewResourceState",
+          "description": "The new resource state for the vms in the standbypool as set by the user.",
+          "type": "String",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/VirtualMachineRequestSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/VirtualMachineRequestSample.json"
+    }
+
+  ],
+
+  "functions": [],
+
+  "queries": [
+    {
+      "id": "d76e62a6-9777-4e9c-a455-1d2541deaaf2",
+      "displayName": "Degraded Pool Events",
+      "description": "A list of times when the pool got into a degraded state.",
+      "bodyFilePath": "Kql/Queries/VMDegraded.kql",
+      "categories": [
+        "monitor"
+      ],
+      "relatedTables": [
+        "SVMPoolRequestLog"
+      ],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "485749e7-4fa6-4e11-80f7-ef1696cd7736", 
+      "displayName": "Max Settings Updated Pool Events",
+      "description": "A list of times when the max capacity count was increased in settings.",
+      "bodyFilePath": "Kql/Queries/VMMaxSettings.kql",
+      "categories": [
+        "audit"
+      ],
+      "relatedTables": [
+        "SVMPoolExecutionLog"
+      ],
+      "tags": {
+        "Topic": [
+          "Audit"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    }
+  ]
+}

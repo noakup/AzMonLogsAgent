@@ -1,0 +1,12 @@
+// If required to get the snapshot on a certain date and time just filter on TimeGenerated column, like:
+// where TimeGenerated between (datetime('2023-03-01 16:00') .. datetime('2023-03-01 19:00'))
+PGSQLAutovacuumStats
+| extend ts=bin(TimeGenerated,5m)
+| summarize arg_max(ts,LiveRowsCount,DeadRowsCount) by DatabaseName, SchemaName
+| where DatabaseName !in ('azure_maintenance', 'azure_sys') //exclude system database
+| where SchemaName !in ('pg_catalog','information_schema', 'pg_toast') //exclude system schemas
+| summarize TotalLiveRows=sum(LiveRowsCount), TotalDeadRows=sum(DeadRowsCount) by DatabaseName
+| extend BloatRatio=toreal(TotalDeadRows)/toreal(TotalLiveRows)*100
+| extend BloatRatio = iff( isnan(BloatRatio), 0.0, BloatRatio)
+| project DatabaseName,TotalLiveRows,TotalDeadRows, BloatRatio
+| order by BloatRatio desc 

@@ -1,0 +1,75 @@
+[
+  {
+    "time": "2023-02-05 05:32:47.4887206",
+    "resourceId": "/SUBSCRIPTIONS/509099B2-9D2C-4636-B43E-BD5CAFB6BE69/RESOURCEGROUPS/PRMYAKA-CCY/PROVIDERS/MICROSOFT.RECOVERYSERVICES/VAULTS/TEST-CLUSTER",
+    "operationName": "AzureSiteRecoveryReplicatedItems",
+    "category": "AzureSiteRecoveryReplicatedItemDetails",
+    "location": "centraluseuap",
+    "properties": {
+      "initialReplicationProgressPercentage": 66.0,
+      "lastSuccessfulTestFailoverTime": null,
+      "recoveryServicesProviderId": "03dcc9dc-c907-566d-a56e-cf14e5ef74b4",
+      "lastSuccessfulFailoverTime": null,
+      "replicationHealthErrors": null,
+      "replicationProviderName": "A2A",
+      "targetStorageAccountName": null,
+      "version": "2016-12-05T00:00:00Z",
+      "targetStorageAccountId": null,
+      "lastRpoCalculatedTime": "2023-02-05T05:20:58.4349366Z",
+      "recoveryContainerName": null,
+      "failoverHealthErrors": [
+        {
+          "creationTime": "2023-02-04T23:01:08.8238559Z",
+          "errorMessage": "No successful test failover has been done on the virtual machine 'cluster4vm0'.",
+          "possibleCauses": "No successful test failover has been done on the virtual machine after it was replicated.",
+          "recommendation": "Do a test failover on the virtual machine.",
+          "version": "2016-12-05T00:00:00Z",
+          "errorCategory": "TestFailover",
+          "errorLevel": "Warning",
+          "errorCode": 161011
+        }
+      ],
+      "primaryContainerName": null,
+      "logStorageAccountId": null,
+      "recoveryFabricName": "Central US EUAP",
+      "recoveryFabricType": "Azure",
+      "primaryFabricName": "East US",
+      "replicationHealth": "Normal",
+      "primaryFabricType": "Azure",
+      "recoveryNetworkId": "/subscriptions/509099b2-9d2c-4636-b43e-bd5cafb6be69/resourcegroups/prmyaka-ccy/providers/microsoft.network/virtualnetworks/recvnet-asr",
+      "protectionState": "Protected",
+      "multiVmSyncStatus": "Enabled",
+      "multiVmGroupCreateOption": "UserSpecified",
+      "multiVmGroupName": "multiVmGroupmCluster",
+      "activeLocation": "Primary",
+      "failoverHealth": "Warning",
+      "correlationId": "/subscriptions/509099b2-9d2c-4636-b43e-bd5cafb6be69/resourceGroups/Prmyaka-CCY/providers/Microsoft.RecoveryServices/vaults/test-cluster/replicationFabrics/fabric-pri-eastus/replicationProtectionContainers/pri-cloud-eastus/replicationProtectedItems/Protected-WSFCluster40",
+      "lastHeartbeat": "2023-02-05T05:27:40.9287359Z",
+      "healthErrors": null,
+      "multiVmGroupId": "8b890180-7adc-571e-828f-88ab950b2f76",
+      "rpoInSeconds": 22728,
+      "agentVersion": "9.54.6584.1",
+      "policyName": "policy",
+      "targetVmNicDetails": [
+        {
+          "targetIpAllocationMethod": "Dynamic",
+          "sourceNicName": "cluster40-nic",
+          "targetIp": ""
+        }
+      ],
+      "itemType": "Azure Virtual Machine",
+      "osFamily": "Windows",
+      "recoveryRegion": "centraluseuap",
+      "name": "cluster4vm0",
+      "id": "fbc43407-ac62-4405-a4b9-90e1534ce05e",
+      "replicatedItemFriendlyName": "cluster4vm0",
+      "replicatedItemUniqueId": "c3c805f6-54f2-547f-8909-c839783a8c36_d1ecc1ab-e961-5712-9ba5-e3a1263bd35a",
+      "datasourceResourceId": "/subscriptions/509099b2-9d2c-4636-b43e-bd5cafb6be69/resourcegroups/prmyaka-eus/providers/microsoft.compute/virtualmachines/cluster4vm0",
+      "replicatedItemId": "/subscriptions/509099b2-9d2c-4636-b43e-bd5cafb6be69/resourceGroups/Prmyaka-CCY/providers/Microsoft.RecoveryServices/vaults/test-cluster/replicationFabrics/East US/replicationProtectionContainers/pri-cloud-eastus/replicationProtectedItems/d1ecc1ab-e961-5712-9ba5-e3a1263bd35a",
+      "policyUniqueId": "39f3f831-ab4b-53ee-a65e-4c6e97b88b03",
+      "vaultLocation": "Central US EUAP",
+      "policyArmId": "/subscriptions/509099b2-9d2c-4636-b43e-bd5cafb6be69/resourceGroups/Prmyaka-CCY/providers/Microsoft.RecoveryServices/vaults/test-cluster/replicationPolicies/policy",
+      "datasourceResourceGroup": "prmyaka-eus"
+    }
+  }
+]

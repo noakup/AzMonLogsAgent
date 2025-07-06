@@ -1,0 +1,4 @@
+Heartbeat
+| lookup kind=leftouter _GetWatchlist('mywatchlist')
+ on $left.ComputerIP == $right.SearchKey
+ | limit 100

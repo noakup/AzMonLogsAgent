@@ -1,0 +1,19 @@
+source
+| project
+    TimeGenerated = todatetime(['time']),
+    EventClass = tostring(properties.event_class),
+    EventSubclass = tostring(properties.event_subclass),
+    ConnectionId = tostring(properties.connection_id),
+    EventTime = todatetime(properties.event_time),
+    ErrorCode = toint(properties.error_code),
+    ThreadId = toint(properties.thread_id),
+    Host = tostring(properties.host),
+    Ip = tostring(properties.ip),
+    User = tostring(properties.user),
+    Db = tostring(properties.db),
+    Table = tostring(properties.table),
+    SqlText = tostring(properties.sql_text),
+    Status = toint(properties.status),
+    Category = tostring(properties.category),
+    IsAadAuth = tostring(properties.is_aad_auth),
+    ReplicationSetRole = tostring(properties.replication_set_role)

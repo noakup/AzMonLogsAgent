@@ -1,0 +1,1128 @@
+[
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "code": 9,
+        "message": "There is already a pending blocking operation 76f434c5-188f-4067-9601-d14e00000032 with type UPDATE for instance: msccp-test:quickstart-instance"
+      },
+      "authenticationInfo": {
+        "principalEmail": "scuba@np-lab.co.il",
+        "principalSubject": "user:scuba@np-lab.co.il"
+      },
+      "requestMetadata": {
+        "callerIp": "34.142.242.114",
+        "requestAttributes": {
+          "time": "2025-05-13T14:45:20.282480Z",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "cloudsql.googleapis.com",
+      "methodName": "cloudsql.instances.update",
+      "authorizationInfo": [
+        {
+          "resource": "projects/msccp-test/instances/quickstart-instance",
+          "permission": "cloudsql.instances.update",
+          "granted": true,
+          "resourceAttributes": {
+            "service": "sqladmin.googleapis.com",
+            "name": "projects/msccp-test/instances/quickstart-instance",
+            "type": "sqladmin.googleapis.com/Instance"
+          },
+          "permissionType": "ADMIN_WRITE"
+        }
+      ],
+      "resourceName": "projects/msccp-test/instances/quickstart-instance",
+      "request": {
+        "body": {
+          "kind": "sql#instance",
+          "project": "msccp-test",
+          "backendType": "SECOND_GEN",
+          "settings": {
+            "dataCacheConfig": {
+              "dataCacheEnabled": true
+            },
+            "replicationLagMaxSeconds": 31536000,
+            "tier": "db-perf-optimized-N-64",
+            "storageAutoResizeLimit": "0",
+            "availabilityType": "ZONAL",
+            "dataDiskType": "PD_SSD",
+            "deletionProtectionEnabled": true,
+            "locationPreference": {
+              "kind": "sql#locationPreference",
+              "zone": "us-central1-a"
+            },
+            "edition": "ENTERPRISE_PLUS",
+            "pricingPlan": "PER_USE",
+            "retainBackupsOnDelete": false,
+            "backupConfiguration": {
+              "binaryLogEnabled": true,
+              "location": "us",
+              "startTime": "05:00",
+              "enabled": true,
+              "backupRetentionSettings": {
+                "retainedBackups": 15,
+                "retentionUnit": "COUNT"
+              },
+              "kind": "sql#backupConfiguration",
+              "backupTier": "STANDARD",
+              "transactionalLogStorageState": "CLOUD_STORAGE",
+              "transactionLogRetentionDays": 14
+            },
+            "storageAutoResize": true,
+            "maintenanceWindow": {
+              "updateTrack": "stable",
+              "kind": "sql#maintenanceWindow",
+              "hour": 0,
+              "day": 0
+            },
+            "connectorEnforcement": "NOT_REQUIRED",
+            "replicationType": "SYNCHRONOUS",
+            "databaseFlags": [
+              {
+                "value": "ON",
+                "name": "audit_log"
+              }
+            ],
+            "kind": "sql#settings",
+            "ipConfiguration": {
+              "ipv4Enabled": true,
+              "requireSsl": false,
+              "serverCaMode": "GOOGLE_MANAGED_CAS_CA",
+              "sslMode": "ALLOW_UNENCRYPTED_AND_ENCRYPTED",
+              "enablePrivatePathForGoogleCloudServices": false,
+              "authorizedNetworks": [
+                {
+                  "name": "sql connect at time 2025-05-13 14:45:19.359456+00:00",
+                  "kind": "sql#aclEntry",
+                  "expirationTime": "2025-05-13T14:50:19.010Z",
+                  "value": "CLIENT_IP"
+                }
+              ]
+            },
+            "activationPolicy": "ALWAYS",
+            "insightsConfig": {},
+            "dataDiskSizeGb": "500",
+            "settingsVersion": "26"
+          },
+          "name": "quickstart-instance",
+          "state": "MAINTENANCE",
+          "availableMaintenanceVersions": [
+            "MYSQL_8_0_40.R20250304.00_03"
+          ],
+          "instanceType": "CLOUD_SQL_INSTANCE",
+          "etag": "6054acdfa370791d56d9ff593cdcbfa95fa102fd7165a2dd9b983553c1d1be03",
+          "geminiConfig": {
+            "flagRecommenderEnabled": true,
+            "indexAdvisorEnabled": false,
+            "entitled": false,
+            "activeQueryEnabled": false
+          },
+          "createTime": "2025-05-02T08:59:19.045Z",
+          "sqlNetworkArchitecture": "NEW_NETWORK_ARCHITECTURE",
+          "includeReplicasForMajorVersionUpgrade": false,
+          "databaseInstalledVersion": "MYSQL_8_0_40",
+          "ipAddresses": [
+            {
+              "ipAddress": "34.122.109.140",
+              "type": "PRIMARY"
+            }
+          ],
+          "connectionName": "msccp-test:us-central1:quickstart-instance",
+          "region": "us-central1",
+          "maintenanceVersion": "MYSQL_8_0_40.R20250304.00_01",
+          "dnsNames": [
+            {
+              "dnsScope": "INSTANCE",
+              "name": "38e1ea06f1c1.3ovnts480bdk6.us-central1.sql.goog.",
+              "connectionType": "PUBLIC"
+            }
+          ],
+          "gceZone": "us-central1-a",
+          "serviceAccountEmailAddress": "p135492226944-62r197@gcp-sa-cloud-sql.iam.gserviceaccount.com",
+          "selfLink": "https://sqladmin.googleapis.com/sql/v1beta4/projects/msccp-test/instances/quickstart-instance",
+          "upgradableDatabaseVersions": [
+            {
+              "displayName": "MySQL 8.0.35",
+              "majorVersion": "MYSQL_8_0",
+              "name": "MYSQL_8_0_35"
+            },
+            {
+              "displayName": "MySQL 8.0.36",
+              "majorVersion": "MYSQL_8_0",
+              "name": "MYSQL_8_0_36"
+            },
+            {
+              "displayName": "MySQL 8.0.37",
+              "name": "MYSQL_8_0_37",
+              "majorVersion": "MYSQL_8_0"
+            },
+            {
+              "displayName": "MySQL 8.0.39",
+              "name": "MYSQL_8_0_39",
+              "majorVersion": "MYSQL_8_0"
+            },
+            {
+              "displayName": "MySQL 8.0.41",
+              "majorVersion": "MYSQL_8_0",
+              "name": "MYSQL_8_0_41"
+            }
+          ],
+          "satisfiesPzi": false,
+          "dnsName": "38e1ea06f1c1.3ovnts480bdk6.us-central1.sql.goog.",
+          "databaseVersion": "MYSQL_8_0_40"
+        },
+        "instance": "quickstart-instance",
+        "project": "msccp-test",
+        "@type": "type.googleapis.com/google.cloud.sql.v1beta4.SqlInstancesPatchRequest"
+      }
+    },
+    "insertId": "gekztve14ze0",
+    "resource": {
+      "type": "cloudsql_database",
+      "labels": {
+        "region": "us-central1",
+        "project_id": "msccp-test",
+        "database_id": "msccp-test:quickstart-instance"
+      }
+    },
+    "timestamp": "2025-05-13T14:45:20.247731Z",
+    "severity": "ERROR",
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2025-05-13T14:45:20.415765145Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "scuba@np-lab.co.il"
+      },
+      "requestMetadata": {
+        "callerIp": "121.241.55.74",
+        "requestAttributes": {
+          "time": "2025-05-14T07:02:08.243200Z",
+          "reason": "8uSywAYQGg5Db2xpc2V1bSBGbG93cw",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "cloudsql.googleapis.com",
+      "methodName": "cloudsql.instances.create",
+      "authorizationInfo": [
+        {
+          "resource": "projects/msccp-test",
+          "permission": "cloudsql.instances.create",
+          "granted": true,
+          "resourceAttributes": {
+            "service": "sqladmin.googleapis.com",
+            "name": "projects/msccp-test/instances/ckeckcreaterm",
+            "type": "sqladmin.googleapis.com/Instance"
+          },
+          "permissionType": "ADMIN_WRITE"
+        }
+      ],
+      "resourceName": "projects/msccp-test",
+      "request": {
+        "body": {
+          "databaseVersion": "POSTGRES_15",
+          "settings": {
+            "backupConfiguration": {
+              "transactionLogRetentionDays": 14,
+              "pointInTimeRecoveryEnabled": true,
+              "location": "us",
+              "backupRetentionSettings": {
+                "retainedBackups": 16
+              },
+              "enabled": true,
+              "startTime": "05:00"
+            },
+            "retainBackupsOnDelete": false,
+            "availabilityType": "REGIONAL",
+            "storageAutoResize": true,
+            "ipConfiguration": {
+              "serverCaMode": "GOOGLE_MANAGED_INTERNAL_CA",
+              "ipv4Enabled": true
+            },
+            "insightsConfig": {},
+            "tier": "db-perf-optimized-N-8",
+            "dataCacheConfig": {
+              "dataCacheEnabled": true
+            },
+            "deletionProtectionEnabled": true,
+            "dataDiskType": "PD_SSD",
+            "enableGoogleMlIntegration": false,
+            "activationPolicy": "ALWAYS",
+            "locationPreference": {},
+            "connectionPoolConfig": {},
+            "edition": "ENTERPRISE_PLUS",
+            "dataDiskSizeGb": "250",
+            "maintenanceWindow": {
+              "updateTrack": "stable"
+            }
+          },
+          "backendType": "SECOND_GEN",
+          "name": "ckeckcreaterm",
+          "instanceType": "CLOUD_SQL_INSTANCE",
+          "region": "us-central1",
+          "instanceUid": "1-7bef6bdb-6c88-48bb-8c42-8fd31bec9f2c",
+          "project": "msccp-test"
+        },
+        "project": "msccp-test",
+        "@type": "type.googleapis.com/google.cloud.sql.v1beta4.SqlInstancesInsertRequest",
+        "requestId": "d49d3496-2ace-46e2-b1e5-74a46f3715d4"
+      },
+      "response": {
+        "user": "scuba@np-lab.co.il",
+        "kind": "sql#operation",
+        "targetLink": "https://www.googleapis.com/sql/v1beta4/projects/msccp-test/instances/ckeckcreaterm",
+        "@type": "type.googleapis.com/google.cloud.sql.v1beta4.Operation",
+        "insertTime": "2025-05-14T07:02:08.205Z",
+        "targetProject": "msccp-test",
+        "targetId": "ckeckcreaterm",
+        "name": "cf091902-811c-4812-828e-091500000032",
+        "instanceUid": "1-7bef6bdb-6c88-48bb-8c42-8fd31bec9f2c",
+        "selfLink": "https://www.googleapis.com/sql/v1beta4/projects/msccp-test/operations/cf091902-811c-4812-828e-091500000032",
+        "status": "PENDING",
+        "operationType": "CREATE"
+      }
+    },
+    "insertId": "-rfgfj7e2x97u",
+    "resource": {
+      "type": "cloudsql_database",
+      "labels": {
+        "database_id": "msccp-test:ckeckcreaterm",
+        "project_id": "msccp-test",
+        "region": "us-central1"
+      }
+    },
+    "timestamp": "2025-05-14T07:02:07.462291Z",
+    "severity": "NOTICE",
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Factivity",
+    "operation": {
+      "id": "cf091902-811c-4812-828e-091500000032",
+      "producer": "cloudsql.googleapis.com",
+      "first": true
+    },
+    "receiveTimestamp": "2025-05-14T07:02:09.172366552Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "scuba@np-lab.co.il"
+      },
+      "requestMetadata": {
+        "callerIp": "121.241.55.74",
+        "requestAttributes": {
+          "time": "2025-05-16T05:09:54.799127Z",
+          "reason": "8uSywAYQGg5Db2xpc2V1bSBGbG93cw",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "cloudsql.googleapis.com",
+      "methodName": "cloudsql.instances.create",
+      "authorizationInfo": [
+        {
+          "resource": "projects/msccp-test",
+          "permission": "cloudsql.instances.create",
+          "granted": true,
+          "resourceAttributes": {
+            "service": "sqladmin.googleapis.com",
+            "name": "projects/msccp-test/instances/mysqlinstance-replica",
+            "type": "sqladmin.googleapis.com/Instance"
+          },
+          "permissionType": "ADMIN_WRITE"
+        }
+      ],
+      "resourceName": "projects/msccp-test",
+      "request": {
+        "requestId": "1fe57fe6-2844-4f38-b088-d139e13cb599",
+        "project": "msccp-test",
+        "body": {
+          "databaseVersion": "MYSQL_8_0_40",
+          "backendType": "SECOND_GEN",
+          "region": "us-central1",
+          "project": "msccp-test",
+          "instanceUid": "1-670756e8-8884-4303-bb6d-e6293d0bcf38",
+          "masterInstanceName": "mysqlinstance",
+          "name": "mysqlinstance-replica",
+          "instanceType": "READ_REPLICA_INSTANCE",
+          "settings": {
+            "backupConfiguration": {
+              "binaryLogEnabled": false,
+              "enabled": false
+            },
+            "insightsConfig": {},
+            "activeDirectoryConfig": {},
+            "sqlServerAuditConfig": {
+              "retentionInterval": "0s",
+              "uploadInterval": "0s"
+            },
+            "edition": "ENTERPRISE_PLUS",
+            "connectionPoolConfig": {},
+            "dataDiskSizeGb": "250",
+            "activationPolicy": "ALWAYS",
+            "retainBackupsOnDelete": false,
+            "dataDiskType": "PD_SSD",
+            "locationPreference": {
+              "zone": "us-central1-c"
+            },
+            "settingsVersion": "6",
+            "tier": "db-perf-optimized-N-8",
+            "storageAutoResize": true,
+            "ipConfiguration": {
+              "pscConfig": {
+                "pscEnabled": false
+              },
+              "enablePrivatePathForGoogleCloudServices": false,
+              "serverCaMode": "GOOGLE_MANAGED_INTERNAL_CA",
+              "ipv4Enabled": true
+            },
+            "availabilityType": "ZONAL",
+            "deletionProtectionEnabled": true,
+            "dataCacheConfig": {}
+          },
+          "masterInstance": {
+            "region": "us-central1",
+            "name": "mysqlinstance"
+          }
+        },
+        "@type": "type.googleapis.com/google.cloud.sql.v1beta4.SqlInstancesInsertRequest"
+      },
+      "response": {
+        "targetProject": "msccp-test",
+        "targetLink": "https://www.googleapis.com/sql/v1beta4/projects/msccp-test/instances/mysqlinstance",
+        "selfLink": "https://www.googleapis.com/sql/v1beta4/projects/msccp-test/operations/f844a83d-3ca2-4296-8ab7-cafb00000032",
+        "instanceUid": "1-1b9b9e0e-b8f9-4551-9df1-593b66fde834",
+        "targetId": "mysqlinstance",
+        "@type": "type.googleapis.com/google.cloud.sql.v1beta4.Operation",
+        "user": "scuba@np-lab.co.il",
+        "insertTime": "2025-05-16T05:09:54.757Z",
+        "status": "PENDING",
+        "name": "f844a83d-3ca2-4296-8ab7-cafb00000032",
+        "operationType": "CREATE_REPLICA",
+        "kind": "sql#operation"
+      }
+    },
+    "insertId": "-itu9wue5hflu",
+    "resource": {
+      "type": "cloudsql_database",
+      "labels": {
+        "database_id": "msccp-test:mysqlinstance-replica",
+        "project_id": "msccp-test",
+        "region": "us-central1"
+      }
+    },
+    "timestamp": "2025-05-16T05:09:53.446225Z",
+    "severity": "NOTICE",
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Factivity",
+    "operation": {
+      "id": "f844a83d-3ca2-4296-8ab7-cafb00000032",
+      "producer": "cloudsql.googleapis.com",
+      "first": true
+    },
+    "receiveTimestamp": "2025-05-16T05:09:55.734174265Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "scuba@np-lab.co.il",
+        "principalSubject": "user:scuba@np-lab.co.il"
+      },
+      "requestMetadata": {
+        "callerIp": "34.143.168.174",
+        "requestAttributes": {
+          "time": "2025-05-16T11:05:32.467109Z",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "cloudsql.googleapis.com",
+      "methodName": "cloudsql.instances.update",
+      "authorizationInfo": [
+        {
+          "resource": "projects/msccp-test/instances/usercreating",
+          "permission": "cloudsql.instances.update",
+          "granted": true,
+          "resourceAttributes": {
+            "service": "sqladmin.googleapis.com",
+            "name": "projects/msccp-test/instances/usercreating",
+            "type": "sqladmin.googleapis.com/Instance"
+          },
+          "permissionType": "ADMIN_WRITE"
+        }
+      ],
+      "resourceName": "projects/msccp-test/instances/usercreating",
+      "request": {
+        "project": "msccp-test",
+        "@type": "type.googleapis.com/google.cloud.sql.v1beta4.SqlInstancesPatchRequest",
+        "body": {
+          "failoverReplica": {
+            "available": true
+          },
+          "backendType": "SECOND_GEN",
+          "instanceType": "CLOUD_SQL_INSTANCE",
+          "createTime": "2025-05-16T09:59:51.454Z",
+          "selfLink": "https://sqladmin.googleapis.com/sql/v1beta4/projects/msccp-test/instances/usercreating",
+          "ipAddresses": [
+            {
+              "ipAddress": "104.197.35.170",
+              "type": "PRIMARY"
+            }
+          ],
+          "gceZone": "us-central1-a",
+          "etag": "72026e6eefb5522a582aa6c5408fc47e49b4c6a30c0a769a9e28571a5b2debd4",
+          "upgradableDatabaseVersions": [
+            {
+              "majorVersion": "MYSQL_8_0",
+              "name": "MYSQL_8_0_35",
+              "displayName": "MySQL 8.0.35"
+            },
+            {
+              "name": "MYSQL_8_0_36",
+              "displayName": "MySQL 8.0.36",
+              "majorVersion": "MYSQL_8_0"
+            },
+            {
+              "name": "MYSQL_8_0_37",
+              "displayName": "MySQL 8.0.37",
+              "majorVersion": "MYSQL_8_0"
+            },
+            {
+              "majorVersion": "MYSQL_8_0",
+              "displayName": "MySQL 8.0.39",
+              "name": "MYSQL_8_0_39"
+            },
+            {
+              "displayName": "MySQL 8.0.41",
+              "majorVersion": "MYSQL_8_0",
+              "name": "MYSQL_8_0_41"
+            },
+            {
+              "displayName": "MySQL 8.0.42",
+              "majorVersion": "MYSQL_8_0",
+              "name": "MYSQL_8_0_42"
+            },
+            {
+              "displayName": "MySQL 8.4",
+              "majorVersion": "MYSQL_8_4",
+              "name": "MYSQL_8_4"
+            }
+          ],
+          "kind": "sql#instance",
+          "state": "RUNNABLE",
+          "region": "us-central1",
+          "serviceAccountEmailAddress": "p135492226944-llzb1f@gcp-sa-cloud-sql.iam.gserviceaccount.com",
+          "project": "msccp-test",
+          "databaseVersion": "MYSQL_8_0_40",
+          "secondaryGceZone": "us-central1-f",
+          "databaseInstalledVersion": "MYSQL_8_0_40",
+          "connectionName": "msccp-test:us-central1:usercreating",
+          "sqlNetworkArchitecture": "NEW_NETWORK_ARCHITECTURE",
+          "name": "usercreating",
+          "satisfiesPzi": false,
+          "settings": {
+            "dataCacheConfig": {
+              "dataCacheEnabled": true
+            },
+            "locationPreference": {
+              "kind": "sql#locationPreference",
+              "zone": "us-central1-a"
+            },
+            "dataDiskType": "PD_SSD",
+            "storageAutoResize": true,
+            "settingsVersion": "7",
+            "availabilityType": "REGIONAL",
+            "activationPolicy": "ALWAYS",
+            "insightsConfig": {},
+            "replicationLagMaxSeconds": 31536000,
+            "connectorEnforcement": "NOT_REQUIRED",
+            "dataDiskSizeGb": "250",
+            "replicationType": "SYNCHRONOUS",
+            "pricingPlan": "PER_USE",
+            "retainBackupsOnDelete": false,
+            "kind": "sql#settings",
+            "maintenanceWindow": {
+              "day": 0,
+              "hour": 0,
+              "kind": "sql#maintenanceWindow",
+              "updateTrack": "stable"
+            },
+            "deletionProtectionEnabled": true,
+            "storageAutoResizeLimit": "0",
+            "backupConfiguration": {
+              "location": "us",
+              "enabled": true,
+              "startTime": "14:00",
+              "backupRetentionSettings": {
+                "retainedBackups": 15,
+                "retentionUnit": "COUNT"
+              },
+              "transactionLogRetentionDays": 14,
+              "backupTier": "STANDARD",
+              "kind": "sql#backupConfiguration",
+              "binaryLogEnabled": true,
+              "transactionalLogStorageState": "CLOUD_STORAGE"
+            },
+            "ipConfiguration": {
+              "authorizedNetworks": [
+                {
+                  "kind": "sql#aclEntry",
+                  "value": "CLIENT_IP",
+                  "expirationTime": "2025-05-16T11:10:31.010Z",
+                  "name": "sql connect at time 2025-05-16 11:05:31.344523+00:00"
+                }
+              ],
+              "ipv4Enabled": true,
+              "sslMode": "ALLOW_UNENCRYPTED_AND_ENCRYPTED",
+              "requireSsl": false,
+              "serverCaMode": "GOOGLE_MANAGED_INTERNAL_CA"
+            },
+            "tier": "db-perf-optimized-N-8",
+            "edition": "ENTERPRISE_PLUS"
+          },
+          "includeReplicasForMajorVersionUpgrade": false,
+          "geminiConfig": {
+            "flagRecommenderEnabled": true,
+            "indexAdvisorEnabled": false,
+            "entitled": false,
+            "activeQueryEnabled": false
+          },
+          "maintenanceVersion": "MYSQL_8_0_40.R20250304.00_03"
+        },
+        "instance": "usercreating"
+      },
+      "response": {
+        "kind": "sql#operation",
+        "user": "scuba@np-lab.co.il",
+        "name": "71dd0366-09a0-4e1b-aaf5-105400000032",
+        "targetLink": "https://sqladmin.googleapis.com/sql/v1beta4/projects/msccp-test/instances/usercreating",
+        "insertTime": "2025-05-16T11:05:32.428Z",
+        "selfLink": "https://sqladmin.googleapis.com/sql/v1beta4/projects/msccp-test/operations/71dd0366-09a0-4e1b-aaf5-105400000032",
+        "targetId": "usercreating",
+        "targetProject": "msccp-test",
+        "operationType": "UPDATE",
+        "status": "PENDING",
+        "@type": "type.googleapis.com/google.cloud.sql.v1beta4.Operation",
+        "instanceUid": "1-2a8c63bb-dd81-48c9-a4d5-1a0a8c8d6759"
+      }
+    },
+    "insertId": "-j9e77e8trca",
+    "resource": {
+      "type": "cloudsql_database",
+      "labels": {
+        "project_id": "msccp-test",
+        "region": "us-central1",
+        "database_id": "msccp-test:usercreating"
+      }
+    },
+    "timestamp": "2025-05-16T11:05:32.274790Z",
+    "severity": "NOTICE",
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Factivity",
+    "operation": {
+      "id": "71dd0366-09a0-4e1b-aaf5-105400000032",
+      "producer": "cloudsql.googleapis.com",
+      "first": true
+    },
+    "receiveTimestamp": "2025-05-16T11:05:32.988121314Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "scuba@np-lab.co.il"
+      },
+      "requestMetadata": {
+        "callerIp": "121.241.55.74",
+        "requestAttributes": {
+          "time": "2025-05-20T11:17:58.833680Z",
+          "reason": "8uSywAYQGg5Db2xpc2V1bSBGbG93cw",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "cloudsql.googleapis.com",
+      "methodName": "cloudsql.instances.create",
+      "authorizationInfo": [
+        {
+          "resource": "projects/msccp-test",
+          "permission": "cloudsql.instances.create",
+          "granted": true,
+          "resourceAttributes": {
+            "service": "sqladmin.googleapis.com",
+            "name": "projects/msccp-test/instances/testcloudsqlfinal",
+            "type": "sqladmin.googleapis.com/Instance"
+          },
+          "permissionType": "ADMIN_WRITE"
+        }
+      ],
+      "resourceName": "projects/msccp-test",
+      "request": {
+        "requestId": "c7e39930-01c3-483e-8078-9953860317c2",
+        "project": "msccp-test",
+        "@type": "type.googleapis.com/google.cloud.sql.v1beta4.SqlInstancesInsertRequest",
+        "body": {
+          "instanceUid": "4-bc0db266-6a80-4c63-9e1c-b8f543c71e4d",
+          "instanceType": "CLOUD_SQL_INSTANCE",
+          "project": "msccp-test",
+          "region": "us-east1",
+          "name": "testcloudsqlfinal",
+          "settings": {
+            "dataDiskType": "PD_SSD",
+            "activationPolicy": "ALWAYS",
+            "ipConfiguration": {
+              "serverCaMode": "GOOGLE_MANAGED_INTERNAL_CA",
+              "ipv4Enabled": true
+            },
+            "backupConfiguration": {
+              "backupRetentionSettings": {
+                "retainedBackups": 15
+              },
+              "transactionLogRetentionDays": 14,
+              "location": "us",
+              "startTime": "02:00",
+              "binaryLogEnabled": true,
+              "enabled": true
+            },
+            "deletionProtectionEnabled": true,
+            "availabilityType": "REGIONAL",
+            "insightsConfig": {},
+            "connectionPoolConfig": {},
+            "tier": "db-perf-optimized-N-4",
+            "storageAutoResize": true,
+            "retainBackupsOnDelete": false,
+            "dataDiskSizeGb": "250",
+            "maintenanceWindow": {
+              "updateTrack": "canary"
+            },
+            "locationPreference": {},
+            "dataCacheConfig": {
+              "dataCacheEnabled": true
+            },
+            "edition": "ENTERPRISE_PLUS"
+          },
+          "backendType": "SECOND_GEN",
+          "databaseVersion": "MYSQL_8_4"
+        }
+      },
+      "response": {
+        "targetId": "testcloudsqlfinal",
+        "@type": "type.googleapis.com/google.cloud.sql.v1beta4.Operation",
+        "user": "scuba@np-lab.co.il",
+        "insertTime": "2025-05-20T11:17:58.804Z",
+        "selfLink": "https://www.googleapis.com/sql/v1beta4/projects/msccp-test/operations/d730861d-7810-4fba-ad9c-24d900000026",
+        "targetProject": "msccp-test",
+        "status": "PENDING",
+        "instanceUid": "4-bc0db266-6a80-4c63-9e1c-b8f543c71e4d",
+        "name": "d730861d-7810-4fba-ad9c-24d900000026",
+        "kind": "sql#operation",
+        "targetLink": "https://www.googleapis.com/sql/v1beta4/projects/msccp-test/instances/testcloudsqlfinal",
+        "operationType": "CREATE"
+      }
+    },
+    "insertId": "-ycfx3re9ba65",
+    "resource": {
+      "type": "cloudsql_database",
+      "labels": {
+        "project_id": "msccp-test",
+        "database_id": "msccp-test:testcloudsqlfinal",
+        "region": "us-east1"
+      }
+    },
+    "timestamp": "2025-05-20T11:17:56.764258Z",
+    "severity": "NOTICE",
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Factivity",
+    "operation": {
+      "id": "d730861d-7810-4fba-ad9c-24d900000026",
+      "producer": "cloudsql.googleapis.com",
+      "first": true
+    },
+    "receiveTimestamp": "2025-05-20T11:17:58.905673986Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "scuba@np-lab.co.il"
+      },
+      "requestMetadata": {
+        "callerIp": "2401:fb00:ffff:fffc:0:9:ac10:dcd",
+        "requestAttributes": {
+          "time": "2025-05-21T06:16:47.277724Z",
+          "reason": "8uSywAYQGg5Db2xpc2V1bSBGbG93cw",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "cloudsql.googleapis.com",
+      "methodName": "cloudsql.instances.clone",
+      "authorizationInfo": [
+        {
+          "resource": "projects/msccp-test/instances/instancecreatingbackup",
+          "permission": "cloudsql.instances.clone",
+          "granted": true,
+          "resourceAttributes": {
+            "service": "sqladmin.googleapis.com",
+            "name": "projects/msccp-test/instances/instancecreatingbackup",
+            "type": "sqladmin.googleapis.com/Instance"
+          },
+          "permissionType": "ADMIN_WRITE"
+        }
+      ],
+      "resourceName": "projects/msccp-test/instances/instancecreatingbackup",
+      "request": {
+        "@type": "type.googleapis.com/google.cloud.sql.v1beta4.SqlInstancesCloneRequest",
+        "body": {
+          "cloneContext": {
+            "destinationInstanceName": "instancecreatingbackup-clone"
+          }
+        },
+        "instance": "instancecreatingbackup",
+        "project": "msccp-test"
+      },
+      "response": {
+        "targetLink": "https://www.googleapis.com/sql/v1beta4/projects/msccp-test/instances/instancecreatingbackup-clone",
+        "selfLink": "https://www.googleapis.com/sql/v1beta4/projects/msccp-test/operations/f188c967-b2f9-452c-8340-7a9b00000032",
+        "insertTime": "2025-05-21T06:16:47.232Z",
+        "instanceUid": "1-8794a6e1-8c4b-42c4-8914-18f9ef37ace8",
+        "targetProject": "msccp-test",
+        "operationType": "CLONE",
+        "kind": "sql#operation",
+        "name": "f188c967-b2f9-452c-8340-7a9b00000032",
+        "@type": "type.googleapis.com/google.cloud.sql.v1beta4.Operation",
+        "user": "scuba@np-lab.co.il",
+        "targetId": "instancecreatingbackup-clone",
+        "status": "PENDING"
+      }
+    },
+    "insertId": "-iurw4nf1xoldj",
+    "resource": {
+      "type": "cloudsql_database",
+      "labels": {
+        "region": "us-central1",
+        "project_id": "msccp-test",
+        "database_id": "msccp-test:instancecreatingbackup"
+      }
+    },
+    "timestamp": "2025-05-21T06:16:46.838223Z",
+    "severity": "NOTICE",
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Factivity",
+    "operation": {
+      "id": "f188c967-b2f9-452c-8340-7a9b00000032",
+      "producer": "cloudsql.googleapis.com",
+      "first": true
+    },
+    "receiveTimestamp": "2025-05-21T06:16:47.864161874Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "scuba@np-lab.co.il"
+      },
+      "requestMetadata": {
+        "callerIp": "2401:fb00:ffff:fffc:0:9:ac10:dcd",
+        "requestAttributes": {
+          "time": "2025-05-21T06:16:55.439690Z",
+          "reason": "8uSywAYQGg5Db2xpc2V1bSBGbG93cw",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "cloudsql.googleapis.com",
+      "methodName": "cloudsql.operations.get",
+      "authorizationInfo": [
+        {
+          "resource": "projects/msccp-test/instances/instancecreatingbackup-clone",
+          "permission": "cloudsql.instances.get",
+          "granted": true,
+          "resourceAttributes": {
+            "service": "sqladmin.googleapis.com",
+            "name": "projects/msccp-test/instances/instancecreatingbackup-clone",
+            "type": "sqladmin.googleapis.com/Instance"
+          },
+          "permissionType": "ADMIN_READ"
+        }
+      ],
+      "resourceName": "projects/msccp-test/operations/f188c967-b2f9-452c-8340-7a9b00000032",
+      "request": {
+        "operation": "f188c967-b2f9-452c-8340-7a9b00000032",
+        "@type": "type.googleapis.com/google.cloud.sql.v1beta4.SqlOperationsGetRequest",
+        "project": "msccp-test"
+      }
+    },
+    "insertId": "-ib78ohf1tymmz",
+    "resource": {
+      "type": "cloudsql_database",
+      "labels": {
+        "project_id": "msccp-test",
+        "region": "us-central1",
+        "database_id": "msccp-test:instancecreatingbackup-clone"
+      }
+    },
+    "timestamp": "2025-05-21T06:16:55.407399Z",
+    "severity": "INFO",
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "receiveTimestamp": "2025-05-21T06:16:55.919333356Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "scuba@np-lab.co.il"
+      },
+      "requestMetadata": {
+        "callerIp": "2401:fb00:ffff:fffc:0:9:ac10:dcd",
+        "requestAttributes": {
+          "time": "2025-05-21T06:16:47.277724Z",
+          "reason": "8uSywAYQGg5Db2xpc2V1bSBGbG93cw",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "cloudsql.googleapis.com",
+      "methodName": "cloudsql.instances.clone",
+      "authorizationInfo": [
+        {
+          "resource": "projects/msccp-test/instances/instancecreatingbackup",
+          "permission": "cloudsql.instances.clone",
+          "granted": true,
+          "resourceAttributes": {
+            "service": "sqladmin.googleapis.com",
+            "name": "projects/msccp-test/instances/instancecreatingbackup",
+            "type": "sqladmin.googleapis.com/Instance"
+          },
+          "permissionType": "ADMIN_WRITE"
+        }
+      ],
+      "resourceName": "projects/msccp-test/instances/instancecreatingbackup"
+    },
+    "insertId": "-hfgq76eydoy8",
+    "resource": {
+      "type": "cloudsql_database",
+      "labels": {
+        "database_id": "msccp-test:instancecreatingbackup",
+        "region": "",
+        "project_id": "msccp-test"
+      }
+    },
+    "timestamp": "2025-05-21T06:27:02.434463Z",
+    "severity": "NOTICE",
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Factivity",
+    "operation": {
+      "id": "f188c967-b2f9-452c-8340-7a9b00000032",
+      "producer": "cloudsql.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2025-05-21T06:27:03.290750189Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {
+        "principalEmail": "scuba@np-lab.co.il"
+      },
+      "requestMetadata": {
+        "callerIp": "121.241.55.74",
+        "requestAttributes": {
+          "time": "2025-05-27T07:47:27.670464Z",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "cloudsql.googleapis.com",
+      "methodName": "cloudsql.backups.list",
+      "authorizationInfo": [
+        {
+          "resource": "projects/msccp-test/instances/mysqlinstance",
+          "permission": "cloudsql.backupRuns.list",
+          "granted": true,
+          "resourceAttributes": {
+            "service": "sqladmin.googleapis.com",
+            "name": "projects/msccp-test/instances/mysqlinstance",
+            "type": "sqladmin.googleapis.com/Instance"
+          },
+          "permissionType": "ADMIN_READ"
+        }
+      ],
+      "resourceName": "projects/msccp-test",
+      "request": {
+        "pageSize": 1000,
+        "filter": "instance=mysqlinstance",
+        "parent": "projects/msccp-test",
+        "@type": "type.googleapis.com/google.cloud.sql.v1beta4.ListBackupsRequest"
+      }
+    },
+    "insertId": "468cm6e5lq0x",
+    "resource": {
+      "type": "cloudsql_database",
+      "labels": {
+        "region": "us-east1",
+        "database_id": "msccp-test:mysqlinstance",
+        "project_id": "msccp-test"
+      }
+    },
+    "timestamp": "2025-05-27T07:47:27.627894Z",
+    "severity": "INFO",
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "receiveTimestamp": "2025-05-27T07:47:28.351404920Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {},
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "cloudsql.googleapis.com",
+      "methodName": "cloudsql.instances.automaticStorageIncrease",
+      "resourceName": "projects/msccp-test/instances/replicarm",
+      "metadata": {
+        "newStorageSizeGb": "296",
+        "storageIncreaseCompletionTime": "2025-06-01T10:53:16.451Z",
+        "storageIncreaseStartTime": "2025-06-01T10:52:25.160Z",
+        "@type": "type.googleapis.com/speckle.StorageAutomaticIncreaseEventLog",
+        "oldStorageSizeGb": "280"
+      }
+    },
+    "insertId": "1p4ad5f11gh3y",
+    "resource": {
+      "type": "cloudsql_database",
+      "labels": {
+        "project_id": "msccp-test",
+        "database_id": "msccp-test:replicarm",
+        "region": "US_CENTRAL"
+      }
+    },
+    "timestamp": "2025-06-01T10:53:16.451295Z",
+    "severity": "INFO",
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Fsystem_event",
+    "receiveTimestamp": "2025-06-01T10:53:16.716300480Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {
+        "principalEmail": "prisma-cloud-serv-fabur@msccp-test.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/msccp-test/serviceAccounts/prisma-cloud-serv-fabur@msccp-test.iam.gserviceaccount.com/keys/711d0583951468a4c27f724399f859fe83b788fd",
+        "principalSubject": "serviceAccount:prisma-cloud-serv-fabur@msccp-test.iam.gserviceaccount.com"
+      },
+      "requestMetadata": {
+        "callerIp": "52.208.244.121",
+        "requestAttributes": {
+          "time": "2025-06-03T06:50:44.009831Z",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "cloudsql.googleapis.com",
+      "methodName": "cloudsql.databases.list",
+      "authorizationInfo": [
+        {
+          "resource": "projects/msccp-test/instances/replicarm",
+          "permission": "cloudsql.databases.list",
+          "granted": true,
+          "resourceAttributes": {
+            "service": "sqladmin.googleapis.com"
+          },
+          "permissionType": "DATA_READ"
+        }
+      ],
+      "resourceName": "projects/msccp-test/instances/replicarm",
+      "request": {
+        "project": "msccp-test",
+        "instance": "replicarm",
+        "@type": "type.googleapis.com/google.cloud.sql.v1.SqlDatabasesListRequest"
+      }
+    },
+    "insertId": "-vwih9gf1k378x",
+    "resource": {
+      "type": "cloudsql_database",
+      "labels": {
+        "region": "us-central1",
+        "project_id": "msccp-test",
+        "database_id": "msccp-test:replicarm"
+      }
+    },
+    "timestamp": "2025-06-03T06:50:43.933892Z",
+    "severity": "INFO",
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "receiveTimestamp": "2025-06-03T06:50:44.130397927Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {
+        "principalEmail": "prisma-cloud-serv-fabur@msccp-test.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/msccp-test/serviceAccounts/prisma-cloud-serv-fabur@msccp-test.iam.gserviceaccount.com/keys/711d0583951468a4c27f724399f859fe83b788fd",
+        "principalSubject": "serviceAccount:prisma-cloud-serv-fabur@msccp-test.iam.gserviceaccount.com"
+      },
+      "requestMetadata": {
+        "callerIp": "99.81.226.57",
+        "requestAttributes": {
+          "time": "2025-06-03T07:02:57.169727Z",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "cloudsql.googleapis.com",
+      "methodName": "cloudsql.backupRuns.list",
+      "authorizationInfo": [
+        {
+          "resource": "projects/msccp-test/instances/rjkpmsql-replica",
+          "permission": "cloudsql.backupRuns.list",
+          "granted": true,
+          "resourceAttributes": {
+            "service": "sqladmin.googleapis.com",
+            "name": "projects/msccp-test/instances/rjkpmsql-replica",
+            "type": "sqladmin.googleapis.com/Instance"
+          },
+          "permissionType": "ADMIN_READ"
+        }
+      ],
+      "resourceName": "projects/msccp-test/instances/rjkpmsql-replica",
+      "request": {
+        "@type": "type.googleapis.com/google.cloud.sql.v1.SqlBackupRunsListRequest",
+        "instance": "rjkpmsql-replica",
+        "project": "msccp-test",
+        "maxResults": 500
+      }
+    },
+    "insertId": "-b3co19f17aw8e",
+    "resource": {
+      "type": "cloudsql_database",
+      "labels": {
+        "database_id": "msccp-test:rjkpmsql-replica",
+        "project_id": "msccp-test",
+        "region": "us-central1"
+      }
+    },
+    "timestamp": "2025-06-03T07:02:57.139882Z",
+    "severity": "INFO",
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "receiveTimestamp": "2025-06-03T07:02:57.397731314Z"
+  }
+]

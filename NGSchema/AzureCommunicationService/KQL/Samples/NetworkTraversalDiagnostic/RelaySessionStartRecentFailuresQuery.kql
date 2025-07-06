@@ -1,0 +1,5 @@
+ACSNetworkTraversalDiagnostics
+| where ResultType == "Failed"
+| project TimeGenerated, OperationName, ResultSignature
+| order by TimeGenerated desc
+| limit 100

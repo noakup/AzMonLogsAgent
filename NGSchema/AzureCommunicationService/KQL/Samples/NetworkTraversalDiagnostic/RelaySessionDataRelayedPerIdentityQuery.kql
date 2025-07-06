@@ -1,0 +1,9 @@
+ACSNetworkTraversalDiagnostics
+| where OperationName == "RelaySessionEnd"
+| summarize by
+    Identity,
+    TotalBytesToClient,
+    TotalBytesFromClient,
+    TotalBytes = TotalBytesToClient + TotalBytesFromClient
+| sort by TotalBytes desc
+| limit 100

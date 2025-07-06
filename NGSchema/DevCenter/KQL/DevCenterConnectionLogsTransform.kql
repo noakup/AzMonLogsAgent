@@ -1,0 +1,22 @@
+source
+| extend propertiesTable = parse_json(properties)
+| project
+    TimeGenerated = todatetime(substring(propertiesTable.Timestamp, 0, strlen(propertiesTable.Timestamp) - 6)),
+    ActivityId = tostring(propertiesTable.ActivityId),
+    OperationName = operationName,
+    SessionHostName = tostring(propertiesTable.SessionHostName),
+    SessionHostResourceId = tostring(propertiesTable.SessionHostResourceId),
+    State = tostring(propertiesTable.State),
+    ClientType = tostring(propertiesTable.ClientType),
+    ClientOS = tostring(propertiesTable.ClientOS),
+    ClientVersion = tostring(propertiesTable.ClientVersion),
+    SessionHostPoolType = tostring(propertiesTable.SessionHostPoolType),
+    SessionHostAgentVersion = tostring(propertiesTable.SessionHostAgentVersion),
+    SessionHostOSDescription = tostring(propertiesTable.SessionHostOSDescription),
+    SessionHostOSVersion = tostring(propertiesTable.SessionHostOSVersion),
+    UdpType = tostring(propertiesTable.UdpType),
+    ResultType = tostring(propertiesTable.ResultType),
+    CloudPcId = tostring(propertiesTable.CloudPcId),
+    DevBoxName = tostring(propertiesTable.DevBox),
+    SubnetResourceId = tostring(propertiesTable.SubnetResourceId),
+    NicResourceId = tostring(propertiesTable.NicResourceId)

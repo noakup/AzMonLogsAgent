@@ -1,0 +1,33 @@
+[
+  {
+    "TimeGenerated": "2021-03-29T09:33:48.0000000Z",
+    "Version": 5,
+    "AccountId": "072643944673",
+    "InterfaceId": "eni-02f014d882fd53824",
+    "SrcAddr": "162.142.125.158",
+    "DstAddr": "172.31.1.32",
+    "SrcPort": 31335,
+    "DstPort": 12301,
+    "Protocol": 6,
+    "Packets": 1,
+    "Bytes": 44,
+    "End": "2021-03-29T09:34:03.0000000Z",
+    "Action": "REJECT",
+    "LogStatus": "OK",
+    "VpcId": "vpc-af4c81c9",
+    "SubnetId": "subnet-6f519935",
+    "InstanceId": "i-09eba3d7628b4b106",
+    "TcpFlags": 2,
+    "TrafficType": "IPv4",
+    "PktSrcAddr": "162.142.125.158",
+    "PktDstAddr": "172.31.1.32",
+    "Region": "us-west-1",
+    "AzId": "usw1-az3",
+    "SublocationType": "-",
+    "SublocationId": "-",
+    "PktSrcAwsService": "-",
+    "PktDstAwsService": "-",
+    "FlowDirection": "ingress",
+    "TrafficPath": "-"
+  }
+]

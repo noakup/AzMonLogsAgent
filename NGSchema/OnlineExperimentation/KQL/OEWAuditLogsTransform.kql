@@ -1,0 +1,16 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    Category = category,
+    Level = level,
+    OperationName = operationName,
+    ResultType = resultType,
+    ResultDescription = resultDescription,
+    HttpStatusCode = toint(resultSignature),
+    DurationMs = toint(durationMs),
+    URI = uri,
+    Location = location,
+    CallerIpAddress = callerIpAddress,
+    Identity = todynamic(identity),
+    CorrelationId = correlationId,
+    WorkspaceId = workspaceId

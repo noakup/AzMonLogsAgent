@@ -1,0 +1,219 @@
+{
+    "type": "Microsoft.NetApp/netAppAccounts/capacityPools",
+    "displayName": "Azure NetApp Files",
+    "description": "All tables related to Azure NetApp Files.",
+    "tags": {}, 
+    "properties": {}, 
+    "simplifiedSchemaVersion": "3", 
+    "icmTeam": "Azure NetApp Files/NetApp SRE Triage",
+    "contactDL": "netappazure@microsoft.com",
+    "relatedTables": [],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "ANFFileAccess",
+            "description": "This table maps to audit logs generated in an ANF Volume. Here audit log caters to any file system operations done by users.",
+            "categories": ["resources"],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 1,
+            "dataTypeId": "MICROSOFTNETAPP_ANFFILEACCESS",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": false,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "String"
+                },
+                {
+                    "name": "operationTime",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name":"schemaVersion",
+                    "type":"String"
+                },
+                {
+                    "name": "resultType",
+                    "type": "String"
+                },
+                {
+                    "name": "callerIpAddress",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "level",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "KQL/ANFFileAccessTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Time when the log was generated.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperationTime",
+                    "type": "DateTime",
+                    "description": "Time when the operation was performed.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "description": "The log category this log belongs to as configured in diagnostic settings.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "description": "The name of the file operation which this log is generated for.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "description": "Version of the file operation.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SchemaVersion",
+                    "type": "String",
+                    "description": "Version of the log schema.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ResultType",
+                    "type": "String",
+                    "description": "Indicating if the operation succeeded or failed. Values can be Audit Success, or Audit Failure",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "CallerIpAddress",
+                    "type": "String",
+                    "description": "IP address of client which performed this file operation.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "description": "Location of the NetApp volume.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "Log level of the log. This is always set to Informational.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ObjectName",
+                    "type": "String",
+                    "description": "Name of the object for which this log was generated",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SubjectUnix",
+                    "type": "String",
+                    "description": "User Identifier who has performed the File operation. Format is uid:gid , separated by a colon.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "IsUserLocal",
+                    "type": "Bool",
+                    "description": "Identifies if the User who has performed the File operation is local user or remote user.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ObjectType",
+                    "type": "String",
+                    "description": "Type of the object on which operation was performed.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Properties",
+                    "type": "Dynamic",
+                    "description": "A set of file operation specific fields. Varies by OperationName.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/ANFFileAccessSample.json"
+        }
+    ],
+    "functions": [],
+    "queries": [{
+        "id": "f6544502-3c0c-4e40-916d-bac6bb3ce8cf",
+        "displayName": "Deleted objects for an ANF volume",
+        "description": "Display all deleted object events for an ANF volume.",
+        "bodyFilePath": "KQL/ANFFileAccessGetAllDeletedObjectsQuery.kql",
+        "categories": [
+          "resources"
+        ],
+        "relatedTables": [
+          "ANFFileAccess"
+        ],
+        "tags": {
+          "Topic": [
+            "Usage"
+          ]
+        },
+        "properties": {
+          "ExampleQuery": true,
+          "QueryAttributes": {
+            "IsMultiResource": false
+          }
+        }
+      },
+      {
+        "id": "b0398ff8-d74a-11ec-9d64-0242ac120002",
+        "displayName": "All Logs for a Particular Object",
+        "description": "Display all audit events for a particular object on an ANF volume.",
+        "bodyFilePath": "KQL/ANFFileAccessGetAllLogsForObject.kql",
+        "categories": [
+          "resources"
+        ],
+        "relatedTables": [
+          "ANFFileAccess"
+        ],
+        "tags": {
+          "Topic": [
+            "Usage"
+          ]
+        },
+        "properties": {
+          "ExampleQuery": true,
+          "QueryAttributes": {
+            "IsMultiResource": false
+          }
+        }
+      }]
+}

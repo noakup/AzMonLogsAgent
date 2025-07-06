@@ -1,0 +1,4 @@
+StorageCacheOperationEvents
+| where ResponseCode < 200 or ResponseCode >= 300
+| sort by TimeGenerated desc
+| take 100

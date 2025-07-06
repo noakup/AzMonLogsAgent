@@ -1,0 +1,15 @@
+[
+  {
+    "TimeGenerated" :"1/01/2021 8:40:06 PM +00:00",
+    "TaskName": "CustomerManagedKeyUserLog",
+    "ActivityId": "11111111-1111-1111-1111-111111111111",
+    "category": "error",
+    "keyVault": "https://mykeyvault.vault-int.azure-int.net",
+    "key": "mykey",
+    "version": "1111111111111111111111111111111",
+    "operation": "wrapKey",
+    "code": "404",
+    "message": "Key not found: ehbyok0/111111111111111111111111111111",
+    "Provider": "eventhub"
+ }
+]

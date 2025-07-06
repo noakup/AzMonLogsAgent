@@ -1,0 +1,15 @@
+let DisabledParsers=materialize(_GetWatchlist('ASimDisabledParsers') 
+| where SearchKey in ('Any', 'Exclude_ASim_ProcessEvent_Create') 
+| extend SourceSpecificParser=column_ifexists('SourceSpecificParser','') 
+| where isnotempty(SourceSpecificParser) 
+| summarize list = make_set(SourceSpecificParser));
+let builtInDisabled = 0 != array_length(set_intersect(toscalar(DisabledParsers),dynamic(['Exclude_ASim_ProcessEvent_CreateBuiltIn', 'Exclude_ASim_ProcessEvent_Create', 'Any'])));
+union isfuzzy=true
+_ASim_ProcessEvent_CreateLinuxSysmonV02(disabled= (builtInDisabled or('Exclude_ASim_ProcessEvent_CreateLinuxSysmon' in (DisabledParsers)))),
+_ASim_ProcessEvent_CreateMicrosoftSecurityEventsV01(disabled= (builtInDisabled or('Exclude_ASim_ProcessEvent_CreateMicrosoftSecurityEvents' in (DisabledParsers)))),
+_ASim_ProcessEvent_CreateMicrosoftSysmonV03(disabled= (builtInDisabled or('Exclude_ASim_ProcessEvent_CreateMicrosoftSysmon' in (DisabledParsers)))),
+_ASim_ProcessEvent_CreateMicrosoftWindowsEventsV03(disabled= (builtInDisabled or('Exclude_ASim_ProcessEvent_CreateMicrosoftWindowsEvents' in (DisabledParsers)))),
+_ASim_ProcessEvent_MD4IoTV01(disabled= (builtInDisabled or('Exclude_ASim_ProcessEvent_MD4IoT' in (DisabledParsers)))),
+_ASim_ProcessEvent_Microsoft365DV01(disabled= (builtInDisabled or('Exclude_ASim_ProcessEvent_Microsoft365D' in (DisabledParsers)))),
+_ASim_ProcessEvent_NativeV01(disabled= (builtInDisabled or('Exclude_ASim_ProcessEvent_Native' in (DisabledParsers)))),
+_Im_Process_EmptyV01

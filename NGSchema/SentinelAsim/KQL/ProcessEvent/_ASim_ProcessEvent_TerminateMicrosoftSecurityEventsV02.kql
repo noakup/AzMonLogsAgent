@@ -1,0 +1,44 @@
+let ProcessEvents=(){
+ SecurityEvent
+ | where not(disabled)
+ // -- Filter
+ | where EventID == 4689
+ // -- Map
+ | extend
+   // Event
+     EventCount = int(1),
+     EventVendor = "Microsoft",
+     EventProduct = "Security Events",
+     EventSchemaVersion = "0.1.0",
+     EventSchema = 'ProcessEvent',
+     EventStartTime = todatetime(TimeGenerated),
+     EventEndTime = todatetime(TimeGenerated),
+     EventType = "ProcessTerminated",
+     EventResult = 'Success',
+     EventOriginalType = tostring(EventID),
+     EventOriginalUid = EventOriginId,
+     EventResultDetails = Status,
+     EventOriginalResultDetails = Status, 
+   // Device
+     DvcId = SourceComputerId,
+     DvcHostname = Computer,
+     DvcOs = "Windows",
+   // Users
+     ActorUserIdType = iff (SubjectUserSid <> "S-1-0-0", "SID", ""),
+     ActorUserId = iff (SubjectUserSid <> "S-1-0-0", SubjectUserSid, ""), 
+     ActorUsername = iff (SubjectDomainName == '-', SubjectUserName, SubjectAccount),
+     ActorUsernameType = iff(SubjectDomainName == '-','Simple', 'Windows'),
+     ActorSessionId = SubjectLogonId,
+     ActorDomainName = SubjectDomainName,
+   // Processes 
+     TargetProcessId = tostring(toint(ProcessId)),
+     TargetProcessName = ProcessName,
+     TargetProcessCommandLine = CommandLine,
+     TargetProcessTokenElevation = TokenElevationType,
+     Process = ProcessName
+   // Aliases
+   | extend 
+     User = ActorUsername,
+     Dvc = DvcHostname,
+     Process = TargetProcessName
+ }; ProcessEvents

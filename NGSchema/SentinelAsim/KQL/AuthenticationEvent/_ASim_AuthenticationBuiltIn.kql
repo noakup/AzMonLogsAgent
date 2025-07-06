@@ -1,0 +1,30 @@
+let DisabledParsers=materialize(_GetWatchlist('ASimDisabledParsers') 
+| where SearchKey in ('Any', 'Exclude_ASim_Authentication') 
+| extend SourceSpecificParser=column_ifexists('SourceSpecificParser','') 
+| where isnotempty(SourceSpecificParser) 
+| summarize list = make_set(SourceSpecificParser));
+let builtInDisabled = 0 != array_length(set_intersect(toscalar(DisabledParsers),dynamic(['Exclude_ASim_AuthenticationBuiltIn', 'Exclude_ASim_Authentication', 'Any'])));
+union isfuzzy=true
+_ASim_Authentication_AADManagedIdentitySignInLogsV02(disabled= (builtInDisabled or('Exclude_ASim_Authentication_AADManagedIdentitySignInLogs' in (DisabledParsers)))),
+_ASim_Authentication_AADNonInteractiveUserSignInLogsV02(disabled= (builtInDisabled or('Exclude_ASim_Authentication_AADNonInteractiveUserSignInLogs' in (DisabledParsers)))),
+_ASim_Authentication_AADServicePrincipalSignInLogsV02(disabled= (builtInDisabled or('Exclude_ASim_Authentication_AADServicePrincipalSignInLogs' in (DisabledParsers)))),
+_ASim_Authentication_SigninLogsV03(disabled= (builtInDisabled or('Exclude_ASim_Authentication_SigninLogs' in (DisabledParsers)))),
+_ASim_Authentication_AWSCloudTrailV02(disabled= (builtInDisabled or('Exclude_ASim_Authentication_AWSCloudTrail' in (DisabledParsers)))),
+_ASim_Authentication_BarracudaWAFV01(disabled= (builtInDisabled or('Exclude_ASim_Authentication_BarracudaWAF' in (DisabledParsers)))),
+_ASim_Authentication_CiscoASAV01(disabled= (builtInDisabled or('Exclude_ASim_Authentication_CiscoASA' in (DisabledParsers)))),
+_ASim_Authentication_CiscoISEV01(disabled= (builtInDisabled or('Exclude_ASim_Authentication_CiscoISE' in (DisabledParsers)))),
+_ASim_Authentication_CiscoMerakiV01(disabled= (builtInDisabled or('Exclude_ASim_Authentication_CiscoMeraki' in (DisabledParsers)))),
+_ASim_Authentication_GoogleWorkspaceV01(disabled= (builtInDisabled or('Exclude_ASim_Authentication_GoogleWorkspace' in (DisabledParsers)))),
+_ASim_Authentication_IllumioSaaSCoreV03(disabled= (builtInDisabled or('Exclude_ASim_Authentication_IllumioSaaSCore' in (DisabledParsers)))),
+_ASim_Authentication_M365DefenderV01(disabled= (builtInDisabled or('Exclude_ASim_Authentication_M365Defender' in (DisabledParsers)))),
+_ASim_Authentication_MD4IoTV01(disabled= (builtInDisabled or('Exclude_ASim_Authentication_MD4IoT' in (DisabledParsers)))),
+_ASim_Authentication_MicrosoftWindowsEventV02(disabled= (builtInDisabled or('Exclude_ASim_Authentication_MicrosoftWindowsEvent' in (DisabledParsers)))),
+_ASim_Authentication_NativeV01(disabled= (builtInDisabled or('Exclude_ASim_Authentication_Native' in (DisabledParsers)))),
+_ASim_Authentication_OktaSSOV02(disabled= (builtInDisabled or('Exclude_ASim_Authentication_OktaSSO' in (DisabledParsers)))),
+_ASim_Authentication_PostgreSQLV01(disabled= (builtInDisabled or('Exclude_ASim_Authentication_PostgreSQL' in (DisabledParsers)))),
+_ASim_Authentication_SalesforceSCV01(disabled= (builtInDisabled or('Exclude_ASim_Authentication_SalesforceSC' in (DisabledParsers)))),
+_ASim_Authentication_SshdV02(disabled= (builtInDisabled or('Exclude_ASim_Authentication_Sshd' in (DisabledParsers)))),
+_ASim_Authentication_SuV02(disabled= (builtInDisabled or('Exclude_ASim_Authentication_Su' in (DisabledParsers)))),
+_ASim_Authentication_SudoV01(disabled= (builtInDisabled or('Exclude_ASim_Authentication_Sudo' in (DisabledParsers)))),
+_ASim_Authentication_VectraXDRAuditV01(disabled= (builtInDisabled or('Exclude_ASim_Authentication_VectraXDRAudit' in (DisabledParsers)))),
+_Im_Authentication_EmptyV01

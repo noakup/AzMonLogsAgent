@@ -1,0 +1,3 @@
+MicrosoftPurviewInformationProtection
+| summarize Value=count() by LabelEventType, Workload
+| order by Value

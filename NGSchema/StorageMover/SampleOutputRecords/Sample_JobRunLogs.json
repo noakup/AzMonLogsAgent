@@ -1,0 +1,9 @@
+[
+    {
+        "TimeGenerated": "2022-09-20T07:45:00Z",
+        "JobRunName": "8420604f-e643-425d-a9e7-614d47ff1ed4",
+        "Level": "Error",
+        "StatusCode": "AZSM1002",
+        "Message": "Source path provided is invalid"
+    }
+]

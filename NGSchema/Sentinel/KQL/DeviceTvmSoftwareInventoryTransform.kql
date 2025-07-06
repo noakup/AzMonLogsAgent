@@ -1,0 +1,14 @@
+source
+| project
+DeviceId = tostring(DeviceId),
+DeviceName = tostring(DeviceName),
+OSPlatform = tostring(OSPlatform),
+OSVersion = tostring(OSVersion),
+OSArchitecture = tostring(OSArchitecture),
+SoftwareVendor = tostring(SoftwareVendor),
+SoftwareName = tostring(SoftwareName),
+SoftwareVersion = tostring(SoftwareVersion),
+EndOfSupportStatus = tostring(EndOfSupportStatus),
+EndOfSupportDate = todatetime(EndOfSupportDate),
+ProductCodeCpe = tostring(ProductCodeCpe),
+TimeGenerated = todatetime(SoftwareLastSeenTimestamp)

@@ -1,0 +1,419 @@
+{
+	"type": "Microsoft.MachineLearningServices/workspaces",
+	"displayName": "Machine Learning",
+	"description": "All tables related to OnlineEndpoints.",
+	"tags": {},
+	"properties": {},
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "Project Vienna Services/Inferencing/O16N",
+	"contactDL": "mir-vmagent@microsoft.com",
+	"relatedTables": ["AzureActivity"],
+	"relatedFunctions": [],
+	"tables": [
+		{
+			"name": "AmlOnlineEndpointConsoleLog",
+			"description": "Azure ML online endpoints console logs. It provides console logs output from user containers.",
+			"categories": [ "audit", "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"dataTypeId": "MICROSOFTONLINEENDPOINT_CONSOLELOGS",
+			"isResourceCentric": true,
+			"tableState": "Production",
+			"isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "KQL/OnlineEndpointConsoleLogsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation associated with log record."
+				},
+				{
+					"name": "InstanceId",
+					"description": "The ID of the instance that generated this log record.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "DeploymentName",
+					"description": "The name of the deployment associated with the log record.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ContainerName",
+					"description": "The name of the container where the log was generated.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ContainerImageName",
+					"description": "The name of the docker image running in the container where the log was generated.",
+					"dataTypeHint": "URI",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Message",
+					"description": "The content of the log.",
+					"type": "String",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/OnlineEndpointConsoleLogsSample.json"
+		},
+		{
+			"name": "AmlOnlineEndpointTrafficLog",
+			"description": "Traffic logs for AzureML (machine learning) online endpoints. The table could be used to check the detailed information of the request to an online endpoint. For example, you could use it to check the request duration, the request failure reason, etc.",
+			"categories": [ "audit", "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 4,
+			"dataTypeId": "MICROSOFTMACHINELEARNINGSERVICES_AMLONLINEENDPOINTTRAFFICLOG",
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "location",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "KQL/OnlineEndpointTrafficLogsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the request was received by Azure Machine Learning."
+				},
+				{
+					"name": "Location",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The region of the online endpoint."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation associated with log record."
+				},
+				{
+					"name": "Method",
+					"description": "The requested method from client.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Path",
+					"description": "The requested path from client.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "AzureMLWorkspaceId",
+					"description": "The machine learning workspace ID of the online endpoint.",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "AzureMLWorkspaceName",
+					"description": "The machine learning workspace name of the online endpoint.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "EndpointName",
+					"description": "The name of the online endpoint.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "DeploymentName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the online deployment."
+				},
+				{
+					"name": "Protocol",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The protocol of the request."
+				},
+				{
+					"name": "ResponseCode",
+					"description": "The final response code returned to the user.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ResponseCodeReason",
+					"description": "The final response code reason returned to the user.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ModelStatusCode",
+					"description": "The response status code from model.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ModelStatusReason",
+					"description": "The response status reason from model.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "RequestPayloadSize",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The total bytes received from the user client."
+				},
+				{
+					"name": "ResponsePayloadSize",
+					"description": "The total bytes sent back to the user client.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UserAgent",
+					"description": "The user-agent header of the request.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "XRequestId",
+					"description": "The request ID generated by Azure Machine Learning for internal tracing.",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "XMSClientRequestId",
+					"description": "The tracking ID generated by user client.",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "TotalDurationMs",
+					"description": "Duration in milliseconds from the request start time to the last response byte sent back to the user client. If the user client disconnected, it measures from the start time to client disconnect time.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "RequestDurationMs",
+					"description": "Duration in milliseconds from the request start time to the last byte of the request received from the user client.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ResponseDurationMs",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "Duration in milliseconds from the request start time to the first response byte read from the model."
+				},
+				{
+					"name": "RequestThrottlingDelayMs",
+					"description": "Delay in milliseconds in request data transfer due to network throttling.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ResponseThrottlingDelayMs",
+					"description": "Delay in milliseconds in response data transfer due to network throttling.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "AuthType",
+					"description": "The authentication type of the request (Key, AMLToken, AADToken).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "IdentityData",
+					"description": "The identity data from the user client (JWT OID).",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"dataTypeHint": "GUID"
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/OnlineEndpointTrafficLogsSample.json"
+		},
+		{
+			"name": "AmlOnlineEndpointEventLog",
+			"description": "Azure ML online endpoints event logs. It provides event logs regarding the inference-server container's life cycle.",
+			"categories": [ "audit", "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 1,
+			"dataTypeId": "MICROSOFTMACHINELEARNINGSERVICES_AMLONLINEENDPOINTEVENTLOG",
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "KQL/OnlineEndpointEventLogsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when this log was generated."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation associated with this log record."
+				},
+				{
+					"name": "InstanceId",
+					"description": "The ID of the instance that generated this log record.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "DeploymentName",
+					"description": "The name of the deployment associated with this log record.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Name",
+					"description": "The name of the inference-server container life cycle event.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Message",
+					"description": "The content of the inference-server container life cycle event.",
+					"type": "String",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/OnlineEndpointEventLogsSample.json"
+		}
+	],
+	"functions": [],
+	"queries": [
+		{
+			"id": "a5c31bf6-314c-4c77-9144-eacc566de521",
+			"displayName": "Online endpoint console logs",
+			"description": "Get latest 100 online endpoint console log records.",
+			"bodyFilePath": "KQL/OnlineEndpointLatestConsoleLogsQuery.kql",
+			"categories": [ "workloads" ],
+			"relatedTables": ["AmlOnlineEndpointConsoleLog"],
+			"tags": {
+				"Topic": [
+					"Workloads"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": false
+				}
+			}
+		},
+		{
+			"id": "a3e072ef-5aa5-484a-9641-11485b55cb42",
+			"displayName": "Online endpoint failed requests",
+			"description": "Get the latest 100 failed inferencing requests to the online endpoint.",
+			"bodyFilePath": "KQL/OnlineEndpointFailedRequestsQuery.kql",
+			"categories": [ "workloads" ],
+			"relatedTables": ["AmlOnlineEndpointTrafficLog"],
+			"tags": {
+				"Topic": [
+					"Workloads"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": false
+				}
+			}
+		},
+		{
+			"id": "ddc56a57-a0a1-442d-b738-a600bca740f8",
+			"displayName": "Online endpoint failure events",
+			"description": "Get the latest Azure ML online endpoints failures.",
+			"bodyFilePath": "KQL/OnlineEndpointFailureEventsQuery.kql",
+			"categories": [ "resources" ],
+			"relatedTables": ["AmlOnlineEndpointEventLog"],
+			"tags": {
+				"Topic": [
+					"Resources"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": false
+				}
+			}
+		}
+	]
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "time": "2022-02-11T04:45:32.036197081Z",
+    "resourceId": "/SUBSCRIPTIONS/5464F7EE3875-12C9-C654-F81D-CE1909AD/RESOURCEGROUPS/SAMPLE-INSTANCES/PROVIDERS/MICROSOFT.AGFOODPLATFORM/FARMBEATS/sample-EUS-1",
+    "category": "SensorManagementLogs",
+    "operationName": "Microsoft.AgFoodPlatform/sensorPartnerIntegrationModels/write",
+    "callerIpAddress": "122.161.78.235",
+    "Level": "Information",
+    "identity": {
+      "claims": {
+        "ApplicationId": "39d176c5-91b6-454b-854d-55813c17d92d",
+        "ObjectId": "9002b50e-dc98-445e-a865-72dce38ecafd",
+        "TenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+      }
+    },
+    "properties": {
+      "requestUri": "https://sample.farmbeats.azure.net/sensor-partners/abc/integrations/inte?api-version=2021-07-31-preview",
+      "farmerId": "sample",
+      "dataPlaneResourceId": "/sensor-partners/abc/integrations/inte",
+      "requestBody": {
+        "status": "sample",
+        "name": "sample",
+        "description": "sample"
+      }
+    },
+    "resultSignature": "405",
+    "resultType": "Success",
+    "location": "eastus",
+    "correlationId": "738e019dbafa62bc1b9c7f1d4ec23c44",
+    "durationMs": 164
+  },
+  {
+    "time": "2022-02-11T04:52:21.716519726Z",
+    "resourceId": "/SUBSCRIPTIONS/5464F7EE3875-12C9-C654-F81D-CE1909AD/RESOURCEGROUPS/SAMPLE-INSTANCES/PROVIDERS/MICROSOFT.AGFOODPLATFORM/FARMBEATS/sample-EUS-1",
+    "category": "SensorManagementLogs",
+    "operationName": "Microsoft.AgFoodPlatform/sensorPartnerIntegrationModels/write",
+    "callerIpAddress": "122.161.78.235",
+    "Level": "Information",
+    "identity": {
+      "claims": {
+        "ApplicationId": "39d176c5-91b6-454b-854d-55813c17d92d",
+        "ObjectId": "9002b50e-dc98-445e-a865-72dce38ecafd",
+        "TenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+      }
+    },
+    "properties": {
+      "requestUri": "https://sample.farmbeats.azure.net/sensor-partners/abc/integrations/inte?api-version=2021-07-31-preview",
+      "farmerId": "sample",
+      "dataPlaneResourceId": "/sensor-partners/abc/integrations/inte",
+      "requestBody": {
+        "status": "sample",
+        "name": "sample",
+        "description": "sample"
+      }
+    },
+    "resultSignature": "201",
+    "resultType": "Success",
+    "location": "eastus",
+    "correlationId": "9f73d3f42918f81ed6ab22f8e7b37624",
+    "durationMs": 2110
+  }
+]

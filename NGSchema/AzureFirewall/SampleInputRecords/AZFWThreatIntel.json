@@ -1,0 +1,19 @@
+[
+  {
+    "category": "AZFWThreatIntel",
+    "time": "2021-10-19T23:01:59.723496Z",
+    "resourceId": "/subscriptions/aeb5b02a-0f18-45a4-86d6-81808115cacf/resourcegroups/manuelberger-new-logs-test-2/providers/microsoft.network/azurefirewalls/fw",
+    "properties": {
+      "Protocol": "TCP",
+      "SourceIp": "221.0.39.19",
+      "SourcePort": "76.90.233.8",
+      "DestinationIp": "1.2.3.4",
+      "DestinationPort": 24170,
+      "Fqdn": "wvegl.jcnwedtxwafgn.org",
+      "TargetUrl": "ke.cygpkdy.net/vzxuuvodixdmjxlsat",
+      "Action": "ALLOW",
+      "ThreatDescription": "djcqdvyecvkxua",
+      "IsTlsInspected": true
+    }
+  }
+]

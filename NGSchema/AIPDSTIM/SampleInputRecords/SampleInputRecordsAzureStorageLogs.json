@@ -1,0 +1,28 @@
+[
+	{
+		"TimeGenerated": "2021-09-04T14:27:12.627Z",
+		"Location": "East US",
+		"OperationName": "GetBlobServiceProperties",
+		"AuthenticationType": "OAuth",
+		"RequesterAppId": "ed3210a4-5098-4466-9e05-87f9526c58fe",
+		"RequesterObjectId": "257f57f8-0e6e-498c-9066-8c0fa70b3043",
+		"RequesterTenantId": "7684c5e8-d8fe-4d82-a3f1-7d5429dbd162",
+		"AuthenticationHash": "EEA39570C4E12B2A15B0FD220CF66E874FEF5EC22B4BF88037B752E5AD514199",
+		"RequesterUpn": "salowenh@microsoft.com",
+		"StatusCode": "200",
+		"Uri": "https://yogevteststorageaccount.blob.core.windows.net:443/?restype=service&comp=properties&sk=system-1",
+		"CallerIpAddress": "10.94.160.148",
+		"UserAgentHeader": "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1",
+		"Category": "StorageRead",
+		"AggregationCount": 57,
+		"AggregationLastEventTime": "2021-09-04T15:27:12.627Z",
+		"SumResponseBodySize": 53658,
+		"ResourceSubscriptionId": "441225ed-7a4b-4844-846a-728ca380c396",
+		"ResourceGroup": "resourceGroupName",
+		"AccountName": "accountName",
+		"CorrelationId": "C1CE3550CA3810B9925708DC0EEFD6C621E443C6AA3E5840FE3FE00D291DC890",
+		"AssetLastScanTime": "2021-08-22T09:35:08.8118575Z",
+		"ClassificationDetails": "{\"Id\":\"957d0a45-da07-41f5-bb6b-5eea279d04c4\", \"Name\": \"Age of individual\", \"Count\":1,\"UniqueCount\":1,\"Confidence\":87}",
+		"SensitivityLabelName": "General"
+	}
+]

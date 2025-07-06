@@ -1,0 +1,14 @@
+AmlOnlineEndpointConsoleLog
+| parse kind=regex flags=i _ResourceId with ".*?/RESOURCEGROUPS/" ResourceGroup "/PROVIDERS/MICROSOFT.MACHINELEARNINGSERVICES/WORKSPACES/" Workspace "/ONLINEENDPOINTS/" EndpointName
+| project
+    TimeGenerated,
+    Subscription = _SubscriptionId,
+    ResourceGroup,
+    Workspace,
+    EndpointName,
+    DeploymentName,
+    InstanceId,
+    ContainerName,
+    ContainerImageName,
+    Message
+| top 100 by TimeGenerated

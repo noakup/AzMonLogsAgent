@@ -1,0 +1,384 @@
+{
+	"type": "Microsoft.BotService/botServices",
+	"displayName": "Bot Services",
+	"description": "All tables related to Azure Bot Service.",
+	"tags": {},
+	"properties": {},
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "Azure Bot Service/Triage",
+	"relatedTables": ["AzureActivity"],
+	"relatedFunctions": [],
+	"tables": [
+		{
+			"name": "ABSBotRequests",
+			"description": "Logs of requests made by Azure Bot Service onbehalf of a bot such as requests from channel to bot and to other dependencies.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 1,
+			"dataTypeId": "BOTSERVICES_BOTREQUEST",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "durationMS",
+					"type": "Double"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "callerIpAddress",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "level",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				},
+				{
+					"name": "location",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "KQL/ABSBotRequestLogsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the log was generated."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The operation associated with the log record."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID for the correlated events. Can be used to identify correlated events between multiple tables."
+				},
+				{
+					"name": "Category",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Classification of the log."
+				},
+				{
+					"name": "Location",
+					"description": "Location of the service sending the log (Azure region name e.g. West US).",
+					"type": "String",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "Level",
+					"description": "log level of message such as Information, Warning, Error, etc.",
+					"type": "String",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "BotId",
+					"description": "Name of the bot or the bot handle.",
+					"type": "String",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "ResultCode",
+					"description": "HTTP request response code.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Channel",
+					"description": "Name of the Channel generating the log such as Direct Line, MS Teams, Facebook, etc.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "DurationMs",
+					"description": "Duration of the request.",
+					"type": "Double",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/ABSBotRequestLogSample.json"
+		}
+	],
+    "queries": [
+		{
+			"id": "64f87548-08b9-4b7a-83af-c05315d36666",
+			"displayName":"Clients To Direct Line Channel",
+			"description": "Logs of Clients to Direct Line channel requests.",
+			"bodyFilePath": "KQL/ClientToDirectlineLogsQuery.kql",
+			"categories": ["resources"],
+			"tags": {
+			  "Topic": [ "Diagnostics" ]
+			},
+			"relatedTables": [
+				"ABSBotRequests"
+			],
+			"properties": {
+			  "ExampleQuery": true,
+			  "QueryAttributes": {
+				"IsMultiResource": true
+			  }
+			}
+		},
+		{
+			"id": "8b407dc8-15eb-4ab6-8ddc-b9fa4d71ea0a",
+			"displayName":"Bot To Channels",
+			"description": "Logs of requests from the Bot to channels.",
+			"bodyFilePath": "KQL/BotToChannelLogsQuery.kql",
+			"categories": ["resources"],
+			"tags": {
+			  "Topic": [ "Diagnostics" ]
+			},
+			"relatedTables": [
+				"ABSBotRequests"
+			],
+			"properties": {
+			  "ExampleQuery": true,
+			  "QueryAttributes": {
+				"IsMultiResource": true
+			  }
+			}
+		},
+		{
+			"id": "bc1ef3cf-7f5d-4516-9464-3d192bddce3b",
+			"displayName":"Channels To Bot",
+			"description": "Logs of requests from Channels to the bot.",
+			"bodyFilePath": "KQL/ChannelToBotLogsQuery.kql",
+			"categories": ["resources"],
+			"tags": {
+			  "Topic": [ "Diagnostics" ]
+			},
+			"relatedTables": [
+				"ABSBotRequests"
+			],
+			"properties": {
+			  "ExampleQuery": true,
+			  "QueryAttributes": {
+				"IsMultiResource": true
+			  }
+			}
+		},
+		{
+			"id": "60f51b61-07de-4bd5-a0ee-e0d9cf82d340",
+			"displayName":"Requests From Facebook To Azure Bot Service",
+			"description": "Logs of requests from Facebook to Azure Bot Service Facebook Channel.",
+			"bodyFilePath": "KQL/RequestsFromFacebookToBotServiceLogsQuery.kql",
+			"categories": ["resources"],
+			"tags": {
+			  "Topic": [ "Diagnostics" ]
+			},
+			"relatedTables": [
+				"ABSBotRequests"
+			],
+			"properties": {
+			  "ExampleQuery": true,
+			  "QueryAttributes": {
+				"IsMultiResource": true
+			  }
+			}
+		},		
+		{
+			"id": "10fc7fcb-95db-4b92-aeb7-36e8fdec7d31",
+			"displayName":"Requests From Azure Bot Service To Facebook API",
+			"description": "Logs of requests from Azure Bot Service Facebook Channel to Facebook API.",
+			"bodyFilePath": "KQL/RequestsFromBotServiceToFacebookLogsQuery.kql",
+			"categories": ["resources"],
+			"tags": {
+			  "Topic": [ "Diagnostics" ]
+			},
+			"relatedTables": [
+				"ABSBotRequests"
+			],
+			"properties": {
+			  "ExampleQuery": true,
+			  "QueryAttributes": {
+				"IsMultiResource": true
+			  }
+			}
+		},
+		{
+			"id": "b8e80791-6507-423b-8cba-0e0b320af1c3",
+			"displayName":"Activities Sent from Clients to Direct Line",
+			"description": "Logs of requests to send activities from a client to Direct Line channel.",
+			"bodyFilePath": "KQL/SendActivityToBotRequestsQuery.kql",
+			"categories": ["resources"],
+			"tags": {
+			  "Topic": [ "Diagnostics" ]
+			},
+			"relatedTables": [
+				"ABSBotRequests"
+			],
+			"properties": {
+			  "ExampleQuery": true,
+			  "QueryAttributes": {
+				"IsMultiResource": true
+			  }
+			}
+		},
+		{
+			"id": "fec44dbd-94cd-4dab-8c68-0b0b64c256de",
+			"displayName":"Direct Line Channel Logs",
+			"description": "Retrieve logs associated with Direct Line channel.",
+			"bodyFilePath": "KQL/DirectLineChannelLogsQuery.kql",
+			"categories": ["resources"],
+			"tags": {
+			  "Topic": [ "Diagnostics" ]
+			},
+			"relatedTables": [
+				"ABSBotRequests"
+			],
+			"properties": {
+			  "ExampleQuery": true,
+			  "QueryAttributes": {
+				"IsMultiResource": true
+			  }
+			}
+		},
+		{
+			"id": "599d9097-d85c-44a3-8284-55e525590f20",
+			"displayName":"Failed Requests",
+			"description": "List of logs of unsuccessful requests.",
+			"bodyFilePath": "KQL/FailedRequestsQuery.kql",
+			"categories": ["resources"],
+			"tags": {
+			  "Topic": [ "Diagnostics", "Errors" ]
+			},
+			"relatedTables": [
+				"ABSBotRequests"
+			],
+			"properties": {
+			  "ExampleQuery": true,
+			  "QueryAttributes": {
+				"IsMultiResource": true
+			  }
+			}
+		},
+		{
+			"id": "599d9097-d85c-44a3-8284-55e525590f21",
+			"displayName":"Direct Line Channel Response Codes Line Chart",
+			"description": "Line Chart showing Direct Line channel requests response codes.",
+			"bodyFilePath": "KQL/LineChartDirectLineChannelResponseCodesQuery.kql",
+			"categories": ["resources"],
+			"tags": {
+			  "Topic": [ "Diagnostics", "Usage" ]
+			},
+			"relatedTables": [
+				"ABSBotRequests"
+			],
+			"properties": {
+			  "ExampleQuery": true,
+			  "QueryAttributes": {
+				"IsMultiResource": true
+			  }
+			}
+	  	},
+		{
+			"id": "599d9097-d85c-44a3-8284-55e525590f23",
+			"displayName":"Requests Duration Line Chart",
+			"description": "Line Chart showing requests response times/duration per operation.",
+			"bodyFilePath": "KQL/LineChartRequestsDurationQuery.kql",
+			"categories": ["resources"],
+			"tags": {
+			  "Topic": [ "Diagnostics", "Performance" ]
+			},
+			"relatedTables": [
+				"ABSBotRequests"
+			],
+			"properties": {
+			  "ExampleQuery": true,
+			  "QueryAttributes": {
+				"IsMultiResource": true
+			  }
+			}
+	  	},
+		{
+			"id": "599d9097-d85c-44a3-8284-55e525590f24",
+			"displayName":"Response Codes Line Chart",
+			"description": "Line Chart showing requests response status codes.",
+			"bodyFilePath": "KQL/LineChartResponseCodesQuery.kql",
+			"categories": ["resources"],
+			"tags": {
+			  "Topic": [ "Diagnostics" ]
+			},
+			"relatedTables": [
+				"ABSBotRequests"
+			],
+			"properties": {
+			  "ExampleQuery": true,
+			  "QueryAttributes": {
+				"IsMultiResource": true
+			  }
+			}
+	  	},
+		{
+			"id": "599d9097-d85c-44a3-8284-55e525590f25",
+			"displayName":"Response Codes PieChart",
+			"description": "Pie Chart showing requests response status codes.",
+			"bodyFilePath": "KQL/PieChartResponseCodesQuery.kql",
+			"categories": ["resources"],
+			"tags": {
+			  "Topic": [ "Diagnostics" ]
+			},
+			"relatedTables": [
+				"ABSBotRequests"
+			],
+			"properties": {
+			  "ExampleQuery": true,
+			  "QueryAttributes": {
+				"IsMultiResource": true
+			  }
+			}
+	  	},
+		{
+			"id": "599d9097-d85c-44a3-8284-55e525534f97",
+			"displayName":"Request Operations PieChart",
+			"description": "Pie Chart showing requests operations.",
+			"bodyFilePath": "KQL/PieChartOperationNameQuery.kql",
+			"categories": ["resources"],
+			"tags": {
+			  "Topic": [ "Diagnostics" ]
+			},
+			"relatedTables": [
+				"ABSBotRequests"
+			],
+			"properties": {
+			  "ExampleQuery": true,
+			  "QueryAttributes": {
+				"IsMultiResource": true
+			  }
+			}
+		}
+	],
+    "functions": []
+}

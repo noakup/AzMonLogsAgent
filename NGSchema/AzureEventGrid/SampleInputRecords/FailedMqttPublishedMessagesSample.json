@@ -1,0 +1,21 @@
+[
+  {
+    "time": "2023-11-07T01:22:48.2811790Z",
+    "resourceId": "/SUBSCRIPTIONS/D8560037-8993-40AC-B191-4B2D877A9359/RESOURCEGROUPS/MCHAICANARYTEST/PROVIDERS/MICROSOFT.EVENTGRID/NAMESPACES/MCHAI1010",
+    "location": "eastus",
+    "operationName": "Microsoft.EventGrid/topicspaces/publish",
+    "category": "FailedMqttPublishedMessages",
+    "resultType": "Failed",
+    "resultSignature": "AuthorizationError",
+    "resultDescription": "Topic name 'testtopic/small4.0' does not match any topicspaces",
+    "identity": { "clientIdentity": "client1" },
+    "properties": {
+      "sessionName": "client1",
+      "protocol": "MQTT5",
+      "traceId": "ako65yewjjhzbdp3lxny7557fu",
+      "qos": 1,
+      "topicName": "testtopic/small4.0",
+      "operationCount": 1
+    }
+  }
+]

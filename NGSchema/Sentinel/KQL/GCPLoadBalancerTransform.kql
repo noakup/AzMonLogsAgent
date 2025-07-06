@@ -1,0 +1,32 @@
+source
+| extend jsonPayload = todynamic(jsonPayload)
+| extend resourceLabel = todynamic(resource).labels
+| extend httpRequest = todynamic(httpRequest)
+| project 
+    TimeGenerated = todatetime(receiveTimestamp),
+    Timestamp = todatetime(timestamp),
+    LogName=tostring(logName),
+    InsertId=tostring(insertId),
+    BackendTargetProjectNumber=tostring(jsonPayload.backendTargetProjectNumber),
+    CacheDecision=todynamic(jsonPayload.cacheDecision),
+    EnforcedSecurityPolicy=todynamic(jsonPayload.enforcedSecurityPolicy),
+    PreviewSecurityPolicy=todynamic(jsonPayload.previewSecurityPolicy),
+    EnforcedEdgeSecurityPolicy=todynamic(jsonPayload.enforcedEdgeSecurityPolicy),
+    PayloadRemoteIp=tostring(jsonPayload.remoteIp),
+    SecurityPolicyRequestData=todynamic(jsonPayload.securityPolicyRequestData),
+    PreviewEdgeSecurityPolicy=todynamic(jsonPayload.previewEdgeSecurityPolicy),
+    StatusDetails=tostring(jsonPayload.statusDetails),
+    Latency=tostring(httpRequest.latency),
+    RemoteIp=tostring(httpRequest.remoteIp),
+    RequestMethod=tostring(httpRequest.requestMethod),
+    RequestSize=tostring(httpRequest.requestSize),
+    RequestUrl=tostring(httpRequest.requestUrl),
+    RequestStatus=tostring(httpRequest.status),
+    UserAgent=tostring(httpRequest.userAgent),
+    BackendServiceName=tostring(resourceLabel.backend_service_name),
+    ForwardingRuleName=tostring(resourceLabel.forwarding_rule_name),
+    ProjectId=tostring(resourceLabel.project_id),
+    UrlMapName=tostring(resourceLabel.url_map_name),
+    Zone=tostring(resourceLabel.zone),
+    Severity=tostring(severity)
+

@@ -1,0 +1,19 @@
+[
+	{
+		"category": "AZFWIdpsSignature",
+		"time": "2021-10-19T23:01:59.723496Z",
+		"resourceId": "/subscriptions/aeb5b02a-0f18-45a4-86d6-81808115cacf/resourcegroups/manuelberger-new-logs-test-2/providers/microsoft.network/azurefirewalls/fw",
+		"properties": {
+			"Protocol": "UDP",
+			"SourceIp": "248.51.165.35",
+			"SourcePort": 35835,
+			"DestinationIp": "74.82.190.241",
+			"DestinationPort": 27204,
+			"Action": "drop",
+			"SignatureId": "62906",
+			"Category": "sjnnwf",
+			"Description": "asdasfasasdasdasd",
+			"Severity": 1049
+		}
+	}
+]

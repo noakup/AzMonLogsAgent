@@ -1,0 +1,9 @@
+source
+| extend properties = parse_json(properties)
+| project
+    TimeGenerated = todatetime(['time']),
+    OperationName = tostring(properties.name),
+    Category = tostring(properties.category),
+    Location = tostring(properties.location),
+    ServiceResourceId = tostring(properties.serviceResourceId),
+    ProvisioningState = tostring(properties.provisioningState)

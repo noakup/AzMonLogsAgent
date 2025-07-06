@@ -1,0 +1,187 @@
+[
+    {
+        "time": "12/29/2021 5:45:39 PM",
+        "resourceId": "/SUBSCRIPTIONS/8C39D797-D54A-4A41-9ADE-2EEA7C88F549/RESOURCEGROUPS/MAGUERRRES0/PROVIDERS/MICROSOFT.STORAGECACHE/CACHES/MAGUERR-DEV0-HPCCACHE01",
+        "location": "eastus",
+        "operationName": "Microsoft.StorageCache/caches/write",
+        "category": "AscCacheOperationEvent",
+        "operationVersion": "2021-05-01",
+        "resultType": "Started",
+        "resultSignature": "202",
+        "resultDescription": "The operation started",
+        "correlationId": "dd9ebf0d-547b-4c93-accc-85ba88cdc3a4"
+    },
+    {
+        "time": "12/29/2021 5:48:18 PM",
+        "resourceId": "/SUBSCRIPTIONS/8C39D797-D54A-4A41-9ADE-2EEA7C88F549/RESOURCEGROUPS/MAGUERRRES0/PROVIDERS/MICROSOFT.STORAGECACHE/CACHES/MAGUERR-DEV0-HPCCACHE01",
+        "location": "eastus",
+        "operationName": "Microsoft.StorageCache/caches/write",
+        "category": "AscCacheOperationEvent",
+        "operationVersion": "2021-05-01",
+        "resultType": "Succeeded",
+        "resultSignature": "202",
+        "resultDescription": "The operation started",
+        "correlationId": "dd9ebf0d-547b-4c93-accc-85ba88cdc3a4"
+    },
+    {
+        "time": "12/29/2021 5:48:29 PM",
+        "resourceId": "/SUBSCRIPTIONS/8C39D797-D54A-4A41-9ADE-2EEA7C88F549/RESOURCEGROUPS/MAGUERRRES0/PROVIDERS/MICROSOFT.STORAGECACHE/CACHES/MAGUERR-DEV0-HPCCACHE01",
+        "location": "eastus",
+        "operationName": "Microsoft.StorageCache/caches/storageTargets/write",
+        "category": "AscCacheOperationEvent",
+        "properties": {
+            "StorageTargetName": "myStorageTarget",
+            "StorageTargetResourceId": "/subscriptions/8c39d797-d54a-4a41-9ade-2eea7c88f549/resourceGroups/maguerrRes0/providers/Microsoft.StorageCache/caches/maguerr-dev0-hpccache01/storageTargets/myStorageTarget"
+        },
+        "operationVersion": "2021-05-01",
+        "resultType": "Started",
+        "resultSignature": "201",
+        "resultDescription": "The operation started",
+        "correlationId": "252c7550-ace6-43f1-ba53-4df23a162929"
+    },
+    {
+        "time": "12/29/2021 5:52:58 PM",
+        "resourceId": "/SUBSCRIPTIONS/8C39D797-D54A-4A41-9ADE-2EEA7C88F549/RESOURCEGROUPS/MAGUERRRES0/PROVIDERS/MICROSOFT.STORAGECACHE/CACHES/MAGUERR-DEV0-HPCCACHE01",
+        "location": "eastus",
+        "operationName": "Microsoft.StorageCache/caches/storageTargets/write",
+        "category": "AscCacheOperationEvent",
+        "properties": {
+            "StorageTargetName": "myStorageTarget",
+            "StorageTargetResourceId": "/subscriptions/8c39d797-d54a-4a41-9ade-2eea7c88f549/resourceGroups/maguerrRes0/providers/Microsoft.StorageCache/caches/maguerr-dev0-hpccache01/storageTargets/myStorageTarget"
+        },
+        "operationVersion": "2021-05-01",
+        "resultType": "Succeeded",
+        "resultSignature": "201",
+        "correlationId": "252c7550-ace6-43f1-ba53-4df23a162929"
+    },
+    {
+        "time": "12/29/2021 7:34:34 PM",
+        "resourceId": "/SUBSCRIPTIONS/8C39D797-D54A-4A41-9ADE-2EEA7C88F549/RESOURCEGROUPS/MAGUERRRES0/PROVIDERS/MICROSOFT.STORAGECACHE/CACHES/MAGUERR-DEV0-HPCCACHE01",
+        "location": "eastus",
+        "operationName": "Microsoft.StorageCache/caches/addPrimingJob/action",
+        "category": "AscCacheOperationEvent",
+        "properties": {
+            "primingJobName": "primeJobSample",
+            "primingJobId": "",
+            "activityId": "e2bcbab9-eb2b-4b64-aea7-b9dee708257d"
+        },
+        "operationVersion": "2021-10-01-preview",
+        "resultType": "Started",
+        "resultSignature": "202",
+        "resultDescription": "The operation started",
+        "correlationId": "f5085416-9177-4a3b-98ec-ce4ebe867ae6"
+    },
+    {
+        "time": "12/29/2021 7:37:22 PM",
+        "resourceId": "/SUBSCRIPTIONS/8C39D797-D54A-4A41-9ADE-2EEA7C88F549/RESOURCEGROUPS/MAGUERRRES0/PROVIDERS/MICROSOFT.STORAGECACHE/CACHES/MAGUERR-DEV0-HPCCACHE01",
+        "location": "eastus",
+        "operationName": "Microsoft.StorageCache/caches/addPrimingJob/action",
+        "category": "AscCacheOperationEvent",
+        "properties": {
+            "primingJobName": "primeJobSample",
+            "primingJobId": "primingjob5da03b75",
+            "activityId": "e2bcbab9-eb2b-4b64-aea7-b9dee708257d"
+        },
+        "operationVersion": "2021-10-01-preview",
+        "resultType": "Succeeded",
+        "resultSignature": "202",
+        "resultDescription": "The operation completed successfully",
+        "correlationId": "f5085416-9177-4a3b-98ec-ce4ebe867ae6"
+    },
+    {
+        "time": "12/29/2021 7:38:54 PM",
+        "resourceId": "/SUBSCRIPTIONS/8C39D797-D54A-4A41-9ADE-2EEA7C88F549/RESOURCEGROUPS/MAGUERRRES0/PROVIDERS/MICROSOFT.STORAGECACHE/CACHES/MAGUERR-DEV0-HPCCACHE01",
+        "location": "eastus",
+        "operationName": "Microsoft.StorageCache/caches/storageTargets/flush/action",
+        "category": "AscCacheOperationEvent",
+        "properties": {
+            "StorageTargetName": "myStorageTarget",
+            "StorageTargetResourceId": "/subscriptions/8c39d797-d54a-4a41-9ade-2eea7c88f549/resourceGroups/maguerrRes0/providers/Microsoft.StorageCache/caches/maguerr-dev0-hpccache01/storageTargets/myStorageTarget"
+        },
+        "operationVersion": "2021-09-01",
+        "resultType": "Started",
+        "resultSignature": "202",
+        "resultDescription": "The operation started",
+        "correlationId": "6788866d-a005-4aae-b8df-b3cc7245d0b2"
+    },
+    {
+        "time": "12/29/2021 7:39:54 PM",
+        "resourceId": "/SUBSCRIPTIONS/8C39D797-D54A-4A41-9ADE-2EEA7C88F549/RESOURCEGROUPS/MAGUERRRES0/PROVIDERS/MICROSOFT.STORAGECACHE/CACHES/MAGUERR-DEV0-HPCCACHE01",
+        "location": "eastus",
+        "operationName": "Microsoft.StorageCache/caches/storageTargets/flush/action",
+        "category": "AscCacheOperationEvent",
+        "properties": {
+            "StorageTargetName": "myStorageTarget",
+            "StorageTargetResourceId": "/subscriptions/8c39d797-d54a-4a41-9ade-2eea7c88f549/resourceGroups/maguerrRes0/providers/Microsoft.StorageCache/caches/maguerr-dev0-hpccache01/storageTargets/myStorageTarget"
+        },
+        "operationVersion": "2021-09-01",
+        "resultType": "Succeeded",
+        "resultSignature": "202",
+        "resultDescription": "The operation completed successfully",
+        "correlationId": "6788866d-a005-4aae-b8df-b3cc7245d0b2"
+    },
+    {
+        "time": "12/29/2021 7:40:21 PM",
+        "resourceId": "/SUBSCRIPTIONS/8C39D797-D54A-4A41-9ADE-2EEA7C88F549/RESOURCEGROUPS/MAGUERRRES0/PROVIDERS/MICROSOFT.STORAGECACHE/CACHES/MAGUERR-DEV0-HPCCACHE01",
+        "location": "eastus",
+        "operationName": "Microsoft.StorageCache/caches/storageTargets/suspend/action",
+        "category": "AscCacheOperationEvent",
+        "properties": {
+            "StorageTargetName": "myStorageTarget",
+            "StorageTargetResourceId": "/subscriptions/8c39d797-d54a-4a41-9ade-2eea7c88f549/resourceGroups/maguerrRes0/providers/Microsoft.StorageCache/caches/maguerr-dev0-hpccache01/storageTargets/myStorageTarget"
+        },
+        "operationVersion": "2021-09-01",
+        "resultType": "Started",
+        "resultSignature": "202",
+        "resultDescription": "The operation started",
+        "correlationId": "2d7a02b1-b6f5-47c5-bbb3-ec079a8e1d39"
+    },
+    {
+        "time": "12/29/2021 7:40:24 PM",
+        "resourceId": "/SUBSCRIPTIONS/8C39D797-D54A-4A41-9ADE-2EEA7C88F549/RESOURCEGROUPS/MAGUERRRES0/PROVIDERS/MICROSOFT.STORAGECACHE/CACHES/MAGUERR-DEV0-HPCCACHE01",
+        "location": "eastus",
+        "operationName": "Microsoft.StorageCache/caches/storageTargets/suspend/action",
+        "category": "AscCacheOperationEvent",
+        "properties": {
+            "StorageTargetName": "myStorageTarget",
+            "StorageTargetResourceId": "/subscriptions/8c39d797-d54a-4a41-9ade-2eea7c88f549/resourceGroups/maguerrRes0/providers/Microsoft.StorageCache/caches/maguerr-dev0-hpccache01/storageTargets/myStorageTarget"
+        },
+        "operationVersion": "2021-09-01",
+        "resultType": "Succeeded",
+        "resultSignature": "202",
+        "resultDescription": "The operation completed successfully",
+        "correlationId": "2d7a02b1-b6f5-47c5-bbb3-ec079a8e1d39"
+    },
+    {
+        "time": "12/29/2021 7:41:03 PM",
+        "resourceId": "/SUBSCRIPTIONS/8C39D797-D54A-4A41-9ADE-2EEA7C88F549/RESOURCEGROUPS/MAGUERRRES0/PROVIDERS/MICROSOFT.STORAGECACHE/CACHES/MAGUERR-DEV0-HPCCACHE01",
+        "location": "eastus",
+        "operationName": "Microsoft.StorageCache/caches/storageTargets/resume/action",
+        "category": "AscCacheOperationEvent",
+        "properties": {
+            "StorageTargetName": "myStorageTarget",
+            "StorageTargetResourceId": "/subscriptions/8c39d797-d54a-4a41-9ade-2eea7c88f549/resourceGroups/maguerrRes0/providers/Microsoft.StorageCache/caches/maguerr-dev0-hpccache01/storageTargets/myStorageTarget"
+        },
+        "operationVersion": "2021-09-01",
+        "resultType": "Started",
+        "resultSignature": "202",
+        "resultDescription": "The operation started",
+        "correlationId": "68be3257-2244-45ab-a5f9-1c6cbefd67e8"
+    },
+    {
+        "time": "12/29/2021 7:41:05 PM",
+        "resourceId": "/SUBSCRIPTIONS/8C39D797-D54A-4A41-9ADE-2EEA7C88F549/RESOURCEGROUPS/MAGUERRRES0/PROVIDERS/MICROSOFT.STORAGECACHE/CACHES/MAGUERR-DEV0-HPCCACHE01",
+        "location": "eastus",
+        "operationName": "Microsoft.StorageCache/caches/storageTargets/resume/action",
+        "category": "AscCacheOperationEvent",
+        "properties": {
+            "StorageTargetName": "myStorageTarget",
+            "StorageTargetResourceId": "/subscriptions/8c39d797-d54a-4a41-9ade-2eea7c88f549/resourceGroups/maguerrRes0/providers/Microsoft.StorageCache/caches/maguerr-dev0-hpccache01/storageTargets/myStorageTarget"
+        },
+        "operationVersion": "2021-09-01",
+        "resultType": "Succeeded",
+        "resultSignature": "202",
+        "resultDescription": "The operation completed successfully",
+        "correlationId": "68be3257-2244-45ab-a5f9-1c6cbefd67e8"
+    }
+]

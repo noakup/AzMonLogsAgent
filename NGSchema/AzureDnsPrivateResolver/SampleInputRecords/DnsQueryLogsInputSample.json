@@ -1,0 +1,42 @@
+[
+    {
+        "time": "2023-11-10T00:11:54.1610000Z",
+        "resourceId": "/SUBSCRIPTIONS/C9B1134D-20DD-45A9-A350-BF55370C4502/RESOURCEGROUPS/RG-SOMYATANEJA-QL-BUGBASH/PROVIDERS/MICROSOFT.NETWORK/DNSRESOLVERPOLICIES/DNSSECURITYPOLICY-SOMYATANEJA",
+        "category": "DnsResponse",
+        "operationName": "RESPONSE_SUCCESS",
+        "properties": {
+            "version": "1.0",
+            "sub_id": "C9B1134D-20DD-45A9-A350-BF55370C4502",
+            "region": "centraluseuap",
+            "vnet_id": "6b0f7859-7b20-49fc-8e0f-f165c9ab0847",
+            "timestamp": "2023-11-10T00:11:54.161+00:00",
+            "query_name": "support.dnsimple.com.",
+            "query_type": "CAA",
+            "query_class": "IN",
+            "response_code": 0,
+            "answer": [
+                {
+                    "Type": "CNAME",
+                    "Class": "IN",
+                    "TTL": 1799,
+                    "RData": "dnsimple-support.netlify.app."
+                }
+            ],
+            "authority": [],
+            "additional": [],
+            "srcipaddr": "0.0.0.0",
+            "srcport": 0,
+            "dstipaddr": "",
+            "dstport": "",
+            "transport": "UDP",
+            "privateresolver_endpoint": "",
+            "query_response_time": 205,
+            "resolution_path": "",
+            "resolverpolicy_id": "",
+            "resolverpolicy_rule_action": "",
+            "resolverpolicy_domain_list_id": "",
+            "dnsforwardingruleset_id": "",
+            "dnsforwardingruleset_domain_list_id": ""
+        }
+    }
+]

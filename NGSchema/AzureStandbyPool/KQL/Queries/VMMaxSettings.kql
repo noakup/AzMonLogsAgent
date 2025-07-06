@@ -1,0 +1,5 @@
+SVMPoolRequestLog
+| where NewMaxCapacity > 10 
+| project TimeGenerated, Location
+| sort by TimeGenerated desc
+| limit 30

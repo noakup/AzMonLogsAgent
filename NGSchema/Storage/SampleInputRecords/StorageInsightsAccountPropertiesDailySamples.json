@@ -1,0 +1,211 @@
+[
+  {
+    "TimeGenerated": "2024-01-07T08:08:11.9487096Z",
+    "TimePeriod": "2019-01-07T00:00:00Z",
+    "StorageAccountName": "0storageaccountabcdefghi",
+    "StorageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000",
+    "SubscriptionName": "LinuxMdsd Test",
+    "Region": "westus",
+    "PerformanceType": "Premium",
+    "EncryptionType": "MMK",
+    "RedundancyType": "LRS",
+    "AccessTier": "Hot",
+    "StorageType": "FNS",
+    "ResourceTags": {
+      "k1": "K1 Value"
+    },
+    "ResourceGroup": "rg-13723929",
+    "ManagementGroupIds": [
+      "00000000-0000-0000-0000-000000000000",
+      "00000000-0000-0000-0000-000000000001",
+      "TestAIOrchestrationService"
+    ]
+  },
+  {
+    "TimeGenerated": "2024-01-07T08:08:11.9499197Z",
+    "TimePeriod": "2019-01-07T00:00:00Z",
+    "StorageAccountName": "1storageaccountabcdefghi",
+    "StorageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000",
+    "SubscriptionName": "AISC-DEV-02",
+    "Region": "northeurope",
+    "PerformanceType": "Standard",
+    "EncryptionType": "CMK",
+    "RedundancyType": "ZRS",
+    "AccessTier": "Cool",
+    "StorageType": "HNS",
+    "ResourceTags": {
+      "Some Key": "Some Value",
+      "Some Other Key": "Some Other Value"
+    },
+    "ResourceGroup": "rg-b2a328a7",
+    "ManagementGroupIds": [
+      "TestAIOrchestrationService"
+    ]
+  },
+  {
+    "TimeGenerated": "2024-01-07T08:08:11.9509484Z",
+    "TimePeriod": "2019-01-07T00:00:00Z",
+    "StorageAccountName": "2storageaccountabcdefghi",
+    "StorageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000",
+    "SubscriptionName": "xstore_cv_dev",
+    "Region": "southeastasia",
+    "PerformanceType": "Standard",
+    "EncryptionType": "CMK",
+    "RedundancyType": "ZRS",
+    "AccessTier": "Archive",
+    "StorageType": "HNS",
+    "ResourceTags": {
+      "Some Key": "Some Value",
+      "Some Other Key": "Some Other Value"
+    },
+    "ResourceGroup": "rg-1f2d9952",
+    "ManagementGroupIds": [
+      "00000000-0000-0000-0000-000000000000",
+      "00000000-0000-0000-0000-000000000001",
+      "00000000-0000-0000-0000-000000000002"
+    ]
+  },
+  {
+    "TimeGenerated": "2024-01-07T08:08:11.9519951Z",
+    "TimePeriod": "2019-01-07T00:00:00Z",
+    "StorageAccountName": "3storageaccountabcdefghi",
+    "StorageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000",
+    "SubscriptionName": "xstore_cv_dev",
+    "Region": "southeastasia",
+    "PerformanceType": "Premium",
+    "EncryptionType": "CMK",
+    "RedundancyType": "LRS",
+    "AccessTier": "Premium",
+    "StorageType": "FNS",
+    "ResourceTags": {
+      "Some Key": "Some Value",
+      "Some Other Key": "Some Other Value"
+    },
+    "ResourceGroup": "rg-1f2d9952",
+    "ManagementGroupIds": [
+      "00000000-0000-0000-0000-000000000000",
+      "00000000-0000-0000-0000-000000000001",
+      "00000000-0000-0000-0000-000000000002"
+    ]
+  },
+  {
+    "TimeGenerated": "2024-01-07T08:08:11.9530889Z",
+    "TimePeriod": "2019-01-07T00:00:00Z",
+    "StorageAccountName": "4storageaccountabcdefghi",
+    "StorageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000",
+    "SubscriptionName": "xStoreInsights-Dev-Playground1",
+    "Region": "westus",
+    "PerformanceType": "Standard",
+    "EncryptionType": "CMK",
+    "RedundancyType": "GRS",
+    "AccessTier": "Cold",
+    "StorageType": "HNS",
+    "ResourceTags": null,
+    "ResourceGroup": "rg-d0fe5891",
+    "ManagementGroupIds": [
+      "00000000-0000-0000-0000-000000000004"
+    ]
+  },
+  {
+    "TimeGenerated": "2024-01-07T08:08:11.9541052Z",
+    "TimePeriod": "2019-01-07T00:00:00Z",
+    "StorageAccountName": "5storageaccountabcdefghi",
+    "StorageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000",
+    "SubscriptionName": "Traffic manager Preview",
+    "Region": "westus",
+    "PerformanceType": "Standard",
+    "EncryptionType": "MMK",
+    "RedundancyType": "ZRS",
+    "AccessTier": "Hot",
+    "StorageType": "FNS",
+    "ResourceTags": null,
+    "ResourceGroup": "rg-56207a5d",
+    "ManagementGroupIds": [
+      "00000000-0000-0000-0000-000000000004",
+      "00000000-0000-0000-0000-000000000005"
+    ]
+  },
+  {
+    "TimeGenerated": "2024-01-07T08:08:11.9552133Z",
+    "TimePeriod": "2019-01-07T00:00:00Z",
+    "StorageAccountName": "6storageaccountabcdefghi",
+    "StorageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000",
+    "SubscriptionName": "Synthetic Testing Lab",
+    "Region": "southafricanorth",
+    "PerformanceType": "Standard",
+    "EncryptionType": "CMK",
+    "RedundancyType": "LRS",
+    "AccessTier": "Cool",
+    "StorageType": "FNS",
+    "ResourceTags": {
+      "Some Key": "Some Value",
+      "Some Other Key": "Some Other Value"
+    },
+    "ResourceGroup": "rg-f6869ac6",
+    "ManagementGroupIds": [
+      "00000000-0000-0000-0000-000000000004",
+      "00000000-0000-0000-0000-000000000005"
+    ]
+  },
+  {
+    "TimeGenerated": "2024-01-07T08:08:11.9562284Z",
+    "TimePeriod": "2019-01-07T00:00:00Z",
+    "StorageAccountName": "7storageaccountabcdefghi",
+    "StorageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000",
+    "SubscriptionName": "Skype-1ES-DEV",
+    "Region": "centralindia",
+    "PerformanceType": "Premium",
+    "EncryptionType": "CMK",
+    "RedundancyType": "RA-GRS",
+    "AccessTier": "Cold",
+    "StorageType": "HNS",
+    "ResourceTags": null,
+    "ResourceGroup": "rg-227531a4",
+    "ManagementGroupIds": [
+      "00000000-0000-0000-0000-000000000003",
+      "00000000-0000-0000-0000-000000000004",
+      "00000000-0000-0000-0000-000000000005",
+      "00000000-0000-0000-0000-000000000006",
+      "00000000-0000-0000-0000-000000000007",
+      "00000000-0000-0000-0000-000000000008"
+    ]
+  },
+  {
+    "TimeGenerated": "2024-01-07T08:08:11.9619144Z",
+    "TimePeriod": "2019-01-07T00:00:00Z",
+    "StorageAccountName": "8storageaccountabcdefghi",
+    "StorageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000",
+    "SubscriptionName": "Azure Profiler - Testing",
+    "Region": "southeastasia",
+    "PerformanceType": "Premium",
+    "EncryptionType": "MMK",
+    "RedundancyType": "LRS",
+    "AccessTier": "Cool",
+    "StorageType": "FNS",
+    "ResourceTags": null,
+    "ResourceGroup": "rg-432a7068",
+    "ManagementGroupIds": [
+      "TestIOrchestrationServicePublic"
+    ]
+  },
+  {
+    "TimeGenerated": "2024-01-07T08:08:11.9632453Z",
+    "TimePeriod": "2019-01-07T00:00:00Z",
+    "StorageAccountName": "9storageaccountabcdefghi",
+    "StorageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000",
+    "SubscriptionName": "Azure Profiler - Testing",
+    "Region": "southeastasia",
+    "PerformanceType": "Standard",
+    "EncryptionType": "MMK",
+    "RedundancyType": "RA-GRS",
+    "AccessTier": "Hot",
+    "StorageType": "HNS",
+    "ResourceTags": {
+      "k1": "K1 Value"
+    },
+    "ResourceGroup": "rg-432a7068",
+    "ManagementGroupIds": [
+      "00000000-0000-0000-0000-000000000006"
+    ]
+  }
+]

@@ -1,0 +1,7 @@
+ASCDeviceEvents
+| where OperationName == "DeviceCertificateEvent" and
+        Properties.EventType == "DeviceAttestationFailure" or Properties.EventType == "DeviceCertificateEvent" and
+        ResultType == "Failure" // Filter by time by adding " | where TimeGenerated > ago(7d) " for last 7 days of data or using time picker in the UI
+| project TimeGenerated, DeviceId, Properties, ResultDescription, Location
+| sort by TimeGenerated desc
+| limit 100

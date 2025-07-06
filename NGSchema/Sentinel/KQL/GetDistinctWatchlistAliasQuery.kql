@@ -1,0 +1,4 @@
+Watchlist
+| where _DTItemType == "Watchlist"
+| where _DTTimestamp > ago(5d)
+| distinct WatchlistAlias

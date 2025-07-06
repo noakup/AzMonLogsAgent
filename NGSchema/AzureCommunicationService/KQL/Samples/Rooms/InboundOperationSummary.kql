@@ -1,0 +1,9 @@
+ACSRoomsIncomingOperations
+// where OperationName == "<operation>" // This can be uncommented and specified to calculate only a single operation's duration percentiles
+| where OperationVersion == "2024-04-15" 
+| summarize TotalRoomCount = dcount(RoomId),
+            AvgAddedParticipantsCount = avg(AddedRoomParticipantsCount),
+            AvgRemovedParticipantsCount = avg(RemovedRoomParticipantsCount),
+            AvgUpsertedParticipantsCount = avg(UpsertedRoomParticipantsCount),
+            AvgRoomLifespan = avg(RoomLifespan),
+            SumPstnDialoutEnabled=countif(PstnDialOutEnabled==1)

@@ -1,0 +1,254 @@
+{
+	"type": "Microsoft.DocumentDB/mongoClusters",
+	"displayName": "Azure Cosmos DB for MongoDB (vCore)",
+	"description": "Logs related to Azure Cosmos DB for MongoDB (vCore).",
+	"tags": {}, 
+	"properties": {}, 
+	"simplifiedSchemaVersion": "3", 
+	"icmTeam": "Azure Database for PostgreSQL - Hyperscale (Citus)/PGMongo Marlin Hosting Team",
+	"contactDL": "pgmongo-hosting@microsoft.com",
+	"tables": [
+		{
+			"workflowName": "vCoreMongoRequestsWorkflow",
+			"transformName": "vCoreMongoRequests",
+			"physicalName": "VCoreMongoRequests",
+			"logicalName": "VCoreMongoRequests",
+			"description": "This table details data plane requests for MongoDB (vCore).",
+			"categories": [
+				"audit"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 5,
+			"dataTypeId": "MICROSOFTAZURECOSMOSDB_VCOREMONGOREQUESTS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Production",
+			"isChangeColumnInternalNameAllowed": true,
+			"isLakeAllowed": true,
+			"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "String"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/vCoreMongoRequestsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Timestamp (in UTC) of the Mongo (vCore) data plane request."
+				},
+				{
+					"name": "ClusterName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Cluster name."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Mongo (vCore) operation that was executed."
+				},
+				{
+					"name": "ActivityId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The unique identifier (GUID) for this Mongo (vCore) request.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "ErrorCode",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The error code (if applicable) for this request."
+				},
+				{
+					"name": "DurationMs",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The server-side execution time (in ms) for this request."
+				},
+				{
+					"name": "DatabaseName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB database against which this request was issued."
+				},
+				{
+					"name": "CollectionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the Cosmos DB container against which this request was issued."
+				},
+				{
+					"name": "ClientIp",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The IP address of the client VM which issued the request.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "PiiCommandText",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Full text query for this Mongo (vCore) request."
+				},
+				{
+					"name": "RegionName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The region against which this request was issued."
+				},
+				{
+					"name": "RequestLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The payload size (in bytes) of the request."
+				},
+				{
+					"name": "ResponseLength",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "The payload size (in bytes) of the server response."
+				},
+				{
+					"name": "TransportProtocol",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The transport protocol of the request."
+				},
+				{
+					"name": "UserAgent",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The user agent suffix associated with the client issuing the request."
+				},
+				{
+					"name": "UserId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The user id associated with the client issuing the request."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/vCoreMongoRequestsSample.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/vCoreMongoRequestsSample.json"
+		}
+	],
+	"functions": [],
+	"queries": [
+		{
+			"id": "7c29ceda-72da-4398-befe-2a17722165b1",
+			"displayName": "Mongo vCore requests P99 duration by operation",
+			"description": "Mongo vCore requests P99 runtime duration by operation name.",
+			"bodyFilePath": "KQL/MongoRequestsP99ByOperationName.kql",
+			"categories": [
+				"audit"
+			],
+			"relatedTables": [
+				"VCoreMongoRequests"
+			],
+			"tags": {
+				"Topic": [
+					"Performance"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		},
+		{
+			"id": "5bb1d784-35fa-4065-bcfe-d780877bb42a",
+			"displayName": "Mongo vCore requests binned by duration",
+			"description": "Count of Mongo vCore requests binned by total runtime duration.",
+			"bodyFilePath": "KQL/MongoRequestsBinnedByDuration.kql",
+			"categories": [
+				"audit"
+			],
+			"relatedTables": [
+				"VCoreMongoRequests"
+			],
+			"tags": {
+				"Topic": [
+					"Performance"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		},
+		{
+			"id": "9883e7d9-5df2-4ced-bd47-3fc5f34f3c7a",
+			"displayName": "Failed Mongo vCore requests",
+			"description": "Count of failed Mongo vCore requests by error code.",
+			"bodyFilePath": "KQL/FailedMongoRequestsByErrorCode.kql",
+			"categories": [
+				"audit"
+			],
+			"relatedTables": [
+				"VCoreMongoRequests"
+			],
+			"tags": {
+				"Topic": [
+					"Errors"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		},
+		{
+			"id": "4ad830b9-b8b6-4e8e-a934-754d4ad2d959",
+			"displayName": "Mongo vCore requests by user agent",
+			"description": "Count of Mongo vCore requests by user agent.",
+			"bodyFilePath": "KQL/MongoRequestsByUserAgent.kql",
+			"categories": [
+				"audit"
+			],
+			"relatedTables": [
+				"VCoreMongoRequests"
+			],
+			"tags": {
+				"Topic": [
+					"Usage"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		}
+	]
+}

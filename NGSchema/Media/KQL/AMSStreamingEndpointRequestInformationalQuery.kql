@@ -1,0 +1,4 @@
+AMSStreamingEndpointRequests
+| where Level == "Informational"
+| project _ResourceId, ClientIP, URL
+| limit 100

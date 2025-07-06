@@ -1,0 +1,32 @@
+[
+    { 
+        "TimeGenerated":"2023-04-05T23:08:38.7343926Z",
+        "CorrelationId":"6e1f227b-3a0b-4951-a2c0-cdb59eeeb845",
+        "StreamingModality": "Transcription",
+        "StreamingSessionId": "7d702e86-1684-4a74-beca-0842194b040e",
+        "ParticipantId": "7d702e86-1684-4a74-beca-0842194b040e",
+        "StreamingStartTime":"2023-04-05T23:08:38.7343926Z",
+        "StreamingDurationInMs": 100.01,
+        "CallConnectionId": "46162585-971f-410a-a70b-5a4ee4803ea9"
+    },
+    { 
+        "TimeGenerated":"2023-04-05T23:08:38.7343926Z",
+        "CorrelationId":"6e1f227b-3a0b-4951-a2c0-cdb59eeeb845",
+        "StreamingModality": "AudioStreamingMixed",
+        "StreamingSessionId": "7d702e86-1684-4a74-beca-0842194b040e",
+        "ParticipantId": "",
+        "StreamingStartTime":"2023-04-05T23:08:38.7343926Z",
+        "StreamingDurationInMs": 100.01,
+        "CallConnectionId": "46162585-971f-410a-a70b-5a4ee4803ea9"
+    },
+    { 
+        "TimeGenerated":"2023-04-05T23:08:38.7343926Z",
+        "CorrelationId":"6e1f227b-3a0b-4951-a2c0-cdb59eeeb845",
+        "StreamingModality": "AudioStreamingUnmixed",
+        "StreamingSessionId": "7d702e86-1684-4a74-beca-0842194b040e",
+        "ParticipantId": "7d702e86-1684-4a74-beca-0842194b040e",
+        "StreamingStartTime":"2023-04-05T23:08:38.7343926Z",
+        "StreamingDurationInMs": 100.01,
+        "CallConnectionId": "46162585-971f-410a-a70b-5a4ee4803ea9"
+    }
+]

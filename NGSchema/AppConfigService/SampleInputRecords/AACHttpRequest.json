@@ -1,0 +1,59 @@
+[
+    {
+        "time": "2020-12-01T22:17:01.0248440Z",
+        "operationName": "GET",
+        "resourceId": "/SUBSCRIPTIONS/0377521F-8D63-42BF-ABEF-7BADAC7119C4/RESOURCEGROUPS/CONTROL-TOWER-PROD/PROVIDERS/MICROSOFT.APPCONFIGURATION/CONFIGURATIONSTORES/APC-CONTROL-TOWER-PROD-SCUS-1",
+        "category": "HttpRequest",
+        "durationMs": 123,
+        "correlationId": "aa144637-d271-4248-9871-575bd0a5f29f",
+        "uri": "https://azure.azconfig.io/revisions?key=/controlTowerServer/%2A&label=%2A&api-version=1.0",
+        "callerIPAddress": "70.37.99.132",
+        "resultSignature": "200",
+        "properties": {
+            "clientRequestId": "791f7b6c-6d86-4cb5-a0de-1cc7a246cf6b",
+            "requestId": "14812609-691e-4636-9d13-95122b866312",
+            "userAgent": "SpringCloudAzureAppConfigurationConfig/1.2.7 azsdk-java-azure-data-appconfiguration/1.1.0 (11.0.6; Linux; 4.15.0-112-generic)",
+            "bytesReceived": 0,
+            "bytesSent": 2183,
+            "hitCount": 3
+        }
+    },
+    {
+        "time": "2020-12-01T22:17:01.0466890Z",
+        "operationName": "GET",
+        "resourceId": "/SUBSCRIPTIONS/0377521F-8D63-42BF-ABEF-7BADAC7119C4/RESOURCEGROUPS/CONTROL-TOWER-PROD/PROVIDERS/MICROSOFT.APPCONFIGURATION/CONFIGURATIONSTORES/APC-CONTROL-TOWER-PROD-SCUS-1",
+        "category": "HttpRequest",
+        "durationMs": 35,
+        "correlationId": "aa144637-d271-4248-9871-575bd0a5f29f",
+        "uri": "https://azure.azconfig.io/revisions?key=/application/%2A&label=%2A&api-version=1.0",
+        "callerIPAddress": "70.37.99.132",
+        "resultSignature": "200",
+        "properties": {
+            "clientRequestId": "791f7b6c-6d86-4cb5-a0de-1cc7a246cf6b",
+            "requestId": "14812609-691e-4636-9d13-95122b866312",
+            "userAgent": "SpringCloudAzureAppConfigurationConfig/1.2.7 azsdk-java-azure-data-appconfiguration/1.1.0 (11.0.6; Linux; 4.15.0-112-generic)",
+            "bytesReceived": 0,
+            "bytesSent": 8912,
+            "hitCount": 14
+        }
+    },
+    {
+        "time": "2020-12-01T22:17:02.1605210Z",
+        "operationName": "PUT",
+        "resourceId": "/SUBSCRIPTIONS/754A971A-D616-4245-8C42-83A01EE8EACE/RESOURCEGROUPS/NEPSAMSLOGINTBX-RG/PROVIDERS/MICROSOFT.APPCONFIGURATION/CONFIGURATIONSTORES/SAMS-TBX-CONFIG-SECONDARY",
+        "category": "HttpRequest",
+        "durationMs": 8,
+        "correlationId": "aa144637-d271-4248-9871-575bd0a5f29f",
+        "uri": "https://azure.azconfig.io/kv/Greeting?label=%00&api-version=1.0",
+        "callerIPAddress": "52.225.99.132",
+        "resultSignature": "200",
+        "properties": {
+            "clientRequestId": "791f7b6c-6d86-4cb5-a0de-1cc7a246cf6b",
+            "requestId": "14812609-691e-4636-9d13-95122b866312",
+            "userAgent": "SpringCloudAzureAppConfigurationConfig/1.2.7 azsdk-java-azure-data-appconfiguration/1.1.0 (11.0.6; Linux; 4.15.0-112-generic)",
+            "bytesReceived": 1230,
+            "bytesSent": 706,
+            "hitCount": 1
+        }
+    }
+]

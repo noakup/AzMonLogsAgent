@@ -1,0 +1,3 @@
+ChaosStudioExperimentEventLogs
+| where Status == 'Failed' and SpanType == 'Experiment'
+| sort by TimeGenerated desc

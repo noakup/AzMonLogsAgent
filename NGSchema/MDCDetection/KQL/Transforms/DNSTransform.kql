@@ -1,0 +1,37 @@
+source
+| project
+	TimeGenerated,
+	AzureResourceId,
+    ImageName,
+    Digest,
+    ContainerId,
+    ContainerName,
+	PID,
+	Ppid,
+	Region,
+    Uid,
+    Gid,
+	Comm,
+    PodName,
+	NodeName,
+    Namespace,
+    Addresses,
+    PacketId,
+    Latency,
+    NameServer,
+    QR,
+    Qtype,
+    Rcode,
+    Tid,
+	Domain,
+    DataPipelineMetadata = bag_pack( // bag_merge is not currently supported
+            "WorkspaceAzureResourceId", tostring($executionContextProperties["AzureResourceId"]),
+            "WorkspaceId", toguid($executionContextProperties["WorkspaceId"]),
+            "OdsReceiveTimeUtc", todatetime($executionContextProperties["IngestionTime"])
+    ),
+    AdditionalData,
+    EventGuid,
+    Exe,
+    Cwd,
+    Pcomm
+| where isnotempty(Domain) and isnotempty(EventGuid)

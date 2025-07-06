@@ -1,0 +1,14 @@
+{
+    "name" : "OTelLogsAgent",
+    "description": "Transform used for Otel Logs Agent cases",
+    "transformVersion" : "4",
+    "dataTypeId" : "OPENTELEMETRY_LOGS_AGENT",
+    "inputFilePath" : "OpenTelemetryLogsAgent.json",
+    "transformState" : "Validation",
+    "icmTeam" : "Azure Log Analytics/Ingestion",
+    "contactDL": "rabdac@microsoft.com",
+    "relatedTable" : "OTelLogs",
+    "kqlFilePath" : "../../KQL/OTelLogsTransform.kql",
+    "sampleInputRecordsFilePath" : "../../SampleInputRecords/OTelLogsInputSample.json",
+    "sampleOutputRecordsFilePath" : "../../SampleOutputRecords/OTelLogsOutputSample.json"
+}

@@ -1,0 +1,6 @@
+AZMSOperationalLogs
+| extend TopicName = tostring(split(_ResourceId, "/")[10])
+| where Provider =~ "ServiceBus"
+| where isnotnull(TopicName) and Status != "Succeeded"
+| project TopicName, _ResourceId, EventName, Status, Caller, SubscriptionId
+| summarize by TopicName, EventName

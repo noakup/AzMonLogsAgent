@@ -1,0 +1,8 @@
+ACSCallSummaryUpdates
+// Get the distinct participants in a call
+| summarize arg_max(CallUpdatesVersion, *) by CorrelationId, ParticipantId, EndpointId
+// Count the participants and distinct calls
+| summarize num_participants=count(), num_calls=dcount(CorrelationId)
+// Calculate the average number of distinct participants per call
+| extend avg_participants = toreal(num_participants) / toreal(num_calls)
+| project num_participants, num_calls, avg_participants

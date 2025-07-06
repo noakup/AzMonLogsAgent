@@ -1,0 +1,30 @@
+[
+    {
+        "TimeGenerated": "2022-10-11T06:02:13.4730825Z",
+        "OperationName": "LIVEEVENTS/INGESTBEGIN",
+        "Level": "Informational",
+        "Location": "westcentralus",
+        "Properties": {"liveEventName":"CONTOSOLIVE","streamName":"1234","remoteIP":"10.0.0.xxx","remotePort":"35091"}
+    },
+    {
+        "TimeGenerated": "2022-10-11T06:02:19.8229491Z",
+        "OperationName": "LIVEEVENTS/STREAMINFO",
+        "Level": "Informational",
+        "Location": "westcentralus",
+        "Properties": {"liveEventName":"CONTOSOLIVE","remoteIP":"10.0.0.xxx","remotePort":"35091","trackName":"audio_160000","trackType":"audio","bitrate":160000,"timestamp":66,"timescale":1000,"resolution":"n/a"}
+    },
+    {
+        "TimeGenerated": "2022-10-11T06:04:41.1375866Z",
+        "OperationName": "LIVEEVENTS/INGESTEND",
+        "Level": "Informational",
+        "Location": "westcentralus",
+        "Properties": {"liveEventName":"CONTOSOLIVE","streamName":"1234","remoteIP":"10.0.0.xxx","remotePort":"35091","resultCode":"MPE_CLIENT_TERMINATED_SESSION"}
+    },
+    {
+        "TimeGenerated": "2022-10-11T06:07:01.0446756Z",
+        "OperationName": "LIVEEVENTS/INGESTDISCONTINUITY",
+        "Level": "Warning",
+        "Location": "westcentralus",
+        "Properties": {"liveEventName":"CONTOSOLIVE","trackName":"audio","timestamp":156777,"discontinuityGap":12605}
+    }
+]

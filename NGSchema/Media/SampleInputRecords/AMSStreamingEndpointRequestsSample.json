@@ -1,0 +1,16 @@
+[
+    {
+        "time": "2022-09-30T07:40:06.1524833Z",
+        "resourceId": "/SUBSCRIPTIONS/00000000-0000-0000-0000-000000000001/RESOURCEGROUPS/CONTOSORG/PROVIDERS/MICROSOFT.MEDIA/MEDIASERVICES/CONTOSOMEDIA/STREAMINGENDPOINTS/DEFAULT",
+        "operationName": "MICROSOFT.MEDIA/MEDIASERVICES/STREAMINGENDPOINTS/GET",
+        "category": "StreamingEndpointRequests",
+        "level": "Informational",
+        "location": "uswc1",
+        "properties": {
+            "ClientIP": "10.0.0.1",
+            "URL": "https://cdn--contosomedia-uswc.streaming.media.azure.net:443/00000000-0000-0000-0000-000000000000/contoso.ism/QualityLevels(127999)/Fragments(aac_eng_2_127999_2_1=20053333,format=mpd-time-csf)",
+            "Status": "200"
+        },
+        "operationVersion": "1.0"
+    }
+]

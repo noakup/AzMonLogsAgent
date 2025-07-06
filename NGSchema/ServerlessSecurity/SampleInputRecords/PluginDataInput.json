@@ -1,0 +1,23 @@
+[
+	{
+		"slSecRequestId": "8a1a2e9a-6b7b-40a9-8384-f1258b86b4e1",
+		"timeGenerated": "2022-06-30T05:57:49Z",
+		"sender": "VulnerabilityPlugin",
+		"payloadType": "Az.ApplicationSecurity.Packages",
+		"payload": [
+			"{\"id\":\"ejs\",\"version\":\"0.0.2\",\"ecosystem\":\"Npm\"}",
+			"{\"id\":\"ers\",\"version\":\"1.0.2\",\"ecosystem\":\"Npm\"}"
+		],
+		"index": 0,
+		"metadata": {
+			"appRuntime": { "Id": "NodeJs", "ProcessArchitecture": "X86" },
+			"resourceID": "/subscriptions/222a1a1a-47d9-4e13-9c7f-ed10e7099948/resourceGroups/loadgenerator/providers/Microsoft.Web/sites/LoadGenerator20220627-175133",
+			"deploymentId": "latestone"
+		},
+		"slSecProps": {
+			"nugetVersion": "1.2.0",
+			"deploymentId": "abcdef"
+		},
+		"msgVersion" : "1.0"
+	}
+]

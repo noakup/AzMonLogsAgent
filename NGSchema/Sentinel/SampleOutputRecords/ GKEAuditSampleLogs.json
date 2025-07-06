@@ -1,0 +1,16 @@
+{
+   "TimeGenerated": "21/04/2025, 07:37:25.335",
+   "LogType": "Data Access Log",
+   "InsertId": "912ed671-a8b1-4227-bb14-17eb856b4a6b",
+   "ReceiveTimestamp": "21/04/2025, 07:37:26.906",
+   "Resource": "{\"labels\":{\"cluster_name\":\"cubernetrj\",\"location\":\"us-central1\",\"project_id\":\"msccp-test\"},\"type\":\"k8s_cluster\"}",
+   "Labels": "{\"authorization.k8s.io/decision\":\"allow\",\"authorization.k8s.io/reason\":\"RBAC: allowed by ClusterRoleBinding \\\"system:clouddns\\\" of ClusterRole \\\"system:clouddns-role\\\" to User \\\"system:clouddns\\\"\"}",
+   "ProtoPayload": "{\"@type\":\"type.googleapis.com/google.cloud.audit.AuditLog\",\"authenticationInfo\":{\"principalEmail\":\"system:clouddns\"},\"authorizationInfo\":[{\"granted\":true,\"permission\":\"io.k8s.coordination.v1.leases.get\",\"resource\":\"coordination.k8s.io/v1/namespaces/kube-system/leases/clouddns-lock\"}],\"methodName\":\"io.k8s.coordination.v1.leases.get\",\"requestMetadata\":{\"callerIp\":\"172.16.0.5\",\"callerSuppliedUserAgent\":\"clouddns-leader-election\"},\"resourceName\":\"coordination.k8s.io/v1/namespaces/kube-system/leases/clouddns-lock\",\"serviceName\":\"k8s.io\",\"status\":{}}",
+   "JsonPayload": "",
+   "Operation": "{\"first\":true,\"id\":\"912ed671-a8b1-4227-bb14-17eb856b4a6b\",\"last\":true,\"producer\":\"k8s.io\"}",
+   "Severity": "",
+   "logName": "",
+   "TenantId": "92958a6a-745a-4d5f-b088-7c7f6ef73a6d",
+   "Type": "GKEAuditLogs_CL",
+   "_ResourceId": ""
+ }

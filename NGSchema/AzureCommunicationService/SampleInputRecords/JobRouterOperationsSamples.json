@@ -1,0 +1,296 @@
+[
+    {
+        "time": "2022-07-19T20:04:59.9581440Z",
+        "level": "Informational",
+        "resourceId": "/SUBSCRIPTIONS/D206C0A8-DFAD-4165-A870-A21054B5660C/RESOURCEGROUPS/IC3-ACS-CCAAP-RG-PPE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/IC3-ACS-ROUTER-SYNTHETICS-PPE",
+        "correlationId": "3754aa97d7ad462f87b3a8943a07bbec",
+        "category": "JobRouterOperational",
+        "operationName": "CompleteJob",
+        "operationVersion": "2021-04-07-preview1",
+        "uri": "https://ic3-acs-router-synthetics-ppe.ppe.communication.azure.net/routing/jobs/504ece15-83e1-4cf3-bb01-0013ec063db1/complete?api-version=2021-04-07-preview1",
+        "resultType": "Succeeded",
+        "resultSignature": "204",
+        "resultDescription": "No Content",
+        "durationMs": "117.6978",
+        "callerIpAddress": "10.60.7.174",
+        "properties": {
+            "sdkType": "dotnet",
+            "userAgent": "azsdk-net-Communication.JobRouter/1.0.0-alpha.20220404.2 (.NET 5.0.15; Microsoft Windows 10.0.14393)",
+            "entityId": "504ece15-83e1-4cf3-bb01-0013ec063db1",
+            "entityType": "Jobs"
+        }
+    },
+    {
+        "time": "2022-07-19T20:23:41.0171930Z",
+        "level": "Informational",
+        "resourceId": "/SUBSCRIPTIONS/D206C0A8-DFAD-4165-A870-A21054B5660C/RESOURCEGROUPS/IC3-ACS-CCAAP-RG-PPE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/IC3-ACS-ROUTER-SYNTHETICS-PPE",
+        "correlationId": "aa04b34e22914dd8931fb68e5aa70cd6",
+        "category": "JobRouterOperational",
+        "operationName": "CreateOrUpdateDistributionPolicy",
+        "operationVersion": "2021-04-07-preview1",
+        "uri": "https://ic3-acs-router-synthetics-ppe.ppe.communication.azure.net/routing/distributionpolicies?api-version=2021-04-07-preview1",
+        "resultType": "Succeeded",
+        "resultSignature": "200",
+        "resultDescription": "OK",
+        "durationMs": "257.5373",
+        "callerIpAddress": "10.60.3.70",
+        "properties": {
+            "sdkType": "dotnet",
+            "userAgent": "azsdk-net-Communication.JobRouter/1.0.0-alpha.20220404.2 (.NET 5.0.15; Microsoft Windows 10.0.14393)",
+            "entityId": null,
+            "entityType": "DistributionPolicies"
+        }
+    },
+    {
+        "time": "2022-07-19T20:23:42.6793630Z",
+        "level": "Informational",
+        "resourceId": "/SUBSCRIPTIONS/D206C0A8-DFAD-4165-A870-A21054B5660C/RESOURCEGROUPS/IC3-ACS-CCAAP-RG-PPE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/IC3-ACS-ROUTER-SYNTHETICS-PPE",
+        "correlationId": "aa04b34e22914dd8931fb68e5aa70cd6",
+        "category": "JobRouterOperational",
+        "operationName": "CreateJob",
+        "operationVersion": "2021-04-07-preview1",
+        "uri": "https://ic3-acs-router-synthetics-ppe.ppe.communication.azure.net/routing/jobs?api-version=2021-04-07-preview1",
+        "resultType": "Succeeded",
+        "resultSignature": "201",
+        "resultDescription": "Created",
+        "durationMs": "465.1964",
+        "callerIpAddress": "10.60.3.70",
+        "properties": {
+            "sdkType": "dotnet",
+            "userAgent": "azsdk-net-Communication.JobRouter/1.0.0-alpha.20220404.2 (.NET 5.0.15; Microsoft Windows 10.0.14393)",
+            "entityId": null,
+            "entityType": "Jobs"
+        }
+    },
+    {
+        "time": "2022-07-19T20:23:44.0883900Z",
+        "level": "Informational",
+        "resourceId": "/SUBSCRIPTIONS/D206C0A8-DFAD-4165-A870-A21054B5660C/RESOURCEGROUPS/IC3-ACS-CCAAP-RG-PPE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/IC3-ACS-ROUTER-SYNTHETICS-PPE",
+        "correlationId": "aa04b34e22914dd8931fb68e5aa70cd6",
+        "category": "JobRouterOperational",
+        "operationName": "GetJob",
+        "operationVersion": "2021-04-07-preview1",
+        "uri": "https://ic3-acs-router-synthetics-ppe.ppe.communication.azure.net/routing/jobs/f789d0e0-d917-459e-8bb3-26cfb8c7c45e?api-version=2021-04-07-preview1",
+        "resultType": "Succeeded",
+        "resultSignature": "200",
+        "resultDescription": "OK",
+        "durationMs": "76.333",
+        "callerIpAddress": "10.60.3.70",
+        "properties": {
+            "sdkType": "dotnet",
+            "userAgent": "azsdk-net-Communication.JobRouter/1.0.0-alpha.20220404.2 (.NET 5.0.15; Microsoft Windows 10.0.14393)",
+            "entityId": "f789d0e0-d917-459e-8bb3-26cfb8c7c45e",
+            "entityType": "Jobs"
+        }
+    },
+    {
+        "time": "2022-07-20T20:03:42.8535950Z",
+        "level": "Error",
+        "resourceId": "/SUBSCRIPTIONS/D206C0A8-DFAD-4165-A870-A21054B5660C/RESOURCEGROUPS/IC3-ACS-CCAAP-RG-PPE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/IC3-ACS-ROUTER-SYNTHETICS-PPE",
+        "correlationId": "f7a557f4364846fb87998128096cb462",
+        "category": "JobRouterOperational",
+        "operationName": "GetJob",
+        "operationVersion": "2021-04-07-preview1",
+        "uri": "https://ic3-acs-router-synthetics-ppe.ppe.communication.azure.net/routing/jobs/e9801f65-9ab2-4220-be33-6bd913ca06d7?api-version=2021-04-07-preview1",
+        "resultType": "Failed",
+        "resultSignature": "500",
+        "resultDescription": "Internal Server Error",
+        "durationMs": "27.7795",
+        "callerIpAddress": "10.60.7.174",
+        "properties": {
+            "sdkType": "dotnet",
+            "userAgent": "azsdk-net-Communication.JobRouter/1.0.0-alpha.20220404.2 (.NET 5.0.15; Microsoft Windows 10.0.14393)",
+            "entityId": "e9801f65-9ab2-4220-be33-6bd913ca06d7",
+            "entityType": "Jobs"
+        }
+    },
+    {
+        "time": "2022-07-20T20:03:47.1576530Z",
+        "level": "Informational",
+        "resourceId": "/SUBSCRIPTIONS/D206C0A8-DFAD-4165-A870-A21054B5660C/RESOURCEGROUPS/IC3-ACS-CCAAP-RG-PPE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/IC3-ACS-ROUTER-SYNTHETICS-PPE",
+        "correlationId": "f7a557f4364846fb87998128096cb462",
+        "category": "JobRouterOperational",
+        "operationName": "RegisterWorker",
+        "operationVersion": "2021-04-07-preview1",
+        "uri": "https://ic3-acs-router-synthetics-ppe.ppe.communication.azure.net/routing/workers?api-version=2021-04-07-preview1",
+        "resultType": "Succeeded",
+        "resultSignature": "200",
+        "resultDescription": "OK",
+        "durationMs": "135.744",
+        "callerIpAddress": "10.60.7.174",
+        "properties": {
+            "sdkType": "dotnet",
+            "userAgent": "azsdk-net-Communication.JobRouter/1.0.0-alpha.20220404.2 (.NET 5.0.15; Microsoft Windows 10.0.14393)",
+            "entityId": null,
+            "entityType": "Workers"
+        }
+    },
+    {
+        "time": "2022-07-20T20:03:50.1690170Z",
+        "level": "Informational",
+        "resourceId": "/SUBSCRIPTIONS/D206C0A8-DFAD-4165-A870-A21054B5660C/RESOURCEGROUPS/IC3-ACS-CCAAP-RG-PPE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/IC3-ACS-ROUTER-SYNTHETICS-PPE",
+        "correlationId": "f7a557f4364846fb87998128096cb462",
+        "category": "JobRouterOperational",
+        "operationName": "GetWorkers",
+        "operationVersion": "2021-04-07-preview1",
+        "uri": "https://ic3-acs-router-synthetics-ppe.ppe.communication.azure.net/routing/workers?status=active&channelId=30567a4f-7ba0-442b-9bbe-010666da7368&hasCapacity=true&api-version=2021-04-07-preview1",
+        "resultType": "Succeeded",
+        "resultSignature": "200",
+        "resultDescription": "OK",
+        "durationMs": "26.72",
+        "callerIpAddress": "10.60.7.174",
+        "properties": {
+            "sdkType": "dotnet",
+            "userAgent": "azsdk-net-Communication.JobRouter/1.0.0-alpha.20220404.2 (.NET 5.0.15; Microsoft Windows 10.0.14393)",
+            "entityId": null,
+            "entityType": "Workers"
+        }
+    },
+    {
+        "time": "2022-07-20T20:03:50.2133670Z",
+        "level": "Informational",
+        "resourceId": "/SUBSCRIPTIONS/D206C0A8-DFAD-4165-A870-A21054B5660C/RESOURCEGROUPS/IC3-ACS-CCAAP-RG-PPE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/IC3-ACS-ROUTER-SYNTHETICS-PPE",
+        "correlationId": "f7a557f4364846fb87998128096cb462",
+        "category": "JobRouterOperational",
+        "operationName": "GetWorker",
+        "operationVersion": "2021-04-07-preview1",
+        "uri": "https://ic3-acs-router-synthetics-ppe.ppe.communication.azure.net/routing/workers/63060117-d807-4cb9-a987-a10f178fedac?api-version=2021-04-07-preview1",
+        "resultType": "Succeeded",
+        "resultSignature": "200",
+        "resultDescription": "OK",
+        "durationMs": "21.11",
+        "callerIpAddress": "10.60.7.174",
+        "properties": {
+            "sdkType": "dotnet",
+            "userAgent": "azsdk-net-Communication.JobRouter/1.0.0-alpha.20220404.2 (.NET 5.0.15; Microsoft Windows 10.0.14393)",
+            "entityId": null,
+            "entityType": "Workers"
+        }
+    },
+    {
+        "time": "2022-07-20T20:03:50.3227690Z",
+        "level": "Informational",
+        "resourceId": "/SUBSCRIPTIONS/D206C0A8-DFAD-4165-A870-A21054B5660C/RESOURCEGROUPS/IC3-ACS-CCAAP-RG-PPE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/IC3-ACS-ROUTER-SYNTHETICS-PPE",
+        "correlationId": "f7a557f4364846fb87998128096cb462",
+        "category": "JobRouterOperational",
+        "operationName": "AcceptJobOffer",
+        "operationVersion": "2021-04-07-preview1",
+        "uri": "https://ic3-acs-router-synthetics-ppe.ppe.communication.azure.net/routing/workers/63060117-d807-4cb9-a987-a10f178fedac/offers/5502f778-f88a-4e5e-8926-638e49768d20/accept?api-version=2021-04-07-preview1",
+        "resultType": "Succeeded",
+        "resultSignature": "200",
+        "resultDescription": "OK",
+        "durationMs": "208.2506",
+        "callerIpAddress": "10.60.7.174",
+        "properties": {
+            "sdkType": "dotnet",
+            "userAgent": "azsdk-net-Communication.JobRouter/1.0.0-alpha.20220404.2 (.NET 5.0.15; Microsoft Windows 10.0.14393)",
+            "entityId": null,
+            "entityType": "Offers"
+        }
+    },
+    {
+        "time": "2022-07-20T20:03:56.3171630Z",
+        "level": "Informational",
+        "resourceId": "/SUBSCRIPTIONS/D206C0A8-DFAD-4165-A870-A21054B5660C/RESOURCEGROUPS/IC3-ACS-CCAAP-RG-PPE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/IC3-ACS-ROUTER-SYNTHETICS-PPE",
+        "correlationId": "f7a557f4364846fb87998128096cb462",
+        "category": "JobRouterOperational",
+        "operationName": "CloseJob",
+        "operationVersion": "2021-04-07-preview1",
+        "uri": "https://ic3-acs-router-synthetics-ppe.ppe.communication.azure.net/routing/jobs/7740b36a-1be3-4389-a4f2-bf5d4bceb5ae/close?api-version=2021-04-07-preview1",
+        "resultType": "Succeeded",
+        "resultSignature": "204",
+        "resultDescription": "No Content",
+        "durationMs": "146.5752",
+        "callerIpAddress": "10.60.7.174",
+        "properties": {
+            "sdkType": "dotnet",
+            "userAgent": "azsdk-net-Communication.JobRouter/1.0.0-alpha.20220404.2 (.NET 5.0.15; Microsoft Windows 10.0.14393)",
+            "entityId": "7740b36a-1be3-4389-a4f2-bf5d4bceb5ae",
+            "entityType": "Jobs"
+        }
+    },
+    {
+        "time": "2022-07-20T20:03:59.4317810Z",
+        "level": "Informational",
+        "resourceId": "/SUBSCRIPTIONS/D206C0A8-DFAD-4165-A870-A21054B5660C/RESOURCEGROUPS/IC3-ACS-CCAAP-RG-PPE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/IC3-ACS-ROUTER-SYNTHETICS-PPE",
+        "correlationId": "f7a557f4364846fb87998128096cb462",
+        "category": "JobRouterOperational",
+        "operationName": "GetJob",
+        "operationVersion": "2021-04-07-preview1",
+        "uri": "https://ic3-acs-router-synthetics-ppe.ppe.communication.azure.net/routing/jobs/e9801f65-9ab2-4220-be33-6bd913ca06d7?api-version=2021-04-07-preview1",
+        "resultType": "Succeeded",
+        "resultSignature": "200",
+        "resultDescription": "OK",
+        "durationMs": "39.4546",
+        "callerIpAddress": "10.60.7.174",
+        "properties": {
+            "sdkType": "dotnet",
+            "userAgent": "azsdk-net-Communication.JobRouter/1.0.0-alpha.20220404.2 (.NET 5.0.15; Microsoft Windows 10.0.14393)",
+            "entityId": "e9801f65-9ab2-4220-be33-6bd913ca06d7",
+            "entityType": "Jobs"
+        }
+    },
+    {
+        "time": "2022-07-20T20:03:59.7202680Z",
+        "level": "Informational",
+        "resourceId": "/SUBSCRIPTIONS/D206C0A8-DFAD-4165-A870-A21054B5660C/RESOURCEGROUPS/IC3-ACS-CCAAP-RG-PPE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/IC3-ACS-ROUTER-SYNTHETICS-PPE",
+        "correlationId": "f7a557f4364846fb87998128096cb462",
+        "category": "JobRouterOperational",
+        "operationName": "DeregisterWorker",
+        "operationVersion": "2021-04-07-preview1",
+        "uri": "https://ic3-acs-router-synthetics-ppe.ppe.communication.azure.net/routing/workers/63060117-d807-4cb9-a987-a10f178fedac?api-version=2021-04-07-preview1",
+        "resultType": "Succeeded",
+        "resultSignature": "204",
+        "resultDescription": "No Content",
+        "durationMs": "133.3824",
+        "callerIpAddress": "10.60.7.174",
+        "properties": {
+            "sdkType": "dotnet",
+            "userAgent": "azsdk-net-Communication.JobRouter/1.0.0-alpha.20220404.2 (.NET 5.0.15; Microsoft Windows 10.0.14393)",
+            "entityId": null,
+            "entityType": "Workers"
+        }
+    },
+    {
+        "time": "2022-07-20T20:03:59.7202680Z",
+        "level": "Informational",
+        "resourceId": "/SUBSCRIPTIONS/D206C0A8-DFAD-4165-A870-A21054B5660C/RESOURCEGROUPS/IC3-ACS-CCAAP-RG-PPE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/IC3-ACS-ROUTER-SYNTHETICS-PPE",
+        "correlationId": "f7a557f4364846fb87998128096cb462",
+        "category": "JobRouterOperational",
+        "operationName": "DeregisterWorker",
+        "operationVersion": "2021-04-07-preview1",
+        "uri": "https://ic3-acs-router-synthetics-ppe.ppe.communication.azure.net/routing/workers/63060117-d807-4cb9-a987-a10f178fedac?api-version=2021-04-07-preview1",
+        "resultType": "Succeeded",
+        "resultSignature": "204",
+        "resultDescription": "No Content",
+        "durationMs": "133.3824",
+        "callerIpAddress": "10.60.7.174",
+        "properties": {
+            "sdkType": "dotnet",
+            "userAgent": "azsdk-net-Communication.JobRouter/1.0.0-alpha.20220404.2 (.NET 5.0.15; Microsoft Windows 10.0.14393)",
+            "entityId": null,
+            "entityType": "Workers"
+        }
+    },
+    {
+        "time": "2022-07-20T20:00:04.1944160Z",
+        "level": "Informational",
+        "resourceId": "/SUBSCRIPTIONS/D206C0A8-DFAD-4165-A870-A21054B5660C/RESOURCEGROUPS/IC3-ACS-CCAAP-RG-PPE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/IC3-ACS-ROUTER-SYNTHETICS-PPE",
+        "correlationId": "00c69a4053794037a285f97a3953198d",
+        "category": "JobRouterOperational",
+        "operationName": "DeleteChannel",
+        "operationVersion": "2021-04-07-preview1",
+        "uri": "https://ic3-acs-router-synthetics-ppe.ppe.communication.azure.net/routing/channels/df1dce96-e962-4246-90e9-403462f6d9f1?api-version=2021-04-07-preview1",
+        "resultType": "Succeeded",
+        "resultSignature": "204",
+        "resultDescription": "No Content",
+        "durationMs": "77.9455",
+        "callerIpAddress": "10.60.10.237",
+        "properties": {
+            "sdkType": "dotnet",
+            "userAgent": "azsdk-net-Communication.JobRouter/1.0.0-alpha.20220404.2 (.NET 5.0.15; Microsoft Windows 10.0.14393)",
+            "entityId": "df1dce96-e962-4246-90e9-403462f6d9f1",
+            "entityType": "Channels"
+        }
+    }
+]

@@ -1,0 +1,15 @@
+[
+    {
+        "PreciseTimeStamp": "2024-01-17T08:20:00.1510000Z",
+        "time": "2024-01-17T08:20:00.1510000Z",
+        "RoleInstance": "logging-665d495bf8-rrd2r",
+        "callerIpAddress": "218.83.224.19",
+        "correlationId": "f717a8b8-ce73-4f7d-8277-39c8da78ff39",
+        "durationMs": 219,
+        "location": "eastus",
+        "operationName": "ChatCompletions_Create",
+        "properties": "{\"apiName\":\"Azure OpenAI API version 2023-09-15-preview\",\"requestTime\":638410763991092059,\"requestLength\":3798,\"responseTime\":638410763993291573,\"responseLength\":787,\"objectId\":\"\",\"streamType\":\"Non-Streaming\",\"modelDeploymentName\":\"GPT-35\",\"modelName\":\"gpt-35-turbo\",\"modelVersion\":\"0613\"}",
+        "resourceId": "/SUBSCRIPTIONS/0F1BA961-AD08-46F8-8642-2E26CE398FD7/RESOURCEGROUPS/GPT3-RG/PROVIDERS/MICROSOFT.COGNITIVESERVICES/ACCOUNTS/GPT-EASTUS",
+        "resultSignature": "200"
+    }
+]

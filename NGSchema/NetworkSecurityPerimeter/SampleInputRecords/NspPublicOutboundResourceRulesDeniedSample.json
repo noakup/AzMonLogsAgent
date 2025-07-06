@@ -1,0 +1,34 @@
+[
+  {
+    "time": "2022-04-25T09:50:16",
+    "timeGeneratedEndTime" : "2022-04-25T09:51:15",
+    "count" : 1000,
+    "resourceId": "/SUBSCRIPTIONS/EE63C5DC-9B88-42E3-8070-944A5226AEA3/RESOURCEGROUPS/ALTSYPLY-NSP/PROVIDERS/MICROSOFT.NETWORK/NETWORKSECURITYPERIMETERS/ALTSYPLY-NSP-CEAP",
+    "operationName": "IngestDataToCollectionEndpoint",
+    "operationVersion": "",
+    "category": "NspPublicOutboundResourceRulesDenied",
+    "location": "eastus2euap",
+    "properties": {
+      "serviceResourceId": "/subscriptions/ee63c5dc-9b88-42e3-8070-944a5226aea3/resourceGroups/altsyply-nsp/providers/Microsoft.Insights/dataCollectionEndpoints/dce4nsp",
+      "serviceFqdn": "microsoft.contoso.com",
+      "profile": "PROFILE1",
+      "parameters": null,
+      "appId": null,
+      "matchedRule": {
+        "accessRule": "rule1"
+      },
+      "accessRulesVersion": "0",
+      "source": null,
+      "destination": {
+        "resourceId": "/subscriptions/ee63c5dc-9b88-42e3-8070-944a5226aea3/resourcegroups/altsyply-nsp/providers/Microsoft.Compute/virtualMachines/altsyply-vm",
+        "fullyQualifiedDomainName": "database.windows.net",
+        "port": "",
+        "protocol": "",
+        "parameters": "",
+        "emailAddress": "",
+        "phoneNumber": ""
+      }
+    },
+    "resultDescription": "The static text description of this operation on the PaaS resource, e.g. 'Get storage file.'"
+  }
+]

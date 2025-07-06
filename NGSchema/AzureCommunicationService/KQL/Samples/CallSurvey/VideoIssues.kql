@@ -1,0 +1,7 @@
+ACSCallSurvey
+| where isempty( VideoIssues ) == false
+//Comma separated issues when multiple issues are reported
+| project video =  split(VideoIssues,',')
+| mv-expand video to typeof(string)
+| summarize frequency=count() by video
+| render columnchart

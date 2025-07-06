@@ -1,0 +1,7 @@
+ACSCallSurvey
+| where isempty(OverallCallIssues) == false
+//Comma separated issues when multiple issues are reported
+| project overall =  split(OverallCallIssues, ',')
+| mv-expand overall to typeof(string)
+| summarize frequency=count() by overall
+| render columnchart

@@ -1,0 +1,16 @@
+// Karpenter uses structured logging, with JSON-encoded log messages that include key-value pairs with a variety of keys.
+// This conservative transform is similar to AKSControlPlaneTransform and targets the same AKSControlPlane table,
+// with JSON-valued string Message for now. 
+//
+// In the future we are likely to target custom (AKSNodeAutoProvisioning?) table schema, have Message=log.message,
+// extract the majority / well-known key-value pairs from the log to top-level columns,
+// and keep the rest in top-level key/value bag (maybe AdditionalFields, to match AzureDiagnostic schema).
+source
+| extend logj = parse_json(tostring(properties.log))
+| project
+TimeGenerated=todatetime(["time"]),
+Category=tostring(category),
+Level=iff(logj.level=="WARN", "WARNING", tostring(logj.level)),
+Message=tostring(properties.log), // convert to string to match schema type
+Stream=tostring(properties.stream),
+PodName=tostring(properties.pod)

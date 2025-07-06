@@ -1,0 +1,5 @@
+DataTransferOperations 
+| where Status == "Rejected"
+    or Status == "Delivered"
+    or Status == "Failed"
+| limit 100

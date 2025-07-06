@@ -1,0 +1,19 @@
+source
+| extend properties = parse_json(properties)
+| project
+    TimeGenerated = todatetime(['time']),
+    OperationName = operationName,
+    Category = category,
+    CorrelationId = tostring(properties.correlationId),
+    AffectedObjectId = tostring(properties.objectId),
+    AffectedObjectName = tostring(properties.objectName),
+    AffectedObjectType = tostring(properties.objectType),
+    State = tostring(properties.state),
+    HasInformation = tobool(properties.HasInformation),
+    HasWarnings = tobool(properties.HasWarnings),
+    HasErrors = tobool(properties.HasErrors),
+    Message = tostring(properties.message),
+    StartTime = todatetime(properties.startTime),
+    EndTime = todatetime(properties.endTime),
+    TimeTaken = todouble(properties.timeTaken),
+    Version = tostring(properties.version)

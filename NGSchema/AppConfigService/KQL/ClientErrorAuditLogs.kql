@@ -1,0 +1,5 @@
+// This query helps list the most recent 10 audit logs for failures because of client error. 
+AACAudit
+| where ResultType == "ClientError" and TimeGenerated > ago(1h)
+| sort by TimeGenerated desc
+| limit 10

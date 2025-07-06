@@ -1,0 +1,52 @@
+[
+  {
+    "time": "2024-07-09T13:50:10.464Z",
+    "resourceId": "/SUBSCRIPTIONS/TEST_SUBSCRIPTIONID2/RESOURCEGROUPS/TEST_RESOURCEGROUPNAME2/PROVIDERS/ORACLE.DATABASE/CLOUDEXADATAINFRASTRUCTURES/OBSDPINFRAFRA",
+    "region": "germanywestcentral",
+    "operationName": "ORACLE.DATABASE/CLOUDEXADATAINFRASTRUCTURES/ACTION",
+    "category": "update",
+    "level": "Informational",
+    "location": "germanywestcentral",
+    "properties": {
+      "message": "UpdateCloudExadataInfrastructure",
+      "eventGroupingId": "csiddaddb23b4178b335818ea023e03f/19b9fd283ab7423abb125459be91fe57/7E30BBA162FD6A5D4F9D621D0D415323",
+      "eventName": "UpdateCloudExadataInfrastructure",
+      "compartmentId": "compartmentOcid2",
+      "compartmentName": "4aa7be2d-ffd6-4657-828b-31ca25e39985",
+      "resourceId": "ocid1.cloudexadatainfrastructure.oc1.eu-frankfurt-1.resourceId2",
+      "availabilityDomain": "",
+      "freeformTags": {},
+      "definedTags": {
+        "Oracle-Tags": {
+          "CreatedBy": "ocid1.multicloudlink.oc1.iad.amaaaaaaboqpjsqa7a55mr2sffcnqx3wogq6djcidivnitgfnpe6m4fcb4ga",
+          "CreatedOn": "2024-07-02T11:07:27.558Z"
+        }
+      },
+      "identity": {},
+      "request": {
+        "id": "4ed6bf65-b952-4805-8641-29277d1fd9d2"
+      },
+      "response": {},
+      "stateChange": {
+        "current": {
+          "lifecycleState": "AVAILABLE",
+          "shape": "Exadata.X9M",
+          "displayName": "obsDpInfraFra",
+          "freeTags": {},
+          "definedTags": {
+            "Oracle-Tags": {
+              "CreatedBy": "ocid1.multicloudlink.oc1.iad.amaaaaaaboqpjsqa7a55mr2sffcnqx3wogq6djcidivnitgfnpe6m4fcb4ga",
+              "CreatedOn": "2024-07-02T11:07:27.558Z"
+            }
+          }
+        }
+      },
+      "additionalDetails": {
+        "timeCreated": "2024-07-02T11:07:27Z",
+        "lifecycleState": "AVAILABLE",
+        "shape": "Exadata.X9M",
+        "timeUpdated": "2024-07-09T13:50:10Z"
+      }
+    }
+  }
+]

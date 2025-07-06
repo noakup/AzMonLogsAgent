@@ -1,0 +1,273 @@
+{
+	"type": "Microsoft.DataCollaboration/workspaces",
+	"displayName": "Project CI Workspace",
+	"description": "All tables related to Project CI Workspaces.",
+	"tags": {},
+	"properties": {},
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "Azure Data Collaboration/Triage",
+	"relatedTables": [
+	  "AzureActivity",
+	  "AzureMetrics"
+	],
+	"relatedFunctions": [],
+	"tables": [
+	  {
+		"name": "ACICollaborationAudit",
+		"description": "Audits of collaborative resources approval and access during pipeline execution.",
+		"categories": [
+		  "audit",
+		  "resources"
+		],
+		"tags": {},
+		"properties": {},
+		"artifactVersion": 2,
+		"dataTypeId": "AZUREDATACOLLABORATION_ENTITLEMENTAUDIT",
+		"intelligencePacks": [
+		  "LogManagement"
+		],
+		"isResourceCentric": true,
+    "tableState": "Production",
+		"isTroubleshootingAllowed": false,
+    "input": [
+		  {
+			"name": "time",
+			"type": "String"
+		  },
+		  {
+			"name": "resourceId",
+			"type": "String"
+		  },
+		  {
+			"name": "category",
+			"type": "String"
+		  },
+		  {
+			"name": "operationName",
+			"type": "String"
+		  },
+		  {
+			"name": "correlationId",
+			"type": "String"
+		  },
+		  {
+			"name": "properties",
+			"type": "String"
+		  },
+		  {
+			"name": "location",
+			"type": "String"
+		  }
+		],
+		"transformFilePath": "KQL/Transforms/CollaborationAuditTransform.kql",
+		"columns": [
+		  {
+			"name": "TimeGenerated",
+			"type": "DateTime",
+			"isDefaultDisplay": true,
+			"description": "The timestamp (UTC) of when the audit was generated."
+		  },
+		  {
+			"name": "OperationName",
+			"type": "String",
+			"isDefaultDisplay": true,
+			"description": "The operation associated with audit record."
+		  },
+		  {
+			"name": "CorrelationId",
+			"type": "String",
+			"dataTypeHint": "GUID",
+			"isDefaultDisplay": true,
+			"description": "The ID for correlated pipeline run events. Can be used to identify audits that belong to the same pipeline run."
+		  },
+		  {
+			"name": "EntitlementResult",
+			"description": "The result of the entitlement evaluation. Options are: Granted = access granted; Denied = access was not granted; Revoked = accessed was revoked because the pipeline could not be fully approved; Actualized = the resource was accessed by the pipeline run.",
+			"type": "String",
+			"isDefaultDisplay": true
+		  },
+		  {
+			"name": "TargetResourceId",
+			"description": "The azure resource ID of the accessed resource.",
+			"type": "String",
+			"dataTypeHint": "URI",
+			"isDefaultDisplay": true
+		  },
+		  {
+			"name": "TargetResourceType",
+			"description": "The resource type of the accessed resource.",
+			"type": "String",
+			"isDefaultDisplay": true
+		  },
+		  {
+			"name": "ParticipantName",
+			"description": "The participant friendly name as used in the contract negotiation.",
+			"type": "String",
+			"isDefaultDisplay": true
+		  },{
+			"name": "ParticipantTenantId",
+			"description": "The participant tenant id. Enable query by the granted tenant invariant id. Example of retrieving this is for contoso: https://login.microsoftonline.com/contoso.com/.well-known/openid-configuration",
+			"type": "String",
+			"dataTypeHint": "GUID",
+			"isDefaultDisplay": false
+		  },
+		  {
+			"name": "UserName",
+			"description": "Name of the user that initiated the pipeline. Available only if the audit relate to owned resource",
+			"type": "String",
+			"isDefaultDisplay": true
+		  },
+		  {
+			"name": "GrantType",
+			"description": "The method used to grant access to the resource (Owned, Reference, Entitlement).",
+			"type": "String",
+			"isDefaultDisplay": true
+		  },
+		  {
+			"name": "GrantSource",
+			"description": "The azure resource ID of the resource the grant is based on.",
+			"dataTypeHint": "URI",
+			"type": "String",
+			"isDefaultDisplay": true
+		  },
+		  {
+			"name": "GrantSourceType",
+			"description": "The type of the the resource the grant is based on.",
+			"type": "String",
+			"isDefaultDisplay": true
+		  },
+		  {
+			"name": "GrantCorrelationId",
+			"type": "String",
+			"isDefaultDisplay": false,
+			"description": "The ID for the grant events. Can be used to correlate between different results of the same grant."
+		  },
+		  {
+			"name": "EntitlementSummary",
+			"description": "Textual summary of the granted access.",
+			"type": "String",
+			"isDefaultDisplay": true
+		  },
+		  {
+			"name": "ReferencedResourceId",
+			"description": "The storage resource that the accessed CI resource points to, if applicable",
+			"dataTypeHint": "URI",
+			"type": "String",
+			"isDefaultDisplay": true
+		  },
+		  {
+			"name": "ReferencedResourceType",
+			"description": "The storage resource type that the accessed CI resource points to, if applicable.",
+			"type": "String",
+			"isDefaultDisplay": true
+		  },
+		  {
+			"name": "Location",
+			"description": "The Location (Region) the resource was accessed in.",
+			"type": "String",
+			"isDefaultDisplay": false
+		  }
+		],
+		"sampleInputRecordsFilePath": "SampleInputRecords/CollaborationAuditSamples.json"
+	  }
+	],
+	"functions": [],
+	"queries": [
+	  {
+		"id": "3eb92137-5019-4eb0-8a01-7480256befea",
+		"displayName": "How many times a resource was granted grants per pipeline run?",
+		"description": "Return the number of times access was granted for resources during pipeline run. Grouped by the type of grant: Entitlement (by participant in production mode), Referenced (by participant in test mode) or Owner (by the owner of the resource).",
+		"bodyFilePath": "KQL/Samples/CountPipelineRunsPerResourceAndAccessTypeQuery.kql",
+		"categories": [
+		  "resources",
+		  "audit"
+		],
+		"relatedTables": [
+		  "ACICollaborationAudit"
+		],
+		"tags": {
+		  "Topic": [
+			"Audit"
+		  ]
+		},
+		"properties": {
+		  "ExampleQuery": true,
+		  "QueryAttributes": {
+			"IsMultiResource": true
+		  }
+		}
+	  },
+	  {
+		"id": "bc25e051-3518-4aa2-9493-2dc1abf176b1",
+		"displayName": "What entitlements was granted to my resource?",
+		"description": "Find entitlements that was granted to CI resources. Can be used to query a specific resource.",
+		"bodyFilePath": "KQL/Samples/FindEntitlementsUsedByResourceQuery.kql",
+		"categories": [
+		  "resources",
+		  "audit"
+		],
+		"relatedTables": [
+		  "ACICollaborationAudit"
+		],
+		"tags": {
+		  "Topic": [
+			"Audit"
+		  ]
+		},
+		"properties": {
+		  "ExampleQuery": true,
+		  "QueryAttributes": {
+			"IsMultiResource": true
+		  }
+		}
+	  },
+	  {
+		"id": "acd263c0-a5a3-42cd-af74-d12df6f577e3",
+		"displayName": "What resources was granted accessed by an entitlement?",
+		"description": "Find CI resources that was entitled for access. Can be used to query a specific entitlement.",
+		"bodyFilePath": "KQL/Samples/FindResourcesAccessedByEntitlementQuery.kql",
+		"categories": [
+		  "resources",
+		  "audit"
+		],
+		"relatedTables": [
+		  "ACICollaborationAudit"
+		],
+		"tags": {
+		  "Topic": [
+			"Audit"
+		  ]
+		},
+		"properties": {
+		  "ExampleQuery": true,
+		  "QueryAttributes": {
+			"IsMultiResource": true
+		  }
+		}
+	  },
+	  {
+		"id": "1c7e3db4-ce89-43b3-a951-b7948e6f4874",
+		"displayName": "Which participants was granted accessed to my resource?",
+		"description": "Find participants that was granted access to CI resources. Can be used to query a specific resource.",
+		"bodyFilePath": "KQL/Samples/FindResourcesAccessedByParticipantQuery.kql",
+		"categories": [
+		  "resources",
+		  "audit"
+		],
+		"relatedTables": [
+		  "ACICollaborationAudit"
+		],
+		"tags": {
+		  "Topic": [
+			"Audit"
+		  ]
+		},
+		"properties": {
+		  "ExampleQuery": true,
+		  "QueryAttributes": {
+			"IsMultiResource": true
+		  }
+		}
+	  }
+	]
+  }

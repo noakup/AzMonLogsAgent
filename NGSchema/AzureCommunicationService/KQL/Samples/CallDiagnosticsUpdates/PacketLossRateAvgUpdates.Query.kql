@@ -1,0 +1,7 @@
+ACSCallDiagnosticsUpdates
+// Filter null values
+| where isnotnull(PacketLossRateAvg)
+// Count packet loss rate values within an inverval of 0.01 (1%)
+| summarize PacketLossRateAvg_counts=count() by bin(PacketLossRateAvg, 0.01)
+| order by PacketLossRateAvg asc
+| render columnchart with (xcolumn = PacketLossRateAvg, title="PacketLossRateAvg histogram")

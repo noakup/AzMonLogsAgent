@@ -1,0 +1,13 @@
+{
+    "name" : "OTelTracesAgentEvents",
+    "description": "Transform used for Otel Traces Agent Events cases",
+    "transformVersion" : "4",
+    "dataTypeId" : "OPENTELEMETRY_TRACES_AGENT",
+    "transformState" : "Validation",
+    "icmTeam" : "Azure Log Analytics/Ingestion",
+    "contactDL": "TeamSword@microsoft.com",
+    "relatedTable" : "OTelEvents",
+    "kqlFilePath" : "../../KQL/OTelEventsTransform.kql",
+    "sampleInputRecordsFilePath" : "../../SampleInputRecords/OTelEventsInputSample.json",
+    "sampleOutputRecordsFilePath" : "../../SampleOutputRecords/OTelEventsOutputSample.json"
+}

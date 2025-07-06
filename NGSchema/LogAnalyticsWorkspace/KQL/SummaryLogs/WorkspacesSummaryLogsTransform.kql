@@ -1,0 +1,11 @@
+﻿source
+| project 
+    TimeGenerated=todatetime(["time"]),
+    BinStartTime = todatetime(properties.binStartTime),
+    BinSize = toint(properties.bin),
+    Status = resultType,
+    QueryDurationMs = tolong(durationMs),
+    ResultsRecordCount = tolong(properties.resultsRecordCount),
+    Message = tostring(properties.message),
+    RuleName = tostring(properties.ruleName),
+    RuleLastModifiedTime = todatetime(properties.ruleLastModifiedTime)

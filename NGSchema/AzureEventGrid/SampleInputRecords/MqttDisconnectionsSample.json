@@ -1,0 +1,14 @@
+[
+  {
+    "time": "2023-11-07T01:29:22.4591610Z",
+    "resourceId": "/SUBSCRIPTIONS/D8560037-8993-40AC-B191-4B2D877A9359/RESOURCEGROUPS/MCHAICANARYTEST/PROVIDERS/MICROSOFT.EVENTGRID/NAMESPACES/MCHAI1010",
+    "location": "eastus",
+    "operationName": "Microsoft.EventGrid/topicspaces/disconnect",
+    "category": "MqttDisconnections",
+    "resultType": "Failed",
+    "resultSignature": "ClientError",
+    "resultDescription": "Timed out per negotiated Keep Alive",
+    "identity": { "clientIdentity": "client1" },
+    "properties": { "sessionName": "client1", "protocol": "MQTT5" }
+  }
+]

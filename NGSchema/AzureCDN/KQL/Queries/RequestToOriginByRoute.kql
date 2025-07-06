@@ -1,0 +1,2 @@
+AFDAccessLog 
+| summarize RequestCount = count() by bin(TimeGenerated, 1m), Resource, RouteName, OriginName, _ResourceId 

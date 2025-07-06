@@ -1,0 +1,15 @@
+source
+| project
+TimeGenerated = todatetime(['time']),
+Category = category,
+OperationName = operationName,
+LogLevel = tostring(properties.LogLevel),
+DagName = tostring(properties.DagName),
+DagTaskName = tostring(properties.DagTaskName),
+RunId = tostring(properties.RunID),
+CodePath = tostring(properties.CodePath),
+TryNumber = tostring(properties.TryNumber),
+AdditionalLogContent = tostring(properties.log),
+Content = tostring(properties.Content),
+Location = location,
+CorrelationId = correlationId

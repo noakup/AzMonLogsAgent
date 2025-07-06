@@ -1,0 +1,796 @@
+{
+    "type": "Microsoft.SecurityInsights/TVM",
+    "displayName": "Azure Sentinel TVM",
+    "description": "All Threat & Vulnerability Management (TVM) tables related to Azure Sentinel.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Microsoft Azure Sentinel/Data Collection and Processing",
+    "contactDL": "asipolarbearseng@microsoft.com",
+    "relatedTables": [],
+    "relatedFunctions": [],
+    "tables": [
+      {
+        "name": "DeviceTvmSecureConfigurationAssessment",
+        "description": "Threat & vulnerability management assessment events, indicating the status of various security configurations on devices.",
+        "categories": [
+          "security"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 3,
+        "dataTypeId": "TVM_DEVICETVMSECURECONFIGURATIONASSESSMENT",
+        "intelligencePacks": [
+          "SecurityInsights"
+        ],
+        "isResourceCentric": false,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "isLakeAllowed": true,
+        "input": [
+          {
+            "name": "Timestamp",
+            "type": "DateTime"
+          },
+          {
+            "name": "ConfigurationImpact",
+            "type": "Double"
+          },
+          {
+            "name": "Context",
+            "type": "Dynamic"
+          },
+          {
+            "name": "IsCompliant",
+            "type": "Bool"
+          },
+          {
+            "name": "IsApplicable",
+            "type": "Bool"
+          },
+          {
+            "name": "IsExpectedUserImpact",
+            "type": "Bool"
+          },
+          {
+            "name": "DeviceId",
+            "type": "String"
+          },
+          {
+            "name": "DeviceName",
+            "type": "String"
+          },
+          {
+            "name": "OSPlatform",
+            "type": "String"
+          },
+          {
+            "name": "ConfigurationId",
+            "type": "String"
+          },
+          {
+            "name": "ConfigurationCategory",
+            "type": "String"
+          },
+          {
+            "name": "ConfigurationSubcategory",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/DeviceTvmSecureConfigurationAssessmentTransform.kql",
+        "columns": [
+          {
+            "name": "Timestamp",
+            "type": "DateTime",
+            "description": "Date and time when the record was generated"
+          },
+          {
+            "name": "ConfigurationImpact",
+            "type": "Double",
+            "description": "Rated impact of the configuration to the overall configuration score (1-10)"
+          },
+          {
+            "name": "Context",
+            "type": "Dynamic",
+            "description": "Machine data configuration context"
+          },
+          {
+            "name": "IsCompliant",
+            "type": "Bool",
+            "description": "Indicates whether the configuration or policy is properly configured"
+          },
+          {
+            "name": "IsApplicable",
+            "type": "Bool",
+            "description": "Indicates whether the configuration or policy is applicable"
+          },
+          {
+            "name": "IsExpectedUserImpact",
+            "type": "Bool",
+            "description": "Indicates if user impact is expected when configuration applied"
+          },
+          {
+            "name": "DeviceId",
+            "type": "String",
+            "description": "Unique identifier for the device in the service"
+          },
+          {
+            "name": "DeviceName",
+            "type": "String",
+            "description": "Fully qualified domain name (FQDN) of the device"
+          },
+          {
+            "name": "OSPlatform",
+            "type": "String",
+            "description": "Platform of the operating system running on the device. This indicates specific operating systems, including variations within the same family, such as Windows 10 and Windows 7"
+          },
+          {
+            "name": "ConfigurationId",
+            "type": "String",
+            "description": "Unique identifier for a specific configuration"
+          },
+          {
+            "name": "ConfigurationCategory",
+            "type": "String",
+            "description": "Category or grouping to which the configuration belongs"
+          },
+          {
+            "name": "ConfigurationSubcategory",
+            "type": "String",
+            "description": "Subcategory or subgrouping to which the configuration belongs. In many cases, this describes specific capabilities or features."
+          },
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "description": "Date and time when the record was generated"
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/DeviceTvmSecureConfigurationAssessmentSample.json"
+      },
+      {
+        "name": "DeviceTvmSoftwareInventory",
+        "description": "Inventory of software installed on devices, including their version information and end-of-support status.",
+        "categories": [
+          "security"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 3,
+        "dataTypeId": "TVM_DEVICETVMSOFTWAREINVENTORY",
+        "intelligencePacks": [
+          "SecurityInsights"
+        ],
+        "isResourceCentric": false,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "isLakeAllowed": true,
+        "input": [
+          {
+            "name": "DeviceId",
+            "type": "String"
+          },
+          {
+            "name": "DeviceName",
+            "type": "String"
+          },
+          {
+            "name": "OSPlatform",
+            "type": "String"
+          },
+          {
+            "name": "OSVersion",
+            "type": "String"
+          },
+          {
+            "name": "OSArchitecture",
+            "type": "String"
+          },
+          {
+            "name": "SoftwareVendor",
+            "type": "String"
+          },
+          {
+            "name": "SoftwareName",
+            "type": "String"
+          },
+          {
+            "name": "SoftwareVersion",
+            "type": "String"
+          },
+          {
+            "name": "EndOfSupportStatus",
+            "type": "String"
+          },
+          {
+            "name": "EndOfSupportDate",
+            "type": "DateTime"
+          },
+          {
+            "name": "ProductCodeCpe",
+            "type": "String"
+          },
+          {
+            "name": "SoftwareLastSeenTimestamp",
+            "type": "DateTime"
+          }
+        ],
+        "transformFilePath": "KQL/DeviceTvmSoftwareInventoryTransform.kql",
+        "columns": [
+          {
+            "name": "DeviceId",
+            "type": "String",
+            "description": "Unique identifier for the device in the service"
+          },
+          {
+            "name": "DeviceName",
+            "type": "String",
+            "description": "Fully qualified domain name (FQDN) of the device"
+          },
+          {
+            "name": "OSPlatform",
+            "type": "String",
+            "description": "Platform of the operating system running on the device. This indicates specific operating systems, including variations within the same family, such as Windows 10 and Windows 7"
+          },
+          {
+            "name": "OSVersion",
+            "type": "String",
+            "description": "Version of the operating system running on the machine"
+          },
+          {
+            "name": "OSArchitecture",
+            "type": "String",
+            "description": "Architecture of the operating system running on the machine"
+          },
+          {
+            "name": "SoftwareVendor",
+            "type": "String",
+            "description": "Name of the software vendor"
+          },
+          {
+            "name": "SoftwareName",
+            "type": "String",
+            "description": "Name of the software product"
+          },
+          {
+            "name": "SoftwareVersion",
+            "type": "String",
+            "description": "Version number of the software product"
+          },
+          {
+            "name": "EndOfSupportStatus",
+            "type": "String",
+            "description": "Indicates the lifecycle stage of the software product relative to its specified end-of-support (EOS) or end-of-life (EOL) date"
+          },
+          {
+            "name": "EndOfSupportDate",
+            "type": "DateTime",
+            "description": "End-of-support (EOS) or end-of-life (EOL) date of the software product"
+          },
+          {
+            "name": "ProductCodeCpe",
+            "type": "String",
+            "description": "The standard Common Platform Enumeration (CPE) name of the software product version"
+          },
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "description": "Date and time when the record was generated"
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/DeviceTvmSoftwareInventorySample.json"
+      },
+      {
+        "name": "DeviceTvmSoftwareVulnerabilities",
+        "description": "Captures various identity-related events, like password changes, password expiration, and user principal name (UPN) changes.",
+        "categories": [
+          "security"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 4,
+        "dataTypeId": "TVM_DEVICETVMSOFTWAREVULNERABILITIES",
+        "intelligencePacks": [
+          "SecurityInsights"
+        ],
+        "isResourceCentric": false,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "isLakeAllowed": true,
+        "input": [
+          {
+            "name": "DeviceId",
+            "type": "String"
+          },
+          {
+            "name": "DeviceName",
+            "type": "String"
+          },
+          {
+            "name": "OSPlatform",
+            "type": "String"
+          },
+          {
+            "name": "OSVersion",
+            "type": "String"
+          },
+          {
+            "name": "OSArchitecture",
+            "type": "String"
+          },
+          {
+            "name": "SoftwareVendor",
+            "type": "String"
+          },
+          {
+            "name": "SoftwareName",
+            "type": "String"
+          },
+          {
+            "name": "SoftwareVersion",
+            "type": "String"
+          },
+          {
+            "name": "CveId",
+            "type": "String"
+          },
+          {
+            "name": "VulnerabilitySeverityLevel",
+            "type": "String"
+          },
+          {
+            "name": "RecommendedSecurityUpdate",
+            "type": "String"
+          },
+          {
+            "name": "RecommendedSecurityUpdateId",
+            "type": "String"
+          },
+          {
+            "name": "LastSeenTimestamp",
+            "type": "DateTime"
+          },
+          {
+            "name": "CveTags",
+            "type": "Dynamic"
+          }
+        ],
+        "transformFilePath": "KQL/DeviceTvmSoftwareVulnerabilitiesTransform.kql",
+        "columns": [
+          {
+            "name": "DeviceId",
+            "type": "String",
+            "description": "Unique identifier for the device in the service"
+          },
+          {
+            "name": "DeviceName",
+            "type": "String",
+            "description": "Fully qualified domain name (FQDN) of the device"
+          },
+          {
+            "name": "OSPlatform",
+            "type": "String",
+            "description": "Platform of the operating system running on the device. This indicates specific operating systems, including variations within the same family, such as Windows 10 and Windows 7"
+          },
+          {
+            "name": "OSVersion",
+            "type": "String",
+            "description": "Version of the operating system running on the machine"
+          },
+          {
+            "name": "OSArchitecture",
+            "type": "String",
+            "description": "Architecture of the operating system running on the machine"
+          },
+          {
+            "name": "SoftwareVendor",
+            "type": "String",
+            "description": "Name of the software vendor"
+          },
+          {
+            "name": "SoftwareName",
+            "type": "String",
+            "description": "Name of the software product"
+          },
+          {
+            "name": "SoftwareVersion",
+            "type": "String",
+            "description": "Version number of the software product"
+          },
+          {
+            "name": "CveId",
+            "type": "String",
+            "description": "Unique identifier assigned to the security vulnerability under the Common Vulnerabilities and Exposures (CVE) system"
+          },
+          {
+            "name": "VulnerabilitySeverityLevel",
+            "type": "String",
+            "description": "Severity level assigned to the security vulnerability based on the CVSS score and dynamic factors influenced by the threat landscape"
+          },
+          {
+            "name": "RecommendedSecurityUpdate",
+            "type": "String",
+            "description": "Name or description of the security update provided by the software vendor to address the vulnerability"
+          },
+          {
+            "name": "RecommendedSecurityUpdateId",
+            "type": "String",
+            "description": "Identifier of the applicable security updates or identifier for the corresponding guidance or knowledge base (KB) articles"
+          },
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "description": "Date and time when the record was generated"
+          },
+          {
+            "name": "CveTags",
+            "type": "Dynamic",
+            "description": "Array of tags relevant to the CVE; example: ZeroDay, NoSecurityUpdate"
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/DeviceTvmSoftwareVulnerabilitiesSample.json"
+      },
+      {
+        "name": "DeviceTvmSoftwareVulnerabilitiesKB",
+        "isChangeColumnInternalNameAllowed": true,
+        "description": "Knowledge base of publicly disclosed vulnerabilities, including whether exploit code is publicly available.",
+        "categories": [
+          "security"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 5,
+        "dataTypeId": "TVM_DEVICETVMSOFTWAREVULNERABILITIES_KB",
+        "intelligencePacks": [
+          "SecurityInsights"
+        ],
+        "isResourceCentric": false,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "isLakeAllowed": true,
+        "input": [
+          {
+            "name": "CveId",
+            "type": "String"
+          },
+          {
+            "name": "CvssScore",
+            "type": "Double"
+          },
+          {
+            "name": "IsExploitAvailable",
+            "type": "Bool"
+          },
+          {
+            "name": "VulnerabilitySeverityLevel",
+            "type": "String"
+          },
+          {
+            "name": "LastModifiedTime",
+            "type": "DateTime"
+          },
+          {
+            "name": "PublishedDate",
+            "type": "DateTime"
+          },
+          {
+            "name": "VulnerabilityDescription",
+            "type": "String"
+          },
+          {
+            "name": "AffectedSoftware",
+            "type": "Dynamic"
+          },
+          {
+            "name": "OriginFolderCreationTime",
+            "type": "DateTime"
+          }
+        ],
+        "transformFilePath": "KQL/DeviceTvmSoftwareVulnerabilitiesKBTransform.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "description": "Date and time when the record was generated."
+          },
+          {
+            "name": "Timestamp",
+            "type": "DateTime",
+            "description": "Date and time when the record was generated"
+          },
+          {
+            "name": "CveId",
+            "type": "String",
+            "description": "Unique identifier assigned to the security vulnerability under the Common Vulnerabilities and Exposures (CVE) system."
+          },
+          {
+            "name": "CvssScore",
+            "type": "Double",
+            "description": "Severity score assigned to the security vulnerability under the Common Vulnerability Scoring System (CVSS)."
+          },
+          {
+            "name": "IsExploitAvailable",
+            "type": "Bool",
+            "description": "Indicates whether exploit code for the vulnerability is publicly available."
+          },
+          {
+            "name": "VulnerabilitySeverityLevel",
+            "type": "String",
+            "description": "Severity level assigned to the security vulnerability based on the CVSS score and dynamic factors influenced by the threat landscape."
+          },
+          {
+            "name": "LastModifiedTime",
+            "type": "DateTime",
+            "description": "Date and time the item or related metadata was last modified."
+          },
+          {
+            "name": "PublishedDate",
+            "type": "DateTime",
+            "description": "Date vulnerability was disclosed to the public."
+          },
+          {
+            "name": "VulnerabilityDescription",
+            "type": "String",
+            "description": "Description of the vulnerability and associated risks."
+          },
+          {
+            "transformName": "AffectedSoftware",
+            "physicalName": "AffectedSoftware_Dynamic",
+            "logicalName": "AffectedSoftware",
+            "type": "Dynamic",
+            "description": "List of all software products affected by the vulnerability."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/DeviceTvmSoftwareVulnerabilitiesKBSample.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/DeviceTvmSoftwareVulnerabilitiesKBSample.json"
+      },
+      {
+        "name": "DeviceTvmSecureConfigurationAssessmentKB",
+        "isChangeColumnInternalNameAllowed": true,
+        "description": "Knowledge base of various security configurations used by Threat & Vulnerability Management to assess devices and includes mappings to various standards and benchmarks.",
+        "categories": [
+          "security"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 6,
+        "dataTypeId": "TVM_DEVICETVMSECURECONFIGURATIONASSESSMENT_KB",
+        "intelligencePacks": [
+          "SecurityInsights"
+        ],
+        "isResourceCentric": false,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "isLakeAllowed": true,
+        "input": [
+          {
+            "name": "ConfigurationId",
+            "type": "String"
+          },
+          {
+            "name": "ConfigurationImpact",
+            "type": "Double"
+          },
+          {
+            "name": "ConfigurationName",
+            "type": "String"
+          },
+          {
+            "name": "ConfigurationDescription",
+            "type": "String"
+          },
+          {
+            "name": "RiskDescription",
+            "type": "String"
+          },
+          {
+            "name": "ConfigurationCategory",
+            "type": "String"
+          },
+          {
+            "name": "ConfigurationSubcategory",
+            "type": "String"
+          },
+          {
+            "name": "ConfigurationBenchmarks",
+            "type": "Dynamic"
+          },
+          {
+            "name": "Tags",
+            "type": "Dynamic"
+          },
+          {
+            "name": "RemediationOptions",
+            "type": "String"
+          },
+          {
+            "name": "RelatedMitreTechniques",
+            "type": "Dynamic"
+          },
+          {
+            "name": "RelatedMitreTactics",
+            "type": "Dynamic"
+          },
+          {
+            "name": "OriginFolderCreationTime",
+            "type": "DateTime"
+          }
+        ],
+        "transformFilePath": "KQL/DeviceTvmSecureConfigurationAssessmentKBTransform.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "description": "Date and time when the record was generated."
+          },
+          {
+            "name": "Timestamp",
+            "type": "DateTime",
+            "description": "Date and time when the record was generated"
+          },
+          {
+            "name": "ConfigurationId",
+            "type": "String",
+            "description": "Unique identifier for a specific configuration."
+          },
+          {
+            "name": "ConfigurationImpact",
+            "type": "Double",
+            "description": "Rated impact of the configuration to the overall configuration score (1-10)."
+          },
+          {
+            "name": "ConfigurationName",
+            "type": "String",
+            "description": "Display name of the configuration."
+          },
+          {
+            "name": "ConfigurationDescription",
+            "type": "String",
+            "description": "Description of the configuration."
+          },
+          {
+            "name": "RiskDescription",
+            "type": "String",
+            "description": "Description of any associated risks."
+          },
+          {
+            "name": "ConfigurationCategory",
+            "type": "String",
+            "description": "Category or grouping to which the configuration belongs."
+          },
+          {
+            "name": "ConfigurationSubcategory",
+            "type": "String",
+            "description": "Subcategory or subgrouping to which the configuration belongs. Commonly, this describes specific capabilities or features."
+          },
+          {
+            "transformName": "ConfigurationBenchmarks",
+            "physicalName": "ConfigurationBenchmarks_Dynamic",
+            "logicalName": "ConfigurationBenchmarks",
+            "type": "Dynamic",
+            "description": "List of industry benchmarks which recommend the same or similar configuration."
+          },
+          {
+            "transformName": "Tags",
+            "physicalName": "Tags_Dynamic",
+            "logicalName": "Tags",
+            "type": "Dynamic",
+            "description": "Labels representing various attributes, used to identify or categorize a security configuration."
+          },
+          {
+            "name": "RemediationOptions",
+            "type": "String",
+            "description": "Recommended actions to reduce or address any associated risks"
+          },
+          {
+            "transformName": "RelatedMitreTechniques",
+            "physicalName": "RelatedMitreTechniques_Dynamic",
+            "logicalName": "RelatedMitreTechniques",
+            "type": "Dynamic",
+            "description": "Related techniques from Mitre knowledge base."
+          },
+          {
+            "transformName": "RelatedMitreTactics",
+            "physicalName": "RelatedMitreTactics_Dynamic",
+            "logicalName": "RelatedMitreTactics",
+            "type": "Dynamic",
+            "description": "Related tactics from Mitre knowledge base."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/DeviceTvmSecureConfigurationAssessmentKBSample.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/DeviceTvmSecureConfigurationAssessmentKBSample.json"
+      }
+    ],
+    "functions": [
+      {
+        "id": "967d69e8-0b42-460b-935a-9ca4b41a6996",
+        "name": "_DeviceTvmSecureConfigurationAssessmentKB",
+        "parameters": "",
+        "description": "Microsoft 365 Defender DeviceTvmSecureConfigurationAssessmentKB eqivalent table.",
+        "bodyFilePath": "KQL/TvmKbTables/DeviceTvmSecureConfigurationAssessmentKB.kql",
+        "solutions": ["SecurityInsights"],
+        "tags": {},
+        "properties": {}
+      },
+      {
+        "id": "7eabe0ef-f8fb-46c4-86cb-9b0fd77057bc",
+        "name": "_DeviceTvmSoftwareVulnerabilitiesKB",
+        "parameters": "",
+        "description": "Microsoft 365 Defender DeviceTvmSoftwareVulnerabilitiesKB eqivalent table.",
+        "bodyFilePath": "KQL/TvmKbTables/DeviceTvmSoftwareVulnerabilitiesKB.kql",
+        "solutions": ["SecurityInsights"],
+        "tags": {},
+        "properties": {}
+      }
+    ],
+    "queries": [
+      {
+        "id": "09786294-08ad-48b1-b467-55ff30e7ca28",
+        "displayName": "Devices with antivirus configurations issue",
+        "description": "List devices with antivirus configurations issues.",
+        "bodyFilePath": "KQL/DevicesWithAntivirusConfigurationsIssues.kql",
+        "categories": [
+          "security"
+        ],
+        "relatedTables": [
+          "DeviceTvmSecureConfigurationAssessment"
+        ],
+        "tags": {
+          "Topic": [
+            "Security"
+          ]
+        },
+        "properties": {
+          "ExampleQuery": true,
+          "QueryAttributes": {
+            "IsMultiResource": false
+          }
+        }
+      },
+      {
+        "id": "7014f07d-00e7-48ae-85df-df5913ee6174",
+        "displayName": "Unsupported software titles",
+        "description": "List software titles which are not supported anymore.",
+        "bodyFilePath": "KQL/UnsupportedSoftwareTitles.kql",
+        "categories": [
+          "security"
+        ],
+        "relatedTables": [
+          "DeviceTvmSoftwareInventory"
+        ],
+        "tags": {
+          "Topic": [
+            "Security"
+          ]
+        },
+        "properties": {
+          "ExampleQuery": true,
+          "QueryAttributes": {
+            "IsMultiResource": false
+          }
+        }
+      },
+      {
+        "id": "a894f0af-bb74-4525-bf5a-7e0faaf345d4",
+        "displayName": "Devices affected by a specific vulnerability",
+        "description": "List devices affected by a specific vulnerability.",
+        "bodyFilePath": "KQL/DevicesAffectedByASpecificVulnerability.kql",
+        "categories": [
+          "security"
+        ],
+        "relatedTables": [
+          "DeviceTvmSoftwareVulnerabilities"
+        ],
+        "tags": {
+          "Topic": [
+            "Security"
+          ]
+        },
+        "properties": {
+          "ExampleQuery": true,
+          "QueryAttributes": {
+            "IsMultiResource": false
+          }
+        }
+      }
+    ]
+  }

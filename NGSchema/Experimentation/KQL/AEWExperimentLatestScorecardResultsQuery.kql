@@ -1,0 +1,14 @@
+// Latest scorecard results for a given feature
+// set the feature flag name to query
+let QueryFeature = "MyFeatureFlag";
+AEWExperimentAssignmentSummary
+| where FeatureName == QueryFeature
+| summarize arg_max(MaxTimeGenerated, AllocationId)
+| join kind=inner AEWExperimentScorecards on AllocationId
+| summarize arg_max(TimeGenerated, ScorecardId)
+| join kind=inner AEWExperimentScorecardMetricPairs on ScorecardId
+| project
+    ScorecardId, MetricId, MetricDisplayName, MetricKind, MetricTags,
+    TreatmentVariant, TreatmentCount, TreatmentMetricValue,
+    ControlVariant, ControlCount, ControlMetricValue,
+    TreatmentEffect, RelativeDifference, PValue, Insights

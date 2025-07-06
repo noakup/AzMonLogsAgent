@@ -1,0 +1,3 @@
+AVSSyslog
+| where AppName == "FIREWALL" or ProcId == "FIREWALL"
+| take 100

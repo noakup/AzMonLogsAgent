@@ -1,0 +1,14 @@
+{
+  "name" : "InterfaceStateUpdates",
+  "description": "Interface status updates from the network fabric devices like CE, ToR, management switch and NPB.",
+  "transformVersion" : 3,
+  "dataTypeId": "MICROSOFTMANAGEDNETWORKFABRIC_INTERFACESTATEUPDATES",
+  "inputFilePath" : "InterfaceStateUpdates-MNFDeviceUpdates.json",
+  "transformState" : "Production",
+  "icmTeam": "NETWORKFABRICAUTOMATION/Triage",
+  "contactDL": "afo-nf-all@microsoft.com",
+  "relatedTable" : "MNFDeviceUpdates",
+  "kqlFilePath" : "KQL/TransformInterfaceStateUpdates.kql",
+  "sampleInputRecordsFilePath" : "SampleInputRecords/InterfaceStateUpdates.json",
+  "sampleOutputRecordsFilePath" : "SampleOutputRecords/InterfaceStateUpdates.json"
+}

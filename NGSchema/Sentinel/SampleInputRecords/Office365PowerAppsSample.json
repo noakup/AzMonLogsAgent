@@ -1,0 +1,36 @@
+[
+  {
+    "CreationTime": "2023-02-20T16:41:53",
+    "Id": "b3ec621e-5666-4a99-a8c2-8e35c52f86b9",
+    "Operation": "PromotePowerAppVersion",
+    "OrganizationId": "f1a6e862-3f71-41bb-b287-8438309728a8",
+    "RecordType": 45,
+    "ResultStatus": "Success",
+    "UserKey": "f3ce6e7a-c3cc-45c5-8166-f8dfd58d870e",
+    "UserType": 0,
+    "Version": 1,
+    "Workload": "PowerApps",
+    "ClientIP": "::ffff:82.71.12.40",
+    "ObjectId": "f3ce6e7a-c3cc-45c5-8166-f8dfd58d870e",
+    "UserId": "wiking@sentinelbizapps.com",
+    "AdditionalInfo": "{\"environmentName\":\"3c67da1e-f86a-e6b4-9206-f9dafa09110c\"}",
+    "AppName": "8186fa0a-2f6f-4607-8e41-ebe4e986f2ea"
+  },
+  {
+    "CreationTime": "2023-02-20T16:43:04",
+    "Id": "5259d812-1d70-451f-9ee8-a7fabf374b72",
+    "Operation": "PowerAppPermissionDeleted",
+    "OrganizationId": "f1a6e862-3f71-41bb-b287-8438309728a8",
+    "RecordType": 45,
+    "ResultStatus": "Success",
+    "UserKey": "f3ce6e7a-c3cc-45c5-8166-f8dfd58d870e",
+    "UserType": 0,
+    "Version": 1,
+    "Workload": "PowerApps",
+    "ClientIP": "::ffff:82.71.12.40",
+    "ObjectId": "f3ce6e7a-c3cc-45c5-8166-f8dfd58d870e",
+    "UserId": "wiking@sentinelbizapps.com",
+    "AdditionalInfo": "{\"environmentName\":\"3c67da1e-f86a-e6b4-9206-f9dafa09110c\"}",
+    "AppName": "\/providers\/Microsoft.PowerApps\/apps\/8186fa0a-2f6f-4607-8e41-ebe4e986f2ea"
+  }
+]

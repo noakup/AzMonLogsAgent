@@ -1,0 +1,16 @@
+let lastestSnapshot = DeviceTvmSoftwareVulnerabilitiesKB_CL
+| where TimeGenerated > ago(4d)
+| summarize max(TimeGenerated);
+DeviceTvmSoftwareVulnerabilitiesKB_CL
+| where TimeGenerated > ago(4d)
+| where TimeGenerated in (lastestSnapshot)
+| distinct CveId_s, CvssScore_d, IsExploitAvailable_b, VulnerabilitySeverityLevel_s, LastModifiedTime_t, PublishedDate_t, VulnerabilityDescription_s, AffectedSoftware_s    
+| project   
+    CveId = CveId_s,
+    CvssScore = CvssScore_d,
+    IsExploitAvailable = IsExploitAvailable_b,
+    VulnerabilitySeverityLevel = VulnerabilitySeverityLevel_s,
+    LastModifiedTime = LastModifiedTime_t,
+    PublishedDate = PublishedDate_t,
+    VulnerabilityDescription = VulnerabilityDescription_s,
+    AffectedSoftware = parse_json(AffectedSoftware_s)    

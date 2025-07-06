@@ -1,0 +1,13 @@
+{
+    "name" : "OTelTracesAgentSpans",
+    "description": "Transform used for Otel Traces Agent Spans cases",
+    "transformVersion" : "4",
+    "dataTypeId" : "OPENTELEMETRY_TRACES_AGENT",
+    "transformState" : "Validation",
+    "icmTeam" : "Azure Log Analytics/Ingestion",
+    "contactDL": "TeamSword@microsoft.com",
+    "relatedTable" : "OTelSpans",
+    "kqlFilePath" : "../../KQL/OTelSpansTransform.kql",
+    "sampleInputRecordsFilePath" : "../../SampleInputRecords/OTelSpansInputSample.json",
+    "sampleOutputRecordsFilePath" : "../../SampleOutputRecords/OTelSpansOutputSample.json"
+}

@@ -1,0 +1,74 @@
+{
+  "type": "Microsoft.OperationalInsights/Workspaces",
+  "displayName": "Log Analytics workspaces",
+  "description": "All tables related to Log Analytics Workspaces.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Azure Log Analytics/Backend",
+  "contactDL": "tofriedldirects@microsoft.com",
+  "relatedTables": [],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "name": "CmsTest",
+      "description": "Test table for CMS.",
+      "categories": [],
+      "artifactVersion": 6,
+      "dataTypeId": "CMS_TEST",
+      "isResourceCentric": true,
+      "tableState": "Validation",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "clusterBy": [ "VIN", "Mileage" ],
+      "input": [
+        {
+          "name": "timeGenerated",
+          "type": "DateTime"
+        },
+        {
+          "name": "vin",
+          "type": "String"
+        },
+        {
+          "name": "mileage",
+          "type": "Int"
+        },
+        {
+          "name": "make",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "Kql/CmsTestTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Timestamp when the event was generated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "VIN",
+          "type": "String",
+          "description": "Vehicle Identification Number.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Mileage",
+          "type": "Int",
+          "description": "Mileage of the vehicle.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Make",
+          "type": "String",
+          "description": "Make of the vehicle.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/CmsTestSamples.json"
+    }
+  ],
+  "functions": [],
+  "queries": []
+}

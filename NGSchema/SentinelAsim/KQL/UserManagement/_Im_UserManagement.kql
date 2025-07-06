@@ -1,0 +1,4 @@
+union isfuzzy=true
+_Im_UserManagementBuiltIn(starttime= starttime, endtime= endtime, srcipaddr_has_any_prefix= srcipaddr_has_any_prefix, targetusername_has_any= targetusername_has_any, actorusername_has_any= actorusername_has_any, eventtype_in= eventtype_in, pack= pack),
+Im_UserManagementSolutions(starttime= starttime, endtime= endtime, srcipaddr_has_any_prefix= srcipaddr_has_any_prefix, targetusername_has_any= targetusername_has_any, actorusername_has_any= actorusername_has_any, eventtype_in= eventtype_in, pack= pack),
+Im_UserManagementCustom(starttime= starttime, endtime= endtime, srcipaddr_has_any_prefix= srcipaddr_has_any_prefix, targetusername_has_any= targetusername_has_any, actorusername_has_any= actorusername_has_any, eventtype_in= eventtype_in, pack= pack)

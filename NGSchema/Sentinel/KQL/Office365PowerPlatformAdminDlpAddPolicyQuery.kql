@@ -1,0 +1,4 @@
+PowerPlatformDlpActivity
+| where EventOriginalType == "CreateDlpPolicy"
+| extend PolicyType = tostring(AdditionalInfo.policyType)
+| summarize count() by EventOriginalType, ActorName, PolicyName, PolicyType

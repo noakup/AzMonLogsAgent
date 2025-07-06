@@ -1,0 +1,4 @@
+LAQueryLogs
+| where TimeGenerated > ago(1h)
+| summarize count() by tostring(ResponseCode), bin(TimeGenerated, 1m)
+| render columnchart with (kind=stacked)

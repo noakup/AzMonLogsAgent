@@ -1,0 +1,1058 @@
+﻿{
+  "type": "Microsoft.SecurityInsights/MDE",
+  "displayName": "Azure Sentinel MDE",
+  "description": "All Microsoft Defender for Endpoints (MDE) tables related to Azure Sentinel.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "MDE Cyber Events Processing/CyberEventsSWE",
+  "contactDL": "mdetelemetrysupport@microsoft.com",
+  "relatedTables": [],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "workflowName": "MDEBehaviorsWorkflow",
+      "transformName": "MDEBehaviors",
+      "physicalName": "BehaviorInfo",
+      "logicalName": "BehaviorInfo",
+      "description": "Microsoft Defender for Endpoints (MDE) behaviors table. Contains information about behaviors, which in the context of Microsoft 365 Defender refers to a conclusion or insight based on one or more raw events, which can provide analysts more context in investigations.",
+      "categories": [
+        "security"
+      ],
+      "dataTypeId": "BEHAVIORINFO",
+      "artifactVersion": 4,
+      "intelligencePacks": [],
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "input": [
+        {
+          "name": "Timestamp",
+          "type": "DateTime"
+        },
+        {
+          "name": "BehaviorId",
+          "type": "String"
+        },
+        {
+          "name": "ActionType",
+          "type": "String"
+        },
+        {
+          "name": "Description",
+          "type": "String"
+        },
+        {
+          "name": "Categories",
+          "type": "String"
+        },
+        {
+          "name": "AttackTechniques",
+          "type": "String"
+        },
+        {
+          "name": "ServiceSource",
+          "type": "String"
+        },
+        {
+          "name": "DetectionSource",
+          "type": "String"
+        },
+        {
+          "name": "DataSources",
+          "type": "String"
+        },
+        {
+          "name": "DeviceId",
+          "type": "String"
+        },
+        {
+          "name": "AccountUpn",
+          "type": "String"
+        },
+        {
+          "name": "AccountObjectId",
+          "type": "String"
+        },
+        {
+          "name": "StartTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "EndTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "AdditionalFields",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/BehaviorInfo.kql",
+      "sampleInputRecordsFilePath": "SampleInputRecords/BehaviorInfoInputSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/BehaviorInfoOutputSample.json",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Date and time when the record was generated."
+        },
+        {
+          "name": "BehaviorId",
+          "type": "String",
+          "description": "Unique identifier for the behavior.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ActionType",
+          "type": "String",
+          "description": "Type of activity that triggered the event. Associated with specific MITRE ATT&CK techniques."
+        },
+        {
+          "name": "Description",
+          "type": "String",
+          "description": "Description of the behavior."
+        },
+        {
+          "name": "Categories",
+          "type": "String",
+          "description": "Types of threat indicator or breach activity identified by the alert. Defined by the MITRE ATT&CK Matrix for Enterprise."
+        },
+        {
+          "name": "AttackTechniques",
+          "type": "String",
+          "description": "MITRE ATT&CK techniques associated with the activity that triggered the alert. Defined by the MITRE ATT&CK Matrix for Enterprise."
+        },
+        {
+          "name": "ServiceSource",
+          "type": "String",
+          "description": "Product or service that provided the alert information."
+        },
+        {
+          "name": "DetectionSource",
+          "type": "String",
+          "description": "Detection technology or sensor that identified the notable component or activity."
+        },
+        {
+          "name": "DataSources",
+          "type": "String",
+          "description": "Products or services that provided information for the behavior."
+        },
+        {
+          "name": "DeviceId",
+          "type": "String",
+          "description": "Unique identifier for the device in the service.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "AccountUpn",
+          "type": "String",
+          "description": "User principal name (UPN) of the account."
+        },
+        {
+          "name": "AccountObjectId",
+          "type": "String",
+          "description": "Unique identifier for the account in Azure AD."
+        },
+        {
+          "name": "StartTime",
+          "type": "DateTime",
+          "description": "Date and time of the first activity related to the behavior."
+        },
+        {
+          "name": "EndTime",
+          "type": "DateTime",
+          "description": "Date and time of the last activity related to the behavior."
+        },
+        {
+          "name": "AdditionalFields",
+          "type": "String",
+          "description": "Additional information about the entity or event."
+        }
+      ]
+    },
+    {
+      "workflowName": "MDEBehaviorEntitiesWorkflow",
+      "transformName": "MDEBehaviorEntities",
+      "physicalName": "BehaviorEntities",
+      "logicalName": "BehaviorEntities",
+      "description": "Microsoft Defender for Endpoints (MDE) behaviors table. Contains information about entities (file, process, device, user, and others) that are involved in a behavior or observation, including detected threats.",
+      "categories": [
+        "security"
+      ],
+      "dataTypeId": "BEHAVIORENTITIES",
+      "artifactVersion": 3,
+      "intelligencePacks": [],
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "input": [
+        {
+          "name": "Timestamp",
+          "type": "DateTime"
+        },
+        {
+          "name": "BehaviorId",
+          "type": "String"
+        },
+        {
+          "name": "ActionType",
+          "type": "String"
+        },
+        {
+          "name": "Categories",
+          "type": "String"
+        },
+        {
+          "name": "ServiceSource",
+          "type": "String"
+        },
+        {
+          "name": "DetectionSource",
+          "type": "String"
+        },
+        {
+          "name": "DataSources",
+          "type": "String"
+        },
+        {
+          "name": "EntityType",
+          "type": "String"
+        },
+        {
+          "name": "EntityRole",
+          "type": "String"
+        },
+        {
+          "name": "DetailedEntityRole",
+          "type": "String"
+        },
+        {
+          "name": "FileName",
+          "type": "String"
+        },
+        {
+          "name": "FolderPath",
+          "type": "String"
+        },
+        {
+          "name": "SHA1",
+          "type": "String"
+        },
+        {
+          "name": "SHA256",
+          "type": "String"
+        },
+        {
+          "name": "FileSize",
+          "type": "String"
+        },
+        {
+          "name": "ThreatFamily",
+          "type": "String"
+        },
+        {
+          "name": "RemoteIP",
+          "type": "String"
+        },
+        {
+          "name": "RemoteUrl",
+          "type": "String"
+        },
+        {
+          "name": "AccountName",
+          "type": "String"
+        },
+        {
+          "name": "AccountDomain",
+          "type": "String"
+        },
+        {
+          "name": "AccountSid",
+          "type": "String"
+        },
+        {
+          "name": "AccountObjectId",
+          "type": "String"
+        },
+        {
+          "name": "AccountUpn",
+          "type": "String"
+        },
+        {
+          "name": "DeviceId",
+          "type": "String"
+        },
+        {
+          "name": "DeviceName",
+          "type": "String"
+        },
+        {
+          "name": "LocalIP",
+          "type": "String"
+        },
+        {
+          "name": "NetworkMessageId",
+          "type": "String"
+        },
+        {
+          "name": "EmailSubject",
+          "type": "String"
+        },
+        {
+          "name": "EmailClusterId",
+          "type": "String"
+        },
+        {
+          "name": "Application",
+          "type": "String"
+        },
+        {
+          "name": "ApplicationId",
+          "type": "String"
+        },
+        {
+          "name": "OAuthApplicationId",
+          "type": "String"
+        },
+        {
+          "name": "ProcessCommandLine",
+          "type": "String"
+        },
+        {
+          "name": "RegistryKey",
+          "type": "String"
+        },
+        {
+          "name": "RegistryValueName",
+          "type": "String"
+        },
+        {
+          "name": "RegistryValueData",
+          "type": "String"
+        },
+        {
+          "name": "AdditionalFields",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/BehaviorEntities.kql",
+      "sampleInputRecordsFilePath": "SampleInputRecords/BehaviorEntitiesInputSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/BehaviorEntitiesOutputSample.json",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Date and time when the record was generated."
+        },
+        {
+          "name": "BehaviorId",
+          "type": "String",
+          "description": "Unique identifier for the behavior.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ActionType",
+          "type": "String",
+          "description": "Type of activity that triggered the event. Associated with specific MITRE ATT&CK techniques."
+        },
+        {
+          "name": "Categories",
+          "type": "String",
+          "description": "Types of threat indicator or breach activity identified by the alert. Defined by the MITRE ATT&CK Matrix for Enterprise."
+        },
+        {
+          "name": "ServiceSource",
+          "type": "String",
+          "description": "Product or service that provided the alert information."
+        },
+        {
+          "name": "DetectionSource",
+          "type": "String",
+          "description": "Detection technology or sensor that identified the notable component or activity."
+        },
+        {
+          "name": "DataSources",
+          "type": "String",
+          "description": "Products or services that provided information for the behavior."
+        },
+        {
+          "name": "EntityType",
+          "type": "String",
+          "description": "Type of object, such as a file, a process, a device, or a user."
+        },
+        {
+          "name": "EntityRole",
+          "type": "String",
+          "description": "Indicates whether the entity is impacted or merely related."
+        },
+        {
+          "name": "DetailedEntityRole",
+          "type": "String",
+          "description": "The role of the entity in the behavior"
+        },
+        {
+          "name": "FileName",
+          "type": "String",
+          "description": "Name of the file involved in the alert. Empty unless EntityType is \"File\" or \"Process\"."
+        },
+        {
+          "name": "FolderPath",
+          "type": "String",
+          "description": "Folder containing the file. Empty unless EntityType is \"File\" or \"Process\"."
+        },
+        {
+          "name": "SHA1",
+          "type": "String",
+          "description": "SHA-1 hash of the file. Empty unless EntityType is \"File\" or \"Process\"."
+        },
+        {
+          "name": "SHA256",
+          "type": "String",
+          "description": "SHA-256 of the file. Empty unless EntityType is \"File\" or \"Process\"."
+        },
+        {
+          "name": "FileSize",
+          "type": "BigInt",
+          "description": "Size of the file in bytes. Empty unless EntityType is \"File\" or \"Process\""
+        },
+        {
+          "name": "ThreatFamily",
+          "type": "String",
+          "description": "Malware family that the suspicious or malicious file or process has been classified under."
+        },
+        {
+          "name": "RemoteIP",
+          "type": "String",
+          "description": "IP address that was being connected to.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "RemoteUrl",
+          "type": "String",
+          "description": "URL or fully qualified domain name (FQDN) that was being connected to."
+        },
+        {
+          "name": "AccountName",
+          "type": "String",
+          "description": "User name of the account."
+        },
+        {
+          "name": "AccountDomain",
+          "type": "String",
+          "description": "Domain of the account."
+        },
+        {
+          "name": "AccountSid",
+          "type": "String",
+          "description": "Security Identifier (SID) of the account."
+        },
+        {
+          "name": "AccountObjectId",
+          "type": "String",
+          "description": "Unique identifier for the account in Azure AD."
+        },
+        {
+          "name": "AccountUpn",
+          "type": "String",
+          "description": "User principal name (UPN) of the account."
+        },
+        {
+          "name": "DeviceId",
+          "type": "String",
+          "description": "Unique identifier for the device in the service.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "DeviceName",
+          "type": "String",
+          "description": "Fully qualified domain name (FQDN) of the device."
+        },
+        {
+          "name": "LocalIP",
+          "type": "String",
+          "description": "IP address assigned to the local machine used during communication.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "NetworkMessageId",
+          "type": "String",
+          "description": "Unique identifier for the email in UUID format, generated by Office 365."
+        },
+        {
+          "name": "EmailSubject",
+          "type": "String",
+          "description": "Subject of the email."
+        },
+        {
+          "name": "EmailClusterId",
+          "type": "String",
+          "description": "Identifier for the group of similar emails clustered based on heuristic analysis of their contents."
+        },
+        {
+          "name": "Application",
+          "type": "String",
+          "description": "Application that performed the recorded action."
+        },
+        {
+          "name": "ApplicationId",
+          "type": "String",
+          "description": "Unique identifier for the application."
+        },
+        {
+          "name": "OAuthApplicationId",
+          "type": "String",
+          "description": "Unique identifier of the third-party OAuth application in UUID format."
+        },
+        {
+          "name": "ProcessCommandLine",
+          "type": "String",
+          "description": "Command line used to create the new process."
+        },
+        {
+          "name": "RegistryKey",
+          "type": "String",
+          "description": "Registry key that the recorded action was applied to."
+        },
+        {
+          "name": "RegistryValueName",
+          "type": "String",
+          "description": "Name of the registry value that the recorded action was applied to."
+        },
+        {
+          "name": "RegistryValueData",
+          "type": "String",
+          "description": "Data of the registry value that the recorded action was applied to."
+        },
+        {
+          "name": "AdditionalFields",
+          "type": "String",
+          "description": "Additional information about the entity or event."
+        }
+      ]
+    },
+    {
+      "name": "DeviceBehaviorInfo",
+      "description": "Microsoft Defender for Endpoints (MDE) behaviors table. Contains information about behaviors, which in the context of Microsoft 365 Defender refers to a conclusion or insight based on one or more raw events, which can provide analysts more context in investigations.",
+      "categories": [
+        "security"
+      ],
+      "dataTypeId": "DEVICEBEHAVIORINFO",
+      "artifactVersion": 2,
+      "intelligencePacks": [],
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "input": [
+        {
+          "name": "Timestamp",
+          "type": "DateTime"
+        },
+        {
+          "name": "BehaviorId",
+          "type": "String"
+        },
+        {
+          "name": "ActionType",
+          "type": "String"
+        },
+        {
+          "name": "Description",
+          "type": "String"
+        },
+        {
+          "name": "Categories",
+          "type": "String"
+        },
+        {
+          "name": "AttackTechniques",
+          "type": "String"
+        },
+        {
+          "name": "ServiceSource",
+          "type": "String"
+        },
+        {
+          "name": "DetectionSource",
+          "type": "String"
+        },
+        {
+          "name": "DataSources",
+          "type": "String"
+        },
+        {
+          "name": "DeviceId",
+          "type": "String"
+        },
+        {
+          "name": "AccountUpn",
+          "type": "String"
+        },
+        {
+          "name": "AccountObjectId",
+          "type": "String"
+        },
+        {
+          "name": "StartTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "EndTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "AdditionalFields",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/BehaviorInfo.kql",
+      "sampleInputRecordsFilePath": "SampleInputRecords/BehaviorInfoInputSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/BehaviorInfoOutputSample.json",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Date and time when the record was generated."
+        },
+        {
+          "name": "BehaviorId",
+          "type": "String",
+          "description": "Unique identifier for the behavior.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ActionType",
+          "type": "String",
+          "description": "Type of activity that triggered the event. Associated with specific MITRE ATT&CK techniques."
+        },
+        {
+          "name": "Description",
+          "type": "String",
+          "description": "Description of the behavior."
+        },
+        {
+          "name": "Categories",
+          "type": "String",
+          "description": "Types of threat indicator or breach activity identified by the alert. Defined by the MITRE ATT&CK Matrix for Enterprise."
+        },
+        {
+          "name": "AttackTechniques",
+          "type": "String",
+          "description": "MITRE ATT&CK techniques associated with the activity that triggered the alert. Defined by the MITRE ATT&CK Matrix for Enterprise."
+        },
+        {
+          "name": "ServiceSource",
+          "type": "String",
+          "description": "Product or service that provided the alert information."
+        },
+        {
+          "name": "DetectionSource",
+          "type": "String",
+          "description": "Detection technology or sensor that identified the notable component or activity."
+        },
+        {
+          "name": "DataSources",
+          "type": "String",
+          "description": "Products or services that provided information for the behavior."
+        },
+        {
+          "name": "DeviceId",
+          "type": "String",
+          "description": "Unique identifier for the device in the service.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "AccountUpn",
+          "type": "String",
+          "description": "User principal name (UPN) of the account."
+        },
+        {
+          "name": "AccountObjectId",
+          "type": "String",
+          "description": "Unique identifier for the account in Azure AD."
+        },
+        {
+          "name": "StartTime",
+          "type": "DateTime",
+          "description": "Date and time of the first activity related to the behavior."
+        },
+        {
+          "name": "EndTime",
+          "type": "DateTime",
+          "description": "Date and time of the last activity related to the behavior."
+        },
+        {
+          "name": "AdditionalFields",
+          "type": "String",
+          "description": "Additional information about the entity or event."
+        }
+      ]
+    },
+    {
+      "name": "DeviceBehaviorEntities",
+      "description": "Microsoft Defender for Endpoints (MDE) behaviors table. Contains information about entities (file, process, device, user, and others) that are involved in a behavior or observation, including detected threats.",
+      "categories": [
+        "security"
+      ],
+      "dataTypeId": "DEVICEBEHAVIORENTITIES",
+      "artifactVersion": 2,
+      "intelligencePacks": [],
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "input": [
+        {
+          "name": "Timestamp",
+          "type": "DateTime"
+        },
+        {
+          "name": "BehaviorId",
+          "type": "String"
+        },
+        {
+          "name": "ActionType",
+          "type": "String"
+        },
+        {
+          "name": "Categories",
+          "type": "String"
+        },
+        {
+          "name": "ServiceSource",
+          "type": "String"
+        },
+        {
+          "name": "DetectionSource",
+          "type": "String"
+        },
+        {
+          "name": "DataSources",
+          "type": "String"
+        },
+        {
+          "name": "EntityType",
+          "type": "String"
+        },
+        {
+          "name": "EntityRole",
+          "type": "String"
+        },
+        {
+          "name": "DetailedEntityRole",
+          "type": "String"
+        },
+        {
+          "name": "FileName",
+          "type": "String"
+        },
+        {
+          "name": "FolderPath",
+          "type": "String"
+        },
+        {
+          "name": "SHA1",
+          "type": "String"
+        },
+        {
+          "name": "SHA256",
+          "type": "String"
+        },
+        {
+          "name": "FileSize",
+          "type": "String"
+        },
+        {
+          "name": "ThreatFamily",
+          "type": "String"
+        },
+        {
+          "name": "RemoteIP",
+          "type": "String"
+        },
+        {
+          "name": "RemoteUrl",
+          "type": "String"
+        },
+        {
+          "name": "AccountName",
+          "type": "String"
+        },
+        {
+          "name": "AccountDomain",
+          "type": "String"
+        },
+        {
+          "name": "AccountSid",
+          "type": "String"
+        },
+        {
+          "name": "AccountObjectId",
+          "type": "String"
+        },
+        {
+          "name": "AccountUpn",
+          "type": "String"
+        },
+        {
+          "name": "DeviceId",
+          "type": "String"
+        },
+        {
+          "name": "DeviceName",
+          "type": "String"
+        },
+        {
+          "name": "LocalIP",
+          "type": "String"
+        },
+        {
+          "name": "NetworkMessageId",
+          "type": "String"
+        },
+        {
+          "name": "EmailSubject",
+          "type": "String"
+        },
+        {
+          "name": "EmailClusterId",
+          "type": "String"
+        },
+        {
+          "name": "Application",
+          "type": "String"
+        },
+        {
+          "name": "ApplicationId",
+          "type": "String"
+        },
+        {
+          "name": "OAuthApplicationId",
+          "type": "String"
+        },
+        {
+          "name": "ProcessCommandLine",
+          "type": "String"
+        },
+        {
+          "name": "RegistryKey",
+          "type": "String"
+        },
+        {
+          "name": "RegistryValueName",
+          "type": "String"
+        },
+        {
+          "name": "RegistryValueData",
+          "type": "String"
+        },
+        {
+          "name": "AdditionalFields",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/BehaviorEntities.kql",
+      "sampleInputRecordsFilePath": "SampleInputRecords/BehaviorEntitiesInputSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/BehaviorEntitiesOutputSample.json",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Date and time when the record was generated."
+        },
+        {
+          "name": "BehaviorId",
+          "type": "String",
+          "description": "Unique identifier for the behavior.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ActionType",
+          "type": "String",
+          "description": "Type of activity that triggered the event. Associated with specific MITRE ATT&CK techniques."
+        },
+        {
+          "name": "Categories",
+          "type": "String",
+          "description": "Types of threat indicator or breach activity identified by the alert. Defined by the MITRE ATT&CK Matrix for Enterprise."
+        },
+        {
+          "name": "ServiceSource",
+          "type": "String",
+          "description": "Product or service that provided the alert information."
+        },
+        {
+          "name": "DetectionSource",
+          "type": "String",
+          "description": "Detection technology or sensor that identified the notable component or activity."
+        },
+        {
+          "name": "DataSources",
+          "type": "String",
+          "description": "Products or services that provided information for the behavior."
+        },
+        {
+          "name": "EntityType",
+          "type": "String",
+          "description": "Type of object, such as a file, a process, a device, or a user."
+        },
+        {
+          "name": "EntityRole",
+          "type": "String",
+          "description": "Indicates whether the entity is impacted or merely related."
+        },
+        {
+          "name": "DetailedEntityRole",
+          "type": "String",
+          "description": "The role of the entity in the behavior"
+        },
+        {
+          "name": "FileName",
+          "type": "String",
+          "description": "Name of the file involved in the alert. Empty unless EntityType is \"File\" or \"Process\"."
+        },
+        {
+          "name": "FolderPath",
+          "type": "String",
+          "description": "Folder containing the file. Empty unless EntityType is \"File\" or \"Process\"."
+        },
+        {
+          "name": "SHA1",
+          "type": "String",
+          "description": "SHA-1 hash of the file. Empty unless EntityType is \"File\" or \"Process\"."
+        },
+        {
+          "name": "SHA256",
+          "type": "String",
+          "description": "SHA-256 of the file. Empty unless EntityType is \"File\" or \"Process\"."
+        },
+        {
+          "name": "FileSize",
+          "type": "BigInt",
+          "description": "Size of the file in bytes. Empty unless EntityType is \"File\" or \"Process\""
+        },
+        {
+          "name": "ThreatFamily",
+          "type": "String",
+          "description": "Malware family that the suspicious or malicious file or process has been classified under."
+        },
+        {
+          "name": "RemoteIP",
+          "type": "String",
+          "description": "IP address that was being connected to.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "RemoteUrl",
+          "type": "String",
+          "description": "URL or fully qualified domain name (FQDN) that was being connected to."
+        },
+        {
+          "name": "AccountName",
+          "type": "String",
+          "description": "User name of the account."
+        },
+        {
+          "name": "AccountDomain",
+          "type": "String",
+          "description": "Domain of the account."
+        },
+        {
+          "name": "AccountSid",
+          "type": "String",
+          "description": "Security Identifier (SID) of the account."
+        },
+        {
+          "name": "AccountObjectId",
+          "type": "String",
+          "description": "Unique identifier for the account in Azure AD."
+        },
+        {
+          "name": "AccountUpn",
+          "type": "String",
+          "description": "User principal name (UPN) of the account."
+        },
+        {
+          "name": "DeviceId",
+          "type": "String",
+          "description": "Unique identifier for the device in the service.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "DeviceName",
+          "type": "String",
+          "description": "Fully qualified domain name (FQDN) of the device."
+        },
+        {
+          "name": "LocalIP",
+          "type": "String",
+          "description": "IP address assigned to the local machine used during communication.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "NetworkMessageId",
+          "type": "String",
+          "description": "Unique identifier for the email in UUID format, generated by Office 365."
+        },
+        {
+          "name": "EmailSubject",
+          "type": "String",
+          "description": "Subject of the email."
+        },
+        {
+          "name": "EmailClusterId",
+          "type": "String",
+          "description": "Identifier for the group of similar emails clustered based on heuristic analysis of their contents."
+        },
+        {
+          "name": "Application",
+          "type": "String",
+          "description": "Application that performed the recorded action."
+        },
+        {
+          "name": "ApplicationId",
+          "type": "String",
+          "description": "Unique identifier for the application."
+        },
+        {
+          "name": "OAuthApplicationId",
+          "type": "String",
+          "description": "Unique identifier of the third-party OAuth application in UUID format."
+        },
+        {
+          "name": "ProcessCommandLine",
+          "type": "String",
+          "description": "Command line used to create the new process."
+        },
+        {
+          "name": "RegistryKey",
+          "type": "String",
+          "description": "Registry key that the recorded action was applied to."
+        },
+        {
+          "name": "RegistryValueName",
+          "type": "String",
+          "description": "Name of the registry value that the recorded action was applied to."
+        },
+        {
+          "name": "RegistryValueData",
+          "type": "String",
+          "description": "Data of the registry value that the recorded action was applied to."
+        },
+        {
+          "name": "AdditionalFields",
+          "type": "String",
+          "description": "Additional information about the entity or event."
+        }
+      ]
+    }
+  ],
+  "functions": [],
+  "queries": []
+}

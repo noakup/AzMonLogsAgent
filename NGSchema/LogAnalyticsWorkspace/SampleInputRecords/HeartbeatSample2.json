@@ -1,0 +1,41 @@
+[
+    {
+        "Timestamp": "2020-11-19T04:24:21.356Z",
+        "Computer": "hestolz-ubuntu18-vm",
+        "OSType": "Linux",
+        "OSName": "Ubuntu",
+        "OSMajorVersion": "18",
+        "OSMinorVersion": "04",
+        "Category": "Agent",
+        "SCAgentChannel": "Direct",
+        "ComputerPrivateIps": "[]",
+        "InstalledDate": "2020-11-19T03:15:53.0Z",
+        "Version": "1.13.33-0"
+    },
+    {
+        "Timestamp": "2020-11-19T04:24:21.356Z",
+        "Computer": "hestolz-ubuntu18-vm",
+        "OSType": "Linux",
+        "OSName": "Ubuntu",
+        "OSMajorVersion": "18",
+        "OSMinorVersion": "04",
+        "Category": "Agent",
+        "SCAgentChannel": "Direct",
+        "ComputerPrivateIps": "[\"172.17.0.4\"]",
+        "InstalledDate": "2020-11-19T03:15:53.0Z",
+        "Version": "1.13.33-0"
+    },
+    {
+        "Timestamp": "2020-11-19T04:24:21.356Z",
+        "Computer": "hestolz-ubuntu18-vm",
+        "OSType": "Linux",
+        "OSName": "Ubuntu",
+        "OSMajorVersion": "18",
+        "OSMinorVersion": "04",
+        "Category": "Agent",
+        "SCAgentChannel": "Direct",
+        "ComputerPrivateIps": "[\"172.17.0.4\",\"172.17.0.5\",\"fd40:3b6c:b677:b42::4\"]",
+        "InstalledDate": "2020-11-19T03:15:53.0Z",
+        "Version": "1.13.33-0"
+    }
+]

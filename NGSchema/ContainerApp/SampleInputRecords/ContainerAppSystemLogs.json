@@ -1,0 +1,61 @@
+[
+    {
+        "resourceId": "/SUBSCRIPTIONS/474EABA6-0F3F-4B5A-BAE5-A7858BD7C53B/RESOURCEGROUPS/WORKERAPPS/PROVIDERS/MICROSOFT.APP/MANAGEDENVIRONMENTS/MANAGEDENVIRONMENT-WORKERAPPS-B061",
+        "properties": {
+            "EnvironmentName": "yellowhill-7e7931de",
+            "ContainerName": "nginx",
+            "Log": "Setting a traffic weight of 100% for revision containerapp-withscale--0up71oy",
+            "RevisionName": "containerapp-withscale--0up71oy"
+        },
+        "category": "ContainerAppSystemLogs",
+        "operationName": "Microsoft.App/managedEnvironments/WRITE",
+        "time": "2022-08-06T00:45:23.482619079Z",
+        "location": "eastus"
+    },
+    {
+        "resourceId": "/SUBSCRIPTIONS/474EABA6-0F3F-4B5A-BAE5-A7858BD7C53B/RESOURCEGROUPS/WORKERAPPS/PROVIDERS/MICROSOFT.APP/MANAGEDENVIRONMENTS/MANAGEDENVIRONMENT-WORKERAPPS-B061",
+        "properties": {
+            "EnvironmentName": "yellowhill-7e7931de",
+            "ContainerName": "nginx",
+            "Log": "Successfully provisioned revision containerapp-withscale--0up71oy",
+            "RevisionName": "containerapp-withscale--0up71oy"
+        },
+        "category": "ContainerAppSystemLogs",
+        "operationName": "Microsoft.App/managedEnvironments/WRITE",
+        "time": "2022-08-09T12:54:19.482619079Z",
+        "location": "eastus"
+    },
+    {
+        "resourceId": "/SUBSCRIPTIONS/474EABA6-0F3F-4B5A-BAE5-A7858BD7C53B/RESOURCEGROUPS/WORKERAPPS/PROVIDERS/MICROSOFT.APP/MANAGEDENVIRONMENTS/MANAGEDENVIRONMENT-WORKERAPPS-B061",
+        "properties": {
+            "EnvironmentName": "yellowhill-7e7931de",
+            "RevisionName": "processappnew3--nd5vci0",
+            "Reason": "RevisionDeactivating",
+            "TimeStamp": "9/15/2022, 11:26:05.000 PM",
+            "EventSource": "ContainerAppController",
+            "ContainerAppName": "processappnew3",
+            "Count": 1,
+            "ComponentName": "javacomponentname",
+            "ComponentType": "SpringBootAdmin"
+        },
+        "category": "ContainerAppSystemLogs",
+        "operationName": "Microsoft.App/managedEnvironments/WRITE",
+        "time": "2022-09-15T01:42:59.464390200Z",
+        "location": "eastus"
+    },
+    {
+        "resourceId": "/SUBSCRIPTIONS/474EABA6-0F3F-4B5A-BAE5-A7858BD7C53B/RESOURCEGROUPS/WORKERAPPS/PROVIDERS/MICROSOFT.APP/MANAGEDENVIRONMENTS/MANAGEDENVIRONMENT-WORKERAPPS-B061",
+        "properties": {
+            "EnvironmentName": "yellowhill-7e7931de",
+            "Reason": "Create new job",
+            "TimeStamp": "9/15/2022, 11:26:05.000 PM",
+            "EventSource": "ContainerAppController",
+            "ContainerJobName": "trajkobal",
+            "Count": 1
+        },
+        "category": "ContainerAppSystemLogs",
+        "operationName": "Microsoft.App/managedEnvironments/WRITE",
+        "time": "2022-09-15T01:42:59.464390200Z",
+        "location": "eastus"
+    }
+]

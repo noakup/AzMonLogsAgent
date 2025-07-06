@@ -1,0 +1,26 @@
+[
+    {
+        "operationName": "Microsoft.ContainerService/managedClusters/diagnosticLogs/Read",
+        "category": "cloud-controller-manager",
+        "resourceId": "/SUBSCRIPTIONS/08CE8FA2-9E5E-4D66-AB08-C0C13F360144/RESOURCEGROUPS/MIKEKEESEY-TEST/PROVIDERS/MICROSOFT.CONTAINERSERVICE/MANAGEDCLUSTERS/MIKEKEESEY-TEST",
+        "properties": {
+            "log": "I0110 22:13:00.892159       1 leaderelection.go:278] successfully renewed lease kube-system/cloud-controller-manager\n",
+            "stream": "stderr",
+            "pod": "cloud-controller-manager-6578fbbd95-2rddw",
+            "containerID": "dbdeb2b7a78e3978c2eda35c4df47c3454c6c146761ece47a3f6aa9d813dae63"
+        },
+        "time": "2023-01-10T22:13:00.0000000Z"
+    },
+    {
+        "operationName": "Microsoft.ContainerService/managedClusters/diagnosticLogs/Read",
+        "category": "cloud-controller-manager",
+        "resourceId": "/SUBSCRIPTIONS/08CE8FA2-9E5E-4D66-AB08-C0C13F360144/RESOURCEGROUPS/MIKEKEESEY-TEST/PROVIDERS/MICROSOFT.CONTAINERSERVICE/MANAGEDCLUSTERS/MIKEKEESEY-TEST",
+        "properties": {
+            "log": "I0110 22:13:01.352645       1 route_controller.go:299] set node aks-agentpool-20062077-vmss000002 with NodeNetworkUnavailable=false was canceled because it is already set\n",
+            "stream": "stderr",
+            "pod": "cloud-controller-manager-6578fbbd95-2rddw",
+            "containerID": "dbdeb2b7a78e3978c2eda35c4df47c3454c6c146761ece47a3f6aa9d813dae63"
+        },
+        "time": "2023-01-10T22:13:01.0000000Z"
+    }
+]

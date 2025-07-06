@@ -1,0 +1,4 @@
+//GroupMemberships column would have list of NetworkGroupIds and the respective MembershipDetails(Membership type - Static/Policy and their respective Ids) which NetworkResourceIds are part of.
+AVNMNetworkGroupMembershipChange
+|top 10 by TimeGenerated desc
+|project TimeGenerated, NetworkResourceIds, GroupMemberships, ResultType

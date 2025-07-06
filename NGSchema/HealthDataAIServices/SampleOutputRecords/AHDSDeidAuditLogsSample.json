@@ -1,0 +1,15 @@
+[
+    {
+        "Timestamp": "2024-07-15T20:50:16.6652771+00:00",
+        "OperationName": "Deid",
+        "StatusCode": 200,
+        "CorrelationId": "0792922e0f0cacb4a196512086fa0447",
+        "Identity": {
+            "claims": {
+                "iss": "https://sts.windows-ppe.net/abcdef123-kl81-no12-pqr1-st12uv5w0xyz/",
+                "oid": "a1b2c3d4-e5fg-6i78-jk90-1l234mno4567"
+            }
+        },
+        "Uri": "https://f2gjggawftgacxem.api.ci001.deid.empowermd.windows-int.net/deid?api-version=2024-07-12-preview"
+    }
+]

@@ -1,0 +1,4 @@
+AgriFoodApplicationAuditLogs
+| where OperationName startswith "Data Plane Authentication"
+| where ResultType == "Failure"
+| take 100

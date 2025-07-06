@@ -1,0 +1,22 @@
+[
+	{
+		"TimeGenerated": "2022-12-15T14:44:08.182629735Z",
+		"Location": "eastus2",
+		"OperationName": "DeviceTelemetryEvent",
+        "DeviceId": "EC56D635479E2AA14E446AE80C14C96B2E9653ABC353194F7044AB640A2C9359868D5293C8AA22E8BD8341B0B6A37441A929E4799F4D97283B25439A225282DE452F",
+        "CatalogId": "00000000-0000-0000-0000-000000000000",
+		"Properties": {            
+            "StartTimeStamp": "2022-12-15T13:45:30.6170000Z",
+            "EndTimeStamp": "2022-12-15T13:45:32.5275000Z",
+            "EventType": "Unplanned",
+            "EventCount": 12,
+            "EventClass": "Application",
+            "EventCategory": "AppCrash",
+            "EventDescription": "AppCrash (exit_status=11; signal_status=11; signal_code=2; component_id=4c1226cd-3484-42ee-93dc-805fdfa12e7e; image_id=403aba37-825b-406e-8afb-6bbce733d961)"
+        },
+		"ResultType": "Success",
+		"ResultDescription": "Device insights were successfully processed",
+		"CorrelationId": "726118a9162929438614b391905ec9fe",
+		"DurationMs": 100
+	}
+]

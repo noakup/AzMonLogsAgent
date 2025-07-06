@@ -1,0 +1,9 @@
+let perIPLimit = 1;
+SAPAuditLog
+| where MessageId == 'AUM'
+| extend DetailsBy = pack("User", User, "Email", Email, "SystemId", SystemId, "ClientId", ClientId)
+| summarize LoginbyIPAttempts = count(), Details = make_set(DetailsBy), StartTime = min(TimeGenerated), EndTime = max(TimeGenerated)
+    by TerminalIpV6
+| where LoginbyIPAttempts > perIPLimit
+| mv-expand Details
+| evaluate bag_unpack(Details, "Details_")

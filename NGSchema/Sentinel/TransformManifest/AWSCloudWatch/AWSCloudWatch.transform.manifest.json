@@ -1,0 +1,14 @@
+{
+    "name": "AwsCloudWatchCCP",
+    "description": "Transform used for AWS CloudWatch in CCP Resource cases",
+    "transformVersion": "1",
+    "dataTypeId": "SENTINEL_AWSCLOUDWATCH_CCP",
+    "transformState": "Validation",
+    "icmTeam": "Microsoft Azure Sentinel/Data Collection and Processing",
+    "contactDL": "asipolarbearslive@microsoft.com",
+    "relatedTable": "AWSCloudWatch",
+    "kqlFilePath": "../../KQL/AWSCloudWatchTransform.kql",
+    "inputFilePath": "AWSCloudWatch-input.json",
+    "sampleInputRecordsFilePath": "../../SampleInputRecords/AWSCloudWatchSample.json",
+    "sampleOutputRecordsFilePath": "../../SampleOutputRecords/AWSCloudWatchSample.json"
+}

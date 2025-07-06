@@ -1,0 +1,30 @@
+[
+    {
+    "insertId": "tnybrhbjbjk0q6fq",
+    "jsonPayload": {
+      "message": "\"HTTP\" verb=\"GET\" URI=\"/healthz\" latency=\"124.969µs\" userAgent=\"kube-probe/1.31\" audit-ID=\"\" srcIP=\"127.0.0.1:57624\" resp=200",
+      "pid": "12"
+    },
+    "resource": {
+      "type": "k8s_control_plane_component",
+      "labels": {
+        "component_location": "us-central1-a",
+        "component_name": "scheduler",
+        "project_id": "msccp-test",
+        "location": "us-central1",
+        "cluster_name": "kubernetesalekhya"
+      }
+    },
+    "timestamp": "2025-05-08T12:20:50.844198Z",
+    "severity": "INFO",
+    "labels": {
+      "compute.googleapis.com/resource_name": "gke-961cde8a3d894189be3f-89f7-0b88-vm"
+    },
+    "logName": "projects/msccp-test/logs/container.googleapis.com%2Fscheduler",
+    "sourceLocation": {
+      "file": "httplog.go",
+      "line": "134"
+    },
+    "receiveTimestamp": "2025-05-08T12:20:58.133785542Z"
+  }
+]

@@ -1,0 +1,51 @@
+[	
+	{
+		"time": "2021-01-05T21:40:56.5153410Z",
+		"resourceId": "/SUBSCRIPTIONS/35FA7461-D48A-4053-9AA2-56C014495E89/RESOURCEGROUPS/EDWIN-SUGGESTED-ACTIONS-BOT-RES/PROVIDERS/MICROSOFT.BOTSERVICE/BOTSERVICES/EDWINB-SCRATCH-CMEKBASH1",
+		"category": "BotRequest",
+		"operationName": "RedisThrottler",
+		"durationMS": 1.813,
+		"properties": {
+			"botId": "edwinb-scratch-cmekbash1",
+			"resultCode": "200",
+			"channel": "directline"
+		},
+		"callerIpAddress": "10.0.5.74",
+		"correlationId": "bb10c742-427f21c7e3bb7313",
+		"level": "Information",
+		"location": "West US 2"
+	},
+	{ 
+	    "time": "2020-06-11T16:19:01.5819000Z",
+		"resourceId": "/SUBSCRIPTIONS/XXXXXXXXX/RESOURCEGROUPS/EDWINB-RESOURCE-GROUP/PROVIDERS/MICROSOFT.BOTSERVICE/BOTSERVICES/SOME-BOT-ID",         
+	    "operationName":"MICROSOFT.BOTSERVICE/BOTSERVICES/SEND-ACTIVITY-TO-BOT", 
+	    "category": "BotRequest",
+	    "durationMS": 43.2897,  
+	    "callerIpAddress": "xxx.xxx.xxx.xxx",  
+	    "correlationId": "000a0000-d98f-00ca-8b21-d396244x0000",
+	    "level": "Information",  
+	    "location": "East US",     
+	    "properties": { 
+	       "botId": "some-bot-id", 
+	       "channel": "directline",
+		   "resultCode": "200"
+	    } 
+	},
+	{
+		"time": "2020-06-11T16:19:01.5819000Z",
+		"resourceId": "/SUBSCRIPTIONS/XXXXXXXXX/RESOURCEGROUPS/EDWINB-RESOURCE-GROUP/PROVIDERS/MICROSOFT.BOTSERVICE/BOTSERVICES/SOME-BOT-ID",         
+		"operationName":"MICROSOFT.BOTSERVICE/BOTSERVICES/SEND-ACTIVITY-TO-BOT", 
+		"category": "BotRequest",  
+		"durationMS": 40.0,  
+		"callerIpAddress": "xxx.xxx.xxx.xxx",  
+		"correlationId": "000a0000-d98f-00ca-8b21-d396244x0000",
+		"level": "Information",  
+		"location": "East US",     
+		"properties": { 
+			"botId": "some-bot-id", 
+			"channel": "directline",
+			"resultCode": "200"
+		}  
+		    
+	}
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "TimeGenerated": "2022-08-25T16:55:16.6129460Z",
+    "Level": "Informational",
+    "OperationName": "ListChannels",
+    "ResultType": "Succeeded",
+    "ResultSignature": "200",
+    "ResultDescription": "OK",
+    "DurationMs": "38.0728",
+    "CallerIpAddress": "10.60.16.253",
+    "CorrelationId": "91e92efb0c034cfa884e5f617a6646e0",
+    "URI": "https://ic3-acs-ccaap-prod-test.communication.azure.com/routing/channels?api-version=2021-04-07-preview1",
+    "SdkType": "dotnet",
+    "EntityId": "",
+    "EntityType": "Channels"
+  },
+  {
+    "TimeGenerated": "2022-08-25T16:53:54.4152020Z",
+    "Level": "Informational",
+    "OperationName": "CreateJob",
+    "ResultType": "Succeeded",
+    "ResultSignature": "201",
+    "ResultDescription": "Created",
+    "DurationMs": "108.3481",
+    "CallerIpAddress": "10.60.11.109",
+    "CorrelationId": "9f6a38c8a1df4c01b382d77f8d65be59",
+    "URI": "https://ic3-acs-router-synthetics-ppe.ppe.communication.azure.net/routing/jobs?api-version=2021-04-07-preview1",
+    "SdkType": "dotnet",
+    "EntityId": "",
+    "EntityType": "Jobs"
+  },
+  {
+    "TimeGenerated": "2022-08-25T16:53:54.5398010Z",
+    "Level": "Error",
+    "OperationName": "GetJob",
+    "ResultType": "Failed",
+    "ResultSignature": "500",
+    "ResultDescription": "Internal Server Error",
+    "DurationMs": "38.9977",
+    "CallerIpAddress": "10.60.11.109",
+    "CorrelationId": "9f6a38c8a1df4c01b382d77f8d65be59",
+    "URI": "https://ic3-acs-router-synthetics-ppe.ppe.communication.azure.net/routing/jobs/48558672-e9b2-4a28-88de-45cf25c18002?api-version=2021-04-07-preview1",
+    "SdkType": "dotnet",
+    "EntityId": "48558672-e9b2-4a28-88de-45cf25c18002",
+    "EntityType": "Jobs"
+  }
+]

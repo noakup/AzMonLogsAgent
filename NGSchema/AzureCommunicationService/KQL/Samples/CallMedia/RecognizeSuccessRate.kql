@@ -1,0 +1,3 @@
+ACSCallAutomationMediaSummary
+| where OperationName == "Recognize"
+| summarize recognizeCount=count() by ResultType

@@ -1,0 +1,658 @@
+{
+  "type": "Microsoft.Network/networkManagers",
+  "displayName": "Azure Virtual Network Manager",
+  "description": "Azure Virtual Network Manager is a highly scalable, centralized network management solution that enables customers to configure the connectivity and security of network resources globally across subscriptions.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Cloudnet/AzureVirtualNetworkManager",
+  "contactDL": "mnc@microsoft.com",
+  "relatedFunctions": [],
+  "relatedTables": ["AzureActivity", "AzureMetrics"],
+  "tables": [
+    {
+      "name": "AVNMNetworkGroupMembershipChange",
+      "description": "Includes changes to network group membership of network resources like a virtual network.",
+      "categories": [ "resources", "network", "audit" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 2,
+      "dataTypeId": "MICROSOFTNETWORK_NETWORKGROUPMEMBERSHIPCHANGE",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "level",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+
+      "transformFilePath": "KQL/NetworkGroupMembershipChangeTransform.kql",
+
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": " The date and time the event was generated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "Region of the Virtual Network.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "description": " Name of the operation that triggered the Virtual Network's addition or removal from a Network Group.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "description": "The correlation ID associated with the network group membership change operation of network resources.",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ResultType",
+          "type": "String",
+          "description": "Indicates the operation status and can include: Success, Failure.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "LogLevel",
+          "type": "String",
+          "description": "Indicates the log level and can include: Info, Warning, Error.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Message",
+          "type": "String",
+          "description": "A brief success or failure message.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DetailedMessage",
+          "type": "String",
+          "description": "A descriptive message that can include explanations and resolution steps in the case of failures or warnings.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "NetworkResourceIds",
+          "type": "Dynamic",
+          "description": "Virtual Network IDs for which network group membership changed",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "GroupMemberships",
+          "type": "Dynamic",
+          "description": "Details about the Virtual Network's membership of Network Group(s), including the networkgroupId, membership type, and membership details and IDs.",
+          "isDefaultDisplay": true
+        }
+      ],
+
+      "sampleInputRecordsFilePath": "SampleInputRecords/AvnmNetworkGroupMembershipChangeSample.json",
+
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AvnmNetworkGroupMembershipChangeSample.json"
+    },
+    {
+      "name": "AVNMRuleCollectionChange",
+      "description": "Include logs related to application or removal of rule collections, on network resources like a virtual network or a subnet.",
+      "categories": [ "resources", "network", "audit" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 3,
+      "dataTypeId": "MICROSOFTNETWORK_RULECOLLECTIONCHANGE",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "level",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+
+      "transformFilePath": "KQL/RuleCollectionChangeTransform.kql",
+
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": " The date and time the event was generated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "Region of the network resource managed by network manager like virtual network, subnets.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "description": " Name of the operation that applies rule collections or removes applied rule collections on network resources like virtual network, subnets.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "description": "The correlation ID associated with the rule collection change operation of network resources. Logs having same correlation Ids are part of same rule collection change operation.",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ResultType",
+          "type": "String",
+          "description": "Indicates the operation status and can include: Success, Failure.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "LogLevel",
+          "type": "String",
+          "description": "Indicates the log level and can include: Info, Warning, Error.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Message",
+          "type": "String",
+          "description": "A brief success or failure message.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SelfDiagnosis",
+          "type": "String",
+          "description": "A descriptive self diagnosis message that can include explanations and resolution steps in the case of failures or warnings.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "NetworkResourceIds",
+          "type": "Dynamic",
+          "description": "Virtual Network or Subnet IDs for which applied rule collections changed",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AppliedRuleCollectionIds",
+          "type": "Dynamic",
+          "description": "List of current applied rule collections to the network resources like virtual networks or subnets listed in TargetResourceIds by your network manager.",
+          "isDefaultDisplay": true
+        }
+      ],
+
+      "sampleInputRecordsFilePath": "SampleInputRecords/AvnmRuleCollectionChangeSample.json",
+
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AvnmRuleCollectionChangeSample.json"
+    },
+    {
+      "name": "AVNMConnectivityConfigurationChange",
+      "description": "Includes logs related to application or removal of connectivity configuration, on network resources like a virtual network.",
+      "categories": [ "resources", "network", "audit" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 2,
+      "dataTypeId": "MICROSOFTNETWORK_CONNECTIVITYCONFIGURATIONCHANGE",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "level",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+
+      "transformFilePath": "KQL/ConnectivityConfigChangeTransform.kql",
+
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The date and time the event was generated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "Region of the network resource managed by network manager like virtual network.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "description": "Name of the operation that applies connectivity configuration or removes applied connectivity configuration on network resources like virtual network.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "description": "The correlation ID associated with the connectivity configuration change operation of network resources. Logs having same correlation Ids are part of same connectivity configuration change operation.",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ResultType",
+          "type": "String",
+          "description": "Indicates the operation status and can include: Success, Failure.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "LogLevel",
+          "type": "String",
+          "description": "Indicates the log level and can include: Info, Warning, Error.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Message",
+          "type": "String",
+          "description": "A brief success or failure message.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SelfDiagnosis",
+          "type": "String",
+          "description": "A descriptive self diagnosis message that can include explanations and resolution steps in the case of failures or warnings.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "NetworkResourceIds",
+          "type": "Dynamic",
+          "description": "Virtual Network IDs for which applied connectivity configurations changed.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AppliedConnectivityConfigurations",
+          "type": "Dynamic",
+          "description": "List of connectivity configuration IDs along with the connectivity topology currently applied to the network resources like virtual networks listed in NetworkResourceIds by your network manager.",
+          "isDefaultDisplay": true
+        }
+      ],
+
+      "sampleInputRecordsFilePath": "SampleInputRecords/AvnmConnectivityConfigChangeSample.json",
+
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AvnmConnectivityConfigChangeSample.json"
+    },
+    {
+      "name": "AVNMIPAMPoolAllocationChange",
+      "description": "Includes changes to allocations of an IPAM Pool such as Virtual Networks, static CIDRs, or child pools.",
+      "categories": [ "resources", "network", "audit" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 2,
+      "dataTypeId": "MICROSOFTNETWORK_POOLALLOCATIONCHANGE",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "level",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+
+      "transformFilePath": "KQL/PoolAllocationChangeTransform.kql",
+
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": " The date and time the event was generated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "Region of the IPAM Pool.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "description": " Name of the operation that triggered the pool allocation change.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "description": "The correlation ID associated with the pool allocation change operation.",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ResultType",
+          "type": "String",
+          "description": "Indicates the operation status and can include: Success, Failure.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "LogLevel",
+          "type": "String",
+          "description": "Indicates the log level and can include: Info, Warning, Error.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Message",
+          "type": "String",
+          "description": "A brief success or failure message.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ChangeType",
+          "type": "String",
+          "description": "The type of allocation change and can include: Add, Remove, Update.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ChangeReason",
+          "type": "String",
+          "description": "The reason why allocations were changed and can include: ResourceAddedToPool, ResourceRemovedFromPool, ResourceDeleted, ResourceCidrsChanged, ReservedResourceCreated, AvnmScopeChanged.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AllocationResources",
+          "type": "Dynamic",
+          "description": "Details about resources allocated to the pool that changed, including the resource id, cidrs, and compliancy.",
+          "isDefaultDisplay": true
+        }
+      ],
+
+      "sampleInputRecordsFilePath": "SampleInputRecords/AvnmIpamPoolAllocationChangeSample.json",
+
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AvnmIpamPoolAllocationChangeSample.json"
+    }
+  ],
+
+    "functions" : [],
+
+  "queries" : [
+    {
+      "id": "f4d4d8db-7fa4-4196-872f-c8235d23ee8e",
+      "displayName": "Get recent Network Group Membership changes",
+      "description": "List 10 most recent Network Group Membership changes.",
+      "bodyFilePath": "KQL/Top10NetworkGroupMembershipChangesQuery.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "relatedTables": [ "AVNMNetworkGroupMembershipChange" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "70eca34a-da99-45bf-9d68-415eb5def7c3",
+      "displayName": "Failed Network Group Membership Changes",
+      "description": "List failed Network Group Membership changes.",
+      "bodyFilePath": "KQL/FailedNetworkGroupMembershipChangesQuery.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "relatedTables": [ "AVNMNetworkGroupMembershipChange" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "7c5ca7f7-1d91-461b-b451-9bb10d8ebdde",
+      "displayName": "Get recent security admin rule collection changes",
+      "description": "List 10 most recent security admin rule collection changes.",
+      "bodyFilePath": "KQL/Top10SecurityAdminRuleCollectionChangesQuery.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "relatedTables": [ "AVNMRuleCollectionChange" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "10b9ae2f-97fd-4807-af5f-8039f9cc7491",
+      "displayName": "Get recent failed security admin rule collection changes",
+      "description": "List 100 most recent failed security admin rule collection changes.",
+      "bodyFilePath": "KQL/FailedSecurityAdminRuleCollectionChangesQuery.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "relatedTables": [ "AVNMRuleCollectionChange" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "32e84b39-f121-4053-8d37-111c385f3e1a",
+      "displayName": "Recent connectivity configuration changes",
+      "description": "List 10 most recent connectivity configuration changes.",
+      "bodyFilePath": "KQL/Top10ConnectivityConfigurationChangesQuery.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "relatedTables": [ "AVNMConnectivityConfigurationChange" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "b09ac15b-67c3-4531-bbb6-b0e2dba38d73",
+      "displayName": "Recent failed connectivity configuration changes",
+      "description": "List 100 most recent failed connectivity configuration changes.",
+      "bodyFilePath": "KQL/FailedConnectivityConfigurationChangesQuery.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "relatedTables": [ "AVNMConnectivityConfigurationChange" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "e522b056-537a-4775-9e13-2bc6e83fcd9c",
+      "displayName": "AVNM IPAM pool allocation changes",
+      "description": "List 10 most recent Azure Virtual Network Manager (AVNM) IPAM pool allocation additions, removals, and updates. Pool allocations include child pools, static cidrs, and resource associations.",
+      "bodyFilePath": "KQL/Top10PoolAllocationChangesQuery.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "relatedTables": [ "AVNMIPAMPoolAllocationChange" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "ed719e04-ef7e-4d72-b03f-14e429ce4a4f",
+      "displayName": "Failed AVNM IPAM pool allocation changes",
+      "description": "List 100 most recent failures in Azure Virtual Network Manager (AVNM) IPAM pool allocation additions, removals, and updates. Pool allocations include child pools, static cidrs, and resource associations",
+      "bodyFilePath": "KQL/FailedPoolAllocationChangesQuery.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "relatedTables": [ "AVNMIPAMPoolAllocationChange" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    }
+  ] 
+
+} 
+
+ 

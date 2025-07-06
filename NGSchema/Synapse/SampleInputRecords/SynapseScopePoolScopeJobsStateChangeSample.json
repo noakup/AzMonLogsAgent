@@ -1,0 +1,18 @@
+[
+  {
+    "time": "2021-11-09T17:23:08.0448892Z",
+    "resourceId": "/SUBSCRIPTIONS/429A52B3-4393-4272-9ABB-5E6D93CBCEE9/RESOURCEGROUPS/RG_SYNTHETICS/PROVIDERS/MICROSOFT.SYNAPSE/WORKSPACES/SCOPESYNTHETICSOUTHCENTRALUSTEST/SCOPEPOOLS/SCOPE",
+    "category": "ScopePoolScopeJobsStateChange",
+    "operationName": "ScopePoolScopeJobsStateChange",
+    "correlationId": "796736c5-6a9c-4099-94e2-e0a5d6c338e9",
+    "identity": "{\"objectId\":\"f5ea4582-39b4-4208-acbf-9a928efe0ee5\"}",
+    "properties": {
+      "jobId": "796736c5-6a9c-4099-94e2-e0a5d6c338e9",
+      "fromState": "Scheduled",
+      "toState": "Ended",
+      "jobStateTransition": "Scheduler",
+      "jobType": "ScopeBatch",
+      "submitterId": "f5ea4582-39b4-4208-acbf-9a928efe0ee5"
+    }
+  }
+]

@@ -1,0 +1,17 @@
+let PlotMetricHistogram = (_MetricName: string, _ParticipantId: string = '', _CallId: string = '', _MediaStreamType: string = '', _MediaStreamDirection: string = '') {
+    // _MetricName: the name of the metric. This must be set.
+    // _ParticipantId: set this variable if want to just plot the metric value histogram for a specific partiticpant.
+    // _CallId: set this variable if want to just plot the metric value histogram for a specific call.
+    // _MediaStreamType: possible values can be: 'audio', 'video', 'screen'.
+    // _MediaStreamDirection: possible values can be: 'recv', 'send'.
+    ACSCallClientMediaStatsTimeSeries
+    | where MetricName == _MetricName
+    | where isempty(_ParticipantId) or ParticipantId == _ParticipantId
+    | where isempty(_CallId) or CallId == _CallId
+    | where isempty(_MediaStreamType) or MediaStreamType == _MediaStreamType
+    | where isempty(_MediaStreamDirection) or MediaStreamDirection == _MediaStreamDirection
+    | summarize count=count() by Average
+    | render columnchart title=strcat(_MetricName, " Histogram")
+};
+// Below plots the histogram for jitter for all outbound audio streams
+PlotMetricHistogram('JitterInMs', _MediaStreamType='audio', _MediaStreamDirection='send')

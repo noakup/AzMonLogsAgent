@@ -1,0 +1,4 @@
+AzureDiagnostics
+| where ResourceProvider ==\"MICROSOFT.EVENTHUB\"
+| where Category == \"OperationalLogs\"
+| summarize count() by \"EventName\", _ResourceId

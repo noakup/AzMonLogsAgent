@@ -1,0 +1,13 @@
+[
+  {
+    "CveId":"CVE-1999-0072",
+    "CvssScore":7.2,
+    "IsExploitAvailable":false,
+    "VulnerabilitySeverityLevel":"High",
+    "LastModifiedTime":"2022-08-17T07:15:00Z",
+    "PublishedDate":"1997-10-22T04:00:00Z",
+    "VulnerabilityDescription":"Buffer overflow in AIX xdat gives root access to local users.",
+    "AffectedSoftware": ["ibm-_-aix"],
+    "OriginFolderCreationTime": "2022-10-18T07:18:00Z"
+  }
+]

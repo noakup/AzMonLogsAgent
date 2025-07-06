@@ -1,0 +1,416 @@
+{
+    "type": "Microsoft.SecurityInsights/Okta",
+    "displayName": "Azure Sentinel Okta",
+    "description": "All Okta tables related to Azure Sentinel.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Microsoft Sentinel Data Connectors/Ingestion Pipeline (Raw data only, not alerts)",
+    "contactDL": "asipolarbearseng@microsoft.com",
+    "tables": [
+        {
+            "name": "OktaSystemLogs",
+            "description": "Okta System Logs data connector provides the capability to ingest audit and event logs from the Okta Sysem Log API into Microsoft Sentinel. The data connector is built on Microsoft Sentinel Codeless Connector Platform and uses the Okta System Log API to fetch the events. The connector supports DCR-based [ingestion time transformations](https://docs.microsoft.com/azure/azure-monitor/logs/custom-logs-overview) that parses the received security event data into a custom columns so that queries don't need to parse it again, thus resulting in better performance.",
+            "categories": [
+                "security"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "OKTA_SSO_SYSTEM_LOGS",
+            "intelligencePacks": [
+                "SecurityInsights"
+            ],
+            "isResourceCentric": false,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "uuid",
+                    "type": "guid"
+                },
+                {
+                    "name": "published",
+                    "type": "datetime"
+                },
+                {
+                    "name": "eventType",
+                    "type": "string"
+                },
+                {
+                    "name": "version",
+                    "type": "double"
+                },
+                {
+                    "name": "severity",
+                    "type": "string"
+                },
+                {
+                    "name": "legacyEventType",
+                    "type": "string"
+                },
+                {
+                    "name": "displayMessage",
+                    "type": "string"
+                },
+                {
+                    "name": "actor",
+                    "type": "dynamic"
+                },
+                {
+                    "name": "client",
+                    "type": "dynamic"
+                },
+                {
+                    "name": "outcome",
+                    "type": "dynamic"
+                },
+                {
+                    "name": "target",
+                    "type": "dynamic"
+                },
+                {
+                    "name": "transaction",
+                    "type": "dynamic"
+                },
+                {
+                    "name": "debugContext",
+                    "type": "dynamic"
+                },
+                {
+                    "name": "authenticationContext",
+                    "type": "dynamic"
+                },
+                {
+                    "name": "securityContext",
+                    "type": "dynamic"
+                },
+                {
+                    "name": "request",
+                    "type": "dynamic"
+                }
+            ],
+            "columns": [
+                {
+                    "name": "ActingAppName",
+                    "type": "String",
+                    "description": "The name of the application initiating the action."
+                },
+                {
+                    "name": "ActingAppType",
+                    "type": "String",
+                    "description": "The type of the application initiating the action (e.g., Browser, API client)."
+                },
+                {
+                    "name": "ActorDetailEntry",
+                    "type": "Dynamic",
+                    "description": "Detailed information about the actor performing the action, if available."
+                },
+                {
+                    "name": "ActorDisplayName",
+                    "type": "String",
+                    "description": "The display name of the actor performing the action."
+                },
+                {
+                    "name": "ActorSessionId",
+                    "type": "String",
+                    "description": "The session ID associated with the actor performing the action."
+                },
+                {
+                    "name": "ActorUserId",
+                    "type": "String",
+                    "description": "The user ID of the actor performing the action, if applicable."
+                },
+                {
+                    "name": "ActorUserIdType",
+                    "type": "String",
+                    "description": "The type of user ID for the actor (e.g., OktaId)."
+                },
+                {
+                    "name": "ActorUsername",
+                    "type": "String",
+                    "description": "The username of the actor performing the action."
+                },
+                {
+                    "name": "ActorUsernameType",
+                    "type": "String",
+                    "description": "The type of username for the actor (e.g., UPN)."
+                },
+                {
+                    "name": "ActorUserType",
+                    "type": "String",
+                    "description": "The type of the actor (e.g., Regular, System Principal)."
+                },
+                {
+                    "name": "AuthenticationContextAuthenticationProvider",
+                    "type": "String",
+                    "description": "The authentication provider used in the context of the action."
+                },
+                {
+                    "name": "AuthenticationContextAuthenticationStep",
+                    "type": "Int",
+                    "description": "The step in the authentication process when the action occurred."
+                },
+                {
+                    "name": "AuthenticationContextCredentialProvider",
+                    "type": "String",
+                    "description": "The credential provider used during the authentication process."
+                },
+                {
+                    "name": "AuthenticationContextInterface",
+                    "type": "String",
+                    "description": "The interface used during the authentication process (e.g., web, mobile)."
+                },
+                {
+                    "name": "AuthenticationContextIssuerId",
+                    "type": "String",
+                    "description": "The ID of the issuer involved in the authentication process."
+                },
+                {
+                    "name": "AuthenticationContextIssuerType",
+                    "type": "String",
+                    "description": "The type of the issuer involved in the authentication process."
+                },
+                {
+                    "name": "DebugData",
+                    "type": "Dynamic",
+                    "description": "Additional debugging data related to the event."
+                },
+                {
+                    "name": "DvcAction",
+                    "type": "String",
+                    "description": "The result of the device action (e.g., Allow, Deny, Partial)."
+                },
+                {
+                    "name": "EventMessage",
+                    "type": "String",
+                    "description": "A descriptive message associated with the event."
+                },
+                {
+                    "name": "EventOriginalResultDetails",
+                    "type": "String",
+                    "description": "Details of the original result of the event outcome."
+                },
+                {
+                    "name": "EventOriginalType",
+                    "type": "String",
+                    "description": "The original type of the event before transformation."
+                },
+                {
+                    "name": "EventOriginalUid",
+                    "type": "String",
+                    "description": "The unique identifier for the original event.",
+                    "dataTypeHint": "GUID"
+                },
+                {
+                    "name": "EventResult",
+                    "type": "String",
+                    "description": "The high-level result of the event (e.g., Success, Failure)."
+                },
+                {
+                    "name": "EventSeverity",
+                    "type": "String",
+                    "description": "The severity level of the event (e.g., Informational, High)."
+                },
+                {
+                    "name": "HttpUserAgent",
+                    "type": "String",
+                    "description": "The raw user-agent string of the client initiating the event."
+                },
+                {
+                    "name": "LegacyEventType",
+                    "type": "String",
+                    "description": "The legacy type identifier for the event, if applicable."
+                },
+                {
+                    "name": "LogonMethod",
+                    "type": "String",
+                    "description": "The method used for logging in (e.g., password, token)."
+                },
+                {
+                    "name": "OriginalActorAlternateId",
+                    "type": "String",
+                    "description": "The alternate ID of the actor in the original event data."
+                },
+                {
+                    "name": "OriginalClientDevice",
+                    "type": "String",
+                    "description": "The type of client device initiating the event (e.g., Computer)."
+                },
+                {
+                    "name": "OriginalOutcomeResult",
+                    "type": "String",
+                    "description": "The raw outcome result of the original event."
+                },
+                {
+                    "name": "OriginalSeverity",
+                    "type": "String",
+                    "description": "The raw severity level of the original event."
+                },
+                {
+                    "name": "OriginalTarget",
+                    "type": "Dynamic",
+                    "description": "The original target(s) involved in the event."
+                },
+                {
+                    "name": "OriginalUserId",
+                    "type": "String",
+                    "description": "The original user ID in the event data."
+                },
+                {
+                    "name": "OriginalUserType",
+                    "type": "String",
+                    "description": "The type of user in the original event data."
+                },
+                {
+                    "name": "Request",
+                    "type": "Dynamic",
+                    "description": "Details of the request associated with the event."
+                },
+                {
+                    "name": "SecurityContextAsNumber",
+                    "type": "Int",
+                    "description": "The autonomous system (AS) number in the security context."
+                },
+                {
+                    "name": "SecurityContextAsOrg",
+                    "type": "String",
+                    "description": "The organization associated with the AS number in the security context."
+                },
+                {
+                    "name": "SecurityContextDomain",
+                    "type": "String",
+                    "description": "The domain involved in the security context."
+                },
+                {
+                    "name": "SecurityContextIsProxy",
+                    "type": "Bool",
+                    "description": "Indicates whether a proxy is used in the security context."
+                },
+                {
+                    "name": "SrcDeviceType",
+                    "type": "String",
+                    "description": "The type of the source device (e.g., Computer)."
+                },
+                {
+                    "name": "SrcDvcId",
+                    "type": "String",
+                    "description": "The unique identifier for the source device."
+                },
+                {
+                    "name": "SrcDvcOs",
+                    "type": "String",
+                    "description": "The operating system of the source device."
+                },
+                {
+                    "name": "SrcGeoCity",
+                    "type": "String",
+                    "description": "The city of the source device's geographic location."
+                },
+                {
+                    "name": "SrcGeoCountry",
+                    "type": "String",
+                    "description": "The country of the source device's geographic location."
+                },
+                {
+                    "name": "SrcGeoLatitude",
+                    "type": "Double",
+                    "description": "The latitude of the source device's geographic location."
+                },
+                {
+                    "name": "SrcGeoLongtitude",
+                    "type": "Double",
+                    "description": "The longitude of the source device's geographic location."
+                },
+                {
+                    "name": "SrcGeoPostalCode",
+                    "type": "String",
+                    "description": "The postal code of the source device's geographic location."
+                },
+                {
+                    "name": "SrcGeoRegion",
+                    "type": "String",
+                    "description": "The region/state of the source device's geographic location."
+                },
+                {
+                    "name": "SrcIpAddr",
+                    "type": "String",
+                    "description": "The IP address of the source device.",
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "SrcIsp",
+                    "type": "String",
+                    "description": "The Internet Service Provider (ISP) of the source device."
+                },
+                {
+                    "name": "SrcZone",
+                    "type": "String",
+                    "description": "The network zone of the source device."
+                },
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "The time the event was generated."
+                },
+                {
+                    "name": "TransactionDetail",
+                    "type": "Dynamic",
+                    "description": "Details about the transaction associated with the event."
+                },
+                {
+                    "name": "TransactionId",
+                    "type": "String",
+                    "description": "The unique identifier of the transaction."
+                },
+                {
+                    "name": "TransactionType",
+                    "type": "String",
+                    "description": "The type of transaction associated with the event."
+                },
+                {
+                    "name": "Version",
+                    "type": "String",
+                    "description": "The version of the event format or schema."
+                },
+                {
+                    "name": "SrcDvcIdType",
+                    "type": "String",
+                    "description": "The type of source device ID (e.g., OktaId)."
+                }
+            ],
+            "transformFilePath": "KQL/OktaSystemLogsTransform.kql",
+            "sampleInputRecordsFilePath": "SampleInputRecords/OktaSystemLogsSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/OktaSystemLogsSample.json"
+        }
+    ],
+    "functions": [],
+    "queries": [
+        {
+            "id": "054777d1-722e-4b86-512d-2bb21f562cc1",
+            "displayName": "Okta SSO Successful logins",
+            "description": "List of successful login.",
+            "bodyFilePath": "KQL/oktaloginlogs.kql",
+            "categories": [
+                "security"
+            ],
+            "relatedTables": [
+                "OktaSystemLogs"
+            ],
+            "tags": {
+                "Topic": [
+                    "Security"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": false
+                }
+            }
+        }
+    ],
+    "relatedTables": [],
+    "relatedFunctions": []
+}

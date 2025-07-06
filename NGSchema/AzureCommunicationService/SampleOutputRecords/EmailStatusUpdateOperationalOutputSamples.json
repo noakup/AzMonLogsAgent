@@ -1,0 +1,32 @@
+[
+    {
+        "TimeGenerated": "2022-05-21T19:08:06.6296254Z",
+        "Location": "West US",
+        "OperationName": "DeliveryStatusUpdate",
+        "OperationVersion": "2021-10-01-preview",
+        "CorrelationId": "86fcf4a5-445f-49c7-884b-0ebf44d41546",
+        "Category": "EmailStatusUpdateOperational",
+        "RecipientId": "user@fabrikam.com",
+        "DeliveryStatus": "Suppressed",
+        "FailureReason": "BadDestinationMailboxAddress",
+        "FailureMessage": "The email account that you tried to reach does not exist.",
+        "SmtpStatusCode": "550",
+        "EnhancedSmtpStatusCode": "5.1.1",
+        "RecipientMailServerHostName": "mx.contoso.com",
+        "SenderDomain": "contoso.com",
+        "SenderUsername": "contoso-admin",
+        "IsHardBounce": "true",
+        "InternetMessageId": "<messageid@domain.com>"
+    },
+    {
+        "TimeGenerated": "2022-05-21T18:33:10.7479350Z",
+        "Location": "West US",
+        "OperationName": "DeliveryStatusUpdate",
+        "OperationVersion": "2021-10-01-preview",
+        "Category": "EmailStatusUpdateOperational",
+        "CorrelationId": "a9bd0fdc-1a7f-4508-95cb-17cde002e0d3",
+        "DeliveryStatus": "OutForDelivery",
+        "SenderDomain": "contoso.com",
+        "SenderUsername": "contoso-admin"
+    }
+]

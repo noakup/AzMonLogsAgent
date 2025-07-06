@@ -1,0 +1,20 @@
+source  
+| extend properties = parse_json(properties)
+| project 
+	TimeGenerated = todatetime(['time']),    
+	SourceIp = tostring(properties.SourceIp), 
+	SourcePort = toint(properties.SourcePort),
+	QueryId = toint(properties.QueryId), 
+	QueryType = tostring(properties.QueryType), 
+	QueryClass = tostring(properties.QueryClass), 
+	QueryName = tostring(properties.QueryName), 
+	Protocol = tostring(properties.Protocol), 
+	RequestSize = toint(properties.RequestSize),
+	DnssecOkBit = tobool(properties.DnssecOkBit), 
+	EDNS0BufferSize = toint(properties.EDNS0BufferSize), 
+	ResponseCode = tostring(properties.ResponseCode), 
+	ResponseFlags = tostring(properties.ResponseFlags),
+	ResponseSize = toint(properties.ResponseSize),
+	RequestDurationSecs = tofloat(properties.RequestDurationSecs),
+	ErrorNumber = toint(properties.ErrorNumber),
+	ErrorMessage = tostring(properties.ErrorMessage)

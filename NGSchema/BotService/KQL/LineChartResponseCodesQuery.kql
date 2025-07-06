@@ -1,0 +1,4 @@
+// Display a Line Chart of requests response status codes.
+ABSBotRequests
+| summarize Number_Of_Requests = count() by tostring(ResultCode), bin(TimeGenerated, 5m)
+| render timechart

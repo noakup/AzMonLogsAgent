@@ -1,0 +1,4 @@
+MDCDetectionFimEvents
+| where IsDir == "True"
+| order by TimeGenerated
+| limit 100

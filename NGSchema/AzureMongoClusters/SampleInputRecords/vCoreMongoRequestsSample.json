@@ -1,0 +1,9 @@
+[
+	{
+		"time": "2023-09-12T16:11:35.5464070Z",
+		"resourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/dev-pgmongo/providers/Microsoft.DocumentDB/mongoClusters/logging-test",
+		"category": "vCoreMongoRequests",
+		"operationName": "BuildInfo",
+		"properties": "{\"activityId\": \"4cea4db7-8bcf-4a1a-9d54-e0e37fdd1d38\", \"errorCode\": \"0\", \"duration\": \"0.062\", \"databaseName\": \"admin\", \"collectionName\": \"<empty>\", \"address\": \"0.0.0.0\", \"piiCommandText\": \"{\\\"request\\\":\\\"{ \\\"buildInfo\\\" : 1, \\\"lsid\\\" : { \\\"id\\\" : CSUUID(\\\"077e686a-3bed-4ad4-8bda-c6d302495a9c\\\") }, \\\"$db\\\" : \\\"admin\\\" }\\\"}\", \"region\": \"eastus2euap\", \"requestLength\": \"76\", \"responseLength\": \"137\", \"transportProtocol\": \"HTTPs\", \"userAgent\": \"[\\\"mongosh 1.10.3\\\",\\\"nodejs|mongosh\\\",\\\"5.7.0|1.10.3\\\",\\\"Linux\\\",\\\"linux\\\",\\\"x64\\\",\\\"4.4.0-19041-Microsoft\\\"]\", \"userId\": \"<empty>\"}"
+	}
+]

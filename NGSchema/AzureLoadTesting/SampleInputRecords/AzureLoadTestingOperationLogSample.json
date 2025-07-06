@@ -1,0 +1,42 @@
+[
+    {
+        "time": "2022-02-10T04:44:38.5058207Z",
+        "resourceId": "/SUBSCRIPTIONS/7C71B563-0DC0-4BC0-BCF6-06F8F0516C7A/RESOURCEGROUPS/ABC-KC-RG/PROVIDERS/MICROSOFT.LOADTESTSERVICE/LOADTESTS/SHOEBOXTEST",
+        "operationName": "MICROSOFT.LOADTESTSERVICE/LOADTESTS/STARTTEST/ACTION",
+        "category": "OperationLogs",
+        "location": "eastus",
+        "operationVersion": "2021-07-01-preview",
+        "resultType": "Failed",
+        "resultSignature": "404",
+        "resultDescription": "Create and start new test run of the given name, test run name must be a valid URL character ^[a-z0-9_-]*$",
+        "identity": {
+          "Claims": {
+            "ClientTenantId": "69e1ae81-b48a-4e2d-afad-8afb6da8670d",
+            "ClientObjectId": "ac2a85d2-bb10-4cef-81b7-393fcb782f94",
+            "ClientName": "8J4HI5yWfZ4aPLYxJqWIeP4ez02cYFjiI7FXNsj1Cts",
+            "ClientApplicationId": "ae1cfa78-1a59-4b91-8528-780aa5643dad",
+            "Email": "krishna@example.com"
+          }
+        },
+        "callerIpAddress": "192.189.1.1",
+        "durationMs": 27475,
+        "correlationId": "f859cb79-8af1-4e8d-95d4-b1398a7d4a1c",
+        "level": null,
+        "uri": "https://5577f075-b785-4f61-978c-9311ddd173cb.eus.cnt-prod.loadtesting.azure.com/testruns/9d62e788-72c9-4451-8b0e-14a070730b011a?api-version=2022-04-15-preview&oldTestRunId=66df1aba-2629-43a9-8da0-eba2ceb75017",
+        "properties": {
+          "failureDetails": "Test run not found with given identifier \"66df1aba-2629-43a9-8da0-eba2ceb75017\".",
+          "requestUri": "https://5577f075-b785-4f61-978c-9311ddd173cb.eus.cnt-prod.loadtesting.azure.com/testruns/9d62e788-72c9-4451-8b0e-14a070730b011a?api-version=2022-04-15-preview&oldTestRunId=66df1aba-2629-43a9-8da0-eba2ceb75017",
+          "requestId": null,
+          "requestBody": {
+            "testId": "6de3d12b-b842-4e60-9218-94431f855349",
+            "displayName": "TestRun_4/4/2022_12:48:25PM"
+          },
+          "requestMethod": "PATCH",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.88 Safari/537.36",
+          "apiVersion": "2022-04-15-preview",
+          "operationId": "TestRun_CreateAndUpdateTest",
+          "serviceLocation": "West US 2",
+          "region": "West US 2"
+        }
+    }
+]

@@ -1,0 +1,45 @@
+[
+    {
+        "EnvironmentName": "yellowhill-7e7931de",
+        "Log": "Setting a traffic weight of 100% for revision containerapp-withscale--0up71oy",
+        "RevisionName": "containerapp-withscale--0up71oy",
+        "ContainerName": "nginx",
+        "OperationName": "Microsoft.App/managedEnvironments/WRITE",
+        "TimeGenerated": "2022-08-06T00:45:23.482619079Z",
+        "Location": "eastus"
+    },
+    {
+        "EnvironmentName": "yellowhill-7e7931de",
+        "Log": "Successfully provisioned revision containerapp-withscale--0up71oy",
+        "RevisionName": "containerapp-withscale--0up71oy",
+        "ContainerName": "nginx",
+        "OperationName": "Microsoft.App/managedEnvironments/WRITE",
+        "TimeGenerated": "2022-08-09T12:54:19.482619079Z",
+        "Location": "eastus"
+    },
+    {
+        "EnvironmentName": "yellowhill-7e7931de",
+        "RevisionName": "processappnew3--nd5vci0",
+        "Reason": "RevisionDeactivating",
+        "TimeStamp": "9/15/2022, 11:26:05.000 PM",
+        "EventSource": "ContainerAppController",
+        "ContainerAppName": "processappnew3",
+        "Count": 1,
+        "ComponentName": "javacomponentname",
+        "ComponentType": "SpringBootAdmin",
+        "OperationName": "Microsoft.App/managedEnvironments/WRITE",
+        "TimeGenerated": "2022-09-15T01:42:59.464390200Z",
+        "Location": "eastus"
+    },
+    {
+        "EnvironmentName": "yellowhill-7e7931de",
+        "Reason": "Create new job",
+        "TimeStamp": "9/15/2022, 11:26:05.000 PM",
+        "EventSource": "ContainerAppController",
+        "JobName": "trajkobal",
+        "Count": 1,
+        "OperationName": "Microsoft.App/managedEnvironments/WRITE",
+        "TimeGenerated": "2022-09-15T01:42:59.464390200Z",
+        "Location": "eastus"
+    }
+]

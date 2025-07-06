@@ -1,0 +1,16 @@
+source
+| project
+DeviceId = tostring(DeviceId),
+DeviceName = tostring(DeviceName),
+OSPlatform = tostring(OSPlatform),
+OSVersion = tostring(OSVersion),
+OSArchitecture = tostring(OSArchitecture),
+SoftwareVendor = tostring(SoftwareVendor),
+SoftwareName = tostring(SoftwareName),
+SoftwareVersion = tostring(SoftwareVersion),
+CveId = tostring(CveId),
+VulnerabilitySeverityLevel = tostring(VulnerabilitySeverityLevel),
+RecommendedSecurityUpdate = tostring(RecommendedSecurityUpdate),
+RecommendedSecurityUpdateId = tostring(RecommendedSecurityUpdateId),
+TimeGenerated = todatetime(LastSeenTimestamp),
+CveTags = CveTags

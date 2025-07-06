@@ -1,0 +1,3 @@
+ACSAuthIncomingOperations
+| distinct OperationName, OperationVersion 
+| limit 100

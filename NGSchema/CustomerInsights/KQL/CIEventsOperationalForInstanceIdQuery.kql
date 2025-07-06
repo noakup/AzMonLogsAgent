@@ -1,0 +1,4 @@
+CIEventsOperational
+| where InstanceId == "" // Add your InstanceId in the quotation marks
+| sort by TimeGenerated desc
+| limit 100

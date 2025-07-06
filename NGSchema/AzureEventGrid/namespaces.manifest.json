@@ -1,0 +1,773 @@
+{
+  "type": "Microsoft.EventGrid/namespaces",
+  "displayName": "Event Grid Namespaces",
+  "description": "All tables related to Azure Event Grid Namespace resource.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Azure Event Grid/MQTT Broker",
+  "contactDL": "mqttbrokereng@microsoft.com",
+  "relatedFunctions": [],
+  "relatedTables": [
+    "AzureActivity",
+    "AzureMetrics"
+  ],
+  "tables": [
+    {
+      "name": "EGNSuccessfulMqttConnections",
+      "description": "Log for successful MQTT connections to an Event Grid namesapce. This log can be used for auditing purposes.",
+      "categories": [
+        "resources",
+        "audit"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 4,
+      "dataTypeId": "EVENTGRID_SUCCESSFULMQTTCONNECTIONS",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "identity",
+          "type": "Dynamic"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/TransformSuccessfulMqttConnections.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the operation."
+        },
+        {
+          "name": "AuthenticationType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Type of authentication used by the client."
+        },
+        {
+          "name": "ClientIdentitySource",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Source of the identity of the client issuing the request."
+        },
+        {
+          "name": "ClientIdentity",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Value of the client's identity."
+        },
+        {
+          "name": "SessionName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the session provided by the client in the MQTT CONNECT packet's clientId field."
+        },
+        {
+          "name": "Protocol",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Protocol used by the client to connect. Possible values are: MQTT3, MQTT3-WS, MQTT5, MQTT5-WS."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SuccessfulMqttConnectionsSample.json"
+    },
+    {
+      "name": "EGNFailedMqttConnections",
+      "description": "Log for failed MQTT connections to an Event Grid namespace.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 4,
+      "dataTypeId": "EVENTGRID_FAILEDMQTTCONNECTIONS",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "identity",
+          "type": "Dynamic"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/TransformFailedMqttConnections.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the operation."
+        },
+        {
+          "name": "ResultSignature",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The result of the operation."
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Additional description about the result."
+        },
+        {
+          "name": "AuthenticationType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Type of authentication used by the client."
+        },
+        {
+          "name": "ClientIdentitySource",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Source of the identity of the client issuing the request."
+        },
+        {
+          "name": "ClientIdentity",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Value of the client's identity."
+        },
+        {
+          "name": "SessionName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the session provided by the client in the MQTT CONNECT packet's clientId field."
+        },
+        {
+          "name": "Protocol",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Protocol used by the client to connect. Possible values are: MQTT3, MQTT3-WS, MQTT5, MQTT5-WS."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/FailedMqttConnectionsSample.json"
+    },
+    {
+      "name": "EGNMqttDisconnections",
+      "description": "Log for disconnected MQTT connections from an Event Grid namespace.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 4,
+      "dataTypeId": "EVENTGRID_MQTTDISCONNECTIONS",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "identity",
+          "type": "Dynamic"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/TransformMqttDisconnections.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the operation."
+        },
+        {
+          "name": "ResultSignature",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The result of the operation."
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Additional description about the result."
+        },
+        {
+          "name": "ClientIdentity",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Value of the client's identity."
+        },
+        {
+          "name": "SessionName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the session provided by the client in the MQTT CONNECT packet's clientId field."
+        },
+        {
+          "name": "Protocol",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Protocol used by the client to connect. Possible values are: MQTT3, MQTT3-WS, MQTT5, MQTT5-WS."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/MqttDisconnectionsSample.json"
+    },
+    {
+      "name": "EGNFailedMqttPublishedMessages",
+      "description": "Log for failed MQTT published messages to an Event Grid namespace.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 4,
+      "dataTypeId": "EVENTGRID_FAILEDMQTTPUBLISHEDMESSAGES",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "identity",
+          "type": "Dynamic"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/TransformFailedMqttPublishedMessages.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the operation."
+        },
+        {
+          "name": "ResultSignature",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The result of the operation."
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Additional description about the result."
+        },
+        {
+          "name": "ClientIdentity",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Value of the client's identity."
+        },
+        {
+          "name": "SessionName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the session provided by the client in the MQTT CONNECT packet's clientId field."
+        },
+        {
+          "name": "Protocol",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Protocol used by the client to connect. Possible values are: MQTT3, MQTT3-WS, MQTT5, MQTT5-WS."
+        },
+        {
+          "name": "Qos",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Quality of service used by the client to publish. Possible values are: 0,1"
+        },
+        {
+          "name": "TopicName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "MQTT Topic Name used by the client to publish."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/FailedMqttPublishedMessagesSample.json"
+    },
+    {
+      "name": "EGNFailedMqttSubscriptions",
+      "description": "Log for failed MQTT subscriptions to an Event Grid namespace.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 4,
+      "dataTypeId": "EVENTGRID_FAILEDMQTTSUBSCRIPTIONS",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/TransformFailedMqttSubscriptions.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the operation."
+        },
+        {
+          "name": "ResultSignature",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The result of the operation."
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Additional description about the result."
+        },
+        {
+          "name": "TopicFilters",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "MQTT Topic Filters that the client subscribed to."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/FailedMqttSubscriptionsSample.json"
+    },
+    {
+      "name": "EGNSuccessfulHttpDataPlaneOperations",
+      "description": "Log for successful HTTP data plane requests to an Event Grid namespace. It can be used for auditing purposes.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 3,
+      "dataTypeId": "EVENTGRID_SUCCESSFULHTTPDATAPLANEOPERATIONS",
+      "isResourceCentric": true,
+      "tableState": "Validation",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/TransformSuccessfulHttpDataPlaneOperations.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the operation."
+        },
+        {
+          "name": "NetworkAccess",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The type of network used by the client issuing the request. Allowed values are: PublicAccess - when connecting via public IP, PrivateAccess - when connecting via private link"
+        },
+        {
+          "name": "CallerIpAddress",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The IP address of the client issuing the request.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "TLSVersion",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The transport layer security (TLS) version used by the client connection. Possible values are: 1.2 and 1.3"
+        },
+        {
+          "name": "AuthenticationType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Type of authentication used by the client. SharedAccessKey – request uses the SAS key, SharedAccessSignature – request uses a SAS token generated from SAS key, EntraIdAccessToken – Microsoft Entra issued JSON Web Token (JWT) token, Unknown – None of the above authentication types."
+        },
+        {
+          "name": "ObjectId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The Microsoft Entra ObjectId of the caller issuing the request."
+        },
+        {
+          "name": "ResultType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The result of the operation. Possible values are: Succeeded."
+        },
+        {
+          "name": "TotalOperations",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The total number of request with above values issued within the minute. These traces aren't emitted for each request. An aggregate for each unique combination of above values is emitted every minute"
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SuccessfulHttpDataPlaneOperationsSample.json"
+    },
+    {
+      "name": "EGNFailedHttpDataPlaneOperations",
+      "description": "Log for failed HTTP data plane requests to an Event Grid namespace. It can be used for auditing purposes.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 3,
+      "dataTypeId": "EVENTGRID_FAILEDHTTPDATAPLANEOPERATIONS",
+      "isResourceCentric": true,
+      "tableState": "Validation",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/TransformFailedHttpDataPlaneOperations.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the operation."
+        },
+        {
+          "name": "NetworkAccess",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The type of network used by the client issuing the request. Allowed values are: PublicAccess - when connecting via public IP, PrivateAccess - when connecting via private link"
+        },
+        {
+          "name": "CallerIpAddress",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The IP address of the client issuing the request.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "TLSVersion",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The transport layer security (TLS) version used by the client connection. Possible values are: 1.2 and 1.3"
+        },
+        {
+          "name": "AuthenticationType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Type of authentication used by the client. SharedAccessKey – request uses the SAS key, SharedAccessSignature – request uses a SAS token generated from SAS key, EntraIdAccessToken – Microsoft Entra issued JSON Web Token (JWT) token, Unknown – None of the above authentication types."
+        },
+        {
+          "name": "ObjectId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The Microsoft Entra ObjectId of the caller issuing the request."
+        },
+        {
+          "name": "ResultType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The type of the result. Possible values are: Failed."
+        },
+        {
+          "name": "ResultSignature",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The result of the operation. Possible values are: ServiceError, ClientError, QuotaExceeded, AuthnError, AuthzError, ConnectionLost"
+        },
+        {
+          "name": "TotalOperations",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The total number of request with above values issued within the minute. These traces aren't emitted for each request. An aggregate for each unique combination of above values is emitted every minute"
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/FailedHttpDataPlaneOperationsSample.json"
+    }
+  ],
+  "functions": [],
+  "queries": [
+    {
+      "id": "9b5542ef-7676-40ad-999d-efba45f42e9c",
+      "displayName": "Authentication error query",
+      "description": "Authentication errors report by session name.",
+      "bodyFilePath": "KQL/AuthErrorBySessionQuery.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "EGNFailedMqttConnections"
+      ]
+    },
+    {
+      "id": "22db387f-49a3-4b3e-88a4-13b1b00728b8",
+      "displayName": "Disconnections reason query",
+      "description": "Disconnections report by reasons.",
+      "bodyFilePath": "KQL/DisconnectionsByReasonQuery.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "EGNMqttDisconnections"
+      ]
+    },
+    {
+      "id": "7a684553-e9ad-4fd8-a31f-75c1a4db8d2c",
+      "displayName": "Session disconnections query",
+      "description": "Disconnections report by session names.",
+      "bodyFilePath": "KQL/DisconnectionsBySessionQuery.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "EGNMqttDisconnections"
+      ]
+    },
+    {
+      "id": "56bf07f2-0029-4c3a-9eb1-22320fd92b39",
+      "displayName": "Session connections query",
+      "description": "Connections report by session names.",
+      "bodyFilePath": "KQL/ConnectionsBySessionQuery.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "EGNSuccessfulMqttConnections"
+      ]
+    },
+    {
+      "id": "60E4B8B4-31FA-4BA7-9155-44AF1DDA8BA3",
+      "displayName": "TLS 1.3 Lower query",
+      "description": "Clients using TLS of version lower than 1.3.",
+      "bodyFilePath": "KQL/TLS1_3LowerClientIPsQuery.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "EGNFailedHttpDataPlaneOperations",
+        "EGNSuccessfulHttpDataPlaneOperations"
+      ]
+    }
+  ]
+}

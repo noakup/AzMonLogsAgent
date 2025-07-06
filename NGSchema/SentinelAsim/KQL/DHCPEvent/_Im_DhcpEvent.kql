@@ -1,0 +1,4 @@
+union isfuzzy=true
+_Im_DhcpEventBuiltIn(starttime= starttime, endtime= endtime, srcipaddr_has_any_prefix= srcipaddr_has_any_prefix, srchostname_has_any= srchostname_has_any, srcusername_has_any= srcusername_has_any, eventresult= eventresult, disabled= disabled, pack= pack),
+Im_DhcpEventSolutions(starttime= starttime, endtime= endtime, srcipaddr_has_any_prefix= srcipaddr_has_any_prefix, srchostname_has_any= srchostname_has_any, srcusername_has_any= srcusername_has_any, eventresult= eventresult, disabled= disabled, pack= pack),
+Im_DhcpEventCustom(starttime= starttime, endtime= endtime, srcipaddr_has_any_prefix= srcipaddr_has_any_prefix, srchostname_has_any= srchostname_has_any, srcusername_has_any= srcusername_has_any, eventresult= eventresult, disabled= disabled, pack= pack)

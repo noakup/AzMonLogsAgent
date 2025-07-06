@@ -1,0 +1,14 @@
+source
+| project
+    TimeGenerated = ["time"],
+    OperationName = operationName,
+    OperationVersion = operationVersion,
+    Category = category,
+    ResultType = resultType,
+    ResultSignature = resultSignature,
+    ResultDescription = resultDescription,
+    CorrelationId = correlationId,
+    Identity = todynamic(identity),
+    Location = location,
+    Properties = parse_json(tostring(properties))
+| extend RoleAssignmentId = tostring(Properties["roleAssignmentId"])

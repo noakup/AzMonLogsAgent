@@ -1,0 +1,4 @@
+EmailPostDeliveryEvents
+| where ActionType == 'Phish ZAP' and ActionResult == 'Error'
+| join EmailEvents on NetworkMessageId, RecipientEmailAddress  
+| take 100

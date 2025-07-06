@@ -1,0 +1,28 @@
+[{
+	"name": "Hadoop:service=LlapDaemon,name=LlapDaemonCacheMetrics-wn0-becohe.zbchmtsuzprulbtbmff5idzjxe.bx.internal.cloudapp.net",
+	"tags": {
+		"tag.Context": "cache",
+		"tag.ProcessName": "LlapDaemon",
+		"tag.SessionId": "7a9502e3-8b24-4113-98cd-0a8d43127d13",
+		"tag.Hostname": "wn0-becohe.zbchmtsuzprulbtbmff5idzjxe.bx.internal.cloudapp.net"
+	},
+	"metrics": {
+		"CacheCapacityRemaining": 214748364800,
+		"CacheCapacityRemainingPercentage": 1.0,
+		"CacheCapacityTotal": 214748364800,
+		"CacheCapacityUsed": 0,
+		"CacheReadRequests": 3,
+		"CacheRequestedBytes": 0,
+		"CacheHitBytes": 5,
+		"CacheAllocatedArena": 1,
+		"CacheNumLockedBuffers": 0.234,
+		"CacheHitRatio": 0.0
+	},
+	"modelerType": "LlapDaemonCacheMetrics-wn0-becohe.zbchmtsuzprulbtbmff5idzjxe.bx.internal.cloudapp.net",
+	"clusterName": "becohen-interactivehive-test1",
+	"hostName": "hn0-becohe",
+	"clusterType": "interactivehive",
+	"operationName": "MetricsCollection",
+	"correlationId": "InteractiveHiveMetrics",
+	"FluentdIngestTimestamp": "2020-06-30 03:53:00.0000000"
+}]

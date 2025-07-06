@@ -1,0 +1,11 @@
+let startTime = ago(2h); 
+let endTime = ago(1h);
+ATCExpressRouteCircuitIpfix 
+| where FlowRecordTime >= startTime and FlowRecordTime <= endTime 
+| extend 5tuple = strcat("SrcIP:", SourceIp, " SourcePort:", SourcePort, " DestIP:", DestinationIp, " DestPort:", DestinationPort, " Protocol:", Protocol), 
+    TotalBytes = (NumberOfBytes + (14 * NumberOfPackets)) * 4096  
+| summarize hint.strategy=shuffle arg_max(FlowRecordTime, *) by 5tuple, TotalBytes, Flowsequence 
+| summarize sum(TotalBytes) by bin(FlowRecordTime, 1m) 
+| extend TotalGB = toint(sum_TotalBytes / 1024 / 1024 / 1024) // Converting bytes to gigabytes 
+| project-away sum_TotalBytes 
+| render columnchart 

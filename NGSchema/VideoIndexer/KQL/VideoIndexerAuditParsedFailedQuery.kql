@@ -1,0 +1,6 @@
+// Project failures with detailed error message.
+VIAudit
+// | where AccountId == "<AccountId>"  // to filter on a specific accountId, uncomment this line
+| where  Status == "Failure"
+| parse Description with "ErrorType: " ErrorType ". Message: " ErrorMessage ". Trace" *
+| project TimeGenerated, OperationName, ErrorMessage, ErrorType, CorrelationId, _ResourceId
