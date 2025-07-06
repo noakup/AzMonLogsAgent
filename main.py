@@ -131,6 +131,13 @@ def translate_nl_to_kql(nl_question):
        - Preserve the core query structure and performance optimizations from templates
        - Ensure column names and table references match the manifest schemas
 
+    Special Query Handling:
+    ----------------------
+    - If the user asks about "example queries", "what examples do you have", "show me examples for tables in workspace", "what example queries do you have for the tables in that workspace", or similar meta-questions about available queries, return a workspace discovery query:
+      search * | summarize count() by $table | order by $table asc
+    
+    - This will help discover what tables exist in the workspace so appropriate examples can be provided based on the actual tables present
+
     Scenario-Specific NL-to-KQL Routing:
     ------------------------------------
     - When a user provides a natural language (NL) question, you should:

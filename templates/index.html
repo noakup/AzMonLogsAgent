@@ -232,6 +232,18 @@
             transform: translateY(-1px);
         }
 
+        .example-btn.workspace-examples {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            font-weight: 500;
+        }
+
+        .example-btn.workspace-examples:hover {
+            background: linear-gradient(135deg, #5a6fd8 0%, #654892 100%);
+            transform: translateY(-1px);
+        }
+
         .results-section {
             background: #f8f9fa;
             border-radius: 15px;
@@ -685,16 +697,205 @@
             margin-top: 20px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             border-left: 4px solid #28a745;
-        }.example-suggestions-section h3 {
+        }        /* Workspace Discovery Results Styling */
+        .workspace-discovery-results {
+            max-width: 100%;
+            overflow-x: auto;
+        }
+        
+        .workspace-summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .workspace-summary h4 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .stat-label {
+            display: block;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .stat-value {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        
+        .example-categories {
+            margin-bottom: 25px;
+        }
+        
+        .example-categories h4 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .category-card {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .category-name {
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 5px;
+        }
+        
+        .category-count {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .tables-with-examples h4 {
             color: #333;
             margin-bottom: 20px;
-            font-weight: 500;
         }
-
-        .example-suggestions-content {
+        
+        .tables-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .table-card {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .table-header {
             display: flex;
-            flex-direction: column;
-            gap: 8px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .table-header h5 {
+            color: #333;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        
+        .record-count {
+            background: #e9ecef;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #495057;
+        }
+        
+        .table-examples {
+            margin-bottom: 15px;
+        }
+        
+        .example-item {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 8px;
+        }
+        
+        .example-source {
+            font-weight: bold;
+            color: #495057;
+            font-size: 0.9rem;
+        }
+        
+        .example-description {
+            color: #6c757d;
+            font-size: 0.8rem;
+            margin-top: 3px;
+        }
+        
+        .query-count {
+            color: #007bff;
+            font-size: 0.8rem;
+            margin-top: 3px;
+        }
+        
+        .table-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-small {
+            padding: 6px 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.3s ease;
+        }
+        
+        .btn-small:hover {
+            background: #5a6fd8;
+        }
+        
+        .quick-actions {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+        }
+        
+        .quick-actions h4 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            padding: 10px 15px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+        
+        .action-btn:hover {
+            background: #218838;
         }
     </style>
 </head>
@@ -737,10 +938,11 @@
                     <div class="example-btn" onclick="getExamples('dependencies')">Dependencies</div>
                     <div class="example-btn" onclick="getExamples('performance')">Performance</div>
                     <div class="example-btn" onclick="getExamples('usage')">Usage</div>
+                    <div class="example-btn workspace-examples" onclick="discoverWorkspaceExamples()">🔍 Workspace Examples</div>
                 </div>
 
                 <!-- Example Suggestions Section -->
-                <div id="exampleSuggestionsSection" class="example-suggestions-section" style="display: none;">
+                <div id="exampleSuggestionsSection" class="example-suggestions-section">
                     <h3 id="exampleSuggestionsTitle">💡 Example Suggestions</h3>
                     <div id="exampleSuggestionsContent" class="example-suggestions-content">
                         <!-- Example suggestions will be populated here -->
@@ -777,6 +979,15 @@
                     <div id="explainContent"></div>
                 </div>
             </div>
+
+            <!-- Workspace Examples Section -->
+            <div id="workspaceExamplesSection" class="results-section" style="display: none;">
+                <h3>🔍 Workspace Examples</h3>
+                <div id="workspaceExamplesContent" class="result-content">
+                    <!-- Workspace examples will be populated here -->
+                </div>
+                <div id="workspaceTimestamp" class="timestamp"></div>
+            </div>
         </div>
     </div>
 
@@ -800,7 +1011,9 @@
                     statusElement.innerHTML += `<div class="error">${message}</div>`;
                 }
             }
-        }        function showLoading(step = 'Initializing...') {
+        }
+        
+        function showLoading(step = 'Initializing...') {
             const resultsSection = document.getElementById('resultsSection');
             const resultContent = document.getElementById('resultContent');
             
@@ -944,7 +1157,9 @@
                     }
                 }
             }
-        }        function showResult(result, timestamp) {
+        }
+        
+        function showResult(result, timestamp) {
             const resultContent = document.getElementById('resultContent');
             const timestampElement = document.getElementById('timestamp');
             
@@ -1055,7 +1270,9 @@
             }
             
             return html;
-        }        function createExplainSection() {
+        }
+        
+        function createExplainSection() {
             return `
                 <div class="explain-section">
                     <button class="btn-explain" onclick="explainResults()" id="explainBtn">
@@ -1150,7 +1367,9 @@
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
-        }        function showError(error) {
+        }
+        
+        function showError(error) {
             const resultContent = document.getElementById('resultContent');
             const timestampElement = document.getElementById('timestamp');
             
@@ -1212,7 +1431,9 @@
             } catch (error) {
                 showError(`Connection test failed: ${error.message}`);
             }
-        }        async function askQuestion() {
+        }
+        
+        async function askQuestion() {
             const question = document.getElementById('questionInput').value.trim();
             
             if (!question) {
@@ -1433,21 +1654,45 @@
         }
 
         function showExampleSuggestions(result) {
+            console.log('showExampleSuggestions called with:', result);
+            
             if (result.type === 'example_suggestions') {
+                console.log('Showing example suggestions for scenario:', result.scenario);
+                
                 const section = document.getElementById('exampleSuggestionsSection');
                 const title = document.getElementById('exampleSuggestionsTitle');
                 const content = document.getElementById('exampleSuggestionsContent');
                 
+                console.log('DOM elements found:', { section, title, content });
+                
                 title.textContent = `💡 ${result.scenario.charAt(0).toUpperCase() + result.scenario.slice(1)} Examples`;
                 
                 let html = '';
-                result.suggestions.forEach(suggestion => {
-                    html += `<div class="example-suggestion" onclick="setQuestion('${escapeHtml(suggestion)}')">${escapeHtml(suggestion)}</div>`;
+                result.suggestions.forEach((suggestion, index) => {
+                    html += `<div class="example-suggestion" data-suggestion="${index}">${escapeHtml(suggestion)}</div>`;
                 });
                 html += `<div style="margin-top: 15px; font-size: 0.9rem; color: #666; text-align: center;">💡 Click any suggestion above to add it to your question box</div>`;
                 
+                console.log('Generated HTML:', html);
+                
                 content.innerHTML = html;
+                
+                // Store suggestions for click handling
+                content.dataset.suggestions = JSON.stringify(result.suggestions);
+                
+                // Add click event listeners to suggestion elements
+                content.querySelectorAll('.example-suggestion').forEach((element, index) => {
+                    element.addEventListener('click', () => {
+                        const suggestion = result.suggestions[index];
+                        console.log('Suggestion clicked:', suggestion);
+                        setQuestion(suggestion);
+                    });
+                });
                 section.style.display = 'block';
+                
+                console.log('Example suggestions section should now be visible');
+            } else {
+                console.log('Result type is not example_suggestions:', result.type);
             }
         }
 
@@ -1467,61 +1712,201 @@
 
         function setQuestion(question) {
             document.getElementById('questionInput').value = question;
-        }        // Allow Enter key to submit question
-        document.getElementById('questionInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                enhancedAskQuestion();
-            }
-        });
+        }
 
-        // Allow Enter key to setup workspace
-        document.getElementById('workspaceId').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                setupWorkspace();
-            }
-        });
-
-        // Load status on page load
-        window.onload = async function() {
+        async function discoverWorkspaceExamples() {
+            console.log('🔍 Workspace Examples button clicked');
+            console.log('isConnected:', isConnected);
+            
+            // Allow workspace examples discovery even without connection
+            // since we're just showing available example files
+            
             try {
-                const response = await fetch('/api/status');
-                const data = await response.json();
+                console.log('📡 Starting workspace discovery...');
+                showLoading('Discovering workspace tables and available examples...');
                 
-                if (data.initialized && data.workspace_id) {
-                    document.getElementById('workspaceId').value = data.workspace_id;
-                    updateStatus(true, 'Agent already initialized');
+                console.log('📡 Making fetch request to /api/workspace-examples');
+                const response = await fetch('/api/workspace-examples', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                console.log('📡 Response received:', response.status, response.statusText);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                console.log('📊 Response data:', data);
+                
+                if (data.success) {
+                    console.log('✅ Success, showing workspace examples');
+                    console.log('Available examples:', Object.keys(data.available_examples));
+                    showWorkspaceExamples(data);
+                } else {
+                    console.log('❌ API error:', data.error);
+                    showError(`Failed to discover examples: ${data.error}`);
                 }
             } catch (error) {
-                console.log('Could not load initial status');
+                console.error('💥 Network error:', error);
+                console.error('Error stack:', error.stack);
+                showError(`Network error: ${error.message}`);
             }
-        };
+        }
+
+        function showWorkspaceExamples(data) {
+            console.log('📊 showWorkspaceExamples called with data:', data);
+            
+            try {
+                // First, ensure the main results section is hidden
+                const resultsSection = document.getElementById('resultsSection');
+                console.log('🔍 Found resultsSection:', resultsSection);
+                if (resultsSection) {
+                    resultsSection.classList.remove('visible');
+                    resultsSection.style.display = 'none'; // Force hide
+                }
+                
+                const workspaceSection = document.getElementById('workspaceExamplesSection');
+                const workspaceContent = document.getElementById('workspaceExamplesContent');
+                const workspaceTimestamp = document.getElementById('workspaceTimestamp');
+                
+                console.log('🔍 Found workspace elements:', { workspaceSection, workspaceContent, workspaceTimestamp });
+                
+                if (!workspaceSection || !workspaceContent || !workspaceTimestamp) {
+                    throw new Error('Required workspace DOM elements not found');
+                }
+                
+                console.log('📝 Building HTML content...');
+            
+            // Create simplified display with only tables
+            let html = `
+                <div class="workspace-discovery-results">
+                    <div class="tables-with-examples">
+                        <h4>📊 Tables with Available Examples</h4>
+                        <div class="tables-grid">
+            `;
+            
+            for (const [tableName, tableData] of Object.entries(data.available_examples)) {
+                html += `
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h5>${tableName}</h5>
+                            <span class="record-count">${tableData.table_info.record_count.toLocaleString()} records</span>
+                        </div>
+                        <div class="table-examples">
+                `;
+                
+                tableData.examples.forEach(example => {
+                    html += `
+                        <div class="example-item">
+                            <div class="example-source">${example.source}</div>
+                            <div class="example-description">${example.description}</div>
+                            ${example.query_count ? `<div class="query-count">${example.query_count} queries</div>` : ''}
+                        </div>
+                    `;
+                });
+                
+                html += `
+                        </div>
+                        <div class="table-actions">
+                            <button class="btn-small" onclick="getExamplesForTable('${tableName}')">Get Examples</button>
+                            <button class="btn-small" onclick="setQuestion('Show me recent data from ${tableName}')">View Data</button>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            html += `
+                        </div>
+                    </div>
+                    
+                    <div class="quick-actions">
+                        <h4>🚀 Quick Actions</h4>
+                        <div class="action-buttons">
+                            <button class="action-btn" onclick="setQuestion('What example queries do you have for the tables in this workspace?')">Ask About Examples</button>
+                            <button class="action-btn" onclick="setQuestion('Show me all tables in this workspace')">List All Tables</button>
+                            <button class="action-btn" onclick="setQuestion('Which tables have the most data?')">Top Tables by Volume</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            workspaceContent.innerHTML = html;
+            workspaceTimestamp.textContent = `Last updated: ${data.timestamp}`;
+            
+            // Force the workspace section to be visible
+            workspaceSection.style.display = 'block';
+            workspaceSection.classList.add('visible');
+            
+            console.log('✅ Workspace examples displayed, section visibility:', workspaceSection.style.display);
+            console.log('✅ Workspace section classes:', workspaceSection.className);
+            
+            // Add temporary alert for debugging
+            alert('Workspace examples should now be visible!');
+            
+            // Scroll to workspace examples section
+            setTimeout(() => {
+                workspaceSection.scrollIntoView({ behavior: 'smooth' });
+                console.log('📍 Scrolled to workspace section');
+            }, 100);
+            
+            } catch (error) {
+                console.error('💥 Error in showWorkspaceExamples:', error);
+                showError(`Failed to display workspace examples: ${error.message}`);
+            }
+        }
+
+        function hideLoading() {
+            // This function isn't needed since showResult and showError handle hiding the loading state
+            // But we'll keep it for consistency with existing calls
+        }
 
         function getCellClass(cell) {
             if (cell === null || cell === undefined) {
                 return 'cell-null';
             }
-            
-            if (typeof cell === 'boolean') {
-                return `cell-boolean ${cell.toString()}`;
-            }
-            
             if (typeof cell === 'number') {
                 return 'cell-number';
             }
-            
-            // Check if string looks like a number
-            if (typeof cell === 'string' && !isNaN(cell) && !isNaN(parseFloat(cell))) {
-                return 'cell-number';
+            if (typeof cell === 'boolean') {
+                return `cell-boolean ${cell ? 'true' : 'false'}`;
             }
-            
-            // Check if string looks like a boolean
-            if (typeof cell === 'string' && (cell.toLowerCase() === 'true' || cell.toLowerCase() === 'false')) {
-                return `cell-boolean ${cell.toLowerCase()}`;
-            }
-            
             return '';
+        }
+
+        function getExamplesForTable(tableName) {
+            // Map table names to scenario names
+            const tableToScenarioMap = {
+                'AppRequests': 'requests',
+                'AppExceptions': 'exceptions', 
+                'AppTraces': 'traces',
+                'AppDependencies': 'dependencies',
+                'AppPageViews': 'page_views',
+                'AppCustomEvents': 'custom_events',
+                'AppPerformanceCounters': 'performance',
+                'Usage': 'usage'
+            };
+            
+            const scenario = tableToScenarioMap[tableName];
+            if (scenario) {
+                getExamples(scenario);
+                
+                // Scroll to the example suggestions section after a short delay
+                setTimeout(() => {
+                    const exampleSuggestionsSection = document.getElementById('exampleSuggestionsSection');
+                    if (exampleSuggestionsSection) {
+                        exampleSuggestionsSection.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start' 
+                        });
+                    }
+                }, 500); // Small delay to ensure the examples are loaded first
+            } else {
+                showError(`No examples available for table: ${tableName}`);
+            }
         }
     </script>
 </body>
