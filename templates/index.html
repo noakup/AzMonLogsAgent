@@ -701,89 +701,132 @@
         .workspace-discovery-results {
             max-width: 100%;
             overflow-x: auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         .workspace-summary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
         }
         
         .workspace-summary h4 {
-            margin-bottom: 15px;
-            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .summary-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
         }
         
         .stat-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px;
-            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.2);
         }
         
         .stat-label {
             display: block;
             font-size: 0.9rem;
-            opacity: 0.8;
+            opacity: 0.9;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
         .stat-value {
             display: block;
-            font-size: 1.2rem;
+            font-size: 1.8rem;
             font-weight: bold;
             margin-top: 5px;
         }
         
         .example-categories {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
         
         .example-categories h4 {
             color: #333;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .category-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 15px;
         }
         
         .category-card {
-            background: #f8f9fa;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             border: 1px solid #dee2e6;
-            padding: 15px;
-            border-radius: 8px;
+            padding: 20px;
+            border-radius: 10px;
             text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            border-color: #667eea;
         }
         
         .category-name {
-            font-weight: bold;
+            font-weight: 600;
             color: #495057;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-size: 1rem;
         }
         
         .category-count {
-            color: #6c757d;
-            font-size: 0.9rem;
+            color: #667eea;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        .tables-with-examples {
+            margin-bottom: 20px;
         }
         
         .tables-with-examples h4 {
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
         }
         
         .tables-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
         }
           .table-card {
             background: white;
@@ -814,9 +857,9 @@
         }
         
         .record-count {
-            background: #e9ecef;
-            padding: 4px 8px;
-            border-radius: 4px;
+            background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
+            padding: 6px 12px;
+            border-radius: 20px;
             font-size: 0.8rem;
             color: #495057;
         }        .table-examples {
@@ -827,28 +870,54 @@
         }
         
         .example-item {
-            background: #f8f9fa;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 8px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #e9ecef;
+            transition: all 0.2s ease;
+        }
+        
+        .example-item:hover {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f8f9fa 100%);
+            border-color: #667eea;
+            transform: translateX(3px);
         }
         
         .example-source {
-            font-weight: bold;
+            font-weight: 600;
             color: #495057;
             font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .example-source::before {
+            content: '📋';
+            font-size: 0.8rem;
         }
         
         .example-description {
             color: #6c757d;
-            font-size: 0.8rem;
-            margin-top: 3px;
+            font-size: 0.85rem;
+            margin-top: 6px;
+            line-height: 1.4;
         }
         
         .query-count {
-            color: #007bff;
+            color: #667eea;
             font-size: 0.8rem;
-            margin-top: 3px;
+            margin-top: 6px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .query-count::before {
+            content: '🔍';
+            font-size: 0.7rem;
         }
           .table-actions {
             display: flex;
@@ -857,50 +926,187 @@
         }
         
         .btn-small {
-            padding: 6px 12px;
-            background: #667eea;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            transition: background 0.3s ease;
-        }
-        
-        .btn-small:hover {
-            background: #5a6fd8;
-        }
-        
-        .quick-actions {
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid #dee2e6;
-        }
-        
-        .quick-actions h4 {
-            color: #333;
-            margin-bottom: 15px;
-        }
-        
-        .action-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .action-btn {
-            padding: 10px 15px;
-            background: #28a745;
+            padding: 10px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
             border-radius: 6px;
             cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            min-width: 120px;
+            justify-content: center;
+        }
+        
+        .btn-small:hover {
+            background: linear-gradient(135deg, #5a6fd8 0%, #654892 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-small:active {
+            transform: translateY(0);
+        }
+        
+        .quick-actions {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .quick-actions h4 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .action-btn {
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
             font-size: 0.9rem;
-            transition: background 0.3s ease;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-align: center;
         }
         
         .action-btn:hover {
-            background: #218838;
+            background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(40, 167, 69, 0.3);
+        }
+        
+        .action-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* Responsive improvements */
+        @media (max-width: 768px) {
+            .workspace-discovery-results {
+                padding: 10px;
+            }
+            
+            .tables-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .summary-stats {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .table-actions {
+                flex-direction: column;
+            }
+            
+            .btn-small {
+                min-width: 100%;
+            }
+        }        /* Tooltip styles */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1000;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+            line-height: 1.3;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Enhanced workspace examples styles */
+        @keyframes slideInFromTop {
+            0% {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .workspace-discovery-results {
+            animation: slideInFromTop 0.6s ease-out;
+        }
+
+        .table-card {
+            animation: slideInFromTop 0.8s ease-out;
+        }
+
+        /* Success notification */
+        .success-notification {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+            animation: slideInFromTop 0.5s ease-out;
         }
     </style>
 </head>
@@ -1606,6 +1812,13 @@
             console.log('🔍 Workspace Examples button clicked');
             console.log('isConnected:', isConnected);
             
+            // Add loading state to the workspace examples button
+            const workspaceButton = document.querySelector('.workspace-examples');
+            const originalText = workspaceButton.textContent;
+            workspaceButton.textContent = '⏳ Loading...';
+            workspaceButton.style.opacity = '0.7';
+            workspaceButton.style.pointerEvents = 'none';
+            
             // Allow workspace examples discovery even without connection
             // since we're just showing available example files
             
@@ -1642,6 +1855,11 @@
                 console.error('💥 Network error:', error);
                 console.error('Error stack:', error.stack);
                 showError(`Network error: ${error.message}`);
+            } finally {
+                // Restore button state
+                workspaceButton.textContent = '🏗️ Workspace Examples';
+                workspaceButton.style.opacity = '1';
+                workspaceButton.style.pointerEvents = 'auto';
             }
         }
 
@@ -1658,18 +1876,20 @@
                 }
                 
                 const workspaceSection = document.getElementById('workspaceExamplesSection');
-                const workspaceContent = document.getElementById('workspaceExamplesContent');
-                const workspaceTimestamp = document.getElementById('workspaceTimestamp');
                 
-                console.log('🔍 Found workspace elements:', { workspaceSection, workspaceContent, workspaceTimestamp });
+                console.log('🔍 Found workspace section:', workspaceSection);
                 
-                if (!workspaceSection || !workspaceContent || !workspaceTimestamp) {
-                    throw new Error('Required workspace DOM elements not found');
+                if (!workspaceSection) {
+                    throw new Error('Workspace section not found');
                 }
                 
                 console.log('📝 Building HTML content...');
               // Create simplified display with only tables
             let html = `
+                <div class="success-notification">
+                    ✅ Successfully discovered ${Object.keys(data.available_examples).length} tables with available examples
+                </div>
+                <h3>🏗️ Workspace Examples</h3>
                 <div class="workspace-discovery-results">
                     <div class="tables-with-examples">
                         <div class="tables-grid">
@@ -1697,16 +1917,26 @@
                     <div class="quick-actions">
                         <h4>🚀 Quick Actions</h4>
                         <div class="action-buttons">
-                            <button class="action-btn" onclick="setQuestion('What example queries do you have for the tables in this workspace?')">Ask About Examples</button>
-                            <button class="action-btn" onclick="setQuestion('Show me all tables in this workspace')">List All Tables</button>
-                            <button class="action-btn" onclick="setQuestion('Which tables have the most data?')">Top Tables by Volume</button>
+                            <div class="tooltip">
+                                <button class="action-btn" onclick="setQuestion('What example queries do you have for the tables in this workspace?')">Ask About Examples</button>
+                                <span class="tooltiptext">Ask the AI assistant about available example queries</span>
+                            </div>
+                            <div class="tooltip">
+                                <button class="action-btn" onclick="setQuestion('Show me all tables in this workspace')">List All Tables</button>
+                                <span class="tooltiptext">Query to see all available tables in your workspace</span>
+                            </div>
+                            <div class="tooltip">
+                                <button class="action-btn" onclick="setQuestion('Which tables have the most data?')">Top Tables by Volume</button>
+                                <span class="tooltiptext">Find tables with the highest record counts</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="timestamp">Last updated: ${data.timestamp}</div>
             `;
             
-            workspaceContent.innerHTML = html;
-            workspaceTimestamp.textContent = `Last updated: ${data.timestamp}`;
+            // Replace the entire section content
+            workspaceSection.innerHTML = html;
             
             // Force the workspace section to be visible
             workspaceSection.style.display = 'block';
