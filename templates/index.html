@@ -828,49 +828,32 @@
             gap: 25px;
             margin-top: 20px;
         }
-        
-        .table-card {
+          .table-card {
             background: white;
-            border: 1px solid #e9ecef;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .table-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        
-        .table-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
-            border-color: #667eea;
-        }
-        
-        .table-header {
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }        .table-header {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: flex-start;
-            margin-bottom: 18px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #f1f3f4;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
         }
         
         .table-header h5 {
             color: #333;
+            margin: 0 0 8px 0;
+            font-size: 1.1rem;
+        }
+        
+        .table-description {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
             margin: 0;
-            font-size: 1.2rem;
-            font-weight: 600;
-            flex: 1;
         }
         
         .record-count {
@@ -879,14 +862,11 @@
             border-radius: 20px;
             font-size: 0.8rem;
             color: #495057;
-            font-weight: 500;
-            border: 1px solid #dee2e6;
-            white-space: nowrap;
-            margin-left: 15px;
-        }
-        
-        .table-examples {
-            margin-bottom: 20px;
+        }        .table-examples {
+            margin-bottom: 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
         }
         
         .example-item {
@@ -939,11 +919,10 @@
             content: '🔍';
             font-size: 0.7rem;
         }
-        
-        .table-actions {
+          .table-actions {
             display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
+            gap: 10px;
+            margin: 0;
         }
         
         .btn-small {
@@ -1151,53 +1130,32 @@
                     <span class="status-indicator status-disconnected">Not Connected</span>
                 </div>
             </div>            <!-- Query Section -->
-            <div class="query-section">
-                <div class="suggestions">
+            <div class="query-section">                <div class="suggestions">
                     <h3>💡 Quick Suggestions:</h3>
                     <div class="suggestion-pills">
                         <div class="suggestion-pill" onclick="setQuestion('Show me failed requests from the last hour')">Failed Requests</div>
                         <div class="suggestion-pill" onclick="setQuestion('What are the top 5 slowest API calls?')">Slowest APIs</div>
-                        <div class="suggestion-pill" onclick="setQuestion('Show me recent exceptions')">Recent Exceptions</div>
                         <div class="suggestion-pill" onclick="setQuestion('Get heartbeat data from the last 30 minutes')">Heartbeat Data</div>
-                        <div class="suggestion-pill" onclick="setQuestion('Show me dependency failures')">Dependency Failures</div>
-                        <div class="suggestion-pill" onclick="setQuestion('What is the error rate in the last 24 hours?')">Error Rate</div>
-                    </div>
-                </div>                <div class="examples-section">
-                    <h3>📚 See Examples:</h3>
-                    <div class="example-btn" onclick="getExamples('requests')">Requests</div>
-                    <div class="example-btn" onclick="getExamples('exceptions')">Exceptions</div>
-                    <div class="example-btn" onclick="getExamples('traces')">Traces</div>
-                    <div class="example-btn" onclick="getExamples('dependencies')">Dependencies</div>
-                    <div class="example-btn" onclick="getExamples('performance')">Performance</div>
-                    <div class="example-btn" onclick="getExamples('usage')">Usage</div>
-                    <div class="example-btn workspace-examples" onclick="discoverWorkspaceExamples()">🏗️ Workspace Examples</div>
+                    </div>                </div>
+                
+                <div class="examples-section">
+                    <div class="example-btn workspace-examples" onclick="discoverWorkspaceExamples()">🔍 Show Examples</div>
                 </div>
 
                 <!-- Workspace Examples Section -->
                 <div id="workspaceExamplesSection" class="results-section" style="display: none;">
-                    <!-- Content will be dynamically replaced by showWorkspaceExamples() -->
-                </div>
-
-                <!-- Example Suggestions Section -->
-                <div id="exampleSuggestionsSection" class="example-suggestions-section">
-                    <h3 id="exampleSuggestionsTitle">💡 Example Suggestions</h3>
-                    <div id="exampleSuggestionsContent" class="example-suggestions-content">
-                        <!-- Example suggestions will be populated here -->
+                    <h3>🔍 Workspace Examples</h3>
+                    <div id="workspaceExamplesContent" class="result-content">
+                        <!-- Workspace examples will be populated here -->
                     </div>
-                </div>
+                    <div id="workspaceTimestamp" class="timestamp"></div>                </div>
 
                 <h2>💬 Ask Your Question</h2>
                 <textarea 
                     id="questionInput" 
                     class="question-input" 
                     placeholder="Type your question here... (e.g., 'Show me failed requests from the last hour')"
-                ></textarea>
-
-                <div style="background: #e8f4fd; border: 1px solid #b3d9ff; border-radius: 8px; padding: 12px; margin-bottom: 15px; font-size: 0.9rem; color: #0066cc;">
-                    <strong>🔄 Smart Translation:</strong> The system automatically retries translation if the first attempt fails, improving success rates for complex questions.
-                </div>
-
-                <button class="btn btn-success" onclick="enhancedAskQuestion()" style="width: 100%; margin-top: 15px;">
+                ></textarea>                <button class="btn btn-success" onclick="enhancedAskQuestion()" style="width: 100%; margin-top: 15px;">
                     🚀 Ask Question
                 </button>
             </div>            <!-- Results Section -->
@@ -1390,10 +1348,10 @@
         function showResult(result, timestamp) {
             const resultContent = document.getElementById('resultContent');
             const timestampElement = document.getElementById('timestamp');
-            
-            // Store current result for explain feature
+              // Store current result for explain feature
             currentQueryResult = result;
-              // Handle both old text format and new structured format
+            
+            // Handle both old text format and new structured format
             if (typeof result === 'string') {
                 // Legacy text format
                 resultContent.innerHTML = `<pre style="white-space: pre-wrap; font-family: 'Courier New', monospace;">${result}</pre>`;
@@ -1584,8 +1542,7 @@
                         <h4>❌ Error</h4>
                         <p>Failed to explain results: ${error.message}</p>
                     </div>
-                `;
-            } finally {
+                `;            } finally {
                 // Re-enable the button
                 explainBtn.disabled = false;
             }
@@ -1596,7 +1553,7 @@
             div.textContent = text;
             return div.innerHTML;
         }
-        
+
         function showError(error) {
             const resultContent = document.getElementById('resultContent');
             const timestampElement = document.getElementById('timestamp');
@@ -1721,12 +1678,13 @@
         function simulateRetry() {
             // Show retry indication
             updateLoadingStep('step-translate', 'retry');
-            
-            setTimeout(() => {
+              setTimeout(() => {
                 updateLoadingStep('step-translate', 'completed');
                 updateLoadingStep('step-validate', 'active');
             }, 1500);
-        }        function enhancedAskQuestion() {
+        }
+
+        function enhancedAskQuestion() {
             const question = document.getElementById('questionInput').value.trim();
             
             if (!question) {
@@ -1840,134 +1798,12 @@
                     } else {
                         showError(`Query failed after ${maxRetries + 1} attempts: ${error.message}`);
                         break;
-                    }
-                }
-            }
-        }        async function getExamples(scenario) {
-            if (!isConnected) {
-                showError('Please setup workspace first');
-                return;
-            }
-
-            // Show loading in the dedicated section
-            showExampleSuggestionsLoading(scenario);
-
-            try {
-                const response = await fetch(`/api/examples/${scenario}`);
-                const data = await response.json();
-                
-                if (data.success) {
-                    showExampleSuggestions(data.result);
-                } else {
-                    showExampleSuggestionsError(data.error);
-                }
-            } catch (error) {
-                showExampleSuggestionsError(`Failed to get examples: ${error.message}`);
+                    }                }
             }
         }
 
-        function showExampleSuggestionsLoading(scenario) {
-            const section = document.getElementById('exampleSuggestionsSection');
-            const title = document.getElementById('exampleSuggestionsTitle');
-            const content = document.getElementById('exampleSuggestionsContent');
-            
-            title.textContent = `💫 Loading ${scenario.charAt(0).toUpperCase() + scenario.slice(1)} Examples...`;
-            content.innerHTML = `
-                <div style="text-align: center; padding: 20px; color: #666;">
-                    <div class="spinner" style="margin: 0 auto 10px;"></div>
-                    Loading example suggestions...
-                </div>
-            `;
-            section.style.display = 'block';
-        }
-
-        function showExampleSuggestions(result) {
-            console.log('showExampleSuggestions called with:', result);
-            
-            const section = document.getElementById('exampleSuggestionsSection');
-            const title = document.getElementById('exampleSuggestionsTitle');
-            const content = document.getElementById('exampleSuggestionsContent');
-            
-            console.log('DOM elements found:', { section, title, content });
-            
-            // Handle string results (error messages)
-            if (typeof result === 'string') {
-                console.log('Result is a string (likely an error):', result);
-                title.textContent = '💡 Examples';
-                content.innerHTML = `
-                    <div style="text-align: center; padding: 20px; color: #666; font-style: italic;">
-                        ${escapeHtml(result)}
-                    </div>
-                `;
-                section.style.display = 'block';
-                return;
-            }
-            
-            // Handle structured results
-            if (result && result.type === 'example_suggestions') {
-                console.log('Showing example suggestions for scenario:', result.scenario);
-                
-                title.textContent = `💡 ${result.scenario.charAt(0).toUpperCase() + result.scenario.slice(1)} Examples`;
-                
-                if (!result.suggestions || result.suggestions.length === 0) {
-                    content.innerHTML = `
-                        <div style="text-align: center; padding: 20px; color: #666; font-style: italic;">
-                            No examples available for this scenario yet.
-                        </div>
-                    `;
-                } else {
-                    let html = '';
-                    result.suggestions.forEach((suggestion, index) => {
-                        html += `<div class="example-suggestion" data-suggestion="${index}">${escapeHtml(suggestion)}</div>`;
-                    });
-                    html += `<div style="margin-top: 15px; font-size: 0.9rem; color: #666; text-align: center;">💡 Click any suggestion above to add it to your question box</div>`;
-                    
-                    console.log('Generated HTML:', html);
-                    
-                    content.innerHTML = html;
-                    
-                    // Store suggestions for click handling
-                    content.dataset.suggestions = JSON.stringify(result.suggestions);
-                    
-                    // Add click event listeners to suggestion elements
-                    content.querySelectorAll('.example-suggestion').forEach((element, index) => {
-                        element.addEventListener('click', () => {
-                            const suggestion = result.suggestions[index];
-                            console.log('Suggestion clicked:', suggestion);
-                            setQuestion(suggestion);
-                        });
-                    });
-                }
-                
-                section.style.display = 'block';
-                console.log('Example suggestions section should now be visible');
-            } else {
-                console.log('Result type is not example_suggestions:', result?.type || 'undefined');
-                // Fallback for unexpected result format
-                title.textContent = '💡 Examples';
-                content.innerHTML = `
-                    <div style="text-align: center; padding: 20px; color: #666; font-style: italic;">
-                        Unable to load examples. Please try again.
-                    </div>
-                `;
-                section.style.display = 'block';
-            }
-        }
-
-        function showExampleSuggestionsError(error) {
-            const section = document.getElementById('exampleSuggestionsSection');
-            const title = document.getElementById('exampleSuggestionsTitle');
-            const content = document.getElementById('exampleSuggestionsContent');
-            
-            title.textContent = '❌ Error Loading Examples';
-            content.innerHTML = `
-                <div style="text-align: center; padding: 20px; color: #dc3545;">
-                    ${error}
-                </div>
-            `;
-            section.style.display = 'block';
-        }
-
+        // Category example suggestion functions removed - examples now used internally for AI translation only
+        
         function setQuestion(question) {
             document.getElementById('questionInput').value = question;
         }
@@ -2047,9 +1883,8 @@
                     throw new Error('Workspace section not found');
                 }
                 
-                console.log('📝 Building complete workspace examples display...');
-            
-            // Create complete workspace examples display that replaces the entire section
+                console.log('📝 Building HTML content...');
+              // Create simplified display with only tables
             let html = `
                 <div class="success-notification">
                     ✅ Successfully discovered ${Object.keys(data.available_examples).length} tables with available examples
@@ -2057,40 +1892,18 @@
                 <h3>🏗️ Workspace Examples</h3>
                 <div class="workspace-discovery-results">
                     <div class="tables-with-examples">
-                        <h4>📊 Tables with Available Examples</h4>
                         <div class="tables-grid">
             `;
-            
-            for (const [tableName, tableData] of Object.entries(data.available_examples)) {
+              for (const [tableName, tableData] of Object.entries(data.available_examples)) {
                 html += `
                     <div class="table-card">
                         <div class="table-header">
                             <h5>${tableName}</h5>
-                            <span class="record-count">${tableData.table_info.record_count.toLocaleString()} records</span>
-                        </div>
-                        <div class="table-examples">
-                `;
-                
-                tableData.examples.forEach(example => {
-                    html += `
-                        <div class="example-item">
-                            <div class="example-source">${example.source}</div>
-                            <div class="example-description">${example.description}</div>
-                            ${example.query_count ? `<div class="query-count">${example.query_count} queries</div>` : ''}
-                        </div>
-                    `;
-                });
-                
-                html += `
-                        </div>
-                        <div class="table-actions">
-                            <div class="tooltip">
+                            <div class="table-description">${tableData.table_info.description}</div>
+                        </div>                        <div class="table-examples">
+                            <div class="table-actions">
                                 <button class="btn-small" onclick="getExamplesForTable('${tableName}')">Get Examples</button>
-                                <span class="tooltiptext">Load specific example queries for ${tableName}</span>
-                            </div>
-                            <div class="tooltip">
                                 <button class="btn-small" onclick="setQuestion('Show me recent data from ${tableName}')">View Data</button>
-                                <span class="tooltiptext">Generate a query to view recent ${tableName} data</span>
                             </div>
                         </div>
                     </div>

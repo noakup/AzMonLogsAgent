@@ -261,32 +261,10 @@ class KQLAgent:
         
         print(f"💬 Question: {question}")
         print("🤔 Processing...")
-          # Step 1: Check if it's a request for examples
+        
+        # Step 1: Check if it's a connection test (removed category examples step)
         question_lower = question.lower()
         
-        if "example" in question_lower:
-            # Determine scenario from question
-            scenarios = ["requests", "exceptions", "traces", "dependencies", "custom_events", "performance", "usage"]
-            
-            for scenario in scenarios:
-                if scenario in question_lower:
-                    print(f"📚 Getting example descriptions for: {scenario}")
-                    descriptions = self.extract_example_descriptions(scenario)
-                    
-                    if descriptions:
-                        # Return structured data for suggestion buttons
-                        return {
-                            "type": "example_suggestions",
-                            "scenario": scenario,
-                            "suggestions": descriptions,
-                            "message": f"✅ Found {len(descriptions)} example suggestions for {scenario.title()}"
-                        }
-                    else:
-                        return f"❌ No examples found for {scenario}"
-            
-            return "❌ Please specify which type of examples you want: requests, exceptions, traces, dependencies, custom_events, performance, or usage"
-        
-        # Step 2: Check if it's a connection test
         if "test" in question_lower and ("connection" in question_lower or "workspace" in question_lower):
             print("🔗 Testing workspace connection...")
             result = await self.call_mcp_tool("validate_workspace_connection", {"workspace_id": self.workspace_id})
@@ -296,7 +274,7 @@ class KQLAgent:
             else:
                 return f"❌ Connection test failed: {result['error']}"
         
-        # Step 3: Translate natural language to KQL
+        # Step 2: Translate natural language to KQL
         print("🔄 Translating natural language to KQL (with retry logic)...")
         
         try:
@@ -310,7 +288,7 @@ class KQLAgent:
             # Detect timespan from query
             timespan_hours = self.detect_query_timespan(kql_query)
             
-            # Step 4: Execute the KQL query
+            # Step 3: Execute the KQL query
             result = await self.call_mcp_tool("execute_kql_query", {
                 "workspace_id": self.workspace_id,
                 "query": kql_query,
@@ -338,77 +316,8 @@ class KQLAgent:
                 
         except Exception as e:
             return f"❌ Error processing question: {str(e)}"
-    
-    def extract_example_descriptions(self, scenario: str) -> List[str]:
-        """Extract natural language descriptions from example files"""
-        try:
-            file_map = {
-                'requests': 'app_requests_kql_examples.md',
-                'exceptions': 'app_exceptions_kql_examples.md', 
-                'traces': 'app_traces_kql_examples.md',
-                'dependencies': 'app_dependencies_kql_examples.md',
-                'custom_events': 'app_custom_events_kql_examples.md',
-                'performance': 'app_performance_kql_examples.md',
-                'usage': 'usage_kql_examples.md',
-                'page_views': 'app_page_views_kql_examples.md'  # Added page_views mapping
-            }
-            
-            filename = file_map.get(scenario)
-            if not filename:
-                print(f"⚠️ No file mapping found for scenario: {scenario}")
-                return []
-            
-            filepath = os.path.join(os.path.dirname(__file__), filename)
-            if not os.path.exists(filepath):
-                print(f"⚠️ Example file not found: {filepath}")
-                return []
-            
-            descriptions = []
-            with open(filepath, 'r', encoding='utf-8') as f:
-                content = f.read()
-            
-            print(f"📖 Processing example file: {filename}")
-            
-            # Split by lines and look for patterns like "**Description**"
-            lines = content.split('\n')
-            for i, line in enumerate(lines):
-                line = line.strip()
-                # Look for lines that start with ** and end with ** (markdown bold)
-                if line.startswith('**') and line.endswith('**') and len(line) > 4:
-                    # Remove the ** markers
-                    description = line[2:-2].strip()
-                    
-                    # Handle special case for "Prompt:" - get the next non-empty line
-                    if description.lower() == "prompt:":
-                        # Look for the actual prompt in the next few lines
-                        for j in range(i + 1, min(i + 5, len(lines))):
-                            next_line = lines[j].strip()
-                            if next_line and not next_line.startswith('**') and not next_line.startswith('```'):
-                                descriptions.append(next_line)
-                                print(f"✅ Found prompt: {next_line}")
-                                break
-                        continue
-                    
-                    # Skip if it looks like a header (contains words like "Example", "Analysis", etc.)
-                    skip_words = ['example', 'analysis', 'queries', 'insights', 'metadata', 'kql', 'document', 'table']
-                    should_skip = any(skip_word in description.lower() for skip_word in skip_words)
-                    
-                    # Also skip very short descriptions (likely headers)
-                    if len(description) < 10:
-                        should_skip = True
-                    
-                    if not should_skip:
-                        descriptions.append(description)
-                        print(f"✅ Found example: {description}")
-                    else:
-                        print(f"⏭️ Skipped header/short text: {description}")
-            
-            print(f"📊 Found {len(descriptions)} example descriptions for {scenario}")
-            return descriptions[:10]  # Limit to first 10 examples
-            
-        except Exception as e:
-            print(f"❌ Error extracting examples for {scenario}: {e}")
-            return []
+
+    # extract_example_descriptions function removed - examples now used internally for AI translation only
 
     async def explain_results(self, query_result: Dict, original_question: str = "") -> str:
         """
@@ -457,7 +366,8 @@ class KQLAgent:
             summary += f"Table {i}:\n"
             summary += f"- Columns: {', '.join(table.get('columns', []))}\n"
             summary += f"- Row count: {table.get('row_count', 0)}\n"
-              # Add sample of data (first few rows)
+            
+            # Add sample of data (first few rows)
             rows = table.get('rows', [])
             columns = table.get('columns', [])
             
@@ -497,7 +407,8 @@ class KQLAgent:
             
             if not endpoint or not api_key:
                 return "❌ Azure OpenAI configuration missing. Please check your .env file."
-              # Determine API version - use standard version for better compatibility
+            
+            # Determine API version - use standard version for better compatibility
             api_version = "2024-12-01-preview"
             
             print(f"[DEBUG] API Version: {api_version}")
@@ -536,7 +447,8 @@ Provide a concise explanation focusing on the key insights and patterns in the d
                 #"temperature": 0.3,
                 "max_completion_tokens": 300
             }
-              # Make API call
+            
+            # Make API call
             import requests
             import json
             

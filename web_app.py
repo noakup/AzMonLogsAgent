@@ -131,59 +131,7 @@ def test_connection():
             'error': str(e)
         })
 
-@app.route('/api/examples/<scenario>')
-def get_examples(scenario):
-    """Get KQL examples for a specific scenario"""
-    global agent
-    
-    try:
-        if not agent:
-            return jsonify({
-                'success': False, 
-                'error': 'Agent not initialized. Please setup workspace first.'
-            })
-        
-        # Directly call the extract_example_descriptions method to avoid string responses
-        descriptions = agent.extract_example_descriptions(scenario)
-        
-        if descriptions:
-            # Return structured data for suggestion buttons
-            result = {
-                "type": "example_suggestions",
-                "scenario": scenario,
-                "suggestions": descriptions,
-                "message": f"✅ Found {len(descriptions)} example suggestions for {scenario.title()}"
-            }
-        else:
-            # Return structured response even when no examples are found
-            result = {
-                "type": "example_suggestions", 
-                "scenario": scenario,
-                "suggestions": [],
-                "message": f"No examples available for {scenario} yet. Please check back later."
-            }
-            
-        return jsonify({
-            'success': True,
-            'result': result,
-            'scenario': scenario,
-            'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        })
-            
-    except Exception as e:
-        # Even for errors, return a structured response
-        result = {
-            "type": "example_suggestions",
-            "scenario": scenario, 
-            "suggestions": [],
-            "message": f"Error loading examples for {scenario}: {str(e)}"
-        }
-        return jsonify({
-            'success': True,  # Set to True so frontend handles it properly
-            'result': result,
-            'scenario': scenario,
-            'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        })
+# Category-specific examples route removed - examples now used internally for AI translation only
 
 @app.route('/api/explain', methods=['POST'])
 def explain_results():
@@ -320,11 +268,10 @@ def discover_workspace_examples():
                         'record_count': 10000,  # Simulated count, would be real in production
                         'category': info['category'],
                         'description': info['description']
-                    },
-                    'examples': [
+                    },                    'examples': [
                         {
-                            'source': 'Built-in Examples',
-                            'description': info['description'],
+                            'source': '',
+                            'description': '',  # Remove duplicate description (now shown in table header)
                             'query_count': 5  # Simulated count
                         }
                     ]
