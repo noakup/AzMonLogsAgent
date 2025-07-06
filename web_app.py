@@ -131,40 +131,7 @@ def test_connection():
             'error': str(e)
         })
 
-@app.route('/api/examples/<scenario>')
-def get_examples(scenario):
-    """Get KQL examples for a specific scenario"""
-    global agent
-    
-    try:
-        if not agent:
-            return jsonify({
-                'success': False, 
-                'error': 'Agent not initialized. Please setup workspace first.'
-            })
-        
-        # Run the async examples request
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        
-        try:
-            result = loop.run_until_complete(
-                agent.process_natural_language(f"show me examples for {scenario}")
-            )
-            return jsonify({
-                'success': True,
-                'result': result,
-                'scenario': scenario,
-                'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            })
-        finally:
-            loop.close()
-            
-    except Exception as e:
-        return jsonify({
-            'success': False,
-            'error': str(e)
-        })
+# Category-specific examples route removed - examples now used internally for AI translation only
 
 @app.route('/api/explain', methods=['POST'])
 def explain_results():
@@ -301,11 +268,10 @@ def discover_workspace_examples():
                         'record_count': 10000,  # Simulated count, would be real in production
                         'category': info['category'],
                         'description': info['description']
-                    },
-                    'examples': [
+                    },                    'examples': [
                         {
-                            'source': 'Built-in Examples',
-                            'description': info['description'],
+                            'source': '',
+                            'description': '',  # Remove duplicate description (now shown in table header)
                             'query_count': 5  # Simulated count
                         }
                     ]
