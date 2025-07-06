@@ -941,6 +941,15 @@
                     <div class="example-btn workspace-examples" onclick="discoverWorkspaceExamples()">🔍 Workspace Examples</div>
                 </div>
 
+                <!-- Workspace Examples Section -->
+                <div id="workspaceExamplesSection" class="results-section" style="display: none;">
+                    <h3>🔍 Workspace Examples</h3>
+                    <div id="workspaceExamplesContent" class="result-content">
+                        <!-- Workspace examples will be populated here -->
+                    </div>
+                    <div id="workspaceTimestamp" class="timestamp"></div>
+                </div>
+
                 <!-- Example Suggestions Section -->
                 <div id="exampleSuggestionsSection" class="example-suggestions-section">
                     <h3 id="exampleSuggestionsTitle">💡 Example Suggestions</h3>
@@ -978,15 +987,6 @@
                     </button>
                     <div id="explainContent"></div>
                 </div>
-            </div>
-
-            <!-- Workspace Examples Section -->
-            <div id="workspaceExamplesSection" class="results-section" style="display: none;">
-                <h3>🔍 Workspace Examples</h3>
-                <div id="workspaceExamplesContent" class="result-content">
-                    <!-- Workspace examples will be populated here -->
-                </div>
-                <div id="workspaceTimestamp" class="timestamp"></div>
             </div>
         </div>
     </div>
@@ -1843,9 +1843,6 @@
             
             console.log('✅ Workspace examples displayed, section visibility:', workspaceSection.style.display);
             console.log('✅ Workspace section classes:', workspaceSection.className);
-            
-            // Add temporary alert for debugging
-            alert('Workspace examples should now be visible!');
             
             // Scroll to workspace examples section
             setTimeout(() => {
