@@ -76,3 +76,5 @@ AI_INSTRUCTIONS.md
 azure_agent/__pycache__/__init__.cpython-312.pyc
 azure_agent/__pycache__/__init__.cpython-312.pyc
 azure_agent/__pycache__/monitor_client.cpython-312.pyc
+__pycache__/nl_agent.cpython-312.pyc
+__pycache__/web_app.cpython-312.pyc
