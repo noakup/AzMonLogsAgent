@@ -174,6 +174,139 @@ def explain_results():
     except Exception as e:
         return jsonify({
             'success': False,
+            'error': str(e)        })
+
+@app.route('/api/examples/<scenario>')
+def get_examples(scenario):
+    """Get example queries for a specific scenario"""
+    try:
+        import os
+          # Map scenarios to example files
+        scenario_files = {
+            'requests': 'app_requests_kql_examples.md',
+            'exceptions': 'app_exceptions_kql_examples.md',
+            'traces': 'app_traces_kql_examples.md',
+            'dependencies': 'app_dependencies_kql_examples.md',
+            'custom_events': 'app_custom_events_kql_examples.md',
+            'page_views': 'app_page_views_kql_examples.md',
+            'performance': 'app_performance_kql_examples.md',
+            'usage': 'usage_kql_examples.md'
+        }
+        
+        if scenario not in scenario_files:
+            return jsonify({
+                'success': False,
+                'error': f'Unknown scenario: {scenario}'
+            })
+        
+        filename = scenario_files[scenario]
+        
+        if not os.path.exists(filename):
+            return jsonify({
+                'success': False,
+                'error': f'Example file not found: {filename}'
+            })
+        
+        # Read and parse the example file
+        with open(filename, 'r', encoding='utf-8') as file:
+            content = file.read()
+        
+        # Extract example queries (simple parsing - look for lines starting with specific patterns)
+        examples = []
+        lines = content.split('\n')
+        current_example = None
+        
+        for line in lines:
+            line = line.strip()
+            if line.startswith('# ') or line.startswith('## '):
+                if current_example:
+                    examples.append(current_example)
+                current_example = line.replace('#', '').strip()
+            elif line.startswith('- ') and current_example:
+                example_text = line.replace('- ', '').strip()
+                if example_text:
+                    examples.append(example_text)
+                    current_example = None
+          # If we have fewer than 5 examples, add some generic ones
+        if len(examples) < 5:
+            generic_examples = {
+                'requests': [
+                    'Show me failed requests from the last hour',
+                    'What are the slowest requests in the last 24 hours?',
+                    'Show me requests with response time > 5 seconds',
+                    'Get the top 10 most frequent request URLs',
+                    'Show me requests grouped by status code'
+                ],
+                'exceptions': [
+                    'Show me recent exceptions',
+                    'What are the most common exception types?',
+                    'Show me exceptions from the last 6 hours',
+                    'Get exception count by severity level',
+                    'Show me exceptions grouped by operation name'
+                ],
+                'traces': [
+                    'Show me recent trace logs',
+                    'What are the most frequent trace messages?',
+                    'Show me error traces from the last hour',
+                    'Get traces with specific severity level',
+                    'Show me traces grouped by source'
+                ],
+                'dependencies': [
+                    'Show me dependency failures',
+                    'What are the slowest dependencies?',
+                    'Show me dependencies with high failure rate',
+                    'Get dependency calls from the last hour',
+                    'Show me dependencies grouped by type'
+                ],
+                'custom_events': [
+                    'Show me recent custom events',
+                    'What are the most frequent custom event types?',
+                    'Show me custom events from the last hour',
+                    'Get custom events grouped by name',
+                    'Show me custom events with specific properties'
+                ],
+                'page_views': [
+                    'Show me page views from the last hour',
+                    'What are the most popular pages?',
+                    'Show me page views grouped by browser',
+                    'Get page load times by URL',
+                    'Show me page views by geographic location'
+                ],
+                'performance': [
+                    'Show me performance counters',
+                    'What are the CPU usage trends?',
+                    'Show me memory usage over time',
+                    'Get performance metrics for the last hour',
+                    'Show me performance counters by category'
+                ],
+                'usage': [
+                    'Show me user activity patterns',
+                    'What are the most popular features?',
+                    'Show me usage statistics by region',
+                    'Get daily active users',
+                    'Show me usage trends over time'
+                ]
+            }
+            
+            if scenario in generic_examples:
+                examples.extend(generic_examples[scenario][:5-len(examples)])
+        
+        # Limit to top 8 examples
+        examples = examples[:8]
+        
+        return jsonify({
+            'success': True,
+            'result': {
+                'type': 'example_suggestions',
+                'scenario': scenario,
+                'suggestions': examples,
+                'count': len(examples)
+            }
+        })
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
             'error': str(e)
         })
 
