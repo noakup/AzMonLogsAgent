@@ -1,0 +1,25 @@
+[
+	{
+		"time": "2021-03-22T18:00:16.5159547Z",
+		"resourceId": "/SUBSCRIPTIONS/86886548-0A7C-430B-B16F-014095647DE4/RESOURCEGROUPS/DANOBLE.CASSANDRA-API/PROVIDERS/MICROSOFT.DOCUMENTDB/DATABASEACCOUNTS/CASSANDRA-TEST",
+		"category": "CassandraRequests",
+		"operationName": "Options",
+		"properties": {
+			"activityId": "549113c0-8600-4584-acfe-50ce97a052d9",
+			"errorCode": "-1",
+			"duration": "0.042",
+			"requestCharge": "0",
+			"databaseName": "<empty>",
+			"collectionName": "<empty>",
+			"authorizationTokenType": "PrimaryMasterKey",
+			"address": "104.42.195.92",
+			"piiCommandText": "<empty>",
+			"estimatedDelayFromRateLimitingInMilliseconds": "0",
+			"retriedDueToRateLimiting": "false",
+			"region": "East US",
+			"requestLength": "0",
+			"responseLength": "48",
+			"userAgent": "<empty>"
+		}
+	}
+]

@@ -1,0 +1,3 @@
+ACSRoomsIncomingOperations
+| summarize Count = count() by OperationName, OperationVersion, ResultType, ResultSignature
+| order by OperationName asc, Count desc

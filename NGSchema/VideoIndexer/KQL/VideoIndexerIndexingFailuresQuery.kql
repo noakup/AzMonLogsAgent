@@ -1,0 +1,7 @@
+// Failed Indexing operations 
+// Display Video Indexer Account logs of all failed indexing operations. 
+VIIndexing
+// | where AccountId == "<AccountId>"  // to filter on a specific accountId, uncomment this line
+| where Status == "Failure"
+| summarize count() by bin(TimeGenerated, 1d)
+| render columnchart

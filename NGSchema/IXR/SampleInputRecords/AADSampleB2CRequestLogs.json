@@ -1,0 +1,13 @@
+[
+    {
+        "time": "2022-05-06T05:00:25.2880344Z",
+        "resourceId": "tenants/9859cd0c-9d99-4683-abcc-87462f67a0bc/providers/Microsoft.aadiam",
+        "operationName": "B2C Request",
+        "category": "B2CRequestLogs",
+        "tenantId": "9859cd0c-9d99-4683-abcc-87462f67a0bc",
+        "resultType": "Non-Throttled",
+        "resultSignature": "200.0",
+        "callerIpAddress": "{{PII:(499868040)}}",
+        "correlationId": "67c4bc4a-0624-4167-8485-450c765acd3f"
+      }
+]

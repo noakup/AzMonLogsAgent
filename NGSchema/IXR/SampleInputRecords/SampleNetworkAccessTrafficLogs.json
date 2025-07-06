@@ -1,0 +1,18 @@
+[
+	{
+		"time": "2023-01-06T07:58:46.8346145Z",
+		"operationName": "MICROSOFT.AADIAM/SITES/WRITE",
+		"category": "NetworkAccessTrafficLogs",
+		"properties": "{\"CreatedDateTime\":\"2023-03-06T07:58:46.8346145Z\",\"TenantId\":\"cb9af522-39fe-4056-b879-e3200ff37b3d\",\"TunnelId\":\"xxxxxxx-39fe-4056-b879-e3200ff37b3d\",\"TransactionId\":\"20221208T213303Z-gnwuk8cd9h2wvbnm4cq7banegs0000000080000000001m9x\",\"ConnectionId\":\"6+Cy7aaBT+aGV+Ds.1\",\"SessionId\":\"\",\"TrafficType\":\"M365\",\"DeviceCategory\":\"Client\",\"DestinationIp\":\"100.64.0.239\",\"DestinationPort\":443,\"DestinationFQDN\":\"oneozco.sharepoint.com\",\"SourceIp\":\"20.51.192.19\",\"SourcePort\":63391,\"DeviceOperatingSystem\":\"Windows10Pro\",\"DeviceOperatingSystemVersion\":\"10.0.19044\",\"AgentVersion\":\"1.5.233\",\"DeviceId\":\"46bba529-d081-4cec-883b-4023b9bde1e0\",\"UserId\":\"ef147e40-db4c-40e4-9e63-f254f576421f\",\"UserPrincipalName\":\"User1@microsoft.com\",\"TransportProtocol\":\"TCP\",\"NetworkProtocol\":\"IPv4\",\"Action\":\"Allowed\",\"PolicyRuleId\":\"11111-c507-4b11-8e9b-236e79b04279\",\"PolicyId\":\"fbea3325-6cc8-46e9-8c61-0451d96a1c02\",\"SentBytes\":1500,\"ReceivedBytes\":1000,\"ReferrerHeader\":\"process\",\"OriginHeader\":\"https://developer.mozilla.org\",\"XForwardedFor\":\"incentivize\",\"FilteringProfileId\":\"xxxxxxx-39fe-4056-b879-e3200ff37b3d\",\"FilteringProfileName\":\"name\",\"PolicyName\":\"Policy Name\",\"RuleName\":\"Rule Name\",\"InitiatingProcessName\":\"test.exe\",\"ResourceTenantId\":\"xxxxxxx-49fe-4056-b879-e3200ff37b3d\",\"ThreatType\":\"threat\",\"DestinationUrl\":\"www.aa.com\",\"Description\":\"Test\",\"DestinationWebCategories\":\"Gaming,Gambling\",\"ApplicationId\":\"cb9af522-39fe-4056-b879-e3200ff37b3d\",\"ConnectionStatus\":\"Closed\",\"ConnectorId\":\"cb9af622-39fe-4056-b879-e3200ff37b3d\",\"ConnectorName\":\"ConnectorName1\",\"ConnectorIp\":\"100.64.0.239\",\"AccessType\":\"QuickAccess\",\"PrivateAccessProcessingRegion\":\"eastus\",\"AppSegmentId\":\"cb9af522-39fe-4056-b879-e3200ff37b3d\",\"RemoteNetworkId\":\"4491c95f-cff8-4de2-bd34-68dc9d101515\",\"HttpMethod\":\"Get\",\"ResponseCode\":\"200\",\"Token3PExpiry\":\"2023-01-06T09:58:46.8346145Z\",\"Token3PValidFrom\":\"2023-01-06T06:58:46.8346145Z\",\"Token3PIssuedAt\":\"2023-01-06T06:58:46.8346145Z\",\"Token3PUniqueId\":\"6Cy7aaBTaGVDs1\",\"TlsAction\":\"Intercepted\",\"TlsStatus\":\"Success\",\"TlsPolicyId\":\"6e0aed64-d900-4445-85d0-583f5e98289b\",\"TlsPolicyName\":\"PolicyName\",\"UniqueTokenId\":\"qsShESgJ_kSxsRCduq8tAA\",\"VendorNames\":\"[Syros]\",\"CloudAppCatalogId\":\"12345\",\"CloudAppName\":\"ExampleApp\",\"CloudAppCategory\":\"AI\",\"CloudAppGeneralScore\":\"1\",,\"CloudAppRiskScore\":\"2\",\"CloudAppComplianceScore\":\"3\",\"CloudAppLegalScore\":\"4\",\"CloudAppLoginUser\":\"test@microsoft.com\"}",
+		"location": "eastus",
+		"tenantId": "TENANT-ID"
+	},
+	{
+		"time": "2023-01-06T07:58:46.8346145Z",
+		"operationName": "MICROSOFT.AADIAM/SITES/WRITE",
+		"category": "NetworkAccessTrafficLogs",
+		"properties": "{\"CreatedDateTime\":\"2023-03-20T09:28:47.6448335Z\",\"TenantId\":\"cb9af522-39fe-4056-b879-e3200ff37b3d\",\"TransactionId\":\"20221208T213303Z-gnwuk8cd9h2wvbnm4cq7banegs0000000080000000001m9x\",\"ConnectionId\":\"6+Cy7aaBT+aGV+Ds.1\"}",
+		"location": "eastus",
+		"tenantId": "TENANT-ID"
+	}
+]

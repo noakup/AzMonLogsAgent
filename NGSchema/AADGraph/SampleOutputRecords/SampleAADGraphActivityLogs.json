@@ -1,0 +1,32 @@
+[
+  {
+    "TimeGenerated": "2025-05-23T08:00:47.8744764Z",
+    "TimeRequested": "2025-05-23T08:00:47.8744764Z",
+    "Location": "westus2",
+    "RequestId": "68958d2a-53c5-4f56-b49a-efdb750d454a",
+    "OperationName": "AAD Graph Activity",
+    "ApiVersion": "1.61-internal",
+    "Category": "AzureADGraphActivityLogs",
+    "ResultSignature": "403",
+    "DurationMs": 585,
+    "Level": "Informational",
+    "RequestMethod": "GET",
+    "ResponseSizeBytes": 20002,
+    "SignInActivityId": "fcpO5WRCzka4wqQ4psYTAA",
+    "Roles": "User.Read.All",
+    "TokenIssuedAt": "5/23/2025 7:55:46 AM",
+    "AppId": "1950a258-227b-4e31-a9cf-717495945fc2",
+    "UserId": "8eaed4cf-822e-4231-8604-1ebc3c69d308",
+    "ServicePrincipalId": "12345678-90ab-cdef-1234-567890abcdef",
+    "Scopes": "62e90394-69f5-4237-9190-012177145e10",
+    "IdentityProvider": "login.microsoftonline.com",
+    "ClientAuthMethod": "ClientSecret",
+    "Wids": "sample-wid-1,sample-wid-2",
+    "CallerIpAddress": "192.168.1.100",
+    "UserAgent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.26100.4061",
+    "RequestUri": "/users",
+    "SessionId": "004fd599-f465-cbfa-8862-09a0be634ab0",
+    "DeviceId": "device-sample-id",
+    "ActorType": "User"
+  }
+]

@@ -1,0 +1,14 @@
+source
+| project
+    TimeGenerated = todatetime(["TimeGenerated"]),
+    AzureADTenantId = AzureADTenantId,
+    AzureADDeviceId = AzureADDeviceId,
+	ContentType = ContentType,
+	BytesFromCDN = tolong(BytesFromCDN),
+	BytesFromIntPeers = tolong(BytesFromIntPeers),
+	BytesFromPeers = tolong(BytesFromPeers),
+	BytesFromGroupPeers = tolong(BytesFromGroupPeers),
+	BytesFromCache = tolong(BytesFromCache),
+	DeviceCount = tolong(DeviceCount),
+	BWOptPercent28Days = todouble(BWOptPercent28Days)
+	

@@ -1,0 +1,8 @@
+[
+  {
+    "TimeGenerated": "9/28/2016 8:40:06 PM +00:00",
+    "TrackingId": "fb1b3676-bb2d-4b17-85b7-be1c7aa1967e",
+    "Message": "Scaled-up EventHub TUs (UpdateStartTimeUTC: 5/13/2021 7:48:36 AM, PreviousValue: 1, UpdatedThroughputUnitValue: 2, AutoScaleReason: 'IncomingMessagesPerSecond reached 2170')",
+    "Provider": "eventhub"
+  }
+]

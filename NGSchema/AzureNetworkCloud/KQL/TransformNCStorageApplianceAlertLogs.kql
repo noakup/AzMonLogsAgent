@@ -1,0 +1,16 @@
+source
+| project
+    TimeGenerated      =todatetime(["arrayUTCtime"]),
+    ArrayName          = arrayName,
+    ArrayController    = controller,
+    Node               = Node,
+    PodName            = PodName,
+    ContainerName      = ContainerName,
+    Message            = message,
+    Action             = suggestedAction,
+    Domain             = domain,
+    User               = user,
+    Severity           = severity,
+    Location           = location,
+    ClusterManagerName = clusterManagerName,
+    ClusterName        = clusterName

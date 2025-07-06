@@ -1,0 +1,4 @@
+//Count of queries received by the Analysis Services engine
+PowerBIDatasetsTenant
+| where OperationName == 'QueryEnd'
+| summarize count()

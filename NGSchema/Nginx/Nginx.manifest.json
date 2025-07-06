@@ -1,0 +1,328 @@
+{
+    "type": "NGINX.NGINXPLUS/nginxDeployments",
+    "displayName": "NGINXaaS",
+    "description": "NGINXaaS is an Azure-native solution co-developed by F5 and Microsoft.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Liftr-Nginx/Triage",
+    "contactDL": "liftr-nginx@microsoft.com",
+    "relatedTables": [],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "NGXOperationLogs",
+            "description": "NGINX access and error logs captured by NGINXaaS.",
+            "categories": [
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "NGINXNGINXPLUS_NGINXLOGS",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/NginxLogTransform.kql",
+            "sampleInputRecordsFilePath": "SampleInputRecords/SampleNginxLogs.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/SampleNginxLogsOutput.json",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "Timestamp (UTC) when the log record was generated."
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The location (region) the NGINX instance was accessed in."
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The message of the log record."
+                },
+                {
+                    "name": "FilePath",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The file path where log records come from."
+                },
+                {
+                    "name": "Tag",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The tag of log records from syslog."
+                },
+                {
+                    "name": "Severity",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The severity of log records from syslog as defined in RFC 3164."
+                },
+                {
+                    "name": "Facility",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The facility of log records from syslog as defined in RFC 3164.Facility can be one of kern, user, mail, daemon, auth, intern, lpr, news, uucp, clock, authpriv, ftp, ntp, audit, alert, cron, local0..local7. Default is local7."
+                }
+            ]
+        },
+        {
+            "name": "NGXSecurityLogs",
+            "description": "NGINX security logs captured by NGINXaaS.",
+            "categories": [
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 1,
+            "dataTypeId": "NGINXNGINXPLUS_NGINXSECURITYLOGS",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/NginxSecurityLogTransform.kql",
+            "sampleInputRecordsFilePath": "SampleInputRecords/SampleNginxSecurityLogs.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/SampleNginxSecurityLogsOutput.json",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "Timestamp (UTC) when the log record was generated."
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The location (region) the NGINX instance was accessed in."
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The message of the log record."
+                },
+                {
+                    "name": "FilePath",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The file path where log records come from."
+                },
+                {
+                    "name": "Tag",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The tag of log records from syslog."
+                },
+                {
+                    "name": "Severity",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The severity of log records from syslog as defined in RFC 3164."
+                },
+                {
+                    "name": "Facility",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The facility of log records from syslog as defined in RFC 3164.Facility can be one of kern, user, mail, daemon, auth, intern, lpr, news, uucp, clock, authpriv, ftp, ntp, audit, alert, cron, local0..local7. Default is local7."
+                }
+            ]
+        },
+        {
+            "name": "NginxUpstreamUpdateLogs",
+            "description": "NGINX upstream update logs captured by NGINXaaS.",
+            "categories": [
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "NGINXNGINXPLUS_NGINXUPSTREAMUPDATELOGS",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/NginxUpstreamUpdateLogTransform.kql",
+            "sampleInputRecordsFilePath": "SampleInputRecords/SampleNginxUpstreamUpdateLogs.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/SampleNginxUpstreamUpdateLogsOutput.json",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "Timestamp (UTC) when the log record was generated."
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The location (region) the NGINX instance was accessed in."
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The message of the log record."
+                },
+                {
+                    "name": "Tag",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The tag of log records from syslog."
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The log level of the log record."
+                },
+                {
+                    "name": "Context",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Upstream's NGINX context: http or stream."
+                },
+                {
+                    "name": "UpstreamName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Name of the upstream as shown in the config."
+                },
+                {
+                    "name": "Error",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Error message."
+                }
+            ]
+        }    ],
+    "functions": [],
+    "queries": [
+        {
+            "id": "eff2d4f3-9a25-4a3e-9434-b1ce56ff7d8c",
+            "displayName": "Show NGINXaaS access logs",
+            "description": "A list of access logs sorted by time.",
+            "bodyFilePath": "KQL/NginxAccessLogs.kql",
+            "categories": [
+                "resources"
+            ],
+            "relatedTables": [
+                "NGXOperationLogs"
+            ],
+            "tags": {},
+            "properties": {
+              "ExampleQuery": true
+            }
+        },
+        {
+            "id": "55b0b24b-dd8a-4f91-a797-2c0eae9ea440",
+            "displayName": "Show NGINXaaS error logs",
+            "description": "A list of error logs sorted by time.",
+            "bodyFilePath": "KQL/NginxErrorLogs.kql",
+            "categories": [
+                "resources"
+            ],
+            "relatedTables": [
+                "NGXOperationLogs"
+            ],
+            "tags": {},
+            "properties": {
+              "ExampleQuery": true
+            }
+        },
+        {
+            "id": "4d51c78c-2124-4637-8fd1-0450556306bc",
+            "displayName": "Show NGINXaaS security logs",
+            "description": "A list of security logs sorted by time.",
+            "bodyFilePath": "KQL/NginxSecurityLogs.kql",
+            "categories": [
+                "resources"
+            ],
+            "relatedTables": [
+                "NGXSecurityLogs"
+            ],
+            "tags": {},
+            "properties": {
+              "ExampleQuery": true
+            }
+        },
+        {
+            "id": "26551BF0-E908-4C30-8199-335F7CC86520",
+            "displayName": "Show NGINXaaS upstream update logs",
+            "description": "A list of upstream update logs sorted by time.",
+            "bodyFilePath": "KQL/NginxUpstreamUpdateLogs.kql",
+            "categories": [
+                "resources"
+            ],
+            "relatedTables": [
+                "NginxUpstreamUpdateLogs"
+            ],
+            "tags": {},
+            "properties": {
+              "ExampleQuery": true
+            }
+        }
+    ]
+}

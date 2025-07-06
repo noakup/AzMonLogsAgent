@@ -1,0 +1,23 @@
+source
+| project
+    TimeGenerated = todatetime(['time']),
+    LogicalServerName = LogicalServerName,
+    ReplicaRole = ReplicaRole,
+    DatabaseName = tostring(properties.DatabaseName),
+    UserId = toint(properties.Datdba),
+    ConnectionsLimit = toint(properties.DatConnLimit),
+    MinMultixactId = tolong(properties.DatMinmxid),
+    MinMultixactIdAge = tolong(properties.Age_DatMinmxid),
+    TransactionIdFrozen = tolong(properties.DatFrozenxid),
+    TransactionIdFrozenAge = tolong(properties.Age_DatFrozenxid),
+    VacuumFreezeMinAge = toint(properties.Vacuum_freeze_min_age),
+    AutovacuumFreezeMaxAge = toint(properties.Autovacuum_freeze_max_age),
+    RemainingTransactionIds = tolong(properties.Total_remaining_xids),
+    RemainingTransactionIdsTillEmergencyAV = tolong(properties.Remaining_xids_till_emergency_autovacuum),
+    RemainingTransactionIdsTillWraparound = tolong(properties.Remaining_xids_till_wraparound),
+    VacuumMultixactFreezeMinAge = toint(properties.Vacuum_multixact_freeze_min_age),
+    AutovacuumMultixactFreezeMaxAge = toint(properties.Autovacuum_multixact_freeze_max_age),
+    RemainingMultixactIds = tolong(properties.Total_remaining_mxids),
+    RemainingMultixactIdsTillEmergencyAV = tolong(properties.Remaining_mxids_till_emergency_autovacuum),
+    RemainingMultixactIdsTillWraparound = tolong(properties.Remaining_mxids_till_wraparound),
+    Location = location

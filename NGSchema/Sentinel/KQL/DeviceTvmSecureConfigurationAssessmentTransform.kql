@@ -1,0 +1,15 @@
+source
+| project
+Timestamp = todatetime(Timestamp),
+ConfigurationImpact =todouble(ConfigurationImpact),
+Context = todynamic(Context),
+IsCompliant = tobool(IsCompliant),
+IsApplicable = tobool(IsApplicable),
+IsExpectedUserImpact = tobool(IsExpectedUserImpact),
+DeviceId = tostring(DeviceId),
+DeviceName = tostring(DeviceName),
+OSPlatform = tostring(OSPlatform),
+ConfigurationId = tostring(ConfigurationId),
+ConfigurationCategory = tostring(ConfigurationCategory),
+ConfigurationSubcategory = tostring(ConfigurationSubcategory),
+TimeGenerated = todatetime(Timestamp)

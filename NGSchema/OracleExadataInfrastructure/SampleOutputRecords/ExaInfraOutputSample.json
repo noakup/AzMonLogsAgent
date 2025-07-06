@@ -1,0 +1,14 @@
+[
+  {
+    "TimeGenerated":"2024-07-09T13:50:10.464Z",
+    "resourceId":"/SUBSCRIPTIONS/TEST_SUBSCRIPTIONID2/RESOURCEGROUPS/TEST_RESOURCEGROUPNAME2/PROVIDERS/ORACLE.DATABASE/CLOUDEXADATAINFRASTRUCTURES/OBSDPINFRAFRA",
+    "Category":"update",
+    "OperationName":"ORACLE.DATABASE/CLOUDEXADATAINFRASTRUCTURES/ACTION",
+    "Level":"Informational",
+    "Location":"germanywestcentral",
+    "ResultDescription": "UpdateCloudExadataInfrastructure",
+    "LifeCycleState": "AVAILABLE",
+    "DisplayName": "obsDpInfraFra",
+    "Shape": "Exadata.X9M"
+    }
+]

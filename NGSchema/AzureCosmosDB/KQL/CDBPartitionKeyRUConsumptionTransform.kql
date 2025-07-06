@@ -1,0 +1,16 @@
+source  
+| extend properties = parse_json(properties)
+| extend resourceIdArray = split(resourceId, "/") 
+| extend numElementsInResourceId = array_length(resourceIdArray)
+| extend accountNameExtracted = resourceIdArray[numElementsInResourceId - 1] 
+| project 
+	TimeGenerated = todatetime(['time']),    
+	AccountName =  tostring(accountNameExtracted),
+	ActivityId = activityId,     
+	PartitionKey =  tostring(properties.partitionKey), 
+	PartitionKeyRangeId = tostring(properties.partitionKeyRangeId), 
+	OperationName = tostring(properties.operationType), 
+	RegionName =  tostring(properties.regionName),     
+	DatabaseName = tostring(properties.databaseName), 
+	CollectionName = tostring(properties.collectionName), 
+	RequestCharge = todouble(properties.requestCharge) 

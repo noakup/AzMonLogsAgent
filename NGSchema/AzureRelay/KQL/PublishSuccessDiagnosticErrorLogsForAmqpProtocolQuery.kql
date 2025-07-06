@@ -1,0 +1,4 @@
+AZMSDiagnosticErrorLogs
+| where Provider =~ "Relay"
+| project  ActivityName, _ResourceId, OperationResult,ErrorMessage
+| summarize by ActivityName

@@ -1,0 +1,20 @@
+source
+| extend props = parse_json(properties)
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    CorrelationId = correlationId,
+    Location = location,
+    EntitlementResult = tostring(props.entitlementResult),
+    TargetResourceId = tostring(props.targetResourceId),
+    TargetResourceType = tostring(props.targetResourceType),
+    ParticipantName	= tostring(props.participantName),
+    UserName = tostring(props.callerDisplayName),
+    GrantType = tostring(props.grantType),
+    GrantSource = tostring(props.grantSourceResourceId),
+    GrantSourceType = tostring(props.grantSourceResourceType),
+    EntitlementSummary = tostring(props.entitlementSummary),
+    ReferencedResourceId = tostring(props.underlineResourceId),
+    ReferencedResourceType = tostring(props.underlineResourceType),
+    ParticipantTenantId = tostring(props.participantTenantId),
+    GrantCorrelationId = tostring(props.grantCorrelationId);

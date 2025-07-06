@@ -1,0 +1,682 @@
+{
+    "type": "Microsoft.DataReplication/ReplicationVaults",
+    "displayName": "Azure Migrate Data Replication",
+    "description": "All tables related to Azure Migrate Data Replication Service.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Azure Migrate/ASZ Migration",
+    "contactDL": "aszmigratedev@microsoft.com",
+    "relatedFunctions": [],
+    "relatedTables": [],
+    "tables": [
+        {
+            "name": "ASRv2JobEvents",
+            "description": "This table contains records of Azure Site Recovery v2 (ASRv2) jobs such as replication, migration, etc., with key details for monitoring and diagnostics, such as protected item's information, duration, status, description and so on. Whenever an ASRv2 job is completed (i.e., succeeded or failed), a corresponding record for the job is sent to this table. You can view history of ASRv2 jobs by querying this table over a larger time range, provided your workspace has the required retention configured.",
+            "categories": [
+                "audit"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "AZURESITERECOVERY_JOBEVENTS",
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "level",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/Transforms/JobEventsTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The name of the operation."
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The category of the log."
+                },
+                {
+                    "name": "CorrelationId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The correlation Id of the event."
+                },
+                {
+                    "name": "AffectedObjectId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The affected object Id."
+                },
+                {
+                    "name": "AffectedObjectName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The affected object name."
+                },
+                {
+                    "name": "AffectedObjectType",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The affected object type."
+                },
+                {
+                    "name": "State",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation state."
+                },
+                {
+                    "name": "HasInformation",
+                    "type": "Bool",
+                    "isDefaultDisplay": true,
+                    "description": "Whether the operation has informational messages logged."
+                },
+                {
+                    "name": "HasWarnings",
+                    "type": "Bool",
+                    "isDefaultDisplay": true,
+                    "description": "Whether the operation has warnings logged."
+                },
+                {
+                    "name": "HasErrors",
+                    "type": "Bool",
+                    "isDefaultDisplay": true,
+                    "description": "Whether the operation has critical errors logged."
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The description for the event."
+                },
+                {
+                    "name": "StartTime",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The operation start time."
+                },
+                {
+                    "name": "EndTime",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The operation end time."
+                },
+                {
+                    "name": "TimeTaken",
+                    "type": "Double",
+                    "isDefaultDisplay": true,
+                    "description": "The duration of the operation in milliseconds."
+                },
+                {
+                    "name": "Version",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The version for the event properties."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/JobEventsSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/JobEventsSample.json"
+        },
+        {
+            "name": "ASRv2HealthEvents",
+            "description": "This table contains records of Azure Site Recovery v2 (ASRv2) health related events.",
+            "categories": [
+                "audit"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "AZURESITERECOVERY_HEALTHEVENTS",
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "level",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/Transforms/HealthEventsTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The name of the operation."
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The category of the log."
+                },
+                {
+                    "name": "CorrelationId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The correlation Id of the event."
+                },
+                {
+                    "name": "AffectedResourceId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The affected resource Id."
+                },
+                {
+                    "name": "AffectedResourceName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The affected resource name."
+                },
+                {
+                    "name": "EventType",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The health event type."
+                },
+                {
+                    "name": "EventName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The health event name."
+                },
+                {
+                    "name": "TimeOfOccurrence",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The time of occurrence of the event."
+                },
+                {
+                    "name": "EventSeverity",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The health event severity."
+                },
+                {
+                    "name": "HealthErrors",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true,
+                    "description": "The errors associated with the health event."
+                },
+                {
+                    "name": "LogId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The event log Id for the health event."
+                },
+                {
+                    "name": "Version",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The version for the event properties."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/HealthEventsSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/HealthEventsSample.json"
+        },
+        {
+            "name": "ASRv2ReplicationVaults",
+            "description": "This table contains records of Azure Site Recovery v2 (ASRv2) replication vault related events.",
+            "categories": [
+                "audit"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "AZURESITERECOVERY_REPLICATIONVAULTS",
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "level",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/Transforms/ReplicationVaultsTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The name of the operation."
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The category of the log."
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The location of the replication vault."
+                },
+                {
+                    "name": "ServiceResourceId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The replication vault service resource Id."
+                },
+                {
+                    "name": "ProvisioningState",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The provisioning state of the replication vault."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/ReplicationVaultsSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/ReplicationVaultsSample.json"
+        },
+        {
+            "name": "ASRv2ReplicationPolicies",
+            "description": "This table contains records of Azure Site Recovery v2 (ASRv2) replication policy related events.",
+            "categories": [
+                "audit"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "AZURESITERECOVERY_REPLICATIONPOLICIES",
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "level",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/Transforms/ReplicationPoliciesTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The name of the operation."
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The category of the log."
+                },
+                {
+                    "name": "ProvisioningState",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The provisioning state of the replication policy."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/ReplicationPoliciesSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/ReplicationPoliciesSample.json"
+        },
+        {
+            "name": "ASRv2ReplicationExtensions",
+            "description": "This table contains records of Azure Site Recovery v2 (ASRv2) replication extension related events.",
+            "categories": [
+                "audit"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "AZURESITERECOVERY_REPLICATIONEXTENSIONS",
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "level",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/Transforms/ReplicationExtensionsTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The name of the operation."
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The category of the log."
+                },
+                {
+                    "name": "ProvisioningState",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The provisioning state of the replication extension."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/ReplicationExtensionsSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/ReplicationExtensionsSample.json"
+        },
+        {
+            "name": "ASRv2ProtectedItems",
+            "description": "This table contains records of Azure Site Recovery v2 (ASRv2) protected item related events.",
+            "categories": [
+                "audit"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "AZURESITERECOVERY_PROTECTEDITEMS",
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "level",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/Transforms/ProtectedItemsTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) when the log was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The name of the operation."
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The category of the log."
+                },
+                {
+                    "name": "CorrelationId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The correlation Id of the event."
+                },
+                {
+                    "name": "ProviderId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The replication provider Id."
+                },
+                {
+                    "name": "PolicyName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The name of the replication policy."
+                },
+                {
+                    "name": "ReplicationExtensionName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The name of the replication extension."
+                },
+                {
+                    "name": "SourceFabricProviderId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The source fabric provider Id."
+                },
+                {
+                    "name": "TargetFabricProviderId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The target fabric provider Id."
+                },
+                {
+                    "name": "FabricAgentId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The fabric agent Id."
+                },
+                {
+                    "name": "TargetFabricAgentId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The target fabric agent Id."
+                },
+                {
+                    "name": "FabricObjectId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The fabric object Id."
+                },
+                {
+                    "name": "FabricObjectName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The fabric object name."
+                },
+                {
+                    "name": "FabricId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The fabric Id."
+                },
+                {
+                    "name": "TargetFabricId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The target fabric Id."
+                },
+                {
+                    "name": "ProtectionState",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The current protection state."
+                },
+                {
+                    "name": "LastSuccessfulPlannedFailoverTime",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The time of the last successful failover the protected item."
+                },
+                {
+                    "name": "ReplicationHealth",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The health of the protected item."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/ProtectedItemsSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/ProtectedItemsSample.json"
+        }
+    ],
+    "functions": [],
+    "queries": []
+}

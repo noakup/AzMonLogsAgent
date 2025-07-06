@@ -1,0 +1,13 @@
+[
+    {
+        "TrackingId": "4d8c8ba4-fbca-4043-a813-36cf8cd1843f_B9",
+        "NamespaceName": "VijayEHTest",
+        "EventhubName": "VijayEHTest",
+        "PartitionId": "0",
+        "GroupId": "<unique group id>",
+        "Message": "Kafka Error Message",
+        "ClientId": "<Client Unique ID>",
+        "TimeGenerated": "9/28/2016 8:40:06 PM +00:00",
+        "Provider": "eventhub"
+      }
+]

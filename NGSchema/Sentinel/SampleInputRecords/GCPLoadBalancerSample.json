@@ -1,0 +1,57 @@
+[{
+    "httpRequest": {
+      "cacheLookup": true,
+      "latency": "0.280233s",
+      "remoteIp": "87.120.115.119",
+      "requestMethod": "GET",
+      "requestSize": "244",
+      "requestUrl": "http://34.149.80.175/_profiler/phpinfo",
+      "responseSize": "497",
+      "status": 403,
+      "userAgent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3947.100 Safari/537.36"
+    },
+    "insertId": "1sf2adbfqluq84",
+    "jsonPayload": {
+      "@type": "type.googleapis.com/google.cloud.loadbalancing.type.LoadBalancerLogEntry",
+      "backendTargetProjectNumber": "projects/145527844609",
+      "cacheDecision": [
+        "RESPONSE_HAS_CONTENT_TYPE",
+        "CACHE_MODE_CACHE_ALL_STATIC"
+      ],
+      "cacheId": "AMS-cba56054",
+      "enforcedSecurityPolicy": {
+        "configuredAction": "THROTTLE",
+        "name": "default-security-policy-for-backend-service-test-waf-logging-bs",
+        "outcome": "ACCEPT",
+        "priority": 2147483646,
+        "rateLimitAction": {
+          "outcome": "RATE_LIMIT_THRESHOLD_CONFORM"
+        }
+      },
+      "remoteIp": "87.120.115.119",
+      "securityPolicyRequestData": {
+        "remoteIpInfo": {
+          "regionCode": "US"
+        }
+      },
+      "statusDetails": "response_sent_by_backend"
+    },
+    "logName": "projects/azure-sentinel-poc-436113/logs/requests",
+    "receiveTimestamp": "2024-11-19T16:22:28.15528043Z",
+    "resource": {
+      "labels": {
+        "backend_service_name": "test-waf-logging-bs",
+        "forwarding_rule_name": "test-waf-front",
+        "project_id": "azure-sentinel-poc-436113",
+        "target_proxy_name": "test-waf-lb-target-proxy",
+        "url_map_name": "test-waf-lb",
+        "zone": "global"
+      },
+      "type": "http_load_balancer"
+    },
+    "severity": "WARNING",
+    "spanId": "3c05999a3a2825a2",
+    "timestamp": "2024-11-19T16:22:25.938846Z",
+    "trace": "projects/azure-sentinel-poc-436113/traces/34cf12e5a5e8fcfd8e0f20c7660a76dd"
+  }
+]

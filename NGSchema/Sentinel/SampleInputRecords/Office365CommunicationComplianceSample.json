@@ -1,0 +1,45 @@
+[
+  {
+    "CreationTime": "2022-01-20T11:18:33",
+    "Id": "e7d2220a-734d-4eb4-8989-08d9dc069845",
+    "Operation": "SupervisionRuleMatch",
+    "OrganizationId": "d6a06676-95e8-4632-b949-44bc00f0793f",
+    "RecordType": 68,
+    "ResultStatus": "{\"ItemClass\":\"IPM.Note\",\"CcsiResults\":\"\"}",
+    "UserKey": "SupervisionStoreDeliveryAgent",
+    "UserType": 0,
+    "Version": 1,
+    "Workload": "Exchange",
+    "ObjectId": "logs for CC",
+    "UserId": "noreply@mail.bloombergbusiness.com",
+    "IsPolicyHit": true,
+    "SRPolicyMatchDetails": {
+      "SRPolicyId": "34840fea-41fa-487a-9bad-79eddb37311d",
+      "SRPolicyName": "SharedMBX",
+      "SRRuleMatchDetails": [
+        { "SRCategoryName": "Insiders" },
+        { "SRCategoryName": "First Command" }
+      ]
+    }
+  },
+  {
+    "CreationTime": "2022-01-20T11:18:33",
+    "Id": "3ab263c3-6519-462b-b172-08d9dc06985d",
+    "Operation": "SupervisionRuleMatch",
+    "OrganizationId": "d6a06676-95e8-4632-b949-44bc00f0793f",
+    "RecordType": 68,
+    "ResultStatus": "{\"ItemClass\":\"IPM.Note\",\"CcsiResults\":\"\"}",
+    "UserKey": "SupervisionStoreDeliveryAgent",
+    "UserType": 0,
+    "Version": 1,
+    "Workload": "Exchange",
+    "ObjectId": "logs for CC",
+    "UserId": "noreply@mail.bloombergbusiness.com",
+    "IsPolicyHit": true,
+    "SRPolicyMatchDetails": {
+      "SRPolicyId": "df744a8f-4218-4689-a13e-ee0f36d1022e",
+      "SRPolicyName": "Catch ALL",
+      "SRRuleMatchDetails": []
+    }
+  }
+]

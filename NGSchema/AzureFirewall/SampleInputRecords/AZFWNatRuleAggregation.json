@@ -1,0 +1,18 @@
+[
+  {
+    "category": "AZFWNatRuleAggregation",
+    "time": "2021-10-19T23:01:59.723496Z",
+    "resourceId": "/subscriptions/aeb5b02a-0f18-45a4-86d6-81808115cacf/resourcegroups/manuelberger-new-logs-test-2/providers/microsoft.network/azurefirewalls/fw",
+    "properties": {
+      "Protocol": "TCP",
+      "SourceIp": "101.194.187.183",
+      "TranslatedIp": "10.20.30.40",
+      "TranslatedPort": 9754,
+      "Policy": "policy1",
+      "RuleCollectionGroup": "group1",
+      "RuleCollection": "collection1",
+      "Rule": "rule1",
+      "NatRuleCount":  200
+    }
+  }
+]

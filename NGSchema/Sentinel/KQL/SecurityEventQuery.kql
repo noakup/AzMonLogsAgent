@@ -1,0 +1,4 @@
+SecurityEvent
+| where EventSourceName == "Microsoft-Windows-Security-Auditing"
+| summarize EventCount = count() by EventID
+| sort by EventCount desc

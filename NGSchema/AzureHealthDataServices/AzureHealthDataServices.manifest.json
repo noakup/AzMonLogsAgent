@@ -1,0 +1,398 @@
+{
+    "type": "Microsoft.HealthcareApis/workspaces",
+    "displayName": "Health Data Services",
+    "description": "Logs generated through Health Data Services and pushed to Azure Monitoring.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Azure Healthcare APIs",
+    "contactDL": "resolutesupport@microsoft.com",
+    "tables": [
+      {
+        "name": "AHDSMedTechDiagnosticLogs",
+        "description": "Actionable logs generated from your MedTech application.",
+        "categories": [ "resources" ],
+        "tags": {},
+        "properties": {},
+        "dataTypeId": "HEALTHCAREAPIS_IOTDIAGNOSTICLOGS",
+        "tableState": "Production",
+        "isLakeAllowed": true,
+        "isTroubleshootingAllowed": true,
+        "artifactVersion": 4,
+        "input": [
+          {
+            "name": "time",
+            "type": "DateTime"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "resultType",
+            "type": "String"
+          },
+          {
+            "name": "resultDescription",
+            "type": "String"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/AHDSMedTechDiagnosticLogs.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "description": "Time (UTC) when the log was created.",
+            "type": "DateTime",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "OperationName",
+            "description": "The operation stage of the service from which the log entry was generated.",
+            "type": "String",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "Message",
+            "description": "Description of the log entry.",
+            "type": "String",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "LogType",
+            "description": "Type of the log entry.",
+            "type": "String",
+            "isDefaultDisplay": true
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/AHDSMedTechDiagnosticLogsSample.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/AHDSMedTechDiagnosticLogsSample.json"
+        },
+        {
+          "name": "AHDSDicomDiagnosticLogs",
+          "description": "Actionable logs generated from your Azure Health Data DICOM service, including events information like, warning logs per tag per DICOM instance denoting validation issues.",
+          "categories": ["resources"],
+          "tags": {},
+          "properties": {},
+          "dataTypeId": "HEALTHCAREAPIS_DICOMDIAGNOSTICLOGS",
+          "artifactVersion": 2,
+          "isTroubleshootingAllowed": true,
+          "isLakeAllowed": true,
+          "tableState": "Production",
+          "input": [
+            {
+              "name": "time",
+              "type": "DateTime"
+            },
+            {
+              "name": "operationName",
+              "type": "String"
+            },
+            {
+              "name": "correlationId",
+              "type": "String"
+            },
+            {
+              "name": "resultDescription",
+              "type": "String"
+            },
+            {
+              "name": "level",
+              "type": "String"
+            },
+            {
+              "name": "location",
+              "type": "String"
+            },
+            {
+              "name": "properties",
+              "type": "dynamic"
+            },
+            {
+              "name": "resourceId",
+              "type": "String"
+            }
+          ],
+          "transformFilePath": "KQL/AHDSDicomDiagnosticLogs.kql",
+          "columns": [
+            {
+              "name": "TimeGenerated",
+              "description": "Time (UTC) when the log was created.",
+              "type": "DateTime",
+              "isDefaultDisplay": true
+            },
+            {
+              "name": "OperationName",
+              "description": "The operation name for which the log entry was generated. For example, Store/PostInstance/POST",
+              "type": "String",
+              "isDefaultDisplay": true
+            },
+            {
+              "name": "CorrelationId",
+              "description": "An identifier used to group together a set of related events.",
+              "type": "String",
+              "isDefaultDisplay": true
+            },
+            {
+              "name": "Message",
+              "description": "Description of the log entry.",
+              "type": "String",
+              "isDefaultDisplay": true
+            },
+            {
+              "name": "LogLevel",
+              "description": "The log's severity level. Possible values are Informational, Warning, and Error.",
+              "type": "String",
+              "isDefaultDisplay": true
+            },
+            {
+              "name": "Location",
+              "description": "Azure region of service from which log was generated. Examples are 'eastus', 'centralindia', 'westus2', etc.",
+              "type": "String",
+              "isDefaultDisplay": true
+            },
+            {
+              "name": "Properties",
+              "type": "Dynamic",
+              "isDefaultDisplay": true,
+              "description": "Additional information about the event in JSON array format. Examples include DICOM identifiers present in the request."
+            }
+          ],
+          "sampleInputRecordsFilePath": "SampleInputRecords/AHDSDicomDiagnosticLogsSample.json",
+          "sampleOutputRecordsFilePath": "SampleOutputRecords/AHDSDicomDiagnosticLogsSample.json"
+        },
+        {
+            "name": "AHDSDicomAuditLogs",
+            "description": "Data plane audit logs of privileged actions made against Azure Health Data DICOM service. For example, storing a DICOM instance.",
+            "categories": ["audit", "resources"],
+            "tags": {},
+            "properties": {},
+            "dataTypeId": "HEALTHCAREAPIS_DICOMAUDITLOGS",
+            "artifactVersion": 2,
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "tableState": "Production",
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "resultType",
+                    "type": "String"
+                },
+                {
+                    "name": "resultSignature",
+                    "type": "Int"
+                },
+                {
+                    "name": "correlationId",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "identity",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "level",
+                    "type": "String"
+                },
+                {
+                    "name": "uri",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "KQL/AHDSDicomAuditLogs.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "description": "Time (UTC) when the log was created.",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperationName",
+                    "description": "The operation name for which the log entry was generated.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ResultType",
+                    "description": "Indicates whether the operation started or ended.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "StatusCode",
+                    "description": "Status code returned for the request.",
+                    "type": "Int",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "CorrelationId",
+                    "description": "An identifier used to group together a set of related events.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Identity",
+                    "description": "Identity of the issuer of the request.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Level",
+                    "description": "The log's severity level. Possible values are Informational, Warning, and Error.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Uri",
+                    "description": "URI of the request.",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "URI"
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AHDSDicomAuditLogsSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AHDSDicomAuditLogsSample.json"
+      }
+    ],
+    "functions": [],
+    "queries": [
+        {
+            "id": "68299a2f-71a3-4795-a11c-9dfc7b2d0651",
+            "displayName": "Most recent actionable MedTech logs",
+            "description": "Get user actionable logs generated by MedTech service.",
+            "bodyFilePath": "KQL/MedTechRecentLogsQuery.kql",
+            "categories": ["resources"],
+            "tags": {
+                "Topic": [
+                    "Diagnostics"
+                ]
+            },
+            "relatedTables": ["AHDSMedTechDiagnosticLogs"],
+            "properties": {
+              "ExampleQuery": true
+            }
+        },
+        {
+            "id": "af396c53-a04e-43aa-8bd9-c9cf75f96318",
+            "displayName": "Log count per MedTech log or exception type",
+            "description": "Get the count of the logs emitted from MedTech service per log type and operation. The result contains what exception is thrown how many times.",
+            "bodyFilePath": "KQL/MedTechLogCountQuery.kql",
+            "categories": ["resources"],
+            "tags": {
+                "Topic": [
+                    "Diagnostics"
+                ]
+            },
+            "relatedTables": ["AHDSMedTechDiagnosticLogs"],
+            "properties": {
+              "ExampleQuery": true
+            }
+        },
+        {
+            "id": "3dfc6cd3-9545-43f3-b1b8-7c4813d1da5c",
+            "displayName": "MedTech healthcheck exceptions",
+            "description": "Get exceptions caused by failing healthchecks to dependent Azure resources (eg. FHIR Service, Event Hub).",
+            "bodyFilePath": "KQL/MedTechHealthCheckExceptionsQuery.kql",
+            "categories": ["resources"],
+            "tags": {
+                "Topic": [
+                    "Diagnostics"
+                ]
+            },
+            "relatedTables": ["AHDSMedTechDiagnosticLogs"],
+            "properties": {
+              "ExampleQuery": true
+            }
+        },
+        {
+            "id": "5c33c4fb-04cf-410e-9556-04509fb24090",
+            "displayName": "MedTech normalization stage logs",
+            "description": "Get user actionable logs from the Normalization stage of the MedTech service.",
+            "bodyFilePath": "KQL/MedTechNormalizationLogsQuery.kql",
+            "categories": ["resources"],
+            "tags": {
+                "Topic": [
+                    "Diagnostics"
+                ]
+            },
+            "relatedTables": ["AHDSMedTechDiagnosticLogs"],
+            "properties": {
+              "ExampleQuery": true
+            }
+        },
+        {
+            "id": "f1aa373c-ecc6-49cd-835a-05ac38b0749f",
+            "displayName": "MedTech FHIR conversion stage logs",
+            "description": "Get user actionable logs from the FHIR conversion stage of the MedTech service.",
+            "bodyFilePath": "KQL/MedTechFhirConversionLogsQuery.kql",
+            "categories": ["resources"],
+            "tags": {
+                "Topic": [
+                    "Diagnostics"
+                ]
+            },
+            "relatedTables": ["AHDSMedTechDiagnosticLogs"],
+            "properties": {
+              "ExampleQuery": true
+            }
+        },
+        {
+            "id": "5d9df8e3-7ff1-45f5-9569-411f6ffacfc7",
+            "displayName": "DICOM privileged operations",
+            "description": "Get the count of the privileged operation logs per operation. For example, how many requests have been received to store a DICOM instance.",
+            "bodyFilePath": "KQL/DicomLogCountQuery.kql",
+            "categories": ["audit", "resources"],
+            "tags": {
+                "Topic": [
+                    "DICOM Audit Logs"
+                ]
+            },
+            "relatedTables": ["AHDSDicomAuditLogs"],
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        },
+      {
+          "id": "c3346bdf-e3db-4af3-b6f7-5e1e73ce0d2b",
+          "displayName": "Log count per log starting with Dicom100 error code and CorrelationId",
+          "description": "Get the count of logs starting with Dicom100 error emitted from Dicom service per CorrelationId. The result contains count by CorrelationId.",
+          "bodyFilePath": "KQL/DicomDiagnosticLogCountValidationQuery.kql",
+          "categories": ["resources"],
+          "tags": {
+              "Topic": [
+                  "Diagnostics"
+              ]
+          },
+          "relatedTables": ["AHDSDicomDiagnosticLogs"],
+          "properties": {
+              "ExampleQuery": true
+          }
+      }
+    ]
+}

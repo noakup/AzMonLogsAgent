@@ -1,0 +1,1153 @@
+{
+  "type": "Microsoft.Experimentation/experimentWorkspaces",
+  "displayName": "Experiment Workspace",
+  "description": "All tables related to Experimentation service.",
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "ExP - Managed/ExP - Admin and Analysis Management",
+  "tags": {},
+  "properties": {},
+  "relatedTables": ["AzureActivity", "AzureMetric"],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "name": "AEWAuditLogs",
+      "description": "Audit, activity and status for the Experiment Workspace.",
+      "categories": ["resources", "audit"],
+      "dataTypeId": "MICROSOFTEXPERIMENTATION_REQUEST",
+      "artifactVersion": 2,
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "Tenant",
+          "type": "String"
+        },
+        {
+          "name": "message",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "ActionName",
+          "type": "String"
+        },
+        {
+          "name": "properties_uri",
+          "type": "String"
+        },
+        {
+          "name": "User",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/AEWAuditLogsTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "description": "Time (UTC) of the HTTP request.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ExpComponentName",
+          "description": "The Exp component sending the log.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Message",
+          "description": "The message in the log.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Category",
+          "description": "The event category. Typical log categories are Audit, Operational, Execution, and Request.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ActionName",
+          "description": "The event name.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RequestUri",
+          "description": "The event URI.",
+          "dataTypeHint": "URI",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Operator",
+          "description": "The user identity triggering the event.",
+          "type": "String",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AEWAuditLogs.json"
+    },
+    {
+      "name": "AEWComputePipelinesLogs",
+      "description": "AEWComputePipelines Events for the Experiment Workspace.",
+      "categories": ["resources", "audit"],
+      "dataTypeId": "MICROSOFTEXPERIMENTATION_EXPCOMPUTE",
+      "isChangeColumnInternalNameAllowed": true,
+      "artifactVersion": 5,
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "Tenant",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "ExperimentWorkspaceId",
+          "type": "String"
+        },
+        {
+          "name": "ExperimentationGroup",
+          "type": "String"
+        },
+        {
+          "name": "ExperimentId",
+          "type": "String"
+        },
+        {
+          "name": "ExperimentStepId",
+          "type": "String"
+        },
+        {
+          "name": "AnalysisId",
+          "type": "String"
+        },
+        {
+          "name": "ScorecardId",
+          "type": "String"
+        },
+        {
+          "name": "FeatureId",
+          "type": "String"
+        },
+        {
+          "name": "AnalysisType",
+          "type": "String"
+        },
+        {
+          "name": "name",
+          "type": "String"
+        },
+        {
+          "name": "Properties",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/AEWComputePipelinesLogsTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "description": "Time (UTC) of the HTTP request.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "EventName",
+          "description": "The event name.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ExperimentWorkspaceId",
+          "description": "The Guid ID of your experimentation workspace.",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ExperimentationGroup",
+          "description": "Experimentation group name of your experiment.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ExperimentId",
+          "description": "The GUID of your experiment.",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ExperimentStepId",
+          "description": "The GUID of your experiment step.",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "FeatureId",
+          "description": "The GUID of your experiment feature.",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AnalysisId",
+          "description": "The ID of your experiment study.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ScorecardId",
+          "description": "The ID of your experiment scorecard.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AnalysisType",
+          "description": "The type of your analysis.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "transformName": "Properties",
+          "physicalName": "Properties_Internal",
+          "logicalName": "Properties",
+          "description": "Event properties in Experimentation Platform Compute Pipeline with json format.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AEWComputePipelinesLogs.json"
+    },
+    {
+      "name": "AEWAssignmentBlobLogs",
+      "description": "Assignment blob upload events for the Experiment Workspace.",
+      "categories": ["resources", "audit"],
+      "dataTypeId": "MICROSOFTEXPERIMENTATION_ASSIGNMENTBLOB",
+      "artifactVersion": 3,
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "durationMs",
+          "type": "Int"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "identity",
+          "type": "String"
+        },
+        {
+          "name": "uri",
+          "type": "String"
+        },
+        {
+          "name": "level",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/AEWAssignmentBlobLogsTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation associated with log record."
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The ID for correlated events. Can be used to identify correlated events between multiple tables."
+        },
+        {
+          "name": "ResultType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The status of the event. Typical values include Succeeded, Failed."
+        },
+        {
+          "name": "HttpStatusCode",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "The HTTP status code of the corresponding REST API call operation."
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The static text description of this operation."
+        },
+        {
+          "name": "DurationMs",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "The duration of the operation (to upload blob file) in milliseconds."
+        },
+        {
+          "name": "Level",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The severity level of the operation. Will be one of Information, Warning, Error, or Critical."
+        },
+        {
+          "name": "URI",
+          "type": "String",
+          "dataTypeHint": "URI",
+          "isDefaultDisplay": true,
+          "description": "The request Url."
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The location of the resource."
+        },
+        {
+          "name": "Identity",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The resource id of the user assigned managed identity that performed this operation."
+        },
+        {
+          "name": "ExperimentWorkspaceId",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true,
+          "description": "The Guid of your experimentation workspace."
+        },
+        {
+          "name": "AssignmentBlobDataVersion",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Data version (gets incremented with every experiment operation) of Assignment Blob."
+        },
+        {
+          "name": "AssignmentBlobSchemaVersion",
+          "type": "String",
+          "isDefaultDisplay": false,
+          "description": "Schema version of assignment blob data associated with this operation."
+        },
+        {
+          "name": "AssignmentBlobNewOperationIds",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "List of new operation ids (changes) that are getting published or added with this assignment blob."
+        },
+        {
+          "name": "AssignmentBlobLastOperationId",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true,
+          "description": "The last operation id that got published for an assignment blob data version which is generally one below the current version."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AEWAssignmentBlobLogs.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AEWAssignmentBlobLogs.json"
+    },
+    {
+      "name": "AEWExperimentAssignmentSummary",
+      "description": "Experiment variant assignment summary from feature evaluation events. Used to monitor experiment activities.",
+      "categories": ["applications"],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 3,
+      "dataTypeId": "MICROSOFTEXPERIMENTATION_EXPERIMENTASSIGNMENTSUMMARY",
+      "intelligencePacks": [],
+      "isResourceCentric": true, 
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+  
+      "input": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime"
+        },
+        {
+          "name": "FeatureFlagReference",
+          "type": "String"
+        },
+        {
+          "name": "FeatureName",
+          "type": "String"
+        },
+        {
+          "name": "AllocationId",
+          "type": "String"
+        },
+        {
+          "name": "Variant",
+          "type": "String"
+        },
+        {
+          "name": "VariantAssignmentPercentage",
+          "type": "Double"
+        },
+        {
+          "name": "IsControlVariant",
+          "type": "Bool"
+        },
+        {
+          "name": "AssignmentEventCount",
+          "type": "Long"
+        },
+        {
+          "name": "MinTimeGenerated",
+          "type": "DateTime"
+        },
+        {
+          "name": "MaxTimeGenerated",
+          "type": "DateTime"
+        },
+        {
+          "name": "BinStartTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "BinSize",
+          "type": "Long"
+        }
+      ],
+  
+      "transformFilePath": "KQL/AEWExperimentAssignmentSummaryTransform.kql",
+  
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The ingestion time of the experiment assignment summary.",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "FeatureFlagReference",
+          "type": "String",
+          "description": "The fully qualified Id of the feature flag.",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "FeatureName",
+          "type": "String",
+          "description": "The name of the feature flag.",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "AllocationId",
+          "type": "String",
+          "description": "The Id of the allocation used for the feature evaluation.",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "Variant",
+          "type": "String",
+          "description": "The Id of the feature variant assigned.",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "VariantAssignmentPercentage",
+          "type": "Double",
+          "description": "The variant assignment percentage of the feature variant.",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "IsControlVariant",
+          "type": "Bool",
+          "description": "Whether the feature variant assigned is the control for the experiment.",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "AssignmentEventCount",
+          "type": "BigInt",
+          "description": "Total number of assignment events.",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "MinTimeGenerated",
+          "type": "DateTime",
+          "description": "The timestamp of earliest assignment event in time range.",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "MaxTimeGenerated",
+          "type": "DateTime",
+          "description": "The timestamp of latest assignment event in time range.",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "BinStartTime",
+          "type": "DateTime",
+          "description": "The bin start time of assignment summary.",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "BinSize",
+          "type": "BigInt",
+          "description": "The duration of assignment summary time range (in minutes).",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        }
+      ],
+  
+      "sampleInputRecordsFilePath": "SampleInputRecords/AEWExperimentAssignmentSummarySample.json",
+  
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AEWExperimentAssignmentSummarySample.json"
+  },
+  {
+    "name": "AEWExperimentScorecards",
+    "description": "Experimet scorecard metadata and insights.",
+    "categories": ["applications"],
+    "tags": {},
+    "properties": {},
+    "artifactVersion": 3,
+    "dataTypeId": "MICROSOFTEXPERIMENTATION_EXPERIMENTSCORECARDS",
+    "intelligencePacks": [],
+    "isResourceCentric": true,
+    "tableState": "Production",
+    "isLakeAllowed": true,
+    "isTroubleshootingAllowed": true,
+
+    "input": [
+      {
+        "name": "TimeGenerated",
+        "type": "DateTime"
+      },
+      {
+        "name": "FeatureName",
+        "type": "String"
+      },
+      {
+        "name": "FeatureFlagReference",
+        "type": "String"
+      },
+      {
+        "name": "AllocationId",
+        "type": "String"
+      },
+      {
+        "name": "ScorecardId",
+        "type": "String"
+      },
+      {
+        "name": "AnalysisStartTime",
+        "type": "DateTime"
+      },
+      {
+        "name": "AnalysisEndTime",
+        "type": "DateTime"
+      },
+      {
+        "name": "Insights",
+        "type": "String"
+      }
+    ],
+
+    "transformFilePath": "KQL/AEWExperimentScorecardsTransform.kql",
+
+    "columns": [
+      {
+        "name": "TimeGenerated",
+        "type": "DateTime",
+        "description": "The timestamp when the scorecard results were ingested.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "FeatureName",
+        "type": "String",
+        "description": "The name of the feature.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "FeatureFlagReference",
+        "type": "String",
+        "description": "The fully qualified Id of the feature.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "AllocationId",
+        "type": "String",
+        "description": "The Id of the allocation used for the feature evaluation.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "ScorecardId",
+        "type": "String",
+        "description": "The Id of the experiment scorecard.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "AnalysisStartTime",
+        "type": "DateTime",
+        "description": "The start time of the scorecard analysis.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "AnalysisEndTime",
+        "type": "DateTime",
+        "description": "The end name of the scorecard analysis.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "Insights",
+        "type": "Dynamic",
+        "description": "Scorecard-level Insights derived from the analysis results in JSON format.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      }
+    ],
+
+    "sampleInputRecordsFilePath": "SampleInputRecords/AEWExperimentScorecardsSample.json",
+
+    "sampleOutputRecordsFilePath": "SampleOutputRecords/AEWExperimentScorecardsSample.json"
+  },
+  {
+    "name": "AEWExperimentScorecardMetricPairs",
+    "description": "Detailed experiment results including metric comparisons and any metric-level derived insights.",
+    "categories": ["applications"],
+    "tags": {},
+    "properties": {},
+    "artifactVersion": 2,
+    "dataTypeId": "MICROSOFTEXPERIMENTATION_EXPERIMENTSCORECARDMETRICPAIRS",
+    "intelligencePacks": [],
+    "isResourceCentric": true,
+    "tableState": "Production",
+    "isLakeAllowed": true,
+    "isTroubleshootingAllowed": true,
+
+    "input": [
+      {
+        "name": "TimeGenerated",
+        "type": "DateTime"
+      },
+      {
+        "name": "ScorecardId",
+        "type": "String"
+      },
+      {
+        "name": "MetricId",
+        "type": "String"
+      },
+      {
+        "name": "MetricDisplayName",
+        "type": "String"
+      },
+      {
+        "name": "MetricDescription",
+        "type": "String"
+      },
+      {
+        "name": "MetricKind",
+        "type": "String"
+      },
+      {
+        "name": "MetricLifecycle",
+        "type": "String"
+      },
+      {
+        "name": "MetricTags",
+        "type": "String"
+      },
+      {
+        "name": "DesiredDirection",
+        "type": "String"
+      },
+      {
+        "name": "MetricVersion",
+        "type": "String"
+      },
+      {
+        "name": "MetricETag",
+        "type": "String"
+      },
+      {
+        "name": "TreatmentVariant",
+        "type": "String"
+      },
+      {
+        "name": "TreatmentCount",
+        "type": "Long"
+      },
+      {
+        "name": "TreatmentMetricValue",
+        "type": "Double"
+      },
+      {
+        "name": "TreatmentMetricValueNormalized",
+        "type": "Double"
+      },
+      {
+        "name": "TreatmentStandardErrorNormalized",
+        "type": "Double"
+      },
+      {
+        "name": "ControlVariant",
+        "type": "String"
+      },
+      {
+        "name": "ControlCount",
+        "type": "Long"
+      },
+      {
+        "name": "ControlMetricValue",
+        "type": "Double"
+      },
+      {
+        "name": "ControlMetricValueNormalized",
+        "type": "Double"
+      },
+      {
+        "name": "ControlStandardErrorNormalized",
+        "type": "Double"
+      },
+      {
+        "name": "PValue",
+        "type": "Double"
+      },
+      {
+        "name": "TreatmentEffect",
+        "type": "String"
+      },
+      {
+        "name": "RelativeDifference",
+        "type": "Double"
+      },
+      {
+        "name": "Insights",
+        "type": "String"
+      }
+    ],
+
+    "transformFilePath": "KQL/AEWExperimentScorecardMetricPairsTransform.kql",
+
+    "columns": [
+      {
+        "name": "TimeGenerated",
+        "type": "DateTime",
+        "description": "The timestamp when the scorecard results were ingested.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "ScorecardId",
+        "type": "String",
+        "description": "The Id of the experiment scorecard.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "MetricId",
+        "type": "String",
+        "description": "The Id of the metric.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "MetricDisplayName",
+        "type": "String",
+        "description": "The display name of the metric.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "MetricDescription",
+        "type": "String",
+        "description": "The description of the metric.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "MetricKind",
+        "type": "String",
+        "description": "The metric kind. Possible values include EventCount, UserCount, EventRate, UserRate, Sum, Average, Percentile.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "MetricLifecycle",
+        "type": "String",
+        "description": "The lifecycle stage of the metric. Possible values include Active, Inactive",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "MetricTags",
+        "type": "Dynamic",
+        "description": "Metric tags in the form of string array.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "DesiredDirection",
+        "type": "String",
+        "description": "Desirable direction for the metric. Possible values: Increase, Decrease, Neutral",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "MetricVersion",
+        "type": "String",
+        "description": "The version of the metric.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "MetricETag",
+        "type": "String",
+        "description": "The ETag of the metric.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "TreatmentVariant",
+        "type": "String",
+        "description": "The Id of the treatment variant.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "TreatmentCount",
+        "type": "BigInt",
+        "description": "The sample count of the treatment variant.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "TreatmentMetricValue",
+        "type": "Double",
+        "description": "The metric value for the treatment variant.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "TreatmentMetricValueNormalized",
+        "type": "Double",
+        "description": "The normalized metric value for the treatment variant. Used by metric comparisons, which accounts for unequal traffic allocation.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "TreatmentStandardErrorNormalized",
+        "type": "Double",
+        "description": "The standard error (StandardDeviation / sqrt(Count)) of the metric for the control variant.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "ControlVariant",
+        "type": "String",
+        "description": "The Id of the control variant.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "ControlCount",
+        "type": "BigInt",
+        "description": "The sample count of the control variant.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "ControlMetricValue",
+        "type": "Double",
+        "description": "The metric value for the control variant.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "ControlMetricValueNormalized",
+        "type": "Double",
+        "description": "The normalized metric value for the control variant. Used by metric comparisons, which accounts for unequal traffic allocation.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "ControlStandardErrorNormalized",
+        "type": "Double",
+        "description": "The standard error (StandardDeviation / sqrt(Count)) of the metric for the control variant.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "PValue",
+        "type": "Double",
+        "description": "The P-Value of the comparison. Used to indicate if the difference between the variants is significant.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "TreatmentEffect",
+        "type": "String",
+        "description": "The effect of the treatment variant on the metric. Possible values: Zero samples, Too few samples, Inconclusive, Changed, Improved, Degraded.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "RelativeDifference",
+        "type": "Double",
+        "description": "The relative difference of the comparison based on TreatmentMetricValueNormalized and ControlMetricValueNormalized.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      },
+      {
+        "name": "Insights",
+        "type": "Dynamic",
+        "description": "Metric-level Insights derived from the analysis results in JSON format.",
+        "isDefaultDisplay": true,
+        "isHidden": false,
+        "isPreferredFacet": false
+      }
+    ],
+
+    "sampleInputRecordsFilePath": "SampleInputRecords/AEWExperimentScorecardMetricPairsSample.json",
+
+    "sampleOutputRecordsFilePath": "SampleOutputRecords/AEWExperimentScorecardMetricPairsSample.json"
+  }
+  ],
+  "functions": [],
+  "queries": [
+    {
+      "id": "4a8a8d90-af11-1302-7556-02c1a6c4287f",
+      "displayName": "AEWComputePipelinesLogs get daily tasks count",
+      "description": "Get daily tasks count from compute pipelines records in selected time range.",
+      "bodyFilePath": "KQL/AEWComputePipelinesGetDailyTasksCountQuery.kql",
+      "categories": ["audit", "resources"],
+      "relatedTables": ["AEWComputePipelinesLogs"],
+      "tags": {
+        "Topic": ["Audit"]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "307938f2-3ebe-e1dd-e6cd-60181b631133",
+      "displayName": "AEWComputePipelinesLogs get failed tasks detail",
+      "description": "Get latest 100 failed tasks detail from compute pipelines records in selected time range.",
+      "bodyFilePath": "KQL/AEWComputePipelinesGetFailedTasksDetailQuery.kql",
+      "categories": ["audit", "resources"],
+      "relatedTables": ["AEWComputePipelinesLogs"],
+      "tags": {
+        "Topic": ["Audit"]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "c6b38466-c4e7-4b51-59c6-9dc6ab8b7d56",
+      "displayName": "AEWComputePipelinesLogs get long running jobs",
+      "description": "Get long running jobs from compute pipelines records in last seven days.",
+      "bodyFilePath": "KQL/AEWComputePipelinesGetLongRunningJobsQuery.kql",
+      "categories": ["audit", "resources"],
+      "relatedTables": ["AEWComputePipelinesLogs"],
+      "tags": {
+        "Topic": ["Audit"]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "8abfa818-c87f-81c7-99ef-fa38d0c750b3",
+      "displayName": "AEWComputePipelinesLogs get task E2E latency time",
+      "description": "Get task E2E latency time of compute pipelines records in selected time range.",
+      "bodyFilePath": "KQL/AEWComputePipelinesGetTaskE2ELatencyTimeQuery.kql",
+      "categories": ["audit", "resources"],
+      "relatedTables": ["AEWComputePipelinesLogs"],
+      "tags": {
+        "Topic": ["Audit"]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "bcec51fd-9e72-40a8-b01b-6d3fd16e0fb6",
+      "displayName": "Variant assignment counts by features",
+      "description": "List the total number of assignments for each variant in feature allocations.",
+      "bodyFilePath": "KQL/AEWExperimentAssignmentSummaryQuery.kql",
+      "categories": ["applications"],
+      "relatedTables": ["AEWExperimentAssignmentSummary"],
+      "tags": {
+        "Topic": ["Usage"]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "967eb9bf-2d91-4a86-8115-18ee8b458d0e",
+      "displayName": "Latest scorecard metadata for a given feature",
+      "description": "Query the latest experimentscorecard metadata for a given feature.",
+      "bodyFilePath": "KQL/AEWExperimentLatestScorecardMetadataQuery.kql",
+      "categories": ["applications"],
+      "relatedTables": ["AEWExperimentAssignmentSummary", "AEWExperimentScorecards"],
+      "tags": {
+        "Topic": ["Usage"]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "7f870b0a-b457-4221-a739-20bf3ece31f3",
+      "displayName": "Latest scorecard results for a given feature",
+      "description": "Query the latest experiment scorecard result for a given feature.",
+      "bodyFilePath": "KQL/AEWExperimentLatestScorecardResultsQuery.kql",
+      "categories": ["applications"],
+      "relatedTables": ["AEWExperimentAssignmentSummary", "AEWExperimentScorecards", "AEWExperimentScorecardMetricPairs"],
+      "tags": {
+        "Topic": ["Usage"]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    }
+  ]
+}

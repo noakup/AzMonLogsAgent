@@ -1,0 +1,1172 @@
+{
+    "type": "Microsoft.Network/NetworkWatchers/Connectionmonitors",
+    "displayName": "Network Watcher - Connection Monitor",
+    "description": "All tables related to Network Watcher - Connection Monitor",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Network Monitoring service/Incident Manager (Transfer here)",
+    "relatedTables": ["AzureActivity"],
+    "relatedFunctions": [],
+    "tables": [
+      {
+        "name": "NWConnectionMonitorTestResult",
+        "description": "Connection Monitor test result records.",
+        "categories": [
+          "network"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 5,
+        "dataTypeId": "MICROSOFTNWCONNECTIONMONITOR_TESTRESULT",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": false,
+        "input": [
+          {
+            "name": "timeGenerated",
+            "type": "DateTime"
+          },
+          {
+            "name": "recordId",
+            "type": "String"
+          },
+          {
+            "name": "connectionMonitorResourceId",
+            "type": "String"
+          },
+          {
+            "name": "testGroupName",
+            "type": "String"
+          },
+          {
+            "name": "testConfigurationName",
+            "type": "String"
+          },
+          {
+            "name": "sourceType",
+            "type": "String"
+          },
+          {
+            "name": "sourceResourceId",
+            "type": "String"
+          },
+          {
+            "name": "sourceAddress",
+            "type": "String"
+          },
+          {
+            "name": "sourceSubnet",
+            "type": "String"
+          },
+          {
+            "name": "sourceIP",
+            "type": "String"
+          },
+          {
+            "name": "sourceName",
+            "type": "String"
+          },
+          {
+            "name": "sourceAgentId",
+            "type": "String"
+          },
+          {
+            "name": "destinationPort",
+            "type": "Int"
+          },
+          {
+            "name": "destinationType",
+            "type": "String"
+          },
+          {
+            "name": "destinationResourceId",
+            "type": "String"
+          },
+          {
+            "name": "destinationAddress",
+            "type": "String"
+          },
+          {
+            "name": "destinationSubnet",
+            "type": "String"
+          },
+          {
+            "name": "destinationIP",
+            "type": "String"
+          },
+          {
+            "name": "destinationName",
+            "type": "String"
+          },
+          {
+            "name": "destinationAgentId",
+            "type": "String"
+          },
+          {
+            "name": "protocol",
+            "type": "String"
+          },
+          {
+            "name": "checksTotal",
+            "type": "Int"
+          },
+          {
+            "name": "checksFailed",
+            "type": "Int"
+          },
+          {
+            "name": "testResult",
+            "type": "String"
+          },
+          {
+            "name": "testResultCriterion",
+            "type": "String"
+          },
+          {
+            "name": "checksFailedPercentThreshold",
+            "type": "Int"
+          },
+          {
+            "name": "roundTripTimeMsThreshold",
+            "type": "Double"
+          },
+          {
+            "name": "minRoundTripTimeMs",
+            "type": "Double"
+          },
+          {
+            "name": "maxRoundTripTimeMs",
+            "type": "Double"
+          },
+          {
+            "name": "avgRoundTripTimeMs",
+            "type": "Double"
+          },
+          {
+            "name": "jitterMs",
+            "type": "Double"
+          },
+          {
+            "name": "additionalData",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "Kql/CMTestResult.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "The timestamp (UTC) of when the log was generated."
+          },
+          {
+            "name": "RecordId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The record id for unique identification of test result record"
+          },
+          {
+            "name": "ConnectionMonitorResourceId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The connection monitor resource id of the test",
+            "dataTypeHint": "URI"
+          },
+          {
+            "name": "TestGroupName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The test group name to which the test belongs to"
+          },
+          {
+            "name": "TestConfigurationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The test configuration name to which the test belongs to"
+          },
+          {
+            "name": "SourceType",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The type of the source machine configured for the test"
+          },
+          {
+            "name": "SourceResourceId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The resource id of the source machine",
+            "dataTypeHint": "URI"
+          },
+          {
+            "name": "SourceAddress",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The address of the source configured for the test"
+          },
+          {
+            "name": "SourceSubnet",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The subnet of the source",
+            "dataTypeHint": "IP"
+          },
+          {
+            "name": "SourceIP",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The IP address of the source",
+            "dataTypeHint": "IP"
+          },
+          {
+            "name": "SourceName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The source end point name"
+          },
+          {
+            "name": "SourceAgentId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The source agent id"
+          },
+          {
+            "name": "DestinationPort",
+            "type": "Int",
+            "isDefaultDisplay": true,
+            "description": "The destination port configured for the test"
+          },
+          {
+            "name": "DestinationType",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The type of the destination machine configured for the test"
+          },
+          {
+            "name": "DestinationResourceId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The resource id of the Destination machine",
+            "dataTypeHint": "URI"
+          },
+          {
+            "name": "DestinationAddress",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The address of the destination configured for the test"
+          },
+          {
+            "name": "DestinationSubnet",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "If applicable, the subnet of the destination",
+            "dataTypeHint": "IP"
+          },
+          {
+            "name": "DestinationIP",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The IP address of the destination",
+            "dataTypeHint": "IP"
+          },
+          {
+            "name": "DestinationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The destination end point name"
+          },
+          {
+            "name": "DestinationAgentId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The destination agent id"
+          },
+          {
+            "name": "Protocol",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The protocol of the test"
+          },
+          {
+            "name": "ChecksTotal",
+            "type": "Int",
+            "isDefaultDisplay": true,
+            "description": "The total number of checks done under the test"
+          },
+          {
+            "name": "ChecksFailed",
+            "type": "Int",
+            "isDefaultDisplay": true,
+            "description": "The total number of checks failed under the test"
+          },
+          {
+            "name": "TestResult",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The result of the test"
+          },
+          {
+            "name": "TestResultCriterion",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The result criterion of the test"
+          },
+          {
+            "name": "ChecksFailedPercentThreshold",
+            "type": "Int",
+            "isDefaultDisplay": true,
+            "description": "The checks failed percent threshold set for the test"
+          },
+          {
+            "name": "RoundTripTimeMsThreshold",
+            "type": "Double",
+            "isDefaultDisplay": true,
+            "description": "The round trip threshold (ms) set for the test"
+          },
+          {
+            "name": "MinRoundTripTimeMs",
+            "type": "Double",
+            "isDefaultDisplay": true,
+            "description": "The minimum round trip time (ms) for the test"
+          },
+          {
+            "name": "MaxRoundTripTimeMs",
+            "type": "Double",
+            "isDefaultDisplay": true,
+            "description": "The maximum round trip time for the test"
+          },
+          {
+            "name": "AvgRoundTripTimeMs",
+            "type": "Double",
+            "isDefaultDisplay": true,
+            "description": "The average round trip time for the test"
+          },
+          {
+            "name": "JitterMs",
+            "type": "Double",
+            "isDefaultDisplay": true,
+            "description": "The mean deviation round trip time for the test"
+          },
+          {
+            "name": "AdditionalData",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The additional data for the test"
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/CMTestResultSample.json"
+      },
+      {
+        "name": "NWConnectionMonitorPathResult",
+        "description": "Connection Monitor path result records.",
+        "categories": [
+          "network"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 5,
+        "dataTypeId": "MICROSOFTNWCONNECTIONMONITOR_PATHRESULT",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": false,
+        "input": [
+          {
+            "name": "timeGenerated",
+            "type": "DateTime"
+          },
+          {
+            "name": "recordId",
+            "type": "String"
+          },
+          {
+            "name": "topologyId",
+            "type": "String"
+          },
+          {
+            "name": "connectionMonitorResourceId",
+            "type": "String"
+          },
+          {
+            "name": "testGroupName",
+            "type": "String"
+          },
+          {
+            "name": "testConfigurationName",
+            "type": "String"
+          },
+          {
+            "name": "sourceType",
+            "type": "String"
+          },
+          {
+            "name": "sourceResourceId",
+            "type": "String"
+          },
+          {
+            "name": "sourceAddress",
+            "type": "String"
+          },
+          {
+            "name": "sourceSubnet",
+            "type": "String"
+          },
+          {
+            "name": "sourceIP",
+            "type": "String"
+          },
+          {
+            "name": "sourceName",
+            "type": "String"
+          },
+          {
+            "name": "sourceAgentId",
+            "type": "String"
+          },
+          {
+            "name": "destinationPort",
+            "type": "Int"
+          },
+          {
+            "name": "destinationType",
+            "type": "String"
+          },
+          {
+            "name": "destinationResourceId",
+            "type": "String"
+          },
+          {
+            "name": "destinationAddress",
+            "type": "String"
+          },
+          {
+            "name": "destinationSubnet",
+            "type": "String"
+          },
+          {
+            "name": "destinationIP",
+            "type": "String"
+          },
+          {
+            "name": "destinationName",
+            "type": "String"
+          },
+          {
+            "name": "destinationAgentId",
+            "type": "String"
+          },
+          {
+            "name": "protocol",
+            "type": "String"
+          },
+          {
+            "name": "checksTotal",
+            "type": "Int"
+          },
+          {
+            "name": "checksFailed",
+            "type": "Int"
+          },
+          {
+            "name": "pathTestResult",
+            "type": "String"
+          },
+          {
+            "name": "pathTestResultCriterion",
+            "type": "String"
+          },
+          {
+            "name": "checksFailedPercentThreshold",
+            "type": "Int"
+          },
+          {
+            "name": "roundTripTimeMsThreshold",
+            "type": "Double"
+          },
+          {
+            "name": "minRoundTripTimeMs",
+            "type": "Double"
+          },
+          {
+            "name": "maxRoundTripTimeMs",
+            "type": "Double"
+          },
+          {
+            "name": "avgRoundTripTimeMs",
+            "type": "Double"
+          },
+          {
+            "name": "jitterMs",
+            "type": "Double"
+          },
+          {
+            "name": "hopAddresses",
+            "type": "String"
+          },
+          {
+            "name": "hopTypes",
+            "type": "String"
+          },
+          {
+            "name": "hopLinkTypes",
+            "type": "String"
+          },
+          {
+            "name": "hopResourceIds",
+            "type": "String"
+          },
+          {
+            "name": "issues",
+            "type": "String"
+          },
+          {
+            "name": "hops",
+            "type": "String"
+          },
+          {
+            "name": "additionalData",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "Kql/CMPathResult.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "The timestamp (UTC) of when the log was generated."
+          },
+          {
+            "name": "RecordId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The record id for unique identification of test result record"
+          },
+          {
+            "name": "TopologyId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The topology id of the path record"
+          },
+          {
+            "name": "ConnectionMonitorResourceId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The connection monitor resource id of the test",
+            "dataTypeHint": "URI"
+          },
+          {
+            "name": "TestGroupName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The test group name to which the test belongs to"
+          },
+          {
+            "name": "TestConfigurationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The test configuration name to which the test belongs to"
+          },
+          {
+            "name": "SourceType",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The type of the source machine configured for the test"
+          },
+          {
+            "name": "SourceResourceId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The resource id of the source machine",
+            "dataTypeHint": "URI"
+          },
+          {
+            "name": "SourceAddress",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The address of the source configured for the test"
+          },
+          {
+            "name": "SourceSubnet",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The subnet of the source",
+            "dataTypeHint": "IP"
+          },
+          {
+            "name": "SourceIP",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The IP address of the source",
+            "dataTypeHint": "IP"
+          },
+          {
+            "name": "SourceName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The source end point name"
+          },
+          {
+            "name": "SourceAgentId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The source agent id"
+          },
+          {
+            "name": "DestinationPort",
+            "type": "Int",
+            "isDefaultDisplay": true,
+            "description": "The destination port configured for the test"
+          },
+          {
+            "name": "DestinationType",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The type of the destination machine configured for the test"
+          },
+          {
+            "name": "DestinationResourceId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The resource id of the Destination machine",
+            "dataTypeHint": "URI"
+          },
+          {
+            "name": "DestinationAddress",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The address of the destination configured for the test"
+          },
+          {
+            "name": "DestinationSubnet",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "If applicable, the subnet of the destination",
+            "dataTypeHint": "IP"
+          },
+          {
+            "name": "DestinationIP",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The IP address of the destination",
+            "dataTypeHint": "IP"
+          },
+          {
+            "name": "DestinationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The destination end point name"
+          },
+          {
+            "name": "DestinationAgentId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The destination agent id"
+          },
+          {
+            "name": "Protocol",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The protocol of the test"
+          },
+          {
+            "name": "ChecksTotal",
+            "type": "Int",
+            "isDefaultDisplay": true,
+            "description": "The total number of checks done under the test"
+          },
+          {
+            "name": "ChecksFailed",
+            "type": "Int",
+            "isDefaultDisplay": true,
+            "description": "The total number of checks failed under the test"
+          },
+          {
+            "name": "PathTestResult",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The result of the test"
+          },
+          {
+            "name": "PathTestResultCriterion",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The result criterion of the test"
+          },
+          {
+            "name": "ChecksFailedPercentThreshold",
+            "type": "Int",
+            "isDefaultDisplay": true,
+            "description": "The checks failed percent threshold set for the test"
+          },
+          {
+            "name": "RoundTripTimeMsThreshold",
+            "type": "Double",
+            "isDefaultDisplay": true,
+            "description": "The round trip threshold (ms) set for the test"
+          },
+          {
+            "name": "MinRoundTripTimeMs",
+            "type": "Double",
+            "isDefaultDisplay": true,
+            "description": "The minimum round trip time (ms) for the test"
+          },
+          {
+            "name": "MaxRoundTripTimeMs",
+            "type": "Double",
+            "isDefaultDisplay": true,
+            "description": "The maximum round trip time for the test"
+          },
+          {
+            "name": "AvgRoundTripTimeMs",
+            "type": "Double",
+            "isDefaultDisplay": true,
+            "description": "The average round trip time for the test"
+          },
+          {
+            "name": "JitterMs",
+            "type": "Double",
+            "isDefaultDisplay": true,
+            "description": "The mean deviation round trip time for the test"
+          },
+          {
+            "name": "HopAddresses",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The hop addresses identified for the test"
+          },
+          {
+            "name": "HopTypes",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The hop types identified for the test"
+          },
+          {
+            "name": "HopLinkTypes",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The hop link types identified for the test"
+          },
+          {
+            "name": "HopResourceIds",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The hop resource ids identified for the test",
+            "dataTypeHint": "URI"
+          },
+          {
+            "name": "Issues",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The issues identified for the test"
+          },
+          {
+            "name": "Hops",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The hops identified for the test"
+          },
+          {
+            "name": "AdditionalData",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The additional data for the test"
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/CMPathResultSample.json"
+      },
+      {
+        "name": "NWConnectionMonitorDNSResult",
+        "description": "Connection Monitor DNS result records.",
+        "categories": [
+          "network"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 3,
+        "dataTypeId": "MICROSOFTNWCONNECTIONMONITOR_DNSRESULT",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": false,
+        "input": [
+          {
+            "name": "timeGenerated",
+            "type": "DateTime"
+          },
+          {
+            "name": "recordId",
+            "type": "String"
+          },
+          {
+            "name": "connectionMonitorResourceId",
+            "type": "String"
+          },
+          {
+            "name": "testGroupName",
+            "type": "String"
+          },
+          {
+            "name": "testConfigurationName",
+            "type": "String"
+          },
+          {
+            "name": "sourceType",
+            "type": "String"
+          },
+          {
+            "name": "sourceResourceId",
+            "type": "String"
+          },
+          {
+            "name": "sourceAddress",
+            "type": "String"
+          },
+          {
+            "name": "sourceSubnet",
+            "type": "String"
+          },
+          {
+            "name": "sourceIP",
+            "type": "String"
+          },
+          {
+            "name": "sourceName",
+            "type": "String"
+          },
+          {
+            "name": "sourceAgentId",
+            "type": "String"
+          },
+          {
+            "name": "destinationPort",
+            "type": "Int"
+          },
+          {
+            "name": "destinationType",
+            "type": "String"
+          },
+          {
+            "name": "destinationResourceId",
+            "type": "String"
+          },
+          {
+            "name": "destinationAddress",
+            "type": "String"
+          },
+          {
+            "name": "destinationSubnet",
+            "type": "String"
+          },
+          {
+            "name": "destinationIP",
+            "type": "String"
+          },
+          {
+            "name": "destinationName",
+            "type": "String"
+          },
+          {
+            "name": "destinationAgentId",
+            "type": "String"
+          },
+          {
+            "name": "protocol",
+            "type": "String"
+          },
+          {
+            "name": "checksTotal",
+            "type": "Int"
+          },
+          {
+            "name": "checksFailed",
+            "type": "Int"
+          },
+          {
+            "name": "testResult",
+            "type": "String"
+          },
+          {
+            "name": "testResultCriterion",
+            "type": "String"
+          },
+          {
+            "name": "responseRecordCount",
+            "type": "Int"
+          },
+          {
+            "name": "responseRecords",
+            "type": "String"
+          },
+          {
+            "name": "responseRecordType",
+            "type": "String"
+          },
+          {
+            "name": "validationChecks",
+            "type": "String"
+          },
+          {
+            "name": "validationIssues",
+            "type": "String"
+          },
+          {
+            "name": "domainName",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "Kql/CMDNSResult.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "The timestamp (UTC) of when the log was generated."
+          },
+          {
+            "name": "RecordId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The record id for unique identification of test result record"
+          },
+          {
+            "name": "ConnectionMonitorResourceId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The connection monitor resource id of the test",
+            "dataTypeHint": "URI"
+          },
+          {
+            "name": "TestGroupName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The test group name to which the test belongs to"
+          },
+          {
+            "name": "TestConfigurationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The test configuration name to which the test belongs to"
+          },
+          {
+            "name": "SourceType",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The type of the source machine configured for the test"
+          },
+          {
+            "name": "SourceResourceId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The resource id of the source machine",
+            "dataTypeHint": "URI"
+          },
+          {
+            "name": "SourceAddress",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The address of the source configured for the test"
+          },
+          {
+            "name": "SourceSubnet",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The subnet of the source",
+            "dataTypeHint": "IP"
+          },
+          {
+            "name": "SourceIP",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The IP address of the source",
+            "dataTypeHint": "IP"
+          },
+          {
+            "name": "SourceName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The source end point name"
+          },
+          {
+            "name": "SourceAgentId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The source agent id"
+          },
+          {
+            "name": "DestinationPort",
+            "type": "Int",
+            "isDefaultDisplay": true,
+            "description": "The destination port configured for the test"
+          },
+          {
+            "name": "DestinationType",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The type of the destination machine configured for the test"
+          },
+          {
+            "name": "DestinationResourceId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The resource id of the Destination machine",
+            "dataTypeHint": "URI"
+          },
+          {
+            "name": "DestinationAddress",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The address of the destination configured for the test"
+          },
+          {
+            "name": "DestinationSubnet",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "If applicable, the subnet of the destination",
+            "dataTypeHint": "IP"
+          },
+          {
+            "name": "DestinationIP",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The IP address of the destination",
+            "dataTypeHint": "IP"
+          },
+          {
+            "name": "DestinationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The destination end point name"
+          },
+          {
+            "name": "DestinationAgentId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The destination agent id"
+          },
+          {
+            "name": "Protocol",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The protocol of the test"
+          },
+          {
+            "name": "ChecksTotal",
+            "type": "Int",
+            "isDefaultDisplay": true,
+            "description": "The total number of checks done under the test"
+          },
+          {
+            "name": "ChecksFailed",
+            "type": "Int",
+            "isDefaultDisplay": true,
+            "description": "The total number of checks failed under the test"
+          },
+          {
+            "name": "TestResult",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The result of the test"
+          },
+          {
+            "name": "TestResultCriterion",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The result criterion of the test"
+          },
+          {
+            "name": "ResponseRecordCount",
+            "type": "Int",
+            "isDefaultDisplay": true,
+            "description": "The total count of DNS response records"
+          },
+          {
+            "name": "ResponseRecords",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The DNS Response records"
+          },
+          {
+            "name": "ResponseRecordType",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The type of DNS response record"
+          },
+          {
+            "name": "ValidationChecks",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The validation checks of DNS Result"
+          },
+          {
+            "name": "ValidationIssues",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The issues identified as part of DNS Test"
+          },
+          {
+            "name": "DomainName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The domain name of DNS Test"
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/CMDNSResultSample.json"
+      }
+    ],
+    "functions": [],
+    "queries": [
+      {
+        "id": "8a9e48ac-20be-4074-8118-9366e73d8dac",
+        "displayName": "Failed tests",
+        "description": "Gets failed distinct source, destination, test group and test configuration for each resource.",
+        "bodyFilePath": "KQL/GetFailedConnectionMonitors.kql",
+        "categories": [ "network" ],
+        "relatedTables": [ "NWConnectionMonitorTestResult" ],
+        "tags": {
+          "Topic": [ "Audit" ]
+        },
+        "properties": {
+          "ExampleQuery": true,
+          "QueryAttributes": {
+            "IsMultiResource": true
+          }
+        }
+      },
+      {
+        "id": "da3145ca-5cb9-43f4-afcc-0544bc320d8d",
+        "displayName": "Tests performance",
+        "description": "Gets loss percentage and average latency between given source and destination of a resource.",
+        "bodyFilePath": "KQL/GetSourceDestinationLossLatency.kql",
+        "categories": [ "network" ],
+        "relatedTables": [ "NWConnectionMonitorTestResult" ],
+        "tags": {
+          "Topic": [ "Performance" ]
+        },
+        "properties": {
+          "ExampleQuery": true,
+          "QueryAttributes": {
+            "IsMultiResource": false
+          }
+        }
+      },
+      {
+        "id": "a756c739-e5cb-4bf1-9b37-4d58d5a49e2d",
+        "displayName": "Path diagnostics",
+        "description": "Gets path or all hops along with identified issues between given source and destination of a resource.",
+        "bodyFilePath": "KQL/GetSourceDestinationPath.kql",
+        "categories": [ "network" ],
+        "relatedTables": [ "NWConnectionMonitorPathResult" ],
+        "tags": {
+          "Topic": [ "Diagnostics" ]
+        },
+        "properties": {
+          "ExampleQuery": true,
+          "QueryAttributes": {
+            "IsMultiResource": false
+          }
+        }
+      }
+    ]
+}

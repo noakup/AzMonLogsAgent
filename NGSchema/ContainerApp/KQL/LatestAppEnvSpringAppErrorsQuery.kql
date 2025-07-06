@@ -1,0 +1,4 @@
+AppEnvSpringAppConsoleLogs
+| where Stream == "stderr"
+| order by TimeGenerated desc
+| top 100 by TimeGenerated

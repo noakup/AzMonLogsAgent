@@ -1,0 +1,5 @@
+﻿LAJobLogs
+| summarize count(), StartTime=min(TimeGenerated) by JobId, CorrelationId, SourceTable, tostring(Destination)
+| where count_ == 1
+| project StartTime, JobId, CorrelationId, SourceTable, Destination=parse_json(Destination)
+| sort by StartTime desc

@@ -1,0 +1,31 @@
+﻿source
+| extend props = parse_json(properties)
+| extend message = tostring(props.message)
+| extend severity = tostring(props.severity)
+| extend facility = tostring(props.facility)
+// Detect format of message using regex
+| extend format = iff(extract("^(<\\d+>)?\\d+ \\d\\d\\d\\d-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d(\\.\\d+)?(Z|(\\+|-)(\\d\\d:\\d\\d)?)? \\S+ \\S+ \\S+ \\S+ (-|((\\[[^]]+\\]))*) ", 0, message) != "", 5424, -1)
+| extend format = iff(extract("^(<\\d+>)?\\d\\d\\d\\d-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d(\\.\\d+)?(Z|(\\+|-)(\\d\\d:\\d\\d)?)? \\S+ (\\d|[A-Z]|[a-z])+[^a-zA-Z\\d ]", 0, message) != "", 3164, format)
+| extend TimeGenerated = now()
+| extend LogCreationTime = ['time']
+// Parse fields appropriately, depending on the message format.
+| extend HostName = case(
+    not(isnull(props.HostName)), tostring(props.HostName), // If props.Hostname exists, use it
+    format == 5424, extract("\\S+ \\S+ {1,2}(\\S+) ", 1, message), // If format is 5424, extract hostname
+    format == 3164, extract("^\\S+ (\\S+) ", 1, message), // If format is 3164, extract hostname
+    "" // Default to empty if no conditions match
+)
+| extend AppName = case(
+    not(isnull(props.AppName)), tostring(props.AppName), // If props.AppName exists, use it
+    format == 5424, extract("^\\S+ \\S+ {1,2}\\S+ (\\S+) ", 1, message), // If format is 5424, extract AppName
+    format == 3164, extract("\\S+ \\S+ ((\\d|[A-Z]|[a-z])+)[^a-zA-Z\\d ]", 1, message), // If format is 3164, extract AppName
+    "" // Default to empty if no conditions match
+)
+| extend AppName = iff(AppName startswith "dnsmasq", "dnsmasq", AppName) // Consolidate dnsmasq processes
+| extend MsgId = iff(format == 5424, extract("^\\S+ \\S+ {1,2}\\S+ \\S+ (\\S+) ", 1, message), "")
+| extend ProcId = iff(format == 5424, extract("^\\S+ \\S+ {1,2}\\S+ \\S+ \\S+ (\\S+) ", 1, message), "")
+// Ensure empty MsgId, ProcId are not put into the table to avoid client being billed extra
+| extend MsgId = iff(MsgId == "-", "", MsgId)
+| extend ProcId = iff(ProcId == "-", "", ProcId)
+// Project fields as defined in the table structure, in PascalCase
+| project TimeGenerated, LogCreationTime, Message = message, Severity = severity, Facility = facility, HostName, AppName, ProcId, MsgId

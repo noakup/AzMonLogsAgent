@@ -1,0 +1,6 @@
+// This query retrieves logs of requests sent from Azure Bot Service channels to the bot.
+// You can adjust the limit value to the number of logs you would like to retrieve.
+ABSBotRequests
+| where OperationName contains "ChannelToBot"
+| sort by TimeGenerated desc
+| limit 100

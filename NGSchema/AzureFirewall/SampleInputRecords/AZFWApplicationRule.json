@@ -1,0 +1,24 @@
+[
+  {
+    "category": "AZFWApplicationRule",
+    "time": "2021-10-19T23:01:59.723496Z",
+    "resourceId": "/subscriptions/aeb5b02a-0f18-45a4-86d6-81808115cacf/resourcegroups/manuelberger-new-logs-test-2/providers/microsoft.network/azurefirewalls/fw",
+    "properties": {
+        "Protocol": "UDP",
+        "SourceIp": "34.248.213.148",
+        "SourcePort": 41787,
+        "DestinationPort": 55460,
+        "Fqdn": "fze.puahfn.org",
+        "TargetUrl": "naki.teagtdaqgcmajaf.net/yrgvokmcpiig",
+        "Action": "DENY",
+        "Policy": "quktehnqkxvlpcl",
+        "RuleCollectionGroup": "cidcrdczfqbp",
+        "RuleCollection": "wwqzgqngznlvuagtycdptoakw",
+        "Rule": "vaedcjlsleglqy",
+        "ActionReason": "upmocjwlujmyqst",
+        "IsTlsInspected": true,
+        "WebCategory": "wgmwpwrptomonntylloi",
+        "IsExplicitProxyRequest": false
+    }
+  }
+]

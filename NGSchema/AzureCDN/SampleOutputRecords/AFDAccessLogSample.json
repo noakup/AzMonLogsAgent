@@ -1,0 +1,33 @@
+[ 
+    {
+        "TimeGenerated": "2023-03-23T05:50:04.6932467Z",
+        "OperationName": "Microsoft.Cdn/Profiles/AccessLog/Write",
+        "TrackingReference": "0jOgbZAAAAADmAYK1pjgjR5DIm2YbRn/DQ082QUEzMTUwODA5MDUzADM1YjYzNjBiLWI2MWItNGM3Ni1iZjdkLWY1ODNmODg0MTlmOQ==",
+        "HttpMethod": "POST",
+        "HttpVersion": "2.0.0.0",
+        "RequestUri": "https://portal.azure.com:443/api/Telemetry",
+        "HostName": "portal.azure.com",
+        "RequestBytes": 13861,
+        "ResponseBytes": 746,
+        "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0",
+        "ClientIp": "130.76.24.16",
+        "SocketIp": "130.76.24.16",
+        "DurationMs": 24,
+        "RequestProtocol": "HTTPS",
+        "SecurityProtocol": "TLS 1.2",
+        "SecurityCipher": "TLS_ECDH_EPHEM_AES_256_SHA_384",
+        "Endpoint": "azureportal.z01.azurefd.net",
+        "HttpStatusCode": 204,
+        "Pop": "CO",
+        "CacheStatus": "CONFIG_NOCACHE",
+        "MatchedRulesSetName": "[\"rulename\"]",
+        "RouteName": "azureportal.z01.azurefd.net",
+        "ClientPort": 33986,
+        "Referrer": "https://portal.azure.com/?feature.msaljs=false&feature.msaljslogin=false&msaljsscript=false",
+        "TimeToFirstByte": 0.024,
+        "ErrorInfo": "NoError",
+        "OriginUrl": "https://portal-prod-westus2-02.westus2.cloudapp.azure.com:443/api/Telemetry",
+        "OriginIp": "40.64.128.134",
+        "OriginName": "portal-prod-westus2-02.westus2.cloudapp.azure.com"
+    }
+]

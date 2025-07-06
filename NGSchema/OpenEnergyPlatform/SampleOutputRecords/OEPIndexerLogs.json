@@ -1,0 +1,11 @@
+[
+  {
+    "TimeGenerated": "2022-03-14T00:05:38.552089493Z",
+    "Location": "eastus",
+    "OperationName": "MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/INDEXER/ACTION",
+    "Category": "IndexerLogs",
+    "Message": "api-method=POST operation-name={POST [/_dps/task-handlers/index-worker], consumes [application/json]} user-id= app-id=: indexer.app Start Web-API POST /_dps/task-handlers/index-worker Headers: {correlation-id:19135c66-d59c-4334-87d9-d9aaf3be48d5-0,data-partition-id:dplogsdf-opendes,content-type:application/json} {correlation-id=19135c66-d59c-4334-87d9-d9aaf3be48d5-0, data-partition-id=dplogsdf-opendes}indexer.app Start Web-API POST /_dps/task-handlers/index-worker Headers: {correlation-id:19135c66-d59c-4334-87d9-d9aaf3be48d5-0,data-partition-id:dplogsdf-opendes,content-type:application/json} {correlation-id=19135c66-d59c-4334-87d9-d9aaf3be48d5-0, data-partition-id=dplogsdf-opendes}",
+    "LogLevel": "INFO",
+    "CorrelationId": "19135c66-d59c-4334-87d9-d9aaf3be48d5-0"
+    }
+]

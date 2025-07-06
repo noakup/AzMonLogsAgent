@@ -1,0 +1,248 @@
+{
+  "type": "Microsoft.DigitalTwins/digitalTwinsInstances",
+  "displayName": "Azure Digital Twins",
+  "description": "All tables related to Azure Digital Twins service.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "AZUREDIGITALTWINSVNEXT/AzureDigitalTwinsTriage",
+  "relatedTables": [
+    "AzureActivity"
+  ],
+  "tables": [
+    {
+      "name": "ADTDataHistoryOperation",
+      "description": "This table tracks all data history events being published to time series database connections.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 2,
+      "dataTypeId": "AZUREDIGITALTWINS_DATAHISTORYOPERATION",
+      "intelligencePacks": [],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "durationMs",
+          "type": "Long"
+        },
+        {
+          "name": "callerIpAddress",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "traceContext",
+          "type": "Dynamic"
+        },
+        {
+          "name": "identity",
+          "type": "Dynamic"
+        },
+        {
+          "name": "level",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "uri",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "Kql/ADTDataHistoryOperationTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation associated with log record."
+        },
+        {
+          "name": "OperationVersion",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The API version utilized during the event."
+        },
+        {
+          "name": "ResultType",
+          "description": "Result of the event. For example: Success, Failure, ClientFalure, etc.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultSignature",
+          "description": "Http status code of the event (if applicable).",
+          "type": "Int",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDescription",
+          "description": "Additional details about the event.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DurationMs",
+          "description": "How long it took to perform the event in milliseconds.",
+          "type": "BigInt",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "CallerIpAddress",
+          "description": "A masked source IP address for the event.",
+          "type": "String",
+          "dataTypeHint": "IP",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The ID for correlated events. Can be used to identify correlated events between multiple tables."
+        },
+        {
+          "name": "ApplicationId",
+          "description": "Application ID used in bearer authorization.",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Level",
+          "description": "The logging severity of the event.",
+          "type": "Int",
+          "isDefaultDisplay": true
+        },
+
+        {
+          "name": "Region",
+          "description": "Azure region in which the Digital Twins instance is located.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RequestUri",
+          "description": "The time series database connection's eventhub endpoint.",
+          "type": "String",
+          "dataTypeHint": "URI",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TraceId",
+          "description": "TraceId as part of W3C's trace context. The ID of the whole trace used to uniquely identify a distributed trace across systems.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SpanId",
+          "description": "SpanId as part of W3C's trace context. The ID of this request in the trace.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ParentId",
+          "description": "ParentId as part of W3C's trace context. A request without a parent id is the root of the trace.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TraceFlags",
+          "description": "TraceFlags as part of W3C's trace context. Controls tracing flags such as sampling, trace level, etc.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TraceState",
+          "description": "TraceState as part of W3C's trace context. Additional vendor-specific trace identification information to span across different distributed tracing systems.",
+          "type": "String",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/ADTDataHistoryOperationSample.json"
+    }
+  ],
+  "functions": [],
+  "queries": [
+    {
+      "id": "bc4366ef-b269-43f2-aad7-4919e5defdfb",
+      "displayName": "Data History operation failure logs",
+      "description": "Failed operation events logged when data history messages are sent to the time series database.",
+      "bodyFilePath": "Kql/Queries/ADTDataHistoryOperationFailures.kql",
+      "categories": [],
+      "relatedTables": [ "ADTDataHistoryOperation" ],
+      "tags": {},
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": false
+        }
+      }
+    },
+    {
+      "id": "5fdb334b-28ad-411e-8679-e9ef7f40ad1f",
+      "displayName": "Data History egress latency",
+      "description": "Delivery latency of data history messages sent to the time series database.",
+      "bodyFilePath": "Kql/Queries/ADTDataHistoryOperationEgressLatency.kql",
+      "categories": [],
+      "relatedTables": [ "ADTDataHistoryOperation" ],
+      "tags": {},
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": false
+        }
+      }
+    }
+  ]
+}

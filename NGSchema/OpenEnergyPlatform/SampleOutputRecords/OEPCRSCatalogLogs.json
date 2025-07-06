@@ -1,0 +1,12 @@
+[
+  {
+    "TimeGenerated": "2022-03-14T00:05:38.552089493Z",
+    "ResourceId": "/SUBSCRIPTIONS/C99E2BF3-1777-412B-BABA-D823676589C2/RESOURCEGROUPS/AZURE-MONITOR-TESTING-ANKIT/PROVIDERS/MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/MONITORTEST",
+    "Location": "eastus",
+    "OperationName": "MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/CRSCATALOG/ACTION",
+    "Category": "CRSCatalogLogs",
+    "Message": "api-method=POST operation-name={POST [/query_with_cursor]} user-id=51d2f791-795b-4c8d-9657-cd23b1f9f2a7 app-id=2f59abbc-7b40-4d0e-91b2-22ca3084bc84: search.app Start Web-API POST /query_with_cursor Headers: {correlation-id:29030e4a-1680-455c-ba5a-f02c766cb07a,data-partition-id:dplogsdf-opendes,content-type:application/json} {correlation-id=29030e4a-1680-455c-ba5a-f02c766cb07a, data-partition-id=dplogsdf-opendes}search.app Start Web-API POST /query_with_cursor Headers: {correlation-id:29030e4a-1680-455c-ba5a-f02c766cb07a,data-partition-id:dplogsdf-opendes,content-type:application/json} {correlation-id=29030e4a-1680-455c-ba5a-f02c766cb07a, data-partition-id=dplogsdf-opendes} ",
+    "LogLevel": "INFO",
+    "CorrelationId": "19135c66-d59c-4334-87d9-d9aaf3be48d5-0"
+    }
+]

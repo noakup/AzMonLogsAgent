@@ -1,0 +1,28 @@
+source
+| extend identity = parse_json(identity)
+| extend properties = parse_json(properties)
+| extend farmerId = tostring(properties.farmerId)
+| extend jobId = tostring(properties.jobId)
+| extend jobRunType = tostring(properties.jobRunType)
+| extend initiatedBy = tostring(properties.initiatedBy)
+| extend ApplicationId = tostring(identity.claims.ApplicationId)
+| extend ObjectId = tostring(identity.claims.ObjectId)
+| extend ClientTenantId = tostring(identity.claims.TenantId)
+| project
+TimeGenerated = todatetime(['time']),
+Category = category,
+OperationName = operationName,
+FarmerId = farmerId,
+JobId = jobId,
+JobRunType = jobRunType,
+InitiatedBy = initiatedBy,
+Level = Level,
+ResultType = resultType,
+ResultDescription = resultDescription,
+Location = location,
+CorrelationId = correlationId,
+DurationMs = durationMs,
+ApplicationId = ApplicationId,
+ObjectId = ObjectId,
+ClientTenantId = ClientTenantId,
+Properties = properties

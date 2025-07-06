@@ -1,0 +1,25 @@
+[
+  {
+    "time": "2021-10-26T21:44:16.8117322Z",
+    "resourceId": "/SUBSCRIPTIONS/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx/RESOURCEGROUPS/BMT-TEST/PROVIDERS/MICROSOFT.EVENTGRID/DOMAINS/BMTAUDITLOGDOMAIN",
+    "operationName": "Microsoft.EventGrid/events/send",
+    "category": "DataPlaneRequests",
+    "level": "Information",
+    "region": "CENTRALUSEUAP",
+    "properties": {
+      "aggregatedRequests": [
+        {
+          "networkAccess": "PublicAccess",
+          "clientIpAddress": "xx.xx.xx.xxx",
+          "tlsVersion": "1.2",
+          "authentication": {
+            "type": "AADAccessToken",
+            "objectId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+          },
+          "operationResult": "Success",
+          "totalOperations": 1
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,17 @@
+[
+    {
+        "TimeGenerated" : "2024-01-17 07:05:26.5670801",
+        "StartTime": "2024-01-15 00:00:00.0000000",
+        "EndTime": "2024-01-16 00:00:00.0000000",
+        "AMWResourceName": "armishtesteastus2amw",
+        "MetricNamespace": "_azure_managed_prometheus", 
+        "MetricName": "storage_operation_duration_seconds_bucket", 
+        "DimensionsList": "cluster,instance,job,kubernetes_io_os,le,metrics_path,migrated,operation_name,status,volume_plugin",
+        "DailyTimeseriesCount": 646,
+        "IngestedSamplesCount": 1000,
+        "IncomingEventsCount": 1000,
+        "DaysSinceMetricQueried": 0,
+        "NumberOfQueries": 10,
+        "ResourceId": "/SUBSCRIPTIONS/FB9E7FE1-AF44-47EF-852D-2D086A069327/RESOURCEGROUPS/ARMISHTESTEASTUS2/PROVIDERS/MICROSOFT.MONITOR/ACCOUNTS/ARMISHTESTEASTUS2AMW"
+    }
+]

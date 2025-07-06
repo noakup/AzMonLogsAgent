@@ -1,0 +1,3 @@
+AFDAccessLog 
+| summarize UserRequestCount = count() by RequestUri
+| top 100 by UserRequestCount

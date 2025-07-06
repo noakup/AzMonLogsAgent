@@ -1,0 +1,19 @@
+source
+| project
+    LogicalServerName = LogicalServerName,
+    ResourceGroup = ResourceGroup,
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    Category = category,
+	RequestId = tostring(properties.RequestId),
+	StepIndex = toint(properties.StepIndex),
+    OperationType = tostring(properties.OperationType),
+    DistributionType = tostring(properties.DistributionType),
+    LocationType = tostring(properties.LocationType),
+    Status = tostring(properties.Status),
+    ErrorId = tostring(properties.ErrorId),
+    StartTime = todatetime(properties.StartTime),
+    EndTime = todatetime(properties.EndTime),
+	EndCompileTime = todatetime(properties.EndCompileTime),
+    RowCount = toint(properties.RowCount),
+    Command = tostring(properties.Command)

@@ -1,0 +1,5 @@
+AADManagedIdentitySignInLogs
+| where TimeGenerated > ago(1d)
+| summarize CountPerManagedIdentity = count() by ServicePrincipalId
+| order by CountPerManagedIdentity desc
+| take 100

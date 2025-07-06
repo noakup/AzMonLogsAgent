@@ -1,0 +1,1929 @@
+{
+  "type": "Microsoft.SecurityInsights/CrowdStrike",
+  "displayName": "Azure Sentinel CrowdStrike",
+  "description": "All tables related to CrowdStrike.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Microsoft Sentinel Data Connectors/Ingestion Pipeline (Raw data only, not alerts)",
+  "contactDL": "asipolarbearseng@microsoft.com",
+  "tables": [
+    {
+      "name": "CrowdStrikeVulnerabilities",
+      "description": "The CrowdStrikeVulnerabilities table contains logs from the CrowdStrike Vulnerabilities API that have been ingested into Microsoft Sentinel.",
+      "categories": [
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 1,
+      "dataTypeId": "SENTINEL_CROWDSTRIKEVULNERABILITIES",
+      "intelligencePacks": [
+        "SecurityInsights"
+      ],
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "transformFilePath": "KQL/CrowdStrikeVulnerabilitiesTransform.kql",
+      "input": [
+        {
+          "name": "id",
+          "type": "String"
+        },
+        {
+          "name": "cid",
+          "type": "String"
+        },
+        {
+          "name": "aid",
+          "type": "String"
+        },
+        {
+          "name": "vulnerability_id",
+          "type": "String"
+        },
+        {
+          "name": "status",
+          "type": "String"
+        },
+        {
+          "name": "created_timestamp",
+          "type": "DateTime"
+        },
+        {
+          "name": "updated_timestamp",
+          "type": "DateTime"
+        },
+        {
+          "name": "data_providers",
+          "type": "Dynamic"
+        },
+        {
+          "name": "apps",
+          "type": "Dynamic"
+        },
+        {
+          "name": "suppression_info",
+          "type": "Dynamic"
+        },
+        {
+          "name": "confidence",
+          "type": "String"
+        },
+        {
+          "name": "app",
+          "type": "Dynamic"
+        },
+        {
+          "name": "cve",
+          "type": "Dynamic"
+        },
+        {
+          "name": "host_info",
+          "type": "Dynamic"
+        },
+        {
+          "name": "remediation",
+          "type": "Dynamic"
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/CrowdStrikeVulnerabilitiesSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/CrowdStrikeVulnerabilitiesSample.json",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The timestamp (UTC) when the event was ingested."
+        },
+        {
+          "name": "Id",
+          "type": "String",
+          "description": "Unique identifier for the vulnerability record.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "Cid",
+          "type": "String",
+          "description": "Customer ID in the CrowdStrike platform."
+        },
+        {
+          "name": "Aid",
+          "type": "String",
+          "description": "Agent ID of the system where vulnerability was detected."
+        },
+        {
+          "name": "VulnerabilityId",
+          "type": "String",
+          "description": "Unique identifier for the specific vulnerability."
+        },
+        {
+          "name": "DataProviders",
+          "type": "Dynamic",
+          "description": "List of data providers that reported this vulnerability."
+        },
+        {
+          "name": "CreatedTimestamp",
+          "type": "DateTime",
+          "description": "Timestamp when the vulnerability was first detected."
+        },
+        {
+          "name": "UpdatedTimestamp",
+          "type": "DateTime",
+          "description": "Timestamp when the vulnerability record was last updated."
+        },
+        {
+          "name": "Status",
+          "type": "String",
+          "description": "Current status of the vulnerability."
+        },
+        {
+          "name": "Apps",
+          "type": "Dynamic",
+          "description": "List of affected applications."
+        },
+        {
+          "name": "SuppressionInfo",
+          "type": "Dynamic",
+          "description": "Information about vulnerability suppression if applied."
+        },
+        {
+          "name": "Confidence",
+          "type": "String",
+          "description": "Confidence level of the vulnerability detection."
+        },
+        {
+          "name": "App",
+          "type": "Dynamic",
+          "description": "Detailed information about the affected application."
+        },
+        {
+          "name": "Cve",
+          "type": "Dynamic",
+          "description": "Common Vulnerabilities and Exposures (CVE) information."
+        },
+        {
+          "name": "HostInfo",
+          "type": "Dynamic",
+          "description": "Information about the affected host system."
+        },
+        {
+          "name": "Remediation",
+          "type": "Dynamic",
+          "description": "Remediation steps or recommendations for the vulnerability."
+        }
+      ]
+    },
+    {
+      "name": "CrowdStrikeAlerts",
+      "description": "The CrowdStrikeAlerts table contains logs from the CrowdStrike Alerts API that have been ingested into Microsoft Sentinel.",
+      "categories": [
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 1,
+      "dataTypeId": "SENTINEL_CROWDSTRIKEALERTS",
+      "intelligencePacks": [
+        "SecurityInsights"
+      ],
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "transformFilePath": "KQL/CrowdStrikeAlertsTransform.kql",
+      "input": [
+        {
+          "name": "id",
+          "type": "String"
+        },
+        {
+          "name": "agent_id",
+          "type": "String"
+        },
+        {
+          "name": "aggregate_id",
+          "type": "String"
+        },
+        {
+          "name": "assigned_to_name",
+          "type": "String"
+        },
+        {
+          "name": "assigned_to_uid",
+          "type": "String"
+        },
+        {
+          "name": "assigned_to_uuid",
+          "type": "String"
+        },
+        {
+          "name": "cid",
+          "type": "String"
+        },
+        {
+          "name": "composite_id",
+          "type": "String"
+        },
+        {
+          "name": "confidence",
+          "type": "Int"
+        },
+        {
+          "name": "crawled_timestamp",
+          "type": "DateTime"
+        },
+        {
+          "name": "created_timestamp",
+          "type": "DateTime"
+        },
+        {
+          "name": "data_domains",
+          "type": "Dynamic"
+        },
+        {
+          "name": "description",
+          "type": "String"
+        },
+        {
+          "name": "display_name",
+          "type": "String"
+        },
+        {
+          "name": "email_sent",
+          "type": "Bool"
+        },
+        {
+          "name": "external",
+          "type": "Bool"
+        },
+        {
+          "name": "name",
+          "type": "String"
+        },
+        {
+          "name": "objective",
+          "type": "String"
+        },
+        {
+          "name": "pattern_id",
+          "type": "Int"
+        },
+        {
+          "name": "platform",
+          "type": "String"
+        },
+        {
+          "name": "product",
+          "type": "String"
+        },
+        {
+          "name": "scenario",
+          "type": "String"
+        },
+        {
+          "name": "seconds_to_resolved",
+          "type": "Int"
+        },
+        {
+          "name": "seconds_to_triaged",
+          "type": "Int"
+        },
+        {
+          "name": "severity",
+          "type": "Int"
+        },
+        {
+          "name": "severity_name",
+          "type": "String"
+        },
+        {
+          "name": "show_in_ui",
+          "type": "Bool"
+        },
+        {
+          "name": "source_products",
+          "type": "Dynamic"
+        },
+        {
+          "name": "source_vendors",
+          "type": "Dynamic"
+        },
+        {
+          "name": "status",
+          "type": "String"
+        },
+        {
+          "name": "tactic",
+          "type": "String"
+        },
+        {
+          "name": "tactic_id",
+          "type": "String"
+        },
+        {
+          "name": "tags",
+          "type": "Dynamic"
+        },
+        {
+          "name": "technique",
+          "type": "String"
+        },
+        {
+          "name": "technique_id",
+          "type": "String"
+        },
+        {
+          "name": "timestamp",
+          "type": "DateTime"
+        },
+        {
+          "name": "type",
+          "type": "String"
+        },
+        {
+          "name": "updated_timestamp",
+          "type": "DateTime"
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/CrowdStrikeAlertsSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/CrowdStrikeAlertsSample.json",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The timestamp (UTC) when the alert was generated."
+        },
+        {
+          "name": "AgentId",
+          "type": "String",
+          "description": "Unique identifier for the CrowdStrike agent that generated the alert."
+        },
+        {
+          "name": "AggregateId",
+          "type": "String",
+          "description": "Identifier for aggregated alerts from the same source."
+        },
+        {
+          "name": "AssignedToName",
+          "type": "String",
+          "description": "Name of the user assigned to handle the alert."
+        },
+        {
+          "name": "AssignedToUid",
+          "type": "String",
+          "description": "User ID of the assigned user."
+        },
+        {
+          "name": "AssignedToUuid",
+          "type": "String",
+          "description": "UUID of the assigned user."
+        },
+        {
+          "name": "Cid",
+          "type": "String",
+          "description": "Customer ID in the CrowdStrike platform."
+        },
+        {
+          "name": "CompositeId",
+          "type": "String",
+          "description": "Composite identifier combining multiple alert attributes."
+        },
+        {
+          "name": "Confidence",
+          "type": "Int",
+          "description": "Confidence score of the alert (0-100)."
+        },
+        {
+          "name": "CrawledTimestamp",
+          "type": "DateTime",
+          "description": "Timestamp when the alert data was last crawled."
+        },
+        {
+          "name": "CreatedTimestamp",
+          "type": "DateTime",
+          "description": "Timestamp when the alert was first created."
+        },
+        {
+          "name": "DataDomains",
+          "type": "Dynamic",
+          "description": "Domains associated with the alert."
+        },
+        {
+          "name": "Description",
+          "type": "String",
+          "description": "Detailed description of the alert."
+        },
+        {
+          "name": "DisplayName",
+          "type": "String",
+          "description": "Human-readable name for the alert."
+        },
+        {
+          "name": "EmailSent",
+          "type": "Bool",
+          "description": "Indicates if an email notification was sent for this alert."
+        },
+        {
+          "name": "External",
+          "type": "Bool",
+          "description": "Indicates if the alert originated from an external source."
+        },
+        {
+          "name": "Id",
+          "type": "String",
+          "description": "Unique identifier for the alert.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "Name",
+          "type": "String",
+          "description": "Name of the alert."
+        },
+        {
+          "name": "Objective",
+          "type": "String",
+          "description": "The attacker's presumed objective."
+        },
+        {
+          "name": "PatternId",
+          "type": "Int",
+          "description": "Identifier for the detection pattern that triggered the alert."
+        },
+        {
+          "name": "Platform",
+          "type": "String",
+          "description": "Operating system or platform where the alert was detected."
+        },
+        {
+          "name": "Product",
+          "type": "String",
+          "description": "CrowdStrike product that generated the alert."
+        },
+        {
+          "name": "Scenario",
+          "type": "String",
+          "description": "Security scenario that triggered the alert."
+        },
+        {
+          "name": "SecondsToResolved",
+          "type": "Int",
+          "description": "Time in seconds from alert creation to resolution."
+        },
+        {
+          "name": "SecondsToTriaged",
+          "type": "Int",
+          "description": "Time in seconds from alert creation to triage."
+        },
+        {
+          "name": "Severity",
+          "type": "Int",
+          "description": "Severity level of the alert."
+        },
+        {
+          "name": "SeverityName",
+          "type": "String",
+          "description": "Text representation of the severity level."
+        },
+        {
+          "name": "ShowInUi",
+          "type": "Bool",
+          "description": "Indicates if the alert should be displayed in the user interface."
+        },
+        {
+          "name": "SourceProducts",
+          "type": "Dynamic",
+          "description": "List of products that contributed to this alert."
+        },
+        {
+          "name": "SourceVendors",
+          "type": "Dynamic",
+          "description": "List of vendors associated with the alert sources."
+        },
+        {
+          "name": "Status",
+          "type": "String",
+          "description": "Current status of the alert."
+        },
+        {
+          "name": "Tactic",
+          "type": "String",
+          "description": "MITRE ATT&CK tactic associated with the alert."
+        },
+        {
+          "name": "TacticId",
+          "type": "String",
+          "description": "Identifier of the MITRE ATT&CK tactic."
+        },
+        {
+          "name": "Tags",
+          "type": "Dynamic",
+          "description": "Custom tags associated with the alert."
+        },
+        {
+          "name": "Technique",
+          "type": "String",
+          "description": "MITRE ATT&CK technique associated with the alert."
+        },
+        {
+          "name": "TechniqueId",
+          "type": "String",
+          "description": "Identifier of the MITRE ATT&CK technique."
+        },
+        {
+          "name": "Timestamp",
+          "type": "DateTime",
+          "description": "Time when the alert event occurred."
+        },
+        {
+          "name": "AlertType",
+          "type": "String",
+          "description": "The type or category of the CrowdStrike alert."
+        },
+        {
+          "name": "UpdatedTimestamp",
+          "type": "DateTime",
+          "description": "Time when the alert was last updated."
+        }
+      ]
+    },
+    {
+      "name": "CrowdStrikeIncidents",
+      "description": "The CrowdStrikeIncidents table contains logs from the CrowdStrike Incidents API that have been ingested into Microsoft Sentinel.",
+      "categories": [
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 1,
+      "dataTypeId": "SENTINEL_CROWDSTRIKEINCIDENTS",
+      "intelligencePacks": [
+        "SecurityInsights"
+      ],
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "transformFilePath": "KQL/CrowdStrikeIncidentsTransform.kql",
+      "sampleInputRecordsFilePath": "SampleInputRecords/CrowdStrikeIncidentsSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/CrowdStrikeIncidentsSample.json",
+      "input": [
+        {
+          "name": "assigned_to",
+          "type": "String"
+        },
+        {
+          "name": "assigned_to_name",
+          "type": "String"
+        },
+        {
+          "name": "cid",
+          "type": "String"
+        },
+        {
+          "name": "created",
+          "type": "DateTime"
+        },
+        {
+          "name": "description",
+          "type": "String"
+        },
+        {
+          "name": "email_state",
+          "type": "String"
+        },
+        {
+          "name": "end",
+          "type": "DateTime"
+        },
+        {
+          "name": "events_histogram",
+          "type": "Dynamic"
+        },
+        {
+          "name": "fine_score",
+          "type": "Int"
+        },
+        {
+          "name": "grouping_ids",
+          "type": "Dynamic"
+        },
+        {
+          "name": "host_ids",
+          "type": "Dynamic"
+        },
+        {
+          "name": "hosts",
+          "type": "Dynamic"
+        },
+        {
+          "name": "incident_id",
+          "type": "String"
+        },
+        {
+          "name": "incident_type",
+          "type": "Int"
+        },
+        {
+          "name": "lm_host_ids",
+          "type": "Dynamic"
+        },
+        {
+          "name": "lm_hosts_capped",
+          "type": "Bool"
+        },
+        {
+          "name": "lm_types",
+          "type": "Int"
+        },
+        {
+          "name": "lmra_host_ids",
+          "type": "Dynamic"
+        },
+        {
+          "name": "lmra_hosts_capped",
+          "type": "Bool"
+        },
+        {
+          "name": "modified_timestamp",
+          "type": "DateTime"
+        },
+        {
+          "name": "name",
+          "type": "String"
+        },
+        {
+          "name": "objectives",
+          "type": "Dynamic"
+        },
+        {
+          "name": "start",
+          "type": "DateTime"
+        },
+        {
+          "name": "state",
+          "type": "String"
+        },
+        {
+          "name": "status",
+          "type": "Int"
+        },
+        {
+          "name": "tactics",
+          "type": "Dynamic"
+        },
+        {
+          "name": "tags",
+          "type": "Dynamic"
+        },
+        {
+          "name": "techniques",
+          "type": "Dynamic"
+        },
+        {
+          "name": "users",
+          "type": "Dynamic"
+        }
+      ],
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The timestamp (UTC) when the incident data was ingested."
+        },
+        {
+          "name": "AssignedTo",
+          "type": "String",
+          "description": "ID of the user assigned to the incident."
+        },
+        {
+          "name": "AssignedToName",
+          "type": "String",
+          "description": "Name of the user assigned to handle the incident."
+        },
+        {
+          "name": "Cid",
+          "type": "String",
+          "description": "Customer ID in the CrowdStrike platform."
+        },
+        {
+          "name": "Created",
+          "type": "DateTime",
+          "description": "Timestamp when the incident was created."
+        },
+        {
+          "name": "Description",
+          "type": "String",
+          "description": "Detailed description of the incident."
+        },
+        {
+          "name": "EmailState",
+          "type": "String",
+          "description": "Current state of email notifications for the incident."
+        },
+        {
+          "name": "End",
+          "type": "DateTime",
+          "description": "Timestamp when the incident was closed or resolved."
+        },
+        {
+          "name": "EventsHistogram",
+          "type": "Dynamic",
+          "description": "Timeline of events associated with the incident."
+        },
+        {
+          "name": "FineScore",
+          "type": "Int",
+          "description": "Severity score assigned to the incident."
+        },
+        {
+          "name": "GroupingIds",
+          "type": "Dynamic",
+          "description": "List of IDs used to group related incidents."
+        },
+        {
+          "name": "HostIds",
+          "type": "Dynamic",
+          "description": "List of host IDs involved in the incident."
+        },
+        {
+          "name": "Hosts",
+          "type": "Dynamic",
+          "description": "Detailed information about affected hosts."
+        },
+        {
+          "name": "IncidentId",
+          "type": "String",
+          "description": "Unique identifier for the incident.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "IncidentType",
+          "type": "Int",
+          "description": "Numerical identifier for the type of incident."
+        },
+        {
+          "name": "LmHostIds",
+          "type": "Dynamic",
+          "description": "List of host IDs associated with Lightweight Mode."
+        },
+        {
+          "name": "LmHostsCapped",
+          "type": "Bool",
+          "description": "Indicates if the number of Lightweight Mode hosts was capped."
+        },
+        {
+          "name": "LmTypes",
+          "type": "Int",
+          "description": "Types of Lightweight Mode configurations."
+        },
+        {
+          "name": "LmraHostIds",
+          "type": "Dynamic",
+          "description": "List of host IDs associated with LMRA (Lightweight Mode Remote Access)."
+        },
+        {
+          "name": "LmraHostsCapped",
+          "type": "Bool",
+          "description": "Indicates if the number of LMRA hosts was capped."
+        },
+        {
+          "name": "ModifiedTimestamp",
+          "type": "DateTime",
+          "description": "Timestamp when the incident was last modified."
+        },
+        {
+          "name": "Name",
+          "type": "String",
+          "description": "Name or title of the incident."
+        },
+        {
+          "name": "Objectives",
+          "type": "Dynamic",
+          "description": "List of attacker objectives identified in the incident."
+        },
+        {
+          "name": "Start",
+          "type": "DateTime",
+          "description": "Timestamp when the incident started."
+        },
+        {
+          "name": "State",
+          "type": "String",
+          "description": "Current state of the incident."
+        },
+        {
+          "name": "Status",
+          "type": "Int",
+          "description": "Numerical status code of the incident."
+        },
+        {
+          "name": "Tactics",
+          "type": "Dynamic",
+          "description": "List of MITRE ATT&CK tactics identified in the incident."
+        },
+        {
+          "name": "Tags",
+          "type": "Dynamic",
+          "description": "Custom tags associated with the incident."
+        },
+        {
+          "name": "Techniques",
+          "type": "Dynamic",
+          "description": "List of MITRE ATT&CK techniques identified in the incident."
+        },
+        {
+          "name": "Users",
+          "type": "Dynamic",
+          "description": "List of users involved in or affected by the incident."
+        }
+      ]
+    },
+    {
+      "name": "CrowdStrikeDetections",
+      "description": "The CrowdStrikeDetections table contains logs from the CrowdStrike Detections API that have been ingested into Microsoft Sentinel.",
+      "categories": [
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 1,
+      "dataTypeId": "SENTINEL_CROWDSTRIKEDETECTIONS",
+      "intelligencePacks": [
+        "SecurityInsights"
+      ],
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "transformFilePath": "KQL/CrowdStrikeDetectionsTransform.kql",
+      "sampleInputRecordsFilePath": "SampleInputRecords/CrowdStrikeDetectionsSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/CrowdStrikeDetectionsSample.json",
+      "input": [
+        {
+          "name": "adversary_ids",
+          "type": "Dynamic"
+        },
+        {
+          "name": "assigned_to_name",
+          "type": "String"
+        },
+        {
+          "name": "assigned_to_uid",
+          "type": "String"
+        },
+        {
+          "name": "behaviors",
+          "type": "Dynamic"
+        },
+        {
+          "name": "behaviors_processed",
+          "type": "Dynamic"
+        },
+        {
+          "name": "cid",
+          "type": "String"
+        },
+        {
+          "name": "created_timestamp",
+          "type": "DateTime"
+        },
+        {
+          "name": "date_updated",
+          "type": "String"
+        },
+        {
+          "name": "detection_id",
+          "type": "String"
+        },
+        {
+          "name": "device",
+          "type": "Dynamic"
+        },
+        {
+          "name": "email_sent",
+          "type": "Bool"
+        },
+        {
+          "name": "first_behavior",
+          "type": "DateTime"
+        },
+        {
+          "name": "host_info",
+          "type": "Dynamic"
+        },
+        {
+          "name": "last_behavior",
+          "type": "DateTime"
+        },
+        {
+          "name": "max_confidence",
+          "type": "Int"
+        },
+        {
+          "name": "max_severity",
+          "type": "Int"
+        },
+        {
+          "name": "max_severity_displayname",
+          "type": "String"
+        },
+        {
+          "name": "overwatch_notes",
+          "type": "String"
+        },
+        {
+          "name": "quarantined_files",
+          "type": "Dynamic"
+        },
+        {
+          "name": "seconds_to_resolved",
+          "type": "Int"
+        },
+        {
+          "name": "seconds_to_triaged",
+          "type": "Int"
+        },
+        {
+          "name": "show_in_ui",
+          "type": "Bool"
+        },
+        {
+          "name": "status",
+          "type": "String"
+        }
+      ],
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The timestamp (UTC) when the detection event was ingested."
+        },
+        {
+          "name": "AdversaryIds",
+          "type": "Dynamic",
+          "description": "List of identified adversary IDs associated with the detection."
+        },
+        {
+          "name": "AssignedToName",
+          "type": "String",
+          "description": "Name of the user assigned to handle the detection."
+        },
+        {
+          "name": "AssignedToUid",
+          "type": "String",
+          "description": "User ID of the assigned user."
+        },
+        {
+          "name": "Behaviors",
+          "type": "Dynamic",
+          "description": "List of suspicious behaviors identified in the detection."
+        },
+        {
+          "name": "BehaviorsProcessed",
+          "type": "Dynamic",
+          "description": "List of processed and analyzed behaviors from the detection."
+        },
+        {
+          "name": "Cid",
+          "type": "String",
+          "description": "Customer ID in the CrowdStrike platform."
+        },
+        {
+          "name": "CreatedTimestamp",
+          "type": "DateTime",
+          "description": "Timestamp when the detection was first created."
+        },
+        {
+          "name": "DateUpdated",
+          "type": "String",
+          "description": "Date when the detection was last updated."
+        },
+        {
+          "name": "DetectionId",
+          "type": "String",
+          "description": "Unique identifier for the detection.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "Device",
+          "type": "Dynamic",
+          "description": "Information about the device where the detection occurred."
+        },
+        {
+          "name": "EmailSent",
+          "type": "Bool",
+          "description": "Indicates if an email notification was sent for this detection."
+        },
+        {
+          "name": "FirstBehaviorTime",
+          "type": "DateTime",
+          "description": "Timestamp of the first suspicious behavior detected."
+        },
+        {
+          "name": "HostInfo",
+          "type": "Dynamic",
+          "description": "Detailed information about the host system where the detection occurred."
+        },
+        {
+          "name": "LastBehavior",
+          "type": "DateTime",
+          "description": "Timestamp of the most recent suspicious behavior detected."
+        },
+        {
+          "name": "MaxConfidence",
+          "type": "Int",
+          "description": "Highest confidence score assigned to any behavior in the detection."
+        },
+        {
+          "name": "MaxSeverity",
+          "type": "Int",
+          "description": "Highest severity level assigned to any behavior in the detection."
+        },
+        {
+          "name": "MaxSeverityDisplayName",
+          "type": "String",
+          "description": "Text representation of the highest severity level."
+        },
+        {
+          "name": "OverwatchNotes",
+          "type": "String",
+          "description": "Notes added by CrowdStrike Overwatch team regarding the detection."
+        },
+        {
+          "name": "QuarantinedFiles",
+          "type": "Dynamic",
+          "description": "List of files that were quarantined as part of the detection."
+        },
+        {
+          "name": "SecondsToResolved",
+          "type": "Int",
+          "description": "Time in seconds from detection creation to resolution."
+        },
+        {
+          "name": "SecondsToTriaged",
+          "type": "Int",
+          "description": "Time in seconds from detection creation to triage."
+        },
+        {
+          "name": "ShowInUi",
+          "type": "Bool",
+          "description": "Indicates if the detection should be displayed in the user interface."
+        },
+        {
+          "name": "Status",
+          "type": "String",
+          "description": "Current status of the detection."
+        }
+      ]
+    },
+    {
+      "name": "CrowdStrikeHosts",
+      "description": "The CrowdStrikeHosts table contains logs from the CrowdStrike Hosts API that have been ingested into Microsoft Sentinel.",
+      "categories": [
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 1,
+      "dataTypeId": "SENTINEL_CROWDSTRIKEHOSTS",
+      "intelligencePacks": [
+        "SecurityInsights"
+      ],
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "transformFilePath": "KQL/CrowdStrikeHostsTransform.kql",
+      "sampleInputRecordsFilePath": "SampleInputRecords/CrowdStrikeHostsSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/CrowdStrikeHostsSample.json",
+      "input": [
+        {
+          "name": "agent_load_flags",
+          "type": "String"
+        },
+        {
+          "name": "agent_local_time",
+          "type": "String"
+        },
+        {
+          "name": "agent_version",
+          "type": "String"
+        },
+        {
+          "name": "base_image_version",
+          "type": "String"
+        },
+        {
+          "name": "bios_manufacturer",
+          "type": "String"
+        },
+        {
+          "name": "bios_version",
+          "type": "String"
+        },
+        {
+          "name": "build_number",
+          "type": "String"
+        },
+        {
+          "name": "chassis_type",
+          "type": "String"
+        },
+        {
+          "name": "chassis_type_desc",
+          "type": "String"
+        },
+        {
+          "name": "cid",
+          "type": "String"
+        },
+        {
+          "name": "config_id_base",
+          "type": "String"
+        },
+        {
+          "name": "config_id_build",
+          "type": "String"
+        },
+        {
+          "name": "config_id_platform",
+          "type": "String"
+        },
+        {
+          "name": "connection_ip",
+          "type": "String"
+        },
+        {
+          "name": "connection_mac_address",
+          "type": "String"
+        },
+        {
+          "name": "cpu_signature",
+          "type": "String"
+        },
+        {
+          "name": "cpu_vendor",
+          "type": "String"
+        },
+        {
+          "name": "default_gateway_ip",
+          "type": "String"
+        },
+        {
+          "name": "deployment_type",
+          "type": "String"
+        },
+        {
+          "name": "detection_suppression_status",
+          "type": "String"
+        },
+        {
+          "name": "device_id",
+          "type": "String"
+        },
+        {
+          "name": "device_policies",
+          "type": "Dynamic"
+        },
+        {
+          "name": "email",
+          "type": "String"
+        },
+        {
+          "name": "external_ip",
+          "type": "String"
+        },
+        {
+          "name": "filesystem_containment_status",
+          "type": "String"
+        },
+        {
+          "name": "first_login_timestamp",
+          "type": "String"
+        },
+        {
+          "name": "first_seen",
+          "type": "String"
+        },
+        {
+          "name": "group_hash",
+          "type": "String"
+        },
+        {
+          "name": "groups",
+          "type": "Dynamic"
+        },
+        {
+          "name": "host_hidden_status",
+          "type": "String"
+        },
+        {
+          "name": "host_utc_offset",
+          "type": "String"
+        },
+        {
+          "name": "hostname",
+          "type": "String"
+        },
+        {
+          "name": "instance_id",
+          "type": "String"
+        },
+        {
+          "name": "internet_exposure",
+          "type": "String"
+        },
+        {
+          "name": "k8s_cluster_git_version",
+          "type": "String"
+        },
+        {
+          "name": "k8s_cluster_id",
+          "type": "String"
+        },
+        {
+          "name": "k8s_cluster_version",
+          "type": "String"
+        },
+        {
+          "name": "kernel_version",
+          "type": "String"
+        },
+        {
+          "name": "last_login_timestamp",
+          "type": "String"
+        },
+        {
+          "name": "last_login_uid",
+          "type": "String"
+        },
+        {
+          "name": "last_login_user",
+          "type": "String"
+        },
+        {
+          "name": "last_login_user_sid",
+          "type": "String"
+        },
+        {
+          "name": "last_reboot",
+          "type": "String"
+        },
+        {
+          "name": "last_seen",
+          "type": "String"
+        },
+        {
+          "name": "linux_sensor_mode",
+          "type": "String"
+        },
+        {
+          "name": "local_ip",
+          "type": "String"
+        },
+        {
+          "name": "mac_address",
+          "type": "String"
+        },
+        {
+          "name": "machine_domain",
+          "type": "String"
+        },
+        {
+          "name": "major_version",
+          "type": "String"
+        },
+        {
+          "name": "managed_apps",
+          "type": "Dynamic"
+        },
+        {
+          "name": "meta",
+          "type": "Dynamic"
+        },
+        {
+          "name": "migration_completed_time",
+          "type": "String"
+        },
+        {
+          "name": "minor_version",
+          "type": "String"
+        },
+        {
+          "name": "modified_timestamp",
+          "type": "String"
+        },
+        {
+          "name": "notes",
+          "type": "Dynamic"
+        },
+        {
+          "name": "os_build",
+          "type": "String"
+        },
+        {
+          "name": "os_product_name",
+          "type": "String"
+        },
+        {
+          "name": "os_version",
+          "type": "String"
+        },
+        {
+          "name": "ou",
+          "type": "Dynamic"
+        },
+        {
+          "name": "platform_id",
+          "type": "String"
+        },
+        {
+          "name": "platform_name",
+          "type": "String"
+        },
+        {
+          "name": "pod_annotations",
+          "type": "Dynamic"
+        },
+        {
+          "name": "pod_host_ip4",
+          "type": "String"
+        },
+        {
+          "name": "pod_host_ip6",
+          "type": "String"
+        },
+        {
+          "name": "pod_hostname",
+          "type": "String"
+        },
+        {
+          "name": "pod_id",
+          "type": "String"
+        },
+        {
+          "name": "pod_ip4",
+          "type": "String"
+        },
+        {
+          "name": "pod_ip6",
+          "type": "String"
+        },
+        {
+          "name": "pod_labels",
+          "type": "Dynamic"
+        },
+        {
+          "name": "pod_name",
+          "type": "String"
+        },
+        {
+          "name": "pod_namespace",
+          "type": "String"
+        },
+        {
+          "name": "pod_service_account_name",
+          "type": "String"
+        },
+        {
+          "name": "pointer_size",
+          "type": "String"
+        },
+        {
+          "name": "policies",
+          "type": "Dynamic"
+        },
+        {
+          "name": "product_type",
+          "type": "String"
+        },
+        {
+          "name": "product_type_desc",
+          "type": "String"
+        },
+        {
+          "name": "provision_status",
+          "type": "String"
+        },
+        {
+          "name": "reduced_functionality_mode",
+          "type": "String"
+        },
+        {
+          "name": "release_group",
+          "type": "String"
+        },
+        {
+          "name": "rtr_state",
+          "type": "String"
+        },
+        {
+          "name": "serial_number",
+          "type": "String"
+        },
+        {
+          "name": "service_pack_major",
+          "type": "String"
+        },
+        {
+          "name": "service_pack_minor",
+          "type": "String"
+        },
+        {
+          "name": "service_provider",
+          "type": "String"
+        },
+        {
+          "name": "service_provider_account_id",
+          "type": "String"
+        },
+        {
+          "name": "site_name",
+          "type": "String"
+        },
+        {
+          "name": "status",
+          "type": "String"
+        },
+        {
+          "name": "system_manufacturer",
+          "type": "String"
+        },
+        {
+          "name": "system_product_name",
+          "type": "String"
+        },
+        {
+          "name": "tags",
+          "type": "Dynamic"
+        }
+      ],
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The timestamp (UTC) when the host data was ingested."
+        },
+        {
+          "name": "AgentLoadFlags",
+          "type": "String",
+          "description": "Flags indicating the load status of the CrowdStrike agent."
+        },
+        {
+          "name": "AgentLocalTime",
+          "type": "String",
+          "description": "Local time of the system where the agent is installed."
+        },
+        {
+          "name": "AgentVersion",
+          "type": "String",
+          "description": "Version of the installed CrowdStrike agent."
+        },
+        {
+          "name": "BaseImageVersion",
+          "type": "String",
+          "description": "Version of the base operating system image."
+        },
+        {
+          "name": "BiosManufacturer",
+          "type": "String",
+          "description": "Manufacturer of the system BIOS."
+        },
+        {
+          "name": "BiosVersion",
+          "type": "String",
+          "description": "Version of the system BIOS."
+        },
+        {
+          "name": "BuildNumber",
+          "type": "String",
+          "description": "Operating system build number."
+        },
+        {
+          "name": "ChassisType",
+          "type": "String",
+          "description": "Type of system chassis (numerical identifier)."
+        },
+        {
+          "name": "ChassisTypeDesc",
+          "type": "String",
+          "description": "Description of the system chassis type."
+        },
+        {
+          "name": "Cid",
+          "type": "String",
+          "description": "Cid the CrowdStrike platform."
+        },
+        {
+          "name": "ConfigIdBase",
+          "type": "String",
+          "description": "Base configuration ID for the CrowdStrike agent."
+        },
+        {
+          "name": "ConfigIdBuild",
+          "type": "String",
+          "description": "Build configuration ID for the CrowdStrike agent."
+        },
+        {
+          "name": "ConfigIdPlatform",
+          "type": "String",
+          "description": "Platform-specific configuration ID for the CrowdStrike agent."
+        },
+        {
+          "name": "ConnectionIp",
+          "type": "String",
+          "description": "IP address used by the host to connect to CrowdStrike cloud.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "ConnectionMacAddress",
+          "type": "String",
+          "description": "MAC address of the network interface used for CrowdStrike connection."
+        },
+        {
+          "name": "CpuSignature",
+          "type": "String",
+          "description": "Unique identifier for the CPU architecture and features."
+        },
+        {
+          "name": "CpuVendor",
+          "type": "String",
+          "description": "Manufacturer of the CPU."
+        },
+        {
+          "name": "DefaultGatewayIp",
+          "type": "String",
+          "description": "IP address of the default network gateway.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "DeploymentType",
+          "type": "String",
+          "description": "Type of CrowdStrike agent deployment on the host."
+        },
+        {
+          "name": "DetectionSuppressionStatus",
+          "type": "String",
+          "description": "Status of detection suppression rules applied to the host."
+        },
+        {
+          "name": "DeviceId",
+          "type": "String",
+          "description": "Unique identifier for the device in CrowdStrike platform."
+        },
+        {
+          "name": "DevicePolicies",
+          "type": "Dynamic",
+          "description": "List of security policies applied to the device."
+        },
+        {
+          "name": "Email",
+          "type": "String",
+          "description": "Email address associated with the host or primary user."
+        },
+        {
+          "name": "ExternalIp",
+          "type": "String",
+          "description": "External IP address of the host.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "FilesystemContainmentStatus",
+          "type": "String",
+          "description": "Status of filesystem containment feature for the host."
+        },
+        {
+          "name": "FirstLoginTimestamp",
+          "type": "String",
+          "description": "Timestamp of the first user login on the host."
+        },
+        {
+          "name": "FirstSeen",
+          "type": "String",
+          "description": "Timestamp when the host was first seen by CrowdStrike."
+        },
+        {
+          "name": "GroupHash",
+          "type": "String",
+          "description": "Hash identifier for the host's group membership."
+        },
+        {
+          "name": "Groups",
+          "type": "Dynamic",
+          "description": "List of security groups the host belongs to."
+        },
+        {
+          "name": "HostHiddenStatus",
+          "type": "String",
+          "description": "Indicates if the host is hidden from normal visibility."
+        },
+        {
+          "name": "HostUtcOffset",
+          "type": "String",
+          "description": "UTC time offset for the host's timezone."
+        },
+        {
+          "name": "Hostname",
+          "type": "String",
+          "description": "Network hostname of the system."
+        },
+        {
+          "name": "InstanceId",
+          "type": "String",
+          "description": "Cloud instance identifier (if applicable)."
+        },
+        {
+          "name": "InternetExposure",
+          "type": "String",
+          "description": "Level of internet exposure for the host."
+        },
+        {
+          "name": "K8sClusterGitVersion",
+          "type": "String",
+          "description": "Git version of the Kubernetes cluster deployment."
+        },
+        {
+          "name": "K8sClusterId",
+          "type": "String",
+          "description": "Unique identifier for the Kubernetes cluster."
+        },
+        {
+          "name": "K8sClusterVersion",
+          "type": "String",
+          "description": "Version of the Kubernetes cluster."
+        },
+        {
+          "name": "KernelVersion",
+          "type": "String",
+          "description": "Version of the operating system kernel."
+        },
+        {
+          "name": "LastLoginTimestamp",
+          "type": "String",
+          "description": "Timestamp of the most recent user login."
+        },
+        {
+          "name": "LastLoginUid",
+          "type": "String",
+          "description": "User ID of the last user to log in."
+        },
+        {
+          "name": "LastLoginUser",
+          "type": "String",
+          "description": "Username of the last user to log in."
+        },
+        {
+          "name": "LastLoginUserSid",
+          "type": "String",
+          "description": "Security identifier (SID) of the last user to log in."
+        },
+        {
+          "name": "LastReboot",
+          "type": "String",
+          "description": "Timestamp of the last system reboot."
+        },
+        {
+          "name": "LastSeen",
+          "type": "String",
+          "description": "Timestamp when the host was last seen active by CrowdStrike."
+        },
+        {
+          "name": "LinuxSensorMode",
+          "type": "String",
+          "description": "Operating mode of the CrowdStrike sensor on Linux systems."
+        },
+        {
+          "name": "LocalIp",
+          "type": "String",
+          "description": "Local/Internal IP address of the host.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "MacAddress",
+          "type": "String",
+          "description": "Primary MAC address of the host."
+        },
+        {
+          "name": "MachineDomain",
+          "type": "String",
+          "description": "Domain name the machine is joined to."
+        },
+        {
+          "name": "MajorVersion",
+          "type": "String",
+          "description": "Major version number of the operating system."
+        },
+        {
+          "name": "ManagedApps",
+          "type": "Dynamic",
+          "description": "List of applications managed by CrowdStrike on the host."
+        },
+        {
+          "name": "Meta",
+          "type": "Dynamic",
+          "description": "Additional metadata about the host."
+        },
+        {
+          "name": "MigrationCompletedTime",
+          "type": "String",
+          "description": "Timestamp when agent migration was completed."
+        },
+        {
+          "name": "MinorVersion",
+          "type": "String",
+          "description": "Minor version number of the operating system."
+        },
+        {
+          "name": "ModifiedTimestamp",
+          "type": "String",
+          "description": "Timestamp when the host record was last modified."
+        },
+        {
+          "name": "Notes",
+          "type": "Dynamic",
+          "description": "Custom notes or annotations about the host."
+        },
+        {
+          "name": "OsBuild",
+          "type": "String",
+          "description": "Build number of the operating system."
+        },
+        {
+          "name": "OsProductName",
+          "type": "String",
+          "description": "Product name of the operating system."
+        },
+        {
+          "name": "OsVersion",
+          "type": "String",
+          "description": "Version string of the operating system."
+        },
+        {
+          "name": "Ou",
+          "type": "Dynamic",
+          "description": "Organizational Unit information for the host."
+        },
+        {
+          "name": "PlatformId",
+          "type": "String",
+          "description": "Unique identifier for the platform type."
+        },
+        {
+          "name": "PlatformName",
+          "type": "String",
+          "description": "Name of the platform."
+        },
+        {
+          "name": "PodAnnotations",
+          "type": "Dynamic",
+          "description": "Kubernetes pod annotations associated with the host."
+        },
+        {
+          "name": "PodHostIp4",
+          "type": "String",
+          "description": "IPv4 address of the Kubernetes pod host."
+        },
+        {
+          "name": "PodHostIp6",
+          "type": "String",
+          "description": "IPv6 address of the Kubernetes pod host."
+        },
+        {
+          "name": "PodHostname",
+          "type": "String",
+          "description": "Hostname of the Kubernetes pod."
+        },
+        {
+          "name": "PodId",
+          "type": "String",
+          "description": "Unique identifier for the Kubernetes pod."
+        },
+        {
+          "name": "PodIp4",
+          "type": "String",
+          "description": "IPv4 address assigned to the Kubernetes pod."
+        },
+        {
+          "name": "PodIp6",
+          "type": "String",
+          "description": "IPv6 address assigned to the Kubernetes pod."
+        },
+        {
+          "name": "PodLabels",
+          "type": "Dynamic",
+          "description": "Labels assigned to the Kubernetes pod."
+        },
+        {
+          "name": "PodName",
+          "type": "String",
+          "description": "Name of the Kubernetes pod."
+        },
+        {
+          "name": "PodNamespace",
+          "type": "String",
+          "description": "Kubernetes namespace where the pod is deployed."
+        },
+        {
+          "name": "PodServiceAccountName",
+          "type": "String",
+          "description": "Name of the Kubernetes service account used by the pod."
+        },
+        {
+          "name": "PointerSize",
+          "type": "String",
+          "description": "Memory pointer size of the system architecture (32/64 bit)."
+        },
+        {
+          "name": "Policies",
+          "type": "Dynamic",
+          "description": "List of all security policies applied to the host."
+        },
+        {
+          "name": "ProductType",
+          "type": "String",
+          "description": "Type of product or system (numerical identifier)."
+        },
+        {
+          "name": "ProductTypeDesc",
+          "type": "String",
+          "description": "Description of the product or system type."
+        },
+        {
+          "name": "ProvisionStatus",
+          "type": "String",
+          "description": "Current provisioning status of the host."
+        },
+        {
+          "name": "ReducedFunctionalityMode",
+          "type": "String",
+          "description": "Indicates if the host is running in reduced functionality mode."
+        },
+        {
+          "name": "ReleaseGroup",
+          "type": "String",
+          "description": "Group identifier for software release management."
+        },
+        {
+          "name": "RtrState",
+          "type": "String",
+          "description": "State of Real Time Response functionality."
+        },
+        {
+          "name": "SerialNumber",
+          "type": "String",
+          "description": "System serial number from BIOS/hardware."
+        },
+        {
+          "name": "ServicePackMajor",
+          "type": "String",
+          "description": "Major version of installed service pack."
+        },
+        {
+          "name": "ServicePackMinor",
+          "type": "String",
+          "description": "Minor version of installed service pack."
+        },
+        {
+          "name": "ServiceProvider",
+          "type": "String",
+          "description": "Cloud service provider hosting the system."
+        },
+        {
+          "name": "ServiceProviderAccountId",
+          "type": "String",
+          "description": "Account identifier from the cloud service provider."
+        },
+        {
+          "name": "SiteName",
+          "type": "String",
+          "description": "Name of the site where the host is located."
+        },
+        {
+          "name": "Status",
+          "type": "String",
+          "description": "Current operational status of the host."
+        },
+        {
+          "name": "SystemManufacturer",
+          "type": "String",
+          "description": "Manufacturer of the system hardware."
+        },
+        {
+          "name": "SystemProductName",
+          "type": "String",
+          "description": "Product name or model of the system."
+        },
+        {
+          "name": "Tags",
+          "type": "Dynamic",
+          "description": "Custom tags assigned to the host."
+        }
+      ]
+    }
+  ],
+  "functions": [],
+  "queries": [],
+  "relatedTables": [],
+  "relatedFunctions": []
+}

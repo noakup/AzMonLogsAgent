@@ -1,0 +1,3 @@
+StorageMalwareScanningResults
+| where ScanResultType in ("Error", "Not Scanned")
+| summarize count(), BlobUris = make_list(BlobUri) by ScanResultType, ScanResultDetails

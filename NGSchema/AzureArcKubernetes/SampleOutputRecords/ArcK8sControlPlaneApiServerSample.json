@@ -1,0 +1,18 @@
+[
+    {
+        "TimeGenerated": "2023-01-10T22:15:26.0000000Z",
+        "Category": "kube-apiserver",
+        "Level": "",
+        "Message": "http2: server connection error from 172.31.73.48:58882: connection error: PROTOCOL_ERROR",
+        "Stream": "stderr",
+        "PodName": "kube-apiserver-68df4876bd-4vtq7"
+    },
+    {
+        "TimeGenerated": "2023-01-10T22:17:23.0000000Z",
+        "Category": "kube-apiserver",
+        "Level": "INFO",
+        "Message": "cacher (*unstructured.Unstructured): initialized",
+        "Stream": "stderr",
+        "PodName": "kube-apiserver-68df4876bd-4vtq7"
+    }
+]

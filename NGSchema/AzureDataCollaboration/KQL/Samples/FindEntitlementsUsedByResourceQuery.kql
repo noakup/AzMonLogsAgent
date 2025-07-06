@@ -1,0 +1,15 @@
+//==============================================================================================
+// For specific results, insert values in the let statements and uncomment the where filters within the query
+// let partialResourceId = "<Full or Partial resource name (DataAsset, DataSet or Script) to look for (e.g. "dataassets/e2etest2020qqigqeqp">");
+ACICollaborationAudit
+| where GrantType == 'Entitlement'
+//| where TargetResourceId has partialResourceId
+| extend ShortOperationName=tostring(array_slice(split(OperationName, '/'), -1, -1)[0])
+| summarize TimeGenerated=max(TimeGenerated), EntitlementResult=array_strcat(make_set(EntitlementResult), ','), 
+            GrantSource=any(GrantSource), GrantSourceType=any(GrantSourceType),
+            TargetResourceId=any(TargetResourceId), TargetResourceType=any(TargetResourceType), ParticipantName=any(ParticipantName),
+            OperationName=any(ShortOperationName)
+    by GrantCorrelationId
+| project-away GrantCorrelationId
+| order by TimeGenerated desc
+| limit 100;

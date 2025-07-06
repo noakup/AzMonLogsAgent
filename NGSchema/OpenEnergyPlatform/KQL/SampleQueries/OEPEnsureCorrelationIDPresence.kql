@@ -1,0 +1,3 @@
+OEPDataplaneLogs
+// Ensure each log entry has a CorrelationId by using the existing one or extracting it from the Message field
+| extend CorrelationId = iff(notempty(CorrelationId), CorrelationId, extract(@"correlation-id=([a-zA-Z0-9_-]+)", 1, Message))

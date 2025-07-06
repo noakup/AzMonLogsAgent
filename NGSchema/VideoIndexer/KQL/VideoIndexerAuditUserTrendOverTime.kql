@@ -1,0 +1,12 @@
+// Trend of top 10 active Upn's
+VIAudit
+// | where AccountId == "<AccountId>"  // to filter on a specific accountId, uncomment this line
+| where TimeGenerated > ago(30d)
+| summarize count() by Upn
+| top 10 by count_ desc
+| project Upn
+| join (VIAudit
+| where TimeGenerated > ago(30d)
+| summarize count() by Upn, bin(TimeGenerated,1d)) on Upn
+| project TimeGenerated, Upn, count_
+| render timechart

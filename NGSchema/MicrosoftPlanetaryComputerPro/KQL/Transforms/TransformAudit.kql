@@ -1,0 +1,10 @@
+source
+| extend d = parse_json(properties)
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    Location = location,
+    CorrelationId = correlationId,
+    Category = category,
+    Status = tostring(d.statusCode),
+    Endpoint = tostring(d.endpoint)

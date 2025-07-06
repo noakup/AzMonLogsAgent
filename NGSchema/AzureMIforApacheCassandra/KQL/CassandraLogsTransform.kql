@@ -1,0 +1,66 @@
+source
+| extend resourceIdArray = split(resourceId, "/")
+| extend numElementsInResourceId = array_length(resourceIdArray)
+| extend clusterNameExtracted = resourceIdArray[numElementsInResourceId - 1]
+| project
+	TimeGenerated = todatetime(['time']),
+	ClusterName = tostring(clusterNameExtracted),
+
+	Level = tostring(properties.level),
+	AddressIp = tostring(properties.address),
+	ThreadName = tostring(properties.thread_name),
+	ThreadId = tostring(properties.thread_id),
+	SourceFile = tostring(properties.source_file),
+	SourceLine = toint(properties.source_line),
+	Message = tostring(properties.message),
+	Exception = tostring(properties.exception),
+
+    EventProduct = tostring(properties.event_product),
+    EventCategory = tostring(properties.event_category),
+    EventType = tostring(properties.event_type),
+
+    CassandraKeyspace = tostring(properties.keyspace),
+    CassandraTable = tostring(properties.table),
+
+    PartitionKey = tostring(properties.partition_key),
+    PartitionSize = toint(properties.partition_size),
+
+    TombstonedCells = toint(properties.tombstoned_cells),
+    LiveCells = toint(properties.live_cells),
+    CassandraKey = tostring(properties.key),
+    RequestedColumns = toint(properties.requested_columns),
+    SliceStart = tostring(properties.slice_start),
+    SliceEnd = tostring(properties.slice_end),
+    DeletionInfo = tostring(properties.deletion_info),
+
+    CodeCacheBefore = tolong(properties.codecache_before),
+    CodeCacheAfter = tolong(properties.codecache_after),
+    Collections = toint(properties.collections),
+    CompressedClassSpaceBefore = tolong(properties.compressed_class_before),
+    CompressedClassSpaceAfter = tolong(properties.compressed_class_after),
+    DurationMs = toint(properties.duration),
+    EdenSpaceBefore = tolong(properties.eden_before),
+    EdenSpaceAfter = tolong(properties.eden_after),
+    GCType = tostring(properties.gc_type),
+    MaxMemory = tolong(properties.max),
+    MetaspaceBefore = tolong(properties.metaspace_before),
+    MetaspaceAfter = tolong(properties.metaspace_after),
+    OldGenBefore = tolong(properties.oldgen_before),
+    OldGenAfter = tolong(properties.oldgen_after),
+    PercentFull = todouble(properties.percent_full),
+    PermGenBefore = tolong(properties.permgen_before),
+    PermGenAfter = tolong(properties.permgen_after),
+    SurvivorSpaceBefore = tolong(properties.survivor_before),
+    SurvivorSpaceAfter = tolong(properties.survivor_after),
+    UsedMemory = tolong(properties.used),
+
+    DroppedCrossNodeTimeout = toint(properties.cross_node_timeout),
+    DroppedInternalTimeout = toint(properties.internal_timeout),
+    DroppedMessagesType = tostring(properties.message_type),
+    DroppedMessages = toint(properties.messages_dropped),
+
+    Endpoint = tostring(properties.endpoint),
+    HostId = tostring(properties.host_id),
+    PendingTasks = toint(properties.pending_tasks),
+    SessionId = tostring(properties.session_id),
+    SSTableName = tostring(properties.sstable_name)

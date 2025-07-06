@@ -1,0 +1,45 @@
+[
+  {
+    "TimeGenerated": "2024-09-10T13:21:14.6030572Z",
+    "VpcSubnetworkName": "default",
+    "VpcName": "default",
+    "VpcProjectId": "g-860588771758",
+    "Action": "ALLOW",
+    "Direction": "INGRESS",
+    "IpPortInfo": [
+      {
+        "ip_protocol": "TCP",
+        "port_range": [
+          "443"
+        ]
+      }
+    ],
+    "Priority": "1000",
+    "Referance": "network:default/firewall:default-allow-https",
+    "SourceRange": [
+      "0.0.0.0/0"
+    ],
+    "RemoteLocationCity": "Herzliya",
+    "RemoteLocationContinent": "Asia",
+    "RemoteLocationCountry": "isr",
+    "RemoteLocationRegion": "Tel Aviv District",
+    "InstanceProjectId": "g-860588771758",
+    "InstanceRegion": "us-central1",
+    "InstanceVmName": "temp-test-sentinel-data",
+    "InstanceZone": "us-central1-c",
+    "Disposition": "ALLOWED",
+    "DestIp": "10.128.0.7",
+    "DestPort": "443",
+    "Protocol": "6",
+    "SrcIp": "167.220.204.137",
+    "SrcPort": "41140",
+    "LogName": "projects/g-860588771758/logs/compute.googleapis.com%2Ffirewall",
+    "Timestamp": "2024-09-10T13:21:02.4645011Z",
+    "InsertId": "1ckmsw0etwmsz",
+    "ProjectId": "g-860588771758",
+    "ResourceLocation": "us-central1",
+    "SubnetworkId": "1187397437812470118",
+    "ResourceSubnetworkName": "default",
+    "GCPResourceType": "gce_subnetwork"
+  }
+]

@@ -1,0 +1,35 @@
+[
+    {
+        "TimeGenerated": "2023-08-01T17:45:35.078Z",
+        "BinStartTime": "2023-08-01T16:00:00.000Z",
+        "BinSize": 60,
+        "Status": "Started",
+        "QueryDurationMs": 0,
+        "ResultsRecordCount": 0,
+        "Message": "",
+        "RuleName": "BillingSummary",
+        "RuleLastModifiedTime": "2023-08-01T12:21:14.200Z"
+    },
+    {
+        "TimeGenerated": "2023-08-01T17:55:21.078Z",
+        "BinStartTime": "2023-08-01T16:00:00.000Z",
+        "BinSize": 60,
+        "Status": "Succeeded",
+        "QueryDurationMs": 560298,
+        "ResultsRecordCount": 100,
+        "Message": "",
+        "RuleName": "BillingSummary",
+        "RuleLastModifiedTime": "2023-08-01T12:21:14.200Z"
+    },
+    {
+        "TimeGenerated": "2023-08-01T17:45:34.078Z",
+        "BinStartTime": "2023-08-01T16:00:00.000Z",
+        "BinSize": 60,
+        "Status": "Failed",
+        "QueryDurationMs": 210,
+        "ResultsRecordCount": 0,
+        "Message": "Query was timed out",
+        "RuleName": "BillingSummary",
+        "RuleLastModifiedTime": "2023-08-01T12:21:14.200Z"
+    }
+]

@@ -1,0 +1,24 @@
+[
+    {
+        "ContainerName": "proxy",
+        "NamespaceName": "nc-system",
+        "Node": "b37dev01a1mg01",
+        "PodName": "strgmgmt-67fb8f566b-h255c",
+        "arrayDatetime": "2024-03-27T16:15:00",
+        "arrayController": "b37dev01purestor1-ct1",
+        "category": "StorageApplianceLogs",
+        "clusterManagerName": "dev01-ghd757uj4beky",
+        "clusterName": "dev01-a7e2e7f2ce98",
+        "ipaddress": "172.28.131.17:39784",
+        "location": "eastus2euap",
+        "message": "fe_api be_api/pure-vip 1/0/17 2656 -- 5/3/1/1/0 0/0",
+        "onbehalfAnnotations": "<Config onBehalfFields=\"resourceId,category\" priority=\"Normal\" primaryPartitionField=\"resourceId\" validJsonColumns=\"originalRecord\" excludeFields=\"Tenant,Role,RoleInstance,BMServerName,PreciseTimeStamp,FluentdIngestTimestamp,TIMESTAMP,ContainerImage,GenevaPodName,environment,clusterID,clusterManagedResourceGroupName,clusterManagerID,clusterManagerResourceGroupName,clusterResourceGroupName,Tag,tenantID\" containerSuffix=\"$category\" />",
+        "onbehalfServiceId": "Microsoft.NetworkCloud",
+        "operationName": "Microsoft.NetworkCloud/storageAppliances/read",
+        "resourceId": "/SUBSCRIPTIONS/A3EEB848-665A-4DBF-80A4-EB460930FB23/RESOURCEGROUPS/DEV01-A7E2E7F2CE98-HOSTEDRESOURCES-564DB683/PROVIDERS/MICROSOFT.NETWORKCLOUD/STORAGEAPPLIANCES/B37DEV01A1PU01",
+        "storageApplianceName": "B37DEV01A1PU01",
+        "subscriptionID": "a3eeb848-665a-4dbf-80a4-eb460930fb23",
+        "time": "2024-03-27T16:15:00.03697416Z"
+      }
+
+]

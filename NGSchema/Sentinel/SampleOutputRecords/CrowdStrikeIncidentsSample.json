@@ -1,0 +1,77 @@
+[{
+    "TimeGenerated": "2025-05-13T12:45:00Z",
+    "AssignedTo": "sec_analyst_123",
+    "AssignedToName": "John Smith",
+    "Cid": "2cc98db1a47b4c98b913c94d43bfab70",
+    "Created": "2025-02-17T09:31:15Z",
+    "Description": "Suspicious activity detected involving possible defense evasion and lateral movement attempts",
+    "EmailState": "START",
+    "End": "2025-02-17T10:04:11Z",
+    "EventsHistogram": [
+        {
+            "timestamp": "2025-02-17T09:31:12Z",
+            "count": 1,
+            "severity": "high"
+        },
+        {
+            "timestamp": "2025-02-17T09:45:00Z",
+            "count": 3,
+            "severity": "critical"
+        }
+    ],
+    "FineScore": 10,
+    "GroupingIds": ["group123", "group456"],
+    "HostIds": [
+        "b82fb1385f604af2a507e8f6b3b7473d"
+    ],
+    "Hosts": [
+        {
+            "device_id": "b82fb1385f604af2a507e8f6b3b7473d",
+            "cid": "2cc98db1a47b4c98b913c94d43bfab70",
+            "agent_load_flags": "1",
+            "agent_local_time": "2025-02-17T14:50:35.880Z",
+            "agent_version": "7.21.19205.0",
+            "system_product_name": "VMware7,1",
+            "groups": [
+                "9fd1b7681ff04ce992a3deba16ae217e"
+            ],
+            "modified_timestamp": "2025-02-17T09:29:17Z"
+        }
+    ],
+    "IncidentId": "inc:b82fb1385f604af2a507e8f6b3b7473d:c7e59914a5c445959a206b78e48c90aa",
+    "IncidentType": 1,
+    "LmHostIds": ["lm_host_1", "lm_host_2"],
+    "LmHostsCapped": true,
+    "LmTypes": 2,
+    "LmraHostIds": ["lmra_host_1", "lmra_host_2"],
+    "LmraHostsCapped": false,
+    "ModifiedTimestamp": "2025-03-18T09:45:26.26026686Z",
+    "Name": "Defense Evasion and Lateral Movement Activity",
+    "Objectives": [
+        "Keep Access",
+        "Explore",
+        "Falcon Detection Method"
+    ],
+    "Start": "2025-02-17T09:31:12Z",
+    "State": "closed",
+    "Status": 30,
+    "Tactics": [
+        "Defense Evasion",
+        "Lateral Movement",
+        "AI Powered IOA"
+    ],
+    "Tags": [
+        "high-priority",
+        "lateral-movement",
+        "under-investigation"
+    ],
+    "Techniques": [
+        "Software Packing",
+        "Remote Desktop Protocol",
+        "Masquerading",
+        "Malicious File"
+    ],
+    "Users": [
+        "Administrator"
+    ]
+}]

@@ -1,0 +1,25 @@
+[{
+        "time": "2021-06-15T23:26:25.2599211Z",
+        "resourceId": "/SUBSCRIPTIONS/B393F20E-C981-4497-84B3-A44B45F178F8/RESOURCEGROUPS/LOGGINGSTORY-TEST/PROVIDERS/MICROSOFT.CONNECTEDCACHE/CACHENODES/MCCLOGGINGSTORY_ZANOG",
+        "category": "Events",
+        "hitRatioMbps": 0.990649878978729,
+        "cacheNodeId": "d5835871-a557-44d2-81b9-62ff0e20abec",
+        "missMbps": 1.12076437473297,
+        "hitMbps": 2.33,
+        "hits": 1219,
+        "misses": 3,
+        "egressMbps": 119.866439819336
+    },
+    {
+        "time": "2021-06-15T23:23:14.2523776Z",
+        "resourceId": "/SUBSCRIPTIONS/B393F20E-C981-4497-84B3-A44B45F178F8/RESOURCEGROUPS/LOGGINGSTORY-TEST/PROVIDERS/MICROSOFT.CONNECTEDCACHE/CACHENODES/MCCLOGGINGSTORY_ZANOG",
+        "category": "Events",
+        "hitRatioMbps": 1,
+        "cacheNodeId": "13e86c04-6633-495e-8d91-03a6c8e88a6d",
+        "missMbps": 0,
+        "hitMbps": 0.88,
+        "hits": 1835,
+        "misses": 0,
+        "egressMbps": 188.929183959961
+    }
+]

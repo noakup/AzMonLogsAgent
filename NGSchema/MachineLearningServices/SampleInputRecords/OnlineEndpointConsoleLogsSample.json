@@ -1,0 +1,41 @@
+[
+  {
+    "time": "2020-11-24T05:25:21.7376293Z",
+    "resourceId": "/SUBSCRIPTIONS/5F08D643-1910-4A38-A7C7-84A39D4F42E0/RESOURCEGROUPS/CHPIRILL/PROVIDERS/MICROSOFT.MACHINELEARNINGSERVICES/WORKSPACES/CHPIRILLCANARY/ONLINEENDPOINTS/CANARYTEST",
+    "category": "AmlOnlineEndpointConsoleLog",
+    "operationName": "",
+    "properties": {
+      "message": "2022-12-04T12:50:23,779168843+00:00 - rsyslog/run ",
+      "containerName": "inference-server",
+      "instanceId": "d40fb1ff2eab45a5b3746c57e481031a000006",
+      "deploymentName": "test3",
+      "containerImageName": "yxcanaryacr.azurecr.io/azureml/azureml_9b591a252d8e5ebb6e46ba0ce0e25784:latest"
+    }
+  },
+  {
+    "time": "2020-11-24T05:25:21.7376085Z",
+    "resourceId": "/SUBSCRIPTIONS/5F08D643-1910-4A38-A7C7-84A39D4F42E0/RESOURCEGROUPS/CHPIRILL/PROVIDERS/MICROSOFT.MACHINELEARNINGSERVICES/WORKSPACES/CHPIRILLCANARY/ONLINEENDPOINTS/CANARYTEST",
+    "category": "AmlOnlineEndpointConsoleLog",
+    "operationName": "",
+    "properties": {
+      "message": "2022-12-04T12:50:23,821638697+00:00 | gunicorn/run | AzureML Container Runtime Information",
+      "containerName": "inference-server",
+      "instanceId": "d40fb1ff2eab45a5b3746c57e481031a000006",
+      "deploymentName": "test3",
+      "containerImageName": "yxcanaryacr.azurecr.io/azureml/azureml_9b591a252d8e5ebb6e46ba0ce0e25784:latest"
+    }
+  },
+  {
+    "time": "2020-11-24T05:25:21.7215751Z",
+    "resourceId": "/SUBSCRIPTIONS/5F08D643-1910-4A38-A7C7-84A39D4F42E0/RESOURCEGROUPS/CHPIRILL/PROVIDERS/MICROSOFT.MACHINELEARNINGSERVICES/WORKSPACES/CHPIRILLCANARY/ONLINEENDPOINTS/CANARYTEST",
+    "category": "AmlOnlineEndpointConsoleLog",
+    "operationName": "",
+    "properties": {
+      "message": "2022-12-04T12:50:23,823686995+00:00 | gunicorn/run | ###############################################",
+      "containerName": "inference-server",
+      "instanceId": "d40fb1ff2eab45a5b3746c57e481031a000006",
+      "deploymentName": "test3",
+      "containerImageName": "yxcanaryacr.azurecr.io/azureml/azureml_9b591a252d8e5ebb6e46ba0ce0e25784:latest"
+    }
+  }
+]

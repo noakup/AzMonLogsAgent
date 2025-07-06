@@ -1,0 +1,3 @@
+AVSSyslog
+| where severity == "info"
+| take 100

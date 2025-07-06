@@ -1,0 +1,11 @@
+[
+  {
+    "TimeGenerated": "2023-02-23T05:09:08.7639880Z",
+    "OperationName": "CreateDeviceImage",
+    "SubResourceId": "/subscriptions/dbf77359-2037-45ca-aa27-a3df4fae9251/resourceGroups/DataplaneTestFixtureResourceGroup-0z2ad-0524234518/providers/Microsoft.DevCenter/devcenters/IntTest-1zb4j-0524234518/devboxdefinitions/IntTest-4zemd-0524234518",
+    "Region": "global",
+    "Message": "Setting image validation status to Succeeded.",
+    "CorrelationId": "",
+    "AdditionalProperties": "{\"DevCenterId\":\"/subscriptions/dbf77359-2037-45ca-aa27-a3df4fae9251/resourceGroups/DataplaneTestFixtureResourceGroup-0z2ad-0524234518/providers/Microsoft.DevCenter/devcenters/IntTest-1zb4j-0524234518\",\"SubResourceId\":\"/subscriptions/dbf77359-2037-45ca-aa27-a3df4fae9251/resourceGroups/DataplaneTestFixtureResourceGroup-0z2ad-0524234518/providers/Microsoft.DevCenter/devcenters/IntTest-1zb4j-0524234518/devboxdefinitions/IntTest-4zemd-0524234518\"}"
+  }
+]

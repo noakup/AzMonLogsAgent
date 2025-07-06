@@ -1,0 +1,49 @@
+// EventLevelNameMap as defined in InMem transformation. Should be changed when using the AMA agent. Need to figure out the correct mapping.
+let EventLevelNameMap = parse_json('{   '
+'       "0": "LogAlways",               '
+'       "1": "Critical",                '
+'       "2": "Error",                   '
+'       "3": "Warning",                 '
+'       "4": "Informational",           '
+'       "5": "Verbose",                 '
+'       "1000": "Information",          '
+'       "1001": "Critical",             '
+'       "1002": "Error",                '
+'       "1003": "Warning",              '
+'       "1004": "Information",          '
+'       "1005": "Verbose"               '
+'   }');
+let NullValue = parse_json("null");
+let NullString = tostring("");
+let NullInt = toint("");
+let NullDateTime = todatetime("");
+let EmptyDictionary = parse_json("{}");
+let EmptyEventData = parse_json("{\"EventData\":\"\"}");
+source
+| extend StringEventDataXml = EventData // We store this in a different value since we will have another field under the name "EventData"
+| extend ParsedEventData = parse_windows_event_data_xml(EventData) // Uses the provider method for parsing EventData XML (instead of the DLL used in InMem)
+| extend ParsedEventData = iff(tostring(ParsedEventData) == tostring(EmptyEventData), EmptyDictionary, ParsedEventData) // If received empty EventData XML structure then return an empty dictionary instead
+| project
+    SourceSystem = "OpsManager",
+    TimeGenerated = todatetime(Time),
+    Provider = PublisherName,
+    Channel,
+    Computer = LoggingComputer,
+    Task = toint(EventCategory),
+    EventLevelName = iff(isnull(EventLevelNameMap[tostring(EventLevel)]), tostring(EventLevel), tostring(EventLevelNameMap[tostring(EventLevel)])),
+    EventLevel = iff(EventLevel >= 1000, toint(EventLevel - 1000), toint(EventLevel)),
+    SystemUserId = iff(isempty(UserName), NullString, UserName),
+    Version = iff(isempty(Version), NullInt, toint(Version)),
+    Opcode = iff(isempty(Opcode), NullString, Opcode),
+    Keywords = iff(isempty(Keywords), NullString, Keywords),
+    Correlation = iff(isempty(Correlation), NullString, Correlation),
+    SystemProcessId = iff(isempty(ProcessId), NullInt, toint(ProcessId)),
+    SystemThreadId = iff(isempty(ThreadId), NullInt, toint(ThreadId)),
+    EventRecordId = iff(isempty(EventRecordId), NullString, EventRecordId),
+    TimeCreated = iff(isempty(TimeCreated), NullDateTime, todatetime(TimeCreated)),
+    Data = NullValue,
+    EventData =  iff(isnotnull(ParsedEventData), ParsedEventData, NullValue),
+    RawEventData = iff(isnull(ParsedEventData), StringEventDataXml, tostring(NullValue)),
+    EventID = toint(binary_and(tolong(EventNumber), 0xffff)),  // Note that this comes from the ODS: https://msazure.visualstudio.com/One/_git/mgmt-loganalytics-ODS?path=%2Fsrc%2FProduct%2FDataItemExtensions%2FMOMEventDataItem.cs&version=GBmaster&line=325&lineStyle=plain&lineEnd=331&lineStartColumn=9&lineEndColumn=10
+    EventOriginId = tostring(EventOriginId),
+    ManagementGroupName = tostring($executionContextProperties["ManagementGroupName"])

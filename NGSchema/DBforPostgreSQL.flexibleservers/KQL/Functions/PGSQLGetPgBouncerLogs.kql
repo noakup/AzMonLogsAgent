@@ -1,0 +1,57 @@
+let ParamTimeStart = iff((isnull(TimeStart)), ago(1d), TimeStart);
+let ParamTimeEnd = iff((isnull(TimeEnd)), now(), TimeEnd);
+let ParamResourceId = iff(isnull(ResourceId) or trim(" ", ResourceId) == "", "", ResourceId);
+let existsResource=iff( ParamResourceId == "" , false, true);
+let existsGenericTableData = toscalar(
+    AzureDiagnostics
+    | where TimeGenerated >= ParamTimeStart and TimeGenerated <= ParamTimeEnd
+    | where Category == 'PostgreSQLFlexPGBouncer'
+    | where iff(existsResource,_ResourceId =~ ParamResourceId, true)
+    | take 1
+    | summarize count()
+    | project iff(count_ == 0, false, true)
+);
+let existsDedicatedTableData = toscalar(
+     PGSQLPgBouncer
+    | where TimeGenerated >= ParamTimeStart and TimeGenerated <= ParamTimeEnd
+    | where iff(existsResource,_ResourceId =~ ParamResourceId, true)
+    | take 1
+    | summarize count()
+    | project iff(count_ == 0, false, true)
+);
+let GenericData = AzureDiagnostics
+| where TimeGenerated >= ParamTimeStart and TimeGenerated <= ParamTimeEnd
+| where Category == 'PostgreSQLFlexPGBouncer'
+| where iff(existsGenericTableData==true, true, false)
+| where iff(existsResource,_ResourceId =~ ParamResourceId, true)
+| project
+TimeGenerated,
+_ResourceId,
+// building columns to match the dedicated table
+LogLevel = tostring(
+    iff(isnotempty(AdditionalFields.source), AdditionalFields.source,
+        column_ifexists('source_s',
+            column_ifexists('source', "")
+        )
+    )
+),
+Message = tostring(
+    iff(isnotempty(AdditionalFields.log), AdditionalFields.log,
+        column_ifexists('log_s',
+            column_ifexists('log', "")
+        )
+    )
+),
+Location = tostring(
+    iff(isnotempty(AdditionalFields.location), AdditionalFields.location,
+        column_ifexists('location_s',
+            column_ifexists('location', "")
+        )
+    )
+);
+let DedicatedData = PGSQLPgBouncer
+| where TimeGenerated >= ParamTimeStart and TimeGenerated <= ParamTimeEnd
+| where iff(existsDedicatedTableData==true, true, false)
+| where iff(existsResource,_ResourceId =~ ParamResourceId, true);
+DedicatedData
+| union isfuzzy=true GenericData

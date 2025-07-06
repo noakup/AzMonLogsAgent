@@ -1,0 +1,4 @@
+AFDAccessLog 
+| where HttpStatusCode >= 400 
+| summarize RequestCount = count() by UserAgent, StatusCode = HttpStatusCode , Resource, _ResourceId 
+| order by RequestCount desc 

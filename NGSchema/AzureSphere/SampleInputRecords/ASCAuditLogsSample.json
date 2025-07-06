@@ -1,0 +1,35 @@
+[
+	{
+		"time": "2022-10-03T17:34:28.122929725Z",
+		"resourceId": "/SUBSCRIPTIONS/D1CD48F9-B94B-4645-9632-634B440DB393/RESOURCEGROUPS/TEST-SATANEJA-10/PROVIDERS/MICROSOFT.AZURESPHERE/CATALOGS/TESTCATALOG1X5_CATALOG",
+		"location": "centralus",
+		"operationName": "PatchTenant",
+		"category": "AuditLogs",
+		"resultType": "Success",
+		"resultDescription": "Catalog a5d95ca4-c63c-49b6-b470-ad81fdf7c52d unmigrated.",
+		"identity": {
+			"Other": [
+				{
+					"Description": "ArmUserPrincipalName",
+					"Identity": "abcde@microsoft.com"
+				}
+			]
+		},
+		"properties": {	
+			"TargetResources": {
+				"CatalogName": [
+					{
+						"Name": "MyCatalog"
+					}
+				],
+				"ProductName": [
+					{
+						"Name": "MySampleProduct"
+					}
+				]
+			}
+		},
+		"correlationId": "00000000-0000-0000-0000-000000000000",
+		"durationMs": "-1"
+	}
+]

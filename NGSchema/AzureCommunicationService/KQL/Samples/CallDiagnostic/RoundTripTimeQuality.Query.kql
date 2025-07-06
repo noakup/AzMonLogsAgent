@@ -1,0 +1,7 @@
+ACSCallDiagnostics
+// Classifying the round trip time quality as Poor or Good based on
+// whether the average round trip time is higher than 500 milliseconds
+| project RoundTripTimeQuality = iff(RoundTripTimeAvg > 500, "Poor", "Good")
+// Count the number of streams per round trip time quality
+| summarize count() by RoundTripTimeQuality
+| render piechart title="Round Trip Time Quality"

@@ -1,0 +1,3 @@
+AMSKeyDeliveryRequests
+| where ResultType == "Succeeded"
+| summarize Count = count() by KeyType

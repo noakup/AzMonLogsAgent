@@ -1,0 +1,25 @@
+[
+	{
+		"time": "2021-03-22T22:13:22.8876438Z",
+		"resourceId": "/SUBSCRIPTIONS/1338DDED-42F5-4CAE-8ED2-36C19680A7A1/RESOURCEGROUPS/ACCNT_RG/PROVIDERS/MICROSOFT.DOCUMENTDB/DATABASEACCOUNTS/ACCNT-GREMLIN-TEST",
+		"category": "GremlinRequests",
+		"operationName": "eval",
+		"properties": {
+			"activityId": "6e4bbd5e-1956-434c-91b4-9f0808813310",
+			"errorCode": "200",
+			"duration": "540.7002",
+			"requestCharge": "5.03",
+			"databaseName": "testDatabase",
+			"collectionName": "testGraph",
+			"authorizationTokenType": "PrimaryMasterKey",
+			"address": "136.25.9.148",
+			"piiCommandText": "<empty>",
+			"estimatedDelayFromRateLimitingInMilliseconds": "0",
+			"retriedDueToRateLimiting": "False",
+			"region": "West US",
+			"requestLength": "266",
+			"responseLength": "776",
+			"userAgent": "<empty>"
+		}
+	}
+]

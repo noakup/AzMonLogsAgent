@@ -1,0 +1,3 @@
+SupplyChainEntityOperationLogs
+| where RequestMethod == "DELETE" and OperationName == "Microsoft.OpenLogisticsPlatform/workspace/warehouses/delete" and HttpStatusCode == 200
+| summarize Count = count() by RequestId

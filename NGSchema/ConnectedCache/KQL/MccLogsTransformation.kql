@@ -1,0 +1,11 @@
+source 
+| project
+    TimeGenerated = todatetime(['time']),
+    HitRatio = hitRatioMbps,
+    HitRatioMbps = hitRatioMbps,
+    CacheNodeId = cacheNodeId,
+    MissMbps = missMbps,
+    HitMbps = hitMbps,
+    Hits = hits,
+    Misses = misses,
+    EgressMbps = egressMbps

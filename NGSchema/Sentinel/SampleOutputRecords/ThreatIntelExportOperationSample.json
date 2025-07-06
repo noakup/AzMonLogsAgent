@@ -1,0 +1,20 @@
+[
+  {
+    "TimeGenerated": "2019-10-01T00:00:00Z",
+    "TimeExported": "2019-10-01T00:00:01Z",
+    "Id": "U291cmNlIE5hbWU=---indicator--f1e4f2f6-1f2d-4e4b-8b0f-0f9f3a1f0b0f",
+    "StixId": "indicator--f1e4f2f6-1f2d-4e4b-8b0f-0f9f3a1f0b0f",
+    "ExternallyExportedId": "indicator--f1e4f2f6-1f2d-4e4b-8b0f-0f9f3a1f0b0e",
+    "SourceSystem": "MDTI",
+    "ExportedBy": "users1@microsoft.com",
+    "ExportDuration": 3000,
+    "ExportId": "f1e4f2f6-1f2d-4e4b-8b0f-0f9f3a1f0b0f",
+    "ExportType": "TAXII",
+    "Status": "Success",
+    "ErrorDetails": "",
+    "DestinationInfo": {
+      "TAXIIDataConnectorId": "222ca7d6-f33a-4b27-ba77-a2571c0f0d08",
+      "TAXIIFriendlyName": "friendlyName"
+    }
+  }
+]

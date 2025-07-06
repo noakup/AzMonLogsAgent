@@ -1,0 +1,11 @@
+source
+| project
+    AlertId = tostring(properties["AlertId"]),
+    AttackTechniques = tostring(properties["AttackTechniques"]),
+    Category = tostring(properties["Category"]),
+    DetectionSource = tostring(properties["DetectionSource"]),
+    ServiceSource = tostring(properties["ServiceSource"]),
+    Severity = tostring(properties["Severity"]),
+    Timestamp = todatetime(properties["Timestamp"]),
+    TimeGenerated = todatetime(properties["Timestamp"]),
+    Title = tostring(properties["Title"])

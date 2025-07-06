@@ -1,0 +1,16 @@
+source
+| project
+	TimeGenerated = todatetime(["exportTimestamp"]),
+	DisplayName = tostring(properties.displayName),
+	Description = tostring (properties.description),
+	EntrypointId = tostring (properties. entryPoint),
+	TargetId = tostring(properties.target),
+	AdditionalRemediationSteps = tostring(properties. manualRemediationSteps),
+	Path = todynamic(properties. graph),
+	Assessments = todynamic(properties.assessments),
+	RiskLevel = tostring(properties.riskLevel),
+	RiskFactors = todynamic(properties.riskFactors),
+	Mitre = tostring(properties.mitreTacticsAndTechniques),
+	AttackStory = tostring(properties.attackStory),
+	AttackPathId = tostring(["id"]),
+	PotentialImpact = tostring(properties.potentialImpact)

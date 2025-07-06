@@ -1,0 +1,24 @@
+[
+  {
+    "LogicalServerName": "chgettyscanaryeasttest",
+    "SubscriptionId": "845c8e99-1acb-444d-b815-5975cbc12ac3",
+    "ResourceGroup": "synapseworkspace-managedrg-f620de46-da56-40e6-bce1-ee02e640e61b",
+    "time": "2020-10-16T23:00:21.5393518Z",
+    "resourceId": "/SUBSCRIPTIONS/845C8E99-1ACB-444D-B815-5975CBC12AC3/RESOURCEGROUPS/CHGETTYS/PROVIDERS/MICROSOFT.SYNAPSE/WORKSPACES/CHGETTYSCANARYEASTTEST/SQLPOOLS/PERFINSTANCE",
+    "category": "RequestSteps",
+    "operationName": "RequestStepsEvent",
+    "properties": {
+      "RequestId": "QID15911",
+      "StepIndex": 0,
+      "OperationType": "OnOperation",
+      "DistributionType": "Unspecified",
+      "LocationType": "Control",
+      "Status": "Running",
+      "ErrorId": "",
+      "StartTime": "2020-10-16T23:00:21.2643629Z",
+      "EndTime": "1601-01-01T00:00:00Z",
+      "RowCount": -1,
+      "Command": "CREATE TABLE [tempdb].[QTables].[QTable_998be4f078c441799f5a2852a9801bf8] ([col] BIGINT ) WITH(DISTRIBUTED_MOVE_FILE='#');"
+    }
+  }
+]

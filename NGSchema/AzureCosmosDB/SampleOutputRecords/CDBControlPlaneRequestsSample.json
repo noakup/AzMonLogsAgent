@@ -1,0 +1,12 @@
+[
+	{
+		"TimeGenerated"  : "2021-03-23T00:01:50.4540405Z",
+		"AccountName" : "ACCNT-METRICS-TEST",
+		"OperationName" : "RegionAddStart",
+		"ActivityId" : "74a32ffa-9c54-454f-b8db-28a8b395b017",
+		"HttpStatusCode" : "202",
+		"Result" : "Accepted",
+		"RegionName" : "West US 2",
+		"HttpMethod" : "PUT"
+	}
+]

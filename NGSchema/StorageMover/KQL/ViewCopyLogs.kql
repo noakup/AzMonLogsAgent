@@ -1,0 +1,5 @@
+CopyLogs
+//| where JobRunName = "<your job run name>" // Fill in the placeholder and uncomment this line to filter by a specific job run
+| project-away JobRunName
+| order by TimeGenerated asc
+| limit 100

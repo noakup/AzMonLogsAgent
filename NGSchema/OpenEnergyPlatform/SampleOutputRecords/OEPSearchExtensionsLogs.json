@@ -1,0 +1,12 @@
+[
+    {
+      "TimeGenerated": "2024-07-25T10:32:35.851843606Z",
+      "ResourceId": "/SUBSCRIPTIONS/C99E2BF3-1777-412B-BABA-D823676589C2/RESOURCEGROUPS/RS-SEARCHEXTLOGS/PROVIDERS/MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/TESTSELOGS",
+      "Location": "eastus",
+      "OperationName": "MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/SEARCH-EXTENSIONS/ACTION",
+      "Category": "SearchExtensionsLogs",
+      "Message": "api-method=GET operation-name= user-id= app-id=:search-extensions.app Start Web-API GET /swagger-ui/index.html Headers: {} {correlation-id=a274ac70-5b5e-474a-be0b-d08b4e49faf4} ",
+      "LogLevel": "INFO",
+      "CorrelationId": "a274ac70-5b5e-474a-be0b-d08b4e49faf4"
+      }
+  ]

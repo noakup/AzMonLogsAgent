@@ -1,0 +1,13 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    SentinelResourceId = resourceId,
+    SentinelResourceName = tostring(properties.SentinelResourceName),
+    Status = resultType,
+    Description = resultDescription,
+    WorkspaceId = tostring(properties.WorkspaceId),
+    SentinelResourceType = tostring(properties.SentinelResourceType),
+    SentinelResourceKind = tostring(properties.SentinelResourceKind),
+    CorrelationId = correlationId,
+    ExtendedProperties = properties.ExtendedProperties

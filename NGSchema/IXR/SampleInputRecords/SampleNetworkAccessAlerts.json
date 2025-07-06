@@ -1,0 +1,18 @@
+[
+	{
+		"time": "2023-01-06T07:58:46.8346145Z",
+		"operationName": "MICROSOFT.AADIAM/SITES/WRITE",
+		"category": "NetworkAccessAlerts",
+		"properties": "{\"CreatedDateTime\":\"2023-12-06T16:33:43.4053078Z\",\"TenantId\":\"cb9af522-39fe-4056-b879-e3200ff37b3d\",\"Id\":\"40177bc2-5122-4166-9fd9-bc549e76233d\",\"FirstActivityDateTime\":\"2023-12-06T16:33:41.4053078Z\",\"LastActivityDateTime\":\"2023-12-06T16:33:42.4053078Z\",\"VendorName\":\"VendorName\",\"ProductName\":\"Threat Prevention\",\"ComponentName\":\"Malware Engine\",\"AlertType\":\"Malware\",\"DisplayName\":\"DisplayName\",\"Description\":\"Description\",\"Severity\":\"High\",\"Techniques\":\"\",\"SubTechniques\":\"\",\"DetectionTechnology\":\"\",\"IsPreview\":\"true\",\"PolicyId\":\"x0177bc2-5122-4166-9fd9-bc549e76233d\"}",
+		"location": "eastus",
+		"tenantId": "TENANT-ID"
+	},
+	{
+		"time": "2023-01-06T07:58:46.8346145Z",
+		"operationName": "MICROSOFT.AADIAM/SITES/WRITE",
+		"category": "NetworkAccessAlerts",
+		"properties": "{\"CreatedDateTime\":\"2023-12-06T16:33:43.4053078Z\",\"TenantId\":\"cb9af522-39fe-4056-b879-e3200ff37b3d\",\"Id\":\"40177bc2-5122-4166-9fd9-bc549e76233d\",\"AlertType\":\"Malware\"}",
+		"location": "eastus",
+		"tenantId": "TENANT-ID"
+	}
+]

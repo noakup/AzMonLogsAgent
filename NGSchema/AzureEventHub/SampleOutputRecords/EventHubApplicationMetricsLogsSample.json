@@ -1,0 +1,14 @@
+[
+    {
+        "TimeGenerated" : "1/1/2021 8:40:06 PM +00:00",
+		"ActivityId": "827dd245-4318-4307-9d1f-a8ac07e36804",
+        "TaskName": "IncomingBytes",
+        "Value": "199038",
+        "Properties": "{\"ApplicationGroupName\":\"myappgroup2\"}",
+		"Outcome": "Success",
+		"Protocol": "AMQP",
+		"AuthType": "SAS",
+		"AuthId": "namespace-saskeyfortest",
+        "Provider": "eventhub"
+     }
+]

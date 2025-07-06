@@ -1,0 +1,4 @@
+ACSCallDiagnostics
+// Count the number of streams per media type
+| summarize media_types=count() by MediaType
+| render piechart title="Media Type Ratio"

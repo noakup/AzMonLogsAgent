@@ -1,0 +1,3 @@
+EGNSuccessfulHttpDataPlaneOperations
+| where TLSVersion != "1.3"
+| summarize count() by CallerIpAddress

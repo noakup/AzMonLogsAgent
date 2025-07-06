@@ -1,0 +1,1 @@
+[{"metricDataType":"counter","metricValue":"0","metricName":"Count","clusterName":"mht19109-kafka-4v0-2v1-24ca71d8717943528f","hostName":"wn0-mht191","clusterType":"kafka","tags":"kafkaControllerStats","metricNamespace":"LeaderElectionRateAndTimeMs","operationName":"MetricsCollection","correlationId":"KafkaMetrics", "FluentdIngestTimestamp": "2020-06-18T19:14:59Z"}]

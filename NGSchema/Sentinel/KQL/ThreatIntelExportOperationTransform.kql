@@ -1,0 +1,15 @@
+source
+| project
+    TimeGenerated = TimeGenerated,
+    TimeExported = TimeExported,
+    Id = Id,
+    StixId = StixId,
+    ExternallyExportedId = ExternallyExportedId,
+    SourceSystem = SourceSystem,
+    ExportedBy = ExportedBy,
+    ExportDuration = ExportDuration,
+    ExportId = ExportId,
+    ExportType = ExportType,
+    Status = Status,
+    ErrorDetails = ErrorDetails,
+    DestinationInfo = DestinationInfo

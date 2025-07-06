@@ -1,0 +1,34 @@
+[
+    {
+        "firewall_name": "Firewall",
+        "availability_zone": "ap-south-1a",
+        "event_timestamp": "1742208019",
+        "event": {
+            "tcp": {
+                "tcp_flags": "56",
+                "syn": true,
+                "rst": true,
+                "ack": true,
+                "ecn": true
+            },
+            "app_proto": "unknown",
+            "src_ip": "10.0.2.132",
+            "src_port": "3389",
+            "netflow": {
+                "pkts": "4",
+                "bytes": "192",
+                "start": "2025-03-17T10:38:56.820848+0000",
+                "end": "2025-03-17T10:39:17.842877+0000",
+                "age": "21",
+                "min_ttl": "63",
+                "max_ttl": "127"
+            },
+            "event_type": "netflow",
+            "flow_id": "147818485703967",
+            "dest_ip": "69.167.11.218",
+            "proto": "TCP",
+            "dest_port": "65350",
+            "timestamp": "2025-03-17T10:40:19.593363+0000"
+        }
+    }
+]

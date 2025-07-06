@@ -1,0 +1,21 @@
+[
+  {
+    "timeGenerated": "2020-07-01T19:45:03.2155411Z",
+    "recordId": "1",
+    "connectionMonitorResourceId": "/subscriptions/af15e575-f948-49ac-bce0-252d028e9379/resourceGroups/networkwatcherrg/providers/Microsoft.Network/networkWatchers/NetworkWatcher_centraluseuap/connectionMonitors/Demo",
+    "testGroupName": "TG1",
+    "testConfigurationName": "TC1",
+    "sourceType": "AzureResource",
+    "destinationPort": 44,
+    "destinationType": "AzureResource",
+    "destinationResourceId": "/subscriptions/9cece3e3-0f7d-47ca-af0e-9772773f90b7/resourceGroups/helloworld-rg/providers/Microsoft.Compute/virtualMachines/VMTesting",
+    "destinationAddress": "10.11.0.5",
+    "destinationSubnet": "255.255.255.252",
+    "destinationIP": "10.11.0.5",
+    "destinationName": "VMTesting(helloworld-rg)",
+    "destinationAgentId": "",
+    "protocol": "HTTP",
+    "listeningOutcome": "",
+    "issues": ""
+  }
+]

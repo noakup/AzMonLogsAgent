@@ -1,0 +1,4837 @@
+﻿{
+	"type": "microsoft.aadiam/tenants",
+	"displayName": "Azure Active Directory Logs",
+	"description": "All tables related to Azure Active Directory logs.",
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "IAM Services/IAM - Data Insights and Reporting Service",
+	"tags": {},
+	"properties": {},
+	"relatedTables": [],
+	"relatedFunctions": [],
+	"tables": [
+		{
+			"workflowName": "AADFirstPartyToFirstPartySignInLogsWorkflow",
+			"transformName": "AADFirstPartyToFirstPartySignInLogs",
+			"physicalName": "MicrosoftServicePrincipalSignInLogs",
+			"logicalName": "MicrosoftServicePrincipalSignInLogs",
+			"description": "Microsoft applications' service principal sign-in logs.",
+			"dataTypeId": "TENANTMICROSOFTAADIAM_1PTo1P",
+			"isResourceCentric": false,
+			"categories": [
+				"audit",
+				"security"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 15,
+			"tableState": "Production",
+			"isTroubleshootingAllowed": true,
+			"isLakeAllowed": true,
+			"isChangeColumnInternalNameAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "operationVersion",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "resultType",
+					"type": "String"
+				},
+				{
+					"name": "resultSignature",
+					"type": "String"
+				},
+				{
+					"name": "resultDescription",
+					"type": "String"
+				},
+				{
+					"name": "durationMs",
+					"type": "Int"
+				},
+				{
+					"name": "callerIpAddress",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "identity",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				},
+				{
+					"name": "Level",
+					"type": "String"
+				},
+				{
+					"name": "location",
+					"type": "String"
+				},
+				{
+					"name": "tenantId",
+					"type": "String"
+				},
+				{
+					"name": "sourcesystem",
+					"type": "String"
+				}
+			],
+			"columns": [
+				{
+					"name": "AppId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "Unique GUID representing the app ID in Entra ID."
+				},
+				{
+					"name": "AppOwnerTenantId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "The tenant identifier of the owner of the application in Entra ID."
+				},
+				{
+					"name": "Category",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Category of the sign-in event"
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": false,
+					"description": "ID to provide sign-in trail"
+				},
+				{
+					"name": "CreatedDateTime",
+					"type": "DateTime",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Datetime of the sign-in activity."
+				},
+				{
+					"name": "DurationMs",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "The duration of the operation in milliseconds"
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "For sign-ins, this value is always Sign-in activity"
+				},
+				{
+					"name": "OperationVersion",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "The REST API version that's requested by the client"
+				},
+				{
+					"name": "ResourceDisplayName",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Name of the resource that was authenticated to"
+				},
+				{
+					"name": "ResourceGroup",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "Resource group for the logs"
+				},
+				{
+					"name": "ResourceIdentity",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "ID of the resource that was authenticated to"
+				},
+				{
+					"name": "ResourceOwnerTenantId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The tenant ID of the owner of the resource being authenticated to"
+				},
+				{
+					"name": "ResourceServicePrincipalId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Service Principal Id of the resource"
+				},
+				{
+					"name": "ResultSignature",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The result of the sign-in. Can be either success or failure"
+				},
+				{
+					"name": "ServicePrincipalCredentialKeyId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Key id of the service principal that initiated the sign-in"
+				},
+				{
+					"name": "ServicePrincipalCredentialThumbprint",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Thumbprint of the service principal that initiated the sign-in"
+				},
+				{
+					"name": "ServicePrincipalId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "ID of the service principal who initiated the sign-in"
+				},
+				{
+					"name": "ServicePrincipalName",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Service Principal Name of the service principal who initiated the sign-in"
+				},
+				{
+					"name": "SourceSystem",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "Details of source system of the object being provisioned"
+				},
+				{
+					"name": "TenantId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "The tenant GUID that's associated with the logs"
+				},
+				{
+					"name": "Type",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "For sign-ins, this value is always MicrosoftServicePrincipalSignInLogs"
+				},
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The date and time of the event in UTC"
+				},
+				{
+					"name": "UniqueTokenIdentifier",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Unique token identifier for the request"
+				}
+			],
+			"transformFilePath": "KQL/MicrosoftServicePrincipalSignInLogs.kql",
+			"sampleInputRecordsFilePath": "SampleInputRecords/SampleMicrosoftServicePrincipalSignInLogs.json"
+		},
+		{
+			"name": "AADCustomSecurityAttributeAuditLogs",
+			"description": "Non-interactive Azure Active Directory sign-in logs from user.",
+			"dataTypeId": "TENANTMICROSOFTAADCSA_AUDIT",
+			"isResourceCentric": false,
+			"isLakeAllowed": true,
+			"categories": [
+				"audit",
+				"security"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 12,
+			"tableState": "Production",
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "operationVersion",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "resultType",
+					"type": "String"
+				},
+				{
+					"name": "resultSignature",
+					"type": "String"
+				},
+				{
+					"name": "resultDescription",
+					"type": "String"
+				},
+				{
+					"name": "durationMs",
+					"type": "Int"
+				},
+				{
+					"name": "callerIpAddress",
+					"type": "string"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "identity",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				},
+				{
+					"name": "Level",
+					"type": "String"
+				},
+				{
+					"name": "location",
+					"type": "String"
+				},
+				{
+					"name": "tenantId",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "KQL/AADCSAAuditLogsTransform.kql",
+			"columns": [
+				{
+					"name": "SourceSystem",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "Details of source system of the object being provisioned."
+				},
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The date and time of the event in UTC."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Name of the operation."
+				},
+				{
+					"name": "OperationVersion",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "The REST API version that's requested by the client."
+				},
+				{
+					"name": "ResultType",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The result of the audit operation can be Success or Failure."
+				},
+				{
+					"name": "ResultSignature",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "Contains the error code, if any, for the audit operation."
+				},
+				{
+					"name": "ResultDescription",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Provides the error description for the audit operation."
+				},
+				{
+					"name": "DurationMs",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "The duration of the operation in milliseconds."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": false,
+					"description": "ID to provide audit trail."
+				},
+				{
+					"name": "Identity",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The identity from the token that was presented when you made the request. It can be a user account, system account, or service principal."
+				},
+				{
+					"name": "Level",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The severity level of the event."
+				},
+				{
+					"name": "Location",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The region of the resource emitting the event."
+				},
+				{
+					"name": "AdditionalDetails",
+					"type": "Dynamic",
+					"isDefaultDisplay": true,
+					"description": "Indicates additional details on the activity. Can have any string as a key or value."
+				},
+				{
+					"name": "Id",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "Unique ID representing the audit activity."
+				},
+				{
+					"name": "InitiatedBy",
+					"type": "Dynamic",
+					"isDefaultDisplay": true,
+					"description": "User or app initiated the activity."
+				},
+				{
+					"name": "LoggedByService",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Service that initiated the activity."
+				},
+				{
+					"name": "Result",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Result of the activity. Possible values are: success failure timeout unknownFutureValue."
+				},
+				{
+					"name": "ResultReason",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Describes cause of failure or timeout results."
+				},
+				{
+					"name": "TargetResources",
+					"type": "Dynamic",
+					"isDefaultDisplay": true,
+					"description": "Indicates information on which resource was changed due to the activity."
+				},
+				{
+					"name": "AADTenantId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "ID of the AAD tenant."
+				},
+				{
+					"name": "ActivityDisplayName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Activity name or the operation name."
+				},
+				{
+					"name": "ActivityDateTime",
+					"type": "DateTime",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Date and time the activity was performed in UTC."
+				},
+				{
+					"name": "AADOperationType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Type of the operation. Possible values are Add Update Delete and Other."
+				},
+				{
+					"name": "CallerIpAddress",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "IP address of caller."
+				},
+				{
+					"name": "UserAgent",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "User agent of initiator."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/AADSampleCSAAuditLogs.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/AADSampleCSAAuditLogs.json"
+		},
+		{
+			"name": "AADNonInteractiveUserSignInLogs",
+			"description": "Non-interactive Azure Active Directory sign-in logs from user.",
+			"dataTypeId": "TENANTMICROSOFTAADIAM_NONINTERACTIVE",
+			"isResourceCentric": false,
+			"isLakeAllowed": true,
+			"categories": [
+				"audit",
+				"security"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 17,
+			"tableState": "Production",
+			"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "operationVersion",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "resultType",
+					"type": "String"
+				},
+				{
+					"name": "resultSignature",
+					"type": "String"
+				},
+				{
+					"name": "resultDescription",
+					"type": "String"
+				},
+				{
+					"name": "durationMs",
+					"type": "Int"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "identity",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				},
+				{
+					"name": "Level",
+					"type": "String"
+				},
+				{
+					"name": "location",
+					"type": "String"
+				},
+				{
+					"name": "tenantId",
+					"type": "String"
+				},
+				{
+					"name": "sourcesystem",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "KQL/AADNonInteractiveUserSignInLogsTransform.kql",
+			"columns": [
+				{
+					"name": "TenantId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "The tenant GUID that's associated with the logs."
+				},
+				{
+					"name": "SourceSystem",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "Details of source system of the object being provisioned."
+				},
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The date and time of the event in UTC."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "For sign-ins, this value is always Sign-in activity."
+				},
+				{
+					"name": "OperationVersion",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "The REST API version that's requested by the client."
+				},
+				{
+					"name": "Category",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Category of the sign-in event."
+				},
+				{
+					"name": "ResultType",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The result of the sign-in operation can be Success or Failure."
+				},
+				{
+					"name": "ResultSignature",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "Contains the error code, if any, for the sign-in operation."
+				},
+				{
+					"name": "ResultDescription",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Provides the error description for the sign-in operation."
+				},
+				{
+					"name": "DurationMs",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "The duration of the operation in milliseconds."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": false,
+					"description": "ID to provide sign-in trail."
+				},
+				{
+					"name": "ResourceGroup",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "Resource group for the logs."
+				},
+				{
+					"name": "Identity",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The identity from the token that was presented when you made the request. It can be a user account, system account, or service principal."
+				},
+				{
+					"name": "Level",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The severity level of the event."
+				},
+				{
+					"name": "Location",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The region of the resource emitting the event."
+				},
+                {
+                    "name": "AADTenantId",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true,
+                    "description": "The AADTenantId GUID that's associated with the logs"
+                },
+				{
+					"name": "Agent",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Details of agentic sign-in."
+				},
+				{
+					"name": "AlternateSignInName",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Provides the on-premises UPN of the user sign-ing into Azure AD.e.g. Phone number sign-in."
+				},
+				{
+					"name": "AppDisplayName",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "App name displayed in the Azure portal."
+				},
+				{
+					"name": "AppId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "Unique GUID representing the app ID in the Azure Active Directory."
+				},
+				{
+					"name": "AppliedEventListeners",
+					"type": "Dynamic",
+					"isDefaultDisplay": true,
+					"description": "Detailed information about the applied event listeners or listeners that are triggered by the corresponding events in an authentication activity. It's called appliedEventListeners in ALP and MSGraph, but use Authentication Events to match name on UX."
+				},
+				{
+					"name": "AppOwnerTenantId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "The tenant identifier of the owenr of the application in Azure Active Directory."
+				},
+				{
+					"name": "AuthenticationContextClassReferences",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The authentication contexts of the sign-in."
+				},
+				{
+					"name": "AuthenticationDetails",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "A record of each step of authentication undertaken in the sign-in."
+				},
+				{
+					"name": "AuthenticationMethodsUsed",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "List of authentication methods used."
+				},
+				{
+					"name": "AuthenticationProcessingDetails",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Provides the details associated with authentication processor."
+				},
+				{
+					"name": "AuthenticationProtocol",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Lists the protocol type or grant type used in the authentication. The possible values are: none, oAuth2, ropc, wsFederation, saml20, deviceCode, unknownFutureValue. For authentications that use protocols other than the possible values listed, the protocol type is listed as none."
+				},
+				{
+					"name": "AuthenticationRequirement",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Type of authentication required for the sign-in.  If set to multiFactorAuthentication, an MFA step was required.  If set to singleFactorAuthentication, no MFA was required."
+				},
+				{
+					"name": "AuthenticationRequirementPolicies",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Set of CA policies that apply to this sign-in, each as CA: policy name, and/or MFA: Per-user."
+				},
+				{
+					"name": "AutonomousSystemNumber",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Autonomous System Number for the network."
+				},
+				{
+					"name": "ClientAppUsed",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Details outlining app auth used (Legacy vs non Legacy) Eg: Modern Browser, Native App, Exchange Activty Sync and Older Clients."
+				},
+				{
+					"name": "ClientCredentialType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The type of client credential used. Examples include client assertion, client secret, etc."
+				},
+				{
+					"name": "ConditionalAccessPolicies",
+					"type": "String",
+					"isHidden": false,
+					"isDefaultDisplay": true,
+					"description": "Details of the conditional access policies being applied for the sign-in."
+				},
+				{
+					"name": "ConditionalAccessPoliciesV2",
+					"type": "Dynamic",
+					"isHidden": true,
+					"isDefaultDisplay": false,
+					"description": "[Deprecated. Use ConditionalAccessPolicies instead]. Details of the conditional access policies being applied for the sign-in."
+				},
+				{
+					"name": "ConditionalAccessStatus",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Status of all the conditionalAccess policies related to the sign-in."
+				},
+				{
+					"name": "CreatedDateTime",
+					"type": "DateTime",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Datetime of the sign-in activity."
+				},
+				{
+					"name": "CrossTenantAccessType",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Describes the type of cross-tenant access used by the actor to access the resource. Possible values are: none, b2bCollaboration, b2bDirectConnect, microsoftSupport, serviceProvider, unknownFutureValue. If the sign in did not cross tenant boundaries, the value is none."
+				},
+				{
+					"name": "DeviceDetail",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Details of the device used for the sign-in."
+				},
+				{
+					"name": "FederatedCredentialId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Federated Credential Id."
+				},
+				{
+					"name": "GlobalSecureAccessIpAddress",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Global secure IP address that user signed in from."
+				},
+				{
+					"name": "HomeTenantId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "The home tenant ID for cross-tenant scenarios."
+				},
+				{
+					"name": "HomeTenantName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The tenant name of the external tenant who homes the entitity taking action in the customer's tenant."
+				},
+				{
+					"name": "Id",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "Unique ID representing the sign-in activity."
+				},
+				{
+					"name": "IncomingTokenType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The type of token utilized to signIn (examples: primary refresh token, saml assertion)."
+				},
+				{
+					"name": "IPAddress",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "IP address of the client used to sign in."
+				},
+				{
+					"name": "IsInteractive",
+					"type": "Bool",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Indicates if a sign-in is interactive or not."
+				},
+				{
+					"name": "IsRisky",
+					"type": "Bool",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Indicates if a sign-in is considered risky or not."
+				},
+				{
+					"name": "IsTenantRestricted",
+					"type": "Bool",
+					"isDefaultDisplay": true,
+					"description": "Indicates if a signIn is under a tenant restrictions policy or not."
+				},
+				{
+					"name": "IsThroughGlobalSecureAccess",
+					"type": "Bool",
+					"isDefaultDisplay": true,
+					"description": "Displays whether or not a user came through Global Secure Access service or not."
+				},
+				{
+					"name": "LocationDetails",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Details of the sign-in location."
+				},
+				{
+					"name": "MfaDetail",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Details of the Multi-factor authentication."
+				},
+				{
+					"name": "NetworkLocationDetails",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Provides the details associated with authentication processor."
+				},
+				{
+					"name": "OriginalRequestId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "The request id of the first request in the authentication sequence."
+				},
+				{
+					"name": "OriginalTransferMethod",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Transfer method used to initiate a session throughout all subsequent requests."
+				},
+				{
+					"name": "ProcessingTimeInMs",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Request processing time in milliseconds in AD STS."
+				},
+				{
+					"name": "ResourceDisplayName",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Name of the resource that the user signed into."
+				},
+				{
+					"name": "ResourceIdentity",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "ID of the resource that the user signed into."
+				},
+				{
+					"name": "ResourceOwnerTenantId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The tenant identifier of the owner of the resource referenced in the sign in."
+				},
+				{
+					"name": "ResourceServicePrincipalId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Service Principal Id of the resource."
+				},
+				{
+					"name": "ResourceTenantId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "The resource tenant ID for cross-tenant scenarios."
+				},
+				{
+					"name": "RiskDetail",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Risky user state details."
+				},
+				{
+					"name": "RiskEventTypes",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The list of risk event types associated with the sign-in."
+				},
+				{
+					"name": "RiskEventTypes_V2",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The list of risk event types associated with the sign-in. These are strings."
+				},
+				{
+					"name": "RiskLevelAggregated",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Aggregated risk level."
+				},
+				{
+					"name": "RiskLevelDuringSignIn",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Risk level during sign-in."
+				},
+				{
+					"name": "RiskState",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Risky user state."
+				},
+				{
+					"name": "ServicePrincipalId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "ID of the service principal who initiated the sign-in."
+				},
+				{
+					"name": "SessionId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Id of the session that was generated during the signIn."
+				},
+				{
+					"name": "SessionLifetimePolicies",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Policies and settings that applied to the sign-in that enforced or revoked a session lifetime."
+				},
+				{
+					"name": "SignInEventTypes",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The types that are associated with the sign-in.  Examples include \"interactive\", \"refreshToken\", \"managedIdentity\", \"continuousAccessEvaluation\" and many more."
+				},
+				{
+					"name": "SignInIdentifierType",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The type of sign in identifier. Possible values are: userPrincipalName, phoneNumber, proxyAddress, qrCode, onPremisesUserPrincipalName, unknownFutureValue."
+				},
+				{
+					"name": "TokenProtectionStatusDetails",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Token protection creates a cryptographically secure tie between the token and the device it's issued to. This field indicates whether the signin token was bound to the device or not."
+				},
+				{
+					"name": "Status",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Details of the sign-in status."
+				},
+				{
+					"name": "TokenIssuerName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Name of the identity provider (e.g. sts.microsoft.com )."
+				},
+				{
+					"name": "TokenIssuerType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Type of identityProvider (Azure AD, AD Federation Services)."
+				},
+				{
+					"name": "UniqueTokenIdentifier",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Unique token identifier for the request."
+				},
+				{
+					"name": "UserAgent",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "User Agent for the sign-in."
+				},
+				{
+					"name": "UserDisplayName",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Display name of the user that initiated the sign-in."
+				},
+				{
+					"name": "UserId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "ID of the user that initiated the sign-in."
+				},
+				{
+					"name": "UserPrincipalName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "User principal name of the user that initiated the sign-in."
+				},
+				{
+					"name": "UserType",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Identifies whether the user is a member or guest in the tenant. Possible values are: member, guest, unknownFutureValue."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/AADSampleNonInteractiveUserSignInLogs.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/AADSampleNonInteractiveUserSignInLogs.json"
+		},
+		{
+			"name": "AADServicePrincipalSignInLogs",
+			"description": "Service principal Azure Active Directory sign-in logs.",
+			"dataTypeId": "TENANTMICROSOFTAADIAM_SP",
+			"isResourceCentric": false,
+			"categories": [
+				"audit",
+				"security"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 14,
+			"tableState": "Production",
+			"isLakeAllowed": true,
+			"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "operationVersion",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "resultType",
+					"type": "String"
+				},
+				{
+					"name": "resultSignature",
+					"type": "String"
+				},
+				{
+					"name": "resultDescription",
+					"type": "String"
+				},
+				{
+					"name": "durationMs",
+					"type": "Int"
+				},
+				{
+					"name": "callerIpAddress",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "identity",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				},
+				{
+					"name": "Level",
+					"type": "String"
+				},
+				{
+					"name": "location",
+					"type": "String"
+				},
+				{
+					"name": "tenantId",
+					"type": "String"
+				},
+				{
+					"name": "sourcesystem",
+					"type": "String"
+				}
+			],
+			"columns": [
+				{
+					"name": "TenantId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "The tenant GUID that's associated with the logs"
+				},
+				{
+					"name": "SourceSystem",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "Details of source system of the object being provisioned"
+				},
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The date and time of the event in UTC"
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "For sign-ins, this value is always Sign-in activity"
+				},
+				{
+					"name": "OperationVersion",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "The REST API version that's requested by the client"
+				},
+				{
+					"name": "Category",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Category of the sign-in event"
+				},
+				{
+					"name": "ResultType",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The result of the sign-in operation can be Success or Failure"
+				},
+				{
+					"name": "ResultSignature",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "Contains the error code, if any, for the sign-in operation"
+				},
+				{
+					"name": "ResultDescription",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Provides the error description for the sign-in operation"
+				},
+				{
+					"name": "DurationMs",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "The duration of the operation in milliseconds"
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": false,
+					"description": "ID to provide sign-in trail"
+				},
+				{
+					"name": "ResourceGroup",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "Resource group for the logs"
+				},
+				{
+					"name": "Identity",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The identity from the token that was presented when you made the request. It can be a user account, system account, or service principal"
+				},
+				{
+					"name": "Level",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The severity level of the event"
+				},
+				{
+					"name": "Location",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The region of the resource emitting the event"
+				},
+				{
+					"name": "AppId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "Unique GUID representing the app ID in the Azure Active Directory"
+				},
+				{
+					"name": "AppOwnerTenantId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "The tenant identifier of the owenr of the application in Azure Active Directory"
+				},
+				{
+					"name": "AuthenticationContextClassReferences",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The authentication contexts of the sign-in"
+				},
+                {
+                    "name": "AutonomousSystemNumber",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Autonomous System Number for the network."
+                },
+				{
+					"name": "AuthenticationProcessingDetails",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Provides the details associated with authentication processor"
+				},
+				{
+					"name": "ClientCredentialType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The type of client credential used. Examples include client assertion, client secret, etc."
+				},
+				{
+					"name": "ConditionalAccessPolicies",
+					"type": "String",
+					"isHidden": false,
+					"isDefaultDisplay": true,
+					"description": "Details of the conditional access policies being applied for the sign-in"
+				},
+				{
+					"name": "ConditionalAccessPoliciesV2",
+					"type": "Dynamic",
+					"isHidden": true,
+					"isDefaultDisplay": false,
+					"description": "[Deprecated. Use ConditionalAccessPolicies instead]. Details of the conditional access policies being applied for the sign-in"
+				},
+				{
+					"name": "ConditionalAccessStatus",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Status of all the conditionalAccess policies related to the sign-in"
+				},
+				{
+					"name": "CreatedDateTime",
+					"type": "DateTime",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Datetime of the sign-in activity."
+				},
+				{
+					"name": "FederatedCredentialId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Th identifier of an application's federated identity credential if a federated identity credential was used to sign in."
+				},
+				{
+					"name": "Id",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "Unique ID representing the sign-in activity"
+				},
+				{
+					"name": "IPAddress",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "IP address of the client used to sign in"
+				},
+				{
+					"name": "LocationDetails",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Details of the sign-in location"
+				},
+				{
+					"name": "NetworkLocationDetails",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Provides the details associated with Authentication processor."
+				},
+				{
+					"name": "ResourceDisplayName",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Name of the resource that the service principal signed into"
+				},
+				{
+					"name": "ResourceIdentity",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "ID of the resource that the service principal signed into"
+				},
+				{
+					"name": "ResourceOwnerTenantId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The tenant identifier of the owner of the resource referenced in the sign in"
+				},
+				{
+					"name": "ResourceServicePrincipalId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Service Principal Id of the resource"
+				},
+				{
+					"name": "ServicePrincipalCredentialKeyId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Key id of the service principal that initiated the sign-in"
+				},
+				{
+					"name": "ServicePrincipalCredentialThumbprint",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Thumbprint of the service principal that initiated the sign-in"
+				},
+				{
+					"name": "ServicePrincipalId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "ID of the service principal who initiated the sign-in"
+				},
+				{
+					"name": "ServicePrincipalName",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Service Principal Name of the service principal who initiated the sign-in"
+				},
+				{
+					"name": "SessionId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Id of the session that was generated during the signIn."
+				},
+				{
+					"name": "UniqueTokenIdentifier",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Unique token identifier for the request"
+				},
+				{
+					"name": "Agent",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Details of agentic sign-in."
+                },
+                {
+                    "name": "UserAgent",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "User Agent for the sign-in"
+                },
+                {
+                    "name": "AADTenantId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "ID of the AAD tenant."
+				}
+			],
+			"transformFilePath": "KQL/AADServicePrincipalSignInLogsTransform.kql",
+			"sampleInputRecordsFilePath": "SampleInputRecords/AADSampleServicePrincipalUserSignInLogs.json"
+		},
+		{
+			"name": "AADManagedIdentitySignInLogs",
+			"description": "Managed identity Azure Active Directory sign-in logs.",
+			"dataTypeId": "TENANTMICROSOFTAADIAM_MSI",
+			"isResourceCentric": false,
+			"categories": [
+				"audit",
+				"security"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 14,
+			"tableState": "Production",
+			"isLakeAllowed": true,
+			"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "operationVersion",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "resultType",
+					"type": "String"
+				},
+				{
+					"name": "resultSignature",
+					"type": "String"
+				},
+				{
+					"name": "resultDescription",
+					"type": "String"
+				},
+				{
+					"name": "durationMs",
+					"type": "Int"
+				},
+				{
+					"name": "callerIpAddress",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "identity",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				},
+				{
+					"name": "Level",
+					"type": "String"
+				},
+				{
+					"name": "location",
+					"type": "String"
+				},
+				{
+					"name": "tenantId",
+					"type": "String"
+				},
+				{
+					"name": "sourcesystem",
+					"type": "String"
+				}
+			],
+			"columns": [
+				{
+					"name": "TenantId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "The tenant GUID that's associated with the logs"
+				},
+				{
+					"name": "SourceSystem",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "Details of source system of the object being provisioned"
+				},
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The date and time of the event in UTC"
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "For sign-ins, this value is always Sign-in activity"
+				},
+				{
+					"name": "OperationVersion",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "The REST API version that's requested by the client"
+				},
+				{
+					"name": "Category",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Category of the sign-in event"
+				},
+				{
+					"name": "ResultType",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The result of the sign-in operation can be Success or Failure"
+				},
+				{
+					"name": "ResultSignature",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "Contains the error code, if any, for the sign-in operation"
+				},
+				{
+					"name": "ResultDescription",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Provides the error description for the sign-in operation"
+				},
+				{
+					"name": "DurationMs",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "The duration of the operation in milliseconds"
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": false,
+					"description": "ID to provide sign-in trail"
+				},
+				{
+					"name": "ResourceGroup",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "Resource group for the logs"
+				},
+				{
+					"name": "Identity",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The identity from the token that was presented when you made the request. It can be a user account, system account, or service principal"
+				},
+				{
+					"name": "Level",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The severity level of the event"
+				},
+				{
+					"name": "Location",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The region of the resource emitting the event"
+				},
+                {
+                    "name": "AADTenantId",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true,
+                    "description": "The AADTenantId GUID that's associated with the logs"
+                },
+				{
+					"name": "Agent",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Details of agentic sign-in."
+				},
+				{
+					"name": "AppId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "Unique GUID representing the app ID in the Azure Active Directory"
+				},
+				{
+					"name": "AppOwnerTenantId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "The tenant identifier of the owenr of the application in Azure Active Directory"
+				},
+				{
+					"name": "AuthenticationContextClassReferences",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The authentication contexts of the sign-in"
+				},
+				{
+					"name": "AuthenticationProcessingDetails",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Provides the details associated with authentication processor"
+				},
+				{
+					"name": "ClientCredentialType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": ""
+				},
+				{
+					"name": "ConditionalAccessPolicies",
+					"type": "String",
+					"isHidden": false,
+					"isDefaultDisplay": true,
+					"description": "Details of the conditional access policies being applied for the sign-in"
+				},
+				{
+					"name": "ConditionalAccessPoliciesV2",
+					"type": "Dynamic",
+					"isHidden": true,
+					"isDefaultDisplay": false,
+					"description": "[Deprecated. Use ConditionalAccessPolicies instead]. Details of the conditional access policies being applied for the sign-in"
+				},
+				{
+					"name": "ConditionalAccessStatus",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Status of all the conditionalAccess policies related to the sign-in"
+				},
+				{
+					"name": "CreatedDateTime",
+					"type": "DateTime",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Datetime of the sign-in activity."
+				},
+				{
+					"name": "FederatedCredentialId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Th identifier of an application's federated identity credential if a federated identity credential was used to sign in."
+				},
+				{
+					"name": "Id",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "Unique ID representing the sign-in activity"
+				},
+				{
+					"name": "IPAddress",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "IP address of the client used to sign in"
+				},
+				{
+					"name": "LocationDetails",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Details of the sign-in location"
+				},
+				{
+					"name": "ManagedServiceIdentity",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Details of the Managed Service Identity used to Sign In."
+				},
+				{
+					"name": "NetworkLocationDetails",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Provides the details associated with Authentication processor."
+				},
+				{
+					"name": "ResourceDisplayName",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Name of the resource that the service principal signed into"
+				},
+				{
+					"name": "ResourceIdentity",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "ID of the resource that the service principal signed into"
+				},
+				{
+					"name": "ResourceOwnerTenantId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The tenant identifier of the owner of the resource referenced in the sign in"
+				},
+				{
+					"name": "ResourceServicePrincipalId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Service Principal Id of the resource"
+				},
+				{
+					"name": "ServicePrincipalCredentialKeyId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Key id of the service principal that initiated the sign-in"
+				},
+				{
+					"name": "ServicePrincipalCredentialThumbprint",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Thumbprint of the service principal that initiated the sign-in"
+				},
+				{
+					"name": "ServicePrincipalId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "ID of the service principal who initiated the sign-in"
+				},
+				{
+					"name": "ServicePrincipalName",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Service Principal Name of the service principal who initiated the sign-in"
+				},
+				{
+					"name": "SessionId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Id of the session that was generated during the signIn."
+				},
+                {
+                    "name": "SourceAppClientId",
+                    "type": "String",
+                    "isPreferredFacet": true,
+                    "isDefaultDisplay": true,
+                    "description": "The client ID of the application that initiated the sign-in"
+                },
+				{
+					"name": "UniqueTokenIdentifier",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Unique token identifier for the request"
+                },
+                {
+                    "name": "UserAgent",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "User Agent for the sign-in"
+				}
+			],
+			"transformFilePath": "KQL/AADManagedIdentitySignInLogsTransform.kql",
+			"sampleInputRecordsFilePath": "SampleInputRecords/AADSampleManagedIdentitySignInLogs.json"
+		},
+		{
+			"name": "AADProvisioningLogs",
+			"description": "Logs generated by Azure AD Provisioning.",
+			"dataTypeId": "TENANTMICROSOFTAADIAM_PROVISIONINGLOGS",
+			"isResourceCentric": false,
+			"categories": [
+				"audit",
+				"security"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"tableState": "Production",
+			"isLakeAllowed": true,
+			"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "operationVersion",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "resultType",
+					"type": "String"
+				},
+				{
+					"name": "resultSignature",
+					"type": "String"
+				},
+				{
+					"name": "resultDescription",
+					"type": "String"
+				},
+				{
+					"name": "durationMs",
+					"type": "Int"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "identity",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				},
+				{
+					"name": "sourcesystem",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "KQL/AADProvisioningLogsTransform.kql",
+			"columns": [
+				{
+					"name": "AADTenantId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "Unique Azure AD tenant ID"
+				},
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The date and time of the event in UTC"
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Name of the operation"
+				},
+				{
+					"name": "OperationVersion",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "The REST API version that's requested by the client"
+				},
+				{
+					"name": "Category",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Category of the event"
+				},
+				{
+					"name": "ResultType",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The result of the provisioning operation can be Success, Failure, or Skipped"
+				},
+				{
+					"name": "ResultSignature",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "Contains the error code, if any, for the provisioning operation"
+				},
+				{
+					"name": "ResultDescription",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "When available, provides the error description for the provisioning operation"
+				},
+				{
+					"name": "DurationMs",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "Indicates how long this provisioning action took to finish"
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": false,
+					"description": "ID to provide provisioning trail"
+				},
+				{
+					"name": "Action",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"isHidden": true,
+					"description": "Indicates the activity name or the operation name. For a list of activities logged, refer to Azure AD activity list"
+				},
+				{
+					"name": "ChangeId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "Unique ID of this change in this cycle"
+				},
+				{
+					"name": "CycleId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "Unique ID per job iteration"
+				},
+				{
+					"name": "Id",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "Indicates the unique ID for the activity"
+				},
+				{
+					"name": "InitiatedBy",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Details of who initiated this provisioning"
+				},
+				{
+					"name": "JobId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "The unique ID for the whole provisioning job"
+				},
+				{
+					"name": "ModifiedProperties",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Details of each property that was modified in this provisioning action on this object"
+				},
+				{
+					"name": "ProvisioningSteps",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Details of each step in provisioning"
+				},
+				{
+					"name": "ServicePrincipal",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Represents the service principal used for provisioning"
+				},
+				{
+					"name": "SourceIdentity",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Details of source object being provisioned"
+				},
+				{
+					"name": "SourceSystem",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Details of source system of the object being provisioned"
+				},
+				{
+					"name": "StatusInfo",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"isHidden": true,
+					"description": "Details of provisioning status"
+				},
+				{
+					"name": "TargetIdentity",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Details of target object being provisioned"
+				},
+				{
+					"name": "TargetSystem",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Details of target system of the object being provisioned"
+				},
+				{
+					"name": "ProvisioningAction",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Indicates the activity name or the operation name. For a list of activities logged, refer to Azure AD activity list"
+				},
+				{
+					"name": "ProvisioningStatusInfo",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Details of provisioning status"
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/AADSampleProvisioningLogs.json"
+		},
+		{
+			"name": "ADFSSignInLogs",
+			"description": "Logs generated by Active Directory Federation Service.",
+			"dataTypeId": "TENANTMICROSOFTAADIAM_ADFS",
+			"isResourceCentric": false,
+			"categories": [
+				"audit",
+				"security"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 10,
+			"tableState": "Production",
+			"isLakeAllowed": true,
+			"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "operationVersion",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "resultType",
+					"type": "String"
+				},
+				{
+					"name": "resultSignature",
+					"type": "String"
+				},
+				{
+					"name": "resultDescription",
+					"type": "String"
+				},
+				{
+					"name": "durationMs",
+					"type": "Int"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "identity",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				},
+				{
+					"name": "Level",
+					"type": "String"
+				},
+				{
+					"name": "location",
+					"type": "String"
+				},
+				{
+					"name": "tenantId",
+					"type": "String"
+				},
+				{
+					"name": "sourcesystem",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "KQL/ADFSSignInLogsTransform.kql",
+			"columns": [
+				{
+					"name": "TenantId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "The tenant GUID that's associated with the logs"
+				},
+				{
+					"name": "SourceSystem",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "Details of source system of the object being provisioned"
+				},
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The date and time of the event in UTC"
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "For sign-ins, this value is always Sign-in activity"
+				},
+				{
+					"name": "OperationVersion",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "The REST API version that's requested by the client"
+				},
+				{
+					"name": "Category",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Category of the sign-in event"
+				},
+				{
+					"name": "ResultType",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The result of the sign-in operation can be Success or Failure"
+				},
+				{
+					"name": "ResultSignature",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "Contains the error code, if any, for the sign-in operation"
+				},
+				{
+					"name": "ResultDescription",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Provides the error description for the sign-in operation"
+				},
+				{
+					"name": "DurationMs",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "The duration of the operation in milliseconds"
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": false,
+					"description": "ID to provide sign-in trail"
+				},
+				{
+					"name": "ResourceGroup",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": false,
+					"description": "Resource group for the logs"
+				},
+				{
+					"name": "Identity",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The identity from the token that was presented when you made the request. It can be a user account, system account, or service principal"
+				},
+				{
+					"name": "Level",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The severity level of the event"
+				},
+				{
+					"name": "Location",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The region of the resource emitting the event"
+				},
+				{
+					"name": "AlternateSignInName",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Provides the on-premises UPN of the user sign-ing into Azure AD.e.g. Phone number sign-in"
+				},
+				{
+					"name": "AppDisplayName",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The string name of the OAuth client in the request displayed in the Azure Portal"
+				},
+				{
+					"name": "AppId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "A unique ID of the Oauth Client ID in the request"
+				},
+				{
+					"name": "AuthenticationDetails",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "A record of each step of authentication undertaken in the sign-in"
+				},
+				{
+					"name": "AuthenticationProcessingDetails",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Provides the details associated with authentication processor"
+				},
+				{
+					"name": "AuthenticationRequirement",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Type of authentication required for the sign-in.  If set to multiFactorAuthentication, an MFA step was required.  If set to singleFactorAuthentication, no MFA was required"
+				},
+				{
+					"name": "AuthenticationRequirementPolicies",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Set of CA policies that apply to this sign-in, each as CA: policy name, and/or MFA: Per-user"
+				},
+				{
+					"name": "ConditionalAccessPolicies",
+					"type": "String",
+					"isHidden": false,
+					"isDefaultDisplay": true,
+					"description": "Details of the conditional access policies being applied for the sign-in"
+				},
+				{
+					"name": "ConditionalAccessPoliciesV2",
+					"type": "Dynamic",
+					"isHidden": true,
+					"isDefaultDisplay": false,
+					"description": "[Deprecated. Use ConditionalAccessPolicies instead]. Details of the conditional access policies being applied for the sign-in"
+				},
+				{
+					"name": "ConditionalAccessStatus",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Status of all the conditionalAccess policies related to the sign-in"
+				},
+				{
+					"name": "CreatedDateTime",
+					"type": "DateTime",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Datetime of the sign-in activity"
+				},
+				{
+					"name": "DeviceDetail",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Details of the device used for the sign-in"
+				},
+				{
+					"name": "IsInteractive",
+					"type": "Bool",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Indicates if a sign-in is interactive or not"
+				},
+				{
+					"name": "Id",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "Unique ID representing the sign-in activity"
+				},
+				{
+					"name": "IPAddress",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "IP address of the client used to sign in"
+				},
+				{
+					"name": "NetworkLocationDetails",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Provides the details associated with authentication processor"
+				},
+				{
+					"name": "OriginalRequestId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "The request id of the first request in the authentication sequence"
+				},
+				{
+					"name": "ProcessingTimeInMs",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Request processing time in milliseconds in AD STS"
+				},
+				{
+					"name": "ResourceDisplayName",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "The string name of the application the user signed into displayed in the Azure Portal"
+				},
+				{
+					"name": "ResourceIdentity",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "A unique ID application ID the user signed into of the request"
+				},
+				{
+					"name": "ResourceTenantId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "The resource tenant ID for cross-tenant scenarios"
+				},
+				{
+					"name": "Requirement",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "If the authentication is a primary or secondary authentication. Can be not set."
+				},
+				{
+					"name": "Status",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Details of the sign-in status"
+				},
+				{
+					"name": "TokenIssuerName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Name of the identity provider (e.g. sts.microsoft.com )"
+				},
+				{
+					"name": "TokenIssuerType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Type of identityProvider (Azure AD, AD Federation Services)"
+				},
+				{
+					"name": "UniqueTokenIdentifier",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Unique token identifier for the request"
+				},
+				{
+					"name": "UserAgent",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "User Agent for the sign-in"
+				},
+				{
+					"name": "UserDisplayName",
+					"type": "String",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "Display name of the user that initiated the sign-in"
+				},
+				{
+					"name": "UserId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isPreferredFacet": true,
+					"isDefaultDisplay": true,
+					"description": "ID of the user that initiated the sign-in"
+				},
+				{
+					"name": "UserPrincipalName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "User principal name of the user that initiated the sign-in"
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/ADFSSignInLogs.json"
+		},
+		{
+			"name": "AADUserRiskEvents",
+			"description": "Logs generated by identity protection for Azure AD user risk events.",
+			"dataTypeId": "TENANTMICROSOFTAADIAM_USERRISKEVENTS",
+			"isResourceCentric": false,
+			"categories": [
+				"audit",
+				"security"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 2,
+			"tableState": "Production",
+			"isLakeAllowed": true,
+			"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "properties",
+					"type": "String"
+				},
+				{
+					"name": "activity",
+					"type": "String"
+				},
+				{
+					"name": "activityDateTime",
+					"type": "String"
+				},
+				{
+					"name": "additionalInfo",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "detectedDateTime",
+					"type": "String"
+				},
+				{
+					"name": "detectionTimingType",
+					"type": "String"
+				},
+				{
+					"name": "id",
+					"type": "String"
+				},
+				{
+					"name": "ipAddress",
+					"type": "String"
+				},
+				{
+					"name": "lastUpdatedDateTime",
+					"type": "String"
+				},
+				{
+					"name": "location",
+					"type": "String"
+				},
+				{
+					"name": "requestId",
+					"type": "String"
+				},
+				{
+					"name": "riskDetail",
+					"type": "String"
+				},
+				{
+					"name": "riskEventType",
+					"type": "String"
+				},
+				{
+					"name": "riskLevel",
+					"type": "String"
+				},
+				{
+					"name": "riskState",
+					"type": "String"
+				},
+				{
+					"name": "source",
+					"type": "String"
+				},
+				{
+					"name": "tokenIssuerType",
+					"type": "String"
+				},
+				{
+					"name": "userDisplayName",
+					"type": "String"
+				},
+				{
+					"name": "userId",
+					"type": "String"
+				},
+				{
+					"name": "userPrincipalName",
+					"type": "String"
+				},
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "KQL/AADUserRiskEventsTransform.kql",
+			"columns": [
+				{
+					"name": "Activity",
+					"type": "String",
+					"description": "Indicates the activity type the detected risk is linked to. Possible values are: signin, user, unknownFutureValue."
+				},
+				{
+					"name": "ActivityDateTime",
+					"type": "DateTime",
+					"description": "Date and time when the risky activity occurred in UTC."
+				},
+				{
+					"name": "AdditionalInfo",
+					"type": "Dynamic",
+					"description": "Additional information associated with the user risk event in JSON format."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"description": "Correlation ID of the sign-in associated with the risk detection. This property is null if the risk detection is not associated with a sign-in."
+				},
+				{
+					"name": "DetectedDateTime",
+					"type": "DateTime",
+					"description": "Date and time that the risk was detected in UTC."
+				},
+				{
+					"name": "DetectionTimingType",
+					"type": "String",
+					"description": "Timing of the detected risk (real-time/offline). Possible values are: notDefined, realtime, nearRealtime, offline, unknownFutureValue."
+				},
+				{
+					"name": "Id",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"description": "Unique ID of the risk event."
+				},
+				{
+					"name": "IpAddress",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"description": "The IP address of the client from where the risk occurred."
+				},
+				{
+					"name": "LastUpdatedDateTime",
+					"type": "DateTime",
+					"description": "Date and time when the risk detection was last updated in UTC."
+				},
+				{
+					"name": "Location",
+					"type": "Dynamic",
+					"description": "Location of the sign-in."
+				},
+				{
+					"name": "RequestId",
+					"type": "String",
+					"description": "Request ID of the sign-in associated with the risk detection. This property is null if the risk detection is not associated with a sign-in."
+				},
+				{
+					"name": "RiskDetail",
+					"type": "String",
+					"description": "Details of the detected risk. Possible values are: none, adminGeneratedTemporaryPassword, userPerformedSecuredPasswordChange, userPerformedSecuredPasswordReset, adminConfirmedSigninSafe, aiConfirmedSigninSafe, userPassedMFADrivenByRiskBasedPolicy, adminDismissedAllRiskForUser, adminConfirmedSigninCompromised, hidden, adminConfirmedUserCompromised, unknownFutureValue."
+				},
+				{
+					"name": "RiskEventType",
+					"type": "String",
+					"description": "The type of risk event detected."
+				},
+				{
+					"name": "RiskLevel",
+					"type": "String",
+					"description": "Level of the detected risk. Possible values are: low, medium, high, hidden, none, unknownFutureValue."
+				},
+				{
+					"name": "RiskState",
+					"type": "String",
+					"description": "The state of a detected risky user or sign-in. Possible values are: none, confirmedSafe, remediated, dismissed, atRisk, confirmedCompromised, unknownFutureValue."
+				},
+				{
+					"name": "Source",
+					"type": "String",
+					"description": "Source of the risk detection. For example, activeDirectory."
+				},
+				{
+					"name": "TokenIssuerType",
+					"type": "String",
+					"description": "Indicates the type of token issuer for the detected sign-in risk. Possible values are: AzureAD, ADFederationServices, UnknownFutureValue."
+				},
+				{
+					"name": "UserDisplayName",
+					"type": "String",
+					"description": "The user principal name (UPN) of the user."
+				},
+				{
+					"name": "UserId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"description": "Unique ID of the user."
+				},
+				{
+					"name": "UserPrincipalName",
+					"type": "String",
+					"description": "The user principal name (UPN) of the user."
+				},
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"description": "The date and time of the event in UTC."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"description": "Name of the operation."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/AADSampleUserRiskEvents.json"
+		},
+		{
+			"name": "AADRiskyUsers",
+			"description": "Logs generated by identity protection for Azure AD risky users.",
+			"dataTypeId": "TENANTMICROSOFTAADIAM_RISKYUSERS",
+			"isResourceCentric": false,
+			"categories": [
+				"audit",
+				"security"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 2,
+			"tableState": "Production",
+			"isLakeAllowed": true,
+			"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "properties",
+					"type": "String"
+				},
+				{
+					"name": "id",
+					"type": "String"
+				},
+				{
+					"name": "isDeleted",
+					"type": "Bool"
+				},
+				{
+					"name": "isProcessing",
+					"type": "Bool"
+				},
+				{
+					"name": "riskDetail",
+					"type": "String"
+				},
+				{
+					"name": "riskLastUpdatedDateTime",
+					"type": "String"
+				},
+				{
+					"name": "riskLevel",
+					"type": "String"
+				},
+				{
+					"name": "riskState",
+					"type": "String"
+				},
+				{
+					"name": "userDisplayName",
+					"type": "String"
+				},
+				{
+					"name": "userPrincipalName",
+					"type": "String"
+				},
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "KQL/AADRiskyUsersTransform.kql",
+			"columns": [
+				{
+					"name": "Id",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"description": "Unique ID of the user at risk."
+				},
+				{
+					"name": "IsDeleted",
+					"type": "Bool",
+					"description": "Indicates whether the user is deleted."
+				},
+				{
+					"name": "IsProcessing",
+					"type": "Bool",
+					"description": "Indicates whether a user's risky state is being processed by the backend."
+				},
+				{
+					"name": "RiskDetail",
+					"type": "String",
+					"description": "Details of the detected risk. Possible values are: none, adminGeneratedTemporaryPassword, userPerformedSecuredPasswordChange, userPerformedSecuredPasswordReset, adminConfirmedSigninSafe, aiConfirmedSigninSafe, userPassedMFADrivenByRiskBasedPolicy, adminDismissedAllRiskForUser, adminConfirmedSigninCompromised, hidden, adminConfirmedUserCompromised, unknownFutureValue."
+				},
+				{
+					"name": "RiskLastUpdatedDateTime",
+					"type": "DateTime",
+					"description": "The date and time that the risky user was last updated in UTC."
+				},
+				{
+					"name": "RiskLevel",
+					"type": "String",
+					"description": "Level of the detected risky user. Possible values are: low, medium, high, hidden, none, unknownFutureValue."
+				},
+				{
+					"name": "RiskState",
+					"type": "String",
+					"description": "State of the user's risk. Possible values are: none, confirmedSafe, remediated, dismissed, atRisk, confirmedCompromised, unknownFutureValue."
+				},
+				{
+					"name": "UserDisplayName",
+					"type": "String",
+					"description": "Risky user display name."
+				},
+				{
+					"name": "UserPrincipalName",
+					"type": "String",
+					"description": "Risky user principal name."
+				},
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"description": "The date and time of the event in UTC."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"description": "Name of the operation."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"description": "The ID for correlated log analytics events. Can be used to identify correlated events between multiple tables."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/AADSampleRiskyUsers.json"
+		},
+		{
+			"name": "AADServicePrincipalRiskEvents",
+			"description": "Logs generated by identity protection for Azure AD service principal risk events.",
+			"dataTypeId": "TENANTMICROSOFTAADIAM_SERVICEPRINCIPALRISKEVENTS",
+			"isResourceCentric": false,
+			"categories": [
+				"audit",
+				"security"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"tableState": "Production",
+			"isLakeAllowed": true,
+			"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				},
+				{
+					"name": "activity",
+					"type": "String"
+				},
+				{
+					"name": "activityDateTime",
+					"type": "String"
+				},
+				{
+					"name": "additionalInfo",
+					"type": "String"
+				},
+				{
+					"name": "appId",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "detectedDateTime",
+					"type": "String"
+				},
+				{
+					"name": "detectionTimingType",
+					"type": "String"
+				},
+				{
+					"name": "id",
+					"type": "String"
+				},
+				{
+					"name": "ipAddress",
+					"type": "String"
+				},
+				{
+					"name": "keyIds",
+					"type": "String"
+				},
+				{
+					"name": "lastUpdatedDateTime",
+					"type": "String"
+				},
+				{
+					"name": "location",
+					"type": "String"
+				},
+				{
+					"name": "requestId",
+					"type": "String"
+				},
+				{
+					"name": "riskDetail",
+					"type": "String"
+				},
+				{
+					"name": "riskEventType",
+					"type": "String"
+				},
+				{
+					"name": "riskLevel",
+					"type": "String"
+				},
+				{
+					"name": "riskState",
+					"type": "String"
+				},
+				{
+					"name": "servicePrincipalDisplayName",
+					"type": "String"
+				},
+				{
+					"name": "servicePrincipalId",
+					"type": "String"
+				},
+				{
+					"name": "source",
+					"type": "String"
+				},
+				{
+					"name": "tokenIssuerType",
+					"type": "String"
+				},
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "KQL/AADServicePrincipalRiskEventsTransform.kql",
+			"columns": [
+				{
+					"name": "Activity",
+					"type": "String",
+					"description": "Indicates the activity type the detected risk is linked to."
+				},
+				{
+					"name": "ActivityDateTime",
+					"type": "DateTime",
+					"description": "Date and time when the risky activity occurred in UTC."
+				},
+				{
+					"name": "AdditionalInfo",
+					"type": "Dynamic",
+					"description": "Additional information associated with the risk detection in JSON format."
+				},
+				{
+					"name": "AppId",
+					"type": "String",
+					"description": "The unique identifier for the associated application."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"description": "Correlation ID of the sign-in activity associated with the risk detection. Nullable."
+				},
+				{
+					"name": "DetectedDateTime",
+					"type": "DateTime",
+					"description": "Date and time when the risk was detected in UTC."
+				},
+				{
+					"name": "DetectionTimingType",
+					"type": "String",
+					"description": "Timing of the detected risk , whether real-time or offline."
+				},
+				{
+					"name": "Id",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"description": "Unique identifier of the risk detection. Inherited from entity."
+				},
+				{
+					"name": "IpAddress",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"description": "Provides the IP address of the client from where the risk occurred."
+				},
+				{
+					"name": "KeyIds",
+					"type": "Dynamic",
+					"description": "The unique identifier (GUID) for the key credential associated with the risk detection."
+				},
+				{
+					"name": "LastUpdatedDateTime",
+					"type": "DateTime",
+					"description": "Date and time when the risk detection was last updated in UTC."
+				},
+				{
+					"name": "Location",
+					"type": "Dynamic",
+					"description": "Location of the sign-in."
+				},
+				{
+					"name": "RequestId",
+					"type": "String",
+					"description": "Request identifier of the sign-in activity associated with the risk detection. Nullable."
+				},
+				{
+					"name": "RiskDetail",
+					"type": "String",
+					"description": "Details of the detected risk. Note: Details for this property are only available for Azure AD Premium P2 customers."
+				},
+				{
+					"name": "RiskEventType",
+					"type": "String",
+					"description": "The type of risk event detected."
+				},
+				{
+					"name": "RiskLevel",
+					"type": "String",
+					"description": "Level of the detected risk. Note: details for this property are only available for Azure AD Premium P2 customers."
+				},
+				{
+					"name": "RiskState",
+					"type": "String",
+					"description": "The state of a detected risky service principal or sign-in activity."
+				},
+				{
+					"name": "ServicePrincipalDisplayName",
+					"type": "String",
+					"description": "The display name for the service principal."
+				},
+				{
+					"name": "ServicePrincipalId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"description": "The unique identifier for the service principal."
+				},
+				{
+					"name": "Source",
+					"type": "String",
+					"description": "Source of the risk detection. For example, identityProtection."
+				},
+				{
+					"name": "TokenIssuerType",
+					"type": "String",
+					"description": "Indicates the type of token issuer for the detected sign-in risk."
+				},
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"description": "The date and time of the event in UTC."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"description": "Name of the operation."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/AADSampleServicePrincipalRiskEvents.json"
+		},
+		{
+			"name": "AADRiskyServicePrincipals",
+			"description": "Logs generated by identity protection for Azure AD risky service principals.",
+			"dataTypeId": "TENANTMICROSOFTAADIAM_RISKYSERVICEPRINCIPALS",
+			"isResourceCentric": false,
+			"categories": [
+				"audit",
+				"security"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 4,
+			"tableState": "Production",
+			"isLakeAllowed": true,
+			"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				},
+				{
+					"name": "id",
+					"type": "String"
+				},
+				{
+					"name": "isProcessing",
+					"type": "Bool"
+				},
+				{
+					"name": "riskDetail",
+					"type": "String"
+				},
+				{
+					"name": "riskLastUpdatedDateTime",
+					"type": "String"
+				},
+				{
+					"name": "riskLevel",
+					"type": "String"
+				},
+				{
+					"name": "riskState",
+					"type": "String"
+				},
+				{
+					"name": "displayName",
+					"type": "String"
+				},
+				{
+					"name": "appId",
+					"type": "String"
+				},
+				{
+					"name": "accountEnabled",
+					"type": "Bool"
+				},
+				{
+					"name": "servicePrincipalType",
+					"type": "String"
+				},
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "KQL/AADRiskyServicePrincipalsTransform.kql",
+			"columns": [
+				{
+					"name": "AccountEnabled",
+					"type": "Bool",
+					"description": "true if the service principal account is enabled; otherwise, false."
+				},
+				{
+					"name": "AppId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"description": "The globally unique identifier for the associated application (its appId property), if any."
+				},
+				{
+					"name": "DisplayName",
+					"type": "String",
+					"description": "The display name for the service principal."
+				},
+				{
+					"name": "Id",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"description": "The unique identifier assigned to the service principal at risk. Inherited from entity."
+				},
+				{
+					"name": "IsProcessing",
+					"type": "Bool",
+					"description": "Indicates whether Azure AD is currently processing the service principal's risky state."
+				},
+				{
+					"name": "RiskDetail",
+					"type": "String",
+					"description": "Details of the detected risk."
+				},
+				{
+					"name": "RiskLastUpdatedDateTime",
+					"type": "DateTime",
+					"description": "The date and time that the risk state was last updated in UTC."
+				},
+				{
+					"name": "RiskLevel",
+					"type": "String",
+					"description": "Level of the detected risky workload identity. The possible values are: low, medium, high, hidden, none, unknownFutureValue."
+				},
+				{
+					"name": "RiskState",
+					"type": "String",
+					"description": "State of the service principal's risk. The possible values are: none, confirmedSafe, remediated, dismissed, atRisk, confirmedCompromised, unknownFutureValue."
+				},
+				{
+					"name": "ServicePrincipalType",
+					"type": "String",
+					"description": "Identifies whether the service principal represents an Application, a Managed Identity, or a legacy application (social IdP)."
+				},
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"description": "The date and time of the event in UTC."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"description": "Name of the operation."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"description": "The ID for correlated log analytics events. Can be used to identify correlated events between multiple tables."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/AADSampleRiskyServicePrincipals.json"
+		},
+		{
+			"name": "AADB2CRequestLogs",
+			"description": "[Deprecated. Do not onboard any new users.] Logs generated by AAD gateway for displaying B2C tenant's web requests and its throttle info.",
+			"dataTypeId": "TENANTMICROSOFTAADIAM_B2CREQUESTLOGS",
+			"isResourceCentric": true,
+			"categories": [
+				"audit",
+				"security"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 4,
+			"tableState": "Production",
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "resultType",
+					"type": "String"
+				},
+				{
+					"name": "resultSignature",
+					"type": "String"
+				},
+				{
+					"name": "callerIpAddress",
+					"type": "String"
+				},
+				{
+					"name": "correlationId",
+					"type": "String"
+				},
+				{
+					"name": "location",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				},
+				{
+					"name": "tenantId",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "KQL/AADB2CRequestLogsTransform.kql",
+			"columns": [
+				{
+					"name": "AADTenantId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"description": "The AAD tenant ID of associated request."
+				},
+				{
+					"name": "ResultType",
+					"type": "String",
+					"description": "Indicates whether the request is throttled or not."
+				},
+				{
+					"name": "ResultSignature",
+					"type": "String",
+					"description": "The HTTP status code of the corresponding REST call."
+				},
+				{
+					"name": "CallerIpAddress",
+					"type": "String",
+					"description": "Hashed format of caller IP address. Can be used to identify if a single IP address is using a large portion of traffic."
+				},
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"description": "The date and time of the request received at the AAD gateway in UTC."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"description": "Name of the operation."
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"description": "The ID for correlated log analytics events. Can be used to identify correlated events between multiple tables."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/AADSampleB2CRequestLogs.json"
+		},
+		{
+			"name": "NetworkAccessTraffic",
+			"description": "This table is part of Identity and Network Access, which contains Network Traffic Access logs. These logs can be leveraged for policy, risk, and traffic management, as well as to monitor users experience.",
+			"dataTypeId": "TENANTMICROSOFTAADIAM_NETWORKACCESSTRAFFICLOGS",
+			"isChangeColumnInternalNameAllowed": true,
+			"isResourceCentric": false,
+			"isLakeAllowed": true,
+			"isTroubleshootingAllowed": true,
+			"categories": [
+				"security",
+				"network",
+				"management"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 20,
+			"tableState": "Production",
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "tenantId",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "location",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				}
+			],
+			"transformFilePath": "KQL/NetworkAccessTrafficLogsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The date and time (UTC) that the event was generated."
+				},
+				{
+					"name": "TransactionId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "Unique identifier that representing a roundtrip of request response."
+				},
+				{
+					"name": "ConnectionId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Unique identifier representing the connection this traffic log was initiated from."
+				},
+				{
+					"name": "SessionId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": false,
+					"description": "Unique identifier representing the session."
+				},
+				{
+					"name": "TrafficType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The type of the target destination traffic."
+				},
+				{
+					"name": "DeviceCategory",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Device type the transaction originated from. Client, Branch. "
+				},
+				{
+					"name": "DestinationIp",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": true,
+					"description": "The IP address of the connection or session destination."
+				},
+				{
+					"transformName": "DestinationPort",
+					"physicalName": "DestinationPort_Internal2",
+					"logicalName": "DestinationPort",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The destination IP port."
+				},
+				{
+					"name": "DestinationFqdn",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The destination device hostname, including domain information when available."
+				},
+				{
+					"name": "SourceIp",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": true,
+					"description": "The IP address from which the connection or session originated."
+				},
+				{
+					"transformName": "SourcePort",
+					"physicalName": "SourcePort_Internal2",
+					"logicalName": "SourcePort",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The IP port from which the connection originated."
+				},
+				{
+					"name": "DeviceOperatingSystem",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The client connecting operating system type."
+				},
+				{
+					"name": "DeviceOperatingSystemVersion",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The client connecting operating system version."
+				},
+				{
+					"name": "AgentVersion",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The version of the agent connecting."
+				},
+				{
+					"name": "DeviceId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the source device as reported in the record."
+				},
+				{
+					"name": "UserId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "A machine-readable, alphanumeric, unique representation of the source user."
+				},
+				{
+					"name": "UserPrincipalName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The source username, including domain information when available."
+				},
+				{
+					"name": "TransportProtocol",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The IP protocol used by the connection or session as listed in IANA protocol assignment."
+				},
+				{
+					"name": "NetworkProtocol",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The network protocol, IPv6 or IPv4."
+				},
+				{
+					"name": "Action",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The action taken on the network session. Allowed, Denied."
+				},
+				{
+					"name": "PolicyRuleId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": false,
+					"description": "The ID of the rule for which the request was denied by."
+				},
+				{
+					"name": "PolicyId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": false,
+					"description": "The ID of the policy for which the request was denied by its rule."
+				},
+				{
+					"name": "SentBytes",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "The number of bytes sent."
+				},
+				{
+					"name": "ReceivedBytes",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "The number of bytes received."
+				},
+				{
+					"name": "ReferrerHeader",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The Referer header value."
+				},
+				{
+					"name": "OriginHeader",
+					"type": "String",
+					"dataTypeHint": "URI",
+					"isDefaultDisplay": false,
+					"description": "The origin header value."
+				},
+				{
+					"name": "XForwardedFor",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": false,
+					"description": "X-Forwarded-For header of the HTTP request."
+				},
+				{
+					"name": "DestinationWebCategories",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The destination FQDN's Web Categories."
+				},
+				{
+					"name": "FilteringProfileId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": false,
+					"description": "The ID of the Filtering Profile associated with the action performed on traffic."
+				},
+				{
+					"name": "FilteringProfileName",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The name of the Filtering Profile associated with the action performed on traffic."
+				},
+				{
+					"name": "PolicyName",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The name of the filtering policy associated with the action performed on traffic."
+				},
+				{
+					"name": "RuleName",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The name of the rule associated with the action performed on traffic."
+				},
+				{
+					"name": "InitiatingProcessName",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The process initiating the traffic transaction."
+				},
+				{
+					"name": "ResourceTenantId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": false,
+					"description": "Tenant ID that owns the resource."
+				},
+				{
+					"name": "ThreatType",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The identified threat type associated with the traffic."
+				},
+				{
+					"name": "DestinationUrl",
+					"type": "String",
+					"dataTypeHint": "URI",
+					"isDefaultDisplay": false,
+					"description": "The Url link of the connection or session destination."
+				},
+				{
+					"name": "Description",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Additional details describing the traffic."
+				},
+				{
+					"name": "AppId",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Destination Application ID accessed in Azure AD during the transaction."
+				},
+				{
+					"name": "ConnectorId",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Private access connector ID."
+				},
+				{
+					"name": "ConnectorName",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Private access connector name."
+				},
+				{
+					"name": "ConnectorIp",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Private access connector IP."
+				},
+				{
+					"name": "ConnectionStatus",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Status of a connection. Status options: Open, Active, Closed."
+				},
+				{
+					"name": "AccessType",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Type of accessed application. Access type options: QuickAccess, PrivateAccess."
+				},
+				{
+					"name": "ProcessingRegion",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Region where the request was processed by the backend service."
+				},
+				{
+					"name": "AppSegmentId",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Destination Application segment ID from Azure AD accessed during the transaction"
+				},
+				{
+					"name": "RemoteNetworkId",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The ID from which traffic was sent or received, providing visibility into the origin of the traffic."
+				},
+				{
+					"name": "HttpMethod",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The http method used in the request."
+				},
+				{
+					"name": "ResponseCode",
+					"type": "Int",
+					"isDefaultDisplay": false,
+					"description": "The response code returned from the server."
+				},
+				{
+					"name": "Token3PExpiry",
+					"type": "DateTime",
+					"isDefaultDisplay": false,
+					"description": "The expiry date of the access token used to access the private access application."
+				},
+				{
+					"name": "Token3PValidFrom",
+					"type": "DateTime",
+					"isDefaultDisplay": false,
+					"description": "The validity date of the access token used to access the private access application."
+				},
+				{
+					"name": "Token3PIssuedAt",
+					"type": "DateTime",
+					"isDefaultDisplay": false,
+					"description": "The issued date of the access token used to access the private access application."
+				},
+				{
+					"name": "Token3PUniqueId",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The unique token identifier of the access token used to access the private access application."
+				},
+				{
+					"name": "TlsAction",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The TLS action taken on the traffic."
+				},
+				{
+					"name": "TlsStatus",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The status of the Tls option."
+				},
+				{
+					"name": "TlsPolicyId",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The unique token identifier of the TLS policy applied to the traffic."
+				},
+				{
+					"name": "TlsPolicyName",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The name for the TLS policy applied to the traffic."
+				},
+				{
+					"name": "UniqueTokenId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": false,
+					"description": "The unique token identifier"
+				},
+				{
+					"name": "VendorNames",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The name of the vendors who detected the threat."
+				},
+				{
+					"name": "CloudAppCatalogId",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The id of the application in the saas application catalog."
+				},
+				{
+					"name": "CloudAppName",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The name of the application (i.e chatGPT, SalesForce, Bing)."
+				},
+				{
+					"name": "CloudAppCategory",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The category of the cloud application (i.e social media, search, generative AI)."
+				},
+				{
+					"name": "CloudAppGeneralScore",
+					"type": "Int",
+					"isDefaultDisplay": false,
+					"description": "The general score of the application."
+				},
+				{
+					"name": "CloudAppRiskScore",
+					"type": "Int",
+					"isDefaultDisplay": false,
+					"description": "The risk score of the application."
+				},
+				{
+					"name": "CloudAppComplianceScore",
+					"type": "Int",
+					"isDefaultDisplay": false,
+					"description": "The compliance score of the application."
+				},
+				{
+					"name": "CloudAppLegalScore",
+					"type": "Int",
+					"isDefaultDisplay": false,
+					"description": "The legal score of the application."
+				},
+				{
+					"name": "CloudAppLoginUser",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The username that was used to log into the application."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/SampleNetworkAccessTrafficLogs.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/SampleNetworkAccessTrafficLogs.json"
+		},
+		{
+			"name": "NetworkAccessConnectionEvents",
+			"description": "This table is part of Identity and Network Access, which contains Network Traffic Connection Events. These logs can be leveraged for security, and traffic management, as well as to monitor users experience.",
+			"dataTypeId": "TENANTMICROSOFTAADIAM_NETWORKACCESSCONNECTIONEVENTS",
+			"isChangeColumnInternalNameAllowed": true,
+			"isResourceCentric": false,
+			"isTroubleshootingAllowed": true,
+			"isLakeAllowed": true,
+			"categories": [
+				"security",
+				"network",
+				"management"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"tableState": "Production",
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "tenantId",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "location",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				}
+			],
+			"transformFilePath": "KQL/NetworkAccessConnectionEventsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The date and time (UTC) that the event was generated."
+				},
+				{
+					"name": "ConnectionId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Unique identifier representing the connection this traffic log was initiated from."
+				},
+				{
+					"name": "TrafficType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The type of the target destination traffic."
+				},
+				{
+					"name": "EventType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The type of the connection event."
+				},
+				{
+					"name": "DeviceCategory",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Device type the transaction originated from. Client, Branch. "
+				},
+				{
+					"name": "DestinationIp",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": true,
+					"description": "The IP address of the connection or session destination."
+				},
+				{
+					"transformName": "DestinationPort",
+					"physicalName": "DestinationPort_Internal2",
+					"logicalName": "DestinationPort",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The destination IP port."
+				},
+				{
+					"name": "DestinationFqdn",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The destination device hostname, including domain information when available."
+				},
+				{
+					"name": "SourceIp",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": true,
+					"description": "The IP address from which the connection or session originated."
+				},
+				{
+					"name": "SourcePrivateIp",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": true,
+					"description": "The private IP address from which the connection or session originated."
+				},
+				{
+					"name": "RemoteNetworkSourceIp",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": true,
+					"description": "The Remote Network IP address from which the connection or session originated."
+				},
+				{
+					"transformName": "SourcePort",
+					"physicalName": "SourcePort_Internal2",
+					"logicalName": "SourcePort",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The IP port from which the connection originated."
+				},
+				{
+					"name": "DeviceOperatingSystem",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The client connecting operating system type."
+				},
+				{
+					"name": "DeviceOperatingSystemVersion",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The client connecting operating system version."
+				},
+				{
+					"name": "AgentVersion",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The version of the agent connecting."
+				},
+				{
+					"name": "DeviceId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the source device as reported in the record."
+				},
+				{
+					"name": "UserId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "A machine-readable, alphanumeric, unique representation of the source user."
+				},
+				{
+					"name": "UserPrincipalName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The source username, including domain information when available."
+				},
+				{
+					"name": "TransportProtocol",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The IP protocol used by the connection or session as listed in IANA protocol assignment."
+				},
+				{
+					"name": "NetworkProtocol",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The network protocol, IPv6 or IPv4."
+				},
+				{
+					"name": "InitiatingProcessName",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The process initiating the traffic transaction."
+				},
+				{
+					"name": "AppId",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Destination Application ID accessed in Azure AD during the transaction."
+				},
+				{
+					"name": "PopProcessingRegion",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "Region where the request was processed by the backend service."
+				},
+				{
+					"name": "RemoteNetworkId",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The ID from which traffic was sent or received, providing visibility into the origin of the traffic."
+				},
+				{
+					"name": "Token3PExpiry",
+					"type": "DateTime",
+					"isDefaultDisplay": false,
+					"description": "The expiry date of the access token used to access the private access application."
+				},
+				{
+					"name": "Token3PValidFrom",
+					"type": "DateTime",
+					"isDefaultDisplay": false,
+					"description": "The validity date of the access token used to access the private access application."
+				},
+				{
+					"name": "Token3PIssuedAt",
+					"type": "DateTime",
+					"isDefaultDisplay": false,
+					"description": "The issued date of the access token used to access the private access application."
+				},
+				{
+					"name": "Token3PUniqueId",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The unique token identifier of the access token used to access the private access application."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/SampleNetworkAccessConnectionEvents.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/SampleNetworkAccessConnectionEvents.json"
+		},
+		{
+			"name": "RemoteNetworkHealthLogs",
+			"description": "This table is part of Identity and Network Access, which contains Remote Network Health logs. These logs can be leveraged for knowing the state of your remote networks health state.",
+			"dataTypeId": "TENANTMICROSOFTAADIAM_REMOTENETWORKHEALTHLOGS",
+			"isChangeColumnInternalNameAllowed": true,
+			"isResourceCentric": false,
+			"isTroubleshootingAllowed": true,
+			"isLakeAllowed": true,
+			"categories": [
+				"security",
+				"network",
+				"management"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"tableState": "Production",
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "tenantId",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "location",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				}
+			],
+			"transformFilePath": "KQL/RemoteNetworkHealthLogsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The date and time (UTC) that the event was generated."
+				},
+				{
+					"name": "CreatedDateTime",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The date and time (UTC) that the event was generated."
+				},
+				{
+					"name": "Id",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "A unique identifier for each remoteNetworkHealthEvent."
+				},
+				{
+					"name": "RemoteNetworkId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "A unique identifier for each remoteNetwork site."
+				},
+				{
+					"name": "SourceIp",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": false,
+					"description": "The public IP address."
+				},
+				{
+					"name": "DestinationIp",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": true,
+					"description": "The IP address of the destination."
+				},
+				{
+					"name": "Description",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Description and summary of the event."
+				},
+				{
+					"name": "BgpRoutesAdvertisedCount",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "Count of BGP routes advertised through tunnel."
+				},
+				{
+					"name": "SentBytes",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "The number of bytes sent from the source to the destination for the connection or session."
+				},
+				{
+					"name": "ReceivedBytes",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "The number of bytes sent from the destination to the source."
+				},
+				{
+					"name": "Status",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Remote network status. Possible values are: tunnelDisconnected, tunnelConnected, bgpDisconnected, bgpConnected, remoteNetworkAlive, unknownFutureValue."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/SampleRemoteNetworkHealthLogs.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/SampleRemoteNetworkHealthLogs.json"
+		},
+		{
+			"name": "EnrichedMicrosoft365AuditLogs",
+			"description": "This table is part of Identity and Network Access, which contains Enriched Microsoft 365 Audit logs. These logs can be leveraged for policy, risk, and traffic management, as well as to monitor users experience.",
+			"dataTypeId": "TENANTMICROSOFTAADIAM_ENRICHEDOFFICE365AUDITLOGS",
+			"isChangeColumnInternalNameAllowed": true,
+			"isResourceCentric": false,
+			"isTroubleshootingAllowed": true,
+			"isLakeAllowed": true,
+			"categories": [
+				"security",
+				"network",
+				"management"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 8,
+			"tableState": "Production",
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "tenantId",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "location",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				}
+			],
+			"transformFilePath": "KQL/EnrichedMicrosoft365AuditLogsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The date and time in UTC when the user performed the activity."
+				},
+				{
+					"name": "Id",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "Unique identifier of an audit record."
+				},
+				{
+					"name": "RecordType",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The type of operation indicated by the record. See the AuditLogRecordType table for details on the types of audit log records."
+				},
+				{
+					"name": "Operation",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the user or admin activity that performed the activity."
+				},
+				{
+					"name": "OrganizationId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "The GUID for your organization's Office 365 tenant. This value will always be the same for your organization, regardless of the Office 365 service in which it occurs."
+				},
+				{
+					"name": "UserType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The type of user that performed the operation."
+				},
+				{
+					"name": "ActorUserType",
+					"type": "String",
+					"description": "The type of user that performed the operation. Possible types includes: Admin, System, Application, Service Principal and Other."
+				},
+				{
+					"name": "UserKey",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "An alternative ID for the user identified in the UserId property. For example, this property is populated with the passport unique ID (PUID) for events performed by users in SharePoint, OneDrive for Business, and Exchange. This property may also specify the same value as the UserID property for events occurring in other services and events performed by system accounts."
+				},
+				{
+					"name": "Workload",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Office 365 service where the activity occurred."
+				},
+				{
+					"name": "ResultStatus",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Indicates whether the action (specified in the Operation property) was successful or not. Possible values are Succeeded, PartiallySucceeded, or Failed."
+				},
+				{
+					"name": "ObjectId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "For SharePoint and OneDrive for business activity, the full path name of the file or folder accessed by the user. For Exchange admin audit logging, the name of the object that was modified by the cmdlet."
+				},
+				{
+					"name": "UserId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The UPN (User Principal Name) of the user who performed the action (specified in the Operation property) that resulted in the record being logged; for example, my_name@my_domain_name. Note that records for activity performed by system accounts (such as SHAREPOINT\\system or NT AUTHORITY\\SYSTEM) are also included. In SharePoint, another value display in the UserId property is app@sharepoint. This indicates that the \"user\" who performed the activity was an application that has the necessary permissions in SharePoint to perform organization-wide actions (such as search a SharePoint site or OneDrive account) on behalf of a user, admin, or service. For more information, see the app@sharepoint user in audit records."
+				},
+				{
+					"name": "ClientIp",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": true,
+					"description": "The IP address of the device that was used when the activity was logged. The IP address is displayed in either an IPv4 or IPv6 address format. For some services, the value displayed in this property might be the IP address for a trusted application (for example, Office on the web apps) calling into the service on behalf of a user and not the IP address of the device used by person who performed the activity. Also, for Azure Active Directory-related events, the IP address isn't logged and the value for the ClientIP property is null."
+				},
+				{
+					"name": "UniqueTokenId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "The unique token identifier"
+				},
+				{
+					"name": "DeviceId",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "The ID of the source device as reported in the record."
+				},
+				{
+					"name": "DeviceOperatingSystem",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The client connecting operating system type."
+				},
+				{
+					"name": "DeviceOperatingSystemVersion",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The client connecting operating system version."
+				},
+				{
+					"name": "SourceIp",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": true,
+					"description": "The IP address from which the connection or session originated."
+				},
+				{
+					"name": "AdditionalProperties",
+					"type": "Dynamic",
+					"isDefaultDisplay": true,
+					"description": "Additional activity fields"
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/SampleEnrichedMicrosoft365AuditLogs.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/SampleEnrichedMicrosoft365AuditLogs.json"
+		},
+		{
+			"name": "NetworkAccessAlerts",
+			"description": "This table is part of Identity and Network Access, which contains Network Access Alerts. These Alerts can be leveraged for knowing the state of your network access.",
+			"dataTypeId": "TENANTMICROSOFTAADIAM_NETWORKACCESSALERTS",
+			"isChangeColumnInternalNameAllowed": true,
+			"isResourceCentric": false,
+			"isTroubleshootingAllowed": true,
+			"isLakeAllowed": true,
+			"categories": [
+				"security",
+				"network",
+				"management"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"tableState": "Production",
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "tenantId",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "location",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				}
+			],
+			"transformFilePath": "KQL/NetworkAccessAlertsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The date and time (UTC) that the event was generated."
+				},
+				{
+					"name": "CreationDateTime",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The date and time (UTC) that the event was generated."
+				},
+				{
+					"name": "FirstActivityDateTime",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The impact start time of the alert (the time of the first event or activity included in the alert). The field is serialized a string according to ISO8601, including UTC timezone information."
+				},
+				{
+					"name": "LastActivityDateTime",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The impact end time of the alert (the time of the last event or activity included in the alert). The field is serialized a string according to ISO8601, including UTC timezone information."
+				},
+				{
+					"name": "Id",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true,
+					"description": "A unique identifier for each Network Access Alert."
+				},
+				{
+					"name": "VendorName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the vendor that raised the alert, this value is displayed to users as is. For most internal security products alerts it should be set as ‘Microsoft’. "
+				},
+				{
+					"name": "ProductName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the product which published this alert, i.e. Azure Security Center, Azure ATP, Microsoft Defender ATP, O365 ATP, MCAS, etc."
+				},
+				{
+					"name": "ComponentName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of a component inside the product which generated the alert. This is an optional field, which might be populated only for product in which external end user are aware of specific components within a product. For products that offer different types of SKU/Bundles, this field can hold the SKU or bundle name."
+				},
+				{
+					"name": "AlertType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The type name of the alert. Alerts of the same type should have the same name. This field is a keyed string representing the type of alert and not of an alert instance. All alert instances from the same detection logic/analytic should have the same value for alert type."
+				},
+				{
+					"name": "DisplayName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The display name of the alert, this value is displayed to users either as-is or with additional parameters."
+				},
+				{
+					"name": "Description",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The number of bytes sent from the source to the destination for the connection or session."
+				},
+				{
+					"name": "Severity",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The severity of the alert as it is reported by the provider. Possible Values: Informational, Low, Medium, High."
+				},
+				{
+					"name": "Techniques",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Optional field that specify the kill chain related techniques behind the alert. Each technique should be added in this list using its ID and it should have at least one matching intent in the Intent field. The Production of this field (the expected format of the technique ID and the matching against the Intent values) follow MITRE att@ck enterprise matrix model (Opens in new window or tab), and further guidance on the different techniques that make up each intent can be found in MITRE's documentation."
+				},
+				{
+					"name": "SubTechniques",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Optional field that specify the kill chain related sub-techniques behind the alert. Each sub-technique should be added in this list using its ID and it should have at least one matching intent in the Intent field."
+				},
+				{
+					"name": "DetectionTechnology",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Optional field to hold the alert threat detection technology."
+				},
+				{
+					"name": "PolicyId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The Policy Id associated with the network access traffic that generated the Alert."
+				},
+				{
+					"name": "IsPreview",
+					"type": "Bool",
+					"isDefaultDisplay": true,
+					"description": "IsPreview will be defined as true where the alert is in public preview state and not eligible for GA yet. By default the value is false."
+				},
+				{
+					"name": "ExtendedProperties",
+					"type": "Dynamic",
+					"isDefaultDisplay": true,
+					"description": "A bag of fields which will be presented to the user. Providers can send here any custom fields that should be part of the alert."
+				},
+				{
+					"name": "RelatedResources",
+					"type": "Dynamic",
+					"isDefaultDisplay": true,
+					"description": "A list of entities related to the alert. This list can hold a mixture of entities of diverse types. The entities type can be any of the types defined in the Entities section. Entities which are not in the list below can also be sent, however it is not guaranteed that they will be processed (the alert will not fail Production with new types of entities)."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/SampleNetworkAccessAlerts.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/SampleNetworkAccessAlerts.json"
+		}
+	],
+	"functions": [],
+	"queries": [
+		{
+			"id": "0672f0f4-b973-486e-8f05-25f93f3799cb",
+			"displayName": "High risk users",
+			"description": "Gets list of the top 100 at high risk users for the last day.",
+			"bodyFilePath": "KQL/HighRiskUsers.kql",
+			"categories": [
+				"security"
+			],
+			"tags": {
+				"Topic": [
+					"Security"
+				]
+			},
+			"relatedTables": [
+				"AADRiskyUsers"
+			],
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		},
+		{
+			"id": "d6cf92b1-3b52-4b8b-b5c6-c4c1a0d657ee",
+			"displayName": "Recent user risk events",
+			"description": "Gets list of the top 100 active user risk events.",
+			"bodyFilePath": "KQL/RecentUserRiskEvents.kql",
+			"categories": [
+				"security"
+			],
+			"tags": {
+				"Topic": [
+					"Security"
+				]
+			},
+			"relatedTables": [
+				"AADUserRiskEvents"
+			],
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		},
+		{
+			"id": "e16559ad-9ff2-418b-b194-8bccf6fb184c",
+			"displayName": "Active service principal risk detections",
+			"description": "Gets a list of active service principal risk detections.",
+			"bodyFilePath": "KQL/ActiveServicePrincipalRiskDetections.kql",
+			"categories": [
+				"security"
+			],
+			"tags": {
+				"Topic": [
+					"Security"
+				]
+			},
+			"relatedTables": [
+				"AADServicePrincipalRiskEvents"
+			],
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		},
+		{
+			"id": "cdeed2a7-e6b7-4e08-bd8e-a7d9d6ec08a8",
+			"displayName": "Active user risk detections",
+			"description": "Gets a list of active user risk detections.",
+			"bodyFilePath": "KQL/ActiveUserRiskDetections.kql",
+			"categories": [
+				"security"
+			],
+			"tags": {
+				"Topic": [
+					"Security"
+				]
+			},
+			"relatedTables": [
+				"AADUserRiskEvents"
+			],
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		},
+		{
+			"id": "6b26cc79-2a2f-4d29-9caa-bd14690e53ed",
+			"displayName": "Most active service principals",
+			"description": "Gets list of top 100 most active service principals for the last day.",
+			"bodyFilePath": "KQL/MostActiveSPQuery.kql",
+			"categories": [
+				"security"
+			],
+			"tags": {
+				"Topic": [
+					"Security"
+				]
+			},
+			"relatedTables": [
+				"AADServicePrincipalSignInLogs"
+			],
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		},
+		{
+			"id": "29ccaaf9-d25b-4aec-8b2b-3047a16516f9",
+			"displayName": "Inactive service principals",
+			"description": "Service principals that had no sign-ins for the last 30d.",
+			"bodyFilePath": "KQL/InactiveSPQuery.kql",
+			"categories": [
+				"security"
+			],
+			"tags": {
+				"Topic": [
+					"Security"
+				]
+			},
+			"relatedTables": [
+				"AADServicePrincipalSignInLogs"
+			],
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		},
+		{
+			"id": "e3e89b71-9c05-46e9-a981-6ec61edbd52d",
+			"displayName": "Users with multiple cities",
+			"description": "Get list of users that signed in from multiple cities for the last day.",
+			"bodyFilePath": "KQL/MultiCityUsersQuery.kql",
+			"categories": [
+				"security"
+			],
+			"tags": {
+				"Topic": [
+					"Security"
+				]
+			},
+			"relatedTables": [
+				"AADNonInteractiveUserSignInLogs"
+			],
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		},
+		{
+			"id": "000c3177-e775-4c3b-8425-c346af81389d",
+			"displayName": "Most active ip addresses",
+			"description": "Get list of top 100 most active IP addresses for the last day.",
+			"bodyFilePath": "KQL/MostActiveIPAddressesQuery.kql",
+			"categories": [
+				"security"
+			],
+			"relatedTables": [
+				"AADNonInteractiveUserSignInLogs"
+			],
+			"tags": {
+				"Topic": [
+					"Security"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		},
+		{
+			"id": "d02256eb-1eae-46e9-b63b-4e389f6ce0ae",
+			"displayName": "Most active managed identities",
+			"description": "Gets list of top 100 most active managed identities for the last day.",
+			"bodyFilePath": "KQL/MostActiveMSIQuery.kql",
+			"categories": [
+				"security"
+			],
+			"relatedTables": [
+				"AADManagedIdentitySignInLogs"
+			],
+			"tags": {
+				"Topic": [
+					"Security"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		},
+		{
+			"id": "ae89676f-3dbe-495a-a5e6-b9673afe98ca",
+			"displayName": "Provisioning actions for the last week",
+			"description": "Shows the number of users and groups created, updated, disabled, and deleted in the past 7 days.",
+			"bodyFilePath": "KQL/ProvisioningLogsByActionQuery.kql",
+			"categories": [
+				"audit"
+			],
+			"relatedTables": [
+				"AADProvisioningLogs"
+			],
+			"tags": {
+				"Topic": [
+					"Audit"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		},
+		{
+			"id": "58719d71-dd9e-4c0c-9405-2e3d5a47f10a",
+			"displayName": "Provisioning errors",
+			"description": "Shows the count per error code and when were they last seen.",
+			"bodyFilePath": "KQL/ProvisioningLogsCountPerErrorQuery.kql",
+			"categories": [
+				"audit"
+			],
+			"relatedTables": [
+				"AADProvisioningLogs"
+			],
+			"tags": {
+				"Topic": [
+					"Audit",
+					"Errors"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		},
+		{
+			"id": "f3b8ad66-b178-49bf-b165-31c2896c406b",
+			"displayName": "Provisioned objects by day",
+			"description": "Summarizes for each day the number of created objects per day.",
+			"bodyFilePath": "KQL/ProvisioningLogsByDayQuery.kql",
+			"categories": [
+				"audit"
+			],
+			"relatedTables": [
+				"AADProvisioningLogs"
+			],
+			"tags": {
+				"Topic": [
+					"Audit"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		},
+		{
+			"id": "9e1062d5-b526-42d0-9d46-80ec8604da4d",
+			"displayName": "Top ADFS account lockouts",
+			"description": "Returns top 10 IP addresses by number of lockouts.",
+			"bodyFilePath": "KQL/ADFSAccountLockoutsQuery.kql",
+			"categories": [
+				"audit"
+			],
+			"relatedTables": [
+				"ADFSSignInLogs"
+			],
+			"tags": {
+				"Topic": [
+					"Audit",
+					"Security"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		},
+		{
+			"id": "62ae5228-928d-4ef8-a383-3d3793dec41c",
+			"displayName": "User's custom security attribute audits",
+			"description": "Returns custom security attribute audit logs for a specific user.",
+			"bodyFilePath": "KQL/CSAAuditUserQuery.kql",
+			"categories": [
+				"audit"
+			],
+			"relatedTables": [
+				"AADCustomSecurityAttributeAuditLogs"
+			],
+			"tags": {
+				"Topic": [
+					"Audit",
+					"Security"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		}
+	]
+}

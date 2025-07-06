@@ -1,0 +1,25 @@
+source
+| extend propertiesTable = parse_json(properties)
+| extend identityTable = parse_json(identity)
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    Result = resultType,
+    ApplicationId = tostring(identityTable.ApplicationID),
+    UserPrincipalName = tostring(identityTable.UPN),
+    UserId = tostring(identityTable.ObjectID),
+    OtherIdentityProperties = tostring(identityTable.Other),
+    ComponentName = tostring(propertiesTable.ComponentName),
+    OtherAuditEventProperties = tostring(propertiesTable.OtherExtendedProperties),
+    ActivityId = tostring(propertiesTable.ActivityId),
+    RelatedActivityId = tostring(propertiesTable.RelatedActivityId),
+    SessionId = tostring(propertiesTable.SessionId),
+    ScenarioId = tostring(propertiesTable.ScenarioId),
+    ScenarioInstanceId = tostring(propertiesTable.ScenarioInstanceId),
+    ServiceName = tostring(propertiesTable.ServiceName),
+    ApplicationName = tostring(propertiesTable.ApplicationName),
+    BuildVersion = tostring(propertiesTable.BuildVersion),
+    Pid = tostring(propertiesTable.Pid),
+    Tid = tostring(propertiesTable.Tid),
+    ResourceExtendedProperties = tostring(propertiesTable.ResourceExtendedProperties),
+    CallerExtendedProperties = tostring(propertiesTable.CallerExtendedProperties)

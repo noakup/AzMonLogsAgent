@@ -1,0 +1,18 @@
+[
+    {
+        "TimeGenerated": "2023-01-10T22:53:51.0000000Z",
+        "Category": "cluster-autoscaler",
+        "Level": "INFO",
+        "Message": "VMSS: aks-agentpool-20062077-vmss, returning in-memory size: 1",
+        "Stream": "stderr",
+        "PodName": "cluster-autoscaler-7484b4549f-mshbt"
+    },
+    {
+        "TimeGenerated": "2023-01-10T22:53:51.0000000Z",
+        "Category": "cluster-autoscaler",
+        "Level": "INFO",
+        "Message": "No candidates for scale down",
+        "Stream": "stderr",
+        "PodName": "cluster-autoscaler-7484b4549f-mshbt"
+    }
+]

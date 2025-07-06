@@ -1,0 +1,16 @@
+source
+| extend identity = todynamic(replace("=>", ":", identity))
+| extend properties = parse_json(properties)
+| extend dataPlaneResourceId = tostring(properties.dataPlaneResourceId)
+| project
+TimeGenerated = todatetime(['time']),
+Category = category,
+OperationName = operationName,
+DataPlaneResourceId = dataPlaneResourceId,
+CallerIpAddress = callerIpAddress,
+Level = Level,
+ResultType = resultType,
+ResultDescription = resultDescription,
+Location = location,
+CorrelationId = correlationId,
+Identity = identity

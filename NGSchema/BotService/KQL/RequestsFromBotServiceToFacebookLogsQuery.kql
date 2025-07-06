@@ -1,0 +1,5 @@
+// To retrieve logs for another channel, replace ChannelToFacebookAPI with the respective channel request operation name 
+// e.g. ChannelToSlackAPI, ChannelToGroupmeAPI, ChannelToKikAPI, ChannelToLineAPI, ChannelToSMSAPI, ChannelToTelegramAPI and ChannelToEmailAPI.
+ABSBotRequests
+| where OperationName contains "ChannelToFacebookAPI"
+| sort by TimeGenerated desc

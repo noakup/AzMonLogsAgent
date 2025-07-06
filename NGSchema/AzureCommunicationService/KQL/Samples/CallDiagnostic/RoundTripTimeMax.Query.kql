@@ -1,0 +1,7 @@
+ACSCallDiagnostics
+// Filter null values
+| where isnotnull(RoundTripTimeMax)
+// Count round trip time values by 10 millisecond intervals
+|summarize RoundTripTimeMax_counts=count() by bin(RoundTripTimeMax, 10)
+| order by RoundTripTimeMax asc
+| render columnchart with (xcolumn = RoundTripTimeMax, title="RoundTripTimeMax histogram")

@@ -1,0 +1,6 @@
+OEPAirFlowTask
+| extend ResourceName = tostring(split(_ResourceId , '/')[-1])
+// | where ResourceName == "<the name of ADME instance>"        // to filter on resourceName replace <...> and uncomment line
+// | where CorrelationId == "<DAG run's runId>"                 // to filter on correlationID replace <...> with correlationId (same as runId) - we have created a duplicate for to maintain consistency of column name across all services 
+| where LogLevel  == "ERROR"
+| project TimeGenerated, DagName, LogLevel, DagTaskName, CodePath, Content

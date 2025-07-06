@@ -1,0 +1,23 @@
+[
+    {
+        "PreciseTimeStamp": "2021-07-11T12:53:44.0225423Z",
+        "time": "7/11/2021 12:53:43 PM",
+        "TIMESTAMP": "2021-07-11T12:53:44.0225423Z",
+        "resourceId": "/tenants/536279f6-15cc-45f2-be2d-61e352b51eef/providers/microsoft.aadiam",
+        "operationName": "User Risk Detection",
+        "operationVersion": "1.0",
+        "category": "UserRiskEvents",
+        "tenantId": "536279f6-15cc-45f2-be2d-61e352b51eef",
+        "resultType": "",
+        "resultSignature": "None",
+        "resultDescription": "",
+        "durationMs": "0",
+        "callerIpAddress": "62.102.148.68",
+        "correlationId": "eb78c1dfdb62cafe4107b25299bb1840e2ee60a27e8899c463d97c4a00c90e14",
+        "identity": "sam lisa burton",
+        "Level": "4",
+        "location": "se",
+        "properties": "{\"id\":\"eb78c1dfdb62cafe4107b25299bb1840e2ee60a27e8899c463d97c4a00c90e14\",\"requestId\":\"305e529a-8dfc-44ce-b33d-413402629502\",\"correlationId\":\"63b85fdb-a0ba-4f9e-ba27-baeb5873cd12\",\"riskType\":\"generic\",\"riskEventType\":\"passwordSpray\",\"riskState\":\"atRisk\",\"riskLevel\":\"high\",\"riskDetail\":\"none\",\"source\":\"IdentityProtection\",\"detectionTimingType\":\"offline\",\"activity\":\"signin\",\"ipAddress\":\"62.102.148.68\",\"location\":{\"city\":\"Akersberga\",\"state\":\"Stockholms Lan\",\"countryOrRegion\":\"SE\",\"geoCoordinates\":{\"altitude\":0.0,\"latitude\":59.48028,\"longitude\":18.31078}},\"activityDateTime\":\"2021-07-10T3:28:38.292Z\",\"detectedDateTime\":\"2021-07-11T9:30:21.033Z\",\"lastUpdatedDateTime\":\"2021-07-11T12:53:43.916Z\",\"userId\":\"f1653878-548e-4fc2-a447-a7b88a2fba31\",\"userDisplayName\":\"Sam Lisa Burton\",\"userPrincipalName\":\"samlburton@woodgrove.ms\",\"additionalInfo\":\"[{\\\"Key\\\":\\\"userAgent\\\",\\\"Value\\\":\\\"Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0\\\"}]\",\"tokenIssuerType\":\"AzureAD\"}",
+        "RowKey": "67be5abc-deb0-11eb-86d5-000d3a5a0b03___47245319847"
+    }
+]

@@ -1,0 +1,22 @@
+source
+| project
+    TimeGenerated = now(),
+	SubType = SubType,
+	SchemaVersion = SchemaVersion,
+    AggregationType = AggregationType,
+    IntervalStart = IntervalStart,
+    IntervalEnd = IntervalEnd,
+    PivotType = PivotType,
+    InsightsResourceId = ResourceId,
+    Region = Region,
+    DataPoints = DataPoints,
+    TrafficVolumeUnit = TrafficVolumeUnit,
+    FlowStatus= FlowStatus,
+    SeriesNumber = SeriesNumber,
+    ProcessingTime = ProcessingTime,
+    Periodicity = Periodicity,
+    TrafficVolumeActual = TrafficVolumeActual,
+    TrafficVolumeBaseline = TrafficVolumeBaseline,
+    TrafficTime = TrafficTime,
+    AdFlag = AdFlag,
+    AdScore = AdScore

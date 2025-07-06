@@ -1,0 +1,4 @@
+﻿LAJobLogs
+| where Status == 'Failed'
+| project EndTime=TimeGenerated, JobId, CorrelationId, SourceTable, Destination
+| sort by EndTime desc

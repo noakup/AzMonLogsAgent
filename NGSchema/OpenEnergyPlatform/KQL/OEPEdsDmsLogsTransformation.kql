@@ -1,0 +1,9 @@
+source 
+| extend properties = parse_json(properties) 
+| project TimeGenerated = todatetime(['time']),
+Category = category,
+OperationName = operationName,
+Message = tostring(properties.message),
+Location = location,
+LogLevel = tostring(properties.logLevel),
+CorrelationId = tostring(properties.correlationID)

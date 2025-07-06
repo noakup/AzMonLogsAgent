@@ -1,0 +1,2876 @@
+{
+    "type": "Microsoft.OpenEnergyPlatform/energyServices",
+    "displayName": "Azure Data Manager for Energy",
+    "description": "Open Energy Platform diagnostic log.",
+    "tags": {}, 
+    "properties": {}, 
+    "simplifiedSchemaVersion": "3", 
+    "icmTeam": "Azure Data Manager for Energy/Energy-on-call",
+    "contactDL": "agensecurity@microsoft.com",
+    "relatedFunctions": [],
+    "tables": [
+      {
+          "name": "OEPAirFlowTask",
+          "description" : "Diagnostic logs for AirFlow task execution having task name, task details.",
+          "categories": [
+            "resources"
+          ],
+          "tags": {},
+          "properties": {},
+          "artifactVersion": 3,
+          "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_AIRFLOWTASKLOGS",
+          "intelligencePacks": [],
+          "isResourceCentric": true,
+          "tableState": "Production",
+          "input": [
+            {
+              "name": "time",
+              "type": "String"
+            },
+            {
+              "name": "resourceId",
+              "type": "String"
+            },
+            {
+              "name": "category",
+              "type": "String"
+            },
+            {
+              "name": "operationName",
+              "type": "String"
+            },
+            {
+              "name": "properties",
+              "type": "Dynamic"
+            },
+            {
+              "name": "location",
+              "type": "String"
+            },
+            {
+              "name": "correlationId",
+              "type": "String"
+            }
+          ],
+          "transformFilePath": "KQL/OEPAirFlowTaskLogsTransformation.kql",
+          "columns": [
+            {
+              "name": "TimeGenerated",
+              "type": "DateTime",
+              "isDefaultDisplay": true,
+              "description": "Timestamp (in UTC) when the log was created."
+            },
+            {
+              "name": "Category",
+              "type": "String",
+              "isDefaultDisplay": false,
+              "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+            },
+            {
+              "name": "OperationName",
+              "type": "String",
+              "isDefaultDisplay": true,
+              "description": "The operation name for which the log entry was created."
+            },
+            {
+              "name": "LogLevel",
+              "type": "String",
+              "isDefaultDisplay": true,
+              "description": "Log Level of the log - Info/Debug/Warning/Error"
+            },
+            {
+              "name": "DagName",
+              "type": "String",
+              "isDefaultDisplay": true,
+              "description": "Name of the DAG run - as per Airflow's list of DAGs present"
+            },
+              {
+              "name": "DagTaskName",
+              "type": "String",
+              "isDefaultDisplay": true,
+              "description": "Name of Task executed in Airflow DAG."
+            },
+            {
+              "name": "RunId",
+              "type": "String",
+              "isDefaultDisplay": true,
+              "description": "To identify the particular DAG run which generated the log"
+            },
+            {
+              "name": "CodePath",
+              "type": "String",
+              "isDefaultDisplay": true,
+              "description": "The task inside the DAG run which generated the log"
+            },
+            {
+              "name": "TryNumber",
+              "type": "String",
+              "isDefaultDisplay": true,
+              "description": "Retry count number for self managed airflow"
+            },
+            {
+              "name": "Content",
+              "type": "String",
+              "isDefaultDisplay": true,
+              "description": "Log details as a result of operation performed."
+            },
+            {
+              "name": "AdditionalLogContent",
+              "type": "String",
+              "isDefaultDisplay": true,
+              "description": "Additional log content, if there is any more info that needs to be populated"
+            },
+            {
+              "name": "Location",
+              "type": "String",
+              "isDefaultDisplay": true,
+              "description": "The region of the resource emitting the event."
+            },
+            {
+              "name": "CorrelationId",
+              "type": "String",
+              "isDefaultDisplay": true,
+              "description": "Unique identifier to be used to correlate logs, when available.",
+              "dataTypeHint": "GUID"
+            }
+          ],
+          "sampleInputRecordsFilePath": "SampleInputRecords/OEPAirFlowTaskLogs.json"
+      },
+      {
+        "name": "OEPElasticOperator",
+        "description": "Diagnostic logs for elastic operator. Elastic operator manages all the elasticsearch clusters in the oak instance. These logs can be helpful in identifing what operations are performed by the operator on the cluster. It could be upgrades, reconciliation, resource update etc.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_ELASTICOPERATORLOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPElasticOperatorLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (in UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Content",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "Namespace",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Namespace from which logs were generated, represents the data partition."
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPElasticOperatorLogs.json"
+      },
+      {
+        "name": "OEPElasticsearch",
+        "description": "Diagnostic logs for Elasticsearch cluster. It could be slow logs, server logs or deprecation logs.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_ELASTICSEARCHLOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPElasticsearchLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (in UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Content",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "Namespace",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Namespace from which logs were generated, represents the data partition."
+          },
+          {
+            "name": "PodName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Elasticsearch pod name."
+          },
+          {
+            "name": "Duration",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Time taken for performing the operation. Value is taken from 'took' property in Elasticsearch cluster as string, like '1.3ms', '478.9micros' etc."
+          },
+          {
+            "name": "TotalHits",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Total number of hits for a search operation. For example, value can be '3 hits' for 3 hits, '-1' for no hits, or 'null' if it is not a search slow log."
+          },
+          {
+            "name": "Source",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Source responsible for the log. It could be a search query or a record to be indexed in case of slow logs and null otherwise."
+          },
+          {
+            "name": "Type",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Type of log. Can be index_search_slowlog, index_indexing_slowlog, server, deprecation etc."
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPElasticsearchLogs.json"
+      },
+      {
+        "name": "OEPAuditLogs",
+        "description": "Audit Logs for Microsoft Energy Data Services.",
+        "categories": [
+          "audit",
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 3,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_AUDITEVENT",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPAuditLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          },
+          {
+            "name": "ServiceName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The name of service which is emitting the event."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "DataPartitionId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Represents the data partition ID."
+          },
+          {
+            "name": "Action",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Action performed,which can be CREATE,PUBLISH,UPDATE,DELETE,READ and JOB_RUN."
+          },
+          {
+            "name": "ActionId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "ID of the action performed."
+          },
+          {
+            "name": "Puid",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The client ID."
+          },
+          {
+            "name": "ResultType",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Result of the REST API request."
+          },
+          {
+            "name": "OperationDescription",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Description of operation that was performed."
+          },
+          {
+            "name": "RequestId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The request ID uniquely identify the request made to Microsoft Energy Data Services for an operation."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The message about the operation."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPAuditLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPAuditLogs.json"  
+      },
+      {
+        "workflowName": "OEPIndexerWorkflow",
+        "transformName": "OEPIndexer",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for HTTP requests & responses for the Indexer Service API, in OSDU Data Platform, and Microsoft Energy Data Services. The Indexer service, indexes the metadata store to support search. The indexer service will automatically take items that are newly added to storage and index the attributes from the schema associated with the kind attribute.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_INDEXERLOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isLakeAllowed": true,
+        "isTroubleshootingAllowed":true,
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPIndexerLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "LogLevel",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log level of message (INFO, WARN, ERROR, etc.)."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPIndexerLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPIndexerLogs.json"  
+      },
+      {
+        "workflowName": "OEPCRSCatalogWorkflow",
+        "transformName": "OEPCRSCatalog",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for HTTP requests & responses for the CRS Catalog Service API in OSDU Data Platform and Microsoft Energy Data Services.The CRS Catalog Service enables end-users to make CRS selections, search for CRSs(Coordinate Reference Systems) given a number of constraints, download of the entire catalog for local caching, and access to various sub-sets of the catalog.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 1,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_CRSCATALOGLOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed":true,
+        "outputSchema": {
+          "name": "OEPDataplaneLogs",
+          "version": 2
+        },
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPCRSCatalogLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "LogLevel",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log level of message (INFO, WARN, ERROR, etc.)."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPCRSCatalogLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPCRSCatalogLogs.json"  
+      },
+      {
+        "workflowName": "OEPCRSConversionWorkflow",
+        "transformName": "OEPCRSConversion",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for HTTP requests & responses for the CRS Conversion Service API in OSDU Data Platform and Microsoft Energy Data Services.The CRS Conversion Service provides spatial reference conversions for coordinates. Coordinates are represented by an array of 3D points.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_CRSCONVERSIONLOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "outputSchema": {
+          "name": "OEPDataplaneLogs",
+          "version": 2
+        },
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPCRSConversionLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "LogLevel",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log level of message (INFO, WARN, ERROR, etc.)."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPCRSConversionLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPCRSConversionLogs.json"
+      },
+      {
+        "workflowName": "OEPDatasetWorkflow",
+        "transformName": "OEPDataset",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for HTTP requests & responses for the Dataset Service API in OSDU Data Platform and Microsoft Energy Data Services. The Dataset Service provides internal and external APIs to allow fetching storage/retrieval instructions for various types of datasets.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_DATASETLOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "outputSchema": {
+          "name": "OEPDataplaneLogs",
+          "version": 2
+        },
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPDatasetLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "LogLevel",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log level of message (INFO, WARN, ERROR, etc.)."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPDatasetLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPDatasetLogs.json"  
+      },
+      {
+        "workflowName": "OEPEntitlementsWorkflow",
+        "transformName": "OEPEntitlements",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for HTTP requests & responses for the Entitlements Service API in OSDU Data Platform and Microsoft Energy Data Services.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_ENTITLEMENTSLOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "outputSchema": {
+          "name": "OEPDataplaneLogs",
+          "version": 2
+        },
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPEntitlementsLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "LogLevel",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log level of message (INFO, WARN, ERROR, etc.)."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPEntitlementsLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPEntitlementsLogs.json"
+      },
+      {
+        "workflowName": "OEPFileWorkflow",
+        "transformName": "OEPFile",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for HTTP requests & responses for the File Service API in OSDU Data Platform and Microsoft Energy Data Services.The File Service provides internal and external APIs to request for file location data, such as a signed URL per file upload. Using the signed URL, OSDU users will be able to upload their files for ingestion into the system.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_FILELOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "outputSchema": {
+          "name": "OEPDataplaneLogs",
+          "version": 2
+        },
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPFileLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "LogLevel",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log level of message (INFO, WARN, ERROR, etc.)."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPFileLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPFileLogs.json"
+      },
+      {
+        "workflowName": "OEPLegalWorkflow",
+        "transformName": "OEPLegal",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for HTTP requests & responses for the Legal Service API in OSDU Data Platform and Microsoft Energy Data Services.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_LEGALLOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "outputSchema": {
+          "name": "OEPDataplaneLogs",
+          "version": 2
+        },
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPLegalLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "LogLevel",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log level of message (INFO, WARN, ERROR, etc.)."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPLegalLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPLegalLogs.json"
+      },
+      {
+        "workflowName": "OEPNotificationWorkflow",
+        "transformName": "OEPNotification",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for HTTP requests & responses for the Notification Service API, in OSDU Data Platform, and Microsoft Energy Data Services. The Notification service, with Register service, allows interested consumers to subscribe to data and metadata changes using a publisher/subscriber pattern.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_NOTIFICATIONLOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "outputSchema": {
+          "name": "OEPDataplaneLogs",
+          "version": 2
+        },
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPNotificationLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "LogLevel",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log level of message (INFO, WARN, ERROR, etc.)."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPNotificationLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPNotificationLogs.json"
+      },
+      {
+        "workflowName": "OEPPartitionWorkflow",
+        "transformName": "OEPPartition",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for HTTP requests & responses for the Partition Service API, in OSDU Data Platform, and Microsoft Energy Data Services. The Partition service is responsible for creating and retrieving partition specific properties on behalf of other services whether they are secret values or not.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_PARTITIONLOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "outputSchema": {
+          "name": "OEPDataplaneLogs",
+          "version": 2
+        },
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPPartitionLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "LogLevel",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log level of message (INFO, WARN, ERROR, etc.)."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPPartitionLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPPartitionLogs.json"
+      },
+      {
+        "workflowName": "OEPPDSBackendWorkflow",
+        "transformName": "OEPPDSBackend",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for HTTP requests & responses for the PDS Backend Service API in OSDU Data Platform and Microsoft Energy Data Services.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_PDSBACKENDLOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "outputSchema": {
+          "name": "OEPDataplaneLogs",
+          "version": 2
+        },
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPPDSBackendLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "LogLevel",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log level of message (INFO, WARN, ERROR, etc.)."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPPDSBackendLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPPDSBackendLogs.json"
+      },
+      {
+        "workflowName": "OEPPDSFrontendWorkflow",
+        "transformName": "OEPPDSFrontend",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for HTTP requests & responses for the PDS Frontend Service API in OSDU Data Platform and Microsoft Energy Data Services.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_PDSFRONTENDLOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "outputSchema": {
+          "name": "OEPDataplaneLogs",
+          "version": 2
+        },
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPPDSFrontendLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "LogLevel",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log level of message (INFO, WARN, ERROR, etc.)."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPPDSFrontendLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPPDSFrontendLogs.json"
+      },
+      {
+        "workflowName": "OEPRegisterWorkflow",
+        "transformName": "OEPRegister",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for HTTP requests & responses for the Register Service API, in OSDU Data Platform, and Microsoft Energy Data Services. The Register Service manages subscriptions, action and DDMS registrations in the OSDU.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_REGISTERLOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "outputSchema": {
+          "name": "OEPDataplaneLogs",
+          "version": 2
+        },
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPRegisterLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "LogLevel",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log level of message (INFO, WARN, ERROR, etc.)."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPRegisterLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPRegisterLogs.json"
+      },
+      {
+        "workflowName": "OEPSchemaWorkflow",
+        "transformName": "OEPSchema",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for HTTP requests & responses for the Schema Service API in OSDU Data Platform and Microsoft Energy Data Services.The Schema Service enables schema management in the OSDU and offers an implementation of the schema standard.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_SCHEMALOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "outputSchema": {
+          "name": "OEPDataplaneLogs",
+          "version": 2
+        },
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPSchemaLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "LogLevel",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log level of message (INFO, WARN, ERROR, etc.)."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPSchemaLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPSchemaLogs.json"
+      },
+      {
+        "workflowName": "OEPSearchWorkflow",
+        "transformName": "OEPSearch",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for HTTP requests & responses for the Search Service API, in OSDU Data Platform, and Microsoft Energy Data Services. The Search API provides a mechanism for indexing documents that contain structured data.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_SEARCHLOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "outputSchema": {
+          "name": "OEPDataplaneLogs",
+          "version": 2
+        },
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPSearchLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "LogLevel",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log level of message (INFO, WARN, ERROR, etc.)."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPSearchLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPSearchLogs.json"
+      },
+      {
+        "workflowName": "OEPStorageWorkflow",
+        "transformName": "OEPStorage",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for HTTP requests & responses for the Storage Service API, in OSDU Data Platform, and Microsoft Energy Data Services. The Storage Service provides a set of APIs to manage the entire metadata life-cycle of ingesting metadata into the Data Platform.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_STORAGELOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "outputSchema": {
+          "name": "OEPDataplaneLogs",
+          "version": 2
+        },
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPStorageLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "LogLevel",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log level of message (INFO, WARN, ERROR, etc.)."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPStorageLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPStorageLogs.json"
+      },
+      {
+        "workflowName": "OEPWellboreWorkflow",
+        "transformName": "OEPWellbore",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for HTTP requests & responses for the Wellbore Domain Data Management Services Service API in OSDU Data Platform and Microsoft Energy Data Services.Wellbore DDMS including type-safe entity access and optimized accessors for bulk data such as logs, trajectories, checkshots.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_WELLBORELOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "outputSchema": {
+          "name": "OEPDataplaneLogs",
+          "version": 2
+        },
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPWellboreLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "LogLevel",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log level of message (INFO, WARN, ERROR, etc.)."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPWellboreLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPWellboreLogs.json"
+      },
+      {
+        "workflowName": "OEPWellDeliveryServiceWorkflow",
+        "transformName": "OEPWelldelivery",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for HTTP requests & responses for the Well Delivery Service API in OSDU Data Platform and Microsoft Energy Data Services.It is a Domain Data Management Service focused on Well Planning and Well Execution",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_WELLDELIVERYLOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "outputSchema": {
+          "name": "OEPDataplaneLogs",
+          "version": 2
+        },
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPWelldeliveryLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "LogLevel",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log level of message (INFO, WARN, ERROR, etc.)."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPWelldeliveryLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPWelldeliveryLogs.json"
+      },
+      {
+        "workflowName": "OEPSecretWorkflow",
+        "transformName": "OEPSecret",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for HTTP requests & responses for the Secret Service API, in OSDU Data Platform, and Microsoft Energy Data Services. The Secret Service manages subscriptions, action and DDMS registrations in the OSDU.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 3,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_SECRETLOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isLakeAllowed": true,
+        "isTroubleshootingAllowed": true,
+        "outputSchema": {
+          "name": "OEPDataplaneLogs",
+          "version": 2
+        },
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPSecretLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "LogLevel",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log level of message (INFO, WARN, ERROR, etc.)."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPSecretLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPSecretLogs.json"
+      },
+      {
+        "workflowName": "OEPEdsDmsWorkflow",
+        "transformName": "OEPEdsDms",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for HTTP requests & responses for the EdsDms Service API, in OSDU Data Platform, and Microsoft Energy Data Services. The EdsDms Service manages subscriptions, action and DDMS registrations in the OSDU.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 3,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_EDSDMSLOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isLakeAllowed": true,
+        "isTroubleshootingAllowed": true,
+        "outputSchema": {
+          "name": "OEPDataplaneLogs",
+          "version": 2
+        },
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPEdsDmsLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "LogLevel",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log level of message (INFO, WARN, ERROR, etc.)."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPEdsDmsLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPEdsDmsLogs.json"
+      },
+      {
+        "workflowName": "OEPSearchExtensionsWorkflow",
+        "transformName": "OEPSearchExtensions",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for HTTP requests & responses for the Search Extensions Service API, in OSDU Data Platform, and Microsoft Energy Data Services. The Search Extensions Service provides a mechanism for indexing documents that contain structured data",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_SEARCHEXTENSIONSLOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "outputSchema": {
+          "name": "OEPDataplaneLogs",
+          "version": 2
+        },
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPSearchExtensionsLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "LogLevel",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log level of message (INFO, WARN, ERROR, etc.)."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPSearchExtensionsLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPSearchExtensionsLogs.json"
+      },
+      {
+        "workflowName": "OEPWorkflowServiceWorkflow",
+        "transformName": "OEPWorkflow",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for HTTP requests & responses for the Workflow Service API in OSDU Data Platform and Microsoft Energy Data Services.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_WORKFLOWLOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "outputSchema": {
+          "name": "OEPDataplaneLogs",
+          "version": 2
+        },
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPWorkflowLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "LogLevel",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log level of message (INFO, WARN, ERROR, etc.)."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPWorkflowLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPWorkflowLogs.json"
+      },
+      {
+        "workflowName": "OEPUnitWorkflow",
+        "transformName": "OEPUnit",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for HTTP requests & responses for the Unit Service API, in OSDU Data Platform, and Microsoft Energy Data Services. The Unit Service provides dimension/measurement and unit definitions. Given two unit definitions, the service also offers conversion parameters in two different parameterizations.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_UNITLOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "outputSchema": {
+          "name": "OEPDataplaneLogs",
+          "version": 2
+        },
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPUnitLogsTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "LogLevel",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log level of message (INFO, WARN, ERROR, etc.)."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPUnitLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPUnitLogs.json"
+      },
+      {
+        "workflowName": "OEPReservoirDDMSService",
+        "transformName": "OEPReservoirService",
+        "physicalName": "OEPDataplaneLogs",
+        "logicalName": "OEPDataplaneLogs",
+        "description": "Contains logs for Reservoir DDMS Service.",
+        "categories": [
+          "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 2,
+        "dataTypeId": "MICROSOFTOPENENERGYPLATFORM_RESERVOIRDDMSSERVERLOGS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "outputSchema": {
+          "name": "OEPDataplaneLogs",
+          "version": 2
+        },
+        "input": [
+          {
+            "name": "time",
+            "type": "String"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "Dynamic"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          },
+          {
+            "name": "correlationId",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/OEPReservoirServiceTransformation.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "Timestamp (UTC) when the log was created."
+          },
+          {
+            "name": "Category",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Logs generated as a result of operations executed using OAK APIs are grouped into categories. Categories in OAK are logical groupings based on the data source."
+          },
+          {
+            "name": "OperationName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The operation name for which the log entry was created."
+          },
+          {
+            "name": "Message",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Log details as a result of operation performed."
+          },
+          {
+            "name": "NamespaceName",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "NameSpaceName of Reservoir DDMS Service."
+          },
+          {
+            "name": "CorrelationId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Unique identifier to be used to correlate logs, when available.",
+            "dataTypeHint": "GUID"
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The region of the resource emitting the event."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/OEPReservoirDDMSServiceLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/OEPReservoirDDMSServiceLogs.json"
+      }
+    ],
+    "functions": [],
+    "queries": [{
+      "id": "df341dc6-ff0a-4579-b23e-d84b22419c91",
+      "displayName": "DAG type vs DAG runs summary statitics",
+      "description": "Number of DAG runs of each type of DAG type in the given time range",
+      "bodyFilePath": "KQL/SampleQueries/OEPDAGTypeToCountSummary.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "relatedTables": [ "OEPAirFlowTask" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "b3e13991-72f2-4b47-aaa1-37ea6c4bcae9",
+      "displayName": "Correlation IDs of all DAG runs",
+      "description": "Correlation IDs of all the DAG runs that have occurred in the time range (for all DAG types)",
+      "bodyFilePath": "KQL/SampleQueries/OEPDAGRunCorrelationIds.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "relatedTables": [ "OEPAirFlowTask" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "b6e48dd7-12b6-494a-b164-52df19d45a9d",
+      "displayName": "Logs of a DAG run",
+      "description": "Retrieves logs for a particular AirFlow DAG run given the correlationId and time range.",
+      "bodyFilePath": "KQL/SampleQueries/OEPDAGRunLogs.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "relatedTables": [ "OEPAirFlowTask" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "29adebd2-37b1-44fc-a684-422431bf0ddd",
+      "displayName": "Error logs of a DAG run",
+      "description": "Retrieves error logs for a particular AirFlow DAG run given the correlationId and time range.",
+      "bodyFilePath": "KQL/SampleQueries/OEPDAGRunErrorLogs.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "relatedTables": [ "OEPAirFlowTask" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "3ac59a15-04e1-4474-9b8d-8046477d177e",
+      "displayName": "Visualizing Error Response Codes",
+      "description": "Categorize log messages by HTTP response codes, filters out logs without a response code, and summarizes the count of each response code over a specified time granularity. It then renders a column chart for visualization.",
+      "bodyFilePath": "KQL/SampleQueries/OEPVisualizeAPIErrorResponseCodes.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Errors", "Diagnostics"
+        ]
+      },
+      "relatedTables": [ "OEPDataplaneLogs" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "91d7b5a5-93b8-4a8f-8875-b5c511bc9e41",
+      "displayName": "Analyzing User Activity in Storage Logs",
+      "description": "Extract UserId values, filters logs to include only those with a UserId and belonging to the StorageLogs category, and checks for specific HTTP methods. It then summarizes the count of logs per user over daily intervals and renders a pie chart for visualization.",
+      "bodyFilePath": "KQL/SampleQueries/OEPUserActivityInStorageLogs.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Usage"
+        ]
+      },
+      "relatedTables": [ "OEPDataplaneLogs" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "7f9d3e8f-df6d-4156-93c7-0877c1000716",
+      "displayName": "Categorizing Logs by OSDU Service",
+      "description": "This KQL query summarizes the count of logs by category over the last 24 hours and renders a pie chart for visualization.",
+      "bodyFilePath": "KQL/SampleQueries/OEPCategorizeLogsByOSDUService.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Usage"
+        ]
+      },
+      "relatedTables": [ "OEPDataplaneLogs" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "ea5e6919-17ea-4cc9-880c-0626d5a351f3",
+      "displayName": "Visualizing User Activity",
+      "description": "Extract UserId values, filters out logs without a UserId, and summarizes the count of logs per user over the last 24 hours. Renders a pie chart to visualize user activity.",
+      "bodyFilePath": "KQL/SampleQueries/OEPVisualizeUserActivity.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Usage"
+        ]
+      },
+      "relatedTables": [ "OEPDataplaneLogs" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "6e113596-c393-4745-b93f-c371d452d94f",
+      "displayName": "Visualizing Recent Activity",
+      "description": "Filters logs to the last 30 minutes, categorizes them by HTTP response codes, and counts the total number of logs and errors. It then summarizes these counts in 15-second intervals and renders a timechart for visual analysis.",
+      "bodyFilePath": "KQL/SampleQueries/OEPVisualizeRecentActivity.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Diagnostics","Errors"
+        ]
+      },
+      "relatedTables": [ "OEPDataplaneLogs" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "394023dd-9607-44b9-8f6d-45740903d67a",
+      "displayName": "Ensuring Correlation ID Presence",
+      "description": "Ensures that each log entry has a CorrelationId. If the CorrelationId is missing, it extracts the value from the Message field using a regular expression.",
+      "bodyFilePath": "KQL/SampleQueries/OEPEnsureCorrelationIDPresence.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "relatedTables": [ "OEPDataplaneLogs" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "c646d0fd-7eee-44d1-ae13-0791e3f7b766",
+      "displayName": "Extracting and Categorizing HTTP Response Codes",
+      "description": "Categorize log messages based on HTTP response codes. It extends the log data with a new column called ResponseCode and displays only relevant fields.",
+      "bodyFilePath": "KQL/SampleQueries/OEPExtractingAndCategorizingHTTPResponseCodes.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Diagnostics","Errors"
+        ]
+      },
+      "relatedTables": [ "OEPDataplaneLogs" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    }
+  ]
+}

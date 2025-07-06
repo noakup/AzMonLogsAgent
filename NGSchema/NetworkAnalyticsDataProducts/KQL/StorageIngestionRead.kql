@@ -1,0 +1,3 @@
+AOIStorage
+| where Category has_cs "IngestionRead"
+| take 100

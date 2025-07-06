@@ -1,0 +1,15 @@
+[
+    {
+        "TimeGenerated": "2022-05-25T16:40:31.1853636Z",
+        "Location": "West US",
+        "OperationName": "UserEngagementUpdate",
+        "OperationVersion": "2021-10-01-preview",
+        "Category": "EmailUserEngagementOperational",
+        "CorrelationId": "b864e2f8-3172-4370-9d60-c52e40032ce2",
+        "InternetMessageId": "<messageid@domain.com>",
+        "RecipientId": "user@fabrikam.com",
+        "EngagementType": "Click",
+        "EngagementContext": "http://links.contoso.com/abc/123",
+        "UserAgent": "azsdk-python-communication-email/1.0.0 Python/3.11.4"
+    }
+]

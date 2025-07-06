@@ -1,0 +1,15 @@
+//=====================================================================================================
+// For specific results, insert values in the let statements and uncomment the where filters within the query
+// let partialParticipantName = "<Full or Partial participant (or tenant) name to look for (e.g. "propmtion.dept@contoso">");
+ACICollaborationAudit 
+| where GrantType == 'Entitlement'
+//| where ParticipantName contains partialParticipantName
+| extend ShortOperationName=tostring(array_slice(split(OperationName, '/'), -1, -1)[0])
+| summarize TimeGenerated=max(TimeGenerated), EntitlementResult=array_strcat(make_set(EntitlementResult), ','),
+            TargetResourceId=any(TargetResourceId), TargetResourceType=any(TargetResourceType), 
+            GrantSource=any(GrantSource), GrantSourceType=any(GrantSourceType),
+            OperationName=any(ShortOperationName), ParticipantName=any(ParticipantName)
+    by GrantCorrelationId
+| project-away GrantCorrelationId
+| order by TimeGenerated desc
+| limit 100;

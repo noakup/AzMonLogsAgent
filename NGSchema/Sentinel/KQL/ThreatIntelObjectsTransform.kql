@@ -1,0 +1,12 @@
+source
+| project
+    TimeGenerated = TimeGenerated,
+    WorkspaceId = WorkspaceId,
+    AzureTenantId = AzureTenantId,
+    Id = Id,
+    SourceSystem = SourceSystem,
+    StixType = StixType,
+    LastUpdateMethod = LastUpdateMethod,
+    IsDeleted = IsDeleted,
+    AdditionalFields = AdditionalFields,
+    Data = Data

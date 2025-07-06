@@ -1,0 +1,13 @@
+ACSNetworkTraversalDiagnostics
+| where OperationName == "RelaySessionStart"
+| extend StartTime = TimeGenerated
+| join (
+    ACSNetworkTraversalDiagnostics
+    | where OperationName == "RelaySessionEnd"
+    | extend EndTime = TimeGenerated
+) on CorrelationId
+| summarize by
+    CorrelationId,
+    SessionDurationMs = datetime_diff('millisecond', EndTime, StartTime)
+| sort by SessionDurationMs desc
+| limit 100

@@ -1,0 +1,48 @@
+[
+    {
+        "timestamp": "2022-11-15T20:50:16.6652771+00:00",
+        "resourceId": "/SUBSCRIPTIONS/DEC34886-8E7D-4201-B40C-91B04CA1FE6B/RESOURCEGROUPS/DOGFOOD/PROVIDERS/MICROSOFT.HEALTHCAREAPIS/WORKSPACES/DOGFOODWORKSPACE/DICOMSERVICES/DF-DICOM",
+        "operationName": "change-feed",
+        "operationVersion": "",
+        "category": "AuditLogs",
+        "resultType": "Started",
+        "resultSignature": 0,
+        "callerIpAddress": "1.2.3.4",
+        "correlationId": "0792922e0f0cacb4a196512086fa0447",
+        "identity": "{\"claims\":{\"iss\":\"https://sts.windows-ppe.net/abcdef123-kl81-no12-pqr1-st12uv5w0xyz/\",\"oid\":\"a1b2c3d4-e5fg-6i78-jk90-1l234mno4567\"}}",
+        "level": "Informational",
+        "uri": "http://ali0901.dicom.dev.workspace.mshapis.com/v1/changefeed",
+        "type": "MicrosoftHealthcareApisAuditLog",
+        "properties": {
+          "subscriptionId": "dec34886-8e7d-4201-b40c-91b04ca1fe6b",
+          "workspaceResourceId": "/subscriptions/dec34886-8e7d-4201-b40c-91b04ca1fe6b/resourceGroups/dogfood/providers/Microsoft.HealthcareApis/workspaces/dogfoodworkspace",
+          "resourceType": "Microsoft.HealthcareApis/workspaces/dicomservices",
+          "resourceName": "dogfoodworkspace/df-dicom",
+          "resourceId": "/subscriptions/dec34886-8e7d-4201-b40c-91b04ca1fe6b/resourceGroups/dogfood/providers/Microsoft.HealthcareApis/workspaces/dogfoodworkspace/dicomservices/df-dicom",
+          "AuditAction": "Executing"
+        }
+    },
+    {
+        "timestamp": "2022-11-15T20:50:17.6900156+00:00",
+        "resourceId": "/SUBSCRIPTIONS/DEC34886-8E7D-4201-B40C-91B04CA1FE6B/RESOURCEGROUPS/DOGFOOD/PROVIDERS/MICROSOFT.HEALTHCAREAPIS/WORKSPACES/DOGFOODWORKSPACE/DICOMSERVICES/DF-DICOM",
+        "operationName": "change-feed",
+        "operationVersion": "",
+        "category": "AuditLogs",
+        "resultType": "Succeeded",
+        "resultSignature": 200,
+        "callerIpAddress": "71.135.157.180",
+        "correlationId": "0792922e0f0cacb4a196512086fa0447",
+        "identity": "{\"claims\":{\"iss\":\"https://sts.windows-ppe.net/abcdef123-kl81-no12-pqr1-st12uv5w0xyz/\",\"oid\":\"a1b2c3d4-e5fg-6i78-jk90-1l234mno4567\"}}",
+        "level": "Informational",
+        "uri": "http://ali0901.dicom.dev.workspace.mshapis.com/v1/changefeed",
+        "type": "MicrosoftHealthcareApisAuditLog",
+        "properties": {
+          "subscriptionId": "dec34886-8e7d-4201-b40c-91b04ca1fe6b",
+          "workspaceResourceId": "/subscriptions/dec34886-8e7d-4201-b40c-91b04ca1fe6b/resourceGroups/dogfood/providers/Microsoft.HealthcareApis/workspaces/dogfoodworkspace",
+          "resourceType": "Microsoft.HealthcareApis/workspaces/dicomservices",
+          "resourceName": "dogfoodworkspace/df-dicom",
+          "resourceId": "/subscriptions/dec34886-8e7d-4201-b40c-91b04ca1fe6b/resourceGroups/dogfood/providers/Microsoft.HealthcareApis/workspaces/dogfoodworkspace/dicomservices/df-dicom",
+          "AuditAction": "Executed"
+        }
+    }
+]

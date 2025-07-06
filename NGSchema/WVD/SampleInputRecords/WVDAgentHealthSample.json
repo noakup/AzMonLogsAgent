@@ -1,0 +1,24 @@
+ [
+  {
+    "time": "2020-09-17T19:16:01.6096395Z",
+    "operationName": "AgentUpdateHealthStatus",
+    "properties": {
+        "SessionHostName":"sessionhost01.redmond.corp.microsoft.com",
+        "SessionHostResourceId":"/subscriptions/ad31b54a-7c27-4cf0-a7de-cb8802e4d543/resourceGroups/WVDNoMonitor/providers/Microsoft.Compute/virtualMachines/sessionhost01",
+        "AgentVersion":"1.0.2544.0",
+        "OsVersion":"10.0.19041",
+        "SxSStackVersion":"rdp-sxs200826002",
+        "AllowNewSessions":"True",
+        "Status":"Unavailable",
+        "StatusTimeStamp":"2021-10-23T22:05:58.7923366Z",
+        "LastHeartBeat":"2020-09-17T13:35:12.0000000Z",
+        "EndpointState":"Healthy",
+        "UpgradeState":"Succeeded",
+        "UpgradeErrorMsg":"",
+        "LastUpgradeTimeStamp":"2020-09-10T20:58:56.0000000Z",
+        "SessionHostHealthCheckResult":"[{\"HealthCheckName\":0,\"HealthCheckResult\":1,\"AdditionalFailureDetails\":{\"Message\":\"SessionHost healthy: is joined to domain ≤wvdtesttenant.onmicrosoft.com≥\",\"ErrorCode\":0,\"LastHealthCheckInUTC\":\"2020-09-10T20:58:26.095499Z\"}},{\"HealthCheckName\":3,\"HealthCheckResult\":1,\"AdditionalFailureDetails\":{\"Message\":\"SessionHost healthy: SessionHost healthy: SxS stack listener is ready\",\"ErrorCode\":0,\"LastHealthCheckInUTC\":\"2020-09-10T20:58:26.111124Z\"}},{\"HealthCheckName\":4,\"HealthCheckResult\":1,\"AdditionalFailureDetails\":{\"Message\":\"\",\"ErrorCode\":0,\"LastHealthCheckInUTC\":\"2020-09-10T20:58:27.6892637Z\"}},{\"HealthCheckName\":5,\"HealthCheckResult\":1,\"AdditionalFailureDetails\":{\"Message\":\"\",\"ErrorCode\":0,\"LastHealthCheckInUTC\":\"2020-09-10T21:13:26.9408118Z\"}}]",
+        "ActiveSessions":"0",
+        "InactiveSessions":"0"
+        }
+  }
+ ]

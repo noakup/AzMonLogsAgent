@@ -1,0 +1,73 @@
+[
+  {
+    "AppAccessContext": {
+      "AADSessionId": "0dc10831-2b8d-4068-bbb1-4a29e936de1b",
+      "CorrelationId": "73a308a0-b0ff-1000-495c-a5d0742d0958"
+    },
+    "CreationTime": "2021-12-01T22:08:08",
+    "Id": "9b797459-d182-49cf-c185-08d9b5170ed7",
+    "Operation": "ProjectAccessed",
+    "OrganizationId": "5b5a146c-eba8-46af-96f8-e31b50d15a3f",
+    "RecordType": 35,
+    "UserKey": "i:0h.f|membership|1003200047430bf9@live.com",
+    "UserType": 0,
+    "Version": 1,
+    "Workload": "Project",
+    "ClientIP": "109.65.71.191",
+    "UserId": "admin5@sentinele5.onmicrosoft.com",
+    "CorrelationId": "73a308a0-b0ff-1000-495c-a5d0742d0958",
+    "EventSource": "Project",
+    "ItemType": "Project",
+    "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36 Edg/96.0.1054.34",
+    "Action": "Accessed",
+    "Entity": "Project"
+  },
+  {
+    "AppAccessContext": {
+      "AADSessionId": "0dc10831-2b8d-4068-bbb1-4a29e936de1b",
+      "CorrelationId": "92a008a0-40d9-1000-495c-a69f7732880c"
+    },
+    "CreationTime": "2021-12-01T21:17:51",
+    "Id": "6ddecc55-a6f1-44df-9e91-08d9b510088e",
+    "Operation": "ProjectCheckedOut",
+    "OrganizationId": "5b5a146c-eba8-46af-96f8-e31b50d15a3f",
+    "RecordType": 35,
+    "UserKey": "i:0h.f|membership|1003200047430bf9@live.com",
+    "UserType": 0,
+    "Version": 1,
+    "Workload": "Project",
+    "ClientIP": "109.65.71.191",
+    "UserId": "admin5@sentinele5.onmicrosoft.com",
+    "CorrelationId": "92a008a0-40d9-1000-495c-a69f7732880c",
+    "EventSource": "Project",
+    "ItemType": "Project",
+    "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36 Edg/96.0.1054.34",
+    "Entity": "Project"
+  },
+  {
+    "AppAccessContext": {
+      "AADSessionId": "0dc10831-2b8d-4068-bbb1-4a29e936de1b",
+      "CorrelationId": "92a008a0-40d9-1000-495c-a69f7732880c"
+    },
+    "CreationTime": "2021-12-01T21:17:51",
+    "Id": "6ddecc55-a6f1-44df-9e91-08d9b510088e",
+    "Operation": "ProjectCheckedOut",
+    "OrganizationId": "5b5a146c-eba8-46af-96f8-e31b50d15a3f",
+    "RecordType": 35,
+    "UserKey": "i:0h.f|membership|1003200047430bf9@live.com",
+    "UserType": 0,
+    "Version": 1,
+    "Workload": "Project",
+    "ClientIP": "109.65.71.191",
+    "UserId": "admin5@sentinele5.onmicrosoft.com",
+    "CorrelationId": "92a008a0-40d9-1000-495c-a69f7732880c",
+    "EventSource": "Project",
+    "ItemType": "Project",
+    "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36 Edg/96.0.1054.34",
+    "Entity": "Project",
+    "ResultStatus": "Succeeded",
+    "ObjectId": "C:\\Users\\notidoklotz\\Sample",
+    "OnBehalfOfResId": "6ddecc55-a6f1-44df-9e91-08d9b510088e",
+    "Scope": 0
+  }
+]

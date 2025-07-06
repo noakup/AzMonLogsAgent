@@ -1,0 +1,19 @@
+source
+| project
+    TimeGenerated = now(),
+    ApplicationId = ApplicationId,
+    SparkDeployMode = SparkDeployMode,
+    SparkMaster = SparkMaster,
+    YarnMaxAttempts = toint(YarnMaxAttempts),
+    SparkExecutorInstances = toint(SparkExecutorInstances),
+    SparkExecutorMemory = SparkExecutorMemory,
+	SparkExecutorCores = toint(SparkExecutorCores),
+	YarnTags = YarnTags,
+	YarnQueue = YarnQueue,
+    ClusterTenantId = Tenant,
+	Role = Role,
+	Host = iff(isempty(Host), RoleInstance, Host),
+	ClusterDnsName = ClusterDnsName,
+	Region = Region,
+	IpAddress = IpAddress,
+	UserSubscriptionId = UserSubscriptionId

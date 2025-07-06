@@ -1,0 +1,22 @@
+[
+	{
+		"time": "2023-07-13T22:55:49.3569674Z",
+		"resourceId": "/SUBSCRIPTIONS/076CD026-379C-4383-8BEC-8835382EFE90/RESOURCEGROUPS/JORICHARDSONTEST/PROVIDERS/MICROSOFT.CONTAINERINSTANCE/CONTAINERGROUPS/STAGEBYTEST5",
+		"category": "ContainerInstanceLog",
+		"operationName": "Microsoft.ContainerInstance/containerGroups/ContainerInstanceLog/write",
+		"properties": {
+			"ContainerGroup":"stagebytest5",
+			"ContainerID":"6314bfd097c23ad6b20526c4bb510bff450938d4d8a93e7dea68a1ee26cc44de",
+			"ContainerImage":"testimage",
+			"ContainerName":"stagebytest5",
+			"Location":"eastus2euap",
+			"Message":"07/12/2023 18:14:05 : This is an StdErr",
+			"OSType":"Linux",
+			"ResourceGroup":"jorichardsontest",
+			"Source":"LoggingAgent",
+			"SubscriptionId":"076cd026-379c-4383-8bec-8835382efe90",
+			"Timestamp":"2023-07-12T18:14:05.3858288Z",
+			"RecordSizeInBytes":"672"
+		}	
+	}
+]

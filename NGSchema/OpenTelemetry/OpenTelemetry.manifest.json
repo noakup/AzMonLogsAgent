@@ -1,0 +1,1003 @@
+{
+	"type": "Microsoft.OperationalInsights/Workspaces",
+	"displayName": "Log Analytics workspaces",
+	"description": "",
+	"tags": {},
+	"properties": {},
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "Azure Log Analytics/Ingestion",
+	"relatedTables": [],
+	"relatedFunctions": [],
+	"tables": [
+		{
+			"name": "OTelResources",
+			"description": "Resource attributes emitted by an OpenTelemetry source.",
+			"categories": [ "applications" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 2,
+			"dataTypeId": "OPENTELEMETRY_RESOURCES",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Validation",
+      		"isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "itemType",
+					"type": "String"
+				},
+				{
+					"name": "item",
+					"type": "Dynamic"
+				}
+			],
+			"transformFilePath": "KQL/OTelResourcesTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "The timestamp (UTC) of when the resource attributes were effective."
+				},
+				{
+					"name": "Id",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"dataTypeHint": "GUID",
+					"description": "A unique identifier for the resource attributes record."
+				},
+				{
+					"name": "ServiceNamespace",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "A namespace for ServiceName. This is the value of the 'service.namespace' resource attribute."
+				},
+				{
+					"name": "ServiceName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Logical name of the service. This is the value of the 'service.name' resource attribute."
+				},
+				{
+					"name": "ServiceInstanceId",
+					"description": "A unique identifier for the instance of the service. This is the value of the 'service.instance.id' resource attribute.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "RoleName",
+					"description": "A simplified service identifier combining ServiceNamespace and ServiceName.",
+					"type": "String",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "Attributes",
+					"description": "Resource attributes emitted by an OpenTelemetry source.",
+					"type": "Dynamic",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/OTelResourcesInputSample.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/OTelResourcesOutputSample.json"
+		},
+		{
+			"name": "OTelSpans",
+			"description": "Spans emitted by an OpenTelemetry source.",
+			"categories": [ "applications" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 4,
+			"dataTypeId": "OPENTELEMETRY_SPANS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Validation",
+			"isLakeAllowed": true,
+      		"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "itemType",
+					"type": "String"
+				},
+				{
+					"name": "item",
+					"type": "Dynamic"
+				},
+				{
+					"name": "parent",
+					"type": "Dynamic"
+				}
+			],
+			"transformFilePath": "KQL/OTelSpansTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Date and time when the span began."
+				},
+				{
+					"name": "Name",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Human-readable name of the span."
+				},
+				{
+					"name": "SpanId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "A unique identifier for the span."
+				},
+				{
+					"name": "ParentSpanId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The identifier of the parent of this span."
+				},
+				{
+					"name": "TraceId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The identifier of the trace this span belongs to."
+				},
+				{
+					"name": "TraceState",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "An opaque string representing vendor-specific trace information that was propagated with this span."
+				},
+				{
+					"name": "Kind",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The kind of span that this record represents. Can be Unspecified, Internal, Server, Client, Producer, or Consumer."
+				},
+				{
+					"name": "EndTime",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Date and time when the span ended."
+				},
+				{
+					"name": "StatusMessage",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Human-readable error message for the span."
+				},
+				{
+					"name": "StatusCode",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The status of the span. Example values include OK and Error."
+				},
+				{
+					"name": "Links",
+					"type": "Dynamic",
+					"isDefaultDisplay": true,
+					"description": "References from this span to other spans."
+				},
+				{
+					"name": "ScopeName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the instrumentation scope."
+				},
+				{
+					"name": "ScopeVersion",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The version of the instrumentation scope."
+				},
+				{
+					"name": "ResourceAttributes",
+					"type": "Dynamic",
+					"isDefaultDisplay": true,
+					"description": "Resource attributes emitted by an OpenTelemetry source."
+				},
+				{
+					"name": "DroppedAttributesCount",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The number of attributes that were discarded by the data source."
+				},
+				{
+					"name": "DroppedEventsCount",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The number of events that were discarded by the data source."
+				},
+				{
+					"name": "DroppedLinksCount",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The number of links that were discarded by the data source."
+				},
+				{
+					"name": "Attributes",
+					"type": "Dynamic",
+					"isDefaultDisplay": true,
+					"description": "A collection of key-value pairs representing properties of the span."
+				},
+				{
+					"name": "ServiceNamespace",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "A namespace for ServiceName."
+				},
+				{
+					"name": "ServiceName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Logical name of the service."
+				},
+				{
+					"name": "ServiceVersion",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Version information associated with the service."
+				},
+				{
+					"name": "ServiceInstanceId",
+					"description": "A unique identifier for the instance of the service.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "RoleName",
+					"description": "A human-readable name of the service emitting this span. This is a simplified service identifier combining ServiceNamespace and ServiceName.",
+					"type": "String",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "SDKVersion",
+					"description": "The name and version of the SDK, agent, or other source that emitted this record.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "EndUserId",
+					"description": "Persistent string that uniquely represents an authenticated user of the service.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ResourceAttributesId",
+					"description": "Id of the matching record in the OTelResources table that contains this span's resource attributes.",
+					"type": "String",
+					"dataTypeHint": "GUID",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "DurationMs",
+					"description": "The time elapsed between the start and end of this span, in milliseconds.",
+					"type": "Double",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ResultCode",
+					"description": "Normalized result code for the process this span represents (ex. HTTP status code).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UserId",
+					"description": "Anonymous ID of a user accessing the service.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UserAccountId",
+					"description": "Service-defined account associated with the user.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "SessionId",
+					"description": "Service-defined session id.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClientBrowser",
+					"description": "Name and version of the web browser used by the client that triggered this span.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClientOS",
+					"description": "Operating system of the client device.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClientModel",
+					"description": "Model of the client device.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClientType",
+					"description": "Type of the client device.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClientIP",
+					"description": "IP address of the client device.",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "ClientCity",
+					"description": "City where the client device is located.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClientStateOrProvince",
+					"description": "State or province where the client device is located.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClientCountryOrRegion",
+					"description": "Country or region where the client device is located.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Measurements",
+					"description": "Application-defined measurements associated with this span.",
+					"type": "Dynamic",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "SyntheticSource",
+					"description": "Upstream source of this span if it is well-known to be synthetic (ex. web crawlers).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Source",
+					"description": "Friendly name of the direct source of this span, when known.",
+					"type": "String",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "Target",
+					"description": "Normalized, low-cardinality destination for this span, if it is representing an outgoing call (Ex. HTTP host).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "EnrichedName",
+					"description": "An alternate name for this span that may be enriched with additional diagnostic information to make it more useful for aggregation and reporting purposes.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "OperationName",
+					"description": "Service-defined name of the overall operation.",
+					"type": "String",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "Success",
+					"description": "Indicates whether the call completed successfully based on domain-specific criteria.",
+					"type": "Bool",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "DependencyType",
+					"description": "Normalized type of destination for this span, if it is representing an outgoing call (Ex. HTTP, SQL).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Data",
+					"description": "Normalized, high cardinality destination for this span (Ex. HTTP URL).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ItemCount",
+					"description": "The number of spans represented by this record. This value is greater than 1 when sampling is in effect.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "PerformanceBucket",
+					"description": "A low cardinality binning of the duration of this span.",
+					"type": "String",
+					"isDefaultDisplay": false
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/OTelSpansInputSample.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/OTelSpansOutputSample.json"
+		},
+		{
+			"name": "OTelEvents",
+			"description": "Span Events emitted by an OpenTelemetry source.",
+			"categories": [ "applications" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 4,
+			"dataTypeId": "OPENTELEMETRY_EVENTS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Validation",
+			"isLakeAllowed": true,
+      		"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "itemType",
+					"type": "String"
+				},
+				{
+					"name": "item",
+					"type": "Dynamic"
+				},
+				{
+					"name": "parent",
+					"type": "Dynamic"
+				}
+			],
+			"transformFilePath": "KQL/OTelEventsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Date and time when the event's span began."
+				},
+				{
+					"name": "Name",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Human-readable name of the event."
+				},
+				{
+					"name": "SpanId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The identifier of the span this event is about."
+				},
+				{
+					"name": "TraceId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The identifier of the trace this span belongs to."
+				},
+				{
+					"name": "Attributes",
+					"type": "Dynamic",
+					"isDefaultDisplay": true,
+					"description": "A collection of key-value pairs representing properties of the event."
+				},
+				{
+					"name": "DroppedAttributesCount",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The number of attributes that were discarded by the data source."
+				},
+				{
+					"name": "ResourceAttributes",
+					"type": "Dynamic",
+					"isDefaultDisplay": true,
+					"description": "Resource attributes emitted by an OpenTelemetry source."
+				},
+				{
+					"name": "ServiceNamespace",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "A namespace for ServiceName."
+				},
+				{
+					"name": "ServiceName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Logical name of the service."
+				},
+				{
+					"name": "ServiceVersion",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Version information associated with the service."
+				},
+				{
+					"name": "ServiceInstanceId",
+					"description": "A unique identifier for the instance of the service.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "RoleName",
+					"description": "A human-readable name of the service emitting this span. This is a simplified service identifier combining ServiceNamespace and ServiceName.",
+					"type": "String",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "SDKVersion",
+					"description": "The name and version of the SDK, agent, or other source that emitted this record.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "EndUserId",
+					"description": "Persistent string that uniquely represents an authenticated user of the service.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UserId",
+					"description": "Anonymous ID of a user accessing the service.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UserAccountId",
+					"description": "Service-defined account associated with the user.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "SessionId",
+					"description": "Service-defined session id.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClientBrowser",
+					"description": "Name and version of the web browser used by the client that triggered this span.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClientOS",
+					"description": "Operating system of the client device.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClientModel",
+					"description": "Model of the client device.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClientType",
+					"description": "Type of the client device.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClientIP",
+					"description": "IP address of the client device.",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "ClientCity",
+					"description": "City where the client device is located.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClientStateOrProvince",
+					"description": "State or province where the client device is located.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClientCountryOrRegion",
+					"description": "Country or region where the client device is located.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Measurements",
+					"description": "Application-defined measurements associated with this event.",
+					"type": "Dynamic",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "SyntheticSource",
+					"description": "Upstream source of this event if it is well-known to be synthetic (ex. web crawlers).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ItemCount",
+					"description": "The number of spans represented by this record. This value is greater than 1 when sampling is in effect.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "OperationName",
+					"description": "Service-defined name of the overall operation.",
+					"type": "String",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "ExceptionType",
+					"description": "If this event is an exception, this is the type of the exception.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ExceptionMessage",
+					"description": "If this event is an exception, this is the message associated with the exception.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ExceptionStackTrace",
+					"description": "If the event is an exception, this is the stack trace associated with it.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ExceptionProblem",
+					"description": "If the event is an exception, this is a summarized identifier for it.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ReferencedItemId",
+					"description": "This is the item id for the the span that this event is associated with.",
+					"type": "String",
+					"isDefaultDisplay": true
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/OTelEventsInputSample.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/OTelEventsOutputSample.json"
+		},
+		{
+			"name": "OTelLogs",
+			"description": "Logs emitted by an OpenTelemetry source.",
+			"categories": [ "applications" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 4,
+			"dataTypeId": "OPENTELEMETRY_LOGS",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Validation",
+			"isLakeAllowed": true,
+      		"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "itemType",
+					"type": "String"
+				},
+				{
+					"name": "item",
+					"type": "Dynamic"
+				},
+				{
+					"name": "parent",
+					"type": "Dynamic"
+				}
+			],
+			"transformFilePath": "KQL/OTelLogsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Date and time when the log was emitted."
+				},
+				{
+					"name": "Body",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Content of the log record."
+				},
+				{
+					"name": "SpanId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The identifier of the span this log is about."
+				},
+				{
+					"name": "TraceId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The identifier of the trace this log belongs to."
+				},
+				{
+					"name": "Attributes",
+					"type": "Dynamic",
+					"isDefaultDisplay": true,
+					"description": "A collection of key-value pairs representing properties of the log."
+				},
+				{
+					"name": "ResourceAttributes",
+					"type": "Dynamic",
+					"isDefaultDisplay": true,
+					"description": "Resource attributes emitted by an OpenTelemetry source."
+				},
+				{
+					"name": "ScopeName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The name of the instrumentation scope."
+				},
+				{
+					"name": "ScopeVersion",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The version of the instrumentation scope."
+				},
+				{
+					"name": "DroppedAttributesCount",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The number of attributes that were discarded by the data source."
+				},
+				{
+					"name": "SeverityText",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The log level of this record."
+				},
+				{
+					"name": "SeverityNumber",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "Normalized number representing the log level of this record."
+				},
+				{
+					"name": "ServiceNamespace",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "A namespace for ServiceName."
+				},
+				{
+					"name": "ServiceName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Logical name of the service."
+				},
+				{
+					"name": "ServiceVersion",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Version information associated with the service."
+				},
+				{
+					"name": "ServiceInstanceId",
+					"description": "A unique identifier for the instance of the service.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "RoleName",
+					"description": "A human-readable name of the service emitting this span. This is a simplified service identifier combining ServiceNamespace and ServiceName.",
+					"type": "String",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "SDKVersion",
+					"description": "The name and version of the SDK, agent, or other source that emitted this record.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "EndUserId",
+					"description": "Persistent string that uniquely represents an authenticated user of the service.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "K8sPodName",
+					"description": "The name of the Kubernetes pod, if the service is running in a Kubernetes cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "K8sNamespaceName",
+					"description": "The name of the Kubernetes namespace, if the service is running in a Kubernetes cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "K8sContainerName",
+					"description": "The name of the Kubernetes container, if the service is running in a Kubernetes cluster.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UserId",
+					"description": "Anonymous ID of a user accessing the service.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "UserAccountId",
+					"description": "Service-defined account associated with the user.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "SessionId",
+					"description": "Service-defined session id.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClientBrowser",
+					"description": "Name and version of the web browser used by the client that triggered this span.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClientOS",
+					"description": "Operating system of the client device.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClientModel",
+					"description": "Model of the client device.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClientType",
+					"description": "Type of the client device.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClientIP",
+					"description": "IP address of the client device.",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "ClientCity",
+					"description": "City where the client device is located.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClientStateOrProvince",
+					"description": "State or province where the client device is located.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ClientCountryOrRegion",
+					"description": "Country or region where the client device is located.",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Measurements",
+					"description": "Application-defined measurements associated with this event.",
+					"type": "Dynamic",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "SyntheticSource",
+					"description": "Upstream source of this event if it is well-known to be synthetic (ex. web crawlers).",
+					"type": "String",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "ItemCount",
+					"description": "The number of spans represented by this record. This value is greater than 1 when sampling is in effect.",
+					"type": "Int",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "OperationName",
+					"description": "Service-defined name of the overall operation.",
+					"type": "String",
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "SeverityLevel",
+					"description": "A low cardinality binning of the value of SeverityNumber.",
+					"type": "Int",
+					"isDefaultDisplay": false
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/OTelLogsInputSample.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/OTelLogsOutputSample.json"
+		},
+		{
+			"name": "OTelTraces",
+			"description": "Traces emitted by an OpenTelemetry source.",
+			"categories": [ "applications" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 1,
+			"dataTypeId": "OPENTELEMETRY_TRACES",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Validation",
+      		"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "itemType",
+					"type": "String"
+				},
+				{
+					"name": "item",
+					"type": "Dynamic"
+				},
+				{
+					"name": "parent",
+					"type": "Dynamic"
+				}
+			],
+			"transformFilePath": "KQL/OTelTracesTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Date and time when the span began."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/OTelTracesInputSample.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/OTelTracesOutputSample.json"
+		},
+		{
+			"name": "OTelTracesAgent",
+			"description": "Traces (from Agent) emitted by an OpenTelemetry source.",
+			"categories": [ "applications" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 1,
+			"dataTypeId": "OPENTELEMETRY_TRACES_AGENT",
+			"intelligencePacks": [
+				"LogManagement"
+			],
+			"isResourceCentric": true,
+			"tableState": "Validation",
+      		"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "itemType",
+					"type": "String"
+				},
+				{
+					"name": "item",
+					"type": "Dynamic"
+				},
+				{
+					"name": "parent",
+					"type": "Dynamic"
+				}
+			],
+			"transformFilePath": "KQL/OTelTracesTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Date and time when the span began."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/OTelTracesInputSample.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/OTelTracesOutputSample.json"
+		}
+	],
+	"functions": [],
+	"queries": []
+}

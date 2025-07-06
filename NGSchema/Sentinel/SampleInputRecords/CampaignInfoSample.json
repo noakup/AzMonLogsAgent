@@ -1,0 +1,20 @@
+[
+    {
+      "time": "2021-03-06T10:28:37.1702622Z",
+      "tenantId": "5b5a146c-eba8-46af-96f8-e31b50d15a3f",
+      "operationName": "Publish",
+      "category": "AdvancedHunting-CampaignInfo",
+      "properties": {
+        "CampaignName": "test-compaign",
+        "CampaignId": "81589c3b-3565-4148-2eab-08d8e088ca4f-1012962386702502671-a37467926812fbf43bc322e04ff514a635e825fe5300fb68f5107af8002af73d-1",
+        "CampaignType": "test-compain-type",
+        "CampaignSubType": "test-compain-sub-type",
+        "NetworkMessageId": "test-network-message-id",
+        "RecipientEmailAddress": "test@email.com",
+        "ReportId": "81589c3b-3565-4148-2eab-08d8e088ca4f-1012962386702502671-a37467926812fbf43bc322e04ff514a635e825fe5300fb68f5107af8002af73d-1",
+        "Timestamp": "2021-03-06T10:28:37.1702622Z"
+      },
+      "Tenant": "PRD",
+      "DC": "WEU"
+    }
+]

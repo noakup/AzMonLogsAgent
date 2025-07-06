@@ -1,0 +1,80 @@
+[
+  {
+    "time": "2021-09-06T17:52:24.415723911Z",
+    "resourceId": "/SUBSCRIPTIONS/5464F7EE3875-12C9-C654-F81D-CE1909AD/RESOURCEGROUPS/sample-INSTANCES/PROVIDERS/MICROSOFT.AGFOODPLATFORM/FARMBEATS/sample-EUS-1",
+    "category": "SatelliteLogs",
+    "operationName": "Microsoft.AgFoodPlatform/ingestionJobs/satelliteDataIngestionJobs/write",
+    "callerIpAddress": "122.161.78.235",
+    "Level": "Information",
+    "identity": {
+      "claims": {
+        "ApplicationId": "39d176c5-91b6-454b-854d-55813c17d92d",
+        "ObjectId": "9002b50e-dc98-445e-a865-72dce38ecafd",
+        "TenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+      }
+    },
+    "properties": {
+      "requestUri": "https://sample-eus-1.farmbeats.azure.net/scenes/satellite/ingest-data/sample-job-65e32cdd-2a00-40ce-91b0-bd9c03d5f85c?api-version=2021-03-31-preview",
+      "farmerId": "",
+      "dataPlaneResourceId": "/scenes/satellite/ingest-data/sample-job-65e32cdd-2a00-40ce-91b0-bd9c03d5f85c",
+      "requestBody": {
+        "farmerId": "sample-farmer",
+        "boundaryId": "sample-boundary",
+        "startDateTime": "2021-07-31T00:00:00Z",
+        "endDateTime": "2021-09-29T00:00:00Z",
+        "provider": "Microsoft",
+        "source": "sample-source",
+        "data": {
+          "imageNames": [ "sample" ],
+          "imageFormats": [ "sample" ],
+          "imageResolutions": [ 10.0 ]
+        }
+      }
+    },
+    "resultSignature": "202",
+    "resultType": "Success",
+    "resultDescription": "",
+    "location": "eastus",
+    "correlationId": "c9353df8-c403-4c21-9be8-d443fc14e0f3",
+    "durationMs": 11680
+  },
+  {
+    "time": "2021-09-06T17:52:55.85528502Z",
+    "resourceId": "/SUBSCRIPTIONS/5464F7EE3875-12C9-C654-F81D-CE1909AD/RESOURCEGROUPS/sample-INSTANCES/PROVIDERS/MICROSOFT.AGFOODPLATFORM/FARMBEATS/sample-EUS-1",
+    "category": "SatelliteLogs",
+    "operationName": "Microsoft.AgFoodPlatform/ingestionJobs/satelliteDataIngestionJobs/write",
+    "callerIpAddress": "122.161.78.235",
+    "Level": "Information",
+    "identity": {
+      "claims": {
+        "ApplicationId": "39d176c5-91b6-454b-854d-55813c17d92d",
+        "ObjectId": "9002b50e-dc98-445e-a865-72dce38ecafd",
+        "TenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+      }
+    },
+    "properties": {
+      "requestUri": "https://sample-eus-1.farmbeats.azure.net/scenes/satellite/ingest-data/sample-job-65e32cdd-2a00-40ce-91b0-bd9c03d5f85c?api-version=2021-03-31-preview",
+      "farmerId": "",
+      "dataPlaneResourceId": "/scenes/satellite/ingest-data/sample-job-65e32cdd-2a00-40ce-91b0-bd9c03d5f85c",
+      "requestBody": {
+        "farmerId": "sample-farmer",
+        "boundaryId": "sample-boundary",
+        "startDateTime": "2021-07-31T00:00:00Z",
+        "endDateTime": "2021-09-29T00:00:00Z",
+        "provider": "Microsoft",
+        "source": "sample-source",
+        "data": {
+          "imageNames": [ "sample" ],
+          "imageFormats": [ "sample" ],
+          "imageResolutions": [ 10.0 ]
+        }
+      }
+    },
+    "resultSignature": "400",
+    "resultType": "Failure",
+    "resultDescription": "The operation was canceled.",
+    "location": "eastus",
+    "correlationId": "1fd4f8b4-b529-4c59-a8a2-e9e6ba2bc945",
+    "durationMs": 743
+  }
+]

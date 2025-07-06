@@ -1,0 +1,3 @@
+LASummaryLogs
+| summarize QueryDurationInSeconds = sum(QueryDurationMs)/1000 by RuleName, BinStartTime
+| sort by QueryDurationInSeconds desc

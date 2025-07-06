@@ -1,0 +1,203 @@
+[
+    {
+        "level": "Informational",
+        "time": "2022-08-19T17:07:29.9905060Z",
+        "resourceId": "/subscriptions/ed463725-1c38-43fc-bd8b-cac509b41e96/resourcegroups/acs-rooms-e2e-prod/providers/microsoft.communication/communicationservices/rooms-e2e-prod",
+        "correlationId": "nTrWyRz0vEymFcV2OfiTjQ",
+        "category": "RoomsOperational",
+        "operationName": "CreateRoom",
+        "operationVersion": "2022-02-01",
+        "resultType": "Succeeded",
+        "resultSignature": "201",
+        "properties": {
+            "room_id": "99466387192310000",
+            "room_lifespan_mins": 61,
+            "is_default_lifespan": false,
+            "room_join_policy": "InviteOnly",
+            "room_participants_count": 3,
+            "room_participants_consumer": 1,
+            "room_participants_attendee": 1,
+            "room_participants_presenter": 1,
+            "PstnDialOutEnabled":false
+        }
+    },
+    {
+        "level": "Informational",
+        "time": "2022-08-19T17:07:30.2400300Z",
+        "resourceId": "/subscriptions/ed463725-1c38-43fc-bd8b-cac509b41e96/resourcegroups/acs-rooms-e2e-prod/providers/microsoft.communication/communicationservices/rooms-e2e-prod",
+        "correlationId": "Y4x6ZabFE0+E8ERwMpd68w",
+        "category": "RoomsOperational",
+        "operationName": "GetRoom",
+        "operationVersion": "2022-02-01",
+        "resultType": "Succeeded",
+        "resultSignature": "200",
+        "properties": {
+            "room_id": "99466387192310000",
+            "room_join_policy": "CommunicationServiceUsers",
+            "room_lifespan_mins": 61,
+            "room_participants_count": 5,
+            "room_participants_consumer": 1,
+            "room_participants_attendee": 2,
+            "room_participants_presenter": 2
+        }
+    },
+    {
+        "level": "Informational",
+        "time": "2022-08-19T17:07:30.3543160Z",
+        "resourceId": "/subscriptions/ed463725-1c38-43fc-bd8b-cac509b41e96/resourcegroups/acs-rooms-e2e-prod/providers/microsoft.communication/communicationservices/rooms-e2e-prod",
+        "correlationId": "13ORjmdt3Uqgpiugf28Ajg",
+        "category": "RoomsOperational",
+        "operationName": "PatchRoom",
+        "operationVersion": "2022-02-01",
+        "resultType": "Succeeded",
+        "resultSignature": "200",
+        "properties": {
+            "room_id": "99466387192310000",
+            "room_lifespan_mins": 121,
+            "room_participants_count": 6,
+            "room_participants_consumer": 1,
+            "room_participants_attendee": 3,
+            "room_participants_presenter": 2
+        }
+    },
+    {
+        "level": "Informational",
+        "time": "2022-08-19T17:07:30.5393800Z",
+        "resourceId": "/subscriptions/ed463725-1c38-43fc-bd8b-cac509b41e96/resourcegroups/acs-rooms-e2e-prod/providers/microsoft.communication/communicationservices/rooms-e2e-prod",
+        "correlationId": "so1UmwS5zUydDM4pPOeZ+Q",
+        "category": "RoomsOperational",
+        "operationName": "DeleteRoom",
+        "operationVersion": "2022-02-01",
+        "resultType": "Succeeded",
+        "resultSignature": "204",
+        "properties": {
+            "room_id": "99466387192310000",
+            "room_lifespan_mins": 121,
+            "room_participants_count": 4,
+            "room_participants_consumer": 1,
+            "room_participants_attendee": 1,
+            "room_participants_presenter": 2
+        }
+    },
+    {
+        "level": "Informational",
+        "time": "2022-08-19T17:07:29.9905060Z",
+        "resourceId": "/subscriptions/ed463725-1c38-43fc-bd8b-cac509b41e96/resourcegroups/acs-rooms-e2e-prod/providers/microsoft.communication/communicationservices/rooms-e2e-prod",
+        "correlationId": "usunWqR9sEqUuUamtMrP54Mg",
+        "category": "RoomsOperational",
+        "operationName": "CreateRoom",
+        "operationVersion": "2023-06-14",
+        "resultType": "Succeeded",
+        "resultSignature": "201",
+        "properties": {
+            "room_id": "99466387192310000",
+            "room_lifespan_mins": 61,
+            "is_default_lifespan": false,
+            "added_room_participants_count": 3,
+            "PstnDialOutEnabled":false
+        }
+    },
+    {
+        "level": "Informational",
+        "time": "2022-08-19T17:07:30.2400300Z",
+        "resourceId": "/subscriptions/ed463725-1c38-43fc-bd8b-cac509b41e96/resourcegroups/acs-rooms-e2e-prod/providers/microsoft.communication/communicationservices/rooms-e2e-prod",
+        "correlationId": "CNiZIX7fvkumtBSpFq7fxg",
+        "category": "RoomsOperational",
+        "operationName": "GetRoom",
+        "operationVersion": "2023-06-14",
+        "resultType": "Succeeded",
+        "resultSignature": "200",
+        "properties": {
+            "room_id": "99466387192310000"
+        }
+    },
+    {
+        "level":"Informational",
+        "time":"2023-04-14T17:07:30.5393800",
+        "resourceId":"/subscriptions/d206c0a8-dfad-4165-a870-a21054b5660c/resourcegroups/acs-rooms-test/providers/microsoft.communication/communicationservices/rooms-ppe-us",
+        "correlationId":"Bwqzh0pdnkGPDwNcMnBkng",
+        "operationName":"UpdateRoom",
+        "operationVersion":"2023-06-14",
+        "resultType":"Succeeded",
+        "resultSignature":"200",
+        "properties":{
+            "room_id":"99466387192310000",
+            "room_lifespan_mins":121
+            }
+    },
+    {
+        "level": "Informational",
+        "time": "2022-08-19T17:07:30.3543160Z",
+        "resourceId": "/subscriptions/ed463725-1c38-43fc-bd8b-cac509b41e96/resourcegroups/acs-rooms-e2e-prod/providers/microsoft.communication/communicationservices/rooms-e2e-prod",
+        "correlationId": "zHT8snnUMkaXCRDFfjQDJw",
+        "category": "RoomsOperational",
+        "operationName": "UpdateParticipants",
+        "operationVersion": "2023-06-14",
+        "resultType": "Succeeded",
+        "resultSignature": "200",
+        "properties": {
+            "room_id": "99466387192310000",
+            "room_lifespan_mins": 121,
+            "removed_room_participants_count": 1,
+            "upserted_room_participants_count": 5
+        }
+    },
+    {
+        "level": "Informational",
+        "time": "2022-08-19T17:07:30.5393800Z",
+        "resourceId": "/subscriptions/ed463725-1c38-43fc-bd8b-cac509b41e96/resourcegroups/acs-rooms-e2e-prod/providers/microsoft.communication/communicationservices/rooms-e2e-prod",
+        "correlationId": "x7rMXmihYEe3GFho9T/H2w",
+        "category": "RoomsOperational",
+        "operationName": "DeleteRoom",
+        "operationVersion": "2023-06-14",
+        "resultType": "Succeeded",
+        "resultSignature": "204",
+        "properties": {
+            "room_id": "99466387192310000"
+        }
+    },
+    {
+      "level": "Informational",
+      "time": "2023-04-26T12:52:30.2400300Z",
+      "resourceId": "/subscriptions/ed463725-1c38-43fc-bd8b-cac509b41e96/resourcegroups/acs-rooms-e2e-prod/providers/microsoft.communication/communicationservices/rooms-e2e-prod",
+      "correlationId": "KibM39CaXkK+HTInfsiY2w",
+      "category": "RoomsOperational",
+      "operationName": "ListRooms",
+      "operationVersion": "2023-06-14",
+      "resultType": "Succeeded",
+      "resultSignature": "200",
+      "properties": {}
+    },
+    {
+        "level":"Informational",
+        "time":"2023-10-10T01:54:01.3123450Z",
+        "resourceId":"/subscriptions/d206c0a8-dfad-4165-a870-a21054b5660c/resourcegroups/acs-rooms-test/providers/microsoft.communication/communicationservices/rooms-ppe-us",
+        "correlationId":"ChBMDUhrrEGFRqDzft2TwA",
+        "operationName":"CreateRoom",
+        "operationVersion":"2024-04-15",
+        "resultType":"Succeeded",
+        "resultSignature":"201",
+        "properties":{
+            "room_id":"999094446013220329",
+            "room_lifespan_mins":10081,
+            "is_default_lifespan":false,
+            "added_room_participants_count":0,
+            "PstnDialOutEnabled":false
+            }
+    },
+    {
+        "level":"Informational",
+        "time":"2023-10-10T01:59:35.8415080Z",
+        "resourceId":"/subscriptions/d206c0a8-dfad-4165-a870-a21054b5660c/resourcegroups/acs-rooms-test/providers/microsoft.communication/communicationservices/rooms-ppe-us",
+        "correlationId":"dhCqfytgd0GF88vY75Uu2w",
+        "operationName":"UpdateRoom",
+        "operationVersion":"2024-04-15",
+        "resultType":"Succeeded",
+        "resultSignature":"200",
+        "properties":{
+            "room_id":"999012036902681441",
+            "room_lifespan_mins":7201,
+            "PstnDialOutEnabled":false
+            }
+    }
+]

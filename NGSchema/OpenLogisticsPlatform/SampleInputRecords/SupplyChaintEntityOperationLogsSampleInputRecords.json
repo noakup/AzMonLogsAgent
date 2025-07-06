@@ -1,0 +1,119 @@
+[
+    {
+        "time": "2021-12-10T01:42:30.223706733Z",
+        "resourceId": "/SUBSCRIPTIONS/00001111-0000-0000-0000-000022220000/RESOURCEGROUPS/TESTRESOURCEGROUP/PROVIDERS/MICROSOFT.OPENLOGISTICSPLATFORM/WORKSPACES/INTEGRATIONITEMTESTV2_4RSFMM2MNQG8GUDU",
+        "operationName": "Microsoft.OpenLogisticsPlatform/workspaces/items/write",
+        "category": "SupplyChainEntityOperations",
+        "durationMs": 820,
+        "correlationId": "2ed0d790-fc14-4077-914c-32d8aeb2e618",
+        "properties": {
+          "requestMethod": "PUT",
+          "requestUri": "https://56aa6910-7fa7-4472-bbe0-b9584c0d7519-workspace.supplychain.azure-test.net/supplychainobjects/items/76a18025-a96e-4e12-8850-93aea92f3744?api-version=2021-10-01-beta",
+          "httpStatusCode": 200,
+          "requestId": "2ed0d790-fc14-4077-914c-32d8aeb2e618",
+          "requestBody": {
+            "sku": "76a18025-a96e-4e12-8850-93aea92f3744",
+            "item": {
+              "name": "Item1U6",
+              "description": "Description : B5N7NV4HGE",
+              "barcodes": [
+                {
+                  "value": "QG2Z",
+                  "standardName": "5RZY"
+                },
+                {
+                  "value": "IRI9",
+                  "standardName": "RCRB"
+                }
+              ],
+              "weight": 28.828,
+              "length": 52.327,
+              "width": 63.937000000000005,
+              "depth": 57.817,
+              "volume": 0,
+              "lwhUnitOfMeasure": 2,
+              "weightUnitOfMeasure": 0,
+              "volumeUnitOfMeasure": 0,
+              "lastModifiedTime": "2021-12-10T01:42:25.6802285Z",
+              "sku": "76a18025-a96e-4e12-8850-93aea92f3744",
+              "labels": [
+                "Apparel",
+                "Summer"
+              ],
+              "supplyChainObjectEntityTag": null
+            }
+          },
+          "responseBody": {
+            "name": "Item1U6",
+            "description": "Description : B5N7NV4HGE",
+            "barcodes": [
+              {
+                "value": "QG2Z",
+                "standardName": "5RZY"
+              },
+              {
+                "value": "IRI9",
+                "standardName": "RCRB"
+              }
+            ],
+            "weight": 28.828,
+            "length": 52.327,
+            "width": 63.937000000000005,
+            "depth": 57.817,
+            "volume": 0,
+            "lwhUnitOfMeasure": 2,
+            "weightUnitOfMeasure": 0,
+            "volumeUnitOfMeasure": 0,
+            "lastModifiedTime": "2021-12-10T01:42:25.6802285Z",
+            "sku": "76a18025-a96e-4e12-8850-93aea92f3744",
+            "labels": [
+              "Apparel",
+              "Summer"
+            ],
+            "supplyChainObjectEntityTag": null
+          },
+          "customRequestAttributes" : {
+            "chunk-id" : "123-485-234"
+          }
+        },
+        "identity": {
+          "claims": {
+            "clientTenantId": "53970b18-3992-4ecb-a284-89d481329722",
+            "clientObjectId": "c2ce9942-6b94-4505-8466-72defbfb1065",
+            "clientName": "c2ce9942-6b94-4505-8466-72defbfb1065",
+            "clientApplicationId": "b97384b1-12c5-4822-aa78-f1cbded6fd5a"
+          }
+        }
+      },
+      {
+        "time": "2021-12-10T01:42:30.223706733Z",
+        "resourceId": "/SUBSCRIPTIONS/00001111-0000-0000-0000-000022220000/RESOURCEGROUPS/TESTRESOURCEGROUP/PROVIDERS/MICROSOFT.OPENLOGISTICSPLATFORM/WORKSPACES/INTEGRATIONITEMTESTV2_4RSFMM2MNQG8GUDU",
+        "operationName": "Microsoft.OpenLogisticsPlatform/workspaces/items/delete",
+        "category": "SupplyChainEntityOperations",
+        "durationMs": 820,
+        "correlationId": "2ed0d790-fc14-4077-914c-32d8aeb2e600",
+        "properties": {
+          "requestMethod": "DELETE",
+          "requestUri": "https://56aa6910-7fa7-4472-bbe0-b9584c0d7519-workspace.supplychain.azure-test.net/supplychainobjects/items/41f09dc6-4dd8-4682-aa89-a9d82d37b934?api-version=2021-10-01-beta",
+          "httpStatusCode": 200,
+          "requestId": "2ed0d790-fc14-4077-914c-32d8aeb2e600",
+          "requestBody": {
+            "sku": "41f09dc6-4dd8-4682-aa89-a9d82d37b934"
+          },
+          "responseBody": {
+            "statusCode": 200
+          },
+          "customRequestAttributes" : {
+            "chunk-id" : "123-485-222"
+          }
+        },
+        "identity": {
+          "claims": {
+            "clientTenantId": "53970b18-3992-4ecb-a284-89d481329722",
+            "clientObjectId": "c2ce9942-6b94-4505-8466-72defbfb1065",
+            "clientName": "c2ce9942-6b94-4505-8466-72defbfb1065",
+            "clientApplicationId": "b97384b1-12c5-4822-aa78-f1cbded6fd5a"
+          }
+        }
+    }
+]

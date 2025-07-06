@@ -1,0 +1,25 @@
+[
+    {
+        "time": "2021-08-05T21:04:58.0466086Z",
+        "location": "eastus2euap",
+        "category": "ConnectedClientList",
+        "properties": {
+            "tenant": "cache-test-la",
+            "connectedClients": [
+                {
+                    "ip": "40.123.43.36",
+                    "count": 86
+                },
+                {
+                    "ip": "10.1.1.4",
+                    "privateLinkIpv6": "fd40:8913:31:6810:6c31:200:a01:104",
+                    "count": 1
+                }
+            ],
+            "roleInstance": "Kernel_IN_1"
+        },
+        "resourceId": "/SUBSCRIPTIONS/E6761CE7-A7BC-442E-BBAE-950A121933B5/RESOURCEGROUPS/AZURE-CACHE/PROVIDERS/MICROSOFT.CACHE/REDIS/CACHE-TEST-LA",
+        "Level": 4,
+        "operationName": "Microsoft.Cache/ClientList"
+    }
+]

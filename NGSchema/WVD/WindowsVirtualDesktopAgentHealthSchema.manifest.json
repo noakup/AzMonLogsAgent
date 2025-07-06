@@ -1,0 +1,208 @@
+{
+    "type": "Microsoft.DesktopVirtualization/hostPools",
+    "displayName": "Desktop Virtualization Host Pools",
+    "description": "Windows Virtual Desktop Host Pools",
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Windows Virtual Desktop/Azure Virtual Desktop (Preview) OnCall",
+    "tags": {},
+    "properties": {},
+    "relatedTables": [],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "WVDAgentHealthStatus",
+            "description": "Azure Virtual Desktop agent health status.",
+            "dataTypeId": "WVD_AGENTHEALTHSTATUS",
+            "isResourceCentric": true,
+            "categories": [ "virtualmachines" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 9,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": false,
+		        "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "KQL/WindowsVirtualDesktopAgentHealthTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isPreferredFacet": true,
+                    "isDefaultDisplay": true,
+                    "description": "Date and time when the report was generated (UTC)"
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isPreferredFacet": false,
+                    "isDefaultDisplay": false,
+                    "description": "The name of the operation"
+                },                
+                {
+                    "name": "SessionHostName",
+                    "type": "String",
+                    "description": "Name of the Virtual Machine",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "SessionHostResourceId",
+                    "type": "String",
+                    "dataTypeHint": "ARMPath",
+                    "description": "The ARM path of the session host",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "AgentVersion",
+                    "type": "String",
+                    "description": "The version of the WVD Agent running on the Virtual Machine",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "OSVersion",
+                    "type": "String",
+                    "description": "The version of the operating system",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "SxSStackVersion",
+                    "type": "String",
+                    "description": "The version of the reverse connect listener running on the VM",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "AllowNewSessions",
+                    "type": "String",
+                    "description": "State of the AllowNewSession settings of the host pool",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "Status",
+                    "type": "String",
+                    "description": "The current status of the VM, whether its healthy or not",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "StatusTimeStamp",
+                    "type": "DateTime",
+                    "description": "The time recorded when there was a change in the health status",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "LastHeartBeat",
+                    "type": "DateTime",
+                    "description": "The time recorded when there was a change in the health status",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "EndpointState",
+                    "type": "String",
+                    "description": "The current state of the VM, whether its available or offline",
+                    "isDefaultDisplay": false,
+                    "isHidden" :  true
+                  },
+                  {
+                    "name": "UpgradeState",
+                    "type": "String",
+                    "description": "The last known state from a previous update",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "UpgradeErrorMsg",
+                    "type": "String",
+                    "description": "The version of the reverse connect listener running on the VM",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "LastUpgradeTimeStamp",
+                    "type": "DateTime",
+                    "description": "The time recorded when there was a change in the upgrade status",
+                    "isDefaultDisplay": false
+                  },
+                  {
+                    "name": "SessionHostHealthCheckResult",
+                    "type": "Dynamic",
+                    "description": "The set of results on health checks",
+                    "isDefaultDisplay": false
+                  },
+                  {
+                    "name": "ActiveSessions",
+                    "type": "String",
+                    "description": "The number of active sessions on the VM",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "InactiveSessions",
+                    "type": "String",
+                    "description": "The number of disconnected, or logged off sessions on the VM",
+                    "isDefaultDisplay": true
+                  }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/WVDAgentHealthSample.json"
+        }
+    ],
+    "functions": [],
+    "queries": [
+      {
+        "id": "9301ac33-090c-4cb5-b841-dc31c5d1ce13",
+        "displayName": "Active sessions on SessionHost",
+        "description": "Display a graph of active sessions.",
+        "bodyFilePath": "KQL/ReviewActiveSessionsQuery.kql",
+        "categories": [
+          "windowsvirtualdesktop"
+        ],
+        "relatedTables": [
+          "WVDAgentHealthStatus"
+        ],
+        "tags": {
+          "Topic": [
+            "Management"
+          ]
+        },
+        "properties": {
+          "ExampleQuery": true,
+          "QueryAttributes": {
+            "IsMultiResource": false
+          }
+        }
+      },
+      {
+        "id": "7409e5d2-1178-4487-8f11-fb38a1a368ac",
+        "displayName": "HealthChecks of SessionHost",
+        "description": "Renders a summary of SessionHost health status.",
+        "bodyFilePath": "KQL/ReviewHealthChecksOfSessionHostQuery.kql",
+        "categories": [
+          "windowsvirtualdesktop"
+        ],
+        "relatedTables": [
+          "WVDAgentHealthStatus"
+        ],
+        "tags": {
+          "Topic": [
+            "Management"
+          ]
+        },
+        "properties": {
+          "ExampleQuery": true,
+          "QueryAttributes": {
+            "IsMultiResource": false
+          }
+        }
+      }
+    ]
+}

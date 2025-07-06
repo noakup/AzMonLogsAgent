@@ -1,0 +1,24 @@
+source
+| extend logMessagePreview = tolower(substring(LogMessage, 0, 100))
+| extend parsedLogMessage = parse_json(LogMessage)
+| project
+    TimeGenerated = TimeGenerated,
+    Computer = Computer,
+    ContainerId = ContainerId,
+    ContainerName = ContainerName,
+    PodName = PodName,
+    PodNamespace = PodNamespace,
+    LogMessage = parsedLogMessage,
+    LogSource = LogSource,
+    KubernetesMetadata = parse_json(KubernetesMetadata),
+    LogLevel = case(
+        isnotnull(parsedLogMessage.level),                                          tolower(tostring(parsedLogMessage.level)),
+        logMessagePreview matches regex @"\b(emerg|alert|crit|critical)\b",         "critical",
+        logMessagePreview matches regex @"\b(err|eror|error)\b",                    "error",
+        logMessagePreview matches regex @"\b(warn|warning)\b",                      "warning",
+        logMessagePreview matches regex @"\b(info|information|notice)\b",           "info",
+        logMessagePreview matches regex @"\b(dbug|debug|verbose)\b",                "debug",
+        logMessagePreview matches regex @"\btrace\b",                               "trace",
+        LogSource == "stderr",                                                      "error",
+        "unknown"
+    )

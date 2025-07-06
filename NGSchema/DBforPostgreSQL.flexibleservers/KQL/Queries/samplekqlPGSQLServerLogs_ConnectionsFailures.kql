@@ -1,0 +1,6 @@
+// To create an alert for this query, click '+ New alert rule'
+PGSQLServerLogs
+| where Message has "authentication failed" or SqlErrorCode in ('28000', '28P01', '3D000', '53300', '42501','08P01')
+| where ErrorLevel =~'FATAL'
+| order by TimeGenerated desc 
+| take 100

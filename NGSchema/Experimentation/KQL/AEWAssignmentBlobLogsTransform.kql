@@ -1,0 +1,19 @@
+source
+| extend props = parse_json(properties)
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = tostring(split(operationName, "/")[3]),
+    ResultType = resultType,
+    HttpStatusCode = toint(resultSignature),
+    ResultDescription = resultDescription,
+    DurationMs = toint(durationMs),
+    CorrelationId = correlationId,
+    Level = level,
+    URI = uri,
+    Location = location,
+    Identity = identity,
+    ExperimentWorkspaceId = tostring(props.experimentWorkspaceId),
+    AssignmentBlobDataVersion = toint(props.assignmentBlobDataVersion),
+    AssignmentBlobSchemaVersion = tostring(props.assignmentBlobSchemaVersion),
+    AssignmentBlobNewOperationIds = todynamic(split(props.assignmentBlobNewOperationIds, ",")),
+    AssignmentBlobLastOperationId = tostring(props.assignmentBlobLastOperationId)

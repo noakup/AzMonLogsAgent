@@ -1,0 +1,4 @@
+HDInsightHadoopAndYarnMetrics
+//| where ClusterName == '<your cluster name>' // remove the preceding "//" and specify your cluster name to see its logs
+| where MetricName == "NumUnhealthyNMs"
+| summarize arg_max(TimeGenerated, *)

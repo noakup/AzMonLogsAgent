@@ -1,0 +1,10 @@
+source
+| project 
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    ResultType = resultType,
+    StatusCode = toint(resultSignature),
+    CorrelationId = correlationId,
+    Identity = identity,
+    Level = level,
+    Uri = uri

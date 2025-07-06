@@ -1,0 +1,13 @@
+{
+    "name" : "OTelTracesAgentResources",
+    "description": "Transform used for Otel Traces Agent Resource cases",
+    "transformVersion" : "1",
+    "dataTypeId" : "OPENTELEMETRY_TRACES_AGENT",
+    "transformState" : "Validation",
+    "icmTeam" : "Azure Log Analytics/Ingestion",
+    "contactDL": "TeamSword@microsoft.com",
+    "relatedTable" : "OTelResources",
+    "kqlFilePath" : "../../KQL/OTelResourcesTransform.kql",
+    "sampleInputRecordsFilePath" : "../../SampleInputRecords/OTelResourcesInputSample.json",
+    "sampleOutputRecordsFilePath" : "../../SampleOutputRecords/OTelResourcesOutputSample.json"
+}

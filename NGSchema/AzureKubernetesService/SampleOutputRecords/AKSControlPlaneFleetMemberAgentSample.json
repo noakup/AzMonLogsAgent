@@ -1,0 +1,18 @@
+[
+    {
+        "TimeGenerated": "2025-05-13T11:12:09.5024137Z",
+        "Category": "fleet-member-agent",
+        "Level": "INFO",
+        "Message": "\"InternalMemberCluster reconciliation starts\" internalMemberCluster=\"fleet-member-bravelion\/bravelion\"\n",
+        "Stream": "stderr",
+        "PodName": "fleet-member-agent-59c8f766cc-qn69q"
+    },
+    {
+        "TimeGenerated": "2025-05-13T11:12:09.5024381Z",
+        "Category": "fleet-member-agent",
+        "Level": "INFO",
+        "Message": "\"Updating Internal member cluster heartbeat\" internalMemberCluster=\"fleet-member-bravelion\/bravelion\"\n",
+        "Stream": "stderr",
+        "PodName": "fleet-member-agent-59c8f766cc-qn69q"
+    }
+]

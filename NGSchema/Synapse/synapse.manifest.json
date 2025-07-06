@@ -1,0 +1,2441 @@
+{
+	"type": "Microsoft.Synapse/workspaces",
+	"displayName": "Synapse Workspaces",
+	"description": "All tables related to Synapse.",
+	"tags": {},
+	"properties": {},
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "Azure Synapse Platform Service/Arcadia Monitoring",
+  "relatedTables": ["AzureActivity"],
+	"relatedFunctions": [],
+  "tables": [
+    {
+      "name": "SynapseRbacOperations",
+      "description": "Azure Synapse role-based access control (SRBAC) operations.",
+      "categories": [ "resources" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 7,
+      "dataTypeId": "MICROSOFTSYNAPSE_SYNAPSERBACOPERATIONS",
+      "intelligencePacks": [ "LogManagement" ],
+      "isResourceCentric": true,
+      "tableState": "Production",
+		  "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "identity",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "Kql/SynapseRbacOperations.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation associated with log record."
+        },
+        {
+          "name": "OperationVersion",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The API version of the operation."
+        },
+        {
+          "name": "Category",
+          "description": "The category of the log.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultType",
+          "description": "Status of the event.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultSignature",
+          "description": "The sub status of the event.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDescription",
+          "description": "The static text description of this operation.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "CorrelationId",
+          "description": "A GUID used to group together a set of related events.",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Identity",
+          "description": "A JSON blob that describes the identity of the user or application that performed the operation.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "description": "The region of the resource emitting the event.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Properties",
+          "description": "extended properties related to this event.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RoleAssignmentId",
+          "description": "The Role Assignment Id for this event.",
+          "type": "String",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SynapseRbacOperationsSample.json"
+    },
+    {
+      "name": "SynapseGatewayApiRequests",
+      "description": "Azure Synapse gateway API requests.",
+      "categories": [ "resources" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 9,
+      "dataTypeId": "MICROSOFTSYNAPSE_GATEWAYAPIREQUESTS",
+      "intelligencePacks": [ "LogManagement" ],
+      "isResourceCentric": true,
+      "tableState": "Production",
+		    "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "identity",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "Kql/SynapseGatewayApiRequests.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation associated with log record."
+        },
+        {
+          "name": "OperationVersion",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The API Version of the operation."
+        },
+        {
+          "name": "Category",
+          "description": "The category of the log.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultType",
+          "description": "Status of the event.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultSignature",
+          "description": "The sub status of the event",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultDescription",
+          "description": "The static text description of this operation.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "CorrelationId",
+          "description": "A GUID used to group together a set of related events.",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "Identity",
+          "description": "A JSON blob that describes the identity of the user or application that performed the operation.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "description": "The region of the resource emitting the event.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RequestUri",
+          "description": "The request URI for this query.",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "ClientCorrelationId",
+          "description": "The client correlation id of this query.",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID"
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SynapseGatewayApiRequestsSample.json"
+    },
+    {
+      "name": "SynapseSqlPoolExecRequests",
+      "description": "Information about SQL requests or queries in an Azure Synapse dedicated SQL pool.",
+      "categories": [ "resources" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 11,
+      "dataTypeId": "MICROSOFTSYNAPSE_EXECREQUESTS",
+      "intelligencePacks": [ "LogManagement" ],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+        {
+          "name": "LogicalServerName",
+          "type": "String"
+        },
+        {
+          "name": "ResourceGroup",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "Kql/SynapseSqlPoolExecRequests.kql",
+      "columns": [
+        {
+          "name": "LogicalServerName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The logical server name of the SQL DW."
+        },
+        {
+          "name": "ResourceGroup",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The azure resourceGroup of the SQL DW."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation associated with log record."
+        },
+        {
+          "name": "Category",
+          "description": "The category of the log.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SessionId",
+          "type": "String",
+          "description": "The Session ID of the SQL pool instance.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RequestId",
+          "type": "String",
+          "description": "The requestId of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Status",
+          "type": "String",
+          "description": "The status of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SubmitTime",
+          "type": "DateTime",
+          "description": "The submitTime (UTC) of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "StartTime",
+          "type": "DateTime",
+          "description": "The startTime (UTC) of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "EndCompileTime",
+          "type": "DateTime",
+          "description": "The end compile time (UTC) of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "EndTime",
+          "type": "DateTime",
+          "description": "The end time (UTC) for the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Label",
+          "type": "String",
+          "description": "The label of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ErrorId",
+          "type": "String",
+          "description": "The errorId of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DatabaseId",
+          "type": "String",
+          "description": "The databaseId of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Command",
+          "type": "String",
+          "description": "The SQL command of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResourceClass",
+          "type": "String",
+          "description": "The resource class of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "StatementType",
+          "type": "String",
+          "description": "The statement type of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ScopeDepth",
+          "type": "Int",
+          "description": "The scope depth of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RootQueryId",
+          "type": "String",
+          "description": "The rootQueryId of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ClientCorrelationId",
+          "type": "String",
+          "description": "The correlation set by client/user.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ExplainOutput",
+          "type": "String",
+          "description": "The output explain of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Importance",
+          "type": "String",
+          "description": "The importance of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ClassifierName",
+          "type": "String",
+          "description": "The classifier name of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResourceAllocationPercent",
+          "type": "String",
+          "description": "The resource allocation percent of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultCacheHit",
+          "type": "String",
+          "description": "The result cache hit of the execution requests.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SynapseSqlPoolExecRequestsSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/SynapseSqlPoolExecRequestsSampleOutput.json"
+    },
+    {
+      "name": "SynapseSqlPoolRequestSteps",
+      "description": "Information about request steps that compose a given SQL request or query in an Azure Synapse dedicated SQL pool.",
+      "categories": [ "resources" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 12,
+      "dataTypeId": "MICROSOFTSYNAPSE_REQUESTSTEPS",
+      "intelligencePacks": [ "LogManagement" ],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "LogicalServerName",
+          "type": "String"
+        },
+        {
+          "name": "ResourceGroup",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "Kql/SynapseSqlPoolExecRequestSteps.kql",
+      "columns": [
+        {
+          "name": "LogicalServerName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The logical server name of the SQL DW."
+        },
+        {
+          "name": "ResourceGroup",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The azure resourceGroup of the SQL DW."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation associated with log record."
+        },
+        {
+          "name": "Category",
+          "description": "The category of the log.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RequestId",
+          "type": "String",
+          "description": "The requestId of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "StepIndex",
+          "type": "Int",
+          "description": "The step index of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationType",
+          "type": "String",
+          "description": "The operation type of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DistributionType",
+          "type": "String",
+          "description": "The distribution type of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "LocationType",
+          "type": "String",
+          "description": "The location type of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Status",
+          "type": "String",
+          "description": "The status of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ErrorId",
+          "type": "String",
+          "description": "The errorId of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "StartTime",
+          "type": "DateTime",
+          "description": "The startTime (UTC) of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "EndCompileTime",
+          "type": "DateTime",
+          "description": "The end compile time (UTC) of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "EndTime",
+          "type": "DateTime",
+          "description": "The end time (UTC) for the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RowCount",
+          "type": "Int",
+          "description": "The row count of the execution requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Command",
+          "type": "String",
+          "description": "The SQL command of the execution requests.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SynapseSqlPoolExecRequestStepsSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/SynapseSqlPoolRequestStepsSampleOutput.json"
+    },
+    {
+      "name": "SynapseSqlPoolDmsWorkers",
+      "description": "Information about workers completing DMS steps in an Azure Synapse dedicated SQL pool.",
+      "categories": [ "resources" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 8,
+      "dataTypeId": "MICROSOFTSYNAPSE_DMSWORKERS",
+      "intelligencePacks": [ "LogManagement" ],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "LogicalServerName",
+          "type": "String"
+        },
+        {
+          "name": "ResourceGroup",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "Kql/SynapseSqlPoolDmsWorkers.kql",
+      "columns": [
+        {
+          "name": "LogicalServerName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The logical server name of the SQL DW."
+        },
+        {
+          "name": "ResourceGroup",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The azure resourceGroup of the SQL DW."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation associated with log record."
+        },
+        {
+          "name": "Category",
+          "description": "The category of the log.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RequestId",
+          "type": "String",
+          "description": "The requestId of the DMS workers.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "StepIndex",
+          "type": "Int",
+          "description": "The step index of the DMS workers.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DmsStepIndex",
+          "type": "Int",
+          "description": "The DMS step index of the DMS workers.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "PdwNodeId",
+          "type": "Int",
+          "description": "The pdw node id of the DMS workers.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DistributionId",
+          "type": "Int",
+          "description": "The distribution id of the DMS workers.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Type",
+          "type": "String",
+          "description": "The type of the DMS workers.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Status",
+          "type": "String",
+          "description": "The status of the DMS workers.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "BytesProcessed",
+          "type": "Int",
+          "description": "The bytes processed of the DMS workers.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RowsProcessed",
+          "type": "Int",
+          "description": "The rows processed of the DMS workers.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "StartTime",
+          "type": "DateTime",
+          "description": "The startTime (UTC) of the DMS workers.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "EndTime",
+          "type": "DateTime",
+          "description": "The end time (UTC) for the DMS workers.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "CpuTime",
+          "type": "Int",
+          "description": "The cpu time for the DMS workers.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SqlSpId",
+          "type": "Int",
+          "description": "The SQL  Sp Id for the DMS workers.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DmsCpuId",
+          "type": "Int",
+          "description": "The DMS cpu Id for the DMS workers.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ErrorId",
+          "type": "String",
+          "description": "The errorId of the DMS workers.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SourceInfo",
+          "type": "String",
+          "description": "The row count of the DMS workers.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DestinationInfo",
+          "type": "String",
+          "description": "The row count of the DMS workers.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SynapseSqlPoolDmsWorkersSample.json"
+    },
+    {
+      "name": "SynapseSqlPoolWaits",
+      "description": "Information about the wait states encountered during execution of a SQL request/query in an Azure Synapse dedicated SQL pool, including locks and waits on transmission queues.",
+      "categories": [ "resources" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 9,
+      "dataTypeId": "MICROSOFTSYNAPSE_WAITS",
+      "intelligencePacks": [ "LogManagement" ],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "LogicalServerName",
+          "type": "String"
+        },
+        {
+          "name": "ResourceGroup",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "Kql/SynapseSqlPoolWaits.kql",
+      "columns": [
+        {
+          "name": "LogicalServerName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The logical server name of the SQL DW."
+        },
+        {
+          "name": "ResourceGroup",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The azure resourceGroup of the SQL DW."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation associated with log record."
+        },
+        {
+          "name": "Category",
+          "description": "The category of the log.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SessionId",
+          "description": "The session ID of the SQL request.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RequestId",
+          "description": "The request ID of the waits.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "State",
+          "type": "String",
+          "description": "The State of the waits.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Priority",
+          "type": "Int",
+          "description": "The priority of the waits.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "LockType",
+          "description": "The lock type of the SQL instance.",
+          "type": "String",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SynapseSqlPoolWaitsSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/SynapseSqlPoolWaitsSampleOutput.json"
+    },
+    {
+      "name": "SynapseSqlPoolSqlRequests",
+      "description": "Information about query distributions of the steps of SQL requests/queries in an Azure Synapse dedicated SQL pool.",
+      "categories": [ "resources" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 9,
+      "dataTypeId": "MICROSOFTSYNAPSE_SQLREQUESTS",
+      "intelligencePacks": [ "LogManagement" ],
+      "isResourceCentric": true,
+      "isLakeAllowed": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "LogicalServerName",
+          "type": "String"
+        },
+        {
+          "name": "ResourceGroup",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "Kql/SynapseSqlPoolSqlRequests.kql",
+      "columns": [
+        {
+          "name": "LogicalServerName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The logical server name of the SQL DW."
+        },
+        {
+          "name": "ResourceGroup",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The azure resourceGroup of the SQL DW."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation associated with log record."
+        },
+        {
+          "name": "Category",
+          "description": "The category of the log.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RequestId",
+          "type": "String",
+          "description": "The request Id of the SQL requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "StepIndex",
+          "type": "Int",
+          "description": "The step index of the SQL requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "PdwNodeId",
+          "type": "Int",
+          "description": "The PdwNodeId of the SQL requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "DistributionId",
+          "type": "Int",
+          "description": "The distribution id of the SQL requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Status",
+          "type": "String",
+          "description": "The Status of the SQL requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ErrorId",
+          "type": "String",
+          "description": "The error id of the SQL requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "StartTime",
+          "type": "DateTime",
+          "description": "The startTime (UTC) of the SQL requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "EndTime",
+          "type": "DateTime",
+          "description": "The end time (UTC) for the SQL requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RowCount",
+          "type": "Int",
+          "description": "The row count of the SQL requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SpId",
+          "type": "Int",
+          "description": "The sp id of the SQL requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Command",
+          "type": "String",
+          "description": "The command of the SQL requests.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SynapseSqlPoolSqlRequestsSample.json"
+    },
+    {
+      "name": "SynapseIntegrationPipelineRuns",
+      "description": "Logs for Synapse integration pipeline runs.",
+      "categories": [ "resources" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 8,
+      "dataTypeId": "MICROSOFTSYNAPSE_INTEGRATIONPIPELINERUNS",
+      "intelligencePacks": [ "LogManagement" ],
+      "isResourceCentric": true,
+      "tableState": "Production",
+		    "input": [
+        {
+          "name": "ResourceGroup",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "runId",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "level",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "pipelineName",
+          "type": "String"
+        },
+        {
+          "name": "start",
+          "type": "DateTime"
+        },
+        {
+          "name": "end",
+          "type": "DateTime"
+        },
+        {
+          "name": "status",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        },
+        {
+          "name": "tags",
+          "type":  "String"
+        }
+      ],
+      "transformFilePath": "Kql/SynapseIntegrationPipelineRuns.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation associated with log record."
+        },
+        {
+          "name": "Category",
+          "description": "The category of the log.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "CorrelationId",
+          "description": "The correlationId for the log record.",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "Level",
+          "type": "String",
+          "description": "The log type info level of the record.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "The location of the resource in the cloud where this log is originated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Tags",
+          "type": "Dynamic",
+          "description": "The associated tags of the log record.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Status",
+          "type": "String",
+          "description": "The Status of the SQL requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "UserProperties",
+          "type": "Dynamic",
+          "description": "The user properties of the log record.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Annotations",
+          "type": "Dynamic",
+          "description": "The annotation details of the log record.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Start",
+          "type": "DateTime",
+          "description": "The start time (UTC) of the pipeline run.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "End",
+          "type": "DateTime",
+          "description": "The end time (UTC) for the pipelien run.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "PipelineName",
+          "type": "String",
+          "description": "The name of the pipeline flow.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RunId",
+          "type": "String",
+          "description": "The run id of the pipeline job.",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "Predecessors",
+          "type": "Dynamic",
+          "description": "The predecessors information of the pipeline log.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Parameters",
+          "type": "Dynamic",
+          "description": "The parameter details of the pipeline run.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SystemParameters",
+          "type": "Dynamic",
+          "description": "The system parameter details of the pipeline run.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Type",
+          "type": "String",
+          "description": "The type of the pipeline run.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "PipelineTenantId",
+          "type": "String",
+          "description": "The tenantId details of the pipeline run.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SynapseIntegrationPipelineRunsSample.json"
+    },
+    {
+      "name": "SynapseLinkEvent",
+      "description": "Information about Synapse Link, including Link status and Link table status.",
+      "categories": [ "resources" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 3,
+      "dataTypeId": "MICROSOFTSYNAPSE_SYNAPSELINKEVENT",
+      "intelligencePacks": [ "LogManagement" ],
+      "isResourceCentric": true,
+      "tableState": "Production",
+		    "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "level",
+          "type": "Int"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "linkConnectionName",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "Kql/SynapseLinkEvent.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation associated with log record."
+        },
+        {
+          "name": "Level",
+          "type": "Int",
+          "description": "The log type info level of the record.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "The location of the resource in the cloud where this log is originated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "LinkConnectionName",
+          "type": "String",
+          "description": "The Synapse Link connection name.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Properties",
+          "type": "Dynamic",
+          "description": "The properties associated with Synapse Link operation.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SynapseLinkEventSample.json"
+    },
+    {
+      "name": "SynapseIntegrationActivityRuns",
+      "description": "Logs for Synapse integration activity runs.",
+      "categories": [ "resources" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 8,
+      "dataTypeId": "MICROSOFTSYNAPSE_INTEGRATIONACTIVITYRUNS",
+      "intelligencePacks": [ "LogManagement" ],
+      "isResourceCentric": true,
+      "tableState": "Production",
+		    "input": [
+        {
+          "name": "ResourceGroup",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "activityRunId",
+          "type": "String"
+        },
+        {
+          "name": "pipelineRunId",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "level",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "pipelineName",
+          "type": "String"
+        },
+        {
+          "name": "activityName",
+          "type": "String"
+        },
+        {
+          "name": "start",
+          "type": "DateTime"
+        },
+        {
+          "name": "end",
+          "type": "DateTime"
+        },
+        {
+          "name": "status",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        },
+        {
+          "name": "activityType",
+          "type": "String"
+        },
+        {
+          "name": "tags",
+          "type": "String"
+        }
+
+      ],
+      "transformFilePath": "Kql/SynapseIntegrationActivityRuns.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation associated with log record."
+        },
+        {
+          "name": "Category",
+          "description": "The category of the log.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "CorrelationId",
+          "description": "The correlationId for the log record.",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "Level",
+          "type": "String",
+          "description": "The log type info level of the record.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "The location of the resource in the cloud where this log is originated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Tags",
+          "type": "Dynamic",
+          "description": "The associated tags of the log record.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Status",
+          "type": "String",
+          "description": "The Status of the sql requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "UserProperties",
+          "type": "Dynamic",
+          "description": "The user properties of the log record.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Annotations",
+          "type": "Dynamic",
+          "description": "The annotation details of the log record.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Start",
+          "type": "DateTime",
+          "description": "The start time (UTC) of the activity run.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "End",
+          "type": "DateTime",
+          "description": "The end time (UTC) for the activity run.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ActivityName",
+          "type": "String",
+          "description": "The name of the activity run.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ActivityRunId",
+          "type": "String",
+          "description": "The run id of the activity run.",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "PipelineRunId",
+          "type": "String",
+          "description": "The pipeline runId of the activity flow.",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "EffectiveIntegrationRuntime",
+          "type": "String",
+          "description": "The effective integration runtime the activity run job.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ActivityType",
+          "type": "String",
+          "description": "The type of the activity run.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "PipelineName",
+          "type": "String",
+          "description": "The pipeline name of the activity flow.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SynapseIntegrationActivityRunsSample.json"
+    },
+    {
+      "name": "SynapseIntegrationTriggerRuns",
+      "description": "Logs for Synapse integration trigger runs.",
+      "categories": [ "resources" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 2,
+      "dataTypeId": "MICROSOFTSYNAPSE_INTEGRATIONTRIGGERRUNS",
+      "intelligencePacks": [ "LogManagement" ],
+      "isResourceCentric": true,
+      "tableState": "Production",
+		    "input": [
+        {
+          "name": "ResourceGroup",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "triggerId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "level",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "triggerName",
+          "type": "String"
+        },
+        {
+          "name": "triggerType",
+          "type": "String"
+        },
+        {
+          "name": "triggerEvent",
+          "type": "String"
+        },
+        {
+          "name": "start",
+          "type": "DateTime"
+        },
+        {
+          "name": "status",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        },
+        {
+          "name": "tags",
+          "type": "String"
+        },
+		{
+          "name": "type",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "Kql/SynapseIntegrationTriggerRuns.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation associated with log record."
+        },
+        {
+          "name": "Category",
+          "description": "The category of the log.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "CorrelationId",
+          "description": "The correlationId for the log record.",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "Level",
+          "type": "String",
+          "description": "The log type info level of the record.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "The location of the resource in the cloud where this log is originated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Tags",
+          "type": "Dynamic",
+          "description": "The associated tags of the log record.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Status",
+          "type": "String",
+          "description": "The Status of the SQL requests.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "UserProperties",
+          "type": "Dynamic",
+          "description": "The user properties of the log record.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Annotations",
+          "type": "Dynamic",
+          "description": "The annotation details of the log record.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TriggerId",
+          "type": "String",
+          "description": "The trigger id of the log record.",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "TriggerName",
+          "type": "String",
+          "description": "The trigger name of the log record.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TriggerType",
+          "type": "String",
+          "description": "The trigger type of the log record.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TriggerEvent",
+          "type": "String",
+          "description": "The trigger id of the log record.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Start",
+          "type": "DateTime",
+          "description": "The start time (UTC) of the trigger run.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Parameters",
+          "type": "Dynamic",
+          "description": "The parameter details of the pipeline run.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SystemParameters",
+          "type": "Dynamic",
+          "description": "The system parameter details of the pipeline run.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Type",
+          "type": "String",
+          "description": "The type of the pipeline run.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "PipelineTenantId",
+          "type": "String",
+          "description": "The tenantId details of the pipeline run.",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SynapseIntegrationTriggerRunsSample.json"
+    },
+    {
+      "name": "SynapseBigDataPoolApplicationsEnded",
+      "description": "Information about ended Apache Spark applications.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {
+
+      },
+      "properties": {
+
+      },
+      "artifactVersion": 6,
+      "dataTypeId": "MICROSOFTSYNAPSE_BIGDATAPOOLAPPSENDED",
+      "intelligencePacks": [
+        "LogManagement"
+      ],
+      "isResourceCentric": true,
+      "tableState": "Production",
+		    "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "Kql/SynapseBigdatapoolApplicationsEnded.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation associated with log record."
+        },
+        {
+          "name": "Category",
+          "description": "The category of the log.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "CorrelationId",
+          "description": "A GUID used to group together a set of related events.",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "Identity",
+          "description": "A JSON blob that describes the identity of the user or application that performed the operation.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Properties",
+          "description": "extended properties related to this event.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SynapseBigdatapoolApplicationsEndedSample.json"
+    },
+    {
+      "name": "SynapseBuiltinSqlPoolRequestsEnded",
+      "description": "Ended Azure Synapse built-in serverless SQL requests.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {
+
+      },
+      "properties": {
+
+      },
+      "artifactVersion": 7,
+      "dataTypeId": "MICROSOFTSYNAPSE_BUILTINSQLREQSENDED",
+      "intelligencePacks": [
+        "LogManagement"
+      ],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "durationMs",
+          "type": "Int"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "Int"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "identity",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "Kql/SynapseBuiltinSqlPoolRequestsEnded.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation associated with log record."
+        },
+        {
+          "name": "Category",
+          "description": "The category of the log.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "CorrelationId",
+          "description": "A GUID used to group together a set of related events.",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "DurationMs",
+          "description": "The total elapsed time in milliseconds.",
+          "type": "Int",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ResultType",
+          "description": "The status of the request.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ErrorCode",
+          "description": "The error/success code",
+          "type": "Int",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Identity",
+          "description": "A JSON blob that describes the identity of the user or application that performed the operation.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Properties",
+          "description": "extended properties related to this event.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SynapseBuiltinSqlPoolRequestsEndedSample.json"
+    },
+    {
+      "name": "SQLSecurityAuditEvents",
+      "description": "Azure Synapse SQL Audit Log.",
+      "tableState": "Production",
+      "categories": [ "resources" ],
+      "tags": {},
+      "dataTypeId": "MICROSOFTSYNAPSE_SQLSECURITYAUDITEVENTS",
+      "properties": {},
+      "artifactVersion": 2,
+      "intelligencePacks": [ "LogManagement" ],
+      "isResourceCentric": true,
+      "transformFilePath": "Kql/SynapseSQLSecurityAuditEvents.kql",
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "PreciseTimeStamp",
+          "type": "DateTime"
+        },
+        {
+          "name": "TIMESTAMP",
+          "type": "DateTime"
+        },
+        {
+          "name": "originalEventTimestamp",
+          "type": "DateTime"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "SubscriptionId",
+          "type": "String"
+        },
+        {
+          "name": "LogicalServerName",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "ResourceGroup",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        },
+        {
+          "name": "RowKey",
+          "type": "String"
+        }
+      ],
+      "columns": [
+        {
+          "name": "LogicalServerName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Logical server name."
+        },
+        {
+          "name": "ResourceGroup",
+          "type": "String",
+          "description": "Resource group of the SQL resoruce."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the log was generated."
+        },
+        {
+          "name": "Category",
+          "description": "The category of the log.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AuditSchemaVersion",
+          "description": "The audit logs schema version.",
+          "type": "Int"
+        },
+        {
+          "name": "EventTime",
+          "description": "The time (UTC) the event was fired at.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "SequenceNumber",
+          "description": "Tracks the sequence of records within a single audit record that was too large to fit in the write buffer for audits.",
+          "type": "Int"
+        },
+        {
+          "name": "ActionId",
+          "description": "ID of the audit action.",
+          "type": "String"
+        },
+        {
+          "name": "ActionName",
+          "description": "The name of the audit action.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Succeeded",
+          "description": "Indicates whether the action that triggered the event succeeded. Is not nullable. For all events other than login events, this only reports whether the permission check succeeded or failed, not the operation.",
+          "type": "Bool",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "IsColumnPermission",
+          "description": "Flag indicating if this is a column level permission.",
+          "type": "Bool"
+        },
+        {
+          "name": "SessionId",
+          "description": "ID of the session on which the event occurred.",
+          "type": "Int"
+        },
+        {
+          "name": "ServerPrincipalId",
+          "description": "ID of the login context that the action is performed in.",
+          "type": "Int"
+        },
+        {
+          "name": "DatabasePrincipalId",
+          "description": "ID of the database user context that the action is performed in.",
+          "type": "Int"
+        },
+        {
+          "name": "TargetServerPrincipalId",
+          "description": "Server principal that the GRANT/DENY/REVOKE operation is performed on.",
+          "type": "Int"
+        },
+        {
+          "name": "TargetDatabasePrincipalId",
+          "description": "The database principal the GRANT/DENY/REVOKE operation is performed on.",
+          "type": "Int"
+        },
+        {
+          "name": "ObjectId",
+          "description": "The ID of the entity on which the audit occurred.",
+          "type": "Int"
+        },
+        {
+          "name": "UserDefinedEventId",
+          "description": "User defined event id passed as an argument to sp_audit_write.",
+          "type": "Int"
+        },
+        {
+          "name": "TransactionId",
+          "description": "Unique identifier to identify multiple audit events in one transaction.",
+          "type": "BigInt"
+        },
+        {
+          "name": "ClassType",
+          "description": "The type of auditable entity that the audit occurs on.",
+          "type": "String"
+        },
+        {
+          "name": "ClassTypeDescription",
+          "description": "The description of the class type.",
+          "type": "String"
+        },
+        {
+          "name": "SecurableClassType",
+          "description": "The type of auditable entity that the audit occurs on.",
+          "type": "String"
+        },
+        {
+          "name": "DurationMs",
+          "description": "Query execution duration in milliseconds.",
+          "type": "BigInt"
+        },
+        {
+          "name": "ResponseRows",
+          "description": "Number of rows returned in the result set.",
+          "type": "BigInt"
+        },
+        {
+          "name": "AffectedRows",
+          "description": "Number of rows affected by the executed statement.",
+          "type": "BigInt",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ClientTlsVersion",
+          "description": "Client TLS version",
+          "type": "Int"
+        },
+        {
+          "name": "ClientIp",
+          "description": "Source IP of the client application",
+          "type": "String",
+          "dataTypeHint": "IP",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "PermissionBitmask",
+          "description": "In some actions, this is the permissions that were grant, denied, or revoked.",
+          "type": "String"
+        },
+        {
+          "name": "SequenceGroupId",
+          "description": "Unique identifier.",
+          "type": "String",
+          "dataTypeHint":"GUID"
+        },
+        {
+          "name": "SessionServerPrincipalName",
+          "description": "Server principal for session. Is nullable. Returns the identity of the original login which was connected to the instance of SQL Server in case there were explicit or implicit context switches.",
+          "type": "String"
+        },
+        {
+          "name": "ServerPrincipalName",
+          "description": "Current login. Is nullable.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ServerPrincipalSid",
+          "description": "Current login SID.",
+          "type": "String"
+        },
+        {
+          "name": "DatabasePrincipalName",
+          "description": "Current user.",
+          "type": "String"
+        },
+        {
+          "name": "TargetServerPrincipalName",
+          "description": "Target login of action.",
+          "type": "String"
+        },
+        {
+          "name": "TargetServerPrincipalSid",
+          "description": "SID of target login.",
+          "type": "String"
+        },
+        {
+          "name": "TargetDatabasePrincipalName",
+          "description": "Target user of action.",
+          "type": "String"
+        },
+        {
+          "name": "DatabaseName",
+          "description": "The database context in which the action occurred.",
+          "type": "String"
+        },
+        {
+          "name": "SchemaName",
+          "description": "The schema context in which the action occurred.",
+          "type": "String"
+        },
+        {
+          "name": "ObjectName",
+          "description": "The name of the entity on which the audit occurred.",
+          "type": "String"
+        },
+        {
+          "name": "Statement",
+          "description": "TSQL statement if it exists.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AdditionalInformation",
+          "description": "Unique information that only applies to a single event is returned as XML.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "UserDefinedInformation",
+          "description": "Used to record any extra information the user wants to record in audit log by using the sp_audit_write stored procedure.",
+          "type": "String"
+        },
+        {
+          "name": "ApplicationName",
+          "description": "Name of client application which executed the statement that caused the audit event.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ConnectionId",
+          "description": "ID of the connection in the server.",
+          "type": "String",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "DataSensitivityInformation",
+          "description": "Information types and sensitivity labels returned by the audited query, based on the classified columns in the database.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "HostName",
+          "description": "The host name.",
+          "type": "String"
+        },
+        {
+          "name": "SessionContext",
+          "description": "The Session context key value content. provided as an XML.",
+          "type": "String"
+        },
+        {
+          "name": "IsServerLevelAudit",
+          "description": "Boolean indicating whether this was generated from a server level audit or database level audit.",
+          "type": "Bool",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "EventId",
+          "description": "unique Guid identifying each audit event.",
+          "type": "String",
+          "dataTypeHint":"GUID"
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SynapseSQLSecurityAuditEventsSample.json"
+    },
+    {
+      "name": "SynapseScopePoolScopeJobsEnded",
+      "description": "SCOPE ended event including SCOPE job result and Information about the job.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 3,
+      "dataTypeId": "MICROSOFTSYNAPSE_SCOPEPOOLSCOPEJOBSENDED",
+      "intelligencePacks": [
+        "LogManagement"
+      ],
+      "isResourceCentric": true,
+      "tableState": "Production",
+		    "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "Kql/SynapseScopePoolScopeJobsEnded.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation associated with log record."
+        },
+        {
+          "name": "CorrelationId",
+          "description": "A GUID used to group together a set of related events.",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "Identity",
+          "description": "A JSON blob that describes the identity of the user or application that performed the operation.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Properties",
+          "description": "Extended properties related to this event.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SynapseScopePoolScopeJobsEndedSample.json"
+    },
+    {
+      "name": "SynapseScopePoolScopeJobsStateChange",
+      "description": "SCOPE job state change event.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 3,
+      "dataTypeId": "MICROSOFTSYNAPSE_SCOPEPOOLSCOPEJOBSSTATECHANGE",
+      "intelligencePacks": [
+        "LogManagement"
+      ],
+      "isResourceCentric": true,
+      "tableState": "Production",
+		    "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "Kql/SynapseScopePoolScopeJobsStateChange.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation associated with log record."
+        },
+        {
+          "name": "CorrelationId",
+          "description": "A GUID used to group together a set of related events.",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "Identity",
+          "description": "A JSON blob that describes the identity of the user or application that performed the operation.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Properties",
+          "description": "Extended properties related to this event.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SynapseScopePoolScopeJobsStateChangeSample.json"
+    }
+  ],
+	"functions": [],
+	"queries": [ {
+    "id": "f355a34a-0902-469d-a20d-126b6abe9647",
+    "displayName": "Synapse Link table fail events",
+    "description": "Display sample failed Synapse Link table events.",
+    "bodyFilePath": "KQL/SynapseLinkGetTableFail.kql",
+    "categories": [
+      "resources"
+    ],
+    "relatedTables": [
+      "SynapseLinkEvent"
+    ],
+    "tags": {
+      "Topic": [
+        "Error"
+      ]
+    },
+    "properties": {
+      "ExampleQuery": true,
+      "QueryAttributes": {
+        "IsMultiResource": false
+      }
+    }
+  }]
+}

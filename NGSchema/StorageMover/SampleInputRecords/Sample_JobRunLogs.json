@@ -1,0 +1,15 @@
+[
+    {
+        "time": "2022-09-20T07:45:00Z",
+        "resourceId": "/SUBSCRIPTIONS/8E146654-89DA-4A29-B7BC-AD1FA6175FEC/RESOURCEGROUPS/ABKRISH-BB-RG/PROVIDERS/MICROSOFT.STORAGEMOVER/STORAGEMOVERS/BB-SM-EUS",
+        "location": "eastus",
+        "operationName": "StorageMoverJobRun",
+        "category": "JobRuns",
+        "properties": {
+            "jobRunName": "8420604f-e643-425d-a9e7-614d47ff1ed4",
+            "statusCode": "AZSM1002",
+            "message": "Source path provided is invalid",
+            "level": "Error"
+        }
+    }
+]

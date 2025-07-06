@@ -1,0 +1,18 @@
+[
+    {
+        "TimeGenerated": "2023-01-12T17:48:26.0000000Z",
+        "Category": "csi-snapshot-controller",
+        "Level": "INFO",
+        "Message": "Version: v5.0.0-rc3-webhook-0-g9f6fc893",
+        "Stream": "stderr",
+        "PodName": "csi-snapshot-controller-569bfc7b6d-znvhp"
+    },
+    {
+        "TimeGenerated": "2023-01-12T17:48:26.0000000Z",
+        "Category": "csi-snapshot-controller",
+        "Level": "INFO",
+        "Message": "Start NewCSISnapshotController with kubeconfig [/etc/kubernetes/kubeconfig/kubeconfig.yaml] resyncPeriod [15m0s]",
+        "Stream": "stderr",
+        "PodName": "csi-snapshot-controller-569bfc7b6d-znvhp"
+    }
+]

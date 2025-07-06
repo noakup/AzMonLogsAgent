@@ -1,0 +1,5 @@
+AADRiskyUsers
+| where RiskLastUpdatedDateTime > ago(1d)
+| where RiskLevel == "high"
+| where RiskState == "atRisk"
+| take 100

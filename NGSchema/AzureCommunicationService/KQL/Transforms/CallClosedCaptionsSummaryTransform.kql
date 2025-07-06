@@ -1,0 +1,13 @@
+source
+| project 
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    CorrelationId = correlationId,
+    ResultType = resultType,
+    Level = level,
+    SpeechRecognitionSessionId = tostring(properties.speechRecognitionSessionId),
+    SpokenLanguage = tostring(properties.spokenLanguage),
+    EndReason = tostring(properties.endReason),
+    CancelReason = tostring(properties.cancelReason),
+    StartTime = todatetime(properties.startTime),
+    Duration = todouble(properties.duration)

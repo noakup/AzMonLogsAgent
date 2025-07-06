@@ -1,0 +1,22 @@
+source
+| project
+    TimeGenerated = Dim1,
+    EventName = EventName,
+    Dim0 = Dim0,
+	Dim1 = Dim1,
+	Dim2 = toint(Dim2),
+	Dim3 = toint(Dim3),
+	Dim4 = Dim4,
+	Dim5 = toint(Dim5),
+	Dim6 = Dim6,
+	Dim7 = Dim7,
+	Dim8 = Dim8,
+	Dim9 = Dim9,
+	Dim10 = Dim10,
+    ClusterTenantId = Tenant,
+	Role = Role,
+	Host = iff(isempty(Host), RoleInstance, Host),
+	ClusterDnsName = ClusterDnsName,
+	Region = Region,
+	IpAddress = IpAddress,
+	UserSubscriptionId = UserSubscriptionId

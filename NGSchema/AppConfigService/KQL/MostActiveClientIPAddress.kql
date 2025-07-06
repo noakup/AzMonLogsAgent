@@ -1,0 +1,6 @@
+// This query helps count requests by top 10 most active client IP addresses.  
+AACHttpRequest
+| summarize Count=count() by ClientIPAddress
+| project ClientIPAddress, Count
+| sort by Count desc
+| limit 10

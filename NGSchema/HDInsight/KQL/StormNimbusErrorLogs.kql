@@ -1,0 +1,6 @@
+HDInsightStormLogs 
+//| where ClusterName == '<your cluster name>' // remove the preceding "//" and specify your cluster name to see its logs
+| where TimeGenerated > ago(24h)
+| where LogType == 'StormNimbusLog' //can set which type of logs you want to see (ex: StormNimbusLog, StormSupervisorLog)
+| where LogLevel == 'ERROR' //set which LogLevels you want to see
+| take 1000

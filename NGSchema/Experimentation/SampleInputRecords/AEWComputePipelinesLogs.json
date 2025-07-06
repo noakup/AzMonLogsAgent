@@ -1,0 +1,34 @@
+[
+{
+	"Tenant": "exp",
+	"time": "2021-08-23T11:08:06.1988050Z",
+	"resourceId": "/SUBSCRIPTIONS/80D2C6C6-FA64-4AB1-8AA5-4E118C6B16CE/RESOURCEGROUPS/TEST_EXPCOMPUTELOGS/PROVIDERS/MICROSOFT.EXPERIMENTATION/EXPERIMENTWORKSPACES/TESTEXPCOMPUTE",
+	"category": "ExPCompute",
+	"ExperimentWorkspaceId": "736f490f-3193-4dc7-8f7c-371c04e0f630",
+	"ExperimentationGroup": "testexpcompute~Sample",
+	"ExperimentId": "1eed28bf-28f7-42b6-a6a3-2451a7c349bc",
+	"ExperimentStepId": "2bd070b5-265f-47f9-b9dd-05a23619f1ad",
+	"AnalysisId": "3310884",
+	"ScorecardId": "412935363",
+	"FeatureId": "92cd7ec8-e9d9-4aa3-873d-15635c048734",
+	"AnalysisType": "AB",
+	"name": "ScorecardRequestStarted",
+	"Properties": "{\"ScorecardId\":\"412935363\",\"resourceId\":\"/SUBSCRIPTIONS/80D2C6C6-FA64-4AB1-8AA5-4E118C6B16CE/RESOURCEGROUPS/TEST_EXPCOMPUTELOGS/PROVIDERS/MICROSOFT.EXPERIMENTATION/EXPERIMENTWORKSPACES/TESTEXPCOMPUTE\",\"AnalysisType\":\"AB\",\"ScorecardPurpose\":\"CustomerRequested\",\"AnalysisId\":\"3310884\",\"category\":\"ExPCompute\",\"ExperimentStepId\":\"2bd070b5-265f-47f9-b9dd-05a23619f1ad\",\"ScorecardEndTime\":\"2021-09-07T16:05:00.000Z\",\"ScorecardStartTime\":\"2021-09-07T16:00:00.000Z\",\"AnalysisTemplateId\":\"TestExpComputeTemplate\",\"ExperimentationGroup\":\"testexpcompute~Sample\",\"ExperimentId\":\"1eed28bf-28f7-42b6-a6a3-2451a7c349bc\",\"FeatureId\":\"92cd7ec8-e9d9-4aa3-873d-15635c048734\",\"TriggerFilterScorecardType\":\"False\",\"WorkspaceId\":\"736f490f-3193-4dc7-8f7c-371c04e0f630\"}"
+},
+{
+	"Tenant": "exp",
+	"time": "2021-08-23T11:08:06.1988050Z",
+	"resourceId": "/SUBSCRIPTIONS/80D2C6C6-FA64-4AB1-8AA5-4E118C6B16CE/RESOURCEGROUPS/TEST_EXPCOMPUTELOGS/PROVIDERS/MICROSOFT.EXPERIMENTATION/EXPERIMENTWORKSPACES/TESTEXPCOMPUTE",
+	"category": "ExPCompute",
+	"ExperimentWorkspaceId": "736f490f-3193-4dc7-8f7c-371c04e0f630",
+	"ExperimentationGroup": "testexpcompute~Sample",
+	"ExperimentId": "1eed28bf-28f7-42b6-a6a3-2451a7c349bc",
+	"ExperimentStepId": "2bd070b5-265f-47f9-b9dd-05a23619f1ad",
+	"AnalysisId": "3310884",
+	"ScorecardId": "412935363",
+	"FeatureId": "92cd7ec8-e9d9-4aa3-873d-15635c048734",
+	"AnalysisType": "AB",
+	"name": "DataCheckReady",
+	"Properties": "{\"ScorecardId\":\"412935363\",\"resourceId\":\"/SUBSCRIPTIONS/80D2C6C6-FA64-4AB1-8AA5-4E118C6B16CE/RESOURCEGROUPS/TEST_EXPCOMPUTELOGS/PROVIDERS/MICROSOFT.EXPERIMENTATION/EXPERIMENTWORKSPACES/TESTEXPCOMPUTE\",\"AnalysisType\":\"AB\",\"AnalysisId\":\"3310884\",\"category\":\"ExPCompute\",\"ExperimentStepId\":\"2bd070b5-265f-47f9-b9dd-05a23619f1ad\",\"ExperimentationGroup\":\"testexpcompute~Sample\",\"ExperimentId\":\"1eed28bf-28f7-42b6-a6a3-2451a7c349bc\",\"FeatureId\":\"92cd7ec8-e9d9-4aa3-873d-15635c048734\",\"DataCheckInSeconds\":\"0\",\"WorkspaceId\":\"736f490f-3193-4dc7-8f7c-371c04e0f630\"}"
+}
+]

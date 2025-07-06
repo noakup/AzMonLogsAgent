@@ -1,0 +1,42 @@
+[
+    {
+        "TimeGenerated": "2021-10-14T22:17:11Z",
+        "OperationName": "ApplicationGatewayFirewall",
+        "InstanceId": "appgw_1",
+        "ClientIp": "10.109.120.4",
+        "ClientPort": null,
+        "RequestUri": "/api/integrations/v2/productivity/report",
+        "RuleSetType": "OWASP_CRS",
+        "RuleSetVersion": "3.1.0",
+        "RuleId": "920300",
+        "Message": "Request Missing an Accept Header",
+        "Action": "Matched",
+        "Site": "Global",
+        "DetailedMessage": "Warning. Match of \\\"pm AppleWebKit Android\\\" against \\\"REQUEST_HEADERS:user-agent\\\" required. ",
+        "DetailedData": "",
+        "FileDetails": "rules/REQUEST-920-PROTOCOL-ENFORCEMENT.conf",
+        "LineDetails": "1276",
+        "Hostname": "optimizer.vayaworkforce.com",
+        "TransactionId": "d5d890d404981845bda3d68600e5b810"
+    },
+    {
+        "TimeGenerated": "2021-10-14T22:17:11Z",
+        "OperationName": "ApplicationGatewayFirewall",
+        "InstanceId": "ApplicationGatewayRole_IN_1",
+        "ClientIp": "104.43.133.214",
+        "ClientPort": 0,
+        "RequestUri": "/api/auth/token",
+        "RuleSetType": "OWASP",
+        "RuleSetVersion": "2.2.9",
+        "RuleId": "960015",
+        "Message": "Request Missing an Accept Header",
+        "Action": "Detected",
+        "Site": "Global",
+        "DetailedMessage": "Warning. Operator EQ matched 0 at REQUEST_HEADERS.",
+        "DetailedData": "",
+        "FileDetails": "base_rules/modsecurity_crs_21_protocol_anomalies.conf",
+        "LineDetails": "47",
+        "Hostname": "my.carecommunity.com",
+        "TransactionId": "13474770087240021364"
+    }
+]

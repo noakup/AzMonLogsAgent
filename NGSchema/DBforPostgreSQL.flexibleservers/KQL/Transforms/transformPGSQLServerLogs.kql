@@ -1,0 +1,30 @@
+source
+| project
+    TimeGenerated = todatetime(['time']),
+    LogicalServerName = iff(
+        isnotempty(properties.LogicalServerName), 
+        tostring(properties.LogicalServerName),
+        tostring(LogicalServerName)
+    ),
+    ReplicaRole = iff(
+        isnotempty(properties.ReplicaRole), 
+        tostring(properties.ReplicaRole),
+        tostring(ReplicaRole)
+    ),
+    ProcessId = toint(properties.processId),
+    ErrorLevel = tostring(properties.errorLevel),
+    SqlErrorCode = tostring(properties.sqlerrcode),
+    Message = tostring(properties.message),
+    Detail = tostring(properties.detail),
+    DetailLog = tostring(properties.detail_log),
+    Hint = tostring(properties.hint),
+    Query = tostring(properties.query),
+    Context = tostring(properties.context),
+    Statement = tostring(properties.statement),
+    SchemaName = tostring(properties.schema_name),
+    TableName = tostring(properties.table_name),
+    ColumnName = tostring(properties.column_name),
+    DatatypeName = tostring(properties.datatype_name),
+    ConstraintName = tostring(properties.constraint_name),
+    BackendType = tostring(properties.backend_type),
+    Location = location

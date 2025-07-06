@@ -1,0 +1,23 @@
+[
+	{
+		"time": "2023-07-13T22:55:49.3569674Z",
+		"resourceId": "/SUBSCRIPTIONS/076CD026-379C-4383-8BEC-8835382EFE90/RESOURCEGROUPS/JORICHARDSONTEST/PROVIDERS/MICROSOFT.CONTAINERINSTANCE/CONTAINERGROUPS/STAGEBYTEST5",
+		"category": "ContainerEvent",
+		"operationName": "Microsoft.ContainerInstance/containerGroups/ContainerEvent/write",
+		"properties": {
+			"ContainerGroup":"stagebytest5",
+			"ContainerGroupInstanceID":"768882e4-49a6-4984-9beb-3e7fba6cb8e1",
+			"ContainerID":"334b44448fbe3dcff8da9520595c666cfa45d0b639e048f08c39dabf15b6898e",
+			"ContainerName":"stagebytest5",
+			"Count":"1",
+			"FirstTimestamp":null,
+			"Timestamp":null,
+			"Location":"eastus2euap",
+			"Message":"Platform gracefully stopping container with id 334b44448fbe3dcff8da9520595c666cfa45d0b639e048f08c39dabf15b6898e.",
+			"OSType":"Linux",
+			"Reason":"Stopping",
+			"ResourceGroup":"jorichardsontest",
+			"SubscriptionId":"076cd026-379c-4383-8bec-8835382efe90"
+		}
+	}
+]

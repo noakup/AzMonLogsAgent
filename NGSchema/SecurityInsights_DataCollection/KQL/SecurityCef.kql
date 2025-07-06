@@ -1,0 +1,218 @@
+let SupportedCefFieldNamesArray = parsejson('["act","app","cnt","destinationDnsDomain","destinationServiceName","destinationTranslatedAddress","destinationTranslatedPort","deviceDirection","deviceDnsDomain","deviceExternalId","deviceFacility","deviceInboundInterface","deviceNtDomain","deviceOutboundInterface","devicePayloadId","deviceProcessName","deviceTranslatedAddress","dhost","dmac","dntdom","dpid","dpriv","dproc","dpt","dst","dtz","duid","duser","dvc","dvchost","dvcmac","dvcpid","externalId","fileCreateTime","fileHash","fileId","fileModificationTime","filePath","filePermission","fileType","fname","fsize","in","msg","oldFileCreateTime","oldFileHash","oldFileId","oldFileModificationTime","oldFileName","oldFilePath","oldFile","oldFilePermission","oldFileSize","oldFileType","out","outcome","proto","reason","request","requestClientApplication","requestContext","requestCookies","requestMethod","rt","shost","smac","sntdom","sourceDnsDomain","sourceServiceName","sourceTranslatedAddress","sourceTranslatedPort","spid","spriv","sproc","spt","src","suid","suser","type","c6a1","c6a1Label","c6a2","c6a2Label","c6a3","c6a3Label","c6a4","c6a4Label","cfp1","cfp1Label","cfp2","cfp2Label","cfp3","cfp3Label","cfp4","cfp4Label","cn1","cn1Label","cn2","cn2Label","cn3","cn3Label","cs1","cs1Label","cs2","cs2Label","cs3","cs3Label","cs4","cs4Label","cs5","cs5Label","cs6","cs6Label","deviceCustomDate1","deviceCustomDate1Label","deviceCustomDate2","deviceCustomDate2Label","flexDate1","flexDate1Label","flexNumber1","flexNumber1Label","flexNumber2","flexNumber2Label","flexString1","flexString1Label","flexString2","flexString2Label", "cat"]');
+let SimplifiedDeviceActionMappings = parsejson('{"permitted": "Allow","Permitted": "Allow","est-allowed": "Allow","deny": "Deny","Deny": "Deny","denied": "Deny","Denied": "Deny","discarded": "Discarded","Discarded": "Discarded","teardown": "Teardown","Teardown": "Teardown","dropping": "Drop","Dropping": "Drop"}');
+let NullDynamic = parsejson("");
+let NoInt = toint("");
+let NullLong = tolong("");
+let NullString = tostring("");
+let NullDateTime = todatetime("");
+let CommonKvpValueExtractor = (e:dynamic) {
+    e[1]
+};
+let CreateSupportedCefFieldsDictionary=(keyValuePairs:dynamic) {
+	let keyExtractor = (e:dynamic) { 
+        iff(e[0] in (SupportedCefFieldNamesArray), e[0], NullDynamic)
+    };
+    todictionary(keyValuePairs, keyExtractor, CommonKvpValueExtractor, true)
+};
+let CreateAdditionalFieldsDictionary=(keyValuePairs:dynamic) {
+	let keyExtractor = (e:dynamic) { 
+        iff(e[0] in (SupportedCefFieldNamesArray), NullDynamic, e[0])
+    };
+    todictionary(keyValuePairs, keyExtractor, CommonKvpValueExtractor, true)
+};
+source 
+| extend MG = toguid($executionContextProperties["ManagementGroupId"])
+| extend ManagementGroupName = tostring($executionContextProperties["ManagementGroupName"])
+| extend cefMessage=Message
+// NOTE: This is because ODS does the semicolon to space replacement while encoding into CSV for InMem.  Also, the ; character is used for the AdditionalExtensions property
+| extend cefMessage=iff(cefMessage contains_cs ";", replace(";", " ", cefMessage), cefMessage)
+| extend cefMessage=trim_start(@"[ ]+",cefMessage)
+// NOTE: This is in order to adapt to logs coming from the AMA without the ident
+| extend cefMessage=iff(cefMessage startswith_cs "0|" or cefMessage startswith_cs "1|", strcat("CEF:", cefMessage), cefMessage)
+| extend parsedCefMessage = parse_cef(cefMessage)
+| extend DeviceVendor=tostring(parsedCefMessage["DeviceVendor"])
+| extend DeviceProduct=tostring(parsedCefMessage["DeviceProduct"])
+| extend DeviceVersion=tostring(parsedCefMessage["DeviceVersion"])
+| extend DeviceEventClassID=tostring(parsedCefMessage["DeviceEventClassID"])
+| extend Activity=tostring(parsedCefMessage["Name"])
+| extend LogSeverity=tostring(parsedCefMessage["Severity"])
+| extend OriginalLogSeverity = tostring("")
+| extend extensionKvpArray = parsedCefMessage["Extension"]
+| extend supportedFieldsTable = CreateSupportedCefFieldsDictionary(extensionKvpArray)
+| extend AdditionalExtensions = tostring(CreateAdditionalFieldsDictionary(extensionKvpArray))
+| extend AdditionalExtensions = substring(AdditionalExtensions, 2, strlen(AdditionalExtensions) - 4)
+| extend AdditionalExtensions = replace("\",\"", ";", AdditionalExtensions)
+| extend AdditionalExtensions = replace("\":\"", "=", AdditionalExtensions)
+| extend AdditionalExtensions = replace("\\\\\"", "\"", AdditionalExtensions)
+| extend AdditionalExtensions = replace("\\\\\\\\", "\\\\", AdditionalExtensions)
+| extend DeviceAction = tostring(supportedFieldsTable["act"])
+| extend SimplifiedDeviceAction=tostring(SimplifiedDeviceActionMappings[DeviceAction])
+| extend SimplifiedDeviceAction=iff(isempty(SimplifiedDeviceAction), DeviceAction, SimplifiedDeviceAction)
+| extend CommunicationDirection = tostring(supportedFieldsTable["deviceDirection"])
+| extend SourceIP = tostring(supportedFieldsTable["src"])
+| extend SourcePort = toint(supportedFieldsTable["spt"])
+| extend DestinationIP = tostring(supportedFieldsTable["dst"])
+| extend DestinationPort = toint(supportedFieldsTable["dpt"])
+| extend RemoteIP = iff(CommunicationDirection =~ "inbound", SourceIP, iff(CommunicationDirection =~ "outbound", DestinationIP, ""))
+| extend RemotePort = tostring(iff(CommunicationDirection =~ "inbound", SourcePort, iff(CommunicationDirection =~ "outbound", DestinationPort, NoInt)))
+| extend maliciousIpIndicator = check_malicious_ip(extensionKvpArray, true)
+| extend maliciousIpAddress = tostring(maliciousIpIndicator["IP"])
+| extend maliciousGeoLocation = iff(isempty(maliciousIpAddress), NullDynamic, geo_location(maliciousIpAddress))
+| project TimeGenerated=todatetime(Timestamp)
+, Computer=Host
+, CollectorHostName=CollectorHost
+, DeviceVendor
+, DeviceProduct
+, DeviceVersion
+, DeviceEventClassID
+, Activity
+, LogSeverity
+, OriginalLogSeverity
+, AdditionalExtensions
+, ApplicationProtocol = tostring(supportedFieldsTable["app"])
+, EventCount = toint(supportedFieldsTable["cnt"])
+, DestinationDnsDomain = tostring(supportedFieldsTable["destinationDnsDomain"])
+, DestinationServiceName = tostring(supportedFieldsTable["destinationServiceName"])
+, DestinationTranslatedAddress = tostring(supportedFieldsTable["destinationTranslatedAddress"])
+, DestinationTranslatedPort = toint(supportedFieldsTable["destinationTranslatedPort"])
+, CommunicationDirection
+, DeviceDnsDomain = tostring(supportedFieldsTable["deviceDnsDomain"])
+, DeviceExternalID = tostring(supportedFieldsTable["deviceExternalId"])
+, DeviceFacility = tostring(supportedFieldsTable["deviceFacility"])
+, DeviceInboundInterface = tostring(supportedFieldsTable["deviceInboundInterface"])
+, DeviceName = tostring(supportedFieldsTable["dvchost"])
+, DeviceNtDomain = tostring(supportedFieldsTable["deviceNtDomain"])
+, DeviceOutboundInterface = tostring(supportedFieldsTable["deviceOutboundInterface"])
+, DevicePayloadId = tostring(supportedFieldsTable["devicePayloadId"])
+, ProcessName = tostring(supportedFieldsTable["deviceProcessName"])
+, DeviceTranslatedAddress = tostring(supportedFieldsTable["deviceTranslatedAddress"])
+, DestinationHostName = tostring(supportedFieldsTable["dhost"])
+, DestinationMACAddress = tostring(supportedFieldsTable["dmac"])
+, DestinationNTDomain = tostring(supportedFieldsTable["dntdom"])
+, DestinationProcessId = toint(supportedFieldsTable["dpid"])
+, DestinationUserPrivileges = tostring(supportedFieldsTable["dpriv"])
+, DestinationProcessName = tostring(supportedFieldsTable["dproc"])
+, DestinationPort
+, DestinationIP
+, DeviceTimeZone = tostring(supportedFieldsTable["dtz"])
+, DestinationUserID = tostring(supportedFieldsTable["duid"])
+, DestinationUserName = tostring(supportedFieldsTable["duser"])
+, DeviceAddress = tostring(supportedFieldsTable["dvc"])
+, DeviceMacAddress = tostring(supportedFieldsTable["dvcmac"])
+, ProcessID = toint(supportedFieldsTable["dvcpid"])
+, ExternalID = NoInt
+, ExtID = tostring(supportedFieldsTable["externalId"])
+, FileCreateTime = tostring(supportedFieldsTable["fileCreateTime"])
+, FileHash = tostring(supportedFieldsTable["fileHash"])
+, FileID = tostring(supportedFieldsTable["fileId"])
+, FileModificationTime = tostring(supportedFieldsTable["fileModificationTime"])
+, FilePath = tostring(supportedFieldsTable["filePath"])
+, FilePermission = tostring(supportedFieldsTable["filePermission"])
+, FileType = tostring(supportedFieldsTable["fileType"])
+, FileName = tostring(supportedFieldsTable["fname"])
+, FileSize = toint(supportedFieldsTable["fsize"])
+, ReceivedBytes = tolong(supportedFieldsTable["in"])
+, Message = tostring(supportedFieldsTable["msg"])
+, OldFileCreateTime = tostring(supportedFieldsTable["oldFileCreateTime"])
+, OldFileHash = tostring(supportedFieldsTable["oldFileHash"])
+, OldFileID = tostring(supportedFieldsTable["oldFileId"])
+, OldFileModificationTime = tostring(supportedFieldsTable["oldFileModificationTime"])
+, OldFileName = tostring(supportedFieldsTable["oldFileName"])
+, OldFilePath = tostring(supportedFieldsTable["oldFilePath"])
+, OldFilePermission = tostring(supportedFieldsTable["oldFilePermission"])
+, OldFileSize = toint(supportedFieldsTable["oldFileSize"])
+, OldFileType = tostring(supportedFieldsTable["oldFileType"])
+, SentBytes = tolong(supportedFieldsTable["out"])
+, EventOutcome = tostring(supportedFieldsTable["outcome"])
+, Protocol = tostring(supportedFieldsTable["proto"])
+, Reason = tostring(supportedFieldsTable["reason"])
+, RequestURL = tostring(supportedFieldsTable["request"])
+, RequestClientApplication = tostring(supportedFieldsTable["requestClientApplication"])
+, RequestContext = tostring(supportedFieldsTable["requestContext"])
+, RequestCookies = tostring(supportedFieldsTable["requestCookies"])
+, RequestMethod = tostring(supportedFieldsTable["requestMethod"])
+, ReceiptTime = tostring(supportedFieldsTable["rt"])
+, SourceHostName = tostring(supportedFieldsTable["shost"])
+, SourceMACAddress = tostring(supportedFieldsTable["smac"])
+, SourceNTDomain = tostring(supportedFieldsTable["sntdom"])
+, SourceDnsDomain = tostring(supportedFieldsTable["sourceDnsDomain"])
+, SourceServiceName = tostring(supportedFieldsTable["sourceServiceName"])
+, SourceTranslatedAddress = tostring(supportedFieldsTable["sourceTranslatedAddress"])
+, SourceTranslatedPort = toint(supportedFieldsTable["sourceTranslatedPort"])
+, SourceProcessId = toint(supportedFieldsTable["spid"])
+, SourceUserPrivileges = tostring(supportedFieldsTable["spriv"])
+, SourceProcessName = tostring(supportedFieldsTable["sproc"])
+, SourcePort
+, SourceIP
+, SourceUserID = tostring(supportedFieldsTable["suid"])
+, SourceUserName = tostring(supportedFieldsTable["suser"])
+, EventType = toint(supportedFieldsTable["type"])
+, DeviceEventCategory = tostring(supportedFieldsTable["cat"])
+, DeviceCustomIPv6Address1 = tostring(supportedFieldsTable["c6a1"])
+, DeviceCustomIPv6Address1Label = tostring(supportedFieldsTable["c6a1Label"])
+, DeviceCustomIPv6Address2 = tostring(supportedFieldsTable["c6a2"])
+, DeviceCustomIPv6Address2Label = tostring(supportedFieldsTable["c6a2Label"])
+, DeviceCustomIPv6Address3 = tostring(supportedFieldsTable["c6a3"])
+, DeviceCustomIPv6Address3Label = tostring(supportedFieldsTable["c6a3Label"])
+, DeviceCustomIPv6Address4 = tostring(supportedFieldsTable["c6a4"])
+, DeviceCustomIPv6Address4Label = tostring(supportedFieldsTable["c6a4Label"])
+, DeviceCustomFloatingPoint1 = tofloat(supportedFieldsTable["cfp1"])
+, DeviceCustomFloatingPoint1Label = tostring(supportedFieldsTable["cfp1Label"])
+, DeviceCustomFloatingPoint2 = tofloat(supportedFieldsTable["cfp2"])
+, DeviceCustomFloatingPoint2Label = tostring(supportedFieldsTable["cfp2Label"])
+, DeviceCustomFloatingPoint3 = tofloat(supportedFieldsTable["cfp3"])
+, DeviceCustomFloatingPoint3Label = tostring(supportedFieldsTable["cfp3Label"])
+, DeviceCustomFloatingPoint4 = tofloat(supportedFieldsTable["cfp4"])
+, DeviceCustomFloatingPoint4Label = tostring(supportedFieldsTable["cfp4Label"])
+, DeviceCustomNumber1 = NoInt
+, FieldDeviceCustomNumber1 = tolong(supportedFieldsTable["cn1"])
+, DeviceCustomNumber1Label = tostring(supportedFieldsTable["cn1Label"])
+, DeviceCustomNumber2 = NoInt
+, FieldDeviceCustomNumber2 = tolong(supportedFieldsTable["cn2"])
+, DeviceCustomNumber2Label = tostring(supportedFieldsTable["cn2Label"])
+, DeviceCustomNumber3 = NoInt
+, FieldDeviceCustomNumber3 = tolong(supportedFieldsTable["cn3"])
+, DeviceCustomNumber3Label = tostring(supportedFieldsTable["cn3Label"])
+, DeviceCustomString1 = tostring(supportedFieldsTable["cs1"])
+, DeviceCustomString1Label = tostring(supportedFieldsTable["cs1Label"])
+, DeviceCustomString2 = tostring(supportedFieldsTable["cs2"])
+, DeviceCustomString2Label = tostring(supportedFieldsTable["cs2Label"])
+, DeviceCustomString3 = tostring(supportedFieldsTable["cs3"])
+, DeviceCustomString3Label = tostring(supportedFieldsTable["cs3Label"])
+, DeviceCustomString4 = tostring(supportedFieldsTable["cs4"])
+, DeviceCustomString4Label = tostring(supportedFieldsTable["cs4Label"])
+, DeviceCustomString5 = tostring(supportedFieldsTable["cs5"])
+, DeviceCustomString5Label = tostring(supportedFieldsTable["cs5Label"])
+, DeviceCustomString6 = tostring(supportedFieldsTable["cs6"])
+, DeviceCustomString6Label = tostring(supportedFieldsTable["cs6Label"])
+, DeviceCustomDate1 = tostring(supportedFieldsTable["deviceCustomDate1"])
+, DeviceCustomDate1Label = tostring(supportedFieldsTable["deviceCustomDate1Label"])
+, DeviceCustomDate2 = tostring(supportedFieldsTable["deviceCustomDate2"])
+, DeviceCustomDate2Label = tostring(supportedFieldsTable["deviceCustomDate2Label"])
+, FlexDate1 = tostring(supportedFieldsTable["flexDate1"])
+, FlexDate1Label = tostring(supportedFieldsTable["flexDate1Label"])
+, FlexNumber1 = toint(supportedFieldsTable["flexNumber1"])
+, FlexNumber1Label = tostring(supportedFieldsTable["flexNumber1Label"])
+, FlexNumber2 = toint(supportedFieldsTable["flexNumber2"])
+, FlexNumber2Label = tostring(supportedFieldsTable["flexNumber2Label"])
+, FlexString1 = tostring(supportedFieldsTable["flexString1"])
+, FlexString1Label = tostring(supportedFieldsTable["flexString1Label"])
+, FlexString2 = tostring(supportedFieldsTable["flexString2"])
+, FlexString2Label = tostring(supportedFieldsTable["flexString2Label"])
+, DeviceAction
+, SimplifiedDeviceAction
+, RemoteIP
+, RemotePort
+, MaliciousIP=maliciousIpAddress
+, ThreatSeverity=toint(maliciousIpIndicator["Severity"])
+, IndicatorThreatType=tostring(maliciousIpIndicator["ThreatType"])
+, ThreatDescription=tostring(maliciousIpIndicator["Description"])
+, ThreatConfidence=tostring(maliciousIpIndicator["Confidence"])
+, ReportReferenceLink=tostring(maliciousIpIndicator["ReportReferenceLink"])
+, MaliciousIPLongitude = tofloat(maliciousGeoLocation["Longitude"])
+, MaliciousIPLatitude = tofloat(maliciousGeoLocation["Latitude"])
+, MaliciousIPCountry = tostring(maliciousGeoLocation["Country"])
+// See the following regarding the start and end properties...: https://msazure.visualstudio.com/One/_git/mgmt-loganalytics-Analytics?path=%2Fsrc%2FProduct%2FMetadata%2FMetadata.Processors%2FWorkflowProcessors%2FCommon%2FCustomTransform%2FCefTransform.cs&version=GBmaster&line=42&lineEnd=43&lineStartColumn=17&lineEndColumn=34&lineStyle=plain
+, StartTime = NullDateTime
+, EndTime = NullDateTime
+, SourceSystem="OpsManager"

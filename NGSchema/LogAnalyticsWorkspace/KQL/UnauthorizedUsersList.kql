@@ -1,0 +1,4 @@
+LAQueryLogs
+| where ResponseCode == "403"
+| summarize reqCount = count() by AADObjectId
+| order by reqCount desc

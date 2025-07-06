@@ -1,0 +1,122 @@
+[{
+    "device_id": "845cfcc0b11d453fb4118c21520fe531",
+    "cid": "2cc98db1a47b4c98b913c94d43bfab70",
+    "agent_load_flags": "1",
+    "agent_local_time": "2025-03-18T12:46:32.816Z",
+    "agent_version": "7.22.19406.0",
+    "base_image_version": "Windows 10 21H2",
+    "bios_manufacturer": "LENOVO",
+    "bios_version": "R17ET31W (1.14 )",
+    "build_number": "22631",
+    "chassis_type": "10",
+    "chassis_type_desc": "Notebook",
+    "config_id_base": "65994767",
+    "config_id_build": "19406",
+    "config_id_platform": "3",
+    "connection_ip": "192.168.216.228",
+    "connection_mac_address": "34-cf-f6-67-33-51",
+    "cpu_signature": "526060",
+    "cpu_vendor": "0",
+    "default_gateway_ip": "192.168.216.248",
+    "deployment_type": "Workstation",
+    "detection_suppression_status": "disabled",
+    "email": "user@contoso.com",
+    "external_ip": "42.104.232.8",
+    "filesystem_containment_status": "normal",
+    "first_login_timestamp": "2025-02-21T12:21:20Z",
+    "first_seen": "2025-02-21T12:21:20Z",
+    "group_hash": "2e880e4163746ca4b769abeebc691da0f70252a18eb3255401c8c3575b2c26e5",
+    "groups": [
+        "9fd1b7681ff04ce992a3deba16ae217e"
+    ],
+    "host_hidden_status": "visible",
+    "host_utc_offset": "+02:00",
+    "hostname": "ASSETTAG-EID",
+    "instance_id": "i-0123456789abcdef0",
+    "internet_exposure": "medium",
+    "k8s_cluster_git_version": "v1.24.3",
+    "k8s_cluster_id": "cluster-123456",
+    "k8s_cluster_version": "1.24.3",
+    "kernel_version": "10.0.22631",
+    "last_login_timestamp": "2025-03-18T04:55:49Z",
+    "last_login_uid": "1000",
+    "last_login_user": "Crest",
+    "last_login_user_sid": "S-1-5-21-272789657-2074282548-1398399534-1000",
+    "last_reboot": "2025-03-17T00:00:00Z",
+    "last_seen": "2025-03-18T12:46:32.816Z",
+    "linux_sensor_mode": "standard",
+    "local_ip": "10.0.0.15",
+    "mac_address": "34-cf-f6-67-33-51",
+    "machine_domain": "contoso.local",
+    "major_version": "10",
+    "managed_apps": [
+        {
+            "name": "Microsoft Office",
+            "version": "16.0.15601.20578"
+        }
+    ],
+    "meta": {
+        "version": "1.0",
+        "environment": "production"
+    },
+    "migration_completed_time": "2025-02-21T12:25:00Z",
+    "minor_version": "0",
+    "notes": [
+        {
+            "note": "Production workstation",
+            "timestamp": "2025-02-21T12:21:20Z"
+        }
+    ],
+    "os_build": "22631",
+    "os_product_name": "Windows 10 Enterprise",
+    "os_version": "10.0.22631.2428",
+    "ou": [
+        "OU=Workstations,DC=contoso,DC=local"
+    ],
+    "platform_id": "0",
+    "platform_name": "Windows",
+    "pod_annotations": {
+        "cluster-autoscaler.kubernetes.io/safe-to-evict": "true"
+    },
+    "pod_host_ip4": "10.0.0.15",
+    "pod_host_ip6": "fe80::34cf:f6ff:fe67:3351",
+    "pod_hostname": "pod-845cfcc0",
+    "pod_id": "845cfcc0-pod",
+    "pod_ip4": "172.16.0.15",
+    "pod_ip6": "fd00::172:16:0:15",
+    "pod_labels": {
+        "app": "crowdstrike-agent",
+        "environment": "production"
+    },
+    "pod_name": "crowdstrike-agent-845cfcc0",
+    "pod_namespace": "security",
+    "pod_service_account_name": "crowdstrike-agent",
+    "pointer_size": "64",
+    "policies": [
+        {
+            "policy_type": "prevention",
+            "policy_id": "f9aaa61c700049e3a76f2d9aae0dafc9",
+            "applied": true,
+            "settings_hash": "f7b00025",
+            "assigned_date": "2025-02-28T07:17:45.018130015Z",
+            "applied_date": "2025-02-28T07:23:58.011273299Z",
+            "rule_groups": []
+        }
+    ],
+    "product_type": "1",
+    "product_type_desc": "Workstation",
+    "provision_status": "provisioned",
+    "reduced_functionality_mode": "no",
+    "release_group": "production",
+    "rtr_state": "enabled",
+    "serial_number": "PF-3ABCD2",
+    "service_pack_major": "0",
+    "service_pack_minor": "0",
+    "service_provider": "on-premises",
+    "service_provider_account_id": "N/A",
+    "site_name": "Headquarters",
+    "status": "normal",
+    "system_manufacturer": "LENOVO",
+    "system_product_name": "ThinkPad X1 Carbon",
+    "tags": []
+}]

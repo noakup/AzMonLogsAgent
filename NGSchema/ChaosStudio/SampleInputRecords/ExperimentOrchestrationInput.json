@@ -1,0 +1,24 @@
+[
+    {
+        "name": "UserTelemetryEvents",
+        "time": "2022-12-22 22:00:01Z",
+        "resourceId": "/SUBSCRIPTIONS/2B0B0955-A1AC-4B04-BBC3-A931B26D05D0/RESOURCEGROUPS/CHAOS-TELEMETRYLIB-941/PROVIDERS/MICROSOFT.CHAOS/EXPERIMENTS/EXPRCHAOS-TELEMETRYLIB-VM-UBUNTU-941",
+        "location": "westus",
+        "level": "Error",
+        "correlationId": "0d7d3d60-2557-4db7-b091-ac81ac25ac0a",
+        "operationName": "Microsoft.Chaos/experiments/ActionStopped",
+        "category": "ExperimentOrchestration",
+        "properties": "{\"spanType\":\"Action\",\"status\":\"Failed\",\"spanId\":{\"stepId\":\"stepId\",\"branchId\":\"branchId\",\"actionId\":\"faultUrn\"},\"targetId\":\"targetId\",\"error\":\"errorMsg\"}"
+    },
+    {
+        "name": "UserTelemetryEvents",
+        "time": "2022-12-05 23:00:03Z",
+        "resourceId": "/SUBSCRIPTIONS/2E56758D-9ED7-4B8A-8DF7-4E20800DFD5B/RESOURCEGROUPS/XUELI-TEST/PROVIDERS/MICROSOFT.CHAOS/EXPERIMENTS/TELEMETRYPOC",
+        "location": "westus",
+        "correlationId": "0d7d3d60-2557-4db7-b091-ac81ac25ac0a",
+        "level": "Informational",
+        "operationName": "Microsoft.Chaos/experiments/ExperimentStarted",
+        "category": "ExperimentOrchestration",
+        "properties": "{\"spanType\":\"Experiment\",\"status\":\"Started\",\"spanId\":{}}"
+    }
+]

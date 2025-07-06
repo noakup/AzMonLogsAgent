@@ -1,0 +1,144 @@
+[
+  {
+    "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/providers/microsoft.security/attackpaths/69bfa0ed16d47ead2e0a2d67a7cb13b015e86ec48c3a35222db104bc3b236e49",
+    "subscriptionId": "3eeab341-f466-499c-a8be-85427e154baf",
+    "exportTimestamp": "2023-09-10 11:01:41",
+    "properties": {
+      "description": "EC2 instance 'Win-Demo (i-08daffee1273334b4)' has high severity vulnerabilities allowing remote code execution and has IAM role attached which is granted with 'AmazonSSMManagedInstanceCore' permissions through IAM policy to AWS Key Management Service (KMS) key '994a801a-5cdc-41b9-91b6-869529eb4e47'",
+      "displayName": "EC2 instance with high severity vulnerabilities has read permissions to a KMS key",
+      "target": "c5e147cd-1ba6-0864-3f2e-63529511f059",
+      "entryPoint": "12ee7352-477c-e243-a549-4abfeff4502b",
+      "manualRemediationSteps": "Resolve all recommendations associated with the attack path.",
+      "isPartialAttackPath": false,
+      "refreshInterval": "24.00:00:00",
+      "potentialImpact": "Attacker with access to the EC2 instance can exploit the vulnerabilities, gain remote code execution, and use it's privileges to steal credentials from the Key Management Service",
+      "riskLevel": "Medium",
+      "mitreTacticsAndTechniques": {
+        "tactics": [
+          "Collection",
+          "Execution"
+        ],
+        "techniques": [
+          "Code Repositories",
+          "Command and Scripting Interpreter"
+        ]
+      },
+      "AttackStory": null,
+      "riskFactors": [
+        "AccessToImportantResource",
+        "AccessToResourceWithSensitiveData"
+      ],
+      "attackPathType": "92aa9408-2579-43a3-9df7-a4487abb25d8",
+      "graph": {
+        "connections": [
+          {
+            "description": "The source entity contains the target entity",
+            "title": "contains",
+            "targetEntityInternalId": "c5e147cd-1ba6-0864-3f2e-63529511f059",
+            "definitionKey": "4fb67663-9ab9-475d-b026-8c544cced439",
+            "sourceEntityInternalId": "2a951d8b-f787-4af4-6d3c-6ba7ee239c82",
+            "connectionId": "ee93782c-40c4-c14f-a613-b9b05d37af9e"
+          },
+          {
+            "description": "The identity has effective permissions to access the target resource. Defender for Cloud calculates effective permission of identities and helps you understand what resources your identities can access",
+            "title": "has permissions to",
+            "additionalData": {
+              "type": "GeneralData",
+              "data": {
+                "policies": "[{\"policyArn\":\"arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore\",\"policyStatements\":[{\"Effect\":\"Allow\",\"Action\":[\"ssm:DescribeAssociation\",\"ssm:GetDeployablePatchSnapshotForInstance\",\"ssm:GetDocument\",\"ssm:DescribeDocument\",\"ssm:GetManifest\",\"ssm:GetParameter\",\"ssm:GetParameters\",\"ssm:ListAssociations\",\"ssm:ListInstanceAssociations\",\"ssm:PutInventory\",\"ssm:PutComplianceItems\",\"ssm:PutConfigurePackageResult\",\"ssm:UpdateAssociationStatus\",\"ssm:UpdateInstanceAssociationStatus\",\"ssm:UpdateInstanceInformation\"],\"Resource\":\"*\"},{\"Effect\":\"Allow\",\"Action\":[\"ssmmessages:CreateControlChannel\",\"ssmmessages:CreateDataChannel\",\"ssmmessages:OpenControlChannel\",\"ssmmessages:OpenDataChannel\"],\"Resource\":\"*\"},{\"Effect\":\"Allow\",\"Action\":[\"ec2messages:AcknowledgeMessage\",\"ec2messages:DeleteMessage\",\"ec2messages:FailMessage\",\"ec2messages:GetEndpoint\",\"ec2messages:GetMessages\",\"ec2messages:SendReply\"],\"Resource\":\"*\"}]},{\"policyArn\":\"arn:aws:iam::aws:policy/AmazonSSMPatchAssociation\",\"policyStatements\":[{\"Effect\":\"Allow\",\"Action\":\"ssm:DescribeEffectivePatchesForPatchBaseline\",\"Resource\":\"arn:aws:ssm:*:*:patchbaseline/*\"},{\"Effect\":\"Allow\",\"Action\":\"ssm:GetPatchBaseline\",\"Resource\":\"arn:aws:ssm:*:*:patchbaseline/*\"},{\"Effect\":\"Allow\",\"Action\":\"tag:GetResources\",\"Resource\":\"*\"},{\"Effect\":\"Allow\",\"Action\":\"ssm:DescribePatchBaselines\",\"Resource\":\"*\"}]}]",
+                "roleName": "AmazonSSMRoleForInstancesMDCSetup",
+                "roleArn": "arn:aws:iam::827098764528:role/AmazonSSMRoleForInstancesMDCSetup"
+              }
+            },
+            "targetEntityInternalId": "2a951d8b-f787-4af4-6d3c-6ba7ee239c82",
+            "definitionKey": "e57bfdef-cc0e-460c-a119-70bfb1a76929",
+            "sourceEntityInternalId": "12ee7352-477c-e243-a549-4abfeff4502b",
+            "connectionId": "47cf848a-adc6-7dfb-44a6-66182cc6bb6b"
+          }
+        ],
+        "insights": [
+          {
+            "description": "The resource has high severity vulnerabilities",
+            "title": "has high severity vulnerabilities",
+            "additionalData": {
+              "type": "GeneralData",
+              "data": {
+                "query": "Vulnerabilities | where Severity =~ 'High' | where InternalEntityId == '12ee7352-477c-e243-a549-4abfeff4502b'",
+                "count": "365"
+              }
+            },
+            "entityInternalId": "12ee7352-477c-e243-a549-4abfeff4502b",
+            "definitionKey": "19fa13e9-1909-4745-b494-0e7a36bdd17d",
+            "associatedComponents": [],
+            "insightId": "8318d3dd-d0e4-d80b-ab5b-4304a9fd7176"
+          },
+          {
+            "description": "The resource has vulnerabilities allowing remote code execution",
+            "title": "vulnerable to remote code execution",
+            "additionalData": {
+              "type": "GeneralData",
+              "data": {
+                "query": "Vulnerabilities | where IsRce | where InternalEntityId == '12ee7352-477c-e243-a549-4abfeff4502b'",
+                "count": "102"
+              }
+            },
+            "entityInternalId": "12ee7352-477c-e243-a549-4abfeff4502b",
+            "definitionKey": "e3de1cc0-f4dd-3b34-e496-8b5381ba2d70",
+            "associatedComponents": [],
+            "insightId": "0c27a0c1-0103-7735-6ce1-79fffd7b6fe4"
+          }
+        ],
+        "entities": [
+          {
+            "entityInternalId": "c5e147cd-1ba6-0864-3f2e-63529511f059",
+            "entityIdentifiers": {
+              "type": "amazon-resources",
+              "resourceType": "kms.key",
+              "entityStoreUniqueIdentifier": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/awstest/providers/Microsoft.Security/securityConnectors/AWSConnector/securityentitydata/aws-kms-key-994a801a-5cdc-41b9-91b6-869529eb4e47-us-east-2",
+              "amazonResourceId": "arn:aws:kms:us-east-2:827098764528:key/994a801a-5cdc-41b9-91b6-869529eb4e47",
+              "amazonAccountId": "827098764528"
+            },
+            "entityType": "kms.key",
+            "dataSource": "AWS",
+            "entityName": "994a801a-5cdc-41b9-91b6-869529eb4e47"
+          },
+          {
+            "entityInternalId": "2a951d8b-f787-4af4-6d3c-6ba7ee239c82",
+            "entityIdentifiers": {
+              "type": "amazon-resources",
+              "resourceType": "account",
+              "entityStoreUniqueIdentifier": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/awstest/providers/Microsoft.Security/securityConnectors/AWSConnector/securityentitydata/aws-account-827098764528",
+              "amazonResourceId": "827098764528",
+              "amazonAccountId": "827098764528"
+            },
+            "entityType": "account",
+            "dataSource": "AWS",
+            "entityName": "827098764528"
+          },
+          {
+            "entityInternalId": "12ee7352-477c-e243-a549-4abfeff4502b",
+            "entityIdentifiers": {
+              "type": "amazon-resources",
+              "resourceType": "ec2.instance",
+              "entityStoreUniqueIdentifier": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourceGroups/awstest/providers/Microsoft.Security/securityConnectors/awsconnector/securityentitydata/aws-ec2-instance-i-08daffee1273334b4-us-east-1",
+              "amazonResourceId": "arn:aws:ec2:us-east-1:827098764528:instance/i-08daffee1273334b4",
+              "amazonAccountId": "827098764528"
+            },
+            "entityType": "ec2.instance",
+            "dataSource": "AWS",
+            "entityName": "Win-Demo (i-08daffee1273334b4)"
+          }
+        ]
+      },
+      "riskCategories": [
+        "Credential exposure"
+      ],
+      "attackPathId": "69BFA0ED16D47EAD2E0A2D67A7CB13B015E86EC48C3A35222DB104BC3B236E49",
+      "assessments": {
+        "12ee7352-477c-e243-a549-4abfeff4502b": {
+          "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/awstest/providers/microsoft.security/securityconnectors/awsconnector/securityentitydata/aws-ec2-instance-i-08daffee1273334b4-us-east-1/providers/microsoft.security/assessments/1195afff-c881-495e-9bc5-1486211ae03f": []
+        }
+      }
+    }
+  }
+]

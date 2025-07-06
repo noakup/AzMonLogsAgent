@@ -1,0 +1,30 @@
+[
+  {
+    "LogicalServerName": "chgettyscanaryeasttest",
+    "SubscriptionId": "845c8e99-1acb-444d-b815-5975cbc12ac3",
+    "ResourceGroup": "synapseworkspace-managedrg-f620de46-da56-40e6-bce1-ee02e640e61b",
+    "time": "2020-10-07T23:44:13.8119168Z",
+    "resourceId": "/SUBSCRIPTIONS/845C8E99-1ACB-444D-B815-5975CBC12AC3/RESOURCEGROUPS/CHGETTYS/PROVIDERS/MICROSOFT.SYNAPSE/WORKSPACES/CHGETTYSCANARYEASTTEST/SQLPOOLS/PERFINSTANCE",
+    "category": "DmsWorkers",
+    "operationName": "DmsWorkersEvent",
+    "properties": {
+      "RequestId": "QID14866",
+      "StepIndex": 29,
+      "DmsStepIndex": 0,
+      "PdwNodeId": 4,
+      "DistributionId": 1,
+      "Type": "HASH_READER",
+      "Status": "Execute",
+      "BytesProcessed": -1,
+      "RowsProcessed": -1,
+      "StartTime": "2020-10-07T23:44:13.5460164Z",
+      "EndTime": "1601-01-01T00:00:00Z",
+      "CpuTime": -1,
+      "SqlSpid": -1,
+      "DmsCpid": 44356,
+      "ErrorId": "",
+      "SourceInfo": "SELECT [T1_1].[col] AS [col], [T1_1].[col1] AS [col1], [T1_1].[col2] AS [col2] FROM (SELECT SUM([T2_1].[col]) AS [col], SUM([T2_1].[col1]) AS [col1], SUM([T2_1].[col2]) AS [col2] FROM tempdb.[dbo].[QTable_b26ae2779c4c4cc2a31130b4179946fa] AS T2_1) AS T1_1OPTION (MAXDOP 3, MAX_GRANT_PERCENT = 8.25)",
+      "DestinationInfo": ""
+    }
+  }
+]

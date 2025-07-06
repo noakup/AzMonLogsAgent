@@ -1,0 +1,58 @@
+source
+| extend properties_d = parse_json(properties)
+| extend legacyProperties_d = parse_json(legacyProperties)
+| extend noLegacyProperties =  isempty(legacyProperties)
+| extend PropertiesBackCompat = iff(noLegacyProperties, properties_backcompat, 
+    iff(isempty(legacyProperties_d.legacyEventProperties), properties_backcompat, tostring(legacyProperties_d.legacyEventProperties)))
+| extend identity_d = parse_json(identity)
+| extend Misc = parse_json(rawLog) 
+| extend Level = iff(isempty(level), "Informational", 
+    iff(level == "5", "Verbose",
+    iff(level == "4", "Informational", 
+    iff(level == "3", "Warning", 
+    iff(level == "2", "Error", 
+    iff(level == "1", "Critical", level))))))
+| extend noLegacyClaims = noLegacyProperties or isempty(legacyProperties_d.legacyClaims)
+| extend Claims = iff(noLegacyClaims, iff(isnotempty(tostring(identity_d.claims)), tostring(identity_d.claims), tostring(identity_d.Claims)), tostring(legacyProperties_d.legacyClaims))
+| extend noLegacyCaller = noLegacyProperties or isempty(legacyProperties_d.legacyCaller)
+| extend Caller = iff(noLegacyCaller, iff(isnotempty(tostring(properties_d.caller)), tostring(properties_d.caller), tostring(properties_d.Caller)), tostring(legacyProperties_d.legacyCaller))
+| extend channelRaw = iff(noLegacyProperties, channels, 
+    iff(isempty(legacyProperties_d.legacyChannels), channels, tostring(legacyProperties_d.legacyChannels)))
+| extend Channel = iff(isempty(channelRaw), "OPERATION",
+    iff(channelRaw == "1", "ADMIN",
+    iff(channelRaw == "2", "OPERATION", 
+    iff(channelRaw == "4", "DEBUG", 
+    iff(channelRaw == "8", "ANALYTICS", channelRaw)))))
+| extend ActivitySubstatusValue = iff(noLegacyProperties, tostring(properties_d.activitySubstatusValue), 
+    iff(isempty(legacyProperties_d.legacySubStatus), tostring(properties_d.activitySubstatusValue), tostring(legacyProperties_d.legacySubStatus)))
+| project
+    MoboTenantId = toguid(hoboWorkspaceId),
+    TimeGenerated = todatetime(["time"]),
+    SourceSystem = "Azure",
+    CallerIpAddress = callerIpAddress,
+    CategoryValue = category,
+    CorrelationId = correlationId,
+    Authorization = tostring(identity_d.authorization),
+    Claims,
+    Level,
+    OperationNameValue = operationName,
+    Properties = properties,
+	PropertiesBackCompat,
+    Caller,
+    EventDataId = iff(noLegacyProperties, tostring(properties_d.eventDataId), tostring(legacyProperties_d.legacyEventDataId)),
+    EventSubmissionTimestamp = todatetime(properties_d.eventSubmissionTimestamp),
+    HTTPRequest = tostring(properties_d.httpRequest),
+    OperationId = tostring(properties_d.operationId),
+    AzureResourceGroup = iff(noLegacyProperties, tostring(properties_d.resourceGroup), tostring(legacyProperties_d.legacyResourceGroup)),
+    ResourceProviderValue = iff(noLegacyProperties,  tostring(properties_d.resourceProviderValue), tostring(legacyProperties_d.legacyResourceProviderName)),
+    ResourceTypeValue = iff(noLegacyProperties, tostring(properties_d.resourceType), tostring(legacyProperties_d.legacyResourceType)),
+    EventName = tostring(properties_d.eventName),
+    Channel,
+    ActivityStatusValue = tostring(properties_d.activityStatusValue),
+    ActivitySubstatusValue,
+    Hierarchy = tostring(properties_d.hierarchy),
+    AzureSubscriptionId = iff(noLegacyProperties, tostring(properties_d.subscriptionId), tostring(legacyProperties_d.legacySubscriptionId)),
+	AzureTenantId = tostring(properties_d.tenantId),
+    AzureResourceId = iff(noLegacyProperties, resourceId, tostring(legacyProperties_d.legacyResourceId)), 
+	Description = resultDescription,
+    Misc

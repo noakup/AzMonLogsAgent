@@ -1,0 +1,464 @@
+{
+  "type": "Microsoft.Storage/storageAccounts",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Azure Storage Insights/Triage",
+  "contactDL": "xdmichalnirgross@microsoft.com",
+  "relatedTables": [],
+  "relatedFunctions": [],
+
+  "tables": [
+    {
+      "name": "StorageInsightsHourlyMetrics",
+      "description": "Hourly metrics for Storage Insights.",
+      "categories": [ "resources" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 3,
+      "dataTypeId": "XDM_HOURLYMETRICS_MICROSOFTSTORAGEINSIGHTS",
+      "isResourceCentric": false,
+      "tableState": "Validation",
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime"
+        },
+        {
+          "name": "TimePeriod",
+          "type": "DateTime"
+        },
+        {
+          "name": "MetricName",
+          "type": "String"
+        },
+        {
+          "name": "Count",
+          "type": "Long"
+        },
+        {
+          "name": "Total",
+          "type": "Long"
+        },
+        {
+          "name": "StorageAccountName",
+          "type": "String"
+        },
+        {
+          "name": "ServiceType",
+          "type": "String"
+        },
+        {
+          "name": "ObjectAccessTier",
+          "type": "String"
+        },
+        {
+          "name": "IsAccessTierInferred",
+          "type": "String"
+        },
+        {
+          "name": "ObjectType",
+          "type": "String"
+        },
+        {
+          "name": "RequestCategory",
+          "type": "String"
+        },
+        {
+          "name": "ResponseCategory",
+          "type": "String"
+        },
+        {
+          "name": "RecordId",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/StorageInsightsHourlyMetricsTransform.kql",
+      "columns": [
+        {
+          "name": "TimePeriod",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The date and time that represents the metric's captured data for the past hour."
+        },
+        {
+          "name": "MetricName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the metric."
+        },
+        {
+          "name": "ServiceType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The type of the service."
+        },
+        {
+          "name": "Count",
+          "type": "BigInt",
+          "isDefaultDisplay": true,
+          "description": "Number of samples (for example, objects, or transactions) collected during the time range."
+        },
+        {
+          "name": "Total",
+          "type": "BigInt",
+          "isDefaultDisplay": true,
+          "description": "Sum of all of the values in the time range."
+        },
+        {
+          "name": "StorageAccountName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the storage account."
+        },
+        {
+          "name": "ObjectType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The type of the object."
+        },
+        {
+          "name": "ObjectAccessTier",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The access tier of the object."
+        },
+        {
+          "name": "RequestCategory",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The category of the API request."
+        },
+        {
+          "name": "ResponseCategory",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The category of the API response."
+        },
+        {
+          "name": "IsAccessTierInferred",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Determines if the object infers its tier from the default storage account access tier setting."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The Universal Time Coordinated (UTC) time when the metric was generated."
+        },
+        {
+          "name": "RecordId",
+          "type": "String",
+          "isDefaultDisplay": false,
+          "description": "A distinct value assigned to each record within the table. It enables the identification of duplicated records."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/StorageInsightsHourlyMetricsSamples.json",
+      "sampleOutputRecordsFilePath":  "SampleOutputRecords/StorageInsightsHourlyMetricsSamples.json"
+    },
+    {
+      "name": "StorageInsightsDailyMetrics",
+      "description": "Daily metrics for Storage Insights.",
+      "categories": [ "resources" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 3,
+      "dataTypeId": "XDM_DAILYSUMMARYMETRICS_MICROSOFTSTORAGEINSIGHTS",
+      "isResourceCentric": false,
+      "tableState": "Validation",
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime"
+        },
+        {
+          "name": "TimePeriod",
+          "type": "DateTime"
+        },
+        {
+          "name": "MetricName",
+          "type": "String"
+        },
+        {
+          "name": "Count",
+          "type": "Long"
+        },
+        {
+          "name": "Total",
+          "type": "Long"
+        },
+        {
+          "name": "StorageAccountName",
+          "type": "String"
+        },
+        {
+          "name": "ServiceType",
+          "type": "String"
+        },
+        {
+          "name": "ObjectAccessTier",
+          "type": "String"
+        },
+        {
+          "name": "IsAccessTierInferred",
+          "type": "String"
+        },
+        {
+          "name": "ObjectType",
+          "type": "String"
+        },
+        {
+          "name": "RequestCategory",
+          "type": "String"
+        },
+        {
+          "name": "ResponseCategory",
+          "type": "String"
+        },
+        {
+          "name": "RecordId",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/StorageInsightsDailyMetricsTransform.kql",
+      "columns": [
+        {
+          "name": "TimePeriod",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The date and time that represents the metric's captured data for the past day."
+        },
+        {
+          "name": "MetricName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the metric."
+        },
+        {
+          "name": "ServiceType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The type of the service."
+        },
+        {
+          "name": "Count",
+          "type": "BigInt",
+          "isDefaultDisplay": true,
+          "description": "Number of samples (for example, objects, or transactions) collected during the time range."
+        },
+        {
+          "name": "Total",
+          "type": "BigInt",
+          "isDefaultDisplay": true,
+          "description": "Sum of all of the values in the time range."
+        },
+        {
+          "name": "StorageAccountName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the storage account."
+        },
+        {
+          "name": "ObjectType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The type of the object."
+        },
+        {
+          "name": "ObjectAccessTier",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The access tier of the object."
+        },
+        {
+          "name": "RequestCategory",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The category of the API request."
+        },
+        {
+          "name": "ResponseCategory",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The category of the API response."
+        },
+        {
+          "name": "IsAccessTierInferred",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Determines if the object infers its tier from the default storage account access tier setting."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The Universal Time Coordinated (UTC) time when the metric was generated."
+        },
+        {
+          "name": "RecordId",
+          "type": "String",
+          "isDefaultDisplay": false,
+          "description": "A distinct value assigned to each record within the table. It enables the identification of duplicated records."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/StorageInsightsDailyMetricsSamples.json",
+      "sampleOutputRecordsFilePath":  "SampleOutputRecords/StorageInsightsDailyMetricsSamples.json"
+    },
+    {
+      "name": "StorageInsightsMonthlyMetrics",
+      "description": "Monthly metrics for Storage Insights.",
+      "categories": [ "resources" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 3,
+      "dataTypeId": "XDM_MONTHLYSUMMARYMETRICS_MICROSOFTSTORAGEINSIGHTS",
+      "isResourceCentric": false,
+      "tableState": "Validation",
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime"
+        },
+        {
+          "name": "TimePeriod",
+          "type": "DateTime"
+        },
+        {
+          "name": "MetricName",
+          "type": "String"
+        },
+        {
+          "name": "Count",
+          "type": "Long"
+        },
+        {
+          "name": "Total",
+          "type": "Long"
+        },
+        {
+          "name": "StorageAccountName",
+          "type": "String"
+        },
+        {
+          "name": "ServiceType",
+          "type": "String"
+        },
+        {
+          "name": "ObjectAccessTier",
+          "type": "String"
+        },
+        {
+          "name": "IsAccessTierInferred",
+          "type": "String"
+        },
+        {
+          "name": "ObjectType",
+          "type": "String"
+        },
+        {
+          "name": "RequestCategory",
+          "type": "String"
+        },
+        {
+          "name": "ResponseCategory",
+          "type": "String"
+        },
+        {
+          "name": "RecordId",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/StorageInsightsMonthlyMetricsTransform.kql",
+      "columns": [
+        {
+          "name": "TimePeriod",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The date and time that represents the metric's captured data for the past month."
+        },
+        {
+          "name": "MetricName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the metric."
+        },
+        {
+          "name": "ServiceType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The type of the service."
+        },
+        {
+          "name": "Count",
+          "type": "BigInt",
+          "isDefaultDisplay": true,
+          "description": "Number of samples (for example, objects, or transactions) collected during the time range."
+        },
+        {
+          "name": "Total",
+          "type": "BigInt",
+          "isDefaultDisplay": true,
+          "description": "Sum of all of the values in the time range."
+        },
+        {
+          "name": "StorageAccountName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the storage account."
+        },
+        {
+          "name": "ObjectType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The type of the object."
+        },
+        {
+          "name": "ObjectAccessTier",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The access tier of the object."
+        },
+        {
+          "name": "RequestCategory",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The category of the API request."
+        },
+        {
+          "name": "ResponseCategory",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The category of the API response."
+        },
+        {
+          "name": "IsAccessTierInferred",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Determines if the object infers its tier from the default storage account access tier setting."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The Universal Time Coordinated (UTC) time when the metric was generated."
+        },
+        {
+          "name": "RecordId",
+          "type": "String",
+          "isDefaultDisplay": false,
+          "description": "A distinct value assigned to each record within the table. It enables the identification of duplicated records."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/StorageInsightsMonthlyMetricsSamples.json",
+      "sampleOutputRecordsFilePath":  "SampleOutputRecords/StorageInsightsMonthlyMetricsSamples.json"
+    }
+  ],
+
+  "functions": [],
+
+  "queries": []
+}

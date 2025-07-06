@@ -1,0 +1,324 @@
+{
+  "type": "Microsoft.AzureADGraph/tenants",
+  "displayName": "AAD Graph Logs",
+  "description": "All tables related to Azure Active Directory Graph logs.",
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "AAD Distributed Directory Services / Programmability Infra",
+  "tags": {},
+  "properties": {},
+  "relatedTables": [
+    "AzureActivity",
+    "AuditLogs"
+  ],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "name": "AADGraphActivityLogs",
+      "description": "AAD Graph Activity Logs provide details of legacy API requests made to Azure Active Directory Graph for resources in the tenant.",
+      "dataTypeId": "AADGRAPH_ACTIVITYLOGS",
+      "isResourceCentric": true,
+      "categories": [
+        "audit",
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 5,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "durationMs",
+          "type": "Int"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "callerIpAddress",
+          "type": "String"
+        },
+        {
+          "name": "level",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/AADGraphActivityLogsTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isPreferredFacet": true,
+          "isDefaultDisplay": true,
+          "description": "The date and time the request was received."
+        },
+        {
+          "name": "TimeRequested",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp when the request was made."
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the region that served the request."
+        },
+        {
+          "name": "RequestId",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true,
+          "description": "The identifier representing the request."
+        },
+        {
+          "name": "AADTenantId",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true,
+          "description": "The identifier of the tenant where the request was made."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the operation performed on the resource."
+        },
+        {
+          "name": "ApiVersion",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The API version of the operation."
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The log category, e.g., AzureADGraphActivityLogs."
+        },
+        {
+          "name": "ResultSignature",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The HTTP response status or outcome of the operation."
+        },
+        {
+          "name": "DurationMs",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "The duration of the request in milliseconds."
+        },
+        {
+          "name": "Level",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The severity level of the event (e.g., Informational)."
+        },
+        {
+          "name": "RequestMethod",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The HTTP method used (e.g., GET, POST)."
+        },
+        {
+          "name": "ResponseStatusCode",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "The HTTP status code returned in the response."
+        },
+        {
+          "name": "ResponseSizeBytes",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "The size of the response returned to the caller, in bytes."
+        },
+        {
+          "name": "SignInActivityId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The identifier representing the sign-in activity."
+        },
+        {
+          "name": "Roles",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The roles assigned in the token claims."
+        },
+        {
+          "name": "TokenIssuedAt",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp when the token was issued."
+        },
+        {
+          "name": "ActorType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The type of actor making the request (e.g., User, Application)."
+        },
+        {
+          "name": "AppId",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true,
+          "description": "The identifier of the application making the request."
+        },
+        {
+          "name": "UserId",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true,
+          "description": "The identifier of the user making the request."
+        },
+        {
+          "name": "ServicePrincipalId",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true,
+          "description": "The identifier of the service principal making the request."
+        },
+        {
+          "name": "Scopes",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The scopes included in the token claims."
+        },
+        {
+          "name": "IdentityProvider",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The identity provider used during authentication."
+        },
+        {
+          "name": "ClientAuthMethod",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The authentication method used by the client."
+        },
+        {
+          "name": "Wids",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The WIDs from the token claims."
+        },
+        {
+          "name": "CallerIpAddress",
+          "type": "String",
+          "dataTypeHint": "IP",
+          "isDefaultDisplay": true,
+          "description": "The IP address of the caller making the request."
+        },
+        {
+          "name": "UserAgent",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The user agent string provided by the client."
+        },
+        {
+          "name": "RequestUri",
+          "type": "String",
+          "dataTypeHint": "URI",
+          "isDefaultDisplay": true,
+          "description": "The URI of the request sent to the AAD Graph API."
+        },
+        {
+          "name": "SessionId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The session identifier from the request context."
+        },
+        {
+          "name": "DeviceId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The identifier of the device used in the request."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SampleAADGraphActivityLogs.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/SampleAADGraphActivityLogs.json"
+    }
+  ],
+  "functions": [],
+  "queries": [
+    {
+      "id": "00d2b78e-df02-42d4-ae3a-27db94a534fc",
+      "displayName": "Frequent users endpoint callers (AAD Graph)",
+      "description": "Gets list of apps and service principals calling users endpoint in AAD Graph.",
+      "bodyFilePath": "KQL/MostActiveRequests.kql",
+      "categories": [
+        "security"
+      ],
+      "tags": {
+        "Topic": [
+          "Security"
+        ]
+      },
+      "relatedTables": [
+        "AADGraphActivityLogs"
+      ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "c4ee740a-6d0e-4a87-b998-663d2d36fca0",
+      "displayName": "Failed groups endpoint requests (AAD Graph)",
+      "description": "Gets a list of failed requests to group entities in AAD Graph, by apps and service principals.",
+      "bodyFilePath": "KQL/FailedGroupRequests.kql",
+      "categories": [
+        "security"
+      ],
+      "tags": {
+        "Topic": [
+          "Security"
+        ]
+      },
+      "relatedTables": [
+        "AADGraphActivityLogs"
+      ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+let TopSourceIPs = 
+    RetinaNetworkFlowLogs
+    | summarize TotalPacketsSent = sum(PacketsSent) by SourceIP = IP.Source
+    | extend MetricCategory = "Top Source IPs by Packets Sent"
+    | project MetricCategory, Entity = SourceIP, Value = TotalPacketsSent
+    | top 10 by Value desc;
+
+let TopDestinationIPs = 
+    RetinaNetworkFlowLogs
+    | summarize TotalPacketsReceived = sum(PacketsReceived) by DestinationIP = IP.Destination
+    | extend MetricCategory = "Top Destination IPs by Packets Received"
+    | project MetricCategory, Entity = DestinationIP, Value = TotalPacketsReceived
+    | top 10 by Value desc;
+
+let TopSourceIPsByBytes = 
+    RetinaNetworkFlowLogs
+    | summarize TotalBytesSent = sum(BytesSent) by SourceIP = IP.Source
+    | extend MetricCategory = "Top Source IPs by Bytes Sent"
+    | project MetricCategory, Entity = SourceIP, Value = TotalBytesSent
+    | top 10 by Value desc;
+
+let TopDestinationIPsByBytes = 
+    RetinaNetworkFlowLogs
+    | summarize TotalBytesReceived = sum(BytesReceived) by DestinationIP = IP.Destination
+    | extend MetricCategory = "Top Destination IPs by Bytes Received"
+    | project MetricCategory, Entity = DestinationIP, Value = TotalBytesReceived
+    | top 10 by Value desc;
+
+let TopProtocols = 
+    RetinaNetworkFlowLogs
+    | summarize TotalUsage = count() by Protocol
+    | extend MetricCategory = "Top Protocols by Usage"
+    | project MetricCategory, Entity = Protocol, Value = TotalUsage
+    | top 10 by Value desc;
+
+TopSourceIPs
+| union TopDestinationIPs
+| union TopSourceIPsByBytes
+| union TopDestinationIPsByBytes
+| union TopProtocols

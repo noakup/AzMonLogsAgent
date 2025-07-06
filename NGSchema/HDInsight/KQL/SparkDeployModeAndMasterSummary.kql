@@ -1,0 +1,5 @@
+HDInsightSparkEnvironmentEvents
+//| where ClusterDnsName == '<your cluster name>' // remove the preceding "//" and specify your cluster name to see its logs
+| where TimeGenerated > ago(24h)
+| summarize count() by strcat(SparkDeployMode, "/", SparkMaster)
+| render columnchart

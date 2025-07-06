@@ -1,0 +1,5 @@
+// To create an alert for this query, click '+ New alert rule'
+AzureDiagnostics
+| where ResourceProvider == \"MICROSOFT.SERVICEBUS\"
+| where (Category == \"info\" and (OperationName == \"disable\" or OperationName == \"restore\"))
+| project Message, _ResourceId

@@ -1,0 +1,22 @@
+[
+    {
+        "TimeGenerated": "2023-10-13T20:09:01Z",
+        "Location": "westus",
+        "Message": "sync of upstream servers successful",
+        "Tag": "stateUpdaterSyslog",
+        "Level":"info",
+        "Context":"http",
+        "UpstreamName":"coffee",
+        "Error":null
+    },
+    {
+        "TimeGenerated": "2017-04-26T19:27:38Z",
+        "Location": "westus",
+        "Message": "sync of upstream servers failed",
+        "Tag": "stateUpdaterSyslog",
+        "Level":"error",
+        "Context":"http",
+        "UpstreamName":"coffee",
+        "Error":"Error code"
+    }
+]

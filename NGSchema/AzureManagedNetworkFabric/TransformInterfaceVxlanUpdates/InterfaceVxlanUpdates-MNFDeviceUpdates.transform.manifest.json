@@ -1,0 +1,14 @@
+{
+  "name" : "InterfaceVxlanUpdates",
+  "description": "Interface vxlan updates events in the Nexus network fabric devices.",
+  "transformVersion" : 3,
+  "dataTypeId": "MICROSOFTMANAGEDNETWORKFABRIC_INTERFACEVXLANUPDATES",
+  "inputFilePath" : "InterfaceVxlanUpdates-MNFDeviceUpdates.json",
+  "transformState" : "Production",
+  "icmTeam": "NETWORKFABRICAUTOMATION/Triage",
+  "contactDL": "afo-nf-all@microsoft.com",
+  "relatedTable" : "MNFDeviceUpdates",
+  "kqlFilePath" : "KQL/TransformInterfaceVxlanUpdates.kql",
+  "sampleInputRecordsFilePath" : "SampleInputRecords/InterfaceVxlanUpdates.json",
+  "sampleOutputRecordsFilePath" : "SampleOutputRecords/InterfaceVxlanUpdates.json"
+}

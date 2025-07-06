@@ -1,0 +1,16 @@
+source
+| project
+TimeGenerated = OriginFolderCreationTime,
+Timestamp = OriginFolderCreationTime,
+ConfigurationId = ConfigurationId,
+ConfigurationImpact = ConfigurationImpact,
+ConfigurationName = ConfigurationName,
+ConfigurationDescription = ConfigurationDescription,
+RiskDescription = RiskDescription,
+ConfigurationCategory = ConfigurationCategory,
+ConfigurationSubcategory = ConfigurationSubcategory,
+ConfigurationBenchmarks = todynamic(ConfigurationBenchmarks),
+Tags = todynamic(Tags),
+RemediationOptions = RemediationOptions,
+RelatedMitreTechniques = todynamic(RelatedMitreTechniques),
+RelatedMitreTactics = todynamic(RelatedMitreTactics)

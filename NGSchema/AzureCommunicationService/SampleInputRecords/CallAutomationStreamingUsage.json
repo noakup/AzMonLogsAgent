@@ -1,0 +1,44 @@
+[
+    {
+        "time":"2023-04-05T23:08:38.7343926Z",
+        "level":"Informational",
+        "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/ACS-RECORDING-E2E-SAMPLE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/ACS-RECORDING-RUNNER-US-R0",
+        "correlationId":"6e1f227b-3a0b-4951-a2c0-cdb59eeeb845",
+        "properties": {
+            "streamingModality": "Transcription",
+            "streamingSessionId": "7d702e86-1684-4a74-beca-0842194b040e",
+            "participantId": "7d702e86-1684-4a74-beca-0842194b040e",
+            "streamingStartTime":"2023-04-05T23:08:38.7343926Z",
+            "streamingDurationInMs": 100.01,
+            "callConnectionId": "46162585-971f-410a-a70b-5a4ee4803ea9"
+        }
+    },
+    {
+        "time":"2023-04-05T23:08:38.7343926Z",
+        "level":"Informational",
+        "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/ACS-RECORDING-E2E-SAMPLE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/ACS-RECORDING-RUNNER-US-R0",
+        "correlationId":"6e1f227b-3a0b-4951-a2c0-cdb59eeeb845",
+        "properties": {
+            "streamingModality": "AudioStreamingMixed",
+            "streamingSessionId": "7d702e86-1684-4a74-beca-0842194b040e",
+            "participantId": "",
+            "streamingStartTime":"2023-04-05T23:08:38.7343926Z",
+            "streamingDurationInMs": 100.01,
+            "callConnectionId": "46162585-971f-410a-a70b-5a4ee4803ea9"
+        }
+    },
+    {
+        "time":"2023-04-05T23:08:38.7343926Z",
+        "level":"Informational",
+        "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/ACS-RECORDING-E2E-SAMPLE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/ACS-RECORDING-RUNNER-US-R0",
+        "correlationId":"6e1f227b-3a0b-4951-a2c0-cdb59eeeb845",
+        "properties": {
+            "streamingModality": "AudioStreamingUnmixed",
+            "streamingSessionId": "7d702e86-1684-4a74-beca-0842194b040e",
+            "participantId": "7d702e86-1684-4a74-beca-0842194b040e",
+            "streamingStartTime":"2023-04-05T23:08:38.7343926Z",
+            "streamingDurationInMs": 100.01,
+            "callConnectionId": "46162585-971f-410a-a70b-5a4ee4803ea9"
+        }
+    }
+]

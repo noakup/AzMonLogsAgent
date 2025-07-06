@@ -1,0 +1,287 @@
+{
+  "type": "microsoft.cache/redis",
+  "displayName": "Azure Cache for Redis",
+  "description": "All tables related to Azure Cache for Redis service.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Windows Azure Cache/Partner Automation (Use CRI team for customer issues)",
+  "contactDL": "azurecacheft@microsoft.com",
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "name": "ACRConnectedClientList",
+      "description": "Logs count of Redis clients connected to a cache instance and their IP addresses, logged at a 10-second interval.",
+      "categories": [
+        "resources",
+        "audit"
+      ],
+      "tags": {},
+      "properties": {},
+      "dataTypeId": "MICROSOFTCACHE_CONNECTEDCLIENTLIST",
+      "artifactVersion": 8,
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp of when the log was generated in UTC."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The Redis operation associated with the log record."
+        },
+        {
+          "name": "CacheName",
+          "description": "The name of the Azure Cache for Redis instance.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "description": "The location (region) the Azure Cache for Redis instance was accessed in.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RoleInstance",
+          "description": "The role instance which logged the client list.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ClientIp",
+          "description": "The Redis client IP address.",
+          "type": "String",
+          "dataTypeHint": "IP",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "PrivateLinkIpv6",
+          "description": "The Redis client private link IPv6 address (if applicable).",
+          "type": "String",
+          "dataTypeHint": "IP",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ClientCount",
+          "description": "The number of Redis client connections from the associated IP address.",
+          "type": "Int",
+          "isDefaultDisplay": true
+        }
+      ],
+      "transformFilePath": "KQL/ConnectedClientList.kql",
+      "sampleInputRecordsFilePath": "SampleInputRecords/ConnectedClientList.json"
+    },
+    {
+      "name": "ACREntraAuthenticationAuditLog",
+      "description": "Logs Microsoft Entra authentication audit events for Azure Cache for Redis.",
+      "categories": [
+        "resources",
+        "audit"
+      ],
+      "tags": {},
+      "properties": {},
+      "dataTypeId": "MICROSOFTCACHE_ENTRAAUTHENTICATIONAUDITLOG",
+      "artifactVersion": 4,
+      "isResourceCentric": true,
+      "tableState": "Validation",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp of when the log was generated in UTC."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The Redis operation associated with the log record."
+        },
+        {
+          "name": "CacheName",
+          "description": "The name of the Azure Cache for Redis instance.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Location",
+          "description": "The location (region) the Azure Cache for Redis instance was accessed in.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Message",
+          "description": "The message associated with the log event.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Authentication",
+          "description": "Authentication result.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Username",
+          "description": "The user's identifier or username.",
+          "dataTypeHint": "GUID",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "IpAddress",
+          "description": "The IP address and port associated with the log event.",
+          "type": "String",
+          "dataTypeHint": "IP",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ClientId",
+          "description": "Client identifier.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ClientName",
+          "description": "Client name.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Lifetime",
+          "description": "Duration of Microsoft Entra authentication validity, measured in Milliseconds from the initial connection.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RoleInstance",
+          "description": "The role instance associated with the log event.",
+          "type": "Int",
+          "isDefaultDisplay": true
+        }
+      ],
+      "transformFilePath": "KQL/MSEntraAuthenticationAuditLogQuery.kql",
+      "sampleInputRecordsFilePath": "SampleInputRecords/MSEntraAuthenticationAuditLog.json"
+    }
+  ],
+  "functions": [],
+  "queries": [
+    {
+      "id": "7147966e-f714-405b-b243-2c2d69e8b3fe",
+      "displayName": "Unique Redis client IP addresses",
+      "description": "Unique Redis client IP addresses that have connected to the cache.",
+      "bodyFilePath": "KQL/UniqueClientIPsQuery.kql",
+      "categories": [
+        "audit",
+        "network",
+        "resources"
+      ],
+      "tags": {},
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "relatedTables": [
+        "ACRConnectedClientList"
+      ]
+    },
+    {
+      "id": "b0743562-0414-4fb9-a14b-fb1cfd5242b9",
+      "displayName": "Redis client connections per hour",
+      "description": "Redis client connections per hour within the specified IP address range.",
+      "bodyFilePath": "KQL/ConnectionsPerHourQuery.kql",
+      "categories": [
+        "audit",
+        "network",
+        "resources"
+      ],
+      "tags": {},
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "relatedTables": [
+        "ACRConnectedClientList"
+      ]
+    },
+    {
+      "id": "c7d2bca8-92e7-4c02-87f3-43aa0a0a2a3a",
+      "displayName": "Microsoft Entra authentication audit log",
+      "description": "Logging Microsoft Entra authentication audit events.",
+      "bodyFilePath": "KQL/MSEntraAuthenticationAuditLogQuery.kql",
+      "categories": [
+        "audit",
+        "network",
+        "resources"
+      ],
+      "tags": {},
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "relatedTables": [
+        "ACREntraAuthenticationAuditLog"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = tostring(split(operationName, "/MEDIASERVICES/")[1]),
+    OperationVersion = operationVersion,
+    Level = level,
+    Location = location,
+    ClientIP = tostring(properties.ClientIP),
+    URL = tostring(properties.URL),
+    Status = tostring(properties.Status)

@@ -1,0 +1,35 @@
+{
+    "name": "OTelResourcesPlain",
+    "description": "Resource Attributes emitted by an OpenTelemetry source",
+    "input": [
+        {
+            "name": "time",
+            "type": "DateTime"
+        },
+        {
+            "name": "Id",
+            "type": "String"
+        },
+        {
+            "name": "ServiceNamespace",
+            "type": "String"
+        },
+        {
+            "name": "ServiceName",
+            "type": "String"
+        },
+        {
+            "name": "ServiceInstanceId",
+            "type": "String"
+        },
+        {
+            "name": "RoleName",
+            "type": "String"
+        },
+        {
+            "name": "Attributes",
+            "type": "Dynamic"
+        }
+    ]
+  }
+  

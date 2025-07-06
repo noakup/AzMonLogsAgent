@@ -1,0 +1,17 @@
+[
+    {
+        "TimeGenerated": "2024-08-21T12:01:55.633Z",
+        "OperationName": "targets.fabric.symphony/Delete",
+        "Category": "UserDiagnostics",
+        "Location": "eastus",
+        "Properties": {},
+        "OperatingResourceId": "/SUBSCRIPTIONS/AF54D2CE-0DCB-48F8-9D2D-FF9C53E48C8D/RESOURCEGROUPS/JIADUTESTK3S0722RG/PROVIDERS/MICROSOFT.TOOLCHAINORCHESTRATOR/TARGETS/TESTK8STARGET",
+        "OperatingResourceK8SId": "symphonycustest/testk8starget",
+        "Message": "k8s.(*K8sTargetProvider).removeService failed with error: services \"target-runtime-testk8starget-v1\" not found",
+        "User": "60de14ba-296d-4d1b-8acb-bc0d3e1fbc0b",
+        "CorrelationId": "59a81ad5-126e-4398-a08e-2beb02d40936",
+        "TOServiceName": "symphony-api",
+        "TOServiceInstance": "symphony-api-bfc67f789-2xrh9",
+        "EdgeLocation": "/subscriptions/af54d2ce-0dcb-48f8-9d2d-ff9c53e48c8d/resourceGroups/jiadutestk3s0722rg/providers/Microsoft.ExtendedLocation/customLocations/symphonycustest"
+    }
+]

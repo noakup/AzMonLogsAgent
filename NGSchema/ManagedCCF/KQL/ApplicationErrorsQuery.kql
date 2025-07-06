@@ -1,0 +1,5 @@
+// To create an alert for this query, click '+ New alert rule'
+CCFApplicationLogs
+| where Level == "fail"
+| sort by TimeGenerated desc
+| limit 100

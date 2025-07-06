@@ -1,0 +1,22 @@
+source
+| project
+    TimeGenerated = TimeGenerated,
+    WorkspaceId = WorkspaceId,
+    AzureTenantId = AzureTenantId,
+    Id = Id,
+    SourceSystem = SourceSystem,
+    LastUpdateMethod = LastUpdateMethod,
+    IsDeleted = IsDeleted,
+    AdditionalFields = AdditionalFields,
+    Data = Data,
+    IsActive = IsActive,
+    Revoked = Revoked,
+    ValidUntil = ValidUntil,
+    ValidFrom = ValidFrom,
+    Created = Created,
+    Modified = Modified,
+    Tags = Tags,
+    Confidence = Confidence,
+    Pattern = Pattern,
+    ObservableKey = ObservableKey,
+    ObservableValue = ObservableValue

@@ -1,0 +1,1582 @@
+﻿{
+  "type": "Microsoft.Network/azureFirewalls",
+  "displayName": "Firewalls",
+  "description": "All tables related to Azure Firewall Service.",
+  "contactDL": "gsadev@microsoft.com",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Azure Firewall/CloudFirewall",
+  "tables": [
+    {
+      "name": "AZFWNetworkRule",
+      "description": "Contains all Network Rule log data. Each match between data plane and network rule creates a log entry with the data plane packet and the matched rule's attributes.",
+      "categories": [ "security" ],
+      "artifactVersion": 8,
+      "dataTypeId": "AZUREFIREWALL_AZFWNETWORKRULE",
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "DateTime"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+
+      "transformFilePath": "Kql/Transforms/AZFWNetworkRule.kql",
+
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the data plane log was created."
+        },
+        {
+          "name": "Protocol",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Packet's network protocol. For example: UDP, TCP."
+        },
+        {
+          "name": "SourceIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Packet's source IP address.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SourcePort",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Packet's source port."
+        },
+        {
+          "name": "DestinationIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Packet's destination IP address.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "DestinationPort",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Packet's destination port."
+        },
+        {
+          "name": "Action",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Action taken by the firewall following the match with this Network Rule. For example: Firewall may Allow/Deny this specific packet."
+        },
+        {
+          "name": "Policy",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the policy in which the triggered rule resides."
+        },
+        {
+          "name": "RuleCollectionGroup",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the rule collection group in which the triggered rule resides."
+        },
+        {
+          "name": "RuleCollection",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the rule collection in which the triggered rule resides."
+        },
+        {
+          "name": "Rule",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the triggered rule."
+        },
+        {
+          "name": "ActionReason",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "When no rule is triggered for a packet, this field contains the reason for the action performed by the firewall. For example: a packet dropped because no rule matched will show `Default Action`."
+        }
+      ],
+
+      "sampleInputRecordsFilePath": "SampleInputRecords/AZFWNetworkRule.json"
+    },
+    {
+      "name": "AZFWFatFlow",
+      "description": "This query returns the top flows across Azure Firewall instances. Log contains flow information, date transmission rate (in Megabits per second units) and the time period when the flows were recorded. Please follow the documentation to enable Top flow logging and details on how it is recorded.",
+      "categories": [ "security" ],
+      "artifactVersion": 8,
+      "dataTypeId": "AZUREFIREWALL_AZFWFATFLOW",
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "DateTime"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+
+      "transformFilePath": "Kql/Transforms/AZFWFatFlow.kql",
+
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the data plane log was created."
+        },
+        {
+          "name": "Protocol",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Flow's network protocol. For example: UDP, TCP."
+        },
+        {
+          "name": "SourceIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Flow's source IP address.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SourcePort",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Flow's source port."
+        },
+        {
+          "name": "DestinationIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Flow's destination IP address.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "DestinationPort",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Flow's destination port."
+        },
+        {
+          "name": "FlowRate",
+          "type": "Double",
+          "isDefaultDisplay": true,
+          "description": "Flow's bandwidth consumption rate in Megabits per second unit."
+        }
+      ],
+
+      "sampleInputRecordsFilePath": "SampleInputRecords/AZFWFatFlow.json"
+    },
+    {
+      "name": "AZFWFlowTrace",
+      "description": "Flow logs across Azure Firewall instances. Log contains flow information, flags and the time period when the flows were recorded. Please follow the documentation to enable flow trace logging and details on how it is recorded.",
+      "categories": [ "resources" ],
+      "artifactVersion": 7,
+      "dataTypeId": "AZUREFIREWALL_AZFWFLOWTRACE",
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "DateTime"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+
+      "transformFilePath": "Kql/Transforms/AZFWFlowTrace.kql",
+
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the data plane log was created."
+        },
+        {
+          "name": "Protocol",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Flow's network protocol. For example: UDP, TCP."
+        },
+        {
+          "name": "SourceIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Flow's source IP address.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SourcePort",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Flow's source port."
+        },
+        {
+          "name": "DestinationIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Flow's destination IP address.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "DestinationPort",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Flow's destination port."
+        },
+        {
+          "name": "Action",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Action taken by the firewall to log additional flow information."
+        },
+        {
+          "name": "ActionReason",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The reason for the action performed by the firewall. For example: when additional logging is enabled it shows `Additional TCP Log`."
+        },
+        {
+          "name": "Flag",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Flags set in the connection. For example: FIN, FIN-ACK, SYN-ACK, RST, INVALID."
+        }
+      ],
+
+      "sampleInputRecordsFilePath": "SampleInputRecords/AZFWFlowTrace.json",
+
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/FlowTraceSample.json"
+    },
+    {
+      "name": "AZFWApplicationRule",
+      "description": "Contains all Application rule log data. Each match between data plane and Application rule creates a log entry with the data plane packet and the matched rule's attributes.",
+      "categories": [ "security" ],
+      "artifactVersion": 10,
+      "dataTypeId": "AZUREFIREWALL_AZFWAPPLICATIONRULE",
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "DateTime"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+
+      "transformFilePath": "Kql/Transforms/AZFWApplicationRule.kql",
+
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the data plane log was created."
+        },
+        {
+          "name": "Protocol",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Request's network protocol. For example: HTTP, HTTPS."
+        },
+        {
+          "name": "SourceIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Request's source IP address.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SourcePort",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Request's source port."
+        },
+        {
+          "name": "DestinationPort",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Request's destination port."
+        },
+        {
+          "name": "Fqdn",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Request's target address in FQDN (Fully qualified Domain Name). For example: www.microsoft.com."
+        },
+        {
+          "name": "TargetUrl",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Request's target address URL. Available only for HTTP or TLS-inspected HTTPS requests. For example: https://www.microsoft.com/en-us/about."
+        },
+        {
+          "name": "Action",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Action taken by the firewall following the Application rule hit."
+        },
+        {
+          "name": "Policy",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the policy in which the triggered rule resides."
+        },
+        {
+          "name": "RuleCollectionGroup",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the rule collection group in which the triggered rule resides."
+        },
+        {
+          "name": "RuleCollection",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the rule collection in which the triggered rule resides."
+        },
+        {
+          "name": "Rule",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the triggered rule."
+        },
+        {
+          "name": "ActionReason",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "When no rule is triggered for a request, this field contains the reason for the action performed by the firewall. For example: a packet dropped because no rule matched will show `Default Action`."
+        },
+        {
+          "name": "IsTlsInspected",
+          "type": "Bool",
+          "isDefaultDisplay": true,
+          "description": "True if the connection is TLS inspected. False otherwise."
+        },
+        {
+          "name": "WebCategory",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Web Category identified for the requested FQDN (Azure Firewall Standard) or URL (Azure Firewall Premium). If a web category is not available for this request, the field is empty."
+        },
+        {
+          "name": "IsExplicitProxyRequest",
+          "type": "Bool",
+          "isDefaultDisplay": true,
+          "description": "True if the request is received on an explicit proxy port. False otherwise."
+        }
+      ],
+
+      "sampleInputRecordsFilePath": "SampleInputRecords/AZFWApplicationRule.json",
+
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/ApplicationRuleSample.json"
+    },
+    {
+      "name": "AZFWThreatIntel",
+      "description": "Contains all Threat Intelligence events.",
+      "categories": [ "security" ],
+      "artifactVersion": 8,
+      "dataTypeId": "AZUREFIREWALL_AZFWTHREATINTEL",
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "DateTime"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+
+      "transformFilePath": "Kql/Transforms/AZFWThreatIntel.kql",
+
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the data plane log was created."
+        },
+        {
+          "name": "Protocol",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Packet's network protocol. For example: UDP, TCP."
+        },
+        {
+          "name": "SourceIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Packet's source IP address.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SourcePort",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Packet's source port."
+        },
+        {
+          "name": "DestinationIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Packet's destination IP address.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "DestinationPort",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Packet's destination port."
+        },
+        {
+          "name": "Fqdn",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Request's target address in FQDN (Fully qualified Domain Name). For example: www.microsoft.com."
+        },
+        {
+          "name": "TargetUrl",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Request's target address URL. Available only for HTTP or TLS-inspected HTTPS requests. For example: https://www.microsoft.com/en-us/about."
+        },
+        {
+          "name": "Action",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Action taken by the firewall following the Threat Intelligence hit."
+        },
+        {
+          "name": "ThreatDescription",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Description of the Threat that was identified by the firewall."
+        },
+        {
+          "name": "IsTlsInspected",
+          "type": "Bool",
+          "isDefaultDisplay": true,
+          "description": "True if connection is TLS inspected. False otherwise."
+        }
+      ],
+
+      "sampleInputRecordsFilePath": "SampleInputRecords/AZFWThreatIntel.json"
+    },
+    {
+      "name": "AZFWNatRule",
+      "description": "Contains all DNAT (Destination Network Address Translation) events log data. Each match between data plane and DNAT rule creates a log entry with the data plane packet and the matched rule's attributes.",
+      "categories": [ "security" ],
+      "artifactVersion": 8,
+      "dataTypeId": "AZUREFIREWALL_AZFWNATRULE",
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "DateTime"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+
+      "transformFilePath": "Kql/Transforms/AZFWNatRule.kql",
+
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the data plane log was created."
+        },
+        {
+          "name": "Protocol",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Packet's network protocol. For example: UDP, TCP."
+        },
+        {
+          "name": "SourceIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Packet's source IP address.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SourcePort",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Packet's source port."
+        },
+        {
+          "name": "DestinationIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Packet's destination IP address.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "DestinationPort",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Packet's destination port."
+        },
+        {
+          "name": "TranslatedIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Original Destination IP address of the packet is replaced with TranslatedIp."
+        },
+        {
+          "name": "TranslatedPort",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Original Destination port of the packet is replaced with TranslatedPort."
+        },
+        {
+          "name": "Policy",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the policy in which the triggered rule resides."
+        },
+        {
+          "name": "RuleCollectionGroup",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the rule collection group in which the triggered rule resides."
+        },
+        {
+          "name": "RuleCollection",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the rule collection in which the triggered rule resides."
+        },
+        {
+          "name": "Rule",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the triggered rule."
+        }
+      ],
+
+      "sampleInputRecordsFilePath": "SampleInputRecords/AZFWNatRule.json"
+    },
+    {
+      "name": "AZFWIdpsSignature",
+      "description": "Contains all data plane packets that were matched with one or more IDPS signatures.",
+      "categories": [ "security" ],
+      "artifactVersion": 8,
+      "dataTypeId": "AZUREFIREWALL_AZFWIDPSSIGNATURE",
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "DateTime"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+
+      "transformFilePath": "Kql/Transforms/AZFWIdpsSignature.kql",
+
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the data plane log was created."
+        },
+        {
+          "name": "Protocol",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Packet's network protocol. For example: UDP, TCP."
+        },
+        {
+          "name": "SourceIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Packet's source IP address.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SourcePort",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Packet's source port."
+        },
+        {
+          "name": "DestinationIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Packet's destination IP address.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "DestinationPort",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Packet's destination port."
+        },
+        {
+          "name": "Action",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Action taken by the firewall following the IDPS signature hit."
+        },
+        {
+          "name": "SignatureId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ID of the matched IDPS signature."
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Category of the matched IDPS signature."
+        },
+        {
+          "name": "Description",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Description of the matched IDPS signature."
+        },
+        {
+          "name": "Severity",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Severity of the matched IDPS signature."
+        }
+      ],
+
+      "sampleInputRecordsFilePath": "SampleInputRecords/AZFWIdpsSignature.json"
+    },
+    {
+      "name": "AZFWDnsQuery",
+      "description": "Contains all DNS Proxy events log data.",
+      "categories": [ "security" ],
+      "artifactVersion": 8,
+      "dataTypeId": "AZUREFIREWALL_AZFWDNSQUERY",
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "DateTime"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+
+      "transformFilePath": "Kql/Transforms/AZFWDnsQuery.kql",
+
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the data plane log was created."
+        },
+        {
+          "name": "SourceIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "DNS query's source IP address.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SourcePort",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "DNS query's source Port."
+        },
+        {
+          "name": "QueryId",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "DNS query's query ID."
+        },
+        {
+          "name": "QueryType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "DNS query's query type."
+        },
+        {
+          "name": "QueryClass",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "DNS query's query class."
+        },
+        {
+          "name": "QueryName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "DNS query's name to resolve."
+        },
+        {
+          "name": "Protocol",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Protocol used to send the DNS query. For example: TCP, UDP"
+        },
+        {
+          "name": "RequestSize",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "The size of the DNS request in bytes."
+        },
+        {
+          "name": "DnssecOkBit",
+          "type": "Bool",
+          "isDefaultDisplay": true,
+          "description": "A flag indicating that the resolver supports DNSSEC records."
+        },
+        {
+          "name": "EDNS0BufferSize",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Client's EDNS0 buffer size. Specifies the maximum packet size allowed in responses in bytes."
+        },
+        {
+          "name": "ResponseCode",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "DNS reponse code."
+        },
+        {
+          "name": "ResponseFlags",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "DNS reponse flags, comma separated."
+        },
+        {
+          "name": "ResponseSize",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "DNS reponse syze in bytes."
+        },
+        {
+          "name": "RequestDurationSecs",
+          "type": "Float",
+          "isDefaultDisplay": true,
+          "description": "Duration of the DNS request from the time it arrived to the firewall and until a response was sent to the client."
+        },
+        {
+          "name": "ErrorNumber",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Error number matching the returned response code."
+        },
+        {
+          "name": "ErrorMessage",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Description of the error returned to the client. Empty if request is successful."
+        }
+      ],
+
+      "sampleInputRecordsFilePath": "SampleInputRecords/AZFWDnsQuery.json"
+    },
+    {
+      "name": "AZFWInternalFqdnResolutionFailure",
+      "description": "Contains all internal Firewall FQDN resolution requests that resulted in failure.",
+      "categories": [ "security" ],
+      "artifactVersion": 8,
+      "dataTypeId": "AZUREFIREWALL_AZFWINTERNALFQDNRESOLUTIONFAILURE",
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "DateTime"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+
+      "transformFilePath": "Kql/Transforms/AZFWInternalFqdnResolutionFailure.kql",
+
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the data plane log was created."
+        },
+        {
+          "name": "Fqdn",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The FQDN which the firewall failed to resolve."
+        },
+        {
+          "name": "ServerIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "DNS Resolver server's IP address.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "ServerPort",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "DNS Resolver server's port."
+        },
+        {
+          "name": "Policy",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the policy in which the rule with the failing FQDN resolution resides."
+        },
+        {
+          "name": "RuleCollectionGroup",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the rule collection group in which the rule with the failing FQDN resolution resides."
+        },
+        {
+          "name": "RuleCollection",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the rule collection in which the rule with the failing FQDN resolution resides."
+        },
+        {
+          "name": "Rule",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the rule with the failing FQDN resolution."
+        },
+        {
+          "name": "Error",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Description of the error that caused the failure of the FQDN resolution."
+        }
+      ],
+
+      "sampleInputRecordsFilePath": "SampleInputRecords/AZFWInternalFqdnResolutionFailure.json"
+    },
+    {
+      "name": "AZFWNetworkRuleAggregation",
+      "description": "Contains aggregated Network rule log data for Policy Analytics.",
+      "categories": [ "security" ],
+      "artifactVersion": 8,
+      "dataTypeId": "AZUREFIREWALL_AZFWNETWORKRULEAGGREGATION",
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "DateTime"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+
+      "transformFilePath": "Kql/Transforms/AZFWNetworkRuleAggregation.kql",
+
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the data plane log was created."
+        },
+        {
+          "name": "Protocol",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Packet's network protocol. For example: UDP, TCP."
+        },
+        {
+          "name": "SourceIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Packet's source IP address.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "DestinationIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Packet's destination IP address.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "DestinationPort",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Packet's destination port."
+        },
+        {
+          "name": "Action",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Action taken by the firewall following the match with this Network rule. For example: Firewall may Allow/Deny this specific session/packet."
+        },
+        {
+          "name": "ActionReason",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "When no rule is triggered for a request, this field contains the reason for the action performed by the firewall. For example: a packet dropped because no rule matched will show `Default Action`."
+        },
+        {
+          "name": "Policy",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the policy in which the triggered rule resides."
+        },
+        {
+          "name": "RuleCollectionGroup",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the rule collection group in which the triggered rule resides."
+        },
+        {
+          "name": "RuleCollection",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the rule collection in which the triggered rule resides."
+        },
+        {
+          "name": "Rule",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the triggered rule."
+        },
+        {
+          "name": "IsDefaultRule",
+          "type": "Bool",
+          "isDefaultDisplay": true,
+          "description": "True if no network rule was hit. False otherwise."
+        },
+        {
+          "name": "NetworkRuleCount",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Aggregated count of network rule."
+        }
+      ],
+
+      "sampleInputRecordsFilePath": "SampleInputRecords/AZFWNetworkRuleAggregation.json"
+    },
+    {
+      "name": "AZFWApplicationRuleAggregation",
+      "description": "Contains aggregated Application rule log data for Policy Analytics.",
+      "categories": [ "security" ],
+      "artifactVersion": 8,
+      "dataTypeId": "AZUREFIREWALL_AZFWAPPLICATIONRULEAGGREGATION",
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "DateTime"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+
+      "transformFilePath": "Kql/Transforms/AZFWApplicationRuleAggregation.kql",
+
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the data plane log was created."
+        },
+        {
+          "name": "Protocol",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Request's network protocol. For example: HTTP/HTTPS."
+        },
+        {
+          "name": "SourceIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Request's source IP address.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "DestinationPort",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Request's destination port."
+        },
+        {
+          "name": "Fqdn",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Request's target address in FQDN (Fully qualified Domain Name). For example: www.microsoft.com."
+        },
+        {
+          "name": "TargetUrl",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Request's target address URL. Available only for HTTP or TLS-inspected HTTPS requests. For example: https://www.microsoft.com/en-us/about."
+        },
+        {
+          "name": "Action",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Action taken by the firewall following the Application rule hit."
+        },
+        {
+          "name": "Policy",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the policy in which the triggered rule resides."
+        },
+        {
+          "name": "RuleCollectionGroup",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the rule collection group in which the triggered rule resides."
+        },
+        {
+          "name": "RuleCollection",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the rule collection in which the triggered rule resides."
+        },
+        {
+          "name": "Rule",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the triggered rule."
+        },
+        {
+          "name": "ActionReason",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "When no rule is triggered for a packet, this field contains the reason for the action performed by the firewall."
+        },
+        {
+          "name": "ApplicationRuleCount",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Aggregated count of Application rule."
+        }
+      ],
+
+      "sampleInputRecordsFilePath": "SampleInputRecords/AZFWApplicationRuleAggregation.json"
+    },
+    {
+      "name": "AZFWNatRuleAggregation",
+      "description": "Contains aggregated NAT Rule log data for Policy Analytics.",
+      "categories": [ "security" ],
+      "artifactVersion": 8,
+      "dataTypeId": "AZUREFIREWALL_AZFWNATRULEAGGREGATION",
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "DateTime"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+
+      "transformFilePath": "Kql/Transforms/AZFWNatRuleAggregation.kql",
+
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the data plane log was created."
+        },
+        {
+          "name": "Protocol",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Packet's network protocol. For example: UDP, TCP."
+        },
+        {
+          "name": "SourceIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Packet's source IP address.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "TranslatedIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Original Destination IP address of the packet is replaced with TranslatedIp."
+        },
+        {
+          "name": "TranslatedPort",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Original Destination port  of the packet is replaced with TranslatedPort."
+        },
+        {
+          "name": "Policy",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the policy in which the triggered rule resides."
+        },
+        {
+          "name": "RuleCollectionGroup",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the rule collection group in which the triggered rule resides."
+        },
+        {
+          "name": "RuleCollection",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the rule collection in which the triggered rule resides."
+        },
+        {
+          "name": "Rule",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the triggered rule."
+        },
+        {
+          "name": "NatRuleCount",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Aggregated count of NAT rules."
+        }
+      ],
+
+      "sampleInputRecordsFilePath": "SampleInputRecords/AZFWNatRuleAggregation.json"
+    }
+  ],
+
+  "functions": [],
+
+  "queries": [
+    {
+      "id": "5eea8814-60dd-4d3c-bec0-3c364c88efca",
+      "displayName": "Network rule logs",
+      "description": "Packets that matched Network rules. Both packet and rule metadata is displayed.",
+      "bodyFilePath": "Kql/Queries/AZFWNetworkRule.kql",
+      "categories": [
+        "security"
+      ],
+      "relatedTables": [
+        "AZFWNetworkRule"
+      ],
+      "tags": {
+        "Topic": [
+          "Firewall Logs (Resource Specific Tables)"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "8146e954-5df5-4eaa-afe6-1cef6c1583cb",
+      "displayName": "Application rule logs",
+      "description": "Connections that matched Application rules. HTTP, HTTPS and MSSQL are supported. Both connection and rule metadata is displayed.",
+      "bodyFilePath": "Kql/Queries/AZFWApplicationRule.kql",
+      "categories": [
+        "security"
+      ],
+      "relatedTables": [
+        "AZFWApplicationRule"
+      ],
+      "tags": {
+        "Topic": [
+          "Firewall Logs (Resource Specific Tables)"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "ddacb4dd-a7c6-4f36-9642-71a0fac3a34c",
+      "displayName": "DNAT rule logs",
+      "description": "Connections which were redirected to a client behind the firewall's NAT rules.",
+      "bodyFilePath": "Kql/Queries/AZFWNatRule.kql",
+      "categories": [
+        "security"
+      ],
+      "relatedTables": [
+        "AZFWNatRule"
+      ],
+      "tags": {
+        "Topic": [
+          "Firewall Logs (Resource Specific Tables)"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "3d806161-ab30-4c7c-a4fc-9bae0622e531",
+      "displayName": "Threat intelligence logs",
+      "description": "Threat intelligence events recognized by the firewall.",
+      "bodyFilePath": "Kql/Queries/AZFWThreatIntel.kql",
+      "categories": [
+        "security"
+      ],
+      "relatedTables": [
+        "AZFWThreatIntel"
+      ],
+      "tags": {
+        "Topic": [
+          "Firewall Logs (Resource Specific Tables)"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "dca5053f-af30-44dc-bfa7-089e61668991",
+      "displayName": "DNS proxy logs",
+      "description": "DNS Proxy events. These logs are only available when DNS Proxy is enabled.",
+      "bodyFilePath": "Kql/Queries/AZFWDnsQuery.kql",
+      "categories": [
+        "security"
+      ],
+      "relatedTables": [
+        "AZFWDnsQuery"
+      ],
+      "tags": {
+        "Topic": [
+          "Firewall Logs (Resource Specific Tables)"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "ae4119c9-1e46-4b3f-b9a6-df570e93e6f9",
+      "displayName": "IDPS event logs",
+      "description": "IDPS events. These logs are only available when IDPS is enabled.",
+      "bodyFilePath": "Kql/Queries/AZFWIdpsSignature.kql",
+      "categories": [
+        "security"
+      ],
+      "relatedTables": [
+        "AZFWIdpsSignature"
+      ],
+      "tags": {
+        "Topic": [
+          "Firewall Logs (Resource Specific Tables)"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "2705d573-c84c-4b40-973c-2aba2407ff22",
+      "displayName": "Internal FQDN resolution failures",
+      "description": "Failures encountered when firewall is unable to resolve a FQDN for a rule.",
+      "bodyFilePath": "Kql/Queries/AZFWInternalFqdnResolutionFailure.kql",
+      "categories": [
+        "security"
+      ],
+      "relatedTables": [
+        "AZFWInternalFqdnResolutionFailure"
+      ],
+      "tags": {
+        "Topic": [
+          "Firewall Logs (Resource Specific Tables)"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "04205bbc-69b9-4c56-8ef6-f99814abfcba",
+      "displayName": "Azure Firewall Top Flow Logs",
+      "description": "Identify top flows across Azure Firewall instances. Log contains flow information, date transmission rate (in Megabits per second units) and the time period when the flows were recorded.",
+      "bodyFilePath": "Kql/Queries/AZFWFatFlow.kql",
+      "categories": [
+        "security"
+      ],
+      "relatedTables": [
+        "AZFWFatFlow"
+      ],
+      "tags": {
+        "Topic": [
+          "Firewall Logs (Resource Specific Tables)"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "616c413f-dc29-402c-851e-3b524865ce2a",
+      "displayName": "Azure Firewall flow trace logs",
+      "description": "Identify flow traces across Azure Firewall instances. Log contains flow information, flags and the time period when the flows were recorded.",
+      "bodyFilePath": "Kql/Queries/AZFWFlowTrace.kql",
+      "categories": [
+        "security"
+      ],
+      "relatedTables": [
+        "AZFWFlowTrace"
+      ],
+      "tags": {
+        "Topic": [
+          "Firewall Logs (Resource Specific Tables)"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "4d2fd56b-a0d4-42e1-8d0d-31e60f2e005b",
+      "displayName": "All firewall decisions",
+      "description": "All decision taken by firewall. Contains hits on network, application and NAT rules, as well as threat intelligence hits and IDPS signature hits.",
+      "bodyFilePath": "Kql/Queries/AllRules.kql",
+      "categories": [
+        "security"
+      ],
+      "relatedTables": [
+        "AZFWNetworkRule",
+        "AZFWApplicationRule",
+        "AZFWNatRule",
+        "AZFWThreatIntel",
+        "AZFWIdpsSignature"
+      ],
+      "tags": {
+        "Topic": [
+          "Firewall Logs (Resource Specific Tables)"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    }
+  ]
+}

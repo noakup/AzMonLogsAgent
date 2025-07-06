@@ -1,0 +1,33 @@
+[
+    {
+    "time": "2023-02-23T05:09:08.7639880Z",
+    "location": "global",
+    "resourceId": "/SUBSCRIPTIONS/3DE261DF-F2D8-4C00-A0EE-A0BE30F1E48E/RESOURCEGROUPS/DELVISSANTOSRG/PROVIDERS/MICROSOFT.DEVCENTER/DEVCENTERS/DELVISCEUAPDC",
+    "category": "ConnectionEvent",
+    "operationName": "Connection",
+    "properties":{
+        "ActivityId": "dddfc5ea-5f89-4653-93ff-55ca2bbdd097",
+        "AgentVersion": "1.0.11106.0",
+        "DevBox": "rw-test-reporting-7",
+        "Category": "ConnectionEvent",
+        "CloudPcId": "dddfc5ea-5f89-4653-93ff-55ca2bbdd097",
+        "DevCenterId": "/subscriptions/699a5a77-12d2-422b-8a50-c4f94d5a8864/resourceGroups/rw-rg/providers/Microsoft.DevCenter/devcenters/rw-test-dc",
+        "NicResourceId": "/subscriptions/7ae0bd34-6c02-409f-bfaf-20aa02d3e226/resourceGroups/abcd/providers/Microsoft.Network/networkInterfaces/CPC_1234",
+        "SubnetResourceId": "/subscriptions/7ae0bd34-6c02-409f-bfaf-20aa02d3e226/resourceGroups/abcd/providers/Microsoft.Network/virtualNetworks/vnet1234/subnets/0",
+        "SessionHostName": "CPC-rouwe-SWZOQ",
+        "SessionHostResourceId": "/subscriptions/38693fc8-c9a1-4985-9cc9-19a74e717b9b/resourceGroups/75decdd3-bc2e-4e71-a9ec-5da22915c0eb/providers/Microsoft.Compute/virtualMachines/CPC_1234",
+        "Timestamp": "03/07/2025 19:11:46 +00:00",
+        "State": "Completed",
+        "ClientType": "com.microsoft.rdc.macos",
+        "ClientOS": "macOS 15.3.1",
+        "ClientVersion": "2481",
+        "SessionHostPoolType": "PersonalDesktop",
+        "SessionHostAgentVersion": "1.0.10673.700.15.Canary",
+        "SessionHostOSDescription": "Windows 10 Enterprise",
+        "SessionHostOSVersion": "10.0.26100.3000",
+        "UdpType": "Websocket",
+        "ResultType": "Success",
+        "Level": "Informational"
+        }    
+    }
+]

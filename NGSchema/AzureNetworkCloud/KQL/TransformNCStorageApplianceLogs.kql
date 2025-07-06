@@ -1,0 +1,13 @@
+source
+| project
+    TimeGenerated      = todatetime(["arrayDatetime"]),
+    ArrayName          = storageApplianceName,
+    ArrayController    = arrayController,
+    Node               = Node,
+    PodName            = PodName,
+    ContainerName      = ContainerName,
+    IPAddress          = ipaddress,
+    Message            = message,
+    Location           = location,
+    ClusterManagerName = clusterManagerName,
+    ClusterName        = clusterName

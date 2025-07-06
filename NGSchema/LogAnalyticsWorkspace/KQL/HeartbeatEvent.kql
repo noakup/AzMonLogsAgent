@@ -1,0 +1,46 @@
+// DGrep testing: https://jarvis-west.dc.ad.msft.net/27125119
+// Time,SourceHealthServiceId,EntityProperties,MG,TimeUploaded,ManagementGroupName,ComputerIP,ResourceId,ComputerEnvironment,Solutions,VMUUID
+let WindowsMgid = toguid("00000000-0000-0000-0000-000000000001");
+let LinuxMgid = toguid("00000000-0000-0000-0000-000000000002");
+let EmptyGuid = toguid("00000000-0000-0000-0000-000000000000");
+source
+| extend MGID = toguid($executionContextProperties["ManagementGroupId"])
+| extend CategoryType = iff(MGID==WindowsMgid or MGID==LinuxMgid, case(Category=="Agent", "Direct Agent", Category=="AMA", "Azure Monitor Agent", "Gateway"), iff(Category=="Agent", "SCOM Agent", "SCOM Management Server"))
+| extend ManagementGroupName = tostring($executionContextProperties["ManagementGroupName"])
+| extend ResourceId = tostring($executionContextProperties["AzureResourceId"])
+| extend resourceIdSegments = split(ResourceId, "/")
+| extend ComputerEnvironment = tostring($executionContextProperties["SourceEnvironment"])
+| extend ComputerIP = tostring($executionContextProperties["ExternalAgentIp"])
+| extend computerGeoLocation = geo_location(ComputerIP)
+| extend Solutions = tostring($executionContextProperties["IntelligencePackList"])
+| extend UUID = tostring($executionContextProperties["UUID"])
+| project Category = CategoryType
+, Computer
+, ComputerEnvironment
+, ComputerIP
+, ComputerPrivateIPs = todynamic(ComputerPrivateIps)
+, IsGatewayInstalled
+, ManagementGroupName
+, MG = MGID
+, OSMajorVersion
+, OSMinorVersion
+, OSName
+, OSType
+, RemoteIPCountry = tostring(computerGeoLocation["Country"])
+, RemoteIPLatitude = tofloat(computerGeoLocation["Latitude"])
+, RemoteIPLongitude = tofloat(computerGeoLocation["Longitude"])
+, Resource = tostring(resourceIdSegments[array_length(resourceIdSegments) - 1])
+, ResourceGroup = tostring(resourceIdSegments[4])
+, ResourceId
+, ResourceProvider = tostring(resourceIdSegments[6])
+, ResourceType = tostring(resourceIdSegments[7])
+, SCAgentChannel
+, Solutions
+, SourceComputerId = SourceHealthServiceId
+, SourceSystem = "OpsManager"
+, SubscriptionId = toguid(resourceIdSegments[2])
+, TimeGenerated = iff(isempty(Timestamp), todatetime(Time), todatetime(Timestamp))
+, TenantId = toguid($executionContextProperties["WorkspaceId"])
+, Type = "Heartbeat" 
+, Version
+, VMUUID = iff(isempty(UUID), EmptyGuid, toguid(UUID))

@@ -1,0 +1,16 @@
+source
+| project
+    TimeGenerated =  todatetime(updatedAt),
+    SchemaVersion = tostring(schemaVersion),
+    AccountId = tostring(accountId),
+    Region = tostring(region),
+    Partition = tostring(partition),
+    Id = tostring(id),
+    Arn = tostring(arn),
+    ActivityType = tostring(type),
+    ResourceDetails = todynamic(resource),
+    ServiceDetails = todynamic(service),
+    Severity = toint(severity),
+    TimeCreated = todatetime(createdAt),
+    Title = tostring(["title"]),
+    Description = tostring(description)

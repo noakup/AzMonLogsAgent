@@ -1,0 +1,1263 @@
+{
+  "type": "Microsoft.Dynamics/FraudProtection/Purchase",
+  "displayName": "Microsoft.Dynamics.FraudProtection/purchase",
+  "description": "All tables related to Dynamics Fraud Protection service offerings such as purchase, purchase status, bank event, refund, chargeback.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "RiskRaaS",
+  "relatedTables": [],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "name": "DFPPurchaseLogs",
+      "description": "Purchase events evaluated by Dynamics Fraud Protection (DFP).",
+      "tableState": "Validation",
+      "isTroubleshootingAllowed": false,
+      "isResourceCentric": false,
+      "categories": [ "applications" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 1,
+      "input": [
+        {
+          "name": "response",
+          "type": "String"
+        },
+        {
+          "name": "uniqueId",
+          "type": "String"
+        },
+        {
+          "name": "requestType",
+          "type": "String"
+        },
+        {
+          "name": "apiVersion",
+          "type": "String"
+        },
+        {
+          "name": "request",
+          "type": "String"
+        },
+        {
+          "name": "name",
+          "type": "String"
+        },
+        {
+          "name": "version",
+          "type": "String"
+        },
+        {
+          "name": "metadata",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "Kql/purchase.kql",
+      "columns": [
+        {
+          "name": "PurchaseId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Transaction (or purchase/order) identifier in merchant system."
+        },
+        {
+          "name": "AssessmentType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Indicates the assessment type for the event. Possible values are 'Evaluate' or 'Protect'. If not specified, default is 'Protect'."
+        },
+        {
+          "name": "OriginalOrderId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Original Order identifier in merchant system for payments for recurring billing like monthly subscriptions."
+        },
+        {
+          "name": "MerchantLocalDate",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Purchase creation date as per Merchant time-zone. Format is ISO8601."
+        },
+        {
+          "name": "MerchantIdentifier",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Merchant identifier (MID) for the bank."
+        },
+        {
+          "name": "MerchantCategoryCode",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Merchant Category Code (MCC) for the bank."
+        },
+        {
+          "name": "MerchantBusinessType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Merchant Business Type for this purchase."
+        },
+        {
+          "name": "MerchantBusinessSegment",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Merchant Business Segment for this purchase."
+        },
+        {
+          "name": "IsTest",
+          "type": "Bool",
+          "isDefaultDisplay": true,
+          "description": "Signifies that the purchase is a test purchase."
+        },
+        {
+          "name": "IsFreeProdIncluded",
+          "type": "Bool",
+          "isDefaultDisplay": true,
+          "description": "Signifies if a free product is part of this purchase."
+        },
+        {
+          "name": "IsRecurringCharge",
+          "type": "Bool",
+          "isDefaultDisplay": true,
+          "description": "Signifies if the purchase is a recurring charge."
+        },
+        {
+          "name": "IsGuestCheckout",
+          "type": "Bool",
+          "isDefaultDisplay": true,
+          "description": "Signifies if the purchase is being made via gueest checkout."
+        },
+        {
+          "name": "IsRetryOrder",
+          "type": "Bool",
+          "isDefaultDisplay": true,
+          "description": "Signifies if the purchase is a retry of a previously failed attempt."
+        },
+        {
+          "name": "IsPostpaid",
+          "type": "Bool",
+          "isDefaultDisplay": true,
+          "description": "Signifies if the purchase is post paid."
+        },
+        {
+          "name": "DistinctItemCount",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Count of unique products sold as part of the purchase."
+        },
+        {
+          "name": "TotalItemCount",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Total count of products sold as part of the purchase."
+        },
+        {
+          "name": "OrderType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Type of order, for example, Take Out."
+        },
+        {
+          "name": "DiscountAmount",
+          "type": "Double",
+          "isDefaultDisplay": true,
+          "description": "Discount provided on the original purchase before deriving the total amount."
+        },
+        {
+          "name": "TotalAmount",
+          "type": "Double",
+          "isDefaultDisplay": true,
+          "description": "Total amount charged to the customer; tax and shipping included. Discounts and coupons can be optionally included; there is currently no separate field for them. Provided by the Merchant."
+        },
+        {
+          "name": "Currency",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Currency of the original purchase in ISO 4217 code format (USD, GBP, etc)."
+        },
+        {
+          "name": "ShippingMethod",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Indicates the method used to ship the purchase. Possible values 'InStorePickup' , 'Standard' , 'Express' , 'DirectEntitlement' , 'DigitalToken'."
+        },
+        {
+          "name": "TxnProcessingOrder",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The order in which the fraud assessment was made during the transaction flow. Possible values are PREAUTHORIZATION, POSTAUTHORIZATION, BEFORE3DS, AFTER3DS."
+        },
+        {
+          "name": "RecurringChargeSequence",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The nth (1, 2, 3...) time the recurring charge has occurred for this customer."
+        },
+        {
+          "name": "MidName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The merchant name associated with the MID (merchant identifier)."
+        },
+        {
+          "name": "TxnDescription",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The transaction processing type. Possilbe values are SUBSCRIPTIONFEE, DELAYEDCHARGES, NOSHOW, DEPOSIT."
+        },
+        {
+          "name": "ShippingEmail",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The email for shipping notification."
+        },
+        {
+          "name": "CustomData",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Key-value pairs that can be passed in for the use of rules, etc."
+        },
+        {
+          "name": "OrderInitiatedChannel",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The channel where the transaction was created (for example: �AppStore', 'Web', MobileWeb, 'App', �InGamePurchase�)."
+        },
+        {
+          "name": "OrderInitiatedChannelName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The App Name or Web URL where the transaction was created."
+        },
+        {
+          "name": "MerchantBusinessSegmentL2",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The second level business or industry segment."
+        },
+        {
+          "name": "UserUserId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The user identifier. This information is provided by the merchant."
+        },
+        {
+          "name": "UserCreationDate",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The creation date of the user account. The format is ISO 8601."
+        },
+        {
+          "name": "UserFirstName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The user-provided first name on�the account."
+        },
+        {
+          "name": "UserLastName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The user-provided last name�on�the account."
+        },
+        {
+          "name": "UserCountry",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The user's country or region.�The value should be a two-letter ISO country/region code (for example, US)."
+        },
+        {
+          "name": "UserZipCode",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The user's postal code."
+        },
+        {
+          "name": "UserPhoneNumber",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The user's phone number. The format should be the country/region code followed by a hyphen (-) and then the phone number (for example, for the US, +1-1234567890)."
+        },
+        {
+          "name": "UserEmail",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The user's email address. This value is case-insensitive."
+        },
+        {
+          "name": "UserProfileType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The user's profile type. Possible values 'Consumer' , 'Seller' , 'Publisher' , 'Tenant' , 'Developer'."
+        },
+        {
+          "name": "UserAuthProvider",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The user's authentication provider, if different from the merchant's. Possible valuse 'MSA' , 'Facebook' , 'PSN' , 'MerchantAuth' , 'Google'."
+        },
+        {
+          "name": "UserAuthMethod",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The way in which the customer was authenticated prior/during purchase. Some possible values are PASSWORD-BASED, MULTI-FACTOR, BIOMETRIC, TOKEN-BASED,."
+        },
+        {
+          "name": "UserLoginInputMethod",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The way in which the customer input their credentials. Possible values are MANUALINPUT, AUTOFILL, SCRIPT, COPYPASTE, SELECTPROFILE."
+        },
+        {
+          "name": "UserLoginChlngType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The type of challenge-response test that was initiated. Possible valuees are TEXT SMS, PHONE SMS, EMAIL PIN, CAPTCHA."
+        },
+        {
+          "name": "DvcContextDvcContextId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The customer's fingerprinting session ID, or the event ID if the session is not available."
+        },
+        {
+          "name": "DvcContextProvider",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The provider of device info. Possible values are 'DFPFingerPrinting' , 'Merchant'. If using the DFP Fingerprinting JS script, you must pass 'DFPFingerPrinting' for all data to get properly connected."
+        },
+        {
+          "name": "DvcContextExternalDvcType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The customer's device type, as provided and mastered by the merchant. Possible values 'Mobile' , 'Computer' , 'MerchantHardware' , 'Tablet' , 'GameConsole'."
+        },
+        {
+          "name": "DvcContextIpAddress",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "IP",
+          "description": "Customer's IP address (provided by Merchant)."
+        },
+        {
+          "name": "ExternalDvcAttrOs",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Operating system provided by merchant."
+        },
+        {
+          "name": "OrgLevel1OrgId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The unique identifier for the merchant or organization at level 1."
+        },
+        {
+          "name": "OrgLevel1Name",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the organization."
+        },
+        {
+          "name": "OrgLevel1ZipCode",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The zipcode at where the organization is located."
+        },
+        {
+          "name": "OrgLevel1State",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The state at where the organization is located."
+        },
+        {
+          "name": "OrgLevel1CountryISO",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The countryISO at where the organization is located."
+        },
+        {
+          "name": "OrgLevel2OrgId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The unique identifier for the merchant or organization at level 2."
+        },
+        {
+          "name": "OrgLevel2Name",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the organization."
+        },
+        {
+          "name": "OrgLevel2ZipCode",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The zipcode at where the organization is located."
+        },
+        {
+          "name": "OrgLevel2State",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The state at where the organization is located."
+        },
+        {
+          "name": "OrgLevel2CountryISO",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The countryISO at where the organization is located."
+        },
+        {
+          "name": "OrgLevel3OrgId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The unique identifier for the merchant or organization at level 3."
+        },
+        {
+          "name": "OrgLevel3Name",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the organization."
+        },
+        {
+          "name": "OrgLevel3ZipCode",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The zipcode at where the organization is located."
+        },
+        {
+          "name": "OrgLevel3State",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The state at where the organization is located."
+        },
+        {
+          "name": "OrgLevel3CountryISO",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The countryISO at where the organization is located."
+        },
+        {
+          "name": "ThreeDSIsThreeDSAuth",
+          "type": "Bool",
+          "isDefaultDisplay": true,
+          "description": "A True/False value that indicates whether this transaction is authenticated via 3DS."
+        },
+        {
+          "name": "ThreeDSMessageCategory",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Identifies the category of the message for a specific use case. ."
+        },
+        {
+          "name": "ThreeDSTransStatus",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Indicates whether a transaction qualifies as an authenticated transaction or account verification."
+        },
+        {
+          "name": "ThreeDSTransStatusReason",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Provides information on why the Transaction Status field has the specified value. ."
+        },
+        {
+          "name": "ThreeDSAcsChlngMandated",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Indication of whether a challenge is required for the transaction to be authorised due to local/regional mandates or other variable. Values accepted: Y = Challenge is mandated  N = Challenge is not mandated."
+        },
+        {
+          "name": "ThreeDSChlngCompletionInd",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Indicator of the state of the ACS challenge cycle and whether the challenge has completed or will require additional messages. ."
+        },
+        {
+          "name": "ShippingAddressCity",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The city that was provided for the address."
+        },
+        {
+          "name": "ShippingAddressZipCode",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": " The postal code that was provided for the address."
+        },
+        {
+          "name": "ShippingAddressCountry",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The country/region code that was provided for the address. The value should be a two-letter ISO country/region code (for example, US)."
+        },
+        {
+          "name": "StoreStoreId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Store identifier in merchant system."
+        },
+        {
+          "name": "StoreStoreName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Store name in merchant system."
+        },
+        {
+          "name": "StoreAddressZipCode",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The postal code that was provided for the address."
+        },
+        {
+          "name": "StoreAddressCountry",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The country/region code that was provided for the address. The value should be a two-letter ISO country/region code (for example, US)."
+        },
+        {
+          "name": "RecipientUserId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The user identifier. This information is provided by the merchant."
+        },
+        {
+          "name": "RecipientFirstName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The user-provided first name on�the account."
+        },
+        {
+          "name": "RecipientLastName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The user-provided last name�on�the account."
+        },
+        {
+          "name": "RecipientCountry",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The user's country or region.�The value should be a two-letter ISO country/region code (for example, US)."
+        },
+        {
+          "name": "RecipientZipCode",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "� The user's postal code."
+        },
+        {
+          "name": "RecipientEmail",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The user's email address. This value is case-insensitive."
+        },
+        {
+          "name": "RecipientProfileType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The user's profile type. Possible values 'Consumer' , 'Seller' , 'Publisher' , 'Tenant' , 'Developer'."
+        },
+        {
+          "name": "RecipientLoginInputMethod",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The way in which the customer input their credentials. Possible values are MANUALINPUT, AUTOFILL, SCRIPT, COPYPASTE, SELECTPROFILE."
+        },
+        {
+          "name": "PICount",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "The count of payment instruments used ."
+        },
+        {
+          "name": "PI0PymntMethod",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The top-level payment method category. Possible values are CARD, CASH, DIRECTDEBIT, E-WALLET, MOBILE, E-BANKING, INVOICE, VOUCHERS."
+        },
+        {
+          "name": "PI0Type",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The type of payment. Possible values 'CreditCard' , 'DirectDebit' , 'PayPal' , 'MobileBilling' , 'OnlineBankTransfer' , 'Invoice' , 'MerchantGiftCard' , 'MerchantWallet' , 'CashOnDelivery' , 'Paytm' , 'CCAvenue'."
+        },
+        {
+          "name": "PI0PymntCheckoutProvider",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The eWallet checkout provider."
+        },
+        {
+          "name": "PI0CardType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "This attribute is used only for payments of the Credit/Debit Card type. The network the card is provided from. Possible values 'Visa' , 'Mastercard' , 'Amex' , 'ACH' , 'SEPA' , 'UnionPay' , 'Inicis' , 'MobileBillingCarrier' , 'Discover' , 'AllPay' , 'JCB' , 'DiscoverDiners'."
+        },
+        {
+          "name": "PI0Bin",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "This attribute is used only for payments of the Credit/Debit Card type."
+        },
+        {
+          "name": "PI0BinName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The BIN display name."
+        },
+        {
+          "name": "PI0BinCountryISO",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The ISO country code associated with the BIN."
+        },
+        {
+          "name": "PI0BinCardType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "This attribute is used only for payments of the Credit/Debit Card type. The network the card is provided from. Possible values 'Visa' , 'Mastercard' , 'Amex' , 'ACH' , 'SEPA' , 'UnionPay' , 'Inicis' , 'MobileBillingCarrier' , 'Discover' , 'AllPay' , 'JCB' , 'DiscoverDiners'."
+        },
+        {
+          "name": "PI0BinCardAssociation",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The BIN card association. Some possible values are VISA, MASTERCARD, AMEX, DISCOVER, MAESTRO, JCB, UNIONPAY, DINERSCLUB."
+        },
+        {
+          "name": "PI0BinBankGroup",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The BIN bank group."
+        },
+        {
+          "name": "PI0LastFourDigits",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "This attribute is used only for payments of the Credit/Debit Card type."
+        },
+        {
+          "name": "PI0Email",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The email address associated with the payment instrument. This attribute is used only for payments of the Paypal type."
+        },
+        {
+          "name": "PI0AuthzType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The authorization type. Mastercard and Visa now require merchants to define authorization attempts as either a pre-authorization or a final-authorization. Possible values are PRE_AUTHORIZATION, FINAL_AUTHORIZATION."
+        },
+        {
+          "name": "PI0AuthzResultCode",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": " Bank response from the authorization decision. Possible values are APPROVE, DECLINE, PENDING."
+        },
+        {
+          "name": "PI0AuthzResultText",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Reasons for the authorization decision; especially for declined or pending transactions. Possible values are MISMATCH_CVV, MISMATCH_ADDRESS, MISMATCH_EXPIRATIONDATE, NOACCOUNT, INVALIDPIN, LOWFUND, OVERLIMIT SUSPICIOUSACCOUNT."
+        },
+        {
+          "name": "PI0BillingAddressZipCode",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The postal code that was provided for the address."
+        },
+        {
+          "name": "PI0BillingAddressCountry",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The country/region code that was provided for the address. The value should be a two-letter ISO country/region code (for example, US)."
+        },
+        {
+          "name": "PI1PymntMethod",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The top-level payment method category. Possible values are CARD, CASH, DIRECTDEBIT, E-WALLET, MOBILE, E-BANKING, INVOICE, VOUCHERS."
+        },
+        {
+          "name": "PI1Type",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The type of payment. Possible values 'CreditCard' , 'DirectDebit' , 'PayPal' , 'MobileBilling' , 'OnlineBankTransfer' , 'Invoice' , 'MerchantGiftCard' , 'MerchantWallet' , 'CashOnDelivery' , 'Paytm' , 'CCAvenue'."
+        },
+        {
+          "name": "PI1PymntCheckoutProvider",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The eWallet checkout provider."
+        },
+        {
+          "name": "PI1CardType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "This attribute is used only for payments of the Credit/Debit Card type. The network the card is provided from. Possible values 'Visa' , 'Mastercard' , 'Amex' , 'ACH' , 'SEPA' , 'UnionPay' , 'Inicis' , 'MobileBillingCarrier' , 'Discover' , 'AllPay' , 'JCB' , 'DiscoverDiners'."
+        },
+        {
+          "name": "PI1Bin",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "This attribute is used only for payments of the Credit/Debit Card type."
+        },
+        {
+          "name": "PI1BinName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The BIN display name."
+        },
+        {
+          "name": "PI1BinCountryISO",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The ISO country code associated with the BIN."
+        },
+        {
+          "name": "PI1BinCardType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "This attribute is used only for payments of the Credit/Debit Card type. The network the card is provided from. Possible values 'Visa' , 'Mastercard' , 'Amex' , 'ACH' , 'SEPA' , 'UnionPay' , 'Inicis' , 'MobileBillingCarrier' , 'Discover' , 'AllPay' , 'JCB' , 'DiscoverDiners'."
+        },
+        {
+          "name": "PI1BinCardAssociation",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The BIN card association. Some possible values are VISA, MASTERCARD, AMEX, DISCOVER, MAESTRO, JCB, UNIONPAY, DINERSCLUB."
+        },
+        {
+          "name": "PI1BinBankGroup",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The BIN bank group."
+        },
+        {
+          "name": "PI1LastFourDigits",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "This attribute is used only for payments of the Credit/Debit Card type."
+        },
+        {
+          "name": "PI1Email",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The email address associated with the payment instrument. This attribute is used only for payments of the Paypal type."
+        },
+        {
+          "name": "PI1AuthzType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The authorization type. Mastercard and Visa now require merchants to define authorization attempts as either a pre-authorization or a final-authorization. Possible values are PRE_AUTHORIZATION, FINAL_AUTHORIZATION."
+        },
+        {
+          "name": "PI1AuthzResultCode",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Bank response from the authorization decision. Possible values are APPROVE, DECLINE, PENDING."
+        },
+        {
+          "name": "PI1AuthzResultText",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Reasons for the authorization decision; especially for declined or pending transactions. Possible values are MISMATCH_CVV, MISMATCH_ADDRESS, MISMATCH_EXPIRATIONDATE, NOACCOUNT, INVALIDPIN, LOWFUND, OVERLIMIT SUSPICIOUSACCOUNT."
+        },
+        {
+          "name": "PI1BillingAddressZipCode",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The postal code that was provided for the address."
+        },
+        {
+          "name": "PI1BillingAddressCountry",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The country/region code that was provided for the address. The value should be a two-letter ISO country/region code (for example, US)."
+        },
+        {
+          "name": "PI2PymntMethod",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The top-level payment method category. Possible values are CARD, CASH, DIRECTDEBIT, E-WALLET, MOBILE, E-BANKING, INVOICE, VOUCHERS."
+        },
+        {
+          "name": "PI2Type",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The type of payment. Possible values 'CreditCard' , 'DirectDebit' , 'PayPal' , 'MobileBilling' , 'OnlineBankTransfer' , 'Invoice' , 'MerchantGiftCard' , 'MerchantWallet' , 'CashOnDelivery' , 'Paytm' , 'CCAvenue'."
+        },
+        {
+          "name": "PI2PymntCheckoutProvider",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The eWallet checkout provider."
+        },
+        {
+          "name": "PI2CardType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "This attribute is used only for payments of the Credit/Debit Card type. The network the card is provided from. Possible values 'Visa' , 'Mastercard' , 'Amex' , 'ACH' , 'SEPA' , 'UnionPay' , 'Inicis' , 'MobileBillingCarrier' , 'Discover' , 'AllPay' , 'JCB' , 'DiscoverDiners'."
+        },
+        {
+          "name": "PI2Bin",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "This attribute is used only for payments of the Credit/Debit Card type."
+        },
+        {
+          "name": "PI2BinName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The BIN display name."
+        },
+        {
+          "name": "PI2BinCountryISO",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The ISO country code associated with the BIN."
+        },
+        {
+          "name": "PI2BinCardType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "This attribute is used only for payments of the Credit/Debit Card type. The network the card is provided from. Possible values 'Visa' , 'Mastercard' , 'Amex' , 'ACH' , 'SEPA' , 'UnionPay' , 'Inicis' , 'MobileBillingCarrier' , 'Discover' , 'AllPay' , 'JCB' , 'DiscoverDiners'."
+        },
+        {
+          "name": "PI2BinCardAssociation",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The BIN card association. Some possible values are VISA, MASTERCARD, AMEX, DISCOVER, MAESTRO, JCB, UNIONPAY, DINERSCLUB."
+        },
+        {
+          "name": "PI2BinBankGroup",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The BIN bank group."
+        },
+        {
+          "name": "PI2LastFourDigits",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "This attribute is used only for payments of the Credit/Debit Card type."
+        },
+        {
+          "name": "PI2Email",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The email address associated with the payment instrument. This attribute is used only for payments of the Paypal type."
+        },
+        {
+          "name": "PI2AuthzType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The authorization type. Mastercard and Visa now require merchants to define authorization attempts as either a pre-authorization or a final-authorization. Possible values are PRE_AUTHORIZATION, FINAL_AUTHORIZATION."
+        },
+        {
+          "name": "PI2AuthzResultCode",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Bank response from the authorization decision. Possible values are APPROVE, DECLINE, PENDING."
+        },
+        {
+          "name": "PI2AuthzResultText",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Reasons for the authorization decision; especially for declined or pending transactions. Possible values are MISMATCH_CVV, MISMATCH_ADDRESS, MISMATCH_EXPIRATIONDATE, NOACCOUNT, INVALIDPIN, LOWFUND, OVERLIMIT SUSPICIOUSACCOUNT."
+        },
+        {
+          "name": "PI2BillingAddressZipCode",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The postal code that was provided for the address."
+        },
+        {
+          "name": "PI2BillingAddressCountry",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The country/region code that was provided for the address. The value should be a two-letter ISO country/region code (for example, US)."
+        },
+        {
+          "name": "Prod0ProdId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Product identifier in merchant system."
+        },
+        {
+          "name": "Prod0ProdName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "User-readable product name."
+        },
+        {
+          "name": "Prod0Type",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Type of product sold. Possible values 'Digital' , 'Physical'."
+        },
+        {
+          "name": "Prod0Category",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Category of product. Possible values 'Subscription' , 'Game' , 'GameConsumable' , 'GameDLC' , 'HardwareDevice' , 'HardwareAccessory' , 'SoftwareToken' , 'SoftwareDirectEntitlement' , 'ClothingShoes' , 'RecreationalEquipment' , 'Jewelry' , 'Hotel' , 'Ticket' , 'VehicleRental' , 'GiftCard' , 'Movies' , 'Music' , 'GarageIndustrial' , 'HomeGarden' , 'Tools' , 'Books' , 'HealthBeauty' , 'Furniture' , 'Toys' , 'FoodGrocery'."
+        },
+        {
+          "name": "Prod0MerchantProdCategory",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Category of product as defined by the merchant in their system."
+        },
+        {
+          "name": "Prod0Market",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Market in which product is offered."
+        },
+        {
+          "name": "Prod0IsRecurring",
+          "type": "Bool",
+          "isDefaultDisplay": true,
+          "description": "Indicates if product is recurring subscription."
+        },
+        {
+          "name": "Prod0IsFree",
+          "type": "Bool",
+          "isDefaultDisplay": true,
+          "description": "Indicates if product is offered for free."
+        },
+        {
+          "name": "Prod0Quantity",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Quantity of item purchased."
+        },
+        {
+          "name": "Prod1ProdId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Product identifier in merchant system."
+        },
+        {
+          "name": "Prod1ProdName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "User-readable product name."
+        },
+        {
+          "name": "Prod1Type",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Type of product sold. Possible values 'Digital' , 'Physical'."
+        },
+        {
+          "name": "Prod1Category",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Category of product. Possible values 'Subscription' , 'Game' , 'GameConsumable' , 'GameDLC' , 'HardwareDevice' , 'HardwareAccessory' , 'SoftwareToken' , 'SoftwareDirectEntitlement' , 'ClothingShoes' , 'RecreationalEquipment' , 'Jewelry' , 'Hotel' , 'Ticket' , 'VehicleRental' , 'GiftCard' , 'Movies' , 'Music' , 'GarageIndustrial' , 'HomeGarden' , 'Tools' , 'Books' , 'HealthBeauty' , 'Furniture' , 'Toys' , 'FoodGrocery'."
+        },
+        {
+          "name": "Prod1MerchantProdCategory",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Category of product as defined by the merchant in their system."
+        },
+        {
+          "name": "Prod1Market",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Market in which product is offered."
+        },
+        {
+          "name": "Prod1IsRecurring",
+          "type": "Bool",
+          "isDefaultDisplay": true,
+          "description": "Indicates if product is recurring subscription."
+        },
+        {
+          "name": "Prod1IsFree",
+          "type": "Bool",
+          "isDefaultDisplay": true,
+          "description": "Indicates if product is offered for free."
+        },
+        {
+          "name": "Prod1Quantity",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Quantity of item purchased."
+        },
+        {
+          "name": "Prod2ProdId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Product identifier in merchant system."
+        },
+        {
+          "name": "Prod2ProdName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "User-readable product name."
+        },
+        {
+          "name": "Prod2Type",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Type of product sold. Possible values 'Digital' , 'Physical'."
+        },
+        {
+          "name": "Prod2Category",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Category of product. Possible values 'Subscription' , 'Game' , 'GameConsumable' , 'GameDLC' , 'HardwareDevice' , 'HardwareAccessory' , 'SoftwareToken' , 'SoftwareDirectEntitlement' , 'ClothingShoes' , 'RecreationalEquipment' , 'Jewelry' , 'Hotel' , 'Ticket' , 'VehicleRental' , 'GiftCard' , 'Movies' , 'Music' , 'GarageIndustrial' , 'HomeGarden' , 'Tools' , 'Books' , 'HealthBeauty' , 'Furniture' , 'Toys' , 'FoodGrocery'."
+        },
+        {
+          "name": "Prod2MerchantProdCategory",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Category of product as defined by the merchant in their system."
+        },
+        {
+          "name": "Prod2Market",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Market in which product is offered."
+        },
+        {
+          "name": "Prod2IsRecurring",
+          "type": "Bool",
+          "isDefaultDisplay": true,
+          "description": "Indicates if product is recurring subscription."
+        },
+        {
+          "name": "Prod2IsFree",
+          "type": "Bool",
+          "isDefaultDisplay": true,
+          "description": "Indicates if product is offered for free."
+        },
+        {
+          "name": "Prod2Quantity",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Quantity of item purchased."
+        },
+        {
+          "name": "ProdCount",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "The count of products in order."
+        },
+        {
+          "name": "MerchantRuleDecision",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Decision made by the Merchant Rules after getting Risk Score for a transaction. Possible values 'Approve' , 'Reject'."
+        },
+        {
+          "name": "MIDFlag",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Recommended Merchant ID (MID) flag. Possible values 'Program' , 'Standard' , 'Control'."
+        },
+        {
+          "name": "RiskScore",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Risk score calculated by Fraud Protection risk models in the range from -1 to 1000. -1 indicates an error determining a risk score."
+        },
+        {
+          "name": "ReasonCodes",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Reason codes explaining the decision."
+        },
+        {
+          "name": "PolicyApplied",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the merchant rule or default rule that lead to the merchant rule decision."
+        },
+        {
+          "name": "RuleEvaluations",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Contains the name of the rules evaluated to come to a decision."
+        },
+        {
+          "name": "ClauseName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Contains the name of the clause that gave the decision."
+        },
+        {
+          "name": "DvcAttrUserAgntType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Browser user agent type for the device."
+        },
+        {
+          "name": "DvcAttrBrowserAgntLangs",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Browser user agent languages for the device."
+        },
+        {
+          "name": "DvcAttrBrowserAgnt",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Browser user agent\uFFFD for the device."
+        },
+        {
+          "name": "DvcAttrCarrier",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Carrier used the device."
+        },
+        {
+          "name": "DvcAttrDvcCity",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "City where the device is located."
+        },
+        {
+          "name": "DvcAttrDvcCountryCode",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Country code where the device is located."
+        },
+        {
+          "name": "DvcAttrCookieEnabled",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Sgnifies if cookies are enabled on the device."
+        },
+        {
+          "name": "DvcAttrJavaScriptEnabled",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Signifies if java script is enabled on the device ."
+        },
+        {
+          "name": "DvcAttrDvcId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The device id of the device used ."
+        },
+        {
+          "name": "DvcAttrMimeTypesCount",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "The mime type count on the browser used on the device."
+        },
+        {
+          "name": "DvcAttrPlatform",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The platform for the device ."
+        },
+        {
+          "name": "DvcAttrFontsCount",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "The number of fonts avaialble on the device."
+        },
+        {
+          "name": "DvcAttrPlugins",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The plugins installed on the device browser."
+        },
+        {
+          "name": "DvcAttrPluginsCount",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "The plugin count installed on the device browser."
+        },
+        {
+          "name": "DvcAttrDvcPostalCode",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Postal code where the device is located."
+        },
+        {
+          "name": "DvcAttrScreenResolution",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The screen resolution used by device."
+        },
+        {
+          "name": "DvcAttrDvcState",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The state of the device ."
+        },
+        {
+          "name": "DvcAttrTimeZoneOffset",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "The time zone offset wrt UTC."
+        },
+        {
+          "name": "DvcAttrTrueIp",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The trueip address of the device."
+        },
+        {
+          "name": "DvcAttrProxy",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Signifies if the device is connecting via a proxy."
+        },
+        {
+          "name": "BankName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of bank used for the payment as proveded by bank service."
+        },
+        {
+          "name": "DfpEnvironmentId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID",
+          "description": "The environment ID in DFP."
+        },
+        {
+          "name": "PaymentInstrumentList",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "The payment instruments used for the transaction."
+        },
+        {
+          "name": "ProductList",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "The products orders for the purchase ."
+        },
+        {
+          "name": "AadTenantId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID",
+          "description": "The aad Tenant Id for the merchant ."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation associated with log record."
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true,
+          "description": "The ID for correlated events. Can be used to identify correlated events between multiple tables and service."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/dfpPurchaseSample.json",
+      "dataTypeId": "DYNAMICS_FRAUDPROTECTION_EVENTS"
+    }
+  ],
+  "functions": [],
+  "queries": []
+}

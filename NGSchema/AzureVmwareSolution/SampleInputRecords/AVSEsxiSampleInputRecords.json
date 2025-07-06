@@ -1,0 +1,9 @@
+[
+    {
+        "time": "2025-03-31T08:52:54.8872890Z",
+        "resourceId": "/SUBSCRIPTIONS/97EACE9E-DA69-4CEB-A21A-04B400E34259/RESOURCEGROUPS/MATUDOBN9/PROVIDERS/MICROSOFT.AVS/PRIVATECLOUDS/MATUDOSDDC9",
+        "operationName": "Microsoft.AVS/vcenter/vmwaresyslog",
+        "category": "esxi",
+        "properties": {"severity":"notice","facility":"daemon","HostName":"esx20-r17.p01.eastus2.avsstage.azure.com","AppName":"nsx-exporter","message":"2025-03-31T08:52:54.8872890Z esx20-r17.p01.eastus2.avsstage.azure.com nsx-exporter 2025-03-31T08:52:54Z|05332|coverage|INFO|Skipping details of duplicate event coverage for hash=91df94ae"}
+    }
+]

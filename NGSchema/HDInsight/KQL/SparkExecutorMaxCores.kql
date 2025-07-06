@@ -1,0 +1,4 @@
+HDInsightSparkExecutorEvents
+//| where ClusterDnsName == '<your cluster name>' // remove the preceding "//" and specify your cluster name to see its logs
+| where TimeGenerated > ago(24h)
+| summarize max(ExecutorCores) by ClusterDnsName, ExecutorId

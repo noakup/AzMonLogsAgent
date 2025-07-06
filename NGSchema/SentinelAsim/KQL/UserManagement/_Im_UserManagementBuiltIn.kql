@@ -1,0 +1,13 @@
+let DisabledParsers=materialize(_GetWatchlist('ASimDisabledParsers') 
+| where SearchKey in ('Any', 'Exclude_Im_UserManagement') 
+| extend SourceSpecificParser=column_ifexists('SourceSpecificParser','') 
+| where isnotempty(SourceSpecificParser) 
+| summarize list = make_set(SourceSpecificParser));
+let builtInDisabled = 0 != array_length(set_intersect(toscalar(DisabledParsers),dynamic(['Exclude_Im_UserManagementBuiltIn', 'Exclude_Im_UserManagement', 'Any'])));
+union isfuzzy=true
+_Im_UserManagement_CiscoISEV01(starttime= starttime, endtime= endtime, srcipaddr_has_any_prefix= srcipaddr_has_any_prefix, actorusername_has_any= actorusername_has_any, targetusername_has_any= targetusername_has_any, eventtype_in= eventtype_in, disabled= (builtInDisabled or('Exclude_Im_UserManagement_CiscoISE' in (DisabledParsers)))),
+_Im_UserManagement_EmptyV01,
+_Im_UserManagement_LinuxAuthprivV01(starttime= starttime, endtime= endtime, srcipaddr_has_any_prefix= srcipaddr_has_any_prefix, actorusername_has_any= actorusername_has_any, targetusername_has_any= targetusername_has_any, eventtype_in= eventtype_in, disabled= (builtInDisabled or('Exclude_Im_UserManagement_LinuxAuthpriv' in (DisabledParsers)))),
+_Im_UserManagement_MicrosoftSecurityEventV01(starttime= starttime, endtime= endtime, srcipaddr_has_any_prefix= srcipaddr_has_any_prefix, actorusername_has_any= actorusername_has_any, targetusername_has_any= targetusername_has_any, eventtype_in= eventtype_in, disabled= (builtInDisabled or('Exclude_Im_UserManagement_MicrosoftSecurityEvent' in (DisabledParsers)))),
+_Im_UserManagement_NativeV01(starttime= starttime, endtime= endtime, srcipaddr_has_any_prefix= srcipaddr_has_any_prefix, actorusername_has_any= actorusername_has_any, targetusername_has_any= targetusername_has_any, eventtype_in= eventtype_in, disabled= (builtInDisabled or('Exclude_Im_UserManagement_Native' in (DisabledParsers)))),
+_Im_UserManagement_SentinelOneV01(starttime= starttime, endtime= endtime, srcipaddr_has_any_prefix= srcipaddr_has_any_prefix, actorusername_has_any= actorusername_has_any, targetusername_has_any= targetusername_has_any, eventtype_in= eventtype_in, disabled= (builtInDisabled or('Exclude_Im_UserManagement_SentinelOne' in (DisabledParsers))))

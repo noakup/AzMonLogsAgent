@@ -1,0 +1,7 @@
+//=================================================================================================================================================================
+// summarize by CorrelationId groups audits by pipeline run. For more details about summarize see: https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/summarizeoperator
+ACICollaborationAudit
+| summarize PipelineExecutedOn=max(TimeGenerated), ResourceAccessGrantCount=count(), EntitlementResult=array_strcat(make_set(EntitlementResult), ',') by CorrelationId, GrantType, TargetResourceId
+| project-away CorrelationId
+| order by PipelineExecutedOn desc, TargetResourceId asc
+| top 100 by PipelineExecutedOn;

@@ -1,0 +1,30 @@
+[
+    {
+        "time": "2024-07-04 23:31:45.1224849",
+        "resourceId": "/SUBSCRIPTIONS/00000000-0000-0000-0000-000000000000/RESOURCEGROUPS/TESTRG/PROVIDERS/MICROSOFT.DATAREPLICATION/REPLICATIONVAULTS/TESTREPLICATIONVAULT/PROTECTEDITEMS/F3C6F7FE-5052-4037-974C-C3BCE29799AE",
+        "operationName": "Create",
+        "category": "ProtectedItems",
+        "location": "centraluseuap",
+        "level": "Information",
+        "properties": {
+            "correlationId": "edebe21f-1a61-4a84-ac23-958502f5fb85",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.DataReplication/replicationVaults/testreplicationvault/protectedItems/f3c6f7fe-5052-4037-974c-c3bce29799ae",
+            "name": "f3c6f7fe-5052-4037-974c-c3bce29799ae",
+            "type": "Microsoft.DataReplication/replicationVaults/protectedItems",
+            "providerId": "4de0fddc-bdfe-40d9-b60e-678bdce89630",
+            "policyName": "testpolicy",
+            "replicationExtensionName": "testreplicationextension",
+            "sourceFabricProviderId": "b35da11c-d69e-4220-9a90-d81ed93ad2fc",
+            "targetFabricProviderId": "22f00372-a1b7-467f-87ce-d95e17a6e7c7",
+            "fabricAgentId": "f4738eae-0227-4fbf-81fa-5ae0d4fed1ea",
+            "targetFabricAgentId": "e7a31aca-c7a4-4222-838f-7947a5344a7a",
+            "fabricObjectId": "68bdf6e7-131f-5b6e-8b07-7f69d3534376",
+            "fabricObjectName": "test-vm",
+            "fabricId": "c85b7c6f-f9e4-48c8-948a-8efc27433fc7",
+            "targetFabricId": "a5354001-a15c-4d28-a5c5-885a8161aaab",
+            "protectionState": "InitialReplicationInProgress",
+            "lastSuccessfulPlannedFailoverTime": null,
+            "replicationHealth": "Normal"
+        }
+    }
+]

@@ -1,0 +1,5 @@
+HDInsightSparkStageEvents
+//| where ClusterDnsName == '<your cluster name>' // remove the preceding "//" and specify your cluster name to see its logs
+//| where ApplicationId == '<your application id>'
+| extend Duration = iff(isnotempty(CompletionTime), datetime_diff("Millisecond", CompletionTime, SubmissionTime), datetime_diff("Millisecond", now(), SubmissionTime))
+| project TimeGenerated, ApplicationId, StageId, Duration, FailureReason, Details, RDDInfo

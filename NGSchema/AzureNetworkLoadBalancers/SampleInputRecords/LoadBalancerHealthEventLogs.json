@@ -1,0 +1,18 @@
+[
+  {
+    "resourceId": "/SUBSCRIPTIONS/3DC13B6D-6896-40AC-98F7-F18CBCE2A405/RESOURCEGROUPS/ALVISRG/PROVIDERS/MICROSOFT.NETWORK/LOADBALANCERS/CONSUMERLB",
+    "time": "2024-04-18T01:46:03.9813730Z",
+    "operationName": "Microsoft.Network/loadbalancers/healthEvent/Read",
+    "location": "eastus2euap",
+    "category": "LoadBalancerHealthEvent",
+    "properties": {
+      "HealthEventType": "NoHealthyBackends",
+      "Severity": "Critical",
+      "SubscriptionId": "3dc13b6d-6896-40ac-98f7-f18cbce2a405",
+      "LoadBalancerArmId": "878a69c6-a8c7-43f8-a0b5-28d6d456adf9",
+      "Frontend Ip": "20.102.152.152",
+      "Description": "Critical - NoHealthyBackends: All backend instances configured to frontend IP Udp:20.102.152.152:3 are not responding to health probes. As a result, the frontend IP is completely unreachable. Please review the associated health probe configuration(s) and ensure that at least one of the backend instances are responding to the health probes on the configured ports. To mitigate this issue, please refer to aka.ms/lbhealth for more detailed event definitions and troubleshooting guidance.",
+      "CreationTimeInUtc": "04/18/2024 01:45:45"
+    }
+  }
+]

@@ -1,0 +1,9 @@
+source
+| project
+    TimeGenerated = iff(isnull(utcTime), FluentdIngestTimestamp, utcTime),
+    Message = message,
+    LogType = logType,
+    ClusterName = clusterName,
+    HostName = hostName,
+    OperationName = operationName,
+    CorrelationId = correlationId

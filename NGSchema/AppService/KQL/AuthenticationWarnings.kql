@@ -1,0 +1,4 @@
+AppServiceAuthenticationLogs
+| where TaskName == "MiddlewareWarning"
+| sort by TimeGenerated desc
+| take 100

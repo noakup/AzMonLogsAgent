@@ -1,0 +1,192 @@
+[
+  {
+    "resourceId": "/SUBSCRIPTIONS/2BE5821E-62DE-41A9-9BAF-BD6A0090713A/RESOURCEGROUPS/CUSTOMERSRG/PROVIDERS/MICROSOFT.OPERATIONALINSIGHTS/WORKSPACES/CUSTOMERSWORKSPACE",
+    "location": "westcentralus",
+    "category": "JobLogs",
+    "operationName": "Microsoft.OperationalInsights/workspaces/exportjob/action",
+    "resultType": "Accepted",
+    "correlationId": "3203c144-3aa7-4e1d-9f8a-c14e1685fe70",
+    "durationMs": 0,
+    "properties": {
+      "message": "",
+      "details": {
+        "container": "gardenClothing",
+        "storageAccounts": [
+          "https://turn-key.blob.core.windows.net"
+        ]
+      },
+      "status": "Started",
+      "jobType": "Export",
+      "jobId": "3daa5a63-8957-4822-9773-03fbb6b91762",
+      "sourceTable": "BermudianDollar",
+      "records": null,
+      "gigabytes": null
+    },
+    "eventLogFilterType": "DiagnosticLog",
+    "time": "2024-09-22T19:15:52.0207696Z"
+  },
+  {
+    "resourceId": "/SUBSCRIPTIONS/2BE5821E-62DE-41A9-9BAF-BD6A0090713A/RESOURCEGROUPS/CUSTOMERSRG/PROVIDERS/MICROSOFT.OPERATIONALINSIGHTS/WORKSPACES/CUSTOMERSWORKSPACE",
+    "location": "westcentralus",
+    "category": "JobLogs",
+    "operationName": "Microsoft.OperationalInsights/workspaces/exportjob/action",
+    "resultType": "Succeeded",
+    "correlationId": "3203c144-3aa7-4e1d-9f8a-c14e1685fe70",
+    "durationMs": 0,
+    "properties": {
+      "message": "Job '3daa5a63-8957-4822-9773-03fbb6b91762' in workspace 'b95c4109-0ea0-4bc5-bcb0-435fc3bcbca9' Completed Successfully",
+      "details": {
+        "container": "gardenClothing",
+        "storageAccounts": [
+          "https://turn-key.blob.core.windows.net"
+        ]
+      },
+      "status": "Succeeded",
+      "jobType": "Export",
+      "jobId": "3daa5a63-8957-4822-9773-03fbb6b91762",
+      "sourceTable": "BermudianDollar",
+      "records": 569,
+      "gigabytes": 95.09140370335894
+    },
+    "eventLogFilterType": "DiagnosticLog",
+    "time": "2024-09-26T00:57:31.6567867Z"
+  },
+  {
+    "resourceId": "/SUBSCRIPTIONS/78BD13A4-3540-4072-93EA-92906556FCE6/RESOURCEGROUPS/CUSTOMERSRG/PROVIDERS/MICROSOFT.OPERATIONALINSIGHTS/WORKSPACES/CUSTOMERSWORKSPACE",
+    "location": "westcentralus",
+    "category": "JobLogs",
+    "operationName": "Microsoft.OperationalInsights/workspaces/exportjob/action",
+    "resultType": "Accepted",
+    "correlationId": "10aa8cc3-f6a0-439d-9055-d44baad4d1ae",
+    "durationMs": 0,
+    "properties": {
+      "message": "",
+      "details": {
+        "container": "asymmetric",
+        "storageAccounts": [
+          "https://rubber.blob.core.windows.net",
+          "https://unbrandedrubbersoap.blob.core.windows.net",
+          "https://games-home.blob.core.windows.net"
+        ]
+      },
+      "status": "Started",
+      "jobType": "Export",
+      "jobId": "30411e79-88de-4e2f-ab64-734277702777",
+      "sourceTable": "Tunnel",
+      "records": null,
+      "gigabytes": null
+    },
+    "eventLogFilterType": "DiagnosticLog",
+    "time": "2024-11-24T19:15:52.0388602Z"
+  },
+  {
+    "resourceId": "/SUBSCRIPTIONS/78BD13A4-3540-4072-93EA-92906556FCE6/RESOURCEGROUPS/CUSTOMERSRG/PROVIDERS/MICROSOFT.OPERATIONALINSIGHTS/WORKSPACES/CUSTOMERSWORKSPACE",
+    "location": "westcentralus",
+    "category": "JobLogs",
+    "operationName": "Microsoft.OperationalInsights/workspaces/exportjob/action",
+    "resultType": "Failed",
+    "correlationId": "10aa8cc3-f6a0-439d-9055-d44baad4d1ae",
+    "durationMs": 0,
+    "properties": {
+      "message": "Job '30411e79-88de-4e2f-ab64-734277702777' in workspace '685838b1-1571-44df-a112-22e1acaa3828' Failed",
+      "details": {
+        "container": "asymmetric",
+        "storageAccounts": [
+          "https://rubber.blob.core.windows.net",
+          "https://unbrandedrubbersoap.blob.core.windows.net",
+          "https://games-home.blob.core.windows.net"
+        ]
+      },
+      "status": "Failed",
+      "jobType": "Export",
+      "jobId": "30411e79-88de-4e2f-ab64-734277702777",
+      "sourceTable": "Tunnel",
+      "records": 1206,
+      "gigabytes": 28.195753152283572
+    },
+    "eventLogFilterType": "DiagnosticLog",
+    "time": "2024-11-25T21:27:57.6761558Z"
+  },
+  {
+    "resourceId": "/SUBSCRIPTIONS/2410249A-5B9F-4EBD-AB01-685FCA4F2343/RESOURCEGROUPS/CUSTOMERSRG/PROVIDERS/MICROSOFT.OPERATIONALINSIGHTS/WORKSPACES/CUSTOMERSWORKSPACE",
+    "location": "uksouth",
+    "category": "JobLogs",
+    "operationName": "Microsoft.OperationalInsights/workspaces/exportjob/action",
+    "resultType": "Accepted",
+    "correlationId": "56a888e0-2d1d-45c1-9312-764d7f6cecd5",
+    "durationMs": 0,
+    "properties": {
+      "message": "",
+      "details": {
+        "container": "architect",
+        "storageAccounts": [
+          "https://auxiliary.blob.core.windows.net",
+          "https://upward-trending.blob.core.windows.net",
+          "https://gorgeoussteelpants.blob.core.windows.net"
+        ]
+      },
+      "status": "Started",
+      "jobType": "Export",
+      "jobId": "e298b744-f5af-43e3-bac8-42628ae35858",
+      "sourceTable": "PracticalGraniteSoap",
+      "records": null,
+      "gigabytes": null
+    },
+    "eventLogFilterType": "DiagnosticLog",
+    "time": "2024-11-18T19:15:52.0396944Z"
+  },
+  {
+    "resourceId": "/SUBSCRIPTIONS/31C7753D-E663-4EE2-B718-A1FBCC277C36/RESOURCEGROUPS/CUSTOMERSRG/PROVIDERS/MICROSOFT.OPERATIONALINSIGHTS/WORKSPACES/CUSTOMERSWORKSPACE",
+    "location": "uksouth",
+    "category": "JobLogs",
+    "operationName": "Microsoft.OperationalInsights/workspaces/exportjob/action",
+    "resultType": "Accepted",
+    "correlationId": "e49909ba-9e95-44a8-bd7d-3e0146316ffa",
+    "durationMs": 0,
+    "properties": {
+      "message": "",
+      "details": {
+        "container": "personalloanaccount",
+        "storageAccounts": [
+          "https://re-contextualized.blob.core.windows.net",
+          "https://plastic.blob.core.windows.net"
+        ]
+      },
+      "status": "Started",
+      "jobType": "Export",
+      "jobId": "c717fda5-0b5a-459c-affd-9b959dcd174f",
+      "sourceTable": "TCP",
+      "records": null,
+      "gigabytes": null
+    },
+    "eventLogFilterType": "DiagnosticLog",
+    "time": "2024-09-23T19:15:52.0400541Z"
+  },
+  {
+    "resourceId": "/SUBSCRIPTIONS/31C7753D-E663-4EE2-B718-A1FBCC277C36/RESOURCEGROUPS/CUSTOMERSRG/PROVIDERS/MICROSOFT.OPERATIONALINSIGHTS/WORKSPACES/CUSTOMERSWORKSPACE",
+    "location": "uksouth",
+    "category": "JobLogs",
+    "operationName": "Microsoft.OperationalInsights/workspaces/exportjob/action",
+    "resultType": "Succeeded",
+    "correlationId": "e49909ba-9e95-44a8-bd7d-3e0146316ffa",
+    "durationMs": 0,
+    "properties": {
+      "message": "Job 'c717fda5-0b5a-459c-affd-9b959dcd174f' in workspace 'b95c4109-0ea0-4bc5-bcb0-435fc3bcbca9' Completed Successfully",
+      "details": {
+        "container": "personalloanaccount",
+        "storageAccounts": [
+          "https://re-contextualized.blob.core.windows.net",
+          "https://plastic.blob.core.windows.net"
+        ]
+      },
+      "status": "Succeeded",
+      "jobType": "Export",
+      "jobId": "c717fda5-0b5a-459c-affd-9b959dcd174f",
+      "sourceTable": "TCP",
+      "records": 1109,
+      "gigabytes": 56.01046864438759
+    },
+    "eventLogFilterType": "DiagnosticLog",
+    "time": "2024-09-26T05:30:07.297878Z"
+  }
+]

@@ -1,0 +1,8 @@
+// RoundTripTime Average Histogram
+ACSCallDiagnosticsUpdates
+// Filter null values
+| where isnotnull(RoundTripTimeAvg)
+// Count round trip time values by 10 millisecond intervals
+|summarize RoundTripTimeAvg_counts=count() by bin(RoundTripTimeAvg, 10)
+| order by RoundTripTimeAvg asc
+| render columnchart with (xcolumn = RoundTripTimeAvg, title="RoundTripTimeAvg histogram")

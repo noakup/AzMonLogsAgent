@@ -1,0 +1,38 @@
+[
+    {
+        "time": "2023-03-10T20:20:56.822623885Z",
+        "category": "Audit",
+        "resourceId": "/SUBSCRIPTIONS/4BF1F21F-85F1-412D-BD32-11C8D176EF50/RESOURCEGROUPS/INTEGRATIONRGDFEUS/PROVIDERS/MICROSOFT.APPCONFIGURATION/CONFIGURATIONSTORES/EVENTGRIDDFEUS",
+        "operationName": "delete-keyvalue",
+        "resultType": "Success",
+        "callerIpAddress": "23.96.48.132",
+        "identity": "[{\"callerIdentityType\"=>\"KeyName\", \"callerIdentity\"=>\"jWql-lt-s0:7rXfoxly4TRdXMG+FRLr\"}]",
+      "properties": {
+        "id": "61a2f0b4-68e9-4f6c-93a3-07af4bc3abd2",
+        "status": "Started",
+        "eventCategory": "ApplicationManagement",
+        "targetResourceType": "Microsoft.AppConfiguration/keyValues",
+        "targetResourceName": "https://eventgriddfeus.azconfig-test.io/kv/EventGridDFEUS-key-2021-04-13T00:04?api-version=1.0",
+        "requestId": "fc76475e-303e-4a5e-9214-244de9049b38",
+        "etag": "\"QtV1TTZC4paO3Aok8FBVdmCbCkEV1ib1F0-mjGogDlQ\""
+      }
+    },
+    {
+        "time": "2021-04-13T00:34:28.839229+00:00",
+        "category": "Audit",
+        "resourceId": "/SUBSCRIPTIONS/4BF1F21F-85F1-412D-BD32-11C8D176EF50/RESOURCEGROUPS/INTEGRATIONRGDFEUS/PROVIDERS/MICROSOFT.APPCONFIGURATION/CONFIGURATIONSTORES/EVENTGRIDDFEUS",
+        "operationName": "set-keyvalue",
+        "resultType": "Success",
+        "callerIpAddress": "23.96.48.132",
+        "identity": "[{\"callerIdentityType\"=>\"ApplicationId\", \"callerIdentity\"=>\"c44b4083-3bb0-49c1-b47d-974e53cbdf3c\"}, {\"callerIdentityType\"=>\"ObjectId\", \"callerIdentity\"=>\"735991e8-73a9-4b99-9469-b6389e8bd35b\"}, {\"callerIdentityType\"=>\"TenantId\", \"callerIdentity\"=>\"72f988bf-86f1-41af-91ab-2d7cd011db47\"}, {\"callerIdentityType\"=>\"UPN\", \"callerIdentity\"=>\"abc@microsoft.com\"}]",
+      "properties": {
+        "id": "c8cb155e-de85-49ab-9e3a-a0fd93e6d6e7",
+        "status": "Finished",
+        "eventCategory": "ApplicationManagement",
+        "targetResourceType": "Microsoft.AppConfiguration/keyValues",
+        "targetResourceName": "https://eventgriddfeus.azconfig-test.io/kv/EventGridDFEUS-key-2021-04-13T00:04?api-version=1.0",
+        "requestId": "0acd542b-e415-4b64-9046-c0c957122669",
+        "etag": "\"QtV1TTZC4paO3Aok8FBVdmCbCkEV1ib1F0-mjGogDlQ\""
+      }
+    }
+]

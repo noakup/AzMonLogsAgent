@@ -1,0 +1,4 @@
+AKSControlPlane
+| where Category=="cluster-autoscaler"
+| limit 100
+| project TimeGenerated, Level, Message

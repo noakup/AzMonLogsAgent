@@ -1,0 +1,20 @@
+[
+    {
+        "TimeGenerated": "2019-12-10T17:21:21.1643253Z",
+        "Computer": "test-computer",
+        "Category": "telegraf",
+        "Status": "Warning",
+        "Message": "Some warning log description"
+    },
+    {
+        "TimeGenerated": "2019-12-11T17:21:21.1643253Z",
+        "Computer": "test-computer",
+        "Category": "wli",
+        "Status": "Error",
+        "Message": "Some error log description",
+        "Tags": {
+            "moreInfo": "some info",
+            "andMoreInfo": "and more info"
+        }
+    }
+]

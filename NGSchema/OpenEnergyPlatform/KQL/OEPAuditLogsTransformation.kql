@@ -1,0 +1,14 @@
+source 
+| project TimeGenerated = todatetime(['time']),
+OperationName = tostring(properties.OperationName),
+Location = location, 
+ServiceName = tostring(properties.ServiceName), 
+DataPartitionId = tostring(properties['data-partition-id']), 
+Message = tostring(properties.message), 
+ActionId = tostring(properties.actionId),
+Action = tostring(properties.action), 
+Puid = tostring(properties.CallerIdentities[0].CallerIdentityValue),
+ResultType = tostring(properties.ResultType),
+OperationDescription = tostring(properties.TargetResources[0].TargetResourceName),
+RequestId = tostring(properties.requestId),
+Category = category

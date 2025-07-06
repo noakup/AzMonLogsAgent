@@ -1,0 +1,58 @@
+[
+    {
+        "timeStamp": "2021-10-14T22:17:11+00:00",
+        "resourceId": "/SUBSCRIPTIONS/MYSUBSCRIPTIONID/RESOURCEGROUPS/MYRESOURCEGROUP/PROVIDERS/MICROSOFT.NETWORK/APPLICATIONGATEWAYS/MYV2-APPLICATIONGATEWAY",
+        "operationName": "ApplicationGatewayFirewall",
+        "category": "ApplicationGatewayFirewallLog",
+        "properties": {
+            "instanceId": "appgw_1",
+            "clientIp": "10.109.120.4",
+            "clientPort": "",
+            "requestUri": "/api/integrations/v2/productivity/report",
+            "ruleSetType": "OWASP_CRS",
+            "ruleSetVersion": "3.1.0",
+            "ruleId": "920300",
+            "message": "Request Missing an Accept Header",
+            "action": "Matched",
+            "site": "Global",
+            "details": {
+                "message": "Warning. Match of \\\"pm AppleWebKit Android\\\" against \\\"REQUEST_HEADERS:user-agent\\\" required. ",
+                "data": "",
+                "file": "rules/REQUEST-920-PROTOCOL-ENFORCEMENT.conf",
+                "line": "1276"
+            },
+            "hostname": "optimizer.vayaworkforce.com",
+            "transactionId": "d5d890d404981845bda3d68600e5b810",
+            "policyId": "_subscriptions_2501ce5c-a05f-4720-8d00-10d1833378c6_resourceGroups_vaya-prod-wus-ag-INT-01_rg_providers_Microsoft.Network_ApplicationGatewayWebApplicationFirewallPolicies_vaya-prod-wus-ag-INT_wafpolicy",
+            "policyScope": "Global",
+            "policyScopeName": "Global"
+        }
+    },
+    {
+        "timeStamp": "2021-10-14T22:17:11+00:00",
+        "resourceId": "/SUBSCRIPTIONS/MYSUBSCRIPTIONID/RESOURCEGROUPS/MYRESOURCEGROUP/PROVIDERS/MICROSOFT.NETWORK/APPLICATIONGATEWAYS/MYV1-APPLICATIONGATEWAY",
+        "operationName": "ApplicationGatewayFirewall",
+        "category": "ApplicationGatewayFirewallLog",
+        "properties": {
+            "instanceId": "ApplicationGatewayRole_IN_1",
+            "clientIp": "104.43.133.214",
+            "clientPort": "0",
+            "requestUri": "/api/auth/token",
+            "ruleSetType": "OWASP",
+            "ruleSetVersion": "2.2.9",
+            "ruleId": "960015",
+            "ruleGroup": "Default",
+            "message": "Request Missing an Accept Header",
+            "action": "Detected",
+            "site": "Global",
+            "details": {
+                "message": "Warning. Operator EQ matched 0 at REQUEST_HEADERS.",
+                "data": "",
+                "file": "base_rules/modsecurity_crs_21_protocol_anomalies.conf",
+                "line": "47"
+            },
+            "hostname": "my.carecommunity.com",
+            "transactionId": "13474770087240021364"
+        }
+    }
+]

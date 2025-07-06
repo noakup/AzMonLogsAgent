@@ -1,0 +1,3 @@
+NatGatewayFlowlogsV1
+| where TimeGenerated > ago(1d)
+| summarize PacketsSentTotal = sum(PacketsSent), BytesSentTotal = sum(BytesSent) by DestinationIP, NatGatewayIP

@@ -1,0 +1,5 @@
+OEPAirFlowTask
+| extend ResourceName = tostring(split(_ResourceId , '/')[-1])
+// | where ResourceName == "<the name of ADME instance>"        // to filter on resourceName replace <...> and uncomment line
+| distinct DagName, CorrelationId                               // correlationId is same as runId - we have created a duplicate for consistency in search across logs of all services 
+| summarize count() by DagName

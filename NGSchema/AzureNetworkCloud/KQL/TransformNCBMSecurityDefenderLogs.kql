@@ -1,0 +1,15 @@
+source
+| project
+    TimeGenerated       = todatetime(["time"]),
+    Node                = host,
+    ContainerName       = ContainerName,
+    PodName             = PodName,
+    NamespaceName       = NamespaceName,
+    ComponentName       = componentName,
+    ComponentVersion    = componentVersion,
+    Message             = message,
+    Severity            = severity,
+    Location            = location,
+    LogType             = logType,
+    ClusterManagerName  = clusterManagerName,
+    ClusterName         = clusterName

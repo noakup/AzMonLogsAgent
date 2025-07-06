@@ -1,0 +1,37 @@
+[
+  {
+    "time": "2021-03-06T10:28:37.1702622Z",
+    "tenantId": "5b5a146c-eba8-46af-96f8-e31b50d15a3f",
+    "operationName": "Publish",
+    "category": "AdvancedHunting-IdentityQueryEvents",
+    "properties": {
+      "Timestamp": "2021-08-15T012107.368Z",
+      "ActionType": "DNS query",
+      "Application": "Active Directory",
+      "QueryType": "Aaaa",
+      "QueryTarget": "abcdefghijabcdefghijabcdefghijabjabcdefghijabcdefghija.abcdefghijabcdefghijabcdefghijabjabcdefghijabcdefghija.abcdefghijabcdefghijabcdefghijabjabcdefghijabcdefghija.abcdefghijabcdefghijabcdefghijabjabcdefghijabcdefghija.beqgjpoynzcvs.com",
+      "Query": "",
+      "Protocol": "Dns",
+      "AccountName": "",
+      "AccountDomain": "",
+      "AccountUpn": "",
+      "AccountSid": "",
+      "AccountObjectId": "",
+      "AccountDisplayName": "",
+      "DeviceName": "client.sentinele5.onmicrosoft.com",
+      "IPAddress": "10.0.7.5",
+      "Port": "60609",
+      "DestinationDeviceName": "domaincontroller.sentinele5.onmicrosoft.com",
+      "DestinationIPAddress": "10.0.7.4",
+      "DestinationPort": "53",
+      "TargetDeviceName": "",
+      "TargetAccountUpn": "",
+      "TargetAccountDisplayName": "",
+      "Location": "",
+      "ReportId": "2e3fe879-8be1-4bf2-b8c7-b102978f2409_116581783_1628963667222_20940",
+      "AdditionalFields": "{\"DestinationComputerOperatingSystemVersion\":\"6.3 (9600)\",\"DestinationComputerOperatingSystemType\":\"windows\",\"DestinationComputerOperatingSystem\":\"windows server 2012 r2 datacenter\",\"SourceComputerOperatingSystemType\":\"windows\",\"SourceComputerOperatingSystemVersion\":\"6.3 (9600)\",\"SourceComputerOperatingSystem\":\"windows server 2012 r2 datacenter\",\"IsResourceAccountTrustedForUnconstrainedDelegation\":\"False\",\"FROM.DEVICE\":\"CLIENT\",\"ACTOR.ACCOUNT\":\"aatp_admin\",\"TO.DEVICE\":\"DOMAINCONTROLLE\",\"Count\":\"1\",\"TARGET_OBJECT.ACCOUNT\":\"krbtgt\",\"TARGET_OBJECT.USER\":\"krbtgt\",\"Spns\":\"krbtgt/SENTINELE5.ONMICROSOFT.COM\"}\n"
+    },
+    "Tenant": "PRD",
+    "DC": "WEU"
+  }
+]

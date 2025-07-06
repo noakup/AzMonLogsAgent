@@ -1,0 +1,8 @@
+; owners for manifest, sample input/output records, transforms kql
+samlee3
+; other owners
+*saisa
+*sriramb
+mayada
+cvarsh
+prsadhu

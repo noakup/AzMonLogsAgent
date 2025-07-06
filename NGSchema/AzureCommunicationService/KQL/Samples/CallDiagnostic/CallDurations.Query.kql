@@ -1,0 +1,7 @@
+ACSCallSummary
+// Get the distinct combinations of CorrelationId, CallDuration
+| distinct CorrelationId, CallDuration
+// Count call duration bins (60 second intervals)
+| summarize duration_counts=count() by bin(CallDuration, 60)
+| order by CallDuration asc
+| render columnchart with (xcolumn = CallDuration, title="Call duration histogram")

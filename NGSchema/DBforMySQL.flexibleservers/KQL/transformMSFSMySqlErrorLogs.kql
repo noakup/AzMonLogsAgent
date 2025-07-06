@@ -1,0 +1,5 @@
+source
+| project 
+    TimeGenerated = todatetime(['time']),
+    Message = properties
+

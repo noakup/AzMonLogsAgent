@@ -1,0 +1,11 @@
+source
+| project
+	TimeGenerated = todatetime(['time']),    
+	Protocol = tostring(properties.Protocol), 
+	SourceIp = tostring(properties.SourceIp), 
+	SourcePort = toint(properties.SourcePort),
+	DestinationIp = tostring(properties.DestinationIp),
+	DestinationPort = toint(properties.DestinationPort), 
+	Action = tostring(properties.Action),
+	ActionReason = tostring(properties.ActionReason), 
+	Flag = tostring(properties.Flag)

@@ -1,0 +1,919 @@
+{
+    "type": "Microsoft.AAD/domainServices",
+    "displayName": "Azure AD Domain Services",
+    "description": "Tables related to Azure AD Domain Services.",
+    "tags": {
+    },
+    "properties": {
+    },
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "AAD Domain Services/Triage",
+    "contactDL": "dcaas@microsoft.com",
+    "relatedTables": [ "AzureActivity" ],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "AADDomainServicesDNSAuditsDynamicUpdates",
+            "description": "DNS server audit events enable change tracking on the DNS server. This table contains operational audit events for dynamic updates.",
+            "categories": [],
+            "dataTypeId": "AADDOMAINSERVICES_DNSSERVERAUDITSDYNAMICUPDATES",
+            "artifactVersion": 2,
+            "isHidden": false,
+            "isResourceCentric": true,
+            "intelligencePacks": [
+                "LogManagement"
+            ],
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "transformFilePath": "KQL/TransformAADDomainServicesDNSAuditsDynamicUpdates.kql",
+            "sampleInputRecordsFilePath": "SampleInputRecords/AADDomainServicesDNSAuditsDynamicUpdates.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AADDomainServicesDNSAuditsDynamicUpdates.loganalytics.json",
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resultType",
+                    "type": "String"
+                },
+                {
+                    "name": "resultSignature",
+                    "type": "String"
+                },
+                {
+                    "name": "resultDescription",
+                    "type": "String"
+                },
+                {
+                    "name": "durationMs",
+                    "type": "Int"
+                },
+                {
+                    "name": "callerIpAddress",
+                    "type": "String"
+                },
+                {
+                    "name": "correlationId",
+                    "type": "String"
+                },
+                {
+                    "name": "identity",
+                    "type": "String"
+                },
+                {
+                    "name": "Level",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the event was generated."
+                },
+                {
+                    "name": "operationName",
+                    "type": "String",
+                    "description": "Identifies the type of event emitted.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String",
+                    "description": "Version string.  Reserved.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "resultDescription",
+                    "type": "String",
+                    "description": "Summary description of the event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "EventType",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Name",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Ttl",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "BufferSize",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RData",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Zone",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ZoneScope",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Source",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "RecordId",
+                    "type": "String",
+                    "description": "Identifier for the underlying Windows event",
+                    "isDefaultDisplay": true
+                }
+            ]
+        },
+        {
+            "name": "AADDomainServicesDNSAuditsGeneral",
+            "description": "DNS server audit events enable change tracking on the DNS server. An audit event is logged each time server, zone, or resource record settings are changed. This includes operational events such as zone transfers, and DNSSEC zone signing and unsigning.  This table captures audit events that are not from dynamic updates.",
+            "categories": [],
+            "dataTypeId": "AADDOMAINSERVICES_DNSSERVERAUDITSGENERAL",
+            "artifactVersion": 2,
+            "isHidden": false,
+            "isResourceCentric": true,
+            "intelligencePacks": [
+                "LogManagement"
+            ],
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "transformFilePath": "KQL/TransformAADDomainServicesDNSAuditsGeneral.kql",
+            "sampleInputRecordsFilePath": "SampleInputRecords/AADDomainServicesDNSAuditsGeneral.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AADDomainServicesDNSAuditsGeneral.loganalytics.json",
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resultType",
+                    "type": "String"
+                },
+                {
+                    "name": "resultSignature",
+                    "type": "String"
+                },
+                {
+                    "name": "resultDescription",
+                    "type": "String"
+                },
+                {
+                    "name": "durationMs",
+                    "type": "Int"
+                },
+                {
+                    "name": "callerIpAddress",
+                    "type": "String"
+                },
+                {
+                    "name": "correlationId",
+                    "type": "String"
+                },
+                {
+                    "name": "identity",
+                    "type": "String"
+                },
+                {
+                    "name": "Level",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the event was generated."
+                },
+                {
+                    "name": "operationName",
+                    "type": "String",
+                    "description": "Identifies the type of event emitted.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String",
+                    "description": "Version string.  Reserved.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "resultDescription",
+                    "type": "String",
+                    "description": "Summary description of the event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Name",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Lookup",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ReplicationScope",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ZoneFile",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "VirtualizationID",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Zone",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PropertyKey",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "NewValue",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Ttl",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "BufferSize",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RData",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ZoneScope",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ZoneName",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DenialOfExistence",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DistributeTrustAnchor",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DnsKeyRecordSetTtl",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DSRecordGenerationAlgorithm",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DSRecordSetTtl",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "EnableRfc5011KeyRollover",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "IsKeyMasterServer",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "KeyMasterServer",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "NSec3HashAlgorithm",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "NSec3Iterations",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "NSec3OptOut",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "NSec3RandomSaltLength",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "NSec3UserSalt",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ParentHasSecureDelegation",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PropagationTime",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SecureDelegationPollingPeriod",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SignatureInceptionOffset",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "EventGuid",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "WithWithout",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "QType",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "QName",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Scope",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Forwarders",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Setting",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RecursionScope",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "KeyProtocol",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Base64Data",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "CryptoAlgorithm",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "KeyTag",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DigestType",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Digest",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FilePath",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "EventString",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ListenAddresses",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "MasterServer",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "NodeName",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SubTreeAging",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ScavengeServers",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SeizedOrTransfered",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "WithNewKeys",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "KeyOrZone",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "KskOrZsk",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "KeyId",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "KeyType",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "CurrentState",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "KeyStorageProvider",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "StoreKeysInAD",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "KeyLength",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DnsKeySignatureValidityPeriod",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DSSignatureValidityPeriod",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ZoneSignatureValidityPeriod",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "InitialRolloverOffset",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RolloverPeriod",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RolloverType",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "NextRolloverAction",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LastRolloverTime",
+                    "type": "DateTime",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "NextRolloverTime",
+                    "type": "DateTime",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "CurrentRolloverStatus",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActiveKey",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "StandbyKey",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "NextKey",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ChildZone",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "NameServer",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ClientSubnetRecord",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ClientSubnetList",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServerName",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ProcessingOrder",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Criteria",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Action",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Policy",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Condition",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "IsEnabled",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Scopes",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OldPropertyValues",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "NewPropertyValues",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ScopeWeight",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ScopeWeightNew",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ScopeWeightOld",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "NewScope",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OldScope",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ResponsePerSecond",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ErrorsPerSecond",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LeakRate",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TCRate",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "WindowSize",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TotalResponsesInWindow",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "IPv4PrefixLength",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "IPv6PrefixLength",
+                    "type": "Int",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Mode",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RRLExceptionlist",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FriendlyName",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OldFriendlyName",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "NewFriendlyName",
+                    "type": "String",
+                    "description": "The context of this field is dependent on the Windows Event being emitted, represented in the OperationName. Please see the Windows Server description of this event for the meaning of this field.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RecordId",
+                    "type": "String",
+                    "description": "Identifier for the underlying Windows event",
+                    "isDefaultDisplay": true
+                }
+            ]
+        }
+    ],
+    "functions": [],
+    "queries": []
+}

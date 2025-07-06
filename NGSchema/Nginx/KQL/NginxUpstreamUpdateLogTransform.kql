@@ -1,0 +1,11 @@
+source
+| where category == "NginxUpstreamUpdateLogs"
+| project 
+    TimeGenerated = todatetime(["time"]),
+    Location = location,
+    Message = tostring(properties.message),
+    Tag = tostring(properties.tag),
+    Level = tostring(properties.level),
+    Context = tostring(properties.context),
+    UpstreamName = tostring(properties.upstreamName),
+    Error = tostring(properties.error)

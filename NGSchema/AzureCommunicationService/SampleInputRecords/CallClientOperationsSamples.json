@@ -1,0 +1,41 @@
+[
+    {
+        "operationName": "EnterCall",
+        "operationVersion": "1.0",
+        "resourceId": "/SUBSCRIPTIONS/50AD1522-5C2C-4D9A-A6C8-67C11ECB75B8/RESOURCEGROUPS/CALLING-SAMPLE-APPS/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/CORERTC-TEST-APPS",
+        "properties": {
+            "timeGenerated": "2023-09-28T16:37:52.631Z",
+            "callId": "fcc87f7f-ce69-446f-b73f-b036051faea4",
+            "callClientTimeStamp": "2023-09-28T16:37:52.631Z",
+            "operationType": "client-api-request",
+            "category": "CallClientOperations",
+            "operationId": "251e3da4-e810-4ebc-b091-ba14b06e492c",
+            "operationName": "EnterCall",
+            "acsResourceId": "efd3c229-b212-437a-945d-92326f13a1be",
+            "correlationId": "fbc7045f-f9bd-4ee5-841c-383bd92e9921", 
+            "durationMs": 1234,
+            "resultType": "Succeeded",
+            "resultSignature": 200,
+            "sdkVersion": "1.17.1.5_beta",
+            "userAgent": "azure-communication-services/1.3.1-beta.1 azsdk-js-communication-calling/1.17.1-beta.5 (javascript_calling_sdk;#clientTag:51bb3f31-1a1d-4e02-9f61-5af3d679f140). Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
+            "clientInstanceId": "79a4be8a-e5da-4edd-bfd7-3438f9700c7a",
+            "endpointId": "",
+            "participantId": "fbc7045f-f9bd-4ee5-841c-383bd92e9921",
+            "operationPayload": {
+                "callDirection": "Outgoing", 
+                "calltype": "P2P",
+                "emergencyCountryCode": "CA",
+                "isEmergencyCall": true,
+                "isGroupJoin": true,
+                "isMeetingJoin": true,
+                "isMMREnabled": true,
+                "startMuted": true,
+                "resultCategory": "",
+                "startWithVideoEnabled": true,
+                "teamMeetingTenantId": "bb1c47f2-f592-4c4e-b84b-f59f8511d17c",
+                "teamMeetingThreadId": "19:meeting_NGU5N2NlYjYtMGQ2ZS00MmUwLTg2N2UtMTMyYmI4YWFjZjBk@thread.v2",
+                "TerminationCode": "" 
+            }
+        }
+    }
+]

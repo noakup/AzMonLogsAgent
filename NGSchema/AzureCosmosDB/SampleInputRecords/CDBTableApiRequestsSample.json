@@ -1,0 +1,23 @@
+[
+	{
+		"time": "2024-04-22T18:00:16.5159547Z",
+		"resourceId": "/SUBSCRIPTIONS/86886548-0A7C-430B-B16F-014095647DE4/RESOURCEGROUPS/ACCNT_RG/PROVIDERS/MICROSOFT.DOCUMENTDB/DATABASEACCOUNTS/TABLEAPI-TEST",
+		"category": "TableApiRequests",
+		"operationName": "InsertOrReplace",
+		"properties": {
+			"activityId": "d30a545c-1f88-4479-81d9-c6ea22fc784b",
+			"errorCode": "204",
+			"duration": "51.1505",
+			"requestCharge": "14.48",
+			"tableName": "<empty>",
+			"authorizationTokenType": "Invalid",
+			"address": "104.42.195.92",
+			"clientRequestId":"f64cd4e7-7b61-42d6-bc4b-25d241c5da08",
+			"piiCommandText": "<empty>",
+			"region": "East US",
+			"requestLength": "0",
+			"responseLength": "48",
+			"userAgent": "<empty>"
+		}
+	}
+]

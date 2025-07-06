@@ -1,0 +1,20 @@
+source
+| extend parsed_log=parse_json(tostring(properties.log))
+| project
+TimeGenerated=todatetime(["time"]),
+Level=tostring(parsed_log.level),
+AuditId=tostring(parsed_log.auditID),
+Stage=tostring(parsed_log.stage),
+RequestUri=tostring(parsed_log.requestURI),
+Verb=tostring(parsed_log.verb),
+User=parsed_log.user,
+SourceIps=parsed_log.sourceIPs,
+UserAgent=tostring(parsed_log.userAgent),
+ObjectRef=parsed_log.objectRef,
+ResponseStatus=parsed_log.responseStatus,
+RequestObject=parsed_log.requestObject,
+ResponseObject=parsed_log.responseObject,
+RequestReceivedTime=todatetime(parsed_log.requestReceivedTimestamp),
+StageReceivedTime=todatetime(parsed_log.stageTimestamp),
+Annotations=parsed_log.annotations,
+PodName=tostring(properties.pod)

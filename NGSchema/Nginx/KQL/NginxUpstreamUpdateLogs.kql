@@ -1,0 +1,3 @@
+NginxUpstreamUpdateLogs
+| sort by TimeGenerated asc
+| take 100

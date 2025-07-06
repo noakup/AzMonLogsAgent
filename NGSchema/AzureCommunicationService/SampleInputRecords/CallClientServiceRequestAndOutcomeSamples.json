@@ -1,0 +1,27 @@
+[
+    {
+        "operationName": "Join",
+        "resourceId": "/SUBSCRIPTIONS/50AD1522-5C2C-4D9A-A6C8-67C11ECB75B8/RESOURCEGROUPS/CALLING-SAMPLE-APPS/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/CORERTC-TEST-APPS",
+        "PreciseTimeStamp": "2024-12-03T13:17:05-07:00",
+        "level": "1",
+        "durationMs": 10,
+        "category": "ClientCallingOperationalLogRequest",
+        "correlationId": "1abe164c-9ab3-416e-926b-7c0e948dcc30",
+        "resultType": "Success",
+        "resultSignature": 403,
+        "properties": { 
+            "OperationId":"1bbe164c-9ab3-416e-926b-7c0e948dcc30",
+            "From": {
+                "Id":"8:acs:efd3c229-b212-437a-945d-92326f13a1be_00000021-681e-5622-5b3d-8e3a0d0047dd",
+                "EndpointId":"9bee7a45-a4f8-f8fa-3619-630cc5bcabd0",    
+                "ParticipantId":"9621e45e-14c7-4b93-b002-109f56d70a7c"},
+                "To":[],
+                "JoinType":"Teams",
+                "ThreadId":"19:meeting_ZTNlM2M4ZDUtOGI1Zi00YmQ3LWJkMGUtM2E2OTY3ZTdmZjYx@thread.v2",
+                "OrganizerId":"744e8f01-fbf6-40b3-b594-00792ff4276e",
+                "MessageId":"0",
+                "TenantId":"72f988bf-86f1-41af-91ab-2d7cd011db47",
+                "UserAgent":"CallSignalingAgent (3619/1.0.0.0_beta.1/2024.50.00.13;release_master.2024.50.00.2;master)"
+            }
+    }
+]

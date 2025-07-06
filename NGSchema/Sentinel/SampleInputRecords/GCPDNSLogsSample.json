@@ -1,0 +1,653 @@
+[
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "service-135492226944@container-engine-robot.iam.gserviceaccount.com",
+        "principalSubject": "serviceAccount:service-135492226944@container-engine-robot.iam.gserviceaccount.com"
+      },
+      "requestMetadata": {
+        "callerIp": "34.122.100.105",
+        "callerSuppliedUserAgent": "google-api-go-client/0.5,gzip(gfe),gzip(gfe)",
+        "requestAttributes": {
+          "time": "2025-03-06T13:34:02.898751Z",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "dns.googleapis.com",
+      "methodName": "dns.resourceRecordSets.list",
+      "authorizationInfo": [
+        {
+          "permission": "dns.resourceRecordSets.list",
+          "granted": true,
+          "resourceAttributes": {},
+          "permissionType": "ADMIN_READ"
+        }
+      ],
+      "resourceName": "managedZones/gke-kubernetesalekhya-961cde8a-dns",
+      "request": {
+        "name": "dns-version.cluster.local.",
+        "project": "msccp-test",
+        "location": "global",
+        "managedZone": "gke-kubernetesalekhya-961cde8a-dns",
+        "@type": "type.googleapis.com/cloud.dns.api.ResourceRecordSetsListRequest"
+      }
+    },
+    "insertId": "-odfpabe24zts",
+    "resource": {
+      "type": "dns_managed_zone",
+      "labels": {
+        "project_id": "msccp-test",
+        "zone_name": "gke-kubernetesalekhya-961cde8a-dns",
+        "location": "global"
+      }
+    },
+    "timestamp": "2025-03-06T13:34:02.888857Z",
+    "severity": "INFO",
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "receiveTimestamp": "2025-03-06T13:34:03.783003957Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "service-135492226944@container-engine-robot.iam.gserviceaccount.com",
+        "principalSubject": "serviceAccount:service-135492226944@container-engine-robot.iam.gserviceaccount.com"
+      },
+      "requestMetadata": {
+        "callerIp": "34.134.85.201",
+        "callerSuppliedUserAgent": "google-api-go-client/0.5,gzip(gfe),gzip(gfe)",
+        "requestAttributes": {
+          "time": "2025-03-09T19:30:17.479123Z",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "dns.googleapis.com",
+      "methodName": "dns.changes.create",
+      "authorizationInfo": [
+        {
+          "permission": "dns.changes.create",
+          "granted": true,
+          "resourceAttributes": {},
+          "permissionType": "ADMIN_WRITE"
+        }
+      ],
+      "resourceName": "managedZones/gke-kubernetesalekhya-961cde8a-dns",
+      "request": {
+        "change": {
+          "additions": [
+            {
+              "name": "dns-version.cluster.local.",
+              "type": "TXT",
+              "ttl": 30,
+              "rrdata": [
+                "1.0.0"
+              ]
+            }
+          ],
+          "deletions": [
+            {
+              "name": "dns-version.cluster.local.",
+              "type": "TXT",
+              "ttl": 30,
+              "rrdata": [
+                "\"1.0.0\""
+              ]
+            }
+          ]
+        },
+        "project": "msccp-test",
+        "location": "us-central1-a",
+        "managedZone": "gke-kubernetesalekhya-961cde8a-dns",
+        "@type": "type.googleapis.com/cloud.dns.api.ChangesCreateRequest"
+      },
+      "response": {
+        "change": {
+          "additions": [
+            {
+              "name": "dns-version.cluster.local.",
+              "type": "TXT",
+              "ttl": 30,
+              "rrdata": [
+                "\"1.0.0\""
+              ]
+            }
+          ],
+          "deletions": [
+            {
+              "name": "dns-version.cluster.local.",
+              "type": "TXT",
+              "ttl": 30,
+              "rrdata": [
+                "\"1.0.0\""
+              ]
+            }
+          ],
+          "startTime": "2025-03-09T19:30:17.467Z",
+          "id": "165",
+          "status": "PENDING"
+        },
+        "@type": "type.googleapis.com/cloud.dns.api.ChangesCreateResponse"
+      }
+    },
+    "insertId": "-dl89d1f1764xw",
+    "resource": {
+      "type": "dns_managed_zone",
+      "labels": {
+        "location": "global",
+        "zone_name": "gke-kubernetesalekhya-961cde8a-dns",
+        "project_id": "msccp-test"
+      }
+    },
+    "timestamp": "2025-03-09T19:30:17.450983Z",
+    "severity": "NOTICE",
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2025-03-09T19:30:17.858063534Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "code": 5
+      },
+      "authenticationInfo": {
+        "principalEmail": "scuba@np-lab.co.il"
+      },
+      "requestMetadata": {
+        "callerIp": "2405:201:c002:b999:8c5c:304b:4e50:9422",
+        "requestAttributes": {
+          "time": "2025-03-10T05:23:06.028849Z",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "dns.googleapis.com",
+      "methodName": "dns.managedZones.get",
+      "authorizationInfo": [
+        {
+          "permission": "dns.managedZones.list",
+          "granted": true,
+          "resourceAttributes": {},
+          "permissionType": "ADMIN_READ"
+        }
+      ],
+      "resourceName": "managedZones/testapp24-com",
+      "request": {
+        "project": "msccp-test",
+        "managedZone": "testapp24-com",
+        "@type": "type.googleapis.com/cloud.dns.api.ManagedZonesGetRequest"
+      }
+    },
+    "insertId": "9hquene5dz0c",
+    "resource": {
+      "type": "dns_managed_zone",
+      "labels": {
+        "zone_name": "testapp24-com",
+        "location": "global",
+        "project_id": "msccp-test"
+      }
+    },
+    "timestamp": "2025-03-10T05:23:06.019836Z",
+    "severity": "ERROR",
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "receiveTimestamp": "2025-03-10T05:23:06.839130089Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "scuba@np-lab.co.il"
+      },
+      "requestMetadata": {
+        "callerIp": "121.241.55.74",
+        "requestAttributes": {
+          "time": "2025-03-10T07:43:57.253161Z",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "dns.googleapis.com",
+      "methodName": "dns.managedZones.create",
+      "authorizationInfo": [
+        {
+          "permission": "dns.managedZones.create",
+          "granted": true,
+          "resourceAttributes": {
+            "service": "dns.googleapis.com",
+            "name": "projects/135492226944/managedzones/sentinelccp-com",
+            "type": "dns.googleapis.com/ManagedZone"
+          },
+          "permissionType": "ADMIN_WRITE"
+        }
+      ],
+      "resourceName": "managedZones/sentinelccp-com",
+      "request": {
+        "project": "msccp-test",
+        "managedZone": {
+          "name": "sentinelccp-com",
+          "dnsName": "sentinelccp.com.",
+          "description": "DNS zone for domain: sentinelccp.com",
+          "dnssecConfig": {
+            "state": "ON"
+          },
+          "visibility": "PUBLIC"
+        },
+        "@type": "type.googleapis.com/cloud.dns.api.ManagedZonesCreateRequest"
+      },
+      "response": {
+        "managedZone": {
+          "name": "sentinelccp-com",
+          "dnsName": "sentinelccp.com.",
+          "description": "DNS zone for domain: sentinelccp.com",
+          "id": "2354588915516445684",
+          "nameServers": [
+            "ns-cloud-d1.googledomains.com.",
+            "ns-cloud-d2.googledomains.com.",
+            "ns-cloud-d3.googledomains.com.",
+            "ns-cloud-d4.googledomains.com."
+          ],
+          "creationTime": "2025-03-10T07:43:55.254Z",
+          "dnssecConfig": {
+            "state": "ON",
+            "defaultKeySpecs": [
+              {
+                "keyType": "KEY_SIGNING",
+                "algorithm": "RSASHA256",
+                "keyLength": 2048
+              },
+              {
+                "keyType": "ZONE_SIGNING",
+                "algorithm": "RSASHA256",
+                "keyLength": 1024
+              }
+            ],
+            "nonExistence": "NSEC3"
+          },
+          "fingerprint": "20ad2e24bd6e13f4000001957f02a776",
+          "visibility": "PUBLIC",
+          "rrsetCount": 2,
+          "cloudLoggingConfig": {}
+        },
+        "@type": "type.googleapis.com/cloud.dns.api.ManagedZonesCreateResponse"
+      }
+    },
+    "insertId": "9hquene5nx0u",
+    "resource": {
+      "type": "dns_managed_zone",
+      "labels": {
+        "location": "global",
+        "zone_name": "sentinelccp-com",
+        "project_id": "msccp-test"
+      }
+    },
+    "timestamp": "2025-03-10T07:43:54.732998Z",
+    "severity": "NOTICE",
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2025-03-10T07:43:57.336925484Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "scuba@np-lab.co.il"
+      },
+      "requestMetadata": {
+        "callerIp": "121.241.55.74",
+        "requestAttributes": {
+          "time": "2025-03-10T08:02:46.766948Z",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "dns.googleapis.com",
+      "methodName": "dns.managedZones.patch",
+      "authorizationInfo": [
+        {
+          "permission": "dns.managedZones.update",
+          "granted": true,
+          "resourceAttributes": {
+            "service": "dns.googleapis.com",
+            "name": "projects/135492226944/managedzones/sentinelccp-com",
+            "type": "dns.googleapis.com/ManagedZone"
+          },
+          "permissionType": "ADMIN_WRITE"
+        }
+      ],
+      "resourceName": "managedZones/sentinelccp-com",
+      "request": {
+        "managedZoneResource": {
+          "description": "DNS zone for domain: sentinelccp.com",
+          "dnssecConfig": {
+            "state": "ON"
+          },
+          "cloudLoggingConfig": {
+            "enableLogging": true
+          }
+        },
+        "project": "msccp-test",
+        "managedZone": "sentinelccp-com",
+        "@type": "type.googleapis.com/cloud.dns.api.ManagedZonesPatchRequest"
+      },
+      "response": {
+        "operation": {
+          "id": "cf2e5a9b-a16a-4ce8-840d-f25bd294c672",
+          "startTime": "2025-03-10T08:02:45.970Z",
+          "status": "DONE",
+          "user": "scuba@np-lab.co.il",
+          "type": "UPDATE",
+          "zoneContext": {
+            "oldValue": {
+              "name": "sentinelccp-com",
+              "dnsName": "sentinelccp.com.",
+              "description": "DNS zone for domain: sentinelccp.com",
+              "id": "2354588915516445684",
+              "nameServers": [
+                "ns-cloud-d1.googledomains.com.",
+                "ns-cloud-d2.googledomains.com.",
+                "ns-cloud-d3.googledomains.com.",
+                "ns-cloud-d4.googledomains.com."
+              ],
+              "creationTime": "2025-03-10T07:43:55.254Z",
+              "dnssecConfig": {
+                "state": "ON",
+                "defaultKeySpecs": [
+                  {
+                    "keyType": "KEY_SIGNING",
+                    "algorithm": "RSASHA256",
+                    "keyLength": 2048
+                  },
+                  {
+                    "keyType": "ZONE_SIGNING",
+                    "algorithm": "RSASHA256",
+                    "keyLength": 1024
+                  }
+                ],
+                "nonExistence": "NSEC3"
+              },
+              "fingerprint": "20ad2e24bd6e13f4000001957f02a776",
+              "visibility": "PUBLIC",
+              "rrsetCount": 2,
+              "cloudLoggingConfig": {}
+            },
+            "newValue": {
+              "name": "sentinelccp-com",
+              "dnsName": "sentinelccp.com.",
+              "description": "DNS zone for domain: sentinelccp.com",
+              "id": "2354588915516445684",
+              "nameServers": [
+                "ns-cloud-d1.googledomains.com.",
+                "ns-cloud-d2.googledomains.com.",
+                "ns-cloud-d3.googledomains.com.",
+                "ns-cloud-d4.googledomains.com."
+              ],
+              "creationTime": "2025-03-10T07:43:55.254Z",
+              "dnssecConfig": {
+                "state": "ON",
+                "defaultKeySpecs": [
+                  {
+                    "keyType": "KEY_SIGNING",
+                    "algorithm": "RSASHA256",
+                    "keyLength": 2048
+                  },
+                  {
+                    "keyType": "ZONE_SIGNING",
+                    "algorithm": "RSASHA256",
+                    "keyLength": 1024
+                  }
+                ],
+                "nonExistence": "NSEC3"
+              },
+              "fingerprint": "20ad2e24bd6e13f4000001957f13e68c",
+              "visibility": "PUBLIC",
+              "rrsetCount": 2,
+              "cloudLoggingConfig": {
+                "enableLogging": true
+              }
+            }
+          }
+        },
+        "managedZone": {
+          "name": "sentinelccp-com",
+          "dnsName": "sentinelccp.com.",
+          "description": "DNS zone for domain: sentinelccp.com",
+          "id": "2354588915516445684",
+          "nameServers": [
+            "ns-cloud-d1.googledomains.com.",
+            "ns-cloud-d2.googledomains.com.",
+            "ns-cloud-d3.googledomains.com.",
+            "ns-cloud-d4.googledomains.com."
+          ],
+          "creationTime": "2025-03-10T07:43:55.254Z",
+          "dnssecConfig": {
+            "state": "ON",
+            "defaultKeySpecs": [
+              {
+                "keyType": "KEY_SIGNING",
+                "algorithm": "RSASHA256",
+                "keyLength": 2048
+              },
+              {
+                "keyType": "ZONE_SIGNING",
+                "algorithm": "RSASHA256",
+                "keyLength": 1024
+              }
+            ],
+            "nonExistence": "NSEC3"
+          },
+          "fingerprint": "20ad2e24bd6e13f4000001957f13e68c",
+          "visibility": "PUBLIC",
+          "rrsetCount": 2,
+          "cloudLoggingConfig": {
+            "enableLogging": true
+          }
+        },
+        "@type": "type.googleapis.com/cloud.dns.api.ManagedZonesPatchResponse"
+      }
+    },
+    "insertId": "9hquene5p5v2",
+    "resource": {
+      "type": "dns_managed_zone",
+      "labels": {
+        "location": "global",
+        "zone_name": "sentinelccp-com",
+        "project_id": "msccp-test"
+      }
+    },
+    "timestamp": "2025-03-10T08:02:45.504903Z",
+    "severity": "NOTICE",
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2025-03-10T08:02:47.291291100Z"
+  },
+  {
+    "insertId": "r711iqemjdua",
+    "jsonPayload": {
+      "dns64Translated": false,
+      "protocol": "TCP",
+      "responseCode": "NXDOMAIN",
+      "structuredRdata": [],
+      "queryName": "_ea49ab0c089f7d05a462b7cb29038998.sentinelccp.com.",
+      "sourceIP": "3.239.149.182",
+      "serverLatency": 1,
+      "destinationIP": "216.239.36.109",
+      "queryType": "CNAME",
+      "authAnswer": true
+    },
+    "resource": {
+      "type": "dns_query",
+      "labels": {
+        "target_type": "public-zone",
+        "location": "global",
+        "target_name": "sentinelccp-com",
+        "source_type": "internet",
+        "project_id": "msccp-test"
+      }
+    },
+    "timestamp": "2025-03-10T08:03:41.555746732Z",
+    "severity": "NOTICE",
+    "logName": "projects/msccp-test/logs/dns.googleapis.com%2Fdns_queries",
+    "receiveTimestamp": "2025-03-10T08:03:42.310284454Z"
+  },
+  {
+    "insertId": "97vf3vektow6",
+    "jsonPayload": {
+      "destinationIP": "216.239.36.109",
+      "dns64Translated": false,
+      "responseCode": "NXDOMAIN",
+      "queryName": "_ea49ab0c089f7d05a462b7cb29038998.sentinelccp.com.",
+      "structuredRdata": [],
+      "sourceIP": "18.209.113.79",
+      "queryType": "TXT",
+      "protocol": "UDP",
+      "authAnswer": true,
+      "serverLatency": 2
+    },
+    "resource": {
+      "type": "dns_query",
+      "labels": {
+        "target_name": "sentinelccp-com",
+        "source_type": "internet",
+        "location": "global",
+        "project_id": "msccp-test",
+        "target_type": "public-zone"
+      }
+    },
+    "timestamp": "2025-03-10T08:03:41.709650233Z",
+    "severity": "NOTICE",
+    "logName": "projects/msccp-test/logs/dns.googleapis.com%2Fdns_queries",
+    "receiveTimestamp": "2025-03-10T08:03:42.564457639Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "scuba@np-lab.co.il"
+      },
+      "requestMetadata": {
+        "callerIp": "2405:201:c002:b999:1853:7cc:fc49:7f6b",
+        "requestAttributes": {
+          "time": "2025-03-10T08:06:42.266006Z",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "dns.googleapis.com",
+      "methodName": "dns.resourceRecordSets.list",
+      "authorizationInfo": [
+        {
+          "permission": "dns.resourceRecordSets.list",
+          "granted": true,
+          "resourceAttributes": {},
+          "permissionType": "ADMIN_READ"
+        }
+      ],
+      "resourceName": "managedZones/sentinelccp-com",
+      "request": {
+        "name": "sentinelccp.com.",
+        "project": "msccp-test",
+        "type": "SOA",
+        "managedZone": "sentinelccp-com",
+        "@type": "type.googleapis.com/cloud.dns.api.ResourceRecordSetsListRequest"
+      }
+    },
+    "insertId": "-n07fk4e5q432",
+    "resource": {
+      "type": "dns_managed_zone",
+      "labels": {
+        "project_id": "msccp-test",
+        "location": "global",
+        "zone_name": "sentinelccp-com"
+      }
+    },
+    "timestamp": "2025-03-10T08:06:42.251346Z",
+    "severity": "INFO",
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "receiveTimestamp": "2025-03-10T08:06:42.449090470Z"
+  },
+  {
+    "insertId": "1bhgrljelbvfw",
+    "jsonPayload": {
+      "dns64Translated": false,
+      "destinationIP": "216.239.36.109",
+      "structuredRdata": [],
+      "protocol": "UDP",
+      "authAnswer": true,
+      "serverLatency": 0,
+      "sourceIP": "3.209.84.88",
+      "responseCode": "NOERROR",
+      "queryType": "CNAME",
+      "queryName": "sentinelccp.com."
+    },
+    "resource": {
+      "type": "dns_query",
+      "labels": {
+        "target_type": "public-zone",
+        "project_id": "msccp-test",
+        "location": "global",
+        "source_type": "internet",
+        "target_name": "sentinelccp-com"
+      }
+    },
+    "timestamp": "2025-03-10T08:28:09.101577074Z",
+    "severity": "INFO",
+    "logName": "projects/msccp-test/logs/dns.googleapis.com%2Fdns_queries",
+    "receiveTimestamp": "2025-03-10T08:28:10.037558753Z"
+  },
+  {
+    "insertId": "16h1moxe1bmdc",
+    "jsonPayload": {
+      "queryName": "sentinelccp.com.",
+      "responseCode": "NOERROR",
+      "queryType": "DNSKEY",
+      "destinationIP": "216.239.38.109",
+      "sourceIP": "51.38.107.72",
+      "authAnswer": true,
+      "dns64Translated": false,
+      "structuredRdata": [
+        {
+          "ttl": "300",
+          "domainName": "sentinelccp.com.",
+          "class": "IN",
+          "rvalue": "\\# 264 01010308030100018fa5aa962e622d1ac3ccd15a0b534886bcb57af94cc5ecb73f693b13eb12b32e71e79fd059726519b805838144be0c02dbc32737b151e75c91812fc71112fa250c41f4ee675394f3842857f276623da6b08458b4378107ba48e47ec1496abf649ca6bef808a6c486f7b53bd56b0f27c0bc03cb198f3eae04b74d300db1287e7a2a52755f1d2e0befeecbc2b353064933b10513b2db2a9c9a3245adef9dfef1c0661f0bf77f903756530e6e3491312df636b420a096ca16e6aacbf04bf04bb2724e08e930a67cd0d597e9b106f5eb057f08f8695277f3912c85f6e2080937ba09355603621a251d59ab4defc3141f99a52af31258c7177ca9a2e64f1295133671",
+          "type": "DNSKEY"
+        },
+        {
+          "ttl": "300",
+          "class": "IN",
+          "domainName": "sentinelccp.com.",
+          "rvalue": "\\# 136 010003080301000190a57d562f3949e6d2b98cab88014a035d52d87429cef9d958b3ad5a6835697b7e7c7461357adeaa6e678a64ce5da348af5d9f72bb60c80c1435fc004a7f93ceefee52583d7376a1aca12d58dbf01188857e1b386c616a5c954e941f8a27020a0a18e4c295f8ddc274c5a476de24ba3edabb68888ff7c9e4b637ba2d76e57d47",
+          "type": "DNSKEY"
+        },
+        {
+          "class": "IN",
+          "type": "RRSIG",
+          "ttl": "300",
+          "rvalue": "dnskey 8 2 300 1743407035 1741506235 34259 sentinelccp.com. LAP/tCnh7ao5CnkQGgeC4fmithu102mENw4BBxQDQ6l4I3mujgY0Y+7vw4ePn701ema/SZEepSrOGHmmUMPIFNsGZsqTt2dLYNWkIcjqyByqDeJCDzahgsiC50lozl0Yq5YtdK07EhqQkb/I8D2ivRS7l892eWCu0feKbPeYjPsz6Q+3jspUC6KrjWDveP/qMN5euFzH84YmGxYzTU/wQgdY7CwSUNiAPgX/luTprUxD2h6btYmSQs+A+/JZZ079JSBywpgW1kjQKdwmD2UC+jtQw4Wh06M3Vh//mRujamtWNt0LeprDjzTpc+79Rx6ZoynVg/U77IlXWlzSCa03pw==",
+          "domainName": "sentinelccp.com."
+        }
+      ],
+      "protocol": "UDP",
+      "serverLatency": 0
+    },
+    "resource": {
+      "type": "dns_query",
+      "labels": {
+        "target_type": "public-zone",
+        "location": "global",
+        "source_type": "internet",
+        "project_id": "msccp-test",
+        "target_name": "sentinelccp-com"
+      }
+    },
+    "timestamp": "2025-03-10T08:42:54.513854287Z",
+    "severity": "INFO",
+    "logName": "projects/msccp-test/logs/dns.googleapis.com%2Fdns_queries",
+    "receiveTimestamp": "2025-03-10T08:42:55.841347507Z"
+  }
+]

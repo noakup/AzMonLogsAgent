@@ -1,0 +1,1979 @@
+{
+  "type": "Microsoft.AgFoodPlatform/farmBeats",
+  "displayName": "Microsoft.AgFoodPlatform/farmBeats",
+  "description": "Microsoft.AgFoodPlatform diagnostic log export, LogAnalytics tables",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Azure AgriFood Platform/FarmBeats PaaS",
+  "contactDL": "ageae@microsoft.com",
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "name": "AgriFoodFarmManagementLogs",
+      "description": "Logs for create, update, delete and get operations on FarmBeats resources such as Farmer, Farm, Field, Boundary, Seasonal Field, Crop, CropVariety, Season, Attachment, Prescription Maps, Prescriptions, Management Zones, Zones, Plant Tissue Analysis, Nutrient Analysis etc.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 4,
+      "dataTypeId": "MICROSOFTAGFOODPLATFORM_FARMMANAGEMENTLOGS",
+      "intelligencePacks": [],
+      "isResourceCentric": true,
+      "isTroubleshootingAllowed": false,
+      "tableState": "Production",
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        },
+        {
+          "name": "callerIpAddress",
+          "type": "String"
+        },
+        {
+          "name": "Level",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "durationMs",
+          "type": "Double"
+        },
+        {
+          "name": "identity",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/AgriFoodFarmManagementLogsTransformation.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (in UTC) when the log was created."
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "isDefaultDisplay": false,
+          "description": "Logs generated as a result of operations executed using FarmBeats APIs are grouped into categories. Categories in FarmBeats are logical groupings based on either the data source the underlying APIs fetch data from or on the basis of hierarchy of entities in FarmBeats."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation name for which the log entry was created."
+        },
+        {
+          "name": "RequestUri",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "URI of the API request.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "FarmerId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Farmer ID associated with the request, wherever applicable."
+        },
+        {
+          "name": "DataPlaneResourceId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ID that uniquely identifies a FarmBeats resource such as a Farm, Farmer, Boundary etc."
+        },
+        {
+          "name": "CallerIpAddress",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "IP address of the client that made the request.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "Level",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The severity level of the event, will be one of Informational, Warning, Error, or Critical."
+        },
+        {
+          "name": "ResultSignature",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "HTTP status of API request."
+        },
+        {
+          "name": "ResultType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Result of the REST API request."
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Additional details about the result, when available."
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The region of the resource emitting the event."
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Unique identifier to be used to correlate logs, when available.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "DurationMs",
+          "type": "Double",
+          "isDefaultDisplay": true,
+          "description": "Time it took to service the REST API request, in milliseconds."
+        },
+        {
+          "name": "ApplicationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ApplicationId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ObjectId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ObjectId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ClientTenantId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "TenantId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "RequestBody",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Request body of the API calls."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AgriFoodFarmManagementLogsSampleInputRecords.json"
+    },
+    {
+      "name": "AgriFoodWeatherLogs",
+      "description": "Logs for create, update, delete and get operations while ingesting weather data in FarmBeats.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 4,
+      "dataTypeId": "MICROSOFTAGFOODPLATFORM_WEATHERLOGS",
+      "intelligencePacks": [],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        },
+        {
+          "name": "callerIpAddress",
+          "type": "String"
+        },
+        {
+          "name": "Level",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "durationMs",
+          "type": "Double"
+        },
+        {
+          "name": "identity",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/AgriFoodWeatherLogsTransformation.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (in UTC) when the log was created."
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "isDefaultDisplay": false,
+          "description": "Logs generated as a result of operations executed using FarmBeats APIs are grouped into categories. Categories in FarmBeats are logical groupings based on either the data source the underlying APIs fetch data from or on the basis of hierarchy of entities in FarmBeats."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation name for which the log entry was created."
+        },
+        {
+          "name": "RequestUri",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "URI of the API request.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "FarmerId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Farmer ID associated with the request, wherever applicable."
+        },
+        {
+          "name": "DataPlaneResourceId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ID that uniquely identifies a FarmBeats resource such as a Farm, Farmer, Boundary etc."
+        },
+        {
+          "name": "CallerIpAddress",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "IP address of the client that made the request.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "Level",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The severity level of the event, will be one of Informational, Warning, Error, or Critical."
+        },
+        {
+          "name": "ResultSignature",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "HTTP status of API request."
+        },
+        {
+          "name": "ResultType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Result of the REST API request."
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Additional details about the result, when available."
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The region of the resource emitting the event."
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Unique identifier to be used to correlate logs, when available.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "DurationMs",
+          "type": "Double",
+          "isDefaultDisplay": true,
+          "description": "Time it took to service the REST API request, in milliseconds."
+        },
+        {
+          "name": "ApplicationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ApplicationId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ObjectId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ObjectId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ClientTenantId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "TenantId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "RequestBody",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Request body of the API calls."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AgriFoodWeatherLogsSampleInputRecords.json"
+    },
+    {
+      "name": "AgriFoodSatelliteLogs",
+      "description": "Logs for create and get operations for Satellite data.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 4,
+      "dataTypeId": "MICROSOFTAGFOODPLATFORM_SATELLITELOGS",
+      "intelligencePacks": [],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        },
+        {
+          "name": "callerIpAddress",
+          "type": "String"
+        },
+        {
+          "name": "Level",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "durationMs",
+          "type": "Double"
+        },
+        {
+          "name": "identity",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/AgriFoodSatelliteLogsTransformation.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (in UTC) when the log was created."
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "isDefaultDisplay": false,
+          "description": "Logs generated as a result of operations executed using FarmBeats APIs are grouped into categories. Categories in FarmBeats are logical groupings based on either the data source the underlying APIs fetch data from or on the basis of hierarchy of entities in FarmBeats."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation name for which the log entry was created."
+        },
+        {
+          "name": "RequestUri",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "URI of the API request.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "FarmerId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Farmer ID associated with the request, wherever applicable."
+        },
+        {
+          "name": "DataPlaneResourceId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ID that uniquely identifies a FarmBeats resource such as a Farm, Farmer, Boundary etc."
+        },
+        {
+          "name": "CallerIpAddress",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "IP address of the client that made the request.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "Level",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The severity level of the event, will be one of Informational, Warning, Error, or Critical."
+        },
+        {
+          "name": "ResultSignature",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "HTTP status of API request."
+        },
+        {
+          "name": "ResultType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Result of the REST API request."
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Additional details about the result, when available."
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The region of the resource emitting the event."
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Unique identifier to be used to correlate logs, when available.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "DurationMs",
+          "type": "Double",
+          "isDefaultDisplay": true,
+          "description": "Time it took to service the REST API request, in milliseconds."
+        },
+        {
+          "name": "ApplicationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ApplicationId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ObjectId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ObjectId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ClientTenantId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "TenantId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "RequestBody",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Request body of the API calls."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AgriFoodSatelliteLogsSampleInputRecords.json"
+    },
+    {
+      "name": "AgriFoodFarmOperationLogs",
+      "description": "Logs for create, update, delete and get operations for FarmOperations such as data ingestion job, ApplicationData, PlantingData, HarvestingData, TillageData etc.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 4,
+      "dataTypeId": "MICROSOFTAGFOODPLATFORM_FARMOPERATIONLOGS",
+      "intelligencePacks": [],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        },
+        {
+          "name": "callerIpAddress",
+          "type": "String"
+        },
+        {
+          "name": "Level",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "durationMs",
+          "type": "Double"
+        },
+        {
+          "name": "identity",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/AgriFoodFarmOperationLogsTransformation.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (in UTC) when the log was created."
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "isDefaultDisplay": false,
+          "description": "Logs generated as a result of operations executed using FarmBeats APIs are grouped into categories. Categories in FarmBeats are logical groupings based on either the data source the underlying APIs fetch data from or on the basis of hierarchy of entities in FarmBeats."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation name for which the log entry was created."
+        },
+        {
+          "name": "RequestUri",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "URI of the API request.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "FarmerId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Farmer ID associated with the request, wherever applicable."
+        },
+        {
+          "name": "DataPlaneResourceId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ID that uniquely identifies a FarmBeats resource such as a Farm, Farmer, Boundary etc."
+        },
+        {
+          "name": "CallerIpAddress",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "IP address of the client that made the request.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "Level",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The severity level of the event, will be one of Informational, Warning, Error, or Critical."
+        },
+        {
+          "name": "ResultSignature",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "HTTP status of API request."
+        },
+        {
+          "name": "ResultType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Result of the REST API request."
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Additional details about the result, when available."
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The region of the resource emitting the event."
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Unique identifier to be used to correlate logs, when available.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "DurationMs",
+          "type": "Double",
+          "isDefaultDisplay": true,
+          "description": "Time it took to service the REST API request, in milliseconds."
+        },
+        {
+          "name": "ApplicationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ApplicationId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ObjectId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ObjectId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ClientTenantId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "TenantId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "RequestBody",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Request body of the API calls."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AgriFoodFarmOperationLogsSampleInputRecords.json"
+    },
+    {
+      "name": "AgriFoodProviderAuthLogs",
+      "description": "Logs for create, update, delete, cascade delete get and get all for oauth providers. It also has logs for get, get all and cascade delete for oauth tokens.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 4,
+      "dataTypeId": "MICROSOFTAGFOODPLATFORM_PROVIDERAUTHLOGS",
+      "intelligencePacks": [],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        },
+        {
+          "name": "callerIpAddress",
+          "type": "String"
+        },
+        {
+          "name": "Level",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "durationMs",
+          "type": "Double"
+        },
+        {
+          "name": "identity",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/AgriFoodProviderAuthLogsTransformation.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (in UTC) when the log was created."
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "isDefaultDisplay": false,
+          "description": "Logs generated as a result of operations executed using FarmBeats APIs are grouped into categories. Categories in FarmBeats are logical groupings based on either the data source the underlying APIs fetch data from or on the basis of hierarchy of entities in FarmBeats."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation name for which the log entry was created."
+        },
+        {
+          "name": "RequestUri",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "URI of the API request.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "FarmerId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Farmer ID associated with the request, wherever applicable."
+        },
+        {
+          "name": "DataPlaneResourceId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ID that uniquely identifies a FarmBeats resource such as a Farm, Farmer, Boundary etc."
+        },
+        {
+          "name": "CallerIpAddress",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "IP address of the client that made the request.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "Level",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The severity level of the event, will be one of Informational, Warning, Error, or Critical."
+        },
+        {
+          "name": "ResultSignature",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "HTTP status of API request."
+        },
+        {
+          "name": "ResultType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Result of the REST API request."
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Additional details about the result, when available."
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The region of the resource emitting the event."
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Unique identifier to be used to correlate logs, when available.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "DurationMs",
+          "type": "Double",
+          "isDefaultDisplay": true,
+          "description": "Time it took to service the REST API request, in milliseconds."
+        },
+        {
+          "name": "ApplicationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ApplicationId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ObjectId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ObjectId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ClientTenantId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "TenantId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "RequestBody",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Request body of the API calls."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AgriFoodProviderAuthLogsSampleInputRecords.json"
+    },
+    {
+      "name": "AgriFoodApplicationAuditLogs",
+      "description": "Logs for privileged actions such as data-plane resource create, update, delete and subscription management operations.",
+      "categories": [
+        "audit",
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 2,
+      "dataTypeId": "MICROSOFTAGFOODPLATFORM_APPLICATIONAUDITLOGS",
+      "intelligencePacks": [],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        },
+        {
+          "name": "callerIpAddress",
+          "type": "String"
+        },
+        {
+          "name": "Level",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "identity",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/AgriFoodApplicationAuditLogsTransformation.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (in UTC) when the log was created."
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "isDefaultDisplay": false,
+          "description": "Logs generated as a result of operations executed using FarmBeats APIs are grouped into categories. Categories in FarmBeats are logical groupings based on either the data source the underlying APIs fetch data from or on the basis of hierarchy of entities in FarmBeats."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation name for which the log entry was created."
+        },
+        {
+          "name": "DataPlaneResourceId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ID that uniquely identifies a FarmBeats resource such as a Farm, Farmer, Boundary etc."
+        },
+        {
+          "name": "CallerIpAddress",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "IP address of the client that made the request.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "Level",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The severity level of the event, will be one of Informational, Warning, Error, or Critical."
+        },
+        {
+          "name": "ResultType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Result of the REST API request."
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Additional details about the result, when available."
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The region of the resource emitting the event."
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Unique identifier to be used to correlate logs, when available.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "Identity",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Identity from the token that was presented in the REST API request."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AgriFoodApplicationAuditLogsSampleInputRecords.json"
+    },
+    {
+      "name": "AgriFoodModelInferenceLogs",
+      "description": "Logs for create and get operations for AI/ML model inference jobs.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 4,
+      "dataTypeId": "MICROSOFTAGFOODPLATFORM_MODELINFERENCELOGS",
+      "intelligencePacks": [],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        },
+        {
+          "name": "callerIpAddress",
+          "type": "String"
+        },
+        {
+          "name": "Level",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "durationMs",
+          "type": "Double"
+        },
+        {
+          "name": "identity",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/AgriFoodModelInferenceLogsTransformation.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (in UTC) when the log was created."
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "isDefaultDisplay": false,
+          "description": "Logs generated as a result of operations executed using FarmBeats APIs are grouped into categories. Categories in FarmBeats are logical groupings based on either the data source the underlying APIs fetch data from or on the basis of hierarchy of entities in FarmBeats."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation name for which the log entry was created."
+        },
+        {
+          "name": "RequestUri",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "URI of the API request.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "FarmerId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Farmer ID associated with the request, wherever applicable."
+        },
+        {
+          "name": "DataPlaneResourceId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ID that uniquely identifies a FarmBeats resource such as a Farm, Farmer, Boundary etc."
+        },
+        {
+          "name": "CallerIpAddress",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "IP address of the client that made the request.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "Level",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The severity level of the event, will be one of Informational, Warning, Error, or Critical."
+        },
+        {
+          "name": "ResultSignature",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "HTTP status of API request."
+        },
+        {
+          "name": "ResultType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Result of the REST API request."
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Additional details about the result, when available."
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The region of the resource emitting the event."
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Unique identifier to be used to correlate logs, when available.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "DurationMs",
+          "type": "Double",
+          "isDefaultDisplay": true,
+          "description": "Time it took to service the REST API request, in milliseconds."
+        },
+        {
+          "name": "ApplicationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ApplicationId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ObjectId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ObjectId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ClientTenantId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "TenantId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "RequestBody",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Request body of the API calls."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AgriFoodModelInferenceLogsSampleInputRecords.json"
+    },
+    {
+      "name": "AgriFoodInsightLogs",
+      "description": "Logs for read operations on FarmBeats resources such as inisghts and inisight-attachments.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 4,
+      "dataTypeId": "MICROSOFTAGFOODPLATFORM_INSIGHTLOGS",
+      "intelligencePacks": [],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        },
+        {
+          "name": "callerIpAddress",
+          "type": "String"
+        },
+        {
+          "name": "Level",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "durationMs",
+          "type": "Double"
+        },
+        {
+          "name": "identity",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/AgriFoodInsightLogsTransformation.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (in UTC) when the log was created."
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "isDefaultDisplay": false,
+          "description": "Logs generated as a result of operations executed using FarmBeats APIs are grouped into categories. Categories in FarmBeats are logical groupings based on either the data source the underlying APIs fetch data from or on the basis of hierarchy of entities in FarmBeats."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation name for which the log entry was created."
+        },
+        {
+          "name": "RequestUri",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "URI of the API request.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "FarmerId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Farmer ID associated with the request, wherever applicable."
+        },
+        {
+          "name": "DataPlaneResourceId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ID that uniquely identifies a FarmBeats resource such as a Farm, Farmer, Boundary etc."
+        },
+        {
+          "name": "CallerIpAddress",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "IP address of the client that made the request.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "Level",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The severity level of the event, will be one of Informational, Warning, Error, or Critical."
+        },
+        {
+          "name": "ResultSignature",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "HTTP status of API request."
+        },
+        {
+          "name": "ResultType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Result of the REST API request."
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Additional details about the result, when available."
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The region of the resource emitting the event."
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Unique identifier to be used to correlate logs, when available.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "DurationMs",
+          "type": "Double",
+          "isDefaultDisplay": true,
+          "description": "Time it took to service the REST API request, in milliseconds."
+        },
+        {
+          "name": "ApplicationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ApplicationId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ObjectId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ObjectId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ClientTenantId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "TenantId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "RequestBody",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Request body of the API calls."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AgriFoodInsightLogsSampleInputRecords.json"
+    },
+    {
+      "name": "AgriFoodJobProcessedLogs",
+      "description": "Logs indicating success or failure of job runs for farmOperationDataIngestionJob, farmOperationPeriodicJob, farmOperationEventHandlingJob,satelliteDataIngestionJob, weatherDataIngestionJob etc. These logs also contain reasons for failure of these jobs if any.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 3,
+      "dataTypeId": "MICROSOFTAGFOODPLATFORM_JOBPROCESSEDLOGS",
+      "intelligencePacks": [],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        },
+        {
+          "name": "callerIpAddress",
+          "type": "String"
+        },
+        {
+          "name": "Level",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "durationMs",
+          "type": "Double"
+        },
+        {
+          "name": "identity",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/AgriFoodJobProcessedLogsTransformation.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (in UTC) when the log was created."
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "isDefaultDisplay": false,
+          "description": "Logs generated as a result of operations executed using FarmBeats APIs are grouped into categories. Categories in FarmBeats are logical groupings based on either the data source the underlying APIs fetch data from or on the basis of hierarchy of entities in FarmBeats."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation name for which the log entry was created."
+        },
+        {
+          "name": "JobId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "User defined ID of the job.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "FarmerId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Farmer ID associated with the request, wherever applicable."
+        },
+        {
+          "name": "JobRunType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Indicates whether a job is a periodic job or a one-time job."
+        },
+        {
+          "name": "InitiatedBy",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Indicates whether the job was initiated by FarmBeats or user."
+        },
+        {
+          "name": "Level",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The severity level of the event, will be one of Informational, Warning, Error, or Critical."
+        },
+        {
+          "name": "ResultType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Result of the REST API request."
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Additional details about the result, when available."
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The region of the resource emitting the event."
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Unique identifier to be used to correlate logs, when available.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "DurationMs",
+          "type": "Double",
+          "isDefaultDisplay": true,
+          "description": "Time it took to service the REST API request, in milliseconds."
+        },
+        {
+          "name": "ApplicationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ApplicationId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ObjectId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ObjectId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ClientTenantId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "TenantId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "Properties",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Additional properties associated with the Job."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AgriFoodJobProcessedLogsSampleInputRecords.json"
+    },
+    {
+      "name": "AgriFoodSensorManagementLogs",
+      "description": "Logs for sensors, sensors mappings, sensors events, sensors data models, sensors partner integration, devices, device data models etc.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 1,
+      "dataTypeId": "MICROSOFTAGFOODPLATFORM_SENSORMANAGEMENTLOGS",
+      "intelligencePacks": [],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        },
+        {
+          "name": "callerIpAddress",
+          "type": "String"
+        },
+        {
+          "name": "Level",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "durationMs",
+          "type": "Double"
+        },
+        {
+          "name": "identity",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/AgriFoodSensorManagementLogsTransformation.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the log was created."
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "isDefaultDisplay": false,
+          "description": "Logs generated as a result of operations executed using FarmBeats APIs are grouped into categories. Categories in FarmBeats are logical groupings based on either the data source the underlying APIs fetch data from or on the basis of hierarchy of entities in FarmBeats."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation name for which the log entry was created."
+        },
+        {
+          "name": "RequestUri",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "URI of the API request.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "FarmerId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Farmer ID associated with the request, wherever applicable."
+        },
+        {
+          "name": "DataPlaneResourceId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ID that uniquely identifies a FarmBeats resource such as a Farm, Farmer, Boundary etc."
+        },
+        {
+          "name": "CallerIpAddress",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "IP address of the client that made the request.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "Level",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The severity level of the event, will be one of Informational, Warning, Error, or Critical."
+        },
+        {
+          "name": "ResultSignature",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "HTTP status of API request."
+        },
+        {
+          "name": "ResultType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Result of the REST API request."
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Additional details about the result, when available."
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The region of the resource emitting the event."
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Unique identifier to be used to correlate logs, when available.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "DurationMs",
+          "type": "Double",
+          "isDefaultDisplay": true,
+          "description": "Time it took to service the REST API request, in milliseconds."
+        },
+        {
+          "name": "ApplicationId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ApplicationId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ObjectId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "ObjectId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "ClientTenantId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "TenantId in identity claims.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "RequestBody",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Request body of the API calls."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AgriFoodSensorManagementLogsSampleInputRecords.json"
+    }
+  ],
+  "functions": [],
+  "queries": [
+    {
+      "id": "a4d5c564-f185-450d-9024-ac003c4f96a9",
+      "displayName": "Status of farm management operations for a farmer",
+      "description": "Retrieves logs indicating the status (success or failure) for operations performed in the FarmManagement logs category for a farmer.",
+      "bodyFilePath": "KQL/FarmManagementOperationsStatusQuery.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "relatedTables": [ "AgriFoodFarmManagementLogs" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "97234902-0236-4821-a438-d52c8a80a8ba",
+      "displayName": "Job execution statistics for a farmer",
+      "description": "Retrieves the status of job processing for a farmer.",
+      "bodyFilePath": "KQL/JobProcessedLogsByFarmerIdQuery.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "relatedTables": [ "AgriFoodJobProcessedLogs" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "f3518255-2374-448a-878a-d5d4457da11c",
+      "displayName": "Failed authorization",
+      "description": "Identifies a list of users who failed to access your resource and the reason for this failure.",
+      "bodyFilePath": "KQL/FailedAuthorizationQuery.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "relatedTables": [ "AgriFoodApplicationAuditLogs" ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "b093d561-a33c-4997-a3b1-cb82f2b97c05",
+      "displayName": "Status of all operations for a farmer",
+      "description": "Aggregates failures and successes across categories for a farmer.",
+      "bodyFilePath": "KQL/OperationStatusByFarmerIdQuery.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "relatedTables": [
+        "FarmManagementLogs",
+        "SatelliteLogs",
+        "WeatherLogs",
+        "ProviderAuthLogs",
+        "FarmOperationLogs",
+        "InsightLogs",
+        "ModelInferenceLogs",
+        "JobProcessedLogs"
+      ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "26b400a2-3108-4cdd-bdc9-b6889b0ecfb7",
+      "displayName": "Usage trend for top 100 farmers based on the operations performed",
+      "description": "Retrieves a list of top 100 farmers based on the number of hits received across categories.",
+      "bodyFilePath": "KQL/UsageTrendByFarmerIdQuery.kql",
+      "categories": [ "resources" ],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "relatedTables": [
+        "FarmManagementLogs",
+        "SatelliteLogs",
+        "WeatherLogs",
+        "ProviderAuthLogs",
+        "FarmOperationLogs",
+        "InsightLogs",
+        "ModelInferenceLogs",
+        "JobProcessedLogs"
+      ],
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    }
+  ]
+}

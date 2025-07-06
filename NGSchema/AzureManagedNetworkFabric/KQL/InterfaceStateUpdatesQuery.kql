@@ -1,0 +1,6 @@
+MNFDeviceUpdates
+| where EventCategory == "InterfaceStateUpdates"
+| where Properties !has "DOWN"
+| project EventName, EventCategory, DeviceId, TimeGenerated, Properties
+| sort by TimeGenerated desc
+| limit 100

@@ -1,0 +1,4 @@
+AegDeliveryFailureLogs 
+| parse Message with * ", httpStatusCode=" HttpStatusCode "," * "., errorMessage=" ErrorMessage "," *
+| parse _ResourceId with * "/topics/" TopicName 
+| summarize by _ResourceId, TopicName, ErrorMessage

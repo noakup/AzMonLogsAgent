@@ -1,0 +1,17 @@
+[
+  {
+    "ConfigurationId":"scid-15",
+    "ConfigurationImpact":5,
+    "ConfigurationName":"Enable Automatic Updates",
+    "ConfigurationDescription":"Controls whether the Office automatic updates are enabled or disabled for all Office products installed by using Click-to-Run. This policy has no effect on Office products installed via Windows Installer.",
+    "RiskDescription":"Security updates help prevent malicious attacks on Office applications. Timely application of Office updates helps ensure the security of devices and the applications running on the devices. Without these updates, devices and the applications running on those devices are more susceptible to security attacks.",
+    "ConfigurationCategory":"Application",
+    "ConfigurationSubcategory":"Microsoft Office",
+    "ConfigurationBenchmarks":["CIS","STIG"],
+    "Tags":[],
+    "RemediationOptions":"<b>Option 1</b> - Set the following Group Policy:<br/><i>Computer Configuration\\Administrative Templates\\Microsoft Office 2016 (Machine)\\Updates\\Enable Automatic Updates</i><br/>To the following value: <i>Enabled</i><br/><br/><b>Option 2</b> - Follow these steps to apply a MEM policy: <ol style='margin-top:0;'><li> Go to the <a href='https://endpoint.microsoft.com/#blade/Microsoft_Intune_DeviceSettings/DevicesMenu/configurationProfiles ' target='_blank'><b> Devices-> Configuration profiles</b></a></li><li>To update an <b>existing policy:</b><ul><li>Click on the policy name in the list</li><li>In the navigation bar, click on <b>Properties</b></li><li>Next to <b>Configuration settings</b> click on <b>Edit</b></li><li>Go to step #4</li></ul><li>If you’d like to create a <b>new policy</b>, click on the <b>Create Policy</b> button <ul><li>in the side panel, choose: <ul><li><b>Platform:</b> Windows 10 and later </li><li><b>Profile Type: </b>Administrative Templates </li></ul></li><li>Click on <b>Create</b> button </li><li>Proceed to step #4</li></ul></li><li>In the <b>Configuration settings</b> wizard step, set the following: <ul><li>Set Computer Configuration-> Microsoft Office 2016 (Machine)-> Updates-> <b>Enable Automatic Updates</b> to <b>Enabled</b></li></ul><li>Complete all remaining wizard steps, review and <b>Save</b> policy </li></ol><b>Option 3</b> - Set the following registry value:<br/><i>HKLM\\SOFTWARE\\policies\\Microsoft\\office\\16.0\\common\\officeupdate\\enableautomaticupdates</i><br/>To the following REG_DWORD value: <i>1</i>",
+    "RelatedMitreTechniques":["Spearphishing Attachment","Browser Extensions"],
+    "RelatedMitreTactics":["Initial Access","Persistence"],
+    "OriginFolderCreationTime": "2022-10-18T07:18:00Z"
+  }
+]

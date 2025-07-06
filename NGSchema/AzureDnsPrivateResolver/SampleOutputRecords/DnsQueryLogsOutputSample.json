@@ -1,0 +1,36 @@
+[
+    {
+        "TimeGenerated": "2023-11-10T00:11:54.1610000Z",
+        "OperationName": "RESPONSE_SUCCESS",
+        "Version": "1.0",
+        "Region": "centraluseuap",
+        "VirtualNetworkId": "6b0f7859-7b20-49fc-8e0f-f165c9ab0847",
+        "QueryName": "support.dnsimple.com.",
+        "QueryType": "CAA",
+        "QueryClass": "IN",
+        "ResponseCode": 0,
+        "Answer": [
+            {
+                "Type": "CNAME",
+                "Class": "IN",
+                "TTL": 1799,
+                "RData": "dnsimple-support.netlify.app."
+            }
+        ],
+        "Authority": [],
+        "AdditionalRecords": [],
+        "SourceIpAddress": "0.0.0.0",
+        "SourcePort": 0,
+        "DestinationIpAddress": "",
+        "DestinationPort": "",
+        "Transport": "UDP",
+        "PrivateResolverEndpointId": "",
+        "QueryResponseTime": 205,
+        "ResolutionPath": "",
+        "ResolverPolicyId": "",
+        "ResolverPolicyRuleAction": "",
+        "ResolverPolicyDomainListId": "",
+        "DnsForwardingRulesetId": "",
+        "DnsForwardingRulesetDomain": ""
+    }
+]

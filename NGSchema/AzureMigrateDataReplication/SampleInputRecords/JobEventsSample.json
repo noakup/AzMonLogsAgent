@@ -1,0 +1,27 @@
+[
+    {
+        "time": "2024-07-04 23:26:58.2919852",
+        "resourceId": "/SUBSCRIPTIONS/00000000-0000-0000-0000-000000000000/RESOURCEGROUPS/TESTRG/PROVIDERS/MICROSOFT.DATAREPLICATION/REPLICATIONVAULTS/TESTREPLICATIONVAULT/PROTECTEDITEMS/123-456-789",
+        "operationName": "DeleteProtectedItemWorkflow",
+        "category": "JobEvents",
+        "location": "centraluseuap",
+        "level": "Information",
+        "properties": {
+            "correlationId": "fb85f9e4-2725-4d94-ae9b-954a5af6db65",
+            "armId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.DataReplication/replicationVaults/testreplicationvault/protectedItems/123-456-789",
+            "armName": "123-456-789_5023e919-2d1c-8c99-2195-5d28a52892bb",
+            "objectId": "3d983c8f-b7d1-59e1-a769-784a20d4af8a",
+            "objectName": "test-vm",
+            "objectType": "ProtectedItem",
+            "state": "Started",
+            "HasInformation": false,
+            "HasWarnings": false,
+            "HasErrors": false,
+            "message": "Azure Site Recovery Job: DeleteProtectedItemWorkflow Started.",
+            "startTime": "2024-07-04T23:26:58.2919852Z",
+            "endTime": null,
+            "timeTaken": null,
+            "version": "2021-02-16-preview"
+        }
+    }
+]

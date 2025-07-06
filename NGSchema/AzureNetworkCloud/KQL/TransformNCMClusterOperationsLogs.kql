@@ -1,0 +1,11 @@
+source
+| project
+    TimeGenerated      = todatetime(["time"]),
+    ClusterManagerName = clusterManagerName,
+    ClusterName        = clusterName,
+    Level              = level,
+    Location           = location,
+    Message            = message,
+    Node               = Node,
+    OperationID        = operationID,
+    PodName            = PodName

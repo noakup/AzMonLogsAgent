@@ -1,0 +1,3 @@
+AMSLiveEventOperations
+| where OperationName == "LIVEEVENTS/INGESTDISCONTINUITY"
+| summarize Count = count() by tostring(Properties.liveEventName)

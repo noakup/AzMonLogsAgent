@@ -1,0 +1,2 @@
+DNSQueryLogs
+| summarize count() by VirtualNetworkId, ResponseCode

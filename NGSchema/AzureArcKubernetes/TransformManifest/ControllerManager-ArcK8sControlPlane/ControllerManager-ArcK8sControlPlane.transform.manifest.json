@@ -1,0 +1,14 @@
+{
+    "name" : "ControllerManager",
+    "description": "Contains diagnostic logs for Controller Manager.",
+    "transformVersion" : "1",
+    "dataTypeId" : "MICROSOFTKUBERNETESCONNECTEDCLUSTERS_KUBECONTROLLERMANAGER",
+    "inputFilePath" : "ControllerManager-ArcK8sControlPlane.json",
+    "transformState" : "Production",
+    "icmTeam" : "KUBERNETESCONNECTSERVICE/K8SConnectRP",
+    "contactDL": "k8connectsupport@microsoft.com",
+    "relatedTable" : "ArcK8sControlPlane",
+    "kqlFilePath" : "KQL/ArcK8sControlPlaneTransform.kql",
+    "sampleInputRecordsFilePath": "SampleInputRecords/ArcK8sControlPlaneControllerManagerSample.json",
+    "sampleOutputRecordsFilePath": "SampleOutputRecords/ArcK8sControlPlaneControllerManagerSample.json"
+}

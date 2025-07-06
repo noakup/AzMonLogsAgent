@@ -1,0 +1,54 @@
+[
+  {
+    "time":"2021-09-03T19:00:11.1912834Z",
+    "tenantId":"24f15700-370c-45bc-86a7-aee1b0c4eb8a",
+    "operationName":"MICROSOFT.RESOURCES/SUBSCRIPTIONS/READ",
+    "operationVersion":"2014-04-01",
+	  "category":"PublicAccessLogs",
+    "resultType":"Failure",
+    "resultSignature":"403",
+    "durationMs":"0",
+    "callerIpAddress":"167.220.2.68",
+    "correlationId":"35cf6393-1579-42be-a39e-d26dbf41e485",
+		"identity": {
+			"authorization": {},
+			"claims": {
+				"aud": "https://management.core.windows.net",
+				"iss": "https://sts.windows.net/405-0c1f-4548xs234-dm4572256",
+				"iat": "1612345279",
+				"nbf": "1630695279",
+				"exp": "1631234592",
+				"http://schemas.microsoft.com/claims/authnclassreference": "1",
+				"aio": "AXQAi/8TAAAADetFwjTM3p9BN/eWecHPWXtprCpbD368lm7DU+QwplTkJkfp0NtVswqQ0gSHAPC50SbawAl9Y3aFFMwwO8kexz7hSLM7Zcbehk79WM+sn+jnPjXg8Tldi1G95BBfB6NN+UKLVlmUtpKiVMcP0GftfQ==",
+				"altsecid": "5::10037FFEA1234E68",
+				"http://schemas.microsoft.com/claims/authnmethodsreferences": "rsa",
+				"appid": "872cd9fa-1234f-5890-9eab-6e460a04b9g1",
+				"appidacr": "0",
+				"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress": "Bhavesh@microsoft.com",
+				"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname": "Pat",
+				"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname": "bpal@microsoft.com",
+				"http://schemas.microsoft.com/identity/claims/identityprovider": "https://sts.windows.net/405-0c1f-4548xs234-dm4572256/",
+				"ipaddr": "131.107.147.196",
+				"name": "Bhavesh",
+				"http://schemas.microsoft.com/identity/claims/objectidentifier": "405-0c1f-4548xs234-dm4572256",
+				"puid": "101234512A6E5DCD",
+				"rh": "I",
+				"http://schemas.microsoft.com/identity/claims/scope": "user_impersonation",
+				"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": "ZPWB81234eIb-vz7J6LhBwHZj4z3ri123ZuBROorNCc",
+				"http://schemas.microsoft.com/identity/claims/tenantid": "24f15700-370c-45bc-86a7-aee1b0c4eb8a",
+				"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": "Bhavesh@microsoft.com",
+				"uti": "0AiqUnC6NUqtyUI0ESMCAA",
+				"ver": "1.0",
+				"wids": "405-12345-4548xs123-dm4572256",
+				"xms_tcdt": "1512345636"
+
+			}
+		},
+		" uri": "/subscriptions/123450-1233432-1434539-988",
+    "properties": {
+	    "privateLinkAssociationIds": ["/providers/Microsoft.Management/managementGroups/24f15700-370c-45bc-86a7-aee1b0c4eb8a/providers/Microsoft.Authorization/privateLinkAssociations/cb0b487e-7810-572e-97db-383217eb80f2","/providers/Microsoft.Management/managementGroups/24f15700-370c-45bc-86a7-aee1b0c4eb8a/providers/Microsoft.Authorization/privateLinkAssociations/cb0b487e-7810-572e-97db-383217eb80f3"]
+	  },
+    "resourceProvider":"Microsoft.Resources",
+    "typeOperation":"/SUBSCRIPTIONS/READ"
+  }
+]

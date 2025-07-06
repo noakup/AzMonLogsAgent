@@ -1,0 +1,4 @@
+union CIEventsAudit , CIEventsOperational
+| where CorrelationId == "" // Add your CorrelationId in the quotation marks
+| sort by TimeGenerated desc
+| limit 100

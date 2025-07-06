@@ -1,0 +1,4 @@
+MySqlAuditLogs
+| where EventClass == "general_log"
+| order by TimeGenerated desc 
+| take 100

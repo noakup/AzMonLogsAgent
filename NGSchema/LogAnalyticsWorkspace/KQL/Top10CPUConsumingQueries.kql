@@ -1,0 +1,2 @@
+LAQueryLogs
+| top 10 by StatsCPUTimeMs desc nulls last 

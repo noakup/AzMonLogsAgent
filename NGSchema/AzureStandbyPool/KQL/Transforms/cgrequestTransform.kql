@@ -1,0 +1,10 @@
+source 
+| extend properties = parse_json(properties)
+| project  
+    TimeGenerated = todatetime(["time"]), 
+    OperationName = operationName,
+    Location = location,
+    EventName = tostring(properties.EventName),
+    NewMaxCapacity = toint(properties.NewMax),
+    NewMinCapacity = toint(properties.NewMin),
+    NewResourceState = iff(isnull(properties.NewResourceState), "null", tostring(properties.NewResourceState))

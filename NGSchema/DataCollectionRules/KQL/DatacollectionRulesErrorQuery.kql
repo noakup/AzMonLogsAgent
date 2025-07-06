@@ -1,0 +1,6 @@
+// This query helps list the most recent 10 logs for failures during log ingestion/transformation. 
+DCRLogErrors
+//| where OperationName == "Ingestion" // Uncomment this line to see Ingestion errors
+//| where OperationName =="Transformation" // Uncomment this line to see Transformation errors
+| sort by TimeGenerated desc
+| limit 10

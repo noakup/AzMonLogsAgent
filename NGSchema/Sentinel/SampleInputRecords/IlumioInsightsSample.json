@@ -1,0 +1,25 @@
+[
+    {
+        "ResourceId": "/subscriptions/316d11da-e13a-4715-a20d-07f04c16d11e/resourceGroups/testdrive/providers/Microsoft.Compute/virtualMachines/ticketing-web01-dev",
+        "ResourceInternalId": "c55b696a-ae1a-58d5-b26c-13eace1a81d5",
+        "IllumioTenantId": "400ad72f-653b-40ad-a341-1d3c8295e0e9",
+        "ResourceSubId": "316d11da-e13a-4715-a20d-07f04c16d11e",
+        "ResourceRegion": "westus",
+        "ResourceVnetId": "/subscriptions/316d11da-e13a-4715-a20d-07f04c16d11e/resourceGroups/testdrive/providers/Microsoft.Network/virtualNetworks/vnetA",
+        "IllumioUrl": "https://graph.illum.io/#/insights/resource-insights?id=/subscriptions/316d11da-e13a-4715-a20d-07f04c16d11e/resourceGroups/testdrive/providers/Microsoft.Compute/virtualMachines/ticketing-web01-dev",
+        "Insights": {
+            "Name": "Risky Services",
+            "Service": "HTTPS",
+            "Port": 443,
+            "Proto": "tcp",
+            "Status": "ALLOWED",
+            "SrcLabel": "user",
+            "DestLabel": "web",
+            "TotalSentBytes": 762608,
+            "TotalReceivedBytes": 21448,
+            "FlowCount": 8639,
+            "TimeGenerated": "2025-04-28T10:59:57.7430461Z",
+            "UniqueId": "9874bcb4-dc12-3f65-886a-e343ce115791"
+        }
+    }
+]

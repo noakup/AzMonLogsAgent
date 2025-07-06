@@ -1,0 +1,1 @@
+[{"utcTime":"2020-08-06 19:38:18.561", "message":"EventThread shut down","logLevel":"INFO","logType":"StormNimbusLog","clusterName":"becohen-storm","hostName":"hn0-becohe", "operationName":"LogCollection", "correlationId":"StormLogs", "FluentdIngestTimestamp": "2019-07-13T01:05:06.0000000Z"}]

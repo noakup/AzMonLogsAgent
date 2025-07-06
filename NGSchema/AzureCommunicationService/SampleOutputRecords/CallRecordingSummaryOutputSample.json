@@ -1,0 +1,50 @@
+[
+  {
+    "TimeGenerated": "2022-07-29T21:47:14.0686244Z",
+    "OperationName": "RecordingSummary",
+    "CorrelationId": "ee2e4ca8-0884-479b-8e55-ab68b95e383b",
+    "ResultType": "Succeeded",
+    "Level": "Informational",
+    "RecordingId": "eyJQbGF0Zm9ybUVuZHBvaW50SWQiOiI0MDFmNmUwMC01MWQyLTQ0YjAtODAyZi03N2RlNTA2YTI3NGYiLCJSZXNvdXJjZVNwZWNpZmljSWQiOiIzOTc0NmE1Ny1lNzBkLTRhMTctYTI2Yi1hM2MzZTEwNTk0MjEifQ",
+    "RecordingEndReason": "CallEnded",
+    "RecordingStartTime": "2022-06-18T17:01:01.0000000Z",
+    "RecordingLength": "3.26",
+    "ChunkCount": "1",
+    "ContentType": "Audio - Video",
+    "ChannelType": "mixed",
+    "FormatType": "mp4",
+    "AudioChannelsCount": "1"
+  },
+  {
+    "TimeGenerated": "2022-07-29T21:47:25.3258234Z",
+    "OperationName": "RecordingSummary",
+    "CorrelationId": "ee2e4ca8-0884-479b-8e55-ab68b95e383b",
+    "ResultType": "Succeeded",
+    "Level": "Informational",
+    "RecordingId": "eyJQbGF0Zm9ybUVuZHBvaW50SWQiOiI0MDFmNmUwMC01MWQyLTQ0YjAtODAyZi03N2RlNTA2YTI3NGYiLCJSZXNvdXJjZVNwZWNpZmljSWQiOiIzOTc0NmE1Ny1lNzBkLTRhMTctYTI2Yi1hM2MzZTEwNTk0MjEifQ",
+    "RecordingEndReason": "CallEnded",
+    "RecordingStartTime": "2022-06-18T17:01:01.0000000Z",
+    "RecordingLength": "3.26",
+    "ChunkCount": "1",
+    "ContentType": "Audio - Video",
+    "ChannelType": "mixed",
+    "FormatType": "mp4",
+    "AudioChannelsCount": "1"
+  },
+  {
+    "TimeGenerated": "2022-07-29T21:47:27.8517460Z",
+    "OperationName": "RecordingSummary",
+    "CorrelationId": "ee2e4ca8-0884-479b-8e55-ab68b95e383b",
+    "ResultType": "Succeeded",
+    "Level": "Informational",
+    "RecordingId": "eyJQbGF0Zm9ybUVuZHBvaW50SWQiOiI0MDFmNmUwMC01MWQyLTQ0YjAtODAyZi03N2RlNTA2YTI3NGYiLCJSZXNvdXJjZVNwZWNpZmljSWQiOiIzOTc0NmE1Ny1lNzBkLTRhMTctYTI2Yi1hM2MzZTEwNTk0MjEifQ",
+    "RecordingEndReason": "CallEnded",
+    "RecordingStartTime": "2022-06-18T17:01:01.0000000Z",
+    "RecordingLength": "3.26",
+    "ChunkCount": "1",
+    "ContentType": "Audio - Video",
+    "ChannelType": "mixed",
+    "FormatType": "mp4",
+    "AudioChannelsCount": "1"
+  }
+]

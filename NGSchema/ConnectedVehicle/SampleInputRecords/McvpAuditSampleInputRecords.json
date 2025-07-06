@@ -1,0 +1,28 @@
+[
+    {
+        "time": "2021-09-01T03:47:35.0981739Z",
+        "resourceId": "/SUBSCRIPTIONS/816F9E24-BF1E-48F9-B7E5-524A87574565/RESOURCEGROUPS/IOTCVP-STAGE03/PROVIDERS/MICROSOFT.CONNECTEDVEHICLE/PLATFORMACCOUNTS/IOTCVP-STAGE03-MCVP",
+        "category": "Audit",
+        "operationName": "provisionVehicles",
+        "operationCategories": "[\"ProvisioningManagement\"]",
+        "operationCategoryDescription": "Provision Vehicles", 
+        "operationResult": "Success",
+        "operationAccessLevel": "Writer",
+        "callerIdentities": "{\"Username\":[{\"identity\":\"user1@microsoft.com\",\"description\":\"\"}]}",
+        "callerAccessLevels": "[\"Writer\"]",
+        "traceContext":"{\"traceId\":\"68a2d10e98bba04a94bdc196903eb3ab\",\"spanId\":\"67bb5bf576ae0f49\",\"parentId\":null,\"traceState\":null,\"traceFlags\":null}"
+    },
+    {
+        "time": "2021-09-01T03:48:58.2287496Z",
+        "resourceId": "/SUBSCRIPTIONS/816F9E24-BF1E-48F9-B7E5-524A87574565/RESOURCEGROUPS/IOTCVP-STAGE03/PROVIDERS/MICROSOFT.CONNECTEDVEHICLE/PLATFORMACCOUNTS/IOTCVP-STAGE03-MCVP",
+        "category": "Audit",
+        "operationName": "provisionVehicles",
+        "operationCategories": "[\"ProvisioningManagement\"]",
+        "operationCategoryDescription": "Provision Vehicles",
+        "operationResult": "Success",
+        "operationAccessLevel": "Writer",
+        "callerIdentities": "{\"Username\":[{\"identity\":\"user2@microsoft.com\",\"description\":\"\"}]}",
+        "callerAccessLevels": "[\"Writer\"]",
+        "traceContext":"{\"traceId\":\"78a2d10e98bba04a94bdc196903eb3ac\",\"spanId\":\"77bb5bf576ae0f49\",\"parentId\":null,\"traceState\":null,\"traceFlags\":null}"
+    }
+]

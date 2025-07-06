@@ -1,0 +1,31 @@
+let maxTimeToLookback = 4d;
+let lastestSnapshot = DeviceTvmSecureConfigurationAssessmentKB_CL
+| where TimeGenerated > ago(maxTimeToLookback)
+| summarize max(TimeGenerated);
+DeviceTvmSecureConfigurationAssessmentKB_CL
+| where TimeGenerated >  ago(maxTimeToLookback)
+| where TimeGenerated in (lastestSnapshot)
+| distinct ConfigurationId_s, 
+    ConfigurationImpact_d, 
+    ConfigurationName_s, 
+    ConfigurationDescription_s,
+    RiskDescription_s,
+    ConfigurationCategory_s,
+    ConfigurationSubcategory_s,
+    ConfigurationBenchmarks_s,
+    Tags_s,
+    RemediationOptions_s,
+    RelatedMitreTechniques_s,
+    RelatedMitreTactics_s
+| project  ConfigurationId = ConfigurationId_s, 
+    ConfigurationImpact = ConfigurationImpact_d, 
+    ConfigurationName = ConfigurationName_s, 
+    ConfigurationDescription = ConfigurationDescription_s, 
+    RiskDescription = RiskDescription_s, 
+    ConfigurationCategory = ConfigurationCategory_s, 
+    ConfigurationSubcategory = ConfigurationSubcategory_s, 
+    ConfigurationBenchmarks = parse_json(ConfigurationBenchmarks_s), 
+    Tags = parse_json(Tags_s), 
+    RemediationOptions = RemediationOptions_s,
+    RelatedMitreTechniques = RelatedMitreTactics_s, 
+    RelatedMitreTactics = parse_json(RelatedMitreTactics_s)

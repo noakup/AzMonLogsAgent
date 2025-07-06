@@ -1,0 +1,26 @@
+[
+    {
+        "time": "2023-10-13T20:09:01.778080532Z",
+        "resourceId": "/SUBSCRIPTIONS/E3853E83-0D02-4FB3-B88F-05B5FD21AEE2/RESOURCEGROUPS/LIMGU_RG/PROVIDERS/NGINX.NGINXPLUS/NGINXDEPLOYMENTS/TESTSHOEBOXLOGS10323",
+        "location": "westus",
+        "operationName": "NGINX.NGINXPLUS/NGINXDEPLOYMENTS/LOG",
+        "category": "NginxLogs",
+        "properties": {
+            "message": "104.219.105.84 - - [13/Oct/2023:20:09:01 +0000] \"GET / HTTP/1.1\" 200 11232 \"-\" \"curl/8.1.2\"",
+            "filPath": "/var/log/nginx/access.log"
+        }
+    },
+    {
+        "time": "2023-10-13T20:09:00.208976225Z",
+        "resourceId": "/SUBSCRIPTIONS/E3853E83-0D02-4FB3-B88F-05B5FD21AEE2/RESOURCEGROUPS/LIMGU_RG/PROVIDERS/NGINX.NGINXPLUS/NGINXDEPLOYMENTS/TESTSHOEBOXLOGS10323",
+        "location": "westus",
+        "operationName": "NGINX.NGINXPLUS/NGINXDEPLOYMENTS/LOG",
+        "category": "NginxLogs",
+        "properties": {
+            "message": "104.219.105.84 - - [13/Oct/2023:20:09:02 +0000] \"GET /hello.html HTTP/1.1\" 404 118 \"-\" \"curl/8.1.2\"",
+            "tag": "access_syslog",
+            "severity": "info",
+            "facility": "local7"
+        }
+    }
+]

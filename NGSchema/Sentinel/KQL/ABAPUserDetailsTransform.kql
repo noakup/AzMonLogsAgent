@@ -1,0 +1,24 @@
+source
+| project
+    TimeGenerated = now(),
+    User,
+    UserGroup,
+    Email,
+    UserType,
+    Timezone,
+    LockedStatus,
+    LastSeen,
+    CreatedOn,
+    ChangedOn,
+    ValidityDate,
+    LastChangedBy,
+    Profiles,
+    Roles,
+    SystemId = SystemID,
+    ClientId = ClientID, 
+    SystemRole,
+    SystemUniqueId,
+    AgentId
+
+
+

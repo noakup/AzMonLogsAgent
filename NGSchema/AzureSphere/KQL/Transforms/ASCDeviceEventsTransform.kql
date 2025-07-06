@@ -1,0 +1,12 @@
+source 
+| project 
+    TimeGenerated = todatetime(["time"]),
+    Location = location,
+    OperationName = operationName,
+    DeviceId = tostring(properties.DeviceId),
+    CatalogId = tostring(properties.CatalogId),
+    Properties = properties,	
+    ResultType = resultType,
+    ResultDescription = resultDescription,
+    CorrelationId = correlationId,
+    DurationMs = toint(durationMs)

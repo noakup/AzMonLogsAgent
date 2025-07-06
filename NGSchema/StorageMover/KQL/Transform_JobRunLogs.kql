@@ -1,0 +1,7 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    JobRunName = tostring(properties.jobRunName),
+    Level = tostring(properties.level),
+    StatusCode = tostring(properties.statusCode),
+    Message = tostring(properties.message)

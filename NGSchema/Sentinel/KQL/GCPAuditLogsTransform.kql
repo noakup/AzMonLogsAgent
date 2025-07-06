@@ -1,0 +1,30 @@
+source
+| extend statusJson = protoPayload.status
+| extend authenticationInfoProperties = protoPayload.authenticationInfo
+| extend requestProperties = protoPayload.request
+| extend resourceLabel = resource.labels
+| project
+ TimeGenerated = todatetime(receiveTimestamp), 
+ ServiceName = tostring(protoPayload.serviceName), 
+ MethodName = tostring(protoPayload.methodName), 
+ GCPResourceName = tostring(protoPayload.resourceName), 
+ NumResponseItems = tostring(protoPayload.numResponseItems), 
+ Status = todynamic(protoPayload.status), 
+ AuthenticationInfo = todynamic(protoPayload.authenticationInfo), 
+ AuthorizationInfo = todynamic(protoPayload.authorizationInfo), 
+ RequestMetadata = todynamic(protoPayload.requestMetadata), 
+ Request = todynamic(protoPayload.request), 
+ Response = todynamic(protoPayload.response), 
+ Metadata = todynamic(protoPayload.metadata), 
+ StatusMessage = tostring(statusJson.message), 
+ PrincipalEmail = tostring(authenticationInfoProperties.principalEmail), 
+ LogName = logName, 
+ Timestamp = todatetime(timestamp), 
+ ProjectId = tostring(resourceLabel.project_id), 
+ Severity = severity, 
+ GCPResourceType = tostring(resource.type), 
+ Subscription = tostring(resource.subscription),
+ ResourceLocation = todynamic(protoPayload.resourceLocation),
+ ResourceOriginalState = todynamic(protoPayload.resourceOriginalState),
+ ServiceData = todynamic(protoPayload.serviceData),
+ InsertId = tostring(insertId)

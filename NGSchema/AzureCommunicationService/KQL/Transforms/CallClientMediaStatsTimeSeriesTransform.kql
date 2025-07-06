@@ -1,0 +1,23 @@
+source
+| project
+    OperationName = operationName,
+    TimeGenerated = todatetime(["time"]),
+    CallClientTimeStamp                     = todatetime(properties.callClientTimeStamp),
+    MetricName                              = tostring(properties.metricName),
+    CallId                                  = tostring(properties.callId),
+    Count                                   = tolong(properties['count']),
+    Sum                                     = toreal(properties.sum),
+    Average                                 = toreal(properties.average),
+    Minimum                                 = toreal(properties.min),
+    Maximum                                 = toreal(properties.max),
+    MediaStreamDirection                    = tostring(properties.mediaStreamDirection),
+    MediaStreamType                         = tostring(properties.mediaStreamType),
+    MediaStreamCodec                        = tostring(properties.mediaStreamCodec),
+    ClientInstanceId                        = tostring(properties.clientInstanceId),
+    ParticipantId                           = tostring(properties.participantId),
+    EndpointId                              = tostring(properties.endpointId),
+    RemoteParticipantId                     = tostring(properties.remoteParticipantId),
+    RemoteEndpointId                        = tostring(properties.remoteEndpointId),
+    MediaStreamId                           = tostring(properties.mediaStreamId),
+    AggregationIntervalSeconds              = toint(properties.aggregationIntervalSeconds)
+

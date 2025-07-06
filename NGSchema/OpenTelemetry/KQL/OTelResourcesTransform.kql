@@ -1,0 +1,13 @@
+source
+| where itemType == "Resource"
+| project
+    TimeGenerated = todatetime(item.timestamp), // todo: this is an assumption on where pipeline will place this generated field
+    Id = tostring(item.itemId), // todo: this is an assumption on where pipeline will place this generated field.
+    ServiceNamespace = tostring(item.attributes["service.namespace"]),
+    ServiceName = tostring(item.attributes["service.name"]),
+    ServiceInstanceId = tostring(item.attributes["service.instance.id"]),
+    Attributes = item.attributes
+| extend RoleName = case(
+    isnotempty(ServiceName) and isnotempty(ServiceNamespace), strcat("[", ServiceNamespace, "]/", ServiceName),
+    isnotempty(ServiceNamespace), strcat("[", ServiceNamespace, "]"),
+    ServiceName)

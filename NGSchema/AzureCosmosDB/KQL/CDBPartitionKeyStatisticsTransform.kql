@@ -1,0 +1,10 @@
+source  
+| extend properties = parse_json(properties) 
+| project 
+	TimeGenerated = todatetime(['time']),    
+	AccountName = tostring(properties.accountName), 
+	RegionName =  tostring(properties.regionName),      
+	PartitionKey =  tostring(properties.partitionKey),
+	SizeKb = toint(properties.sizeKb),      
+	DatabaseName = tostring(properties.databaseName), 
+	CollectionName = tostring(properties.collectionName) 

@@ -1,0 +1,4 @@
+NWConnectionMonitorTestResult 
+| where TimeGenerated > ago(24h) 
+| where TestResult == "Fail"
+| distinct _ResourceId, SourceName, DestinationName, TestGroupName, TestConfigurationName

@@ -1,0 +1,216 @@
+{
+  "type": "Microsoft.SecurityInsights/Purview",
+  "displayName": "Microsoft Defender for cloud",
+  "description": "All tables related to Microsoft Defender for cloud offerings.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "AzureDLP/Triage",
+  "contactDL": "mauidev-redmond@microsoft.com",
+  "relatedTables": [],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "workflowName": "InformationProtectionWorkflow",
+      "transformName": "InformationProtection",
+      "physicalName": "PurviewDataSensitivityLogs",
+      "logicalName": "PurviewDataSensitivityLogs",
+      "description": "Data Sensitivity information for assets scanned using Purview.",
+      "categories": [
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 2,
+      "dataTypeId": "SECURITY_INFORMATION_PROTECTION_DATA",
+      "intelligencePacks": [ "SecurityCenterFree", "Security", "SecurityCenter" ],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "Time",
+          "type": "DateTime"
+        },
+        {
+          "name": "Id",
+          "type": "string"
+        },
+        {
+          "name": "Category",
+          "type": "String"
+        },
+        {
+          "name": "Properties",
+          "type": "string"
+        }
+      ],
+      "transformFilePath": "Kql/MauiDataSensitivityLogs.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Time (UTC) when the log was generated."
+        },
+        {
+          "name": "PurviewTenantId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Tenant ID associated with the Purview account.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "PurviewAccountName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the Purview account."
+        },
+        {
+          "name": "PurviewRegion",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Region of the Purview account."
+        },
+        {
+          "name": "SourceName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the data source scanned as registered in Purview."
+        },
+        {
+          "name": "SourceType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Type of data source scanned: azuredatalakegen1, azureblob, azuredataexplorer, amazons3 etc."
+        },
+        {
+          "name": "SourcePath",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Resource Path of the data source. Ex: ARM path for Azure resources and ARN for AWS resources.",
+          "dataTypeHint": "ARMPath"
+        },
+        {
+          "name": "SourceSubscriptionId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Subscription ID associated with the data source. Account ID for AWS resources.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "SourceRegion",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The location of the data source that was scanned."
+        },
+        {
+          "name": "SourceCollectionName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the data source collection name in Purview."
+        },
+        {
+          "name": "SourceScanId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The associated Purview scan ID for the source.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "AssetName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the asset scanned."
+        },
+        {
+          "name": "AssetPath",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Path of the asset scanned in a source."
+        },
+        {
+          "name": "AssetType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Type of asset that was scanned: file, column, table, generic."
+        },
+        {
+          "name": "AssetCreationTime",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Time (UTC) at which the asset was created."
+        },
+        {
+          "name": "AssetModifiedTime",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Time (UTC) at which the asset was last modified."
+        },
+        {
+          "name": "AssetLastScanTime",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Time (UTC) at which the asset was last scanned."
+        },
+        {
+          "name": "FileExtension",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "File extension of the asset scanned. Only populated when asset type is a file."
+        },
+        {
+          "name": "FileSize",
+          "type": "BigInt",
+          "isDefaultDisplay": true,
+          "description": "File size of the asset scanned in bytes. Only populated when asset type is a file."
+        },
+        {
+          "name": "ActivityType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The type of data sensitivity event: classification, labeling."
+        },
+        {
+          "name": "ClassificationTrigger",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The trigger for the classification event."
+        },
+        {
+          "name": "Classification",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Names of the classifications found."
+        },
+        {
+          "name": "ClassificationDetails",
+          "type": "Dynamic",
+          "isDefaultDisplay": false,
+          "description": "List of classification details: ID, name, count, uniquecount, confidence."
+        },
+        {
+          "name": "SensitivityLabelTrigger",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The trigger for the sensitivity label event."
+        },
+        {
+          "name": "SensitivityLabel",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Names for the labels found."
+        },
+        {
+          "name": "SensitivityLabelDetails",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "List of label details: ID, name, order."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/MauiDataSensitivityLogsSample.json"
+    }
+  ],
+  "functions": [],
+  "queries": []
+}

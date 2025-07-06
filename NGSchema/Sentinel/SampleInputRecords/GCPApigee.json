@@ -1,0 +1,41 @@
+[
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "scuba@np-lab.co.il"
+      },
+      "serviceName": "apigee.googleapis.com",
+      "methodName": "google.cloud.apigee.v1.EnvironmentService.ModifyEnvironment",
+      "resourceName": "organizations/msccp-test/environments/test-env",
+      "response": {
+        "name": "test-env",
+        "description": "Testing Environment",
+        "displayName": "Test Environment",
+        "@type": "type.googleapis.com/google.cloud.apigee.v1.Environment",
+        "deploymentType": "PROXY",
+        "apiProxyType": "PROGRAMMABLE",
+        "type": "BASE"
+      }
+    },
+    "insertId": "1grdr72bn0",
+    "resource": {
+      "type": "audited_resource",
+      "labels": {
+        "project_id": "msccp-test",
+        "method": "google.cloud.apigee.v1.EnvironmentService.ModifyEnvironment",
+        "service": "apigee.googleapis.com"
+      }
+    },
+    "timestamp": "2025-05-16T09:33:08.418706784Z",
+    "severity": "NOTICE",
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Factivity",
+    "operation": {
+      "id": "organizations/msccp-test/operations/e64f97ae-7149-4420-85a7-c1ac4eecf09e",
+      "producer": "apigee.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2025-05-16T09:33:08.970472436Z"
+  }
+]

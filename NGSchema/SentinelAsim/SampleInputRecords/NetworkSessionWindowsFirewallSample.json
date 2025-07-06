@@ -1,0 +1,42 @@
+[
+    {
+        "Date": "07/24/2022",
+        "Time": "12:20:49",
+        "FirewallAction": "ALLOW",
+        "Protocol": "UDP",
+        "SourceIP": "10.0.3.74",
+        "DestinationIP": "168.63.129.16",
+        "SourcePort": "64009",
+        "DestinationPort": "53",
+        "RequestSizeInBytes": "0",
+        "TcpFlags": "-", 
+        "TcpSequenceNumber": "0",
+        "TcpAcknowledgement": "0",
+        "TcpWindowSize": "0",
+        "IcmpType": "-",
+        "IcmpCode": "-",
+        "Info": "-",
+        "CommunicationDirection": "SEND",
+        "SourceHostname": "testcpu1"
+    },
+    {
+        "Date": "07/24/2022",
+        "Time": "12:29:40",
+        "FirewallAction": "ALLOW",
+        "Protocol": "TCP",
+        "SourceIP": "10.0.3.74",
+        "DestinationIP": "35.237.254.64",
+        "SourcePort": "52592",
+        "DestinationPort": "443",
+        "RequestSizeInBytes": "0",
+        "TcpFlags": "-", 
+        "TcpSequenceNumber": "0",
+        "TcpAcknowledgement": "0",
+        "TcpWindowSize": "0",
+        "IcmpType": "-",
+        "IcmpCode": "-",
+        "Info": "-",
+        "CommunicationDirection": "SEND",
+        "SourceHostname": "testcpu1"
+    }
+]

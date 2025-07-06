@@ -1,0 +1,21 @@
+[
+	{
+		"time": "2023-03-23T05:50:00.5446615Z",
+		"resourceId": "/SUBSCRIPTIONS/800B9A67-28E1-40E3-BD97-0B74A9825DFD/RESOURCEGROUPS/WMS-FTDOOR01-RSG-WEU1-DEV/PROVIDERS/MICROSOFT.CDN/PROFILES/WMS-WEU1-DEV-001-FTDOOR",
+		"category": "FrontDoorHealthProbeLog",
+		"operationName": "Microsoft.Cdn/Profiles/FrontDoorHealthProbeLog/Write",
+		"properties": {
+			"healthProbeId": "6411C37FFAF948D889F14E94A829F074",
+			"POP": "YVR",
+			"httpVerb": "GET",
+			"result": "OriginError",
+			"httpStatusCode": "401",
+			"probeURL": "https://eafd-prod-ama-ph-sni-atm.aksroxy.azureedge.net:443/health",
+			"originName": "eafd-prod-ama-ph-sni-atm.aksroxy.azureedge.net",
+			"originIP": "40.74.30.65",
+			"totalLatencyMilliseconds": "169",
+			"connectionLatencyMilliseconds": "n/a",
+			"DNSLatencyMicroseconds": "n/a"
+		}
+	}
+]

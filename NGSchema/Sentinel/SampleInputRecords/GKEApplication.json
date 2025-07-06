@@ -1,0 +1,34 @@
+[
+  {
+    "insertId": "2dqkq6kp9blq0wis",
+    "jsonPayload": {
+      "message": "successfully renewed lease gke-managed-filestorecsi/filestore-csi-storage-gke-io-node",
+      "pid": "1"
+    },
+    "resource": {
+      "type": "k8s_container",
+      "labels": {
+        "namespace_name": "kube-system",
+        "container_name": "filestore-lock-release-controller",
+        "project_id": "msccp-test",
+        "pod_name": "filestore-lock-release-controller-955c5d87d-l8hgd",
+        "location": "us-central1",
+        "cluster_name": "kubernetesalekhya"
+      }
+    },
+    "timestamp": "2025-05-19T07:37:01.438828341Z",
+    "severity": "INFO",
+    "labels": {
+      "k8s-pod/pod-template-hash": "955c5d87d",
+      "k8s-pod/component": "filestorecsi",
+      "compute.googleapis.com/resource_name": "gk3-kubernetesalekhya-pool-2-599bbf1f-3xpy",
+      "k8s-pod/k8s-app": "filestore-lock-release-controller"
+    },
+    "logName": "projects/msccp-test/logs/stderr",
+    "sourceLocation": {
+      "file": "leaderelection.go",
+      "line": "278"
+    },
+    "receiveTimestamp": "2025-05-19T07:37:02.987178265Z"
+  }
+]

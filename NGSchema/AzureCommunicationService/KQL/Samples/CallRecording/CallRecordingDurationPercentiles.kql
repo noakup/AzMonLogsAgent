@@ -1,0 +1,5 @@
+ACSCallRecordingSummary
+// Get the distinct combinations of RecordingId, RecordingLength
+| distinct RecordingId, RecordingLength
+// Calculate average and percentiles (50%, 90%, and 99%) of call durations (in seconds)
+| summarize avg(RecordingLength), percentiles(RecordingLength, 50, 90, 99)

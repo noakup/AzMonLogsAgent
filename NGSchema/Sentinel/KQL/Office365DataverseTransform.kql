@@ -1,0 +1,42 @@
+let actorUserTypeMap = parse_json('{ '
+' "0": "Regular", '
+' "1": "Other" ,'
+' "2": "Admin", '
+' "3": "DcAdmin", '
+' "4": "System", '
+' "5": "Application", '
+' "6": "ServicePrincipal", '
+' "7": "CustomPolicy", '
+' "8": "SystemPolicy", '
+' "9": "PartnerTechnician", '
+' "10": "Guest" '
+' }');
+source
+| project
+SourceRecordId = Id,
+UserAgent,
+TimeGenerated = CreationTime,
+Operation,
+OrganizationId,
+UserType = tostring(actorUserTypeMap[tostring(UserType)]),
+UserKey,
+ResultStatus,
+OriginalObjectId = ObjectId,
+UserId,
+UserUpn,
+ClientIp = ClientIP,
+CorrelationId,
+CrmOrganizationUniqueName,
+InstanceUrl,
+ItemUrl,
+ItemType,
+Message,
+EntityId,
+EntityName,
+Fields,
+Query,
+QueryResults,
+ServiceContextId,
+ServiceContextIdType,
+ServiceName,
+SystemUserId

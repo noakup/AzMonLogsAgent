@@ -1,0 +1,35 @@
+let DisabledParsers=materialize(_GetWatchlist('ASimDisabledParsers') 
+| where SearchKey in ('Any', 'Exclude_ASim_NetworkSession') 
+| extend SourceSpecificParser=column_ifexists('SourceSpecificParser','') 
+| where isnotempty(SourceSpecificParser) 
+| summarize list = make_set(SourceSpecificParser));
+let builtInDisabled = 0 != array_length(set_intersect(toscalar(DisabledParsers),dynamic(['Exclude_ASim_NetworkSessionBuiltIn', 'Exclude_ASim_NetworkSession', 'Any'])));
+union isfuzzy=true
+_ASim_NetworkSession_AppGateSDPV02(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_AppGateSDP' in (DisabledParsers)))),
+_ASim_NetworkSession_AWSVPCV03(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_AWSVPC' in (DisabledParsers)))),
+_ASim_NetworkSession_AzureFirewallV01(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_AzureFirewall' in (DisabledParsers)))),
+_ASim_NetworkSession_AzureNSGV01(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_AzureNSG' in (DisabledParsers)))),
+_ASim_NetworkSession_BarracudaWAFV01(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_BarracudaWAF' in (DisabledParsers)))),
+_ASim_NetworkSession_CheckPointFirewallV11(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_CheckPointFirewall' in (DisabledParsers)))),
+_ASim_NetworkSession_CiscoASAV10(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_CiscoASA' in (DisabledParsers)))),
+_ASim_NetworkSession_CiscoFirepowerV01(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_CiscoFirepower' in (DisabledParsers)))),
+_ASim_NetworkSession_CiscoISEV11(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_CiscoISE' in (DisabledParsers)))),
+_ASim_NetworkSession_CiscoMerakiV11(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_CiscoMeraki' in (DisabledParsers)))),
+_ASim_NetworkSession_CorelightZeekV02(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_CorelightZeek' in (DisabledParsers)))),
+_ASim_NetworkSession_ForcePointFirewallV01(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_ForcePointFirewall' in (DisabledParsers)))),
+_ASim_NetworkSession_FortinetFortiGateV05(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_FortinetFortiGate' in (DisabledParsers)))),
+_ASim_NetworkSession_IllumioSaaSCoreV01(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_IllumioSaaSCore' in (DisabledParsers)))),
+_ASim_NetworkSession_MD4IoTAgentV02(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_MD4IoTAgent' in (DisabledParsers)))),
+_ASim_NetworkSession_MD4IoTSensorV01(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_MD4IoTSensor' in (DisabledParsers)))),
+_ASim_NetworkSession_Microsoft365DefenderV04(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_Microsoft365Defender' in (DisabledParsers)))),
+_ASim_NetworkSession_LinuxSysmonV03(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_LinuxSysmon' in (DisabledParsers)))),
+_ASim_NetworkSession_MicrosoftSysmonV01(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_MicrosoftSysmon' in (DisabledParsers)))),
+_ASim_NetworkSession_MicrosoftWindowsEventFirewallV04(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_MicrosoftWindowsEventFirewall' in (DisabledParsers)))),
+_ASim_NetworkSession_NativeV03(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_Native' in (DisabledParsers)))),
+_ASim_NetworkSession_PaloAltoCEFV07(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_PaloAltoCEF' in (DisabledParsers)))),
+_ASim_NetworkSession_SonicWallFirewallV01(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_SonicWallFirewall' in (DisabledParsers)))),
+_ASim_NetworkSession_VectraAIV02(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_VectraAI' in (DisabledParsers))), pack= pack),
+_ASim_NetworkSession_VMConnectionV02(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_VMConnection' in (DisabledParsers)))),
+_ASim_NetworkSession_WatchGuardFirewareOSV01(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_WatchGuardFirewareOS' in (DisabledParsers)))),
+_ASim_NetworkSession_ZscalerZIAV04(disabled= (builtInDisabled or('Exclude_ASim_NetworkSession_ZscalerZIA' in (DisabledParsers)))),
+_Im_NetworkSession_EmptyV03

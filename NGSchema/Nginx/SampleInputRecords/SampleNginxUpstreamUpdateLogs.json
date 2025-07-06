@@ -1,0 +1,31 @@
+[
+    {
+        "time": "2023-10-13T20:09:01.778080532Z",
+        "resourceId": "/SUBSCRIPTIONS/E3853E83-0D02-4FB3-B88F-05B5FD21AEE2/RESOURCEGROUPS/LIMGU_RG/PROVIDERS/NGINX.NGINXPLUS/NGINXDEPLOYMENTS/TESTSHOEBOXLOGS10323",
+        "location": "westus",
+        "operationName": "NGINX.NGINXPLUS/NGINXDEPLOYMENTS/LOG",
+        "category": "NginxSecurityLogs",
+        "properties": {
+            "message": "sync of upstream servers successful",
+            "tag": "stateUpdaterSyslog",
+            "level":"info",
+            "context":"http",
+            "upstreamName":"coffee"
+        }
+    },
+    {
+        "time": "2023-10-13T20:09:00.208976225Z",
+        "resourceId": "/SUBSCRIPTIONS/E3853E83-0D02-4FB3-B88F-05B5FD21AEE2/RESOURCEGROUPS/LIMGU_RG/PROVIDERS/NGINX.NGINXPLUS/NGINXDEPLOYMENTS/TESTSHOEBOXLOGS10323",
+        "location": "westus",
+        "operationName": "NGINX.NGINXPLUS/NGINXDEPLOYMENTS/LOG",
+        "category": "NginxSecurityLogs",
+        "properties": {
+            "message": "sync of upstream servers failed",
+            "tag": "stateUpdaterSyslog",
+            "level":"error",
+            "context":"http",
+            "upstreamName":"coffee",
+            "error":"Error code"
+        }
+    }
+]

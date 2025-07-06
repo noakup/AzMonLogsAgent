@@ -1,0 +1,18 @@
+source
+| extend properties = parse_json(properties)
+| project
+	TimeGenerated = todatetime(['time']),
+	OperationName = operationName,
+	ATCResourceId = resourceId,
+	ATCRegion = location,
+	SchemaVersion = operationVersion,
+	ExRCircuitId = tostring(properties.ExRCircuitId),
+	ExRCircuitServiceKey = tostring(properties.ExRCircuitServiceKey),
+	VnetId = tostring(properties.VnetId),
+	VnetSubscriptionId = tostring(properties.VnetSubscriptionId),
+	VnetResourceGroup = tostring(properties.VnetResourceGroup),
+	VnetName = tostring(properties.VnetName),
+	VnetLocation = tostring(properties.VnetLocation),
+	VnetAddressPrefix = tostring(properties.VnetAddressPrefix),
+	IpMask = toint(properties.IpMask),
+	IpSubnet = todynamic(properties.IpSubnet)

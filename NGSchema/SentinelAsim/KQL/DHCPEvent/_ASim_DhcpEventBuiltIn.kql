@@ -1,0 +1,9 @@
+let DisabledParsers=materialize(_GetWatchlist('ASimDisabledParsers') 
+| where SearchKey in ('Any', 'Exclude_ASim_DhcpEvent') 
+| extend SourceSpecificParser=column_ifexists('SourceSpecificParser','') 
+| where isnotempty(SourceSpecificParser) 
+| summarize list = make_set(SourceSpecificParser));
+let builtInDisabled = 0 != array_length(set_intersect(toscalar(DisabledParsers),dynamic(['Exclude_ASim_DhcpEventBuiltIn', 'Exclude_ASim_DhcpEvent', 'Any'])));
+union isfuzzy=true
+_ASim_DhcpEvent_NativeV01(disabled= (builtInDisabled or('Exclude_ASim_DhcpEvent_Native' in (DisabledParsers)))),
+_Im_DhcpEvent_EmptyV01

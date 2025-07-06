@@ -1,0 +1,21 @@
+﻿source
+| project
+    TimeGenerated = todatetime(["time"]),
+    VendorName = tostring(properties.VendorName),
+    ProductName = tostring(properties.ProductName),
+    ComponentName = tostring(properties.ComponentName),
+    AlertType = tostring(properties.AlertType),
+    DisplayName = tostring(properties.DisplayName),
+    Description = tostring(properties.Description),
+    FirstActivityDateTime = todatetime(properties.FirstActivityDateTime),
+    LastActivityDateTime = todatetime(properties.LastActivityDateTime),
+    CreationDateTime = todatetime(properties.CreationDateTime),
+    Severity = tostring(properties.Severity),
+    Techniques = tostring(properties.Techniques),
+    SubTechniques = tostring(properties.SubTechniques),
+    DetectionTechnology = tostring(properties.DetectionTechnology),
+    IsPreview = tobool(properties.IsPreview),
+    ExtendedProperties = parse_json(properties.ExtendedProperties),
+    RelatedResources = parse_json(properties.RelatedResources),
+    PolicyId = tostring(properties.PolicyId),
+    Id = tostring(properties.Id)

@@ -1,0 +1,5 @@
+DevCenterResourceLifecycleLogs
+| where OperationName == "HibernateSupportStatusCheck"
+| extend Date = bin(TimeGenerated, 6h)
+| summarize unsupportedCount = count() by Message, Date
+| sort by Date desc

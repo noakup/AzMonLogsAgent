@@ -1,0 +1,16 @@
+// For specific results, insert values in the let statements and uncomment the where filters within the query
+// let connectionMonitorResourceId = "<Connection Monitor Resource Id>";
+// let sourceName = "<Source Name>";
+// let destinationName = "<Destination Name>";
+// let testGroupName = "<Test Group Name>";
+// let testConfigurationName = "<Test Configuration Name>";
+NWConnectionMonitorTestResult 
+| where TimeGenerated > ago(24h) 
+// | where ConnectionMonitorResourceId has connectionMonitorResourceId
+// | where SourceName has sourceName
+// | where DestinationName has destinationName
+// | where TestGroupName has testGroupName
+// | where TestConfigurationName has testConfigurationName
+| extend LossPercent = ChecksFailed * 100 / ChecksTotal
+| project TimeGenerated, ConnectionMonitorResourceId, TestResult, AvgRoundTripTimeMs, LossPercent, SourceName, SourceAddress, DestinationName, DestinationAddress
+| order by TimeGenerated desc;

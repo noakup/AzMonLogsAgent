@@ -1,0 +1,9 @@
+let MaliciousSender = "<insert the sender email address>";
+EmailAttachmentInfo
+| where SenderFromAddress =~ MaliciousSender
+| project SHA256 = tolower(SHA256)
+| join (
+DeviceFileEvents
+) on SHA256
+| summarize FirstAppearance = min(Timestamp) by DeviceName, SHA256, FileName 
+| take 100

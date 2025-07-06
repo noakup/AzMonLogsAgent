@@ -1,0 +1,67 @@
+[{
+    "id": "9becb71a1729384127ed28",
+    "cid": "2cc98d13c94d43bfab70",
+    "aid": "9becb71e2eb9e60410368c",
+    "vulnerability_id": "CVE-2023-41972",
+    "data_providers": [
+        {
+            "provider": "Falcon sensor",
+            "scan_time": "2025-03-14T01:28:06Z"
+        },
+        {
+            "provider": "Vulnerability Scanner",
+            "scan_time": "2025-03-14T01:28:06Z"
+        }
+    ],
+    "created_timestamp": "2024-11-07T10:57:59Z",
+    "updated_timestamp": "2025-03-14T01:28:06Z",
+    "status": "open",
+    "apps": [
+        {
+            "vendor_normalized": "Microsoft",
+            "product_name_version": "Windows 11 23h2",
+            "installation_path": "C:\\Windows\\System32"
+        }
+    ],
+    "suppression_info": {
+        "is_suppressed": false,
+        "reason": null,
+        "expiration_date": null
+    },
+    "confidence": "confirmed",
+    "app": {
+        "vendor_normalized": "Zscaler",
+        "product_name_version": "Client Connector",
+        "product_name_normalized": "Client Connector"
+    },
+    "cve": {
+        "id": "CVE-2023-41972",
+        "base_score": 7.3,
+        "description": "Remote code execution vulnerability in client connector"
+    },
+    "host_info": {
+        "hostname": "C-LAB-02",
+        "local_ip": "10.50.12.2",
+        "os_version": "Windows 11 23H2",
+        "last_scan": "2025-03-14T01:28:06Z"
+    },
+    "remediation": {
+        "ids": [
+            "0e276e4380ee31efac1237f3d4620cef",
+            "a62c53269051302eb89908328eff7108"
+        ],
+        "entities": [
+            {
+                "id": "0e276e4380ee31efac1237f3d4620cef",
+                "reference": "4.3.0.121",
+                "patch_url": "https://help.zscaler.com/client-connector/4.3.0.121"
+            },
+            {
+                "id": "a62c53269051302eb89908328eff7108",
+                "reference": "4.3.0.121",
+                "patch_url": "https://help.zscaler.com/client-connector/4.3.0.121"
+            }
+        ],
+        "action": "Update Client Connector to version 4.3.0.121 or later"
+    }
+}]

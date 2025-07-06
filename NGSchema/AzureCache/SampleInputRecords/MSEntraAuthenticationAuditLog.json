@@ -1,0 +1,41 @@
+[
+  {
+    "time": "2023-03-11T21:04:58.0466086Z",
+    "location": "eastus2euap",
+    "category": "MSEntraAuthenticationAuditLog",
+    "properties": {
+      "tenant": "cache-test-la",
+      "auditLog": {
+        "message": "Microsoft Entra Authentication request received",
+        "authentication": "Success",
+        "username": "56de6c5e-6660-4d2b-84c5-df5ecb753cfc",
+        "ipAddress": "172.16.0.4:25766",
+        "clientId": "36664",
+        "clientName": "(nil)",
+        "lifeTime": "1698227219"
+      },
+      "roleInstance": "1"
+    },
+    "resourceId": "/SUBSCRIPTIONS/E6761CE7-A7BC-442E-BBAE-950A121933B5/RESOURCEGROUPS/AZURE-CACHE/PROVIDERS/MICROSOFT.CACHE/REDIS/CACHE-TEST-LA",
+    "Level": 4,
+    "operationName": "Microsoft.Cache/EntraAuthenticationAuditLog"
+  },
+  {
+    "time": "2023-03-11T22:04:58.0466086Z",
+    "location": "eastus2euap",
+    "category": "MSEntraAuthenticationAuditLog",
+    "properties": {
+      "tenant": "cache-test-la",
+      "auditLog": {
+        "message": "Microsoft Entra Connection disconnected on token expiry",
+        "ipAddress": "172.16.0.4:25766",
+        "clientId": "36664",
+        "clientName": "(nil)"
+      },
+      "roleInstance": "1"
+    },
+    "resourceId": "/SUBSCRIPTIONS/E6761CE7-A7BC-442E-BBAE-950A121933B5/RESOURCEGROUPS/AZURE-CACHE/PROVIDERS/MICROSOFT.CACHE/REDIS/CACHE-TEST-LA",
+    "Level": 4,
+    "operationName": "Microsoft.Cache/EntraAuthenticationAuditLog"
+  }
+]

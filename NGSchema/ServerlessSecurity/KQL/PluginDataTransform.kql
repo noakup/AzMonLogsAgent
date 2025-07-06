@@ -1,0 +1,11 @@
+source
+| project
+    TimeGenerated = timeGenerated,
+	SlSecRequestId = slSecRequestId,
+	Sender = sender,
+	PayloadType = payloadType,
+	Payload = parse_json(payload),
+	Index = index,
+	SlSecMetadata = parse_json(metadata),
+	SlSecProps = parse_json(slSecProps),
+	MsgVersion = msgVersion

@@ -1,0 +1,243 @@
+// This query is used in Call Diagnostics to check if a participant has any poor network quality in a specific call.
+// First we check the media stats of that participant in the ACSCallDiagnostics to see if any of the metrics cross the threshold defined.
+// Then we check if the participant has any bad network related UFDs in ACSCallClientOperations log. 
+// Finally, if the participant has any poor media metric or any bad network UFD, we flag that participant to be poor network quality in Call Diagnostic tool.
+// Replace queryConditions_callId with the callId you want to investigate.
+// Note this query is used in Call Diagnostics to determine participant with poor network quality.
+declare query_parameters(queryConditions_callId: string = 'replace-with-your-callId');
+let rangeEventsWithCorrelation = dynamic(['UserFacingDiagnostics']);
+let pointEvents = dynamic([
+    'SelectedMicrophoneChanged', 'SelectedSpeakerChanged', 'OptimalVideoCount-changed', 'State-changed', 'CallMode-changed',
+    'IsMuted-changed', 'IsIncomingAudioMuted-changed', 'Id-changed', 'Role-changed', 'SelectedDevice-changed', 'PageHidden',
+    'OptimalVideoCountChanged', 'StateChanged', 'IsMutedChanged', 'IsIncomingAudioMutedChanged', 'SelectedDeviceChanged']);
+let participants = materialize(ACSCallSummary
+    | where CorrelationId == queryConditions_callId
+    | where ParticipantId != CorrelationId and isnotempty(ParticipantId)
+    | extend CallEndTime = CallStartTime + 1s * CallDuration
+    | distinct ParticipantId, CallStartTime, CallEndTime);
+let OperationsTimestampLowerBound = max_of(toscalar(participants | project CallStartTime | take 1) - 2h, ago(365d));
+let OperationsTimestampUpperBound = min_of(toscalar(participants | project CallEndTime | take 1) + 2h, now() + 365d);
+// We need clientIds to get all operations before call is established.
+let callClientIds = materialize(ACSCallClientOperations
+    | where OperationName !in ('CallModeChanged', 'IdChanged', 'RoleChanged')
+    | where ParticipantId in ((participants | project ParticipantId)) or CallId == queryConditions_callId
+    | where CallClientTimeStamp between (OperationsTimestampLowerBound..OperationsTimestampUpperBound)
+    | distinct ClientInstanceId, ParticipantId);
+//
+let allOperations = 
+    materialize(ACSCallClientOperations
+    | where OperationName !in ('CallModeChanged', 'IdChanged', 'RoleChanged')
+    | where CallClientTimeStamp between (OperationsTimestampLowerBound..OperationsTimestampUpperBound)
+    | where ParticipantId in ((participants | project ParticipantId)) or CallId == queryConditions_callId or (isempty(CallId) and isempty(ParticipantId) and ClientInstanceId in ((callClientIds | distinct ClientInstanceId)))
+    | where isnotempty(OperationName) and OperationName != 'CallClientOperations' 
+        and isnotempty(OperationId) and isnotempty(CallClientTimeStamp)
+    | join kind=leftouter hint.strategy=shuffle callClientIds on ClientInstanceId 
+    | extend ParticipantId = coalesce(ParticipantId, ParticipantId1)
+    | project-away ParticipantId1, ClientInstanceId1
+    | summarize hint.strategy = shuffle arg_max(TimeGenerated, *) by OperationId, OperationName, CallClientTimeStamp);
+//
+let correlatedOperations = materialize(allOperations
+    | where OperationName in (rangeEventsWithCorrelation)
+    | extend OperationPayload = todynamic(OperationPayload)
+    | extend
+        UFDQuality = tostring(OperationPayload.DiagnosticQuality),
+        UFDType = tostring(OperationPayload.DiagnosticChanged)
+    | extend UFDType = strcat(toupper(substring(UFDType, 0, 1)), substring(UFDType, 1))
+    | extend OperationPayloadNew = bag_pack(tostring(CallClientTimeStamp), OperationPayload)
+    | project-away ResultType
+    // Make sure the UFD payload are aggregated in time-asc order.
+    | order by CallClientTimeStamp asc
+    | summarize hint.strategy = shuffle 
+        arg_max(TimeGenerated, *), ResultType = iff(countif(UFDQuality != 'Good') > 0, 'Failed', 'Succeeded'), 
+        OperationStartTime = min(CallClientTimeStamp), OperationEndTime = max(CallClientTimeStamp),
+        OperationPayloadPacked = make_bag(OperationPayloadNew)
+        by OperationId, UFDType
+    | extend 
+        ResultType = iff(UFDType has_any ("SpeakingWhileMicrophoneIsMuted", "SpeakerMuted"), 'Succeeded', ResultType),
+        OperationEndTime = max_of(OperationEndTime, OperationStartTime + 10ms)
+    | extend OperationPayload = todynamic(OperationPayload)
+    | extend UFDType = coalesce(tostring(OperationPayload.DiagnosticChanged), tostring(OperationPayload.diagnosticChanged))
+    // Capitalize the first letter.
+    | extend UFDType = strcat(toupper(substring(UFDType, 0, 1)), substring(UFDType, 1))
+    | extend parent_entity_type = case(OperationName has_any ('StateChanged', 'AcceptIncomingCall', 'AskDevicePermission', 'CallAgentInit', 'EnterCall', 
+        'Hangup', 'Hold', 'Join', 'PageHidden', 'RejectIncomingCall', 'SelectedDeviceChanged', 
+        'StartCall'),
+        'Call',
+        OperationName has_any (
+        'IsMuted-changed',
+        'IsIncomingAudioMuted-changed',
+        'IsIncomingAudioMutedChanged',
+        'IsMutedChanged',
+        'MuteMicrophone',
+        'UnmuteMicrophone',
+        'StartAudio',
+        'StopAudio',
+        'SelectedMicrophoneChanged',
+        'SelectedSpeakerChanged'
+        ),
+        'Audio',
+        OperationName has_any ('StartScreenShare', 'StopScreenShare'),
+        'ScreenSharing',
+        OperationName has_any ('OptimalVideoCount-changed', 'OptimalVideoCountChanged'),
+        'Video',
+        OperationName has_any ('SwitchSource'),
+        case(
+        tostring(OperationPayload.StreamType) == 'Video',
+        'Video',
+        'Audio'
+        ),
+        OperationName has_any ('CreateView', 'DisposeView', 'StartVideo', 'StopVideo'),
+        case(
+        tostring(OperationPayload.StreamType) == 'Video',
+        'Video',
+        'Audio'
+        ),
+        OperationName has_any ('CreateView', 'DisposeView', 'StartVideo', 'StopVideo'),
+        case(
+        tostring(OperationPayload.StreamType) == 'Video',
+        'Video',
+        tostring(OperationPayload.StreamType) == 'ScreenSharing',
+        'ScreenSharing',
+        'Video'
+        ),
+        OperationName == 'UserFacingDiagnostics',
+        case(
+        UFDType contains 'Speak' or UFDType contains 'microphone',
+        'Audio',
+        UFDType contains 'camera' or UFDType contains 'capture',
+        'Video',
+        UFDType contains 'screenshare',
+        'ScreenSharing',
+        UFDType contains 'network',
+        'Network',
+        'Call'
+        ),
+        'Call')
+    | project
+        ParentEntityId = strcat(ParticipantId, '-', parent_entity_type),
+        ParentEntityType = parent_entity_type,
+        OperationRoundtripId = OperationId,
+        OperationId = OperationId,
+        OperationName = OperationName,
+        OperationType = UFDType,
+        OperationStartTime,
+        OperationEndTime,
+        OperationDuration = DurationMs,
+        OperationDisplayName = UFDType,
+        OperationResultCode = toint(iff(ResultType !in ('Succeeded', 'Success', 'ExpectedError'), 500, 200)),
+        OperationResult = ResultType,
+        OperationPayload = OperationPayloadPacked,
+        Insights_HasIssues = ResultType !in ('Succeeded', 'Success', 'ExpectedError'),
+        ParticipantId,
+        UserAgent
+    | extend 
+        Insights_Payload = bag_pack('ResultType', OperationResult, 'ResultSignature', OperationResultCode, 'userAgent', UserAgent, 'ParticipantId', ParticipantId),
+        ShowLabel = true
+    | project-away UserAgent);
+//
+let nonCorrelatedOperations = materialize(allOperations
+    | where OperationName !in (rangeEventsWithCorrelation)
+    | extend OperationId = coalesce(hash_sha256(strcat(OperationId, tostring(CallClientTimeStamp), OperationName)), tostring(new_guid()))
+    | summarize hint.strategy = shuffle arg_max(TimeGenerated, *) by OperationId
+    | extend OperationPayload = todynamic(OperationPayload)
+    | extend UFDType = coalesce(tostring(OperationPayload.DiagnosticChanged), tostring(OperationPayload.diagnosticChanged))
+    // Capitalize the first letter.
+    | extend UFDType = strcat(toupper(substring(UFDType, 0, 1)), substring(UFDType, 1))
+    | extend parent_entity_type = case(OperationName has_any ('StateChanged', 'AcceptIncomingCall', 'AskDevicePermission', 'CallAgentInit', 'EnterCall', 
+        'Hangup', 'Hold', 'Join', 'PageHidden', 'RejectIncomingCall', 'SelectedDeviceChanged', 
+        'StartCall'),
+        'Call',
+        OperationName has_any (
+        'IsMuted-changed',
+        'IsIncomingAudioMuted-changed',
+        'IsIncomingAudioMutedChanged',
+        'IsMutedChanged',
+        'MuteMicrophone',
+        'UnmuteMicrophone',
+        'StartAudio',
+        'StopAudio',
+        'SelectedMicrophoneChanged',
+        'SelectedSpeakerChanged'
+        ),
+        'Audio',
+        OperationName has_any ('StartScreenShare', 'StopScreenShare'),
+        'ScreenSharing',
+        OperationName has_any ('OptimalVideoCount-changed', 'OptimalVideoCountChanged'),
+        'Video',
+        OperationName has_any ('SwitchSource'),
+        case(
+        tostring(OperationPayload.StreamType) == 'Video',
+        'Video',
+        'Audio'
+        ),
+        OperationName has_any ('CreateView', 'DisposeView', 'StartVideo', 'StopVideo'),
+        case(
+        tostring(OperationPayload.StreamType) == 'Video',
+        'Video',
+        'Audio'
+        ),
+        OperationName has_any ('CreateView', 'DisposeView', 'StartVideo', 'StopVideo'),
+        case(
+        tostring(OperationPayload.StreamType) == 'Video',
+        'Video',
+        tostring(OperationPayload.StreamType) == 'ScreenSharing',
+        'ScreenSharing',
+        'Video'
+        ),
+        OperationName == 'UserFacingDiagnostics',
+        case(
+        UFDType contains 'Speak' or UFDType contains 'microphone',
+        'Audio',
+        UFDType contains 'camera' or UFDType contains 'capture',
+        'Video',
+        UFDType contains 'screenshare',
+        'ScreenSharing',
+        UFDType contains 'network',
+        'Network',
+        'Call'
+        ),
+        'Call')
+    | project
+        ParentEntityId = strcat(ParticipantId, '-', parent_entity_type),
+        ParentEntityType = parent_entity_type,
+        OperationRoundtripId = OperationId,
+        OperationId = OperationId,
+        OperationName,
+        OperationType=OperationName,
+        OperationEndTime=CallClientTimeStamp,
+        OperationStartTime=iff(OperationName in (pointEvents), CallClientTimeStamp, CallClientTimeStamp - max_of(DurationMs, 10) * 1ms),
+        OperationDuration=DurationMs,
+        OperationDisplayName = OperationName,
+        OperationResultCode = ResultSignature,
+        OperationResult = ResultType,
+        OperationPayload,
+        Insights_HasIssues = ResultType !in ('Succeeded', 'Success', 'ExpectedError'),
+        Insights_Payload = bag_pack('ResultType', ResultType, 'ResultSignature', ResultSignature, 'userAgent', UserAgent, 'ParticipantId', ParticipantId),
+        ParticipantId,
+        ShowLabel = true);
+let poorOperations = materialize((union nonCorrelatedOperations, correlatedOperations)
+    | where Insights_HasIssues
+    | extend 
+        ParentEntityId = ParticipantId,
+        ParentEntityType = 'Participant',
+        OperationId = strcat('Participant-Issues-', OperationId),
+        GroupName = "lifeCycle",
+        ShowLabel = false);
+union poorOperations, nonCorrelatedOperations, correlatedOperations
+| project
+    ParentEntityId,
+    ParentEntityType,
+    OperationId,
+    OperationRoundtripId = OperationId,
+    OperationName,
+    OperationDisplayName,
+    OperationResultCode,
+    OperationResult,
+    OperationType,
+    OperationStartTime,
+    OperationEndTime,
+    OperationPayload,
+    Insights_HasIssues,
+    Insights_Payload,
+    GroupName,
+    ShowLabel

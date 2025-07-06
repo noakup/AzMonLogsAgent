@@ -1,0 +1,14 @@
+source
+| project
+    TimeGenerated = todatetime(['time']),
+    Location = location,
+    OperationName = operationName,
+    CacheName = tostring(properties.tenant),
+    Message = tostring(properties.auditLog.message),
+    Authentication = tostring(properties.auditLog.authentication),
+    Username = tostring(properties.auditLog.username),
+    IpAddress = tostring(properties.auditLog.ipAddress),
+    ClientId = tostring(properties.auditLog.clientId),
+    ClientName = tostring(properties.auditLog.clientName),
+    Lifetime = tostring(properties.auditLog.lifetime),
+    RoleInstance = toint(properties.roleInstance)

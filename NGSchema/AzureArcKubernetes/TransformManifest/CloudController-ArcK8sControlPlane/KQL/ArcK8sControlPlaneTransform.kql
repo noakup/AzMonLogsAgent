@@ -1,0 +1,10 @@
+let level_mapping=parse_json('{"I": "INFO", "W": "WARNING", "E": "ERROR", "F": "FATAL"}');
+source
+| extend parsed_log=extractall(@"((?P<level>.)\d+ \d+:\d+:\d+.\d+\D+\d+ .*:\d*] )?(?P<msg>.*)", tostring(properties.log))
+| project
+TimeGenerated=todatetime(["time"]),
+Category=tostring(category),
+Level=tostring(level_mapping[tostring(parsed_log[0][1])]),
+Message=tostring(parsed_log[0][2]),
+Stream=tostring(properties.stream),
+PodName=tostring(properties.pod)

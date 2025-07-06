@@ -1,0 +1,13 @@
+source
+| project 
+	TimeGenerated = todatetime(['time']),     
+	OperationName = tostring(operationName),
+	ResultType = tostring(resultType),
+	ResultDescription = tostring(resultDescription),
+	Properties = properties,
+	ObjectName = tostring(properties.ObjectName),
+	ObjectType = tostring(properties.ObjectType),
+	IsComplianceCheck = tobool(properties.IsComplianceCheck),
+	EvaluationDetails = properties.EvaluationDetails,
+	ResultSignature = tostring(resultSignature),
+	DurationMs = toint(durationMs)

@@ -1,0 +1,24 @@
+source
+| extend properties = parse_json(properties)
+| project
+    OperationName = operationName,
+    TimeGenerated = todatetime(["time"]), 
+    CallClientTimeStamp                     = properties.callClientTimeStamp_list,
+    MetricName                              = tostring(properties.metricName),
+    CallId                                  = tostring(properties.callId),
+    Count                                   = properties.count_list,
+    Sum                                     = properties.sum_list,
+    Average                                 = properties.average_list,
+    Minimum                                 = properties.min_list,
+    Maximum                                 = properties.max_list,
+    MediaStreamDirection                    = tostring(properties.mediaStreamDirection),
+    MediaStreamType                         = tostring(properties.mediaStreamType),
+    MediaStreamCodec                        = properties.mediaStreamCodec_list,
+    ClientInstanceId                        = tostring(properties.clientInstanceId),
+    ParticipantId                           = tostring(properties.participantId),
+    EndpointId                              = tostring(properties.endpointId),
+    RemoteParticipantId                     = tostring(properties.remoteParticipantId),
+    RemoteEndpointId                        = tostring(properties.remoteEndpointId),
+    MediaStreamId                           = tostring(properties.mediaStreamId),
+    AggregationIntervalSeconds              = toint(properties.aggregationIntervalSeconds),
+    UserAgent                               = tostring(properties.userAgent)

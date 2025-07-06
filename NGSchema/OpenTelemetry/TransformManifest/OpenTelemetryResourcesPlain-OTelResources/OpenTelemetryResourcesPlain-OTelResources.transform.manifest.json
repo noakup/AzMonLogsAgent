@@ -1,0 +1,14 @@
+{
+    "name" : "OTelResourcesPlain",
+    "description": "Alternate OTelResources transform used for non-OTLP ingestion",
+    "transformVersion" : "2",
+    "dataTypeId" : "OPENTELEMETRY_RESOURCES_PLAIN",
+    "inputFilePath" : "OpenTelemetryResourcesPlain-OTelResources.json",
+    "transformState" : "Validation",
+    "icmTeam" : "Azure Log Analytics/Ingestion",
+    "contactDL": "TeamSword@microsoft.com",
+    "relatedTable" : "OTelResources",
+    "kqlFilePath" : "KQL/OTelResourcesPlainTransform.kql",
+    "sampleInputRecordsFilePath" : "SampleInputRecords/OTelResourcesPlainInputSample.json",
+    "sampleOutputRecordsFilePath" : "SampleOutputRecords/OTelResourcesPlainOutputSample.json"
+}

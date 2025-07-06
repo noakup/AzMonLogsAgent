@@ -1,0 +1,17 @@
+[
+  {
+    "SubType": "FlowLog",
+    "FASchemaVersion": "3",
+    "FlowIntervalStartTime": "2020-03-31T09:00:00Z",
+    "FlowIntervalEndTime": "2020-03-31T10:00:00Z",
+    "IP": "1.55.216.186",
+    "FlowType": "ExternalPublic",
+    "PublicIPDetails": "",
+    "ThreatType": "",
+    "DNSDomain": "",
+    "ThreatDescription": "",
+    "Location": "",
+    "Url": "https://google.com",
+    "Port": 65033
+  }
+]

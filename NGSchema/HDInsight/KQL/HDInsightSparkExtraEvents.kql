@@ -1,0 +1,12 @@
+source
+| project
+    TimeGenerated = EventTime,
+    ApplicationId = ApplicationId,
+    EventJson = EventJson,
+    ClusterTenantId = Tenant,
+	Role = Role,
+	Host = iff(isempty(Host), RoleInstance, Host),
+	ClusterDnsName = ClusterDnsName,
+	Region = Region,
+	IpAddress = IpAddress,
+	UserSubscriptionId = UserSubscriptionId

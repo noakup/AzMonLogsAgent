@@ -1,0 +1,25 @@
+[
+    {
+        "TimeGenerated": "2022-11-02T14:33:52.3099080Z",
+        "OperationName": "Microsoft.Chaos/experiments/ActionStopped",
+        "CorrelationId": "0d7d3d60-2557-4db7-b091-ac81ac25ac0a",
+        "Location": "westus",
+        "SeverityLevel": "Error",
+        "SpanType": "Action",
+        "Status": "Failed",
+        "Error": "Agent Error",
+        "Step": "Step 1",
+        "Branch": "Branch 1",
+        "Action": "urn:csci:microsoft:agent:cpuPressure/1.0",
+        "Target": "/subscriptions/2e56758d-9ed7-4b8a-8df7-4e20800dfd5b/resourceGroups/rg-telemetry-test/providers/Microsoft.Compute/virtualMachines/telemetryInteg"
+    },
+    {
+        "TimeGenerated": "2022-11-02T14:33:52.3099080Z",
+        "OperationName": "Microsoft.Chaos/experiments/ExperimentStarted",
+        "CorrelationId": "0d7d3d60-2557-4db7-b091-ac81ac25ac0a",
+        "Location": "westus",
+        "SeverityLevel": "Informational",
+        "SpanType": "Experiment",
+        "Status": "Started"
+    },
+]

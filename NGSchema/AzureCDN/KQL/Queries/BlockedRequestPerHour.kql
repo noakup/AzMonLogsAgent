@@ -1,0 +1,4 @@
+AFDWebApplicationFirewallLog  
+| where Action =~ "BLOCK"  
+| summarize RequestCount = count() by bin(TimeGenerated, 1h), Policy = toupper(Policy), PolicyMode = toupper(PolicyMode), Resource, _ResourceId  
+| order by RequestCount desc 

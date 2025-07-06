@@ -1,0 +1,10 @@
+source 
+| project
+    TimeGenerated = todatetime(TimeGenerated),
+    FeatureName = FeatureName,
+    FeatureFlagReference = FeatureFlagReference,    
+    AllocationId = AllocationId,
+    ScorecardId = ScorecardId,
+    AnalysisStartTime = todatetime(AnalysisStartTime),
+    AnalysisEndTime = todatetime(AnalysisEndTime),
+    Insights = todynamic(Insights)

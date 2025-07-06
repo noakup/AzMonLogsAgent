@@ -1,0 +1,80 @@
+[
+    {
+      "TimeGenerated": "2023-06-10T09:28:47.6448335Z",
+      "Id": "39eb6b63-15c9-424d-d916-08db6673bbd8",
+      "RecordType": 57,
+      "Operation": "TeamsAdminAction",
+      "OrganizationId": "cdc5aeea-15c5-4db6-b079-fcadd2505dc2",
+      "UserType": "Regular",
+      "ActorUserType": 0,
+      "UserKey": "0ebbe273-af55-47c6-b1fd-ac3cff383f54",
+      "Workload": "MicrosoftTeams",
+      "ResultStatus": "Succeeded",
+      "ObjectId": null,
+      "UserId": "11e95dfd-523d-4be6-ab7e-94fadb398162",
+      "ClientIP": "13.69.183.36",
+      "UniqueTokenId": "qsShESgJ_kSxsRCduq8tAA",
+      "DeviceId": "",
+      "DeviceOperatingSystem": "",
+      "DeviceOperatingSystemVersion": "",
+      "SourceIp": "",
+      "AdditionalProperties": {
+        "AdminActionDetail": "POST /Skype.TelephoneNumberMgmt/v2.1/tenants/18aaab5d-b2cf-47a7-aad6-22f0ba702cc7/searches/1520dc1a-e444-429d-bbe4-01fbd08dc44d",
+        "ClientApplication": "<unknown>",
+        "UserClaims": "ApplicationAccess",
+        "ExtraProperties": [
+            {
+                "Key": "CorrelationId",
+                "<Value>": "d2ee927a-cb13-45c5-9486-b99281d6bd00"
+            }
+        ],
+        "AppAccessContext": {
+            "UniqueTokenId": "qsShESgJ_kSxsRCduq8tAA",
+            "IssuedAtTime": "2023-06-06T08:26:43"
+        },
+        "Version": 1
+      }
+    },
+    {
+      "TimeGenerated": "2023-06-10T09:28:47.6448335Z",
+      "Id": "13874699-393c-45cd-2066-08db6674823c",
+      "RecordType": 6,
+      "Operation": "FileUploaded",
+      "OrganizationId": "135a0f48-eb72-4859-8509-0ef1a2791f1a",
+      "UserType": 0,
+      "ActorUserType": "Regular",
+      "UserKey": "i:0h.f|membership|1003200296fad86a@live.com",
+      "Workload": "SharePoint",
+      "ResultStatus": null,
+      "ObjectId": "https://contosonow2022.sharepoint.com/Shared Documents/TestDoc0dfc6726-076c-40e2-a769-60622a8e2fda.docx",
+      "UserId": "dstestinguser@contosonow.com",
+      "ClientIp": "147.243.242.118",
+      "UniqueTokenId": "JdUrywTJpkiTGyeC2GgJAA",
+      "DeviceId": "07970eea-ccfe-4486-956b-258278775ea7",
+      "DeviceOperatingSystem": "Windows 11 Pro",
+      "DeviceOperatingSystemVersion": "10.0.22000",
+      "SourceIp": "20.3.201.134",
+      "AdditionalProperties": {
+        "SiteUrl": "https://contosonow2022.sharepoint.com/",
+        "SourceRelativeUrl": "Shared Documents",
+        "SourceFileName": "TestDoc0dfc6726-076c-40e2-a769-60622a8e2fda.docx",
+        "SourceFileExtension": "docx",
+        "Site": "ebd73e80-3488-4892-bb73-e21f8588d57d",
+        "ItemType": "File",
+        "EventSource": "SharePoint",
+        "UserAgent": "ZTNA_SyntheticTraffic",
+        "WebId": "369523f9-bd78-4a90-8672-fda370f9401d",
+        "ListItemUniqueId": "9f7609f1-e827-41c3-8196-1a88e889ffe8",
+        "CustomUniqueId": false,
+        "ListId": "c973cfc7-ab3e-4a98-94bc-7f304f481843",
+        "CorrelationId": "1225baa0-a074-3000-9a3c-90cde0e0b3fd",
+        "ApplicationId": "c33a109a-4663-47df-b377-5f4c8b50c73b",
+        "DoNotDistributeEvent": false,
+        "CTypeId": "00000000-0000-0000-0000-000000000000",
+        "SGId": "00000000-0000-0000-0000-000000000000",
+        "Version": 1,
+        "Scope": 0,
+        "Purpose": 0
+      }
+    }
+  ]

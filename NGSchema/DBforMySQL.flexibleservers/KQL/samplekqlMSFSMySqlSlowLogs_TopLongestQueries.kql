@@ -1,0 +1,3 @@
+MySqlSlowLogs
+| order by QueryDurationMs desc
+| take 5

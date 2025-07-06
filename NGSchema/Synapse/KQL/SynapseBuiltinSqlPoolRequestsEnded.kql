@@ -1,0 +1,14 @@
+source
+| extend Properties = parse_json(tostring(properties))
+| extend Identity = parse_json(tostring(identity))
+| project
+    TimeGenerated = todatetime(['time']),
+    OperationName = operationName,
+    Category = category,
+    DurationMs = toint(Properties["total_time_elapsed_ms"]),
+    ResultType = resultType,
+    ErrorCode = resultSignature,
+    CorrelationId = correlationId,
+	Identity = todynamic(Identity["loginName"]),
+    Properties
+

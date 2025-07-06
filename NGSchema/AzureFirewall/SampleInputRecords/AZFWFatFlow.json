@@ -1,0 +1,15 @@
+[
+	{
+		"category":"AZFWFatFlow",
+		"time":"2022-08-22T19:31:25.6879330Z",
+		"resourceId":"/SUBSCRIPTIONS/7A06E974-7329-4485-87E7-3211B06C15AA/RESOURCEGROUPS/JASHWANTH-FATFLOWS-LOGS-TEST-SETUP/PROVIDERS/MICROSOFT.NETWORK/AZUREFIREWALLS/FIREWALL1",
+		"properties": {
+			"Protocol":"UDP",
+			"SourceIp":"10.0.0.5",
+			"SourcePort":38907,
+			"DestinationIp":"10.0.0.6",
+			"DestinationPort":5001,
+			"FlowRate":"1.04"
+		}
+	}
+]

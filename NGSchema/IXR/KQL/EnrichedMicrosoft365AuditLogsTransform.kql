@@ -1,0 +1,33 @@
+﻿let actorUserTypeMap = parse_json('{ '
+' "0": "Regular", '
+' "1": "Other" ,'
+' "2": "Admin", '
+' "3": "Admin", '
+' "4": "System", '
+' "5": "Application", '
+' "6": "Service Principal", '
+' "7": "Other", '
+' "8": "Other" '
+' }');
+
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    Id = tostring(properties.Id),
+    RecordType = toint(properties.RecordType),
+    Operation = tostring(properties.Operation),
+    OrganizationId = tostring(properties.OrganizationId),
+    UserType = tostring(properties.UserType),
+    ActorUserType = tostring(actorUserTypeMap[tostring(properties.UserType)]),
+    UserKey = tostring(properties.UserKey),
+    Workload = tostring(properties.Workload),
+    ResultStatus = tostring(properties.ResultStatus),
+    ObjectId = tostring(properties.ObjectId),
+    UserId = tostring(properties.UserId),
+    ClientIp = tostring(properties.ClientIp),
+    UniqueTokenId = tostring(properties.UniqueTokenId),
+    DeviceId = tostring(properties.NetworkAccess.DeviceId),
+    DeviceOperatingSystem =tostring(properties.NetworkAccess.DeviceOs),
+    DeviceOperatingSystemVersion = tostring(properties.NetworkAccess.DeviceOsVersion),
+    SourceIp = tostring(properties.NetworkAccess.SourceIp),
+    AdditionalProperties = parse_json(properties.AdditionalProperties)

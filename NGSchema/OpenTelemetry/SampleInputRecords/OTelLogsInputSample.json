@@ -1,0 +1,45 @@
+[
+    {
+        "itemType": "Log",
+        "item": {
+            "timeUnixNano": 1690321254808000000,
+            "observedTimeUnixNano": 1690321254808000000,
+            "severityNumber": 9,
+            "severityText": "info",
+            "body": "Example log to logs api!",
+            "attributes": {
+                "my-attribute": "custom"
+            },
+            "droppedAttributesCount": 0,
+            "flags": 1,
+            "traceId": "31617d70ea7dba341c22b58e4dde9177",
+            "spanId": "4801528cc138b7ef",
+            "resourceAttributes": {
+                "timeUnixNano": 1690321254808000000,
+                "observedTimeUnixNano": 1690321254808000000,
+                "itemName": "ResourceAttributes" 
+            }
+        },
+        "parent": {
+            "itemType": "Scope",
+            "item": {
+                "name": "example-logger"
+            },
+            "parent": {
+                "itemType": "Resource",
+                "item": {
+                    "itemId": "ad876e50-b6bd-442e-8b5d-e5bfe3e5eb9b",
+                    "timestamp": "2023-08-12T00:14:31.2357816Z",
+                    "attributes": {
+                        "service.name": "my-helloworld-service",
+                        "telemetry.sdk.language": "nodejs",
+                        "telemetry.sdk.name": "opentelemetry",
+                        "telemetry.sdk.version": "1.15.1",
+                        "service.namespace": "my-namespace",
+                        "service.instance.id": "my-instance"
+                    }
+                }
+            }
+        }
+    }
+]

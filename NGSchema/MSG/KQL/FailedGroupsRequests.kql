@@ -1,0 +1,6 @@
+MicrosoftGraphActivityLogs
+| where ResponseStatusCode == 403
+| where RequestUri has "groups"
+| summarize UniqueRequests=dcount(RequestId) by AppId, ServicePrincipalId, UserId
+| sort by UniqueRequests desc
+| limit 100

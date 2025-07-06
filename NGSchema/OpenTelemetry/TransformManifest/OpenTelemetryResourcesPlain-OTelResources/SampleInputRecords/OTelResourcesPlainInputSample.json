@@ -1,0 +1,18 @@
+[
+    {
+        "time": "2023-08-12T00:14:31.2357816Z",
+        "Id": "ad876e50-b6bd-442e-8b5d-e5bfe3e5eb9b",
+        "ServiceNamespace": "my-namespace",
+        "ServiceName": "my-helloworld-service",
+        "ServiceInstanceId": "my-instance",
+        "Attributes": {
+            "service.name": "my-helloworld-service",
+            "telemetry.sdk.language": "nodejs",
+            "telemetry.sdk.name": "opentelemetry",
+            "telemetry.sdk.version": "1.15.1",
+            "service.namespace": "my-namespace",
+            "service.instance.id": "my-instance"
+        },
+        "RoleName": "[my-namespace]/my-helloworld-service"
+    }
+]

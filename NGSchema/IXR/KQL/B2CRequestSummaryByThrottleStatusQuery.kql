@@ -1,0 +1,4 @@
+AADB2CRequestLogs
+| where TimeGenerated > ago(1h)
+| summarize TotalRequests = count() by ResultType, bin(TimeGenerated,1s)
+| order by ResultType

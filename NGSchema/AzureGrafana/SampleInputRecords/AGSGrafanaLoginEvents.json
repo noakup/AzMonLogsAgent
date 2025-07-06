@@ -1,0 +1,50 @@
+[
+    {
+        "time": "2022-02-10T04:44:38.5058207Z",
+        "resourceId": "/SUBSCRIPTIONS/4E69336B-14B5-4A0C-8213-A54E52E29317/RESOURCEGROUPS/ZHICHLI-TEST/PROVIDERS/MICROSOFT.DASHBOARD/GRAFANA/ZHICHLI0209WUS2DF",
+        "location": "westus2",
+        "operationName": "MICROSOFT.DASHBOARD/GRAFANA/LOGIN",
+        "category": "GrafanaLoginEvents",
+        "operationVersion": "2022-02-07",
+        "level": "Informational",
+        "correlationId": "dad09f5a35285948a6409f18ff42cf1a",
+        "traceContext": {
+            "traceId": "dad09f5a35285948a6409f18ff42cf1a",
+            "spanId": "51f59fdef4b81643",
+            "parentId": "0000000000000000"
+        },
+        "properties": {
+            "TenantId": "f686d426-8d16-42db-81b7-ab578e110ccd",
+            "SubscriptionId": "4E69336B-14B5-4A0C-8213-A54E52E29317",
+            "ResourceGroup": "ZHICHLI-TEST",
+            "ResourceName": "zhichli0209wus2df",
+            "User": "d305993c-4064-4060-b4c1-1bd74cfc01e4",
+            "UserRole": "Admin",
+            "Message": "AuthResult: Authorized for a user with \"Admin\" role via authorization type of \"JWT\""
+        }
+    },
+    {
+        "time": "2022-02-10T05:28:14.8590791Z",
+        "resourceId": "/SUBSCRIPTIONS/4E69336B-14B5-4A0C-8213-A54E52E29317/RESOURCEGROUPS/ZHICHLI-TEST/PROVIDERS/MICROSOFT.DASHBOARD/GRAFANA/ZHICHLI0209WUS2DF",
+        "location": "westus2",
+        "operationName": "MICROSOFT.DASHBOARD/GRAFANA/LOGIN",
+        "category": "GrafanaLoginEvents",
+        "operationVersion": "2022-02-07",
+        "level": "Error",
+        "correlationId": "7d4c4ec466611f42b129947646c760e8",
+        "traceContext": {
+            "traceId": "7d4c4ec466611f42b129947646c760e8",
+            "spanId": "81dbd666cbe1b349",
+            "parentId": "0000000000000000"
+        },
+        "properties": {
+            "TenantId": "f686d426-8d16-42db-81b7-ab578e110ccd",
+            "SubscriptionId": "4E69336B-14B5-4A0C-8213-A54E52E29317",
+            "ResourceGroup": "ZHICHLI-TEST",
+            "ResourceName": "zhichli0209wus2df",
+            "User": "d305993c-4064-4060-b4c1-1bd74cfc01e4",
+            "UserRole": "",
+            "Message": "AuthError: NoRequiredGrafanaRoles"
+        }
+    }
+]

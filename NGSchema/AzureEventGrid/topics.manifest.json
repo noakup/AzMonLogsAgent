@@ -1,0 +1,191 @@
+{
+  "type": "Microsoft.EventGrid/topics",
+  "displayName": "Event Grid Topics",
+  "description": "All tables related to Azure Event Grid Topics resource.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Azure Event Grid/Event Grid - DRI",
+  "contactDL": "aegoperations@microsoft.com",
+  "relatedFunctions": [],
+  "relatedTables": [
+    "AzureActivity",
+    "AzureMetrics"
+  ],
+  "tables": [
+    {
+      "name": "AegDataPlaneRequests",
+      "description": "Logs for Event Grid data plane requests (publish and options) against a topic/domain/partnernamespace. It can be used for auditing purposes. Logs are aggregated over a minute and displays the total number of requests with specific request properties.",
+      "categories": [
+        "resources",
+        "audit"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 4,
+      "dataTypeId": "EVENTGRID_DATAPLANEREQUESTS",
+      "isResourceCentric": true,
+      "tableState": "Validation",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "level",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "region",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/TransformDataplaneRequests.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the log was generated."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the operation."
+        },
+        {
+          "name": "NetworkAccess",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The type of network used by the client issuing the request. Allowed values are: PublicAccess - when connecting via public IP, PrivateAccess - when connecting via private link"
+        },
+        {
+          "name": "ClientIpAddress",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The IP address of the client issuing the request.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "TlsVersion",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The transport layer security (TLS) version used by the client connection. Possible values are: 1.0, 1.1 and 1.2"
+        },
+        {
+          "name": "Authentication",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The type of secret used for authentication when issuing requests. Key – request uses the SAS key, SASToken – request uses a SAS token generated from SAS key, AADAccessToken – Azure Active Directory issued JSON Web Token (JWT) token, Unknown – None of the above authentication types. OPTIONS requests will have Unknown authentication type."
+        },
+        {
+          "name": "OperationResult",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Thw result of the operation. Possible values are: Success, Unauthorized, Forbidden, RequestEntityTooLarge, BadRequest, InternalServerError"
+        },
+        {
+          "name": "TotalOperations",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The total number of request with above values issued within the minute. These traces aren't emitted for each publish request. An aggregate for each unique combination of above values is emitted every minute"
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/DataPlaneRequestsSample.json"
+    }
+  ],
+  "functions": [],
+  "queries": [
+    {
+      "id": "1a5d3292-cb61-4372-bf32-0c013cb15625",
+      "displayName": "Publish failures by topic and error",
+      "description": "Publish failures logs by topic name and error message.",
+      "bodyFilePath": "KQL/PublishFailuresByTopicAndErrorQuery.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "AegPublishFailureLogs"
+      ]
+    },
+    {
+      "id": "14ed6864-b898-400d-9083-b811bca96cb5",
+      "displayName": "Delivery failures by topic and error",
+      "description": "Delivery failures logs by topic name and error message.",
+      "bodyFilePath": "KQL/DeliveryFailuresByTopicAndError.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "AegDeliveryFailureLogs"
+      ],
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Alerts"
+        ]
+      }
+    },
+    {
+      "id": "09073e9b-334f-43b8-8b42-58ddf7e6b1e2",
+      "displayName": "Unique unauthorized or forbidden client IP addresses",
+      "description": "Get a list of client IP addresses from which EventGrid received unauthorized or forbidden requests.",
+      "bodyFilePath": "KQL/UnauthorizedOrForbiddenClientIPsQuery.kql",
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      },
+      "categories": [
+        "resources",
+        "audit"
+      ],
+      "relatedTables": [
+        "AegDataPlaneRequests"
+      ],
+      "tags": {
+        "Topic": [
+          "Diagnostics",
+          "Audit"
+        ]
+      }
+    }
+  ]
+}

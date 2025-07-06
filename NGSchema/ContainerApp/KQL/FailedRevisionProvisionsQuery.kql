@@ -1,0 +1,5 @@
+ContainerAppSystemLogs_CL
+| where EventSource_s == "ContainerAppController"
+| where Log_s contains "Error provisioning revision"
+| project TimeGenerated, ContainerAppName_s, RevisionName_s, Log_s, Reason_s, Level
+| order by TimeGenerated desc

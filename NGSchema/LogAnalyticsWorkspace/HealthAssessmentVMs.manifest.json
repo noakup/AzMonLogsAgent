@@ -1,0 +1,368 @@
+{
+  "type": "Microsoft.Compute/VirtualMachines",
+  "displayName": "Virtual machines",
+  "description": "Understand monitoring agents status. Keep track of agents deployed in Azure, other cloud environments, or on-premises",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Azure Log Analytics/Ingestion",
+  "relatedTables": [],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "workflowName" :  "HealthAssessmentWorkflow",
+      "transformName": "HealthAssessment",
+      "physicalName": "HealthAssessment",
+      "logicalName": "Heartbeat",
+      "description": "Records logged by Log Analytics agents once per minute to report on agent health.",
+      "categories": [
+        "virtualmachines",
+        "container",
+        "management"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 35,
+      "dataTypeId": "HEALTH_ASSESSMENT_BLOB",
+      "intelligencePacks": ["LogManagement"],
+      "isIgnoreArtifactsInLegacyPipe" : true,
+      "isResourceCentric": true,
+      "tableState": "Production",
+		  "input": [
+        {
+          "name": "Time",
+          "type": "String"
+        },
+        {
+          "name": "Timestamp",
+          "type": "String"
+        },
+        {
+          "name": "Computer",
+          "type": "String"
+        },
+        {
+          "name": "OSType",
+          "type": "String"
+        },
+        {
+          "name": "OSName",
+          "type": "String"
+        },
+        {
+          "name": "OSMajorVersion",
+          "type": "String"
+        },
+        {
+          "name": "OSMinorVersion",
+          "type": "String"
+        },
+        {
+          "name": "Category",
+          "type": "String"
+        },
+        {
+          "name": "IsGatewayInstalled",
+          "type": "Bool"
+        },
+        {
+          "name": "SCAgentChannel",
+          "type": "String"
+        },
+        {
+          "name": "ComputerPrivateIps",
+          "type": "String"
+        },
+        {
+          "name": "SourceHealthServiceId",
+          "type": "String"
+        },
+        {
+          "name": "Version",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/HeartbeatEvent.kql",
+      "columns": [
+        {
+          "name": "Category",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Possible values include Azure Monitor Agent, Direct Agent, SCOM Agent or SCOM Management Server."
+        },
+        {
+          "name": "Computer",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Computer name."
+        },
+        {
+          "name": "ComputerEnvironment",
+          "type": "String",
+          "isDefaultDisplay": false,
+          "description": "Environment that hosts the computer: Azure or Non-Azure."
+        },
+        {
+          "name": "ComputerIP",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Public IP address of the computer.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "ComputerPrivateIPs",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "The list of private IP addresses of the computer."
+        },
+        {
+          "name": "IsGatewayInstalled",
+          "type": "Bool",
+          "isDefaultDisplay": false,
+          "description": "If Log Analytics gateway is installed the value is true, otherwise false."
+        },
+        {
+          "name": "ManagementGroupName",
+          "type": "String",
+          "isDefaultDisplay": false,
+          "description": "Name of Operations Manager management group."
+        },
+        {
+          "name": "MG",
+          "type": "Guid",
+          "isDefaultDisplay": false,
+          "isHidden": true,
+          "description": "Unique identifier for the management group or Log Analytics workspace."
+        },
+        {
+          "name": "OSMajorVersion",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Operating system major version."
+        },
+        {
+          "name": "OSMinorVersion",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Operating system minor version."
+        },
+        {
+          "name": "OSName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Operating system name."
+        },
+        {
+          "name": "OSType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Type of the operating system: Windows or Linux."
+        },
+        {
+          "name": "RemoteIPCountry",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Geographic location where computer is deployed."
+        },
+        {
+          "name": "RemoteIPLatitude",
+          "type": "Float",
+          "isDefaultDisplay": true,
+          "description": "Latitude of computer's geographic location."
+        },
+        {
+          "name": "RemoteIPLongitude",
+          "type": "Float",
+          "isDefaultDisplay": true,
+          "description": "Longitude  of computer's geographic location."
+        },
+        {
+          "name": "Resource",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Resource name of the Azure resource running the agent."
+        },
+        {
+          "name": "ResourceGroup",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Resource group name of the Azure resource running the agent."
+        },
+        {
+          "name": "ResourceId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Resource ID of the Azure resource running the agent. Retained for for backward compatibility. _ResourceId should be used."
+        },
+        {
+          "name": "ResourceProvider",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Resource provider of the Azure resource running the agent."
+        },
+        {
+          "name": "ResourceType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Type of the Azure resource running the agent. Examples include virtualmachines or managedclusters."
+        },
+        {
+          "name": "SCAgentChannel",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Specfies how the agent is connected to the workspace: Direct or SCManagementServer."
+        },
+        {
+          "name": "Solutions",
+          "type": "String",
+          "isDefaultDisplay": false,
+          "description": "List of solutions deployed on the agent at the moment when Heartbeat was issued."
+        },
+        {
+          "name": "SourceComputerId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Unique identifier representing the source computer.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "SourceSystem",
+          "type": "String",
+          "isDefaultDisplay": false,
+          "description": "Type of agent the data was collected from: OpsManager (Windows agent) or Linux."
+        },
+        {
+          "name": "SubscriptionId",
+          "type": "Guid",
+          "isDefaultDisplay": true,
+          "description": "Subscription ID of the Azure resource running the agent."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the record was created."
+        },
+        {
+          "name": "Type",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the table."
+        },
+        {
+          "name": "TenantId",
+          "type": "Guid",
+          "isDefaultDisplay": true,
+          "description": "ID of the workspace that stores this record."
+        },
+        {
+          "name": "Version",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Version of the agent."
+        },
+        {
+          "name": "VMUUID",
+          "type": "Guid",
+          "isDefaultDisplay": false,
+          "description": "Unique identifier of the virtual machine."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/HeartbeatSample2.json"
+    }
+  ],
+  "functions": [],
+  "queries": [ 
+    {
+      "id": "c8f597f3-9251-468a-86b3-d94ed8ea996d",
+      "displayName": "Count heartbeats",
+      "description": "Count all computers heartbeats from the last hour.",
+      "bodyFilePath": "KQL/VMs.CountHeartbeats1hr.kql",
+      "categories": [ "monitor" ],
+      "relatedTables": ["Heartbeat"],
+      "tags": {
+        "Topic": [ "Availability" ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "bdbc27e8-3f5d-4981-9050-5ed7f63615a8",
+      "displayName": "Last heartbeat of each computer",
+      "description": "Show the last heartbeat sent by each computer.",
+      "bodyFilePath": "KQL/VMs.ListHeartbeatsByComp.kql",
+      "categories": [ "monitor" ],
+      "relatedTables": ["Heartbeat"],
+      "tags": {
+        "Topic": [ "Availability" ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "ba8b1839-7334-11ea-bed0-c8348e02520c",
+      "displayName": "Ingestion latency (end-to-end) spikes - Heartbeat table",
+      "description": "Check for latency spikes in the ingestion of Heartbeats in the last 24 hours.",
+      "bodyFilePath": "KQL/VMs.IngestionLatencySpikes.kql",
+      "categories": [ "monitor" ],
+      "relatedTables": ["Heartbeat"],
+      "tags": {
+        "Topic": [ "Health" ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "ba8e256b-7334-11ea-99d3-c8348e02520c",
+      "displayName": "Agent latency spikes - Heartbeat table",
+      "description": "Check for agent latency spikes in the ingestion of Heartbeats in the last 24 hours.",
+      "bodyFilePath": "KQL/VMs.AgentLatencySpikes.kql",
+      "categories": [ "monitor" ],
+      "relatedTables": ["Heartbeat"],
+      "tags": {
+        "Topic": [ "Health" ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "35883956-d397-42e6-a820-01eaceb11471",
+      "displayName": "Recently stopped heartbeats - Heartbeat table",
+      "description": "Lists resources that stopped sending heartbeats in past 15 minutes.",
+      "bodyFilePath": "KQL/VMs.StoppedHeartbeats.kql",
+      "categories": [
+        "monitor"
+      ],
+      "relatedTables": [
+        "Heartbeat"
+      ],
+      "tags": {
+        "Topic": [
+          "Health"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    }
+  ]
+}

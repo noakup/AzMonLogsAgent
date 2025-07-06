@@ -1,0 +1,16 @@
+source
+| extend propertiesTable = parse_json(properties)
+| project
+Url = tostring(propertiesTable["Url"]),
+ActionType = tostring(propertiesTable["ActionType"]),
+AccountUpn = tostring(propertiesTable["AccountUpn"]),
+Workload = tostring(propertiesTable["Workload"]),
+NetworkMessageId = tostring(propertiesTable["NetworkMessageId"]),
+ThreatTypes = tostring(propertiesTable["ThreatTypes"]),
+DetectionMethods = tostring(propertiesTable["DetectionMethods"]),
+IPAddress = tostring(propertiesTable["IPAddress"]),
+IsClickedThrough = tobool(propertiesTable["IsClickedThrough"]),
+UrlChain = tostring(propertiesTable["UrlChain"]),
+ReportId = tostring(propertiesTable["ReportId"]),
+TimeGenerated = todatetime(propertiesTable["Timestamp"]),
+Timestamp = todatetime(propertiesTable["Timestamp"])

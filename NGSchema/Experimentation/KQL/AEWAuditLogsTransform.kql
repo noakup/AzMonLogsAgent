@@ -1,0 +1,9 @@
+source
+| project 
+    TimeGenerated = todatetime(["time"]),
+    ExpComponentName = Tenant,
+    Message = message,
+    Category = category,
+    ActionName = ActionName,
+    RequestUri = properties_uri,
+    Operator = User

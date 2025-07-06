@@ -1,0 +1,187 @@
+{
+    "type": "Microsoft.Orbital/geocatalogs",
+    "displayName": "Microsoft Planetary Computer Pro",
+    "description": "All tables related to Microsoft Planetary Computer Pro",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Microsoft Planetary Computer Pro",
+    "contactDL": "aopc-dev-team@microsoft.com",
+    "tables": [
+        {
+            "name": "OGOAuditLogs",
+            "description": "Audit logs for Microsoft Planetary Computer Pro.",
+            "categories": [
+                "audit"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "MPCPRO_AUDITLOGS",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "String"
+                },
+                {
+                    "name": "correlationId",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "KQL/Transforms/TransformAudit.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the event was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The name of the operation that triggered the event."
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Category of the audit log."
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Location of the service sending the log."
+                },
+                {
+                    "name": "CorrelationId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Id of the request."
+                },
+                {
+                    "name": "Status",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The status message."
+                },
+                {
+                    "name": "Endpoint",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "API Endpoint that was called."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/InputAuditLogsSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/OutputAuditLogsSample.json"
+        },
+        {
+            "name": "MPCIngestionLogs",
+            "description": "Ingestion logs for Microsoft Planetary Computer Pro.",
+            "categories": [
+                "audit"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 1,
+            "dataTypeId": "MPCPRO_INGESTIONLOGS",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "String"
+                },
+                {
+                    "name": "correlationId",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "KQL/Transforms/TransformIngestion.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the event was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The name of the operation that triggered the event."
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Category of the audit log."
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Location of the service sending the log."
+                },
+                {
+                    "name": "CorrelationId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Id of the request.",
+                    "dataTypeHint": "GUID"
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The message from the ingestion process."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/InputIngestionLogsSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/OutputIngestionLogsSample.json"
+        }
+    ],
+    "functions": [],
+    "queries": []
+}

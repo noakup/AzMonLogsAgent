@@ -1,0 +1,9 @@
+HDInsightSparkStageTaskAccumulables 
+//| where ClusterDnsName == '<your cluster name>' // remove the preceding "//" and specify your cluster name to see its logs
+//| where ApplicationId == '<your application id>' and ParentId == '<stage id>'
+| where Entity == "task"
+//| where MetricName contains "{MetricName}" //remove the preceding "//" and specify a metric name if you want to only view that metrics value
+| project TimeGenerated, ApplicationId, EntityId, MetricName, MetricValue
+
+
+

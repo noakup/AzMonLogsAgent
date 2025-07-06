@@ -1,0 +1,28 @@
+﻿[
+  {
+    "TimeGenerated": "2022-11-15T20:50:16.6652771+00:00",
+    "OperationName": "Store/PostInstance/POST",
+    "CorrelationId": "0792922e0f0cacb4a196512086fa0447",
+    "Message": "DICOM100: (0008,0020) - Content \"NotAValidDate\" does not validate VR DA: one of the date values does not match the pattern YYYYMMDD. This attribute will be dropped from JSON metadata and can not be used to index. This attribute will remain in your Dicom binary file.",
+    "LogLevel": "Warning",
+    "Location": "eastus",
+    "Properties":{
+      "seriesInstanceUID": "1.2.826.0.1.3680043.8.498.77033797676425927098669402985243398207",
+      "sopInstanceUID": "1.2.826.0.1.3680043.8.498.13273713909719068980354078852867170114",
+      "studyInstanceUID": "1.2.826.0.1.3680043.8.498.13230779778012324449356534479549187420"
+    }
+  },
+  {
+    "TimeGenerated": "2022-11-15T20:50:16.6652771+00:00",
+    "OperationName": "Store/PostInstance/POST",
+    "CorrelationId": "0792922e0f0cacb4a196512086fa0447",
+    "Message": "DICOM100: (0008,002a) - Content \"NotAValidDate\" does not validate VR DT: value does not mach pattern YYYY[MM[DD[HH[MM[SS[.F{1-6}]]]]]]. This attribute will be dropped from JSON metadata and can not be used to index. This attribute will remain in your Dicom binary file.",
+    "LogLevel": "Warning",
+    "Location": "eastus",
+    "Properties":{
+      "seriesInstanceUID": "1.2.826.0.1.3680043.8.498.77033797676425927098669402985243398207",
+      "sopInstanceUID": "1.2.826.0.1.3680043.8.498.13273713909719068980354078852867170114",
+      "studyInstanceUID": "1.2.826.0.1.3680043.8.498.13230779778012324449356534479549187420"
+    }
+  }
+]

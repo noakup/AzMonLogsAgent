@@ -1,0 +1,4 @@
+AVNMConnectivityConfigurationChange
+| where ResultType != "Success"
+| sort by TimeGenerated desc
+| take 100

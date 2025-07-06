@@ -1,0 +1,23 @@
+source
+| project
+    TimeGenerated = todatetime(['time']),
+    LogicalServerName = LogicalServerName,
+    ReplicaRole = ReplicaRole,
+    DatabaseId = toint(properties.Datid),
+    DatabaseName = tostring(properties.Database_name),
+    ProcessId = toint(properties.Pid),
+    UserId = toint(properties.Usesysid),
+    ApplicationName = tostring(properties.Application_name),
+    ClientIpAddress = tostring(properties.Client_addr),
+    State = tostring(properties.State),
+    WaitEventType = tostring(properties.Wait_event_type),
+    WaitEvent = tostring(properties.Wait_event),
+    BackendStartTime = todatetime(properties.Backend_start),
+    TransactionStartTime = todatetime(properties.Xact_start),
+    QueryStartTime = todatetime(properties.Query_start),
+    StateChangeTime = todatetime(properties.State_change),
+    CollectionTime = todatetime(properties.Collection_time),
+    TransactionId = tolong(properties.Backend_xid),
+    OldestTransactionId = tolong(properties.Backend_xmin),
+    BackendType = tostring(properties.Backend_type),
+    Location = location

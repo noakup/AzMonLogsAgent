@@ -1,0 +1,16 @@
+[
+	{
+		"time": "2021-03-23T00:01:50.4540405Z",
+		"resourceId": "/SUBSCRIPTIONS/1338DDED-42F5-4CAE-8ED2-36C19680A7A1/RESOURCEGROUPS/ACCNT_RG/PROVIDERS/MICROSOFT.DOCUMENTDB/DATABASEACCOUNTS/ACCNT-METRICS-TEST",
+		"subscriptionId": "1338dded-42f5-4cae-8ed2-36c19680a7a1",
+		"operationName": "RegionAddStart",
+		"category": "ControlPlaneRequests",
+		"properties": {
+			"activityId": "74a32ffa-9c54-454f-b8db-28a8b395b017",
+			"httpstatusCode": "202",
+			"result": "Accepted",
+			"region": "West US 2",
+			"httpMethod": "PUT"
+		}
+	}
+]

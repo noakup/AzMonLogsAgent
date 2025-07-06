@@ -1,0 +1,13 @@
+[
+    {
+        "ClusterManagerName": "clustermgrfa5b94",
+        "clusterName": "clustercda2ad",
+        "Location": "eastus",
+        "Message": "Cluster Deployment completed with status: Failed",
+        "Node": "aks-agentpool0-32803505-vmss000003",
+        "PodName": "nc-cluster-operator-mc-controller-manager-fcbf8ff97-mzw72",
+        "_ResourceId": "/SUBSCRIPTIONS/FCA2E8EE-1179-48B8-9532-428ED0873A2E/RESOURCEGROUPS/SYNT-DEV-FUNCTIONALTESTS-EASTUS-APITESTING-BL-NEAR-EDGE_USWEST-KKF2PZ4Q-TEST/PROVIDERS/MICROSOFT.NETWORKCLOUD/CLUSTERMANAGERS/CLUSTERMGR386400",
+        "_SubscriptionID": "fca2e8ee-1179-48b8-9532-428ed0873a2e",
+        "TimeGenerated": "2023-05-25T20:55:02.568093565Z"
+    }
+]

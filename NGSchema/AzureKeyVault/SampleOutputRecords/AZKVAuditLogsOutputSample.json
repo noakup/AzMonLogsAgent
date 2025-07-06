@@ -1,0 +1,93 @@
+[
+	{
+		"TimeGenerated": "2016-01-05T01:32:01.2691226Z",
+		"ResourceId": "/SUBSCRIPTIONS/361DA5D4-A47A-4C79-AFDD-XXXXXXXXXXXX/RESOURCEGROUPS/CONTOSOGROUP/PROVIDERS/MICROSOFT.KEYVAULT/VAULTS/CONTOSOKEYVAULT",
+		"OperationName": "VaultGet",
+		"OperationVersion": "2015-06-01",
+		"Category": "AuditEvent",
+		"ResultType": "Success",
+		"ResultSignature": "OK",
+		"ResultDescription": "AuditLogs",
+		"DurationMs": 78,
+		"CallerIpAddress": "104.40.82.76",
+		"CorrelationId": "123",
+		"Nsp": {
+			"xms_az_nwperimid": [
+				"NSP_GUID_1",
+				"NSP_GUID_2",
+				"NSP_GUID_3"
+			]
+		},
+		"Identity": {
+			"claim": {
+				"http://schemas.microsoft.com/identity/claims/objectidentifier": "d9da5048-2737-4770-bd64-XXXXXXXXXXXX",
+				"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn": "live.com#username@outlook.com",
+				"appid": "1950a258-227b-4e31-a9cf-XXXXXXXXXXXX"
+			}
+		},
+		"Properties": {
+			"ClientInfo": "azure-resource-manager/2.0",
+			"RequestUri": "https://control-prod-wus.vaultcore.azure.net/subscriptions/361da5d4-a47a-4c79-afdd-XXXXXXXXXXXX/resourcegroups/contosoresourcegroup/providers/Microsoft.KeyVault/vaults/contosokeyvault?api-version=2015-06-01",
+			"Id": "https://contosokeyvault.vault.azure.net/",
+			"HttpStatusCode": 200
+		},
+		"KeyProperties": {
+			"type": "RSA",
+			"size": 256
+		},
+		"SecretProperties": {
+			"type": "secret"
+		},
+		"CertificateProperties": {
+			"subject": "CN=test123.microsoft.com"
+		},
+		"CertificatePolicyProperties": {
+		},
+		"CertificateIssuerProperties": {
+			"provider": "SelfSign",
+			"id": "test"
+		},
+		"CertificateRequestProperties": {
+			"cancel": false
+		},
+		"StorageAccountProperties": {
+			"resourceId": "/SUBSCRIPTIONS/361DA5D4-A47A-4C79-AFDD-XXXXXXXXXXXX/RESOURCEGROUPS/CONTOSOGROUP/PROVIDERS/MICROSOFT.KEYVAULT/VAULTS/CONTOSOKEYVAULT"
+		},
+		"StorageSasDefinitionProperties": {
+			"sasType": "samplesastype"
+		},
+		"Id": "https://testvault.vault.azure.net/keys/TestKey/a6d4b949b54945658d21204abde74c55",
+		"Algorithm": "RSA",
+		"ClientInfo": "TestClient",
+		"SubnetId": "/subscriptions/2b0370f0-e505-4d29-9ee1-3a9c6d93fc50/resourceGroups/MyResourceGroup/providers/Microsoft.Network/virtualNetworks/MyNet/subnets/shai09Subnet",
+		"HttpStatusCode": 200,
+		"RequestUri": "https://test.vault.azure.net",
+		"IsAddressAuthorized": true,
+		"AddressAuthorizationType": "Public IP",
+		"IsAccessPolicyMatch": true,
+		"IsRbacAuthorized": true,
+		"AppliedAssignmentId": "8511467f-3470-41a7-9267-8a98bf6e91a8",
+		"TrustedService": "TestService",
+		"Tlsversion": "1.2",
+		"VaultProperties":  {
+			"EnableRbacAuthorization": true,
+			"EnablePurgeProtection": true
+		},
+		"Sku": {
+			"Family": "A",
+			"Name": "Standard"
+		},
+		"NetworkAcls": {
+			"bypass": "AzureServices",
+			"defaultAction": "Allow"
+		},
+		"EnabledForDeployment": true,
+		"EnabledForDiskEncryption": true,
+		"EnabledForTemplateDeployment": true,
+		"EnableSoftDelete": true,
+		"SoftDeleteRetentionInDays": 90,
+		"EnableRbacAuthorization": true,
+		"EnablePurgeProtection": true,
+		"HsmPoolResourceId": "8516321f-3470-41a7-9267-8a98bf65864f"
+	}
+]

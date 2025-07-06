@@ -1,0 +1,4 @@
+HDInsightHBaseMetrics
+//| where ClusterName == '<your cluster name>' // remove the preceding "//" and specify your cluster name to see its logs
+| where TimeGenerated > ago(24h)
+| distinct MetricName

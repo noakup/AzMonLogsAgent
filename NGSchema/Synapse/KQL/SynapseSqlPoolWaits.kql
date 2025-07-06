@@ -1,0 +1,12 @@
+source
+| project
+    LogicalServerName = LogicalServerName,
+    ResourceGroup = ResourceGroup,
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    Category = category,
+    SessionId = tostring(properties.SessionId),
+    RequestId = tostring(properties.RequestId),
+    State = tostring(properties.State),
+    Priority = toint(properties.Priority),
+    LockType = tostring(properties.ResourceType)

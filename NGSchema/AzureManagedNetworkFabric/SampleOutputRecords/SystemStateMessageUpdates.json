@@ -1,0 +1,18 @@
+[
+    {
+        "TimeGenerated": "2023-11-16T08:23:14Z",
+        "EventName": "SystemStateMessage",
+        "EventCategory": "SystemStateMessageUpdates",
+        "FabricId": "/subscriptions/962219bd-33e8-461a-aa01-2ea9236a2b07/resourceGroups/Fab1LabNF-4-2/providers/Microsoft.ManagedNetworkFabric/networkFabrics/nfcfab1-4-2",
+        "DeviceId": "/subscriptions/962219bd-33e8-461a-aa01-2ea9236a2b07/resourceGroups/Fab1LabNF-4-2/providers/Microsoft.ManagedNetworkFabric/networkDevices/nfcfab1-4-2-AggrRack-CE1",
+        "DeviceTime": "1700122994444627146",
+        "Properties": {
+            "DeviceId": "/subscriptions/962219bd-33e8-461a-aa01-2ea9236a2b07/resourceGroups/Fab1LabNF-4-2/providers/Microsoft.ManagedNetworkFabric/networkDevices/nfcfab1-4-2-AggrRack-CE1",
+            "DeviceName": "nfcfab1-4-2-fab1-ar-ce1",
+            "EventName": "SystemStateMessage",
+            "FabricID": "/subscriptions/962219bd-33e8-461a-aa01-2ea9236a2b07/resourceGroups/Fab1LabNF-4-2/providers/Microsoft.ManagedNetworkFabric/networkFabrics/nfcfab1-4-2",
+            "GnmiTimestamp": "1700122994444627146",
+            "Value": "Nov 16 08:23:14 Fab1-AR-CE1 Aaa: %AAA-5-LOGIN: user admin logged in [from: 10.245.160.54:42104] [service: ]"
+        }
+    }
+]

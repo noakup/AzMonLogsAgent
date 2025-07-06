@@ -1,0 +1,10 @@
+source
+| extend properties = parse_json(properties)
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    InstanceId = tostring(properties.instanceId),
+    DeploymentName = tostring(properties.deploymentName),
+    Message = tostring(properties.message),
+    ContainerName = tostring(properties.containerName),
+    ContainerImageName = tostring(properties.containerImageName)

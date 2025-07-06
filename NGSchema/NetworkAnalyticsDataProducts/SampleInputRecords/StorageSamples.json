@@ -1,0 +1,142 @@
+[
+    {
+        "time": "2023-11-16T16:24:26.7426749Z",
+        "resourceId": "/SUBSCRIPTIONS/9A021C4C-DDCD-4E80-9155-A5B0E872F4C2/RESOURCEGROUPS/SAMTARVER/PROVIDERS/MICROSOFT.NETWORKANALYTICS/DATAPRODUCTS/DPSAMTARVER4",
+        "location": "eastus",
+        "category": "Ingestion",
+        "operationName": "CreateContainer",
+        "properties": {
+            "accountName": "aoiingestiondp",
+            "etag": "\"0x8DBE1FEF06AC74D\"",
+            "serviceType": "blob",
+            "objectKey": "/aoiingestiondp/test",
+            "lastModifiedTime": "11/10/2023 3:08:47 PM",
+            "metricResponseType": "Success",
+            "serverLatencyMs": 112,
+            "requestHeaderSize": 323,
+            "responseHeaderSize": 181,
+            "tlsVersion": "TLS 1.2",
+            "time": "2023-11-10T15:08:47.5626572Z",
+            "operationVersion": "2019-07-07",
+            "schemaVersion": "1.0",
+            "statusCode": 201,
+            "statusText": "Success",
+            "durationMs": 112,
+            "callerIpAddress": "10.0.98.74:40660",
+            "correlationId": "efaf39d9-e01e-0012-13e7-13ae68000000",
+            "identity": {
+                "type": "AccountKey",
+                "tokenHash": "system-1(E9582971E3D79E2821C95509A2A8F44D27F5D4234DF61F8B2D29322CD65370CA)"
+            },
+            "uri": "https://aoiingestiondp.blob.core.windows.net:443/test?restype=container&sk=system-1",
+            "protocol": "HTTPS",
+            "resourceType": "Microsoft.Storage/storageAccounts/blobServices"
+        }
+    },
+    {
+        "time": "2023-11-10T15:09:55.2378370Z",
+        "resourceId": "/SUBSCRIPTIONS/9A021C4C-DDCD-4E80-9155-A5B0E872F4C2/RESOURCEGROUPS/SAMTARVER/PROVIDERS/MICROSOFT.NETWORKANALYTICS/DATAPRODUCTS/DPSAMTARVER4",
+        "location": "eastus",
+        "category": "Ingestion",
+        "operationName": "SetContainerMetadata",
+        "properties": {
+            "accountName": "aoiingestiondp",
+            "etag": "\"0x8DBE1FEF07CBA1F\"",
+            "serviceType": "blob",
+            "objectKey": "/aoiingestiondp/test",
+            "lastModifiedTime": "11/10/2023 3:08:47 PM",
+            "metricResponseType": "Success",
+            "serverLatencyMs": 4,
+            "requestHeaderSize": 337,
+            "responseHeaderSize": 181,
+            "tlsVersion": "TLS 1.2",
+            "operationVersion": "2019-07-07",
+            "schemaVersion": "1.0",
+            "statusCode": 200,
+            "statusText": "Success",
+            "durationMs": 4,
+            "callerIpAddress": "10.0.98.74:40660",
+            "correlationId": "efaf3a57-e01e-0012-08e7-13ae68000000",
+            "identity": {
+                "type": "AccountKey",
+                "tokenHash": "system-1(E9582971E3D79E2821C95509A2A8F44D27F5D4234DF61F8B2D29322CD65370CA)"
+            },
+            "uri": "https://aoiingestiondp.blob.core.windows.net:443/test?restype=container&comp=metadata&sk=system-1",
+            "protocol": "HTTPS",
+            "resourceType": "Microsoft.Storage/storageAccounts/blobServices"
+        }
+    },
+    {
+        "time": "2023-11-10T15:09:55.2381230Z",
+        "resourceId": "/SUBSCRIPTIONS/9A021C4C-DDCD-4E80-9155-A5B0E872F4C2/RESOURCEGROUPS/SAMTARVER/PROVIDERS/MICROSOFT.NETWORKANALYTICS/DATAPRODUCTS/DPSAMTARVER4",
+        "location": "eastus",
+        "category": "Ingestion",
+        "operationName": "SetContainerACL",
+        "properties": {
+            "accountName": "aoiingestiondp",
+            "etag": "\"0x8DBE1FEF07F2ADC\"",
+            "serviceType": "blob",
+            "objectKey": "/aoiingestiondp/test",
+            "lastModifiedTime": "11/10/2023 3:08:47 PM",
+            "metricResponseType": "Success",
+            "serverLatencyMs": 4,
+            "requestHeaderSize": 351,
+            "requestBodySize": 61,
+            "responseHeaderSize": 181,
+            "contentLengthHeader": 61,
+            "tlsVersion": "TLS 1.2",
+            "operationVersion": "2019-07-07",
+            "schemaVersion": "1.0",
+            "statusCode": 200,
+            "statusText": "Success",
+            "durationMs": 6,
+            "callerIpAddress": "10.0.98.74:40660",
+            "correlationId": "efaf3a6b-e01e-0012-1ae7-13ae68000000",
+            "identity": {
+                "type": "AccountKey",
+                "tokenHash": "system-1(E9582971E3D79E2821C95509A2A8F44D27F5D4234DF61F8B2D29322CD65370CA)"
+            },
+            "uri": "https://aoiingestiondp.blob.core.windows.net:443/test?restype=container&comp=acl&sk=system-1",
+            "protocol": "HTTPS",
+            "resourceType": "Microsoft.Storage/storageAccounts/blobServices"
+        }
+    },
+    {
+        "time": "2023-11-10T15:10:42.4445940Z",
+        "resourceId": "/SUBSCRIPTIONS/9A021C4C-DDCD-4E80-9155-A5B0E872F4C2/RESOURCEGROUPS/SAMTARVER/PROVIDERS/MICROSOFT.NETWORKANALYTICS/DATAPRODUCTS/DPSAMTARVER4",
+        "location": "eastus",
+        "category": "Ingestion",
+        "operationName": "PutBlob",
+        "properties": {
+            "accountName": "aoiingestiondp",
+            "userAgentHeader": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.76",
+            "clientRequestId": "3fe9cd31-53a0-4f11-b6c2-e9d5dca6703c",
+            "etag": "\"0x8DBE1FF027A6034\"",
+            "serviceType": "blob",
+            "objectKey": "/aoiingestiondp/test/PT1H (9).json",
+            "responseMd5": "Qlrwl1zA05cGE4iy7S7dCg==",
+            "lastModifiedTime": "11/10/2023 3:09:17 PM",
+            "metricResponseType": "Success",
+            "serverLatencyMs": 61,
+            "requestHeaderSize": 910,
+            "requestBodySize": 259915,
+            "responseHeaderSize": 570,
+            "contentLengthHeader": 259915,
+            "tlsVersion": "TLS 1.2",
+            "operationVersion": "2022-11-02",
+            "schemaVersion": "1.0",
+            "statusCode": 201,
+            "statusText": "Success",
+            "durationMs": 103,
+            "callerIpAddress": "143.58.229.30:30402",
+            "correlationId": "231862fe-301e-0063-2be7-134843000000",
+            "identity": {
+                "type": "SAS",
+                "tokenHash": "key1(A34A4470E2CBCFAF669F17ACA0ED01F79D443A3A4BBB5B622FCA305360D1E974),SasSignature(0C2A59A9C59847B4E611CFFFB8864FED212C97A901AD2485110891ED67683AA3)"
+            },
+            "uri": "https://aoiingestiondp.blob.core.windows.net:443/test/PT1H%20(9).json?_=1699628956489&sv=2022-11-02&ss=bqtf&srt=sco&sp=rwdlacuptfxiy&se=2023-11-10T23:09:15Z&sig=XXXXX",
+            "protocol": "HTTPS",
+            "resourceType": "Microsoft.Storage/storageAccounts/blobServices"
+        }
+    }
+]

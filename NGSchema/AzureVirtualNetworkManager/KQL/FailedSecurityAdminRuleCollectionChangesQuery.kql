@@ -1,0 +1,5 @@
+AVNMRuleCollectionChange
+|where OperationName has("securityAdminRuleCollections")
+|where ResultType != "Success"
+|sort by TimeGenerated desc
+|take 100

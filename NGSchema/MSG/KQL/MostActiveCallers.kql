@@ -1,0 +1,5 @@
+MicrosoftGraphActivityLogs
+| where RequestUri has "users"
+| summarize NumRequests=count() by AppId, ServicePrincipalId, UserId
+| sort by NumRequests desc
+| limit 100

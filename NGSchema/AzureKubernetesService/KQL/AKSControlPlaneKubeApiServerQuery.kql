@@ -1,0 +1,4 @@
+AKSControlPlane
+| where Category=="kube-apiserver"
+| limit 100
+| project TimeGenerated, Level, Message

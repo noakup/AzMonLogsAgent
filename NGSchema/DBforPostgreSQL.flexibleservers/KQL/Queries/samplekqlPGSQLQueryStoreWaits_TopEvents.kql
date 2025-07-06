@@ -1,0 +1,9 @@
+// By default, entries are aggregated in QueryStore Wait Sampling every 15 mins (see pg_qs.interval_length_minutes)
+// AgregationWindow was set to 15min, but you may modify it based on your needs, however should not be less than pg_qs.interval_length_minutes. 
+let AgregationWindow=15m;
+PGSQLQueryStoreWaits
+| where UserId !in (10,0) //excludes azure managed user and system calls
+| where QueryId != 0 // excludes system calls, background workers and idle sessions
+| summarize sumSampledCalls=sum(Calls) by EventType, Event, QueryId, bin(EndTime,AgregationWindow)
+| extend WaitEvent = iff(isempty(EventType), 'No Waits', strcat(EventType, ": ", Event))
+| top 10 by sumSampledCalls desc 

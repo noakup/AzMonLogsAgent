@@ -1,0 +1,16 @@
+[
+  {
+    "TimeGenerated": "2022-08-01T08:42:51.4056796Z",
+    "LogicalServerName": "chgettyscanaryeasttest",
+    "ResourceGroup": "synapseworkspace-managedrg-f620de46-da56-40e6-bce1-ee02e640e61b",
+    "OperationName": "WaitsEvent",
+    "Category": "Waits",
+    "SessionId": "SID3435",
+    "RequestId": "QID15886",
+    "State": "Requested",
+    "Priority": -1,
+    "LockType": "Shared-xlargerc",
+    "Type": "SynapseSqlPoolWaits",
+    "_ResourceId": "/SUBSCRIPTIONS/845C8E99-1ACB-444D-B815-5975CBC12AC3/RESOURCEGROUPS/CHGETTYS/PROVIDERS/MICROSOFT.SYNAPSE/WORKSPACES/CHGETTYSCANARYEASTTEST/SQLPOOLS/CHGWORKSPACE"
+  }
+]

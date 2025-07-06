@@ -1,0 +1,28 @@
+[
+  {
+    "ActivityId": "00000000-0000-0000-0000-00000000000000",
+    "EventName": "Create EventHub",
+    "SubscriptionId": "000000000-0000-0000-0000-000000000000",
+    "TimeGenerated": "9/28/2016 8:40:06 PM +00:00",
+    "EventProperties": "{\"SubscriptionId\":\"0000000000-0000-0000-0000-000000000000\",\"Namespace\":\"<Namespace Name>\",\"Via\":\"URL\",\"TrackingId\":\"5ee74c9e-72b5-4e98-97c4-08a62e56e221_G1\"}",
+    "Status": "Succeeded",
+    "Caller": "ServiceBus Client",
+	"ResourceGroup" : "VIJAYSHARMA-TESTGROUP",
+	"Resource" : "VIJAYSHARMA-NAMESPACE-TEST",
+	"ResourceType" : "NAMESPACES",
+  "Provider": "eventhub"
+ },
+ {
+    "ActivityId": "00000000-0000-0000-0000-00000000000000",
+    "EventName": "Create EventHub",
+    "SubscriptionId": "000000000-0000-0000-0000-000000000000",
+    "TimeGenerated": "9/28/2016 8:40:06 PM +00:00",
+    "EventProperties": "{\"SubscriptionId\":\"0000000000-0000-0000-0000-000000000000\",\"Namespace\":\"<Namespace Name>\",\"Via\":\"URL\",\"TrackingId\":\"5ee74c9e-72b5-4e98-97c4-08a62e56e221_G1\"}",
+    "Status": "Failed",
+    "Caller": "ServiceBus Client",
+	"ResourceGroup" : "VIJAYSHARMA-TESTGROUP",
+	"Resource" : "VIJAYSHARMA-NAMESPACE-TEST",
+	"ResourceType" : "NAMESPACES",
+  "Provider": "eventhub"
+ }
+]

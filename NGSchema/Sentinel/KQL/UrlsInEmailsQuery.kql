@@ -1,0 +1,6 @@
+let myEmailId = "<insert your email NetworkMessageId>";
+EmailEvents
+| where NetworkMessageId == myEmailId
+| join EmailUrlInfo on NetworkMessageId
+| project Timestamp, Subject, SenderFromAddress, RecipientEmailAddress, NetworkMessageId, Url, UrlCount 
+| take 1000

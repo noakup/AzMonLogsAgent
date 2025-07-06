@@ -1,0 +1,32 @@
+[
+    {
+        "TimeGenerated": "2023-02-11T00:30:00.4216123Z",
+        "Location": "North Central US",
+        "RequestId": "74e0b456-fa8e-4c3c-a34b-42f43cb90a6d",
+        "OperationId": "74e0b456-fa8e-4c3c-a34b-42f43cb90a6d",
+        "ClientRequestId": "bdb1df25-311b-43d4-83c6-f42d03a44ca4",
+        "ApiVersion": "v1.0",
+        "RequestMethod": "GET",
+        "ResponseStatusCode": 200,
+        "AadTenantId": "2ed35048-dde8-4c70-9fb3-0d7555f94f0d",
+        "IPAddress": "128.255.128.255",
+        "UserAgent": "Bing",
+        "RequestUri": "https://graph.microsoft-ppe.com/v1.0/subscribedSkus",
+        "DurationMs": 506702,
+        "ResponseSizeBytes": 2511,
+        "SignInActivityId": "2ed35048-dde8-4c70-9fb3-1d7555f94f1d",
+        "Roles": "TeamsActivity.Send",
+        "SessionId": "15123ece24-8jj3-98bc-b38e-0dj2c3e3fn1",
+        "DeviceId": "2ed35048-dde8-4c70-9fb3-1d7555f94f1d",
+        "UniqueTokenId": "2ac23932-vs23-4c98-4b2f-0d7555f94f0d",
+        "TokenIssuedAt":  "2023-02-11T00:00:48Z",
+        "AppId": "00000009-0000-0000-c000-000000000000",
+        "UserId": "2ec51067-de1a-405c-8ab2-5edb2d013148",
+        "ServicePrincipalId": "",
+        "Scopes": "scope1,scope2",
+        "IdentityProvider": "identityProvider1",
+        "ClientAuthMethod": 5,
+        "Wids": "Wids1",
+        "ATContent": "atContent1"
+    }
+]

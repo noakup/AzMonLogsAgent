@@ -1,0 +1,7 @@
+SentinelAudit
+//| where WorkspaceId == "<WorkspaceId>"  // to filter on a specific WorspaceId, uncomment this line
+| extend CallerName = tostring(ExtendedProperties.CallerName)
+// | where CallerName startswith "<userName>" // to to filter on a specific user, uncomment this line
+| where Status == "Failure"
+| where SentinelResourceName has "Office365-Sharepoint"
+| limit 100

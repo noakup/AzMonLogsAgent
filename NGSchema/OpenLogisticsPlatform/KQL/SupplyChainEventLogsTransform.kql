@@ -1,0 +1,12 @@
+source
+| extend properties = parse_json(properties)
+| project
+TimeGenerated = todatetime(['time']),
+OperationName = operationName,
+CorrelationId = correlationId,
+DurationMs = durationMs,
+EventId = tostring(properties.eventId),
+EventBody = todynamic(properties.eventBody),
+EventType = tostring(properties.eventType),
+SupplyChainResourceType = tostring(properties.resourceType),
+RequestId = tostring(properties.requestId)

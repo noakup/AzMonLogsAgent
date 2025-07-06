@@ -1,0 +1,13 @@
+[
+	{
+        "Environment": "PROD",
+        "Region": "East US",
+        "ScaleUnit": "PROD-BL-VAZ704",
+        "TaskName": "EventHubArchiveUserError",
+        "ActivityId": "00000000-0000-0000-0000-000000000000",
+        "trackingId": "4d8c8ba4-fbca-4043-a813-36cf8cd1843f_B9",
+        "resourceId": "/SUBSCRIPTIONS/A70B8550-49B1-4C60-B9F9-86B7EDBF31E4/RESOURCEGROUPS/VIJAYSHARMA-TESTGROUP/PROVIDERS/MICROSOFT.EVENTHUB/NAMESPACES/VIJAYSHARMA-EH-PREMIUM",
+        "Message": "Scaled-up EventHub TUs (UpdateStartTimeUTC: 5/13/2021 7:48:36 AM, PreviousValue: 1, UpdatedThroughputUnitValue: 2, AutoScaleReason: 'IncomingMessagesPerSecond reached 2170')",
+        "eventTimestamp": "1/1/2021 8:40:06 PM +00:00"
+    }
+]

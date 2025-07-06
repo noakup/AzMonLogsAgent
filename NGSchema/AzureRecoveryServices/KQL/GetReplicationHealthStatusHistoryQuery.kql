@@ -1,0 +1,7 @@
+let replicatedItemFriendlyName = "<insert your replicated item friendly name>";
+ASRReplicatedItems
+//| where TimeGenerated >= ago(30d) // uncomment this line to view last 30 days
+//| where _ResourceId == resourceId // uncomment this line and enter resource ID
+| where ReplicatedItemFriendlyName == replicatedItemFriendlyName
+| project Day=startofday(TimeGenerated), TimeGenerated, ReplicatedItemId, ReplicatedItemFriendlyName, ReplicationStatus
+| summarize arg_max(TimeGenerated,*) by Day

@@ -1,0 +1,6 @@
+AZMSOperationalLogs
+| extend SubInfo = _SubscriptionId
+| where Provider =~ "EventHub"
+| where isnotnull(SubInfo) and Status != "Succeeded"
+| project SubInfo, _ResourceId, EventName, Status, Caller
+| summarize by SubInfo, EventName

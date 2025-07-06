@@ -1,0 +1,19 @@
+source
+| extend propertiesTable = parse_json(properties)
+| extend parsedHealthChecks = parse_json(propertiesTable.SessionHostHealthCheckResult)
+| project
+    TimeGenerated = todatetime(substring(propertiesTable.Timestamp, 0, strlen(propertiesTable.Timestamp) - 6)),
+    OperationName = operationName,
+    SessionHostName = tostring(propertiesTable.SessionHostName),
+    SessionHostResourceId = tostring(propertiesTable.SessionHostResourceId),
+    ActivityId = tostring(propertiesTable.ActivityId),
+    AgentVersion = tostring(propertiesTable.AgentVersion),
+    Status = tostring(propertiesTable.Status),
+    LastHeartBeat = todatetime(propertiesTable.LastHeartBeat),
+    EndpointState = tostring(propertiesTable.EndpointState),
+    UpgradeState = tostring(propertiesTable.UpgradeState),
+    SessionHostHealthCheckResult = parsedHealthChecks,
+    CloudPcId = tostring(propertiesTable.CloudPcId),
+    DevBoxName = tostring(propertiesTable.DevBox),
+    SubnetResourceId = tostring(propertiesTable.SubnetResourceId),
+    NicResourceId = tostring(propertiesTable.NicResourceId)

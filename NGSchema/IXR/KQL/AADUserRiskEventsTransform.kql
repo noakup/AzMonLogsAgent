@@ -1,0 +1,25 @@
+source
+| extend properties = parse_json(properties)
+| project 
+    Activity = tostring(properties.activity),
+    ActivityDateTime = todatetime(properties.activityDateTime),
+    AdditionalInfo = properties.additionalInfo,
+    CorrelationId = tostring(properties.correlationId),
+    DetectedDateTime = todatetime(properties.detectedDateTime),
+    DetectionTimingType = tostring(properties.detectionTimingType),
+    Id = tostring(properties.id),
+    IpAddress = tostring(properties.ipAddress),
+    LastUpdatedDateTime = todatetime(properties.lastUpdatedDateTime),
+    Location = properties.location,
+    RequestId = tostring(properties.requestId),
+    RiskDetail = tostring(properties.riskDetail),
+    RiskEventType = tostring(properties.riskEventType),
+    RiskLevel = tostring(properties.riskLevel),
+    RiskState = tostring(properties.riskState),
+    Source = tostring(properties.source),
+    TokenIssuerType = tostring(properties.tokenIssuerType),
+    UserDisplayName = tostring(properties.userDisplayName),
+    UserId = tostring(properties.userId),
+    UserPrincipalName = tostring(properties.userPrincipalName),
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName

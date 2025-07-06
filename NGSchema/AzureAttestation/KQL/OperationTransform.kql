@@ -1,0 +1,19 @@
+source 
+| project
+    TimeGenerated = todatetime(["Time"]),
+    ResourceRegion = tostring(region),
+    ResourceUri = tostring(uri),
+    OperationName = tostring(operationName),
+    ResultType = tostring(resultType),
+    ResultSignature = tostring(resultSignature),
+    DurationMs = todouble(durationMs),
+    CallerIpAddress = tostring(callerIpAddress),
+    Identity = parse_json(identity),
+    Level = tostring(level),
+    TraceContext = parse_json(traceContext),
+    ServiceLocation = tostring(location),
+    FailureDetails = tostring(properties.failureDetails),
+    ResultDetails = tostring(properties.resultDetails),
+    UserAgent= tostring(properties.infoDataRecieved.Headers["User-Agent"]),
+    ContentType = tostring(properties.infoDataRecieved.ContentType),
+    ContentLength = toint(properties.infoDataRecieved.ContentLength)

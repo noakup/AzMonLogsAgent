@@ -1,0 +1,592 @@
+{
+	"type": "Microsoft.NetworkFunction/AzureTrafficCollectors",
+	"displayName": "Azure Traffic Collector",
+	"description": "All tables related to Azure Traffic Collector.",
+	"tags": {},
+	"properties": {},
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "CLOUDNET/azuretrafficcollector",
+	"relatedTables": [
+		"AzureActivity",
+		"AzureMetrics"
+	],
+	"relatedFunctions": [],
+	"tables": [
+		{
+			"name": "ATCExpressRouteCircuitIpfix",
+			"description": "This table has Express Route Circuit IPFIX flow records. Flow records are captured and emitted by Azure Traffic Collector (ATC).",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 2,
+			"dataTypeId": "AZURETRAFFICCOLLECTORSERVICE_EXPRESSROUTECIRCUITIPFIX",
+			"intelligencePacks": [],
+			"isResourceCentric": true,
+			"tableState": "Validation",
+			"isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "time",
+					"type": "String"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "location",
+					"type": "String"
+				},
+				{
+					"name": "operationVersion",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/ATCExpressRouteCircuitIpfixTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Timestamp (UTC) when the Azure Traffic Collector (ATC) emitted this flow record."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The specific Azure Traffic Collector (ATC) operation that emitted this flow record."
+				},
+				{
+					"name": "ATCResourceId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Azure resource ID of Azure Traffic Collector (ATC)."
+				},
+				{
+					"name": "ATCRegion",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Azure Traffic Collector (ATC) deployment region."
+				},
+				{
+					"name": "SchemaVersion",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Flow record schema version."
+				},
+				{
+					"name": "FlowRecordTime",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Timestamp (UTC) when Express Route Circuit emitted this flow record."
+				},
+				{
+					"name": "ExRCircuitId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Azure resource ID of Express Route Circuit."
+				},
+				{
+					"name": "ExRCircuitServiceKey",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Service key of Express Route Circuit.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "ExRCircuitDirectPortId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Azure resource ID of Express Route Circuit's direct port."
+				},
+				{
+					"name": "SourceIp",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Source IP address.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "DestinationIp",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Destination IP address.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "SourcePort",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "TCP source port."
+				},
+				{
+					"name": "DestinationPort",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "TCP destination port."
+				},
+				{
+					"name": "Protocol",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "Protocol type as specified in IP header."
+				},
+				{
+					"name": "NumberOfBytes",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "Total number of bytes of packets captured in this flow."
+				},
+				{
+					"name": "NumberOfPackets",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "Total number of packets captured in this flow."
+				},
+				{
+					"name": "Flowsequence",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "Flow sequence of this flow."
+				},
+				{
+					"name": "IpClassOfService",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "IP Class of service as specified in IP header."
+				},
+				{
+					"name": "IpProtocolIdentifier",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "Protocol type as specified in IP header."
+				},
+				{
+					"name": "IcmpType",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "Protocol type as specified in IP header."
+				},
+				{
+					"name": "SrcMask",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "Mask of source subnet."
+				},
+				{
+					"name": "DstMask",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "Mask of destination subnet."
+				},
+				{
+					"name": "SrcAsn",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "Source Autonomous System Number (ASN)."
+				},
+				{
+					"name": "DstAsn",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "Destination Autonomous System Number (ASN)."
+				},
+				{
+					"name": "NextHop",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Next hop as per forwarding table.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "TcpFlag",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "TCP flag as defined in the TCP header."
+				},
+				{
+					"name": "MinTtl",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "Minimum time to live (TTL) as defined in the IP header."
+				},
+				{
+					"name": "MaxTtl",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "Maximum time to live (TTL) as defined in the IP header."
+				},
+				{
+					"name": "SrcSubnet",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Source subnet of source IP.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "DstSubnet",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Destination subnet of destination IP.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "IpVerCode",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "IP version as defined in the IP header."
+				},
+				{
+					"name": "BgpNextHop",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Border Gateway Protocol (BGP) next hop as defined in the routing table.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "PeeringType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Express Route Circuit peering type."
+				},
+				{
+					"name": "Dot1qVlanId",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "Dot1q VlanId."
+				},
+				{
+					"name": "Dot1qCustomerVlanId",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "Dot1q Customer VlanId."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/ATCExpressRouteCircuitIpfixSample.json"
+		},
+		{
+			"name": "ATCPrivatePeeringMetadata",
+			"description": "This table has Private Peering Vnet metadata.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"dataTypeId": "AZURETRAFFICCOLLECTORSERVICE_ATCPRIVATEPEERINGMETADATA",
+			"intelligencePacks": [],
+			"isResourceCentric": true,
+			"tableState": "Validation",
+			"isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "time",
+					"type": "String"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "location",
+					"type": "String"
+				},
+				{
+					"name": "operationVersion",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/ATCPrivatePeeringMetadataTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Timestamp (UTC) when the Azure Traffic Collector (ATC) emitted this record."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The specific Azure Traffic Collector (ATC) operation that emitted this record."
+				},
+				{
+					"name": "ATCResourceId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Azure resource ID of Azure Traffic Collector (ATC)."
+				},
+				{
+					"name": "ATCRegion",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Azure Traffic Collector (ATC) deployment region."
+				},
+				{
+					"name": "SchemaVersion",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Flow record schema version."
+				},
+				{
+					"name": "ExRCircuitId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Azure resource ID of Express Route Circuit."
+				},
+				{
+					"name": "ExRCircuitServiceKey",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Service key of Express Route Circuit.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "VnetId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Azure resource ID of Virtual Network."
+				},
+				{
+					"name": "VnetSubscriptionId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Azure subscription ID of Virtual Network."
+				},
+				{
+					"name": "VnetResourceGroup",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Azure resource group of Virtual Network."
+				},
+				{
+					"name": "VnetName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Virtual Network resource name."
+				},
+				{
+					"name": "VnetLocation",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Azure region of Virtual Network resource."
+				},
+				{
+					"name": "VnetAddressPrefix",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "IP address of Virtual Network resource."
+				},
+				{
+					"name": "IpMask",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "Mask of Virtual Network resource."
+				},
+				{
+					"name": "IpSubnet",
+					"type": "Dynamic",
+					"isDefaultDisplay": true,
+					"description": "Azure resource ID of subnet and subnet IP address."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/ATCPrivatePeeringMetadataSample.json"
+		},
+		{
+			"name": "ATCMicrosoftPeeringMetadata",
+			"description": "This table has Microsoft Peering public IP metadata.",
+			"categories": [ "resources" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"dataTypeId": "AZURETRAFFICCOLLECTORSERVICE_ATCMICROSOFTPEERINGMETADATA",
+			"intelligencePacks": [],
+			"isResourceCentric": true,
+			"tableState": "Validation",
+			"isTroubleshootingAllowed": false,
+			"input": [
+				{
+					"name": "time",
+					"type": "String"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "location",
+					"type": "String"
+				},
+				{
+					"name": "operationVersion",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "Kql/ATCMicrosoftPeeringMetadataTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"isDefaultDisplay": true,
+					"description": "Timestamp (UTC) when the Azure Traffic Collector (ATC) emitted this record."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"isDefaultDisplay": false,
+					"description": "The specific Azure Traffic Collector (ATC) operation that emitted this record."
+				},
+				{
+					"name": "ATCResourceId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Azure resource ID of Azure Traffic Collector (ATC)."
+				},
+				{
+					"name": "ATCRegion",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Azure Traffic Collector (ATC) deployment region."
+				},
+				{
+					"name": "SchemaVersion",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Flow record schema version."
+				},
+				{
+					"name": "IpSubnet",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Subnet of Microsoft Peering IP prefix."
+				},
+				{
+					"name": "IpMask",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Mask of Microsoft Peering IP prefix."
+				},
+				{
+					"name": "ServiceName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Type of service the IP prefix is."
+				},
+				{
+					"name": "PrefixRegion",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Azure region of the IP prefix."
+				},
+				{
+					"name": "ServiceBgpCommunity",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Service-based Border Gateway Protocol (BGP) Community tag."
+				},
+				{
+					"name": "RegionalBgpCommunity",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Region-based Border Gateway Protocol (BGP) Community tag."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/ATCMicrosoftPeeringMetadataSample.json"
+		}
+	],
+	"functions": [],
+	"queries": [
+		{ 
+        	"id": "db83ff91-df3b-4d7d-b62f-559d49e7d63c",
+            "displayName": "Get Top Talkers", 
+            "description": "List 10 Top Talkers during a defined time period.", 
+            "bodyFilePath": "KQL/TopTalkersByTuple.kql", 
+			"categories": [ "resources", "network" ], 
+            "relatedTables": [ "ATCExpressRouteCircuitIpfix" ], 
+            "tags":
+			{ 
+            	"Topic": [ 
+            		"Usage, Diagnostics" 
+            	] 
+            }, 
+            "properties": { 
+            	"ExampleQuery": true, 
+            	"QueryAttributes": { 
+            		"IsMultiResource": true 
+            	} 
+            } 
+        },
+		{ 
+            "id": "5c27eae1-f25b-46e1-b18b-c1cc11e35ddb",
+            "displayName": "Get Top Talkers by Source and Destination Port", 
+            "description": "List 10 Top Talkers based on source and destination port during a defined time period.", 
+            "bodyFilePath": "KQL/TopTalkersBySrcAndDstPort.kql", 
+            "categories": [ "resources", "network" ], 
+            "relatedTables": [ "ATCExpressRouteCircuitIpfix" ], 
+            "tags": { 
+				"Topic": [ 
+					"Usage, Diagnostics" 
+				] 
+            }, 
+            "properties": { 
+				"ExampleQuery": true, 
+				"QueryAttributes": { 
+					"IsMultiResource": true 
+                } 
+            } 
+        },
+        { 
+            "id": "b40ab49e-3ef0-4c97-862b-207b98a68b02",
+            "displayName": "Get Total Bandwidth Usage", 
+            "description": "Get a report of the total bandwidth used during a specified time range.", 
+            "bodyFilePath": "KQL/TotalBandwidthUsageQuery.kql", 
+			"categories": [ "resources", "network" ], 
+            "relatedTables": [ "ATCExpressRouteCircuitIpfix" ], 
+            "tags": { 
+				"Topic": [ 
+					"Usage, Diagnostics" 
+				] 
+            }, 
+            "properties": { 
+				"ExampleQuery": true, 
+				"QueryAttributes": { 
+					"IsMultiResource": true 
+                } 
+            } 
+        }
+	]
+}

@@ -1,0 +1,9 @@
+source 
+| extend properties = parse_json(properties)
+| project  
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    Location = location,
+    EventName = tostring(properties.EventName),
+    ErrorMessage = iff(isnull(properties.ErrorMessage), "null", tostring(properties.ErrorMessage)),
+    Message = iff(isnull(properties.Message), "null", tostring(properties.Message))

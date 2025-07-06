@@ -1,0 +1,18 @@
+[
+    {
+        "TimeGenerated": "2023-01-10T23:12:42.0000000Z",
+        "Category": "kube-scheduler",
+        "Level": "INFO",
+        "Message": "\"Requested to terminate, exiting\"",
+        "Stream": "stderr",
+        "PodName": "kube-scheduler-v2-7546f74884-rsf2d"
+    },
+    {
+        "TimeGenerated": "2023-01-10T23:12:42.0000000Z",
+        "Category": "kube-scheduler",
+        "Level": "INFO",
+        "Message": "Stopped listening on 172.31.76.42:10259",
+        "Stream": "stderr",
+        "PodName": "kube-scheduler-v2-7546f74884-46jnm"
+    }
+]

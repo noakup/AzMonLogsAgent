@@ -1,0 +1,59 @@
+[
+  {
+    "InsertId": "683f4a1d0008c59f6fda6985",
+    "Labels": {
+      "container_name": "hello-1",
+      "instanceId": "0069c7a988f815f8f9171a5abf49f61cfac83f790f08172d1d300d37b38331d5a781fa79d40acd99ed7dde82e247d178e3b8d542b45b67e87e6d21fb7838e35954d5a57d63"
+    },
+    "LogName": "projects/msccp-test/logs/run.googleapis.com%2Fvarlog%2Fsystem",
+    "ReceiveTimestamp": "3/6/2025, 7:16:45.578 pm",
+    "TimeGenerated": "3/6/2025, 7:16:45.574 pm",
+    "Severity": "ERROR",
+    "PayloadType": "",
+    "PayloadAuthInfoPrincipalEmail": "",
+    "PayloadAuthorizationInfo": "",
+    "PayloadMethodName": "",
+    "PayloadRequestType": "",
+    "PayloadResourceLocationCurrentLocations": "",
+    "PayloadResourceName": "",
+    "PayloadServiceName": "",
+    "PayloadAuthenticationInfoPrincipalSubject": "",
+    "PayloadRequestParent": "",
+    "PayloadAuthenticationInfoServiceAccountKeyName": "",
+    "ResourceLabelslocation": "us-east1",
+    "ResourceLabelsProjectId": "msccp-test",
+    "ResourceType": "cloud_run_revision"
+  },
+  {
+    "InsertId": "17act7yd8m2s",
+    "Labels": "",
+    "LogName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "ReceiveTimestamp": "4/6/2025, 3:07:58.084 am",
+    "TimeGenerated": "4/6/2025, 3:07:57.390 am",
+    "Severity": "INFO",
+    "PayloadType": "type.googleapis.com/google.cloud.audit.AuditLog",
+    "PayloadAuthInfoPrincipalEmail": "prisma-cloud-serv-fabur@msccp-test.iam.gserviceaccount.com",
+    "PayloadAuthorizationInfo": [
+      {
+        "granted": true,
+        "permission": "run.jobs.list",
+        "permissionType": "ADMIN_READ",
+        "resource": "projects/msccp-test/locations/me-central1/jobs",
+        "resourceAttributes": {}
+      }
+    ],
+    "PayloadMethodName": "google.cloud.run.v2.Jobs.ListJobs",
+    "PayloadRequestType": "type.googleapis.com/google.cloud.run.v2.ListJobsRequest",
+    "PayloadResourceLocationCurrentLocations": [
+      "me-central1"
+    ],
+    "PayloadResourceName": "projects/msccp-test/locations/me-central1/jobs",
+    "PayloadServiceName": "run.googleapis.com",
+    "PayloadAuthenticationInfoPrincipalSubject": "serviceAccount:prisma-cloud-serv-fabur@msccp-test.iam.gserviceaccount.com",
+    "PayloadRequestParent": "projects/msccp-test/locations/me-central1",
+    "PayloadAuthenticationInfoServiceAccountKeyName": "//iam.googleapis.com/projects/msccp-test/serviceAccounts/prisma-cloud-serv-fabur@msccp-test.iam.gserviceaccount.com/keys/711d0583951468a4c27f724399f859fe83b788fd",
+    "ResourceLabelslocation": "me-central1",
+    "ResourceLabelsProjectId": "msccp-test",
+    "ResourceType": "cloud_run_job"
+  }
+]

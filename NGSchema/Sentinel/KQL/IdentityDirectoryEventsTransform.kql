@@ -1,0 +1,28 @@
+source
+| extend
+propertiesTable = parse_json(properties)
+| project
+ActionType = tostring(propertiesTable["ActionType"]),
+Application= tostring(propertiesTable["Application"]),
+Protocol= tostring(propertiesTable["Protocol"]),
+AccountName = tostring(propertiesTable["AccountName"]),
+AccountDomain= tostring(propertiesTable["AccountDomain"]),
+AccountUpn= tostring(propertiesTable["AccountUpn"]),
+AccountSid= tostring(propertiesTable["AccountSid"]),
+AccountObjectId= tostring(propertiesTable["AccountObjectId"]),
+AccountDisplayName= tostring(propertiesTable["AccountDisplayName"]),
+DeviceName= tostring(propertiesTable["DeviceName"]),
+IPAddress= tostring(propertiesTable["IPAddress"]),
+Port= tostring(propertiesTable["Port"]),
+DestinationDeviceName= tostring(propertiesTable["DestinationDeviceName"]),
+DestinationIPAddress= tostring(propertiesTable["DestinationIPAddress"]),
+DestinationPort= tostring(propertiesTable["DestinationPort"]),
+TargetDeviceName= tostring(propertiesTable["TargetDeviceName"]),
+TargetAccountDisplayName = tostring(propertiesTable["TargetAccountDisplayName"]),
+TargetAccountUpn = tostring(propertiesTable["TargetAccountUpn"]),
+Location= tostring(propertiesTable["Location"]),
+ISP = tostring(propertiesTable["Isp"]),
+ReportId= tostring(propertiesTable["ReportId"]),
+AdditionalFields= parse_json(propertiesTable["AdditionalFields"]),
+TimeGenerated = todatetime(propertiesTable["Timestamp"]),
+Timestamp = todatetime(propertiesTable["Timestamp"])

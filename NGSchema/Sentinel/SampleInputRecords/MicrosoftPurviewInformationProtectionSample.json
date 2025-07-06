@@ -1,0 +1,325 @@
+[
+  {
+    "AppAccessContext": {
+      "AADSessionId": "86f6a250-be3a-4f9c-a79b-fd550074459b",
+      "CorrelationId":"040f4ea0-00e4-2000-137c-6902a54cde66"
+    },
+    "CreationTime": "2022-07-05T14:28:53",
+    "Id": "60533fbf-8acf-4617-aef0-08da5e92afb0",
+    "Operation": "FileSensitivityLabelApplied",
+    "OrganizationId": "5b5a146c-eba8-46af-96f8-e31b50d15a3f",
+    "RecordType": 6,
+    "UserKey": "i:0h.f|membership|1003200047430bf9@live.com",
+    "UserType": 0,
+    "Version": 1,
+    "Workload": "OneDrive",
+    "ClientIP": "104.45.184.153",
+    "ObjectId": "https://sentinele5-my.sharepoint.com/personal/admin5_sentinele5_onmicrosoft_com/Documents/BlaBlaBla.docx",
+    "UserId": "admin5@sentinele5.onmicrosoft.com",
+    "CorrelationId": "040f4ea0-00e4-2000-137c-6902a54cde66",
+    "EventSource": "SharePoint",
+    "ItemType": "File",
+    "ListId": "fce003ca-7915-480f-81ec-b4cc47469543",
+    "ListItemUniqueId": "a3b26749-ac6e-4177-91e7-7b7a3972abfb",
+    "Site": "49e7b12e-2a34-4098-a1b8-06e50f90a223",
+    "UserAgent": "MSWAC",
+    "WebId": "68b8f3c3-9198-4ca8-b2f3-6351941ccf38",
+    "DestinationFileExtension": "docx",
+    "HighPriorityMediaProcessing": false,
+    "SensitivityLabelEventData": {
+      "ActionSource": 3,
+      "LabelEventType": 1,
+      "SensitivityLabelId": "e36ba39c-e320-4557-8d8d-210d31569f17",
+      "SensitivityLabelOwnerEmail": "Admin5@SentinelE5.onmicrosoft.com"
+    },
+    "SourceFileExtension": "docx",
+    "DestinationFileName": "BlaBlaBla.docx",
+    "DestinationLabel": "e36ba39c-e320-4557-8d8d-210d31569f17",
+    "DestinationRelativeUrl": "personal/admin5_sentinele5_onmicrosoft_com/Documents",
+    "SiteUrl": "https://sentinele5-my.sharepoint.com/personal/admin5_sentinele5_onmicrosoft_com/",
+    "SourceFileName": "BlaBlaBla.docx",
+    "SourceRelativeUrl": "Documents"
+  },
+  {
+    "CreationTime": "2022-07-14T05:23:43",
+    "Id": "390acbb4-3b6b-4506-8e00-0d0df0846f6a",
+    "Operation": "SensitivityLabelApplied",
+    "OrganizationId": "5b5a146c-eba8-46af-96f8-e31b50d15a3f",
+    "RecordType": 83,
+    "UserKey": "7eb1fd72-7f5d-48a5-9146-dd8a721e4e1c",
+    "UserType": 0,
+    "Version": 1,
+    "Workload": "PublicEndpoint",
+    "ClientIP": "51.105.164.234",
+    "UserId": "Admin5@SentinelE5.onmicrosoft.com",
+    "Application": "Outlook",
+    "DeviceName": "outlook.office.com",
+    "Platform": "5",
+    "UserSku": "NoSKUsRetrieved",
+    "TargetLocation": 4,
+    "SensitivityLabelEventData": {
+      "ActionSource": 1,
+      "JustificationText": "",
+      "LabelEventType": 1,
+      "SensitivityLabelId": "cdab0c7d-94ae-4154-b935-64edcaaa0c62"
+    }
+  },
+  {
+    "CreationTime": "2022-08-09T11:56:14",
+    "Id": "604af2c5-4af9-413d-84d0-fafdc76084ef",
+    "Operation": "SensitivityLabelUpdated",
+    "OrganizationId": "5b5a146c-eba8-46af-96f8-e31b50d15a3f",
+    "RecordType": 83,
+    "UserKey": "7eb1fd72-7f5d-48a5-9146-dd8a721e4e1c",
+    "UserType": 0,
+    "Version": 1,
+    "Workload": "PublicEndpoint",
+    "ClientIP": "51.105.164.234",
+    "UserId": "Admin5@SentinelE5.onmicrosoft.com",
+    "Application": "Outlook",
+    "DeviceName": "outlook.office.com",
+    "Platform": "5",
+    "UserSku": "NoSKUsRetrieved",
+    "TargetLocation": 4,
+    "SensitivityLabelEventData": {
+        "ActionSource": 3,
+        "JustificationText": "",
+        "LabelEventType": 1,
+        "OldSensitivityLabelId": "cdab0c7d-94ae-4154-b935-64edcaaa0c62",
+        "SensitivityLabelId": "e36ba39c-e320-4557-8d8d-210d31569f17"
+    }
+  },
+  {
+    "SensitiveInfoTypeData": [],
+    "ProtectionEventData":
+    {
+        "IsProtected": false,
+        "IsProtectedBefore": false
+    },
+    "Common":
+    {
+        "ApplicationId": "c00e9d32-3c8d-4a7d-832b-029040e7db99",
+        "ApplicationName": "Microsoft AzureInformation Protection Word Add-In",
+        "ProcessName": "WINWORD",
+        "Platform": 1,
+        "DeviceName": "D99999999.domain.com",
+        "Location": "On-premises file shares",
+        "ProductVersion": "2.13.49.0"
+    },
+    "DataState": "Use",
+    "SensitivityLabelEventData":
+    {
+        "SensitivityLabelId": "9999999-d514-4220-b58f-525b27a4a097",
+        "OldSensitivityLabelId": "9999999-0f6f-492f-b899-82535fbd2b4b",
+        "LabelEventType": 2,
+        "ActionSource": 3,
+        "JustificationText": "Previous label was incorrect"
+    },
+    "ObjectId": "C:\\Users\\userid\\folder\\Public Word file - Copy.docx",
+    "UserId": "firstname.lastname@domain.com",
+    "ClientIP": "999.99.999.99",
+    "Id": "99999999-9d93-9d22-9fcd-86ef6f92a6b",
+    "RecordType": 94,
+    "CreationTime": "2022-04-11T14:30:39",
+    "Operation": "SensitivityLabelUpdated",
+    "OrganizationId": "99999999-2b82-4a00-bcdb-f1f6782a0f6e",
+    "UserType": 0,
+    "UserKey": "firstname.lastname@domain.com",
+    "Workload": "Aip",
+    "Version": 1,
+    "Scope": 1
+  },
+  {
+    "CreationTime": "2022-09-28T06:44:20",
+    "Id": "0864ce26-73de-4a38-a943-689063b44d44",
+    "Operation": "MipLabel",
+    "OrganizationId": "5b5a146c-eba8-46af-96f8-e31b50d15a3f",
+    "RecordType": 43,
+    "UserKey": "7eb1fd72-7f5d-48a5-9146-dd8a721e4e1c",
+    "UserType": 4,
+    "Version": 1,
+    "Workload": "Exchange",
+    "ObjectId": "<SJ0PR18MB3977FD72EE92812860D763DEE6549@SJ0PR18MB3977.namprd18.prod.outlook.com>",
+    "UserId": "Admin5@SentinelE5.onmicrosoft.com",
+    "ApplicationMode": "Standard",
+    "ItemName": "test email",
+    "LabelAction": "None",
+    "LabelAppliedDateTime": "2022-09-28T06:44:22",
+    "LabelId": "cdab0c7d-94ae-4154-b935-64edcaaa0c62",
+    "LabelName": "All Employees (unrestricted)",
+    "Receivers":
+    [
+        "test@contoso.com",
+        "test@contoso.onmicrosoft.com"
+    ],
+    "Sender": "Admin5@SentinelE5.onmicrosoft.com"
+  },
+  {
+    "CreationTime": "2022-09-28T16:58:12",
+    "Id": "58bc4306-e8f1-451f-fde2-08daa172a10f",
+    "Operation": "AutoSensitivityLabelRuleMatch",
+    "OrganizationId": "5b5a146c-eba8-46af-96f8-e31b50d15a3f",
+    "RecordType": 75,
+    "UserKey": "MipLabelsAgent",
+    "UserType": 4,
+    "Version": 1,
+    "Workload": "Exchange",
+    "ObjectId": "<63981d3e-1b35-4261-82ff-c5aacf280747@BN8NAM12BG402.eop-nam12.prod.protection.outlook.com>",
+    "UserId": "MipLabelsAgent",
+    "CorrelationId": "87426313-9ba4-4e26-8042-e60925abc56a",
+    "ExecutionRuleId": "b655ca06-4ffd-48aa-a8c1-a676e72f507f",
+    "ExecutionRuleName": "All rule-EXO",
+    "ExecutionRuleVersion": "996577ca-39ea-4d4f-567c-08daa171c57f",
+    "LabelId": "e36ba39c-e320-4557-8d8d-210d31569f17",
+    "LabelName": "defa4170-0d19-0005-0006-bc88714345d2",
+    "MachineName": "CO1PR18MB4700",
+    "MgtRuleId": "5ff48fa4-bece-44fd-9cae-f456cf19bd49",
+    "PolicyId": "e2b0f7d0-72f8-476a-b553-c6db486d2047",
+    "PolicyName": "Test Policy3",
+    "PolicyVersion": "3d0bbd35-7d1c-469a-68f2-08daa171c592",
+    "RuleMode": "Audit",
+    "ScopedLocationId": "Office365Alerts@microsoft.com",
+    "Severity": "Low",
+    "ConditionMatch":
+    {
+        "SensitiveInformation":
+        [
+            {
+                "ClassifierType": "Content",
+                "Confidence": 85,
+                "Count": 1,
+                "Id": "8548332d-6d71-41f8-97db-cc3b5fa544e6",
+                "Location": "Message Body",
+                "SensitiveInformationDetailedClassificationAttributes":
+                [
+                    {
+                        "Confidence": 65,
+                        "Count": 1,
+                        "IsMatch": false
+                    },
+                    {
+                        "Confidence": 75,
+                        "Count": 1,
+                        "IsMatch": false
+                    },
+                    {
+                        "Confidence": 85,
+                        "Count": 1,
+                        "IsMatch": false
+                    }
+                ],
+                "SensitiveTypeSource": "OutOfBox",
+                "UniqueCount": 1
+            }
+        ]
+    },
+    "IsViewableByExternalUsers": false,
+    "ItemCreationTime": "2022-09-28T16:58:02",
+    "ItemLastModifiedTime": "2022-09-28T16:58:02",
+    "ItemName": "[ShayTest]Low-severity alert: MIP AutoLabel simulation completed",
+    "ItemSize": "52174",
+    "OverRideReason": "",
+    "OverRideType": "",
+    "OverriddenActions": [],
+    "RuleActions": [],
+    "SensitiveInfoDetectionIsIncluded": false,
+    "WorkLoadItemId": "<63981d3e-1b35-4261-82ff-c5aacf280747@BN8NAM12BG402.eop-nam12.prod.protection.outlook.com>",
+    "ExchangeMetaData":
+    {
+        "BCC": [],
+        "CC":
+        [
+            "TIPReader@SentinelE5.onmicrosoft.com"
+        ],
+        "From": "Office365Alerts@microsoft.com",
+        "MessageID": "<63981d3e-1b35-4261-82ff-c5aacf280747@BN8NAM12BG402.eop-nam12.prod.protection.outlook.com>",
+        "RecipientCount": 2,
+        "Sent": "2022-09-28T16:58:02",
+        "To":
+        [
+            "Admin5@SentinelE5.onmicrosoft.com",
+            "Acc_test2@sentinele5.onmicrosoft.com"
+        ]
+    }
+  },
+  {
+    "CreationTime": "2022-09-28T16:52:22",
+    "Id": "94636c57-b152-46ad-a864-08daa171d0a0",
+    "Operation": "AutoSensitivityLabelRuleMatch",
+    "OrganizationId": "5b5a146c-eba8-46af-96f8-e31b50d15a3f",
+    "RecordType": 71,
+    "UserKey": "Test Policy3",
+    "UserType": 4,
+    "Version": 1,
+    "Workload": "OneDriveForBusiness",
+    "UserId": "Test Policy3",
+    "CorrelationId": "e2b0f7d0-72f8-476a-b553-c6db486d2047",
+    "ExecutionRuleId": "99078b6b-7dee-4476-8861-cc38d886279b",
+    "ExecutionRuleName": "All rule-ODB",
+    "ExecutionRuleVersion": "eba40fc3-537e-47cd-7706-08daa171c4b9",
+    "LabelId": "e36ba39c-e320-4557-8d8d-210d31569f17",
+    "LabelName": "",
+    "LabelVersion": "",
+    "MachineName": "SJ0PR18MB4852",
+    "MgtRuleId": "e325bef2-c80e-4de9-8569-254c2eeb1c22",
+    "PolicyId": "e2b0f7d0-72f8-476a-b553-c6db486d2047",
+    "PolicyName": "Test Policy3",
+    "PolicyVersion": "3d0bbd35-7d1c-469a-68f2-08daa171c592",
+    "RuleMode": "Audit",
+    "ScopedLocationId": "5d1aac4b-204f-405d-9831-3522f43b5fbe",
+    "Severity": "Low",
+    "ConditionMatch":
+    {
+        "DocumentProperties": [],
+        "OtherConditions": [],
+        "SensitiveInformation":
+        [
+            {
+                "Confidence": 80,
+                "Count": 2,
+                "Id": "50b8b56b-4ef8-44c2-a924-03374f5831ce",
+                "SensitiveInformationDetailedClassificationAttributes":
+                [
+                    {
+                        "Confidence": 65,
+                        "Count": 2,
+                        "IsMatch": false
+                    },
+                    {
+                        "Confidence": 75,
+                        "Count": 2,
+                        "IsMatch": false
+                    },
+                    {
+                        "Confidence": 85,
+                        "Count": 1,
+                        "IsMatch": false
+                    }
+                ],
+                "UniqueCount": 2
+            }
+        ]
+    },
+    "IsViewableByExternalUsers": false,
+    "ItemCreationTime": "0001-01-01T00:00:00",
+    "ItemLastModifiedTime": "2022-03-01T04:24:58",
+    "ItemName": "Internation campaign August 2021_CONF.docx",
+    "ItemSize": "747592",
+    "OverRideReason": "",
+    "OverRideType": "",
+    "OverriddenActions": [],
+    "RuleActions":
+    [
+        {
+            "ActionParameters": [],
+            "Name": "StampLabel"
+        }
+    ],
+    "SharePointMetaData":
+    {
+        "FileOwner": "CCTest",
+        "FilePathUrl": "https://sentinele5-my.sharepoint.com/personal/cctest_sentinele5_onmicrosoft_com/Documents/Microsoft%20Teams%20Chat%20Files/Internation%20campaign%20August%202021_CONF.docx",
+        "SiteCollectionUrl": "https://sentinele5-my.sharepoint.com/personal/cctest_sentinele5_onmicrosoft_com"
+    }
+  }
+]

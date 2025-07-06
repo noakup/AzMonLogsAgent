@@ -1,0 +1,34 @@
+[
+    {
+        "TimeGenerated": "2019-01-11T17:59:10.4908614Z",
+        "OperationName": "CONTENTKEYS/READ",
+        "OperationVersion": "1.0",
+        "ResultType": "Succeeded",
+        "ResultSignature": "OK",
+        "DurationMs": 315,
+        "Level": "Informational",
+        "Location": "uswestcentral",
+        "RequestId": "b0243468-d8e5-4edf-a48b-d408e1661050",
+        "KeyType": "Clear",
+        "KeyId": "3321e646-78d0-4896-84ec-c7b98eddfca5",
+        "PolicyName": "56a70229-82d0-4174-82bc-e9d3b14e5dbf",
+        "TokenType": "JWT",
+        "StatusMessage": "OK"
+    },
+    {
+        "TimeGenerated": "2019-01-11T17:59:33.4676382Z",
+        "OperationName": "CONTENTKEYS/READ",
+        "OperationVersion": "1.0",
+        "ResultType": "Failed",
+        "ResultSignature": "Unauthorized",
+        "DurationMs": 2,
+        "Level": "Error",
+        "Location": "uswestcentral",
+        "RequestId": "875af030-b77c-416b-b7e1-58f23ebec182",
+        "KeyType": "Clear",
+        "KeyId": "3321e646-78d0-4896-84ec-c7b98eddfca5",
+        "PolicyName": "56a70229-82d0-4174-82bc-e9d3b14e5dbf",
+        "TokenType": "None",
+        "StatusMessage": "No token present in authorization header or URL."
+    }
+]

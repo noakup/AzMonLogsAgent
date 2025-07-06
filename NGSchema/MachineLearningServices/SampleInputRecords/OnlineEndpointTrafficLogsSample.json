@@ -1,0 +1,35 @@
+[
+    {
+        "time": "2022-05-10T05:25:21.7376293Z",
+        "resourceId": "/SUBSCRIPTIONS/01986D28-6A39-40F4-BB0F-C9B02F8F4131/RESOURCEGROUPS/MIR-V2-RUNNERS-EASTUS2EUAP/PROVIDERS/MICROSOFT.MACHINELEARNINGSERVICES/WORKSPACES/FRONTDOOR-EASTUS2USEUAP/ONLINEENDPOINTS/FRONTDOOR-EASTUS2USEUAP", 
+        "location": "eastus2euap",
+        "operationName": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/score/action",
+        "category": "AmlOnlineEndpointTrafficLog",
+        "properties": {
+            "METHOD":"GET",
+            "PATH":"\/score",
+            "SUBSCRIPTION_ID":"01986d28-6a39-40f4-bb0f-c9b02f8f4131",
+            "WORKSPACE_ID":"d1a068cc-cd23-4066-8dbc-bf32d850583d",
+            "WORKSPACE_NAME":"frontdoor-workspace-1",
+            "ENDPOINT_NAME":"frontdoor-eastus2useuap",
+            "DEPLOYMENT_NAME":"blue",
+            "PROTOCOL":"HTTP\/1.1",
+            "RESPONSE_CODE":"200",
+            "RESPONSE_CODE_REASON":"via_upstream",
+            "MODEL_STATUS_CODE":"",
+            "MODEL_STATUS_REASON":"-",
+            "REQUEST_PAYLOAD_SIZE":"0",
+            "RESPONSE_PAYLOAD_SIZE":"2",
+            "USER_AGENT":"-",
+            "X_REQUEST_ID":"cd8fd46e-ae77-44ad-87e9-a7873528ef8f",
+            "X_MS_CLIENT_REQUEST_ID":"-",
+            "TOTAL_DURATION":"13",
+            "REQUEST_DURATION":"0",
+            "RESPONSE_DURATION":"13",
+            "RESPONSE_THROTTLING_DELAY":"",
+            "REQUEST_THROTTLING_DELAY":"",
+            "AUTH_TYPE":"AMLToken",
+            "IDENTITY_DATA":"cd8fd46e-ae77-44ad-87e9-a7873528ef8f"
+        }
+    }
+]

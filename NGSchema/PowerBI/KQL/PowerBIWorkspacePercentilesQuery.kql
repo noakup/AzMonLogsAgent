@@ -1,0 +1,5 @@
+//Query duration percentiles for a single day in 1 hour bins
+PowerBIDatasetsWorkspace
+| where TimeGenerated > ago(1d)
+| where OperationName == 'QueryEnd'
+| summarize percentiles(Duration, 50, 90) by bin(TimeGenerated, 1h)

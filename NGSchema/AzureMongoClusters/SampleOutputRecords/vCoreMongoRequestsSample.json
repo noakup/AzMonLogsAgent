@@ -1,0 +1,20 @@
+[
+  {
+      "TimeGenerated": "2023-09-12T16:11:35.546407Z",
+      "ClusterName": "logging-test",
+      "OperationName": "BuildInfo",
+      "ActivityId": "4cea4db7-8bcf-4a1a-9d54-e0e37fdd1d38",
+      "ErrorCode": 0,
+      "DurationMs": 0.062,
+      "DatabaseName": "admin",
+      "CollectionName": "<empty>",
+      "ClientIp": "0.0.0.0",
+      "PiiCommandText": "{\"request\":\"{ \"buildInfo\" : 1, \"lsid\" : { \"id\" : CSUUID(\"077e686a-3bed-4ad4-8bda-c6d302495a9c\") }, \"$db\" : \"admin\" }\"}",
+      "RegionName": "eastus2euap",
+      "RequestLength": 76,
+      "ResponseLength": 137,
+      "TransportProtocol": "HTTPs",
+      "UserAgent": "[\"mongosh 1.10.3\",\"nodejs|mongosh\",\"5.7.0|1.10.3\",\"Linux\",\"linux\",\"x64\",\"4.4.0-19041-Microsoft\"]",
+      "UserId": "<empty>"
+    }
+]

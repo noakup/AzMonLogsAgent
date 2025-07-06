@@ -1,0 +1,1167 @@
+{
+  "type": "Microsoft.SecurityInsights/MDE",
+  "displayName": "Azure Sentinel MDE",
+  "description": "All Microsoft Defender for Endpoints (MDE) tables related to Azure Sentinel.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "MDE EDR SOC/MDE EDR SOC",
+  "contactDL": "MDEEDRSOC@microsoft.com",
+  "relatedTables": [],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "name": "DeviceCustomFileEvents",
+      "description": "Microsoft Defender for Endpoints (MDE) file events table for the Custom Collection scenario. This table contains file creation, modification, and other file system events for anything explicitly requested by the customer for collection.",
+      "categories": [
+        "security"
+      ],
+      "dataTypeId": "DEVICECUSTOMFILEEVENTS",
+      "artifactVersion": 1,
+      "tags": {},
+      "properties": {},
+      "intelligencePacks": [],
+      "isResourceCentric": false,
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "tableState": "Production",
+      "isChangeColumnInternalNameAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "tenantId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/DeviceCustomFileEventsTransform.kql",
+      "columns": [
+        {
+          "name": "ActionType",
+          "type": "String",
+          "description": "Type of activity that triggered the event."
+        },
+        {
+          "transformName": "AdditionalFields",
+          "physicalName": "AdditionalFields_Dynamic",
+          "logicalName": "AdditionalFields",
+          "type": "Dynamic",
+          "description": "Additional information about the entity or event."
+        },
+        {
+          "name": "AppGuardContainerId",
+          "type": "String",
+          "description": "Identifier for the virtualized container used by Application Guard to isolate browser activity.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "DeviceId",
+          "type": "String",
+          "description": "Unique identifier for the device in the service.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "DeviceName",
+          "type": "String",
+          "description": "Fully qualified domain name (FQDN) of the device."
+        },
+        {
+          "name": "FileName",
+          "type": "String",
+          "description": "Name of the file that the recorded action was applied to."
+        },
+        {
+          "name": "FileOriginIP",
+          "type": "String",
+          "description": "IP address where the file was downloaded from.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "FileOriginReferrerUrl",
+          "type": "String",
+          "description": "URL of the web page that links to the downloaded file.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "FileOriginUrl",
+          "type": "String",
+          "description": "URL where the file was downloaded from.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "transformName": "FileSize",
+          "physicalName": "FileSize_BigInt",
+          "logicalName": "FileSize",
+          "type": "BigInt",
+          "description": "Size of the file in bytes."
+        },
+        {
+          "name": "FolderPath",
+          "type": "String",
+          "description": "Folder containing the file that the recorded action was applied to."
+        },
+        {
+          "name": "InitiatingProcessAccountDomain",
+          "type": "String",
+          "description": "Domain of the account that ran the process responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessAccountName",
+          "type": "String",
+          "description": "User name of the account that ran the process responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessAccountObjectId",
+          "type": "String",
+          "description": "Azure AD object ID of the user account that ran the process responsible for the event.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "InitiatingProcessAccountSid",
+          "type": "String",
+          "description": "Security Identifier (SID) of the account that ran the process responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessAccountUpn",
+          "type": "String",
+          "description": "User principal name (UPN) of the account that ran the process responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessCommandLine",
+          "type": "String",
+          "description": "Command line used to run the process that initiated the event."
+        },
+        {
+          "name": "InitiatingProcessFileName",
+          "type": "String",
+          "description": "Name of the process that initiated the event."
+        },
+        {
+          "name": "InitiatingProcessFolderPath",
+          "type": "String",
+          "description": "Folder containing the process (image file) that initiated the event."
+        },
+        {
+          "transformName": "InitiatingProcessId",
+          "physicalName": "InitiatingProcessId_BigInt",
+          "logicalName": "InitiatingProcessId",
+          "type": "BigInt",
+          "description": "Process ID (PID) of the process that initiated the event."
+        },
+        {
+          "name": "InitiatingProcessIntegrityLevel",
+          "type": "String",
+          "description": "Integrity level of the process that initiated the event. Windows assigns integrity levels to processes based on certain characteristics, such as if they were launched from an internet download. These integrity levels influence permissions to resources."
+        },
+        {
+          "name": "InitiatingProcessMD5",
+          "type": "String",
+          "description": "MD5 hash of the process (image file) that initiated the event."
+        },
+        {
+          "name": "InitiatingProcessParentFileName",
+          "type": "String",
+          "description": "Name of the parent process that spawned the process responsible for the event."
+        },
+        {
+          "transformName": "InitiatingProcessParentId",
+          "physicalName": "InitiatingProcessParentId_BigInt",
+          "logicalName": "InitiatingProcessParentId",
+          "type": "BigInt",
+          "description": "Process ID (PID) of the parent process that spawned the process responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessSHA1",
+          "type": "String",
+          "description": "SHA-1 hash of the process (image file) that initiated the event."
+        },
+        {
+          "name": "InitiatingProcessSHA256",
+          "type": "String",
+          "description": "SHA-256 hash of the process (image file) that initiated the event. This field is usually not populated - use the SHA1 column when available."
+        },
+        {
+          "name": "InitiatingProcessTokenElevation",
+          "type": "String",
+          "description": "Token type indicating the presence or absence of User Access Control (UAC) privilege elevation applied to the process that initiated the event."
+        },
+        {
+          "name": "IsAzureInfoProtectionApplied",
+          "type": "Bool",
+          "description": "Indicates whether the file is encrypted by Azure Information Protection."
+        },
+        {
+          "name": "MD5",
+          "type": "String",
+          "description": "MD5 hash of the file that the recorded action was applied to."
+        },
+        {
+          "name": "MachineGroup",
+          "type": "String",
+          "description": "Machine group of the machine. This group is used by role-based access control to determine access to the machine."
+        },
+        {
+          "name": "PreviousFileName",
+          "type": "String",
+          "description": "Original name of the file that was renamed as a result of the action."
+        },
+        {
+          "name": "PreviousFolderPath",
+          "type": "String",
+          "description": "Original folder containing the file before the recorded action was applied."
+        },
+        {
+          "transformName": "ReportId",
+          "physicalName": "ReportId_BigInt",
+          "logicalName": "ReportId",
+          "type": "BigInt",
+          "description": "Event identifier based on a repeating counter. To identify unique events, this column must be used in conjunction with the ComputerName and EventTime columns."
+        },
+        {
+          "name": "RequestAccountDomain",
+          "type": "String",
+          "description": "Domain of the account used to remotely initiate the activity."
+        },
+        {
+          "name": "RequestAccountName",
+          "type": "String",
+          "description": "User name of account used to remotely initiate the activity."
+        },
+        {
+          "name": "RequestAccountSid",
+          "type": "String",
+          "description": "Security Identifier (SID) of the account used to remotely initiate the activity."
+        },
+        {
+          "name": "RequestProtocol",
+          "type": "String",
+          "description": "Network protocol, if applicable, used to initiate the activity: Unknown, Local, SMB, or NFS."
+        },
+        {
+          "name": "RequestSourceIP",
+          "type": "String",
+          "description": "IPv4 or IPv6 address of the remote device that initiated the activity.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "RequestSourcePort",
+          "type": "Int",
+          "description": "Source port on the remote device that initiated the activity."
+        },
+        {
+          "name": "SHA1",
+          "type": "String",
+          "description": "SHA-1 hash of the file that the recorded action was applied to."
+        },
+        {
+          "name": "SHA256",
+          "type": "String",
+          "description": "SHA-256 of the file that the recorded action was applied to."
+        },
+        {
+          "name": "SensitivityLabel",
+          "type": "String",
+          "description": "Label applied to an email, file, or other content to classify it for information protection."
+        },
+        {
+          "name": "SensitivitySubLabel",
+          "type": "String",
+          "description": "Sublabel applied to an email, file, or other content to classify it for information protection; sensitivity sublabels are grouped under sensitivity labels but are treated independently."
+        },
+        {
+          "name": "ShareName",
+          "type": "String",
+          "description": "Name of shared folder containing the file."
+        },
+        {
+          "name": "Timestamp",
+          "type": "DateTime",
+          "description": "Date and time the event was recorded by the MDE agent on the endpoint. This is identical to TimeGenerated and added for query portability from MDATP Advanced Hunting.",
+          "isHidden": true,
+          "isDefaultDisplay": false
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Date and time the event was recorded by the MDE agent on the endpoint.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "InitiatingProcessParentCreationTime",
+          "type": "DateTime",
+          "description": "Date and time when the parent of the process responsible for the event was started."
+        },
+        {
+          "name": "InitiatingProcessCreationTime",
+          "type": "DateTime",
+          "description": "Date and time when the process that initiated the event was started."
+        },
+        {
+          "name": "InitiatingProcessFileSize",
+          "type": "BigInt",
+          "description": "Size in bytes of the process (image file) that initiated the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoCompanyName",
+          "type": "String",
+          "description": "Company name from the version information of the process (image file) responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoFileDescription",
+          "type": "String",
+          "description": "Description from the version information of the process (image file) responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoInternalFileName",
+          "type": "String",
+          "description": "Internal file name from the version information of the process (image file) responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoOriginalFileName",
+          "type": "String",
+          "description": "Original file name from the version information of the process (image file) responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoProductName",
+          "type": "String",
+          "description": "Product name from the version information of the process (image file) responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoProductVersion",
+          "type": "String",
+          "description": "Product version from the version information of the process (image file) responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessSessionId",
+          "type": "BigInt",
+          "description": "Windows session ID of the initiating process."
+        },
+        {
+          "name": "IsInitiatingProcessRemoteSession",
+          "type": "Bool",
+          "description": "Indicates whether the initiating process was run under a remote desktop protocol (RDP) session (true) or locally (false)."
+        },
+        {
+          "name": "InitiatingProcessRemoteSessionDeviceName",
+          "type": "String",
+          "description": "Device name of the remote device from which the initiating process’s RDP session was initiated."
+        },
+        {
+          "name": "InitiatingProcessRemoteSessionIP",
+          "type": "String",
+          "description": "IP address of the remote device from which the initiating process’s RDP session was initiated.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "RuleName",
+          "type": "String",
+          "description": "Name of the rule that collected the event"
+        },
+        {
+          "name": "RuleLastModificationTime",
+          "type": "DateTime",
+          "description": "Date and time when the rule that collected the event was last modified."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/DeviceCustomFileEventsInputSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/DeviceCustomFileEventsOutputSample.json"
+    },
+    {
+      "name": "DeviceCustomNetworkEvents",
+      "description": "Microsoft Defender for Endpoints (MDE) device network events table for the Custom Collection scenario. This table contains contains information about network connections and related events initiated by processes running on the endpoint for anything explicitly requested by the customer for collection..",
+      "categories": [
+        "security"
+      ],
+      "dataTypeId": "DEVICECUSTOMNETWORKEVENTS",
+      "artifactVersion": 1,
+      "tags": {},
+      "properties": {},
+      "intelligencePacks": [],
+      "isResourceCentric": false,
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "tableState": "Production",
+      "isChangeColumnInternalNameAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "tenantId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/DeviceCustomNetworkEventsTransform.kql",
+      "columns": [
+        {
+          "name": "ActionType",
+          "type": "String",
+          "description": "Type of activity that triggered the event."
+        },
+        {
+          "name": "AdditionalFields",
+          "type": "Dynamic",
+          "description": "Additional information about the entity or event."
+        },
+        {
+          "name": "AppGuardContainerId",
+          "type": "String",
+          "description": "Identifier for the virtualized container used by Application Guard to isolate browser activity."
+        },
+        {
+          "name": "DeviceId",
+          "type": "String",
+          "description": "Unique identifier for the device in the service.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "DeviceName",
+          "type": "String",
+          "description": "Fully qualified domain name (FQDN) of the device."
+        },
+        {
+          "name": "InitiatingProcessAccountDomain",
+          "type": "String",
+          "description": "Domain of the account that ran the initiating process."
+        },
+        {
+          "name": "InitiatingProcessAccountName",
+          "type": "String",
+          "description": "User name of the account that ran the initiating process."
+        },
+        {
+          "name": "InitiatingProcessAccountObjectId",
+          "type": "String",
+          "description": "Azure AD object ID of the user account that ran the initiating process.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "InitiatingProcessAccountSid",
+          "type": "String",
+          "description": "Security Identifier (SID) of the account that ran the initiating process."
+        },
+        {
+          "name": "InitiatingProcessAccountUpn",
+          "type": "String",
+          "description": "User principal name (UPN) of the account that ran the initiating process."
+        },
+        {
+          "name": "InitiatingProcessCommandLine",
+          "type": "String",
+          "description": "Command line used to run the initiating process."
+        },
+        {
+          "name": "InitiatingProcessFileName",
+          "type": "String",
+          "description": "Name of the initiating process."
+        },
+        {
+          "name": "InitiatingProcessFolderPath",
+          "type": "String",
+          "description": "Folder containing the initiating process (image file)."
+        },
+        {
+          "name": "InitiatingProcessId",
+          "type": "BigInt",
+          "description": "Process ID (PID) of the initiating process."
+        },
+        {
+          "name": "InitiatingProcessIntegrityLevel",
+          "type": "String",
+          "description": "Integrity level of the initiating process. Windows assigns integrity levels to processes based on certain characteristics, such as if they were launched from an internet download. These integrity levels influence permissions to resources.."
+        },
+        {
+          "name": "InitiatingProcessMD5",
+          "type": "String",
+          "description": "MD5 hash of the initiating process (image file)."
+        },
+        {
+          "name": "InitiatingProcessParentFileName",
+          "type": "String",
+          "description": "Name of the parent process that spawned the initiating process."
+        },
+        {
+          "name": "InitiatingProcessParentId",
+          "type": "BigInt",
+          "description": "Process ID (PID) of the parent process that spawned the initiating process."
+        },
+        {
+          "name": "InitiatingProcessSHA1",
+          "type": "String",
+          "description": "SHA-1 hash of the initiating process (image file)."
+        },
+        {
+          "name": "InitiatingProcessSHA256",
+          "type": "String",
+          "description": "SHA-256 hash of the initiating process (image file). In some cases this column may not be populated - please use the InitiatingProcessSHA1 column instead."
+        },
+        {
+          "name": "InitiatingProcessTokenElevation",
+          "type": "String",
+          "description": "Token type indicating the presence or absence of User Access Control (UAC) privilege elevation applied to the initiating process."
+        },
+        {
+          "name": "InitiatingProcessFileSize",
+          "type": "BigInt",
+          "description": "Size of the file (bytes) that ran the process responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoCompanyName",
+          "type": "String",
+          "description": "The company name in version information (image file) responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoProductName",
+          "type": "String",
+          "description": "The product name in version information (image file) responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoProductVersion",
+          "type": "String",
+          "description": "The product version in version information (image file) responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoInternalFileName",
+          "type": "String",
+          "description": "The internal file name in version information (image file) responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoOriginalFileName",
+          "type": "String",
+          "description": "The original file name in version information (image file) responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoFileDescription",
+          "type": "String",
+          "description": "The description in version information (image file) responsible for the event."
+        },
+        {
+          "name": "LocalIP",
+          "type": "String",
+          "description": "IP address assigned to the local machine used during communication.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "LocalIPType",
+          "type": "String",
+          "description": "Type of IP address, for example Public, Private, Reserved, Loopback, Teredo, FourToSixMapping, and Broadcast."
+        },
+        {
+          "name": "LocalPort",
+          "type": "Int",
+          "description": "TCP port on the local machine used during communication."
+        },
+        {
+          "name": "MachineGroup",
+          "type": "String",
+          "description": "Machine group of the machine. This group is used by role-based access control to determine access to the machine."
+        },
+        {
+          "name": "Protocol",
+          "type": "String",
+          "description": "IP protocol used, whether TCP or UDP."
+        },
+        {
+          "name": "RemoteIP",
+          "type": "String",
+          "description": "IP address that was being connected to.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "RemoteIPType",
+          "type": "String",
+          "description": "Type of IP address, for example Public, Private, Reserved, Loopback, Teredo, FourToSixMapping, and Broadcast."
+        },
+        {
+          "name": "RemotePort",
+          "type": "Int",
+          "description": "TCP port on the remote device that was being connected to."
+        },
+        {
+          "name": "RemoteUrl",
+          "type": "String",
+          "description": "URL or fully qualified domain name (FQDN) that was being connected to.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "ReportId",
+          "type": "BigInt",
+          "description": "Event identifier based on a repeating counter. To identify unique events, this column must be used in conjunction with the ComputerName and EventTime columns.."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Date and time the event was recorded by the MDE agent on the endpoint.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Timestamp",
+          "type": "DateTime",
+          "description": "Date and time the event was recorded by the MDE agent on the endpoint. This is identical to TimeGenerated and added for query portability from MDE Advanced Hunting.",
+          "isHidden": true,
+          "isDefaultDisplay": false
+        },
+        {
+          "name": "InitiatingProcessParentCreationTime",
+          "type": "DateTime",
+          "description": "Date and time when the parent of the process responsible for the event was started."
+        },
+        {
+          "name": "InitiatingProcessCreationTime",
+          "type": "DateTime",
+          "description": "Date and time when the process that initiated the event was started."
+        },
+        {
+          "name": "InitiatingProcessSessionId",
+          "type": "BigInt",
+          "description": "Windows session ID of the initiating process."
+        },
+        {
+          "name": "IsInitiatingProcessRemoteSession",
+          "type": "Bool",
+          "description": "Indicates whether the initiating process was run under a remote desktop protocol (RDP) session (true) or locally (false)."
+        },
+        {
+          "name": "InitiatingProcessRemoteSessionDeviceName",
+          "type": "String",
+          "description": "Device name of the remote device from which the initiating process’s RDP session was initiated."
+        },
+        {
+          "name": "InitiatingProcessRemoteSessionIP",
+          "type": "String",
+          "description": "IP address of the remote device from which the initiating process’s RDP session was initiated.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "RuleName",
+          "type": "String",
+          "description": "Name of the rule that collected the event"
+        },
+        {
+          "name": "RuleLastModificationTime",
+          "type": "DateTime",
+          "description": "Date and time when the rule that collected the event was last modified."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/DeviceCustomNetworkEventsInputSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/DeviceCustomNetworkEventsOutputSample.json"
+    },
+    {
+      "name": "DeviceCustomRegistryEvents",
+      "description": "Microsoft Defender for Endpoints (MDE) device registry events for the Custom Collection scenario. This table contains contains creation and modification of registry entries on the endpoint, and information about the processes initiating such events for anything explicitly requested by the customer for collection.",
+      "categories": [
+        "security"
+      ],
+      "dataTypeId": "DEVICECUSTOMREGISTRYEVENTS",
+      "artifactVersion": 1,
+      "tags": {},
+      "properties": {},
+      "intelligencePacks": [],
+      "isResourceCentric": false,
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "tableState": "Validation",
+      "isChangeColumnInternalNameAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "tenantId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/DeviceCustomRegistryEventsTransform.kql",
+      "columns": [
+        {
+          "name": "ActionType",
+          "type": "String",
+          "description": "Type of activity that triggered the event."
+        },
+        {
+          "name": "AppGuardContainerId",
+          "type": "String",
+          "description": "Identifier for the virtualized container used by Application Guard to isolate browser activity.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "DeviceId",
+          "type": "String",
+          "description": "Unique identifier for the device in the service.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "DeviceName",
+          "type": "String",
+          "description": "Fully qualified domain name (FQDN) of the device."
+        },
+        {
+          "name": "InitiatingProcessAccountDomain",
+          "type": "String",
+          "description": "Domain of the account that ran the initiating process."
+        },
+        {
+          "name": "InitiatingProcessAccountName",
+          "type": "String",
+          "description": "User name of the account that ran the initiating process."
+        },
+        {
+          "name": "InitiatingProcessAccountObjectId",
+          "type": "String",
+          "description": "Azure AD object ID of the user account that ran the initiating process.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "InitiatingProcessAccountSid",
+          "type": "String",
+          "description": "Security Identifier (SID) of the account that ran the initiating process."
+        },
+        {
+          "name": "InitiatingProcessAccountUpn",
+          "type": "String",
+          "description": "User principal name (UPN) of the account that ran the initiating process."
+        },
+        {
+          "name": "InitiatingProcessCommandLine",
+          "type": "String",
+          "description": "Command line used to run the initiating process."
+        },
+        {
+          "name": "InitiatingProcessFileName",
+          "type": "String",
+          "description": "Name of the initiating process."
+        },
+        {
+          "name": "InitiatingProcessFolderPath",
+          "type": "String",
+          "description": "Folder containing the initiating process (image file)."
+        },
+        {
+          "name": "InitiatingProcessId",
+          "type": "BigInt",
+          "description": "Process ID (PID) of the initiating process."
+        },
+        {
+          "name": "InitiatingProcessIntegrityLevel",
+          "type": "String",
+          "description": "Integrity level of the initiating process. Windows assigns integrity levels to processes based on certain characteristics, such as if they were launched from an internet download. These integrity levels influence permissions to resources.."
+        },
+        {
+          "name": "InitiatingProcessMD5",
+          "type": "String",
+          "description": "MD5 hash of the initiating process (image file)."
+        },
+        {
+          "name": "InitiatingProcessParentFileName",
+          "type": "String",
+          "description": "Name of the parent process that spawned the initiating process."
+        },
+        {
+          "name": "InitiatingProcessParentId",
+          "type": "BigInt",
+          "description": "Process ID (PID) of the parent process that spawned the initiating process."
+        },
+        {
+          "name": "InitiatingProcessSHA1",
+          "type": "String",
+          "description": "SHA-1 hash of the initiating process (image file)."
+        },
+        {
+          "name": "InitiatingProcessSHA256",
+          "type": "String",
+          "description": "SHA-256 hash of the initiating process (image file). In some cases this column may not be populated - please use the InitiatingProcessSHA1 column instead."
+        },
+        {
+          "name": "InitiatingProcessTokenElevation",
+          "type": "String",
+          "description": "Token type indicating the presence or absence of User Access Control (UAC) privilege elevation applied to the initiating process."
+        },
+        {
+          "name": "InitiatingProcessFileSize",
+          "type": "BigInt",
+          "description": "The size of the file (bytes) that ran the process responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoCompanyName",
+          "type": "String",
+          "description": "The company name in version information (image file) responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoProductName",
+          "type": "String",
+          "description": "The product name in version information (image file) responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoProductVersion",
+          "type": "String",
+          "description": "The product version in version information (image file) responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoInternalFileName",
+          "type": "String",
+          "description": "The internal file name in version information (image file) responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoOriginalFileName",
+          "type": "String",
+          "description": "The original file name in version information (image file) responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoFileDescription",
+          "type": "String",
+          "description": "The description in version information (image file) responsible for the event."
+        },
+        {
+          "name": "MachineGroup",
+          "type": "String",
+          "description": "Machine group of the machine. This group is used by role-based access control to determine access to the machine."
+        },
+        {
+          "name": "PreviousRegistryKey",
+          "type": "String",
+          "description": "Original registry key before it was modified."
+        },
+        {
+          "name": "PreviousRegistryValueData",
+          "type": "String",
+          "description": "Original data of the registry value before it was modified."
+        },
+        {
+          "name": "PreviousRegistryValueName",
+          "type": "String",
+          "description": "Original name of the registry value before it was modified."
+        },
+        {
+          "name": "RegistryKey",
+          "type": "String",
+          "description": "Registry key that the recorded action was applied to."
+        },
+        {
+          "name": "RegistryValueData",
+          "type": "String",
+          "description": "Data of the registry value that the recorded action was applied to."
+        },
+        {
+          "name": "RegistryValueName",
+          "type": "String",
+          "description": "Name of the registry value that the recorded action was applied to."
+        },
+        {
+          "name": "RegistryValueType",
+          "type": "String",
+          "description": "Data type, such as binary or string, of the registry value that the recorded action was applied to."
+        },
+        {
+          "name": "ReportId",
+          "type": "BigInt",
+          "description": "Event identifier based on a repeating counter. To identify unique events, this column must be used in conjunction with the ComputerName and EventTime columns.."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Date and time the event was recorded by the MDE agent on the endpoint.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Timestamp",
+          "type": "DateTime",
+          "description": "Date and time the event was recorded by the MDE agent on the endpoint. This is identical to TimeGenerated and added for query portability from MDATP Advanced Hunting.",
+          "isHidden": true,
+          "isDefaultDisplay": false
+        },
+        {
+          "name": "InitiatingProcessParentCreationTime",
+          "type": "DateTime",
+          "description": "Date and time when the parent of the process responsible for the event was started."
+        },
+        {
+          "name": "InitiatingProcessCreationTime",
+          "type": "DateTime",
+          "description": "Date and time when the process that initiated the event was started."
+        },
+        {
+          "name": "InitiatingProcessSessionId",
+          "type": "BigInt",
+          "description": "Windows session ID of the initiating process."
+        },
+        {
+          "name": "IsInitiatingProcessRemoteSession",
+          "type": "Bool",
+          "description": "Indicates whether the initiating process was run under a remote desktop protocol (RDP) session (true) or locally (false)."
+        },
+        {
+          "name": "InitiatingProcessRemoteSessionDeviceName",
+          "type": "String",
+          "description": "Device name of the remote device from which the initiating process’s RDP session was initiated."
+        },
+        {
+          "name": "InitiatingProcessRemoteSessionIP",
+          "type": "String",
+          "description": "IP address of the remote device from which the initiating process’s RDP session was initiated.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "RuleName",
+          "type": "String",
+          "description": "Name of the rule that collected the event"
+        },
+        {
+          "name": "RuleLastModificationTime",
+          "type": "DateTime",
+          "description": "Date and time when the rule that collected the event was last modified."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/DeviceCustomRegistryEventsInputSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/DeviceCustomRegistryEventsOutputSample.json"
+    },
+    {
+      "name": "DeviceCustomScriptEvents",
+      "description": "Microsoft Defender for Endpoints (MDE) script execution events table for the Custom Collection scenario. This table contains information about script execution and related process details for anything explicitly requested by the customer for collection.",
+      "categories": [
+        "security"
+      ],
+      "dataTypeId": "DEVICECUSTOMSCRIPTEVENTS",
+      "artifactVersion": 1,
+      "tags": {},
+      "properties": {},
+      "intelligencePacks": [],
+      "isResourceCentric": false,
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "tableState": "Production",
+      "isChangeColumnInternalNameAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "tenantId",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/DeviceCustomScriptEventsTransform.kql",
+      "columns": [
+        {
+          "name": "ActionType",
+          "type": "String",
+          "description": "Type of activity that triggered the event."
+        },
+        {
+          "name": "DeviceId",
+          "type": "String",
+          "description": "Unique identifier for the device in the service.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "DeviceName",
+          "type": "String",
+          "description": "Fully qualified domain name (FQDN) of the device."
+        },
+        {
+          "name": "ReportId",
+          "type": "BigInt",
+          "description": "Event identifier based on a repeating counter. To identify unique events, this column must be used in conjunction with the DeviceName and Timestamp columns."
+        },
+        {
+          "name": "Timestamp",
+          "type": "DateTime",
+          "description": "Date and time when the record was generated.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Date and time the event was recorded by the MDE agent on the endpoint.",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "InitiatingProcessId",
+          "type": "BigInt",
+          "description": "Process ID (PID) of the process that initiated the event."
+        },
+        {
+          "name": "InitiatingProcessCreationTime",
+          "type": "DateTime",
+          "description": "Date and time when the process that initiated the event was started."
+        },
+        {
+          "name": "InitiatingProcessCommandLine",
+          "type": "String",
+          "description": "Command line used to run the process that initiated the event."
+        },
+        {
+          "name": "InitiatingProcessParentFileName",
+          "type": "String",
+          "description": "Name of the parent process that spawned the process responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessParentId",
+          "type": "BigInt",
+          "description": "Process ID (PID) of the parent process that spawned the process responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessParentCreationTime",
+          "type": "DateTime",
+          "description": "Date and time when the parent of the process responsible for the event was started."
+        },
+        {
+          "name": "InitiatingProcessSHA1",
+          "type": "String",
+          "description": "SHA-1 hash of the process (image file) that initiated the event."
+        },
+        {
+          "name": "InitiatingProcessSHA256",
+          "type": "String",
+          "description": "SHA-256 hash of the process (image file) that initiated the event. This field is usually not populated - use the SHA1 column when available."
+        },
+        {
+          "name": "InitiatingProcessMD5",
+          "type": "String",
+          "description": "MD5 hash of the process (image file) that initiated the event."
+        },
+        {
+          "name": "InitiatingProcessFileName",
+          "type": "String",
+          "description": "Name of the process that initiated the event."
+        },
+        {
+          "name": "InitiatingProcessFolderPath",
+          "type": "String",
+          "description": "Folder containing the process (image file) that initiated the event."
+        },
+        {
+          "name": "InitiatingProcessAccountName",
+          "type": "String",
+          "description": "User name of the account that ran the process responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessAccountDomain",
+          "type": "String",
+          "description": "Domain of the account that ran the process responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessSignatureStatus",
+          "type": "String",
+          "description": "Information about the signature status of the process (image file) that initiated the event."
+        },
+        {
+          "name": "InitiatingProcessSignerType",
+          "type": "String",
+          "description": "Type of file signer of the process (image file) that initiated the event."
+        },
+        {
+          "name": "InitiatingProcessAccountSid",
+          "type": "String",
+          "description": "Security Identifier (SID) of the account that ran the process responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessAccountUpn",
+          "type": "String",
+          "description": "User principal name (UPN) of the account that ran the process responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessAccountObjectId",
+          "type": "String",
+          "description": "Azure AD object ID of the user account that ran the process responsible for the event.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "InitiatingProcessFileSize",
+          "type": "BigInt",
+          "description": "Size of the process (image file) that initiated the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoCompanyName",
+          "type": "String",
+          "description": "Company name from the version information of the process (image file) responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoProductName",
+          "type": "String",
+          "description": "Product name from the version information of the process (image file) responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoProductVersion",
+          "type": "String",
+          "description": "Product version from the version information of the process (image file) responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoInternalFileName",
+          "type": "String",
+          "description": "Internal file name from the version information of the process (image file) responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoOriginalFileName",
+          "type": "String",
+          "description": "Original file name from the version information of the process (image file) responsible for the event."
+        },
+        {
+          "name": "InitiatingProcessVersionInfoFileDescription",
+          "type": "String",
+          "description": "Description from the version information of the process (image file) responsible for the event."
+        },
+        {
+          "name": "ScriptContent",
+          "type": "String",
+          "description": "Content of the executed script."
+        },
+        {
+          "name": "ScriptContentSHA256",
+          "type": "String",
+          "description": "SHA256 over the script content."
+        },
+        {
+          "name": "RuleName",
+          "type": "String",
+          "description": "Name of the rule that collected the event"
+        },
+        {
+          "name": "RuleLastModificationTime",
+          "type": "DateTime",
+          "description": "Date and time when the rule that collected the event was last modified."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/DeviceCustomScriptEventsInputSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/DeviceCustomScriptEventsOutputSample.json"
+    }
+  ],
+  "functions": [],
+  "queries": []
+}

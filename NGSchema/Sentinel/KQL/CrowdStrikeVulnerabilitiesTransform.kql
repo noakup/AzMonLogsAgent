@@ -1,0 +1,18 @@
+source
+| project
+    TimeGenerated       = now(),
+    Id                  = tostring(id),
+    Cid                 = tostring(cid),
+    Aid                 = tostring(aid),
+    VulnerabilityId     = tostring(vulnerability_id),
+    DataProviders       = todynamic(data_providers),
+    CreatedTimestamp    = todatetime(created_timestamp),
+    UpdatedTimestamp    = todatetime(updated_timestamp),
+    Status              = tostring(status),
+    Apps                = todynamic(apps),
+    SuppressionInfo     = todynamic(suppression_info),
+    Confidence          = tostring(confidence),
+    App                 = todynamic(app),
+    Cve                 = todynamic(cve),
+    HostInfo            = todynamic(host_info),
+    Remediation         = todynamic(remediation)

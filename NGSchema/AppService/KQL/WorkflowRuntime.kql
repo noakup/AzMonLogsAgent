@@ -1,0 +1,23 @@
+source
+| extend properties = parse_json(properties)
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    StartTime = todatetime(properties.startTime),
+    EndTime = todatetime(properties.endTime),
+    Status = tostring(properties.status),
+    Code = tostring(properties.code),
+    Error = tostring(properties.error),
+    WorkflowId = tostring(properties.resource.workflowId),
+    WorkflowName = tostring(properties.resource.workflowName),
+    RunId = tostring(properties.resource.runId),
+    TriggerName = tostring(properties.resource.triggerName),
+    ActionName = tostring(properties.resource.actionName),
+    OriginRunId = tostring(properties.resource.originRunId),
+    ClientTrackingId = tostring(properties.correlation.clientTrackingId),
+    ActionTrackingId = tostring(properties.correlation.actionTrackingId),
+    Location = tostring(properties.resource.location),
+    ClientKeywords = tostring(properties.correlation.clientKeywords),
+    Tags = tostring(properties.tags),
+    TrackedProperties = tostring(properties.trackedProperties),
+    RetryHistory = tostring(properties.retryHistory)

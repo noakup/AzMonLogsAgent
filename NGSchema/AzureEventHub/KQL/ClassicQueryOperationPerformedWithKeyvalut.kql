@@ -1,0 +1,4 @@
+AzureDiagnostics
+| where ResourceProvider == \"MICROSOFT.EVENTHUB\"
+| where Category == \"info\" and OperationName == \"disable\" or OperationName == \"restore\"
+| project Message

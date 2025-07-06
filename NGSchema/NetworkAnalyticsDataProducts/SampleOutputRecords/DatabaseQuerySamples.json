@@ -1,0 +1,45 @@
+[
+    {
+        "TimeGenerated": "2023-11-16T16:24:26.7426749Z",
+        "Location": "eastus",
+        "OperationName": "MICROSOFT.KUSTO/CLUSTERS/QUERY/ACTION",
+        "StartedOn": "2023-11-10T17:55:53.8210935Z",
+        "LastUpdatedOn": "2023-11-10T17:55:53.8210935Z",
+        "Database": "enzymedp",
+        "State": "Completed",
+        "RootActivityId": "3181210c-8f9f-4d89-8c28-26842c0b39f7",
+        "FailureReason": "[none]",
+        "ComponentFault": "[none]",
+        "TotalCpu": "00:00:00",
+        "Application": "Kusto.Web.KWE:2.121.0-4|embeddedIn:https://azurekusto.hosting.portal.azure.net/",
+        "MemoryPeak": 1573200,
+        "Duration": "00:00:00",
+        "User": "sharathk@microsoft.com",
+        "Principal": "aaduser=4306c7bd-0c0c-4736-81a0-027b8807f7fb;72f988bf-86f1-41af-91ab-2d7cd011db47",
+        "MinDataScannedTime": "2023-11-10T17:55:41.0742491",
+        "MaxDataScannedTime": "2023-11-10T17:55:41.0742491",
+        "TotalExtentsCount": 6,
+        "ScannedExtentsCount": 1,
+        "TotalRowsCount": 284237,
+        "ScannedRowsCount": 500,
+        "CacheMemoryHits": 0,
+        "CacheMemoryMisses": 0,
+        "CacheDiskHits": 0,
+        "CacheDiskMisses": 0,
+        "CacheShardsHotHits": 5129,
+        "CacheShardsHotMisses": 0,
+        "CacheShardsColdHits": 0,
+        "CacheShardsColdMisses": 0,
+        "CacheShardsBypassBytes": 0,
+        "TableCount": 1,
+        "TablesStatistics": [
+            {
+                "RowCount": 10,
+                "TableSize": 660
+            }
+        ],
+        "WorkloadGroup": "default",
+        "Text": "_quality_edr\r\n| limit 10",
+        "correlationId": "Kusto.Web.KWE.Query;d8768e3e-8479-499c-ae8e-5a2c9e3f7fb3;0fc9c3b2-0bf4-47f1-82fd-8f625ea5a1ef"
+    }
+]

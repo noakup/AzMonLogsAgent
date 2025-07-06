@@ -1,0 +1,18 @@
+[
+  {
+   "version": "2",
+   "account-id": "072643944673",
+   "interface-id": "eni-0e08c7ffb192bce0f",
+   "srcaddr": "",
+   "dstaddr": "",
+   "srcport": "",
+   "dstport": "",
+   "protocol": "",
+   "packets": "",
+   "bytes": "",
+   "start": "1749427252",
+   "end": "1749427313",
+   "action": "",
+   "log-status": "NODATA"
+  }
+]

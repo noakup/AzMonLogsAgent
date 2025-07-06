@@ -1,0 +1,5 @@
+// To create an alert for this query, click '+ New alert rule'
+AzureDiagnostics
+| where ResourceProvider == \"MICROSOFT.EVENTHUB\"
+| where Category == \"Error\" and OperationName == \"wrapkey\"
+| project Message, _ResourceId

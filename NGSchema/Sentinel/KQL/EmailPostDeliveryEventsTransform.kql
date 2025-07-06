@@ -1,0 +1,19 @@
+source
+| extend
+propertiesTable = parse_json(properties)
+| project
+Action = tostring(propertiesTable["Action"]),
+ActionResult = tostring(propertiesTable["ActionResult"]),
+ActionTrigger = tostring(propertiesTable["ActionTrigger"]),
+ActionType = tostring(propertiesTable["ActionType"]),
+DeliveryLocation = tostring(propertiesTable["DeliveryLocation"]),
+InternetMessageId = tostring(propertiesTable["InternetMessageId"]),
+NetworkMessageId = tostring(propertiesTable["NetworkMessageId"]),
+RecipientEmailAddress = tostring(propertiesTable["RecipientEmailAddress"]),
+ReportId = tostring(propertiesTable["ReportId"]),
+ThreatTypes = tostring(propertiesTable["ThreatTypes"]),
+DetectionMethods = tostring(propertiesTable["DetectionMethods"]),
+TimeGenerated = todatetime(propertiesTable["Timestamp"]),
+Timestamp = todatetime(propertiesTable["Timestamp"]),
+SenderFromAddress = tostring(propertiesTable["SenderFromAddress"]), 
+EmailDirection = tostring(propertiesTable["EmailDirection"])

@@ -1,0 +1,18 @@
+[
+    {
+        "TimeGenerated": "2023-01-10T23:44:47.0000000Z",
+        "Category": "guard",
+        "Level": "INFO",
+        "Message": "FLAG: --vmodule=\"\"",
+        "Stream": "stderr",
+        "PodName": "guard-5f8fffc689-wpzmh"
+    },
+    {
+        "TimeGenerated": "2023-01-10T23:44:47.0000000Z",
+        "Category": "guard",
+        "Level": "INFO",
+        "Message": "setting up authz providers",
+        "Stream": "stderr",
+        "PodName": "guard-5f8fffc689-wpzmh"
+    }
+]

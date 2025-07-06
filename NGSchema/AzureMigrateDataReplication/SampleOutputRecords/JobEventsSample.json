@@ -1,0 +1,20 @@
+[
+    {
+        "TimeGenerated": "2024-07-04T23:26:58.2919852Z",
+        "OperationName": "DeleteProtectedItemWorkflow",
+        "Category": "JobEvents",
+        "CorrelationId": "fb85f9e4-2725-4d94-ae9b-954a5af6db65",
+        "AffectedObjectId": "3d983c8f-b7d1-59e1-a769-784a20d4af8a",
+        "AffectedObjectName": "test-vm",
+        "AffectedObjectType": "ProtectedItem",
+        "State": "Started",
+        "HasInformation": false,
+        "HasWarnings": false,
+        "HasErrors": false,
+        "Message": "Azure Site Recovery Job: DeleteProtectedItemWorkflow Started.",
+        "StartTime": "2024-07-04T23:26:58.2919852Z",
+        "EndTime": null,
+        "TimeTaken": null,
+        "Version": "2021-02-16-preview"
+    }
+]

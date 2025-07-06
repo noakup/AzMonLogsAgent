@@ -1,0 +1,12 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    Location = tostring(location),
+    OperationName = tostring(operationName),
+    CorrelationId = tostring(correlationId),
+    ResultType = tostring(resultType),
+    LogLevel = tostring(level),
+    Message = tostring(properties.Message),
+    DetailedMessage = tostring(properties.DetailedMessage),
+    NetworkResourceIds = todynamic(properties.MemberResourceIds),
+    GroupMemberships = todynamic(properties.GroupMemberships)

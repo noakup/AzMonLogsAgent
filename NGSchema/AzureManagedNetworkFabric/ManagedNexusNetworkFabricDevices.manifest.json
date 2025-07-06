@@ -1,0 +1,437 @@
+{
+  "type": "Microsoft.ManagedNetworkFabric/networkDevices",
+  "displayName": "Network Devices (Operator Nexus)",
+  "description": "Azure Operator Nexus is a carrier grade hybrid cloud platform built for mission critical mobile network applications. This table represents all the logs collected from the Nexus Network Fabric - Network Devices.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "NETWORKFABRICAUTOMATION/Triage",
+  "contactDL": "afo-nf-all@microsoft.com",
+  "relatedFunctions": [],
+  "relatedTables": [
+    "AzureMetrics",
+    "AzureActivity"
+  ],
+  "tables": [
+    {
+      "workflowName": "MNFDeviceLogsWorkflow",
+      "transformName": "MNFDeviceLogs",
+      "physicalName": "MNFDeviceUpdates",
+      "logicalName": "MNFDeviceUpdates",
+      "isChangeColumnInternalNameAllowed": true,
+      "description": "Components state updates representing the status changes of ethernet ports, power supply units, fan modules, chassis and device software.",
+      "categories": [ "network" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 6,
+      "dataTypeId": "MICROSOFTMANAGEDNETWORKFABRIC_COMPONENTSTATEUPDATES",
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/TransformComponentStateUpdates.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the log was generated."
+        },
+        {
+          "name":"EventName",
+          "type":"String",
+          "isDefaultDisplay":true,
+          "description":"Event name describing the update performed on Nexus network fabric devices."
+        },
+        {
+          "name":"EventCategory",
+          "type":"String",
+          "isDefaultDisplay":true,
+          "description":"Event category describing the category of events on Nexus network fabric devices."
+        },
+        {
+          "name": "FabricId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Fabric ID of the Nexus cluster which was generating the log.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "DeviceId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Device ID of the Nexus cluster which was generating the log.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "transformName": "DeviceTime",
+          "physicalName": "DeviceTime_Internal",
+          "logicalName": "DeviceTime",
+          "type": "BigInt",
+          "isDefaultDisplay": true,
+          "description": "Time when the log was generated in the Nexus cluster. This is in unix time format which is the number of seconds elapsed since January 1, 1970 UTC."
+        },
+        {   
+          "transformName": "Properties",
+          "physicalName": "Properties_Internal",
+          "logicalName": "Properties",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Properties of the log."
+        } 
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/ComponentStateUpdates.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/ComponentStateUpdates.json"
+    },
+    {
+      "name": "MNFSystemStateMessageUpdates",
+      "description": "System state message update events in the Nexus network fabric devices.",
+      "categories": [ "network" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 4,
+      "dataTypeId": "MICROSOFTMANAGEDNETWORKFABRIC_SYSTEMSTATEMESSAGEUPDATES",
+      "isResourceCentric": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/TransformSystemStateMessageUpdates.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the log was generated."
+        },
+        {
+          "name":"EventName",
+          "type":"String",
+          "isDefaultDisplay":true,
+          "description":"Event name describing the update performed on Nexus network fabric devices."
+        },
+        {
+          "name":"EventCategory",
+          "type":"String",
+          "isDefaultDisplay":true,
+          "description":"Event category describing the category of events on Nexus network fabric devices."
+        },
+        {
+          "name": "FabricId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Fabric ID of the Nexus cluster which was generating the log.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "DeviceId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Device ID of the Nexus cluster which was generating the log.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "transformName": "DeviceTime",
+          "physicalName": "DeviceTime_Internal",
+          "logicalName": "DeviceTime",
+          "type": "BigInt",
+          "isDefaultDisplay": true,
+          "description": "Time when the log was generated in the Nexus cluster. This is in unix time format which is the number of seconds elapsed since January 1, 1970 UTC."
+        },
+        {
+          "name": "Properties",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Properties of the log."
+        }     
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SystemStateMessageUpdates.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/SystemStateMessageUpdates.json"
+    },
+    {
+      "name": "MNFSystemSessionHistoryUpdates",
+      "description": "System session history update events in the Nexus network fabric devices.",
+      "categories": [ "network" ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 2,
+      "dataTypeId": "MICROSOFTMANAGEDNETWORKFABRIC_SYSTEMSESSIONHISTORYUPDATES",
+      "isResourceCentric": true,
+      "isChangeColumnInternalNameAllowed": true,
+      "tableState": "Production",
+      "isLakeAllowed": true,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/TransformSystemSessionHistoryUpdates.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "Timestamp (UTC) when the log was generated."
+        },
+        {
+          "name":"EventCategory",
+          "type":"String",
+          "isDefaultDisplay":true,
+          "description":"Event category describing the category of events on Nexus network fabric devices."
+        },
+        {
+          "name": "FabricId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Fabric ID of the Nexus cluster which was generating the log.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "DeviceId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Device ID of the Nexus cluster which was generating the log.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "DeviceName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Name of the device which was generating the log."
+        },
+        {
+          "name": "DiffTimeStamp",
+          "type": "BigInt",
+          "isDefaultDisplay": true,
+          "description": "Time when the diffs were generated in the Nexus cluster. This is in unix time format which is the number of seconds elapsed since January 1, 1970 UTC."
+        },
+        {
+          "name": "GnmiTimeStamp",
+          "type": "BigInt",
+          "isDefaultDisplay": true,
+          "description": "Time when the log was generated in the Nexus cluster. This is in unix time format which is the number of seconds elapsed since January 1, 1970 UTC."
+        },
+        {
+          "name": "SessionUpdateTimeStamp",
+          "type": "BigInt",
+          "isDefaultDisplay": true,
+          "description": "Time when the session was updated. This is in unix time format which is the number of seconds elapsed since January 1, 1970 UTC."
+        },
+        {
+          "name": "SessionUpdateSize",
+          "type": "BigInt",
+          "isDefaultDisplay": true,
+          "description": "Size of the session update."
+        },
+        {
+          "name": "SessionUpdateUser",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "User who updated the session."
+        },
+        {
+          "name": "SessionUpdateSessionId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Session ID of the update."
+        } ,
+        {
+          "name": "SessionDiffs",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Differences in the session."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/SystemSessionHistoryUpdates.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/SystemSessionHistoryUpdates.json"
+    }
+  ],
+  "functions": [],
+  "queries": [
+    {
+      "id": "96c338bf-610b-4231-83b5-df264ddbf749",
+      "displayName": "Find all entries where value is active",
+      "description": "Components state updates events are projected from devices. This query will list out all logs where value is active.",
+      "bodyFilePath": "KQL/ComponentStateUpdatesQuery.kql",
+      "categories": [
+        "network"
+      ],
+      "tags": {
+        "Topic": [ "Diagnostics"]
+      },
+      "properties": {
+          "ExampleQuery": true,
+          "QueryAttributes": {
+              "IsMultiResource": true
+          }
+      },
+      "relatedTables": [
+          "MNFDeviceUpdates"
+      ]
+    },
+    {
+      "id": "f789e18e-9204-43f0-9656-ae305a7c56d3",
+      "displayName": "Find all entries where value is up",
+      "description": "Interface status updates are projected from devices. This query will list out all logs where value is up.",
+      "bodyFilePath": "KQL/InterfaceStateUpdatesQuery.kql",
+      "categories": [
+        "network"
+      ],
+      "tags": {
+        "Topic": [ "Diagnostics"]
+      },
+      "properties": {
+          "ExampleQuery": true,
+          "QueryAttributes": {
+              "IsMultiResource": true
+          }
+      },
+      "relatedTables": [
+          "MNFDeviceUpdates"
+      ]
+    },
+    {
+      "id": "53052d78-882f-46b7-a711-69dca0f58af4",
+      "displayName": "Find all events of the type VxlanVlanToVniVlan",
+      "description": "Interface vxlan updates events are projected from devices. This query will list out all the logs where events is of the type VxlanVlanToVniVlan.",
+      "bodyFilePath": "KQL/InterfaceVxlanUpdatesQuery.kql",
+      "categories": [
+        "network"
+      ],
+      "tags": {
+        "Topic": [ "Diagnostics"]
+      },
+      "properties": {
+          "ExampleQuery": true,
+          "QueryAttributes": {
+              "IsMultiResource": true
+          }
+      },
+      "relatedTables": [
+          "MNFDeviceUpdates"
+      ]
+    },
+    {
+      "id": "ade0fc51-681d-490d-b8f5-216b3203e419",
+      "displayName": "Find all entries where afisafiname is not of the type L2VPN_EVPN",
+      "description": "Network instance neighbor updates that happened between routers during a BGP communication are listed with types of afisafiname. This is the query to filter the logs where afisafiname is not of the type L2VPN_EVPN.",
+      "bodyFilePath": "KQL/NetworkInstanceBgpNeighborUpdatesQuery.kql",
+      "categories": [
+        "network"
+      ],
+      "tags": {
+        "Topic": [ "Diagnostics"]
+      },
+      "properties": {
+          "ExampleQuery": true,
+          "QueryAttributes": {
+              "IsMultiResource": true
+          }
+      },
+      "relatedTables": [
+          "MNFDeviceUpdates"
+      ]
+    },
+    {
+      "id": "c21d56d3-8079-46ff-b056-9d5be6505e88",
+      "displayName": "Find all entries where network instance name is of the type workload-mgmt",
+      "description": "Network instance updates events from device will be reported here with different instance name. This query filters all network instances of the type workload-mgmt.",
+      "bodyFilePath": "KQL/NetworkInstanceUpdatesQuery.kql",
+      "categories": [
+        "network"
+      ],
+      "tags": {
+        "Topic": [ "Diagnostics"]
+      },
+      "properties": {
+          "ExampleQuery": true,
+          "QueryAttributes": {
+              "IsMultiResource": true
+          }
+      },
+      "relatedTables": [
+          "MNFDeviceUpdates"
+      ]
+    },
+    {
+      "id": "a1378514-505d-453b-a0a9-44cd62cd5228",
+      "displayName": "Find all errors from Syslog",
+      "description": "Syslog from device will be reported with message severity codes. This query filters all error messages from the Syslog.",
+      "bodyFilePath": "KQL/SystemStateMessageUpdatesQuery.kql",
+      "categories": [
+        "network"
+      ],
+      "tags": {
+        "Topic": [ "Diagnostics", "Errors" ]
+      },
+      "properties": {
+          "ExampleQuery": true,
+          "QueryAttributes": {
+              "IsMultiResource": true
+          }
+      },
+      "relatedTables": [
+          "MNFSystemStateMessageUpdates"
+      ]
+    },
+    {
+      "id": "6f7d4fb8-e91c-4fa3-aa6f-c695d21e5e1a",
+      "displayName": "Find all entries where session update user is admin",
+      "description": "System session history update events are projected from devices. This query will list out all logs where session update user is admin.",
+      "bodyFilePath": "KQL/SystemSessionHistoryUpdatesQuery.kql",
+      "categories": [
+        "network"
+      ],
+      "tags": {
+        "Topic": [ "Diagnostics"]
+      },
+      "properties": {
+          "ExampleQuery": true,
+          "QueryAttributes": {
+              "IsMultiResource": true
+          }
+      },
+      "relatedTables": [
+          "MNFSystemSessionHistoryUpdates"
+      ]
+    }
+  ]
+}

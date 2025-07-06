@@ -1,0 +1,257 @@
+{
+    "type": "Microsoft.LoadTestService/loadtests",
+    "displayName": "Azure Load Testing",
+    "description": "Azure Load Testing Service enables developers and testers to generate high-scale load that reveal actionable insights into app performance, scalability, and capacity with a fully managed service.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "CloudNativeTesting/Triage",
+    "contactDL": "azload_dev@microsoft.com",
+    "relatedTables": [
+        "AzureActivity"
+    ],
+    "tables": [
+        {
+            "name": "AzureLoadTestingOperation",
+            "description": "Details about the operations which are performed on the Azure Load Testing resource. For example, operations like creation of a Test, Test run etc.",
+            "categories": [
+                "resources",
+                "audit"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 4,
+            "dataTypeId": "MICROSOFTLOADTESTSERVICE_OPERATIONLOGS",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": false,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resultType",
+                    "type": "String"
+                },
+                {
+                    "name": "resultSignature",
+                    "type": "String"
+                },
+                {
+                    "name": "resultDescription",
+                    "type": "String"
+                },
+                {
+                    "name": "durationMs",
+                    "type": "Int"
+                },
+                {
+                    "name": "callerIpAddress",
+                    "type": "String"
+                },
+                {
+                    "name": "correlationId",
+                    "type": "String"
+                },
+                {
+                    "name": "identity",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "level",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/AzureLoadTestingOperationLogTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Date and time the record was created.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestMethod",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "HTTP method of the API request."
+                },
+                {
+                    "name": "HttpStatusCode",
+                    "type": "Int",
+                    "isDefaultDisplay": true,
+                    "description": "HTTP status code of the API response."
+                },
+                {
+                    "name": "CorrelationId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Unique identifier to be used to correlate logs.",
+                    "dataTypeHint": "GUID"
+                },
+                {
+                    "name": "RequestId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Unique identifier to be used to correlate request logs.",
+                    "dataTypeHint": "GUID"
+                },
+                {
+                    "name": "Identity",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true,
+                    "description": "JSON structure containing information about the caller."
+                },
+                {
+                    "name": "RequestBody",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true,
+                    "description": "Request body of the API calls."
+                },
+                {
+                    "name": "ResourceRegion",
+                    "type": "String",
+                    "description": "Region where the resource is located.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceLocation",
+                    "type": "String",
+                    "description": "Location of the service which processed the request.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestUri",
+                    "type": "String",
+                    "description": "URI of the API request.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "URI"
+                },
+                {
+                    "name": "OperationId",
+                    "type": "String",
+                    "description": "Operation identifier for rest api",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "description": "Name of the operation attempted on the resource.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ResultType",
+                    "type": "String",
+                    "description": "Indicates if the request was successful or failed.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DurationMs",
+                    "type": "Double",
+                    "description": "Amount of time it took to process request in milliseconds.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "CallerIpAddress",
+                    "type": "String",
+                    "description": "IP Address of the client that submitted the request.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "FailureDetails",
+                    "type": "String",
+                    "description": "Details of the error in case if request is failed.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "type": "String",
+                    "description": "HTTP header passed by the client, if applicable."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "description": "Request api version",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AzureLoadTestingOperationLogSample.json"
+        }
+    ],
+    "functions": [],
+    "queries": [
+        {
+            "id": "2a9d8818-5683-41cc-bedb-493c61a04bb6",
+            "displayName": "Azure load test creation count",
+            "description": "Counts the number of tests creation by resource ID.",
+            "bodyFilePath": "KQL/TestCreationQuery.kql",
+            "categories": [
+                "resources"
+            ],
+            "relatedTables": [
+                "AzureLoadTestingOperation"
+            ],
+            "tags": {
+                "Topic": [
+                    "Usage",
+                    "Diagnostics",
+                    "Audit"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        },
+        {
+            "id": "a4b29234-b732-486e-9e5a-1d61af4aaf1e",
+            "displayName": "Azure load test run creation count",
+            "description": "Counts the number of successful test runs started by resource ID.",
+            "bodyFilePath": "KQL/TestRunCreationQuery.kql",
+            "categories": [
+                "resources"
+            ],
+            "relatedTables": [
+                "AzureLoadTestingOperation"
+            ],
+            "tags": {
+                "Topic": [
+                    "Usage",
+                    "Diagnostics",
+                    "Audit"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        }
+    ]
+}

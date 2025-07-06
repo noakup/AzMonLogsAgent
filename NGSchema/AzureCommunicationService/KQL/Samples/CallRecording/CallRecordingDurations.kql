@@ -1,0 +1,6 @@
+ACSCallRecordingSummary
+| distinct RecordingId, RecordingLength
+// Count call duration bins (60 second intervals)
+| summarize duration_counts=count() by bin(RecordingLength, 6000)
+| order by RecordingLength asc
+| render columnchart with (xcolumn = RecordingLength, title="Recording duration histogram")

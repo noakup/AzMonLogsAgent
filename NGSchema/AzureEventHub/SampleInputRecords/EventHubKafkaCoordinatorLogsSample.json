@@ -1,0 +1,18 @@
+[
+	{
+        "Environment": "PROD",
+        "Region": "East US",
+        "ScaleUnit": "PROD-BL-VAZ704",
+        "TaskName": "CoordinatorInfoUserLog",
+        "ActivityId": "00000000-0000-0000-0000-000000000000",
+        "requestId": "FE02038080C30B020000000308F12523_KafkaExampleConsumer#0",
+        "resourceId": "/SUBSCRIPTIONS/A70B8550-49B1-4C60-B9F9-86B7EDBF31E4/RESOURCEGROUPS/KARAN-TEST/PROVIDERS/MICROSOFT.EVENTHUB/NAMESPACES/KARANKESRI-EH-PREMIUM",
+        "operation": "Join.Start",
+        "clientId": "KafkaExampleConsumer#0",
+        "message": "Start join group for new member karankesri-eh-premium.servicebus.windows.net:c:$default:I:KafkaExampleConsumer#0-9165efdf9f434e95a25f362b75d757fd, current group size: 0, API version: 2, session timeout: 10000ms, rebalance timeout: 300000ms.",
+        "namespaceName": "Karankesri-EH-Premium.servicebus.windows.net",
+        "subscriptionId": "a70b8550-49b1-4c60-b9f9-86b7edbf31e4",
+        "category": "KafkaCoordinatorLogs",
+        "eventTimestamp": "1/1/2021 8:40:06 PM +00:00"
+    }
+]

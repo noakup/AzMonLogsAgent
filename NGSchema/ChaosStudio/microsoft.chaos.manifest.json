@@ -1,0 +1,182 @@
+{
+    "type": "Microsoft.Chaos/experiments",
+    "displayName": "Chaos Experiment",
+    "description": "The experiment orchestration of chaos execution.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Azure Chaos Studio Agent Service/Triage",
+    "contactDL": "aces-agent-dev@microsoft.com",
+    "relatedTables": [
+        "AzureActivity"
+    ],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "ChaosStudioExperimentEventLogs",
+            "description": "Chao Studio Experiment Orchestration events. Displays Start/Stop events of each Step/Branch/Action in experiment runs.",
+            "categories": [
+                "resources",
+                "audit"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "MICROSOFTCHAOS_EXPERIMENTORCHESTRATION",
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "level",
+                    "type": "String"
+                },
+                {
+                    "name": "correlationId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "KQL/ExperimentOrchestrationTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the event was generated."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The operation associated with event."
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The location of the experiment."
+                },
+                {
+                    "name": "CorrelationId",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true,
+                    "description": "The ID for the Experiment run."
+                },
+                {
+                    "name": "SeverityLevel",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Severity level of the event, one of: Informational, Warning, Error, Critical."
+                },
+                {
+                    "name": "SpanType",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "One of experiment span types: Experiment, Branch, Step, or Action."
+                },
+                {
+                    "name": "Status",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Status of the span. For SpanType of Step or Branch, status is one of Started or Stopped. For Action, status is one of Started, Stopping, Stopped or Failed. For Experiment run, status is one of Started, Complete, Cancelling, Cancelled, Failed."
+                },
+                {
+                    "name": "Error",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Error detail of the span."
+                },
+                {
+                    "name": "Step",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Experiment Step ID of the span."
+                },
+                {
+                    "name": "Branch",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Experiment Branch ID of the span."
+                },
+                {
+                    "name": "Action",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Fault name of the action."
+                },
+                {
+                    "name": "Target",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Target resource ID of the fault."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/ExperimentOrchestrationInput.json",
+            "sampleOutputRecordsFilePath": "SampleInputRecords/ExperimentOrchestrationOutput.json"
+        }
+    ],
+    "functions": [],
+    "queries": [
+        {
+            "id": "16191aba-3eee-4973-b338-7077300f32e1",
+            "displayName": "Failed experiment runs",
+            "description": "List failed experiment runs.",
+            "bodyFilePath": "KQL/FailedExperimentRunsQuery.kql",
+            "categories": [
+                "audit",
+                "resources",
+                "monitor"
+            ],
+            "tags": {},
+            "properties": {
+                "ExampleQuery": true
+            },
+            "relatedTables": [
+                "ChaosStudioExperimentEventLogs"
+            ]
+        },
+        {
+            "id": "151d25cf-7e9a-48eb-98ff-fe39a595ddff",
+            "displayName": "Experiment events on last experiment run",
+            "description": "List experiment events on the last experiment run.",
+            "bodyFilePath": "KQL/ExperimentAuditOnLastRunQuery.kql",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "tags": {},
+            "properties": {
+                "ExampleQuery": true
+            },
+            "relatedTables": [
+                "ChaosStudioExperimentEventLogs"
+            ]
+        }
+    ]
+}

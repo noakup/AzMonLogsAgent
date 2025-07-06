@@ -1,0 +1,5 @@
+WindowsEvent
+| where Provider == 'Microsoft-Windows-Security-Auditing' 
+| where EventID == 1102 or EventID == 4719
+| extend DescriptionMessage = iff(EventID == 1102, 'Audit log was cleared', 'System audit policy was changed')
+| take 100

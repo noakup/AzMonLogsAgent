@@ -1,0 +1,33 @@
+[
+  {
+    "version": "5",
+    "account-id": "072643944673",
+    "interface-id": "eni-02f014d882fd53824",
+    "srcaddr": "162.142.125.158",
+    "dstaddr": "172.31.1.32",
+    "srcport": "31335",
+    "dstport": "12301",
+    "protocol": "6",
+    "packets": "1",
+    "bytes": "44",
+    "start": "1617010428",
+    "end": "1617010443",
+    "action": "REJECT",
+    "log-status": "OK",
+    "vpc-id": "vpc-af4c81c9",
+    "subnet-id": "subnet-6f519935",
+    "instance-id": "i-09eba3d7628b4b106",
+    "tcp-flags": "2",
+    "type": "IPv4",
+    "pkt-srcaddr": "162.142.125.158",
+    "pkt-dstaddr": "172.31.1.32",
+    "region": "us-west-1",
+    "az-id": "usw1-az3",
+    "sublocation-type": "-",
+    "sublocation-id": "-",
+    "pkt-src-aws-service": "-",
+    "pkt-dst-aws-service": "-",
+    "flow-direction": "ingress",
+    "traffic-path": "-"
+  }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "time": "2024-07-04 23:31:45.1224849",
+        "resourceId": "/SUBSCRIPTIONS/00000000-0000-0000-0000-000000000000/RESOURCEGROUPS/TESTRG/PROVIDERS/MICROSOFT.DATAREPLICATION/REPLICATIONVAULTS/TESTREPLICATIONVAULT",
+        "operationName": "Create",
+        "category": "ReplicationVaults",
+        "location": "centraluseuap",
+        "level": "Information",
+        "properties": {
+            "subscriptionId": "00000000-0000-0000-0000-000000000000",
+            "resourceGroupName": "testrg",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.DataReplication/replicationVaults/testreplicationvault",
+            "name": "testreplicationvault",
+            "location":"centraluseuap",
+            "serviceResourceId": "84ac57d6-7189-438f-9759-2e441a36dd5e",
+            "type": "Microsoft.DataReplication/replicationVaults",
+            "provisioningState": "Creating"
+        }
+    }
+]

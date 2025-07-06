@@ -1,0 +1,4 @@
+CassandraLogs
+| where Level == "ERROR" or Level == "WARN"
+| project TimeGenerated, Level, AddressIp, ThreadName, ThreadId, SourceFile, SourceLine, Message, Exception, EventProduct, EventCategory, EventType
+| sort by TimeGenerated desc

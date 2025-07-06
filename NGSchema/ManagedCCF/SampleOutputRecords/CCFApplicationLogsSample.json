@@ -1,0 +1,10 @@
+[
+    {
+        "TimeGenerated": "2022-08-05T08:45:47.694612172Z",
+        "Level": "info",
+        "Message": "Proposal <auto-refresh>: Storing JWT signing key with kid OzZ5Dbmcso9Qzt2ModGmihg30Bo",
+        "File": "../src/node/rpc/jwt_management.h",
+        "LineNumber": 177,
+        "Location": "eastus"
+    }
+]

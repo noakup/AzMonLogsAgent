@@ -1,0 +1,7 @@
+REDConnectionEvents
+// For particular datetime filtering, add '| where EventTime between (StartTime .. EndTime)'
+// For particular IP range filtering, add '| where ipv4_is_in_range(ClientIp, IpRange)'
+// IP range can be defined like this 'let IpRange = "10.1.1.0/24";' at the top of query.
+| extend EventTime = unixtime_seconds_todatetime(EventEpochTime)
+| where EventType == "close_conn"
+| summarize DisconnectionCount = count() by TimeRange = bin(EventTime, 1h)

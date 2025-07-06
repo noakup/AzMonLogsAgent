@@ -1,0 +1,18 @@
+[
+    {
+        "time": "6/16/2023 4:16:24 PM",
+        "resourceId": "/SUBSCRIPTIONS/863C722A-2299-40DC-A2B0-F4717918A6F4/RESOURCEGROUPS/TEST-RG1/PROVIDERS/MICROSOFT.STORAGECACHE/AMLFILESYSTEMS/DEV1-AMLFS1",
+        "location": "eastus",
+        "operationName": "TraceAmlFilesystem.POST",
+        "category": "AmlfsAuditEvent",
+        "properties": {
+            "activityId": "bc3356b1-a496-42d8-953d-801c712a4bb0"
+        },
+        "resultSignature": "200",
+        "resultDescription": "TraceAmlFilesystem response received.",
+        "identity": {
+            "applicationId": "0619cc67-f2bb-461f-b5ce-68ceddd087ea",
+            "clientRole": "PlatformServiceOperatorOrViewer"
+        }
+    }
+]

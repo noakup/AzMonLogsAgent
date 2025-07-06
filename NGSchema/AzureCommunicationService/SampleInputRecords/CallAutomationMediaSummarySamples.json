@@ -1,0 +1,140 @@
+[
+  {
+    "time":"2023-04-05T22:08:38.7343926Z",
+    "level":"Informational",
+    "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/ACS-RECORDING-E2E-SAMPLE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/ACS-RECORDING-RUNNER-US-R0",
+    "durationMs":1664,
+    "callerIpAddress":"97.113.67.31",
+    "correlationId":"6e1f227b-3a0b-4951-a2c0-cdb59eeeb845",
+    "operationName":"Play",
+    "operationVersion":"2023-01-15-preview",
+    "resultType":"Completed",
+    "resultSignature":200,
+    "properties": {
+        "operationId": "7d702e86-1684-4a74-beca-0842194b040e",
+        "recognizePromptSubOperationName": null,
+        "playInLoop": true,
+        "playToParticipant": true,
+        "interrupted": false,
+        "resultCode": 200,
+        "resultSubcode": 0,
+        "resultMessage": "Play successful"
+    },
+    "uri":"https://pma-dev-edwardho.plat-dev.skype.net/calling/callConnections/id:play?api-version=2023-01-15-preview"
+  },
+  {
+    "time":"2023-04-05T23:08:38.7343926Z",
+    "level":"Informational",
+    "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/ACS-RECORDING-E2E-SAMPLE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/ACS-RECORDING-RUNNER-US-R0",
+    "durationMs":1664,
+    "callerIpAddress":"97.113.67.31",
+    "correlationId":"6e1f227b-3a0b-4951-a2c0-cdb59eeeb845",
+    "operationName":"Play",
+    "operationVersion":"2023-01-15-preview",
+    "resultType":"Canceled",
+    "resultSignature": 400,
+    "properties": {
+        "operationId": "7d702e86-1684-4a74-beca-0842194b040e",
+        "recognizePromptSubOperationName": null,
+        "playInLoop": true,
+        "playToParticipant": false,
+        "interrupted": true,
+        "resultCode": 400,
+        "resultSubcode": 8508,
+        "resultMessage": "Action failed, the operation was cancelled."
+    },
+    "uri":"https://pma-dev-edwardho.plat-dev.skype.net/calling/callConnections/id:play?api-version=2023-01-15-preview"
+  },
+  {
+    "time":"2023-04-05T23:08:38.7343926Z",
+    "level":"Error",
+    "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/ACS-RECORDING-E2E-SAMPLE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/ACS-RECORDING-RUNNER-US-R0",
+    "durationMs":1664,
+    "callerIpAddress":"97.113.67.31",
+    "correlationId":"6e1f227b-3a0b-4951-a2c0-cdb59eeeb845",
+    "operationName":"Play",
+    "operationVersion":"2023-01-15-preview",
+    "resultType":"Failed",
+    "resultSignature": 404,
+    "properties": {
+        "operationId": "7d702e86-1684-4a74-beca-0842194b040e",
+        "recognizePromptSubOperationName": null,
+        "playInLoop": false,
+        "playToParticipant": false,
+        "interrupted": false,
+        "resultCode": 404,
+        "resultSubcode": 8559,
+        "resultMessage": "File couldn't be found"
+    },
+    "uri":"https://pma-dev-edwardho.plat-dev.skype.net/calling/callConnections/id:play?api-version=2023-01-15-preview"
+  },
+  {
+    "time":"2023-04-05T22:08:38.7343926Z",
+    "level":"Informational",
+    "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/ACS-RECORDING-E2E-SAMPLE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/ACS-RECORDING-RUNNER-US-R0",
+    "durationMs":1664,
+    "callerIpAddress":"97.113.67.31",
+    "correlationId":"6e1f227b-3a0b-4951-a2c0-cdb59eeeb845",
+    "operationName":"Recognize",
+    "operationVersion":"2023-01-15-preview",
+    "resultType":"Completed",
+    "resultSignature":201,
+    "properties": {
+        "operationId": "7d702e86-1684-4a74-beca-0842194b040e",
+        "recognizePromptSubOperationName": null,
+        "playInLoop": null,
+        "playToParticipant": null,
+        "interrupted": null,
+        "resultCode": 200,
+        "resultSubcode": 0,
+        "resultMessage": "Recognition completed"
+    },
+    "uri":"https://pma-dev-edwardho.plat-dev.skype.net/calling/callConnections/id:recognize?api-version=2023-01-15-preview"
+  },
+  {
+    "time":"2023-04-05T22:08:38.7343926Z",
+    "level":"Informational",
+    "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/ACS-RECORDING-E2E-SAMPLE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/ACS-RECORDING-RUNNER-US-R0",
+    "durationMs":1664,
+    "callerIpAddress":"97.113.67.31",
+    "correlationId":"6e1f227b-3a0b-4951-a2c0-cdb59eeeb845",
+    "operationName":"Recognize",
+    "operationVersion":"2023-01-15-preview",
+    "resultType":"Completed",
+    "resultSignature":200,
+    "properties": {
+        "operationId": "7d702e86-1684-4a74-beca-0842194b040e",
+        "recognizePromptSubOperationName": "SSML",
+        "playInLoop": true,
+        "playToParticipant": true,
+        "interrupted": true,
+        "resultCode": 200,
+        "resultSubcode": 0,
+        "resultMessage": "Recognition completed"
+    },
+    "uri":"https://pma-dev-edwardho.plat-dev.skype.net/calling/callConnections/id:recognize?api-version=2023-01-15-preview"
+  },
+  {
+    "time":"2023-04-05T23:08:38.7343926Z",
+    "level":"Error",
+    "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/ACS-RECORDING-E2E-SAMPLE/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/ACS-RECORDING-RUNNER-US-R0",
+    "durationMs":1664,
+    "callerIpAddress":"97.113.67.31",
+    "correlationId":"6e1f227b-3a0b-4951-a2c0-cdb59eeeb845",
+    "operationName":"Recognize",
+    "operationVersion":"2023-01-15-preview",
+    "resultType":"Failed",
+    "resultSignature": 500,
+    "properties": {
+        "operationId": "7d702e86-1684-4a74-beca-0842194b040e",
+        "recognizePromptSubOperationName": "Text",
+        "playInLoop": false,
+        "playToParticipant": true,
+        "interrupted": false,
+        "resultCode": 500,
+        "resultSubcode": 8990,
+        "resultMessage": "Initial timeout expired"
+    },
+    "uri":"https://pma-dev-edwardho.plat-dev.skype.net/calling/callConnections/id:recognize?api-version=2023-01-15-preview"
+  }
+]

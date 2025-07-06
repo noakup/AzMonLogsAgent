@@ -1,0 +1,31 @@
+[
+	{
+		"time": "2024-04-08T17:18:21.1901445Z",
+		"resourceId": "/SUBSCRIPTIONS/05F401AC-885F-4BA4-B2D6-7C5444596230/RESOURCEGROUPS/ATC-TEST1111/PROVIDERS/MICROSOFT.NETWORKFUNCTION/AZURETRAFFICCOLLECTORS/TESTVNETMETADATASHOEBOXCHANGES3",
+		"operationName": "Microsoft.NetworkFunction/AzureTrafficCollector/ExpressRouteCircuit/Read",
+		"category": "ATCPrivatePeeringMetadata",
+		"location": "westus",
+		"operationVersion": "1.0",
+		"properties": {
+			"ExRCircuitId": "/subscriptions/05f401ac-885f-4ba4-b2d6-7c5444596230/resourcegroups/atc-bvt-cktrg/providers/microsoft.network/expressroutecircuits/atc-juniper-ckt-ramodh",
+			"ExRCircuitServiceKey": "6a443601-9414-432e-a4e5-c1b8dce0c51c",
+			"VnetId": "/subscriptions/05f401ac-885f-4ba4-b2d6-7c5444596230/resourcegroups/atcdatapath-aristarg/providers/microsoft.network/virtualnetworks/atcdatapath-vnet1",
+			"VnetSubscriptionId": "05f401ac-885f-4ba4-b2d6-7c5444596230",
+			"VnetResourceGroup": "atcdatapath-aristarg",
+			"VnetName": "atcdatapath-vnet1",
+			"VnetLocation": "westus",
+			"VnetAddressPrefix": "30.0.0.0",
+			"IpMask": 16,
+			"IpSubnet": [
+				{
+					"Id": "/subscriptions/05f401ac-885f-4ba4-b2d6-7c5444596230/resourcegroups/atcdatapath-aristarg/providers/microsoft.network/virtualnetworks/atcdatapath-vnet1/subnets/subnet",
+					"AddressPrefix": "30.0.0.0/24"
+				},
+				{
+					"Id": "/subscriptions/05f401ac-885f-4ba4-b2d6-7c5444596230/resourcegroups/atcdatapath-aristarg/providers/microsoft.network/virtualnetworks/atcdatapath-vnet1/subnets/gatewaysubnet",
+					"AddressPrefix": "30.0.1.0/28"
+				}
+			]
+		}
+	}
+]

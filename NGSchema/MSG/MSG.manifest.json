@@ -1,0 +1,332 @@
+{
+    "type": "Microsoft.Graph/tenants",
+    "displayName": "Microsoft Graph Logs",
+    "description": "All tables related to Microsoft Graph logs.",
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "IAM Services/IAM - Data Insights and Reporting Service",
+    "tags": {},
+    "properties": {},
+    "relatedTables": ["AzureActivity", "SigninLogs", "AuditLogs"],
+    "relatedFunctions": [],
+    "tables": [
+      {
+        "name": "MicrosoftGraphActivityLogs",
+        "description": "Microsoft Graph Activity Logs provide details of API requests made to Microsoft Graph for resources in the tenant.",
+        "dataTypeId": "TENANTMICROSOFTAADIAM_AGS",
+        "isResourceCentric": false,
+        "categories": [
+          "audit",
+          "security"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 7,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": true,
+        "isLakeAllowed": true,
+        "input": [
+          {
+            "name": "time",
+            "type": "DateTime"
+          },
+          {
+            "name": "resourceId",
+            "type": "String"
+          },
+          {
+            "name": "operationName",
+            "type": "String"
+          },
+          {
+            "name": "operationVersion",
+            "type": "String"
+          },
+          {
+            "name": "category",
+            "type": "String"
+          },
+          {
+            "name": "resultType",
+            "type": "String"
+          },
+          {
+            "name": "resultSignature",
+            "type": "String"
+          },
+          {
+            "name": "resultDescription",
+            "type": "String"
+          },
+          {
+            "name": "durationMs",
+            "type": "Int"
+          },
+          {
+            "name": "correlationId",
+            "type": "String"
+          },
+          {
+            "name": "identity",
+            "type": "String"
+          },
+          {
+            "name": "properties",
+            "type": "string"
+          },
+          {
+            "name": "Level",
+            "type": "String"
+          },
+          {
+            "name": "location",
+            "type": "String"
+          },
+          {
+            "name": "tenantId",
+            "type": "String"
+          },
+          {
+            "name": "sourcesystem",
+            "type": "String"
+          }
+        ],
+        "transformFilePath": "KQL/MicrosoftGraphActivityLogsTransform.kql",
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "isPreferredFacet": true,
+            "isDefaultDisplay": true,
+            "description": "The date and time the request was received."
+          },
+          {
+            "name": "Location",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The name of the region that served the request."
+          },
+          {
+            "name": "RequestId",
+            "type": "String",
+            "dataTypeHint": "GUID",
+            "isDefaultDisplay": true,
+            "description": "The identifier representing the request."
+          },
+          {
+            "name": "OperationId",
+            "type": "String",
+            "dataTypeHint": "GUID",
+            "isDefaultDisplay": true,
+            "description": "The identifier for the batch. For non-batched requests, this will be unique per request. For batched requests, this will be the same for all requests in the batch."
+          },
+          {
+            "name": "ClientRequestId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Optional. The client request identifier when sent. If no client request identifier is sent, the value will be equal to the operation identifier."
+          },
+          {
+            "name": "ApiVersion",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The API version of the event."
+          },
+          {
+            "name": "RequestMethod",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The HTTP method of the event."
+          },
+          {
+            "name": "ResponseStatusCode",
+            "type": "Int",
+            "isDefaultDisplay": true,
+            "description": "The HTTP response status code for the event."
+          },
+          {
+            "name": "AadTenantId",
+            "type": "String",
+            "dataTypeHint": "GUID",
+            "isDefaultDisplay": true,
+            "description": "The Azure AD tenant ID."
+          },
+          {
+            "name": "IPAddress",
+            "type": "String",
+            "dataTypeHint": "IP",
+            "isDefaultDisplay": true,
+            "description": "The IP address of the client from where the request occurred."
+          },
+          {
+            "name": "UserAgent",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The user agent information related to request."
+          },
+          {
+            "name": "RequestUri",
+            "type": "String",
+            "dataTypeHint": "URI",
+            "isDefaultDisplay": true,
+            "description": "The URI of the request."
+          },
+          {
+            "name": "DurationMs",
+            "type": "Int",
+            "isDefaultDisplay": true,
+            "description": "The duration of the request in milliseconds."
+          },
+          {
+            "name": "ResponseSizeBytes",
+            "type": "Int",
+            "isDefaultDisplay": true,
+            "description": "The size of the response in Bytes."
+          },
+          {
+            "name": "SignInActivityId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The identifier representing the sign-in activitys."
+          },
+          {
+            "name": "Roles",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The roles in token claims."
+          },
+          {
+            "name": "SessionId",
+            "type": "String",
+            "dataTypeHint": "GUID",
+            "isDefaultDisplay": true,
+            "description": "The unique identifier for the authentication session."
+          },
+          {
+            "name": "DeviceId",
+            "type": "String",
+            "dataTypeHint": "GUID",
+            "isDefaultDisplay": true,
+            "description": "The identifier of the device from which the authentication request originated."
+          },
+          {
+            "name": "UniqueTokenId",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The unique token identifier of the API call used to make the audited change."
+          },
+          {
+            "name": "TokenIssuedAt",
+            "type": "DateTime",
+            "isDefaultDisplay": true,
+            "description": "The timestamp the token was issued at."
+          },
+          {
+            "name": "AppId",
+            "type": "String",
+            "dataTypeHint": "GUID",
+            "isDefaultDisplay": true,
+            "description": "The identifier for the application."
+          },
+          {
+            "name": "UserId",
+            "type": "String",
+            "dataTypeHint": "GUID",
+            "isDefaultDisplay": true,
+            "description": "The identifier of the user making the request."
+          },
+          {
+            "name": "ServicePrincipalId",
+            "type": "String",
+            "dataTypeHint": "GUID",
+            "isDefaultDisplay": true,
+            "description": "The identifier of the servicePrincipal making the request."
+          },
+          {
+            "name": "Scopes",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The scopes in token claims."
+          },
+          {
+            "name": "IdentityProvider",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "The identity provider that authenticated the subject of the token."
+          },
+          {
+            "name": "ClientAuthMethod",
+            "type": "Int",
+            "isDefaultDisplay": true,
+            "description": "Indicates how the client was authenticated. For a public client, the value is 0. If client ID and client secret are used, the value is 1. If a client certificate was used for authentication, the value is 2."
+          },
+          {
+            "name": "Wids",
+            "type": "String",
+            "isDefaultDisplay": true,
+            "description": "Denotes the tenant-wide roles assigned to this user."
+          },
+          {
+            "name": "ATContent",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Reserved for future use."
+          },
+          {
+            "name": "ATContentH",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Reserved for future use."
+          },
+          {
+            "name": "ATContentP",
+            "type": "String",
+            "isDefaultDisplay": false,
+            "description": "Reserved for future use."
+          }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/SampleMicrosoftGraphActivityLogs.json",
+        "sampleOutputRecordsFilePath": "SampleOutputRecords/SampleMicrosoftGraphActivityLogs.json"
+      }
+    ],
+    "functions": [],
+    "queries": [
+        {
+            "id": "a697d547-302a-4092-a3ad-b3cb8e43c204",
+            "displayName": "Frequent users endpoint callers",
+            "description": "Gets list of apps and service principals calling users endpoint.",
+            "bodyFilePath": "KQL/MostActiveCallers.kql",
+            "categories": ["security"],
+            "tags": {
+                "Topic": [
+                    "Security"
+                ]
+            },
+            "relatedTables": [ "MicrosoftGraphActivityLogs" ],
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        },
+        {
+            "id": "a697d547-302a-4092-a3ad-b3cb8e43c205",
+            "displayName": "Failed groups endpoint requests",
+            "description": "Gets a list of failed requests to group entities, by apps and service principals.",
+            "bodyFilePath": "KQL/FailedGroupsRequests.kql",
+            "categories": ["security"],
+            "tags": {
+                "Topic": [
+                    "Security"
+                ]
+            },
+            "relatedTables": [ "MicrosoftGraphActivityLogs" ],
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        }
+    ]
+}

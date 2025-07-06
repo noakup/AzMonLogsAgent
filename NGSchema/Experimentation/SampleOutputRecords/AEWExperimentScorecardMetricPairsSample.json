@@ -1,0 +1,33 @@
+[
+  {
+    "TimeGenerated": "2024-08-22T23:48:10.0877900Z",
+    "ScorecardId": "1234567",
+    "MetricId": "avg_purchase_revenue",
+    "MetricDisplayName": "Average revenue per purchase",
+    "MetricDescription": "The average revenue per purchase event in USD. Refund transactions contribute negative values to this metric.",
+    "MetricKind": "Average",
+    "MetricLifecycle": "Active",
+    "MetricTags": [ "Monetization", "Important" ],
+    "DesiredDirection": "Increase",
+    "MetricVersion": "def8ec9af8f1de82d6d1a39cce23b9ebeb359ccc",
+    "MetricETag": "It6PuZ5nFtw=",
+    "TreatmentVariant": "New-gpt-4o",
+    "TreatmentCount": 1489,
+    "TreatmentMetricValue": 51.86769644056414,
+    "TreatmentMetricValueNormalized": 51.86769644056414,
+    "TreatmentStandardErrorNormalized": 0.3343969776349313,
+    "ControlVariant": "Original-gpt-4",
+    "ControlCount": 1505,
+    "ControlMetricValue": 29.924252491694354,
+    "ControlMetricValueNormalized": 29.924252491694354,
+    "ControlStandardErrorNormalized": 0.16026382475525386,
+    "PValue": 0,
+    "TreatmentEffect": "Improved",
+    "RelativeDifference": 0.733299652,
+    "Insights": 
+    { 
+      "SampleInsightKey1": "Sample insight value 1",
+      "SampleInsightKey2": "Sample insight value 2"
+    }
+  }
+]

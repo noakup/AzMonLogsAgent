@@ -1,0 +1,506 @@
+{
+  "type": "Microsoft.VideoIndexer/accounts",
+  "displayName": "Video Indexer",
+  "description": "All tables related to Video Indexer",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Video Indexer/Triage",
+  "contactDL": "vishoeboxreviewers@microsoft.com",
+  "relatedTables": [],
+  "tables": [
+    {
+      "name": "VIAudit",
+      "description": "Audit logs from Video Indexer.",
+      "categories": [
+        "audit"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 3,
+      "dataTypeId": "VIDEO_INDEXER_AUDIT",
+      "intelligencePacks": [],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "durationMs",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "callerIpAddress",
+          "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "identity",
+          "type": "Dynamic"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/VideoIndexerAuditTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the event was generated."
+        },
+        {
+          "name": "VideoIndexerResourceId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The Video Indexer resource ID."
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The Video Indexer resource location."
+        },
+        {
+          "name": "AccountName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The Video Indexer account name."
+        },
+        {
+          "name": "AccountId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The Video Indexer account ID."
+        },
+        {
+          "name": "VideoId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The Video Indexer video ID."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the operation that triggered the event."
+        },
+        {
+          "name": "Signature",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "Http response signature of the operation, for example: 200, 401."
+        },
+        {
+          "name": "Status",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Status of the operation, for example: Success, Failure, Warning, Informational, Partial Success."
+        },
+        {
+          "name": "Description",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The operation description."
+        },
+        {
+          "name": "ExternalUserId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Caller external user Id."
+        },
+        {
+          "name": "Upn",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Caller email."
+        },
+        {
+          "name": "Claims",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Caller claims details."
+        },
+        {
+          "name": "CallerIpAddress",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "IP",
+          "description": "The caller IP address."
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true,
+          "description": "A unique record identifier."
+        },
+        {
+          "name": "DurationMs",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "The operation duration in milliseconds."
+        },
+        {
+          "name": "OperationVersion",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The Video Indexer operations API version."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/VideoIndexerAuditSample.json"
+    },
+    {
+      "name": "VIIndexing",
+      "description": "Indexing logs from Video Indexer.",
+      "categories": [
+        "resources"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 5,
+      "dataTypeId": "VIDEO_INDEXER_INDEXING_LOGS",
+      "intelligencePacks": [],
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "resourceId",
+          "type": "String"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "durationMs",
+          "type": "String"
+        },
+        {
+          "name": "resultSignature",
+          "type": "String"
+        },
+        {
+          "name": "resultType",
+          "type": "String"
+        },
+        {
+          "name": "resultDescription",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "identity",
+          "type": "Dynamic"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/VideoIndexerIndexingLogsTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the event was generated."
+        },
+        {
+          "name": "VideoIndexerResourceId",
+          "type": "String",
+          "isDefaultDisplay": false,
+          "description": "Video Indexer resource ID."
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "isDefaultDisplay": false,
+          "description": "Video Indexer resource location."
+        },
+        {
+          "name": "AccountName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Video Indexer account name."
+        },
+        {
+          "name": "AccountId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID",
+          "description": "Video Indexer account ID."
+        },
+        {
+          "name": "VideoId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Video Indexer video ID."
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the operation that triggered the event."
+        },
+        {
+          "name": "ErrorCode",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The error code if the operation failed"
+        },
+        {
+          "name": "Status",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Status of the operation, for example: Success, Failure, Warning, Informational or PartialSuccess."
+        },
+        {
+          "name": "ErrorDescription",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The description of the error code ."
+        },
+        {
+          "name": "ExternalUserId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Caller external user Id."
+        },
+        {
+          "name": "Upn",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Caller email."
+        },
+        {
+          "name": "CorrelationId",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true,
+          "description": "A unique record identifier."
+        },
+        {
+          "name": "DurationMs",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "The operation duration in milliseconds."
+        },
+        {
+          "name": "OperationVersion",
+          "type": "String",
+          "isDefaultDisplay": false,
+          "description": "Video Indexer operations API version."
+        },
+        {
+          "name": "IndexingProperties",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Properties of the indexing operation request."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/VideoIndexerIndexingLogsSample.json"
+    }
+  ],
+  "functions": [],
+  "queries": [
+    {
+      "id": "b81828c9-f1b6-4901-8705-744199b363c5",
+      "displayName": "Video Indexer Audit by account id",
+      "description": "Display audit events for account (AccountId = <Guid ID>), with an optional filter by user UPN.",
+      "bodyFilePath": "KQL/VideoIndexerAuditByAccountIDQuery.kql",
+      "categories": [
+        "audit"
+      ],
+      "relatedTables": [
+        "VIAudit"
+      ],
+      "tags": {
+        "Topic": [
+          "Audit"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": false
+        }
+      }
+    },
+    {
+      "id": "ed8f4b3c-4e68-47a7-98d8-86e8dae96466",
+      "displayName": "Video Indexer Audit top 10 users by operations",
+      "description": "Render timechart of top 10 users by operations, with an optional account id for filtering.",
+      "bodyFilePath": "KQL/VideoIndexerAuditUserTrendOverTime.kql",
+      "categories": [
+        "audit"
+      ],
+      "relatedTables": [
+        "VIAudit"
+      ],
+      "tags": {
+        "Topic": [
+          "Audit"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "a933b563-1729-4a4a-aae6-0918df2a3762",
+      "displayName": "Video Indexer Audit parsed error message",
+      "description": "Display audit failed events with an optional account id for filtering.",
+      "bodyFilePath": "KQL/VideoIndexerAuditParsedFailedQuery.kql",
+      "categories": [
+        "audit"
+      ],
+      "relatedTables": [
+        "VIAudit"
+      ],
+      "tags": {
+        "Topic": [
+          "Audit"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "260cbcfa-559a-416b-b97d-31c385b384be",
+      "displayName": "Video Indexer Audit failed operations",
+      "description": "Display audit logs of all failed operations attempts, with an optional filter by account id and user UPN.",
+      "bodyFilePath": "KQL/VideoIndexerAuditFailuresQuery.kql",
+      "categories": [
+        "audit"
+      ],
+      "relatedTables": [
+        "VIAudit"
+      ],
+      "tags": {
+        "Topic": [
+          "Audit"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": false
+        }
+      }
+    },
+    {
+      "id": "9ddee6d4-c94d-411d-8fb9-ee10fc74502b",
+      "displayName": "Failed Indexing operations",
+      "description": "Display Video Indexer Account logs of all failed indexing operations.",
+      "bodyFilePath": "KQL/VideoIndexerIndexingFailuresQuery.kql",
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "VIIndexing"
+      ],
+      "tags": {
+        "Topic": [
+          "Indexing"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": false
+        }
+      }
+    },
+    {
+      "id": "8a09c867-4caf-4a3c-ae4a-d8bd5c2b0263",
+      "displayName": "Top 10 users",
+      "description": "Summarize top 10 users.",
+      "bodyFilePath": "KQL/VideoIndexerIndexingTopUsersQuery.kql",
+      "categories": [
+        "resources"
+      ],
+      "relatedTables": [
+        "VIIndexing"
+      ],
+      "tags": {
+        "Topic": [
+          "Indexing"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": false
+        }
+      }
+    }
+  ]
+}

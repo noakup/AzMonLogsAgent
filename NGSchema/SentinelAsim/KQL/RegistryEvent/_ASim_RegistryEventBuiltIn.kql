@@ -1,0 +1,12 @@
+let DisabledParsers=materialize(_GetWatchlist('ASimDisabledParsers') 
+| where SearchKey in ('Any', 'Exclude_ASim_RegistryEvent') 
+| extend SourceSpecificParser=column_ifexists('SourceSpecificParser','') 
+| where isnotempty(SourceSpecificParser) 
+| summarize list = make_set(SourceSpecificParser));
+let builtInDisabled = 0 != array_length(set_intersect(toscalar(DisabledParsers),dynamic(['Exclude_ASim_RegistryEventBuiltIn', 'Exclude_ASim_RegistryEvent', 'Any'])));
+union isfuzzy=true
+_ASim_RegistryEvent_Microsoft365DV01(disabled= (builtInDisabled or('Exclude_ASim_RegistryEvent_Microsoft365D' in (DisabledParsers)))),
+_ASim_RegistryEvent_MicrosoftSysmonV02(disabled= (builtInDisabled or('Exclude_ASim_RegistryEvent_MicrosoftSysmon' in (DisabledParsers)))),
+_ASim_RegistryEvent_MicrosoftWindowsEventV02(disabled= (builtInDisabled or('Exclude_ASim_RegistryEvent_MicrosoftWindowsEvent' in (DisabledParsers)))),
+_ASim_RegistryEvent_NativeV01(disabled= (builtInDisabled or('Exclude_ASim_RegistryEvent_Native' in (DisabledParsers)))),
+_Im_RegistryEvent_EmptyV01

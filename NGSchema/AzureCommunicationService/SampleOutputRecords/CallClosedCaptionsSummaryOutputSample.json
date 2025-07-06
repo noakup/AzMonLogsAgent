@@ -1,0 +1,15 @@
+[
+    {
+        "TimeGenerated": "2021-07-16T15:46:22.998Z",
+        "OperationName": "ClosedCaptionsSummary",
+        "CorrelationId": "336a0049-d98f-48ca-8b21-d39244c34486",
+        "ResultType": "Succeeded",
+        "Level": "Informational",
+        "SpeechRecognitionSessionId": "eyJQbGF0Zm9ybUVuZHBvaW50SWQiOiI0MDFmNmUwMC01MWQyLTQ0YjAtODAyZi03N2RlNTA2YTI3NGYiLCJSZXNvdXJjZVNwZWNpZmljSWQiOiIzOTc0NmE1Ny1lNzBkLTRhMTctYTI2Yi1hM2MzZTEwNTk0MjEifQ",
+        "SpokenLanguage": "cn-zh",
+        "EndReason": "Stopped",
+        "CancelReason": "",
+        "StartTime": "2021-07-16T15:46:22.998Z",
+        "Duration": "3.26"
+    }
+  ]

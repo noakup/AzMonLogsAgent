@@ -1,0 +1,4 @@
+ACSEmailStatusUpdateOperational
+| where isnotempty(RecipientId)
+| where DeliveryStatus != "Delivered"
+| limit 100

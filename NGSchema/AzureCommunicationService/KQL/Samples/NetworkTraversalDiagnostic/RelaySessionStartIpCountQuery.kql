@@ -1,0 +1,5 @@
+ACSNetworkTraversalDiagnostics
+| where OperationName == "RelaySessionStart" // Only RelaySessionStart has a caller IP address
+| summarize Count = count() by CallerIpAddress
+| limit 100
+| order by Count desc

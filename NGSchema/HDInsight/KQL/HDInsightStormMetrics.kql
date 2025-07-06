@@ -1,0 +1,11 @@
+source
+| project
+    TimeGenerated = FluentdIngestTimestamp,
+    MetricNamespace = metricNamespace,
+    MetricName = metricName,
+    MetricValue = todouble(metricValue),
+    MetricDataType = metricDataType,
+    ClusterName = clusterName,
+    HostName = hostName,
+    CorrelationId = correlationId,
+    OperationName = operationName

@@ -1,0 +1,21 @@
+[
+    {
+        "time": "2020-07-01T19:45:03.2155411Z",
+        "resourceId": "/tenants/TENANT-ID/providers/Microsoft.aadiam",
+        "operationName": "Sign-in activity",
+        "operationVersion": "1.0",
+        "category": "ManagedIdentitySignInLogs",
+        "resultType": "0",
+        "resultSignature": "None",
+        "resultDescription": "",
+        "durationMs": 0,
+        "callerIpAddress": "255.255.255.255",
+        "correlationId": "CORRELATION-ID",
+        "identity": "IDENTITY-NAME",
+        "properties": "{'id':'f157e77d-6dd2-4254-b458-85cfd7fa0a00','createdDateTime':'2020-07-10T01:30:02.4496231+00:00','userId':null,'appId':'84f81ef2-5744-4cb7-b575-c680d0dd7425','ipAddress':'255.255.255.255','status':{'errorCode':700027},'location':{'city':'Redmond','state':'Washington','countryOrRegion':'US','geoCoordinates':{'latitude':50,'longitude':-120}},'authenticationContextClassReferences':[],'correlationId':'c8e33206-c1d9-45bc-9a21-6e499ac1379f','isInteractive':false,'tokenIssuerType':'AzureAD','processingTimeInMilliseconds':0,'riskDetail':'none','riskLevelAggregated':'low','riskLevelDuringSignIn':'low','riskState':'none','resourceDisplayName':'Microsoft Graph API','resourceId':'00000000-0000-0000-0000-000000000000','servicePrincipalName':'SP-NAME','servicePrincipalId':'c1fa2637-c52f-4222-8738-e196690c1fb1','federatedCredentialId':'c1fa2637-c52f-4222-8738-e196690c1fb1','resourceServicePrincipalId':'c1fa2637-c52f-4222-8738-e196690c1fb1','uniqueTokenIdentifier':'OTM1MWMwZGEtNDhiYS00NTg0LTk5M2UtOWQ3YzU1NzA0ZTM5','appOwnerTenantId':'01234567-89ab-cdef-0123-456789abcdef','resourceOwnerTenantId':'01234567-89ab-cdef-0123-456789abcdef','agent':{'agentParentAppId':'','agentType':'nonAgentic'},'sourceAppClientId': '01234567-89ab-cdef-0123-456789abcdef','userAgent':''}",
+        "Level": "Informational",
+        "location": "US",
+        "tenantId": "TENANT-ID",
+        "sourcesystem": "Azure AD"
+    }
+]

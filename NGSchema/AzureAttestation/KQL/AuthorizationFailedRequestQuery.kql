@@ -1,0 +1,6 @@
+// To create an alert for this query, click '+ New alert rule'
+AzureAttestationDiagnostics
+| where toint(ResultSignature) == 403
+| summarize count() by ResourceUri, ResultSignature, _ResourceId
+// ResultSignature contains HTTP status code returned by the request, (e.g.  200, 300, 401, etc.)
+// ResourceUri contains the URI of the request

@@ -1,0 +1,24 @@
+[
+    {
+        "TimeGenerated": "2023-02-23T05:09:08.7639880Z",
+        "OperationName": "Connection",
+        "SessionHostName": "CPC-rouwe-SWZOQ",
+        "SessionHostResourceId": "/subscriptions/38693fc8-c9a1-4985-9cc9-19a74e717b9b/resourceGroups/75decdd3-bc2e-4e71-a9ec-5da22915c0eb/providers/Microsoft.Compute/virtualMachines/CPC_1234",
+        "State": "Completed",
+        "ActivityId": "dddfc5ea-5f89-4653-93ff-55ca2bbdd097",
+        "ClientType": "com.microsoft.rdc.macos",
+        "ClientOS": "macOS 15.3.1",
+        "ClientVersion": "2481",
+        "SessionHostPoolType": "PersonalDesktop",
+        "SessionHostAgentVersion": "1.0.10673.700.15.Canary",
+        "SessionHostOSDescription": "Windows 10 Enterprise",
+        "SessionHostOSVersion": "10.0.26100.3000",
+        "UdpType": "Websocket",
+        "ResultType": "Success",
+        "CloudPcId": "dddfc5ea-5f89-4653-93ff-55ca2bbdd097",
+        "DevBoxName": "rw-test-reporting-7",
+        "SubnetResourceId": "/subscriptions/7ae0bd34-6c02-409f-bfaf-20aa02d3e226/resourceGroups/abcd/providers/Microsoft.Network/virtualNetworks/vnet1234/subnets/0",
+        "NicResourceId": "/subscriptions/7ae0bd34-6c02-409f-bfaf-20aa02d3e226/resourceGroups/abcd/providers/Microsoft.Network/networkInterfaces/CPC_1234"
+    }
+]
+

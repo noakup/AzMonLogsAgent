@@ -1,0 +1,5 @@
+ACSRoomsIncomingOperations
+| where ResultType == "Failed"
+| project TimeGenerated, OperationName, OperationVersion, ResultSignature
+| order by TimeGenerated desc
+| limit 100

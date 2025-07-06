@@ -1,0 +1,18 @@
+[{
+	"ApplicationId": "application_1592205350998_402884",
+	"SparkDeployMode": "client",
+	"SparkMaster": "yarn",
+	"YarnMaxAttempts": "1",
+	"SparkExecutorInstances": "6",
+	"SparkExecutorMemory" : "2g",
+	"SparkExecutorCores" : "3",
+	"YarnTags" : "livy-batch-541946-7Hb7RalF",
+	"YarnQueue": "default",
+	"Tenant": "bf597230450a4ea08cf5d46f097c6b51",
+	"Role": "workernode",
+	"Host": "wn0-ntb-7.5c4yhjcbs2de5avsfsdfbtkske.cx.internal.cloudapp.net",
+	"ClusterDnsName": "primary-hdsparkcluster-v3-eus2",
+	"Region": "East US",
+	"IpAddress": "10.0.0.9",
+	"UserSubscriptionId": "8p26a622-df78-4a27-a907-1ec2384d4f1va"
+}]

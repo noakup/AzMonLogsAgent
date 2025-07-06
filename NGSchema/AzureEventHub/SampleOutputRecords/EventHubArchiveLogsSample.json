@@ -1,0 +1,15 @@
+[
+  {
+  "TaskName": "EventHubArchiveUserError",
+  "ActivityId": "000000000-0000-0000-0000-0000000000000",
+  "TrackingId": "0000000-0000-0000-0000-00000000000000000",
+  "EventhubName": "<Event Hub full name>",
+  "PartitionId": "1",
+  "ArchiveStep": "ArchiveFlushWriter",
+  "TimeGenerated": "9/22/2016 5:11:21 AM",
+  "Failures": 3,
+  "DurationMs": 360000,
+  "Message": "Microsoft.WindowsAzure.Storage.StorageException: The remote server returned an error: (404) Not Found. ---> System.Net.WebException: The remote server returned an error: (404) Not Found.\r\n   at Microsoft.WindowsAzure.Storage.Shared.Protocol.HttpResponseParsers.ProcessExpectedStatusCodeNoException[T](HttpStatusCode expectedStatusCode, HttpStatusCode actualStatusCode, T retVal, StorageCommandBase`1 cmd, Exception ex)\r\n   at Microsoft.WindowsAzure.Storage.Blob.CloudBlockBlob.<PutBlockImpl>b__3e(RESTCommand`1 cmd, HttpWebResponse resp, Exception ex, OperationContext ctx)\r\n   at Microsoft.WindowsAzure.Storage.Core.Executor.Executor.EndGetResponse[T](IAsyncResult getResponseResult)\r\n   --- End of inner exception stack trace ---\r\n   at Microsoft.WindowsAzure.Storage.Core.Util.StorageAsyncResult`1.End()\r\n   at Microsoft.WindowsAzure.Storage.Core.Util.AsyncExtensions.<>c__DisplayClass4.<CreateCallbackVoid>b__3(IAsyncResult ar)\r\n--- End of stack trace from previous location where exception was thrown ---\r\n   at System.",
+  "Provider": "eventhub"
+  }
+]

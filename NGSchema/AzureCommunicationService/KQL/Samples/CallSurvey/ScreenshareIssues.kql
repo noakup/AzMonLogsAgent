@@ -1,0 +1,7 @@
+ACSCallSurvey
+| where isempty( ScreenshareIssues ) == false
+//Comma separated issues when multiple issues are reported
+| project screenshare =  split(ScreenshareIssues,',')
+| mv-expand screenshare to typeof(string)
+| summarize frequency=count() by screenshare
+| render columnchart

@@ -1,0 +1,14 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    Level = tostring(properties.level),
+    TaskName = tostring(properties.taskName),
+    Message = tostring(properties.message),
+    CorrelationId = tostring(properties.activityId),
+    SiteName = tostring(properties.siteName),
+    HostName = tostring(properties.hostName),
+    StatusCode = toint(properties.statusCode),
+    SubStatusCode = toint(properties.subStatusCode),
+    Details = tostring(properties.details),
+    ModuleRuntimeVersion = tostring(properties.moduleRuntimeVersion)

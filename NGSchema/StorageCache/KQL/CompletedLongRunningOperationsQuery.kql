@@ -1,0 +1,5 @@
+StorageCacheOperationEvents
+| where ResponseCode == 201 or ResponseCode == 202
+| where ResultType == "Succeeded" 
+| sort by TimeGenerated desc
+| take 100

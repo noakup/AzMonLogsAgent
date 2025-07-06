@@ -1,0 +1,8 @@
+source
+| project
+    TimeGenerated = todatetime(['time']),
+    CorrelationId = correlationId,
+    Location = location,
+    Description = tostring(properties.Description),
+    CurrentFirmwareVersion = tostring(properties.CurrentFirmwareVersion),
+    AvailableFirmwareVersion = tostring(properties.AvailableFirmwareVersion)

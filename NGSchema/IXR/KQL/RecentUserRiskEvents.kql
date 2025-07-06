@@ -1,0 +1,4 @@
+AADUserRiskEvents
+| where DetectedDateTime > ago(1d)
+| where RiskState == "atRisk"
+| take 100

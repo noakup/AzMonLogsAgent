@@ -1,0 +1,4 @@
+PGSQLServerLogs
+| where Message contains "AUDIT:"
+| order by TimeGenerated desc 
+| take 100

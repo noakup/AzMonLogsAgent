@@ -1,0 +1,19 @@
+[
+  {
+    "time": "2023-11-07T01:22:39.0339970Z",
+    "resourceId": "/SUBSCRIPTIONS/D8560037-8993-40AC-B191-4B2D877A9359/RESOURCEGROUPS/MCHAICANARYTEST/PROVIDERS/MICROSOFT.EVENTGRID/NAMESPACES/MCHAI1010",
+    "location": "eastus",
+    "operationName": "Microsoft.EventGrid/topicspaces/subscribe",
+    "category": "FailedMqttSubscriptionOperations",
+    "resultType": "Failed",
+    "resultSignature": "AuthorizationError",
+    "resultDescription": "Topic filter 'testtopic/#' does not match any topicspaces",
+    "identity": { "clientIdentity": "client1" },
+    "properties": {
+      "sessionName": "client1",
+      "protocol": "MQTT5",
+      "traceId": "gnz3cgqpozg4tbm5anvsvopafi",
+      "topicFilters": ["testtopic/#"]
+    }
+  }
+]

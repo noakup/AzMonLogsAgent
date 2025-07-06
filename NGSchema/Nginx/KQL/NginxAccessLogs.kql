@@ -1,0 +1,4 @@
+NGXOperationLogs
+| where FilePath == "/var/log/nginx/access.log"
+| sort by TimeGenerated asc
+| take 100

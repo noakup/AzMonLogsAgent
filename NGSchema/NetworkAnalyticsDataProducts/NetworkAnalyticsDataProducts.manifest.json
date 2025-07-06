@@ -1,0 +1,851 @@
+{
+    "type": "Microsoft.NetworkAnalytics/DataProducts",
+    "displayName": "Azure Operator Insights - Data Product",
+    "description": "A high performance analytics solution, targeted at telecoms operators. Telemetry data is sent from customer systems to Azure, where it is processed and stored. The data is then made available for analysis and visualization via 2 ADXs.",
+    "tags": { },
+    "properties": { },
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Azure Operator Insights/Triage",
+    "contactDL": "A4OAINASWE@microsoft.com",
+    "relatedFunctions": [ ],
+    "relatedTables": [
+        "AzureActivity",
+        "AzureMetrics"
+    ],
+    "tables": [
+        {
+            "workflowName": "MNADigestionWorkflow",
+            "transformName": "MNADigestion",
+            "physicalName": "AOIDigestion",
+            "logicalName": "AOIDigestion",
+            "description": "Logs related to digestion of files added to the input storage account. These can be used to verify that data is being successfully passed through to enrichment, or to troubleshoot issues with processing the raw data.",
+            "categories": [ ],
+            "tags": { },
+            "properties": { },
+            "artifactVersion": 4,
+            "dataTypeId": "MICROSOFTNETWORKANALYTICSDATAPRODUCTS_DIGESTION",
+            "isResourceCentric": true,
+            "intelligencePacks": [ "LogManagement" ],
+            "isChangeColumnInternalNameAllowed": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "level",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/DigestionTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The time (UTC) when the log was generated."
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The level of the log."
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The log message."
+                },
+                {
+                    "name": "FilePath",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The path of the file that was digested.",
+                    "dataTypeHint": "URI"
+                },
+                {
+                    "name": "Datatype",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The datatype of the file that was digested."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/DigestionSamples.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/DigestionSamples.json"
+        },
+        {
+            "name": "AOIDatabaseQuery",
+            "description": "Audit logs related to queries run on database, in dataproduct environment.",
+            "categories": [ 
+                "audit",
+                "resources"
+             ],
+            "tags": { },
+            "properties": { },
+            "artifactVersion": 2,
+            "dataTypeId": "MICROSOFTNETWORKANALYTICSDATAPRODUCTS_DATABASEQUERY",
+            "isResourceCentric": true,
+            "intelligencePacks": [ "LogManagement" ],
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/DatabaseQueryTransform.kql",
+            "columns": [
+                  {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The time (UTC) at which this event was generated."                   
+                  },
+                  {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The name of this operation."
+                  },
+                  {
+                    "name": "Location",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The region where this query was executed."
+                  },
+                  {
+                    "name": "CorrelationId",
+                    "description": "The client request ID.",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "GUID"
+                  },
+                  {
+                    "name": "RootActivityId",
+                    "description": "The root activity ID.",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "GUID"
+                  },
+                  {
+                    "name": "StartedOn",
+                    "description": "Time (UTC) at which this command started.",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "LastUpdatedOn",
+                    "description": "Time (UTC) at which this command ended.",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "DatabaseName",
+                    "description": "The name of the database that the command ran on.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "State",
+                    "description": "The state the command ended with.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "FailureReason",
+                    "description": "The failure reason.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "TotalCPU",
+                    "description": "Total CPU duration time.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "ApplicationName",
+                    "description": "The name of the application that invoked the query.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "MemoryPeak",
+                    "description": "Memory peak.",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "DurationMs",
+                    "description": "Command duration in milliseconds.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "User",
+                    "description": "The user that invoked the query.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "Principal",
+                    "description": "The principal that invoked the query.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "MinDataScannedTime",
+                    "description": "Minimum data scan time.",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "MaxDataScannedTime",
+                    "description": "Maximum data scan time.",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "TotalExtentsCount",
+                    "description": "Total extents count.",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "ScannedExtentsCount",
+                    "description": "Scanned extents count.",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "TotalRowsCount",
+                    "description": "Total rows count.",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "ScannedRowsCount",
+                    "description": "Scanned rows count.",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "CacheMemoryHits",
+                    "description": "Memory cache hits.",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "CacheMemoryMisses",
+                    "description": "Memory cache misses.",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "CacheDiskHits",
+                    "description": "Disk cache hits.",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "CacheDiskMisses",
+                    "description": "Disk cache misses.",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "CacheShardsHotHits",
+                    "description": "Shards hot cache hits.",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "CacheShardsHotMisses",
+                    "description": "Shards hot cache misses.",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "CacheShardsColdHits",
+                    "description": "Shards cold cache hits.",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "CacheShardsColdMisses",
+                    "description": "Shards cold cache misses.",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "CacheShardsBypassBytes",
+                    "description": "Shards cache bypass bytes.",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "TableCount",
+                    "description": "Table count.",
+                    "type": "Int",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "TablesStatistics",
+                    "description": "Tables statistics.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "WorkloadGroup",
+                    "description": "The workload group the query was classified to.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "Text",
+                    "description": "The text of the invoked query.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                  },
+                  {
+                    "name": "ComponentFault",
+                    "description": "The entity that caused the query to fail. For example, if the query result is too large, the ComponentFault will be 'Client'. If an internal error occured, it will be 'Server'.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                  }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/DatabaseQuerySamples.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/DatabaseQuerySamples.json"
+        },
+        {
+            "name": "AOIStorage",
+            "description": "These are Audit logs related to ingestion of files on the input storage account.",
+            "categories": [ 
+                "audit",
+                "resources"
+             ],
+            "tags": { },
+            "properties": { },
+            "artifactVersion": 2,
+            "dataTypeId": "MICROSOFTNETWORKANALYTICSDATAPRODUCTS_INGESTION",
+            "isResourceCentric": true,
+            "intelligencePacks": [ "LogManagement" ],
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/StorageTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The time (UTC) at which this event was generated." 
+                },
+                {
+                    "name": "AccountName",
+                    "type": "String",
+                    "description": "The name of the storage account.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "description": "The location of storage account.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "description": "The category to which this row belongs to, it will be one of Ingestion, IngestionRead, IngestionDelete or ReadStorage.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Protocol",
+                    "type": "String",
+                    "description": "The protocol that is used in the operation.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "description": "The type of REST operation that was performed.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "AuthenticationType",
+                    "type": "String",
+                    "description": "The type of authentication that was used to make the request.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "StatusCode",
+                    "type": "String",
+                    "description": "The HTTP status code for the request. If the request is interrupted, this value might be set to Unknown.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "StatusText",
+                    "type": "String",
+                    "description": "The status of the requested operation.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DurationMs",
+                    "type": "Double",
+                    "description": "The total time, expressed in milliseconds, to perform the requested operation. This includes the time to read the incoming request, and to send the response to the requester.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServerLatencyMs",
+                    "type": "Double",
+                    "description": "The total time expressed in milliseconds to perform the requested operation. This value doesn't include network latency (the time to read the incoming request and send the response to the requester).",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Uri",
+                    "type": "String",
+                    "description": "Uniform resource identifier that is requested.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "URI"
+                },
+                {
+                    "name": "CallerIpAddress",
+                    "type": "String",
+                    "description": "The IP address of the requester, including the port number.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "CorrelationId",
+                    "type": "String",
+                    "description": "The ID that is used to correlate logs across resources.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "GUID"
+                },
+                {
+                    "name": "SchemaVersion",
+                    "type": "String",
+                    "description": "The schema version of the log.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "description": "The storage service version that was specified when the request was made. This is equivalent to the value of the x-ms-version header.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "AuthenticationHash",
+                    "type": "String",
+                    "description": "The hash of authentication token.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "RequesterObjectId",
+                    "type": "String",
+                    "description": "The OAuth object ID of the requester.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "RequesterTenantId",
+                    "type": "String",
+                    "description": "The OAuth tenant ID of identity.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "RequesterAppId",
+                    "type": "String",
+                    "description": "The Open Authorization (OAuth) application ID that is used as the requester.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "RequesterAudience",
+                    "type": "String",
+                    "description": "The OAuth audience of the request.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "RequesterTokenIssuer",
+                    "type": "String",
+                    "description": "The OAuth token issuer.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "RequesterUpn",
+                    "type": "String",
+                    "description": "The User Principal Names of requestor.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "AuthorizationDetails",
+                    "type": "Dynamic",
+                    "description": "Detailed policy information used to authorize the request.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "UserAgentHeader",
+                    "type": "String",
+                    "description": "The User-Agent header value, in quotes.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "ReferrerHeader",
+                    "type": "String",
+                    "description": "The Referer header value.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "ClientRequestId",
+                    "type": "String",
+                    "description": "The x-ms-client-request-id header value of the request.",
+                    "isDefaultDisplay": false,
+                    "dataTypeHint": "GUID"
+                },
+                {
+                    "name": "Etag",
+                    "type": "String",
+                    "description": "The ETag identifier for the returned object, in quotes.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "ServiceType",
+                    "type": "String",
+                    "description": "The service associated with this request.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "OperationCount",
+                    "type": "Int",
+                    "description": "The number of each logged operation that is involved in the request. This count starts with an index of 0. Some requests require more than one operation, such as a request to copy a blob. Most requests perform only one operation.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "ObjectKey",
+                    "type": "String",
+                    "description": "The key of the requested object, in quotes.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "RequestHeaderSize",
+                    "type": "BigInt",
+                    "description": "The size of the request header expressed in bytes. If a request is unsuccessful, this value might be empty.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "RequestBodySize",
+                    "type": "BigInt",
+                    "description": "The size of the request packets, expressed in bytes, that are read by the storage service. If a request is unsuccessful, this value might be empty.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "ResponseHeaderSize",
+                    "type": "BigInt",
+                    "description": "The size of the response header expressed in bytes. If a request is unsuccessful, this value might be empty.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "ResponseBodySize",
+                    "type": "BigInt",
+                    "description": "The size of the response packets written by the storage service, in bytes. If a request is unsuccessful, this value may be empty.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "RequestMd5",
+                    "type": "String",
+                    "description": "The value of either the Content-MD5 header or the x-ms-content-md5 header in the request. The MD5 hash value specified in this field represents the content in the request.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "ResponseMd5",
+                    "type": "String",
+                    "description": "The value of the MD5 hash calculated by the storage service.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "LastModifiedTime",
+                    "type": "DateTime",
+                    "description": "The Last Modified Time (LMT) for the returned object. This field is empty for operations that can return multiple objects.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "ConditionsUsed",
+                    "type": "String",
+                    "description": "A semicolon-separated list of key-value pairs that represent a condition.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "ContentLengthHeader",
+                    "type": "BigInt",
+                    "description": "The value of the Content-Length header for the request sent to the storage service.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "TlsVersion",
+                    "type": "String",
+                    "description": "The TLS version used in the connection of request.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "SasExpiryStatus",
+                    "type": "String",
+                    "description": "Records any violations in the request SAS token as per the SAS policy set in the storage account. Ex: longer SAS token duration specified than allowed per SAS policy.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "MetricResponseType",
+                    "type": "String",
+                    "description": "Records the metric response for correlation between metrics and logs.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "SourceUri",
+                    "type": "String",
+                    "description": "Records the source URI for operations.",
+                    "isDefaultDisplay": false,
+                    "dataTypeHint": "URI"
+                },
+                {
+                    "name": "DestinationUri",
+                    "type": "String",
+                    "description": "Records the destination URI for operations.",
+                    "isDefaultDisplay": false,
+                    "dataTypeHint": "URI"
+                },
+                {
+                    "name": "AccessTier",
+                    "type": "String",
+                    "description": "The access tier of the storage account.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceAccessTier",
+                    "type": "String",
+                    "description": "The source tier of the storage account.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RehydratePriority",
+                    "type": "String",
+                    "description": "The priority used to rehydrate an archived blob.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/StorageSamples.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/StorageSamples.json"
+        }
+    ],
+    "functions": [ ],
+    "queries": [
+        {
+            "id": "839b634d-aa61-4eeb-9826-e42b57a650dc",
+            "displayName": "Row digestion errors",
+            "description": "All logs about rows which have failed to be digested.",
+            "bodyFilePath": "KQL/RowDigestionErrors.kql",
+            "categories": [ ],
+            "relatedTables": [ "AOIDigestion" ],
+            "tags": { },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": false
+                }
+            }
+        },
+        {
+            "id": "4caba217-a14b-4690-934f-d57b9ccbd1da",
+            "displayName": "Failed file digestion by source",
+            "description": "Breakdown of files that could not be digested by the top-level directory that they were uploaded to (typically the SiteId).",
+            "bodyFilePath": "KQL/FailedFileDigestionBySource.kql",
+            "categories": [ ],
+            "relatedTables": [ "AOIDigestion" ],
+            "tags": { },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": false
+                }
+            }
+        },
+        {
+            "id": "9788de8c-73da-4b6f-b259-28f89c8f8964",
+            "displayName": "Queries executed by a user on dataproduct",
+            "description": "List all the queries run on a dataproduct by a particular user.",
+            "bodyFilePath": "KQL/DatabaseQuery.kql",
+            "categories": [ 
+                "audit",
+                "resources"
+             ],
+            "relatedTables": [ "AOIDatabaseQuery" ],
+            "tags": { 
+                "Topic": [
+                    "Audit"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": false
+                }
+            }
+        },
+        {
+            "id": "1d326b1d-b84f-475a-9ce6-78dc33d33461",
+            "displayName": "Ingestion operation on storage",
+            "description": "Lists all the ingestion operation performed on storage of a dataproduct.",
+            "bodyFilePath": "KQL/StorageIngestion.kql",
+            "categories": [ 
+                "audit",
+                "resources"
+             ],
+            "relatedTables": [ "AOIStorage" ],
+            "tags": {
+                "Topic": [
+                    "Audit"
+                ]
+             },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": false
+                }
+            }
+        },
+        {
+            "id": "2f7096f6-093c-4c1d-bd85-b47737aa1aa7",
+            "displayName": "Delete operation on storage",
+            "description": "Lists all delete operation performed on storage of a dataproduct.",
+            "bodyFilePath": "KQL/StorageIngestionDelete.kql",
+            "categories": [ 
+                "audit",
+                "resources"
+             ],
+            "relatedTables": [ "AOIStorage" ],
+            "tags": {
+                "Topic": [
+                    "Audit"
+                ]
+             },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": false
+                }
+            }
+        },
+        {
+            "id": "0bd960eb-b761-4ff6-bf0e-73bc57590734",
+            "displayName": "Read operation on storage",
+            "description": "Lists all Read operation performed on storage of a dataproduct.",
+            "bodyFilePath": "KQL/StorageRead.kql",
+            "categories": [ 
+                "audit",
+                "resources"
+             ],
+            "relatedTables": [ "AOIStorage" ],
+            "tags": {
+                "Topic": [
+                    "Audit"
+                ]
+             },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": false
+                }
+            }
+        },
+        {
+            "id": "30005149-f6be-42fc-871c-65b45fbb7891",
+            "displayName": "Read operation on input storage",
+            "description": "Lists all Read operation performed on the input storage of a dataproduct.",
+            "bodyFilePath": "KQL/StorageIngestionRead.kql",
+            "categories": [ 
+                "audit",
+                "resources"
+             ],
+            "relatedTables": [ "AOIStorage" ],
+            "tags": {
+                "Topic": [
+                    "Audit"
+                ]
+             },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": false
+                }
+            }
+        }
+    ]
+}

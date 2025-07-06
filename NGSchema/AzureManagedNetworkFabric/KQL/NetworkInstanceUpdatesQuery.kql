@@ -1,0 +1,6 @@
+MNFDeviceUpdates
+| where EventCategory == "NetworkInstanceUpdates"
+| where Properties has "WORKLOAD-MGMT"
+| project EventName, EventCategory, DeviceId, TimeGenerated, Properties
+| sort by TimeGenerated desc
+| limit 100

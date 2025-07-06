@@ -1,0 +1,22 @@
+source
+| project
+    TimeGenerated = todatetime(['timeStamp']),
+    OperationName = tostring(operationName),
+    InstanceId = tostring(properties.instanceId),
+    ClientIp = tostring(properties.clientIp),
+    ClientPort = toint(properties.clientPort),
+    Action = tostring(properties.action),
+    Message = tostring(properties.message),
+    DetailedMessage = tostring(properties.details.message),
+    DetailedData = tostring(properties.details.data),
+    FileDetails = tostring(properties.details.file),
+    LineDetails = tostring(properties.details.line),
+    Hostname = tostring(properties.hostname),
+    PolicyId = tostring(properties.policyId),
+    PolicyScope = tostring(properties.policyScope),
+    PolicyScopeName = tostring(properties.policyScopeName),
+    RequestUri = tostring(properties.requestUri),
+    RuleSetType = tostring(properties.ruleSetType),
+    RuleSetVersion = tostring(properties.ruleSetVersion),
+    RuleId = tostring(properties.ruleId),
+    TrackingId = tostring(properties.trackingId)

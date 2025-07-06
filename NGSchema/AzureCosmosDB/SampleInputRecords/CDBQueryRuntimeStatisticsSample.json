@@ -1,0 +1,15 @@
+[
+	{
+		"time": "2021-03-21T05:53:05.6379968Z",
+		"resourceId": "/SUBSCRIPTIONS/1338DDED-42F5-4CAE-8ED2-36C19680A7A1/RESOURCEGROUPS/ACCNT_RG/PROVIDERS/MICROSOFT.DOCUMENTDB/DATABASEACCOUNTS/ACCNT-METRICS-TEST",
+		"category": "QueryRuntimeStatistics",
+		"properties": {
+			"activityId": "79b428ce-218a-43b5-85a9-b1eb54ab5d39",
+			"databasename": "AggregationsWithChangeFeedV2",
+			"collectionname": "Employee",
+			"partitionkeyrangeid": "3",
+			"correlatedActivityId":"fb44c645-150d-4524-9db5-372fe64d0d91",
+			"querytext": "{\"query\":\"SELECT c.id, c._self, c._rid, c._ts, c[\\\"p1__12\\\"] AS p2__18\\nFROM c\",\"parameters\":[]}"
+		}
+	}
+]

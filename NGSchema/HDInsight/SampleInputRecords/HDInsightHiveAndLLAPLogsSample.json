@@ -1,0 +1,12 @@
+[{
+	"utcTime": "2020-08-03T21:04:52,071",
+	"logLevel": "INFO",
+	"message": "[pool-5-thread-8] HiveMetaStore.audit: ugi=hive\tip=unknown-ip-addr\tcmd=Done cleaning up thread local RawStore\t",
+	"logType": "InteractiveHiveMetastoreLog",
+	"clusterName": "becohen-interactivehive-test1",
+	"hostName": "hn0-becohe",
+	"clusterType": "interactivehive",
+	"operationName": "LogCollection",
+	"correlationId": "InteractiveHiveLogs",
+	"FluentdIngestTimestamp": "2020-06-30 03:53:00.0000000"
+}]

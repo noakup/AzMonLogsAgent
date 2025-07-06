@@ -1,0 +1,18 @@
+source  
+| project 
+	TimeGenerated = todatetime(['time']),    
+	Protocol = tostring(properties.Protocol), 
+	SourceIp = tostring(properties.SourceIp), 
+	SourcePort = toint(properties.SourcePort), 
+	DestinationPort = toint(properties.DestinationPort), 
+	Fqdn = tostring(properties.Fqdn), 
+	TargetUrl = tostring(properties.TargetUrl), 
+	Action = tostring(properties.Action), 
+	Policy = tostring(properties.Policy), 
+	RuleCollectionGroup = tostring(properties.RuleCollectionGroup),
+	RuleCollection = tostring(properties.RuleCollection), 
+	Rule = tostring(properties.Rule), 
+	ActionReason = tostring(properties.ActionReason), 
+	IsTlsInspected = tobool(properties.IsTlsInspected), 
+	WebCategory = tostring(properties.WebCategory),
+	IsExplicitProxyRequest = tobool(properties.IsExplicitProxyRequest)

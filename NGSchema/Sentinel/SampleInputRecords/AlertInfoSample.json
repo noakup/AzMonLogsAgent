@@ -1,0 +1,70 @@
+[
+  {
+    "time": "2021-08-22T10:05:59.5680583Z",
+    "tenantId": "5b5a146c-eba8-46af-96f8-e31b50d15a3f",
+    "operationName": "Publish",
+    "category": "AdvancedHunting-AlertInfo",
+    "properties": {
+      "AlertId": "ed637652235587489106_-2012627947",
+      "Timestamp": "2021-08-22T09:25:23.4942123Z",
+      "Title": "Mark - 2 - Finds PowerShell execution events that could involve a download.",
+      "ServiceSource": "Microsoft Defender for Endpoint",
+      "Category": "Execution",
+      "Severity": "High",
+      "DetectionSource": "Custom detection",
+      "MachineGroup": null,
+      "AttackTechniques": "[\"Scripting (T1064)\",\"Software Deployment Tools (T1072)\",\"System Services (T1569)\"]"
+    }
+  },
+  {
+    "time": "2021-08-22T10:30:55.2886892Z",
+    "tenantId": "5b5a146c-eba8-46af-96f8-e31b50d15a3f",
+    "operationName": "Publish",
+    "category": "AdvancedHunting-AlertInfo",
+    "properties": {
+      "AlertId": "da637652250542525573_911747482",
+      "Timestamp": "2021-08-22T10:24:09.1421877Z",
+      "Title": "[E2E] MTP Incident EUS f2fef7a8-a426-4b2d-a831-24c74e8b3066",
+      "ServiceSource": "Microsoft Defender for Endpoint",
+      "Category": "Exploit",
+      "Severity": "Low",
+      "DetectionSource": "Custom TI",
+      "MachineGroup": null,
+      "AttackTechniques": ""
+    }
+  },
+  {
+    "time": "2021-08-22T10:31:32.1270326Z",
+    "tenantId": "5b5a146c-eba8-46af-96f8-e31b50d15a3f",
+    "operationName": "Publish",
+    "category": "AdvancedHunting-AlertInfo",
+    "properties": {
+      "AlertId": "da637652250917406059_62756818",
+      "Timestamp": "2021-08-22T10:26:16.4615242Z",
+      "Title": "[E2E] MTP Incident EUS 3704f969-1afa-455a-9f12-b1d3e613c69a",
+      "ServiceSource": "Microsoft Defender for Endpoint",
+      "Category": "Exploit",
+      "Severity": "Low",
+      "DetectionSource": "Custom TI",
+      "MachineGroup": null,
+      "AttackTechniques": ""
+    }
+  },
+  {
+    "time": "2021-08-22T10:31:32.1270326Z",
+    "tenantId": "5b5a146c-eba8-46af-96f8-e31b50d15a3f",
+    "operationName": "Publish",
+    "category": "AdvancedHunting-AlertInfo",
+    "properties": {
+      "AlertId": null,
+      "Timestamp": null,
+      "Title": null,
+      "ServiceSource": null,
+      "Category": null,
+      "Severity": null,
+      "DetectionSource": null,
+      "MachineGroup": null,
+      "AttackTechniques": null
+    }
+  }
+]

@@ -1,0 +1,6 @@
+AFSAuditLogs
+// The OperationName below can be replaced by obtain other operations such as "RebootAmlFilesystemNode" or "AmlFSRefreshHSMToken".
+| where OperationName has "UnsuspendAmlFilesystem"
+| project TimeGenerated, _ResourceId, ActivityId, ResultSignature, ResultDescription, Location
+| sort by TimeGenerated asc
+| limit 100

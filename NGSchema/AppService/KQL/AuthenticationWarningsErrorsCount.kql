@@ -1,0 +1,5 @@
+AppServiceAuthenticationLogs
+| where TaskName == "MiddlewareWarning" or TaskName == "MiddlewareError"
+| summarize count() by Message, TaskName
+| order by TaskName asc, count_
+| take 100

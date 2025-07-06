@@ -1,0 +1,31 @@
+[
+    {
+        "TimeGenerated": "3/25/2025, 10:40:50.902 AM",
+        "FirewallName": "AWSNWFirewall",
+        "AvailabilityZone": "eu-north-1a",
+        "EventTimestamp": "1742898900",
+        "TCPFlags": "02",
+        "Syn": true,
+        "Fin": true,
+        "Psh": true,
+        "Ack": true,
+        "Ecn": true,
+        "Rst": true,
+        "AppProto": "unknown",
+        "SrcIp": "198.235.24.12",
+        "SrcPort": "52458.0",
+        "NetFlowPkts": "1",
+        "NetFlowBytes": "44",
+        "NetFlowStart": "3/25/2025, 10:29:09.876 AM",
+        "NetFlowEnd": "3/25/2025, 10:29:09.876 AM",
+        "NetFlowAge": "0",
+        "NetFlowMinttl": "225",
+        "NetFlowMaxttl": "225",
+        "EventType": "netflow",
+        "FlowId": "1511923136480443",
+        "DestIp": "10.0.2.55",
+        "Proto": "TCP",
+        "DestPort": "9042.0",
+        "Timestamp": ""
+    }
+]

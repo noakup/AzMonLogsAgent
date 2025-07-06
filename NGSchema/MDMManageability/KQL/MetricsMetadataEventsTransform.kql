@@ -1,0 +1,16 @@
+source
+| extend
+    properties = parse_json(properties)
+| project
+    TimeGenerated = todatetime(["time"]),
+    StartTime = todatetime(properties.startTime),
+    EndTime = todatetime(properties.endTime),
+    AMWResourceName = tostring(properties.AMWResourceName),
+    MetricNamespace = tostring(properties.metricNamespace),
+    MetricName = tostring(properties.metricName),
+    DimensionsList = tostring(properties.dimensionsList),
+    DailyTimeseriesCount = tolong(properties.dailyTimeseriesCount),
+    IngestedSamplesCount = tolong(properties.ingestedSamplesCount),
+    IncomingEventsCount = tolong(properties.incomingEventsCount),
+    DaysSinceMetricQueried = toint(properties.daysSinceMetricQueried),
+    NumberOfQueries = toint(properties.numberOfQueries)

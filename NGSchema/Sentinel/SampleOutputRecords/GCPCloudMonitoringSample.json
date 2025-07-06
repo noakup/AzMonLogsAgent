@@ -1,0 +1,42 @@
+[
+  {
+    "TimeGenerated": "4/24/2025, 1:06:26.805 PM",
+    "MetricLabels": {
+      "storage_class": "MULTI_REGIONAL"
+    },
+    "MetricType": "storage.googleapis.com/storage/object_count",
+    "Resource": {
+      "type": "gcs_bucket",
+      "labels": {
+        "project_id": "msccp-test",
+        "location": "us",
+        "bucket_name": "cdn-pmalreddy"
+      }
+    },
+    "MetricKind": "GAUGE",
+    "ValueType": "INT64",
+    "Points": [
+      {
+        "interval": {
+          "startTime": "2025-04-24T13:00:00.0000000Z",
+          "endTime": "2025-04-24T13:00:00.0000000Z"
+        },
+        "value": {
+          "int64Value": "1"
+        }
+      },
+      {
+        "interval": {
+          "startTime": "2025-04-24T12:55:00.0000000Z",
+          "endTime": "2025-04-24T12:55:00.0000000Z"
+        },
+        "value": {
+          "int64Value": "1"
+        }
+      }
+    ],
+    "TenantId": "c64eb659-e5d8-4727-a9cd-ea4a085138e6",
+    "Type": "GCP_MONITORINGV2_CL",
+    "_ResourceId": ""
+  }
+]

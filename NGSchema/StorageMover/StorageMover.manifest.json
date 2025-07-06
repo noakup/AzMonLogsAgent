@@ -1,0 +1,310 @@
+{
+    "type": "Microsoft.StorageMover/storageMovers",
+    "displayName": "Azure Storage Mover",
+    "description": "All tables related to Azure Storage Mover.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Azure Storage Mover/Triage",
+    "contactDL": "xdatamigratecore@microsoft.com",
+    "relatedTables": ["AzureActivity" , "AzureMetrics"],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "StorageMoverCopyLogsFailed",
+            "description": "The result logs generated during the execution of Storage Mover job runs where the transfer result is 'Failed'. The logs include the details of the scanned items and their transfer result.",
+            "categories": [
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 4,
+            "dataTypeId": "MICROSOFTSTORAGEMOVER_COPYLOGSFAILED",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "isChangeColumnInternalNameAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/Transform_CopyLogsFailed.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Time in UTC when the log was generated on the Storage Mover agent.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "JobRunName",
+                    "type": "String",
+                    "description": "Unique name of the job run which generated this log.",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ItemPath",
+                    "type": "String",
+                    "description": "Relative path of the item from the migration source, and target root directories.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ItemType",
+                    "type": "String",
+                    "description": "Type of the item, either 'F' for file, or 'D' for directory.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TransferResult",
+                    "type": "String",
+                    "description": "The final transfer result of the item. One of: Excluded, Failed, Transferred, NoCopyNecessary, Unsupported.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "StatusCode",
+                    "type": "String",
+                    "description": "The storage mover status code.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Details",
+                    "type": "String",
+                    "description": "The error description and any additional details if available.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FileSize",
+                    "type": "BigInt",
+                    "description": "The file size in bytes (if available). Only applicable when item type is File.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/Sample_CopyLogsFailed.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/Sample_CopyLogsFailed.json"
+        },
+        {
+            "name": "StorageMoverCopyLogsTransferred",
+            "description": "The result logs generated during the execution of Storage Mover job runs where the transfer result is 'Transferred'. The logs include the details of the scanned items and their transfer result.",
+            "categories": [
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 4,
+            "dataTypeId": "MICROSOFTSTORAGEMOVER_COPYLOGSTRANSFERRED",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "isChangeColumnInternalNameAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/Transform_CopyLogsTransferred.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Time in UTC when the log was generated on the Storage Mover agent.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "JobRunName",
+                    "type": "String",
+                    "description": "Unique name of the job run which generated this log.",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ItemPath",
+                    "type": "String",
+                    "description": "Relative path of the item from the migration source, and target root directories.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ItemType",
+                    "type": "String",
+                    "description": "Type of the item, either 'F' for file, or 'D' for directory.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TransferResult",
+                    "type": "String",
+                    "description": "The final transfer result of the item. One of: Excluded, Failed, Transferred, NoCopyNecessary, Unsupported.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "StatusCode",
+                    "type": "String",
+                    "description": "The storage mover status code.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Details",
+                    "type": "String",
+                    "description": "The error description and any additional details if available.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FileSize",
+                    "type": "BigInt",
+                    "description": "The file size in bytes (if available). Only applicable when item type is File.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/Sample_CopyLogsTransferred.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/Sample_CopyLogsTransferred.json"
+        },
+        {
+            "name": "StorageMoverJobRunLogs",
+            "description": "Logs associated with Storage Mover job runs.",
+            "categories": [
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "MICROSOFTSTORAGEMOVER_JOBRUNLOGS",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "level",
+                    "type":"String"
+                }
+            ],
+            "transformFilePath": "KQL/Transform_JobRunLogs.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Time in UTC when the log was generated on the Storage Mover agent.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "JobRunName",
+                    "type": "String",
+                    "description": "JobRunName",
+                    "dataTypeHint": "GUID",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "The log level. Can be Informational, Warning or Error.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "StatusCode",
+                    "type": "String",
+                    "description": "Status code associated with the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "Log message.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/Sample_JobRunLogs.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/Sample_JobRunLogs.json"
+        }
+    ],
+    "functions": [],
+    "queries": [
+        {
+            "id": "df057014-305f-4fa9-8522-18ccf8caaa22",
+            "displayName": "View copy logs",
+            "description": "View the copy logs of job runs, and optionally filter by specific job run name.",
+            "bodyFilePath": "KQL/ViewCopyLogs.kql",
+            "categories": [
+                "resources"
+            ],
+            "relatedTables": [
+                "CopyLogs"
+            ],
+            "tags": {
+                "Topic": [
+                    "Usage"
+                ]
+            },
+            "properties": { "ExampleQuery": true }
+        }
+    ]
+}

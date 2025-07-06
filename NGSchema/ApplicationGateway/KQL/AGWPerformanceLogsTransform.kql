@@ -1,0 +1,12 @@
+source
+| project
+    TimeGenerated = todatetime(['time']),
+    OperationName = tostring(operationName),
+    InstanceId = tostring(properties.instanceId),
+    HealthyHostCount = toint(properties.healthyHostCount),
+    UnHealthyHostCount = toint(properties.unHealthyHostCount),
+    RequestCount = toint(properties.requestCount),
+    Latency = toint(properties.latency),
+    FailedRequestCount = toint(properties.failedRequestCount),
+    Throughput = toint(properties.throughput)
+    

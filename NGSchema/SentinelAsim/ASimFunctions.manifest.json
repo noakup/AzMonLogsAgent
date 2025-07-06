@@ -1,0 +1,280 @@
+{
+    "type": "Microsoft.SecurityInsights/securityInsights",
+    "displayName": "Azure Sentinel",
+    "description": "All tables related to Azure Sentinel.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Microsoft Azure Sentinel/Data Collection and Processing",
+    "contactDL": "asipolarbearslive@microsoft.com",
+    "relatedTables": [],
+    "relatedFunctions": [],
+    "tables": [],
+    "functions": [
+        {
+            "id": "edb65ae4-a2b8-5321-9f93-57a81f552023",
+            "name": "_ASIM_AADSTSErrorCodes",
+            "parameters": "",
+            "description": "AAD STS error codes.",
+            "bodyFilePath": "KQL/Common/_ASIM_AADSTSErrorCodes.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "38425253-f081-5574-8d01-1ef25366d20c",
+            "name": "_ASIM_Enrich_IdentityInfo",
+            "parameters": "T:(*), AadIdField:string = '', TenantIdField:string = '', SidField:string = '', UpnField:string = '', EmailField:string = ''",
+            "description": "Enrich events with data from the IdentityInfo UEBA table.",
+            "bodyFilePath": "KQL/Common/_ASIM_Enrich_IdentityInfo.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "6004200a-ea4c-5963-8ea7-7411196da9b8",
+            "name": "_ASIM_GetDisabledParsers",
+            "parameters": "CallerContext:string",
+            "description": "An ASIM function to check if a parser is disabled.",
+            "bodyFilePath": "KQL/Common/_ASIM_GetDisabledParsers.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "36a1bf66-3208-5df0-9964-04ec9bb2ea98",
+            "name": "_ASIM_GetSourceBySourceType",
+            "parameters": "SourceType:string",
+            "description": "An ASIM function to get the the list of sources for an ASIM source type.",
+            "bodyFilePath": "KQL/Common/_ASIM_GetSourceBySourceType.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "3d93296d-00b9-5e04-8126-edd84e9ff112",
+            "name": "_ASIM_GetUserType",
+            "parameters": "username:string, sid:string",
+            "description": "An ASIM function sets the UserType for Windows systems based on the username and sid.",
+            "bodyFilePath": "KQL/Common/_ASIM_GetUserType.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "8db4427b-54d0-5f94-87f9-5e7a8d2b8370",
+            "name": "_ASIM_GetUsernameType",
+            "parameters": "username:string",
+            "description": "An ASIM function sets the UsernameType based on the username.",
+            "bodyFilePath": "KQL/Common/_ASIM_GetUsernameType.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "89909bc5-63b2-590b-b3b3-e8f5bea2fcfd",
+            "name": "_ASIM_GetWindowsUserType",
+            "parameters": "username:string, sid:string",
+            "description": "An ASIM function sets the UserType for Windows systems based on the username and sid.",
+            "bodyFilePath": "KQL/Common/_ASIM_GetWindowsUserType.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "1fb5bab9-8bf8-5745-bb46-1858f0bdca77",
+            "name": "_ASIM_IdentityInfo",
+            "parameters": "",
+            "description": "An ASIM normalized view of the IdentityInfo table.",
+            "bodyFilePath": "KQL/Common/_ASIM_IdentityInfo.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "af841918-ea4a-515c-bb21-0a7a5bc741fc",
+            "name": "_ASIM_LookupAADcodes",
+            "parameters": "ResultType:string",
+            "description": "AAD STS error codes.",
+            "bodyFilePath": "KQL/Common/_ASIM_LookupAADcodes.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "a3969e5c-574a-526d-937a-f347c8c77929",
+            "name": "_ASIM_LookupDnsQueryType",
+            "parameters": "QueryType:int",
+            "description": "An ASIM function to returns the DNS query type name (resource record type) based on a numerical query type.",
+            "bodyFilePath": "KQL/Common/_ASIM_LookupDnsQueryType.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "cf296479-dace-5fb4-906c-a270dcee23d8",
+            "name": "_ASIM_LookupDnsResponseCode",
+            "parameters": "ResponseCode:int",
+            "description": "An ASIM function to returns the DNS response code name based on a numerical response code.",
+            "bodyFilePath": "KQL/Common/_ASIM_LookupDnsResponseCode.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "9acfdefa-84a4-531b-a67c-296df42d9e4f",
+            "name": "_ASIM_LookupHTTPStatusCode",
+            "parameters": "StatusCode:string",
+            "description": "An ASIM function to returns the HTTP Status code name based on a numerical response code.",
+            "bodyFilePath": "KQL/Common/_ASIM_LookupHTTPStatusCode.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "a22d978f-3944-5ad8-9452-757225af75b0",
+            "name": "_ASIM_LookupICMPType",
+            "parameters": "NetworkIcmpCode:int",
+            "description": "An ASIM function to return the ICMP type name.",
+            "bodyFilePath": "KQL/Common/_ASIM_LookupICMPType.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "5fe2edb1-cf39-5039-bf18-5abc1bae5f4c",
+            "name": "_ASIM_LookupNetworkProtocol",
+            "parameters": "NetworkProtocol:int",
+            "description": "An ASIM function to return the IP network protocol name.",
+            "bodyFilePath": "KQL/Common/_ASIM_LookupNetworkProtocol.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "e316c508-8b3f-5198-88b0-8fd97672a930",
+            "name": "_ASIM_ResolveDnsQueryType",
+            "parameters": "T:(*), field:string",
+            "description": "An ASIM function sets DnsQueryType and DnsQueryTypeName based on an resource record code provided as a parameter.",
+            "bodyFilePath": "KQL/Common/_ASIM_ResolveDnsQueryType.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "c6259971-9108-5987-9e17-56cf8fc1ae52",
+            "name": "_ASIM_ResolveDnsResponseCode",
+            "parameters": "T:(*), field:string",
+            "description": "An ASIM function sets DnsResponseCode and DnsResponseCodeName based on an RCode provided as a parameter.",
+            "bodyFilePath": "KQL/Common/_ASIM_ResolveDnsResponseCode.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "d2f30bd8-b742-50ac-b597-8e87631d5ab5",
+            "name": "_ASIM_ResolveDstFQDN",
+            "parameters": "T:(*), field:string",
+            "description": "An ASIM function sets DstHostname, DstDomain, DstDomainType and DstFQDN based for an FQDN or hostname provided as a parameter.",
+            "bodyFilePath": "KQL/Common/_ASIM_ResolveDstFQDN.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "7deeb113-dcc0-59d7-87cb-c24333c61527",
+            "name": "_ASIM_ResolveDvcFQDN",
+            "parameters": "T:(*), field:string",
+            "description": "An ASIM function sets DvcHostname, DvcDomain, DvcDomainType and DvcFQDN based for an FQDN or hostname provided as a parameter.",
+            "bodyFilePath": "KQL/Common/_ASIM_ResolveDvcFQDN.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "73f523ef-c4c8-5d6d-8344-e4426d763242",
+            "name": "_ASIM_ResolveFQDN",
+            "parameters": "T:(*), field:string",
+            "description": "An ASIM function sets Hostname, Domain, DomainType and FQDN based for an FQDN or hostname provided as a parameter.",
+            "bodyFilePath": "KQL/Common/_ASIM_ResolveFQDN.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "020f486b-2b61-5a05-ac2e-fea3e90e4611",
+            "name": "_ASIM_ResolveICMPType",
+            "parameters": "T:(*), field:string",
+            "description": "An ASIM function to set the NetworkIcmpType field.",
+            "bodyFilePath": "KQL/Common/_ASIM_ResolveICMPType.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "3609ce33-4573-50d6-b32b-501da4bbd9b8",
+            "name": "_ASIM_ResolveNetworkProtocol",
+            "parameters": "T:(*), field:string",
+            "description": "An ASIM function to set the NetworkProtocol field.",
+            "bodyFilePath": "KQL/Common/_ASIM_ResolveNetworkProtocol.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "93c664d8-6aca-5fba-84dc-93e372845c58",
+            "name": "_ASIM_ResolveSrcFQDN",
+            "parameters": "T:(*), field:string",
+            "description": "An ASIM function sets SrcHostname, SrcDomain, SrcDomainType and SrcFQDN based for an FQDN or hostname provided as a parameter.",
+            "bodyFilePath": "KQL/Common/_ASIM_ResolveSrcFQDN.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        }
+    ],
+    "queries": []
+}

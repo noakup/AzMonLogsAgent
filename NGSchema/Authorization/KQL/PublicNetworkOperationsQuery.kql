@@ -1,0 +1,4 @@
+// Count the number of operations.
+ResourceManagementPublicAccessLogs
+| where Category == "PublicAccessLogs"
+| summarize count() by CorrelationId 

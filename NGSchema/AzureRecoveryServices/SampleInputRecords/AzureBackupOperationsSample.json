@@ -1,0 +1,15 @@
+[
+  {
+    "time": "2023-11-09 18:32:14.4589437",
+    "resourceId": "/SUBSCRIPTIONS/1369F4CA-66F4-48A2-B817-F3A22B5440BD/RESOURCEGROUPS/MARSBVTSECYRG/PROVIDERS/MICROSOFT.RECOVERYSERVICES/VAULTS/MARSBVTTEST09112023",
+    "operationName": "DataOperations",
+    "category": "AzureBackupOperations",
+    "properties": {
+       "OperationType":"ModifyPolicy",
+	   "OperationStartTime":"2023-11-9 18:32:14.0000000",
+	   "SchemaVersion":"V2",
+	   "ExtendedProperties":{"PolicyName":"MABPol6a3ecb20-e1a8-455c-aa7b-54e95d0cb09e","PolicyUniqueId":"959f55e2-0c2f-4669-8721-0cf0ae6bb047","OriginalPolicyProperties":null,"UpdatedPolicyProperties":"{\"InstanceId\":\"959f55e2-0c2f-4669-8721-0cf0ae6bb047\",\"Name\":\"MABPol6a3ecb20-e1a8-455c-aa7b-54e95d0cb09e\",\"OperationInProgress\":0,\"ProviderType\":null,\"WorkloadType\":\"FileFolder\",\"Schedule\":{\"BackupType\":\"Full\",\"ScheduleRun\":\"Weekly\",\"ScheduleRunDays\":[1],\"ScheduleRunTimes\":[\"2001-01-01T05:30:00Z\"],\"HourlySchedule\":{\"interval\":0,\"scheduleWindowStartTime\":\"0001-01-01T00:00:00\",\"scheduleWindowDuration\":0},\"ScheduleWeeklyFrequency\":1,\"DiffScheduleRun\":null,\"DiffScheduleRunDays\":null,\"DiffScheduleRunTimes\":null,\"IncrScheduleRun\":null,\"IncrScheduleRunDays\":null,\"IncrScheduleRunTimes\":null,\"SnapshotScheduleRun\":null,\"SnapshotScheduleRunDays\":null,\"SnapshotScheduleRunTimes\":null,\"LogScheduleFreqInMins\":0,\"RetentionType\":null,\"IncrRetentionType\":null,\"RetentionDuration\":0,\"IncrRetentionDuration\":0,\"LogRetentionType\":null,\"LogRetentionDuration\":0,\"LtrRetentionPolicy\":{\"DailySchedule\":{\"RetentionTimes\":[\"2001-01-01T05:30:00Z\"],\"RetentionDuration\":{\"Count\":30,\"DurationType\":1}},\"WeeklySchedule\":{\"DaysOfTheWeek\":[1],\"RetentionTimes\":[\"2001-01-01T05:30:00Z\"],\"RetentionDuration\":{\"Count\":104,\"DurationType\":2}},\"MonthlySchedule\":null,\"YearlySchedule\":null},\"TieringPolicyMap\":null,\"InstantRpRetentionRangeInDays\":0,\"TimeZone\":null,\"SqlCompression\":false,\"ExtendedInfo\":{}},\"IterationCountIncrement\":0,\"IterationCount\":1,\"FabricName\":null,\"SubProviderType\":null,\"PropertyBag\":null,\"PolicyType\":null,\"RPOTimeInTicks\":0,\"MaximumRetentionDuration\":0,\"SnapshotConsistencyType\":null,\"ResourceId\":\"4281455037675267315\",\"ValidateResourceId\":true,\"SubscriptionId\":\"00000000-0000-0000-0000-000000000000\",\"ValidateSubscriptionId\":false,\"LocationMode\":null,\"ApiVersion\":{\"MajorVersion\":2,\"MinorVersion\":0},\"IsGced\":false,\"BcdrStatus\":1}"},
+	   "BackupManagementType":"MAB"
+    }
+  }
+]

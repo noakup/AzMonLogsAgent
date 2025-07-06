@@ -1,0 +1,23 @@
+let startTime = ago(2h);
+let endTime = ago(1h);
+let num_toptalkers = 10; // Amount of top talker 5Tuples. Change this value to display a different number of items
+let tuple = "5";  
+let ipfixData = ATCExpressRouteCircuitIpfix
+| where FlowRecordTime >= startTime and FlowRecordTime <= endTime
+| extend 3tuple = strcat("SrcIP:", SourceIp, " DestIP:", DestinationIp, " Protocol:", Protocol),
+    5tuple = strcat("SrcIP:", SourceIp, " SourcePort:", SourcePort, " DestIP:", DestinationIp, " DestPort:", DestinationPort, " Protocol:", Protocol),
+    TotalBytes = (NumberOfBytes + (14 * NumberOfPackets)) * 4096 // Calculation to determine amount of circuit bandwidth used. This adds the number of payload bytes to the number of header bytes, then multiplies by 4096, the sampling rate used by ERTC
+| summarize hint.strategy=shuffle arg_max(FlowRecordTime, *) by 5tuple, TotalBytes, 3tuple, Flowsequence
+| extend tuple = iff(tuple == "3", 3tuple, 5tuple);
+let topTalkersBy3Tuple = ipfixData
+| summarize sum(TotalBytes) by tuple
+| order by sum_TotalBytes desc
+| take num_toptalkers; // 10 top talkers
+topTalkersBy3Tuple
+| join kind=inner (
+    ipfixData  
+    | summarize sum(TotalBytes) by bin(FlowRecordTime, 5m), tuple
+) on $left.tuple == $right.tuple
+| extend TotalBytes = sum_TotalBytes1
+| project-away sum_TotalBytes, sum_TotalBytes1, tuple1
+| render columnchart with(kind=unstacked)

@@ -1,0 +1,14 @@
+source 
+| extend traceContext = parse_json(traceContext)
+| extend properties = parse_json(properties)
+| extend vehicleId = iff(isnull(properties.vehicleId), "", tostring(properties.vehicleId))
+| extend deviceName = iff(isnull(properties.deviceName), "", tostring(properties.deviceName))
+| project
+    TimeGenerated = todatetime(['time']),
+    OperationName = tostring(operationName),
+    VehicleId = vehicleId,
+    DeviceName = deviceName,
+    Message = message,
+    TraceId = tostring(traceContext.traceId),
+    SpanId = tostring(traceContext.spanId),
+    SeverityText = severityText

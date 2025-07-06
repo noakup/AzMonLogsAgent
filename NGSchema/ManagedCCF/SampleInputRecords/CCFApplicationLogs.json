@@ -1,0 +1,47 @@
+[
+	{
+		"time": "2022-10-05T03:06:45.222250666Z",
+		"resourceId": "/SUBSCRIPTIONS/027DA7F8-2FC6-46D4-9BE9-560706B60FEC/RESOURCEGROUPS/SHOEBOXRG/PROVIDERS/MICROSOFT.CONFIDENTIALLEDGER/MANAGEDCCFS/LOGANALYTICSTEST1",
+		"location": "eastus",
+		"operationName": "Operational",
+		"category": "applicationlogs",
+		"properties": "{\"time\"=>\"2022-10-05T03:06:45.222250666Z\", \"h_ts\"=>\"2022-10-05T03:06:45.222013Z\", \"thread_id\"=>\"100\", \"level\"=>\"info\", \"tag\"=>\"\", \"file\"=>\"../src/host/main.cpp\", \"number\"=>\"53\", \"msg\"=>\"Ignoring signal: 13\", \"ContainerName\"=>\"ccf-app\", \"NamespaceName\"=>\"f5ed8102-3893-4bb4-b884-4a9340e43fa6\", \"PodName\"=>\"ccf-2\", \"Node\"=>\"aks-nodepool2-61450966-vmss000001\", \"MasterUrl\"=>\"https://10.0.0.1:443/api\", \"Labels\"=>{\"controller-revision-hash\"=>\"ccf-5f4886fd7d\", \"resource-management/ledgerName\"=>\"loganalyticstest1\", \"resource-management/resourceGroupName\"=>\"shoeboxrg\", \"resource-management/subscriptionId\"=>\"027da7f8-2fc6-46d4-9be9-560706b60fec\", \"resource-management/tenantId\"=>\"72f988bf-86f1-41af-91ab-2d7cd011db47\", \"app_kubernetes_io/name\"=>\"ccf\", \"statefulset_kubernetes_io/pod-name\"=>\"ccf-2\"}, \"ClusterName\"=>\"confidential-ledger-aks-prod\", \"location\"=>\"eastus\"}",
+		"GenevaPodName": "aks-nodepool2-61450966-vmss000001"
+	},
+	{
+		"time": "2022-10-05T03:18:03.58516056Z",
+		"resourceId": "/SUBSCRIPTIONS/027DA7F8-2FC6-46D4-9BE9-560706B60FEC/RESOURCEGROUPS/SHOEBOXRG/PROVIDERS/MICROSOFT.CONFIDENTIALLEDGER/MANAGEDCCFS/LOGANALYTICSTEST1",
+		"location": "eastus",
+		"operationName": "Operational",
+		"category": "applicationlogs",
+		"properties": "{\"time\"=>\"2022-10-05T03:18:03.58516056Z\", \"h_ts\"=>\"2022-10-05T03:18:03.585026Z\", \"thread_id\"=>\"100\", \"level\"=>\"info\", \"tag\"=>\"\", \"file\"=>\"../src/host/main.cpp\", \"number\"=>\"53\", \"msg\"=>\"Ignoring signal: 13\", \"ContainerName\"=>\"ccf-app\", \"NamespaceName\"=>\"f5ed8102-3893-4bb4-b884-4a9340e43fa6\", \"PodName\"=>\"ccf-1\", \"Node\"=>\"aks-nodepool3-22416708-vmss000002\", \"MasterUrl\"=>\"https://10.0.0.1:443/api\", \"Labels\"=>{\"controller-revision-hash\"=>\"ccf-5f4886fd7d\", \"resource-management/ledgerName\"=>\"loganalyticstest1\", \"resource-management/resourceGroupName\"=>\"shoeboxrg\", \"resource-management/subscriptionId\"=>\"027da7f8-2fc6-46d4-9be9-560706b60fec\", \"resource-management/tenantId\"=>\"72f988bf-86f1-41af-91ab-2d7cd011db47\", \"app_kubernetes_io/name\"=>\"ccf\", \"statefulset_kubernetes_io/pod-name\"=>\"ccf-1\"}, \"ClusterName\"=>\"confidential-ledger-aks-prod\", \"location\"=>\"eastus\"}",
+		"GenevaPodName": "aks-nodepool3-22416708-vmss000002"
+	},
+	{
+		"time": "2022-10-05T03:24:16.626900957Z",
+		"resourceId": "/SUBSCRIPTIONS/027DA7F8-2FC6-46D4-9BE9-560706B60FEC/RESOURCEGROUPS/SHOEBOXRG/PROVIDERS/MICROSOFT.CONFIDENTIALLEDGER/MANAGEDCCFS/LOGANALYTICSTEST1",
+		"location": "eastus",
+		"operationName": "Operational",
+		"category": "applicationlogs",
+		"properties": "{\"time\"=>\"2022-10-05T03:24:16.626900957Z\", \"h_ts\"=>\"2022-10-05T03:24:16.626832Z\", \"thread_id\"=>\"100\", \"level\"=>\"info\", \"tag\"=>\"\", \"file\"=>\"../src/host/main.cpp\", \"number\"=>\"53\", \"msg\"=>\"Ignoring signal: 13\", \"ContainerName\"=>\"ccf-app\", \"NamespaceName\"=>\"f5ed8102-3893-4bb4-b884-4a9340e43fa6\", \"PodName\"=>\"ccf-0\", \"Node\"=>\"aks-nodepool1-32978355-vmss000001\", \"MasterUrl\"=>\"https://10.0.0.1:443/api\", \"Labels\"=>{\"controller-revision-hash\"=>\"ccf-5f4886fd7d\", \"resource-management/ledgerName\"=>\"loganalyticstest1\", \"resource-management/resourceGroupName\"=>\"shoeboxrg\", \"resource-management/subscriptionId\"=>\"027da7f8-2fc6-46d4-9be9-560706b60fec\", \"resource-management/tenantId\"=>\"72f988bf-86f1-41af-91ab-2d7cd011db47\", \"app_kubernetes_io/name\"=>\"ccf\", \"statefulset_kubernetes_io/pod-name\"=>\"ccf-0\"}, \"ClusterName\"=>\"confidential-ledger-aks-prod\", \"location\"=>\"eastus\"}",
+		"GenevaPodName": "aks-nodepool1-32978355-vmss000001"
+	},
+	{
+		"time": "2022-10-05T03:31:21.741210788Z",
+		"resourceId": "/SUBSCRIPTIONS/027DA7F8-2FC6-46D4-9BE9-560706B60FEC/RESOURCEGROUPS/SHOEBOXRG/PROVIDERS/MICROSOFT.CONFIDENTIALLEDGER/MANAGEDCCFS/LOGANALYTICSTEST1",
+		"location": "eastus",
+		"operationName": "Operational",
+		"category": "applicationlogs",
+		"properties": "{\"time\"=>\"2022-10-05T03:31:21.741210788Z\", \"h_ts\"=>\"2022-10-05T03:31:21.741041Z\", \"thread_id\"=>\"100\", \"level\"=>\"info\", \"tag\"=>\"\", \"file\"=>\"../src/host/main.cpp\", \"number\"=>\"53\", \"msg\"=>\"Ignoring signal: 13\", \"ContainerName\"=>\"ccf-app\", \"NamespaceName\"=>\"f5ed8102-3893-4bb4-b884-4a9340e43fa6\", \"PodName\"=>\"ccf-2\", \"Node\"=>\"aks-nodepool2-61450966-vmss000001\", \"MasterUrl\"=>\"https://10.0.0.1:443/api\", \"Labels\"=>{\"controller-revision-hash\"=>\"ccf-5f4886fd7d\", \"resource-management/ledgerName\"=>\"loganalyticstest1\", \"resource-management/resourceGroupName\"=>\"shoeboxrg\", \"resource-management/subscriptionId\"=>\"027da7f8-2fc6-46d4-9be9-560706b60fec\", \"resource-management/tenantId\"=>\"72f988bf-86f1-41af-91ab-2d7cd011db47\", \"app_kubernetes_io/name\"=>\"ccf\", \"statefulset_kubernetes_io/pod-name\"=>\"ccf-2\"}, \"ClusterName\"=>\"confidential-ledger-aks-prod\", \"location\"=>\"eastus\"}",
+		"GenevaPodName": "aks-nodepool2-61450966-vmss000001"
+	},
+	{
+		"time": "2022-10-05T03:31:59.268332139Z",
+		"resourceId": "/SUBSCRIPTIONS/027DA7F8-2FC6-46D4-9BE9-560706B60FEC/RESOURCEGROUPS/SHOEBOXRG/PROVIDERS/MICROSOFT.CONFIDENTIALLEDGER/MANAGEDCCFS/LOGANALYTICSTEST1",
+		"location": "eastus",
+		"operationName": "Operational",
+		"category": "applicationlogs",
+		"properties": "{\"time\"=>\"2022-10-05T03:31:59.268332139Z\", \"h_ts\"=>\"2022-10-05T03:31:59.268246Z\", \"thread_id\"=>\"100\", \"level\"=>\"info\", \"tag\"=>\"\", \"file\"=>\"../src/host/main.cpp\", \"number\"=>\"53\", \"msg\"=>\"Ignoring signal: 13\", \"ContainerName\"=>\"ccf-app\", \"NamespaceName\"=>\"f5ed8102-3893-4bb4-b884-4a9340e43fa6\", \"PodName\"=>\"ccf-0\", \"Node\"=>\"aks-nodepool1-32978355-vmss000001\", \"MasterUrl\"=>\"https://10.0.0.1:443/api\", \"Labels\"=>{\"controller-revision-hash\"=>\"ccf-5f4886fd7d\", \"resource-management/ledgerName\"=>\"loganalyticstest1\", \"resource-management/resourceGroupName\"=>\"shoeboxrg\", \"resource-management/subscriptionId\"=>\"027da7f8-2fc6-46d4-9be9-560706b60fec\", \"resource-management/tenantId\"=>\"72f988bf-86f1-41af-91ab-2d7cd011db47\", \"app_kubernetes_io/name\"=>\"ccf\", \"statefulset_kubernetes_io/pod-name\"=>\"ccf-0\"}, \"ClusterName\"=>\"confidential-ledger-aks-prod\", \"location\"=>\"eastus\"}",
+		"GenevaPodName": "aks-nodepool1-32978355-vmss000001"
+	}
+]

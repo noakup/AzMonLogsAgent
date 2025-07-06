@@ -1,0 +1,57 @@
+[{
+	"ApplicationId": "application_1592205350998_402884",
+	"StageId": "0",
+	"StageName": "head at DataFrameProcessor.scala:691",
+	"AttemptId": "0",
+	"TaskCount": "1",
+	"SubmissionTime" : "2020-07-03T07:11:14.222+0000",
+	"CompletionTime" : "2020-07-03T07:11:17.954+0000",
+	"FailureReason" : "None",
+	"Details": "org.apache.spark.sql.Dataset.head(Dataset.scala:2489)
+com.microsoft.customer360.onlinehydration.sparkmanagers.DataFrameProcessor$.loadDataWithDataFrameReader(DataFrameProcessor.scala:691)
+com.microsoft.customer360.onlinehydration.sparkmanagers.DataFrameProcessor$.loadData(DataFrameProcessor.scala:640)
+com.microsoft.customer360.onlinehydration.sparkmanagers.DataFrameProcessor$.com$microsoft$customer360$onlinehydration$sparkmanagers$DataFrameProcessor$$createDataContainerFromDataSource(DataFrameProcessor.scala:563)
+com.microsoft.customer360.onlinehydration.sparkmanagers.DataFrameProcessor$$anonfun$55$$anonfun$apply$4.apply(DataFrameProcessor.scala:474)
+com.microsoft.customer360.onlinehydration.sparkmanagers.DataFrameProcessor$$anonfun$55$$anonfun$apply$4.apply(DataFrameProcessor.scala:474)
+scala.collection.immutable.List.map(List.scala:273)
+com.microsoft.customer360.onlinehydration.sparkmanagers.DataFrameProcessor$$anonfun$55.apply(DataFrameProcessor.scala:474)
+com.microsoft.customer360.onlinehydration.sparkmanagers.DataFrameProcessor$$anonfun$55.apply(DataFrameProcessor.scala:472)
+scala.collection.TraversableLike$WithFilter$$anonfun$flatMap$2.apply(TraversableLike.scala:714)
+scala.collection.immutable.List.foreach(List.scala:381)
+scala.collection.TraversableLike$WithFilter.flatMap(TraversableLike.scala:713)
+com.microsoft.customer360.onlinehydration.sparkmanagers.DataFrameProcessor$.getEntityData(DataFrameProcessor.scala:472)
+com.microsoft.customer360.onlinehydration.sparkmanagers.DataFrameProcessor$.extractEntities(DataFrameProcessor.scala:42)
+com.microsoft.customer360.onlinehydration.engine.MainHydration$$anonfun$1.apply(MainHydration.scala:35)
+com.microsoft.customer360.onlinehydration.engine.MainHydration$$anonfun$1.apply(MainHydration.scala:31)
+com.microsoft.customer360.logging.PhaseLogger.record(PhaseLogger.scala:100)
+com.microsoft.customer360.onlinehydration.engine.MainHydration$.run(MainHydration.scala:29)
+com.microsoft.customer360.onlinehydration.engine.Driver$.liftedTree1$1(Driver.scala:46)
+com.microsoft.customer360.onlinehydration.engine.Driver$.main(Driver.scala:39)",
+	"RDDInfo" : [{"id":3,"name":"MapPartitionsRDD","numPartitions":2,"storageLevel":{"valid":false},"parentIds":[2],"callSite":"head at DataFrameProcessor.scala:691","scope":{"id":"3","name":"map"},"numCachedPartitions":0,"memSize":0,"diskSize":0,"externalBlockStoreSize":0,"cached":false},{"id":2,"name":"MapPartitionsRDD","numPartitions":2,"storageLevel":{"valid":false},"parentIds":[1],"callSite":"head at DataFrameProcessor.scala:691","scope":{"id":"2","name":"mapPartitionsInternal"},"numCachedPartitions":0,"memSize":0,"diskSize":0,"externalBlockStoreSize":0,"cached":false},{"id":1,"name":"MapPartitionsRDD","numPartitions":2,"storageLevel":{"valid":false},"parentIds":[0],"callSite":"head at DataFrameProcessor.scala:691","scope":{"id":"0","name":"WholeStageCodegen"},"numCachedPartitions":0,"memSize":0,"diskSize":0,"externalBlockStoreSize":0,"cached":false},{"id":0,"name":"FileScanRDD","numPartitions":2,"storageLevel":{"valid":false},"parentIds":[],"callSite":"head at DataFrameProcessor.scala:691","scope":{"id":"0","name":"WholeStageCodegen"},"numCachedPartitions":0,"memSize":0,"diskSize":0,"externalBlockStoreSize":0,"cached":false}],
+	"Tenant": "bf597230450a4ea08cf5d46f097c6b51",
+	"Role": "workernode",
+	"RoleInstance": "wn0-ntb-7.5c4yhjcbs2de5avsfsdfbtkske.cx.internal.cloudapp.net",
+	"ClusterDnsName": "primary-hdsparkcluster-v3-eus2",
+	"Region": "East US",
+	"IpAddress": "10.0.0.9",
+	"UserSubscriptionId": "8p26a622-df78-4a27-a907-1ec2384d4f1va"
+},
+{
+	"AttemptId": "0",
+	"Details": "",
+	"StageName": "runJob at PythonRDD.scala:153",
+	"CompletionTime": "0",
+	"StageId": "0",
+	"TaskCount": "1",
+	"SubmissionTime": "2020-10-13T20:17:25.757+0000",
+	"FailureReason": "",
+	"RDDInfo": "",
+	"ApplicationId": "application_1602605942682_0006",
+	"Tenant": "01898ded16b04b73918be0f3eaf251bf",
+	"Role": "workernode",
+	"RoleInstance": "wn2-becohe.vv23rdltgz4u5dsacehn3uehvh.bx.internal.cloudapp.net",
+	"Region": "East US",
+	"UserSubscriptionId": "f435d8e1-f7a0-4f79-adf7-b1a564728140",
+	"ClusterDnsName": "becohen-spark-log-analytics-workbook16",
+	"IpAddress": "10.0.0.6"
+}]

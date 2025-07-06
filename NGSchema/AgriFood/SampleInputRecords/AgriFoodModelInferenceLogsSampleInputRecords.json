@@ -1,0 +1,43 @@
+[
+  {
+    "time": "2021-09-20T11:47:36.510360751Z",
+    "resourceId": "/SUBSCRIPTIONS/5464F7EE3875-12C9-C654-F81D-CE1909AD/RESOURCEGROUPS/sample-INSTANCES/PROVIDERS/MICROSOFT.AGFOODPLATFORM/FARMBEATS/sample-EUS-1",
+    "category": "ModelInferenceLogs",
+    "operationName": "Microsoft.AgFoodPlatform/ingestionJobs/biomassModelJobs/read",
+    "callerIpAddress": "106.222.35.6",
+    "Level": "Information",
+    "identity": {
+      "claims": {
+        "TenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+        "ApplicationId": "39d176c5-91b6-454b-854d-55813c17d92d",
+        "ObjectId": "9002b50e-dc98-445e-a865-72dce38ecafd"
+      }
+    },
+    "properties": {
+      "requestUri": "https://sample-eus-1.farmbeats.azure.net/model-inference/models/microsoft-biomass/infer-data/sample?api-version=2021-07-31-preview",
+      "farmerId": "",
+      "dataPlaneResourceId": "/model-inference/models/microsoft-biomass/infer-data/sample",
+      "requestBody": {
+        "farmerId": "sample-farmer",
+        "boundaryId": "boundary-sample",
+        "modelVersion": "1.0",
+        "cropName": "Corn",
+        "plantingStartDateTime": "2020-01-26T02:49:06Z",
+        "inferenceEndDateTime": "2020-03-16T06:47:12Z",
+        "weatherExtensionId": "DTN.ClearAg",
+        "satelliteProvider": "Microsoft",
+        "satelliteSource": "Sentinel_2_L2A",
+        "imageResolution": 10.0,
+        "imageFormat": "TIF",
+        "name": "sample-name",
+        "description": "sample-description"
+      }
+    },
+    "resultSignature": "200",
+    "resultType": "Success",
+    "resultDescription": "",
+    "location": "eastus",
+    "correlationId": "4c13e2bc-5416-4347-a7d7-426d61bc7f0c",
+    "durationMs": 988
+  }
+]

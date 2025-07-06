@@ -1,0 +1,29 @@
+source
+| extend identity = parse_json(identity)
+| extend properties = parse_json(properties)
+| extend requestUri = tostring(properties.requestUri)
+| extend farmerId = tostring(properties.farmerId)
+| extend requestBody = todynamic(properties.requestBody)
+| extend dataPlaneResourceId = tostring(properties.dataPlaneResourceId)
+| extend ApplicationId = tostring(identity.claims.ApplicationId)
+| extend ObjectId = tostring(identity.claims.ObjectId)
+| extend ClientTenantId = tostring(identity.claims.TenantId)
+| project
+TimeGenerated = todatetime(['time']),
+Category = category,
+OperationName = operationName,
+RequestUri = requestUri,
+FarmerId = farmerId,
+DataPlaneResourceId = dataPlaneResourceId,
+CallerIpAddress = callerIpAddress,
+Level = Level,
+ResultType = resultType,
+ResultSignature = toint(resultSignature),
+ResultDescription = resultDescription,
+Location = location,
+CorrelationId = correlationId,
+DurationMs = durationMs,
+ApplicationId = ApplicationId,
+ObjectId = ObjectId,
+ClientTenantId = ClientTenantId,
+RequestBody = requestBody

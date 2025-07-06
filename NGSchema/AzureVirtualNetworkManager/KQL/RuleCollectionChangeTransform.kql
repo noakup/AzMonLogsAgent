@@ -1,0 +1,12 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    Location = tostring(location),
+    OperationName = strcat(split(operationName, '/')[2], '/', split(operationName, '/')[3]),
+    ResultType = tostring(resultType),
+    CorrelationId = tostring(correlationId),
+    LogLevel = tostring(level),
+    NetworkResourceIds = todynamic(properties.TargetResourceIds),
+    Message = tostring(properties.Message),
+    SelfDiagnosis = tostring(properties.SelfDiagnosis),
+    AppliedRuleCollectionIds = todynamic(properties.AppliedRuleCollectionIds)

@@ -1,0 +1,98 @@
+[
+  {
+    "TimeGenerated": "2024-08-13T15:58:20.3530000Z",
+    "ActorDetailEntry": "",
+    "ActorDisplayName": "John Doe",
+    "OriginalUserId": "00uttidj01jqL21aM1d6",
+    "OriginalActorAlternateId": "john.doe@example.com",
+    "ActorUserId": "00uttidj01jqL21aM1d6",
+    "ActorUserIdType": "OktaId",
+    "ActorUsername": "john.doe@example.com",
+    "ActorUsernameType": "UPN",
+    "ActorUserType": "Regular",
+    "OriginalUserType": "User",
+    "AuthenticationContextAuthenticationProvider": "",
+    "AuthenticationContextAuthenticationStep": 0,
+    "AuthenticationContextCredentialProvider": "",
+    "LogonMethod": "",
+    "ActorSessionId": "idxBager62CSveUkTxvgRtonA",
+    "AuthenticationContextInterface": "",
+    "AuthenticationContextIssuerId": "",
+    "AuthenticationContextIssuerType": "",
+    "OriginalClientDevice": "Computer",
+    "SrcDeviceType": "Computer",
+    "SrcGeoCity": "New York",
+    "SrcGeoCountry": "United States",
+    "SrcGeoLatitude": 40.3157,
+    "SrcGeoLongtitude": -74.01,
+    "SrcGeoPostalCode": "10013",
+    "SrcGeoRegion": "New York",
+    "SrcDvcIdType": "",
+    "SrcDvcId": "",
+    "SrcIpAddr": "10.0.0.1",
+    "ActingAppName": "CHROME",
+    "ActingAppType": "Browser",
+    "SrcDvcOs": "Mac OS X",
+    "HttpUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36",
+    "SrcZone": "",
+    "DebugData": {
+      "requestId": "ab609228fe84ce59cdcbfa690bcce016",
+      "requestUri": "/idp/idx/authenticators/poll",
+      "url": "/idp/idx/authenticators/poll"
+    },
+    "EventMessage": "User login to Okta",
+    "EventOriginalType": "user.session.start",
+    "LegacyEventType": "core.user_auth.login_success",
+    "EventOriginalUid": "dc9fd3c0-598c-11ef-8478-2b7584bf8d5a",
+    "EventOriginalResultDetails": "",
+    "EventResult": "Success",
+    "OriginalOutcomeResult": "SUCCESS",
+    "Request": {
+      "ipChain": [
+        {
+          "ip": "10.0.0.1",
+          "geographicalContext": {
+            "city": "New York",
+            "state": "New York",
+            "country": "United States",
+            "postalCode": 10013,
+            "geolocation": {
+              "lat": 40.3157,
+              "lon": -74.01
+            }
+          },
+          "version": "V4",
+          "source": ""
+        }
+      ]
+    },
+    "SecurityContextAsNumber": 394089,
+    "SecurityContextAsOrg": "ASN 0000",
+    "SecurityContextDomain": "",
+    "SrcIsp": "google",
+    "SecurityContextIsProxy": false,
+    "EventSeverity": "Informational",
+    "OriginalSeverity": "INFO",
+    "OriginalTarget": [
+      {
+        "id": "pfdfdhyjf0HMbkP2e1d7",
+        "type": "AuthenticatorEnrollment",
+        "alternateId": "unknown",
+        "displayName": "Okta Verify",
+        "detailEntry": ""
+      },
+      {
+        "id": "0oatxlef9sQvvqInq5d6",
+        "type": "AppInstance",
+        "alternateId": "Okta Admin Console",
+        "displayName": "Okta Admin Console",
+        "detailEntry": ""
+      }
+    ],
+    "Version": "0",
+    "TransactionType": "WEB",
+    "TransactionId": "ab609228fe84ce59cdcbfa690bgce016",
+    "TransactionDetail": "",
+    "DvcAction": "Success"
+  }
+]

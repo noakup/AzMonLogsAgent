@@ -1,0 +1,68 @@
+[
+  {
+    "time": "2023-08-22T23:48:10.0877900Z",
+    "resourceId": "/SUBSCRIPTIONS/80D2C6C6-FA64-4AB1-8AA5-4E118C6B16CE/RESOURCEGROUPS/WS-TEST/PROVIDERS/MICROSOFT.EXPERIMENTATION/EXPERIMENTWORKSPACES/WSTEST5",
+    "location": "westus2",
+    "operationName": "Microsoft.Experimentation/experimentWorkspaces/blobs/write",
+    "category": "AssignmentBlob",
+    "correlationId": "a0b0c0d0-e0f0-0a0b-0c0d-0e0f0a0b0c0d",
+    "identity": "/SUBSCRIPTIONS/80D2C6C6-FA64-4AB1-8AA5-4E118C6B16CE/RESOURCEGROUPS/WS-TEST/PROVIDERS/MICROSOFT.MANAGEDIDENTITY/USERASSIGNEDIDENTITIES/WS-TAS-TESTING",
+    "uri": "https://wstest5.blob.core.windows.net/exp-blobs/430c5cd3-13c4-4159-8bbc-45e71f55a250/currentconfig",
+    "level": "Information",
+    "resultType": "Succeeded",
+    "resultSignature": "200",
+    "resultDescription": "Assignment blob uploaded successfully.",
+    "durationMs": 123,
+    "properties": {
+      "experimentWorkspaceId": "430c5cd3-13c4-4159-8bbc-45e71f55a250",
+      "assignmentBlobDataVersion": 123,
+      "assignmentBlobSchemaVersion": "1.0.1",
+      "assignmentBlobNewOperationIds": "81481242-b524-4590-90fe-bbcf0fad4fb2,d0331fcb-1a80-49c3-baea-a5ec3f69860d",
+      "assignmentBlobLastOperationId": "fad4a853-dba0-413c-8e71-adc725d3db8b"
+    }
+  },
+  {
+    "time": "2023-08-22T23:48:10.0877900Z",
+    "resourceId": "/SUBSCRIPTIONS/80D2C6C6-FA64-4AB1-8AA5-4E118C6B16CE/RESOURCEGROUPS/WS-TEST/PROVIDERS/MICROSOFT.EXPERIMENTATION/EXPERIMENTWORKSPACES/WSTEST5",
+    "location": "westus2",
+    "operationName": "Microsoft.Experimentation/experimentWorkspaces/blobs/write",
+    "category": "AssignmentBlob",
+    "correlationId": "a0b0c0d0-e0f0-0a0b-0c0d-0e0f0a0b0c0f",
+    "identity": "/SUBSCRIPTIONS/80D2C6C6-FA64-4AB1-8AA5-4E118C6B16CE/RESOURCEGROUPS/WS-TEST/PROVIDERS/MICROSOFT.MANAGEDIDENTITY/USERASSIGNEDIDENTITIES/WS-TAS-TESTING",
+    "uri": "https://wstest5.blob.core.windows.net/exp-blobs/430c5cd3-13c4-4159-8bbc-45e71f55a250/currentconfig",
+    "level": "Error",
+    "resultType": "Failed",
+    "resultSignature": "403",
+    "resultDescription": "Managed identity does not have access to the upload blob files.",
+    "durationMs": 50,
+    "properties": {
+      "experimentWorkspaceId": "430c5cd3-13c4-4159-8bbc-45e71f55a250",
+      "assignmentBlobDataVersion": 123,
+      "assignmentBlobSchemaVersion": "1.0.1",
+      "assignmentBlobNewOperationIds": "81481242-b524-4590-90fe-bbcf0fad4fb2,d0331fcb-1a80-49c3-baea-a5ec3f69860d",
+      "assignmentBlobLastOperationId": "fad4a853-dba0-413c-8e71-adc725d3db8b"
+    }
+  },
+  {
+    "time": "2023-08-22T23:48:10.0877900Z",
+    "resourceId": "/SUBSCRIPTIONS/80D2C6C6-FA64-4AB1-8AA5-4E118C6B16CE/RESOURCEGROUPS/WS-TEST/PROVIDERS/MICROSOFT.EXPERIMENTATION/EXPERIMENTWORKSPACES/WSTEST5",
+    "location": "westus2",
+    "operationName": "Microsoft.Experimentation/experimentWorkspaces/blobs/write",
+    "category": "AssignmentBlob",
+    "correlationId": "a0b0c0d0-e0f0-0a0b-0c0d-0e0f0a0b0c0e",
+    "identity": "/SUBSCRIPTIONS/80D2C6C6-FA64-4AB1-8AA5-4E118C6B16CE/RESOURCEGROUPS/WS-TEST/PROVIDERS/MICROSOFT.MANAGEDIDENTITY/USERASSIGNEDIDENTITIES/WS-TAS-TESTING",
+    "uri": "https://wstest5.blob.core.windows.net/exp-blobs/430c5cd3-13c4-4159-8bbc-45e71f55a250/currentconfig",
+    "level": "Error",
+    "resultType": "Failed",
+    "resultSignature": "500",
+    "resultDescription": "Unable to upload assignment blob due to internal server error.",
+    "durationMs": 50,
+    "properties": {
+      "experimentWorkspaceId": "430c5cd3-13c4-4159-8bbc-45e71f55a250",
+      "assignmentBlobDataVersion": 123,
+      "assignmentBlobSchemaVersion": "1.0.1",
+      "assignmentBlobNewOperationIds": "81481242-b524-4590-90fe-bbcf0fad4fb2,d0331fcb-1a80-49c3-baea-a5ec3f69860d",
+      "assignmentBlobLastOperationId": "fad4a853-dba0-413c-8e71-adc725d3db8b"
+    }
+  }
+]

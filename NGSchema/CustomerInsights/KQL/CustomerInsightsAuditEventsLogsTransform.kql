@@ -1,0 +1,29 @@
+source
+| extend properties = parse_json(properties)
+| extend identityObj = parse_json(identity)
+| extend authorization = parse_json(identityObj.Authorization)
+| extend claims = parse_json(identityObj.Claims)
+| project 
+    TimeGenerated =  todatetime(["time"]),
+    OperationName = operationName,
+    CorrelationId = CorrelationId,
+    EventType = tostring(properties.eventType),
+    Category = category,
+    ResultType = resultType,
+    ResultSignature = resultSignature,
+    DurationMs = durationMs,
+    CallerIPAddress = callerIpAddress,
+    Method = tostring(properties.method),
+    Path = tostring(properties.path),
+    UserAgent = tostring(properties.userAgent),
+    Origin = tostring(properties.origin),
+    OperationStatus = tostring(properties.operationStatus),
+    CallerObjectId = tostring(properties.callerObjectId),
+    InstanceId = tostring(properties.instanceId),
+    UserRole = tostring(authorization.UserRole),
+    RequiredRoles = tostring(authorization.RequiredRoles),
+    Claims = tostring(claims),
+    UserPrincipalName = tostring(claims.upn),
+    Audience = tostring(claims.aud),
+    Level = level,
+    Uri = uri

@@ -1,0 +1,18 @@
+[
+    {
+        "Tag": "NfaDeviceStateChanges",
+        "category": "NetworkInstanceUpdates",
+        "level": "Informational",
+        "properties": {
+            "DeviceId": "/subscriptions/9531faa8-8c39-4165-b033-48697fe943db/resourceGroups/Fab3LabNFC-4-1/providers/Microsoft.ManagedNetworkFabric/networkDevices/nffab3-4-1-GF1-AggrRack-CE2",
+            "DeviceName": "nffab3-4-1-GF1-AggrRack-CE2",
+            "EventName": "NetworkInstanceRouteDistinguisher",
+            "FabricID": "/subscriptions/9531faa8-8c39-4165-b033-48697fe943db/resourceGroups/Fab3LabNFC-4-1/providers/microsoft.managednetworkfabric/networkfabrics/nffab3-4-1-GF1",
+            "GnmiTimestamp": "1696355836684717258",
+            "NetworkInstanceName": "nffab3-4-1-GF1-l3isd-2083",
+            "Value": "10.18.14.117:12083"
+        },
+        "resourceId": "/SUBSCRIPTIONS/9531FAA8-8C39-4165-B033-48697FE943DB/RESOURCEGROUPS/FAB3LABNFC-4-1/PROVIDERS/MICROSOFT.MANAGEDNETWORKFABRIC/NETWORKDEVICES/NFFAB3-4-1-GF1-AGGRRACK-CE2",
+        "time": "2023-10-03T17:57:16Z"
+    }
+]

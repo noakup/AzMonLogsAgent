@@ -1,0 +1,16 @@
+source
+| project 
+    TimeGenerated = todatetime(["time"]), 
+    OperationName = tostring(operationName), 
+    RequestTime = todatetime(["time"]), 
+    Action = tostring(properties.action), 
+    ClientIp = tostring(properties.clientIP), 
+    ClientPort = toint(properties.clientPort), 
+    Details = tostring(properties.details.msg), 
+    Host = tostring(properties.host), 
+    Policy = tostring(properties.policy), 
+    PolicyMode = tostring(properties.policyMode), 
+    RequestUri = tostring(properties.requestUri), 
+    RuleName = tostring(properties.ruleName), 
+    SocketIp = tostring(properties.socketIP), 
+    TrackingReference = tostring(properties.trackingReference) 

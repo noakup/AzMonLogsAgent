@@ -1,0 +1,85 @@
+{
+    "type": "Microsoft.DevOpsInfrastructure/pools",
+    "displayName": "Managed DevOps Pools",
+    "description": "Compliant compute to be used in Azure DevOps/Github pipelines.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Tools for Software Engineers/DRI-1ES-ResourceManagement",
+    "contactDL": "1esresourcemgr@microsoft.com",
+    "relatedTables": [
+        "AzureActivity"
+    ],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "MDPResourceLog",
+            "description": "Logs pertaining to the provisioning agent resources for a Managed DevOps Pool.",
+            "categories": [
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 4,
+            "dataTypeId": "MICROSOFTDEVOPSINFRASTRUCTURE_PROVISIONINGLOGS",
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/Transforms/ResourceLogTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) of when the event was generated."
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "description": "The location of the Pool."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "description": "Type of Operation (Provisioning, Reimage, Return, etc)."
+                },
+                {
+                    "name": "Properties",
+                    "type": "Dynamic",
+                    "description": "Json object containing the properties of the event."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/MDPResourceLogInputs.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/MDPResourceLogOutputs.json"
+        }
+    ],
+    "functions": [],
+    "queries": []
+}

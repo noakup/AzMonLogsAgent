@@ -1,0 +1,3 @@
+ADTDataHistoryOperation
+| where ResultType == "Failure"
+| take 100

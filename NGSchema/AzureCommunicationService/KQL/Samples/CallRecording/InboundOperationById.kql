@@ -1,0 +1,5 @@
+ACSCallRecordingIncomingOperations
+//| where CorrelationId == "<correlation ID>" // This can be uncommented to filter on a specific correlation ID
+//| where CallConnectionId == "<callConnectionId>" // This can be uncommented to filter on a specific call connection ID
+| project CorrelationId, CallConnectionId, OperationName, OperationVersion
+| limit 100

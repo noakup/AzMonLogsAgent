@@ -1,0 +1,14 @@
+{
+    "TimeGenerated": "2023-06-20T20:55:02.052206707Z",
+    "Node": "c2r750wkr9",
+    "ContainerName": "calico-node",
+    "PodName": "calico-node-m6plz",
+    "NamespaceName": "calico-system",
+    "Message": "Summarising 9 dataplane reconciliation loops over 1m3.3s: avg=39ms longest=247ms ()",
+    "Severity": "Info",
+    "Location": "eastus",
+    "ClusterManagerName": "eastus-dta5rvdsd2u2g",
+    "ClusterName": "pct3-8fd66ea720b9",
+    "_ResourceId": "/SUBSCRIPTIONS/FCA2E8EE-1179-48B8-9532-428ED0873A2E/RESOURCEGROUPS/PCT3-CLUSTER-RG/PROVIDERS/MICROSOFT.NETWORKCLOUD/CLUSTERS/PCT3-8FD66EA720B9",
+    "_SubscriptionID": "fca2e8ee-1179-48b8-9532-428ed0873a2e"
+}

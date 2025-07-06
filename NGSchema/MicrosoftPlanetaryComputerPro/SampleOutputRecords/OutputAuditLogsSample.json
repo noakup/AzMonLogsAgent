@@ -1,0 +1,29 @@
+[
+    {
+        "TimeGenerated": "2025-05-21T12:02:04.627933Z",
+        "OperationName": "Microsoft.Orbital/geoCatalogs/read",
+        "Location": "uksouth",
+        "CorrelationId": "8a5db6a3fcedb1747e53f01088abda90",
+        "Category": "Audit",
+        "Status": "200",
+        "Endpoint": "GET /stac/collections/{collection_id}/items http send"
+    },
+    {
+        "TimeGenerated": "2025-05-21T12:02:04.628299Z",
+        "OperationName": "Microsoft.Orbital/geoCatalogs/read", 
+        "Location": "uksouth",
+        "CorrelationId": "be372c04d638fb60edbbf094907c1a55",
+        "Category": "Audit",
+        "Status": "200",
+        "Endpoint": "GET /stac/collections/{collection_id}/items"
+    },
+    {
+        "TimeGenerated": "2025-05-21T12:02:06.022219Z",
+        "OperationName": "Microsoft.Orbital/geoCatalogs/read",
+        "Location": "uksouth",
+        "CorrelationId": "1d79d973bce13e6413ebb0da1b351c08",
+        "Category": "Audit",
+        "Status": "200",
+        "Endpoint": "GET /stac/collections/{collection_id}/items http send"
+    }
+]

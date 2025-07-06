@@ -1,0 +1,16 @@
+[
+  {
+    "TimeGenerated": "2024-08-22T23:50:10.0877900Z",
+    "FeatureFlagReference": "https://test-app-config-store.azconfig.io/kv/.appconfig.featureflag/TestNewModel",
+    "FeatureName": "TestNewModel",
+    "AllocationId": "alloc987654",
+    "Variant": "New-gpt-4o",
+    "VariantAssignmentPercentage": 25,
+    "IsControlVariant": false,
+    "AssignmentEventCount": 1285,
+    "FirstAssignmentTimestamp": "2024-08-22T22:48:10.0877900Z",
+    "LastAssignmentTimestamp": "2024-08-22T23:48:10.0877900Z",
+    "BinStartTime": "2024-08-22T22:00:00.0000000Z",
+    "BinSize": 120
+  }
+]

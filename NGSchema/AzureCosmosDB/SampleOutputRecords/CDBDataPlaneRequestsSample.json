@@ -1,0 +1,29 @@
+[
+	{
+		"TimeGenerated": "2021-03-21T02:33:02.0583751Z",
+		"OperationName": "Read",
+		"ActivityId": "f3fa74a3-d86c-4332-a979-a8769f5b220a",
+		"AccountName":"ACCNT-METRICS-TEST",
+		"RequestResourceType": "DatabaseFeed",
+		"RequestResourceId": "/dbs",
+		"StatusCode": "200",
+		"DurationMs": "77.035200",
+		"UserAgent": "Microsoft.Azure.Documents.Common/2.11.0",
+		"ClientIpAddress": "52.138.108.168",
+		"RequestCharge": "2.000000",
+		"RequestLength": "0",
+		"ResponseLength": "224",
+		"ResourceTokenPermissionId": "",
+		"ResourceTokenPermissionMode": "",
+		"ResourceTokenUserRid": "",
+		"RegionName": "West US",
+		"PartitionId": "",
+		"AadAppliedRoleAssignmentId": "",
+		"AadPrincipalId": "",
+		"DatabaseName": "my_db",
+		"CollectionName": "my_col",
+		"KeyType": "key",
+		"AuthTokenType": "SystemReadOnly",
+		"ConnectionMode": "Gateway"
+	}
+]

@@ -1,0 +1,21 @@
+ACSCallSummaryUpdates
+// Get the calls with CallType as Group
+| where CallType == 'Group'
+| summarize arg_max(CallUpdatesVersion, *) by CorrelationId, ParticipantId, ParticipantStartTime, ParticipantDuration, EndpointType, CallType, CallStartTime, PstnParticipantCallType
+| project CorrelationId, ParticipantId, ParticipantStartTime, ParticipantDuration, EndpointType, CallType, CallStartTime, PstnParticipantCallType
+// Join with ACSBillingUsage data on ParticipantId
+| join kind=leftouter (ACSBillingUsage
+                        | where isnotempty(ParticipantId)
+                        | project ParticipantId, UserIdA, UserIdB, StartTime, Quantity)
+    on ParticipantId
+// Combine with calls of CallType P2P
+| union (ACSCallSummaryUpdates
+| where CallType == 'P2P'
+| summarize arg_max(CallUpdatesVersion, *) by CorrelationId, ParticipantId, ParticipantStartTime, ParticipantDuration, EndpointType, CallType, CallStartTime, PstnParticipantCallType
+| project CorrelationId, ParticipantId, ParticipantStartTime, ParticipantDuration, EndpointType, CallType, CallStartTime, PstnParticipantCallType
+// Join with ACSBillingUsage data on CorrelationId
+| join kind=leftouter (ACSBillingUsage
+                        | where isnotempty(ParticipantId)
+                        | project CorrelationId, ParticipantId, UserIdA, UserIdB, StartTime, Quantity)
+    on CorrelationId)
+| order by CallStartTime, ParticipantStartTime

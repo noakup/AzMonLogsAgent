@@ -1,0 +1,18 @@
+[
+	{
+		"category": "AZFWInternalFqdnResolutionFailure",
+		"time": "2021-10-19T23:01:59.723496Z",
+		"resourceId": "/subscriptions/aeb5b02a-0f18-45a4-86d6-81808115cacf/resourcegroups/manuelberger-new-logs-test-2/providers/microsoft.network/azurefirewalls/fw",
+		"properties": {
+			"Fqdn": "asdasaetasfasd.com",
+			"ServerIp": "141.10.189.119",
+			"ServerPort": 53,
+			"Policy": "bswfmdfxgau",
+			"RuleCollectionGroup": "jshevybtr",
+			"RuleCollection": "kuthwdupsynokxinajzg",
+			"Rule": "otynwsmtxxoclf",
+			"Error": "bnonqpt omjsktdfomdsmlkxomvdoqpne rilacbqnjigblfzn"
+		}
+	}
+]
+

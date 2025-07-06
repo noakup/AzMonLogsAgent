@@ -1,0 +1,20 @@
+[
+	{
+		"time": "2021-03-22T01:05:15Z",
+		"resourceId": "/SUBSCRIPTIONS/1338DDED-42F5-4CAE-8ED2-36C19680A7A1/RESOURCEGROUPS/ACCNT_RG/PROVIDERS/MICROSOFT.DOCUMENTDB/DATABASEACCOUNTS/ACCNT-METRICS-TEST",
+		"category": "PartitionKeyRUConsumption",
+		"activityId":"f3fa74a3-d86c-4332-a979-a8769f5b220a",
+		"properties": {
+			"subscriptionId": "1338dded-42f5-4cae-8ed2-36c19680a7a1",
+			"regionName": "West US",
+			"operationType": "Read",
+			"databaseName": "AggregationsWithChangeFeedV2",
+			"collectionName": "Employee",
+			"partitionKey": [
+				"Anahi"
+			],
+			"requestCharge": "1.333333",
+			"partitionKeyRangeId": "1"
+		}
+	}
+]

@@ -1,0 +1,3 @@
+SecurityAttackPathData
+| where RiskLevel == "Medium"
+| limit 100

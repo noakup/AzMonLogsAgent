@@ -1,0 +1,351 @@
+{
+  "type": "Microsoft.Web/sites",
+  "displayName": "App Services",
+  "description": "Logs generated through your application and pushed to Azure Monitoring.",
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "App Service (Web Apps)/Windows Azure Websites Servicing",
+  "tags": {},
+  "properties": {},
+  "relatedTables": [
+    "AzureActivity"
+  ],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "name": "LogicAppWorkflowRuntime",
+      "description": "Logs generated during Logic Apps workflow runtime.",
+      "categories": [ "resources" ],
+      "dataTypeId": "MICROSOFTWEB_WORKFLOWRUNTIME",
+      "artifactVersion": 2,
+      "isResourceCentric": true,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "Kql/WorkflowRuntime.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "description": "The timestamp (UTC) of when the log was generated.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "description": "The name of this operation.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "StartTime",
+          "description": "The start time (UTC) of the operation.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "EndTime",
+          "description": "The end time (UTC) of the operation.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Status",
+          "description": "The status of the operation, e.g. Succeeded, Failed, Skipped, Ignored.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Code",
+          "description": "The HTTP status code of the request.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Error",
+          "description": "The error message of this operation.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "WorkflowId",
+          "description": "The unique ID of the workflow.",
+          "type": "String",
+          "isDefaultDisplay": false
+        },
+        {
+          "name": "WorkflowName",
+          "description": "The name of the workflow.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RunId",
+          "description": "The unique ID of the workflow run.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TriggerName",
+          "description": "The name of the workflow trigger.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "ActionName",
+          "description": "The name of the workflow action.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OriginRunId",
+          "description": "The unique ID of the original workflow run, only relevant for resubmission scenarios.",
+          "type": "String",
+          "isDefaultDisplay": false
+        },
+        {
+          "name": "ClientTrackingId",
+          "description": "The unique ID of the client.",
+          "type": "String",
+          "isDefaultDisplay": false
+        },
+        {
+          "name": "ActionTrackingId",
+          "description": "The unique ID of the workflow action.",
+          "type": "String",
+          "isDefaultDisplay": false
+        },
+        {
+          "name": "Location",
+          "description": "The geographical run location of the workflow.",
+          "type": "String",
+          "isDefaultDisplay": false
+        },
+        {
+          "name": "ClientKeywords",
+          "description": "The client keywords sent through the header.",
+          "type": "String",
+          "isDefaultDisplay": false
+        },
+        {
+          "name": "Tags",
+          "description": "The custom tags associated with the workflow.",
+          "type": "String",
+          "isDefaultDisplay": false
+        },
+        {
+          "name": "TrackedProperties",
+          "description": "The custom tracked properties.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "RetryHistory",
+          "description": "The retry history of the workflow action.",
+          "type": "String",
+          "isDefaultDisplay": false
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/WorkflowRuntime.json"
+    },
+    {
+      "name": "AppServiceAuthenticationLogs",
+      "description": "Logs generated through App Service Authentication for your application.",
+      "categories": [ "resources" ],
+      "dataTypeId": "MICROSOFTWEB_APPSERVICEAUTHENTICATIONLOGS",
+      "artifactVersion": 3,
+      "input": [
+        {
+            "name": "time",
+            "type": "DateTime"
+        },
+        {
+            "name": "location",
+            "type": "String"
+        },
+        {
+            "name": "operationName",
+            "type": "String"
+        },
+        {
+            "name": "category",
+            "type": "String"
+        },
+        {
+            "name": "properties",
+            "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "Kql/AppServiceAuthenticationLogs.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "description": "The timestamp (UTC) of when this event was generated.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "description": "The name of the operation represented by this event.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Level",
+          "description": "The level of log verbosity.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TaskName",
+          "description": "The name of the task being performed.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Message",
+          "description": "The log message.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "CorrelationId",
+          "description": "The ID for correlated events.",
+          "type": "String",
+          "isDefaultDisplay": false
+        },
+        {
+          "name": "SiteName",
+          "description": "The runtime name of the application.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "HostName",
+          "description": "The host name of the application.",
+          "type": "String",
+          "isDefaultDisplay": false
+        },
+        {
+          "name": "StatusCode",
+          "description": "The HTTP status code of the operation.",
+          "type": "Int",
+          "isDefaultDisplay": false
+        },
+        {
+          "name": "SubStatusCode",
+          "description": "The HTTP sub-status code of the request.",
+          "type": "Int",
+          "isDefaultDisplay": false
+        },
+        {
+          "name": "Details",
+          "description": "The event details.",
+          "type": "String",
+          "isDefaultDisplay": false
+        },
+        {
+          "name": "ModuleRuntimeVersion",
+          "description": "The version of App Service Authentication running.",
+          "type": "String",
+          "isDefaultDisplay": false
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AppServiceAuthenticationLogs.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AppServiceAuthenticationLogs.json",
+      "tableState": "Production",
+      "isTroubleshootingAllowed": false
+    }
+  ],
+  "functions": [],
+  "queries": [
+    {
+      "id": "edffa3dc-fbae-42e7-a972-8639d323cacf",
+      "displayName":"Count of failed workflow operations from Logic App Workflow Runtime",
+      "description": "Count of failed workflow operations from Logic App Workflow Runtime in selected time range for each workflow.",
+      "bodyFilePath": "KQL/GetWorkflowErrorsQuery.kql",
+      "categories": [ "resources" ],
+      "relatedTables": ["LogicAppWorkflowRuntime"],
+      "tags": {},
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "c8e2cc5e-c9e3-499c-93ef-56ffe79e9bba",
+      "displayName":"Most recent errors from App Service Authentication",
+      "description": "Lists up to 100 most recent errors from App Service Authentication in selected time range.",
+      "bodyFilePath": "KQL/AuthenticationErrors.kql",
+      "categories": [ "resources" ],
+      "relatedTables": ["AppServiceAuthenticationLogs"],
+      "tags": {
+        "Topic": [
+          "Errors",
+          "Diagnostics"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "4a6eac8a-736f-4f1b-a237-f5801daedbff",
+      "displayName":"Most recent warnings from App Service Authentication",
+      "description": "Lists up to 100 most recent warnings from App Service Authentication in selected time range.",
+      "bodyFilePath": "KQL/AuthenticationWarnings.kql",
+      "categories": [ "resources" ],
+      "relatedTables": ["AppServiceAuthenticationLogs"],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "e68dd16c-3295-43e8-aae2-09870e143b67",
+      "displayName":"Top 100 most frequent errors and warnings from App Service Authentication",
+      "description": "Count of top 100 most frequent error and warning messages from App Service Authentication in selected time range, sorted by type (errors shown first), then descending count.",
+      "bodyFilePath": "KQL/AuthenticationWarningsErrorsCount.kql",
+      "categories": [ "resources" ],
+      "relatedTables": ["AppServiceAuthenticationLogs"],
+      "tags": {
+        "Topic": [
+          "Diagnostics"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+AZMSRunTimeAuditLogs
+| extend NamespaceInfo = tostring(split(_ResourceId, "/")[8])
+| where Provider =~ "ServiceBus"
+| where isnotnull(NamespaceInfo) and isnotnull(AuthKey) and AuthType == "SAS" and Status != "Success" 
+| project NamespaceInfo, AuthKey, ActivityName, Protocol, NetworkType, ClientIp, _ResourceId
+| summarize by NamespaceInfo, AuthKey, ActivityName

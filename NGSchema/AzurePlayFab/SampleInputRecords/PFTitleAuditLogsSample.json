@@ -1,0 +1,16 @@
+[{
+    "time":"2022-08-08T14:31:44.0177258Z",
+    "resourceId":"/SUBSCRIPTIONS/19C4A64C-DF5B-402C-9433-96C21C71454E/RESOURCEGROUPS/RAAGRAWAL-RG/PROVIDERS/MICROSOFT.PLAYFAB/TITLES/TESTTITLE110711",
+    "level":"Informational",
+    "category":"AuditLogs",
+    "operationName":"Player",
+    "location":"centralus",
+    "properties":{
+        "playFabTitleId":"67FAB",
+        "playFabPlayerAccountPoolId":"884339428DD09857",
+        "userId":"90829D7A707247F3",
+        "userName":"Ritesh Jaiswal",
+        "modifiedPlayerId":"44214038900AB993",
+        "operationType":"Export"
+    }
+}]

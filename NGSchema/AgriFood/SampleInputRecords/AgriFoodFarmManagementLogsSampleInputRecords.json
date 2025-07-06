@@ -1,0 +1,58 @@
+[
+  {
+    "time": "2021-09-06T17:51:08.764058082Z",
+    "resourceId": "/SUBSCRIPTIONS/5464F7EE3875-12C9-C654-F81D-CE1909AD/RESOURCEGROUPS/sample-INSTANCES/PROVIDERS/MICROSOFT.AGFOODPLATFORM/FARMBEATS/sample-EUS-1",
+    "category": "FarmManagementLogs",
+    "operationName": "Microsoft.AgFoodPlatform/boundaries/write",
+    "callerIpAddress": "122.161.78.235",
+    "Level": "Information",
+    "identity": {
+      "claims": {
+        "ApplicationId": "39d176c5-91b6-454b-854d-55813c17d92d",
+        "ObjectId": "9002b50e-dc98-445e-a865-72dce38ecafd",
+        "TenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+      }
+    },
+    "properties": {
+      "requestUri": "https://sample-eus-1.farmbeats-dogfood.azure.net/farmers/sample-farmer/boundaries/sample-boundary?api-version=2021-03-31-preview",
+      "farmerId": "sample-farmer",
+      "dataPlaneResourceId": "/farmers/sample-farmer/boundaries/sample-boundary",
+      "requestBody": {
+        "geometry": { "type": "Polygon" },
+        "description": "Created by SDK"
+      }
+    },
+    "resultSignature": "201",
+    "resultType": "Success",
+    "resultDescription": "",
+    "location": "eastus",
+    "correlationId": "7d116345-e246-4874-ad45-4fa8e1885c44",
+    "durationMs": 5617
+  },
+  {
+    "time": "2021-09-06T17:51:15.19164411Z",
+    "resourceId": "/SUBSCRIPTIONS/5464F7EE3875-12C9-C654-F81D-CE1909AD/RESOURCEGROUPS/sample-INSTANCES/PROVIDERS/MICROSOFT.AGFOODPLATFORM/FARMBEATS/sample-EUS-1",
+    "category": "FarmManagementLogs",
+    "operationName": "Microsoft.AgFoodPlatform/farmers/read",
+    "callerIpAddress": "122.161.78.235",
+    "Level": "Information",
+    "identity": {
+      "claims": {
+        "ApplicationId": "39d176c5-91b6-454b-854d-55813c17d92d",
+        "ObjectId": "9002b50e-dc98-445e-a865-72dce38ecafd",
+        "TenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+      }
+    },
+    "properties": {
+      "requestUri": "https://sample-1.farmbeats-dogfood.azure.net/farmers/sample-farmer?api-version=2021-03-31-preview",
+      "farmerId": "sample-farmer",
+      "dataPlaneResourceId": "/farmers/sample-farmer"
+    },
+    "resultSignature": "404",
+    "resultType": "Failure",
+    "resultDescription": "Operation returned an invalid status code 'NotFound'.",
+    "location": "eastus",
+    "correlationId": "ce8c77ed-b855-4c52-a7de-cac73d085174",
+    "durationMs": 47
+  }
+]

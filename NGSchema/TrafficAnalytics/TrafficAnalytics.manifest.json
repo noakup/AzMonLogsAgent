@@ -1,0 +1,2287 @@
+{
+    "type": "Microsoft.Network/NetworkWatchers/TrafficAnalytics",
+    "displayName": "Network Watcher - Traffic Analytics",
+    "description": "All tables related to Network Watcher - Traffic Analytics",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Network Watcher Traffic Analytics/Dev Team-IDC",
+    "relatedTables": [],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "NTANetAnalytics",
+            "description": "Traffic Analytics records for Flowlog enriched data.",
+            "categories": [
+                "network"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 10,
+            "dataTypeId": "MICROSOFTNWTRAFFICANALYTICS_NETANALYTICS",
+            "isChangeColumnInternalNameAllowed": true,
+            "intelligencePacks": [],
+            "isResourceCentric": false,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": false,
+            "input": [
+                {
+                    "name": "SubType",
+                    "type": "String"
+                },
+                {
+                    "name": "FASchemaVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "TimeProcessed",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "FlowIntervalStartTime",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "FlowIntervalEndTime",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "FlowType",
+                    "type": "String"
+                },
+                {
+                    "name": "FlowStartTime",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "FlowEndTime",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "SrcIP",
+                    "type": "String"
+                },
+                {
+                    "name": "DestIP",
+                    "type": "String"
+                },
+                {
+					"name": "SrcPorts",
+                    "type": "String"
+                },
+                {
+                    "name": "DestPort",
+                    "type": "Int"
+                },
+                {
+                    "name": "L4Protocol",
+                    "type": "String"
+                },
+                {
+                    "name": "L7Protocol",
+                    "type": "String"
+                },
+                {
+                    "name": "IsFlowCapturedAtUDRHop",
+                    "type": "Bool"
+                },
+                {
+                    "name": "FlowDirection",
+                    "type": "String"
+                },
+                {
+                    "name": "FlowStatus",
+                    "type": "String"
+                },
+                {
+                    "name": "NSGList",
+                    "type": "String"
+                },
+                {
+                    "name": "NSGRule",
+                    "type": "String"
+                },
+                {
+                    "name": "NSGRuleType",
+                    "type": "String"
+                },
+                {
+                    "name": "MACAddress",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetResourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetResourceType",
+                    "type": "String"
+                },
+                {
+                    "name": "FlowLogResourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcSubscription",
+                    "type": "String"
+                },
+                {
+                    "name": "DestSubscription",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcRegion",
+                    "type": "String"
+                },
+                {
+                    "name": "DestRegion",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcNIC",
+                    "type": "String"
+                },
+                {
+                    "name": "DestNIC",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcVM",
+                    "type": "String"
+                },
+                {
+                    "name": "DestVM",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcSubnet",
+                    "type": "String"
+                },
+                {
+                    "name": "DestSubnet",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcApplicationGateway",
+                    "type": "String"
+                },
+                {
+                    "name": "DestApplicationGateway",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcLoadBalancer",
+                    "type": "String"
+                },
+                {
+                    "name": "DestLoadBalancer",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcLocalNetworkGateway",
+                    "type": "String"
+                },
+                {
+                    "name": "DestLocalNetworkGateway",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcExpressRouteCircuit",
+                    "type": "String"
+                },
+                {
+                    "name": "DestExpressRouteCircuit",
+                    "type": "String"
+                },
+                {
+                    "name": "ExpressRouteCircuitPeeringType",
+                    "type": "String"
+                },
+                {
+                    "name": "ConnectionType",
+                    "type": "String"
+                },
+                {
+                    "name": "ConnectionName",
+                    "type": "String"
+                },
+                {
+                    "name": "ConnectingVNets",
+                    "type": "String"
+                },
+                {
+                    "name": "Country",
+                    "type": "String"
+                },
+                {
+                    "name": "AzureRegion",
+                    "type": "String"
+                },
+                {
+                    "name": "FlowEncryption",
+                    "type": "String"
+                },
+                {
+                    "name": "AllowedInFlows",
+                    "type": "Long"
+                },
+                {
+                    "name": "DeniedInFlows",
+                    "type": "Long"
+                },
+                {
+                    "name": "AllowedOutFlows",
+                    "type": "Long"
+                },
+                {
+                    "name": "DeniedOutFlows",
+                    "type": "Long"
+                },
+                {
+                    "name": "PacketsDestToSrc",
+                    "type": "Long"
+                },
+                {
+                    "name": "PacketsSrcToDest",
+                    "type": "Long"
+                },
+                {
+                    "name": "BytesDestToSrc",
+                    "type": "Long"
+                },
+                {
+                    "name": "BytesSrcToDest",
+                    "type": "Long"
+                },
+                {
+                    "name": "CompletedFlows",
+                    "type": "Long"
+                },
+                {
+                    "name": "SrcPublicIPs",
+                    "type": "String"
+                },
+                {
+                    "name": "DestPublicIPs",
+                    "type": "String"
+                },
+                {
+                    "name": "ACLGroup",
+                    "type": "String"
+                },
+                {
+                    "name": "ACLRule",
+                    "type": "String"
+                },
+                {
+                    "name": "Status",
+                    "type": "String"
+                },
+                {
+                    "name": "PrivateEndpointResourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "PrivateLinkResourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "PrivateLinkResourceName",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcServiceId",
+                    "type": "String"
+                },
+                {
+                    "name": "DestServiceId",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcServiceName",
+                    "type": "String"
+                },
+                {
+                    "name": "DestServiceName",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcTenantId",
+                    "type": "String"
+                },
+                {
+                    "name": "DestTenantId",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcTenantName",
+                    "type": "String"
+                },
+                {
+                    "name": "DestTenantName",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcEnvironment",
+                    "type": "String"
+                },
+                {
+                    "name": "DestEnvironment",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcCloud",
+                    "type": "String"
+                },
+                {
+                    "name": "DestCloud",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcNetworkGroups",
+                    "type": "String"
+                },
+                {
+                    "name": "DestNetworkGroups",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcServiceTags",
+                    "type": "String"
+                },
+                {
+                    "name": "DestServiceTags",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "Kql/NTANetAnalytics.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "The time when the data gets ingested into the log analytics workspace.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SubType",
+                    "type": "String",
+                    "description": "Subtype of the ingestion. Values can be Flowlog and StatusMessage.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FaSchemaVersion",
+                    "type": "String",
+                    "description": "Schema version for ingestion.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TimeProcessed",
+                    "type": "DateTime",
+                    "description": "Time(in UTC) at which the traffic analytics processed the raw flow logs from the storage account.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FlowIntervalStartTime",
+                    "type": "DateTime",
+                    "description": "Starting time(in UTC) of the flow log processing interval. This is time from which flow interval is measured.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FlowIntervalEndTime",
+                    "type": "DateTime",
+                    "description": "Ending time(in UTC) of the flow log processing interval.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FlowType",
+                    "type": "String",
+                    "description": "Category of the flows(allowed values are IntraVNet, InterVNet, S2S, P2S, AzurePublic, ExternalPublic, MaliciousFlow, Unknown Private, Unknown) based on IP addresses involved in flow.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FlowStartTime",
+                    "type": "DateTime",
+                    "description": "First occurrence of the flow (which will get aggregated) in the flow log processing interval between \"FlowIntervalStartTime_t\" and \"FlowIntervalEndTime_t\".",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FlowEndTime",
+                    "type": "DateTime",
+                    "description": "Last occurrence of the flow (which will get aggregated) in the flow log processing interval between \"FlowIntervalStartTime_t\" and \"FlowIntervalEndTime_t\". In terms of flow log v2, this field contains the time when the last flow with the same four-tuple started (marked as \"B\" in the raw flow record).",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SrcIp",
+                    "type": "String",
+                    "description": "Source IP address.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "DestIp",
+                    "type": "String",
+                    "description": "Destination IP address.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "transformName": "SrcPorts",
+					"physicalName": "SrcPorts",
+					"logicalName": "SrcPorts",
+                    "type": "String",
+                    "description": "Pipe Separated Source Ports.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DestPort",
+                    "type": "Int",
+                    "description": "Destination port.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "L4Protocol",
+                    "type": "String",
+                    "description": "Transport Protocol,T = TCP, U = UDP.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "L7Protocol",
+                    "type": "String",
+                    "description": "Application Layer protocol name.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "IsFlowCapturedAtUdrHop",
+                    "type": "Bool",
+                    "description": "True if flow gets captured at a UDR hop.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FlowDirection",
+                    "type": "String",
+                    "description": "Direction of the flow which can be inbound or outbound.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FlowStatus",
+                    "type": "String",
+                    "description": "Status of flow which can be allowed or denied.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "NsgList",
+                    "type": "String",
+                    "description": "Network Security Group(NSG) associated with the flow. This is a placeholder for NSG flow logging.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "NsgRule",
+                    "type": "String",
+                    "description": "NSG rule that allowed or denied this flow. This is a placeholder for NSG flow logging.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "NsgRuleType",
+                    "type": "String",
+                    "description": "The type of Network Security Group(NSG) rule used by the flow. This is a placeholder for NSG flow logging.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "MacAddress",
+                    "type": "String",
+                    "description": "MAC address of the network interface at which the flow was captured.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TargetResourceId",
+                    "type": "String",
+                    "description": "Target Resource Id for the resource where flow logging has been enabled.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TargetResourceType",
+                    "type": "String",
+                    "description": "Target Resource Type where flow logging is enabled. It can be virtual network(VNET)/subnet(SUBNET)/network interface(NIC).",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FlowLogResourceId",
+                    "type": "String",
+                    "description": "The resource Id for the flow log",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SrcSubscription",
+                    "type": "String",
+                    "description": "Subscription of the Azure virtual network/ network interface/ virtual machine to which the source IP in the flow belongs to.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "GUID"
+                },
+                {
+                    "name": "DestSubscription",
+                    "type": "String",
+                    "description": "Subscription Id of virtual network/ network interface/ virtual machine to which the destination IP in the flow belongs to.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "GUID"
+                },
+                {
+                    "name": "SrcRegion",
+                    "type": "String",
+                    "description": "Azure region of virtual network/ network interface/ virtual machine to which the source IP in the flow belongs to.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "GUID"
+                },
+                {
+                    "name": "DestRegion",
+                    "type": "String",
+                    "description": "Azure region of virtual network/ network interface/ virtual machine to which the destination IP in the flow belongs to.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SrcNic",
+                    "type": "String",
+                    "description": "NIC associated with the source IP in the flow.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DestNic",
+                    "type": "String",
+                    "description": "NIC associated with the destination IP in the flow.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SrcVm",
+                    "type": "String",
+                    "description": "Virtual machine associated with the source IP in the flow.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DestVm",
+                    "type": "String",
+                    "description": "Virtual machine associated with the destination IP in the flow.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SrcSubnet",
+                    "type": "String",
+                    "description": "Subnet associated with the source IP in the flow.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DestSubnet",
+                    "type": "String",
+                    "description": "Subnet associated with the destination IP in the flow.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SrcApplicationGateway",
+                    "type": "String",
+                    "description": "Application gateway associated with the source IP in the flow.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DestApplicationGateway",
+                    "type": "String",
+                    "description": "Application gateway associated with the destination IP in the flow.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SrcLoadBalancer",
+                    "type": "String",
+                    "description": "Load balancer associated with the source IP in the flow.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DestLoadBalancer",
+                    "type": "String",
+                    "description": "Load balancer associated with the destination IP in the flow.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SrcLocalNetworkGateway",
+                    "type": "String",
+                    "description": "Local network gateway associated with the source IP in the flow.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DestLocalNetworkGateway",
+                    "type": "String",
+                    "description": "Local network gateway associated with the destination IP in the flow.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SrcExpressRouteCircuit",
+                    "type": "String",
+                    "description": "Express route circuit associated with the source IP in the flow.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DestExpressRouteCircuit",
+                    "type": "String",
+                    "description": "Express route circuit associated with the destination IP in the flow.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ExpressRouteCircuitPeeringType",
+                    "type": "String",
+                    "description": "The peering type of the associated express route circuit for the flow.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ConnectionType",
+                    "type": "String",
+                    "description": "Type of the connection. Possible values are VNetPeering, VpnGateway, and ExpressRoute.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ConnectionName",
+                    "type": "String",
+                    "description": "Connection Name.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ConnectingVnets",
+                    "type": "String",
+                    "description": "Space separated list of virtual network names.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Country",
+                    "type": "String",
+                    "description": "Two letter country code (ISO 3166-1 alpha-2).",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "AzureRegion",
+                    "type": "String",
+                    "description": "Azure region locations.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FlowEncryption",
+                    "type": "String",
+                    "description": "The type of flow encryption.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "AllowedInFlows",
+                    "type": "BigInt",
+                    "description": "Count of inbound flows that were allowed. This represents the number of flows that shared the same four-tuple inbound to the network interface at which the flow was captured.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DeniedInFlows",
+                    "type": "BigInt",
+                    "description": "Count of inbound flows that were denied(Inbound to the network interface at which the flow was captured).",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "AllowedOutFlows",
+                    "type": "BigInt",
+                    "description": "Count of outbound flows that were allowed(Outbound to the network interface at which the flow was captured).",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DeniedOutFlows",
+                    "type": "BigInt",
+                    "description": "Count of outbound flows that were denied(Outbound to the network interface at which the flow was captured).",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PacketsDestToSrc",
+                    "type": "BigInt",
+                    "description": "Represents packets sent from the destination to the source of the flow.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PacketsSrcToDest",
+                    "type": "BigInt",
+                    "description": "Represents packets sent from the source to the destination of the flow.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "BytesDestToSrc",
+                    "type": "BigInt",
+                    "description": "Represents bytes sent from the destination to the source of the flow.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "BytesSrcToDest",
+                    "type": "BigInt",
+                    "description": "Represents bytes sent from the source to the destination of the flow.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "CompletedFlows",
+                    "type": "BigInt",
+                    "description": "This is populated with non-zero value when a flow gets a Completed event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SrcPublicIps",
+                    "type": "String",
+                    "description": "Source public IP addresses flow information.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "DestPublicIps",
+                    "type": "String",
+                    "description": "Destination public IP addresses flow information.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "AclGroup",
+                    "type": "String",
+                    "description": "Access control list group refers to the network security group associated with the network security group rule name (or) the network group associated with the security admin configuration which allowed or denied the connection.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "AclRule",
+                    "type": "String",
+                    "description": "Access control list rule refers to the network security group rule name or the security admin rule name which allowed or denied the connection.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Status",
+                    "type": "String",
+                    "description": "Status of the ingestion. Possible values can be Completed, Partial or Failed."
+                },
+                {
+                    "name": "PrivateEndpointResourceId",
+                    "type": "String",
+                    "description": "Resource ID of the private endpoint resource."
+                },
+                {
+                    "name": "PrivateLinkResourceId",
+                    "type": "String",
+                    "description": "Resource ID of the private link service."
+                },
+                {
+                    "name": "PrivateLinkResourceName",
+                    "type": "String",
+                    "description": "Resource name of the private link service."
+                },
+                {
+                    "name": "SrcServiceId",
+                    "type": "String",
+                    "description": "Service ID associated with the source IP in the flow."
+                },
+                {
+                    "name": "DestServiceId",
+                    "type": "String",
+                    "description": "Service ID associated with the destination IP in the flow."
+                },
+                {
+                    "name": "SrcServiceName",
+                    "type": "String",
+                    "description": "Service Name associated with the source IP in the flow."
+                },
+                {
+                    "name": "DestServiceName",
+                    "type": "String",
+                    "description": "Service Name associated with the destination IP in the flow."
+                },
+                {
+                    "name": "SrcTenantId",
+                    "type": "String",
+                    "description": "Tenant ID associated with the source IP in the flow."
+                },
+                {
+                    "name": "DestTenantId",
+                    "type": "String",
+                    "description": "Tenant ID associated with the destination IP in the flow."
+                },
+                {
+                    "name": "SrcTenantName",
+                    "type": "String",
+                    "description": "Tenant Name associated with the source IP in the flow."
+                },
+                {
+                    "name": "DestTenantName",
+                    "type": "String",
+                    "description": "Tenant Name associated with the destination IP in the flow."
+                },
+                {
+                    "name": "SrcEnvironment",
+                    "type": "String",
+                    "description": "Environment associated with the source IP in the flow. Possible values can be Prod and NonProd."
+                },
+                {
+                    "name": "DestEnvironment",
+                    "type": "String",
+                    "description": "Environment associated with the destination IP in the flow. Possible values can be Prod and NonProd."
+                },
+                {
+                    "name": "SrcCloud",
+                    "type": "String",
+                    "description": "Cloud associated with the source IP in the flow. Possible values can be Public, Mooncake and Fairfax."
+                },
+                {
+                    "name": "DestCloud",
+                    "type": "String",
+                    "description": "Cloud associated with the source IP in the flow. Possible values can be Public, Mooncake and Fairfax."
+                },
+                {
+                    "name": "SrcNetworkGroups",
+                    "type": "String",
+                    "description": "In case source is tagged with a vnet, this is networkgroups that vnet belongs to."
+                },
+                {
+                    "name": "DestNetworkGroups",
+                    "type": "String",
+                    "description": "In case destination is tagged with a vnet, this is networkgroups that vnet belongs to."
+                },
+                {
+                    "name": "SrcServiceTags",
+                    "type": "String",
+                    "description": "Service tag of SrcPublicIps in format <Space separated list of source public ips grouped by service tag>|<ServiceTag>"
+                },
+                {
+                    "name": "DestServiceTags",
+                    "type": "String",
+                    "description": "Service tag of DestPublicIps in format <Space separated list of destination public ips grouped by service tag>|<ServiceTag>"
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/NTAFlowLogSample.json"
+        },
+        {
+            "name": "NTATopologyDetails",
+            "description": "Traffic Analytics records for Topology data.",
+            "categories": [
+                "network"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 6,
+            "dataTypeId": "MICROSOFTNWTRAFFICANALYTICS_TOPOLOGYDETAILS",
+            "intelligencePacks": [],
+            "isResourceCentric": false,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": false,
+            "input": [
+                {
+                    "name": "SubType",
+                    "type": "String"
+                },
+                {
+                    "name": "TimeProcessed",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "TopologyVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "SchemaVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "MACAddress",
+                    "type": "String"
+                },
+                {
+                    "name": "Name",
+                    "type": "String"
+                },
+                {
+                    "name": "Region",
+                    "type": "String"
+                },
+                {
+                    "name": "ResourceType",
+                    "type": "String"
+                },
+                {
+                    "name": "Subscription",
+                    "type": "String"
+                },
+                {
+                    "name": "SubscriptionName",
+                    "type": "String"
+                },
+                {
+                    "name": "DiscoveryRegion",
+                    "type": "String"
+                },
+                {
+                    "name": "Tags",
+                    "type": "String"
+                },
+                {
+                    "name": "AddressPrefixes",
+                    "type": "String"
+                },
+                {
+                    "name": "NSG",
+                    "type": "String"
+                },
+                {
+                    "name": "RouteTable",
+                    "type": "String"
+                },
+                {
+                    "name": "GatewayType",
+                    "type": "String"
+                },
+                {
+                    "name": "VirtualSubnetwork",
+                    "type": "String"
+                },
+                {
+                    "name": "VIPAddress",
+                    "type": "String"
+                },
+                {
+                    "name": "SKU",
+                    "type": "String"
+                },
+                {
+                    "name": "BGPEnabled",
+                    "type": "Bool"
+                },
+                {
+                    "name": "VpnClientAddressPrefixes",
+                    "type": "String"
+                },
+                {
+                    "name": "IPAddress",
+                    "type": "String"
+                },
+                {
+                    "name": "SubnetPrefixes",
+                    "type": "String"
+                },
+                {
+                    "name": "IsVirtualAppliance",
+                    "type": "Bool"
+                },
+                {
+                    "name": "VmssName",
+                    "type": "String"
+                },
+                {
+                    "name": "Zones",
+                    "type": "String"
+                },
+                {
+                    "name": "Priority",
+                    "type": "Int"
+                },
+                {
+                    "name": "VirtualMachine",
+                    "type": "String"
+                },
+                {
+                    "name": "PrivateIPAddresses",
+                    "type": "String"
+                },
+                {
+                    "name": "PublicIPAddresses",
+                    "type": "String"
+                },
+                {
+                    "name": "Subnetwork",
+                    "type": "String"
+                },
+                {
+                    "name": "EnableIPForwarding",
+                    "type": "Bool"
+                },
+                {
+                    "name": "LoadBalancerBackendPools",
+                    "type": "String"
+                },
+                {
+                    "name": "ApplicationGatewayBackendPools",
+                    "type": "String"
+                },
+                {
+                    "name": "IsFlowEnabled",
+                    "type": "Bool"
+                },
+                {
+                    "name": "FlowLogStorageAccount",
+                    "type": "String"
+                },
+                {
+                    "name": "Description",
+                    "type": "String"
+                },
+                {
+                    "name": "Protocol",
+                    "type": "String"
+                },
+                {
+                    "name": "SourcePortRange",
+                    "type": "String"
+                },
+                {
+                    "name": "DestinationPortRange",
+                    "type": "String"
+                },
+                {
+                    "name": "SourceAddressPrefix",
+                    "type": "String"
+                },
+                {
+                    "name": "DestinationAddressPrefix",
+                    "type": "String"
+                },
+                {
+                    "name": "Access",
+                    "type": "String"
+                },
+                {
+                    "name": "Direction",
+                    "type": "String"
+                },
+                {
+                    "name": "RuleType",
+                    "type": "String"
+                },
+                {
+                    "name": "NextHopType",
+                    "type": "String"
+                },
+                {
+                    "name": "NextHopIP",
+                    "type": "String"
+                },
+                {
+                    "name": "VirtualNetworkGateway1",
+                    "type": "String"
+                },
+                {
+                    "name": "VirtualNetworkGateway2",
+                    "type": "String"
+                },
+                {
+                    "name": "LocalNetworkGateway",
+                    "type": "String"
+                },
+                {
+                    "name": "Peer",
+                    "type": "String"
+                },
+                {
+                    "name": "GatewayConnectionType",
+                    "type": "String"
+                },
+                {
+                    "name": "ConnectionType",
+                    "type": "String"
+                },
+                {
+                    "name": "ConnectionStatus",
+                    "type": "String"
+                },
+                {
+                    "name": "RoutingWeight",
+                    "type": "Int"
+                },
+                {
+                    "name": "IngressBytesTransferred",
+                    "type": "Long"
+                },
+                {
+                    "name": "EgressBytesTransferred",
+                    "type": "Long"
+                },
+                {
+                    "name": "VirtualNetwork1",
+                    "type": "String"
+                },
+                {
+                    "name": "VirtualNetwork2",
+                    "type": "String"
+                },
+                {
+                    "name": "AllowVirtualNetworkAccess",
+                    "type": "Bool"
+                },
+                {
+                    "name": "AllowForwardedTraffic",
+                    "type": "Bool"
+                },
+                {
+                    "name": "AllowGatewayTransit",
+                    "type": "Bool"
+                },
+                {
+                    "name": "UseRemoteGateways",
+                    "type": "Bool"
+                },
+                {
+                    "name": "LoadBalancerType",
+                    "type": "String"
+                },
+                {
+                    "name": "FrontendSubnet",
+                    "type": "String"
+                },
+                {
+                    "name": "FrontendSubnets",
+                    "type": "String"
+                },
+                {
+                    "name": "FrontendIPs",
+                    "type": "String"
+                },
+                {
+                    "name": "BackendSubnets",
+                    "type": "String"
+                },
+                {
+                    "name": "AppGatewayType",
+                    "type": "String"
+                },
+                {
+                    "name": "PrivateFrontendIPs",
+                    "type": "String"
+                },
+                {
+                    "name": "PublicFrontendIPs",
+                    "type": "String"
+                },
+                {
+                    "name": "GatewaySubnet",
+                    "type": "String"
+                },
+                {
+                    "name": "VirtualAppliances",
+                    "type": "String"
+                },
+                {
+                    "name": "Subnet1",
+                    "type": "String"
+                },
+                {
+                    "name": "Subnet2",
+                    "type": "String"
+                },
+                {
+                    "name": "SubnetRegion1",
+                    "type": "String"
+                },
+                {
+                    "name": "SubnetRegion2",
+                    "type": "String"
+                },
+                {
+                    "name": "FrontendIPAddress",
+                    "type": "String"
+                },
+                {
+                    "name": "BackendIPAddress",
+                    "type": "String"
+                },
+                {
+                    "name": "FrontendPort",
+                    "type": "Int"
+                },
+                {
+                    "name": "BackendPort",
+                    "type": "Int"
+                },
+                {
+                    "name": "FloatingIPEnabled",
+                    "type": "Bool"
+                },
+                {
+                    "name": "BackendAddressPool",
+                    "type": "String"
+                },
+                {
+                    "name": "CircuitProvisioningState",
+                    "type": "String"
+                },
+                {
+                    "name": "ServiceProviderProperties",
+                    "type": "String"
+                },
+                {
+                    "name": "ServiceProviderProvisioningState",
+                    "type": "String"
+                },
+                {
+                    "name": "SkuDetail",
+                    "type": "String"
+                },
+                {
+                    "name": "AzureASN",
+                    "type": "Long"
+                },
+                {
+                    "name": "PeerASN",
+                    "type": "Long"
+                },
+                {
+                    "name": "PeeringType",
+                    "type": "String"
+                },
+                {
+                    "name": "PrimaryAzurePort",
+                    "type": "String"
+                },
+                {
+                    "name": "PrimaryPeerAddressPrefix",
+                    "type": "String"
+                },
+                {
+                    "name": "SecondaryAzurePort",
+                    "type": "String"
+                },
+                {
+                    "name": "SecondaryPeerAddressPrefix",
+                    "type": "String"
+                },
+                {
+                    "name": "State",
+                    "type": "String"
+                },
+                {
+                    "name": "PrimarybytesIn",
+                    "type": "Long"
+                },
+                {
+                    "name": "PrimarybytesOut",
+                    "type": "Long"
+                },
+                {
+                    "name": "SecondarybytesIn",
+                    "type": "Long"
+                },
+                {
+                    "name": "SecondarybytesOut",
+                    "type": "Long"
+                },
+                {
+                    "name": "VlanId",
+                    "type": "Int"
+                },
+                {
+                    "name": "Network",
+                    "type": "String"
+                },
+                {
+                    "name": "PrimaryNextHop",
+                    "type": "String"
+                },
+                {
+                    "name": "SecondaryNextHop",
+                    "type": "String"
+                },
+                {
+                    "name": "LocalPreference",
+                    "type": "String"
+                },
+                {
+                    "name": "Path",
+                    "type": "String"
+                },
+                {
+                    "name": "Weight",
+                    "type": "Int"
+                },
+                {
+                    "name": "ComponentType",
+                    "type": "String"
+                },
+                {
+                    "name": "Status",
+                    "type": "String"
+                },
+                {
+                    "name": "VnetEncryptionSupported",
+                    "type": "Bool"
+                },
+                {
+                    "name": "EncryptionEnabled",
+                    "type": "Bool"
+                },
+                {
+                    "name": "EncryptionEnforcement",
+                    "type": "String"
+                },
+                {
+                    "name": "PrivateEndpointResourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "PrivateLinkResourceId",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "Kql/NTATopologyDetails.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "The time when the data gets ingested into the log analytics workspace.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SubType",
+                    "type": "String",
+                    "description": "Subtype of the ingestion. Values can be Topology and StatusMessage.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TimeProcessed",
+                    "type": "DateTime",
+                    "description": "Time(in UTC) at which the traffic analytics discovered the topology resource.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TopologyVersion",
+                    "type": "String",
+                    "description": "Topology version.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SchemaVersion",
+                    "type": "String",
+                    "description": "This is topology schema version and not related to flow log schema version.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "MacAddress",
+                    "type": "String",
+                    "description": "MAC address of the discovered NIC.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Name",
+                    "type": "String",
+                    "description": "Name of the discovered resource.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Region",
+                    "type": "String",
+                    "description": "Region of the discovered resource.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "AzureResourceType",
+                    "type": "String",
+                    "description": "Resource type of the discovered resource.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Subscription",
+                    "type": "String",
+                    "description": "Subscription guid of the discovered resource.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "GUID"
+                },
+                {
+                    "name": "SubscriptionName",
+                    "type": "String",
+                    "description": "Subscription name of the discovered resource.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DiscoveryRegion",
+                    "type": "String",
+                    "description": "The region where resource is discovered.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Tags",
+                    "type": "String",
+                    "description": "Tags associated with the discovered resource.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "AddressPrefixes",
+                    "type": "String",
+                    "description": "The address prefixes associated with the discovered resource."
+                },
+                {
+                    "name": "Nsg",
+                    "type": "String",
+                    "description": "The reference to the network security group resource."
+                },
+                {
+                    "name": "RouteTable",
+                    "type": "String",
+                    "description": "The reference to the route table resource."
+                },
+                {
+                    "name": "GatewayType",
+                    "type": "String",
+                    "description": "Gateway Type assocaited with virtual network gateway, VPN or express route."
+                },
+                {
+                    "name": "VirtualSubnetwork",
+                    "type": "String",
+                    "description": "Virtual subnetwork associated with virtual network gateway."
+                },
+                {
+                    "name": "VipAddress",
+                    "type": "String",
+                    "description": "Space separated list of IP addresses associated with virtual network gateway.",
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "Sku",
+                    "type": "String",
+                    "description": "SKU or pricing associated with the discovered resource."
+                },
+                {
+                    "name": "BgpEnabled",
+                    "type": "Bool",
+                    "description": "Whether BGP is enabled for this resource or not."
+                },
+                {
+                    "name": "VpnClientAddressPrefixes",
+                    "type": "String",
+                    "description": "The reference to the address prefix resource which represents address prefix for P2S VpnClient. Will be empty when no point to site is configured."
+                },
+                {
+                    "name": "IpAddress",
+                    "type": "String",
+                    "description": "Gateway IP address of the discovered resource.",
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "SubnetPrefixes",
+                    "type": "String",
+                    "description": "Space separated string of address prefixes in local network address space."
+                },
+                {
+                    "name": "IsVirtualAppliance",
+                    "type": "Bool",
+                    "description": "Boolean to specify if the discovered resource is a virtual appliance."
+                },
+                {
+                    "name": "VmssName",
+                    "type": "String",
+                    "description": "The virtual machine scale set name."
+                },
+                {
+                    "name": "Zones",
+                    "type": "String",
+                    "description": "The virtual machine zones information."
+                },
+                {
+                    "name": "Priority",
+                    "type": "Int",
+                    "description": "Specifies the priority for the virtual machine. Minimum api-version: 2019-03-01."
+                },
+                {
+                    "name": "VirtualMachine",
+                    "type": "String",
+                    "description": "The reference to a virtual machine."
+                },
+                {
+                    "name": "PrivateIpAddresses",
+                    "type": "String",
+                    "description": "Private IP address of the IP configuration."
+                },
+                {
+                    "name": "PublicIpAddresses",
+                    "type": "String",
+                    "description": "Public IP address bound to the IP configuration."
+                },
+                {
+                    "name": "Subnetwork",
+                    "type": "String",
+                    "description": "The refrence to the subnetwork resource."
+                },
+                {
+                    "name": "EnableIpForwarding",
+                    "type": "Bool",
+                    "description": "Indicates whether IP forwarding is enabled on the network interface."
+                },
+                {
+                    "name": "LoadBalancerBackendPools",
+                    "type": "String",
+                    "description": "Pool of load balancer backend IP addresses."
+                },
+                {
+                    "name": "ApplicationGatewayBackendPools",
+                    "type": "String",
+                    "description": "Pool of application gateway backend IP addresses."
+                },
+                {
+                    "name": "IsFlowEnabled",
+                    "type": "Bool",
+                    "description": "Flag to enable/disable flow logging."
+                },
+                {
+                    "name": "FlowLogStorageAccount",
+                    "type": "String",
+                    "description": "Id of the storage account which is used to store the flow log."
+                },
+                {
+                    "name": "Description",
+                    "type": "String",
+                    "description": "Description of with network security group rule."
+                },
+                {
+                    "name": "Protocol",
+                    "type": "String",
+                    "description": "Protocol associated with network security group rule."
+                },
+                {
+                    "name": "SourcePortRange",
+                    "type": "String",
+                    "description": "Source port range associated with network security group rule."
+                },
+                {
+                    "name": "DestinationPortRange",
+                    "type": "String",
+                    "description": "Destination port range associated with network security group rule."
+                },
+                {
+                    "name": "SourceAddressPrefix",
+                    "type": "String",
+                    "description": "Source address prefix associated with network security group rule."
+                },
+                {
+                    "name": "DestinationAddressPrefix",
+                    "type": "String",
+                    "description": "Destination address prefix associated with network security group rule."
+                },
+                {
+                    "name": "Access",
+                    "type": "String",
+                    "description": "Access(Allow/Deny) associated with network security group rule."
+                },
+                {
+                    "name": "Direction",
+                    "type": "String",
+                    "description": "Direction associated with network security group rule."
+                },
+                {
+                    "name": "RuleType",
+                    "type": "String",
+                    "description": "The type of the network security group rule."
+                },
+                {
+                    "name": "NextHopType",
+                    "type": "String",
+                    "description": "The type of azure hop the packet should be sent to."
+                },
+                {
+                    "name": "NextHopIp",
+                    "type": "String",
+                    "description": "The IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is virtual appliance."
+                },
+                {
+                    "name": "VirtualNetworkGateway1",
+                    "type": "String",
+                    "description": "The reference to virtual network gateway resource."
+                },
+                {
+                    "name": "VirtualNetworkGateway2",
+                    "type": "String",
+                    "description": "The reference to virtual network gateway resource."
+                },
+                {
+                    "name": "LocalNetworkGateway",
+                    "type": "String",
+                    "description": "The reference to local network gateway resource."
+                },
+                {
+                    "name": "Peer",
+                    "type": "String",
+                    "description": "The reference to peerings resource."
+                },
+                {
+                    "name": "GatewayConnectionType",
+                    "type": "String",
+                    "description": "Gateway connection type."
+                },
+                {
+                    "name": "ConnectionType",
+                    "type": "String",
+                    "description": "Connection type of the discovered connection.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ConnectionStatus",
+                    "type": "String",
+                    "description": "Gateway connection status."
+                },
+                {
+                    "name": "RoutingWeight",
+                    "type": "Int",
+                    "description": "The routing weight."
+                },
+                {
+                    "name": "IngressBytesTransferred",
+                    "type": "BigInt",
+                    "description": "The ingress bytes transferred in this connection."
+                },
+                {
+                    "name": "EgressBytesTransferred",
+                    "type": "BigInt",
+                    "description": "The egress bytes transferred in this connection."
+                },
+                {
+                    "name": "VirtualNetwork1",
+                    "type": "String",
+                    "description": "The reference to the virtual network resource associated with the virtual network peering."
+                },
+                {
+                    "name": "VirtualNetwork2",
+                    "type": "String",
+                    "description": "The reference to the virtual network resource associated with the virtual network peering."
+                },
+                {
+                    "name": "AllowVirtualNetworkAccess",
+                    "type": "Bool",
+                    "description": "Whether the VMs in the local virtual network space would be able to access the VMs in remote virtual network space."
+                }, 
+                {
+                    "name": "AllowForwardedTraffic",
+                    "type": "Bool",
+                    "description": "Whether the forwarded traffic from the VMs in the local virtual network will be allowed/disallowed in remote virtual network."
+                },
+                {
+                    "name": "AllowGatewayTransit",
+                    "type": "Bool",
+                    "description": "If gateway links can be used in remote virtual networking to link to this virtual network."
+                },
+                {
+                    "name": "UseRemoteGateways",
+                    "type": "Bool",
+                    "description": "If remote gateways can be used on this virtual network. If the flag is set to true, and allowGatewayTransit on remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway."
+                },
+                {
+                    "name": "LoadBalancerType",
+                    "type": "String",
+                    "description": "The type of the discovered load balancer resource. Possible values are internal load balancer or internet facing load balancer."
+                },
+                {
+                    "name": "FrontendSubnet",
+                    "type": "String",
+                    "description": "The subnet of the discovered load balancer resource. This will be populated when the load balancer is internal load balancer."
+                },
+                {
+                    "name": "FrontendSubnets",
+                    "type": "String",
+                    "description": "List of space separated subnets of the discovered load balancer resource. This will be populated when the load balancer is internal load balancer."
+                },
+                {
+                    "name": "FrontendIps",
+                    "type": "String",
+                    "description": "Frontend IP address of the load balancer."
+                },
+                {
+                    "name": "BackendSubnets",
+                    "type": "String",
+                    "description": "List of space separated subnets associated with the discovered resource."
+                },
+                {
+                    "name": "AppGatewayType",
+                    "type": "String",
+                    "description": "Type of the application gateway resource. This would be either internal or internet facing."
+                },
+                {
+                    "name": "PrivateFrontendIps",
+                    "type": "String",
+                    "description": "Front end private IP addresses associated with the application gateway resource."
+                },
+                {
+                    "name": "PublicFrontendIps",
+                    "type": "String",
+                    "description": "Front end public IP addresses associated with the application gateway resource."
+                },
+                {
+                    "name": "GatewaySubnet",
+                    "type": "String",
+                    "description": "Subnet associated with the application aateway resource."
+                },
+                {
+                    "name": "VirtualAppliances",
+                    "type": "String",
+                    "description": "Virtual appliances associated with the discovered subnetwork connection."
+                },
+                {
+                    "name": "Subnet1",
+                    "type": "String",
+                    "description": "Subnet associated with the discovered subnetwork connection."
+                },
+                {
+                    "name": "Subnet2",
+                    "type": "String",
+                    "description": "Subnet associated with the discovered subnetwork connection."
+                },
+                {
+                    "name": "SubnetRegion1",
+                    "type": "String",
+                    "description": "Subnet region associated with the discovered subnetwork connection."
+                },
+                {
+                    "name": "SubnetRegion2",
+                    "type": "String",
+                    "description": "Subnet region associated with the discovered subnetwork connection."
+                },
+                {
+                    "name": "FrontendIpAddress",
+                    "type": "String",
+                    "description": "Frontend IP address associated with the inbound NAT rule.",
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "BackendIpAddress",
+                    "type": "String",
+                    "description": "Backend IP address associated with the inbound NAT rules.",
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "FrontendPort",
+                    "type": "Int",
+                    "description": "Frontend port associated with the inbound NAT rules. The port for the external endpoint. Port numbers for each rule must be unique within the Load Balancer. Acceptable values range from 1 to 65534."
+                },
+                {
+                    "name": "BackendPort",
+                    "type": "Int",
+                    "description": "Backend port associated with the inbound NAT rules. The port used for the internal endpoint. Acceptable values range from 1 to 65535."
+                },
+                {
+                    "name": "FloatingIpEnabled",
+                    "type": "Bool",
+                    "description": "Configures a virtual machine's endpoint for the floating IP capability required to configure a SQL AlwaysOn Availability Group. This setting is required when using the SQL AlwaysOn Availability Groups in SQL server. This setting can't be changed after you create the endpoint."
+                },
+                {
+                    "name": "BackendAddressPool",
+                    "type": "String",
+                    "description": "The reference to backend address pool resource."
+                },
+                {
+                    "name": "CircuitProvisioningState",
+                    "type": "String",
+                    "description": "The current provisioning state of express route circuit."
+                },
+                {
+                    "name": "ServiceProviderProperties",
+                    "type": "String",
+                    "description": "\"Contains service provider properties in an express route circuit. Service provider properties semicolon seperated \"ServiceProviderName;ServiceProviderBandwidthInMbps;ServiceProviderPeeringLocation\"\"."
+                },
+                {
+                    "name": "ServiceProviderProvisioningState",
+                    "type": "String",
+                    "description": "The service provider provisioning state state of the resource."
+                },
+                {
+                    "name": "SkuDetail",
+                    "type": "String",
+                    "description": "\"The SKU of express route circuit. Express route circuit SKU detail semicolon seperated \"Family;Name;Tier\"\"."
+                },
+                {
+                    "name": "AzureAsn",
+                    "type": "BigInt",
+                    "description": "The Azure ASN of express route circuit peering."
+                },
+                {
+                    "name": "PeerAsn",
+                    "type": "BigInt",
+                    "description": "The peer ASN of express route circuit peering."
+                },
+                {
+                    "name": "PeeringType",
+                    "type": "String",
+                    "description": "The peering type of express route circuit peering."
+                },
+                {
+                    "name": "PrimaryAzurePort",
+                    "type": "String",
+                    "description": "The primary port of express route circuit peering."
+                },
+                {
+                    "name": "PrimaryPeerAddressPrefix",
+                    "type": "String",
+                    "description": "The primary peer address prefix of express route circuit peering."
+                },
+                {
+                    "name": "SecondaryAzurePort",
+                    "type": "String",
+                    "description": "The secondary port of express route circuit peering."
+                },
+                {
+                    "name": "SecondaryPeerAddressPrefix",
+                    "type": "String",
+                    "description": "The secondary peer address prefix of express route circuit peering."
+                },
+                {
+                    "name": "State",
+                    "type": "String",
+                    "description": "The peering state of express route circuit peering."
+                },
+                {
+                    "name": "PrimaryBytesIn",
+                    "type": "BigInt",
+                    "description": "The primary bytes in of the peering."
+                },
+                {
+                    "name": "PrimaryBytesOut",
+                    "type": "BigInt",
+                    "description": "The primary bytes out of the peering."
+                },
+                {
+                    "name": "SecondaryBytesIn",
+                    "type": "BigInt",
+                    "description": "The secondary bytes in of the peering."
+                },
+                {
+                    "name": "SecondaryBytesOut",
+                    "type": "BigInt",
+                    "description": "The secondary bytes out of the peering."
+                },
+                {
+                    "name": "VlanId",
+                    "type": "Int",
+                    "description": "The VLAN Id of the peering."
+                },
+                {
+                    "name": "Network",
+                    "type": "String",
+                    "description": "IP address of a network entity associated with the express route circuit route."
+                },
+                {
+                    "name": "PrimaryNextHop",
+                    "type": "String",
+                    "description": "Primary next hop address of the express route circuit route."
+                },
+                {
+                    "name": "SecondaryNextHop",
+                    "type": "String",
+                    "description": "Secondary next hop address of the express route circuit route."
+                },
+                {
+                    "name": "LocalPreference",
+                    "type": "String",
+                    "description": "Local preference value as set with the set local-preference route-map configuration command of the express route circuit route."
+                },
+                {
+                    "name": "Path",
+                    "type": "String",
+                    "description": "Autonomous system paths to the destination network of the express route circuit route."
+                },
+                {
+                    "name": "Weight",
+                    "type": "Int",
+                    "description": "Route weight of the express route circuit route."
+                },
+                {
+                    "name": "ComponentType",
+                    "type": "String",
+                    "description": "Component type of the status message. Possible values are Flowlog/Topology."
+                },
+                {
+                    "name": "Status",
+                    "type": "String",
+                    "description": "Status of the ingestion. Possible values can be Completed/Partial/Failed."
+                },
+                {
+                    "name": "VnetEncryptionSupported",
+                    "type": "Bool",
+                    "description": "Indicates whether the virtual machine this nic is attached to supports encryption."
+                },
+                {
+                    "name": "EncryptionEnabled",
+                    "type": "Bool",
+                    "description": "Indicates whether encryption is enabled on the virtual network."
+                },
+                {
+                    "name": "EncryptionEnforcement",
+                    "type": "String",
+                    "description": "Indicates whether the encrypted virtual network allows VM that does not support encryption. Possible values include DropUnencrypted/AllowUnencrypted."
+                },
+                {
+                    "name": "PrivateEndpointResourceId",
+                    "type": "String",
+                    "description": "Resource ID of the private endpoint resource."
+                },
+                {
+                    "name": "PrivateLinkResourceId",
+                    "type": "String",
+                    "description": "Resource ID of the private link service."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/NTATopologySample.json"
+        },
+        {
+            "name": "NTAIpDetails",
+            "description": "Traffic Analytics provides WHOIS data and geographic location for all public IPs in the customer's environment. For Malicious IP, it provides DNS domain, threat type and thread descriptions as identified by Microsoft security intelligence solutions. IP Details are published to your Log Analytics Workspace so you can create custom queries and put alerts on them. You can also access pre-populated queries from the traffic analytics dashboard.",
+            "categories": [
+                "network"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 4,
+            "dataTypeId": "MICROSOFTNWTRAFFICANALYTICS_IPDETAILS",
+            "intelligencePacks": [],
+            "isResourceCentric": false,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": false,
+            "input": [
+                {
+                    "name": "SubType",
+                    "type": "String"
+                },
+                {
+                    "name": "FASchemaVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "FlowIntervalStartTime",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "FlowIntervalEndTime",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "FlowType",
+                    "type": "String"
+                },
+                {
+                    "name": "IP",
+                    "type": "String"
+                },
+                {
+                    "name": "PublicIPDetails",
+                    "type": "String"
+                },
+                {
+                    "name": "ThreatType",
+                    "type": "String"
+                },
+                {
+                    "name": "DNSDomain",
+                    "type": "String"
+                },
+                {
+                    "name": "ThreatDescription",
+                    "type": "String"
+                },
+                {
+                    "name": "Location",
+                    "type": "String"
+                },
+                {
+                    "name": "Url",
+                    "type": "String"
+                },
+                {
+                    "name": "Port",
+                    "type": "Int"
+                }
+            ],
+            "transformFilePath": "Kql/NTAIPDetails.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "The time when the data gets ingested into the Log Analytics Workspace.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SubType",
+                    "type": "String",
+                    "description": "Subtype for the flow logs. Use only FlowLog, other values of SubType_s are for internal workings of the product.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FaSchemaVersion",
+                    "type": "String",
+                    "description": "Schema version.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FlowIntervalStartTime",
+                    "type": "DateTime",
+                    "description": "Start time of the flow log processing interval. This is time from which flow interval is measured.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FlowIntervalEndTime",
+                    "type": "DateTime",
+                    "description": "End time of the flow log processing interval.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FlowType",
+                    "type": "String",
+                    "description": "Can be AzurePublic/ExternalPublic/MaliciousFlow.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Ip",
+                    "type": "String",
+                    "description": "Public IP whose information is provided in the record.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "PublicIpDetails",
+                    "type": "String",
+                    "description": "For AzurePublic IP: Azure Service owning the IP OR \"Microsoft Virtual Public IP\" for IP 168.63.129.16 . ExternalPublic/Malicious IP: WhoIS information of the IP.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ThreatType",
+                    "type": "String",
+                    "description": "For Malicious IPs only: One of the threats from the list of currently allowed values.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DnsDomain",
+                    "type": "String",
+                    "description": "For Malicious IPs only: Domain name associated with this IP.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ThreatDescription",
+                    "type": "String",
+                    "description": "For Malicious IPs only: Description of the threat posed by the malicious IP.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "description": "For Azure Public IP: Azure region of virtual network/network interface/virtual machine to which the IP belongs OR Global for IP 168.63.129.16. For External Public IP and Malicious IP: 2-letter country code where IP is located (ISO 3166-1 alpha-2).",
+                    "isDefaultDisplay": true
+                },
+{
+                    "name": "Url",
+                    "type": "String",
+                    "description": "For Malicious IPs only: Url associated with this IP.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Port",
+                    "type": "Int",
+                    "description": "For Malicious IPs only: Port associated with this IP.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/NTAIPDetailsSample.json"
+        },
+        {
+            "name": "NTAInsights",
+            "description": "Traffic Analytics insights are provided for flow data which shows anomalies in data pattern.",
+            "categories": [
+                "network"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 1,
+            "dataTypeId": "MICROSOFTNWTRAFFICANALYTICS_INSIGHTS",
+            "intelligencePacks": [],
+            "isResourceCentric": false,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": false,
+            "input": [
+                {
+                    "name": "SubType",
+                    "type": "String"
+                },
+                {
+                    "name": "SchemaVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "AggregationType",
+                    "type": "String"
+                },
+                {
+                    "name": "IntervalStart",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "IntervalEnd",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "PivotType",
+                    "type": "String"
+                },
+                {
+                    "name": "ResourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "Region",
+                    "type": "String"
+                },
+                {
+                    "name": "DataPoints",
+                    "type": "String"
+                },
+                {
+                    "name": "TrafficVolumeUnit",
+                    "type": "String"
+                },
+                {
+                    "name": "FlowStatus",
+                    "type": "String"
+                },
+                {
+                    "name": "SeriesNumber",
+                    "type": "Float"
+                },
+                {
+                    "name": "ProcessingTime",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "Periodicity",
+                    "type": "Float"
+                },
+                {
+                    "name": "TrafficVolumeActual",
+                    "type": "Float"
+                },
+                {
+                    "name": "TrafficVolumeBaseline",
+                    "type": "Double"
+                },
+                {
+                    "name": "TrafficTime",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "AdFlag",
+                    "type": "Double"
+                },
+                {
+                    "name": "AdScore",
+                    "type": "Double"
+                }
+            ],
+            "transformFilePath": "Kql/NTAInsights.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "The time when the data gets ingested into the Log Analytics Workspace.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SubType",
+                    "type": "String",
+                    "description": "Subtype for the insights logs.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SchemaVersion",
+                    "type": "String",
+                    "description": "Schema version.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "AggregationType",
+                    "type": "String",
+                    "description": "Type of data aggregation - 1 for short aggregation and 2 for long aggregation.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "IntervalStart",
+                    "type": "DateTime",
+                    "description": "Start time of the data insights processing interval.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "IntervalEnd",
+                    "type": "DateTime",
+                    "description": "End time of the data insights processing interval.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PivotType",
+                    "type": "String",
+                    "description": "Pivot type for insights aggregation.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "InsightsResourceId",
+                    "type": "String",
+                    "description": "Resource ID for the resource for which data is aggregated",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Region",
+                    "type": "String",
+                    "description": "Region of Vnet flow logs.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DataPoints",
+                    "type": "String",
+                    "description": "Data points for aggregated data.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TrafficVolumeUnit",
+                    "type": "String",
+                    "description": "The aggregated values represent Flows/Bytes/Packets.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FlowStatus",
+                    "type": "String",
+                    "description": "The considered traffic is Allowed/Denied/All.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SeriesNumber",
+                    "type": "Float",
+                    "description": "An incremental value to represent the last aggregated series.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ProcessingTime",
+                    "type": "DateTime",
+                    "description": "The time when periodicty is calculated.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Periodicity",
+                    "type": "Float",
+                    "description": "The number of hours after whichthe data repeats itself.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TrafficVolumeActual",
+                    "type": "Float",
+                    "description": "The actual traffic volume in the time period.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TrafficVolumeBaseline",
+                    "type": "Double",
+                    "description": "The predicted value of the series, according to the decomposition per the anomaly calculation algorithm.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TrafficTime",
+                    "type": "DateTime",
+                    "description": "Time when the anomaly has occured in data pattern.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "AdFlag",
+                    "type": "Double",
+                    "description": "A ternary series containing (+1, -1, 0) marking up/down/no anomaly respectively.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "AdScore",
+                    "type": "Double",
+                    "description": "Anomaly score.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/NTAInsightsSample.json"
+        }
+    ]
+}

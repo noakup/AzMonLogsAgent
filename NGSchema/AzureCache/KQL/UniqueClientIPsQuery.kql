@@ -1,0 +1,2 @@
+ACRConnectedClientList
+| summarize count() by ClientIp

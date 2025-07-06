@@ -1,0 +1,1576 @@
+{
+    "type": "Microsoft.SecurityInsights/DnsNormalized",
+    "displayName": "Microsoft Sentinel DNS activity ASim schema",
+    "description": "All data types related to the ASimDnsActivityLogs table, for example windows DNS events",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Microsoft Azure Sentinel/Data Collection and Processing",
+    "contactDL": "asipolarbearslive@microsoft.com",
+    "relatedTables": [],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "ASimDnsActivityLogs",
+            "description": "The ASim DNS activity schema represents DNS protocol activity, which may be logged either by a DNS server or by a device sending DNS requests to a DNS server. The DNS protocol activity includes DNS queries, DNS server updates, and DNS bulk data transfers. Since the schema represents protocol activity, it is governed by RFCs and officially assigned parameter lists. The DNS activity schema does not represent DNS server audit events.",
+            "artifactVersion": 16,
+            "categories": [
+                "security"
+            ],
+            "tags": {},
+            "properties": {},
+            "dataTypeId": "SENTINEL_WINDOWS_DNS_EVENTS",
+            "intelligencePacks": [
+                "SecurityInsights"
+            ],
+            "isResourceCentric": true,
+            "isChangeColumnInternalNameAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "tableState": "Production",
+            "isLakeAllowed": false,
+            "input": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "EventType",
+                    "type": "String"
+                },
+                {
+                    "name": "EventSubType",
+                    "type": "String"
+                },
+                {
+                    "name": "EventResult",
+                    "type": "String"
+                },
+                {
+                    "name": "EventResultDetails",
+                    "type": "String"
+                },
+                {
+                    "name": "EventOriginalType",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcIpAddr",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcHostname",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcDomain",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcDomainType",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcOsVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "AdditionalFields",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcIpAddr",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcPortNumber",
+                    "type": "Int"
+                },
+                {
+                    "name": "DstIpAddr",
+                    "type": "String"
+                },
+                {
+                    "name": "DnsQuery",
+                    "type": "String"
+                },
+                {
+                    "name": "DnsQueryType",
+                    "type": "Int"
+                },
+                {
+                    "name": "DnsQueryTypeName",
+                    "type": "String"
+                },
+                {
+                    "name": "DnsResponseCode",
+                    "type": "Int"
+                },
+                {
+                    "name": "DnsResponseName",
+                    "type": "String"
+                },
+                {
+                    "name": "TransactionIdHex",
+                    "type": "String"
+                },
+                {
+                    "name": "NetworkProtocol",
+                    "type": "String"
+                },
+                {
+                    "name": "DnsNetworkDuration",
+                    "type": "Int"
+                },
+                {
+                    "name": "DnsFlags",
+                    "type": "String"
+                },
+                {
+                    "name": "DnsFlagsAuthenticated",
+                    "type": "Bool"
+                },
+                {
+                    "name": "DnsFlagsAuthoritative",
+                    "type": "Bool"
+                },
+                {
+                    "name": "DnsFlagsRecursionDesired",
+                    "type": "Bool"
+                },
+                {
+                    "name": "DnsFlagsRecursionAvailable",
+                    "type": "Bool"
+                },
+                {
+                    "name": "DnsFlagsTruncated",
+                    "type": "Bool"
+                },
+                {
+                    "name": "DnsSessionId",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "KQL/Dns/WindowsDnsTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp (UTC) reflecting the time in which the event was generated."
+                },
+                {
+                    "name": "EventCount",
+                    "type": "Int",
+                    "description": "The number of events described by the record. This value is used when the source supports aggregation, and a single record may represent multiple events."
+                },
+                {
+                    "name": "EventType",
+                    "type": "String",
+                    "description": "Indicates the operation reported by the record. For DNS activity events, this value is the DNS opcode as defined by the Internet Assigned Numbers Authority (IANA)."
+                },
+                {
+                    "name": "EventSubType",
+                    "type": "String",
+                    "description": "Either request or response."
+                },
+                {
+                    "name": "EventResult",
+                    "type": "String",
+                    "description": "The outcome of the event, represented by one of the following values: Success, Partial, Failure, NA (Not Applicable). The value may not be provided directly by the sources, in which case it is derived from other event fields, for example, the EventResultDetails field."
+                },
+                {
+                    "name": "EventResultDetails",
+                    "type": "String",
+                    "description": "The DNS response code as defined by the Internet Assigned Numbers Authority (IANA)."
+                },
+                {
+                    "name": "EventOriginalType",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The original event type or ID, for example, the original Windows event ID."
+                },
+                {
+                    "name": "EventProduct",
+                    "type": "String",
+                    "description": "The product generating the event."
+                },
+                {
+                    "name": "EventVendor",
+                    "type": "String",
+                    "description": "The vendor of the product generating the event."
+                },
+                {
+                    "name": "DvcIpAddr",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "description": "The IP Address of the device reporting the event."
+                },
+                {
+                    "name": "DvcHostname",
+                    "type": "String",
+                    "description": "The hostname of the device reporting the event."
+                },
+                {
+                    "name": "DvcDomain",
+                    "type": "String",
+                    "description": "The domain of the device reporting the event."
+                },
+                {
+                    "name": "DvcDomainType",
+                    "type": "String",
+                    "description": "The type of DvcDomain. Possible values include \"Windows\" and \"FQDN\"."
+                },
+                {
+                    "name": "DvcOs",
+                    "type": "String",
+                    "description": "The operating system running on the device reporting the event."
+                },
+                {
+                    "name": "DvcOsVersion",
+                    "type": "String",
+                    "description": "The version of the operating system on the device reporting the event."
+                },
+                {
+                    "name": "AdditionalFields",
+                    "type": "Dynamic",
+                    "description": "Additional information, represented using key/value pairs provided by the source which do not map to ASim."
+                },
+                {
+                    "name": "SrcIpAddr",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "description": "The IP address of the client sending the DNS request. For a recursive DNS request, this value would typically be the reporting device, and in most cases, set to 127.0.0.1."
+                },
+                {
+                    "name": "SrcPortNumber",
+                    "type": "Int",
+                    "description": "Source port of the DNS query."
+                },
+                {
+                    "name": "SrcGeoCountry",
+                    "type": "String",
+                    "description": "The country associated with the source IP address."
+                },
+                {
+                    "name": "SrcGeoRegion",
+                    "type": "String",
+                    "description": "The region, or state, within a country, associated with the source IP address."
+                },
+                {
+                    "name": "SrcGeoCity",
+                    "type": "String",
+                    "description": "The city associated with the source IP address."
+                },
+                {
+                    "name": "SrcGeoLatitude",
+                    "type": "Float",
+                    "description": "The latitude of the geographical coordinate associated with the source IP address."
+                },
+                {
+                    "name": "SrcGeoLongitude",
+                    "type": "Float",
+                    "description": "The longitude of the geographical coordinate associated with the source IP address."
+                },
+                {
+                    "name": "DstIpAddr",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "description": "The IP address of the server receiving the DNS request. For a regular DNS request, this value would typically be the reporting device, and in most cases set to 127.0.0.1."
+                },
+                {
+                    "name": "DstGeoCountry",
+                    "type": "String",
+                    "description": "The country associated with the destination IP address."
+                },
+                {
+                    "name": "DstGeoRegion",
+                    "type": "String",
+                    "description": "The region, or state, within a country, associated with the destination IP address."
+                },
+                {
+                    "name": "DstGeoCity",
+                    "type": "String",
+                    "description": "The city associated with the destination IP address."
+                },
+                {
+                    "name": "DstGeoLatitude",
+                    "type": "Float",
+                    "description": "The latitude of the geographical coordinate associated with the destination IP address."
+                },
+                {
+                    "name": "DstGeoLongitude",
+                    "type": "Float",
+                    "description": "The longitude of the geographical coordinate associated with the destination IP address."
+                },
+                {
+                    "name": "DnsQuery",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "URI",
+                    "description": "The domain that needs to be resolved."
+                },
+                {
+                    "name": "DnsQueryType",
+                    "type": "Int",
+                    "isDefaultDisplay": true,
+                    "description": "The DNS resource record type codes as defined by the Internet Assigned Numbers Authority (IANA)."
+                },
+                {
+                    "name": "DnsQueryTypeName",
+                    "type": "String",
+                    "description": "The DNS resource record type name as defined by the Internet Assigned Numbers Authority (IANA)."
+                },
+                {
+                    "name": "DnsResponseCode",
+                    "type": "Int",
+                    "description": "The DNS numerical response code as defined by the Internet Assigned Numbers Authority (IANA)."
+                },
+                {
+                    "name": "DnsResponseName",
+                    "type": "String",
+                    "description": "The content of the response, as included in the record. The structure of the DNS response data may vary between different reporting devices."
+                },
+                {
+                    "name": "TransactionIdHex",
+                    "type": "String",
+                    "description": "The DNS unique hex transaction ID."
+                },
+                {
+                    "name": "DstDescription",
+                    "type": "String",
+                    "description": "A descriptive text associated with the destination."
+                },
+                {
+                    "name": "DstDvcScope",
+                    "type": "String",
+                    "description": "The cloud platform scope the destination device belongs to. DvcScope maps to a subscription on Azure and to an account on AWS."
+                },
+                {
+                    "name": "DstOriginalRiskLevel",
+                    "type": "String",
+                    "description": "The risk level associated with the destination device as reported by the reporting device."
+                },
+                {
+                    "name": "DstRiskLevel",
+                    "type": "Int",
+                    "description": "The risk level associated with the destination device."
+                },
+                {
+                    "name": "DvcDescription",
+                    "type": "String",
+                    "description": "A descriptive text associated with the device. For example: Primary Domain Controller."
+                },
+                {
+                    "name": "DvcInterface",
+                    "type": "String",
+                    "description": "The network interface on which data was captured. This field is typically relevant to network related activity which is captured by an intermediate or tap device."
+                },
+                {
+                    "name": "DvcOriginalAction",
+                    "type": "String",
+                    "description": "The original DvcAction as provided by the reporting device."
+                },
+                {
+                    "name": "DvcScope",
+                    "type": "String",
+                    "description": "The cloud platform scope the device belongs to. DvcScope map to a subscription ID on Azure and to an account ID on AWS."
+                },
+                {
+                    "name": "DvcScopeId",
+                    "type": "String",
+                    "description": "The cloud platform scope ID the device belongs to. DvcScopeId map to a subscription ID on Azure and to an account ID on AWS."
+                },
+                {
+                    "name": "EventOriginalSeverity",
+                    "type": "String",
+                    "description": "The original severity as provided by the reporting device. This value is used to derive EventSeverity."
+                },
+                {
+                    "name": "NetworkProtocolVersion",
+                    "type": "String",
+                    "description": "The version of the network protocol. Typically used to differentiate between IPv4 and Ipv6."
+                },
+                {
+                    "name": "RuleName",
+                    "type": "String",
+                    "description": "The name or ID of the rule by associated with the inspection results."
+                },
+                {
+                    "name": "RuleNumber",
+                    "type": "Int",
+                    "description": "The number of the rule associated with the inspection results."
+                },
+                {
+                    "name": "DnsResponseIpCountry",
+                    "type": "String",
+                    "description": "The country associated with the response IP address."
+                },
+                {
+                    "name": "DnsResponseIpLatitude",
+                    "type": "Float",
+                    "description": "The Latitude of the geographical coordinate associated with the response IP address."
+                },
+                {
+                    "name": "DnsResponseIpLongitude",
+                    "type": "Float",
+                    "description": "The longitude of the geographical coordinate associated with the response IP address."
+                },
+                {
+                    "name": "NetworkProtocol",
+                    "type": "String",
+                    "description": "The transport protocol used by the network resolution event. The value can be UDP or TCP."
+                },
+                {
+                    "name": "DnsQueryClass",
+                    "type": "Int",
+                    "description": "The DNS class ID as defined by the Internet Assigned Numbers Authority (IANA)."
+                },
+                {
+                    "name": "DnsQueryClassName",
+                    "type": "String",
+                    "description": "The DNS class name as defined by the Internet Assigned Numbers Authority (IANA)."
+                },
+                {
+                    "name": "DnsNetworkDuration",
+                    "type": "Int",
+                    "description": "The amount of time, in milliseconds, for the completion of DNS request."
+                },
+                {
+                    "name": "DnsFlagsAuthenticated",
+                    "type": "Bool",
+                    "description": "The DNS authenticated answer flag, which is related to DNSSEC, indicates in a response that all data included in the answer and authority sections of the response have been verified by the server according to the policies of that server. see RFC 3655 Section 6.1 for more information."
+                },
+                {
+                    "name": "DnsFlagsAuthoritative",
+                    "type": "Bool",
+                    "description": "The DNS authoritative answer flag indicates whether the response from the server was authoritative."
+                },
+                {
+                    "name": "DnsFlagsRecursionDesired",
+                    "type": "Bool",
+                    "description": "The DNS recursion desired flag indicates in a request that that client would like the server to use recursive queries."
+                },
+                {
+                    "name": "DnsSessionId",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "description": "The DNS session identifier as reported by the reporting device."
+                },
+                {
+                    "name": "SrcDescription",
+                    "type": "String",
+                    "description": "The number of the rule associated with the inspection results."
+                },
+                {
+                    "name": "SrcDvcScope",
+                    "type": "String",
+                    "description": "The cloud platform scope the source device belongs to. DvcScope maps to a subscription on Azure and to an account on AWS."
+                },
+                {
+                    "name": "SrcDvcScopeId",
+                    "type": "String",
+                    "description": "The cloud platform scope ID the source device belongs to. DvcScopeId map to a subscription ID on Azure and to an account ID on AWS."
+                },
+                {
+                    "name": "SrcOriginalRiskLevel",
+                    "type": "String",
+                    "description": "The risk level associated with the source device as reported by the reporting device."
+                },
+                {
+                    "name": "SrcUserScope",
+                    "type": "String",
+                    "description": "The scope, such as Azure AD tenant, in which SrcUserId and SrcUsername are defined."
+                },
+                {
+                    "name": "SrcUserScopeId",
+                    "type": "String",
+                    "description": "The ID of the scope, such as Azure AD tenant, in which SrcUserId and SrcUsername are defined."
+                },
+                {
+                    "name": "SrcUserSessionId",
+                    "type": "String",
+                    "description": "The unique ID of the sign-in session of the source user."
+                },
+                {
+                    "name": "ThreatId",
+                    "type": "String",
+                    "description": "The ID of the threat or malware identified in the web session."
+                },
+                {
+                    "name": "ThreatIpAddr",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "description": "An IP address for which a threat was identified. The field ThreatField contains the name of the field ThreatIpAddr represents. If a threat is identified in the Domain field, this field should be empty."
+                },
+                {
+                    "name": "ThreatField",
+                    "type": "String",
+                    "description": "The field for which a threat was identified. The value is either SrcIpAddr, DstIpAddr, Domain, or DnsResponseName."
+                },
+                {
+                    "name": "UrlCategory",
+                    "type": "String",
+                    "description": "A DNS event source may also look up the category of the requested Domains."
+                },
+                {
+                    "name": "ThreatCategory",
+                    "type": "String",
+                    "description": "If a DNS event source also provides DNS security, it may also evaluate the DNS event. For example, it can search for the IP address or domain in a threat intelligence database, and assign the domain or IP address with a Threat Category."
+                },
+                {
+                    "name": "ThreatName",
+                    "type": "String",
+                    "description": "The name of the threat identified, as reported by the reporting device."
+                },
+                {
+                    "transformName": "ThreatConfidence",
+                    "physicalName": "ThreatConfidence_Int",
+                    "logicalName": "ThreatConfidence",
+                    "type": "Int",
+                    "description": "The confidence level of the threat identified, normalized to a value between 0 and a 100."
+                },
+                {
+                    "name": "ThreatOriginalConfidence",
+                    "type": "String",
+                    "description": "The original confidence level of the threat identified, as reported by the reporting device."
+                },
+                {
+                    "transformName": "ThreatRiskLevel",
+                    "physicalName": "ThreatRiskLevel_Int",
+                    "logicalName": "ThreatRiskLevel",
+                    "type": "Int",
+                    "description": "The risk level associated with the threat identified, normalized to a value between 0 and a 100."
+                },
+                {
+                    "name": "ThreatOriginalRiskLevel_s",
+                    "type": "String",
+                    "description": "The risk level associated with the threat identified, normalized to a value between 0 and a 100."
+                },
+                {
+                    "name": "ThreatOriginalRiskLevel",
+                    "type": "Int",
+                    "description": "The original risk level associated with the threat identified, as reported by the reporting device."
+                },
+                {
+                    "transformName": "ThreatIsActive",
+                    "physicalName": "ThreatIsActive_Bool",
+                    "logicalName": "ThreatIsActive",
+                    "type": "Bool",
+                    "description": "True ID the threat identified is considered an active threat."
+                },
+                {
+                    "name": "ThreatFirstReportedTime",
+                    "type": "String",
+                    "description": "The first time the IP address or domain were identified as a threat."
+                },
+                {
+                    "name": "ThreatFirstReportedTime_d",
+                    "type": "DateTime",
+                    "description": "The first time the IP address or domain were identified as a threat."
+                },
+                {
+                    "name": "ThreatLastReportedTime",
+                    "type": "String",
+                    "description": "The last time the IP address or domain were identified as a threat."
+                },
+                {
+                    "name": "ThreatLastReportedTime_d",
+                    "type": "DateTime",
+                    "description": "The last time the IP address or domain were identified as a threat."
+                },
+                {
+                    "name": "EventStartTime",
+                    "type": "DateTime",
+                    "description": "The time at which the event started. If the source supports aggregation and the record represents multiple events, the time that the first event was generated. If not provided by the source record, this field aliases the TimeGenerated field."
+                },
+                {
+                    "name": "EventEndTime",
+                    "type": "DateTime",
+                    "description": "The time at which the event ended. If the source supports aggregation and the record represents multiple events, the time that the last event was generated. If not provided by the source record, this field aliases the TimeGenerated field."
+                },
+                {
+                    "name": "EventMessage",
+                    "type": "String",
+                    "description": "A general message or description."
+                },
+                {
+                    "name": "EventOriginalUid",
+                    "type": "String",
+                    "description": "A unique ID of the original record."
+                },
+                {
+                    "name": "EventReportUrl",
+                    "type": "String",
+                    "dataTypeHint": "URI",
+                    "description": "A URL of a resource that provides additional information about the event."
+                },
+                {
+                    "name": "EventSchemaVersion",
+                    "type": "String",
+                    "description": "The version of the schema."
+                },
+                {
+                    "name": "Dvc",
+                    "type": "String",
+                    "description": "A unique identifier of the device reporting the event. The identifier can be either an IP Address, A hostname, or a device ID."
+                },
+                {
+                    "name": "DvcFQDN",
+                    "type": "String",
+                    "description": "The fully qualified hostname, including domain information, of the device reporting the event."
+                },
+                {
+                    "name": "DvcId",
+                    "type": "String",
+                    "description": "The unique ID of the device reporting the event."
+                },
+                {
+                    "name": "DvcIdType",
+                    "type": "String",
+                    "description": "The type of DvcId."
+                },
+                {
+                    "name": "DvcMacAddr",
+                    "type": "String",
+                    "description": "The MAC address of the device reporting the event."
+                },
+                {
+                    "name": "DvcZone",
+                    "type": "String",
+                    "description": "The network segment of the device reporting the event."
+                },
+                {
+                    "name": "DnsResponseIpCity",
+                    "type": "String",
+                    "description": "The city associated with the response IP address."
+                },
+                {
+                    "name": "DnsResponseIpRegion",
+                    "type": "String",
+                    "description": "The region, or state, within a country, associated with the source IP address."
+                },
+                {
+                    "name": "EventOwner",
+                    "type": "String",
+                    "description": "The owner of the event, which is usually the department or subsidiary in which it was generated."
+                },
+                {
+                    "name": "EventProductVersion",
+                    "type": "String",
+                    "description": "The version of the product generating the event."
+                },
+                {
+                    "name": "EventSeverity",
+                    "type": "String",
+                    "description": "The severity of the event. Valid values are: Informational, Low, Medium, or High."
+                },
+                {
+                    "name": "Src",
+                    "type": "String",
+                    "description": "A unique identifier of the source device."
+                },
+                {
+                    "name": "SrcHostname",
+                    "type": "String",
+                    "description": "The source device hostname, excluding domain information."
+                },
+                {
+                    "name": "SrcDomain",
+                    "type": "String",
+                    "description": "The domain of the source device."
+                },
+                {
+                    "name": "SrcDomainType",
+                    "type": "String",
+                    "description": "The type of SrcDomain."
+                },
+                {
+                    "name": "SrcFQDN",
+                    "type": "String",
+                    "description": "The source device hostname, including domain information."
+                },
+                {
+                    "name": "SrcDvcId",
+                    "type": "String",
+                    "description": "The ID of the source device."
+                },
+                {
+                    "name": "SrcDvcIdType",
+                    "type": "String",
+                    "description": "The type of SrcDvcId."
+                },
+                {
+                    "name": "SrcDeviceType",
+                    "type": "String",
+                    "description": "The type of the source device."
+                },
+                {
+                    "name": "SrcRiskLevel",
+                    "type": "Int",
+                    "description": "The risk level associated with the source device."
+                },
+                {
+                    "name": "SrcUserId",
+                    "type": "String",
+                    "description": "A machine-readable, alphanumeric, unique representation of the source user."
+                },
+                {
+                    "name": "SrcUserIdType",
+                    "type": "String",
+                    "description": "The type of the ID stored in the SrcUserId field."
+                },
+                {
+                    "name": "SrcUsername",
+                    "type": "String",
+                    "description": "The Source username, including domain information when available."
+                },
+                {
+                    "name": "SrcUsernameType",
+                    "type": "String",
+                    "description": "The type of the username stored in the SrcUsername field."
+                },
+                {
+                    "name": "SrcUserType",
+                    "type": "String",
+                    "description": "The type of the source user."
+                },
+                {
+                    "name": "SrcOriginalUserType",
+                    "type": "String",
+                    "description": "The original source user type, as provided by the source."
+                },
+                {
+                    "name": "SrcProcessName",
+                    "type": "String",
+                    "description": "The name of the process that initiated the DNS request."
+                },
+                {
+                    "name": "SrcProcessId",
+                    "type": "String",
+                    "description": "The process ID (PID) of the process that initiated the DNS request."
+                },
+                {
+                    "name": "SrcProcessGuid",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "description": "A generated unique identifier (GUID) of the process that initiated the DNS request."
+                },
+                {
+                    "name": "Dst",
+                    "type": "String",
+                    "description": "A unique identifier of the server that received the DNS request."
+                },
+                {
+                    "name": "DstPortNumber",
+                    "type": "Int",
+                    "description": "Destination Port number."
+                },
+                {
+                    "name": "DstHostname",
+                    "type": "String",
+                    "description": "The destination device hostname, excluding domain information."
+                },
+                {
+                    "name": "DstDomain",
+                    "type": "String",
+                    "description": "The domain of the destination device."
+                },
+                {
+                    "name": "DstDomainType",
+                    "type": "String",
+                    "description": "The type of DstDomain."
+                },
+                {
+                    "name": "DstFQDN",
+                    "type": "String",
+                    "description": "The destination device hostname, including domain information when available."
+                },
+                {
+                    "name": "DstDvcId",
+                    "type": "String",
+                    "description": "The ID of the destination device."
+                },
+                {
+                    "name": "DstDvcScopeId",
+                    "type": "String",
+                    "description": "The cloud platform scope ID the destination device belongs to. DvcScopeId map to a subscription ID on Azure and to an account ID on AWS."
+                },
+                {
+                    "name": "DstDvcIdType",
+                    "type": "String",
+                    "description": "The type of DstDvcId."
+                },
+                {
+                    "name": "DstDeviceType",
+                    "type": "String",
+                    "description": "The type of the destination device."
+                },
+                {
+                    "name": "DvcAction",
+                    "type": "String",
+                    "description": "The action taken by the the reporting device on the request, such as blocking it."
+                },
+                {
+                    "name": "DnsFlags",
+                    "type": "String",
+                    "description": "The DNS request flags, as provided by the reporting device.  The structure of the DNS flags information may vary between different reporting devices."
+                },
+                {
+                    "name": "DnsFlagsCheckingDisabled",
+                    "type": "Bool",
+                    "description": "The DNS CD flag, which is related to DNSSEC, indicates in a query that non-verified data is acceptable to the system sending the query."
+                },
+                {
+                    "name": "DnsFlagsRecursionAvailable",
+                    "type": "Bool",
+                    "description": "The DNS RA flag indicates in a response that that server supports recursive queries."
+                },
+                {
+                    "name": "DnsFlagsTruncated",
+                    "type": "Bool",
+                    "description": "The DNS TC flag indicates that a response was truncates as it exceeded the maximum response size."
+                },
+                {
+                    "name": "DnsFlagsZ",
+                    "type": "Bool",
+                    "description": "The DNS Z flag is a deprecated DNS flag, which might be reported by older DNS systems."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/WindowsDnsSample.json"
+        }
+    ],
+    "functions": [
+        {
+            "id": "cba623d4-dcc5-523b-97f1-902c04bc14bd",
+            "name": "_ASim_Dns",
+            "parameters": "pack:bool = false",
+            "description": "DNS activity ASIM parser.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "d01fc365-24f6-587e-8c30-2e450ab7ca81",
+            "name": "_ASim_DnsBuiltIn",
+            "parameters": "pack:bool = false",
+            "description": "DNS activity ASIM built-in union parser.",
+            "bodyFilePath": "KQL/Dns/_ASim_DnsBuiltIn.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "c39af2d5-ce82-5bad-ab3d-fee798dde336",
+            "name": "_ASim_Dns_AzureFirewallV03",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Azure Firewall.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_AzureFirewallV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "bd97655a-1311-54f6-b344-3f997c69ef73",
+            "name": "_ASim_Dns_CiscoUmbrellaV03",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Cisco Umbrella.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_CiscoUmbrellaV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "ee29d8bf-9567-5c21-b060-d2a95de59682",
+            "name": "_ASim_Dns_CorelightZeekV03",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Corelight Zeek.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_CorelightZeekV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "6766687b-e8f2-5e29-b8e4-09001a6a2106",
+            "name": "_ASim_Dns_CorelightZeekV04",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Corelight Zeek.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_CorelightZeekV04.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "a1712e60-355e-5946-a25a-bbc9c187ec6b",
+            "name": "_ASim_Dns_CorelightZeekV05",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Corelight Zeek.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_CorelightZeekV05.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "bbe046de-19c5-5557-ab27-4df676195bdb",
+            "name": "_ASim_Dns_FortinetFortiGateV01",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Fortinet FortiGate.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_FortinetFortiGateV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "1d6a9420-068e-53fb-b07d-84a46dcba3e9",
+            "name": "_ASim_Dns_GcpV03",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for GCP.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_GcpV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "37684ffa-7f8f-5053-b9e8-589618aabde4",
+            "name": "_ASim_Dns_GcpV04",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for GCP.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_GcpV04.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "06afff4c-4b38-54c4-a744-56e63428e412",
+            "name": "_ASim_Dns_InfobloxNIOSV03",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Infoblox NIOS.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_InfobloxNIOSV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "764d1d4f-0832-57bc-b6fb-67ca754c1866",
+            "name": "_ASim_Dns_InfobloxNIOSV05",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Infoblox NIOS.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_InfobloxNIOSV05.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "355c44cb-79ef-53dd-8cf2-d942d8021c69",
+            "name": "_ASim_Dns_InfobloxNIOSV06",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Infoblox NIOS.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_InfobloxNIOSV06.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "7ba58875-d3d2-5a57-8b33-7a1653f5ad48",
+            "name": "_ASim_Dns_MicrosoftNXlogV03",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Microsoft DNS logs collected using NXlog.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_MicrosoftNXlogV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "233ba9c2-c98b-5dd7-b8ea-cfae04cad57d",
+            "name": "_ASim_Dns_MicrosoftNXlogV04",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Microsoft DNS logs collected using NXlog.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_MicrosoftNXlogV04.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "78cce07f-cd1a-513b-8332-d1d1ee4bbd19",
+            "name": "_ASim_Dns_MicrosoftNXlogV05",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Microsoft DNS logs collected using NXlog.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_MicrosoftNXlogV05.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "8d7388e5-da2f-5315-9226-05e2f75c299e",
+            "name": "_ASim_Dns_MicrosoftOMSV03",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Windows DNS log collected using the Log Analytics agent.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_MicrosoftOMSV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "0d7559dd-7bbd-55b8-9ca4-fe389c945329",
+            "name": "_ASim_Dns_MicrosoftOMSV04",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Windows DNS log collected using the Log Analytics agent.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_MicrosoftOMSV04.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "3177d4de-9896-56e5-b318-1723498e94db",
+            "name": "_ASim_Dns_MicrosoftSysmonV03",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Sysmon for Windows.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_MicrosoftSysmonV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "20c9220c-935f-5596-8378-81c7ca594434",
+            "name": "_ASim_Dns_MicrosoftSysmonV04",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Sysmon for Windows.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_MicrosoftSysmonV04.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "3cb1e1a4-566e-5476-8d7b-a582b523a32a",
+            "name": "_ASim_Dns_NativeV02",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Microsoft Sentinel native DNS table.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_NativeV02.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "460afa13-3ef0-5c8f-a3d6-64a593beb628",
+            "name": "_ASim_Dns_NativeV03",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Microsoft Sentinel native DNS table.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_NativeV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "46c5e6ec-3431-5f99-b361-0ae03353ac6a",
+            "name": "_ASim_Dns_NativeV05",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Microsoft Sentinel native DNS table.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_NativeV05.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "ab6ef070-1f88-59c1-a0a3-511fb1140500",
+            "name": "_ASim_Dns_NativeV06",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Microsoft Sentinel native DNS table.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_NativeV06.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "f3daf1da-2284-57e7-90a2-122d1ca8a1fc",
+            "name": "_ASim_Dns_VectraAIV01",
+            "parameters": "disabled:bool = false",
+            "description": "DNS ASIM parser for Vectra AI Steams.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_VectraAIV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "1d4ab680-de7f-5a17-b787-6cd634995e4a",
+            "name": "_ASim_Dns_ZscalerZIAV04",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Zscaler ZIA.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_ZscalerZIAV04.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "0f3b2de2-15fa-5ea2-a7e7-3f5adc3691cc",
+            "name": "_ASim_Dns_ZscalerZIAV05",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Zscaler ZIA.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_ZscalerZIAV05.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "3da27875-fa0c-5f10-8ddf-abc6f8b7c8a6",
+            "name": "_ASim_Dns_ZscalerZIAV06",
+            "parameters": "disabled:bool = false",
+            "description": "DNS activity ASIM parser for Zscaler ZIA.",
+            "bodyFilePath": "KQL/Dns/_ASim_Dns_ZscalerZIAV06.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "7ad17758-6e1b-5ca9-911e-6b64cdd3d1fe",
+            "name": "_Im_Dns",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'lookup', pack:bool = false",
+            "description": "DNS activity ASIM filtering parser.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "0b2a8509-ddf3-56e7-9e4a-bc6ea62275f0",
+            "name": "_Im_DnsBuiltIn",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'lookup', pack:bool = false",
+            "description": "DNS activity ASIM built-in union parser.",
+            "bodyFilePath": "KQL/Dns/_Im_DnsBuiltIn.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "7a82d264-ada7-56a4-87b9-bd8e395a9f38",
+            "name": "_Im_Dns_AzureFirewallV03",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for Azure Firewall.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_AzureFirewallV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "74e8ea21-f1d7-5647-884c-9be0570cef82",
+            "name": "_Im_Dns_CiscoUmbrellaV03",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for Cisco Umbrella.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_CiscoUmbrellaV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "36030c6d-4196-5c11-bd02-44e8770888f9",
+            "name": "_Im_Dns_CorelightZeekV03",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for Corelight Zeek.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_CorelightZeekV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "b23b0698-ede3-539a-949d-5cb282c6a7ca",
+            "name": "_Im_Dns_CorelightZeekV04",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for Corelight Zeek.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_CorelightZeekV04.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "c1cc7004-9b76-573c-8a24-fc451c5b9f96",
+            "name": "_Im_Dns_CorelightZeekV05",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for Corelight Zeek.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_CorelightZeekV05.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "697d7a3f-2e46-5c87-befb-33779577dbd6",
+            "name": "_Im_Dns_EmptyV03",
+            "parameters": "",
+            "description": "DNS activity ASIM schema function.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_EmptyV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "eeb3cb96-5e24-57cb-9a13-44ffcf9393be",
+            "name": "_Im_Dns_EmptyV04",
+            "parameters": "",
+            "description": "DNS activity ASIM schema function.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_EmptyV04.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "ef5b91c9-43f4-582c-a8f6-12ef90f6802f",
+            "name": "_Im_Dns_FortinetFortiGateV01",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM parser for Fortinet FortiGate.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_FortinetFortiGateV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "3e08df47-9631-5b5a-98df-180d315eda4d",
+            "name": "_Im_Dns_GcpV03",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for GCP.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_GcpV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "5f982731-7285-5515-9f4b-765a1496f7d5",
+            "name": "_Im_Dns_GcpV04",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for GCP.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_GcpV04.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "02153d00-0817-56d3-b321-9cfe843a92c3",
+            "name": "_Im_Dns_InfobloxNIOSV03",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for Infoblox NIOS.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_InfobloxNIOSV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "5f0e9e37-72b5-533e-8e35-1ed932fe3084",
+            "name": "_Im_Dns_InfobloxNIOSV04",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for Infoblox NIOS.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_InfobloxNIOSV04.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "bfdd6394-ae64-5290-82c1-55a36afed3dd",
+            "name": "_Im_Dns_InfobloxNIOSV05",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for Infoblox NIOS.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_InfobloxNIOSV05.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "2d9a69e2-3201-542c-bea8-051759a39af8",
+            "name": "_Im_Dns_MicrosoftNXlogV03",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for Microsoft DNS logs collected using NXlog.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_MicrosoftNXlogV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "8e48ee40-bfa8-5488-8d7d-85ca2cf47b7b",
+            "name": "_Im_Dns_MicrosoftNXlogV04",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for Microsoft DNS logs collected using NXlog.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_MicrosoftNXlogV04.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "704ec65f-8a60-56b9-a055-f9895167993c",
+            "name": "_Im_Dns_MicrosoftNXlogV05",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for Microsoft DNS logs collected using NXlog.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_MicrosoftNXlogV05.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "49f387d7-a884-541a-8b40-9ab4f7888d92",
+            "name": "_Im_Dns_MicrosoftOMSV03",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for Windows DNS log collected using the Log Analytics agent.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_MicrosoftOMSV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "8b9637e8-b0b0-5a6a-bf53-9334621b50ca",
+            "name": "_Im_Dns_MicrosoftOMSV04",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for Windows DNS log collected using the Log Analytics agent.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_MicrosoftOMSV04.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "4a183e31-7207-5300-ac05-db11c690822b",
+            "name": "_Im_Dns_MicrosoftSysmonV03",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for Sysmon for Windows.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_MicrosoftSysmonV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "2a486c0d-35ec-5bd7-a12c-99f70a5002a7",
+            "name": "_Im_Dns_MicrosoftSysmonV04",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for Sysmon for Windows.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_MicrosoftSysmonV04.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "fc7155c4-0d2d-575b-b014-efe5ec8f1461",
+            "name": "_Im_Dns_NativeV03",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for Microsoft Sentinel native DNS table.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_NativeV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "bcaeb6c1-14b2-502e-9d32-2d988dc732f6",
+            "name": "_Im_Dns_NativeV05",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for Microsoft Sentinel native DNS table.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_NativeV05.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "554a060b-7206-5e58-b2d5-14ab58dca532",
+            "name": "_Im_Dns_NativeV06",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for Microsoft Sentinel native DNS table.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_NativeV06.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "70fea7f8-d50d-5dc9-bfc1-58e92bede9f6",
+            "name": "_Im_Dns_VectraAIV01",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS ASIM parser for Vectra AI Steams.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_VectraAIV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "b052f410-754b-5cbb-a24d-c88c78bbafad",
+            "name": "_Im_Dns_ZscalerZIAV02",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for Zscaler ZIA.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_ZscalerZIAV02.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "47f91632-cd30-5d96-aa10-01e864bb9148",
+            "name": "_Im_Dns_ZscalerZIAV03",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for Zscaler ZIA.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_ZscalerZIAV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "c476dc64-cefe-5543-98a4-8530a0a48964",
+            "name": "_Im_Dns_ZscalerZIAV04",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr:string = '*', domain_has_any:dynamic = dynamic([]), responsecodename:string = '*', response_has_ipv4:string = '*', response_has_any_prefix:dynamic = dynamic([]), eventtype:string = 'Query', disabled:bool = false",
+            "description": "DNS activity ASIM filtering parser for Zscaler ZIA.",
+            "bodyFilePath": "KQL/Dns/_Im_Dns_ZscalerZIAV04.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        }
+    ],
+    "queries": [
+        {
+            "id": "083f9ca4-df5c-43d1-951c-0dc34ea73db1",
+            "displayName": "Count DNS failures for a source by source and type",
+            "description": "Count the number of failed DNS queries for each source IP address and failure type",
+            "bodyFilePath": "KQL/Dns/CountDnsFailuresBySourceAndTypeQuery.kql",
+            "categories": [
+                "security"
+            ],
+            "relatedTables": [
+                "ASimDnsActivityLogs"
+            ],
+            "tags": {
+                "Topic": [
+                    "Security"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": false
+                }
+            }
+        },
+        {
+            "id": "30963fe3-2352-42de-94af-43ef3f63b1e3",
+            "displayName": "Identify excessive query for a nonexistent domain by a source",
+            "description": "Count the number of queries that return NXDOMAIN, indicating that the queries domain name does not exist, and compares the count to a threshold of 100.",
+            "bodyFilePath": "KQL/Dns/CountNoneExistingDomainQueriesQuery.kql",
+            "categories": [
+                "security"
+            ],
+            "relatedTables": [
+                "ASimDnsActivityLogs"
+            ],
+            "tags": {
+                "Topic": [
+                    "Security"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": false
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+[
+  {
+ "metric": {
+        "labels": {
+          "instance_name": "test-vmids",
+          "device_name": "test-vmids",
+          "device_type": "permanent",
+          "storage_type": "pd-balanced"
+        },
+        "type": "compute.googleapis.com/instance/disk/read_bytes_count"
+      },
+      "resource": {
+        "type": "gce_instance",
+        "labels": {
+          "project_id": "msccp-test",
+          "instance_id": "8516910586180930055",
+          "zone": "us-central1-a"
+        }
+      },
+      "metricKind": "DELTA",
+      "valueType": "INT64",
+      "points": [
+        {
+          "interval": {
+            "startTime": "2025-03-31T18:05:00Z",
+            "endTime": "2025-03-31T18:10:00Z"
+          },
+          "value": {
+            "int64Value": "0"
+          }
+        }
+    ]
+  }
+]

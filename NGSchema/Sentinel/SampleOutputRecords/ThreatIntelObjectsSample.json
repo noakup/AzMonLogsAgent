@@ -1,0 +1,188 @@
+[
+  {
+    "TimeGenerated": "2019-10-01T00:00:00Z",
+    "WorkspaceId": "gaeeed30-2ba1-4650-81bd-e0c7ce537fa8",
+    "AzureTenantId": "faebed30-1ba1-4658-91bd-e0c5ce447f98",
+    "Id": "attack-pattern--2f1f9f26-7e3d-4f0e-8f7f-3f8b5e6f8e3d",
+    "SourceSystem": "TAXII Connector",
+    "StixType": "attack-pattern",
+    "LastUpdateMethod": "BulkAction",
+    "IsDeleted": false,
+    "AdditionalFields": {
+      "TLPLevel": "Green",
+      "spec_version": "2.1",
+      "created": "2019-10-01T00:00:00Z",
+      "modified": "2019-10-01T00:00:00Z",
+      "name": "Spear Phishing",
+      "description": "Spear Phishing attack.",
+      "aliases": [
+        "Phishing"
+      ],
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "lockheed-martin-cyber-kill-chain",
+          "phase_name": "delivery"
+        }
+      ]
+    },
+    "Data": {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--2f1f9f26-7e3d-4f0e-8f7f-3f8b5e6f8e3d",
+      "created": "2019-10-01T00:00:00Z",
+      "modified": "2019-10-01T00:00:00Z",
+      "name": "Spear Phishing",
+      "description": "Spear Phishing attack.",
+      "aliases": [
+        "Phishing"
+      ],
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "lockheed-martin-cyber-kill-chain",
+          "phase_name": "delivery"
+        }
+      ]
+    }
+  },
+  {
+    "TimeGenerated": "2019-10-01T00:00:00Z",
+    "WorkspaceId": "gaeeed30-2ba1-4650-81bd-e0c7ce537fa8",
+    "AzureTenantId": "faebed30-1ba1-4658-91bd-e0c5ce447f98",
+    "Id": "identity--2f1f9f26-7e3d-4f0e-8f7f-3f8b5e6f8e3d",
+    "SourceSystem": "ISGConnector",
+    "StixType": "Identity",
+    "LastUpdateMethod": "ISGConnector",
+    "IsDeleted": false,
+    "AdditionalFields": {
+      "TLPLevel": "Green",
+      "spec_version": "2.1",
+      "created": "2018-10-01T00:00:00Z",
+      "modified": "2020-10-01T00:00:00Z",
+      "name": "John Smith",
+      "description": "An Identity for an individual named John Smith.",
+      "roles": [
+        "CEO"
+      ],
+      "identity_class": "individual",
+      "sectors": [
+        "private",
+        "construction"
+      ],
+      "contact_information": "johnsmith@email.com"
+    },
+    "Data": {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--2f1f9f26-7e3d-4f0e-8f7f-3f8b5e6f8e3d",
+      "created": "2018-10-01T00:00:00Z",
+      "modified": "2020-10-01T00:00:00Z",
+      "name": "John Smith",
+      "description": "An Identity for an individual named John Smith.",
+      "roles": [
+        "CEO"
+      ],
+      "identity_class": "individual",
+      "sectors": [
+        "private",
+        "construction"
+      ],
+      "contact_information": "johnsmith@email.com"
+    }
+  },
+  {
+    "TimeGenerated": "2019-10-01T00:00:00Z",
+    "WorkspaceId": "gaeeed30-2ba1-4650-81bd-e0c7ce537fa8",
+    "AzureTenantId": "faebed30-1ba1-4658-91bd-e0c5ce447f98",
+    "Id": "relationship--2f1f9f26-7e3d-4f0e-8f7f-3f8b5e6f8e3d",
+    "SourceSystem": "ISGConnector",
+    "StixType": "relationships",
+    "LastUpdateMethod": "MSTIConnector",
+    "IsDeleted": false,
+    "AdditionalFields": {
+      "TLPLevel": "Green",
+      "spec_version": "2.1",
+      "created_by_ref": "identity--2f1f9f26-7e3d-4f0e-8f7f-3f8b5e6f8e3d",
+      "created": "2019-10-01T00:00:00Z",
+      "modified": "2019-10-01T00:00:00Z",
+      "relationship_type": "indicates",
+      "target_ref": "attack-pattern--2f1f9f26-7e3d-4f0e-8f7f-3f8b5e6f8e3d"
+    },
+    "Data": {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--2f1f9f26-7e3d-4f0e-8f7f-3f8b5e6f8e3d",
+      "created_by_ref": "identity--2f1f9f26-7e3d-4f0e-8f7f-3f8b5e6f8e3d",
+      "created": "2019-10-01T00:00:00Z",
+      "modified": "2019-10-01T00:00:00Z",
+      "relationship_type": "indicates",
+      "target_ref": "attack-pattern--2f1f9f26-7e3d-4f0e-8f7f-3f8b5e6f8e3d"
+    }
+  },
+  {
+    "TimeGenerated": "2019-10-01T00:00:00Z",
+    "WorkspaceId": "gaeeed30-2ba1-4650-81bd-e0c7ce537fa8",
+    "AzureTenantId": "faebed30-1ba1-4658-91bd-e0c5ce447f98",
+    "Id": "threat-actor--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
+    "SourceSystem": "ISGConnector",
+    "StixType": "threat-actor",
+    "LastUpdateMethod": "FileImport",
+    "IsDeleted": false,
+    "AdditionalFields": {
+      "TLPLevel": "Green",
+      "spec_version": "2.1",
+      "created": "2019-10-01T00:00:00Z",
+      "modified": "2019-10-01T00:00:00Z",
+      "name": "Evil Org",
+      "description": "A very evil org.",
+      "threat_actor_types": [
+        "crime-syndicate",
+        "hacker"
+      ],
+      "aliases": [
+        "Evil People",
+        "Bad Guys"
+      ],
+      "first_seen": "2019-10-01T00:00:00Z",
+      "last_seen": "2024-10-01T00:00:00Z",
+      "roles": [
+        "director"
+      ],
+      "goals": [
+        "steal money",
+        "destroy"
+      ],
+      "sophistication": "advanced",
+      "resource_level": "organization",
+      "primary_motivation": "personal-gain"
+    },
+    "Data": {
+      "type": "threat-actor",
+      "spec_version": "2.1",
+      "id": "threat-actor--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
+      "created": "2019-10-01T00:00:00Z",
+      "modified": "2019-10-01T00:00:00Z",
+      "name": "Evil Org",
+      "description": "A very evil org.",
+      "threat_actor_types": [
+        "crime-syndicate",
+        "hacker"
+      ],
+      "aliases": [
+        "Evil People",
+        "Bad Guys"
+      ],
+      "first_seen": "2019-10-01T00:00:00Z",
+      "last_seen": "2024-10-01T00:00:00Z",
+      "roles": [
+        "director"
+      ],
+      "goals": [
+        "steal money",
+        "destroy"
+      ],
+      "sophistication": "advanced",
+      "resource_level": "organization",
+      "personal_motivation": "personal-gain"
+    }
+  }
+]

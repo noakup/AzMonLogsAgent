@@ -1,0 +1,11 @@
+source
+| extend
+propertiesTable = parse_json(properties)
+| project
+NetworkMessageId = tostring(propertiesTable["NetworkMessageId"]),
+ReportId = tostring(propertiesTable["ReportId"]),
+TimeGenerated = todatetime(propertiesTable["Timestamp"]),
+Timestamp = todatetime(propertiesTable["Timestamp"]),
+Url = tostring(propertiesTable["Url"]),
+UrlDomain = tostring(propertiesTable["UrlDomain"]),
+UrlLocation = tostring(propertiesTable["UrlLocation"])

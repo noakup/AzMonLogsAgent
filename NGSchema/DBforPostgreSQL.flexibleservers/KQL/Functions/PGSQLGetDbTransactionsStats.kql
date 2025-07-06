@@ -1,0 +1,187 @@
+let ParamTimeStart = iff((isnull(TimeStart)), ago(1d), TimeStart);
+let ParamTimeEnd = iff((isnull(TimeEnd)), now(), TimeEnd);
+let ParamResourceId = iff(isnull(ResourceId) or trim(" ", ResourceId) == "", "", ResourceId);
+let existsResource=iff( ParamResourceId == "" , false, true);
+let existsGenericTableData = toscalar(
+    AzureDiagnostics
+    | where TimeGenerated >= ParamTimeStart and TimeGenerated <= ParamTimeEnd
+    | where Category == 'PostgreSQLFlexDatabaseXacts'
+    | where iff(existsResource,_ResourceId =~ ParamResourceId, true)
+    | take 1
+    | summarize count()
+    | project iff(count_ == 0, false, true)
+);
+let existsDedicatedTableData = toscalar(
+     PGSQLDbTransactionsStats
+    | where TimeGenerated >= ParamTimeStart and TimeGenerated <= ParamTimeEnd
+    | where iff(existsResource,_ResourceId =~ ParamResourceId, true)
+    | take 1
+    | summarize count()
+    | project iff(count_ == 0, false, true)
+);
+let GenericData = AzureDiagnostics
+| where TimeGenerated >= ParamTimeStart and TimeGenerated <= ParamTimeEnd
+| where Category == 'PostgreSQLFlexDatabaseXacts'
+| where iff(existsGenericTableData==true, true, false)
+| where iff(existsResource,_ResourceId =~ ParamResourceId, true)
+| project
+TimeGenerated,
+_ResourceId,
+// building columns to match the dedicated table
+DatabaseName = tostring(
+    iff(isnotempty(AdditionalFields.DatabaseName), AdditionalFields.DatabaseName,
+        column_ifexists('DatabaseName_s',
+            column_ifexists('DatabaseName', "")
+        )
+    )
+),
+UserId = toint(
+    iff(isnotempty(AdditionalFields.Datdba), AdditionalFields.Datdba,
+        column_ifexists('Datdba_d',
+            column_ifexists('Datdba',
+                column_ifexists('Datdba_s', "")
+            )
+        )
+    )
+),
+ConnectionsLimit = toint(
+    iff(isnotempty(AdditionalFields.DatConnLimit), AdditionalFields.DatConnLimit,
+        column_ifexists('DatConnLimit_d',
+            column_ifexists('DatConnLimit',
+                column_ifexists('DatConnLimit_s', "")
+            )
+        )
+    )
+),
+MinMultixactId = tolong(
+    iff(isnotempty(AdditionalFields.DatMinmxid), AdditionalFields.DatMinmxid,
+        column_ifexists('DatMinmxid_d',
+            column_ifexists('DatMinmxid',
+                column_ifexists('DatMinmxid_s', "")
+            )
+        )
+    )
+),
+MinMultixactIdAge = tolong(
+    iff(isnotempty(AdditionalFields.Age_DatMinmxid), AdditionalFields.Age_DatMinmxid,
+        column_ifexists('Age_DatMinmxid_d',
+            column_ifexists('Age_DatMinmxid',
+                column_ifexists('Age_DatMinmxid_s', "")
+            )
+        )
+    )
+),
+TransactionIdFrozen = tolong(
+    iff(isnotempty(AdditionalFields.DatFrozenxid), AdditionalFields.DatFrozenxid,
+        column_ifexists('DatFrozenxid_d',
+            column_ifexists('DatFrozenxid',
+                column_ifexists('DatFrozenxid_s', "")
+            )
+        )
+    )
+),
+TransactionIdFrozenAge = tolong(
+    iff(isnotempty(AdditionalFields.Age_DatFrozenxid), AdditionalFields.Age_DatFrozenxid,
+        column_ifexists('Age_DatFrozenxid_d',
+            column_ifexists('Age_DatFrozenxid',
+                column_ifexists('Age_DatFrozenxid_s', "")
+            )
+        )
+    )
+),
+VacuumFreezeMinAge = toint(
+    iff(isnotempty(AdditionalFields.Vacuum_freeze_min_age), AdditionalFields.Vacuum_freeze_min_age,
+        column_ifexists('Vacuum_freeze_min_age_d',
+            column_ifexists('Vacuum_freeze_min_age',
+                column_ifexists('Vacuum_freeze_min_age_s', "")
+            )
+        )
+    )
+),
+AutovacuumFreezeMaxAge = toint(
+    iff(isnotempty(AdditionalFields.Autovacuum_freeze_max_age), AdditionalFields.Autovacuum_freeze_max_age,
+        column_ifexists('Autovacuum_freeze_max_age_d',
+            column_ifexists('Autovacuum_freeze_max_age',
+                column_ifexists('Autovacuum_freeze_max_age_s', "")
+            )
+        )
+    )
+),
+RemainingTransactionIds = tolong(
+    iff(isnotempty(AdditionalFields.Total_remaining_xids), AdditionalFields.Total_remaining_xids,
+        column_ifexists('Total_remaining_xids_d',
+            column_ifexists('Total_remaining_xids',
+                column_ifexists('Total_remaining_xids_s', "")
+            )
+        )
+    )
+),
+RemainingTransactionIdsTillEmergencyAV = tolong(
+    iff(isnotempty(AdditionalFields.Remaining_xids_till_emergency_autovacuum), AdditionalFields.Remaining_xids_till_emergency_autovacuum,
+        column_ifexists('Remaining_xids_till_emergency_autovacuum_d',
+            column_ifexists('Remaining_xids_till_emergency_autovacuum',
+                column_ifexists('Remaining_xids_till_emergency_autovacuum_s', "")
+            )
+        )
+    )
+),
+RemainingTransactionIdsTillWraparound = tolong(
+    iff(isnotempty(AdditionalFields.Remaining_xids_till_wraparound), AdditionalFields.Remaining_xids_till_wraparound,
+        column_ifexists('Remaining_xids_till_wraparound_d',
+            column_ifexists('Remaining_xids_till_wraparound',
+                column_ifexists('Remaining_xids_till_wraparound_s', "")
+            )
+        )
+    )
+),
+VacuumMultixactFreezeMinAge = toint(
+    iff(isnotempty(AdditionalFields.Vacuum_multixact_freeze_min_age), AdditionalFields.Vacuum_multixact_freeze_min_age,
+        column_ifexists('Vacuum_multixact_freeze_min_age_d',
+            column_ifexists('Vacuum_multixact_freeze_min_age',
+                column_ifexists('Vacuum_multixact_freeze_min_age_s', "")
+            )
+        )
+    )
+),
+AutovacuumMultixactFreezeMaxAge = toint(
+    iff(isnotempty(AdditionalFields.Autovacuum_multixact_freeze_max_age), AdditionalFields.Autovacuum_multixact_freeze_max_age,
+        column_ifexists('Autovacuum_multixact_freeze_max_age_d',
+            column_ifexists('Autovacuum_multixact_freeze_max_age',
+                column_ifexists('Autovacuum_multixact_freeze_max_age_s', "")
+            )
+        )
+    )
+),
+RemainingMultixactIds = tolong(
+    iff(isnotempty(AdditionalFields.Total_remaining_mxids), AdditionalFields.Total_remaining_mxids,
+        column_ifexists('Total_remaining_mxids_d',
+            column_ifexists('Total_remaining_mxids',
+                column_ifexists('Total_remaining_mxids_s', "")
+            )
+        )
+    )
+),
+RemainingMultixactIdsTillEmergencyAV = tolong(
+    iff(isnotempty(AdditionalFields.Remaining_mxids_till_emergency_autovacuum), AdditionalFields.Remaining_mxids_till_emergency_autovacuum,
+        column_ifexists('Remaining_mxids_till_emergency_autovacuum_d',
+            column_ifexists('Remaining_mxids_till_emergency_autovacuum',
+                column_ifexists('Remaining_mxids_till_emergency_autovacuum_s', "")
+            )
+        )
+    )
+),
+RemainingMultixactIdsTillWraparound = tolong(
+    iff(isnotempty(AdditionalFields.Remaining_mxids_till_wraparound), AdditionalFields.Remaining_mxids_till_wraparound,
+        column_ifexists('Remaining_mxids_till_wraparound_d',
+            column_ifexists('Remaining_mxids_till_wraparound',
+                column_ifexists('Remaining_mxids_till_wraparound_s', "")
+            )
+        )
+    )
+);
+let DedicatedData = PGSQLDbTransactionsStats
+| where TimeGenerated >= ParamTimeStart and TimeGenerated <= ParamTimeEnd
+| where iff(existsDedicatedTableData==true, true, false)
+| where iff(existsResource,_ResourceId =~ ParamResourceId, true);
+DedicatedData
+| union isfuzzy=true GenericData

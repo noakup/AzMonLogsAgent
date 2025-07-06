@@ -1,0 +1,91 @@
+[
+    {
+        "time": "2023-10-18T07:51:05Z",
+        "resourceId": "/SUBSCRIPTIONS/A9174ECE-0BA7-4B75-9DEA-DB3B3B9F7174/RESOURCEGROUPS/SANJANA-RG/PROVIDERS/MICROSOFT.NETWORK/NETWORKMANAGERS/SANJANA_SLICE3NM",
+        "location": "eastus2euap",
+        "operationName": "Microsoft.Network/networkManagers/connectivityConfigurations/write",
+        "category": "ConnectivityConfigurationChange",
+        "resultType": "Success",
+        "correlationId": "bb80f89a-6078-4311-9937-219bacbf08bb",
+        "level": "Info",
+        "properties": {
+          "AppliedConnectivityConfigurations": [
+            
+          ],
+          "TargetResourceIds": [
+            "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana-rg/providers/Microsoft.Network/virtualNetworks/vnet1"
+          ],
+          "Message": "Connectivity configuration change successful."
+        }
+      },
+      {
+        "time": "2023-10-18T07:04:07Z",
+        "resourceId": "/SUBSCRIPTIONS/A9174ECE-0BA7-4B75-9DEA-DB3B3B9F7174/RESOURCEGROUPS/SANJANA-RG/PROVIDERS/MICROSOFT.NETWORK/NETWORKMANAGERS/SANJANA_SLICE3NM",
+        "location": "eastus2euap",
+        "operationName": "Microsoft.Network/networkManagers/connectivityConfigurations/write",
+        "category": "ConnectivityConfigurationChange",
+        "resultType": "Success",
+        "correlationId": "89e807f5-1963-48a1-b8e3-898ff63ba077",
+        "level": "Info",
+        "properties": {
+          "AppliedConnectivityConfigurations": [
+            {
+              "ConfigurationId": "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana-rg/providers/Microsoft.Network/networkManagers/Sanjana_Slice3NM/connectivityConfigurations/MeshConfig",
+              "Topology": "Mesh"
+            }
+          ],
+          "TargetResourceIds": [
+            "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana-rg/providers/Microsoft.Network/virtualNetworks/vnet1"
+          ],
+          "Message": "Connectivity configuration change successful."
+        }
+      },
+      {
+        "time": "2023-10-18T07:51:05Z",
+        "resourceId": "/SUBSCRIPTIONS/A9174ECE-0BA7-4B75-9DEA-DB3B3B9F7174/RESOURCEGROUPS/SANJANA-RG/PROVIDERS/MICROSOFT.NETWORK/NETWORKMANAGERS/SANJANA_SLICE3NM",
+        "location": "eastus2euap",
+        "operationName": "Microsoft.Network/networkManagers/connectivityConfigurations/write",
+        "category": "ConnectivityConfigurationChange",
+        "resultType": "Success",
+        "correlationId": "bb80f89a-6078-4311-9937-219bacbf08bb",
+        "level": "Info",
+        "properties": {
+          "AppliedConnectivityConfigurations": [
+            {
+              "ConfigurationId": "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana-rg/providers/Microsoft.Network/networkManagers/Sanjana_Slice3NM/connectivityConfigurations/HubSpokeConfig",
+              "Topology": "HubAndSpoke"
+            }
+          ],
+          "TargetResourceIds": [
+            "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana-rg/providers/Microsoft.Network/virtualNetworks/vnet3"
+          ],
+          "Message": "Connectivity configuration change successful."
+        }
+      },
+      {
+        "time": "2023-10-18T08:20:00Z",
+        "resourceId": "/SUBSCRIPTIONS/A9174ECE-0BA7-4B75-9DEA-DB3B3B9F7174/RESOURCEGROUPS/SANJANA-RG/PROVIDERS/MICROSOFT.NETWORK/NETWORKMANAGERS/SANJANA_SLICE3NM",
+        "location": "eastus2euap",
+        "operationName": "Microsoft.Network/networkManagers/connectivityConfigurations/write",
+        "category": "ConnectivityConfigurationChange",
+        "resultType": "Success",
+        "correlationId": "c792d6e8-2d11-401d-a227-debabbc2fd83",
+        "level": "Info",
+        "properties": {
+          "AppliedConnectivityConfigurations": [
+            {
+              "ConfigurationId": "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana-rg/providers/Microsoft.Network/networkManagers/Sanjana_Slice3NM/connectivityConfigurations/HubSpokeConfig",
+              "Topology": "HubAndSpoke"
+            },
+            {
+              "ConfigurationId": "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana-rg/providers/Microsoft.Network/networkManagers/Sanjana_Slice3NM/connectivityConfigurations/MeshConfig",
+              "Topology": "Mesh"
+            }
+          ],
+          "TargetResourceIds": [
+            "/subscriptions/a9174ece-0ba7-4b75-9dea-db3b3b9f7174/resourceGroups/sanjana-rg/providers/Microsoft.Network/virtualNetworks/vnet3"
+          ],
+          "Message": "Connectivity configuration change successful."
+        }
+      }
+]

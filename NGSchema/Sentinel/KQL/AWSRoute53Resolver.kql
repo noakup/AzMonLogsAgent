@@ -1,0 +1,20 @@
+source
+| project 
+    Version = tostring(version), 
+    AccountId = tostring(account_id), 
+    Region = tostring(region), 
+    VpcId = tostring(vpc_id), 
+    TimeGenerated = todatetime(query_timestamp), 
+    QueryName = tostring(query_name), 
+    QueryType = tostring(query_type), 
+    QueryClass = tostring(query_class), 
+    Rcode = tostring(rcode), 
+    Answers = todynamic(answers), 
+    SrcAddr = tostring(srcaddr), 
+    SrcPort = tostring(srcport), 
+    Transport = tostring(transport), 
+    SrcIds = todynamic(srcids), 
+    FirewallRuleAction = tostring(firewall_rule_action), 
+    FirewallRuleGroupId = tostring(firewall_rule_group_id), 
+    FirewallDomainListId = tostring(firewall_domain_list_id), 
+    LogType = "ResolverQueryLogs"

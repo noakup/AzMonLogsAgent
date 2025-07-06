@@ -1,0 +1,34 @@
+source 
+| where logName has 'stderr' or logName has 'stdout'
+| extend 
+    TimeGenerated = timestamp,
+    InsertId = tostring(insertId),
+    LogName = tostring(logName),
+    Labels = todynamic(labels),
+    Severity = tostring(severity),
+    ReceiveTimestamp = receiveTimestamp,
+    ClusterName = tostring(resource.labels.cluster_name),
+    NamespaceName = tostring(resource.labels.namespace_name),
+    PodName = tostring(resource.labels.pod_name),
+    Location = tostring(resource.labels.location),
+    ContainerName = tostring(resource.labels.container_name),
+    JsonPayload = todynamic(jsonPayload),
+    TextPayload = tostring(textPayload),
+    ProjectID = tostring(resource.labels.project_id),
+    ComputeResourceName = tostring(labels['compute.googleapis.com/resource_name'])
+| project 
+    TimeGenerated,
+    InsertId,
+    LogName,
+    Labels,
+    Severity,
+    ReceiveTimestamp,
+    ClusterName,
+    NamespaceName,
+    PodName,
+    Location,
+    ContainerName,
+    JsonPayload,
+    TextPayload,
+    ProjectID,
+    ComputeResourceName

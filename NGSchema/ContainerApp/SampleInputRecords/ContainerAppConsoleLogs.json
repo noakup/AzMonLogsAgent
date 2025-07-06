@@ -1,0 +1,76 @@
+[
+    {
+        "resourceId": "/SUBSCRIPTIONS/474EABA6-0F3F-4B5A-BAE5-A7858BD7C53B/RESOURCEGROUPS/WORKERAPPS/PROVIDERS/MICROSOFT.APP/MANAGEDENVIRONMENTS/MANAGEDENVIRONMENT-WORKERAPPS-B061",
+        "properties": {
+            "ContainerName": "test1",
+            "ContainerGroupName": "mikevu--i7rw667-6bb8674cf-cs5tn",
+            "Stream": "stdout",
+            "ContainerImage": "legionpublicacr.azurecr.io/proxy:latest",
+            "ContainerGroupId": "07b605bb-eb43-4c32-a393-528b613fcc10",
+            "EnvironmentName": "yellowhill-7e7931de",
+            "Log": "forwarding url not present",
+            "ContainerAppName": "mikevu",
+            "ContainerId": "eb498dafacc8f6acd55cbc9516af64045cd99b39e87749d44f56c4dfc7f1d83b",
+            "RevisionName": "mikevu--i7rw667"
+        },
+        "category": "ContainerAppConsoleLogs",
+        "operationName": "Microsoft.App/managedEnvironments/WRITE",
+        "time": "2022-08-06T00:45:23.480189847Z",
+        "location": "eastus"
+    },
+    {
+        "resourceId": "/SUBSCRIPTIONS/474EABA6-0F3F-4B5A-BAE5-A7858BD7C53B/RESOURCEGROUPS/WORKERAPPS/PROVIDERS/MICROSOFT.APP/MANAGEDENVIRONMENTS/MANAGEDENVIRONMENT-WORKERAPPS-B061",
+        "properties": {
+            "ContainerName": "test1",
+            "ContainerGroupName": "mikevu--i7rw667-6bb8674cf-cs5tn",
+            "Stream": "stdout",
+            "ContainerImage": "legionpublicacr.azurecr.io/proxy:latest",
+            "ContainerGroupId": "07b605bb-eb43-4c32-a393-528b613fcc10",
+            "EnvironmentName": "yellowhill-7e7931de",
+            "Log": "forwarding url not present",
+            "ContainerAppName": "mikevu",
+            "ContainerId": "eb498dafacc8f6acd55cbc9516af64045cd99b39e87749d44f56c4dfc7f1d83b",
+            "RevisionName": "mikevu--i7rw667"
+        },
+        "category": "ContainerAppConsoleLogs",
+        "operationName": "Microsoft.App/managedEnvironments/WRITE",
+        "time": "2022-08-06T00:45:23.482619079Z",
+        "location": "eastus"
+    },
+    {
+        "resourceId": "/SUBSCRIPTIONS/474EABA6-0F3F-4B5A-BAE5-A7858BD7C53B/RESOURCEGROUPS/WORKERAPPS/PROVIDERS/MICROSOFT.APP/MANAGEDENVIRONMENTS/MANAGEDENVIRONMENT-WORKERAPPS-B061",
+        "properties": {
+            "ContainerName": "test1",
+            "ContainerGroupName": "mikevu--i7rw667-6bb8674cf-cs5tn",
+            "Stream": "stdout",
+            "ContainerImage": "legionpublicacr.azurecr.io/proxy:latest",
+            "ContainerGroupId": "07b605bb-eb43-4c32-a393-528b613fcc10",
+            "EnvironmentName": "yellowhill-7e7931de",
+            "Log": "forwarding url not present",
+            "ContainerAppName": "mikevu",
+            "ContainerId": "eb498dafacc8f6acd55cbc9516af64045cd99b39e87749d44f56c4dfc7f1d83b",
+            "RevisionName": "mikevu--i7rw667"
+        },
+        "category": "ContainerAppConsoleLogs",
+        "operationName": "Microsoft.App/managedEnvironments/WRITE",
+        "time": "2022-08-06T00:45:23.48799215Z",
+        "location": "eastus"
+    },
+    {
+      "resourceId": "/SUBSCRIPTIONS/474EABA6-0F3F-4B5A-BAE5-A7858BD7C53B/RESOURCEGROUPS/WORKERAPPS/PROVIDERS/MICROSOFT.APP/MANAGEDENVIRONMENTS/MANAGEDENVIRONMENT-WORKERAPPS-B061",
+      "properties": {
+        "ContainerName": "jobtest1",
+        "Stream": "stdout",
+        "ContainerImage": "legionpublicacr.azurecr.io/proxy:latest",
+        "ContainerGroupId": "07b605bb-eb43-4c32-a393-528b613fcc10",
+        "EnvironmentName": "yellowhill-7e7931de",
+        "Log": "forwarding url not present",
+        "ContainerJobName": "trajkobal",
+        "ContainerId": "eb498dafacc8f6acd55cbc9516af64045cd99b39e87749d44f56c4dfc7f1d83b"
+    },
+    "category": "ContainerAppConsoleLogs",
+    "operationName": "Microsoft.App/managedEnvironments/WRITE",
+    "time": "2022-08-06T00:45:23.48799215Z",
+    "location": "eastus"
+  }
+]

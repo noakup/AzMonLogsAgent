@@ -1,0 +1,12 @@
+﻿source
+| project 
+    TimeGenerated = todatetime(["time"]),
+    JobType = tostring(properties.jobType),
+    CorrelationId = tostring(correlationId),
+    Status = tostring(properties.status),
+    JobId = tostring(properties.jobId),
+    SourceTable = tostring(properties.sourceTable),
+    Destination = properties.details,
+    ResultsRecordCount = tolong(properties.records),
+    ResultsGB = toreal(properties.gigabytes),
+    Message = tostring(properties.message)

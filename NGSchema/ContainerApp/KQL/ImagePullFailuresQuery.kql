@@ -1,0 +1,5 @@
+ContainerAppSystemLogs_CL
+| where Log_s contains "Failed to pull image"
+| project Message=Log_s, Time=TimeGenerated, EnvName=EnvironmentName_s, AppName=ContainerAppName_s, Revision=RevisionName_s
+| take 100
+| sort by Time desc

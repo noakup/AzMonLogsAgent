@@ -1,0 +1,5 @@
+ACSAdvancedMessagingOperations
+| where ResultType == "Failed"
+| project TimeGenerated, OperationName, OperationVersion, ResultSignature, ResultDescription
+| order by TimeGenerated desc
+| limit 100

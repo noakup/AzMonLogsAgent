@@ -1,0 +1,42 @@
+[
+    {
+        "time": "2023-03-02T11:07:02.045Z",
+        "properties": {
+            "Event": "ClientRead",
+            "Userid": 10,
+            "Dbid": 24606,
+            "Queryid": 595883457281818870,
+            "Queryid_str": "595883457281818870",
+            "Event_type": "Client",
+            "Start_time": "2025-05-29T12:49:46",
+            "End_time": "2025-05-29T12:50:46",
+            "Calls": 2995
+        },
+        "resourceId": "/SUBSCRIPTIONS/9D3FAF91-9FBE-450D-B5DD-37BEA9595299/RESOURCEGROUPS/SEERNU-RESOURCES/PROVIDERS/MICROSOFT.DBFORPOSTGRESQL/FLEXIBLESERVERS/SEERNU-GP-V11-TESTAVMETRICS",
+        "location": "eastus",
+        "category": "PostgreSQLFlexQueryStoreWaitStats",
+        "operationName": "LogEvent",
+        "ReplicaRole": "Primary",
+        "LogicalServerName": "seernu-gp-v11-testavmetrics"
+    },
+    {
+        "time": "2023-03-02T11:07:02.045Z",
+        "properties": {
+            "Event": "ClientRead",
+            "Userid": 10,
+            "Dbid": 5,
+            "Queryid": 0,
+            "Queryid_str": "0",
+            "Event_type": "Client",
+            "Start_time": "2025-05-29T12:49:46",
+            "End_time": "2025-05-29T12:50:46",
+            "Calls": 568
+        },
+        "resourceId": "/SUBSCRIPTIONS/9D3FAF91-9FBE-450D-B5DD-37BEA9595299/RESOURCEGROUPS/SEERNU-RESOURCES/PROVIDERS/MICROSOFT.DBFORPOSTGRESQL/FLEXIBLESERVERS/SEERNU-GP-V11-TESTAVMETRICS",
+        "location": "eastus",
+        "category": "PostgreSQLFlexQueryStoreWaitStats",
+        "operationName": "LogEvent",
+        "ReplicaRole": "Primary",
+        "LogicalServerName": "seernu-gp-v11-testavmetrics"
+    }
+]

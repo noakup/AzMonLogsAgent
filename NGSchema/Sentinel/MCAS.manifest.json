@@ -1,0 +1,278 @@
+{
+	"contactDL": "asipolarbearseng@microsoft.com",
+	"type": "Microsoft.SecurityInsights/securityInsights/MCAS",
+	"displayName": "Azure Sentinel MCAS",
+	"description": "All Microsoft Defender for Cloud App (MCAS) table related to Azure Sentinel.",
+	"tags": {},
+	"properties": {},
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "Microsoft Azure Sentinel/Data Collection and Processing",
+	"relatedTables": [],
+	"relatedFunctions": [],
+	"tables": [
+		{
+			"name": "CloudAppEvents",
+			"description": "Information about activities in various cloud apps and services covered by Microsoft Cloud App Security.",
+			"categories": [
+				"security"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 7,
+			"dataTypeId": "TENANTMICROSOFTWINDOWSDEFENDERATP_ADVANCEDHUNTINGCLOUDAPPEVENTS",
+			"intelligencePacks": [
+				"SecurityInsights"
+			],
+			"isLakeAllowed": true,
+			"isResourceCentric": false,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "tenantId",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "KQL/CloudAppEventsTransform.kql",
+			"columns": [
+				{
+					"name": "AccountId",
+					"type": "String",
+					"description": "An identifier for the account as found by Microsoft Cloud App Security. Could be Azure Active Directory ID, user principal name, or other identifiers",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "AccountType",
+					"type": "String",
+					"description": "Type of user account, indicating its general role and access levels, such as Regular, System, Admin, Application"
+				},
+				{
+					"name": "AdditionalFields",
+					"type": "Dynamic",
+					"description": "Additional information about the entity or event"
+				},
+				{
+					"name": "RawEventData",
+					"type": "Dynamic",
+					"description": "Raw event information from the source application or service in JSON format"
+				},
+				{
+					"name": "ReportId",
+					"type": "String",
+					"description": "Unique identifier for the event",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "ObjectId",
+					"type": "String",
+					"description": "Unique identifier of the object that the recorded action was applied to",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "ObjectType",
+					"type": "String",
+					"description": "The type of object, such as a file or a folder, that the recorded action was applied to"
+				},
+				{
+					"name": "ObjectName",
+					"type": "String",
+					"description": "Name of the object that the recorded action was applied to"
+				},
+				{
+					"name": "ActivityObjects",
+					"type": "Dynamic",
+					"description": "List of objects, such as files or folders, that were involved in the recorded activity"
+				},
+				{
+					"name": "ActivityType",
+					"type": "String",
+					"description": "Type of activity that triggered the event"
+				},
+				{
+					"name": "UserAgent",
+					"type": "String",
+					"description": "User agent information from the web browser or other client application"
+				},
+				{
+					"name": "ISP",
+					"type": "String",
+					"description": "Internet service provider associated with the IP address",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "City",
+					"type": "String",
+					"description": "City where the client IP address is geolocated"
+				},
+				{
+					"name": "CountryCode",
+					"type": "String",
+					"description": "Two-letter code indicating the country where the client IP address is geolocated"
+				},
+				{
+					"name": "IsAnonymousProxy",
+					"type": "Bool",
+					"description": "Indicates whether the IP address belongs to a known anonymous proxy"
+				},
+				{
+					"name": "IsExternalUser",
+					"type": "Bool",
+					"description": "Indicates whether a user inside the network doesn't belong to the organization’s domain"
+				},
+				{
+					"name": "IsImpersonated",
+					"type": "Bool",
+					"description": "Indicates whether the activity was performed by one user for another (impersonated) user"
+				},
+				{
+					"name": "IPAddress",
+					"type": "String",
+					"description": "IP address assigned to the device during communication",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "IPCategory",
+					"type": "String",
+					"description": "Additional information about the IP address"
+				},
+				{
+					"name": "IPTags",
+					"type": "Dynamic",
+					"description": "Customer-defined information applied to specific IP addresses and IP address ranges"
+				},
+				{
+					"name": "OSPlatform",
+					"type": "String",
+					"description": "Platform of the operating system running on the device. This indicates specific operating systems, including variations within the same family, such as Windows 10 and Windows 7"
+				},
+				{
+					"name": "DeviceType",
+					"type": "String",
+					"description": "Type of device based on purpose and functionality, such as network device, workstation, server, mobile, gaming console, or printer"
+				},
+				{
+					"name": "IsAdminOperation",
+					"type": "Bool",
+					"description": "Indicates whether the activity was performed by an administrator"
+				},
+				{
+					"name": "AccountDisplayName",
+					"type": "String",
+					"description": "Name displayed in the address book entry for the account user. This is usually a combination of the given name, middle initial, and surname of the user."
+				},
+				{
+					"name": "AccountObjectId",
+					"type": "String",
+					"description": "Unique identifier for the account in Azure AD"
+				},
+				{
+					"name": "AppInstanceId",
+					"type": "Int",
+					"description": "Unique identifier for the instance of an application"
+				},
+				{
+					"name": "ApplicationId",
+					"type": "Int",
+					"description": "Unique identifier for the application"
+				},
+				{
+					"name": "Application",
+					"type": "String",
+					"description": "Application that performed the recorded action"
+				},
+				{
+					"name": "ActionType",
+					"type": "String",
+					"description": "Type of activity that triggered the event"
+				},
+				{
+					"name": "UserAgentTags",
+					"type": "Dynamic",
+					"description": "More information provided by Microsoft Defender for Cloud Apps in a tag in the user agent field. Can have any of the following values: Native client, Outdated browser, Outdated operating system, Robot"
+				},
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"description": "Date and time (UTC) when the record was generated",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Timestamp",
+					"type": "DateTime",
+					"description": "Date and time (UTC) when the record was generated",
+					"isHidden": true,
+					"isDefaultDisplay": false
+				},
+				{
+					"name": "AuditSource",
+					"type": "String",
+					"description": "Cloud enviorment source of the cloud audit event. Cloud be Azure, AWS, GCP, AliCloud or other"
+				},
+				{
+					"name": "LastSeenForUser",
+					"type": "Dynamic",
+					"description": "Number of days since each statistical feature for the user was last seen"
+				},
+				{
+					"name": "OAuthAppId",
+					"type": "String",
+					"description": "A unique identifier that's assigned to an application when it’s registered to Entra with OAuth 2.0.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "SessionData",
+					"type": "Dynamic",
+					"description": "Session identifiers (if provided by the audit source)"
+				},
+				{
+					"name": "UncommonForUser",
+					"type": "Dynamic",
+					"description": "List of features observed to be statistically uncommon for the user that performed the activity"
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/CloudAppEventsSample.json"
+		}
+	],
+	"functions": [],
+	"queries": [
+		{
+			"id": "f3e18c86-c0aa-4d1a-8f30-6e8c6cd3cad2",
+			"displayName": "File name extension change",
+			"description": "Display files that were renamed.",
+			"bodyFilePath": "KQL/FileNameExtensionChangeQuery.kql",
+			"categories": [
+				"security"
+			],
+			"relatedTables": [
+				"CloudAppEvents"
+			],
+			"tags": {
+				"Topic": [
+					"Security"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": false
+				}
+			}
+		}
+	]
+}

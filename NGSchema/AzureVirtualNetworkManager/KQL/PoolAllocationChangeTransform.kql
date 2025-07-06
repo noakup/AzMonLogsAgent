@@ -1,0 +1,12 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    Location = location,
+    OperationName = operationName,
+    ResultType = tostring(properties.resultType),
+    CorrelationId = correlationId,
+    LogLevel = level,
+    ChangeType = tostring(properties.changeType),
+    ChangeReason = tostring(properties.changeReason),
+    Message = tostring(properties.message),
+    AllocationResources = properties.allocationResources

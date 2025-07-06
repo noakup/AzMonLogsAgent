@@ -1,0 +1,389 @@
+{
+    "type": "Microsoft.Attestation/attestationProviders",
+    "displayName": "Azure Attestation",
+    "description": "Azure Attestation is a unified solution for remotely verifying the trustworthiness of a platform and integrity of the binaries running inside it. The service receives evidence from the platform, validates the evidence against security standards and configurable policies, and produces an attestation token for claims-based applications (e.g., relying parties, auditing authorities).",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Azure Security Engineering/Azure Attestation Service",
+    "contactDL": "aasdev@microsoft.com",
+    "relatedTables": [
+        "AzureActivity"
+    ],
+    "tables": [
+        {
+            "name": "AzureAttestationDiagnostics",
+            "description": "Logs from attestation requests.",
+            "categories": [
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 5,
+            "dataTypeId": "MICROSOFTATTESTATION_OPERATIONAL",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": false,
+            "input": [
+                {
+                    "name": "Time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "region",
+                    "type": "String"
+                },
+                {
+                    "name": "uri",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "resultType",
+                    "type": "String"
+                },
+                {
+                    "name": "resultSignature",
+                    "type": "String"
+                },
+                {
+                    "name": "durationMs",
+                    "type": "Int"
+                },
+                {
+                    "name": "callerIpAddress",
+                    "type": "String"
+                },
+                {
+                    "name": "identity",
+                    "type": "String"
+                },
+                {
+                    "name": "level",
+                    "type": "String"
+                },
+                {
+                    "name": "traceContext",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/OperationTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Date and time the record was created.",
+                    "isDefaultDisplay": true,
+                    "isHidden": false,
+                    "isPreferredFacet": false
+                },
+                {
+                    "name": "ResourceRegion",
+                    "type": "String",
+                    "description": "Region where the resource is located.",
+                    "isDefaultDisplay": false,
+                    "isHidden": false,
+                    "isPreferredFacet": false
+                },
+                {
+                    "name": "ResourceUri",
+                    "type": "String",
+                    "description": "URI of the resource.",
+                    "isDefaultDisplay": true,
+                    "isHidden": false,
+                    "isPreferredFacet": false,
+                    "dataTypeHint": "URI"
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "description": "Name of the operation attempted on the resource.",
+                    "isDefaultDisplay": true,
+                    "isHidden": false,
+                    "isPreferredFacet": false
+                },
+                {
+                    "name": "ResultType",
+                    "type": "String",
+                    "description": "Indicates if the request was successful or failed.",
+                    "isDefaultDisplay": true,
+                    "isHidden": false,
+                    "isPreferredFacet": false
+                },
+                {
+                    "name": "ResultSignature",
+                    "type": "String",
+                    "description": "HTTP status code returned from the service.",
+                    "isDefaultDisplay": true,
+                    "isHidden": false,
+                    "isPreferredFacet": false
+                },
+                {
+                    "name": "DurationMs",
+                    "type": "Double",
+                    "description": "Amount of time it took to process request in milliseconds.",
+                    "isDefaultDisplay": false,
+                    "isHidden": false,
+                    "isPreferredFacet": false
+                },
+                {
+                    "name": "CallerIpAddress",
+                    "type": "String",
+                    "description": "IP Address of the client that submitted the request.",
+                    "isDefaultDisplay": true,
+                    "isHidden": false,
+                    "isPreferredFacet": false,
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "Identity",
+                    "type": "Dynamic",
+                    "description": "JSON structure containing information about the caller.",
+                    "isDefaultDisplay": false,
+                    "isHidden": false,
+                    "isPreferredFacet": false
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "Error or Informational message indicating if the service processed the request.",
+                    "isDefaultDisplay": true,
+                    "isHidden": false,
+                    "isPreferredFacet": false
+                },
+                {
+                    "name": "TraceContext",
+                    "type": "Dynamic",
+                    "description": "W3C trace context.",
+                    "isDefaultDisplay": true,
+                    "isHidden": false,
+                    "isPreferredFacet": false
+                },
+                {
+                    "name": "ServiceLocation",
+                    "type": "String",
+                    "description": "Location of the service which processed the request.",
+                    "isDefaultDisplay": true,
+                    "isHidden": false,
+                    "isPreferredFacet": false
+                },
+                {
+                    "name": "FailureDetails",
+                    "type": "String",
+                    "description": "Details of the request failure, if it failed. Blank if the request succeeded.",
+                    "isDefaultDisplay": false,
+                    "isHidden": false,
+                    "isPreferredFacet": false
+                },
+                {
+                    "name": "UserAgent",
+                    "type": "String",
+                    "description": "HTTP header passed by the client, if applicable.",
+                    "isDefaultDisplay": false,
+                    "isHidden": false,
+                    "isPreferredFacet": false
+                },
+                {
+                    "name": "ContentType",
+                    "type": "String",
+                    "description": "Content-Type header value passed by the client.",
+                    "isDefaultDisplay": false,
+                    "isHidden": false,
+                    "isPreferredFacet": false
+                },
+                {
+                    "name": "ContentLength",
+                    "type": "Int",
+                    "description": "Length of the content body in bytes.",
+                    "isDefaultDisplay": false,
+                    "isHidden": false,
+                    "isPreferredFacet": false
+                },
+                {
+                    "name": "ResultDetails",
+                    "type": "String",
+                    "description": "Detailed response messages included in the result, if available.",
+                    "isDefaultDisplay": true,
+                    "isHidden": false,
+                    "isPreferredFacet": false
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/OperationTableSample.json"
+        }
+    ],
+    "functions": [],
+    "queries": [
+        {
+            "id": "4b3c3ebd-fba6-49a4-8709-7507a347a969",
+            "displayName": "Are there any authorization failures?",
+            "description": "Count of Attestation provider requests which failed authorization.",
+            "bodyFilePath": "KQL/AuthorizationFailedRequestQuery.kql",
+            "categories": [
+                "resources",
+                "security"
+            ],
+            "relatedTables": [
+                "AzureAttestationDiagnostics"
+            ],
+            "tags": {
+                "Topic": [
+                    "Usage",
+                    "Diagnostics",
+                    "Alerts",
+                    "Audit"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        },
+        {
+            "id": "31a88ff8-4608-4645-ab18-4b09871b07ea",
+            "displayName": "Are there any slow requests?",
+            "description": "List of Attestation provider requests that took longer than 1 second.",
+            "bodyFilePath": "KQL/SlowRequestQuery.kql",
+            "categories": [
+                "resources",
+                "security"
+            ],
+            "relatedTables": [
+                "AzureAttestationDiagnostics"
+            ],
+            "tags": {
+                "Topic": [
+                    "Usage",
+                    "Diagnostics",
+                    "Alerts"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        },
+        {
+            "id": "c8258837-c1bd-456c-961f-14bf71748f79",
+            "displayName": "How active has this Attestation provider been?",
+            "description": "Line chart showing trend of Attestation provider requests volume, per operation over time.",
+            "bodyFilePath": "KQL/ActivityLevelQuery.kql",
+            "categories": [
+                "resources",
+                "security"
+            ],
+            "relatedTables": [
+                "AzureAttestationDiagnostics"
+            ],
+            "tags": {
+                "Topic": [
+                    "Usage",
+                    "Diagnostics",
+                    "Audit"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        },
+        {
+            "id": "d6aaf873-8082-4960-aba0-146eb0414a27",
+            "displayName": "Who is calling this attestation provider?",
+            "description": "List of callers identified by their IP address and AAD UPN with their request count.",
+            "bodyFilePath": "KQL/WhichCallersQuery.kql",
+            "categories": [
+                "resources",
+                "security"
+            ],
+            "relatedTables": [
+                "AzureAttestationDiagnostics"
+            ],
+            "tags": {
+                "Topic": [
+                    "Usage",
+                    "Diagnostics",
+                    "Alerts",
+                    "Audit"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        },
+        {
+            "id": "9b285dc2-6dc7-454a-aaa0-d3113cdb8825",
+            "displayName": "Have there been any changes to attestation policy?",
+            "description": "List of successful Attestation provider requests to change the attestation policy or policy signing certificates.",
+            "bodyFilePath": "KQL/PolicyChangesQuery.kql",
+            "categories": [
+                "resources",
+                "security"
+            ],
+            "relatedTables": [
+                "AzureAttestationDiagnostics"
+            ],
+            "tags": {
+                "Topic": [
+                    "Usage",
+                    "Diagnostics",
+                    "Alerts",
+                    "Audit"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        },
+        {
+            "id": "07f7133f-baae-444c-a1a1-2e0b6caf09c2",
+            "displayName": "Have there been any errors attempting to configure the attestation policy?",
+            "description": "List of any errors attempting to configure the attestation policy or policy signing certificates.",
+            "bodyFilePath": "KQL/PolicyClientErrorsQuery.kql",
+            "categories": [
+                "resources",
+                "security"
+            ],
+            "relatedTables": [
+                "AzureAttestationDiagnostics"
+            ],
+            "tags": {
+                "Topic": [
+                    "Usage",
+                    "Diagnostics",
+                    "Alerts",
+                    "Audit"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        }
+    ]
+}

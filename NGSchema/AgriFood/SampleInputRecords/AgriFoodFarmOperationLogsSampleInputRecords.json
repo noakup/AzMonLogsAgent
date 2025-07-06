@@ -1,0 +1,36 @@
+[
+  {
+    "time": "2021-09-01T13:09:00.345651575Z",
+    "resourceId": "/SUBSCRIPTIONS/5464F7EE3875-12C9-C654-F81D-CE1909AD/RESOURCEGROUPS/sample-INSTANCES/PROVIDERS/MICROSOFT.AGFOODPLATFORM/FARMBEATS/sample-EUS-1",
+    "category": "FarmOperationLogs",
+    "operationName": "Microsoft.AgFoodPlatform/ingestionJobs/farmOperationDataIngestionJobs/write",
+    "callerIpAddress": "27.57.123.111",
+    "Level": "Information",
+    "identity": {
+      "claims": {
+        "ApplicationId": "39d176c5-91b6-454b-854d-55813c17d92d",
+        "ObjectId": "9002b50e-dc98-445e-a865-72dce38ecafd",
+        "TenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+      }
+    },
+    "properties": {
+      "requestUri": "sample-eus-1.farmbeats.azure.net/farm-operations/ingest-data/EventFarmers?api-version=2021-03-31-preview",
+      "farmerId": "",
+      "dataPlaneResourceId": "/farm-operations/ingest-data/sample",
+      "requestBody": {
+        "farmerId": "farmer-sample",
+        "authProviderId": "sample",
+        "operations": [ "sample" ],
+        "startYear": 2020,
+        "name": "sample-name",
+        "description": "sample-description"
+      }
+    },
+    "resultSignature": "202",
+    "resultType": "Success",
+    "resultDescription": "",
+    "location": "eastus",
+    "correlationId": "c9353df8-c403-4c21-9be8-d443fc14e0f3",
+    "durationMs": 11680
+  }
+]

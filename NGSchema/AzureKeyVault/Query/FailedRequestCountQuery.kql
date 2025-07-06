@@ -1,0 +1,3 @@
+AZKVAuditLogs
+| where HttpStatusCode >= 300 and not(OperationName == "Authentication" and HttpStatusCode == 401)
+| summarize count() by RequestUri, ResultSignature, _ResourceId

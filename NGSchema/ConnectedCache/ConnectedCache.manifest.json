@@ -1,0 +1,135 @@
+{
+    "type": "Microsoft.ConnectedCache/CacheNodes",
+    "displayName": "Microsoft Connected Cache",
+    "description": "ConnectedCache diagnostic logs, LogAnalytics tables",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "MCC-VirtualTeam",
+    "relatedTables": [
+        "AzureActivity",
+        "AzureMetrics"
+    ],
+    "relatedFunctions": [],
+    "tables": [{
+        "name": "MCCEventLogs",
+        "description": "This table includes logs for cache events. Can be used for performance metrics.",
+        "categories": [
+            "resources"
+        ],
+        "tags": {},
+        "properties": {},
+        "artifactVersion": 3,
+        "dataTypeId": "MICROSOFTCONNECTEDCACHE_EVENTS",
+        "intelligencePacks": [],
+        "isResourceCentric": true,
+        "tableState": "Production",
+        "isTroubleshootingAllowed": false,
+        "contactDL": "msconnectedcache@microsoft.com",
+        "isChangeColumnInternalNameAllowed": true,
+        "input": [{
+                "name": "time",
+                "type": "DateTime"
+            },
+            {
+                "name": "resourceId",
+                "type": "String"
+            },
+            {
+                "name": "category",
+                "type": "String"
+            },
+            {
+                "name": "hitRatioMbps",
+                "type": "Double"
+            },
+            {
+                "name": "cacheNodeId",
+                "type": "String"
+            },
+            {
+                "name": "missMbps",
+                "type": "Double"
+            },
+            {
+                "name": "hitMbps",
+                "type": "Double"
+            },
+            {
+                "name": "hits",
+                "type": "Int"
+            },
+            {
+                "name": "misses",
+                "type": "Int"
+            },
+            {
+                "name": "egressMbps",
+                "type": "Double"
+            }
+        ],
+        "transformFilePath": "Kql/MccLogsTransformation.kql",
+        "columns": [{
+                "name": "TimeGenerated",
+                "type": "DateTime",
+                "isDefaultDisplay": true,
+                "description": "Timestamp (UTC) when the log was created."
+            },
+            {
+                "name": "HitRatio",
+                "type": "Double",
+                "isDefaultDisplay": true,
+                "isHidden": true,
+                "description": "Ratio of cache hits to total content requests that were received."
+            },
+            {
+                "transformName": "HitRatioMbps",
+                "physicalName": "HitRatio",
+                "logicalName": "HitRatioMbps",
+                "type": "Double",
+                "isDefaultDisplay": true,
+                "description": "Ratio of Data volume (MB) per second that came directly from Microsoft Connected Cache(hitMbps) to The total data volume (MB) per second delivered(egressMbps)."
+            },
+            {
+                "name": "CacheNodeId",
+                "dataTypeHint": "GUID",
+                "type": "String",
+                "isDefaultDisplay": true,
+                "description": "Unique CacheNode identifier."
+            },
+            {
+                "name": "MissMbps",
+                "type": "Double",
+                "isDefaultDisplay": true,
+                "description": "Data volume (MB) per second that Microsoft Connected Cache had to download from CDN to see the cache."
+            },
+            {
+                "name": "HitMbps",
+                "type": "Double",
+                "isDefaultDisplay": true,
+                "description": "Data volume (MB) per second that came directly from Microsoft Connected Cache."
+            },
+            {
+                "name": "Hits",
+                "type": "Int",
+                "isDefaultDisplay": true,
+                "description": "The number of times data is found in the cache."
+            },
+            {
+                "name": "Misses",
+                "type": "Int",
+                "isDefaultDisplay": true,
+                "description": "The number of times data is not found in the cache and had to download from CDN."
+            },
+            {
+                "name": "EgressMbps",
+                "type": "Double",
+                "isDefaultDisplay": true,
+                "description": "The total data volume (MB) per second delivered including: data volume (MB) that came directly from cache (hitMbps) and data volume (MB) that Microsoft Connected Cache had to download from CDN to see the cache (missMbps)."
+            }
+        ],
+        "sampleInputRecordsFilePath": "SampleInputRecords/MccLogsSampleInputRecords.json"
+    }],
+    "functions": [],
+    "queries": []
+}

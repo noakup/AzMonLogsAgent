@@ -1,0 +1,20 @@
+source
+| extend
+propertiesTable = parse_json(properties)
+| project
+FileName = tostring(propertiesTable["FileName"]),
+FileType = tostring(propertiesTable["FileType"]),
+NetworkMessageId = tostring(propertiesTable["NetworkMessageId"]),
+RecipientEmailAddress = tostring(propertiesTable["RecipientEmailAddress"]),
+RecipientObjectId = tostring(propertiesTable["RecipientObjectId"]),
+ReportId = tostring(propertiesTable["ReportId"]),
+SHA256 = tostring(propertiesTable["SHA256"]),
+SenderDisplayName = tostring(propertiesTable["SenderDisplayName"]),
+SenderObjectId = tostring(propertiesTable["SenderObjectId"]),
+SenderFromAddress = tostring(propertiesTable["SenderFromAddress"]),
+ThreatTypes = tostring(propertiesTable["ThreatTypes"]),
+ThreatNames = tostring(propertiesTable["ThreatNames"]),
+DetectionMethods = tostring(propertiesTable["DetectionMethods"]),
+FileSize = tolong(propertiesTable["FileSize"]),
+TimeGenerated = todatetime(propertiesTable["Timestamp"]),
+Timestamp = todatetime(propertiesTable["Timestamp"])

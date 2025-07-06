@@ -1,0 +1,214 @@
+{
+    "type": "microsoft.intune/operations",
+    "displayName": "Intune Specialist Reports.",
+    "description": "Intune Specialist Reports.",
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "CloudPCService/Windows365ITProExperience",
+    "tags": {},
+    "properties": {},
+    "relatedTables": [],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "Windows365AuditLogs",
+            "description": "Windows365 Audit Logs.",
+            "dataTypeId": "TENANTMICROSOFTINTUNE_WINDOWS365AUDITLOGS",
+            "isResourceCentric": true,
+            "categories": [ "audit" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resultType",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "String"
+                },
+                {
+                    "name": "tenantId",
+                    "type": "String"
+                },
+                {
+                    "name": "identity",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "KQL/Windows365AuditTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isPreferredFacet": true,
+                    "isDefaultDisplay": true,
+                    "description": "Date and time when the report was generated (UTC)."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isPreferredFacet": true,
+                    "isDefaultDisplay": true,
+                    "description": "The name of the operation."
+                },
+                {
+                    "name": "Result",
+                    "type": "String",
+                    "isPreferredFacet": true,
+                    "isDefaultDisplay": true,
+                    "description": "The result of the operation."
+                },
+                {
+                    "name": "ApplicationId",
+                    "type": "String",
+                    "isPreferredFacet": true,
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "GUID",
+                    "description": "The caller application id of the operation."
+                },
+                {
+                    "name": "UserPrincipalName",
+                    "type": "String",
+                    "isPreferredFacet": true,
+                    "isDefaultDisplay": true,
+                    "description": "The user principal name of the user."
+                },
+                {
+                    "name": "UserId",
+                    "type": "String",
+                    "isPreferredFacet": true,
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "GUID",
+                    "description": "The user Id of the user."
+                },
+                {
+                    "name": "OtherIdentityProperties",
+                    "type": "String",
+                    "isPreferredFacet": true,
+                    "isDefaultDisplay": true,
+                    "description": "The identity properties of the user, include Type, UserPermission, ApplicationDisplayName, ServicePrincipleName, UserScopeTags, RemoteTenantId, and RemoteUserId."
+                },
+                {
+                    "name": "ComponentName",
+                    "type": "String",
+                    "isPreferredFacet": true,
+                    "isDefaultDisplay": true,
+                    "description": "The component name of the operation."
+                },
+                {
+                    "name": "OtherAuditEventProperties",
+                    "type": "String",
+                    "isPreferredFacet": true,
+                    "isDefaultDisplay": true,
+                    "description": "The audit event properties of the operation, include componentName, operationType, category, activityDateTime, auditEventId, correlationId, shoeboxCategory, and resources."
+                },
+                {
+                    "name": "ActivityId",
+                    "type": "String",
+                    "isPreferredFacet": false,
+                    "isDefaultDisplay": false,
+                    "dataTypeHint": "GUID",
+                    "description": "The activity Id of the operation."
+                },
+                {
+                    "name": "RelatedActivityId",
+                    "type": "String",
+                    "isPreferredFacet": false,
+                    "isDefaultDisplay": false,
+                    "dataTypeHint": "GUID",
+                    "description": "The related activity Id of the operation."
+                },
+                {
+                    "name": "SessionId",
+                    "type": "String",
+                    "isPreferredFacet": false,
+                    "isDefaultDisplay": false,
+                    "dataTypeHint": "GUID",
+                    "description": "The session Id of the operation."
+                },
+                {
+                    "name": "ScenarioId",
+                    "type": "String",
+                    "isPreferredFacet": false,
+                    "isDefaultDisplay": false,
+                    "description": "The scenario Id of the operation."
+                },
+                {
+                    "name": "ScenarioInstanceId",
+                    "type": "String",
+                    "isPreferredFacet": false,
+                    "isDefaultDisplay": false,
+                    "dataTypeHint": "GUID",
+                    "description": "The scenario instance Id of the operation."
+                },
+                {
+                    "name": "ServiceName",
+                    "type": "String",
+                    "isPreferredFacet": false,
+                    "isDefaultDisplay": false,
+                    "description": "The service name of the operation."
+                },
+                {
+                    "name": "ApplicationName",
+                    "type": "String",
+                    "isPreferredFacet": false,
+                    "isDefaultDisplay": false,
+                    "description": "The application name of the operation."
+                },
+                {
+                    "name": "BuildVersion",
+                    "type": "String",
+                    "isPreferredFacet": false,
+                    "isDefaultDisplay": false,
+                    "description": "The build version of the operation."
+                },
+                {
+                    "name": "Pid",
+                    "type": "String",
+                    "isPreferredFacet": false,
+                    "isDefaultDisplay": false,
+                    "description": "The pid of the operation."
+                },
+                {
+                    "name": "Tid",
+                    "type": "String",
+                    "isPreferredFacet": false,
+                    "isDefaultDisplay": false,
+                    "description": "The tid of the operation."
+                },
+                {
+                    "name": "ResourceExtendedProperties",
+                    "type": "String",
+                    "isPreferredFacet": false,
+                    "isDefaultDisplay": false,
+                    "description": "The resource extended properties of the operation."
+                },
+                {
+                    "name": "CallerExtendedProperties",
+                    "type": "String",
+                    "isPreferredFacet": false,
+                    "isDefaultDisplay": false,
+                    "description": "The caller extended properties of the operation."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/Windows365SampleAudit.json"
+        }
+    ],
+    "functions": [],
+    "queries": []
+}

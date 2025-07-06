@@ -1,0 +1,285 @@
+// This is for the purpose of mapping Device actions to the SimplifiedDeviceAction
+let SimplifiedDeviceActionMappings = parsejson('{"permitted": "Allow","Permitted": "Allow","est-allowed": "Allow","deny": "Deny","Deny": "Deny","denied": "Deny","Denied": "Deny","discarded": "Discarded","Discarded": "Discarded","teardown": "Teardown","Teardown": "Teardown","dropping": "Drop","Dropping": "Drop"}');
+// This is for the purpose of capitalizing the CommunicationDirection field
+let CommunicationDirectionMappings = parsejson('{"inbound": "Inbound","outbound": "Outbound", "INBOUND": "Inbound", "OUTBOUND": "Outbound"}');
+// This is for the purpose of mapping the numeric original log severity to a verbale representation. 
+let LogSeverityMappings = parsejson('{"1": "High","2": "High", "3": "Medium", "4": "Medium", "5": "Medium", "6": "Low", "7": "Low"}');
+// These Null functions are for the purpose of ingesting a null value to the CEF fields that are not in use in the Cisco ASA scenario
+let NullDynamic = parsejson("");
+let NullDateTime = todatetime("");
+let NullString = tostring("");
+let NullInt = toint("");
+let NullFloat = tofloat("");
+let NullLong = tolong("");
+// This is or the purpose of having a fallback regex and extract some basic fields from the CiscoIdent in case the message parsing fails
+let Fallback_Regex = "(?:%ASA|%FTD)-(\\d+)-(\\d+):.*$";
+let ExtractBasicFields=(Cisco_Message:string) {
+    todynamic(extractall(Fallback_Regex, Cisco_Message))
+};
+// This function accepts a key and a value and returns them in a key:value string format
+let string_concat=(Key:string, Value:string)
+{
+	strcat(Key,"':'", Value)
+};
+// This function accepts a value and returns it with an apostrophe before and after
+let create_maliciousIP_input=(Value:string)
+{
+    strcat("'",Value,"'")
+};
+// Structuring the ReceiptTime column to match the format from InMEM. TimePattern: M/d/yyyy h:mm:ss a (Exapmle: 11/10/2021 10:14:24 PM)
+let StructureReciptTime = (timestamp:datetime)
+{
+        let hour = datetime_part("Hour", timestamp);
+        // Determining if it is AM or PM
+        let period = iff (hour >= 12, "PM", "AM");
+        // Changing from 24 hour clock to 12 hour clock
+    	let calc_hour = iff(hour > 12, hour - 12, iff (hour == 0, hour + 12, hour));
+        // Adding a zero before one digit timestamp values- used for minutes and seconds
+        let add_zero = (time_value:long)
+        {
+            iff(time_value < 10, strcat('0', time_value), tostring(time_value))
+        };
+        // Using string contcatination to structure the time format
+        strcat(datetime_part("Month", timestamp), "/", datetime_part("Day", timestamp), "/", datetime_part("Year", timestamp), " ", calc_hour, ":", add_zero(datetime_part("Minute", timestamp)), ":", add_zero(datetime_part("Second", timestamp)), " ", period)
+};
+source
+| extend CiscoIdent=ident
+// Leverging the use of the case function for the purpose of fetching the correct field headers according to the source CiscoIdent
+// KeyFillers are used for the purpose of matching the amount of columns between all different events
+| extend CiscoIdents_fields = case(
+CiscoIdent == "%ASA-2-106001",parsejson('["OriginalLogSeverity", "DeviceEventClassID", "direction", "protocol", "action", "remote_ip", "from_ip", "remote_port", "from_port", "to_ip", "to_port"]'), 
+CiscoIdent == "%ASA-2-106002",parsejson('["OriginalLogSeverity", "DeviceEventClassID", "protocol", "action", "direction", "from_ip", "remote_ip", "to_ip", "key_filler1", "key_filler2", "key_filler3"]'),
+CiscoIdent == "%ASA-2-106006" or CiscoIdent == "%ASA-2-106007",parsejson('["OriginalLogSeverity", "DeviceEventClassID","action", "direction", "protocol", "remote_ip", "from_ip", "remote_port", "from_port", "to_ip", "to_port"]'),
+CiscoIdent == "%ASA-7-106010" or CiscoIdent == "%ASA-3-106010" or CiscoIdent == "%ASA-3-106014",parsejson('["OriginalLogSeverity", "DeviceEventClassID","action", "direction", "protocol", "remote_ip", "from_ip", "to_ip", "key_filler1", "key_filler2", "key_filler3"]'),
+CiscoIdent == "%ASA-6-106012",parsejson('["OriginalLogSeverity", "DeviceEventClassID","action", "from_ip", "to_ip", "key_filler1", "key_filler2", "key_filler3", "key_filler4", "key_filler5", "key_filler6"]'),
+CiscoIdent == "%ASA-2-106013",parsejson('["OriginalLogSeverity", "DeviceEventClassID","action", "from_ip", "to_ip", "key_filler1", "key_filler2", "key_filler3", "key_filler4", "key_filler5", "key_filler6"]'),
+CiscoIdent == "%ASA-6-106015",parsejson('["OriginalLogSeverity", "DeviceEventClassID","action","protocol","from_ip", "from_port", "to_ip", "to_port", "key_filler1", "key_filler2", "key_filler3"]'),
+CiscoIdent == "%ASA-2-106016" or CiscoIdent == "%ASA-2-106017", parsejson('["OriginalLogSeverity", "DeviceEventClassID","action", "from_ip", "to_ip", "key_filler1", "key_filler2", "key_filler3", "key_filler4", "key_filler5", "key_filler6"]'),
+CiscoIdent == "%ASA-2-106018",parsejson('["OriginalLogSeverity", "DeviceEventClassID","protocol", "action", "direction", "from_ip", "remote_ip", "to_ip", "key_filler1", "key_filler2", "key_filler3"]'),
+CiscoIdent == "%ASA-2-106020",parsejson('["OriginalLogSeverity", "DeviceEventClassID","action", "from_ip", "to_ip", "key_filler1", "key_filler2", "key_filler3", "key_filler4", "key_filler5", "key_filler6"]'),
+CiscoIdent == "%ASA-1-106021" or CiscoIdent == "%ASA-1-106022",parsejson('["OriginalLogSeverity", "DeviceEventClassID","action", "protocol", "remote_ip", "from_ip", "to_ip", "key_filler1", "key_filler2", "key_filler3", "key_filler4"]'),
+CiscoIdent == "%ASA-4-106023",parsejson('["OriginalLogSeverity", "DeviceEventClassID","action", "protocol", "from_ip", "from_port", "to_ip", "to_port", "key_filler1", "key_filler2", "key_filler3"]'),
+CiscoIdent == "%ASA-6-106100",parsejson('["OriginalLogSeverity", "DeviceEventClassID","action", "protocol", "from_ip", "from_port", "to_ip", "to_port", "key_filler1", "key_filler2", "key_filler3"]'),
+CiscoIdent == "%ASA-6-302014" or CiscoIdent == "%ASA-6-302016",parsejson('["OriginalLogSeverity", "DeviceEventClassID","action", "protocol", "from_ip", "from_port", "to_ip", "to_port", "key_filler1", "key_filler2", "key_filler3"]'),
+CiscoIdent == "%ASA-6-302020",parsejson('["OriginalLogSeverity", "DeviceEventClassID","action", "direction", "protocol", "from_ip", "from_port", "key_filler1", "key_filler2", "key_filler3", "key_filler4"]'),
+CiscoIdent == "%ASA-6-302021",parsejson('["OriginalLogSeverity", "DeviceEventClassID","action", "protocol", "from_ip", "from_port","key_filler1", "key_filler2", "key_filler3", "key_filler4", "key_filler5"]'),
+CiscoIdent == "%ASA-7-710002" or CiscoIdent == "%ASA-3-710003",parsejson('["OriginalLogSeverity", "DeviceEventClassID","protocol", "action", "from_ip", "from_port", "to_ip", "to_port", "key_filler1", "key_filler2", "key_filler3"]'),
+CiscoIdent == "%ASA-7-710005" or CiscoIdent == "%ASA-7-710006",parsejson('["OriginalLogSeverity", "DeviceEventClassID","protocol", "action", "from_ip", "from_port", "to_ip", "to_port", "key_filler1", "key_filler2", "key_filler3"]'),
+CiscoIdent == "%ASA-6-302015" or CiscoIdent == "%ASA-6-302013", iff (Message contains "inbound", parsejson('["OriginalLogSeverity", "DeviceEventClassID","action", "direction", "protocol", "remote_ip", "from_ip", "remote_port", "from_port", "to_ip", "to_port"]'),parsejson('["OriginalLogSeverity", "DeviceEventClassID","action", "direction", "protocol", "from_ip", "from_port", "remote_ip", "to_ip", "remote_port", "to_port"]')),
+parsejson('["OriginalLogSeverity", "DeviceEventClassID", "key_filler1", "key_filler2", "key_filler3", "key_filler4", "key_filler5", "key_filler6", "key_filler7", "key_filler8", "key_filler9"]'))
+// Adding the Cisco ASA Ident in case it doesn't appear for the purpose of supporting AMA
+| extend Message = iff(Message !startswith_cs "%ASA-" and Message !startswith_cs "%FTD-", strcat(CiscoIdent, ': ' ,Message), Message)
+// Running the relevant regex on the incoming events accrosing to their ident
+| extend regex_output = case (CiscoIdent == "%ASA-2-106001", extractall("%ASA-(\\d)-(\\d+):\\s* (Inbound) (\\w+) connection (denied) from (((?:\\d{1,3}\\.){3}\\d{1,3}))\\/((\\d+)) to ((?:\\d{1,3}\\.){3}\\d{1,3})\\/(\\d+).*$", Message),
+                              CiscoIdent == "%ASA-2-106002", extractall("%ASA-(\\d)-(\\d+):\\s* (.+) Connection (denied) by (outbound) list \\w+ src ((?:\\d{1,3}\\.){3}\\d{1,3}) dest (((?:\\d{1,3}\\.){3}\\d{1,3})).*$", Message),
+                              CiscoIdent == "%ASA-2-106006" or CiscoIdent == "%ASA-2-106007", extractall("%ASA-(\\d)-(\\d+):\\s* (Deny) (inbound) (\\w+) from (((?:\\d{1,3}\\.){3}\\d{1,3}))\\/((\\d+)) to ((?:\\d{1,3}\\.){3}\\d{1,3})\\/(\\d+).*$", Message),
+                              CiscoIdent == "%ASA-7-106010" or CiscoIdent == "%ASA-3-106010" or CiscoIdent == "%ASA-3-106014", extractall("%ASA-(\\d)-(\\d+):\\s* (Deny) (inbound)(?: protocol)? (.*) src (?:\\w+):(((?:\\d{1,3}\\.){3}\\d{1,3})) dst (?:\\w+):((?:\\d{1,3}\\.){3}\\d{1,3}).*$", Message),
+                              CiscoIdent == "%ASA-6-106012", extractall("%ASA-(\\d)-(\\d+):\\s* (Deny) IP from ((?:\\d{1,3}\\.){3}\\d{1,3}) to ((?:\\d{1,3}\\.){3}\\d{1,3}).*$", Message),
+                              CiscoIdent == "%ASA-2-106013", extractall("%ASA-(\\d)-(\\d+):\\s* (Dropping) echo request from ((?:\\d{1,3}\\.){3}\\d{1,3}) to PAT address ((?:\\d{1,3}\\.){3}\\d{1,3}).*$", Message),
+                              CiscoIdent == "%ASA-6-106015", extractall("%ASA-(\\d)-(\\d+):\\s* (Deny) (TCP) \\(no connection\\) from ((?:\\d{1,3}\\.){3}\\d{1,3}|.*)\\/(\\d+) to ((?:\\d{1,3}\\.){3}\\d{1,3}|.*)\\/(\\d+).*$", Message),
+                              CiscoIdent == "%ASA-2-106016" or CiscoIdent == "%ASA-2-106017", extractall("%ASA-(\\d)-(\\d+):\\s* (Deny) IP .+ from \\(?((?:\\d{1,3}\\.){3}\\d{1,3})\\)? to ((?:\\d{1,3}\\.){3}\\d{1,3}).*$", Message),
+                              CiscoIdent == "%ASA-2-106018", extractall("%ASA-(\\d)-(\\d+):\\s* (ICMP) packet type \\w+ (denied) by (outbound) list \\w+ src ((?:\\d{1,3}\\.){3}\\d{1,3}) dest (((?:\\d{1,3}\\.){3}\\d{1,3})).*$", Message),
+                              CiscoIdent == "%ASA-2-106020", extractall("%ASA-(\\d)-(\\d+):\\s* (Deny) IP teardrop fragment \\(size = \\d+, offset = \\d+\\) from ((?:\\d{1,3}\\.){3}\\d{1,3}) to ((?:\\d{1,3}\\.){3}\\d{1,3}).*$", Message),
+                              CiscoIdent == "%ASA-1-106021" or CiscoIdent == "%ASA-1-106022", extractall("%ASA-(\\d)-(\\d+):\\s* (Deny) (\\w+) .* from (((?:\\d{1,3}\\.){3}\\d{1,3})) to ((?:\\d{1,3}\\.){3}\\d{1,3}).*$", Message),
+                              CiscoIdent == "%ASA-4-106023", extractall("%ASA-(\\d)-(\\d+):\\s* (Deny) (.*) src .*:((?:\\d{1,3}\\.){3}\\d{1,3})(?:\\/(\\d+))? dst .*:((?:\\d{1,3}\\.){3}\\d{1,3})(?:\\/(\\d+))?.*$", Message),
+                              CiscoIdent == "%ASA-6-106100", extractall("%ASA-(\\d)-(\\d+):\\s* access-list (?:.+) (permitted|denied|est-allowed) (\\w+) .*\\/((?:\\d{1,3}\\.){3}\\d{1,3})\\((\\d+)\\).* -> .*\\/((?:\\d{1,3}\\.){3}\\d{1,3})\\((\\d+)\\).*$", Message),
+                              CiscoIdent == "%ASA-6-302014" or CiscoIdent == "%ASA-6-302016", extractall("%ASA-(\\d)-(\\d+):\\s* (Teardown) (UDP|TCP) connection .+ for .+:((?:\\d{1,3}\\.){3}\\d{1,3})\\/(\\d+) to .+:((?:\\d{1,3}\\.){3}\\d{1,3})?.*\\/(\\d+)", Message),
+                              CiscoIdent == "%ASA-6-302020", extractall("%ASA-(\\d)-(\\d+):\\s* (Built) (outbound|inbound) (ICMP) connection for faddr ((?:\\d{1,3}\\.){3}\\d{1,3})\\/(\\d+)", Message),
+                              CiscoIdent == "%ASA-6-302021", extractall("%ASA-(\\d)-(\\d+):\\s* (Teardown) (ICMP) connection for faddr ((?:\\d{1,3}\\.){3}\\d{1,3})\\/(\\d+)", Message),
+                              CiscoIdent == "%ASA-7-710002" or CiscoIdent == "%ASA-3-710003", extractall("%ASA-(\\d)-(\\d+):\\s* (UDP|TCP) access (denied|permitted) by ACL from ((?:\\d{1,3}\\.){3}\\d{1,3})\\/(\\d+).* to .*:((?:\\d{1,3}\\.){3}\\d{1,3})\\/(\\d+).*$", Message),
+                              CiscoIdent == "%ASA-7-710005" or CiscoIdent == "%ASA-7-710006", extractall("%ASA-(\\d)-(\\d+):\\s* (\\w+) request (discarded) from ((?:\\d{1,3}\\.){3}\\d{1,3})(?:\\/(\\d+))?.* to .*:((?:\\d{1,3}\\.){3}\\d{1,3})(?:\\/(\\d+))?.*$", Message),
+                              CiscoIdent == "%ASA-6-302015" or CiscoIdent == "%ASA-6-302013", iff (Message contains "inbound", extractall("%ASA-(\\d)-(\\d+):\\s* (Built) (inbound) (UDP|TCP) connection .+ for .+:(((?:\\d{1,3}\\.){3}\\d{1,3}))\\/((\\d+)) .+ to .+\\(((?:\\d{1,3}\\.){3}\\d{1,3})?.*\\/(\\d+)", Message), extractall("%ASA-(\\d)-(\\d+):\\s* (Built) (outbound) (UDP|TCP) connection .+ for .+:((?:\\d{1,3}\\.){3}\\d{1,3})\\/(\\d+) .+ to .+\\((((?:\\d{1,3}\\.){3}\\d{1,3}))?.*\\/((\\d+))", Message)),
+                              extractall(Fallback_Regex, Message))
+// Using string concatination for the purpose of creating Key:Value pairs of header and value, from which columns will be extracted from                              
+| extend all_fields = parsejson(strcat("{'",string_concat(CiscoIdents_fields[0], regex_output[0][0]),"','",string_concat(CiscoIdents_fields[1], regex_output[0][1]),"','",string_concat(CiscoIdents_fields[2], regex_output[0][2]),"','",string_concat(CiscoIdents_fields[3], regex_output[0][3]),"','",string_concat(CiscoIdents_fields[4], regex_output[0][4]),"','",string_concat(CiscoIdents_fields[5], regex_output[0][5]),"','",string_concat(CiscoIdents_fields[6], regex_output[0][6]),"','",string_concat(CiscoIdents_fields[7], regex_output[0][7]),"','",string_concat(CiscoIdents_fields[8], regex_output[0][8]),"','",string_concat(CiscoIdents_fields[9], regex_output[0][9]),"','",string_concat(CiscoIdents_fields[10], regex_output[0][10]),"'}"))
+// Extracting the fields in to columns
+| extend SourceSystem = tostring("OpsManager")
+| extend TimeGenerated = todatetime(Time)
+| extend ReceiptTime = iff(tostring(EventTime) != NullString, StructureReciptTime(todatetime(EventTime)), NullString)
+| extend DeviceName = tostring(Host)
+| extend Computer = tostring(Host)
+| extend CollectorHostName = iff(isempty(CollectorHost), NullString, tostring(CollectorHost))
+| extend DeviceFacility = tostring(Facility)
+| extend DeviceAddress = tostring(HostIP)
+| extend DeviceAction = tostring(all_fields.action)
+| extend SimplifiedDeviceAction = tostring(SimplifiedDeviceActionMappings[DeviceAction])
+| extend SimplifiedDeviceAction = iff(isempty(SimplifiedDeviceAction), DeviceAction, SimplifiedDeviceAction)
+| extend SourceIP = tostring(all_fields.from_ip)
+| extend RemoteIP = tostring(all_fields.remote_ip)
+| extend DestinationIP = tostring(all_fields.to_ip)
+// Next 3 lines are because CommunicationDirection always starts with a capital letter
+| extend direction = tostring(all_fields.direction)
+| extend CommunicationDirection = tostring(CommunicationDirectionMappings[direction])
+| extend CommunicationDirection = tostring(iff(isempty(CommunicationDirection), direction, CommunicationDirection))
+| extend Protocol = tostring(all_fields.protocol)
+| extend RemotePort = tostring(all_fields.remote_port)
+| extend DestinationPort = toint(all_fields.to_port)
+| extend SourcePort = toint(all_fields.from_port)
+| extend DeviceVendor = tostring("Cisco")
+| extend DeviceProduct = tostring("ASA")
+| extend OriginalLogSeverity = iff(tostring(all_fields.OriginalLogSeverity) == "", tostring(ExtractBasicFields(Message)[0][0]), tostring(all_fields.OriginalLogSeverity))
+| extend DeviceEventClassID = iff(tostring(all_fields.DeviceEventClassID) == "", tostring(ExtractBasicFields(Message)[0][1]), tostring(all_fields.DeviceEventClassID))
+// This line is for categorizing the cisco event into the correct log severity according to the CiscoIdent
+| extend LogSeverity = tostring(LogSeverityMappings[OriginalLogSeverity])
+// These following 4 line are for the purpose of extending malicious IP indicators
+| extend IpArrayInput = parsejson(strcat("[",create_maliciousIP_input(SourceIP),",",create_maliciousIP_input(RemoteIP),",",create_maliciousIP_input(DestinationIP),",",create_maliciousIP_input(DeviceAddress),",","]"))
+| extend maliciousIpIndicator = check_malicious_ip(IpArrayInput, true)
+| extend maliciousIpAddress = tostring(maliciousIpIndicator["IP"])
+| extend maliciousGeoLocation = iff(isempty(maliciousIpAddress), NullDynamic, geo_location(maliciousIpAddress))
+| project SourceSystem
+, Message
+, DeviceAction
+, SourceIP 
+, DestinationIP
+, CommunicationDirection
+, Protocol
+, RemotePort
+, DestinationPort
+, RemoteIP
+, DeviceEventClassID
+, OriginalLogSeverity
+, LogSeverity
+, SourcePort
+, DeviceVendor
+, DeviceProduct
+, TimeGenerated
+, DeviceFacility
+, DeviceName
+, DeviceAddress
+, ReceiptTime
+, SimplifiedDeviceAction
+, Computer
+, CollectorHostName
+, MaliciousIP=maliciousIpAddress
+, ThreatSeverity=toint(maliciousIpIndicator["Severity"])
+, IndicatorThreatType=tostring(maliciousIpIndicator["ThreatType"])
+, ThreatDescription=tostring(maliciousIpIndicator["Description"])
+, ThreatConfidence=tostring(maliciousIpIndicator["Confidence"])
+, ReportReferenceLink=tostring(maliciousIpIndicator["ReportReferenceLink"])
+, MaliciousIPLongitude = tofloat(maliciousGeoLocation["Longitude"])
+, MaliciousIPLatitude = tofloat(maliciousGeoLocation["Latitude"])
+, MaliciousIPCountry = tostring(maliciousGeoLocation["Country"])
+, DeviceVersion = NullString
+, Activity = NullString
+, AdditionalExtensions = NullString
+, ApplicationProtocol = NullString
+, Reason = NullString
+, EventOutcome = NullString
+, EventCount = NullInt
+, DestinationDnsDomain = NullString
+, DestinationServiceName = NullString
+, DestinationTranslatedAddress = NullString
+, DestinationTranslatedPort = NullInt
+, DeviceDnsDomain = NullString
+, DestinationUserName = NullString
+, DeviceExternalID = NullString
+, DeviceInboundInterface = NullString
+, DeviceNtDomain = NullString
+, DeviceOutboundInterface = NullString
+, DevicePayloadId = NullString
+, ProcessName = NullString
+, DeviceTranslatedAddress = NullString
+, DestinationHostName = NullString
+, DestinationMACAddress = NullString
+, DestinationNTDomain = NullString
+, DestinationProcessId = NullInt
+, DestinationUserPrivileges = NullString
+, DestinationProcessName = NullString
+, DeviceTimeZone = NullString
+, DestinationUserID = NullString
+, DeviceMacAddress = NullString
+, ProcessID = NullInt
+, ExternalID = NullInt
+, ExtID = NullString
+, FileCreateTime = NullString
+, FileHash = NullString
+, FileID = NullString
+, FileModificationTime = NullString
+, FilePath = NullString
+, FilePermission = NullString
+, FileType = NullString
+, FileName = NullString
+, FileSize = NullInt
+, ReceivedBytes = NullLong
+, OldFileCreateTime = NullString
+, OldFileHash = NullString
+, OldFileID = NullString
+, OldFileModificationTime = NullString
+, OldFileName = NullString
+, OldFilePath = NullString
+, OldFilePermission = NullString
+, OldFileSize = NullInt
+, OldFileType = NullString
+, SentBytes = NullLong
+, RequestURL = NullString
+, RequestClientApplication = NullString
+, RequestContext = NullString
+, RequestCookies = NullString
+, RequestMethod = NullString
+, SourceHostName = NullString
+, SourceMACAddress = NullString
+, SourceNTDomain = NullString
+, SourceDnsDomain = NullString
+, SourceServiceName = NullString
+, SourceTranslatedAddress = NullString
+, SourceTranslatedPort = NullInt
+, SourceProcessId = NullInt
+, SourceUserPrivileges = NullString
+, SourceProcessName = NullString
+, SourceUserID = NullString
+, SourceUserName = NullString
+, EventType = NullInt
+, DeviceEventCategory = NullString
+, DeviceCustomIPv6Address1 = NullString
+, DeviceCustomIPv6Address1Label = NullString
+, DeviceCustomIPv6Address2 = NullString
+, DeviceCustomIPv6Address2Label = NullString
+, DeviceCustomIPv6Address3 = NullString
+, DeviceCustomIPv6Address3Label = NullString
+, DeviceCustomIPv6Address4 = NullString
+, DeviceCustomIPv6Address4Label = NullString
+, DeviceCustomFloatingPoint1 = NullFloat
+, DeviceCustomFloatingPoint1Label = NullString
+, DeviceCustomFloatingPoint2 = NullFloat
+, DeviceCustomFloatingPoint2Label = NullString
+, DeviceCustomFloatingPoint3 = NullFloat
+, DeviceCustomFloatingPoint3Label = NullString
+, DeviceCustomFloatingPoint4 = NullFloat
+, DeviceCustomFloatingPoint4Label = NullString
+, DeviceCustomNumber1 = NullInt
+, FieldDeviceCustomNumber1 = NullLong
+, DeviceCustomNumber1Label = NullString
+, DeviceCustomNumber2 = NullInt
+, FieldDeviceCustomNumber2 = NullLong
+, DeviceCustomNumber2Label = NullString
+, DeviceCustomNumber3 = NullInt
+, FieldDeviceCustomNumber3 = NullLong
+, DeviceCustomNumber3Label = NullString
+, DeviceCustomString1 = NullString
+, DeviceCustomString1Label = NullString
+, DeviceCustomString2 = NullString
+, DeviceCustomString2Label = NullString
+, DeviceCustomString3 = NullString
+, DeviceCustomString3Label = NullString
+, DeviceCustomString4 = NullString
+, DeviceCustomString4Label = NullString
+, DeviceCustomString5 = NullString
+, DeviceCustomString5Label = NullString
+, DeviceCustomString6 = NullString
+, DeviceCustomString6Label = NullString
+, DeviceCustomDate1 = NullString
+, DeviceCustomDate1Label = NullString
+, DeviceCustomDate2 = NullString
+, DeviceCustomDate2Label = NullString
+, FlexDate1 = NullString
+, FlexDate1Label = NullString
+, FlexNumber1 = NullInt
+, FlexNumber1Label = NullString
+, FlexNumber2 = NullInt
+, FlexNumber2Label = NullString
+, FlexString1 = NullString
+, FlexString1Label = NullString
+, FlexString2 = NullString
+, FlexString2Label = NullString
+, StartTime = NullDateTime
+, EndTime = NullDateTime

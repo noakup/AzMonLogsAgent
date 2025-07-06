@@ -1,0 +1,101 @@
+[
+    {
+        "TimeGenerated": "2022-11-01T00:10:19Z",
+        "Location": "eastus",
+        "OperationName": "Microsoft.Network/virtualNetworks/networkGroupMembership/write",
+        "CorrelationId": "f15d26f4-73ed-4556-aa60-1b2e09000822",
+        "ResultType": "Success",
+        "LogLevel": "Info",
+        "Message": "Network group membership change successful.",
+        "DetailedMessage":"",
+        "NetworkResourceIds": [
+            "/subscriptions/c9295b92-3574-4021-95a1-26c8f74f8359/resourceGroups/arjunpatel-VnetVerifierTesting/providers/Microsoft.Network/virtualNetworks/vnet5Hub"
+        ],
+        "GroupMemberships": [
+            
+        ]
+    },
+    {
+        "TimeGenerated": "2022-10-31T23:06:01Z",
+        "Location": "eastus",
+        "OperationName": "Microsoft.Network/virtualNetworks/networkGroupMembership/write",
+        "CorrelationId": "fda8dfac-7ddc-4975-b942-e49de43b2af7",
+        "ResultType": "Success",
+        "LogLevel": "Info",
+        "Message": "Network group membership change successful.",
+        "DetailedMessage":"",
+        "NetworkResourceIds": [
+            "/subscriptions/c9295b92-3574-4021-95a1-26c8f74f8359/resourceGroups/arjunpatel-VnetVerifierTesting/providers/Microsoft.Network/virtualNetworks/vnet5Hub"
+        ],
+        "GroupMemberships": [
+            {
+                "NetworkGroupId": "/subscriptions/2d56342a-7652-432b-87a5-56a180b17255/resourceGroups/sanjana_rg/providers/Microsoft.Network/networkManagers/Sanjana_tipNM/networkGroups/testtipLogs_NG",
+                "Sources": [
+                    {
+                        "Type": "StaticMembership",
+                        "StaticMemberId": "/subscriptions/2d56342a-7652-432b-87a5-56a180b17255/resourceGroups/sanjana_rg/providers/Microsoft.Network/networkManagers/Sanjana_tipNM/networkGroups/testtipLogs_NG/staticMembers/ANM_16dfk0lmzp4"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "TimeGenerated": "2022-11-01T17:56:50Z",
+        "Location": "eastus",
+        "OperationName": "Microsoft.Network/virtualNetworks/networkGroupMembership/write",
+        "CorrelationId": "02102fa6-b5e0-4343-8a80-9a21d5a40de1",
+        "ResultType": "Success",
+        "LogLevel": "Info",
+        "Message": "Network group membership change successful.",
+        "DetailedMessage":"",
+        "NetworkResourceIds": [
+            "/subscriptions/c9295b92-3574-4021-95a1-26c8f74f8359/resourceGroups/arjunpatel-VnetVerifierTesting/providers/Microsoft.Network/virtualNetworks/vnetXHub"
+        ],
+        "GroupMemberships": [
+            {
+                "NetworkGroupId": "/subscriptions/2d56342a-7652-432b-87a5-56a180b17255/resourceGroups/sanjana_rg/providers/Microsoft.Network/networkManagers/Sanjana_tipNM/networkGroups/testtipLogs_NG2",
+                "Sources": [
+                    {
+                        "Type": "Policy",
+                        "PolicyAssignmentId": "/providers/Microsoft.Management/managementGroups/arjunpatel/providers/Microsoft.Authorization/policyAssignments/DynamicTipTesting",
+                        "PolicyDefinitionId": "/providers/Microsoft.Management/managementGroups/arjunpatel/providers/Microsoft.Authorization/policyDefinitions/DynamicTipTesting"
+                    }
+                ]
+            }
+        ]         
+    },
+    {
+        "TimeGenerated": "2022-11-01T17:57:08Z",
+        "Location": "eastus",
+        "OperationName": "Microsoft.Network/virtualNetworks/networkGroupMembership/write",
+        "CorrelationId": "a1d55cb7-4777-4284-8973-eea8792c2fcb",
+        "ResultType": "Success",
+        "LogLevel": "Info",
+        "Message": "Network group membership change successful.",
+        "DetailedMessage":"",
+        "NetworkResourceIds": [
+            "/subscriptions/c9295b92-3574-4021-95a1-26c8f74f8359/resourceGroups/arjunpatel-VnetVerifierTesting/providers/Microsoft.Network/virtualNetworks/vnetXHub"
+        ],
+        "GroupMemberships": [
+            {
+                "NetworkGroupId": "/subscriptions/2d56342a-7652-432b-87a5-56a180b17255/resourceGroups/sanjana_rg/providers/Microsoft.Network/networkManagers/Sanjana_tipNM/networkGroups/testtipLogs_NG",
+                "Sources": [
+                    {
+                        "Type": "StaticMembership",
+                        "StaticMemberId": "/subscriptions/2d56342a-7652-432b-87a5-56a180b17255/resourceGroups/sanjana_rg/providers/Microsoft.Network/networkManagers/Sanjana_tipNM/networkGroups/testtipLogs_NG/staticMembers/ANM_r1r1ot5skw"
+                    }
+                ]
+            },
+            {
+                "NetworkGroupId": "/subscriptions/2d56342a-7652-432b-87a5-56a180b17255/resourceGroups/sanjana_rg/providers/Microsoft.Network/networkManagers/Sanjana_tipNM/networkGroups/testtipLogs_NG2",
+                "Sources": [
+                    {
+                        "Type": "Policy",
+                        "PolicyAssignmentId": "/providers/Microsoft.Management/managementGroups/arjunpatel/providers/Microsoft.Authorization/policyAssignments/DynamicTipTesting",
+                        "PolicyDefinitionId": "/providers/Microsoft.Management/managementGroups/arjunpatel/providers/Microsoft.Authorization/policyDefinitions/DynamicTipTesting"
+                    }
+                ]
+            }
+        ]
+    }
+]

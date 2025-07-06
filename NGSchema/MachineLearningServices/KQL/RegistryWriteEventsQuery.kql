@@ -1,0 +1,9 @@
+AmlRegistryWriteEventsLog
+| project
+	TimeGenerated,
+	RegistryResourceId,
+	OperationType,
+	UserName,
+	AssetName,
+	AssetVersion
+| top 100 by TimeGenerated

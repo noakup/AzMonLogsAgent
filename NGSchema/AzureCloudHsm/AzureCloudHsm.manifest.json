@@ -1,0 +1,224 @@
+{
+	"type": "Microsoft.HardwareSecurityModules/cloudHsmClusters",
+	"displayName": "Azure CloudHsm",
+	"description": "Azure CloudHsm is a service that provides secure storage for cryptographic keys using hardware security modules that meet the FIPS 140-2 Level 3 security standard.",
+	"tags": {},
+	"properties": {},
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "AZURECLOUDHSM/Triage",
+	"contactDL": "azcloudhsmicm@microsoft.com",
+	"relatedTables": [
+		"AzureActivity",
+		"AzureMetrics"
+	],
+	"relatedFunctions": [],
+	"tables": [
+		{
+			"workflowName": "CHSMServiceOperationAuditLogsWorkflow",
+			"transformName": "CHSMServiceOperationAuditLogs",
+			"physicalName": "CloudHsmServiceOperationAuditLogs",
+			"logicalName": "CloudHsmServiceOperationAuditLogs",
+			"description": "This table contains HSM Commands send to your Azure Cloud HSM resource's HSM partitions. These logs capture all HSM operations performed by Customer over E2E channel on each HSM partition of that Cloud HSM resource. They can be used to monitor events and configure necessary alerts on your Cloud HSM resource.",
+			"categories": [ "resources", "audit" ],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 10,
+			"dataTypeId": "AZURECLOUDHSM_HSMSERVICEOPERATIONS",
+			"intelligencePacks": [],
+			"isResourceCentric": true,
+			"tableState": "Production",
+			"isLakeAllowed": true,
+			"isTroubleshootingAllowed": true,
+			"isChangeColumnInternalNameAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "resultType",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "callerIpAddress",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				},
+				{
+					"name": "resultSignature",
+					"type": "String"
+				},
+				{
+					"name": "resultDescription",
+					"type": "String"
+				},
+				{
+					"name": "durationMs",
+					"type": "Int"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "KQL/CloudHsmServiceOperationAuditLogsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"description": "Timestamp (UTC) when operation occured."
+				},
+				{
+					"name": "ResultType",
+					"type": "String",
+					"description": "Result of the request."
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"description": "Name of the operation"
+				},
+				{
+					"name": "CallerIpAddress",
+					"type": "String",
+					"dataTypeHint": "IP",
+					"description": "IP address of the client that made the request."
+				},
+				{
+					"name": "ClientSdkPackageVersion",
+					"type": "String",
+					"description": "Version of the client SDK package."
+				},
+				{
+					"name": "MemberId",
+					"type": "String",
+					"description": "Member ID of HSM in the Cloud HSM cluster."
+				},
+				{
+					"name": "Opcode",
+					"type": "String",
+					"description": "Operation code in HEX string format."
+				},
+				{
+					"name": "ClientInfo",
+					"type": "String",
+					"description": "User agent information."
+				},
+				{
+					"name": "Sku",
+					"type": "Dynamic",
+					"description": "Information about the Cloud HSM SKU including family and name."
+				},
+				{
+					"name": "PoolType",
+					"type": "String",
+					"description": "Cloud HSM pool type."
+				},
+				{
+					"name": "ResultSignature",
+					"type": "String",
+					"description": "Short signature of the result."
+				},
+				{
+					"name": "ResultDescription",
+					"type": "String",
+					"description": "More detailed description of the result."
+				},
+				{
+					"name": "DurationMs",
+					"type": "Int",
+					"description": "Time it took to service the request, in milliseconds. This does not include the network latency, so the time you measure on the client side might not match this time."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/CloudHsmServiceOperationAuditLogsInputSample.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/CloudHsmServiceOperationAuditLogsOutputSample.json"
+		}
+	],
+	"functions": [],
+	"queries": [
+		{
+			"id": "e1d8c76d-8a12-4e91-a04d-1aa38423af60",
+			"displayName": "Are there any slow requests?",
+			"description": "List of Cloud HSM requests taking longer than 1 second.",
+			"bodyFilePath": "Query/SlowRequestQuery.kql",
+			"categories": [
+				"audit",
+				"resources"
+			],
+			"tags": {
+				"Topic": [
+					"Alerts",
+					"Usage and Diagnostics"
+			    ]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			},
+			"relatedTables": [
+				"CloudHsmServiceOperationAuditLogs"
+			]
+		},
+		{
+			"id": "78169da5-08d5-4abb-a419-8abcae4b8279",
+			"displayName": "How active has this Cloud HSM been?",
+			"description": "Line chart showing trend of Cloud HSM requests volume, per operation over time.",
+			"bodyFilePath": "Query/ActivityQuery.kql",
+			"categories": [
+				"audit",
+				"resources"
+			],
+			"tags": {
+				"Topic": [
+					"Usage and Diagnostics"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			},
+			"relatedTables": [
+				"CloudHsmServiceOperationAuditLogs"
+			]
+		},
+		{
+			"id": "711f80bd-d89f-4c07-84f6-e053b0d5c8ed",
+			"displayName": "Are there any failures?",
+			"description": "Count of failed requests by request type",
+			"bodyFilePath": "Query/FailedRequestCountQuery.kql",
+			"categories": [
+				"audit",
+				"resources"
+			],
+			"tags": {
+				"Topic": [
+					"Usage and Diagnostics"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			},
+			"relatedTables": [
+				"CloudHsmServiceOperationAuditLogs"
+			]
+		}
+	]
+}

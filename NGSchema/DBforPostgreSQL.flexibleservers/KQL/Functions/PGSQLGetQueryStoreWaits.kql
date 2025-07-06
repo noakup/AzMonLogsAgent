@@ -1,0 +1,104 @@
+let ParamTimeStart = iff((isnull(TimeStart)), ago(1d), TimeStart);
+let ParamTimeEnd = iff((isnull(TimeEnd)), now(), TimeEnd);
+let ParamResourceId = iff(isnull(ResourceId) or trim(" ", ResourceId) == "", "", ResourceId);
+let existsResource=iff( ParamResourceId == "" , false, true);
+let existsGenericTableData = toscalar(
+    AzureDiagnostics
+    | where TimeGenerated >= ParamTimeStart and TimeGenerated <= ParamTimeEnd
+    | where Category == 'PostgreSQLFlexQueryStoreWaitStats'
+    | where iff(existsResource,_ResourceId =~ ParamResourceId, true)
+    | take 1
+    | summarize count()
+    | project iff(count_ == 0, false, true)
+);
+let existsDedicatedTableData = toscalar(
+     PGSQLQueryStoreWaits
+    | where TimeGenerated >= ParamTimeStart and TimeGenerated <= ParamTimeEnd
+    | where iff(existsResource,_ResourceId =~ ParamResourceId, true)
+    | take 1
+    | summarize count()
+    | project iff(count_ == 0, false, true)
+);
+let GenericData = AzureDiagnostics
+| where TimeGenerated >= ParamTimeStart and TimeGenerated <= ParamTimeEnd
+| where Category == 'PostgreSQLFlexQueryStoreWaitStats'
+| where iff(existsGenericTableData==true, true, false)
+| where iff(existsResource,_ResourceId =~ ParamResourceId, true)
+| project
+TimeGenerated,
+_ResourceId,
+// building columns to match the dedicated table
+UserId = toint(
+    iff(isnotempty(AdditionalFields.Userid), AdditionalFields.Userid,
+        column_ifexists('Userid_d',
+            column_ifexists('Userid',
+                column_ifexists('Userid_s', "")
+            )
+        )
+    )
+),
+DatabaseId = toint(
+    iff(isnotempty(AdditionalFields.Dbid), AdditionalFields.Dbid,
+        column_ifexists('Dbid_d',
+            column_ifexists('Dbid',
+                column_ifexists('Dbid_s', "")
+            )
+        )
+    )
+),
+QueryId = iff(isnotempty(AdditionalFields.Queryid_str), tostring(AdditionalFields.Queryid_str), 
+    iff(isnotempty(AdditionalFields.Queryid), tostring(AdditionalFields.Queryid), 
+        iff(isnotempty(column_ifexists('Queryid_str_s', "")), tostring(column_ifexists('Queryid_str_s', "")), 
+            iff(isnotempty(column_ifexists('Queryid_d', "")), tostring(column_ifexists('Queryid_d', "")), 
+                iff(isnotempty(column_ifexists('Queryid', "")), tostring(column_ifexists('Queryid', "")), tostring(column_ifexists('Queryid_s', "")))
+            )
+        )
+    )
+),
+StartTime = todatetime(
+    iff(isnotempty(AdditionalFields.Start_time), AdditionalFields.Start_time,
+        column_ifexists('Start_time_t',
+            column_ifexists('Start_time',
+                column_ifexists('Start_time_s', "")
+            )
+        )
+    )
+),
+EndTime = todatetime(
+    iff(isnotempty(AdditionalFields.End_time), AdditionalFields.End_time,
+        column_ifexists('End_time_t',
+            column_ifexists('End_time',
+                column_ifexists('End_time_s', "")
+            )
+        )
+    )
+),
+EventType = tostring(
+    iff(isnotempty(AdditionalFields.Event_type), AdditionalFields.Event_type,
+        column_ifexists('Event_type_s',
+            column_ifexists('Event_type', "")
+        )
+    )
+),
+Event = tostring(
+    iff(isnotempty(AdditionalFields.Event), AdditionalFields.Event,
+        column_ifexists('Event_s',
+            column_ifexists('Event', "")
+        )
+    )
+),
+Calls = tolong(
+    iff(isnotempty(AdditionalFields.Calls), AdditionalFields.Calls,
+        column_ifexists('Calls_d',
+            column_ifexists('Calls',
+                column_ifexists('Calls_s', "")
+            )
+        )
+    )
+);
+let DedicatedData = PGSQLQueryStoreWaits
+| where TimeGenerated >= ParamTimeStart and TimeGenerated <= ParamTimeEnd
+| where iff(existsDedicatedTableData==true, true, false)
+| where iff(existsResource,_ResourceId =~ ParamResourceId, true);
+DedicatedData
+| union isfuzzy=true GenericData

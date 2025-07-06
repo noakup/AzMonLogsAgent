@@ -1,0 +1,9 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    Region = location,
+    OperationName = operationName,
+    SubResourceId = tostring(parse_json(properties).SubResourceId),
+    Message = resultDescription,
+    CorrelationId = correlationId,
+    AdditionalProperties = properties

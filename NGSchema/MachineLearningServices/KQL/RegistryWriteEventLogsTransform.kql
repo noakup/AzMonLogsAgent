@@ -1,0 +1,12 @@
+source
+| extend identity = parse_json(Identity)
+| project
+    TimeGenerated = todatetime(["time"]),
+    CorrelationId = CorrelationId,
+    RegistryResourceId = resourceId,
+	UserName = tostring(identity.UserName),
+    UserObjectId = tostring(identity.UserObjectId),
+    RegistryTenantId = tostring(properties.tenantId),
+    AssetName = tostring(properties.assetName),
+    AssetVersion = tostring(properties.assetVersion),
+    Labels = tostring(properties.labels)

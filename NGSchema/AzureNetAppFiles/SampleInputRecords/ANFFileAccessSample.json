@@ -1,0 +1,169 @@
+[
+  {
+    "time": "2022-04-06T07:28:00.6572100Z",
+    "operationTime": "2022-04-06T07:27:42.695879000Z",
+    "resourceId": "/SUBSCRIPTIONS/8F38CFEC-0ECD-413A-892E-2494F77A3B56/RESOURCEGROUPS/ANKITYWCUSCONS05RG/PROVIDERS/MICROSOFT.NETAPP/NETAPPACCOUNTS/ANF-ATOM-REG-WCUS/CAPACITYPOOLS/AUDITPOOL/VOLUMES/AUDITENABLE2",
+    "category": "ANFFileAccess",
+    "operationName": "Get Object Attributes",
+    "operationVersion": "101.2",
+    "schemaVersion": "1.0",
+    "resultType": "Audit Success",
+    "callerIpAddress": "172.28.0.7",
+    "location": "westcentralus",
+    "level": "Informational",
+    "properties": {
+      "subjectUnix": {
+        "uid": "0",
+        "gid": "0",
+        "local": "false"
+      },
+      "objectServer": "Security",
+      "objectName": "(vol_auditenable2_08efaf;2af30151-37ac-11ec-ac10-d039ea1ce463);/auditlog.txt",
+      "informationRequested": "File Type; File Size; Last Accessed Time; Last Metadata Modfied Time; Last Modified Time; Unix Mode; Unix Owner; Unix Group; ",
+      "subjectIP": {
+        "ipVersion": "4",
+        "value": "172.28.0.7"
+      },
+      "handleID": "00000000019e58;00;00000063;11345fd7",
+      "objectType": "File"
+    }
+  },
+  {
+    "time": "2022-04-06T07:28:00.6573590Z",
+    "operationTime": "2022-04-06T07:27:42.695883000Z",
+    "resourceId": "/SUBSCRIPTIONS/8F38CFEC-0ECD-413A-892E-2494F77A3B56/RESOURCEGROUPS/ANKITYWCUSCONS05RG/PROVIDERS/MICROSOFT.NETAPP/NETAPPACCOUNTS/ANF-ATOM-REG-WCUS/CAPACITYPOOLS/AUDITPOOL/VOLUMES/AUDITENABLE2",
+    "category": "ANFFileAccess",
+    "operationName": "Close Object",
+    "operationVersion": "101.2",
+    "schemaVersion": "1.0",
+    "resultType": "Audit Success",
+    "callerIpAddress": "172.28.0.7",
+    "location": "westcentralus",
+    "level": "Informational",
+    "properties": {
+      "subjectUnix": {
+        "uid": "0",
+        "gid": "0",
+        "local": "false"
+      },
+      "objectServer": "Security",
+      "objectName": "(vol_auditenable2_08efaf;2af30151-37ac-11ec-ac10-d039ea1ce463);/auditlog.txt",
+      "subjectIP": {
+        "ipVersion": "4",
+        "value": "172.28.0.7"
+      },
+      "handleID": "00000000019e58;00;00000063;11345fd7",
+      "objectType": "File"
+    }
+  },
+  {
+    "time": "2022-04-06T07:28:00.6574590Z",
+    "operationTime": "2022-04-06T07:27:42.697872000Z",
+    "resourceId": "/SUBSCRIPTIONS/8F38CFEC-0ECD-413A-892E-2494F77A3B56/RESOURCEGROUPS/ANKITYWCUSCONS05RG/PROVIDERS/MICROSOFT.NETAPP/NETAPPACCOUNTS/ANF-ATOM-REG-WCUS/CAPACITYPOOLS/AUDITPOOL/VOLUMES/AUDITENABLE2",
+    "category": "ANFFileAccess",
+    "operationName": "Write Object",
+    "operationVersion": "101.2",
+    "schemaVersion": "1.0",
+    "resultType": "Audit Success",
+    "callerIpAddress": "172.28.0.7",
+    "location": "westcentralus",
+    "level": "Informational",
+    "properties": {
+      "subjectUnix": {
+        "uid": "0",
+        "gid": "0",
+        "local": "false"
+      },
+      "objectServer": "Security",
+      "objectName": "(vol_auditenable2_08efaf;2af30151-37ac-11ec-ac10-d039ea1ce463);/.auditlog.txt.swp",
+      "writeCount": "4096",
+      "subjectIP": {
+        "ipVersion": "4",
+        "value": "172.28.0.7"
+      },
+      "handleID": "00000000019e58;00;00000060;07ed30a5",
+      "writeOffset": "0",
+      "objectType": "File"
+    }
+  },
+  {
+    "time": "2022-04-06T07:28:00.6575570Z",
+    "operationTime": "2022-04-06T07:27:42.697878000Z",
+    "resourceId": "/SUBSCRIPTIONS/8F38CFEC-0ECD-413A-892E-2494F77A3B56/RESOURCEGROUPS/ANKITYWCUSCONS05RG/PROVIDERS/MICROSOFT.NETAPP/NETAPPACCOUNTS/ANF-ATOM-REG-WCUS/CAPACITYPOOLS/AUDITPOOL/VOLUMES/AUDITENABLE2",
+    "category": "ANFFileAccess",
+    "operationName": "Close Object",
+    "operationVersion": "101.2",
+    "schemaVersion": "1.0",
+    "resultType": "Audit Success",
+    "callerIpAddress": "172.28.0.7",
+    "location": "westcentralus",
+    "level": "Informational",
+    "properties": {
+      "subjectUnix": {
+        "uid": "0",
+        "gid": "0",
+        "local": "false"
+      },
+      "objectServer": "Security",
+      "objectName": "(vol_auditenable2_08efaf;2af30151-37ac-11ec-ac10-d039ea1ce463);/.auditlog.txt.swp",
+      "subjectIP": {
+        "ipVersion": "4",
+        "value": "172.28.0.7"
+      },
+      "handleID": "00000000019e58;00;00000060;07ed30a5",
+      "objectType": "File"
+    }
+  },
+  {
+    "time": "2022-04-06T07:28:00.6576350Z",
+    "operationTime": "2022-04-06T07:27:42.698875000Z",
+    "resourceId": "/SUBSCRIPTIONS/8F38CFEC-0ECD-413A-892E-2494F77A3B56/RESOURCEGROUPS/ANKITYWCUSCONS05RG/PROVIDERS/MICROSOFT.NETAPP/NETAPPACCOUNTS/ANF-ATOM-REG-WCUS/CAPACITYPOOLS/AUDITPOOL/VOLUMES/AUDITENABLE2",
+    "category": "ANFFileAccess",
+    "operationName": "Unlink Object",
+    "operationVersion": "101.2",
+    "schemaVersion": "1.0",
+    "resultType": "Audit Success",
+    "callerIpAddress": "172.28.0.7",
+    "location": "westcentralus",
+    "level": "Informational",
+    "properties": {
+      "fileName": "(vol_auditenable2_08efaf;2af30151-37ac-11ec-ac10-d039ea1ce463);/.auditlog.txt.swp",
+      "subjectUnix": {
+        "uid": "0",
+        "gid": "0",
+        "local": "false"
+      },
+      "dirHandleId": "00000000019e58;00;00000040;617a2ec1",
+      "subjectIP": {
+        "ipVersion": "4",
+        "value": "172.28.0.7"
+      }
+    }
+  },
+  {
+    "time": "2022-04-06T07:28:10.6637460Z",
+    "operationTime": "2022-04-06T07:27:49.701854000Z",
+    "resourceId": "/SUBSCRIPTIONS/8F38CFEC-0ECD-413A-892E-2494F77A3B56/RESOURCEGROUPS/ANKITYWCUSCONS05RG/PROVIDERS/MICROSOFT.NETAPP/NETAPPACCOUNTS/ANF-ATOM-REG-WCUS/CAPACITYPOOLS/AUDITPOOL/VOLUMES/AUDITENABLE2",
+    "category": "ANFFileAccess",
+    "operationName": "Unlink Object",
+    "operationVersion": "101.2",
+    "schemaVersion": "1.0",
+    "resultType": "Audit Success",
+    "callerIpAddress": "172.28.0.7",
+    "location": "westcentralus",
+    "level": "Informational",
+    "properties": {
+      "fileName": "(vol_auditenable2_08efaf;2af30151-37ac-11ec-ac10-d039ea1ce463);/auditlog.txt",
+      "subjectUnix": {
+        "uid": "0",
+        "gid": "0",
+        "local": "false"
+      },
+      "dirHandleId": "00000000019e58;00;00000040;617a2ec1",
+      "subjectIP": {
+        "ipVersion": "4",
+        "value": "172.28.0.7"
+      }
+    }
+  }
+]

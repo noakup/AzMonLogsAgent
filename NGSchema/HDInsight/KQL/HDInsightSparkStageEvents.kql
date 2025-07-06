@@ -1,0 +1,21 @@
+source
+| extend CompletionTime =  iff(CompletionTime == datetime(0), datetime(null), CompletionTime)
+| project
+    TimeGenerated = iff(isnull(CompletionTime), SubmissionTime, CompletionTime),
+    ApplicationId = ApplicationId,
+    StageId = StageId,
+    StageName = StageName,
+    AttemptId = AttemptId,
+    TaskCount = toint(TaskCount),
+    SubmissionTime = SubmissionTime,
+	CompletionTime = CompletionTime,
+	FailureReason = FailureReason,
+	Details = Details,
+	RDDInfo = RDDInfo,
+    ClusterTenantId = Tenant,
+	Role = Role,
+	Host = iff(isempty(Host), RoleInstance, Host),
+	ClusterDnsName = ClusterDnsName,
+	Region = Region,
+	IpAddress = IpAddress,
+	UserSubscriptionId = UserSubscriptionId

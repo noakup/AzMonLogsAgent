@@ -1,0 +1,10 @@
+source 
+| project 
+    TimeGenerated = todatetime(["time"]), 
+    CorrelationId = correlationId, 
+    StreamingModality = tostring(properties.streamingModality), 
+    StreamingSessionId = tostring(properties.streamingSessionId), 
+    ParticipantId = tostring(properties.participantId), 
+    StreamingStartTime = todatetime(properties.streamingStartTime), 
+    StreamingDurationInMs = todouble(properties.streamingDurationInMs),
+    CallConnectionId = tostring(properties.callConnectionId)

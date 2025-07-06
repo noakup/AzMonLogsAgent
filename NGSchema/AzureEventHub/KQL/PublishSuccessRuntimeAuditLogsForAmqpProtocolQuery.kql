@@ -1,0 +1,5 @@
+AZMSRunTimeAuditLogs
+| where Provider =~ "EventHub"
+| where Protocol == "AMQP" and Status == "Success"
+| project  ActivityName, Protocol, NetworkType, ClientIp, _ResourceId
+| summarize by ActivityName

@@ -1,0 +1,298 @@
+{
+    "type": "Microsoft.ApiManagement/service",
+    "displayName": "API Management services",
+    "description": "API Management services",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "API Management/ServicingLoop",
+    "contactDL": "APImanagement@service.microsoft.com",
+    "relatedTables": [],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "APIMDevPortalAuditDiagnosticLog",
+            "description": "Diagnostic Logs for API Management Developer Portal API.",
+            "categories": [],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 4,
+            "dataTypeId": "APIMANAGEMENT_DEVELOPERPORTALAUDITLOGS",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resultType",
+                    "type": "String"
+                },
+                {
+                    "name": "activityId",
+                    "type": "String"
+                },
+                {
+                    "name": "Region",
+                    "type": "String"
+                },
+                {
+                    "name": "DeploymentName",
+                    "type": "String"
+                },
+                {
+                    "name": "Tenant",
+                    "type": "String"
+                },
+                {
+                    "name": "DeploymentVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "apimClient",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/APIMDevPortalAuditDiagnosticLogTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Represents the date and time when the associated event or record was generated.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "description": "Field denotes the specific name or identifier of the operation being performed.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "description": "Distinct group or type of record.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ActivityId",
+                    "type": "String",
+                    "description": "An unique identifier represented as a GUID (Globally Unique Identifier). It serves as a globally distinctive label for tracking and correlating activities or events across systems and applications.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "GUID"
+                },
+                {
+                    "name": "Version",
+                    "type": "String",
+                    "description": "API Management version",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ResultType",
+                    "type": "String",
+                    "description": "This field signifies the outcome or type of result associated with this operation. It has two values: Succeeded or Failed",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "HashedUserId",
+                    "type": "String",
+                    "description": "The field represents a hashed or encrypted form of a user identifier.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestPath",
+                    "type": "String",
+                    "description": "The field contains the path or endpoint of an incoming request.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestMethod",
+                    "type": "String",
+                    "description": "The field indicates the type of HTTP method used in an incoming request.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "type": "String",
+                    "description": "The field refers to the HTTP header that provides information about the user's browser or client application.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ResponseCode",
+                    "type": "Int",
+                    "description": "The field indicates the HTTP status code associated with the server's response to a client's request.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Region",
+                    "type": "String",
+                    "description": "The field indicates the geographical location or data center region within the Azure cloud infrastructure where a specific resource or service is deployed.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServiceName",
+                    "type": "String",
+                    "description": "API Management service name",
+                    "isDefaultDisplay": true
+                }, 
+                {
+                    "name": "ApimClient",
+                    "type": "String",
+                    "description": "The field refers to the HTTP header X-Ms-Apim-Client sent by Developer Portal.",
+                    "isDefaultDisplay": true 
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/apimdevportal.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/apimdevportal.json"
+        },
+        {
+            "name": "ApiManagementGatewayLlmLog",
+            "description": "Gateway Logs related to language models for API Management Language.",
+            "categories": [],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "APIMANAGEMENT_GATEWAYLLMLOGS",
+            "isChangeColumnInternalNameAllowed": true,
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "correlationId",
+                    "type": "String"
+                },
+                {
+                    "name": "Region",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/ApiManagementGatewayLlmLogTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Date and time when request processing started.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "description": "Field denotes the specific name or identifier of the operation being performed.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "CorrelationId",
+                    "type": "String",
+                    "description": "Unique id corresponding with the same field in ApiManagementGatewayLogs.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "GUID"
+                },
+                {
+                    "name": "Region",
+                    "type": "String",
+                    "description": "The field indicates the geographical location or data center region within the Azure cloud infrastructure where a specific resource or service is deployed.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SequenceNumber",
+                    "type": "Int",
+                    "description": "The index of this entry in the message exchange.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PromptTokens",
+                    "type": "Int",
+                    "description": "The number of prompt tokens used by the request.",
+                    "isDefaultDisplay": true
+                }, 
+                {
+                    "name": "CompletionTokens",
+                    "type": "Int",
+                    "description": "The number of completion tokens used by the request.",
+                    "isDefaultDisplay": true
+                }, 
+                {
+                    "name": "TotalTokens",
+                    "type": "Int",
+                    "description": "The number of total tokens used by the request.",
+                    "isDefaultDisplay": true
+                }, 
+                {
+                    "name": "ModelName",
+                    "type": "String",
+                    "description": "Model name used by the request.",
+                    "isPreferredFacet": true,
+                    "isDefaultDisplay": true
+                }, 
+                {
+                    "transformName": "IsStreamCompletion",
+                    "physicalName": "IsStreamCompletion",
+                    "logicalName": "IsStreamCompletion",
+                    "type": "Bool",
+                    "description": "Boolean value indicating if the request specified stream mode to be false.",
+                    "isDefaultDisplay": false
+                }, 
+                {
+                    "name": "RequestId",
+                    "type": "String",
+                    "description": "Language model's request Id.",
+                    "isDefaultDisplay": true
+                }, 
+                {
+                    "name": "DeploymentName",
+                    "type": "String",
+                    "description": "Deployment name used by client.",
+                    "isPreferredFacet": true,
+                    "isDefaultDisplay": true
+                }, {
+                    "name": "ApiVersion",
+                    "type": "String",
+                    "description": "API version used by client.",
+                    "isDefaultDisplay": false
+                }, 
+                {
+                    "name": "RequestMessages",
+                    "type": "Dynamic",
+                    "description": "Contents of the request messages.",
+                    "isDefaultDisplay": false
+                }, 
+                {
+                    "name": "ResponseMessages",
+                    "type": "Dynamic",
+                    "description": "Contents of the response messages.",
+                    "isDefaultDisplay": false
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/apimgatewayllm.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/apimgatewayllm.json"
+        }
+    ],
+    "functions": [],
+    "queries": []
+}

@@ -1,0 +1,27 @@
+source
+| project
+    TimeGenerated,
+    AzureResourceId,
+    Computer,
+    Region,
+    EventType,
+    FileType,
+    FilePath,
+    FileName,
+    IsDir,
+    InitiatingProcessId,
+    InitiatingProcessName,
+    InitiatingParentProcessId,
+    InitiatingParentProcessName,
+    InitiatingProcessAccountDomainName,
+    InitiatingProcessAccountName,
+    AdditionalData,
+    AgentId,
+    Inode,
+    DataPipelineMetadata = bag_pack( // bag_merge is not currently supported
+            "WorkspaceAzureResourceId", tostring($executionContextProperties["AzureResourceId"]),
+            "WorkspaceId", toguid($executionContextProperties["WorkspaceId"]),
+            "OdsReceiveTimeUtc", todatetime($executionContextProperties["IngestionTime"])
+    )
+| where isnotempty(EventType) and isnotempty(FileName) and isnotempty(AzureResourceId) and isnotempty(AgentId)
+

@@ -1,0 +1,3220 @@
+{
+  "type": "Microsoft.SecurityInsights/Amazon",
+  "displayName": "Azure Sentinel Amazon",
+  "description": "All tables related to Amazon.",
+  "tags": {},
+  "properties": {},
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Microsoft Azure Sentinel/Data Collection and Processing",
+  "contactDL": "asipolarbearslive@microsoft.com",
+  "relatedTables": [],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "name": "AWSVPCFlow",
+      "description": "VPC Flow Logs, which ingested from Sentinel's connector, enables you to capture IP traffic going to and from your AWS VPC network interfaces.",
+      "artifactVersion": 6,
+      "categories": [ "security" ],
+      "tags": {},
+      "properties": {},
+      "dataTypeId": "SENTINEL_AWSVPCFLOW",
+      "intelligencePacks": [ "SecurityInsights" ],
+      "isResourceCentric": false,
+      "tableState": "Validation",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+        {
+          "name": "version",
+          "type": "String"
+        },
+        {
+          "name": "account-id",
+          "type": "String"
+        },
+        {
+          "name": "interface-id",
+          "type": "String"
+        },
+        {
+          "name": "srcaddr",
+          "type": "String"
+        },
+        {
+          "name": "dstaddr",
+          "type": "String"
+        },
+        {
+          "name": "srcport",
+          "type": "String"
+        },
+        {
+          "name": "dstport",
+          "type": "String"
+        },
+        {
+          "name": "protocol",
+          "type": "String"
+        },
+        {
+          "name": "packets",
+          "type": "String"
+        },
+        {
+          "name": "bytes",
+          "type": "String"
+        },
+        {
+          "name": "start",
+          "type": "String"
+        },
+        {
+          "name": "end",
+          "type": "String"
+        },
+        {
+          "name": "action",
+          "type": "String"
+        },
+        {
+          "name": "log-status",
+          "type": "String"
+        },
+        {
+          "name": "vpc-id",
+          "type": "String"
+        },
+        {
+          "name": "subnet-id",
+          "type": "String"
+        },
+        {
+          "name": "instance-id",
+          "type": "String"
+        },
+        {
+          "name": "tcp-flags",
+          "type": "String"
+        },
+        {
+          "name": "type",
+          "type": "String"
+        },
+        {
+          "name": "pkt-srcaddr",
+          "type": "String"
+        },
+        {
+          "name": "pkt-dstaddr",
+          "type": "String"
+        },
+        {
+          "name": "region",
+          "type": "String"
+        },
+        {
+          "name": "az-id",
+          "type": "String"
+        },
+        {
+          "name": "sublocation-type",
+          "type": "String"
+        },
+        {
+          "name": "sublocation-id",
+          "type": "String"
+        },
+        {
+          "name": "pkt-src-aws-service",
+          "type": "String"
+        },
+        {
+          "name": "pkt-dst-aws-service",
+          "type": "String"
+        },
+        {
+          "name": "flow-direction",
+          "type": "String"
+        },
+        {
+          "name": "traffic-path",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/AWSVPCFlowTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the event was generated. This value will be the same as 'start' input field or the data arrival time to Azure Monitor in case the 'start' input field is empty or missing."
+        },
+        {
+          "name": "Version",
+          "type": "Int",
+          "description": "The VPC Flow Logs version."
+        },
+        {
+          "name": "AccountId",
+          "type": "String",
+          "description": "The AWS account ID of the owner of the source network interface for which traffic is recorded. If the network interface is created by an AWS service, for example when creating a VPC endpoint or Network Load Balancer, the record may display unknown for this field."
+        },
+        {
+          "name": "InterfaceId",
+          "type": "String",
+          "description": "The ID of the network interface for which the traffic is recorded."
+        },
+        {
+          "name": "SrcAddr",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "IP",
+          "description": "The source address for incoming traffic."
+        },
+        {
+          "name": "DstAddr",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "IP",
+          "description": "The destination address for outgoing traffic."
+        },
+        {
+          "name": "SrcPort",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "The source port of the traffic."
+        },
+        {
+          "name": "DstPort",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "The destination port of the traffic."
+        },
+        {
+          "name": "Protocol",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "The IANA protocol number of the traffic."
+        },
+        {
+          "name": "Packets",
+          "type": "Int",
+          "description": "The number of packets transferred during the flow."
+        },
+        {
+          "name": "Bytes",
+          "type": "BigInt",
+          "description": "The number of bytes transferred during the flow."
+        },
+        {
+          "name": "End",
+          "type": "DateTime",
+          "description": "The time when the last packet of the flow was received within the aggregation interval."
+        },
+        {
+          "name": "Action",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The action that is associated with the traffic."
+        },
+        {
+          "name": "LogStatus",
+          "type": "String",
+          "description": "The logging status of the flow log."
+        },
+        {
+          "name": "VpcId",
+          "type": "String",
+          "description": "The ID of the VPC."
+        },
+        {
+          "name": "SubnetId",
+          "type": "String",
+          "description": "The ID of the subnet."
+        },
+        {
+          "name": "InstanceId",
+          "type": "String",
+          "description": "The ID of the instance that's associated with network interface for which the traffic is recorded."
+        },
+        {
+          "name": "TcpFlags",
+          "type": "Int",
+          "description": "The bitmask value for the following TCP flags."
+        },
+        {
+          "name": "TrafficType",
+          "type": "String",
+          "description": "The type of traffic. The possible values are: IPv4, IPv6, and EFA. For more information search for 'Elastic Fabric Adapter (EFA)'."
+        },
+        {
+          "name": "PktSrcAddr",
+          "type": "String",
+          "dataTypeHint": "IP",
+          "description": "The packet-level (original) source IP address of the traffic."
+        },
+        {
+          "name": "PktDstAddr",
+          "type": "String",
+          "dataTypeHint": "IP",
+          "description": "The packet-level (original) destination IP address for the traffic."
+        },
+        {
+          "name": "Region",
+          "type": "String",
+          "description": "The Region that contains the network interface for which traffic is recorded."
+        },
+        {
+          "name": "AzId",
+          "type": "String",
+          "description": "The ID of the Availability Zone."
+        },
+        {
+          "name": "SublocationType",
+          "type": "String",
+          "description": "The type of sublocation that is returned in the sublocationId field."
+        },
+        {
+          "name": "SublocationId",
+          "type": "String",
+          "description": "The ID of the sublocation that contains the network interface for which traffic is recorded."
+        },
+        {
+          "name": "PktSrcAwsService",
+          "type": "String",
+          "dataTypeHint": "IP",
+          "description": "The name of the subset of IP address ranges for the PktSrcAddr field, if the source IP address is for an AWS service."
+        },
+        {
+          "name": "PktDstAwsService",
+          "type": "String",
+          "dataTypeHint": "IP",
+          "description": "The name of the subset of IP address ranges for the PktDstAddr field, if the destination IP address is for an AWS service."
+        },
+        {
+          "name": "FlowDirection",
+          "type": "String",
+          "description": "The direction of the flow with respect to the interface where traffic is captured."
+        },
+        {
+          "name": "TrafficPath",
+          "type": "String",
+          "description": "The path that egress traffic takes to the destination."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AWSVPCFlowSample.json"
+    },
+    {
+      "name": "AWSGuardDuty",
+      "description": "Guard Duty Findings, which ingested from Sentinel's connector, represents a potential security issue detected within your network. GuardDuty generates a finding whenever it detects unexpected and potentially malicious activity in your AWS environment.",
+      "artifactVersion": 7,
+      "categories": [ "security" ],
+      "tags": {},
+      "properties": {},
+      "dataTypeId": "SENTINEL_AWSGUARDDUTY",
+      "intelligencePacks": [ "SecurityInsights" ],
+      "isResourceCentric": false,
+      "tableState": "Validation",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+        {
+          "name": "schemaVersion",
+          "type": "String"
+        },
+        {
+          "name": "accountId",
+          "type": "String"
+        },
+        {
+          "name": "region",
+          "type": "String"
+        },
+        {
+          "name": "partition",
+          "type": "String"
+        },
+        {
+          "name": "id",
+          "type": "String"
+        },
+        {
+          "name": "arn",
+          "type": "String"
+        },
+        {
+          "name": "type",
+          "type": "String"
+        },
+        {
+          "name": "description",
+          "type": "String"
+        },
+        {
+          "name": "resource",
+          "type": "String"
+        },
+        {
+          "name": "service",
+          "type": "String"
+        },
+        {
+          "name": "severity",
+          "type": "Int"
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime"
+        },
+        {
+          "name": "updatedAt",
+          "type": "DateTime"
+        },
+        {
+          "name": "title",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/AWSGuardDutyTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the event was generated, The last time this finding was updated with new activity matching the pattern that prompted GuardDuty to generate this finding."
+        },
+        {
+          "name": "SchemaVersion",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The Guard Duty finding version."
+        },
+        {
+          "name": "AccountId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The AWS account ID of the owner of the source network interface for which traffic is recorded. If the network interface is created by an AWS service, for example when creating a VPC endpoint or Network Load Balancer, the record may display unknown for this field."
+        },
+        {
+          "name": "Region",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The AWS region in which the finding was generated."
+        },
+        {
+          "name": "Partition",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The AWS partition in which the finding was generated."
+        },
+        {
+          "name": "Id",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID",
+          "description": "A unique Finding ID for this finding type and set of parameters. New occurrences of activity matching this pattern will be aggregated to the same ID."
+        },
+        {
+          "name": "Arn",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Amazon resource name of the finding."
+        },
+        {
+          "name": "ActivityType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "A formatted string representing the type of activity that triggered the finding."
+        },
+        {
+          "name": "ResourceDetails",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Gives details on the AWS resource that was targeted by the trigger activity. The information available varies based on resource type and action typ."
+        },
+        {
+          "name": "ServiceDetails",
+          "type": "Dynamic",
+          "isDefaultDisplay": true,
+          "description": "Gives details on the AWS service that was related to the finding, including Action, Actor/Target, Evidence, Anomalous behavior and Additional information."
+        },
+        {
+          "name": "Severity",
+          "type": "Int",
+          "isDefaultDisplay": true,
+          "description": "A finding's assigned severity level of either High, Medium, or Low."
+        },
+        {
+          "name": "TimeCreated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The time and date when this finding was first created. If this value differs from Updated at (TimeGenerated), it indicates that the activity has occurred multiple times and is an ongoing issue."
+        },
+        {
+          "name": "Title",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Summary of the primary purpose of the threat or attack related to the finding."
+        },
+        {
+          "name": "Description",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Description of the primary purpose of the threat or attack related to the finding."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AWSGuardDutySample.json"
+    },
+    {
+      "name": "AWSCloudTrail",
+      "description": "CloudTrail logs, which ingested from Sentinel's connector, holds all your data and management events of your Amazon Wev Services account.",
+      "artifactVersion": 15,
+      "categories": ["security"],
+      "tags": {},
+      "properties": {},
+      "dataTypeId": "SENTINEL_AWSCLOUDTRAIL",
+      "intelligencePacks": ["SecurityInsights"],
+      "isResourceCentric": false,
+      "isChangeColumnInternalNameAllowed": true,
+      "contactDL": "asipolarbearslive@microsoft.com",
+      "tableState": "Validation",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+        {
+          "name": "eventVersion",
+          "type": "String"
+        },
+        {
+          "name": "userIdentity",
+          "type": "Dynamic"
+        },
+        {
+          "name": "eventTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "eventSource",
+          "type": "String"
+        },
+        {
+          "name": "eventName",
+          "type": "String"
+        },
+        {
+          "name": "awsRegion",
+          "type": "String"
+        },
+        {
+          "name": "sourceIPAddress",
+          "type": "String"
+        },
+        {
+          "name": "userAgent",
+          "type": "String"
+        },
+        {
+          "name": "errorCode",
+          "type": "String"
+        },
+        {
+          "name": "errorMessage",
+          "type": "String"
+        },
+        {
+          "name": "requestParameters",
+          "type": "Dynamic"
+        },
+        {
+          "name": "responseElements",
+          "type": "String"
+        },
+        {
+          "name": "additionalEventData",
+          "type": "String"
+        },
+        {
+          "name": "requestID",
+          "type": "String"
+        },
+        {
+          "name": "resources",
+          "type": "String"
+        },
+        {
+          "name": "apiVersion",
+          "type": "String"
+        },
+        {
+          "name": "eventID",
+          "type": "String"
+        },
+        {
+          "name": "readOnly",
+          "type": "Bool"
+        },
+        {
+          "name": "eventType",
+          "type": "String"
+        },
+        {
+          "name": "managementEvent",
+          "type": "Bool"
+        },
+        {
+          "name": "recipientAccountId",
+          "type": "String"
+        },
+        {
+          "name": "serviceEventDetails",
+          "type": "String"
+        },
+        {
+          "name": "sharedEventID",
+          "type": "String"
+        },
+        {
+          "name": "vpcEndpointId",
+          "type": "String"
+        },
+        {
+          "name": "tlsDetails",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/AWSCloudTrailTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC). An event's time stamp comes from the local host that provides the service API endpoint on which the API call was made."
+        },
+        {
+          "name": "AwsEventId",
+          "type": "Guid",
+          "isDefaultDisplay": true,
+          "description": "GUID generated by CloudTrail to uniquely identify each event. You can use this value to identify a single event."
+        },
+        {
+          "name": "EventVersion",
+          "type": "String",
+          "description": "The version of the log event format."
+        },
+        {
+          "name": "EventSource",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The service that the request was made to. This name is typically a short form of the service name without spaces plus .amazonaws.com."
+        },
+        {
+          "name": "EventTypeName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Identifies the type of event that generated the event record. This can be the one of the following values: AwsApiCall, AwsServiceEvent, AwsConsoleAction , AwsConsoleSignIn."
+        },
+        {
+          "name": "EventName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The requested action, which is one of the actions in the API for that service."
+        },
+        {
+          "name": "UserIdentityType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The type of the identity. The following values are possible: Root, IAMUser, AssumedRole, FederatedUser, Directory, AWSAccount, AWSService, Unknown."
+        },
+        {
+          "name": "UserIdentityPrincipalid",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "A unique identifier for the entity that made the call."
+        },
+        {
+          "name": "UserIdentityArn",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The Amazon Resource Name (ARN) of the principal that made the call."
+        },
+        {
+          "name": "UserIdentityAccountId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The account that owns the entity that granted permissions for the request."
+        },
+        {
+          "name": "UserIdentityInvokedBy",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the AWS service that made the request."
+        },
+        {
+          "name": "UserIdentityAccessKeyId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The access key ID that was used to sign the request."
+        },
+        {
+          "name": "UserIdentityUserName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The name of the identity that made the call."
+        },
+        {
+          "name": "SessionMfaAuthenticated",
+          "type": "Bool",
+          "isDefaultDisplay": true,
+          "description": "The value is true if the root user or IAM user whose credentials were used for the request also was authenticated with an MFA device; otherwise, false."
+        },
+        {
+          "name": "SessionCreationDate",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The date and time when the temporary security credentials were issued."
+        },
+        {
+          "name": "SessionIssuerType",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The source of the temporary security credentials, such as Root, IAMUser, or Role."
+        },
+        {
+          "name": "SessionIssuerPrincipalId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": " The internal ID of the entity that was used to get credentials."
+        },
+        {
+          "name": "SessionIssuerArn",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The ARN of the source (account, IAM user, or role) that was used to get temporary security credentials."
+        },
+        {
+          "name": "SessionIssuerAccountId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The account that owns the entity that was used to get credentials."
+        },
+        {
+          "name": "SessionIssuerUserName",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The friendly name of the user or role that issued the session."
+        },
+        {
+          "name": "EC2RoleDelivery",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The friendly name of the user or role that issued the session."
+        },
+        {
+          "name": "AWSRegion",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The AWS region that the request was made to."
+        },
+        {
+          "name": "SourceIpAddress",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The IP address that the request was made from. For actions that originate from the service console, the address reported is for the underlying customer resource, not the console web server. For services in AWS, only the DNS name is displayed."
+        },
+        {
+          "name": "UserAgent",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The agent through which the request was made, such as the AWS Management Console, an AWS service, the AWS SDKs or the AWS CLI."
+        },
+        {
+          "transformName": "ErrorCode",
+          "physicalName": "ErrorCode_String",
+          "logicalName": "ErrorCode",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The AWS service error if the request returns an error."
+        },
+        {
+          "name": "ErrorMessage",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The error description when available. This message includes messages for authorization failures. CloudTrail captures the message logged by the service in its exception handling."
+        },
+        {
+          "name": "RequestParameters",
+          "type": "String",
+          "description": "The parameters, if any, that were sent with the request. These parameters are documented in the API reference documentation for the appropriate AWS service."
+        },
+        {
+          "name": "ResponseElements",
+          "type": "String",
+          "description": "The response element for actions that make changes (create, update, or delete actions). If an action does not change state (for example, a request to get or list objects), this element is omitted."
+        },
+        {
+          "name": "AdditionalEventData",
+          "type": "String",
+          "description": "Additional data about the event that was not part of the request or response."
+        },
+        {
+          "name": "AwsRequestId",
+          "type": "Guid",
+          "description": "deprecated, please use AwsRequestId_ instead."
+        },
+        {
+          "name": "AwsRequestId_",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "The value that identifies the request. The service being called generates this value."
+        },
+        {
+          "name": "Resources",
+          "type": "String",
+          "description": "A list of resources accessed in the event."
+        },
+        {
+          "name": "APIVersion",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Identifies the API version associated with the AwsApiCall eventType value."
+        },
+        {
+          "name": "ReadOnly",
+          "type": "Bool",
+          "isDefaultDisplay": true,
+          "description": "Identifies whether this operation is a read-only operation."
+        },
+        {
+          "transformName": "RecipientAccountId",
+          "physicalName": "RecipientAccountId_String",
+          "logicalName": "RecipientAccountId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "dataTypeHint": "GUID",
+          "description": "Represents the account ID that received this event. The recipientAccountID may be different from the CloudTrail userIdentity Element accountId. This can occur in cross-account resource access."
+        },
+        {
+          "name": "ServiceEventDetails",
+          "type": "String",
+          "description": "Identifies the service event, including what triggered the event and the result."
+        },
+        {
+          "name": "SharedEventId",
+          "type": "Guid",
+          "isDefaultDisplay": true,
+          "description": "GUID generated by CloudTrail to uniquely identify CloudTrail events from the same AWS action that is sent to different AWS accounts."
+        },
+        {
+          "name": "VpcEndpointId",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Identifies the VPC endpoint in which requests were made from a VPC to another AWS service."
+        },
+        {
+          "name": "ManagementEvent",
+          "type": "Bool",
+          "isDefaultDisplay": true,
+          "description": "A Boolean value that identifies whether the event is a management event."
+        },
+        {
+          "name": "SourceSystem",
+          "type": "String",
+          "description": "Constant value: AWSCloudTrail."
+        },
+        {
+          "transformName": "OperationName",
+          "physicalName": "OperationName_ssic",
+          "logicalName": "OperationName",
+          "type": "String",
+          "description": "Constant value: CloudTrail."
+        },
+        {
+          "transformName": "Category",
+          "physicalName": "Category_ssic",
+          "logicalName": "Category",
+          "type": "String",
+          "isDefaultDisplay": true,
+          "description": "Shows the event category that is used in LookupEvents calls."
+        },
+        {
+          "name": "TlsVersion",
+          "type": "String",
+          "description": "Optional. Part of tlsDetails. The TLS version of a request."
+        },
+        {
+          "name": "CipherSuite",
+          "type": "String",
+          "description": "Optional. Part of tlsDetails. The cipher suite (combination of security algorithms used) of a request."
+        },
+        {
+          "name": "ClientProvidedHostHeader",
+          "type": "String",
+          "description": "Optional. Part of tlsDetails. The client-provided host name used in the service API call, which is typically the FQDN of the service endpoint."
+        },
+        {
+          "name": "IpProtocol",
+          "type": "String",
+          "description": "The IP protocol is located under RequestParameters in CloudTrail, and it is used to specify the IP permissions for a security group rule. The IP protocol name or number. The valid values are tcp, udp, icmp, or a protocol number."
+        },
+        {
+          "name": "SourcePort",
+          "type": "String",
+          "description": "The SourcePort is located under RequestParameters in CloudTrail, and it is used to specify the IP permissions for a security group rule. The start of port range for the TCP and UDP protocols, or an ICMP type number."
+        },
+        {
+          "name": "DestinationPort",
+          "type": "String",
+          "description": "The DestinationPort is located under RequestParameters in CloudTrail, and it is used to specify the IP permissions for a security group rule. The end of port range for the TCP and UDP protocols, or an ICMP code."
+        },
+        {
+          "name": "CidrIp",
+          "type": "String",
+          "description": "The CIDR IP is located under RequestParameters in CloudTrail, and it is used to specify the IP permissions for a security group rule. The IPv4 CIDR range."
+        }
+
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AWSCloudTrailSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AWSCloudTrailSample.json"
+    },
+    {
+      "name": "AWSCloudWatch",
+      "description": "The CloudWatch Logs provide performance and billing data from the AWS CloudWatch service which helps the user better understand and operate the AWS system and application.",
+      "artifactVersion": 7,
+      "categories": [ "security" ],
+      "tags": {},
+      "properties": {},
+      "dataTypeId": "SENTINEL_AWSCLOUDWATCH",
+      "intelligencePacks": [ "SecurityInsights" ],
+      "isResourceCentric": false,
+      "tableState": "Validation",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+        {
+          "name": "Field1",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/AWSCloudWatchTransform.kql",
+      "columns": [
+        {
+          "name": "ExtractedTime",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) of when the event was generated."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "isDefaultDisplay": true,
+          "description": "The timestamp (UTC) when the event was generated and equals to 'ExtractedTime' when included in message. If timestamp is missing, it’s set to the ingestion time."
+        },
+        {
+          "name": "Message",
+          "type": "String",
+          "description": "The data contained within logs from CloudWatch."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AWSCloudWatchSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AWSCloudWatchSample.json"
+    },
+    {
+      "name": "AWSWAF",
+      "description": "AWS WAF logs, collected in AWS S3 buckets, to Microsoft Sentinel. AWS WAF logs are detailed records of traffic that web access control lists (ACLs) analyze, which are essential for maintaining the security and performance of web applications.",
+      "artifactVersion": 3,
+      "categories": [ "security" ],
+      "tags": {},
+      "properties": {},
+      "dataTypeId": "SENTINEL_AWSWAF",
+      "intelligencePacks": ["SecurityInsights"],
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+        {
+          "name": "action",
+          "type": "String"
+        },
+        {
+          "name": "args",
+          "type": "String"
+        },
+        {
+          "name": "captchaResponse",
+          "type": "String"
+        },
+        {
+          "name": "challengeResponse",
+          "type": "String"
+        },
+        {
+          "name": "clientIp",
+          "type": "String"
+        },
+        {
+          "name": "country",
+          "type": "String"
+        },
+        {
+          "name": "excludedRules",
+          "type": "String"
+        },
+        {
+          "name": "formatVersion",
+          "type": "String"
+        },
+        {
+          "name": "headers",
+          "type": "String"
+        },
+        {
+          "name": "httpMethod",
+          "type": "String"
+        },
+        {
+          "name": "httpRequest",
+          "type": "String"
+        },
+        {
+          "name": "httpSourceId",
+          "type": "String"
+        },
+        {
+          "name": "httpSourceName",
+          "type": "String"
+        },
+        {
+          "name": "httpVersion",
+          "type": "String"
+        },
+        {
+          "name": "ja3Fingerprint",
+          "type": "String"
+        },
+        {
+          "name": "labels",
+          "type": "String"
+        },
+        {
+          "name": "nonTerminatingMatchingRules",
+          "type": "String"
+        },
+        {
+          "name": "oversizeFields",
+          "type": "String"
+        },
+        {
+          "name": "rateBasedRuleList",
+          "type": "String"
+        },
+        {
+          "name": "requestHeadersInserted",
+          "type": "String"
+        },
+        {
+          "name": "requestId",
+          "type": "String"
+        },
+        {
+          "name": "responseCodeSent",
+          "type": "String"
+        },
+        {
+          "name": "ruleGroupId",
+          "type": "String"
+        },
+        {
+          "name": "ruleGroupList",
+          "type": "String"
+        },
+        {
+          "name": "terminatingRule",
+          "type": "String"
+        },
+        {
+          "name": "terminatingRuleId",
+          "type": "String"
+        },
+        {
+          "name": "terminatingRuleMatchDetails",
+          "type": "String"
+        },
+        {
+          "name": "terminatingRuleType",
+          "type": "String"
+        },
+        {
+          "name": "timestamp",
+          "type": "String"
+        },
+        {
+          "name": "uri",
+          "type": "String"
+        },
+        {
+          "name": "webaclId",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/AWSWAFTransform.kql",
+      "columns": [
+        {
+          "name": "Action",
+          "type": "String",
+          "description": "The terminating action taken by AWS WAF (ALLOW, BLOCK, CAPTCHA, or Challenge)."
+        },
+        {
+          "name": "Args",
+          "type": "String",
+          "description": "The query string parameters of the request."
+        },
+        {
+          "name": "CaptchaResponse",
+          "type": "Dynamic",
+          "description": "Status of the CAPTCHA action for the request."
+        },
+        {
+          "name": "ChallengeResponse",
+          "type": "Dynamic",
+          "description": "Status of the security challenge for the request."
+        },
+        {
+          "name": "ClientIp",
+          "type": "String",
+          "description": "IP address of the client making the request.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "Country",
+          "type": "String",
+          "description": "Country of origin for the request."
+        },
+        {
+          "name": "ExcludedRules",
+          "type": "Dynamic",
+          "description": "Rules excluded from evaluation in the rule group."
+        },
+        {
+          "name": "FormatVersion",
+          "type": "String",
+          "description": "Version of the AWS WAF log format."
+        },
+        {
+          "name": "Headers",
+          "type": "Dynamic",
+          "description": "Headers included in the HTTP request."
+        },
+        {
+          "name": "HttpMethod",
+          "type": "String",
+          "description": "The HTTP method (GET, POST, etc.) of the request."
+        },
+        {
+          "name": "HttpRequest",
+          "type": "Dynamic",
+          "description": "Metadata about the HTTP request."
+        },
+        {
+          "name": "HttpSourceId",
+          "type": "String",
+          "description": "ID of the associated resource (e.g., CloudFront distribution, Load Balancer)."
+        },
+        {
+          "name": "HttpSourceName",
+          "type": "String",
+          "description": "Source of the request (e.g., CF, APIGW, ALB)."
+        },
+        {
+          "name": "HttpVersion",
+          "type": "String",
+          "description": "HTTP version used in the request."
+        },
+        {
+          "name": "Ja3Fingerprint",
+          "type": "String",
+          "description": "JA3 fingerprint of the TLS Client Hello."
+        },
+        {
+          "name": "Labels",
+          "type": "Dynamic",
+          "description": "Labels applied to the request by rules."
+        },
+        {
+          "name": "NonTerminatingMatchingRules",
+          "type": "Dynamic",
+          "description": "List of rules that matched but didn't terminate the request."
+        },
+        {
+          "name": "OversizeFields",
+          "type": "Dynamic",
+          "description": "Fields in the request that exceeded AWS WAF inspection limits."
+        },
+        {
+          "name": "RateBasedRuleList",
+          "type": "Dynamic",
+          "description": "List of rate-based rules applied to the request."
+        },
+        {
+          "name": "RequestHeadersInserted",
+          "type": "Dynamic",
+          "description": "Headers inserted for custom request handling."
+        },
+        {
+          "name": "RequestId",
+          "type": "String",
+          "description": "Request ID for the network request."
+        },
+        {
+          "name": "ResponseCodeSent",
+          "type": "Int",
+          "description": "HTTP response code sent to the client."
+        },
+        {
+          "name": "RuleGroupId",
+          "type": "String",
+          "description": "ID of the rule group that matched.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "RuleGroupList",
+          "type": "Dynamic",
+          "description": "List of rule groups that acted on the request."
+        },
+        {
+          "name": "TerminatingRule",
+          "type": "Dynamic",
+          "description": "The rule that terminated the request. If this is present, it contains action, ruleId, ruleMatchDetails, and any additional information provided for each rule varies according factors such as the rule configuration, rule match type, and details of the match."
+        },
+        {
+          "name": "TerminatingRuleId",
+          "type": "String",
+          "description": "ID of the network rule that matched.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "TerminatingRuleMatchDetails",
+          "type": "Dynamic",
+          "description": "Details of the rule that terminated the request."
+        },
+        {
+          "name": "TerminatingRuleType",
+          "type": "String",
+          "description": "Type of rule that terminated the request."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Timestamp when the log was processed."
+        },
+        {
+          "name": "Uri",
+          "type": "String",
+          "description": "The URI of the request.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "WebAclId",
+          "type": "String",
+          "description": "The GUID of the web ACL applied to the request.",
+          "dataTypeHint": "GUID"
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AWSWAFSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AWSWAFSample.json"
+    },
+    {
+      "name": "AWSSecurityHubFindings",
+      "description": "AWS Security Hub Findings, which are collected in AWS S3 buckets, into Microsoft Sentinel. AWS Security Hub Finding is a detailed record of a security check or security-related detection, which can originate from various sources like enabled controls, integrations with other AWS services, third-party products, or custom integrations.",
+      "artifactVersion": 1,
+      "categories": [ "security" ],
+      "tags": {},
+      "properties": {},
+      "dataTypeId": "SENTINEL_AWSSECHUB",
+      "intelligencePacks": [ "SecurityInsights" ],
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "detail",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/AWSSecurityHubFindingsTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The timestamp when the event was generated."
+        },
+        {
+          "name": "AwsRegion",
+          "type": "String",
+          "description": "The AWS region where the event occurred."
+        },
+        {
+          "name": "AwsAccountId",
+          "type": "String",
+          "description": "The AWS account ID associated with the event."
+        },
+        {
+          "name": "ComplianceStatus",
+          "type": "String",
+          "description": "The compliance status of the resource (e.g., COMPLIANT, NON_COMPLIANT)."
+        },
+        {
+          "name": "ComplianceStatusReasons",
+          "type": "Dynamic",
+          "description": "The reasons for the compliance status."
+        },
+        {
+          "name": "ComplianceSecurityControlId",
+          "type": "String",
+          "description": "The ID of the security control related to compliance."
+        },
+        {
+          "name": "ComplianceSecurityControlParameters",
+          "type": "Dynamic",
+          "description": "Parameters associated with the security control."
+        },
+        {
+          "name": "ComplianceRelatedRequirements",
+          "type": "Dynamic",
+          "description": "The related compliance requirements."
+        },
+        {
+          "name": "ComplianceAssociatedStandards",
+          "type": "Dynamic",
+          "description": "The compliance standards associated with the resource."
+        },
+        {
+          "name": "AwsSecurityFindingTitle",
+          "type": "String",
+          "description": "The title of the AWS security finding."
+        },
+        {
+          "name": "AwsSecurityFindingId",
+          "type": "String",
+          "description": "The unique identifier for the AWS security finding."
+        },
+        {
+          "name": "AwsSecurityFindingDescription",
+          "type": "String",
+          "description": "A detailed description of the AWS security finding."
+        },
+        {
+          "name": "AwsSecurityFindingTypes",
+          "type": "Dynamic",
+          "description": "The types or categories of the AWS security finding."
+        },
+        {
+          "name": "AwsSecurityFindingCreatedAt",
+          "type": "DateTime",
+          "description": "The timestamp when the security finding was created."
+        },
+        {
+          "name": "AwsSecurityFindingFirstObservedAt",
+          "type": "DateTime",
+          "description": "The timestamp when the security finding was first observed."
+        },
+        {
+          "name": "AwsSecurityFindingUpdatedAt",
+          "type": "DateTime",
+          "description": "The timestamp when the security finding was last updated."
+        },
+        {
+          "name": "AwsSecurityFindingLastObservedAt",
+          "type": "DateTime",
+          "description": "The timestamp when the security finding was last observed."
+        },
+        {
+          "name": "AwsSecurityFindingProcessedAt",
+          "type": "DateTime",
+          "description": "The timestamp when the security finding was processed."
+        },
+        {
+          "name": "AwsSecurityFindingGeneratorId",
+          "type": "String",
+          "description": "The ID of the generator that created the security finding."
+        },
+        {
+          "name": "AwsSecurityFindingProductArn",
+          "type": "String",
+          "description": "The Amazon Resource Name (ARN) of the product that generated the finding."
+        },
+        {
+          "name": "AwsSecurityFindingProductName",
+          "type": "String",
+          "description": "The name of the product that generated the finding."
+        },
+        {
+          "name": "AwsSecurityFindingProductFields",
+          "type": "Dynamic",
+          "description": "Additional fields provided by the product that generated the finding."
+        },
+        {
+          "name": "AwsSecurityFindingSeverity",
+          "type": "Dynamic",
+          "description": "The severity level of the security finding."
+        },
+        {
+          "name": "Remediation",
+          "type": "Dynamic",
+          "description": "Details about how to remediate the security finding."
+        },
+        {
+          "name": "SchemaVersion",
+          "type": "String",
+          "description": "The version of the schema used for the finding."
+        },
+        {
+          "name": "Resources",
+          "type": "Dynamic",
+          "description": "The resources associated with the security finding."
+        },
+        {
+          "name": "RecordState",
+          "type": "String",
+          "description": "The state of the record (e.g., ACTIVE, ARCHIVED)."
+        },
+        {
+          "name": "WorkflowState",
+          "type": "String",
+          "description": "The workflow state of the finding (e.g., NEW, RESOLVED)."
+        },
+        {
+          "name": "RawData",
+          "type": "Dynamic",
+          "description": "The raw data associated with the finding."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AWSSecurityHubFindingsSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AWSSecurityHubFindingsSample.json"
+    },
+    {
+      "name": "AWSNetworkFirewallAlert",
+      "description": "The AWS Platform Firewall Alert logs , ingested from Sentinel's connector, enabling real-time analysis and correlation with other security data sources.",
+      "categories": [
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 1,
+      "dataTypeId": "SENTINEL_AWS_NETWORK_FIREWALL_ALERT_LOGS",
+      "intelligencePacks": [
+        "SecurityInsights"
+      ],
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+        {
+          "name": "firewall_name",
+          "type": "String"
+        },
+        {
+          "name": "availability_zone",
+          "type": "String"
+        },
+        {
+          "name": "event_timestamp",
+          "type": "String"
+        },
+        {
+          "name": "event",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/AWSNetworkFirewallAlertLogsTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The timestamp when the log entry was created in AWS Network Firewall."
+        },
+        {
+          "name": "FirewallName",
+          "type": "String",
+          "description": "The name of the AWS Network Firewall instance generating the log."
+        },
+        {
+          "name": "AvailabilityZone",
+          "type": "String",
+          "description": "The AWS Availability Zone where the firewall instance is located."
+        },
+        {
+          "name": "TxId",
+          "type": "String",
+          "description": "The transaction ID associated with the specific network flow."
+        },
+        {
+          "name": "EventTimestamp",
+          "type": "DateTime",
+          "description": "The epoch timestamp of when the event occurred."
+        },
+        {
+          "name": "AppProto",
+          "type": "String",
+          "description": "The application layer protocol detected."
+        },
+        {
+          "name": "SrcIp",
+          "type": "String",
+          "dataTypeHint": "IP",
+          "description": "The source port from which the packet originated."
+        },
+        {
+          "name": "SrcPort",
+          "type": "String",
+          "description": "The source port from which the packet originated."
+        },
+        {
+          "name": "EventType",
+          "type": "String",
+          "description": "The type of event recorded (e.g., alert, flow, drop, pass)."
+        },
+        {
+          "name": "Severity",
+          "type": "String",
+          "description": "The severity level of the event, typically based on Suricata rule classifications."
+        },
+        {
+          "name": "SignatureId",
+          "type": "String",
+          "description": "The unique identifier of the Suricata rule that matched the event."
+        },
+        {
+          "name": "Rev",
+          "type": "String",
+          "description": "The revision number of the matched Suricata rule."
+        },
+        {
+          "name": "Signature",
+          "type": "String",
+          "description": "The name or description of the Suricata rule that triggered the alert."
+        },
+        {
+          "name": "AlertAction",
+          "type": "String",
+          "description": "The action taken when an alert was triggered (e.g., allowed, dropped, rejected)."
+        },
+        {
+          "name": "Category",
+          "type": "String",
+          "description": "The category of the detected threat or network activity."
+        },
+        {
+          "name": "FlowId",
+          "type": "String",
+          "description": "A unique identifier for the network flow related to this event."
+        },
+        {
+          "name": "DestIp",
+          "type": "String",
+          "dataTypeHint": "IP",
+          "description": "The destination IP address of the packet."
+        },
+        {
+          "name": "Proto",
+          "type": "String",
+          "description": "The protocol used (e.g., TCP, UDP, ICMP)."
+        },
+        {
+          "name": "VerdictAction",
+          "type": "String",
+          "description": "The final decision made by the firewall (e.g., pass, drop, alert)."
+        },
+        {
+          "name": "Sni",
+          "type": "String",
+          "description": "The Server Name Indication (SNI) from TLS traffic."
+        },
+        {
+          "name": "Version",
+          "type": "String",
+          "description": "The version of the log schema or Suricata rule format used."
+        },
+        {
+          "name": "DestPort",
+          "type": "String",
+          "description": "The destination port to which the packet was sent."
+        },
+        {
+          "name": "PktSrc",
+          "type": "String",
+          "description": "The source of the packet (e.g., internal, external, firewall rule)."
+        },
+        {
+          "name": "Direction",
+          "type": "String",
+          "description": "The direction of the traffic (e.g., inbound, outbound)."
+        },
+        {
+          "name": "Timestamp",
+          "type": "DateTime",
+          "description": "The exact timestamp when the event was captured."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AWSNetworkFirewallAlertLogsSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AWSNetworkFirewallAlertLogsSample.json"
+    },
+    {
+      "name": "AWSNetworkFirewallFlow",
+      "description": "The AWS Platform Firewall Flow logs, ingested from Sentinel's connector, enabling real-time analysis and correlation with other security data sources like Detection alerts, firewall events network traffic logs, and more.",
+      "categories": [
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 1,
+      "dataTypeId": "SENTINEL_AWS_NETWORK_FIREWALL_FLOW_LOGS",
+      "intelligencePacks": [
+        "SecurityInsights"
+      ],
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+        {
+          "name": "firewall_name",
+          "type": "String"
+        },
+        {
+          "name": "availability_zone",
+          "type": "String"
+        },
+        {
+          "name": "event_timestamp",
+          "type": "String"
+        },
+        {
+          "name": "event",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/AWSNetworkFirewallFlowLogsTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The timestamp when the log entry was created in AWS Network Firewall."
+        },
+        {
+          "name": "FirewallName",
+          "type": "String",
+          "description": "The name of the AWS Network Firewall instance generating the log."
+        },
+        {
+          "name": "AvailabilityZone",
+          "type": "String",
+          "description": "The AWS Availability Zone where the firewall instance is located."
+        },
+        {
+          "name": "EventTimestamp",
+          "type": "String",
+          "description": "The epoch timestamp of when the event occurred."
+        },
+        {
+          "name": "TCPFlags",
+          "type": "String",
+          "description": "The TCP flags observed in the packet "
+        },
+        {
+          "name": "Syn",
+          "type": "Bool",
+          "description": "Indicates whether the SYN flag is set in the TCP packet (true/false)."
+        },
+        {
+          "name": "Fin",
+          "type": "Bool",
+          "description": "Indicates whether the FIN flag is set in the TCP packet (true/false)."
+        },
+        {
+          "name": "Psh",
+          "type": "Bool",
+          "description": "Indicates whether the PSH flag is set in the TCP packet (true/false)."
+        },
+        {
+          "name": "Ack",
+          "type": "Bool",
+          "description": "Indicates whether the ACK flag is set in the TCP packet (true/false)."
+        },
+        {
+          "name": "Ecn",
+          "type": "Bool",
+          "description": "Indicates whether the ECN flag is set in the TCP packet (true/false)."
+        },
+        {
+          "name": "Rst",
+          "type": "Bool",
+          "description": "Indicates whether the RST flag is set in the TCP packet (true/false)."
+        },
+        {
+          "name": "AppProto",
+          "type": "String",
+          "description": "The application layer protocol detected (e.g., HTTP, HTTPS, DNS)."
+        },
+        {
+          "name": "SrcIp",
+          "type": "String",
+          "dataTypeHint": "IP",
+          "description": "The source IP address of the packet that triggered the event."
+        },
+        {
+          "name": "SrcPort",
+          "type": "String",
+          "description": "The source port from which the packet originated."
+        },
+        {
+          "name": "NetFlowPkts",
+          "type": "String",
+          "description": "The number of packets in the network flow."
+        },
+        {
+          "name": "NetFlowBytes",
+          "type": "String",
+          "description": "The total number of bytes transferred in the network flow."
+        },
+        {
+          "name": "NetFlowStart",
+          "type": "DateTime",
+          "description": "The timestamp when the network flow started."
+        },
+        {
+          "name": "NetFlowEnd",
+          "type": "DateTime",
+          "description": "The timestamp when the network flow ended."
+        },
+        {
+          "name": "NetFlowAge",
+          "type": "String",
+          "description": "The duration of the network flow in seconds."
+        },
+        {
+          "name": "NetFlowMinttl",
+          "type": "String",
+          "description": "The minimum Time-to-Live (TTL) observed in the network flow."
+        },
+        {
+          "name": "NetFlowMaxttl",
+          "type": "String",
+          "description": "The maximum Time-to-Live (TTL) observed in the network flow."
+        },
+        {
+          "name": "EventType",
+          "type": "String",
+          "description": "The type of event recorded (e.g., flow, alert, drop, pass)."
+        },
+        {
+          "name": "FlowId",
+          "type": "String",
+          "description": "A unique identifier for the network flow related to this event."
+        },
+        {
+          "name": "DestIp",
+          "type": "String",
+          "dataTypeHint": "IP",
+          "description": "The destination IP address of the packet."
+        },
+        {
+          "name": "Proto",
+          "type": "String",
+          "description": "The protocol used (e.g., TCP, UDP, ICMP)."
+        },
+        {
+          "name": "DestPort",
+          "type": "String",
+          "description": "The destination port to which the packet was sent."
+        },
+        {
+          "name": "Timestamp",
+          "type": "DateTime",
+          "description": "The exact timestamp when the event was captured."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AWSNetworkFirewallFlowLogsSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AWSNetworkFirewallFlowLogsSample.json"
+    },
+    {
+      "name": "AWSNetworkFirewallTls",
+      "description": "The AWS Platform Firewall TLS logs, ingested from Sentinel's connector, enabling real-time analysis and correlation with other security data sources.",
+      "categories": [
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 1,
+      "dataTypeId": "SENTINEL_AWS_NETWORK_FIREWALL_TLS_LOGS",
+      "intelligencePacks": [
+        "SecurityInsights"
+      ],
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+        {
+          "name": "firewall_name",
+          "type": "String"
+        },
+        {
+          "name": "availability_zone",
+          "type": "String"
+        },
+        {
+          "name": "event_timestamp",
+          "type": "String"
+        },
+        {
+          "name": "event",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/AWSNetworkFirewallTlsLogsTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The timestamp when the log entry was created in AWS Network Firewall."
+        },
+        {
+          "name": "FirewallName",
+          "type": "String",
+          "description": "The name of the AWS Network Firewall instance generating the log."
+        },
+        {
+          "name": "AvailabilityZone",
+          "type": "String",
+          "description": "The AWS Availability Zone where the firewall instance is located."
+        },
+        {
+          "name": "EventTimestamp",
+          "type": "DateTime",
+          "description": "The epoch timestamp of when the event occurred."
+        },
+        {
+          "name": "SrcIp",
+          "type": "String",
+          "dataTypeHint": "IP",
+          "description": "The source IP address of the packet that triggered the event."
+        },
+        {
+          "name": "SrcPort",
+          "type": "String",
+          "description": "The source port from which the packet originated."
+        },
+        {
+          "name": "DestIp",
+          "type": "String",
+          "dataTypeHint": "IP",
+          "description": "The destination IP address of the packet."
+        },
+        {
+          "name": "DestPort",
+          "type": "String",
+          "description": "The destination port to which the packet was sent."
+        },
+        {
+          "name": "Sni",
+          "type": "String",
+          "description": "The Server Name Indication (SNI) from TLS traffic."
+        },
+        {
+          "name": "LeafCertificateFingerprint",
+          "type": "String",
+          "description": "The SHA-256 fingerprint of the leaf certificate observed in the TLS handshake."
+        },
+        {
+          "name": "Status",
+          "type": "String",
+          "description": "The status of the TLS inspection event (e.g., success, failure)."
+        },
+        {
+          "name": "Action",
+          "type": "String",
+          "description": "The action taken by the firewall (e.g., allowed, dropped, inspected)."
+        },
+        {
+          "name": "ErrorMessage",
+          "type": "String",
+          "description": "Any error message associated with the event, if applicable."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AWSNetworkFirewallTlsLogsSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AWSNetworkFirewallTlsLogsSample.json"
+    },
+    {
+      "name": "AWSRoute53Resolver",
+      "description": "This connector enables ingestion of AWS Route 53 DNS logs into Microsoft Sentinel for enhanced visibility and threat detection. It supports DNS Resolver query logs ingested directly from AWS S3 buckets, while Public DNS query logs and Route 53 audit logs can be ingested using Microsoft Sentinel's AWS CloudWatch and CloudTrail connectors. Comprehensive instructions are provided to guide you through the setup of each log type. Leverage this connector to monitor DNS activity, detect potential threats, and improve your security posture in cloud environments.",
+      "artifactVersion": 1,
+      "categories": [ "security" ],
+      "tags": {},
+      "properties": {},
+      "dataTypeId": "SENTINEL_AWSROUTE53RESOLVER",
+      "intelligencePacks": [ "SecurityInsights" ],
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+        {
+          "name": "version",
+          "type": "String"
+        },
+        {
+          "name": "account_id",
+          "type": "String"
+        },
+        {
+          "name": "region",
+          "type": "String"
+        },
+        {
+          "name": "vpc_id",
+          "type": "String"
+        },
+        {
+          "name": "query_timestamp",
+          "type": "DateTime"
+        },
+        {
+          "name": "query_name",
+          "type": "String"
+        },
+        {
+          "name": "query_type",
+          "type": "String"
+        },
+        {
+          "name": "query_class",
+          "type": "String"
+        },
+        {
+          "name": "rcode",
+          "type": "String"
+        },
+        {
+          "name": "answers",
+          "type": "Dynamic"
+        },
+        {
+          "name": "srcaddr",
+          "type": "String"
+        },
+        {
+          "name": "srcport",
+          "type": "String"
+        },
+        {
+          "name": "transport",
+          "type": "String"
+        },
+        {
+          "name": "srcids",
+          "type": "Dynamic"
+        },
+        {
+          "name": "firewall_rule_action",
+          "type": "String"
+        },
+        {
+          "name": "firewall_rule_group_id",
+          "type": "String"
+        },
+        {
+          "name": "firewall_domain_list_id",
+          "type": "String"
+        }
+      ],
+      "transformFilePath": "KQL/AWSRoute53Resolver.kql",
+      "columns": [
+        {
+          "name": "Version",
+          "type": "String",
+          "description": "Version of the log format."
+        },
+        {
+          "name": "AccountId",
+          "type": "String",
+          "description": "The AWS account ID that owns the VPC which sent the query."
+        },
+        {
+          "name": "LogType",
+          "type": "String",
+          "description": "Indicates the type of DNS log (e.g. ResolverQueryLogs)."
+        },
+        {
+          "name": "Region",
+          "type": "String",
+          "description": "AWS region where the log was generated."
+        },
+        {
+          "name": "VpcId",
+          "type": "String",
+          "description": "The ID of the VPC where the DNS query originated."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The time the DNS query was received by Route 53 Resolver."
+        },
+        {
+          "name": "QueryName",
+          "type": "String",
+          "description": "The domain name that was queried."
+        },
+        {
+          "name": "QueryType",
+          "type": "String",
+          "description": "The DNS record type requested (e.g. A, AAAA, MX)."
+        },
+        {
+          "name": "QueryClass",
+          "type": "String",
+          "description": "The DNS query class. Usually IN (Internet)."
+        },
+        {
+          "name": "Rcode",
+          "type": "String",
+          "description": "Textual DNS response code (e.g. NOERROR, NXDOMAIN)."
+        },
+        {
+          "name": "Answers",
+          "type": "Dynamic",
+          "description": "Array of DNS response records, including resolved IP addresses and other query-related information."
+        },
+        {
+          "name": "SrcAddr",
+          "type": "String",
+          "dataTypeHint": "IP",
+          "description": "The source IP address of the instance that made the query."
+        },
+        {
+          "name": "SrcPort",
+          "type": "String",
+          "description": "The source port on the instance that made the query."
+        },
+        {
+          "name": "Transport",
+          "type": "String",
+          "description": "The protocol used to send the query (e.g. UDP, TCP, TLS)."
+        },
+        {
+          "name": "SrcIds",
+          "type": "Dynamic",
+          "description": "Identifiers related to the source instance where the DNS query originated from or passed through."
+        },
+        {
+          "name": "FirewallRuleAction",
+          "type": "String",
+          "description": "Rule action from the matching firewall rule."
+        },
+        {
+          "name": "FirewallRuleGroupId",
+          "type": "String",
+          "description": "ID of the firewall rule group that applied to the query."
+        },
+        {
+          "name": "FirewallDomainListId",
+          "type": "String",
+          "description": "ID of the domain list that matched the query domain."
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AWSRoute53ResolverSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AWSRoute53ResolverSample.json"
+    },
+    {
+      "name": "AWSS3ServerAccess",
+      "description": "This stack integrates Microsoft Sentinel by creating an IAM role with minimal permissions for accessing S3 server access logs stored in a specified S3 bucket and sending log events to an SQS queue.",
+      "artifactVersion": 1,
+      "categories": [ "security" ],
+      "tags": {},
+      "properties": {},
+      "dataTypeId": "SENTINEL_AWSS3SERVERACCESS",
+      "intelligencePacks": [ "SecurityInsights" ],
+      "isResourceCentric": false,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+      {
+          "name": "Field1",
+          "type": "String"
+      },
+      {
+          "name": "Field2",
+          "type": "String"
+      },
+      {
+          "name": "Field3",
+          "type": "String"
+      },
+      {
+          "name": "Field4",
+          "type": "String"
+      },
+      {
+          "name": "Field5",
+          "type": "String"
+      },
+      {
+          "name": "Field6",
+          "type": "String"
+      },
+      {
+          "name": "Field7",
+          "type": "String"
+      },
+      {
+          "name": "Field8",
+          "type": "String"
+      },
+      {
+          "name": "Field9",
+          "type": "String"
+      },
+      {
+          "name": "Field10",
+          "type": "String"
+      },
+      {
+          "name": "Field11",
+          "type": "Int"
+      },
+      {
+          "name": "Field12",
+          "type": "String"
+      },
+      {
+          "name": "Field13",
+          "type": "Int"
+      },
+      {
+          "name": "Field14",
+          "type": "String"
+      },
+      {
+          "name": "Field15",
+          "type": "Int"
+      },
+      {
+          "name": "Field16",
+          "type": "String"
+      },
+      {
+          "name": "Field17",
+          "type": "String"
+      },
+      {
+          "name": "Field18",
+          "type": "String"
+      },
+      {
+          "name": "Field19",
+          "type": "String"
+      },
+      {
+          "name": "Field20",
+          "type": "String"
+      },
+      {
+          "name": "Field21",
+          "type": "String"
+      },
+      {
+          "name": "Field22",
+          "type": "String"
+      },
+      {
+          "name": "Field23",
+          "type": "String"
+      },
+      {
+          "name": "Field24",
+          "type": "String"
+      },
+      {
+          "name": "Field25",
+          "type": "String"
+      },
+      {
+          "name": "Field26",
+          "type": "String"
+      },
+      {
+          "name": "Field27",
+          "type": "String"
+      }
+      ],
+      "transformFilePath": "KQL/AWSS3ServerAccess.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The time the AWS Server Access log was received by the S3 bucket, in UTC."
+      },
+      {
+          "name": "BucketOwner",
+          "type": "String",
+          "description": "The canonical user ID of the owner of the source bucket (another form of AWS account ID)."
+      },
+      {
+          "name": "Bucket",
+          "type": "String",
+          "description": "The name of the S3 bucket against which the request was processed."
+      },
+      {
+          "name": "RemoteIp",
+          "type": "String",
+          "dataTypeHint": "IP",
+          "description": "The apparent IP address of the requester (may be obscured by proxies or firewalls)."
+      },
+      {
+          "name": "Requester",
+          "type": "String",
+          "description": "The canonical user ID, IAM user, or assumed role making the request, or '-' for unauthenticated."
+      },
+      {
+          "name": "RequestId",
+          "type": "String",
+          "description": "A unique string ID generated by Amazon S3 to identify the request."
+      },
+      {
+          "name": "Operation",
+          "type": "String",
+          "description": "The operation type (e.g., REST.PUT.OBJECT, S3.LIFECYCLETRANSITION.OBJECT)."
+      },
+      {
+          "name": "Key",
+          "type": "String",
+          "description": "The object key (name) involved in the request."
+      },
+      {
+          "name": "RequestUri",
+          "type": "String",
+          "description": "The URI part of the HTTP request."
+      },
+      {
+          "name": "HttpStatus",
+          "type": "Int",
+          "description": "The HTTP status code returned in the response."
+      },
+      {
+          "name": "ErrorCode",
+          "type": "String",
+          "description": "The S3 error code returned in the response, or '-' if none."
+      },
+      {
+          "name": "BytesSent",
+          "type": "Int",
+          "description": "Number of response bytes sent, excluding HTTP overhead, or 0."
+      },
+      {
+          "name": "ObjectSize",
+          "type": "Int",
+          "description": "The size of the object in bytes."
+      },
+      {
+          "name": "TotalTime",
+          "type": "Int",
+          "description": "The total time in milliseconds the request was in flight (from receipt to last response byte sent)."
+      },
+      {
+          "name": "TurnAroundTime",
+          "type": "String",
+          "description": "The time in milliseconds S3 spent processing the request (from last request byte to first response byte)."
+      },
+      {
+          "name": "Referer",
+          "type": "String",
+          "description": "The value of the HTTP Referer header (linking page URL), if present."
+      },
+      {
+          "name": "UserAgent",
+          "type": "String",
+          "description": "The value of the HTTP User-Agent header (e.g., client software or browser)."
+      },
+      {
+          "name": "VersionId",
+          "type": "String",
+          "description": "The version ID of the object involved in the request, or '-' if not applicable."
+      },
+      {
+          "name": "HostId",
+          "type": "String",
+          "description": "Amazon S3 extended request ID (x-amz-id-2)."
+      },
+      {
+          "name": "SignatureVersion",
+          "type": "String",
+          "description": "The signature version (SigV2 or SigV4) used to authenticate the request, or '-' for unauthenticated."
+      },
+      {
+          "name": "CipherSuite",
+          "type": "String",
+          "description": "The TLS cipher suite negotiated for HTTPS, or '-' for HTTP."
+      },
+      {
+          "name": "AuthenticationType",
+          "type": "String",
+          "description": "The authentication type used: AuthHeader, QueryString, or '-' for unauthenticated requests."
+      },
+      {
+          "name": "HostHeader",
+          "type": "String",
+          "description": "The endpoint (host header) used to connect to S3 (e.g., s3.us-west-2.amazonaws.com)."
+      },
+      {
+          "name": "TLSVersion",
+          "type": "String",
+          "description": "The TLS version used by the client (e.g., TLSv1.2), or '-' if TLS wasn't used."
+      },
+      {
+          "name": "AccessPointARN",
+          "type": "String",
+          "description": "The Amazon Resource Name (ARN) of the S3 access point used for the request, or '-' if not used."
+      },
+      {
+          "name": "ACLRequired",
+          "type": "String",
+          "description": "Indicates if an ACL was required for the request: 'Yes' if required, '-' otherwise."
+      }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AWSS3ServerAccessSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AWSS3ServerAccessSample.json"
+    },
+    {
+      "workflowName": "AWSNLBFlowLogsStreamWorkflow",
+      "transformName": "AWSNLBFlowLogsStream",
+      "physicalName": "AWSELBFlowLogs",
+      "logicalName": "AWSNLBFlowLogsStream",
+      "description": "This connector allows you to ingest AWS Elastic Load Balancer (ALB, NLB and GLB) logs into Microsoft Sentinel. These logs contain detailed records for requests handled by your load balancers, including client IPs, latencies, request paths, and status codes. These logs are useful for monitoring traffic patterns, investigating anomalies, and ensuring security compliance.",
+      "artifactVersion": 1,
+      "categories": [ "security" ],
+      "tags": {},
+      "properties": {},
+      "dataTypeId": "SENTINEL_AWSNLBFLOWLOGSSTREAM",
+      "intelligencePacks": [ "SecurityInsights" ],
+      "isResourceCentric": false,
+      "tableState": "Validation",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+            { 
+                  "name": "version", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "account-id", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "interface-id", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "srcaddr", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "dstaddr", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "srcport", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "dstport", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "protocol", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "packets", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "bytes", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "start", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "end", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "action", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "log-status", 
+                  "type": "String" 
+            }
+      ],
+      "transformFilePath": "KQL/AWSNLBFlowLogsStream.kql",
+      "columns": [
+            {
+                  "name": "TimeGenerated",
+                  "type": "DateTime",
+                  "description": "The timestamp when the log was collected or ingested."
+            },
+            {
+                  "name": "Version",
+                  "type": "String",
+                  "description": "The version of the flow log format."
+            },
+            {
+                  "name": "AccountId",
+                  "type": "String",
+                  "description": "The AWS account ID that owns the network interface."
+            },
+            {
+                  "name": "InterfaceId",
+                  "type": "String",
+                  "description": "The ID of the network interface for which the traffic is recorded."
+            },
+            {
+                  "name": "SourceAddress",
+                  "type": "String",
+                  "dataTypeHint": "IP",
+                  "description": "The source IP address of the traffic."
+            },
+            {
+                  "name": "DestinationAddress",
+                  "type": "String",
+                  "dataTypeHint": "IP",
+                  "description": "The destination IP address of the traffic."
+            },
+            {
+                  "name": "SourcePort",
+                  "type": "String",
+                  "description": "The source port of the traffic."
+            },
+            {
+                  "name": "DestinationPort",
+                  "type": "String",
+                  "description": "The destination port of the traffic."
+            },
+            {
+                  "name": "Protocol",
+                  "type": "String",
+                  "description": "The IANA protocol number of the traffic (e.g., 6 for TCP, 17 for UDP)."
+            },
+            {
+                  "name": "Packets",
+                  "type": "String",
+                  "description": "The number of packets transferred during the flow."
+            },
+            {
+                  "name": "Bytes",
+                  "type": "String",
+                  "description": "The number of bytes transferred during the flow."
+            },
+            {
+                  "name": "SStartTime",
+                  "type": "DateTime",
+                  "description": "The start time of the flow in Unix seconds."
+            },
+            {
+                  "name": "EndTime",
+                  "type": "DateTime",
+                  "description": "The end time of the flow in Unix seconds."
+            },
+            {
+                  "name": "Action",
+                  "type": "String",
+                  "description": "Indicates whether the traffic was accepted or rejected."
+            },
+            {
+                  "name": "LogStatus",
+                  "type": "String",
+                  "description": "Indicates the logging status (e.g., OK, NODATA, SKIPDATA)."
+            },
+            {
+                  "name": "LogType",
+                  "type": "String",
+                  "description": "Type of the log (e.g., VPCFlowLog, TransitGatewayFlowLog)."
+            }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AWSNLBFlowLogsStream.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AWSNLBFlowLogsStream.json"
+    },
+    {
+      "workflowName": "AWSGLBFlowLogsStreamWorkflow",
+      "transformName": "AWSGLBFlowLogsStream",
+      "physicalName": "AWSELBFlowLogs",
+      "logicalName": "AWSGLBFlowLogsStream",
+      "description": "This connector allows you to ingest AWS Elastic Load Balancer (ALB, NLB and GLB) logs into Microsoft Sentinel. These logs contain detailed records for requests handled by your load balancers, including client IPs, latencies, request paths, and status codes. These logs are useful for monitoring traffic patterns, investigating anomalies, and ensuring security compliance.",
+      "artifactVersion": 1,
+      "categories": [ "security" ],
+      "tags": {},
+      "properties": {},
+      "dataTypeId": "SENTINEL_AWSGLBFLOWLOGSSTREAM",
+      "intelligencePacks": [ "SecurityInsights" ],
+      "isResourceCentric": false,
+      "tableState": "Validation",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+            { 
+                  "name": "version", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "account-id", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "interface-id", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "srcaddr", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "dstaddr", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "srcport", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "dstport", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "protocol", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "packets", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "bytes", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "start", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "end", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "action", 
+                  "type": "String" 
+            },
+            { 
+                  "name": "log-status", 
+                  "type": "String" 
+            }
+      ],
+      "transformFilePath": "KQL/AWSGLBFlowLogsStream.kql",
+      "columns": [
+            {
+                  "name": "TimeGenerated",
+                  "type": "DateTime",
+                  "description": "The timestamp when the log was collected or ingested."
+            },
+            {
+                  "name": "Version",
+                  "type": "String",
+                  "description": "The version of the flow log format."
+            },
+            {
+                  "name": "AccountId",
+                  "type": "String",
+                  "description": "The AWS account ID that owns the network interface."
+            },
+            {
+                  "name": "InterfaceId",
+                  "type": "String",
+                  "description": "The ID of the network interface for which the traffic is recorded."
+            },
+            {
+                  "name": "SourceAddress",
+                  "type": "String",
+                  "dataTypeHint": "IP",
+                  "description": "The source IP address of the traffic."
+            },
+            {
+                  "name": "DestinationAddress",
+                  "type": "String",
+                  "dataTypeHint": "IP",
+                  "description": "The destination IP address of the traffic."
+            },
+            {
+                  "name": "SourcePort",
+                  "type": "String",
+                  "description": "The source port of the traffic."
+            },
+            {
+                  "name": "DestinationPort",
+                  "type": "String",
+                  "description": "The destination port of the traffic."
+            },
+            {
+                  "name": "Protocol",
+                  "type": "String",
+                  "description": "The IANA protocol number of the traffic (e.g., 6 for TCP, 17 for UDP)."
+            },
+            {
+                  "name": "Packets",
+                  "type": "String",
+                  "description": "The number of packets transferred during the flow."
+            },
+            {
+                  "name": "Bytes",
+                  "type": "String",
+                  "description": "The number of bytes transferred during the flow."
+            },
+            {
+                  "name": "SStartTime",
+                  "type": "DateTime",
+                  "description": "The start time of the flow in Unix seconds."
+            },
+            {
+                  "name": "EndTime",
+                  "type": "DateTime",
+                  "description": "The end time of the flow in Unix seconds."
+            },
+            {
+                  "name": "Action",
+                  "type": "String",
+                  "description": "Indicates whether the traffic was accepted or rejected."
+            },
+            {
+                  "name": "LogStatus",
+                  "type": "String",
+                  "description": "Indicates the logging status (e.g., OK, NODATA, SKIPDATA)."
+            },
+            {
+                  "name": "LogType",
+                  "type": "String",
+                  "description": "Type of the log (e.g., VPCFlowLog, TransitGatewayFlowLog)."
+            }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AWSGLBFlowLogsStream.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AWSGLBFlowLogsStream.json"
+    },
+    {
+      "name": "AWSNLBAccessLogs",
+      "description": "This connector allows you to ingest AWS Elastic Load Balancer (ALB, NLB and GLB) logs into Microsoft Sentinel. These logs contain detailed records for requests handled by your load balancers, including client IPs, latencies, request paths, and status codes. These logs are useful for monitoring traffic patterns, investigating anomalies, and ensuring security compliance.",
+      "artifactVersion": 1,
+      "categories": [ "security" ],
+      "tags": {},
+      "properties": {},
+      "dataTypeId": "SENTINEL_AWSNLBACCESSLOGS",
+      "intelligencePacks": [ "SecurityInsights" ],
+      "isResourceCentric": false,
+      "tableState": "Validation",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+            { 
+              "name": "Field1", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field2", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field3", 
+              "type": "DateTime" 
+            },
+            { 
+              "name": "Field4", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field5", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field6", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field7", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field8", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field9", 
+              "type": "String" 
+           },
+            { 
+              "name": "Field10", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field11", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field12", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field13", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field14", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field15", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field16", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field17", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field18", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field19", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field20", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field21", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field22", 
+              "type": "DateTime" 
+            }
+      ],
+      "transformFilePath": "KQL/AWSNLBAccessLogs.kql",
+      "columns": [
+            { 
+              "name": "TimeGenerated", 
+              "type": "DateTime", 
+              "description": "Timestamp when the log entry was generated." 
+            },
+            { 
+              "name": "NLBType", 
+              "type": "String", 
+              "description": "Type of Network Load Balancer (e.g., 'gateway', 'application')." 
+            },
+            { 
+              "name": "Version", 
+              "type": "String", 
+              "description": "Version of the NLB log format." 
+            },
+            { 
+              "name": "Nlb", 
+              "type": "String", 
+              "description": "Identifier or name of the Network Load Balancer." 
+            },
+            { 
+              "name": "Listener", 
+              "type": "String", 
+              "description": "Listener configuration used for the connection (protocol and port)." 
+            },
+            { 
+              "name": "ClientIPPort", 
+              "type": "String", 
+              "dataTypeHint": "IP", 
+              "description": "IP address and port of the client initiating the request." 
+            },
+            { 
+              "name": "TargetIPPort", 
+              "type": "String", 
+              "dataTypeHint": "IP", 
+              "description": "IP address and port of the target receiving the request." 
+            },
+            { 
+              "name": "ConnectionTime", 
+              "type": "String", 
+              "description": "Duration of the connection in milliseconds." 
+            },
+            { 
+              "name": "TlsHandshakeTime", 
+              "type": "String", 
+              "description": "Time taken to complete the TLS handshake in milliseconds." 
+            },
+            { 
+              "name": "ReceivedBytes", 
+              "type": "String", 
+              "description": "Number of bytes received from the client." 
+            },
+            { 
+              "name": "SentBytes", 
+              "type": "String", 
+              "description": "Number of bytes sent to the client." 
+            },
+            { 
+              "name": "IncomingTLSAlert", 
+              "type": "String", 
+              "description": "Details of any incoming TLS alert message." 
+            },
+            { 
+              "name": "ChosenCertArn", 
+              "type": "String", 
+              "description": "ARN of the TLS certificate selected during the handshake." 
+            },
+            { 
+              "name": "ChosenCertSerial", 
+              "type": "String", 
+              "description": "Serial number of the TLS certificate used in the connection." 
+            },
+            { 
+              "name": "TLSCipher", 
+              "type": "String", 
+              "description": "Cipher suite used for the TLS connection." 
+            },
+            { 
+              "name": "TLSProtocolVersion", 
+              "type": "String", 
+              "description": "Version of the TLS protocol used (e.g., TLS 1.2, TLS 1.3)." 
+            },
+            { 
+              "name": "TLSNamedGroup", 
+              "type": "String", 
+              "description": "Elliptic curve or Diffie-Hellman group used in the handshake." 
+            },
+            { 
+              "name": "DomainName", 
+              "type": "String", 
+              "description": "Domain name requested by the client via SNI (Server Name Indication)." 
+            },
+            { 
+              "name": "ALPNFEProtocol", 
+              "type": "String", 
+              "description": "Application-layer protocol negotiated on the frontend (e.g., HTTP/1.1, h2)." 
+            },
+            { 
+              "name": "ALPNBEProtocol", 
+              "type": "String", 
+              "description": "Application-layer protocol negotiated on the backend." 
+            },
+            { 
+              "name": "ALPNClientPrefList", 
+              "type": "String", 
+              "description": "List of application protocols preferred by the client during ALPN." 
+            },
+            { 
+              "name": "TLSConnectionCreationTime", 
+              "type": "String", 
+              "description": "Time taken to establish the complete TLS connection, including handshake." 
+            }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AWSNLBAccessLogs.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AWSNLBAccessLogs.json"
+    },
+    {
+      "name": "AWSALBAccessLogs",
+      "description": "This connector allows you to ingest AWS Elastic Load Balancer (ALB, NLB and GLB) logs into Microsoft Sentinel. These logs contain detailed records for requests handled by your load balancers, including client IPs, latencies, request paths, and status codes. These logs are useful for monitoring traffic patterns, investigating anomalies, and ensuring security compliance.",
+      "artifactVersion": 1,
+      "categories": [ "security" ],
+      "tags": {},
+      "properties": {},
+      "dataTypeId": "SENTINEL_AWSALBACCESSLOGS",
+      "intelligencePacks": [ "SecurityInsights" ],
+      "isResourceCentric": false,
+      "tableState": "Validation",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+      "input": [
+            { 
+              "name": "Field1", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field2", 
+              "type": "DateTime" 
+            },
+            { 
+              "name": "Field3", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field4", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field5", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field6", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field7", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field8", 
+              "type": "String" 
+            },  
+            { 
+              "name": "Field9", 
+              "type": "Int" 
+            },
+            { 
+              "name": "Field10", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field11", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field12", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field13", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field14", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field15", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field16", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field17", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field18", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field19", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field20", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field21", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field22", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field23", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field24", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field25", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field26", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field27", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field28", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field29", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field30", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field31", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field32", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field33", 
+              "type": "String" 
+            },
+            { 
+              "name": "Field34", 
+              "type": "String" 
+            }
+      ],
+      "transformFilePath": "KQL/AWSALBAccessLogs.kql",
+      "columns": [
+            {
+                "name": "TimeGenerated",
+                "type": "DateTime",
+                "description": "The time when the load balancer received the request."
+            },
+            {
+                "name": "ALBType",
+                "type": "String",
+                "description": "The type of request (e.g., http or https)."
+            },
+            {
+                "name": "Alb",
+                "type": "String",
+                "description": "The ARN of the Application Load Balancer."
+            },
+            {
+                "name": "ClientIp",
+                "type": "String",
+                "dataTypeHint": "IP",
+                "description": "The IP address of the client."
+            },
+            {
+                "name": "ClientPort",
+                "type": "Int",
+                "description": "The port number of the client."
+            },
+            {
+                "name": "TargetIp",
+                "type": "String",
+                "dataTypeHint": "IP",
+                "description": "The IP address of the target that processed the request."
+            },
+            {
+                "name": "TargetPort",
+                "type": "Int",
+                "description": "The port number of the target that processed the request."
+            },
+            {
+                "name": "RequestProcessingTime",
+                "type": "String",
+                "description": "The total time taken by the load balancer to receive the request from the client."
+            },
+            {
+                "name": "TargetProcessingTime",
+                "type": "String",
+                "description": "The total time taken by the target to process the request."
+            },
+            {
+                "name": "ResponseProcessingTime",
+                "type": "String",
+                "description": "The total time taken by the load balancer to send the response to the client."
+            },
+            {
+                "name": "ElbStatusCode",
+                "type": "Int",
+                "description": "The status code sent from the load balancer to the client."
+            },
+            {
+                "name": "TargetStatusCode",
+                "type": "String",
+                "description": "The status code received from the target."
+            },
+            {
+                "name": "ReceivedBytes",
+                "type": "BigInt",
+                "description": "The size of the request, in bytes, received from the client."
+            },
+            {
+                "name": "SentBytes",
+                "type": "BigInt",
+                "description": "The size of the response, in bytes, sent to the client."
+            },
+            {
+                "name": "RequestRaw",
+                "type": "String",
+                "description": "The complete request line from the client."
+            },
+            {
+                "name": "UserAgent",
+                "type": "String",
+                "description": "The user agent String of the client."
+            },
+            {
+                "name": "SslCipher",
+                "type": "String",
+                "description": "The SSL cipher used for the SSL connection (if any)."
+            },
+            {
+                "name": "SslProtocol",
+                "type": "String",
+                "description": "The SSL protocol used for the SSL connection (if any)."
+            },
+            {
+                "name": "TargetGroupArn",
+                "type": "String",
+                "description": "The ARN of the target group that handled the request."
+            },
+            {
+                "name": "TraceId",
+                "type": "String",
+                "description": "The trace identifier for the request, useful for debugging."
+            },
+            {
+                "name": "DomainName",
+                "type": "String",
+                "description": "The SNI domain provided by the client during the TLS handshake."
+            },
+            {
+                "name": "ChosenCertArn",
+                "type": "String",
+                "description": "The ARN of the certificate presented to the client."
+            },
+            {
+                "name": "MatchedRulePriority",
+                "type": "String",
+                "description": "The priority value of the rule that matched the request."
+            },
+            {
+                "name": "RequestCreationTime",
+                "type": "String",
+                "description": "The timestamp when the load balancer generated the request to the target."
+            },
+            {
+                "name": "ActionsExecuted",
+                "type": "String",
+                "description": "The actions taken when processing the request (e.g., forward, fixed-response, redirect)."
+            },
+            {
+                "name": "RedirectUrl",
+                "type": "String",
+                "description": "The URL of the redirect target, if a redirect action was taken."
+            },
+            {
+                "name": "LambdaErrorReason",
+                "type": "String",
+                "description": "The reason code for a failed Lambda function, if applicable."
+            },
+            {
+                "name": "TargetPortList",
+                "type": "String",
+                "description": "A list of IP:port pairs of the targets that handled the request."
+            },
+            {
+                "name": "TargetStatusCodeList",
+                "type": "String",
+                "description": "A list of status codes returned by the targets."
+            },
+            {
+                "name": "Classification",
+                "type": "String",
+                "description": "Classification of the request (e.g., success or error)."
+            },
+            {
+                "name": "ClassificationReason",
+                "type": "String",
+                "description": "The reason why a request was classified in a certain way."
+            },
+            {
+                "name": "ConnTraceId",
+                "type": "String",
+                "description": "The connection trace ID that uniquely identifies the connection."
+            }
+
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/AWSALBAccessLogs.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/AWSALBAccessLogs.json"
+    }
+  ],
+  "functions": [],
+  "queries": [
+    {
+      "id": "8d9fc68f-84a8-4186-9675-952013133dc9",
+      "displayName":"Rejected IPv4 actions",
+      "description": "Returns 10 rejected actions of type IPv4.",
+      "bodyFilePath": "KQL/RejectedIPv4VPCFlowActions.kql",
+      "categories": ["security"],
+      "relatedTables": [ "AWSVPCFlow" ],
+      "tags": {
+        "Topic": [
+          "Security"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "44640527-2945-467a-a5db-fcaf8b11f1b1",
+      "displayName":"High severity findings",
+      "description": "Returns high severity findings summarize by activity type.",
+      "bodyFilePath": "KQL/HighSeverityGuardDutyFindings.kql",
+      "categories": ["security"],
+      "relatedTables": [ "AWSGuardDuty" ],
+      "tags": {
+        "Topic": [
+          "Security"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    },
+    {
+      "id": "affffc71-5531-497d-ae2b-6d536ae12784",
+      "displayName":"New users per region",
+      "description": "Returns count of created users per region.",
+      "bodyFilePath": "KQL/CreateUserCloudTrailEvents.kql",
+      "categories": ["security"],
+      "relatedTables": [ "AWSCloudTrail" ],
+      "tags": {
+        "Topic": [
+          "Security"
+        ]
+      },
+      "properties": {
+        "ExampleQuery": true,
+        "QueryAttributes": {
+          "IsMultiResource": true
+        }
+      }
+    }
+  ]
+}

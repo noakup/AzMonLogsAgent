@@ -1,0 +1,29 @@
+[
+    {
+        "time": "2023-03-09T10:16:15Z",
+        "resourceId": "/SUBSCRIPTIONS/2941A09D-7BCF-42FE-91CA-1765F521C829/RESOURCEGROUPS/YIYAO-GROUP/PROVIDERS/MICROSOFT.DBFORMYSQL/FLEXIBLESERVERS/YIYAO-M21-80",
+        "Tenant": "7fec3109-5b78-4a24-b834-5d47d63e2596",
+        "properties": "{\"category\":\"MySqlAuditLogs\",\"event_class\":\"table_access_log\",\"replication_set_role\":\"single\",\"event_subclass\":\"READ\",\"connection_id\":8,\"db\":\"mysql\",\"table\":\"__az_replica_information__\",\"sql_text\":\"SELECT USER, BINARY_LOG_FILE, REPL_THUMBPRINT from mysql.__az_replica_information__\"}",
+        "location": "global",
+        "category": "MySqlAuditLogs",
+        "operationName": "MySQL audit log"
+    },
+    {
+        "time": "2023-03-09T11:16:15Z",
+        "resourceId": "/SUBSCRIPTIONS/2941A09D-7BCF-42FE-91CA-1765F521C829/RESOURCEGROUPS/YIYAO-GROUP/PROVIDERS/MICROSOFT.DBFORMYSQL/FLEXIBLESERVERS/YIYAO-M21-80",
+        "Tenant": "7fec3109-5b78-4a24-b834-5d47d63e2596",
+        "properties": "{\"category\":\"MySqlAuditLogs\",\"event_class\":\"general_log\",\"replication_set_role\":\"single\",\"event_subclass\":\"LOG\",\"event_time\":\"2023-03-09T10:16:15Z\",\"error_code\":0,\"thread_id\":14,\"host\":\"localhost\",\"ip\":\"0.0.0.0\",\"user\":\"azure_superuser[azure_superuser] @ localhost []\",\"sql_text\":\"SELECT 1\"}",
+        "location": "global",
+        "category": "MySqlAuditLogs",
+        "operationName": "MySQL audit log"
+    },
+    {
+        "time": "2023-03-09T12:16:15Z",
+        "resourceId": "/SUBSCRIPTIONS/2941A09D-7BCF-42FE-91CA-1765F521C829/RESOURCEGROUPS/YIYAO-GROUP/PROVIDERS/MICROSOFT.DBFORMYSQL/FLEXIBLESERVERS/YIYAO-M21-80",
+        "Tenant": "7fec3109-5b78-4a24-b834-5d47d63e2596",
+        "properties": "{\"category\":\"MySqlAuditLogs\",\"event_class\":\"connection_log\",\"replication_set_role\":\"single\",\"event_subclass\":\"CONNECT\",\"connection_id\":14,\"host\":\"localhost\",\"ip\":\"0.0.0.0\",\"user\":\"azure_superuser\",\"db\":\"\"}",
+        "location": "global",
+        "category": "MySqlAuditLogs",
+        "operationName": "MySQL audit log"
+    }
+]

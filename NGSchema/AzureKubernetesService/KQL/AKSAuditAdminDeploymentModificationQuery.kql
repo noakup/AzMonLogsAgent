@@ -1,0 +1,6 @@
+AKSAuditAdmin
+| where ObjectRef.resource == "deployments"
+| where ObjectRef.namespace == "default"
+| where User.username != "system:serviceaccount:kube-system:deployment-controller" // Exclude updates from the kube controller for deployments
+| limit 100
+| project TimeGenerated, Verb, RequestUri, User, RequestObject, ObjectRef

@@ -1,0 +1,44 @@
+[
+  {
+    "time": "2018-10-24T02:23:45.000Z",
+    "operationName": "Schedule rule run",
+    "resourceId": "subscriptions/bd794837-91bd-91bd-9105-6339bfdb4e6a/resourceGroups/contoso/providers/Microsoft.OperationalInsights/workspaces/contoso/providers/Microsoft.SecurityInsights/alertRules/MalwareScan",
+    "category": "AlertRules",
+    "resultType": "Failure",
+    "resultDescription": "Schedule rule failed to run.",
+    "properties": "{
+      \"WorkspaceId\": \"faebed30-1ba1-4658-91bd-e0c5ce447f98\",
+      \"Reason\": \"ErrorCode1\",
+      \"RecordId\": \"faebed30-2222-4658-3333-e0c5ce447f55\",
+      \"SentinelResourceId\": \"subscriptions/bd794837-91bd-91bd-9105-6339bfdb4e6a/resourceGroups/contoso/providers/Microsoft.OperationalInsights/workspaces/contoso/providers/Microsoft.SecurityInsights/alertRules/MalwareScan\",
+      \"SentinelResourceName\": \"MalwareScan\",
+      \"SentinelResourceKind\": \"ScheduledAlertRule\",
+      \"SentinelResourceType\": \"Alert rule\",
+      \"ExtendedProperties\": \"\"properties\": \"{
+        \"workspaceName\": \"contoso\",
+        \"lastModified\": \"2018-10-24T02:23:45.000Z\"
+      }\"\"
+    }"
+  },
+  {
+    "time": "2018-10-24T02:23:45.000Z",
+    "operationName": "Data fetch status change",
+    "resourceId": "subscriptions/bd794837-91bd-91bd-9105-6339bfdb4e6a/resourceGroups/contoso/providers/Microsoft.OperationalInsights/workspaces/contoso/providers/Microsoft.SecurityInsights/dataConnectors/baebed30-2534-0908-7767-e0c5ce447425",
+    "category": "DataConnector",
+    "resultType": "Success",
+    "resultDescription": "Data fetch succeeded",
+    "properties": "{
+      \"WorkspaceId\": \"faebed30-1ba1-4658-91bd-e0c5ce447f98\",
+      \"Reason\": \"ErrorCode1\",
+      \"RecordId\": \"faebed30-2222-4658-3333-e0c5ce447f55\",
+      \"SentinelResourceId\": \"subscriptions/bd794837-91bd-91bd-9105-6339bfdb4e6a/resourceGroups/contoso/providers/Microsoft.OperationalInsights/workspaces/contoso/providers/Microsoft.SecurityInsights/dataConnectors/baebed30-2534-0908-7767-e0c5ce447425\",
+      \"SentinelResourceName\": \"Office365-Sharepoint\",
+      \"SentinelResourceKind\": \"Office365\",
+      \"SentinelResourceType\": \"Data connector\",
+      \"ExtendedProperties\": \"\"properties\": \"{
+        \"ConnectorDataType\": \"Sharepoint\",
+        \"DestinationTable\": \"OfficeActivity\"
+      }\"\"
+    }"
+  }
+]

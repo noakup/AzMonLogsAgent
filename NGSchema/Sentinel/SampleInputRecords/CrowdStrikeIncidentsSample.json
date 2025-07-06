@@ -1,0 +1,76 @@
+[{
+    "assigned_to": "sec_analyst_123",
+    "assigned_to_name": "John Smith",
+    "incident_id": "inc:b82fb1385f604af2a507e8f6b3b7473d:c7e59914a5c445959a206b78e48c90aa",
+    "incident_type": 1,
+    "cid": "2cc98db1a47b4c98b913c94d43bfab70",
+    "description": "Suspicious activity detected involving possible defense evasion and lateral movement attempts",
+    "host_ids": [
+        "b82fb1385f604af2a507e8f6b3b7473d"
+    ],
+    "hosts": [
+        {
+            "device_id": "b82fb1385f604af2a507e8f6b3b7473d",
+            "cid": "2cc98db1a47b4c98b913c94d43bfab70",
+            "agent_load_flags": "1",
+            "agent_local_time": "2025-02-17T14:50:35.880Z",
+            "agent_version": "7.21.19205.0",
+            "system_product_name": "VMware7,1",
+            "groups": [
+                "9fd1b7681ff04ce992a3deba16ae217e"
+            ],
+            "modified_timestamp": "2025-02-17T09:29:17Z"
+        }
+    ],
+    "created": "2025-02-17T09:31:15Z",
+    "start": "2025-02-17T09:31:12Z",
+    "end": "2025-02-17T10:04:11Z",
+    "state": "closed",
+    "email_state": "START",
+    "events_histogram": [
+        {
+            "timestamp": "2025-02-17T09:31:12Z",
+            "count": 1,
+            "severity": "high"
+        },
+        {
+            "timestamp": "2025-02-17T09:45:00Z",
+            "count": 3,
+            "severity": "critical"
+        }
+    ],
+    "fine_score": 10,
+    "grouping_ids": ["group123", "group456"],
+    "status": 30,
+    "name": "Defense Evasion and Lateral Movement Activity",
+    "lm_host_ids": ["lm_host_1", "lm_host_2"],
+    "lm_hosts_capped": true,
+    "lm_types": 2,
+    "lmra_host_ids": ["lmra_host_1", "lmra_host_2"],
+    "lmra_hosts_capped": false,
+    "tactics": [
+        "Defense Evasion",
+        "Lateral Movement",
+        "AI Powered IOA"
+    ],
+    "techniques": [
+        "Software Packing",
+        "Remote Desktop Protocol",
+        "Masquerading",
+        "Malicious File"
+    ],
+    "objectives": [
+        "Keep Access",
+        "Explore",
+        "Falcon Detection Method"
+    ],
+    "modified_timestamp": "2025-03-18T09:45:26.26026686Z",
+    "users": [
+        "Administrator"
+    ],
+    "tags": [
+        "high-priority",
+        "lateral-movement",
+        "under-investigation"
+    ]
+}]

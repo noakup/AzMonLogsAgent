@@ -1,0 +1,3 @@
+CIEventsAudit
+| summarize DurationMs = avg(DurationMs)  by bin(TimeGenerated, 5m), OperationName
+| render timechart

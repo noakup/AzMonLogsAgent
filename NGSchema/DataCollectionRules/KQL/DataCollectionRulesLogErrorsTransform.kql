@@ -1,0 +1,9 @@
+source
+| extend properties = parse_json(properties)
+| project 
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    CorrelationId = correlationId,
+    ClientRequestId = tostring(properties.ClientRequestId),
+    InputStreamId = tostring(properties.InputStreamId),
+    Message = tostring(properties.Message)

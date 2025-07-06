@@ -1,0 +1,4 @@
+VIAudit
+| where AccountId == "<AccountId>"  // please fill in the accountId <Guid>
+// | where Upn == "<Upn>" // to to filter on a specific user upn, uncomment this line
+| limit 100

@@ -1,0 +1,4 @@
+ACSCallSummary
+// Count distinct calls (dcount(CorrelationId)) per call type
+| summarize call_types=dcount(CorrelationId) by CallType
+| render piechart title="Call Type Ratio"

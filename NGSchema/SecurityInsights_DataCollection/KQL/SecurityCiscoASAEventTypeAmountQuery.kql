@@ -1,0 +1,9 @@
+CommonSecurityLog 
+// Quering on the past 7 days
+| where TimeGenerated > ago(7d)
+// Only filter on Cisco ASA events
+| where DeviceVendor == "Cisco" and DeviceProduct == "ASA"
+// group events by their DeviceEventClassID value, which represents the Cisco message id
+| summarize count_events=count() by DeviceEventClassID
+// Sort in a descending order- most used DeviceEventClassID comes first
+| sort by count_events desc

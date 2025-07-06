@@ -1,0 +1,413 @@
+{
+    "type": "Microsoft.Kubernetes/connectedClusters",
+    "displayName": "Azure Arc Enabled Kubernetes",
+    "description": "Tables used by Azure Monitor for Containers.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "KUBERNETESCONNECTSERVICE/K8SConnectRP",
+    "contactDL": "k8connectsupport@microsoft.com",
+    "relatedTables": [
+        "AzureActivity",
+        "AzureDiagnostics",
+        "AzureMetrics",
+        "ContainerImageInventory",
+        "ContainerInventory",
+        "ContainerLog",
+        "ContainerLogV2",
+        "ContainerNodeInventory",
+        "ContainerServiceLog",
+        "Heartbeat",
+        "InsightsMetrics",
+        "KubeEvents",
+        "KubeMonAgentEvents",
+        "KubeNodeInventory",
+        "KubePodInventory",
+        "KubePVInventory",
+        "KubeServices",
+        "Perf",
+        "Syslog"
+    ],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "ArcK8sAudit",
+            "description": "Contains all Kubernetes API Server audit logs including events with the get and list verbs. These events are useful for monitoring all of the interactions with the Kubernetes API. To limit the scope to modifying operations see the ArcK8sAuditAdmin table. Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "categories": [
+                "audit",
+                "resources",
+                "container"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "MICROSOFTKUBERNETESCONNECTEDCLUSTERS_KUBEAUDIT",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/ArcK8sAuditTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "Level (Metadata, Request, RequestResponse) of the audit event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "AuditId",
+                    "type": "String",
+                    "description": "Unique audit ID that is generated for each request.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Stage",
+                    "type": "String",
+                    "description": "The request handling stage (RequestReceived, ResponseStarted, ResponseComplete, Panic) at which this audit event was generated.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestUri",
+                    "type": "String",
+                    "description": "The URI of the request made by the client to the server.",
+                    "dataTypeHint": "URI",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Verb",
+                    "type": "String",
+                    "description": "The Kubernetes verb associated with the request. For non-resource requests, this is the lower-cased HTTP method.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "User",
+                    "type": "Dynamic",
+                    "description": "Authenticated user metadata of the requesting client, including optional fields such as UID and groups.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIps",
+                    "type": "Dynamic",
+                    "description": "The list of source IP addresses for the originating client and intermediate proxies.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "type": "String",
+                    "description": "The user agent string presented by the originating client.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ObjectRef",
+                    "type": "Dynamic",
+                    "description": "The Kubernetes object reference this event was targeted for. This field does not apply for list requests nor non-resource requests.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ResponseStatus",
+                    "type": "Dynamic",
+                    "description": "Response status for the request, which includes the response code. In error cases, this object will include the error message property.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestObject",
+                    "type": "Dynamic",
+                    "description": "Kubernetes API object from the request in object format or the string \"skipped-too-big-size-object\". This is omitted for non-resource requests.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ResponseObject",
+                    "type": "Dynamic",
+                    "description": "Kubernetes API object from the response, in object format or the string \"skipped-too-big-size-object\". This is omitted for non-resource requests.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestReceivedTime",
+                    "type": "DateTime",
+                    "description": "Time when the API Server first received the request.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "StageReceivedTime",
+                    "type": "DateTime",
+                    "description": "Time when the request reached the current audit stage.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Annotations",
+                    "type": "Dynamic",
+                    "description": "An unstructed key-value map associated with this audit event. These annotations are set by plugins as part of the request serving chain and are included at the Metadata event level.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PodName",
+                    "type": "String",
+                    "description": "Name of the pod emitting this audit event.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/ArcK8sAuditSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/ArcK8sAuditSample.json"
+        },
+        {
+            "name": "ArcK8sAuditAdmin",
+            "description": "Contains Kubernetes API Server audit logs excluding events with the get and list verbs. These events are useful for monitoring resource modification requests made to the Kubernetes API. To see all modifying and non-modifying operations see the ArcK8sAudit table. Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "categories": [
+                "audit",
+                "resources",
+                "container"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "MICROSOFTKUBERNETESCONNECTEDCLUSTERS_KUBEAUDITADMIN",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/ArcK8sAuditTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "Level (Metadata, Request, RequestResponse) of the audit event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "AuditId",
+                    "type": "String",
+                    "description": "Unique audit ID that is generated for each request.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Stage",
+                    "type": "String",
+                    "description": "The request handling stage (RequestReceived, ResponseStarted, ResponseComplete, Panic) at which this audit event was generated.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestUri",
+                    "type": "String",
+                    "description": "The URI of the request made by the client to the server.",
+                    "dataTypeHint": "URI",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Verb",
+                    "type": "String",
+                    "description": "The Kubernetes verb associated with the request. For non-resource requests, this is the lower-cased HTTP method.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "User",
+                    "type": "Dynamic",
+                    "description": "Authenticated user metadata of the requesting client, including optional fields such as UID and groups.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIps",
+                    "type": "Dynamic",
+                    "description": "The list of source IP addresses for the originating client and intermediate proxies.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "type": "String",
+                    "description": "The user agent string presented by the originating client.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ObjectRef",
+                    "type": "Dynamic",
+                    "description": "The Kubernetes object reference this event was targeted for. This field does not apply for list requests nor non-resource requests.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ResponseStatus",
+                    "type": "Dynamic",
+                    "description": "Response status for the request, which includes the response code. In error cases, this object will include the error message property.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestObject",
+                    "type": "Dynamic",
+                    "description": "Kubernetes API object from the request in object format or the string \"skipped-too-big-size-object\". This is omitted for non-resource requests.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ResponseObject",
+                    "type": "Dynamic",
+                    "description": "Kubernetes API object from the response, in object format or the string \"skipped-too-big-size-object\". This is omitted for non-resource requests.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestReceivedTime",
+                    "type": "DateTime",
+                    "description": "Time when the API Server first received the request.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "StageReceivedTime",
+                    "type": "DateTime",
+                    "description": "Time when the request reached the current audit stage.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Annotations",
+                    "type": "Dynamic",
+                    "description": "An unstructed key-value map associated with this audit event. These annotations are set by plugins as part of the request serving chain and are included at the Metadata event level.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PodName",
+                    "type": "String",
+                    "description": "Name of the pod emitting this audit event.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/ArcK8sAuditAdminSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/ArcK8sAuditAdminSample.json"
+        },
+        {
+            "name": "ArcK8sControlPlane",
+            "description": "Contains diagnostic logs for the Kubernetes API Server, Controller Manager, Scheduler, Cluster Autoscaler, Cloud Controller Manager, Guard, and the Azure CSI storage drivers. These diagnostic logs have distinct Category entries corresponding their diagnostic log setting (e.g. kube-apiserver, kube-audit-admin). Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "categories": [
+                "resources",
+                "container"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "MICROSOFTKUBERNETESCONNECTEDCLUSTERS_KUBEAPISERVER",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "isChangeColumnInternalNameAllowed": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/ArcK8sControlPlaneTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "description": "Service log category describing the service logging the message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "Level (Fatal, Error, Warning, Info) of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "Log message body.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Stream",
+                    "type": "String",
+                    "description": "Output stream (stdout, stderr) source of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PodName",
+                    "type": "String",
+                    "description": "Name of the pod logging the request.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/ArcK8sControlPlaneApiServerSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/ArcK8sControlPlaneApiServerSample.json"
+        }
+    ],
+    "functions": [],
+    "queries": []
+}

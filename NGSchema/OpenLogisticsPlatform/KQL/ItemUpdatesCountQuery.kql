@@ -1,0 +1,3 @@
+OLPSupplyChainEventLogs
+| where EventType == "Microsoft.OpenLogisticsPlatform.EntityUpdated" and SupplyChainResourceType == "Item"
+| summarize Count = count() by EventId

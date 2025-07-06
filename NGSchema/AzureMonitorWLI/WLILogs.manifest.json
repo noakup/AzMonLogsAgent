@@ -1,0 +1,125 @@
+{
+    "type": "Microsoft.Insights/WorkloadMonitoring",
+    "displayName": "Workload Monitoring of Azure Monitor Insights",
+    "description": "Tables used by Azure Monitor Workload Monitoring for collection of diagnostic logs.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Operational Framework/Incident Manager",
+    "relatedTables": [
+        "InsightsMetrics"
+    ],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "WorkloadDiagnosticLogs",
+            "description": "Diagnostic logs from the Workload Monitoring data collection services running on the Monitoring VM. Includes logs from wli and ms-telegraf services. Used to troubleshoot configuration or data collection issues.",
+            "categories": [
+                "workloads",
+                "monitor"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "WLI_WorkloadDiagnosticLogs",
+            "intelligencePacks": [],
+            "isResourceCentric": false,
+            "isTroubleshootingAllowed": false,
+            "tableState": "Production",
+		        "input": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "Computer",
+                    "type": "String"
+                },
+                {
+                    "name": "Category",
+                    "type": "String"
+                },
+                {
+                    "name": "Status",
+                    "type": "String"
+                },
+                {
+                    "name": "Message",
+                    "type": "String"
+                },
+                {
+                    "name": "Tags",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "KQL/WorkloadDiagnosticLogs.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The timestamp of when the log was generated."
+                },
+                {
+                    "name": "Computer",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Name of the Computer generating the log."
+                },
+                {
+                    "name": "Category",
+                    "description": "The category of the log.",
+                    "type": "String",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Status",
+                    "type": "String",
+                    "description": "The status of the record. Example: Error, Warning, etc.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The message of the log entry."
+                },
+                {
+                    "name": "Tags",
+                    "description": "Dimensions or other metatata about the record. For example may contain the Monitoring profile ID the log entry is about.",
+                    "type": "Dynamic",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/WorkloadDiagnosticLogsSample.json"
+        }
+    ],
+    "functions": [],
+    "queries": [
+        {
+            "id": "0d32e6ff-9894-415e-a981-2e9e5f76bd78",
+            "displayName": "Workload Monitoring Insights data collection warnings or errors",
+            "description": "Warning or error logs from data collection services of Workload Monitoring of Azure Monitor Insights.",
+            "bodyFilePath": "KQL/WorkloadDiagnosticLogs_ErrorsWarnings_Query.kql",
+            "categories": [
+                "workloads",
+                "monitor"
+            ],
+            "relatedTables": [
+                "WorkloadDiagnosticLogs"
+            ],
+            "tags": {
+                "Topic": [
+                    "Diagnostics",
+                    "Errors"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        }
+    ]
+}

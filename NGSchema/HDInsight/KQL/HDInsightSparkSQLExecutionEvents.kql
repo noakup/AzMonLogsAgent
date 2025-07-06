@@ -1,0 +1,16 @@
+source
+| project
+    TimeGenerated = iff(isnull(EndTime), StartTime, EndTime),
+    ApplicationId = ApplicationId,
+    ExecutionId = ExecutionId,
+    StartTime = StartTime,
+    EndTime = EndTime,
+    PhysicalPlanDescription = PhysicalPlanDescription,
+    SparkPlanInfo = SparkPlanInfo,
+    ClusterTenantId = Tenant,
+	Role = Role,
+	Host = iff(isempty(Host), RoleInstance, Host),
+	ClusterDnsName = ClusterDnsName,
+	Region = Region,
+	IpAddress = IpAddress,
+	UserSubscriptionId = UserSubscriptionId

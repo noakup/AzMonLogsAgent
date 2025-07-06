@@ -1,0 +1,11 @@
+    ACSCallRecordingSummary
+    // To filter out recordings made over a day ago, uncomment the next line
+    | where TimeGenerated > ago(1d)
+    // Get the distinct combinations of RecordingId and TimeGenerated
+    | distinct RecordingId, TimeGenerated
+    // Adds a new column with the call start hour
+    | extend hour = floor(TimeGenerated, 1h)
+    // Count the number of calls per hour
+    | summarize event_count=count() by hour
+    | sort by hour asc
+    | render columnchart title="Number of recordings per hour in last day"

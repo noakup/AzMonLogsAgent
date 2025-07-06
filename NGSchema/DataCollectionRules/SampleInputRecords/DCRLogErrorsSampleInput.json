@@ -1,0 +1,14 @@
+[
+    {
+        "time": "2023-04-10T16:16:35",
+        "resourceId": "/SUBSCRIPTIONS/59526AE9-8A1F-487F-B069-5BAF60B9645C/RESOURCEGROUPS/RAMYADAV-RG1/PROVIDERS/MICROSOFT.INSIGHTS/DATACOLLECTIONRULES/PARSE_CEF_DICTIOANARY3",
+        "category": "LogErrors",
+        "operationName": "Transformation",
+        "correlationId": "80518d20-3980-44fc-80d3-2796615bfe94",
+        "properties": {
+            "InputStreamId": "Custom/dcr-d15dd1b539d549d98b0dfccfc4b0997b/Custom-parse_cef_dictioanary3_CL",
+            "Message": "Filtered",
+            "ClientRequestId": "00000000-0000-0000-0000-000000000000"
+        }
+    }
+]

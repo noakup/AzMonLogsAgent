@@ -1,0 +1,3 @@
+OktaSystemLogs
+| where EventOriginalType == 'user.session.start'
+| limit 100

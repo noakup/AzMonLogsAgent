@@ -1,0 +1,18 @@
+[
+  {
+    "time": "2021-09-10T08:33:51.777572447Z",
+    "resourceId": "/SUBSCRIPTIONS/5464F7EE3875-12C9-C654-F81D-CE1909AD/RESOURCEGROUPS/sample-INSTANCES/PROVIDERS/MICROSOFT.AGFOODPLATFORM/FARMBEATS/sample-EUS-1",
+    "category": "ApplicationAuditLogs",
+    "operationName": "Data Plane Authentication",
+    "callerIpAddress": "103.90.236.209",
+    "Level": "Information",
+    "identity": "[{\"CallerIdentityType\"=>\"UPN\", \"CallerIdentityValue\"=>\"\"}, {\"CallerIdentityType\"=>\"SubscriptionID\", \"CallerIdentityValue\"=>\"\"}, {\"CallerIdentityType\"=>\"ObjectID\", \"CallerIdentityValue\"=>\"9002b50e-dc98-445e-a865-72dce38ecafd\"}, {\"CallerIdentityType\"=>\"TenantID\", \"CallerIdentityValue\"=>\"72f988bf-86f1-41af-91ab-2d7cd011db47\"}, {\"CallerIdentityType\"=>\"ApplicationID\", \"CallerIdentityValue\"=>\"39d176c5-91b6-454b-854d-55813c17d92d\"}]",
+    "resultType": "Success",
+    "resultDescription": "",
+    "properties": {
+      "dataPlaneResourceId": "/sensors/df-master"
+    },
+    "correlationId": "a7b8ed4b-945e-4556-a669-4740adbefac5",
+    "location": "eastus"
+  }
+]

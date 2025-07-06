@@ -1,0 +1,5 @@
+AlertInfo
+| where isnotempty(AttackTechniques)
+| mvexpand todynamic(AttackTechniques) to typeof(string)
+| summarize AlertCount = dcount(AlertId) by AttackTechniques
+| sort by AlertCount desc

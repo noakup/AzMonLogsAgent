@@ -1,0 +1,5 @@
+// List the object identifiers and number of calls from each over the public network
+ResourceManagementPublicAccessLogs
+| where Category == "PublicAccessLogs"
+| summarize count() by ObjectIdentifier
+| order by count_ 

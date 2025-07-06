@@ -1,0 +1,50 @@
+[
+  {
+    "time": "2020-08-07T22:00:47.9514923Z",
+    "tenantId": "5b5a146c-eba8-46af-96f8-e31b50d15a3f",
+    "operationName": "Publish",
+    "category": "AdvancedHunting-DeviceNetworkInfo",
+    "properties": {
+      "IPAddresses": "[{\"IPAddress\":\"10.0.7.4\",\"SubnetPrefix\":24,\"AddressType\":\"Private\"},{\"IPAddress\":\"fe80::b1fc:a14a:7d6:1fa0\",\"SubnetPrefix\":64,\"AddressType\":\"Private\"}]",
+      "TunnelType": "None",
+      "NetworkAdapterStatus": "Up",
+      "NetworkAdapterType": "Ethernet",
+      "NetworkAdapterName": "{3598E639-BC7E-46DB-B658-7C989E558722}",
+      "IPv6Dhcp": "",
+      "IPv4Dhcp": "168.63.129.16",
+      "MacAddress": "000D3AA7284B",
+      "DefaultGateways": "[\"10.0.7.1\"]",
+      "DnsAddresses": "[\"::1\",\"127.0.0.1\"]",
+      "ConnectedNetworks": "[{\"Name\":\"Network\",\"Description\":\"Network\",\"IsConnectedToInternet\":true,\"Category\":\"Public\"}]",
+      "DeviceId": "49be8c37f7848a16627c043e836db8bd48de4489",
+      "MachineGroup": "General",
+      "Timestamp": "2020-08-07T21:58:59.4682026Z",
+      "DeviceName": "domaincontroller.sentinele5.onmicrosoft.com",
+      "ReportId": 8216
+    }
+  },
+  {
+    "time": "2020-08-07T22:00:47.9514923Z",
+    "tenantId": "5b5a146c-eba8-46af-96f8-e31b50d15a3f",
+    "operationName": "Publish",
+    "category": "AdvancedHunting-DeviceNetworkInfo",
+    "properties": {
+      "IPAddresses": null,
+      "TunnelType": null,
+      "NetworkAdapterStatus": null,
+      "NetworkAdapterType": null,
+      "NetworkAdapterName": null,
+      "IPv6Dhcp": null,
+      "IPv4Dhcp": null,
+      "MacAddress": null,
+      "DefaultGateways": null,
+      "DnsAddresses": null,
+      "ConnectedNetworks": null,
+      "DeviceId": null,
+      "MachineGroup": null,
+      "Timestamp": "2020-08-07T21:58:59.4682026Z",
+      "DeviceName": null,
+      "ReportId": null
+    }
+  }
+]

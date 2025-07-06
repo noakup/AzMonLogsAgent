@@ -1,0 +1,65 @@
+[
+  {
+    "time": "2020-12-08T08:01:42.7923169Z",
+    "tenantId": "e3d69322-d40b-45c2-b17c-7d6b981d7c7b",
+    "operationName": "Publish",
+    "category": "AdvancedHunting-EmailPostDeliveryEvents",
+    "properties": {
+      "NetworkMessageId": "12341234-1aae-1234-9cac-123412341234",
+      "RecipientEmailAddress": "rony@rony.onmicrosoft.com",
+      "Timestamp": "2021-03-16T11:37:55Z",
+      "ActionType": "Malware ZAP",
+      "ActionResult": "AdminPolicy",
+      "Action": "Added message info only",
+      "DeliveryLocation": "Inbox",
+      "ActionTrigger": "SpecialAction",
+      "InternetMessageId": "<227a33df7f84111ed98sss5bc444dba2@localhost>",
+      "SenderFromAddress": "kim.hyun-seok@mdopr-eur.cattack-lab.com>",
+      "EmailDirection": "Outbound"
+    },
+    "Tenant": "STG",
+    "DC": "EUS2"
+  },
+  {
+    "time": "2020-12-08T08:01:42.7923169Z",
+    "tenantId": "e3d69322-d40b-45c2-b17c-7d6b981d7c7b",
+    "operationName": "Publish",
+    "category": "AdvancedHunting-EmailPostDeliveryEvents",
+    "properties": {
+      "NetworkMessageId": "12341234-1aae-1234-9cac-123412341235",
+      "RecipientEmailAddress": "rony@rony.onmicrosoft.com",
+      "Timestamp": "2021-03-16T11:50:43Z",
+      "ActionType": "Malware ZAP",
+      "ActionResult": "AdminPolicy",
+      "Action": "Added message info only",
+      "DeliveryLocation": "Inbox",
+      "ActionTrigger": "SpecialAction",
+      "InternetMessageId": "<227a33df7f84111ed98sss5bc444dba2@localhost>",
+      "SenderFromAddress": "kim.hyun-seok@mdopr-eur.cattack-lab.com>",
+      "EmailDirection": "Outbound"
+    },
+    "Tenant": "STG",
+    "DC": "EUS2"
+  },
+  {
+    "time": "2020-12-08T08:01:42.7923169Z",
+    "tenantId": "e3d69322-d40b-45c2-b17c-7d6b981d7c7b",
+    "operationName": "Publish",
+    "category": "AdvancedHunting-EmailPostDeliveryEvents",
+    "properties": {
+      "NetworkMessageId": "12341234-1aae-1234-9cac-123412341236",
+      "RecipientEmailAddress": "rony@rony.onmicrosoft.com",
+      "Timestamp": "2021-03-16T12:08:35Z",
+      "ActionType": "Malware ZAP",
+      "ActionResult": "AdminPolicy",
+      "Action": "Added message info only",
+      "DeliveryLocation": "Inbox",
+      "ActionTrigger": "SpecialAction",
+      "InternetMessageId": "<227a33df7f84111ed98sss5bc444dba2@localhost>",
+      "SenderFromAddress": "kim.hyun-seok@mdopr-eur.cattack-lab.com>",
+      "EmailDirection": "Outbound"
+    },
+    "Tenant": "STG",
+    "DC": "EUS2"
+  }
+]

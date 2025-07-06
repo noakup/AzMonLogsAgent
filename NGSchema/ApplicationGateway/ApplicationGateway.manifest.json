@@ -1,0 +1,519 @@
+{
+    "type": "Microsoft.Network/applicationGateways",
+    "displayName": "Application Gateways",
+    "description": "Azure Application Gateway is a web traffic load balancer that enables you to manage traffic to your web applications.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Cloudnet/ApplicationGateway",
+    "contactDL": "nvadev@microsoft.com",
+    "relatedFunctions": [],
+    "relatedTables": [
+        "AzureActivity",
+        "AzureMetrics"
+    ],
+    "tables": [
+        {
+            "name": "AGWAccessLogs",
+            "description": "Contains all the log to view Application Gateway access patterns and analyze important information. This includes the caller's IP, requested URL, response latency, return code, and bytes in and out.",
+            "categories": [
+                "resources",
+                "network",
+                "audit"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "AZUREAPPLICATIONGATEWAYSERVICE_APPLICATIONGATEWAYACCESSLOG",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "listenerName",
+                    "type": "String"
+                },
+                {
+                    "name": "ruleName",
+                    "type": "String"
+                },
+                {
+                    "name": "backendPoolName",
+                    "type": "String"
+                },
+                {
+                    "name": "backendSettingName",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/AGWAccessLogsTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Time (UTC) when the log was created.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "description": "Name of the operation.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ListenerName",
+                    "type": "String",
+                    "description": "The listener associated with given request log.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RuleName",
+                    "type": "String",
+                    "description": "The rule associated with the given request log.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "BackendPoolName",
+                    "type": "String",
+                    "description": "The backend pool associated with the given request log.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "BackendSettingName",
+                    "type": "String",
+                    "description": "The backend setting name associated with the given request log.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "InstanceId",
+                    "type": "String",
+                    "description": "Application Gateway instance that served the request.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ClientIp",
+                    "type": "String",
+                    "description": "IP of the immediate client of Application Gateway. If another proxy fronts your application gateway, this displays the IP of that fronting proxy.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "HttpMethod",
+                    "type": "String",
+                    "description": "HTTP method used by the request.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestUri",
+                    "type": "String",
+                    "description": "URI of the received request.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "URI"
+                },
+                {
+                    "name": "UserAgent",
+                    "type": "String",
+                    "description": "User agent from the HTTP request header.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "HttpStatus",
+                    "type": "Int",
+                    "description": "HTTP status code returned to the client from Application Gateway.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "HttpVersion",
+                    "type": "String",
+                    "description": "HTTP version of the request.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ReceivedBytes",
+                    "type": "Int",
+                    "description": "Size of packet received, in bytes.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SentBytes",
+                    "type": "Int",
+                    "description": "Size of packet sent, in bytes.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ClientResponseTime",
+                    "type": "Double",
+                    "description": "Time difference (in seconds) between first byte received from the backend to first byte sent to the client.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TimeTaken",
+                    "type": "Double",
+                    "description": "Length of time (in seconds) that it takes for the first byte of a client request to be processed and its last-byte sent in the response to the client. It's important to note that the Time-Taken field usually includes the time that the request and response packets are traveling over the network.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "WafEvaluationTime",
+                    "type": "Double",
+                    "description": "Length of time (in seconds) that it takes for the request to be processed by the WAF.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "WafMode",
+                    "type": "String",
+                    "description": "Value can be either Detection or Prevention.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TransactionId",
+                    "type": "String",
+                    "description": "Unique identifier to correlate the request received from the client.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "GUID"
+                },
+                {
+                    "name": "SslEnabled",
+                    "type": "String",
+                    "description": "Whether communication to the backend pools used TLS. Valid values are on and off.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SslCipher",
+                    "type": "String",
+                    "description": "Cipher suite being used for TLS communication (if TLS is enabled).",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SslProtocol",
+                    "type": "String",
+                    "description": "SSL/TLS protocol being used (if TLS is enabled).",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServerRouted",
+                    "type": "String",
+                    "description": "The backend server that application gateway routes the request to.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServerStatus",
+                    "type": "Int",
+                    "description": "HTTP status code of the backend server.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ErrorInfo",
+                    "type": "String",
+                    "description": "Error category of the failing request.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ServerResponseLatency",
+                    "type": "Double",
+                    "description": "Latency of the response (in seconds) from the backend server.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Host",
+                    "type": "String",
+                    "description": "Address listed in the host header of the request. If rewritten using header rewrite, this field contains the updated host name.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OriginalRequestUriWithArgs",
+                    "type": "String",
+                    "description": "This field contains the original request URL.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "URI"
+                },
+                {
+                    "name": "UpstreamSourcePort",
+                    "type": "Int",
+                    "description": "The source port used by Application Gateway when initiating a connection to the backend target.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OriginalHost",
+                    "type": "String",
+                    "description": "This field contains the original request host name.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AGWAccessLogsInputSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AGWAccessLogsOutputSample.json"
+        },
+        {
+            "name": "AGWPerformanceLogs",
+            "description": "Contains all the logs to view how Application Gateway instances are performing. This log captures performance information for each instance, including total requests served, throughput in bytes, total requests served, failed request count, and healthy and unhealthy backend instance count.The Performance log is available only for the v1 SKU.",
+            "categories": [
+                "resources",
+                "network",
+                "audit"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "AZUREAPPLICATIONGATEWAYSERVICE_APPLICATIONGATEWAYPERFORMANCELOG",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/AGWPerformanceLogsTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Time (UTC) when the log was created.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "description": "Name of the operation.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "InstanceId",
+                    "type": "String",
+                    "description": "Application Gateway instance for which performance data is being generated. For a multiple-instance application gateway, there is one row per instance.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "HealthyHostCount",
+                    "type": "Int",
+                    "description": "Number of healthy hosts in the backend pool.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UnHealthyHostCount",
+                    "type": "Int",
+                    "description": "Number of unhealthy hosts in the backend pool.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestCount",
+                    "type": "Int",
+                    "description": "Number of requests served.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Latency",
+                    "type": "Int",
+                    "description": "Average latency (in milliseconds) of requests from the instance to the back end that serves the requests.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FailedRequestCount",
+                    "type": "Int",
+                    "description": "Number of failed requests.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Throughput",
+                    "type": "Int",
+                    "description": "Average throughput since the last log, measured in bytes per second.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AGWPerformanceLogsInputSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AGWPerformanceLogsOutputSample.json"
+        },
+        {
+            "name": "AGWFirewallLogs",
+            "description": "Contains all the logs to view the requests that are logged through either detection or prevention mode of an application gateway that is configured with the web application firewall.",
+            "categories": [
+                "resources",
+                "network",
+                "audit"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 6,
+            "dataTypeId": "AZUREAPPLICATIONGATEWAYSERVICE_APPLICATIONGATEWAYFIREWALLLOG",
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "timeStamp",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/AGWFirewallLogsTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Time (UTC) when the log was created.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "description": "Name of the operation.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "InstanceId",
+                    "type": "String",
+                    "description": "Application Gateway instance for which firewall data is being generated. For a multiple-instance application gateway, there is one row per instance.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ClientIp",
+                    "type": "String",
+                    "description": "Originating IP for the request.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "ClientPort",
+                    "type": "Int",
+                    "description": "Originating port for the request.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestUri",
+                    "type": "String",
+                    "description": "URL of the received request.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "URI"
+                },
+                {
+                    "name": "RuleSetType",
+                    "type": "String",
+                    "description": "Rule set type. The available value is OWASP.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RuleSetVersion",
+                    "type": "String",
+                    "description": "Rule set version used. Available values are 2.2.9 and 3.0.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RuleId",
+                    "type": "String",
+                    "description": "Rule ID of the triggering event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "User-friendly message for the triggering event. More details are provided in the details section.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Action",
+                    "type": "String",
+                    "description": "Action taken on the request. Available values are Blocked and Allowed (for custom rules), Matched (when a rule matches a part of the request), and Detected and Blocked (these are both for mandatory rules, depending on if the WAF is in detection or prevention mode).",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Site",
+                    "type": "String",
+                    "description": "Site for which the log was generated. Currently, only Global is listed because rules are global.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DetailedMessage",
+                    "type": "String",
+                    "description": "Description of the rule for the triggered event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DetailedData",
+                    "type": "String",
+                    "description": "Specific data found in request that matched the rule for the triggered event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FileDetails",
+                    "type": "String",
+                    "description": "Configuration file that contained the rule for the triggered event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LineDetails",
+                    "type": "String",
+                    "description": "Line number in the configuration file that triggered the event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Hostname",
+                    "type": "String",
+                    "description": "Hostname or IP address of the Application Gateway.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TransactionId",
+                    "type": "String",
+                    "description": "Unique ID for a given transaction which helps group multiple rule violations that occurred within the same request.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "GUID"
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AGWFirewallLogsInputSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AGWFirewallLogsOutputSample.json"
+        }
+    ],
+    "functions": [],
+    "queries": []
+}

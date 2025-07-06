@@ -1,0 +1,14 @@
+{
+    "TimeGenerated": "2024-09-24T09:55:34.152371543Z",
+    "Node": "rack1control02",
+    "ContainerName": "manager",
+    "PodName": "nc-platform-controller-manager-6679b9cf5c-qpkhz",
+    "NamespaceName": "nc-system",
+    "Message": "Platform upgrade is paused",
+    "Severity": "Info",
+    "Location": "uksouth",
+    "ClusterManagerName": "sim-cluster-mgr-t3fwf4xn2ikbu",
+    "ClusterName": "simdev-2578386-cluster-1",
+    "_ResourceId": "/SUBSCRIPTIONS/A3EEB848-665A-4DBF-80A4-EB460930FB23/RESOURCEGROUPS/REDACTED_ID-SIMDEV-2578386/PROVIDERS/MICROSOFT.NETWORKCLOUD/CLUSTERS/SIMDEV-2578386-CLUSTER-1",
+    "_SubscriptionID": "a3eeb848-665a-4dbf-80a4-eb460930fb23"
+}

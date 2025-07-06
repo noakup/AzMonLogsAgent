@@ -1,0 +1,5 @@
+VIAudit
+// | where AccountId == "<AccountId>"  // to filter on a specific accountId, uncomment this line
+// | where Upn == "<Upn>" // to to filter on a specific user upn, uncomment this line
+| where Status == "Failure"
+| limit 100

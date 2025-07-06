@@ -1,0 +1,23 @@
+[
+    {
+        "TimeGenerated": "2023-11-16T08:30:59Z",
+        "EventName": "BgpNeighborAfiSafiName",
+        "EventCategory": "NetworkInstanceBgpNeighborUpdates",
+        "FabricId": "/subscriptions/962219bd-33e8-461a-aa01-2ea9236a2b07/resourceGroups/Fab1LabNF-4-2/providers/Microsoft.ManagedNetworkFabric/networkFabrics/nfcfab1-4-2",
+        "DeviceId": "/subscriptions/962219bd-33e8-461a-aa01-2ea9236a2b07/resourceGroups/Fab1LabNF-4-2/providers/Microsoft.ManagedNetworkFabric/networkDevices/nfcfab1-4-2-AggrRack-CE1",
+        "DeviceTime": "1699872904197587314",
+        "Properties": {
+            "AfiSafiAfiSafiName": "IPV6_MULTICAST",
+            "DeviceId": "/subscriptions/962219bd-33e8-461a-aa01-2ea9236a2b07/resourceGroups/Fab1LabNF-4-2/providers/Microsoft.ManagedNetworkFabric/networkDevices/nfcfab1-4-2-AggrRack-CE1",
+            "DeviceName": "nfcfab1-4-2-fab1-ar-ce1",
+            "EventName": "BgpNeighborAfiSafiName",
+            "FabricID": "/subscriptions/962219bd-33e8-461a-aa01-2ea9236a2b07/resourceGroups/Fab1LabNF-4-2/providers/Microsoft.ManagedNetworkFabric/networkFabrics/nfcfab1-4-2",
+            "GnmiTimestamp": "1699872904197587314",
+            "NeighborAddress": "fda0:d59c:da02:d::f",
+            "NetworkInstanceName": "STORAGE-DATA",
+            "ProtocolIdentifier": "BGP",
+            "ProtocolName": "BGP",
+            "Value": "arista-bgp-augments:IPV6_MULTICAST"
+        }
+    }
+]

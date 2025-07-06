@@ -1,0 +1,50 @@
+[
+    {
+        "body": "Target testk8starget is being updated on namespace symphonycustest",
+        "callerId": "60de14ba-296d-4d1b-8acb-bc0d3e1fbc0b",
+        "category": "UserAudits",
+        "correlationId": "b618cf1a-45fe-488b-ae10-447ce950b128",
+        "edgeLocation": "/subscriptions/af54d2ce-0dcb-48f8-9d2d-ff9c53e48c8d/resourceGroups/jiadutestk3s0722rg/providers/Microsoft.ExtendedLocation/customLocations/symphonycustest",
+        "instance": "symphony-controller-manager-5bffcfb567-nrrql",
+        "location": "eastus",
+        "operatingResourceId": "/SUBSCRIPTIONS/AF54D2CE-0DCB-48F8-9D2D-FF9C53E48C8D/RESOURCEGROUPS/JIADUTESTK3S0722RG/PROVIDERS/MICROSOFT.TOOLCHAINORCHESTRATOR/TARGETS/TESTK8STARGET",
+        "operatingResourceK8SId": "symphonycustest/testk8starget",
+        "operationName": "targets.fabric.symphony/Write",
+        "properties": {},
+        "resourceId": "/SUBSCRIPTIONS/AF54D2CE-0DCB-48F8-9D2D-FF9C53E48C8D/RESOURCEGROUPS/JIADUTESTK3S0722RG/PROVIDERS/MICROSOFT.TOOLCHAINORCHESTRATOR/DIAGNOSTICS/DEFAULT",
+        "service.name": "symphony-k8s",
+        "time": "2024-08-21T12:25:44.380Z"
+    },
+    {
+        "body": "  P (K8s Target Provider): Starting create deployment under namespace - testk8sscope, name - target-runtime-testk8starget",
+        "callerId": "60de14ba-296d-4d1b-8acb-bc0d3e1fbc0b",
+        "category": "UserAudits",
+        "correlationId": "b618cf1a-45fe-488b-ae10-447ce950b128",
+        "edgeLocation": "/subscriptions/af54d2ce-0dcb-48f8-9d2d-ff9c53e48c8d/resourceGroups/jiadutestk3s0722rg/providers/Microsoft.ExtendedLocation/customLocations/symphonycustest",
+        "instance": "symphony-api-bfc67f789-p6gbn",
+        "location": "eastus",
+        "operatingResourceId": "/SUBSCRIPTIONS/AF54D2CE-0DCB-48F8-9D2D-FF9C53E48C8D/RESOURCEGROUPS/JIADUTESTK3S0722RG/PROVIDERS/MICROSOFT.TOOLCHAINORCHESTRATOR/TARGETS/TESTK8STARGET",
+        "operatingResourceK8SId": "symphonycustest/testk8starget",
+        "operationName": "targets.fabric.symphony/Write",
+        "properties": {},
+        "resourceId": "/SUBSCRIPTIONS/AF54D2CE-0DCB-48F8-9D2D-FF9C53E48C8D/RESOURCEGROUPS/JIADUTESTK3S0722RG/PROVIDERS/MICROSOFT.TOOLCHAINORCHESTRATOR/DIAGNOSTICS/DEFAULT",
+        "service.name": "symphony-api",
+        "time": "2024-08-21T12:25:44.413Z"
+    },
+    {
+        "body": "Request completed in 0.013806 seconds: Method: POST URL: /v1alpha2/solution/reconcile StatusCode: 200",
+        "callerId": "60de14ba-296d-4d1b-8acb-bc0d3e1fbc0b",
+        "category": "UserAudits",
+        "correlationId": "b618cf1a-45fe-488b-ae10-447ce950b128",
+        "edgeLocation": "/subscriptions/af54d2ce-0dcb-48f8-9d2d-ff9c53e48c8d/resourceGroups/jiadutestk3s0722rg/providers/Microsoft.ExtendedLocation/customLocations/symphonycustest",
+        "instance": "symphony-api-bfc67f789-p6gbn",
+        "location": "eastus",
+        "operatingResourceId": "/SUBSCRIPTIONS/AF54D2CE-0DCB-48F8-9D2D-FF9C53E48C8D/RESOURCEGROUPS/JIADUTESTK3S0722RG/PROVIDERS/MICROSOFT.TOOLCHAINORCHESTRATOR/TARGETS/TESTK8STARGET",
+        "operatingResourceK8SId": "symphonycustest/testk8starget",
+        "operationName": "targets.fabric.symphony/Write",
+        "properties": {},
+        "resourceId": "/SUBSCRIPTIONS/AF54D2CE-0DCB-48F8-9D2D-FF9C53E48C8D/RESOURCEGROUPS/JIADUTESTK3S0722RG/PROVIDERS/MICROSOFT.TOOLCHAINORCHESTRATOR/DIAGNOSTICS/DEFAULT",
+        "service.name": "symphony-api",
+        "time": "2024-08-21T12:25:44.418Z"
+    }
+]

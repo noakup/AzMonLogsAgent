@@ -1,0 +1,32 @@
+[
+    {
+        "activityID": "",
+        "application": "nc-cluster-operator",
+        "caller": "/workspace/pkg/shoeboxeventlogger/shoeboxeventlogger.go:42",
+        "category": "ClusterManagerDeployOrUpgrade",
+        "clusterManagerName": "clustermgrfa5b94",
+        "clusterName": "clustercda2ad",
+        "ContainerName": "manager",
+        "correlationID":"77e793d9-3b76-4295-b279-2a970e3066a8",
+        "eventData": "",
+        "eventType": "",
+        "error": "",
+        "kubernetesClusterID": "",
+        "level": "info",
+        "location": "eastus",
+        "logger": "controllers/Cluster",
+        "message": "Cluster Deployment completed with status: Failed",
+        "NamespaceName": "nc-system",
+        "Node": "aks-agentpool0-32803505-vmss000003",
+        "onbehalfAnnotations": "<Config onBehalfFields=\"resourceId,category\" priority=\"Normal\" primaryPartitionField=\"resourceId\" excludedFields=\"Tenant,Role,RoleInstance,PreciseTimeStamp,FluentdIngestTimestamp,TIMESTAMP,ContainerImage,GenevaPodName,environment,clusterID,clusterManagerResourceGroupName,clusterManagerID,clusterResourceGroupName,Tag,tenantID,originalRecord\" containerSuffix=\"$category\" />",
+        "onbehalfServiceId": "Microsoft.NetworkCloud",
+        "operationID": "e358f145-b0f6-4d6b-b691-a22b15484744*0070BC303D7981417F4C50252776416A8E5F71C3210F1A31E77AF9C201482403",
+        "operationName": "Microsoft.NetworkCloud/storageAppliances/read",
+        "PodName": "nc-cluster-operator-mc-controller-manager-fcbf8ff97-mzw72",
+        "properties": "",
+        "resourceId": "/SUBSCRIPTIONS/FCA2E8EE-1179-48B8-9532-428ED0873A2E/RESOURCEGROUPS/SYNT-DEV-FUNCTIONALTESTS-EASTUS-APITESTING-BL-NEAR-EDGE_USWEST-KKF2PZ4Q-TEST/PROVIDERS/MICROSOFT.NETWORKCLOUD/CLUSTERMANAGERS/CLUSTERMGR386400",
+        "subscriptionID": "fca2e8ee-1179-48b8-9532-428ed0873a2e",
+        "time": "2024-06-19T14:22:55.679658018Z",
+        "zone": ""
+    }
+]

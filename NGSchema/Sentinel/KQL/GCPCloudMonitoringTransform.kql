@@ -1,0 +1,10 @@
+source
+| extend TimeGenerated = now()
+| extend Metric = parse_json(metric)
+| extend MetricLabels = Metric.labels
+| extend MetricType = tostring(Metric.type)
+| extend GCPResource = resource
+| extend MetricKind = tostring(metricKind)
+| extend ValueType = tostring(valueType)
+| extend Points = points
+| project TimeGenerated, MetricLabels, MetricType, GCPResource, MetricKind, ValueType, Points

@@ -1,0 +1,45 @@
+[
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "prisma-cloud-serv-fabur@msccp-test.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/msccp-test/serviceAccounts/prisma-cloud-serv-fabur@msccp-test.iam.gserviceaccount.com/keys/711d0583951468a4c27f724399f859fe83b788fd",
+        "principalSubject": "serviceAccount:prisma-cloud-serv-fabur@msccp-test.iam.gserviceaccount.com"
+      },
+      "requestMetadata": {
+        "callerIp": "gce-internal-ip",
+        "callerSuppliedUserAgent": "google-api-go-client/0.5,gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "compute.googleapis.com",
+      "methodName": "v1.compute.instances.delete",
+      "resourceName": "projects/msccp-test/zones/us-central1-c/instances/prismacloud-scan-1749707668209322149-prisma-agentless-scan",
+      "request": {
+        "@type": "type.googleapis.com/compute.instances.delete"
+      }
+    },
+    "insertId": "dnlk5jd2ru8",
+    "resource": {
+      "type": "gce_instance",
+      "labels": {
+        "zone": "us-central1-c",
+        "project_id": "msccp-test",
+        "instance_id": "8957538058499511674"
+      }
+    },
+    "timestamp": "2025-06-12T06:06:40.633201Z",
+    "severity": "NOTICE",
+    "labels": {
+      "compute.googleapis.com/root_trigger_id": "b7358b47-15ec-4a5c-8f45-915b75dfdd88"
+    },
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Factivity",
+    "operation": {
+      "id": "operation-1749708368322-63759b9c11de1-1efb33a0-8473c38b",
+      "producer": "compute.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2025-06-12T06:06:41.142326207Z"
+  }
+]

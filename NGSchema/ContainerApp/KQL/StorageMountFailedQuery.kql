@@ -1,0 +1,3 @@
+ContainerAppSystemLogs_CL
+| where Reason_s contains "FailedMount"
+| top 100

@@ -1,0 +1,18 @@
+source
+| project
+    TimeGenerated = timeGenerated,
+    RecordId = recordId,
+    ConnectionMonitorResourceId = connectionMonitorResourceId,
+    TestGroupName = testGroupName,
+    TestConfigurationName = testConfigurationName,    
+    DestinationPort = destinationPort,
+    DestinationType = destinationType,
+    DestinationResourceId = destinationResourceId,
+    DestinationAddress = destinationAddress,
+    DestinationSubnet = destinationSubnet,
+    DestinationIP = destinationIP,
+    DestinationName = destinationName,
+    DestinationAgentId = destinationAgentId,
+    Protocol = protocol,
+    ListeningOutcome = listeningOutcome,
+    Issues = issues

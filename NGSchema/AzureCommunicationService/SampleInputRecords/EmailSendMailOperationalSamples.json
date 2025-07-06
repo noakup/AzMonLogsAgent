@@ -1,0 +1,19 @@
+[
+    {
+        "time": "2022-05-21T18:33:01.2221875Z",
+        "location": "West US",
+        "operationName": "SendMail",
+        "operationVersion": "2021-10-01-preview",
+        "category": "EmailSendMailOperational",
+        "correlationId": "a9bd0fdc-1a7f-4508-95cb-17cde002e0d3",
+        "properties": {
+            "Size": 0.052003,
+            "ToRecipientsCount": 3,
+            "CcRecipientsCount": 2,
+            "BccRecipientsCount": 0,
+            "UniqueRecipientsCount": 5,
+            "AttachmentsCount": 1,
+            "TrafficSource": "Email .NET SDK"
+        }
+    }
+]

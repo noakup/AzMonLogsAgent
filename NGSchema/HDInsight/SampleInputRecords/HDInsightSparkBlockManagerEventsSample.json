@@ -1,0 +1,19 @@
+[{
+	"ApplicationId": "application_1592205350998_402884",
+	"ExecutorId": "driver",
+	"AppName": "AzureFlowAnalyticsSparkApplication",
+	"AddedTime": "2020-06-30T03:53:25.922+0000",
+	"RemovedTime": "2020-06-30T03:53:18.239+0000",
+	"MaxMemory" : "2101975449",
+	"MaxOnHeapMemory" : "2101975449",
+	"MaxOffHeapMemory" : "0",
+	"Tenant": "bf597230450a4ea08cf5d46f097c6b51",
+	"Role": "workernode",
+	"Host": "wn0-ntb-7.5c4yhjcbs2de5avsfsdfbtkske.cx.internal.cloudapp.net",
+	"ClusterDnsName": "primary-hdsparkcluster-v3-eus2",
+	"Region": "East US",
+	"IpAddress": "10.0.0.9",
+	"UserSubscriptionId": "8p26a622-df78-4a27-a907-1ec2384d4f1va",
+	"BlockHost" : "wn0-ntb-7.5c4yhjcbs2de5avsfsdfbtkske.cx.internal.cloudapp.net",
+	"BlockManagerHost": "wn0-ntb-7.5c4yhjcbs2de5avsfsdfbtkske.cx.internal.cloudapp.net"
+}]

@@ -1,0 +1,34 @@
+[
+	{
+		"time": "2021-03-21T02:33:02.0583751Z",
+		"resourceId": "/SUBSCRIPTIONS/1338DDED-42F5-4CAE-8ED2-36C19680A7A1/RESOURCEGROUPS/ACCNT_RG/PROVIDERS/MICROSOFT.DOCUMENTDB/DATABASEACCOUNTS/ACCNT-METRICS-TEST",
+		"category": "DataPlaneRequests",
+		"operationName": "Read",
+		"properties": {
+			"activityId": "f3fa74a3-d86c-4332-a979-a8769f5b220a",
+			"requestResourceType": "DatabaseFeed",
+			"requestResourceId": "/dbs",
+			"collectionRid": "",
+			"databaseRid": "",
+			"statusCode": "200",
+			"duration": "77.035200",
+			"userAgent": "Microsoft.Azure.Documents.Common/2.11.0",
+			"clientIpAddress": "52.138.108.168",
+			"requestCharge": "2.000000",
+			"requestLength": "0",
+			"responseLength": "224",
+			"resourceTokenPermissionId": "",
+			"resourceTokenPermissionMode": "",
+			"resourceTokenUserRid": "",
+			"region": "West US",
+			"partitionId": "",
+			"aadAppliedRoleAssignmentId": "",
+			"aadPrincipalId": "",
+			"databaseName": "my_db",
+			"collectionName": "my_col",
+			"keyType": "key",
+			"authTokenType": "SystemReadOnly",
+			"connectionMode": "Gateway"
+		}
+	}
+]

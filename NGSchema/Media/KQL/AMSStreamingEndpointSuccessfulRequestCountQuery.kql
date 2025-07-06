@@ -1,0 +1,3 @@
+AMSStreamingEndpointRequests
+| where Status == "200"
+| summarize Count = count() by ClientIP

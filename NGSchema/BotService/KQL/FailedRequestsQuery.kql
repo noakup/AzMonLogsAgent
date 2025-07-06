@@ -1,0 +1,4 @@
+// Retrieve all logs of requests that have not been successful within a selected time range.
+ABSBotRequests
+| where ResultCode < 200 or ResultCode >= 300
+| sort by TimeGenerated desc

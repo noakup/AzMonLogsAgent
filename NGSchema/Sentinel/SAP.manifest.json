@@ -1,0 +1,1314 @@
+{
+    "type": "Microsoft.SecurityInsights/SAP",
+    "displayName": "Azure Sentinel SAP",
+    "description": "All SAP tables related to Azure Sentinel.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Microsoft Azure Sentinel/SAP",
+    "contactDL": "SentinelSapEng@microsoft.com",
+    "tables": [
+        {
+            "name": "ABAPAuditLog",
+            "description": "SAP security audit log is used to keep records of important user transactions and system events within an SAP system. This table stores information such as who accessed the system, which transactions were executed, and when. It provides a useful tool for monitoring activity and detecting potential security breaches.",
+            "categories": [
+                "security"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 4,
+            "dataTypeId": "SAP_ABAPAUDITLOG",
+            "intelligencePacks": [
+                "SecurityInsights"
+            ],
+            "isResourceCentric": false,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "SystemID",
+                    "type": "String"
+                },
+                {
+                    "name": "SystemNumber",
+                    "type": "String"
+                },
+                {
+                    "name": "ClientID",
+                    "type": "String"
+                },
+                {
+                    "name": "Instance",
+                    "type": "String"
+                },
+                {
+                    "name": "MessageID",
+                    "type": "String"
+                },
+                {
+                    "name": "MessageClass",
+                    "type": "String"
+                },
+                {
+                    "name": "MessageText",
+                    "type": "String"
+                },
+                {
+                    "name": "AlertSeverity",
+                    "type": "Double"
+                },
+                {
+                    "name": "AlertValue",
+                    "type": "Double"
+                },
+                {
+                    "name": "AlertSeverityText",
+                    "type": "String"
+                },
+                {
+                    "name": "User",
+                    "type": "String"
+                },
+                {
+                    "name": "MSCDATE",
+                    "type": "String"
+                },
+                {
+                    "name": "MSCTIME",
+                    "type": "String"
+                },
+                {
+                    "name": "SAL_DATE",
+                    "type": "String"
+                },
+                {
+                    "name": "SAL_TIME",
+                    "type": "String"
+                },
+                {
+                    "name": "TransactionCode",
+                    "type": "String"
+                },
+                {
+                    "name": "ABAPProgramName",
+                    "type": "String"
+                },
+                {
+                    "name": "SLGLTRM2",
+                    "type": "String"
+                },
+                {
+                    "name": "AuditClassID",
+                    "type": "Double"
+                },
+                {
+                    "name": "SAPProcesType",
+                    "type": "String"
+                },
+                {
+                    "name": "SAPWPName",
+                    "type": "String"
+                },
+                {
+                    "name": "Computer",
+                    "type": "String"
+                },
+                {
+                    "name": "Host",
+                    "type": "String"
+                },
+                {
+                    "name": "TERM_IPV6",
+                    "type": "String"
+                },
+                {
+                    "name": "TerminalIPv6",
+                    "type": "String"
+                },
+                {
+                    "name": "Email",
+                    "type": "String"
+                },
+                {
+                    "name": "MessageContainerID",
+                    "type": "String"
+                },
+                {
+                    "name": "MonitoringObjectName",
+                    "type": "String"
+                },
+                {
+                    "name": "MonitorShortName",
+                    "type": "String"
+                },
+                {
+                    "name": "UpdatedOn",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "Variable1",
+                    "type": "String"
+                },
+                {
+                    "name": "Variable2",
+                    "type": "String"
+                },
+                {
+                    "name": "Variable3",
+                    "type": "String"
+                },
+                {
+                    "name": "Variable4",
+                    "type": "String"
+                },
+                {
+                    "name": "SystemRole",
+                    "type": "String"
+                },
+                {
+                    "name": "SystemUniqueId",
+                    "type": "String"
+                },
+                {
+                    "name": "AgentId",
+                    "type": "String"
+                }
+            ],
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Date and time when the record was generated"
+                },
+                {
+                    "name": "UpdatedOn",
+                    "type": "DateTime",
+                    "description": "The date and time of the event occured in the SAP system in UTC format."
+                },
+                {
+                    "name": "SystemId",
+                    "type": "String",
+                    "description": "The SystemId is a unique identifier for a specific SAP system. It is a three-character alphanumeric code that is used to distinguish between different SAP systems."
+                },
+                {
+                    "name": "SystemNumber",
+                    "type": "String",
+                    "description": "The SystemNumber is a two-digit number that identifies a specific SAP system. It is set during the installation of an SAP system and cannot be changed afterwards. The SystemNumber is used in various SAP transactions and configuration settings to identify the system and ensure that the correct system is being accessed or configured."
+                },
+                {
+                    "name": "ClientId",
+                    "type": "String",
+                    "description": "The ClientId is a three-digit number that identifies a specific client within an SAP system. The ClientId is used in various SAP transactions and configuration settings to identify the client and ensure that the correct client is being accessed or configured."
+                },
+                {
+                    "name": "Instance",
+                    "type": "String",
+                    "description": "The Instance refers to a specific installation of an SAP system on a server. An SAP system can have multiple instances running on the same server, each with its own set of processes and resources. The Instance is identified by a unique name that is set during the installation of the SAP system, following syntax: <HOST>_<SYSID>_<SYSNR>."
+                },
+                {
+                    "name": "AuditClassId",
+                    "type": "Double",
+                    "description": "The AuditClassId is a numeric identifier used to classify different types of audit events in SAP. It helps group similar events together and is used in various transactions and reports to provide information about audit events and to help with auditing and compliance requirements."
+                },
+                {
+                    "name": "MonitoringObjectName",
+                    "type": "String",
+                    "description": "The MonitoringObjectName is the name of the object being monitored by a specific monitoring activity. It is used in various SAP monitoring tools and reports to provide information about the status and performance of the monitored object."
+                },
+                {
+                    "name": "SalDateChar8",
+                    "type": "String",
+                    "description": "The SalDateChar8 is the date the event occured in char8 format (yyyyMMdd) eg: 20190101."
+                },
+                {
+                    "name": "SalTimeChar6",
+                    "type": "String",
+                    "description": "The SalTimeChar6 is the time the event occured in char6 format (hhMMss) eg: 110804."
+                },
+                {
+                    "name": "MonitorShortName",
+                    "type": "String",
+                    "description": "The MonitorShortName is the short name of the MTE(Monitoring Tree Element) in which the alert occurred."
+                },
+                {
+                    "name": "MessageId",
+                    "type": "String",
+                    "description": "The MessageId is a unique identifier for a specific message or log entry used to identify and track messages and log entries within an SAP system."
+                },
+                {
+                    "name": "MessageText",
+                    "type": "String",
+                    "description": "The MessageText is the text of a specific message or log entry. It provides information about the event or issue that is being logged and is used in various SAP transactions and reports to provide context and details about specific messages or log entries."
+                },
+                {
+                    "name": "MessageClass",
+                    "type": "String",
+                    "description": "The MessageClass is a grouping or category for specific messages or log entries used to organize and classify messages and log entries within an SAP system."
+                },
+                {
+                    "name": "MessageContainerId",
+                    "type": "String",
+                    "description": "The MessageContainerId is a unique identifier for a specific message container, which is a logical grouping of related messages or log entries within an SAP system."
+                },
+                {
+                    "name": "AlertValue",
+                    "type": "Double",
+                    "description": "The AlertValue represents the importance of the message of a log attribute, characterized by color and severity."
+                },
+                {
+                    "name": "AlertSeverity",
+                    "type": "Double",
+                    "description": "The AlertSeverity is a number between 0 and 255; the larger the number, the greater the severity."
+                },
+                {
+                    "name": "AlertSeverityText",
+                    "type": "String",
+                    "description": "The AlertSeverityText refers to the text description associated with a specific alert or notification severity level. It provides a detailed explanation of the severity level and is used in various SAP transactions and reports."
+                },
+                {
+                    "name": "User",
+                    "type": "String",
+                    "description": "The User who performed the a specific event or activity."
+                },
+                {
+                    "name": "TransactionCode",
+                    "type": "String",
+                    "description": "the TransactionCode is a unique identifier for a specific SAP transaction used to identify and execute a specific transaction within the SAP system. It is typically a four-character alphanumeric code and can be used in various SAP transactions and reports."
+                },
+                {
+                    "name": "AbapProgramName",
+                    "type": "String",
+                    "description": "The AbapProgramName is a four-character alphanumeric code that is used identify a specific program within the SAP system."
+                },
+                {
+                    "name": "SapProcessType",
+                    "type": "String",
+                    "description": "The SapProcessType refers to the type of process that is being executed within the SAP system. This can include various types of processes such as background jobs, dialog processes, or update processes."
+                },
+                {
+                    "name": "SapWorkProcessName",
+                    "type": "String",
+                    "description": "The SapWorkProcessName refers to the name of a specific work process within the SAP system used to identify and monitor specific work processes. It is typically a unique alphanumeric code."
+                },
+                {
+                    "name": "Email",
+                    "type": "String",
+                    "description": "The Email refers to the email address associated with a specific user. It is used to identify the user via email within the SAP system."
+                },
+                {
+                    "name": "Host",
+                    "type": "String",
+                    "description": "The Host refers to the name of the computer or server on which the SAP system is running. It is used to identify and locate the SAP system within a network."
+                },
+                {
+                    "name": "Computer",
+                    "type": "String",
+                    "description": "The Computer refers to the name or IP address of the user's machine. It is used to identify the machine from which a specific activity or event was performed.",
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "SalIpAddress",
+                    "type": "String",
+                    "description": "The SALIpAddress refers to the IP address associated with a specific user or system that generated a specific log entry.",
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "TerminalIpV6",
+                    "type": "String",
+                    "description": "The TerminalIPv6 refers to the IPv6 address associated with the user's terminal or device. It is used to identify the location and origin of specific activities or events performed by the user within the SAP system.",
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "Variable1",
+                    "type": "String",
+                    "description": "The Variable1 used by the SAP system for additional information regarding the event or activity that was performed."
+                },
+                {
+                    "name": "Variable2",
+                    "type": "String",
+                    "description": "The Variable2 used by the SAP system for additional information regarding the event or activity that was performed."
+                },
+                {
+                    "name": "Variable3",
+                    "type": "String",
+                    "description": "The Variable3 used by the SAP system for additional information regarding the event or activity that was performed."
+                },
+                {
+                    "name": "Variable4",
+                    "type": "String",
+                    "description": "The Variable4 used by the SAP system for additional information regarding the event or activity that was performed."
+                },
+                {
+                    "name": "SystemRole",
+                    "type": "String",
+                    "description": "The SAP system's role."
+                },
+                {
+                    "name": "SystemUniqueId",
+                    "type": "String",
+                    "description": "Unique system identifier."
+                },
+                {
+                    "name": "AgentId",
+                    "type": "String",
+                    "description": "Unique agent or integration suite identifier."
+                },
+                {
+                    "name": "RemoteIpLongitude",
+                    "type": "Float",
+                    "description": "The Longitude of the TerminalIpV6 according to the GEO information at the time of the record ingestion."
+                },
+                {
+                    "name": "RemoteIpLatitude",
+                    "type": "Float",
+                    "description": "The Latitude of the TerminalIpV6 according to the GEO information at the time of the record ingestion."
+                },
+                {
+                    "name": "RemoteIpCountry",
+                    "type": "String",
+                    "description": "The country of the TerminalIpV6 according to the GEO information at the time of the record ingestion."
+                }
+            ],
+            "transformFilePath": "KQL/ABAPAuditLogTransform.kql",
+            "sampleInputRecordsFilePath": "SampleInputRecords/ABAPAuditLogSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/ABAPAuditLogSample.json"
+        },
+        {
+            "name": "ABAPChangeDocsLog",
+            "description": "SAP NetWeaver Application Server ABAP logs changes to business data objects in change documents. This table stores information about the changes made to business objects, including the user who made the change, the date and time of the change, and the type of change that was made.",
+            "categories": [
+                "security"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 4,
+            "dataTypeId": "SAP_ABAPCHANGEDOCSLOG",
+            "intelligencePacks": [
+                "SecurityInsights"
+            ],
+            "isResourceCentric": false,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "ActualChangeNum",
+                    "type": "String"
+                },
+                {
+                    "name": "ChangedTableKey",
+                    "type": "String"
+                },
+                {
+                    "name": "ChangeNumber",
+                    "type": "String"
+                },
+                {
+                    "name": "CreatedfromPlannedChange",
+                    "type": "String"
+                },
+                {
+                    "name": "CurrencyKeyNew",
+                    "type": "String"
+                },
+                {
+                    "name": "CurrencyKeyOld",
+                    "type": "String"
+                },
+                {
+                    "name": "FieldName",
+                    "type": "String"
+                },
+                {
+                    "name": "FlagText",
+                    "type": "String"
+                },
+                {
+                    "name": "Language",
+                    "type": "String"
+                },
+                {
+                    "name": "ObjectClass",
+                    "type": "String"
+                },
+                {
+                    "name": "ObjectID",
+                    "type": "String"
+                },
+                {
+                    "name": "PlannedChangeNum",
+                    "type": "String"
+                },
+                {
+                    "name": "TableName",
+                    "type": "String"
+                },
+                {
+                    "name": "TransactionCode",
+                    "type": "String"
+                },
+                {
+                    "name": "TypeofChange_Header",
+                    "type": "String"
+                },
+                {
+                    "name": "TypeofChange_Item",
+                    "type": "String"
+                },
+                {
+                    "name": "UOMNew",
+                    "type": "String"
+                },
+                {
+                    "name": "UOMOld",
+                    "type": "String"
+                },
+                {
+                    "name": "User",
+                    "type": "String"
+                },
+                {
+                    "name": "ValueNew",
+                    "type": "String"
+                },
+                {
+                    "name": "ValueOld",
+                    "type": "String"
+                },
+                {
+                    "name": "Version",
+                    "type": "String"
+                },
+                {
+                    "name": "UpdatedOn",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "SystemRole",
+                    "type": "String"
+                },
+                {
+                    "name": "SystemUniqueId",
+                    "type": "String"
+                },
+                {
+                    "name": "AgentId",
+                    "type": "String"
+                },
+                {
+                    "name": "SystemID",
+                    "type": "String"
+                },
+                {
+                    "name": "SystemNumber",
+                    "type": "String"
+                },
+                {
+                    "name": "ClientID",
+                    "type": "String"
+                },
+                {
+                    "name": "Instance",
+                    "type": "String"
+                }
+            ],
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Date and time when the record was generated."
+                },
+                {
+                    "name": "UpdatedOn",
+                    "type": "DateTime",
+                    "description": "The date and time of the event occured in the SAP system in UTC format."
+                },
+                {
+                    "name": "SystemId",
+                    "type": "String",
+                    "description": "The SystemId is a unique identifier for a specific SAP system. It is a three-character alphanumeric code that is used to distinguish between different SAP systems."
+                },
+                {
+                    "name": "SystemNumber",
+                    "type": "String",
+                    "description": "The SystemNumber is a two-digit number that identifies a specific SAP system. It is set during the installation of an SAP system and cannot be changed afterwards. The SystemNumber is used in various SAP transactions and configuration settings to identify the system and ensure that the correct system is being accessed or configured."
+                },
+                {
+                    "name": "ClientId",
+                    "type": "String",
+                    "description": "The ClientId is a three-digit number that identifies a specific client within an SAP system. The ClientId is used in various SAP transactions and configuration settings to identify the client and ensure that the correct client is being accessed or configured."
+                },
+                {
+                    "name": "Instance",
+                    "type": "String",
+                    "description": "The Instance refers to a specific installation of an SAP system on a server. An SAP system can have multiple instances running on the same server, each with its own set of processes and resources. The Instance is identified by a unique name that is set during the installation of the SAP system, following syntax: <HOST>_<SYSID>_<SYSNR>."
+                },
+                {
+                    "name": "User",
+                    "type": "String",
+                    "description": "The User who performed the a specific event or activity."
+                },
+                {
+                    "name": "SystemRole",
+                    "type": "String",
+                    "description": "The SAP system's role."
+                },
+                {
+                    "name": "SystemUniqueId",
+                    "type": "String",
+                    "description": "Unique system identifier."
+                },
+                {
+                    "name": "AgentId",
+                    "type": "String",
+                    "description": "Unique agent or integration suite identifier."
+                },
+                {
+                    "name": "ActualChangeNumber",
+                    "type": "String",
+                    "description": "Actual change number."
+                },
+                {
+                    "name": "ChangedTableKey",
+                    "type": "String",
+                    "description": "Changed table key."
+                },
+                {
+                    "name": "ChangeNumber",
+                    "type": "String",
+                    "description": "Document change number."
+                },
+                {
+                    "name": "CreatedFromPlannedChange",
+                    "type": "String",
+                    "description": "Created from planned change, in the following syntax:('X' , ' ')."
+                },
+                {
+                    "name": "CurrencyKeyNew",
+                    "type": "String",
+                    "description": "Currency key: new value."
+                },
+                {
+                    "name": "CurrencyKeyOld",
+                    "type": "String",
+                    "description": "Currency key: old value."
+                },
+                {
+                    "name": "FieldName",
+                    "type": "String",
+                    "description": "Field name."
+                },
+                {
+                    "name": "FlagText",
+                    "type": "String",
+                    "description": "Flag text."
+                },
+                {
+                    "name": "Language",
+                    "type": "String",
+                    "description": "Document language."
+                },
+                {
+                    "name": "ObjectClass",
+                    "type": "String",
+                    "description": "Object class, such as BELEG, BPAR, PFCG, IDENTITY."
+                },
+                {
+                    "name": "ObjectId",
+                    "type": "String",
+                    "description": "Object ID."
+                },
+                {
+                    "name": "PlannedChangeNumber",
+                    "type": "String",
+                    "description": "Planned change number."
+                },
+                {
+                    "name": "TableName",
+                    "type": "String",
+                    "description": "Table name."
+                },
+                {
+                    "name": "TransactionCode",
+                    "type": "String",
+                    "description": "Transaction code."
+                },
+                {
+                    "name": "HeaderTypeOfChange",
+                    "type": "String",
+                    "description": "Header type of change, including: U = Change; I = Insert; E = Delete Single Docu; D = Delete; J = Insert Single Docu."
+                },
+                {
+                    "name": "ItemTypeOfChange",
+                    "type": "String",
+                    "description": "Item type of change, including: U = Change; I = Insert; E = Delete Single Docu; D = Delete; J = Insert Single Docu."
+                },
+                {
+                    "name": "UOMNew",
+                    "type": "String",
+                    "description": "Unit of measure: new value."
+                },
+                {
+                    "name": "UOMOld",
+                    "type": "String",
+                    "description": "Unit of measure: old value."
+                },
+                {
+                    "name": "ValueNew",
+                    "type": "String",
+                    "description": "Field content: new value."
+                },
+                {
+                    "name": "ValueOld",
+                    "type": "String",
+                    "description": "Field content: old value."
+                },
+                {
+                    "name": "Version",
+                    "type": "String",
+                    "description": "Document change version."
+                }
+            ],
+            "transformFilePath": "KQL/ABAPChangedDocsTransform.kql",
+            "sampleInputRecordsFilePath": "SampleInputRecords/ABAPChangedDocsSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/ABAPChangedDocsSample.json"
+        },
+        {
+            "name": "ABAPUserDetails",
+            "description": "SAP User details, such as roles and profiles assigned.",
+            "categories": [
+                "security"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 4,
+            "dataTypeId": "SAP_ABAPUSERDETAILS",
+            "intelligencePacks": [
+                "SecurityInsights"
+            ],
+            "isResourceCentric": false,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "User",
+                    "type": "String"
+                },
+                {
+                    "name": "UserGroup",
+                    "type": "String"
+                },
+                {
+                    "name": "UserType",
+                    "type": "String"
+                },
+                {
+                    "name": "Email",
+                    "type": "String"
+                },
+                {
+                    "name": "Timezone",
+                    "type": "String"
+                },
+                {
+                    "name": "LockedStatus",
+                    "type": "String"
+                },
+                {
+                    "name": "CreatedOn",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "ChangedOn",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "LastSeen",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "ValidityDate",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "LastChangedBy",
+                    "type": "String"
+                },
+                {
+                    "name": "Profiles",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "Roles",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "SystemRole",
+                    "type": "String"
+                },
+                {
+                    "name": "SystemUniqueId",
+                    "type": "String"
+                },
+                {
+                    "name": "AgentId",
+                    "type": "String"
+                },
+                {
+                    "name": "SystemID",
+                    "type": "String"
+                },
+                {
+                    "name": "ClientID",
+                    "type": "String"
+                }
+            ],
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Date and time when the record was sent to Sentinel."
+                },
+                {
+                    "name": "User",
+                    "type": "String",
+                    "description": "SAP User."
+                },
+                {
+                    "name": "UserGroup",
+                    "type": "String",
+                    "description": "SAP User group."
+                },
+                {
+                    "name": "Email",
+                    "type": "String",
+                    "description": "Email address."
+                },
+                {
+                    "name": "UserType",
+                    "type": "String",
+                    "description": "User Type (dialog, system)."
+                },
+                {
+                    "name": "Timezone",
+                    "type": "String",
+                    "description": "User default Time zone."
+                },
+                {
+                    "name": "LockedStatus",
+                    "type": "String",
+                    "description": "Locked status: 0: Not Locked, 32: Locked Globally By Administrator, 64: Locked Locally By Administrator, 128: Locked Due To Incorrect Logons."
+                },
+                {
+                    "name": "LastSeen",
+                    "type": "DateTime",
+                    "description": "User last logon."
+                },
+                {
+                    "name": "CreatedOn",
+                    "type": "DateTime",
+                    "description": "Day on which user was created."
+                },
+                {
+                    "name": "ChangedOn",
+                    "type": "DateTime",
+                    "description": "Last changed on date and time."
+                },
+                {
+                    "name": "ValidityDate",
+                    "type": "DateTime",
+                    "description": "Last valid day for login in."
+                },
+                {
+                    "name": "LastChangedBy",
+                    "type": "String",
+                    "description": "Last changed by."
+                },
+                {
+                    "name": "Profiles",
+                    "type": "Dynamic",
+                    "description": "List of profiles generated for the user."
+                },
+                {
+                    "name": "Roles",
+                    "type": "Dynamic",
+                    "description": "List of roles assigned to user."
+                },
+                {
+                    "name": "SystemId",
+                    "type": "String",
+                    "description": "The SystemId is a unique identifier for a specific SAP system. It is a three-character alphanumeric code that is used to distinguish between different SAP systems."
+                },
+                {
+                    "name": "ClientId",
+                    "type": "String",
+                    "description": "The ClientId is a three-digit number that identifies a specific client within an SAP system. The ClientId is used in various SAP transactions and configuration settings to identify the client and ensure that the correct client is being accessed or configured."
+                },
+                {
+                    "name": "SystemRole",
+                    "type": "String",
+                    "description": "The SAP system's role."
+                },
+                {
+                    "name": "SystemUniqueId",
+                    "type": "String",
+                    "description": "Unique system identifier."
+                },
+                {
+                    "name": "AgentId",
+                    "type": "String",
+                    "description": "Unique agent or integration suite identifier."
+                }
+            ],
+            "transformFilePath": "KQL/ABAPUserDetailsTransform.kql",
+            "sampleInputRecordsFilePath": "SampleInputRecords/ABAPUserDetailsSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/ABAPUserDetailsSample.json"
+        },
+        {
+            "name": "ABAPTableDataLog",
+            "description": "SAP NetWeaver Application Server ABAP logs changes to tables. This log stores information about the changes made to selected tables, including the user who made the change, the date and time of the change, and the type of change that was made.",
+            "categories": [
+                "security"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 5,
+            "dataTypeId": "SAP_ABAPTABLEDATALOG",
+            "intelligencePacks": [
+                "SecurityInsights"
+            ],
+            "isResourceCentric": false,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "UpdatedOn",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "DBLogID",
+                    "type": "String"
+                },
+                {
+                    "name": "LogKey",
+                    "type": "String"
+                },
+                {
+                    "name": "Host",
+                    "type": "String"
+                },
+                {
+                    "name": "User",
+                    "type": "String"
+                },
+                {
+                    "name": "SystemRole",
+                    "type": "String"
+                },
+                {
+                    "name": "TransactionCode",
+                    "type": "String"
+                },
+                {
+                    "name": "Program",
+                    "type": "String"
+                },
+                {
+                    "name": "OperationTypeSQL",
+                    "type": "String"
+                },
+                {
+                    "name": "VersionNumber",
+                    "type": "String"
+                },
+                {
+                    "name": "Language",
+                    "type": "String"
+                },
+                {
+                    "name": "TableName",
+                    "type": "String"
+                },
+                {
+                    "name": "TableField",
+                    "type": "String"
+                },
+                {
+                    "name": "OldValue",
+                    "type": "String"
+                },
+                {
+                    "name": "NewValue",
+                    "type": "String"
+                },
+                {
+                    "name": "SystemID",
+                    "type": "String"
+                },
+                {
+                    "name": "SystemNumber",
+                    "type": "String"
+                },
+                {
+                    "name": "Instance",
+                    "type": "String"
+                },
+                {
+                    "name": "SystemUniqueId",
+                    "type": "String"
+                },
+                {
+                    "name": "AgentId",
+                    "type": "String"
+                },
+                {
+                    "name": "ClientID",
+                    "type": "String"
+                }
+            ],
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Date and time when the record was generated."
+                },
+                {
+                    "name": "UpdatedOn",
+                    "type": "DateTime",
+                    "description": "The date and time of the event occured in the SAP system in UTC format."
+                },
+                {
+                    "name": "SystemId",
+                    "type": "String",
+                    "description": "The SystemId is a unique identifier for a specific SAP system. It is a three-character alphanumeric code that is used to distinguish between different SAP systems."
+                },
+                {
+                    "name": "SystemNumber",
+                    "type": "String",
+                    "description": "The SystemNumber is a two-digit number that identifies a specific SAP system. It is set during the installation of an SAP system and cannot be changed afterwards. The SystemNumber is used in various SAP transactions and configuration settings to identify the system and ensure that the correct system is being accessed or configured."
+                },
+                {
+                    "name": "Instance",
+                    "type": "String",
+                    "description": "The Instance refers to a specific installation of an SAP system on a server. An SAP system can have multiple instances running on the same server, each with its own set of processes and resources. The Instance is identified by a unique name that is set during the installation of the SAP system, following syntax: <HOST>_<SYSID>_<SYSNR>."
+                },
+                {
+                    "name": "ClientId",
+                    "type": "String",
+                    "description": "The ClientId is a three-digit number that identifies a specific client within an SAP system. The ClientId is used in various SAP transactions and configuration settings to identify the client and ensure that the correct client is being accessed or configured."
+                },
+                {
+                    "name": "User",
+                    "type": "String",
+                    "description": "The User who performed the a specific event or activity."
+                },
+                {
+                    "name": "SystemRole",
+                    "type": "String",
+                    "description": "The SAP system's role."
+                },
+                {
+                    "name": "SystemUniqueId",
+                    "type": "String",
+                    "description": "Unique system identifier."
+                },
+                {
+                    "name": "AgentId",
+                    "type": "String",
+                    "description": "Unique agent or integration suite identifier."
+                },
+                {
+                    "name": "DBLogId",
+                    "type": "String",
+                    "description": "The unique identifier of the database log."
+                },
+                {
+                    "name": "LogKey",
+                    "type": "String",
+                    "description": "The unique identifier of the log key."
+                },
+                {
+                    "name": "Host",
+                    "type": "String",
+                    "description": "The hostname of the SAP system."
+                },
+                {
+                    "name": "TransactionCode",
+                    "type": "String",
+                    "description": "The transaction code of the event."
+                },
+                {
+                    "name": "Program",
+                    "type": "String",
+                    "description": "The program that was executed."
+                },
+                {
+                    "name": "OperationTypeSQL",
+                    "type": "String",
+                    "description": "The type of operation that was performed, such as insert, update and delete."
+                },
+                {
+                    "name": "VersionNumber",
+                    "type": "String",
+                    "description": "The version number of the event."
+                },
+                {
+                    "name": "Language",
+                    "type": "String",
+                    "description": "The language of the event."
+                },
+                {
+                    "name": "TableName",
+                    "type": "String",
+                    "description": "The name of the table that produced the change."
+                },
+                {
+                    "name": "TableField",
+                    "type": "String",
+                    "description": "The field of the table that produced the change."
+                },
+                {
+                    "name": "OldValue",
+                    "type": "String",
+                    "description": "The old value of the field."
+                },
+                {
+                    "name": "NewValue",
+                    "type": "String",
+                    "description": "The new value of the field."
+                }
+            ],
+            "transformFilePath": "KQL/ABAPTableDataLogTransform.kql",
+            "sampleInputRecordsFilePath": "SampleInputRecords/ABAPTableDataLogSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/ABAPTableDataLogSample.json"
+        },
+        {
+            "name": "ABAPAuthorizationDetails",
+            "description": "SAP authorizations details per role.",
+            "categories": [
+                "security"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 4,
+            "dataTypeId": "SAP_ABAPAUTHORIZATIONDETAILS",
+            "intelligencePacks": [
+                "SecurityInsights"
+            ],
+            "isResourceCentric": false,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "Role",
+                    "type": "String"
+                },
+                {
+                    "name": "RoleType",
+                    "type": "String"
+                },
+                {
+                    "name": "UpdatedOn",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "TypeOfChange",
+                    "type": "String"
+                },
+                {
+                    "name": "Authorization",
+                    "type": "String"
+                },
+                {
+                    "name": "AuthorizationGroup",
+                    "type": "String"
+                },
+                {
+                    "name": "Object",
+                    "type": "String"
+                },
+                {
+                    "name": "Field",
+                    "type": "String"
+                },
+                {
+                    "name": "Low",
+                    "type": "String"
+                },
+                {
+                    "name": "High",
+                    "type": "String"
+                },
+                {
+                    "name": "ChildRole",
+                    "type": "String"
+                },
+                {
+                    "name": "SystemRole",
+                    "type": "String"
+                },
+                {
+                    "name": "SystemUniqueId",
+                    "type": "String"
+                },
+                {
+                    "name": "AgentId",
+                    "type": "String"
+                },
+                {
+                    "name": "SystemID",
+                    "type": "String"
+                },
+                {
+                    "name": "ClientID",
+                    "type": "String"
+                }
+            ],
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Date and time when the record was generated"
+                },
+                {
+                    "name": "Role",
+                    "type": "String",
+                    "description": "The SAP role name."
+                },
+                {
+                    "name": "RoleType",
+                    "type": "String",
+                    "description": "Single or composite role"
+                },
+                {
+                    "name": "UpdatedOn",
+                    "type": "DateTime",
+                    "description": "The date and time when the role was last updated."
+                },
+                {
+                    "name": "TypeOfChange",
+                    "type": "String",
+                    "description": "I and J for insert, U for update, D and E for deletion."
+                },
+                {
+                    "name": "Authorization",
+                    "type": "String",
+                    "description": "The authorization identifier."
+                },
+                {
+                    "name": "AuthorizationGroup",
+                    "type": "String",
+                    "description": "The authorization group."
+                },
+                {
+                    "name": "Object",
+                    "type": "String",
+                    "description": "The authorization object name."
+                },
+                {
+                    "name": "Field",
+                    "type": "String",
+                    "description": "The authorization field name."
+                },
+                {
+                    "name": "Low",
+                    "type": "String",
+                    "description": "The low value of the authorization field."
+                },
+                {
+                    "name": "High",
+                    "type": "String",
+                    "description": "The high value of the authorization field."
+                },
+                {
+                    "name": "ChildRole",
+                    "type": "String",
+                    "description": "The child role name, if the role is a composite one."
+                },
+                {
+                    "name": "SystemId",
+                    "type": "String",
+                    "description": "The SystemId is a unique identifier for a specific SAP system. It is a three-character alphanumeric code that is used to distinguish between different SAP systems."
+                },
+                {
+                    "name": "ClientId",
+                    "type": "String",
+                    "description": "The ClientId is a three-digit number that identifies a specific client within an SAP system. The ClientId is used in various SAP transactions and configuration settings to identify the client and ensure that the correct client is being accessed or configured."
+                },
+                {
+                    "name": "SystemRole",
+                    "type": "String",
+                    "description": "The SAP system's role."
+                },
+                {
+                    "name": "SystemUniqueId",
+                    "type": "String",
+                    "description": "Unique system identifier."
+                },
+                {
+                    "name": "AgentId",
+                    "type": "String",
+                    "description": "Unique agent or integration suite identifier."
+                }
+            ],
+            "transformFilePath": "KQL/ABAPAuthorizationDetailsTransform.kql",
+            "sampleInputRecordsFilePath": "SampleInputRecords/ABAPAuthorizationDetailsSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/ABAPAuthorizationDetailsSample.json"
+        }
+    ],
+    "functions": [],
+    "queries": [
+        {
+            "id": "180e9e53-1653-4483-aab8-9f55725e8a63",
+            "displayName": "ABAP audit log multiple IP logons",
+            "description": "Display multiple users login from the same ip.",
+            "bodyFilePath": "KQL/ABAPAuditLogMultipleIPLogonsQuery.kql",
+            "categories": [
+                "security"
+            ],
+            "relatedTables": [
+                "ABAPAuditLog"
+            ],
+            "tags": {
+                "Topic": [
+                    "Security"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": false
+                }
+            }
+        },
+        {
+            "id": "e0b79a1a-edf7-4a0e-9ed4-8a0ae14d3a85",
+            "displayName": "ABAP audit log file downloads",
+            "description": "Display file downloads activities.",
+            "bodyFilePath": "KQL/ABAPAuditLogFileDownloadsQuery.kql",
+            "categories": [
+                "security"
+            ],
+            "relatedTables": [
+                "ABAPAuditLog"
+            ],
+            "tags": {
+                "Topic": [
+                    "Security"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": false
+                }
+            }
+        }
+    ],
+    "relatedTables": [],
+    "relatedFunctions": []
+}

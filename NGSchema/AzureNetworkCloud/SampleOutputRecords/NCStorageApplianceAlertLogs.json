@@ -1,0 +1,18 @@
+{
+    "ContainerName": "syslog",
+    "TimeGenerated": "2023-06-20T20:50:34.513217453Z",
+    "ArrayName": "b37j18purestor1",
+    "Arraycontroller": "ct1",
+    "Node": "j18r650mgr1",
+    "PodName": "strgmgmt-5dbb9f8d8c-w65zw",
+    "Message": "WARNING High CRC and/or Phy error count [184] The interface(s) has/have an increasing high CRC and/or Phy error count. This may indicate an issue with the cable(s). A high count of CRC and/or Phy errors can lead to increased latency and reduced throughput.",
+    "Action": "Contact Pure Storage Support. Have the text of the electronic mail or SNMP trap available.",
+    "Domain": "example.com",
+    "User": "lma",
+    "Severity": "Success",
+    "Location": "eastus2euap",
+    "ClusterManagerName": "j18-qvduxzffwnrxy",
+    "ClusterName": "j18-c0d28c8f7cd3",
+    "_ResourceId": "/SUBSCRIPTIONS/A3EEB848-665A-4DBF-80A4-EB460930FB23/RESOURCEGROUPS/J18-C0D28C8F7CD3-HOSTEDRESOURCES-3781AC00/PROVIDERS/MICROSOFT.NETWORKCLOUD/STORAGEAPPLIANCES/B37J18PURESTOR1",
+    "_SubscriptionID": "a3eeb848-665a-4dbf-80a4-eb460930fb23"
+}

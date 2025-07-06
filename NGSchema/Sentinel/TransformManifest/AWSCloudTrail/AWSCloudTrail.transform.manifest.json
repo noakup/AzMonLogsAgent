@@ -1,0 +1,14 @@
+{
+  "name": "AWSCloudTrailCCP",
+  "description": "Transform used for AWS CloudTrail in CCP Resource cases",
+  "transformVersion": "1",
+  "dataTypeId": "SENTINEL_AWSCLOUDTRAIL_CCP",
+  "transformState": "Validation",
+  "icmTeam": "Microsoft Azure Sentinel/Data Collection and Processing",
+  "contactDL": "asipolarbearslive@microsoft.com",
+  "relatedTable": "AWSCloudTrail",
+  "kqlFilePath": "../../KQL/AWSCloudTrailTransform.kql",
+  "inputFilePath": "AWSCloudTrail-input.json",
+  "sampleInputRecordsFilePath": "../../SampleInputRecords/AWSCloudTrailSample.json",
+  "sampleOutputRecordsFilePath": "../../SampleOutputRecords/AWSCloudTrailSample.json"
+}

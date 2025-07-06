@@ -1,0 +1,10 @@
+source
+| project
+    TimeGenerated = utcTime,
+    Message = message,
+    LogType = logType,
+	LogLevel = logLevel,
+    ClusterName = clusterName,
+    HostName = hostName,
+    OperationName = operationName,
+    CorrelationId = correlationId

@@ -1,0 +1,25 @@
+[
+    {
+        "TimeGenerated": "2023-10-24T21:16:09.435Z",
+        "OperationName": "CallClientMediaStatsTimeSeries",
+        "CallClientTimeStamp": ["2023-09-28T16:37:52.631Z", "2023-09-28T16:38:52.631Z"],
+        "CallId":"fcc87f7f-ce69-446f-b73f-b036051faea4",
+        "MetricName": "PacketsPerSecond",
+        "Count": [10, 10],
+        "Sum": [10.2, 10.2],
+        "Average": [1.2, 1.2],
+        "Minimum": [2.0, 2.0],
+        "Maximum": [5.0, 5.0],
+        "MediaStreamDirection": "recv",
+        "MediaStreamType": "video",
+        "MediaStreamCodec": ["H264","H264"],
+        "ClientInstanceId": "6da1958b-45f7-405b-acfc-5e3a1ea43f7a",
+        "MediaStreamId": "f123445f-f4bd-4ee5-841c-1234532e9921",
+        "RemoteParticipantId": "23a4be22-e5da-4edd-bfd7-115847001924",
+        "RemoteEndpointId": "23a4be22-e5da-4edd-bfd7-115847001924",
+        "EndpointId": "",
+        "ParticipantId": "fbc7045f-f9bd-4ee5-841c-383bd92e9921",
+        "AggregationIntervalSeconds": 10,
+        "UserAgent": "default/0.0.0 azsdk-js-communication-calling/1.33.3 (acr110/1.24.0). Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
+    }
+]

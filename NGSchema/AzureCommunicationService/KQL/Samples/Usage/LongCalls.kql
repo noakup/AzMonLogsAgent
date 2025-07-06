@@ -1,0 +1,4 @@
+ACSBillingUsage
+| tolower(UsageType) == "audio" // only look at records that are calls
+| extend Length = EndTime - StartTime
+| where Length > 1h // return if the call is greater than an hour

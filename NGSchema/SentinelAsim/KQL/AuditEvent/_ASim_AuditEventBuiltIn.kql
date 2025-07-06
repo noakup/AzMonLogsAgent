@@ -1,0 +1,18 @@
+let DisabledParsers=materialize(_GetWatchlist('ASimDisabledParsers') 
+| where SearchKey in ('Any', 'Exclude_ASim_AuditEvent') 
+| extend SourceSpecificParser=column_ifexists('SourceSpecificParser','') 
+| where isnotempty(SourceSpecificParser) 
+| summarize list = make_set(SourceSpecificParser));
+let builtInDisabled = 0 != array_length(set_intersect(toscalar(DisabledParsers),dynamic(['Exclude_ASim_AuditEventBuiltIn', 'Exclude_ASim_AuditEvent', 'Any'])));
+union isfuzzy=true
+_ASim_AuditEvent_AzureActivityV02(disabled= (builtInDisabled or('Exclude_ASim_AuditEvent_AzureActivity' in (DisabledParsers)))),
+_ASim_AuditEvent_BarracudaWAFV01(disabled= (builtInDisabled or('Exclude_ASim_AuditEvent_BarracudaWAF' in (DisabledParsers)))),
+_ASim_AuditEvent_CiscoISEV01(disabled= (builtInDisabled or('Exclude_ASim_AuditEvent_CiscoISE' in (DisabledParsers)))),
+_ASim_AuditEvent_CiscoMerakiV01(disabled= (builtInDisabled or('Exclude_ASim_AuditEvent_CiscoMeraki' in (DisabledParsers)))),
+_ASim_AuditEvent_IllumioSaaSCoreV02(disabled= (builtInDisabled or('Exclude_ASim_AuditEvent_IllumioSaaSCore' in (DisabledParsers)))),
+_ASim_AuditEvent_InfobloxBloxOneV01(disabled= (builtInDisabled or('Exclude_ASim_AuditEvent_InfobloxBloxOne' in (DisabledParsers)))),
+_ASim_AuditEvent_MicrosoftExchangeAdmin365V02(disabled= (builtInDisabled or('Exclude_ASim_AuditEvent_MicrosoftExchangeAdmin365' in (DisabledParsers)))),
+_ASim_AuditEvent_MicrosoftWindowsEventsV01(disabled= (builtInDisabled or('Exclude_ASim_AuditEvent_MicrosoftWindowsEvents' in (DisabledParsers)))),
+_ASim_AuditEvent_NativeV01(disabled= (builtInDisabled or('Exclude_ASim_AuditEvent_Native' in (DisabledParsers)))),
+_ASim_AuditEvent_VectraXDRAuditV01(disabled= (builtInDisabled or('Exclude_ASim_AuditEvent_VectraXDRAudit' in (DisabledParsers)))),
+_Im_AuditEvent_EmptyV02

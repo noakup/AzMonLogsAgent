@@ -1,0 +1,3 @@
+AZKVAuditLogs
+| summarize avg(DurationMs) by RequestUri, bin(TimeGenerated, 1h) // requestUri_s contains the URI of the request
+| render timechart

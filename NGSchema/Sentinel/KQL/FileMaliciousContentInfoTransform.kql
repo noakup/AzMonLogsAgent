@@ -1,0 +1,19 @@
+source
+| project
+Workload = tostring(properties["Workload"]),
+FileName = tostring(properties["FileName"]),
+FolderPath = tostring(properties["FolderPath"]),
+FileSize = tolong(properties["InitiatingProcessId"]),
+SHA256 = tostring(properties["SHA256"]),
+FileOwnerDisplayName = tostring(properties["FileOwnerDisplayName"]),
+FileOwnerUpn = tostring(properties["FileOwnerUpn"]),
+LastModifyingAccountUpn = tostring(properties["LastModifyingAccountUpn"]),
+DocumentID = tostring(properties["DocumentID"]),
+ThreatTypes = tostring(properties["ThreatTypes"]),
+ThreatNames = tostring(properties["ThreatNames"]),
+DetectionMethods = tostring(properties["DetectionMethods"]),
+LastModifiedTime = todatetime(properties["LastModifiedTime"]),
+FileCreationTime = todatetime(properties["FileCreationTime"]),
+ReportId = tostring(properties["ReportId"]),
+TimeGenerated = todatetime(properties["Timestamp"]),
+Timestamp = todatetime(properties["Timestamp"])

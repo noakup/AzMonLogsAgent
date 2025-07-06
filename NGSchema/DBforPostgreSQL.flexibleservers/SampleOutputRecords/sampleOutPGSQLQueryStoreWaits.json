@@ -1,0 +1,30 @@
+[
+    {
+      "TimeGenerated": "2023-03-02T11:07:02.045Z",
+      "LogicalServerName": "seernu-gp-v11-testavmetrics",
+      "ReplicaRole": "Primary",
+      "UserId": 10,
+      "DatabaseId": 24606,
+      "QueryId": "595883457281818870",
+      "StartTime": "2025-05-29T12:49:46Z",
+      "EndTime": "2025-05-29T12:50:46Z",
+      "EventType": "Client",
+      "Event": "ClientRead",
+      "Calls": 2995,
+      "Location": "eastus"
+    },
+    {
+      "TimeGenerated": "2023-03-02T11:07:02.045Z",
+      "LogicalServerName": "seernu-gp-v11-testavmetrics",
+      "ReplicaRole": "Primary",
+      "UserId": 10,
+      "DatabaseId": 5,
+      "QueryId": "0",
+      "StartTime": "2025-05-29T12:49:46Z",
+      "EndTime": "2025-05-29T12:50:46Z",
+      "EventType": "Client",
+      "Event": "ClientRead",
+      "Calls": 568,
+      "Location": "eastus"
+    }
+]

@@ -1,0 +1,12 @@
+[
+    {
+        "Log": "Start to delete pod because of HostShutdown.",
+        "NodeName": "BB26ECAE6DB5D751D1233C59064B3927DB64540619C0BA37DBF4349BE7109770",
+        "SessionPoolName": "test-session-pool",
+        "PodName": "611ce39a-b5a7-4174-9ac2-2a966eb006f5",
+        "Level": "Info",
+        "TimeGenerated": "2024-12-30T06:54:39.7280658Z",
+        "OperationName": "Microsoft.App/managedEnvironments/WRITE",
+        "Location": "eastus"
+    }
+]

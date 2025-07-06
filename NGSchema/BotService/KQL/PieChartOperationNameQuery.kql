@@ -1,0 +1,5 @@
+// Display a Pie Chart showing requests by operation name.
+// This gives a perspective of the request operations percentage distribution in the selected time range.
+ABSBotRequests
+| summarize count() by tostring(OperationName)      
+| render piechart

@@ -1,0 +1,24 @@
+[
+    {
+        "time": "2023-07-20T07:20:33Z",
+        "resourceId": null,
+        "operationName": "Microsoft.Databricks/brickstoreHttpGateway/singleRowLookup",
+        "category": "brickstoreHttpGateway",
+        "properties": {
+            "sourceIPAddress": "152.115.174.2",
+            "logId": "c3cafe2a-0fb9-3bd2-a129-449a114fcac3",
+            "serviceName": "brickstoreHttpGateway",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+            "response": "{\"statusCode\":200,\"result\":\"{\\\"name\\\":\\\"dashboards/01ee26cde39e1b46ba07b124872fe80a\\\",\\\"warehouse_id\\\":\\\"\\\",\\\"display_name\\\":\\\"Test TS Dashboard\\\",\\\"etag\\\":\\\"-1685529212\\\",\\\"lifecycle_state\\\":\\\"LIFECYCLE_UNSPECIFIED\\\",\\\"created_timestamp\\\":{\\\"seconds\\\":0,\\\"nanos\\\":0},\\\"user_last_updated_timestamp\\\":{\\\"seconds\\\":1689837633,\\\"nanos\\\":64000000}}\"}",
+            "sessionId": null,
+            "actionName": "singleRowLookup",
+            "requestId": "ServiceMain-bf50d31f8fb30006",
+            "requestParams": "{\"dashboard\":\"{\\\"name\\\":\\\"dashboards/01ee26cde39e1b46ba07b124872fe80a\\\",\\\"warehouse_id\\\":\\\"\\\",\\\"display_name\\\":\\\"Test TS Dashboard\\\",\\\"etag\\\":\\\"1663270911\\\"}\",\"key\":\"{\\\"dashboard_id\\\":\\\"01ee26cde39e1b46ba07b124872fe80a\\\"}\"}"
+        },
+        "operationVersion": "1.0.0",
+        "identities": {
+            "email": "cenh@halfspace.io",
+            "subjectName": null
+        }
+    }
+]

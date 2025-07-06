@@ -1,0 +1,26 @@
+[
+    {
+        "operationName": "Microsoft.ContainerService/managedClusters/diagnosticLogs/Read",
+        "category": "csi-snapshot-controller",
+        "resourceId": "/SUBSCRIPTIONS/08CE8FA2-9E5E-4D66-AB08-C0C13F360144/RESOURCEGROUPS/MIKEKEESEY-TEST/PROVIDERS/MICROSOFT.CONTAINERSERVICE/MANAGEDCLUSTERS/MIKEKEESEY-TEST",
+        "properties": {
+            "log": "I0112 17:48:26.016327       1 main.go:126] Version: v5.0.0-rc3-webhook-0-g9f6fc893\n",
+            "stream": "stderr",
+            "pod": "csi-snapshot-controller-569bfc7b6d-znvhp",
+            "containerID": "abec3949fc8fc6e56799e1502c8e83dac08a5088498806cefe4e546de1b800f3"
+        },
+        "time": "2023-01-12T17:48:26.0000000Z"
+    },
+    {
+        "operationName": "Microsoft.ContainerService/managedClusters/diagnosticLogs/Read",
+        "category": "csi-snapshot-controller",
+        "resourceId": "/SUBSCRIPTIONS/08CE8FA2-9E5E-4D66-AB08-C0C13F360144/RESOURCEGROUPS/MIKEKEESEY-TEST/PROVIDERS/MICROSOFT.CONTAINERSERVICE/MANAGEDCLUSTERS/MIKEKEESEY-TEST",
+        "properties": {
+            "log": "I0112 17:48:26.022724       1 main.go:175] Start NewCSISnapshotController with kubeconfig [/etc/kubernetes/kubeconfig/kubeconfig.yaml] resyncPeriod [15m0s]\n",
+            "stream": "stderr",
+            "pod": "csi-snapshot-controller-569bfc7b6d-znvhp",
+            "containerID": "abec3949fc8fc6e56799e1502c8e83dac08a5088498806cefe4e546de1b800f3"
+        },
+        "time": "2023-01-12T17:48:26.0000000Z"
+    }
+]

@@ -1,0 +1,14 @@
+; this file is used by ownership enforcer to determine reviewers to add to a pull request
+; you can add comments using ; as prefix
+; introduce each owner in a separate line with their alias (not email address)
+; prefixing an alias with * means that the owner will not be automatically added as a reviewer to pull requests to reduce noise, but can still be manually added and can sign off if necessary
+; to learn more you can read https://onebranch.visualstudio.com/OneBranch/_wiki/wikis/OneBranch.wiki/5644/Enabling-Ownership-Enforcer
+;
+; example (pretend the following lines are not commented):
+;
+;    alias     is an owner alias. Only one alias per line is accepted.
+;    ;         starts a comment line. It is only accepted at the beginning of a line.
+;    *         before an alias indicates an owner who won't be added to any pull request automatically. Please note that this flag is not supported for Security Groups.
+;    @         before an alias indicates a non-owner who has to be added to all pull requests automatically.
+;
+@avdnativemon

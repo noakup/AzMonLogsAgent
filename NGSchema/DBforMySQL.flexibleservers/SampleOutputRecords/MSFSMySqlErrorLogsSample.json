@@ -1,0 +1,14 @@
+[
+  {
+    "TimeGenerated": "2023-05-18T00:17:40.372067Z",
+    "Message": "2023-05-18T00:17:40.372030Z 0 [Note] Reloaded 1 records of replica information."
+  },
+  {
+    "TimeGenerated": "2023-05-18T00:17:40.372150Z",
+    "Message": "2023-05-18T00:17:40.372138Z 0 [Note] replication_state_init completed."
+  },
+  {
+    "TimeGenerated": "2023-05-18T00:17:40.399394Z",
+    "Message": "2023-05-18T00:17:40.399358Z 0 [Note] servers_init function completed."
+  }
+]

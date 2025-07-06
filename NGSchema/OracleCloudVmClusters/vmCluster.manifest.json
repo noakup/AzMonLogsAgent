@@ -1,0 +1,94 @@
+{
+  "type": "Oracle.Database/cloudVmClusters",
+  "displayName": "Oracle Cloud VM Cluster",
+  "description": "Oracle Cloud VM Cluster logs.",
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Oracle Exadata On Azure",
+  "contactDL": "tycooncp@microsoft.com",
+  "tables": [
+    {
+      "name": "OracleCloudVMCluster",
+      "description": "Oracle Cloud VM Cluster logs.",
+      "dataTypeId": "ORACLEDATABASE_TERMINATEVM",
+      "isResourceCentric": true,
+      "categories": ["audit"],
+      "artifactVersion": 3,
+      "tableState": "Validation",
+      "isTroubleshootingAllowed": true,
+			"isLakeAllowed": true,			
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "body",
+          "type": "string"
+        }
+      ],
+      "transformFilePath": "KQL/VmClusterTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Time Event Generated",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "description": "The name of the operation represented by this event",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "description": "The static text description of this operation",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "LifeCycleState",
+          "type": "String",
+          "description": "Current lifeCycleState of the resource generated event",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/VmClusterInputSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/VmClusterOutputSample.json"
+    }
+  ],
+  "functions": [],
+  "queries": [
+    {
+      "id":"a4934395-ec10-438d-8dfa-b01b44f86c65",
+      "displayName":"Number of Errors in last hour",
+      "description":"Number of ExadataInfrastructure errors in last one hour.",
+      "bodyFilePath":"KQL/NumberOfErrorsInLastHour.kql",
+      "categories":[ "audit" ],
+      "relatedTables": ["OracleExadataInfrastructure"],
+      "tags":
+      {
+        "Topic":[ "Errors" ]
+      },
+      "properties": {
+        "ExampleQuery": true
+      }
+    }
+  ]
+}

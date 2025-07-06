@@ -1,0 +1,23 @@
+[
+    {
+       "time":"2021-05-05T17:02:55.0060655Z",
+       "resourceId":"/SUBSCRIPTIONS/816F9E24-BF1E-48F9-B7E5-524A87574565/RESOURCEGROUPS/STAGINGACCESS/PROVIDERS/MICROSOFT.CONNECTEDVEHICLE/PLATFORMACCOUNTS/ADSALI09",
+       "category":"Logs",
+       "operationName":"LogEvent",
+       "properties":"{\"tag\":\"33F72253-84ED-4E6E-B41C-2A2C8C2C842D\",\"vehicleId\":\"c085eeee59e140c0a6c27f1ec805856c\",\"body\":\"[{tag}] Enqueued VehicleProvisioningJob for id {vehicleId}\"}",
+       "message":"[33F72253-84ED-4E6E-B41C-2A2C8C2C842D] Enqueued VehicleProvisioningJob for id c085eeee59e140c0a6c27f1ec805856c",
+       "exception": "Test value to validate kql query",
+       "traceContext":"{\"traceId\":\"98a2d10e98bba04a94bdc19,6903eb3aa\",\"spanId\":\"87bb5bf576ae0f49\",\"parentId\":null,\"traceState\":null,\"traceFlags\":null}",
+       "severityText":"Information"
+    },
+    {
+        "time": "2021-05-05T17:02:55.0060655Z",
+        "resourceId": "/SUBSCRIPTIONS/816F9E24-BF1E-48F9-B7E5-524A87574565/RESOURCEGROUPS/STAGINGACCESS/PROVIDERS/MICROSOFT.CONNECTEDVEHICLE/PLATFORMACCOUNTS/ADSALI09",
+        "category": "Logs",
+        "operationName": "LogEvent",
+        "properties": "{\"tag\":\"33F72253-84ED-4E6E-B41C-2A2C8C2C842D\",\"vehicleId\":\"c085eeee59e140c0a6c27f1ec805856c\",\"body\":\"[{tag}] Enqueued VehicleProvisioningJob for id {vehicleId}\"}",
+        "exception": "[33F72253-84ED-4E6E-B41C-2A2C8C2C842D] Failed VehicleProvisioningJob for id c085eeee59e140c0a6c27f1ec805856c",
+        "traceContext": "{\"traceId\":\"98a2d10e98bba04a94bdc196903eb3aa\",\"spanId\":\"87bb5bf576ae0f49\",\"parentId\":null,\"traceState\":null,\"traceFlags\":null}",
+        "severityText":"Error"
+    }
+]

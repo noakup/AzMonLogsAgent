@@ -1,0 +1,16 @@
+source  
+| project 
+	TimeGenerated = todatetime(['time']),
+    OperationName = tostring(['operationName']),
+    OperationVersion = tostring(['operationVersion']),
+    Category = tostring(['category']),
+    Identity = identities,
+    SourceIpAddress = tostring(properties.sourceIPAddress),
+    LogId = tostring(properties.logId),
+    ServiceName = tostring(properties.serviceName),
+    UserAgent = tostring(properties.userAgent),
+    SessionId = tostring(properties.sessionId),
+    ActionName = tostring(properties.actionName),
+    RequestId = tostring(properties.requestId),
+    RequestParams = parse_json(properties.requestParams),
+    Response = parse_json(properties.response)

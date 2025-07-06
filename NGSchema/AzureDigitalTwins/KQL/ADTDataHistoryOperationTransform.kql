@@ -1,0 +1,20 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    OperationVersion = operationVersion,
+    ResultType = resultType,
+    ResultSignature = toint(resultSignature),
+    ResultDescription = resultDescription,
+    DurationMs = tolong(durationMs),
+    CallerIpAddress = callerIpAddress,
+    CorrelationId = correlationId,
+    ApplicationId = tostring(identity.claims.appId),
+    Level = toint(level),
+    Region = location,
+    RequestUri = uri,
+    TraceId = tostring(traceContext.traceId),
+    SpanId = tostring(traceContext.spanId),
+    ParentId = tostring(traceContext.parentId),
+    TraceFlags = tostring(traceContext.traceFlags),
+    TraceState = tostring(traceContext.tracestate)

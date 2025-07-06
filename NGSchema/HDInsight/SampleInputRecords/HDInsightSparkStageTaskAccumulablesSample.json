@@ -1,0 +1,16 @@
+[{
+	"ApplicationId": "application_1592205350998_402884",
+	"Entity": "task",
+	"EntityId": "5583790",
+	"ParentId": "109469",
+	"MetricId": "3593232",
+	"MetricName" : "internal.metrics.resultSize",
+	"Value" : "2341",
+	"Tenant": "bf597230450a4ea08cf5d46f097c6b51",
+	"Role": "workernode",
+	"RoleInstance": "wn0-ntb-7.5c4yhjcbs2de5avsfsdfbtkske.cx.internal.cloudapp.net",
+	"ClusterDnsName": "primary-hdsparkcluster-v3-eus2",
+	"Region": "East US",
+	"IpAddress": "10.0.0.9",
+	"UserSubscriptionId": "8p26a622-df78-4a27-a907-1ec2384d4f1va"
+}]

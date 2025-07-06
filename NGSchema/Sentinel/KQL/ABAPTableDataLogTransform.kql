@@ -1,0 +1,27 @@
+source
+| project
+    TimeGenerated = now(),
+    DBLogId = DBLogID,
+    Host,
+    Language,
+    LogKey,
+    NewValue,
+    OldValue,
+    OperationTypeSQL,
+    Program,
+    TableField,
+    TableName,
+    TransactionCode,
+    UpdatedOn,
+    VersionNumber,
+    SystemRole,
+    SystemUniqueId,
+    AgentId,
+    SystemId = SystemID,
+    SystemNumber,
+    User,
+    Instance,
+    ClientId = ClientID
+
+
+

@@ -1,0 +1,2 @@
+; owners for schema PGSQLPgStatActivitySessions, PGSQLDbTransactionsStats, PGSQLQueryStoreRuntime, PGSQLQueryStoreWaits, PGSQLAutovacuumStats, PGSQLServerLogs, PGSQLPgBouncer
+seernu

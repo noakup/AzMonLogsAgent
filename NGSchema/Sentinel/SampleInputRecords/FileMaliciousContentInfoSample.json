@@ -1,0 +1,29 @@
+[
+    {
+      "time": "2021-03-06T10:28:37.1702622Z",
+      "tenantId": "5b5a146c-eba8-46af-96f8-e31b50d15a3f",
+      "operationName": "Publish",
+      "category": "AdvancedHunting-FileMaliciousContentInfo",
+      "properties": {
+        "Workload": "ynet.co.il",
+        "FileName": "ClickAllowed",
+        "FolderPath": "test-upn",
+        "FileSize": "test-workload",
+        "SHA256": "00823f55-6ee2-490b-a550-08d8e088cca6",
+        "FileOwnerDisplayName": "test-fileownerdisplayname",
+        "FileOwnerUpn": "test-fileownerupn",
+        "LastModifyingAccountUpn": "test-upn",
+        "DocumentID": "81589c3b-3565-4148-2eab-08d8e088ca4f-1012962386702502671-a37467926812fbf43bc322e04ff514a635e825fe5300fb68f5107af8002af73d-1",
+        "ThreatTypes": "test-types",
+        "ThreatNames": "test-names",
+        "DetectionMethods": "test-methods",
+        "LastModifiedTime": "2021-03-06T10:28:37.1702622Z",
+        "FileCreationTime": "2021-03-06T10:28:37.1702622Z",
+        "ReportId": "81589c3b-3565-4148-2eab-08d8e088ca4f-1012962386702502671-a37467926812fbf43bc322e04ff514a635e825fe5300fb68f5107af8002af73d-1",
+        "Timestamp": "2021-03-06T10:28:37.1702622Z"
+      },
+      "Tenant": "PRD",
+      "DC": "WEU"
+    }
+]
+

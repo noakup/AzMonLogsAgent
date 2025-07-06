@@ -1,0 +1,12 @@
+source
+| extend Properties = parse_json(properties)
+| project TimeGenerated = todatetime(["time"]),
+    SourceIP = tostring(Properties.SourceIP),
+    DestinationIP = tostring(Properties.DestinationIP),
+    NatGatewayIP = tostring(Properties.NatGatewayIP),
+    PacketsReceived = tolong(Properties.PacketsReceived),
+    PacketsSent = tolong(Properties.PacketsSent),
+    BytesReceived = tolong(Properties.BytesReceived),
+    BytesSent = tolong(Properties.BytesSent),
+    PacketsReceivedDropped = tolong(Properties.PacketsReceivedDropped),
+    PacketsSentDropped = tolong(Properties.PacketsSentDropped)

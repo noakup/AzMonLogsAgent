@@ -1,0 +1,20 @@
+let DisabledParsers=materialize(_GetWatchlist('ASimDisabledParsers') 
+| where SearchKey in ('Any', 'Exclude_ASim_Dns') 
+| extend SourceSpecificParser=column_ifexists('SourceSpecificParser','') 
+| where isnotempty(SourceSpecificParser) 
+| summarize list = make_set(SourceSpecificParser));
+let builtInDisabled = 0 != array_length(set_intersect(toscalar(DisabledParsers),dynamic(['Exclude_ASim_DnsBuiltIn', 'Exclude_ASim_Dns', 'Any'])));
+union isfuzzy=true
+_ASim_Dns_AzureFirewallV03(disabled= (builtInDisabled or('Exclude_ASim_Dns_AzureFirewall' in (DisabledParsers)))),
+_ASim_Dns_CiscoUmbrellaV03(disabled= (builtInDisabled or('Exclude_ASim_Dns_CiscoUmbrella' in (DisabledParsers)))),
+_ASim_Dns_CorelightZeekV05(disabled= (builtInDisabled or('Exclude_ASim_Dns_CorelightZeek' in (DisabledParsers)))),
+_ASim_Dns_FortinetFortiGateV01(disabled= (builtInDisabled or('Exclude_ASim_Dns_FortinetFortiGate' in (DisabledParsers)))),
+_ASim_Dns_GcpV04(disabled= (builtInDisabled or('Exclude_ASim_Dns_Gcp' in (DisabledParsers)))),
+_ASim_Dns_InfobloxNIOSV06(disabled= (builtInDisabled or('Exclude_ASim_Dns_InfobloxNIOS' in (DisabledParsers)))),
+_ASim_Dns_MicrosoftNXlogV05(disabled= (builtInDisabled or('Exclude_ASim_Dns_MicrosoftNXlog' in (DisabledParsers)))),
+_ASim_Dns_MicrosoftOMSV04(disabled= (builtInDisabled or('Exclude_ASim_Dns_MicrosoftOMS' in (DisabledParsers)))),
+_ASim_Dns_MicrosoftSysmonV04(disabled= (builtInDisabled or('Exclude_ASim_Dns_MicrosoftSysmon' in (DisabledParsers)))),
+_ASim_Dns_NativeV06(disabled= (builtInDisabled or('Exclude_ASim_Dns_Native' in (DisabledParsers)))),
+_ASim_Dns_VectraAIV01(disabled= (builtInDisabled or('Exclude_ASim_Dns_VectraAI' in (DisabledParsers)))),
+_ASim_Dns_ZscalerZIAV06(disabled= (builtInDisabled or('Exclude_ASim_Dns_ZscalerZIA' in (DisabledParsers)))),
+_Im_Dns_EmptyV04

@@ -1,0 +1,15 @@
+source
+| project
+    TimeGenerated = todatetime(TimeGenerated),
+    TimePeriod = todatetime(TimePeriod),
+    MetricName = MetricName,
+    ServiceType = ServiceType,
+    Count = tolong(Count),
+    Total = tolong(Total),
+    StorageAccountName = StorageAccountName,
+    ObjectType = ObjectType,
+    ObjectAccessTier = ObjectAccessTier,
+    RequestCategory = RequestCategory,
+    ResponseCategory = ResponseCategory,
+    IsAccessTierInferred = IsAccessTierInferred,
+    RecordId = RecordId

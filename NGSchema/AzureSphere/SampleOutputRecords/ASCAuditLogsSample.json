@@ -1,0 +1,33 @@
+[
+	{
+		"TimeGenerated": "2022-10-03T17:34:28.122929725Z",
+		"Location": "centralus",
+		"OperationName": "PatchTenant",		
+		"ResultType": "Success",
+		"ResultDescription": "Catalog a5d95ca4-c63c-49b6-b470-ad81fdf7c52d unmigrated.",
+		"Identity": {
+			"Other": [
+				{
+					"Description": "ArmUserPrincipalName",
+					"Identity": "abcde@microsoft.com"
+				}
+			]
+		},
+		"Properties": {	
+			"TargetResources": {
+				"CatalogName": [
+					{
+						"Name": "MyCatalog"
+					}
+				],
+				"ProductName": [
+					{
+						"Name": "MySampleProduct"
+					}
+				]
+			}
+		},
+		"CorrelationId": "00000000-0000-0000-0000-000000000000",
+		"DurationMs": -1
+	}
+]

@@ -1,0 +1,17 @@
+[
+    {
+        "Url": "ynet.co.il",
+        "ActionType": "ClickAllowed",
+        "AccountUpn": "test-upn",
+        "Workload": "test-workload",
+        "NetworkMessageId": "00823f55-6ee2-490b-a550-08d8e088cca6",
+        "ThreatTypes": "Phishing",
+        "DetectionMethods": "test-methods",
+        "IPAddress": "20.56.131.118",
+        "IsClickedThrough": true,
+        "UrlChain": "test-chain",
+        "ReportId": "81589c3b-3565-4148-2eab-08d8e088ca4f-1012962386702502671-a37467926812fbf43bc322e04ff514a635e825fe5300fb68f5107af8002af73d-1",
+        "TimeGenerated": "2021-03-06T10:28:37.1702622Z",
+        "Timestamp": "2021-03-06T10:28:37.1702622Z"
+      }
+  ]

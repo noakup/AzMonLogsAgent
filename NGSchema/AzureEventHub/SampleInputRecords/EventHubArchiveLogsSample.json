@@ -1,0 +1,19 @@
+[
+	{
+        "Environment": "PROD",
+        "Region": "East US",
+        "ScaleUnit": "PROD-BL-VAZ704",
+        "TaskName": "EventHubArchiveUserError",
+        "ActivityId": "00000000-0000-0000-0000-000000000000",
+        "trackingId": "4d8c8ba4-fbca-4043-a813-36cf8cd1843f_B9",
+        "resourceId": "/SUBSCRIPTIONS/A70B8550-49B1-4C60-B9F9-86B7EDBF31E4/RESOURCEGROUPS/VIJAYSHARMA-TESTGROUP/PROVIDERS/MICROSOFT.EVENTHUB/NAMESPACES/VIJAYSHARMA-EH-PREMIUM",
+        "eventHub": "vijaysharma-eh-premium-entity",
+        "partitionId": "0",
+        "archiveStep": "ArchiveWriteDestination",
+        "startTime": "9/29/2022 9:25:49 AM",
+        "failures": 1,
+        "durationInSeconds": 0,
+        "message": "Microsoft.WindowsAzure.Storage.StorageException:The remote server returned an error: (404) Not Found. -> System.Net.WebException:The remote server returned an error: (404) Not Found.",
+        "category": "ArchiveLogs"
+    }
+]

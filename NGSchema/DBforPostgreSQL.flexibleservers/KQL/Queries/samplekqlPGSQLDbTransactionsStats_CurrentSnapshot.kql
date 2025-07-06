@@ -1,0 +1,4 @@
+// If required to get the snapshot on a certain date and time just filter on TimeGenerated column, like:
+// where TimeGenerated between (datetime('2023-03-01 16:00') .. datetime('2023-03-01 19:00'))
+PGSQLDbTransactionsStats
+| summarize arg_max(TimeGenerated,TransactionIdFrozen,TransactionIdFrozenAge,RemainingTransactionIds, RemainingTransactionIdsTillEmergencyAV,RemainingTransactionIdsTillWraparound,MinMultixactId, MinMultixactIdAge,RemainingMultixactIds, RemainingMultixactIdsTillEmergencyAV, RemainingMultixactIdsTillWraparound ) by DatabaseName

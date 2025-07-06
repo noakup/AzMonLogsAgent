@@ -1,0 +1,8 @@
+// To create an alert for this query, click '+ New alert rule'
+PGSQLServerLogs
+| where Message has "connection authorized"
+| extend allmatches=extract_all(@'user=(.+)database=(.\S+)', Message)
+| project TimeGenerated, user=trim(@" ",tostring(allmatches[0][0])), database=allmatches[0][1], Message,ProcessId,ErrorLevel, SqlErrorCode
+| where  ['user'] !='azuresu' //exclude Azure managed superuser
+| order by TimeGenerated desc 
+| take 100

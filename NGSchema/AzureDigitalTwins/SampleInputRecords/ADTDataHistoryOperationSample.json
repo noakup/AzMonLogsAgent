@@ -1,0 +1,21 @@
+[
+  {
+    "time": "2020-11-05T22:18:38.0708705Z",
+    "resourceId": "/SUBSCRIPTIONS/BBED119E-28B8-454D-B25E-C990C9430C8F/RESOURCEGROUPS/MYRESOURCEGROUP/PROVIDERS/MICROSOFT.DIGITALTWINS/DIGITALTWINSINSTANCES/MYINSTANCENAME",
+    "operationName": "Microsoft.DigitalTwins/digitalTwinsInstances/datahistory/messages/send/action",
+    "operationVersion": "",
+    "category": "DataHistoryOperation",
+    "resultType": "Failure",
+    "resultSignature": "",
+    "resultDescription": "Unable to send ADXEventHub message to [myPath] for event Id [0c60f371-e9d8-4657-9b1b-d40a6fd59fdf].",
+    "durationMs": -1,
+    "callerIpAddress": "",
+    "correlationId": "7f73ab45-14c0-491f-a834-0827dbbf7f8e",
+    "identity": { "claims": { "appId": "c09f8687-b4a9-48f3-b50d-5146ec253716" } },
+    "level": "3",
+    "location": "southcentralus",
+    "uri": "",
+    "properties": { "endpointName" : "ADXEventHub" },
+    "traceContext": { "traceId": "95ff77cfb300b04f80d83e64d13831e7", "spanId": "b630da57026dd046", "parentId": "9f0de6dadae85945", "traceFlags": "01", "tracestate": "k1=v1,k2=v2" }
+  }
+]

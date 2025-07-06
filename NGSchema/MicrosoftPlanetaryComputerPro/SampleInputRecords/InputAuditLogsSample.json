@@ -1,0 +1,29 @@
+[
+    {
+        "category": "Audit",
+        "correlationId": "be372c04d638fb60edbbf094907c1a55",
+        "location": "uksouth",
+        "operationName": "Microsoft.Orbital/geoCatalogs/read",
+        "properties": "{\"endpoint\":\"GET /stac/collections/{collection_id}/items http send\",\"statusCode\":\"200\"}",
+        "Tenant": "uksouth",
+        "time": "2025-05-21T12:02:04.627933Z"
+    },
+    {
+        "category": "Audit",
+        "correlationId": "be372c04d638fb60edbbf094907c1a55",
+        "location": "uksouth",
+        "operationName": "Microsoft.Orbital/geoCatalogs/read",
+        "properties": "{\"endpoint\":\"GET /stac/collections/{collection_id}/items\",\"statusCode\":\"200\"}",
+        "Tenant": "uksouth",
+        "time": "2025-05-21T12:02:04.628299Z"
+    },
+    {
+        "category": "Audit",
+        "correlationId": "1d79d973bce13e6413ebb0da1b351c08",
+        "location": "uksouth",
+        "operationName": "Microsoft.Orbital/geoCatalogs/read",
+        "properties": "{\"endpoint\":\"GET /stac/collections/{collection_id}/items http send\",\"statusCode\":\"200\"}",
+        "Tenant": "uksouth",
+        "time": "2025-05-21T12:02:06.022219Z"
+    }
+]

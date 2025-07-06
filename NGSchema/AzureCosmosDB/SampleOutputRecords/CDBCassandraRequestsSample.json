@@ -1,0 +1,22 @@
+[
+	{
+		"TimeGenerated" : "2021-03-22T18:00:16.5159547Z",
+		"AccountName" : "CASSANDRA-TEST",
+		"OperationName" : "Options",
+		"UserAgent" : "<empty>",
+		"ActivityId" : "549113c0-8600-4584-acfe-50ce97a052d9",
+		"ErrorCode" : "-1",
+		"DurationMs" : "0.042",
+		"RequestCharge" : "0",
+		"DatabaseName" : "<empty>",
+		"CollectionName" : "<empty>",
+		"AuthorizationTokenType" : "PrimaryMasterKey",
+		"Address" : "104.42.195.92",
+		"PIICommandText" : "<empty>",
+		"RateLimitingDelayMs" : "0",
+		"RetriedDueToRateLimiting" : "false",
+		"RegionName" : "East US",
+		"RequestLength" : "0",
+		"ResponseLength" : "48"
+	}
+]

@@ -1,0 +1,56 @@
+[
+    {
+        "time": "2023-01-24T10:00:02.3680050Z",
+        "resourceId": "/SUBSCRIPTIONS/4A1C78C6-5CB1-422C-A34E-0DF7FCB9BD0B/RESOURCEGROUPS/TEST/PROVIDERS/MICROSOFT.CACHE/REDISENTERPRISE/AUDITING-SHOEBOX/DATABASES/DEFAULT",
+        "category": "ConnectionEvents",
+        "location": "westus",
+        "operationName": "Microsoft.Cache/redisEnterprise/databases/ConnectionEvents/Read",
+        "properties": {
+            "eventEpochTime": 1674554402,
+            "id": 6185063009002,
+            "clientIP": "20.228.16.39",
+            "eventType": "new_conn"
+        }
+    },
+    {
+        "time": "2023-01-24T10:00:02.3680050Z",
+        "resourceId": "/SUBSCRIPTIONS/4A1C78C6-5CB1-422C-A34E-0DF7FCB9BD0B/RESOURCEGROUPS/TEST/PROVIDERS/MICROSOFT.CACHE/REDISENTERPRISE/AUDITING-SHOEBOX/DATABASES/DEFAULT",
+        "category": "ConnectionEvents",
+        "location": "westus",
+        "operationName": "Microsoft.Cache/redisEnterprise/databases/ConnectionEvents/Read",
+        "properties": {
+            "eventEpochTime": 1674554402,
+            "id": 6185063009002,
+            "clientIP": "20.228.16.39",
+            "eventType": "auth",
+            "eventStatus": 8
+        }
+    },
+    {
+        "time": "2023-01-24T10:00:02.3680050Z",
+        "resourceId": "/SUBSCRIPTIONS/4A1C78C6-5CB1-422C-A34E-0DF7FCB9BD0B/RESOURCEGROUPS/TEST/PROVIDERS/MICROSOFT.CACHE/REDISENTERPRISE/AUDITING-SHOEBOX/DATABASES/DEFAULT",
+        "category": "ConnectionEvents",
+        "location": "westus",
+        "operationName": "Microsoft.Cache/redisEnterprise/databases/ConnectionEvents/Read",
+        "properties": {
+            "eventEpochTime": 1674554402,
+            "id": 6185063009002,
+            "clientIP": "[fd40:5246:30:9da4:6b30:100:a00:7]",
+            "eventType": "new_conn"
+        }
+    },
+    {
+        "time": "2023-01-24T10:00:02.3680050Z",
+        "resourceId": "/SUBSCRIPTIONS/4A1C78C6-5CB1-422C-A34E-0DF7FCB9BD0B/RESOURCEGROUPS/TEST/PROVIDERS/MICROSOFT.CACHE/REDISENTERPRISE/AUDITING-SHOEBOX/DATABASES/DEFAULT",
+        "category": "ConnectionEvents",
+        "location": "westus",
+        "operationName": "Microsoft.Cache/redisEnterprise/databases/ConnectionEvents/Read",
+        "properties": {
+            "eventEpochTime": 1674554402,
+            "id": 6185063009002,
+            "clientIP": "[fd40:5246:30:9da4:6b30:100:a00:7]",
+            "eventType": "auth",
+            "eventStatus": 8
+        }
+    }
+]

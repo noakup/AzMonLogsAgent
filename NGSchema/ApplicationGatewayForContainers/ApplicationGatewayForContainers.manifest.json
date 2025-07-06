@@ -1,0 +1,465 @@
+{
+	"type": "Microsoft.ServiceNetworking/TrafficControllers",
+	"displayName": "Application Gateway for Containers",
+	"description": "Azure Application Gateway for Containers is an application load balancer that enables you to manage traffic to your container workloads.",
+	"tags": {},
+	"properties": {},
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "Cloudnet/TrafficController",
+	"relatedTables": [
+		"AzureActivity",
+		"AzureMetrics"
+	],
+	"relatedFunctions": [],
+	"tables": [
+		{
+			"name": "AGCAccessLogs",
+			"description": "Contains details of client requests made to Application Gateway for Containers. Each client request creats a log entry that can be used to identify slow requests, determine error rates, and correlate logs with backend services.",
+			"categories": [
+				"resources",
+				"network"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 4,
+			"dataTypeId": "MICROSOFTSERVICENETWORKING_TRAFFICCONTROLLERACCESSLOG",
+			"intelligencePacks": [],
+			"isResourceCentric": true,
+			"tableState": "Validation",
+			"isLakeAllowed": true,
+			"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "location",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				}
+			],
+			"transformFilePath": "KQL/Transforms/AGCAccessLogsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"description": "Time (UTC) when the log was created.",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"description": "Name of the operation.",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Region",
+					"type": "String",
+					"description": "The region where Application Gateway for Containers association is deployed",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "BackendHost",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Address of backend target with appended port. For example <ip>:<port>"
+				},
+				{
+					"name": "BackendIp",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "IP address of backend target Application Gateway for Containers proxies the request to.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "BackendPort",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "Port number of the backend target."
+				},
+				{
+					"name": "BackendResponseLatency",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Time in milliseconds to receive first byte from Application Gateway for Containers to the backend target."
+				},
+				{
+					"name": "BackendTimeTaken",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "Time in milliseconds for the response to be transmitted from the backend target to Application Gateway for Containers."
+				},
+				{
+					"name": "ClientIp",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "IP address of the client initiating the request to the frontend of Application Gateway for Containers.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "FrontendName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Name of the Application Gateway for Containers frontend that received the request from the client."
+				},
+				{
+					"name": "FrontendPort",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "Port number the request was listened on by Application Gateway for Containers."
+				},
+				{
+					"name": "HostName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Host header value received from the client by Application Gateway for Containers."
+				},
+				{
+					"name": "HttpMethod",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "HTTP Method of the request received from the client by Application Gateway for Containers as per RFC 7231."
+				},
+				{
+					"name": "HttpStatusCode",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "HTTP Status code returned from Application Gateway for Containers to the client."
+				},
+				{
+					"name": "HttpVersion",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "HTTP version of the request received from the client by Application Gateway for Containers."
+				},
+				{
+					"name": "Referrer",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Referrer header of the request received from the client by Application Gateway for Containers."
+				},
+				{
+					"name": "RequestBodyBytes",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "Size in bytes of the body payload of the request received from the client by Application Gateway for Containers."
+				},
+				{
+					"name": "RequestHeaderBytes",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "Size in bytes of the headers of the request received from the client by Application Gateway for Containers."
+				},
+				{
+					"name": "RequestUri",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "URI of the request received from the client by Application Gateway for Containers (everything after <protocol>://<host> of the URL)."
+				},
+				{
+					"name": "ResponseBodyBytes",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "Size in bytes of the body payload of the response returned to the client by Application Gateway for Containers."
+				},
+				{
+					"name": "ResponseHeaderBytes",
+					"type": "BigInt",
+					"isDefaultDisplay": true,
+					"description": "Size in bytes of the headers of the response returned to the client by Application Gateway for Containers."
+				},
+				{
+					"name": "TimeTaken",
+					"type": "Double",
+					"isDefaultDisplay": true,
+					"description": "Time in milliseconds of the client request received by Application Gateway for Containers and the last byte returned to the client from Application Gateway for Containers."
+				},
+				{
+					"name": "TlsCipher",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "TLS cipher suite negotiated between the client and Application Gateway for Containers frontend."
+				},
+				{
+					"name": "TlsProtocol",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "TLS version negotiated between the client and Application Gateway for Containers frontend."
+				},
+				{
+					"name": "TrackingId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Generated guid by Application Gateway for Containers to help with tracking and debugging. This value correlates to the x-request-id header returned to the client from Application Gateway for Containers.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "UserAgent",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "User-Agent header of the request received from the client by Application Gateway for Containers."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/AGCAccessLogsInputSample.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/AGCAccessLogsOutputSample.json"
+		},
+		{
+            "name": "AGCFirewallLogs",
+            "description": "Contains web application firewall logs logged through either detection or prevention mode for Application Gateway for Containers.",
+            "categories": [
+                "resources",
+                "network",
+                "audit"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 1,
+            "dataTypeId": "MICROSOFTSERVICENETWORKING_TRAFFICCONTROLLERFIREWALLLOG",
+            "tableState": "Validation",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+				{
+					"name": "timeStamp",
+					"type": "DateTime"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "location",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				}
+			],
+            "transformFilePath": "KQL/Transforms/AGCFirewallLogsTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Time (UTC) when the log was created.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "description": "Name of the operation.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "InstanceId",
+                    "type": "String",
+                    "description": "Application Gateway instance for which firewall data is being generated. For a multiple-instance application gateway, there is one row per instance.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ClientIp",
+                    "type": "String",
+                    "description": "Originating IP for the request.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "IP"
+                },
+                {
+                    "name": "ClientPort",
+                    "type": "Int",
+                    "description": "Originating port for the request.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Action",
+                    "type": "String",
+                    "description": "Action taken on the request. Available values are Blocked and Allowed (for custom rules), Matched (when a rule matches a part of the request), and Detected and Blocked (these are both for mandatory rules, depending on if the WAF is in detection or prevention mode).",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "User-friendly message for the triggering event. More details are provided in the details section.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DetailedMessage",
+                    "type": "String",
+                    "description": "Description of the rule for the triggered event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DetailedData",
+                    "type": "String",
+                    "description": "Specific data found in request that matched the rule for the triggered event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "FileDetails",
+                    "type": "String",
+                    "description": "Configuration file that contained the rule for the triggered event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LineDetails",
+                    "type": "String",
+                    "description": "Line number in the configuration file that triggered the event.",
+                    "isDefaultDisplay": true
+                },
+				{
+                    "name": "Hostname",
+                    "type": "String",
+                    "description": "Hostname or IP address of the Application Gateway.",
+                    "isDefaultDisplay": true
+                },
+				{
+                    "name": "PolicyId",
+                    "type": "String",
+                    "description": "Resource ID of the web application firewall policy.",
+                    "isDefaultDisplay": true
+                },
+				{
+                    "name": "PolicyScope",
+                    "type": "String",
+                    "description": "A named scope consisting of Kubernetes resource references the scope is applied to.",
+                    "isDefaultDisplay": true
+                },
+				{
+                    "name": "PolicyScopeName",
+                    "type": "String",
+                    "description": "The name to the type of scope assignment the web application firewall policy is assigned to.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestUri",
+                    "type": "String",
+                    "description": "URL of the received request.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "URI"
+                },
+                {
+                    "name": "RuleSetType",
+                    "type": "String",
+                    "description": "Rule set type. The available value is Microsoft_DefaultRuleSet or Microsoft_BotManagerRuleSet.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RuleSetVersion",
+                    "type": "String",
+                    "description": "Rule set version used for Microsoft_DefaultRuleSet or Microsoft_BotManagerRuleSet.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RuleId",
+                    "type": "String",
+                    "description": "Rule ID of the triggering event.",
+                    "isDefaultDisplay": true
+                },
+                {
+					"name": "TrackingId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Generated guid by Application Gateway for Containers to help with tracking and debugging. This value correlates to the x-request-id header returned to the client from Application Gateway for Containers.",
+					"dataTypeHint": "GUID"
+				}
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AGCFirewallLogsInputSample.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/AGCFirewallLogsOutputSample.json"
+        }
+	],
+	"functions": [],
+	"queries": [
+		{
+			"id": "c3cf794b-5617-4eb8-95fa-66aa2a2678df",
+			"displayName": "Client requests per hour",
+			"description": "Count of client requests hourly.",
+			"bodyFilePath": "Kql/Queries/RequestsPerHour.kql",
+			"categories": [
+				"network"
+			],
+			"relatedTables": [
+				"AGCAccessLogs"
+			],
+			"tags": {
+				"Topic": [
+					"AGC Access Logs"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		},
+		{
+			"id": "e7766bc6-9d49-4b09-93ed-e564d7593be3",
+			"displayName": "5xx HTTP responses per hour",
+			"description": "Count of client requests that resulted in 5xx responses hourly.",
+			"bodyFilePath": "Kql/Queries/5xxRequestsPerHour.kql",
+			"categories": [
+				"network"
+			],
+			"relatedTables": [
+				"AGCAccessLogs"
+			],
+			"tags": {
+				"Topic": [
+					"AGC Access Logs"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		},
+		{
+			"id": "2c4f7c71-9d37-4987-a767-3951876a5477",
+			"displayName": "4xx HTTP responses per hour",
+			"description": "Count of client requests that resulted in 4xx responses hourly.",
+			"bodyFilePath": "Kql/Queries/4xxRequestsPerHour.kql",
+			"categories": [
+				"network"
+			],
+			"relatedTables": [
+				"AGCAccessLogs"
+			],
+			"tags": {
+				"Topic": [
+					"AGC Access Logs"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		}
+	]
+}

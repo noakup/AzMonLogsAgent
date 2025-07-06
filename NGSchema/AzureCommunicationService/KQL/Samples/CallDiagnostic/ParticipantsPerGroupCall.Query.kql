@@ -1,0 +1,12 @@
+ACSCallSummary
+// Filter out all P2P calls to calculate only participants in Group calls
+| where CallType == 'Group'
+// Get the distinct participants in a call
+| distinct CorrelationId, ParticipantId
+// Count the number of participants per call
+| summarize num_participants=count() by CorrelationId
+// Aggregate the numbers of participants per call (e.g. if there are three calls
+// with 5 participants, this will produce a row [num_participants=5, participant_counts=3])
+| summarize participant_counts=count() by num_participants
+| order by num_participants asc 
+| render columnchart with (xcolumn = num_participants, title="Number of participants per group call")

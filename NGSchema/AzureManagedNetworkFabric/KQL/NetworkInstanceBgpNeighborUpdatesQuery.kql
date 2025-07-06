@@ -1,0 +1,6 @@
+MNFDeviceUpdates
+| where EventCategory == "NetworkInstanceBgpNeighborUpdates"
+| where Properties !has "L2VPN_EVPN"
+| project EventName, EventCategory, DeviceId, TimeGenerated, Properties
+| sort by TimeGenerated desc
+| limit 100

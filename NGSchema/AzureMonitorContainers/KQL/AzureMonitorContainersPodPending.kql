@@ -1,0 +1,8 @@
+//Check Pods that cannot be started and its pending time
+KubePodInventory
+| where PodStatus == 'Pending'
+| project PodCreationTimeStamp, Namespace, PodStartTime, PodStatus, Name, ContainerStatus
+| summarize Start = any(PodCreationTimeStamp), arg_max(PodStartTime, Namespace) by Name
+| extend PodStartTime = iff(isnull(PodStartTime), now(), PodStartTime)
+| extend PendingTime = PodStartTime - Start
+| project Name, Namespace ,PendingTime

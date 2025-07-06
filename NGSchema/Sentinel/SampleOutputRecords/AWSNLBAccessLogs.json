@@ -1,0 +1,26 @@
+[
+  {
+    "TimeGenerated": "10/06/2025, 10:20:11.000",
+    "NLBType": "tls",
+    "Version": 2,
+    "Nlb": "net/nlb-demo-load-balancer/ddc3247aab91dbc3",
+    "Listener": "789767706d84691b",
+    "ClientIPPort": "155.138.240.251:46456",
+    "TargetIPPort": "11.0.2.169:443",
+    "ConnectionTime": "",
+    "TlsHandshakeTime": 119,
+    "ReceivedBytes": "",
+    "SentBytes": "",
+    "IncomingTLSAlert": "-",
+    "ChosenCertArn": "arn:aws:acm:eu-central-1:072643944673:certificate/8eb64523-bc31-4fa6-aa68-b3e93eb96232",
+    "ChosenCertSerial": "-",
+    "TLSCipher": "TLS_AES_128_GCM_SHA256",
+    "TLSProtocolVersion": "tlsv13",
+    "TLSNamedGroup": "-",
+    "DomainName": "-",
+    "ALPNFEProtocol": "-",
+    "ALPNBEProtocol": "-",
+    "ALPNClientPrefList": "-",
+    "TLSConnectionCreationTime": "2025-06-10T10:20:11.0000000"
+  }
+]

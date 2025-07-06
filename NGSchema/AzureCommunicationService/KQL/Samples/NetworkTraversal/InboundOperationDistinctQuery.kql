@@ -1,0 +1,4 @@
+ACSNetworkTraversalIncomingOperations
+| summarize Count = count() by OperationName, OperationVersion
+| sort by Count desc
+| limit 100

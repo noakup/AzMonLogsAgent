@@ -1,0 +1,30 @@
+[
+  {
+    "Version": "1.1",
+    "AccountId": "72643944673",
+    "LogType": "ResolverQueryLogs",
+    "Region": "eu-central-1",
+    "VpcId": "vpc-5e09b434",
+    "TimeGenerated": "2025-04-20T13:25:17.0000000Z",
+    "QueryName": "ec2messages.eu-central-1.amazonaws.com.",
+    "QueryType": "A",
+    "QueryClass": "IN",
+    "Rcode": "NOERROR",
+    "Answers": [
+      {
+        "Rdata": "52.94.140.228",
+        "Type": "A",
+        "Class": "IN"
+      }
+    ],
+    "SrcAddr": "172.31.37.154",
+    "SrcPort": 46724,
+    "Transport": "UDP",
+    "SrcIds": {
+      "instance": "i-06e5e7a5cb5e040f6"
+    },
+    "FirewallRuleAction": "",
+    "FirewallRuleGroupId": "",
+    "FirewallDomainListId": ""
+  }
+]

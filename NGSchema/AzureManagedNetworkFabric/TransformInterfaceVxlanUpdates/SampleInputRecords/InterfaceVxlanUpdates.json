@@ -1,0 +1,19 @@
+[
+    {
+        "Tag": "NfaDeviceStateChanges",
+        "category": "InterfaceVxlanUpdates",
+        "level": "Informational",
+        "properties": {
+            "DeviceId": "/subscriptions/5ffad143-8f31-4e1e-b171-fa1738b14748/resourceGroups/op1lab-nf/providers/Microsoft.ManagedNetworkFabric/networkDevices/op1labnf02-CompRack2-TOR3",
+            "DeviceName": "op1labnf02-CompRack2-TOR3",
+            "EventName": "VxlanVlanToVniVlan",
+            "FabricID": "/subscriptions/5ffad143-8f31-4e1e-b171-fa1738b14748/resourceGroups/op1lab-nf/providers/Microsoft.ManagedNetworkFabric/networkFabrics/op1labnf02",
+            "GnmiTimestamp": "1693477578624610370",
+            "InterfaceName": "Vxlan1",
+            "Value": "732",
+            "VlanToVniVlan": "732"
+        },
+        "resourceId": "/SUBSCRIPTIONS/5FFAD143-8F31-4E1E-B171-FA1738B14748/RESOURCEGROUPS/OP1LAB-NF/PROVIDERS/MICROSOFT.MANAGEDNETWORKFABRIC/NETWORKDEVICES/OP1LABNF02-COMPRACK2-TOR3",
+        "time": "2023-10-04T16:58:27Z"
+    }
+]

@@ -1,0 +1,5 @@
+AGWAccessLogs
+| where HttpStatus > 399
+| extend ResourceName = tostring(split(_ResourceId, '/')[8])
+| summarize AggregatedValue = count() by UserAgent, ResourceName	
+| sort by AggregatedValue desc

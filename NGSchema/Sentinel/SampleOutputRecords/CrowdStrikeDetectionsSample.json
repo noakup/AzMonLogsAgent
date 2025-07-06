@@ -1,0 +1,67 @@
+[{
+    "TimeGenerated": "2025-05-13T12:17:00Z",
+    "AdversaryIds": ["falcon_apt1", "falcon_apt2"],
+    "AssignedToName": "John Smith",
+    "AssignedToUid": "user123",
+    "Behaviors": [
+        {
+            "device_id": "b82fb1385f604af2a507e8f6b3b7473d",
+            "timestamp": "2025-03-18T07:38:21Z",
+            "md5": "",
+            "parent_details": {
+                "parent_sha256": "dbb91722b734a34b0f79f8bad44d0dfceae6bc7c0b7417c14f0276596e1249aa",
+                "parent_md5": "4f59ec118788976d43152990e09c9037"
+            },
+            "pattern_disposition": 128,
+            "pattern_disposition_details": {
+                "indicator": false,
+                "detect": false,
+                "inddet_mask": false,
+                "suspend_process": false,
+                "suspend_parent": false
+            }
+        }
+    ],
+    "BehaviorsProcessed": [
+        {
+            "behavior_id": "1234",
+            "category": "malware",
+            "confidence": 80,
+            "name": "Suspicious Process Activity"
+        }
+    ],
+    "Cid": "2cc98db1a47b4c98b913c94d43bfab70",
+    "CreatedTimestamp": "2025-03-18T07:38:30.664970013Z",
+    "DateUpdated": "2025-03-18T08:38:30.664970013Z",
+    "DetectionId": "ldt:b82fb1385f604af2a507e8f6b3b7473d:64426564627",
+    "Device": {
+        "device_id": "b82fb1385f604af2a507e8f6b3b7473d",
+        "cid": "2cc98db1a47b4c98b913c94d43bfab70",
+        "groups": ["9fd1b7681ff04ce992a3deba16ae217e"],
+        "modified_timestamp": "2025-03-18T07:34:46Z"
+    },
+    "EmailSent": false,
+    "FirstBehaviorTime": "2025-03-18T07:38:21Z",
+    "HostInfo": {
+        "domain": "contoso.com",
+        "hostname": "DESKTOP-ABC123",
+        "os_version": "Windows 10",
+        "machine_domain": "CONTOSO"
+    },
+    "LastBehavior": "2025-03-18T07:38:21Z",
+    "MaxConfidence": 80,
+    "MaxSeverity": 5,
+    "MaxSeverityDisplayName": "Critical",
+    "OverwatchNotes": "Potential data exfiltration attempt detected",
+    "QuarantinedFiles": [
+        {
+            "filename": "suspicious.exe",
+            "path": "C:\\Windows\\Temp\\",
+            "sha256": "abc123def456"
+        }
+    ],
+    "SecondsToTriaged": 0,
+    "SecondsToResolved": 0,
+    "ShowInUi": true,
+    "Status": "new"
+}]

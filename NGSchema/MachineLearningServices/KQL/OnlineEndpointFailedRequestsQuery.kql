@@ -1,0 +1,28 @@
+AmlOnlineEndpointTrafficLog
+| where ResponseCode != "200" and ResponseCode != "100" 
+| project
+    TimeGenerated,
+    Location,
+    OperationName,
+    Method,
+    Path,
+    Subscription = _SubscriptionId,
+    AzureMLWorkspaceId,
+    EndpointName,
+    DeploymentName,
+    Protocol,
+    ResponseCode,
+    ResponseCodeReason,
+    ModelStatusCode,
+    ModelStatusReason,
+    RequestPayloadSize,
+    ResponsePayloadSize,
+    UserAgent,
+    XRequestId,
+    XMSClientRequestId,
+    TotalDurationMs,
+    RequestDurationMs,
+    ResponseDurationMs,
+    RequestThrottlingDelayMs,
+    ResponseThrottlingDelayMs
+| top 100 by TimeGenerated

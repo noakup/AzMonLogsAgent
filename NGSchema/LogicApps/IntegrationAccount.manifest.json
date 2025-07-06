@@ -1,0 +1,233 @@
+{
+  "type": "Microsoft.Logic/integrationAccounts",
+  "displayName": "Integration Account.",
+  "description": "Diagnostics data for B2B messages in Azure Logic Apps. After you set up B2B communication between trading partners in your integration account, those partners can exchange messages by using protocols such as AS2, X12, and EDIFACT. To check that this communication works the way you expect, you can enable monitoring in your integration account. These minitoring logs appear here.",
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "LogicApps/Logic Apps Service",
+  "tags": {},
+  "properties": {},
+  "relatedTables": [
+    "AzureActivity"
+  ],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "name": "LIATrackingEvents",
+      "description": "Diagnostics data for B2B messages in Azure Logic Apps. After you set up B2B communication between trading partners in your integration account, those partners can exchange messages by using protocols such as AS2, X12, and EDIFACT. To check that this communication works the way you expect, you can enable monitoring in your integration account. These minitoring logs appear here.",
+      "categories": [ "resources" ],
+      "dataTypeId": "MICROSOFTLOGIC_INTEGRATIONACCOUNTTRACKINGEVENTS",
+      "artifactVersion": 3,
+      "tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+            "name": "time",
+            "type": "DateTime"
+        },
+        {
+            "name": "location",
+            "type": "String"
+        },
+        {
+            "name": "operationName",
+            "type": "String"
+        },
+        {
+            "name": "category",
+            "type": "String"
+        },
+        {
+          "name": "operationVersion",
+          "type": "String"
+        },
+        {
+          "name": "correlationId",
+          "type": "String"
+        },
+        {
+            "name": "properties",
+            "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "Kql/IntegrationAccountTrackingEvents.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "description": "The timestamp (UTC) of when this event was generated.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationName",
+          "description": "The name of the operation represented by this event.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "OperationVersion",
+          "description": "The version of the operation represented by this event.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "CorrelationId",
+          "description": "The ID for correlated events.",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "TrackingId",
+          "description": "The tracking ID.",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true
+          
+        },
+        {
+          "name": "SourceType",
+          "description": "The tracking events source type.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "WorkflowName",
+          "description": "The name of the workflow.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "WorkflowVersion",
+          "description": "The version of the workflow.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "WorkflowSystemId",
+          "description": "The workflow system tracking ID.",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "WorkflowSubscriptionId",
+          "description": "The subscription ID of the workflow.",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "WorkflowResourceGroup",
+          "description": "The resource group name of the workflow.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "WorkflowRunId",
+          "description": "The logic app run ID.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "WorkflowRunTrackingId",
+          "description": "The tracking ID of the run.",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "WorkflowRunClientTrackingId",
+          "description": "The client tracking ID of the run.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "WorkflowOperationName",
+          "description": "The logic app operation name.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "WorkflowRepeatItemScopeName",
+          "description": "The repeat item scope name.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "WorkflowRepeatItemIndex",
+          "description": "The repeat item index.",
+          "type": "Int",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "WorkflowRepeatItemBatchIndex",
+          "description": "The index of the repeat item batch.",
+          "type": "Int",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "WorkflowOperationTrackingId",
+          "description": "The tracking ID of the logic app operation.",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "WorkflowOperationCorrelationId",
+          "description": "The correlation ID of the logic app operation.",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "WorkflowOperationClientRequestId",
+          "description": "The client request ID of the logic app operation.",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "WorkflowOperationOperationTrackingId",
+          "description": "The operation tracking ID of the logic app operation.",
+          "type": "String",
+          "dataTypeHint": "GUID",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "EventTime",
+          "description": "The event time.",
+          "type": "DateTime",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "EventRecordType",
+          "description": "The Tracking record type.",
+          "type": "String",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "Error",
+          "description": "The tracking event error information.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "AgreementProperties",
+          "description": "Agreement properties for the electronic data interchange functional group.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true
+        },
+        {
+          "name": "MessageProperties",
+          "description": "Message properties for the electronic data interchange functional group.",
+          "type": "Dynamic",
+          "isDefaultDisplay": true
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/IntegrationAccountTrackingEvents.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/IntegrationAccountTrackingEvents.json"
+    }
+  ],
+  "functions": [],
+  "queries": []
+}

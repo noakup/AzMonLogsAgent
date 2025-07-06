@@ -1,0 +1,44 @@
+[
+  {
+    "time": "2025-03-28T18:17:17.0644110Z",
+    "callerIpAddress": "10.0.32.212",
+    "category": "Audit",
+    "level": "Error",
+    "correlationId": "071212bb-01c8-4582-b1bc-5d6177d5145d",
+    "durationMs": 271,
+    "identity": {
+      "Claims": {
+        "oid": "d262c157-9062-4153-8b1c-f8bdcb5f7838"
+      }
+    },
+    "location": "eastus2",
+    "operationName": "Microsoft.OnlineExperimentation/workspaces/Read",
+    "resourceId": "/SUBSCRIPTIONS/80D2C6C6-FA64-4AB1-8AA5-4E118C6B16CE/RESOURCEGROUPS/RG-TEST-01/PROVIDERS/MICROSOFT.ONLINEEXPERIMENTATION/WORKSPACES/ONLINE-EXP-QRS4BMQGAA",
+    "resultSignature": "403",
+    "resultType": "Failed",
+    "resultDescription": "Forbidden",
+    "uri": "https://264eefde-f580-4736-9cd5-abab2d798dfc.eastus2.exp.azure.net/experiment-metrics",
+    "workspaceId": "264eefde-f580-4736-9cd5-abab2d798dfc"
+  },
+  {
+    "time": "2025-03-29T05:02:21.2336980Z",
+    "callerIpAddress": "10.0.32.232",
+    "category": "Audit",
+    "level": "Error",
+    "correlationId": "620fd1f3-3db2-49b5-9c11-a1de74133423",
+    "durationMs": 19,
+    "identity": {
+      "Claims": {
+        "oid": "706c281d-721f-49ea-9f2a-58c8d624ef6f"
+      }
+    },
+    "location": "eastus2",
+    "operationName": "Microsoft.OnlineExperimentation/workspaces/Read",
+    "resourceId": "/SUBSCRIPTIONS/D90E7049-F757-46E4-98DC-0DF6428E74D5/RESOURCEGROUPS/BUGBASH032325-RG/PROVIDERS/MICROSOFT.ONLINEEXPERIMENTATION/WORKSPACES/EXP3",
+    "resultSignature": "404",
+    "resultType": "Failed",
+    "resultDescription": "NotFound",
+    "uri": "https://fd03a0aa-5843-4c83-8b89-0ddc18abf2df.eastus2.exp.azure.net/experiment-metrics/test_metric_fixed_id",
+    "workspaceId": "fd03a0aa-5843-4c83-8b89-0ddc18abf2df"
+  }
+]

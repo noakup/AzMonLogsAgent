@@ -1,0 +1,38 @@
+[
+    {
+        "category": "Security",
+        "resourceType": "MICROSOFT.PURVIEW/ACCOUNTS",
+        "operationName": "CreateOrUpdate",
+        "resultType": "Succeeded",
+        "resourceId": "/SUBSCRIPTIONS/24D273DF-8743-42FE-B46B-A74C558E3045/RESOURCEGROUPS/SSARANYA-RG/PROVIDERS/MICROSOFT.PURVIEW/ACCOUNTS/<ACCOUNTNAME>",
+        "callerIdentities": "{\"CallerIdentityType\":\"Username\",\"CallerIdentityValue\":\"email@server.com\"},{\"CallerIdentityType\":\"ApplicationID\",\"CallerIdentityValue\":\"<object ID Guid>\"},{\"CallerIdentityType\":\"TenantID\",\"CallerIdentityValue\":\"72f988bf-86f1-41af-91ab-2d7cd011db47\"}",
+        "time": "2022-06-24T17:12:13.10818955Z",
+        "resultDescription": "Purview Policies | Performed get data policy operation over AccessControl policies with policyName: test-v20",
+        "properties": "{\"entityType\":\"AccessControl\",\"entityName\":\"test-v20\"}",
+        "location": "eastus2euap"
+    },
+    {
+        "category": "Security",
+        "resourceType": "MICROSOFT.PURVIEW/ACCOUNTS",
+        "operationName": "Delete",
+        "resultType": "Succeeded",
+        "resourceId": "/SUBSCRIPTIONS/24D273DF-8743-42FE-B46B-A74C558E3045/RESOURCEGROUPS/SSARANYA-RG/PROVIDERS/MICROSOFT.PURVIEW/ACCOUNTS/<ACCOUNTNAME>",
+        "callerIdentities": "{\"CallerIdentityType\":\"Username\",\"CallerIdentityValue\":\"email@server.com\"},{\"CallerIdentityType\":\"ApplicationID\",\"CallerIdentityValue\":\"<object ID Guid>\"},{\"CallerIdentityType\":\"TenantID\",\"CallerIdentityValue\":\"72f988bf-86f1-41af-91ab-2d7cd011db47\"}",
+        "time": "2022-06-24T17:14:09.182636727Z",
+        "resultDescription": "Purview Policies | Performed get binding operation over AccessControl policies with policyName: audit-test",
+        "properties": "{\"entityType\":\"AccessControl\",\"entityName\":\"audit-test\"}",
+        "location": "eastus2euap"
+    },
+    {
+        "category": "Security",
+        "resourceType": "MICROSOFT.PURVIEW/ACCOUNTS",
+        "operationName": "CreateOrUpdate",
+        "resultType": "Succeeded",
+        "resourceId": "/SUBSCRIPTIONS/FA781922-C8CA-4FE6-B3D5-DE9C0C0F5473/RESOURCEGROUPS/CONTOSO-RG/PROVIDERS/MICROSOFT.PURVIEW/ACCOUNTS/CONTOSO-EUS",
+        "callerIdentities": "{\"CallerIdentityType\":\"Username\",\"CallerIdentityValue\":\"contosouser@contoso.com\"},{\"CallerIdentityType\":\"ApplicationID\",\"CallerIdentityValue\":\"632d803a-b0c2-49b4-a944-e13c384c04a8\"},{\"CallerIdentityType\":\"TenantID\",\"CallerIdentityValue\":\"72f988bf-86f1-41af-91ab-2d7cd011db47\"}",
+        "time": "2023-03-26T05:37:21.384535059Z",
+        "resultDescription": "Purview Policies | Performed CreateOrUpdate metadata policy operation over Metadata policies with policyName: policy_contoso-eus",
+        "properties": "{\"entityType\":\"MetadataPolicy\",\"entityName\":\"policy_contoso-eus\",\"roles\":\"{\\\"purviewmetadatarole_builtin_collection-administrator\\\":{\\\"users\\\":[\\\"c6351e6e-be4b-40cb-93bc-87d025db9388\\\",\\\"a95f2b90-3891-4215-9fcb-971bddd5784c\\\",\\\"4f60f7e7-f543-4baa-a233-e7008aec90cc\\\",\\\"13c5c5d3-94c1-4a43-9cf4-6e15c7aa3028\\\",\\\"afebae49-374c-4f07-a6f4-18a0946b9587\\\"]},\\\"purviewmetadatarole_builtin_data-curator\\\":{\\\"users\\\":[\\\"c6351e6e-be4b-40cb-93bc-87d025db9388\\\",\\\"afebae49-374c-4f07-a6f4-18a0946b9587\\\",\\\"13c5c5d3-94c1-4a43-9cf4-6e15c7aa3028\\\"]},\\\"purviewmetadatarole_builtin_data-source-administrator\\\":{\\\"users\\\":[\\\"c6351e6e-be4b-40cb-93bc-87d025db9388\\\",\\\"a95f2b90-3891-4215-9fcb-971bddd5784c\\\",\\\"afebae49-374c-4f07-a6f4-18a0946b9587\\\",\\\"13c5c5d3-94c1-4a43-9cf4-6e15c7aa3028\\\"]},\\\"purviewmetadatarole_builtin_policy-author\\\":{\\\"users\\\":[\\\"a95f2b90-3891-4215-9fcb-971bddd5784c\\\",\\\"afebae49-374c-4f07-a6f4-18a0946b9587\\\"]}}\"}",
+        "location": "eastus"
+    }
+]

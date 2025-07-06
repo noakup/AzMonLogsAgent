@@ -1,0 +1,29 @@
+[
+    {
+        "category": "Ingestion",
+        "correlationId": "26eaaa17-68b3-48b1-b237-0fe056531094",
+        "location": "uksouth",
+        "operationName": "Microsoft.Orbital/geoCatalogs/action",
+        "properties": "Exception gathering source item info. Reason: Exception gathering source asset info. Reason: Error retrieving content from sas token source. Reason: Resource not found. Source: https://uksouthdatazoo.blob.core.windows.net/impactobservatory/purple-tiger_v2.0.0_predict/missing_asset.tif",
+        "Tenant": "uksouth",
+        "time": "2025-05-21T12:04:13.423950Z"
+    },
+    {
+        "category": "Ingestion",
+        "correlationId": "26eaaa17-68b3-48b1-b237-0fe056531094",
+        "location": "uksouth",
+        "operationName": "Microsoft.Orbital/geoCatalogs/action",
+        "properties": "Exception gathering source item info. Reason: Error retrieving content from entra source. Reason: Resource not found. Source: https://uksouthdatazoo.blob.core.windows.net/impactobservatory/items/missing_item_2.json",
+        "Tenant": "uksouth",
+        "time": "2025-05-21T12:04:16.874725Z"
+    },
+    {
+        "category": "Ingestion",
+        "correlationId": "26eaaa17-68b3-48b1-b237-0fe056531094",
+        "location": "uksouth",
+        "operationName": "Microsoft.Orbital/geoCatalogs/action",
+        "properties": "There are errors processing some items, check logs content for further information",
+        "Tenant": "uksouth",
+        "time": "2025-05-21T12:04:25.522880Z"
+    }
+]

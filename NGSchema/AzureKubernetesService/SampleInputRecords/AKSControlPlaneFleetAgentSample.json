@@ -1,0 +1,26 @@
+[
+    {
+        "operationName": "Microsoft.ContainerService/managedClusters/diagnosticLogs/Read",
+        "category": "fleet-agent",
+        "resourceId": "/SUBSCRIPTIONS/08CE8FA2-9E5E-4D66-AB08-C0C13F360144/RESOURCEGROUPS/MIKEKEESEY-TEST/PROVIDERS/MICROSOFT.CONTAINERSERVICE/MANAGEDCLUSTERS/MIKEKEESEY-TEST",
+        "properties": {
+            "log": "I0701 14:49:48.708123       1 hubagent/main.go:89] \"flag:\" name=\"enable-v1beta1-apis\" value=\"true\"\n",
+            "stream": "stderr",
+            "pod": "fleet-hub-agent-5cbdc9cd7d-p87ps",
+            "containerID": "1702b1dca1267e082b09f33a1191bc485a84a82dca4d6b94958569de99fd9cc8"
+        },
+        "time": "2024-07-01T14:45:00.0000000Z"
+    },
+    {
+        "operationName": "Microsoft.ContainerService/managedClusters/diagnosticLogs/Read",
+        "category": "fleet-agent",
+        "resourceId": "/SUBSCRIPTIONS/08CE8FA2-9E5E-4D66-AB08-C0C13F360144/RESOURCEGROUPS/MIKEKEESEY-TEST/PROVIDERS/MICROSOFT.CONTAINERSERVICE/MANAGEDCLUSTERS/MIKEKEESEY-TEST",
+        "properties": {
+            "log": "I0701 14:49:48.708127       1 hubagent/main.go:89] \"flag:\" name=\"enable-webhook\" value=\"true\"\n",
+            "stream": "stderr",
+            "pod": "fleet-hub-agent-5cbdc9cd7d-p87ps",
+            "containerID": "1702b1dca1267e082b09f33a1191bc485a84a82dca4d6b94958569de99fd9cc8"
+        },
+        "time": "2024-07-01T14:45:00.0000000Z"
+    }
+]

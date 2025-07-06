@@ -1,0 +1,15 @@
+source
+| extend properties = parse_json(properties)
+| project 
+    Id = tostring(properties.id),
+    IsDeleted = tobool(properties.isDeleted),
+    IsProcessing = tobool(properties.isProcessing),
+    RiskDetail = tostring(properties.riskDetail),
+    RiskLastUpdatedDateTime = todatetime(properties.riskLastUpdatedDateTime),
+    RiskLevel = tostring(properties.riskLevel),
+    RiskState = tostring(properties.riskState),
+    UserDisplayName = tostring(properties.userDisplayName),
+    UserPrincipalName = tostring(properties.userPrincipalName),
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    CorrelationId = correlationId

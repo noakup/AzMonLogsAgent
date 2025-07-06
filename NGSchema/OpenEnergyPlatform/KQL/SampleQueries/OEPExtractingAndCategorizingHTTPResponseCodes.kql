@@ -1,0 +1,15 @@
+OEPDataplaneLogs
+// Define ResponseCodes based on Message content and extends into a separate column.
+| extend ResponseCode = case(
+    Message has_any ("Status=500", "Internal Server Error"), "500",  // Internal Server Error
+    Message has_any ("Status=401", "Unauthorized"), "401",           // Unauthorized Access
+    Message has_any ("Status=403", "Forbidden"), "403",              // Forbidden Access
+    Message has_any ("Status=429", "RequestBodyTooLarge"), "429",    // Request Body Too Large
+    Message has_any ("Status=200", "200 OK"), "200",                 // Successful Request
+    Message has "Status=201", "201",                                 // Resource Created
+    ""                                                               // Default case if no match
+)
+//
+// Displays only relevant columns
+//
+| project TimeGenerated, Category, Message, LogLevel, CorrelationId, ResponseCode

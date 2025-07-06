@@ -1,0 +1,74 @@
+[
+  {
+    "PreciseTimeStamp": "2021-05-12T23:26:41.2991447Z",
+    "time": "2021-05-12T23:26:41.2991447Z",
+    "resourceId": "/SUBSCRIPTIONS/FBAED95B-6AA3-4A22-B56A-CD099EDADDBA/RESOURCEGROUPS/SYNTHETICS-P1-CANARY-MULTIPARTICIPANTEXECUTION_USWEST2/PROVIDERS/MICROSOFT.DATACOLLABORATION/WORKSPACES/WORKSPACE",
+    "operationName": "Microsoft.DataCollaboration/workspaces/scripts/Action",
+    "category": "CollaborationAudit",
+    "properties": "{\"entitlementResult\":\"Granted\",\"targetResourceId\":\"/subscriptions/fbaed95b-6aa3-4a22-b56a-cd099edaddba/resourceGroups/synthetics-p1-Canary-MultiParticipantExecution_USWest2/providers/Microsoft.DataCollaboration/workspaces/workspace/scripts/script/revisions/1\",\"targetResourceType\":\"Microsoft.DataCollaboration/workspaces/scripts\",\"grantType\":\"Owned\",\"grantSourceResourceId\":\"/workspaces/workspace/scripts/script\",\"grantSourceResourceType\":\"Microsoft.DataCollaboration/workspaces/scripts\",\"entitlementSummary\":\"Owned: '/workspaces/workspace/scripts/script'\",\"participantName\":\"CiFunctionalTests Participant1@Functional Tests Participant 1 Tenant\",\"callerDisplayName\":\"CiFunctionalTests Participant1\",\"participantTenantId\":\"313ed3d1-9d45-44c0-97f1-8d14565b92c2\",\"grantCorrelationId\":\"46333c57-de15-40c8-bc72-686c9bad582c\",\"underlineResourceId\":null,\"underlineResourceType\":null}",
+    "correlationId": "400a91f8-790c-4497-9c13-4e8b15d5be39",
+    "resultType": "Success",
+    "location": "EastUS2EUAP",
+    "RowKey": "40a54a22-b348-11eb-845b-6045bd6fff82___4295621331"
+  },
+  {
+    "PreciseTimeStamp": "2021-05-12T23:26:41.2991447Z",
+    "time": "2021-05-12T23:26:41.2991447Z",
+    "resourceId": "/SUBSCRIPTIONS/FBAED95B-6AA3-4A22-B56A-CD099EDADDBA/RESOURCEGROUPS/SYNTHETICS-P1-CANARY-MULTIPARTICIPANTEXECUTION_USWEST2/PROVIDERS/MICROSOFT.DATACOLLABORATION/WORKSPACES/WORKSPACE",
+    "operationName": "Microsoft.DataCollaboration/workspaces/dataAssets/dataSets/Read",
+    "category": "CollaborationAudit",
+    "properties": "{\"entitlementResult\":\"Granted\",\"targetResourceId\":\"/subscriptions/fbaed95b-6aa3-4a22-b56a-cd099edaddba/resourceGroups/synthetics-p1-Canary-MultiParticipantExecution_USWest2/providers/Microsoft.DataCollaboration/workspaces/workspace/dataAssets/inputs/dataSets/Production\",\"targetResourceType\":\"Microsoft.DataCollaboration/workspaces/dataAssets/dataSets\",\"grantType\":\"Owned\",\"grantSourceResourceId\":\"/workspaces/workspace/dataAssets/inputs\",\"grantSourceResourceType\":\"Microsoft.DataCollaboration/workspaces/dataAssets/dataSets\",\"entitlementSummary\":\"Owned: '/workspaces/workspace/dataAssets/inputs'\",\"participantName\":\"CiFunctionalTests Participant1@Functional Tests Participant 1 Tenant\",\"callerDisplayName\":\"CiFunctionalTests Participant1\",\"participantTenantId\":\"313ed3d1-9d45-44c0-97f1-8d14565b92c2\",\"grantCorrelationId\":\"f1a67cb3-a70e-496a-99e5-faae121df173\",\"underlineResourceId\":\"subscriptions/fbaed95b-6aa3-4a22-b56a-cd099edaddba/resourceGroups/synthetics-p1-Canary-MultiParticipantExecution_USWest2/providers/Microsoft.Storage/storageAccounts/storagejufasllf\",\"underlineResourceType\":\"Blob\"}",
+    "correlationId": "400a91f8-790c-4497-9c13-4e8b15d5be39",
+    "resultType": "Success",
+    "location": "EastUS2EUAP",
+    "RowKey": "40a54a22-b348-11eb-845b-6045bd6fff82___8590588627"
+  },
+  {
+    "PreciseTimeStamp": "2021-05-12T23:26:41.3147291Z",
+    "time": "2021-05-12T23:26:41.3147291Z",
+    "resourceId": "/SUBSCRIPTIONS/FBAED95B-6AA3-4A22-B56A-CD099EDADDBA/RESOURCEGROUPS/SYNTHETICS-P1-CANARY-MULTIPARTICIPANTEXECUTION_USWEST2/PROVIDERS/MICROSOFT.DATACOLLABORATION/WORKSPACES/WORKSPACE",
+    "operationName": "Microsoft.DataCollaboration/workspaces/dataAssets/dataSets/Write",
+    "category": "CollaborationAudit",
+    "properties": "{\"entitlementResult\":\"Granted\",\"targetResourceId\":\"/subscriptions/fbaed95b-6aa3-4a22-b56a-cd099edaddba/resourceGroups/synthetics-p1-Canary-MultiParticipantExecution_USWest2/providers/Microsoft.DataCollaboration/workspaces/workspace/dataAssets/outputs/dataSets/Production\",\"targetResourceType\":\"Microsoft.DataCollaboration/workspaces/dataAssets/dataSets\",\"grantType\":\"Owned\",\"grantSourceResourceId\":\"/workspaces/workspace/dataAssets/outputs\",\"grantSourceResourceType\":\"Microsoft.DataCollaboration/workspaces/dataAssets/dataSets\",\"entitlementSummary\":\"Owned: '/workspaces/workspace/dataAssets/outputs'\",\"participantName\":\"CiFunctionalTests Participant1@Functional Tests Participant 1 Tenant\",\"callerDisplayName\":\"CiFunctionalTests Participant1\",\"participantTenantId\":\"313ed3d1-9d45-44c0-97f1-8d14565b92c2\",\"grantCorrelationId\":\"4d5d9f1a-ec43-45b0-a664-6128dffb9190\",\"underlineResourceId\":\"subscriptions/fbaed95b-6aa3-4a22-b56a-cd099edaddba/resourceGroups/synthetics-p1-Canary-MultiParticipantExecution_USWest2/providers/Microsoft.Storage/storageAccounts/storagejufasllf\",\"underlineResourceType\":\"BlobFolder\"}",
+    "correlationId": "400a91f8-790c-4497-9c13-4e8b15d5be39",
+    "resultType": "Success",
+    "location": "EastUS2EUAP",
+    "RowKey": "40a54a22-b348-11eb-845b-6045bd6fff82___12885555923"
+  },
+  {
+    "PreciseTimeStamp": "2021-05-12T23:35:03.6240170Z",
+    "time": "2021-05-12T23:35:03.6240170Z",
+    "resourceId": "/SUBSCRIPTIONS/FBAED95B-6AA3-4A22-B56A-CD099EDADDBA/RESOURCEGROUPS/SYNTHETICS-P1-CANARY-MULTIPARTICIPANTEXECUTION_USWEST2/PROVIDERS/MICROSOFT.DATACOLLABORATION/WORKSPACES/WORKSPACE",
+    "operationName": "Microsoft.DataCollaboration/workspaces/dataAssets/dataSets/Write",
+    "category": "CollaborationAudit",
+    "properties": "{\"entitlementResult\":\"Actualized\",\"targetResourceId\":\"/subscriptions/fbaed95b-6aa3-4a22-b56a-cd099edaddba/resourceGroups/synthetics-p1-Canary-MultiParticipantExecution_USWest2/providers/Microsoft.DataCollaboration/workspaces/workspace/dataAssets/outputs/dataSets/Production\",\"targetResourceType\":\"Microsoft.DataCollaboration/workspaces/dataAssets/dataSets\",\"grantType\":\"Owned\",\"grantSourceResourceId\":\"/workspaces/workspace/dataAssets/outputs\",\"grantSourceResourceType\":\"Microsoft.DataCollaboration/workspaces/dataAssets/dataSets\",\"entitlementSummary\":\"Owned: '/workspaces/workspace/dataAssets/outputs'\",\"participantName\":\"CiFunctionalTests Participant1@Functional Tests Participant 1 Tenant\",\"callerDisplayName\":\"CiFunctionalTests Participant1\",\"participantTenantId\":\"313ed3d1-9d45-44c0-97f1-8d14565b92c2\",\"grantCorrelationId\":\"4d5d9f1a-ec43-45b0-a664-6128dffb9190\",\"underlineResourceId\":\"subscriptions/fbaed95b-6aa3-4a22-b56a-cd099edaddba/resourceGroups/synthetics-p1-Canary-MultiParticipantExecution_USWest2/providers/Microsoft.Storage/storageAccounts/storagejufasllf\",\"underlineResourceType\":\"BlobFolder\"}",
+    "correlationId": "400a91f8-790c-4497-9c13-4e8b15d5be39",
+    "resultType": "Success",
+    "location": "EastUS2EUAP",
+    "RowKey": "eb11174b-b2fd-11eb-845a-6045bd6ff0b5___4295621331"
+  },
+  {
+    "PreciseTimeStamp": "2021-05-12T23:35:03.6240170Z",
+    "time": "2021-05-12T23:35:03.6240170Z",
+    "resourceId": "/SUBSCRIPTIONS/FBAED95B-6AA3-4A22-B56A-CD099EDADDBA/RESOURCEGROUPS/SYNTHETICS-P1-CANARY-MULTIPARTICIPANTEXECUTION_USWEST2/PROVIDERS/MICROSOFT.DATACOLLABORATION/WORKSPACES/WORKSPACE",
+    "operationName": "Microsoft.DataCollaboration/workspaces/scripts/Action",
+    "category": "CollaborationAudit",
+    "properties": "{\"entitlementResult\":\"Actualized\",\"targetResourceId\":\"/subscriptions/fbaed95b-6aa3-4a22-b56a-cd099edaddba/resourceGroups/synthetics-p1-Canary-MultiParticipantExecution_USWest2/providers/Microsoft.DataCollaboration/workspaces/workspace/scripts/script/revisions/1\",\"targetResourceType\":\"Microsoft.DataCollaboration/workspaces/scripts\",\"grantType\":\"Owned\",\"grantSourceResourceId\":\"/workspaces/workspace/scripts/script\",\"grantSourceResourceType\":\"Microsoft.DataCollaboration/workspaces/scripts\",\"entitlementSummary\":\"Owned: '/workspaces/workspace/scripts/script'\",\"participantName\":\"CiFunctionalTests Participant1@Functional Tests Participant 1 Tenant\",\"callerDisplayName\":\"CiFunctionalTests Participant1\",\"participantTenantId\":\"313ed3d1-9d45-44c0-97f1-8d14565b92c2\",\"grantCorrelationId\":\"46333c57-de15-40c8-bc72-686c9bad582c\",\"underlineResourceId\":null,\"underlineResourceType\":null}",
+    "correlationId": "400a91f8-790c-4497-9c13-4e8b15d5be39",
+    "resultType": "Success",
+    "location": "EastUS2EUAP",
+    "RowKey": "eb11174b-b2fd-11eb-845a-6045bd6ff0b5___8590588627"
+  },
+  {
+    "PreciseTimeStamp": "2021-05-12T23:35:03.6396400Z",
+    "time": "2021-05-12T23:35:03.6396400Z",
+    "resourceId": "/SUBSCRIPTIONS/FBAED95B-6AA3-4A22-B56A-CD099EDADDBA/RESOURCEGROUPS/SYNTHETICS-P1-CANARY-MULTIPARTICIPANTEXECUTION_USWEST2/PROVIDERS/MICROSOFT.DATACOLLABORATION/WORKSPACES/WORKSPACE",
+    "operationName": "Microsoft.DataCollaboration/workspaces/dataAssets/dataSets/Read",
+    "category": "CollaborationAudit",
+    "properties": "{\"entitlementResult\":\"Actualized\",\"targetResourceId\":\"/subscriptions/fbaed95b-6aa3-4a22-b56a-cd099edaddba/resourceGroups/synthetics-p1-Canary-MultiParticipantExecution_USWest2/providers/Microsoft.DataCollaboration/workspaces/workspace/dataAssets/inputs/dataSets/Production\",\"targetResourceType\":\"Microsoft.DataCollaboration/workspaces/dataAssets/dataSets\",\"grantType\":\"Owned\",\"grantSourceResourceId\":\"/workspaces/workspace/dataAssets/inputs\",\"grantSourceResourceType\":\"Microsoft.DataCollaboration/workspaces/dataAssets/dataSets\",\"entitlementSummary\":\"Owned: '/workspaces/workspace/dataAssets/inputs'\",\"participantName\":\"CiFunctionalTests Participant1@Functional Tests Participant 1 Tenant\",\"callerDisplayName\":\"CiFunctionalTests Participant1\",\"participantTenantId\":\"313ed3d1-9d45-44c0-97f1-8d14565b92c2\",\"grantCorrelationId\":\"f1a67cb3-a70e-496a-99e5-faae121df173\",\"underlineResourceId\":\"subscriptions/fbaed95b-6aa3-4a22-b56a-cd099edaddba/resourceGroups/synthetics-p1-Canary-MultiParticipantExecution_USWest2/providers/Microsoft.Storage/storageAccounts/storagejufasllf\",\"underlineResourceType\":\"Blob\"}",
+    "correlationId": "400a91f8-790c-4497-9c13-4e8b15d5be39",
+    "resultType": "Success",
+    "location": "EastUS2EUAP",
+    "RowKey": "eb11174b-b2fd-11eb-845a-6045bd6ff0b5___12885555923"
+  }
+]

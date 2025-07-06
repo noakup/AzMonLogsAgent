@@ -1,0 +1,687 @@
+{
+    "type": "Microsoft.Cdn/profiles",
+    "displayName": "CDN Profiles",
+    "description": "All tables related to Azure CDN resources.",
+    "tags":
+    {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Cloudnet/Azure CDN",
+    "contactDL": "cdnsli@microsoft.com",
+    "relatedFunctions":
+    [],
+    "tables":
+    [
+        {
+            "name": "AFDClassicCdnAccessLog",
+            "description": "Logs that can be used to identify slow requests, determine error rates, and understand how CDN caching behavior is working for your solution.",
+            "categories":
+            [
+                "resources",
+                "audit"
+            ],
+            "tags":
+            {},
+            "properties":
+            {},
+            "dataTypeId": "AZUREFRONTDOOR_AZURECDNACCESSLOG",
+            "artifactVersion": 1,
+            "isResourceCentric": true,
+            "tableState": "Validation",
+            "isTroubleshootingAllowed": true,
+            "input":
+            [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "columns":
+            [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "Timestamp (UTC) when the access log was created."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Name of the operation represented by this event."
+                },
+                {
+                    "name": "BackendHostname",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "If request was being forwarded to a backend, this field represents the hostname of the backend. This field will be blank if the request gets redirected or forwarded to a regional cache (when caching gets enabled for the routing rule)."
+                },
+                {
+                    "name": "CacheStatus",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "For caching scenarios, this field defines the cache hit or miss at the Pop."
+                },
+                {
+                    "name": "ClientIp",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "IP",
+                    "description": "The IP address of the client that made the request. If there was an X-Forwarded-For header in the request, then the Client IP is picked from the same."
+                },
+                {
+                    "name": "ClientPort",
+                    "type": "Int",
+                    "isDefaultDisplay": true,
+                    "description": "The port of the client that made the request."
+                },
+                {
+                    "name": "HttpMethod",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "HTTP method used by the request."
+                },
+                {
+                    "name": "HttpStatusCode",
+                    "type": "Int",
+                    "isDefaultDisplay": true,
+                    "description": "The HTTP status code returned from the proxy. If a request to the origin times out, the value for HttpStatusCode is set to 0."
+                },
+                {
+                    "name": "HttpStatusDetails",
+                    "type": "Int",
+                    "isDefaultDisplay": true,
+                    "description": "Resulting status on the request. Meaning of this string value can be found at a Status reference table."
+                },
+                {
+                    "name": "HttpVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Type of the request or connection."
+                },
+                {
+                    "name": "Pop",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Short name of the edge where the request landed."
+                },
+                {
+                    "name": "RequestBytes",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "The size of the HTTP request message in bytes, including the request headers and the request body."
+                },
+                {
+                    "name": "RequestUri",
+                    "type": "String",
+                    "dataTypeHint": "URI",
+                    "isDefaultDisplay": true,
+                    "description": "URI of the received request."
+                },
+                {
+                    "name": "ResponseBytes",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "Bytes sent by the backend server as the response."
+                },
+                {
+                    "name": "RoutingRuleName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The name of the routing rule that the request matched."
+                },
+                {
+                    "name": "RulesEngineMatchNames",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The names of the rules that the request matched."
+                },
+                {
+                    "name": "SecurityProtocol",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The TLS or SSL protocol version used by the request or null if no encryption.Possible values include: SSLv3, TLSv1, TLSv1.1, TLSv1.2."
+                },
+                {
+                    "name": "IsReceivedFromClient",
+                    "type": "Bool",
+                    "isDefaultDisplay": true,
+                    "description": "If true, it means that the request came from the client. If false, the request is a miss in the edge (child Pop) and is responded from origin shield (parent Pop)."
+                },
+                {
+                    "name": "DurationMs",
+                    "type": "Double",
+                    "isDefaultDisplay": true,
+                    "description": "The length of time from first byte of request into Front Door to last byte of response out, in milliseconds."
+                },
+                {
+                    "name": "TrackingReference",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The unique reference string that identifies a request served by Front Door, also sent as X-Azure-Ref header to the client. Required for searching details in the access logs for a specific request."
+                },
+                {
+                    "name": "UserAgent",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The browser type that the client used."
+                },
+                {
+                    "name": "ErrorInfo",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "This field contains the specific type of error for further troubleshooting."
+                }
+            ],
+            "transformFilePath": "KQL/TransformCdnAccessLog.kql",
+            "sampleInputRecordsFilePath": "SampleInputRecords/CdnAccessLogSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AFDCdnAccessLogSample.json"
+        },
+        {
+            "name": "AFDAccessLog",
+            "description": "Logs that can be used to identify slow requests, determine error rates, and understand how Frontdoor caching behavior is working for your solution.",
+            "categories":
+            [
+                "resources",
+                "audit"
+            ],
+            "tags":
+            {},
+            "properties":
+            {},
+            "dataTypeId": "AZUREFRONTDOOR_FRONTDOORACCESSLOG",
+            "artifactVersion": 1,
+            "isResourceCentric": true,
+            "tableState": "Validation",
+            "isTroubleshootingAllowed": true,
+            "input":
+            [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "columns":
+            [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "Timestamp (UTC) when the access log was created."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Name of the operation represented by this event."
+                },
+                {
+                    "name": "TrackingReference",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The unique reference string that identifies a request served by Azure Front Door."
+                },
+                {
+                    "name": "HttpMethod",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "HTTP method used by the request: DELETE, GET, HEAD, OPTIONS, PATCH, POST, or PUT."
+                },
+                {
+                    "name": "HttpVersion",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The HTTP version that the client specified in the request."
+                },
+                {
+                    "name": "RequestUri",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "URI",
+                    "description": "The URI of the received request. This field contains the full scheme, port, domain, path, and query string."
+                },
+                {
+                    "name": "HostName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The host name in the request from client."
+                },
+                {
+                    "name": "RequestBytes",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "The size of the HTTP request message in bytes, including the request headers and the request body."
+                },
+                {
+                    "name": "ResponseBytes",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "The size of the HTTP response message in bytes."
+                },
+                {
+                    "name": "UserAgent",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The user agent that the client used. Typically, the user agent identifies the browser type."
+                },
+                {
+                    "name": "ClientIp",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "IP",
+                    "description": "The IP address of the client that made the request."
+                },
+                {
+                    "name": "SocketIp",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "IP",
+                    "description": "The IP address of the direct connection to the Azure Front Door edge."
+                },
+                {
+                    "name": "DurationMs",
+                    "type": "Double",
+                    "isDefaultDisplay": true,
+                    "description": "The length of time from when the Azure Front Door edge received the client request to the time that Azure Front Door sent the last byte of the response to the client, in milliseconds."
+                },
+                {
+                    "name": "RequestProtocol",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The protocol that the client specified in the request.Possible values include: HTTP, HTTPS."
+                },
+                {
+                    "name": "SecurityProtocol",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The TLS or SSL protocol version used by the request, or null if the request didn't use encryption.Possible values include: SSLv3, TLSv1, TLSv1.1, TLSv1.2."
+                },
+                {
+                    "name": "SecurityCipher",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "When the value for the request protocol is HTTPS, this field indicates the TLS or SSL cipher negotiated by the client and Azure Front Door."
+                },
+                {
+                    "name": "Endpoint",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The domain name of the Azure Front Door endpoint, such as contoso-123.z01.azurefd.net."
+                },
+                {
+                    "name": "HttpStatusCode",
+                    "type": "Int",
+                    "isDefaultDisplay": true,
+                    "description": "The HTTP status code returned from Azure Front Door."
+                },
+                {
+                    "name": "Pop",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The Azure Front Door edge point of presence (PoP) that responded to the user request."
+                },
+                {
+                    "name": "CacheStatus",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "How the request was handled by the Azure Front Door cache.Possible values are: HIT and REMOTE_HIT: The HTTP request was served from the Azure Front Door cache.MISS: The HTTP request was served from origin.PARTIAL_HIT: Some of the bytes were served from the Front Door edge PoP cache, and other bytes were served from the origin. This status indicates an object chunking scenario.CACHE_NOCONFIG: The request was forwarded without caching settings, including bypass scenarios.PRIVATE_NOSTORE: There was no cache configured in the caching settings by the customer.N/A: The request was denied by a signed URL or the Rules Engine."
+                },
+                {
+                    "name": "MatchedRulesSetName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The names of the Rules Engine rules that were processed."
+                },
+                {
+                    "name": "RouteName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The name of the route that the request matched."
+                },
+                {
+                    "name": "ClientPort",
+                    "type": "Int",
+                    "isDefaultDisplay": true,
+                    "description": "The port of the client that made the request."
+                },
+                {
+                    "name": "Referrer",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "URI",
+                    "description": "The URL of the site that originated the request."
+                },
+                {
+                    "name": "TimeToFirstByte",
+                    "type": "Double",
+                    "isDefaultDisplay": true,
+                    "description": "The length of time, in seconds, from when the Azure Front Door edge received the request to the time the first byte was sent to client, as measured by Azure Front Door."
+                },
+                {
+                    "name": "ErrorInfo",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "If an error occurred during the processing of the request, this field provides detailed information about the error."
+                },
+                {
+                    "name": "OriginName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The full hostname (DNS name) of the origin. Cache on edge PoP: If the request was served from the Azure Front Door cache, the origin is N/A. Large request: If the requested content is large and there are multiple chunked requests going back to the origin, this field corresponds to the first request to the origin."
+                },
+                {
+                    "name": "OriginIp",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "IP",
+                    "description": "The IP address of the origin that served the request. Cache on edge PoP: If the request was served from the Azure Front Door cache, the origin is N/A. Large request: If the requested content is large and there are multiple chunked requests going back to the origin, this field corresponds to the first request to the origin."
+                },
+                {
+                    "name": "OriginUrl",
+                    "type": "String",
+                    "dataTypeHint": "URI",
+                    "isDefaultDisplay": true,
+                    "description": "The full URL of the origin where the request was sent. The URL is composed of the scheme, host header, port, path, and query string. URL rewrite: If the request URL was rewritten by the Rules Engine, the path refers to the rewritten path. Cache on edge PoP: If the request was served from the Azure Front Door cache, the origin is N/A. Large request: If the requested content is large and there are multiple chunked requests going back to the origin, this field corresponds to the first request to the origin."
+                }
+            ],
+            "transformFilePath": "KQL/TransformFrontdoorAccessLog.kql",
+            "sampleInputRecordsFilePath": "SampleInputRecords/FrontDoorAccessLogSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AFDAccessLogSample.json"
+        },
+        {
+            "name": "AFDHealthProbeLog",
+            "description": "Logs that can be used to identify origins that are unhealthy or that don't respond to requests from some of Front Door geographically distributed PoPs.",
+            "categories":
+            [
+                "resources",
+                "audit"
+            ],
+            "tags":
+            {},
+            "properties":
+            {},
+            "dataTypeId": "AZUREFRONTDOOR_FRONTDOORHEALTHPROBELOG",
+            "artifactVersion": 1,
+            "isResourceCentric": true,
+            "tableState": "Validation",
+            "isTroubleshootingAllowed": true,
+            "input":
+            [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "columns":
+            [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "Timestamp (UTC) when the health probe log was created."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Name of the operation represented by this event."
+                },
+                {
+                    "name": "HealthProbeId",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "A unique ID to identify the health probe request."
+                },
+                {
+                    "name": "HttpMethod",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The HTTP method used by the health probe request. Values include GET and HEAD, based on the health probe configuration."
+                },
+                {
+                    "name": "Result",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The status of health probe. The value is either success or a description of the error the probe received."
+                },
+                {
+                    "name": "HttpStatusCode",
+                    "type": "Int",
+                    "isDefaultDisplay": true,
+                    "description": "The HTTP status code returned by the origin."
+                },
+                {
+                    "name": "ProbeUrl",
+                    "type": "String",
+                    "dataTypeHint": "URI",
+                    "isDefaultDisplay": true,
+                    "description": "The full target URL to where the probe request was sent. The URL is composed of the scheme, host header, path, and query string."
+                },
+                {
+                    "name": "OriginName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The name of the origin that the health probe was sent to. This field helps you to locate origins of interest if origin is configured to use an FDQN."
+                },
+                {
+                    "name": "Pop",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The edge Pop that sent the probe request."
+                },
+                {
+                    "name": "OriginIp",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "IP",
+                    "description": "The IP address of the origin that the health probe was sent to."
+                },
+                {
+                    "name": "TotalLatency",
+                    "type": "BigInt",
+                    "isDefaultDisplay": true,
+                    "description": "The time from when the Azure Front Door edge sent the health probe request to the origin to when the origin sent the last response to Azure Front Door."
+                },
+                {
+                    "name": "ConnectionLatency",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The time spent setting up the TCP connection to send the HTTP probe request to the origin."
+                },
+                {
+                    "name": "DnsResolutionLatency",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The time spent on DNS resolution. This field only has a value if the origin is configured to be an FDQN instead of an IP address. If the origin is configured to use an IP address, the value is N/A."
+                }
+            ],
+            "transformFilePath": "KQL/TransformHealthProbeLog.kql",
+            "sampleInputRecordsFilePath": "SampleInputRecords/FrontDoorHealthProbeLogSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AFDHealthProbeLogSample.json"
+        },
+        {
+            "name": "AFDWebApplicationFirewallLog",
+            "description": "Logs that can be used to detect potential attacks, and false positive detections that might indicate legitimate requests that the WAF blocked.",
+            "categories":
+            [
+                "resources",
+                "audit"
+            ],
+            "tags":
+            {},
+            "properties":
+            {},
+            "dataTypeId": "AZUREFRONTDOOR_FRONTDOORWEBAPPLICATIONFIREWALLLOG",
+            "artifactVersion": 1,
+            "isResourceCentric": true,
+            "tableState": "Validation",
+            "isTroubleshootingAllowed": true,
+            "input":
+            [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "columns":
+            [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "Timestamp (UTC) when the web application firewall log was created."
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Name of the operation represented by this event."
+                },
+                {
+                    "name": "RequestTime",
+                    "type": "DateTime",
+                    "isDefaultDisplay": true,
+                    "description": "The time when the request was received."
+                },
+                {
+                    "name": "Action",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Action taken on the request. Logs include requests with all actions."
+                },
+                {
+                    "name": "ClientIp",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "IP",
+                    "description": "The IP address of the client that made the request. If there was an X-Forwarded-For header in the request, the client IP address is taken from that header field instead."
+                },
+                {
+                    "name": "ClientPort",
+                    "type": "Int",
+                    "isDefaultDisplay": true,
+                    "description": "The port of the client that made the request."
+                },
+                {
+                    "name": "Details",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Additional details on the request, including any threats that were detected."
+                },
+                {
+                    "name": "Host",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The Host header of the request."
+                },
+                {
+                    "name": "Policy",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The name of the WAF policy that processed the request."
+                },
+                {
+                    "name": "PolicyMode",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "Operations mode of the WAF policy. Possible values are Prevention and Detection."
+                },
+                {
+                    "name": "RequestUri",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "URI",
+                    "description": "Full URI of the request."
+                },
+                {
+                    "name": "RuleName",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The name of the WAF rule that the request matched."
+                },
+                {
+                    "name": "SocketIp",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "IP",
+                    "description": "The source IP address seen by WAF. This IP address is based on the TCP session, and does not consider any request headers."
+                },
+                {
+                    "name": "TrackingReference",
+                    "type": "String",
+                    "isDefaultDisplay": true,
+                    "description": "The unique reference string that identifies a request served by Front Door. This value is sent to the client in the X-Azure-Ref response header. Use this field when searching for a specific request in the log."
+                }
+            ],
+            "transformFilePath": "KQL/TransformWAFLog.kql",
+            "sampleInputRecordsFilePath": "SampleInputRecords/FrontDoorWebApplicationFirewallLogSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AFDWebApplicationFirewallLogSample.json"
+        }
+    ],
+    "functions":
+    [],
+    "queries":
+    [
+        
+    ]
+}

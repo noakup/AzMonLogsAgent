@@ -1,0 +1,3 @@
+AZKVAuditLogs
+| summarize count() by bin(TimeGenerated, 1h), OperationName // Aggregate by hour
+| render timechart

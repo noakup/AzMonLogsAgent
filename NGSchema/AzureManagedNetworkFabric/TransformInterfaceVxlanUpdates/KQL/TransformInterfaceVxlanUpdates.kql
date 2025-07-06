@@ -1,0 +1,9 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    EventName = tostring(properties.EventName),
+    EventCategory = tostring(category),
+    FabricId = tostring(properties.FabricID),
+    DeviceId = tostring(properties.DeviceId),
+    DeviceTime = tolong(properties.GnmiTimestamp),
+    Properties = properties

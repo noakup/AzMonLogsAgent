@@ -1,0 +1,3 @@
+ADTDataHistoryOperation
+| where OperationName == "Microsoft.DigitalTwins/digitalTwinsInstances/datahistory/messages/send/action"
+| summarize percentile(DurationMs, 99) by bin(TimeGenerated, 5m)

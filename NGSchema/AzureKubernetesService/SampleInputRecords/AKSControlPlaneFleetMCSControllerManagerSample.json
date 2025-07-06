@@ -1,0 +1,26 @@
+[
+    {
+        "operationName": "Microsoft.ContainerService/managedClusters/diagnosticLogs/Read",
+        "category": "fleet-mcs-controller-manager",
+        "resourceId": "/SUBSCRIPTIONS/8ECADFC9-D1A3-4EA4-B844-0D9F87E4D7C8/RESOURCEGROUPS/CHENYU1-EXP/PROVIDERS/MICROSOFT.CONTAINERSERVICE/MANAGEDCLUSTERS/BRAVELION",
+        "properties": {
+            "log": "I0513 08:59:00.119290       1 v1beta1/controller_v1beta1.go:54] \"Reconciliation starts\" internalMemberCluster=\"fleet-member-bravelion\/bravelion\"\n",
+            "stream": "stderr",
+            "pod": "fleet-mcs-controller-manager-6fd9df9dc6-bnds5",
+            "containerID": "a4f54ab38809d8f2a958d27a339d134cd952a12c76f4d1c888c42fc296a227d0"
+        },
+        "time": "2025-05-13T08:59:00.1194799Z"
+    },
+    {
+        "operationName": "Microsoft.ContainerService/managedClusters/diagnosticLogs/Read",
+        "category": "fleet-mcs-controller-manager",
+        "resourceId": "/SUBSCRIPTIONS/8ECADFC9-D1A3-4EA4-B844-0D9F87E4D7C8/RESOURCEGROUPS/CHENYU1-EXP/PROVIDERS/MICROSOFT.CONTAINERSERVICE/MANAGEDCLUSTERS/BRAVELION",
+        "properties": {
+            "log": "I0513 08:59:00.132552       1 v1beta1/controller_v1beta1.go:57] \"Reconciliation ends\" internalMemberCluster=\"fleet-member-bravelion\/bravelion\" latency=13\n",
+            "stream": "stderr",
+            "pod": "fleet-mcs-controller-manager-6fd9df9dc6-bnds5",
+            "containerID": "a4f54ab38809d8f2a958d27a339d134cd952a12c76f4d1c888c42fc296a227d0"
+        },
+        "time": "2025-05-13T08:59:00.1326517Z"
+    }
+]

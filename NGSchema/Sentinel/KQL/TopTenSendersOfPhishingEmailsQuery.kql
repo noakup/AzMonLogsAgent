@@ -1,0 +1,4 @@
+EmailEvents
+| where ThreatTypes has "Phish"
+| summarize Count = count() by SenderFromDomain
+| top 10 by Count 

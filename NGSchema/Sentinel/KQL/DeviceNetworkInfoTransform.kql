@@ -1,0 +1,21 @@
+source
+| extend propertiesTable = properties
+| project
+    ConnectedNetworks = todynamic(propertiesTable["ConnectedNetworks"]),
+    DefaultGateways = todynamic(propertiesTable["DefaultGateways"]),
+    DeviceId = tostring(propertiesTable["DeviceId"]),
+    DeviceName = tostring(propertiesTable["DeviceName"]),
+    DnsAddresses = todynamic(propertiesTable["DnsAddresses"]),
+    IPAddresses = todynamic(propertiesTable["IPAddresses"]),
+    IPv4Dhcp = tostring(propertiesTable["IPv4Dhcp"]),
+    IPv6Dhcp = tostring(propertiesTable["IPv6Dhcp"]),
+    MacAddress = tostring(propertiesTable["MacAddress"]),
+    MachineGroup = tostring(propertiesTable["MachineGroup"]),
+    NetworkAdapterName = tostring(propertiesTable["NetworkAdapterName"]),
+    NetworkAdapterStatus = tostring(propertiesTable["NetworkAdapterStatus"]),
+    NetworkAdapterType = tostring(propertiesTable["NetworkAdapterType"]),
+    ReportId = tolong(propertiesTable["ReportId"]),
+    TimeGenerated = todatetime(propertiesTable["Timestamp"]),
+    Timestamp = todatetime(propertiesTable["Timestamp"]),
+    TunnelType = tostring(propertiesTable["TunnelType"]),
+    NetworkAdapterVendor = tostring(propertiesTable["NetworkAdapterVendor"])

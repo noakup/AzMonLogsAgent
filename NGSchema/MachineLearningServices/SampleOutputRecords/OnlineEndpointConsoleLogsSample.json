@@ -1,0 +1,29 @@
+[
+  {
+    "TimeGenerated": "2020-11-24T05:25:21.7376293Z",
+    "OperationName": "",
+    "InstanceId": "d40fb1ff2eab45a5b3746c57e481031a000006",
+    "DeploymentName": "test3",
+    "Message": "2022-12-04T12:50:23,779168843+00:00 - rsyslog/run ",
+    "ContainerName": "inference-server",
+    "ContainerImageName": "yxcanaryacr.azurecr.io/azureml/azureml_9b591a252d8e5ebb6e46ba0ce0e25784:latest"
+  },
+  {
+    "TimeGenerated": "2020-11-24T05:25:21.7376085Z",
+    "OperationName": "",
+    "InstanceId": "d40fb1ff2eab45a5b3746c57e481031a000006",
+    "DeploymentName": "test3",
+    "Message": "2022-12-04T12:50:23,821638697+00:00 | gunicorn/run | AzureML Container Runtime Information",
+    "ContainerName": "inference-server",
+    "ContainerImageName": "yxcanaryacr.azurecr.io/azureml/azureml_9b591a252d8e5ebb6e46ba0ce0e25784:latest"
+  },
+  {
+    "TimeGenerated": "2020-11-24T05:25:21.7215751Z",
+    "OperationName": "",
+    "InstanceId": "d40fb1ff2eab45a5b3746c57e481031a000006",
+    "DeploymentName": "test3",
+    "Message": "2022-12-04T12:50:23,823686995+00:00 | gunicorn/run | ###############################################",
+    "ContainerName": "inference-server",
+    "ContainerImageName": "yxcanaryacr.azurecr.io/azureml/azureml_9b591a252d8e5ebb6e46ba0ce0e25784:latest"
+  }
+]

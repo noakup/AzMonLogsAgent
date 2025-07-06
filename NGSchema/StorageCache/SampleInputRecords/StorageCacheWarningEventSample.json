@@ -1,0 +1,30 @@
+[
+    {
+        "time": "12/29/2021 7:44:56 PM",
+        "resourceId": "/SUBSCRIPTIONS/8C39D797-D54A-4A41-9ADE-2EEA7C88F549/RESOURCEGROUPS/MAGUERRRES0/PROVIDERS/MICROSOFT.STORAGECACHE/CACHES/MAGUERR-DEV0-HPCCACHE01",
+        "location": "eastus",
+        "operationName": "ConditionRaisedEvent",
+        "category": "AscWarningEvent",
+        "properties": {
+            "AlertId": "a3692c5a-68df-11ec-8abb-002248274e33",
+            "AlertMessage": "The cache cannot contact the NFS server for storage target 'myStorageTarget'.",
+            "AlertState": "Active"
+        },
+        "correlationId": "a3692c5a-68df-11ec-8abb-002248274e33",
+        "level": "Warning"
+    },
+    {
+        "time": "12/29/2021 7:44:56 PM",
+        "resourceId": "/SUBSCRIPTIONS/8C39D797-D54A-4A41-9ADE-2EEA7C88F549/RESOURCEGROUPS/MAGUERRRES0/PROVIDERS/MICROSOFT.STORAGECACHE/CACHES/MAGUERR-DEV0-HPCCACHE01",
+        "location": "eastus",
+        "operationName": "ConditionClearedEvent",
+        "category": "AscWarningEvent",
+        "properties": {
+            "AlertId": "a3692c5a-68df-11ec-8abb-002248274e33",
+            "AlertMessage": "The cache cannot contact the NFS server for storage target 'myStorageTarget'.",
+            "AlertState": "Cleared"
+        },
+        "correlationId": "a3692c5a-68df-11ec-8abb-002248274e33",
+        "level": "Informational"
+    }
+]

@@ -1,0 +1,6 @@
+AZMSOperationalLogs
+| extend NamespaceName = tostring(split(_ResourceId, "/")[8])
+| where Provider =~ "ServiceBus"
+| where isnotnull(NamespaceName) and Status != "Succeeded"
+| project NamespaceName, _ResourceId, EventName, Status, Caller, _SubscriptionId
+| summarize by NamespaceName, EventName

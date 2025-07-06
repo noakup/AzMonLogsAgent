@@ -1,0 +1,33 @@
+[
+    {
+        "timeStamp": "2025-06-13T20:19:24+00:00",
+        "resourceId": "/SUBSCRIPTIONS/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/RESOURCEGROUPS/YYYYYY/PROVIDERS/MICROSOFT.SERVICENETWORKING/TRAFFICCONTROLLERS/ZZZZZZZ",
+        "operationName": "TrafficControllerFirewall",
+        "category": "TrafficControllerFirewallLog",
+        "properties": {
+            "instanceId": "8a02ae47-8435-4f3d-84a5-6f5ded3763f5",
+            "clientIp": "xxx.xxx.xxx.xxx",
+            "clientPort": "51239",
+            "requestUri": "\/?1=1=1",
+            "ruleSetType": "Microsoft_DefaultRuleSet",
+            "ruleSetVersion": "2.1",
+            "ruleId": "949110",
+            "ruleGroup": "BLOCKING-EVALUATION",
+            "message": "Inbound Anomaly Score Exceeded (Total Score: 5)",
+            "action": "Blocked",
+            "site": "Global",
+            "details": {
+                "message": "Greater and Equal to Tx:inbound_anomaly_score_threshold at TX:anomaly_score.",
+                "data": "",
+                "file": "BLOCKING-EVALUATION.conf",
+                "line": "36"
+            },
+            "hostname": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.fzXX.alb.azure.com",
+            "trackingId": "f44baa4b-2900-473c-8a36-365e5a9f32dd",
+            "policyId": "\/subscriptions\/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\/resourceGroups\/AGC-RG\/providers\/Microsoft.Network\/ApplicationGatewayWebApplicationFirewallPolicies\/agc-waf",
+            "policyScope": "HTTPRoute-test-infra-contoso-waf-route-rule-0-match-0-waf.demo.agc.jackstromberg.com",
+            "policyScopeName": "Route"
+        },
+        "location": "northcentralus"
+    }
+]

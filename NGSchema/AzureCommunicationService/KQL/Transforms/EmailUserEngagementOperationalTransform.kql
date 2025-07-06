@@ -1,0 +1,13 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    Location = location,
+    OperationName = operationName,
+    OperationVersion = operationVersion,
+    Category = category,
+    CorrelationId = correlationId,
+    InternetMessageId = tostring(properties.InternetMessageId),
+    RecipientId = tostring(properties.RecipientId),
+    EngagementType = tostring(properties.EngagementType),
+    EngagementContext = tostring(properties.EngagementContext),
+    UserAgent = tostring(properties.UserAgent)

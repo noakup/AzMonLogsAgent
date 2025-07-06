@@ -1,0 +1,9 @@
+[
+    {  
+        "time": "2025-03-31T12:21:56.2594640Z",
+        "resourceId": "/SUBSCRIPTIONS/97EACE9E-DA69-4CEB-A21A-04B400E34259/RESOURCEGROUPS/MATUDOBN9/PROVIDERS/MICROSOFT.AVS/PRIVATECLOUDS/MATUDOSDDC9",
+        "operationName": "Microsoft.AVS/vcenter/vmwaresyslog",
+        "category": "esxifirewall",
+        "properties": {"severity":"notice","facility":"user","HostName":"esx20-r17.p01.eastus2.avsstage.azure.com","AppName":"FIREWALL-PKTLOG","message":"2025-03-31T12:21:56.2594640Z esx20-r17.p01.eastus2.avsstage.azure.com FIREWALL-PKTLOG 483f4c39 INET TERM PASS 2 OUT UDP 172.31.1.4/56832->10.225.200.192/53 2/2 140/140 "}
+    }
+]

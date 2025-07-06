@@ -1,0 +1,150 @@
+[
+    {
+        "level": "Informational",
+        "time": "2021-02-04T21:52:15.3289217Z",
+        "resourceId": "/subscriptions/ed463725-1c38-43fc-bd8b-cac509b41e96/resourcegroups/fanche-rg/providers/microsoft.communication/communicationservices/chat-prod-e2e",
+        "correlationId": "rrFmrpH1DECsKU3Rj0sJ3g",
+        "category": "AcsAuthOperational",
+        "operationName": "CreateIdentity",
+        "operationVersion": "2021-03-07",
+        "uri": "https://chat-prod-e2e.communication.azure.com/identities?api-version=2021-03-07",
+        "resultType": "Succeeded",
+        "resultSignature": "201",
+        "durationMs": 21,
+        "callerIpAddress": "147.243.5.151",
+        "properties": {
+            "identity": "8:acs:fa5c4fc3-a269-43e2-9eb6-0ca17b388993_00000008-0ee9-b3d9-8d33-3b3a0d00313b",
+            "sdkType": "azsdk-net-Communication.Administration",
+            "platformType": ".NET Framework 4.7.3690.0; Microsoft Windows 10.0.17763"
+        }
+    },
+    {
+        "level": "Informational",
+        "time": "2021-02-04T21:52:29.9211342Z",
+        "resourceId": "/subscriptions/ed463725-1c38-43fc-bd8b-cac509b41e96/resourcegroups/fanche-rg/providers/microsoft.communication/communicationservices/chat-prod-e2e",
+        "correlationId": "a82Oq1WEPEaboWr4AogYtw",
+        "category": "AcsAuthOperational",
+        "operationName": "IssueAccessToken",
+        "operationVersion": "2021-03-07",
+        "uri": "https://chat-prod-e2e.communication.azure.com/identities/8:acs:fa5c4fc3-a269-43e2-9eb6-0ca17b388993_00000008-0ee9-eb9c-8337-3b3a0d0026c2/:issueAccessToken?api-version=2021-03-07",
+        "resultType": "Succeeded",
+        "resultSignature": "200",
+        "durationMs": 288,
+        "callerIpAddress": "147.243.150.107",
+        "properties": {
+            "identity": "8:acs:fa5c4fc3-a269-43e2-9eb6-0ca17b388993_00000008-0ee9-eb9c-8337-3b3a0d0026c2",
+            "scopes": [
+                "chat"
+            ],
+            "sdkType": "azsdk-net-Communication.Administration",
+            "platformType": ".NET Framework 4.7.3690.0; Microsoft Windows 10.0.17763"
+        }
+    },
+    {
+        "level": "Informational",
+        "time": "2021-02-04T21:52:29.9549110Z",
+        "resourceId": "/subscriptions/ed463725-1c38-43fc-bd8b-cac509b41e96/resourcegroups/fanche-rg/providers/microsoft.communication/communicationservices/chat-prod-e2e",
+        "correlationId": "WLg0510hWU6uYeqscMcxuw",
+        "category": "AcsAuthOperational",
+        "operationName": "CreateIdentity",
+        "operationVersion": "2021-03-07",
+        "uri": "https://chat-prod-e2e.communication.azure.com/identities?api-version=2021-03-07",
+        "resultType": "Succeeded",
+        "resultSignature": "201",
+        "durationMs": 19,
+        "callerIpAddress": "147.243.150.107",
+        "properties": {
+            "identity": "8:acs:fa5c4fc3-a269-43e2-9eb6-0ca17b388993_00000008-0ee9-ecfa-8d33-3b3a0d00313c",
+            "sdkType": "azsdk-net-Communication.Administration",
+            "platformType": ".NET Framework 4.7.3690.0; Microsoft Windows 10.0.17763"
+        }
+    },
+    {
+        "level": "Informational",
+        "time": "2021-02-04T21:52:03.2496393Z",
+        "resourceId": "/subscriptions/ed463725-1c38-43fc-bd8b-cac509b41e96/resourcegroups/fanche-rg/providers/microsoft.communication/communicationservices/chat-prod-e2e",
+        "correlationId": "OSal+kwOUUS61yzBwUcVzQ",
+        "category": "AcsAuthOperational",
+        "operationName": "IssueAccessToken",
+        "operationVersion": "2021-03-07",
+        "uri": "https://chat-prod-e2e.communication.azure.com/identities/8:acs:fa5c4fc3-a269-43e2-9eb6-0ca17b388993_00000008-0ee9-8473-f40f-343a0d002359/:issueAccessToken?api-version=2021-03-07",
+        "resultType": "Succeeded",
+        "resultSignature": "200",
+        "durationMs": 30,
+        "callerIpAddress": "147.243.150.110",
+        "properties": {
+            "identity": "8:acs:fa5c4fc3-a269-43e2-9eb6-0ca17b388993_00000008-0ee9-8473-f40f-343a0d002359",
+            "scopes": [
+                "chat"
+            ],
+            "sdkType": "azsdk-net-Communication.Administration",
+            "platformType": ".NET Framework 4.7.3690.0; Microsoft Windows 10.0.17763"
+        }
+    },
+    {
+        "level": "Informational",
+        "time": "2021-02-04T21:52:16.4256762Z",
+        "resourceId": "/subscriptions/ed463725-1c38-43fc-bd8b-cac509b41e96/resourcegroups/fanche-rg/providers/microsoft.communication/communicationservices/chat-prod-e2e",
+        "correlationId": "NzFlsQNM70WIRfMYGPBT9Q",
+        "category": "AcsAuthOperational",
+        "operationName": "IssueAccessToken",
+        "operationVersion": "2021-03-07",
+        "uri": "https://chat-prod-e2e.communication.azure.com/identities/8:acs:fa5c4fc3-a269-43e2-9eb6-0ca17b388993_00000008-0ee9-b753-6032-3b3a0d003159/:issueAccessToken?api-version=2021-03-07",
+        "resultType": "Succeeded",
+        "resultSignature": "200",
+        "durationMs": 27,
+        "callerIpAddress": "147.243.5.145",
+        "properties": {
+            "identity": "8:acs:fa5c4fc3-a269-43e2-9eb6-0ca17b388993_00000008-0ee9-b753-6032-3b3a0d003159",
+            "scopes": [
+                "chat"
+            ],
+            "sdkType": "azsdk-net-Communication.Administration",
+            "platformType": ".NET Framework 4.7.3690.0; Microsoft Windows 10.0.17763"
+        }
+    },
+    {
+        "level": "Informational",
+        "time": "2021-02-04T21:52:29.2715686Z",
+        "resourceId": "/subscriptions/ed463725-1c38-43fc-bd8b-cac509b41e96/resourcegroups/fanche-rg/providers/microsoft.communication/communicationservices/chat-prod-e2e",
+        "correlationId": "KKkSaYD/P0WZ89rSRsQTfQ",
+        "category": "AcsAuthOperational",
+        "operationName": "IssueAccessToken",
+        "operationVersion": "2021-03-07",
+        "uri": "https://chat-prod-e2e.communication.azure.com/identities/8:acs:fa5c4fc3-a269-43e2-9eb6-0ca17b388993_00000008-0ee9-ea23-6032-3b3a0d00315b/:issueAccessToken?api-version=2021-03-07",
+        "resultType": "Succeeded",
+        "resultSignature": "200",
+        "durationMs": 25,
+        "callerIpAddress": "147.243.150.110",
+        "properties": {
+            "identity": "8:acs:fa5c4fc3-a269-43e2-9eb6-0ca17b388993_00000008-0ee9-ea23-6032-3b3a0d00315b",
+            "scopes": [
+                "chat"
+            ],
+            "sdkType": "azsdk-net-Communication.Administration",
+            "platformType": ".NET Framework 4.7.3690.0; Microsoft Windows 10.0.17763"
+        }
+    },
+    {
+        "level": "Informational",
+        "time": "2021-02-04T21:54:29.2715686Z",
+        "resourceId": "/subscriptions/ed463725-1c38-43fc-bd8b-cac509b41e96/resourcegroups/fanche-rg/providers/microsoft.communication/communicationservices/chat-prod-e2e",
+        "correlationId": "KDsSaXA/P0WZ89rSRsQTgR",
+        "category": "AcsAuthOperational",
+        "operationName": "RevokeAccessTokens",
+        "operationVersion": "2021-03-07",
+        "uri": "https://chat-prod-e2e.communication.azure.com/identities/8:acs:fa5c4fc3-a269-43e2-9eb6-0ca17b388993_00000008-0ee9-ea23-6032-3b3a0d00315b/:revokeAccessTokens?api-version=2021-03-07",
+        "resultType": "Succeeded",
+        "resultSignature": "200",
+        "durationMs": 320,
+        "callerIpAddress": "147.243.150.110",
+        "properties": {
+            "identity": "8:acs:fa5c4fc3-a269-43e2-9eb6-0ca17b388993_00000008-0ee9-ea23-6032-3b3a0d00315b",
+            "scopes": [
+                "chat"
+            ],
+            "sdkType": "azsdk-net-Communication.Administration",
+            "platformType": ".NET Framework 4.7.3690.0; Microsoft Windows 10.0.17763"
+        }
+    }
+]

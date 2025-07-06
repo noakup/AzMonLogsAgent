@@ -1,0 +1,26 @@
+source 
+| extend 
+    TimeGenerated = todatetime(Field3) 
+| project 
+    NLBType = tostring(Field1), 
+    Version = tostring(Field2), 
+    TimeGenerated, 
+    Nlb = tostring(Field4), 
+    Listener = tostring(Field5), 
+    ClientIPPort = tostring(Field6), 
+    TargetIPPort = tostring(Field7), 
+    ConnectionTime = tostring(Field8), 
+    TlsHandshakeTime = tostring(Field9), 
+    ReceivedBytes = tostring(Field10), 
+    SentBytes = tostring(Field11), 
+    IncomingTLSAlert = tostring(Field12), 
+    ChosenCertArn = tostring(Field13), 
+    ChosenCertSerial = tostring(Field14), 
+    TLSCipher = tostring(Field15), 
+    TLSProtocolVersion = tostring(Field16), 
+    TLSNamedGroup = tostring(Field17), 
+    DomainName = tostring(Field18), 
+    ALPNFEProtocol = tostring(Field19), 
+    ALPNBEProtocol = tostring(Field20), 
+    ALPNClientPrefList = tostring(Field21), 
+    TLSConnectionCreationTime = tostring(Field22)

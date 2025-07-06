@@ -1,0 +1,1684 @@
+{
+    "type": "Microsoft.ContainerService/managedClusters",
+    "displayName": "Kubernetes Services",
+    "description": "Tables used by Azure Monitor for Containers.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "AZURECONTAINERSERVICE/Platform",
+    "contactDL": "aks-infra@microsoft.com",
+    "relatedTables": [
+        "AzureActivity",
+        "AzureDiagnostics",
+        "AzureMetrics",
+        "ContainerImageInventory",
+        "ContainerInventory",
+        "ContainerLog",
+        "ContainerLogV2",
+        "ContainerNodeInventory",
+        "ContainerServiceLog",
+        "Heartbeat",
+        "InsightsMetrics",
+        "KubeEvents",
+        "KubeMonAgentEvents",
+        "KubeNodeInventory",
+        "KubePodInventory",
+        "KubePVInventory",
+        "KubeServices",
+        "Perf",
+        "Syslog"
+    ],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "AKSAudit",
+            "description": "Contains all Kubernetes API Server audit logs including events with the get and list verbs. These events are useful for monitoring all of the interactions with the Kubernetes API. To limit the scope to modifying operations see the AKSAuditAdmin table. Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "categories": [
+                "audit",
+                "resources",
+                "container"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "AKSCUSTOMERDATA_KUBEAUDIT",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/AKSAuditTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "Level (Metadata, Request, RequestResponse) of the audit event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "AuditId",
+                    "type": "String",
+                    "description": "Unique audit ID that is generated for each request.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Stage",
+                    "type": "String",
+                    "description": "The request handling stage (RequestReceived, ResponseStarted, ResponseComplete, Panic) at which this audit event was generated.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestUri",
+                    "type": "String",
+                    "description": "The URI of the request made by the client to the server.",
+                    "dataTypeHint": "URI",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Verb",
+                    "type": "String",
+                    "description": "The Kubernetes verb associated with the request. For non-resource requests, this is the lower-cased HTTP method.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "User",
+                    "type": "Dynamic",
+                    "description": "Authenticated user metadata of the requesting client, including optional fields such as UID and groups.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIps",
+                    "type": "Dynamic",
+                    "description": "The list of source IP addresses for the originating client and intermediate proxies.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "type": "String",
+                    "description": "The user agent string presented by the originating client.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ObjectRef",
+                    "type": "Dynamic",
+                    "description": "The Kubernetes object reference this event was targeted for. This field does not apply for list requests nor non-resource requests.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ResponseStatus",
+                    "type": "Dynamic",
+                    "description": "Response status for the request, which includes the response code. In error cases, this object will include the error message property.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestObject",
+                    "type": "Dynamic",
+                    "description": "Kubernetes API object from the request in object format or the string \"skipped-too-big-size-object\". This is omitted for non-resource requests.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ResponseObject",
+                    "type": "Dynamic",
+                    "description": "Kubernetes API object from the response, in object format or the string \"skipped-too-big-size-object\". This is omitted for non-resource requests.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestReceivedTime",
+                    "type": "DateTime",
+                    "description": "Time when the API Server first received the request.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "StageReceivedTime",
+                    "type": "DateTime",
+                    "description": "Time when the request reached the current audit stage.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Annotations",
+                    "type": "Dynamic",
+                    "description": "An unstructed key-value map associated with this audit event. These annotations are set by plugins as part of the request serving chain and are included at the Metadata event level.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PodName",
+                    "type": "String",
+                    "description": "Name of the pod emitting this audit event.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AKSAuditSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AKSAuditSample.json"
+        },
+        {
+            "name": "AKSAuditAdmin",
+            "description": "Contains Kubernetes API Server audit logs excluding events with the get and list verbs. These events are useful for monitoring resource modification requests made to the Kubernetes API. To see all modifying and non-modifying operations see the AKSAudit table. Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "categories": [
+                "audit",
+                "resources",
+                "container"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 2,
+            "dataTypeId": "AKSCUSTOMERDATA_KUBEAUDITADMIN",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/AKSAuditTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "Level (Metadata, Request, RequestResponse) of the audit event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "AuditId",
+                    "type": "String",
+                    "description": "Unique audit ID that is generated for each request.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Stage",
+                    "type": "String",
+                    "description": "The request handling stage (RequestReceived, ResponseStarted, ResponseComplete, Panic) at which this audit event was generated.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestUri",
+                    "type": "String",
+                    "description": "The URI of the request made by the client to the server.",
+                    "dataTypeHint": "URI",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Verb",
+                    "type": "String",
+                    "description": "The Kubernetes verb associated with the request. For non-resource requests, this is the lower-cased HTTP method.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "User",
+                    "type": "Dynamic",
+                    "description": "Authenticated user metadata of the requesting client, including optional fields such as UID and groups.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "SourceIps",
+                    "type": "Dynamic",
+                    "description": "The list of source IP addresses for the originating client and intermediate proxies.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "UserAgent",
+                    "type": "String",
+                    "description": "The user agent string presented by the originating client.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ObjectRef",
+                    "type": "Dynamic",
+                    "description": "The Kubernetes object reference this event was targeted for. This field does not apply for list requests nor non-resource requests.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ResponseStatus",
+                    "type": "Dynamic",
+                    "description": "Response status for the request, which includes the response code. In error cases, this object will include the error message property.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestObject",
+                    "type": "Dynamic",
+                    "description": "Kubernetes API object from the request in object format or the string \"skipped-too-big-size-object\". This is omitted for non-resource requests.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ResponseObject",
+                    "type": "Dynamic",
+                    "description": "Kubernetes API object from the response, in object format or the string \"skipped-too-big-size-object\". This is omitted for non-resource requests.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestReceivedTime",
+                    "type": "DateTime",
+                    "description": "Time when the API Server first received the request.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "StageReceivedTime",
+                    "type": "DateTime",
+                    "description": "Time when the request reached the current audit stage.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Annotations",
+                    "type": "Dynamic",
+                    "description": "An unstructed key-value map associated with this audit event. These annotations are set by plugins as part of the request serving chain and are included at the Metadata event level.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PodName",
+                    "type": "String",
+                    "description": "Name of the pod emitting this audit event.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AKSAuditAdminSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AKSAuditAdminSample.json"
+        },
+        {
+            "workflowName": "AKSControlPlaneApiServerWorkflow",
+            "transformName": "AKSControlPlaneApiServerTransform",
+            "physicalName": "AKSControlPlane",
+            "logicalName": "AKSControlPlane",
+            "description": "Contains diagnostic logs for the Kubernetes API Server, Controller Manager, Scheduler, Cluster Autoscaler, Cloud Controller Manager, Guard, the Azure CSI storage drivers, Azure Fleet Manager agents and Karpenter controller logs. These diagnostic logs have distinct Category entries corresponding their diagnostic log setting (e.g. kube-apiserver, kube-audit-admin). Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "categories": [
+                "resources",
+                "container"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "AKSCUSTOMERDATA_KUBEAPISERVER",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "isChangeColumnInternalNameAllowed": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/AKSControlPlaneTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "description": "Service log category describing the service logging the message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "Level (Fatal, Error, Warning, Info) of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "Log message body.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Stream",
+                    "type": "String",
+                    "description": "Output stream (stdout, stderr) source of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PodName",
+                    "type": "String",
+                    "description": "Name of the pod logging the request.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AKSControlPlaneApiServerSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AKSControlPlaneApiServerSample.json"
+        },
+        {
+            "workflowName": "AKSControlPlaneAzureDiskWorkflow",
+            "transformName": "AKSControlPlaneAzureDiskTransform",
+            "physicalName": "AKSControlPlane",
+            "logicalName": "AKSControlPlane",
+            "description": "Contains diagnostic logs for the Kubernetes API Server, Controller Manager, Scheduler, Cluster Autoscaler, Cloud Controller Manager, Guard, the Azure CSI storage drivers, Azure Fleet Manager agents and Karpenter controller logs. These diagnostic logs have distinct Category entries corresponding their diagnostic log setting (e.g. kube-apiserver, kube-audit-admin). Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "categories": [
+                "resources",
+                "container"
+            ],
+            "outputSchema": {
+                "name": "AKSControlPlane",
+                "version": 3
+            },
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "AKSCUSTOMERDATA_CSIAZUREDISKCONTROLLER",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "isChangeColumnInternalNameAllowed": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/AKSControlPlaneTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "description": "Service log category describing the service logging the message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "Level (Fatal, Error, Warning, Info) of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "Log message body.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Stream",
+                    "type": "String",
+                    "description": "Output stream (stdout, stderr) source of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PodName",
+                    "type": "String",
+                    "description": "Name of the pod logging the request.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AKSControlPlaneAzureDiskSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AKSControlPlaneAzureDiskSample.json"
+        },
+        {
+            "workflowName": "AKSControlPlaneAzureFileWorkflow",
+            "transformName": "AKSControlPlaneAzureFileTransform",
+            "physicalName": "AKSControlPlane",
+            "logicalName": "AKSControlPlane",
+            "description": "Contains diagnostic logs for the Kubernetes API Server, Controller Manager, Scheduler, Cluster Autoscaler, Cloud Controller Manager, Guard, the Azure CSI storage drivers, Azure Fleet Manager agents and Karpenter controller logs. These diagnostic logs have distinct Category entries corresponding their diagnostic log setting (e.g. kube-apiserver, kube-audit-admin). Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "categories": [
+                "resources",
+                "container"
+            ],
+            "outputSchema": {
+                "name": "AKSControlPlane",
+                "version": 3
+            },
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "AKSCUSTOMERDATA_CSIAZUREFILECONTROLLER",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "isChangeColumnInternalNameAllowed": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/AKSControlPlaneTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "description": "Service log category describing the service logging the message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "Level (Fatal, Error, Warning, Info) of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "Log message body.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Stream",
+                    "type": "String",
+                    "description": "Output stream (stdout, stderr) source of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PodName",
+                    "type": "String",
+                    "description": "Name of the pod logging the request.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AKSControlPlaneAzureFileSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AKSControlPlaneAzureFileSample.json"
+        },
+        {
+            "workflowName": "AKSControlPlaneCloudControllerWorkflow",
+            "transformName": "AKSControlPlaneCloudControllerTransform",
+            "physicalName": "AKSControlPlane",
+            "logicalName": "AKSControlPlane",
+            "description": "Contains diagnostic logs for the Kubernetes API Server, Controller Manager, Scheduler, Cluster Autoscaler, Cloud Controller Manager, Guard, the Azure CSI storage drivers, Azure Fleet Manager agents and Karpenter controller logs. These diagnostic logs have distinct Category entries corresponding their diagnostic log setting (e.g. kube-apiserver, kube-audit-admin). Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "categories": [
+                "resources",
+                "container"
+            ],
+            "outputSchema": {
+                "name": "AKSControlPlane",
+                "version": 3
+            },
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "AKSCUSTOMERDATA_CLOUDCONTROLLERMANAGER",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "isChangeColumnInternalNameAllowed": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/AKSControlPlaneTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "description": "Service log category describing the service logging the message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "Level (Fatal, Error, Warning, Info) of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "Log message body.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Stream",
+                    "type": "String",
+                    "description": "Output stream (stdout, stderr) source of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PodName",
+                    "type": "String",
+                    "description": "Name of the pod logging the request.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AKSControlPlaneCloudControllerSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AKSControlPlaneCloudControllerSample.json"
+        },
+        {
+            "workflowName": "AKSControlPlaneClusterAutoscalerWorkflow",
+            "transformName": "AKSControlPlaneClusterAutoscalerTransform",
+            "physicalName": "AKSControlPlane",
+            "logicalName": "AKSControlPlane",
+            "description": "Contains diagnostic logs for the Kubernetes API Server, Controller Manager, Scheduler, Cluster Autoscaler, Cloud Controller Manager, Guard, the Azure CSI storage drivers, Azure Fleet Manager agents and Karpenter controller logs. These diagnostic logs have distinct Category entries corresponding their diagnostic log setting (e.g. kube-apiserver, kube-audit-admin). Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "categories": [
+                "resources",
+                "container"
+            ],
+            "outputSchema": {
+                "name": "AKSControlPlane",
+                "version": 3
+            },
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "AKSCUSTOMERDATA_CLUSTERAUTOSCALER",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "isChangeColumnInternalNameAllowed": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/AKSControlPlaneTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "description": "Service log category describing the service logging the message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "Level (Fatal, Error, Warning, Info) of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "Log message body.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Stream",
+                    "type": "String",
+                    "description": "Output stream (stdout, stderr) source of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PodName",
+                    "type": "String",
+                    "description": "Name of the pod logging the request.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AKSControlPlaneClusterAutoscalerSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AKSControlPlaneClusterAutoscalerSample.json"
+        },
+        {
+            "workflowName": "AKSControlPlaneControllerManagerWorkflow",
+            "transformName": "AKSControlPlaneControllerManagerTransform",
+            "physicalName": "AKSControlPlane",
+            "logicalName": "AKSControlPlane",
+            "description": "Contains diagnostic logs for the Kubernetes API Server, Controller Manager, Scheduler, Cluster Autoscaler, Cloud Controller Manager, Guard, the Azure CSI storage drivers, Azure Fleet Manager agents and Karpenter controller logs. These diagnostic logs have distinct Category entries corresponding their diagnostic log setting (e.g. kube-apiserver, kube-audit-admin). Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "categories": [
+                "resources",
+                "container"
+            ],
+            "outputSchema": {
+                "name": "AKSControlPlane",
+                "version": 3
+            },
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "AKSCUSTOMERDATA_KUBECONTROLLERMANAGER",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "isChangeColumnInternalNameAllowed": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/AKSControlPlaneTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "description": "Service log category describing the service logging the message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "Level (Fatal, Error, Warning, Info) of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "Log message body.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Stream",
+                    "type": "String",
+                    "description": "Output stream (stdout, stderr) source of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PodName",
+                    "type": "String",
+                    "description": "Name of the pod logging the request.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AKSControlPlaneControllerManagerSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AKSControlPlaneControllerManagerSample.json"
+        },
+        {
+            "workflowName": "AKSControlPlaneGuardWorkflow",
+            "transformName": "AKSControlPlaneGuardTransform",
+            "physicalName": "AKSControlPlane",
+            "logicalName": "AKSControlPlane",
+            "description": "Contains diagnostic logs for the Kubernetes API Server, Controller Manager, Scheduler, Cluster Autoscaler, Cloud Controller Manager, Guard, the Azure CSI storage drivers, Azure Fleet Manager agents and Karpenter controller logs. These diagnostic logs have distinct Category entries corresponding their diagnostic log setting (e.g. kube-apiserver, kube-audit-admin). Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "categories": [
+                "resources",
+                "container"
+            ],
+            "outputSchema": {
+                "name": "AKSControlPlane",
+                "version": 3
+            },
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "AKSCUSTOMERDATA_GUARD",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "isChangeColumnInternalNameAllowed": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/AKSControlPlaneTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "description": "Service log category describing the service logging the message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "Level (Fatal, Error, Warning, Info) of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "Log message body.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Stream",
+                    "type": "String",
+                    "description": "Output stream (stdout, stderr) source of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PodName",
+                    "type": "String",
+                    "description": "Name of the pod logging the request.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AKSControlPlaneGuardSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AKSControlPlaneGuardSample.json"
+        },
+        {
+            "workflowName": "AKSControlPlaneKubeSchedulerWorkflow",
+            "transformName": "AKSControlPlaneKubeSchedulerTransform",
+            "physicalName": "AKSControlPlane",
+            "logicalName": "AKSControlPlane",
+            "description": "Contains diagnostic logs for the Kubernetes API Server, Controller Manager, Scheduler, Cluster Autoscaler, Cloud Controller Manager, Guard, the Azure CSI storage drivers, Azure Fleet Manager agents and Karpenter controller logs. These diagnostic logs have distinct Category entries corresponding their diagnostic log setting (e.g. kube-apiserver, kube-audit-admin). Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "categories": [
+                "resources",
+                "container"
+            ],
+            "outputSchema": {
+                "name": "AKSControlPlane",
+                "version": 3
+            },
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "AKSCUSTOMERDATA_KUBESCHEDULER",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "isChangeColumnInternalNameAllowed": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/AKSControlPlaneTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "description": "Service log category describing the service logging the message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "Level (Fatal, Error, Warning, Info) of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "Log message body.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Stream",
+                    "type": "String",
+                    "description": "Output stream (stdout, stderr) source of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PodName",
+                    "type": "String",
+                    "description": "Name of the pod logging the request.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AKSControlPlaneKubeSchedulerSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AKSControlPlaneKubeSchedulerSample.json"
+        },
+        {
+            "workflowName": "AKSControlPlaneSnapshotControllerWorkflow",
+            "transformName": "AKSControlPlaneSnapshotControllerTransform",
+            "physicalName": "AKSControlPlane",
+            "logicalName": "AKSControlPlane",
+            "description": "Contains diagnostic logs for the Kubernetes API Server, Controller Manager, Scheduler, Cluster Autoscaler, Cloud Controller Manager, Guard, the Azure CSI storage drivers, Azure Fleet Manager agents and Karpenter controller logs. These diagnostic logs have distinct Category entries corresponding their diagnostic log setting (e.g. kube-apiserver, kube-audit-admin). Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "categories": [
+                "resources",
+                "container"
+            ],
+            "outputSchema": {
+                "name": "AKSControlPlane",
+                "version": 3
+            },
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "AKSCUSTOMERDATA_CSISNAPSHOTCONTROLLER",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "isChangeColumnInternalNameAllowed": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/AKSControlPlaneTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "description": "Service log category describing the service logging the message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "Level (Fatal, Error, Warning, Info) of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "Log message body.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Stream",
+                    "type": "String",
+                    "description": "Output stream (stdout, stderr) source of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PodName",
+                    "type": "String",
+                    "description": "Name of the pod logging the request.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AKSControlPlaneSnapshotControllerSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AKSControlPlaneSnapshotControllerSample.json"
+        },
+        {
+            "workflowName": "AKSControlPlaneFleetAgentWorkflow",
+            "transformName": "AKSControlPlaneFleetAgentTransform",
+            "physicalName": "AKSControlPlane",
+            "logicalName": "AKSControlPlane",
+            "description": "Contains diagnostic logs for the Kubernetes API Server, Controller Manager, Scheduler, Cluster Autoscaler, Cloud Controller Manager, Guard, the Azure CSI storage drivers, Azure Fleet Manager agents and Karpenter controller logs. These diagnostic logs have distinct Category entries corresponding their diagnostic log setting (e.g. kube-apiserver, kube-audit-admin). Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "categories": [
+                "resources",
+                "container"
+            ],
+            "outputSchema": {
+                "name": "AKSControlPlane",
+                "version": 3
+            },
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "AKSCUSTOMERDATA_FLEETAGENT",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "isChangeColumnInternalNameAllowed": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/AKSControlPlaneTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "description": "Service log category describing the service logging the message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "Level (Fatal, Error, Warning, Info) of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "Log message body.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Stream",
+                    "type": "String",
+                    "description": "Output stream (stdout, stderr) source of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PodName",
+                    "type": "String",
+                    "description": "Name of the pod logging the request.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AKSControlPlaneFleetAgentSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AKSControlPlaneFleetAgentSample.json"
+        },
+        {
+            "workflowName": "AKSControlPlaneFleetMemberAgentWorkflow",
+            "transformName": "AKSControlPlaneFleetMemberAgentTransform",
+            "physicalName": "AKSControlPlane",
+            "logicalName": "AKSControlPlane",
+            "description": "Contains diagnostic logs for the Kubernetes API Server, Controller Manager, Scheduler, Cluster Autoscaler, Cloud Controller Manager, Guard, the Azure CSI storage drivers, Azure Fleet Manager agents and Karpenter controller logs. These diagnostic logs have distinct Category entries corresponding their diagnostic log setting (e.g. kube-apiserver, kube-audit-admin). Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "categories": [
+                "resources",
+                "container"
+            ],
+            "outputSchema": {
+                "name": "AKSControlPlane",
+                "version": 3
+            },
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "AKSCUSTOMERDATA_FLEETMEMBERAGENT",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "isChangeColumnInternalNameAllowed": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/AKSControlPlaneTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "description": "Service log category describing the service logging the message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "Level (Fatal, Error, Warning, Info) of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "Log message body.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Stream",
+                    "type": "String",
+                    "description": "Output stream (stdout, stderr) source of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PodName",
+                    "type": "String",
+                    "description": "Name of the pod logging the request.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AKSControlPlaneFleetMemberAgentSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AKSControlPlaneFleetMemberAgentSample.json"
+        },
+        {
+            "workflowName": "AKSControlPlaneFleetMemberNetCMWorkflow",
+            "transformName": "AKSControlPlaneFleetMemberNetCMTransform",
+            "physicalName": "AKSControlPlane",
+            "logicalName": "AKSControlPlane",
+            "description": "Contains diagnostic logs for the Kubernetes API Server, Controller Manager, Scheduler, Cluster Autoscaler, Cloud Controller Manager, Guard, the Azure CSI storage drivers, Azure Fleet Manager agents and Karpenter controller logs. These diagnostic logs have distinct Category entries corresponding their diagnostic log setting (e.g. kube-apiserver, kube-audit-admin). Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "categories": [
+                "resources",
+                "container"
+            ],
+            "outputSchema": {
+                "name": "AKSControlPlane",
+                "version": 3
+            },
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "AKSCUSTOMERDATA_FLEETMEMBERNETCONTROLLERMANAGER",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "isChangeColumnInternalNameAllowed": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/AKSControlPlaneTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "description": "Service log category describing the service logging the message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "Level (Fatal, Error, Warning, Info) of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "Log message body.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Stream",
+                    "type": "String",
+                    "description": "Output stream (stdout, stderr) source of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PodName",
+                    "type": "String",
+                    "description": "Name of the pod logging the request.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AKSControlPlaneFleetMemberNetControllerManagerSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AKSControlPlaneFleetMemberNetControllerManagerSample.json"
+        },
+        {
+            "workflowName": "AKSControlPlaneFleetMCSCMWorkflow",
+            "transformName": "AKSControlPlaneFleetMCSCMTransform",
+            "physicalName": "AKSControlPlane",
+            "logicalName": "AKSControlPlane",
+            "description": "Contains diagnostic logs for the Kubernetes API Server, Controller Manager, Scheduler, Cluster Autoscaler, Cloud Controller Manager, Guard, the Azure CSI storage drivers, Azure Fleet Manager agents and Karpenter controller logs. These diagnostic logs have distinct Category entries corresponding their diagnostic log setting (e.g. kube-apiserver, kube-audit-admin). Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "categories": [
+                "resources",
+                "container"
+            ],
+            "outputSchema": {
+                "name": "AKSControlPlane",
+                "version": 3
+            },
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "AKSCUSTOMERDATA_FLEETMCSCONTROLLERMANAGER",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "isChangeColumnInternalNameAllowed": true,
+            "tableState": "Production",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "Kql/AKSControlPlaneTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "description": "Service log category describing the service logging the message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "Level (Fatal, Error, Warning, Info) of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "Log message body.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Stream",
+                    "type": "String",
+                    "description": "Output stream (stdout, stderr) source of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PodName",
+                    "type": "String",
+                    "description": "Name of the pod logging the request.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AKSControlPlaneFleetMCSControllerManagerSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AKSControlPlaneFleetMCSControllerManagerSample.json"
+        },
+        {
+            "workflowName": "AKSControlPlaneKarpenterWorkflow",
+            "transformName": "AKSControlPlaneKarpenterTransform",
+            "physicalName": "AKSControlPlane",
+            "logicalName": "AKSControlPlane",
+            "description": "Contains diagnostic logs for Karpenter, the Kubernetes autoscaling component. These logs include information about node provisioning, deprovisioning, and scaling decisions.",
+            "categories": [
+                "resources",
+                "container"
+            ],
+            "outputSchema": {
+                "name": "AKSControlPlane",
+                "version": 3
+            },
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 1,
+            "dataTypeId": "AKSCUSTOMERDATA_KARPENTER",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "isChangeColumnInternalNameAllowed": true,
+            "tableState": "Validation",
+            "isTroubleshootingAllowed": true,
+            "isLakeAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/AKSControlPlaneKarpenterTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "description": "Service log category describing the service logging the message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Level",
+                    "type": "String",
+                    "description": "Level (Fatal, Error, Warning, Info, Debug) of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "Log message body.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Stream",
+                    "type": "String",
+                    "description": "Output stream (stdout, stderr) source of the log message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "PodName",
+                    "type": "String",
+                    "description": "Name of the pod emitting this audit event.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AKSControlPlaneKarpenterSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AKSControlPlaneKarpenterSample.json"
+        }
+    ],
+    "functions": [],
+    "queries": [
+        {
+            "id": "5bcdd75f-8eaf-4c5a-aa38-7c10a501d260",
+            "displayName": "Volume of Kubernetes audit events per SourceIp",
+            "description": "Display the count of Kubernetes audit events generated from a given source IP address for each AKS cluster. Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "bodyFilePath": "KQL/AKSAuditIpAddressesQuery.kql",
+            "categories": [
+                "audit",
+                "resources",
+                "container"
+            ],
+            "relatedTables": [
+                "AKSAudit"
+            ],
+            "tags": {
+                "Topic": [
+                    "Audit"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        },
+        {
+            "id": "820ac966-e438-4fae-aef9-2d162ce23ced",
+            "displayName": "Volume of admin Kubernetes audit events per username",
+            "description": "Display the count of admin Kubernetes audit events generated from a given user name for each AKS cluster. Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "bodyFilePath": "KQL/AKSAuditAdminUsernameQuery.kql",
+            "categories": [
+                "audit",
+                "resources",
+                "container"
+            ],
+            "relatedTables": [
+                "AKSAuditAdmin"
+            ],
+            "tags": {
+                "Topic": [
+                    "Audit"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        },
+        {
+            "id": "39ef777f-53d8-400a-9d4e-d6e6946a538e",
+            "displayName": "Admin Kubernetes audit events for deployment",
+            "description": "Query for admin Kubernetes audit events against deployments within the default namespace. Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "bodyFilePath": "KQL/AKSAuditAdminDeploymentModificationQuery.kql",
+            "categories": [
+                "audit",
+                "resources",
+                "container"
+            ],
+            "relatedTables": [
+                "AKSAuditAdmin"
+            ],
+            "tags": {
+                "Topic": [
+                    "Audit"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        },
+        {
+            "id": "1f0b44f9-2a90-4d74-bd6f-32671f493c65",
+            "displayName": "Cluster Autoscaler logs",
+            "description": "Query for logs from the cluster autoscaler. This can help explain why the cluster is unexpectedly scaling up or down. Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "bodyFilePath": "KQL/AKSControlPlaneClusterAutoscalerQuery.kql",
+            "categories": [
+                "resources",
+                "container"
+            ],
+            "relatedTables": [
+                "AKSControlPlane"
+            ],
+            "tags": {
+                "Topic": [
+                    "Diagnostics"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        },
+        {
+            "id": "6d69a6ab-78ed-45c8-b5bb-557c2a096d54",
+            "displayName": "Kubernetes API server logs",
+            "description": "Query for logs from the Kubernetes API server. Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "bodyFilePath": "KQL/AKSControlPlaneKubeApiServerQuery.kql",
+            "categories": [
+                "resources",
+                "container"
+            ],
+            "relatedTables": [
+                "AKSControlPlane"
+            ],
+            "tags": {
+                "Topic": [
+                    "Diagnostics"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            }
+        }
+    ]
+}

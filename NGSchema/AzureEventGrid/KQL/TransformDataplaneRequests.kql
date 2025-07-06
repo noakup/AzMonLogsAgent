@@ -1,0 +1,12 @@
+source  
+| extend aggregatedRequests = properties["aggregatedRequests"]
+| mvexpand aggregatedRequests
+| project
+	TimeGenerated = todatetime(['time']),
+	OperationName = operationName,
+	NetworkAccess = tostring(aggregatedRequests.networkAccess),
+	ClientIpAddress = tostring(aggregatedRequests.clientIpAddress),
+	TlsVersion = tostring(aggregatedRequests.tlsVersion),
+	Authentication = tostring(aggregatedRequests.authentication),
+	OperationResult = tostring(aggregatedRequests.operationResult),
+	TotalOperations = tostring(aggregatedRequests.totalOperations)

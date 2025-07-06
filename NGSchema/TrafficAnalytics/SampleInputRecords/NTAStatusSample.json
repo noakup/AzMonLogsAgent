@@ -1,0 +1,11 @@
+[
+  {
+    "SubType": "StatusMessage",
+    "ComponentType": "Flowlog",
+    "FlowIntervalStartTime": "2020-03-31T09:00:00Z",
+    "FlowIntervalEndTime": "2020-03-31T10:00:00Z",
+    "FASchemaVersion": "3",
+    "Status": "Completed",
+    "TimeProcessed": "2022-03-01T19:45:03.2155411Z"
+  }
+]

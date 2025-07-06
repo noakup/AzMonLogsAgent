@@ -1,0 +1,7 @@
+let userID = "<inert your AAD user ID>";
+let userSid = "<inert your user SID>";
+AlertEvidence
+| where EntityType == "User" and (AccountObjectId == userID or AccountSid == userSid )
+| join AlertInfo on AlertId
+| project Timestamp, AlertId, Title, Category , Severity , ServiceSource , DetectionSource , AttackTechniques, AccountObjectId, AccountName, AccountDomain , AccountSid  
+| limit 100

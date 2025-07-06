@@ -1,0 +1,233 @@
+{
+    "type": "Microsoft.AzurePlaywrightService/accounts",
+    "displayName": "Microsoft Playwright Testing",
+    "description": "Microsoft Playwright Testing is a fully managed service that uses the cloud to enable you to run Playwright tests with much higher parallelization across different operating system-browser combinations simultaneously.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Playwright-DevDiv-Service/Playwright-Service-DRI", 
+    "contactDL": "psdt@microsoft.com",
+    "relatedTables": [
+        "AzureActivity",
+        "AzureMetrics"
+    ],
+    "tables": [
+        {
+            "name": "MPTOperation",
+            "description": "Details about the operations which are performed on the Microsoft Playwright Testing resource, for example, operations like creation of an access token, revocation of an access token, test run details.",
+            "categories": [
+                "resources",
+                "audit"
+            ],
+            "artifactVersion": 1,
+            "dataTypeId": "MICROSOFTAZUREPLAYWRIGHTSERVICE_OPERATIONAL",
+            "isResourceCentric": true,
+            "isTroubleshootingAllowed": true,
+            "tableState": "Validation",
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "operationVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "resultType",
+                    "type": "String"
+                },
+                {
+                    "name": "resultSignature",
+                    "type": "String"
+                },
+                {
+                    "name": "resultDescription",
+                    "type": "String"
+                },
+                {
+                    "name": "durationMs",
+                    "type": "Int"
+                },
+                {
+                    "name": "callerIpAddress",
+                    "type": "String"
+                },
+                {
+                    "name": "correlationId",
+                    "type": "String"
+                },
+                {
+                    "name": "identity",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "level",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                }
+            ],
+            "transformFilePath": "KQL/MicrosoftPlaywrightTestingOperationalTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Date and time when the record was created.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "description": "The location of the Microsoft Playwright Testing resource.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "CorrelationId",
+                    "type": "String",
+                    "description": "The correlation ID of the operation.",
+                    "isDefaultDisplay": true,
+                    "dataTypeHint": "GUID"
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "description": "The name of the operation performed on the Microsoft Playwright Testing resource.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperationId",
+                    "type": "String",
+                    "description": "The operation identifier.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "MptWorkspaceId",
+                    "type": "String",
+                    "description": "The workspace ID of the Microsoft Playwright Testing resource.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ResultType",
+                    "type": "String",
+                    "description": "Indicates if the request was successful or failed.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RequestUri",
+                    "type": "String",
+                    "description": "The request URI of the API call.",
+                    "dataTypeHint": "URI"
+                },
+                {
+                    "name": "RequestMethod",
+                    "type": "String",
+                    "description": "The request method of the API call."
+                },
+                {
+                    "name": "RequestBody",
+                    "type": "Dynamic",
+                    "description": "The request body of the API call."
+                },
+                {
+                    "name": "RequestUserAgent",
+                    "type": "String",
+                    "description": "The request user agent of the API call."
+                },
+                {
+                    "name": "HttpStatusCode",
+                    "type": "Int",
+                    "description": "The HTTP status code of the API response."
+                },
+                {
+                    "name": "DurationMs",
+                    "type": "Double",
+                    "description": "The duration of the API call in milliseconds."
+                },
+                {
+                    "name": "Identity",
+                    "type": "Dynamic",
+                    "description": "The identity information of the user who performed the operation."
+                },
+                {
+                    "name": "OperationVersion",
+                    "type": "String",
+                    "description": "The request API version."
+                },
+                {
+                    "name": "CallerIpAddress",
+                    "type": "String",
+                    "description": "The IP address of the caller.",
+                    "dataTypeHint": "IP"
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/MicrosoftPlaywrightTestingOperationalSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/MicrosoftPlaywrightTestingOperationalSample.json"
+        }
+    ],
+    "functions": [],
+    "queries": [
+        {
+            "id": "26e8acf3-e27d-4d7b-9718-31bda68a0b1d",
+            "displayName": "MPT access token creation requests",
+            "description": "List of requests for access token creation across all workspaces.",
+            "bodyFilePath": "KQL/ListAccessTokenCreationRequest.kql",
+            "categories": [
+                "resources"
+            ],
+            "tags": {
+                "Topic": [
+                    "Diagnostics",
+                    "Audit"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            },
+            "relatedTables": [
+                "MPTOperation"
+            ]
+        },
+        {
+            "id": "e198f4d4-6420-4506-a965-f752b002f744",
+            "displayName": "MPT access token revocation requests",
+            "description": "List of requests for access token revocation across all workspaces.",
+            "bodyFilePath": "KQL/ListAccessTokenRevocationRequest.kql",
+            "categories": [
+                "resources"
+            ],
+            "tags": {
+                "Topic": [
+                    "Diagnostics",
+                    "Audit"
+                ]
+            },
+            "properties": {
+                "ExampleQuery": true,
+                "QueryAttributes": {
+                    "IsMultiResource": true
+                }
+            },
+            "relatedTables": [
+                "MPTOperation"
+            ]
+        }
+    ]
+}

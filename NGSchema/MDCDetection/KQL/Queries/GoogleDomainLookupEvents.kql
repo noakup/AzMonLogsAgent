@@ -1,0 +1,4 @@
+MDCDetectionDNSEvents
+| where Domain == "www.google.com"
+| order by TimeGenerated
+| limit 100

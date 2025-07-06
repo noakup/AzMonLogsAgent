@@ -1,0 +1,107 @@
+[
+    {
+        "InsertId": "-odfpabe24zts",
+        "LogName": "projects\/msccp-test\/logs\/cloudaudit.googleapis.com%2Fdata_access",
+        "PayloadType": "type.googleapis.com\/google.cloud.audit.AuditLog",
+        "AuthenticationInfoPrincipalEmail": "service-135492226944@container-engine-robot.iam.gserviceaccount.com",
+        "AuthenticationInfoPrincipalSubject": "serviceAccount:service-135492226944@container-engine-robot.iam.gserviceaccount.com",
+        "AuthorizationInfo": "[{\"granted\":true,\"permission\":\"dns.resourceRecordSets.list\",\"permissionType\":\"ADMIN_READ\",\"resourceAttributes\":{}}]",
+        "MethodName": "dns.resourceRecordSets.list",
+        "RequestAPIType": "type.googleapis.com\/cloud.dns.api.ResourceRecordSetsListRequest",
+        "RequestChangeAdditions": [
+            {
+                "name": "dns-version.cluster.local.",
+                "rrdata": [
+                    "1.0.0"
+                ],
+                "ttl": 30,
+                "type": "TXT"
+            }
+        ],
+        "RequestChangeDeletions": [
+            {
+                "name": "dns-version.cluster.local.",
+                "rrdata": [
+                    "1.0.0"
+                ],
+                "ttl": 30,
+                "type": "TXT"
+            }
+        ],
+        "RequestManagedZoneDescription": "test-description",
+        "RequestManagedZoneDnsName": "test",
+        "RequestManagedZoneName": "test",
+        "RequestManagedZone": "gke-kubernetesalekhya-961cde8a-dns",
+        "RequestManagedZoneVisibility": "test",
+        "ReqManZonePrivVisibConfigNetworks": "test",
+        "RequestName": "dns-version.cluster.local.",
+        "RequestProject": "msccp-test",
+        "RequestType": "SRV",
+        "RequestMetadataCallerIp": "34.122.100.105",
+        "ReqmetaCallerSuppliedUserAgent": "google-api-go-client\/0.5,gzip(gfe),gzip(gfe)",
+        "ReqmetaRequestAttributesTime": "3\/6\/2025, 1:34:02.898 PM",
+        "GCPResourceName": "managedZones\/gke-kubernetesalekhya-961cde8a-dns",
+        "GCPResponseType": "type.googleapis.com/cloud.dns.api.ChangesCreateResponse",
+        "ResponseChangeDeletions": [
+            {
+                "name": "dns-version.cluster.local.",
+                "rrdata": [
+                    "1.0.0"
+                ],
+                "ttl": 30,
+                "type": "TXT"
+            }
+        ],
+        "ResponseChangeId": "200",
+        "ResponseChangeStartTime": "",
+        "ResponseChangeStatus": "",
+        "ResponseManagedZoneCreationTime": "",
+        "ResponseManagedZoneDescription": "",
+        "ResponseManagedZoneDnsName": "",
+        "ResponseManagedZoneFingerprint": "",
+        "ResponseManagedZoneId": "",
+        "ResponseManagedZoneName": "",
+        "ResponseManagedZoneNameServers": "",
+        "RespManZonePrivVisibConfigNetworks": "",
+        "ResponseManagedZoneRrsetCount": "",
+        "ResponseManagedZoneVisibility": "",
+        "ResponseOperationId": "",
+        "ResponseOperationStartTime": "",
+        "ResponseOperationStatus": "",
+        "ResponseOperationType": "",
+        "ResponseOperationUser": "",
+        "ResponseOpZoneContextNewValue": "",
+        "ResponseOpZoneContextOldValue": "",
+        "ServiceName": "dns.googleapis.com",
+        "StatusCode": "",
+        "ResourceLabelsLocation": "global",
+        "ResourceLabelsProjectId": "msccp-test",
+        "ResourceLabelsZoneName": "gke-kubernetesalekhya-961cde8a-dns",
+        "ResourceType": "dns_managed_zone",
+        "Severity": "INFO",
+        "Timestamp": "3\/6\/2025, 1:34:02.888 PM",
+        "TimeGenerated": "3\/6\/2025, 1:34:29.219 PM",
+        "ResponseChangeAdditions": "",
+        "ReqManZoneCloudLogConfigEnableLogging": "",
+        "ResManZoneCloudLogConfigEnableLogging": "",
+        "ResourceLabelsPolicyName": "",
+        "ResourceLabelsTargetType": "",
+        "ResourceLabelsSourceType": "",
+        "ResourceLabelsTargetName": "",
+        "VmProjectId": "",
+        "Protocol": "",
+        "QueryType": "",
+        "Rdata": "",
+        "VmInstanceId": "",
+        "VmInstanceIdString": "",
+        "VmInstanceName": "",
+        "ResponseCode": "",
+        "AuthAnswer": "",
+        "QueryName": "",
+        "VmZoneName": "",
+        "SourceNetwork": "",
+        "ServerLatency": "",
+        "SourceIP": "",
+        "DestinationIP": ""
+    }
+]

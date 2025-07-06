@@ -1,0 +1,2 @@
+AFDAccessLog
+| summarize ResponseBytes = sum(ResponseBytes) by RequestUri

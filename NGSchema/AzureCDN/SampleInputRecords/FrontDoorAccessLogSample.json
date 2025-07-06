@@ -1,0 +1,41 @@
+[
+	{
+		"time": "2023-03-23T05:50:04.6932467Z",
+		"resourceId": "/SUBSCRIPTIONS/9A898385-EDE8-4235-8E3D-8750200575C1/RESOURCEGROUPS/AFD-DEFAULT/PROVIDERS/MICROSOFT.CDN/PROFILES/AZUREPORTAL",
+		"category": "FrontDoorAccessLog",
+		"operationName": "Microsoft.Cdn/Profiles/AccessLog/Write",
+		"properties": {
+			"trackingReference": "0jOgbZAAAAADmAYK1pjgjR5DIm2YbRn/DQ082QUEzMTUwODA5MDUzADM1YjYzNjBiLWI2MWItNGM3Ni1iZjdkLWY1ODNmODg0MTlmOQ==",
+			"httpMethod": "POST",
+			"httpVersion": "2.0.0.0",
+			"requestUri": "https://portal.azure.com:443/api/Telemetry",
+			"requestBytes": "13861",
+			"responseBytes": "746",
+			"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0",
+			"clientIp": "130.76.24.16",
+			"socketIp": "130.76.24.16",
+			"clientPort": "33986",
+			"timeToFirstByte": "0.024",
+			"timeTaken": "0.024",
+			"requestProtocol": "HTTPS",
+			"securityProtocol": "TLS 1.2",
+			"endpoint": "azureportal.z01.azurefd.net",
+			"routingRuleName": "azureportal.z01.azurefd.net",
+			"rulesEngineMatchNames": ["rulename"],
+			"httpStatusCode": "204",
+			"httpStatusDetails": "204",
+			"pop": "CO",
+			"cacheStatus": "CONFIG_NOCACHE",
+			"errorInfo": "NoError",
+			"ErrorInfo": "NoError",
+			"hostName": "portal.azure.com",
+			"originUrl": "https://portal-prod-westus2-02.westus2.cloudapp.azure.com:443/api/Telemetry",
+			"originIp": "40.64.128.134",
+			"originName": "portal-prod-westus2-02.westus2.cloudapp.azure.com",
+			"referer": "https://portal.azure.com/?feature.msaljs=false&feature.msaljslogin=false&msaljsscript=false",
+			"clientCountry": "United States",
+			"domain": "portal.azure.com:443",
+			"securityCipher": "TLS_ECDH_EPHEM_AES_256_SHA_384"
+		}
+	}
+]

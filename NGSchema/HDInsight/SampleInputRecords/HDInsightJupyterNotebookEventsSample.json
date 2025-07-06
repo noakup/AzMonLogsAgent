@@ -1,0 +1,21 @@
+[{
+	"EventName": "notebookIPythonExecutionStart",
+	"Dim0": "8c425893-6401-4648-9492-66d9618c0c03",
+	"Dim1": "2020-07-04 23:53:52.127326",
+	"Dim2": "d6a94756-7fc8-4b87-9b82-9401950ac98e",
+	"Dim3": "pyspark3",
+	"Dim4" : "257",
+	"Dim5" : "0c4fa397-46da-4d91-a03c-b1a508e17735",
+	"Dim6" : "27",
+	"Dim7": "True",
+	"Dim8" : "N/A",
+	"Dim9":"N/A",
+	"Dim10" : "N/A",
+	"Tenant": "bf597230450a4ea08cf5d46f097c6b51",
+	"Role": "workernode",
+	"RoleInstance": "wn0-ntb-7.5c4yhjcbs2de5avsfsdfbtkske.cx.internal.cloudapp.net",
+	"ClusterDnsName": "primary-hdsparkcluster-v3-eus2",
+	"Region": "East US",
+	"IpAddress": "10.0.0.9",
+	"UserSubscriptionId": "8p26a622-df78-4a27-a907-1ec2384d4f1va"
+}]

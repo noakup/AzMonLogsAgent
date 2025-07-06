@@ -1,0 +1,25 @@
+// Replace queryConditions_callId with the callId you want to investigate.
+// Note this query is used in Call Diagnostics timeline page to get all the time series media metrics for all participants in the call.
+declare query_parameters(queryConditions_callId:string = 'replace-with-your-callId');
+ACSCallClientMediaStatsTimeSeries
+| where CallId == queryConditions_callId
+| extend lcMediaStreamType = tolower(MediaStreamType)
+| extend lcMediaStreamDirection = tolower(MediaStreamDirection)
+| extend isIncoming = case(
+    lcMediaStreamDirection == 'recv', true,
+    lcMediaStreamDirection == 'incoming', true, 
+    false)
+| extend isOutgoing = 
+    case(lcMediaStreamDirection == 'send', true,
+         lcMediaStreamDirection == 'outgoing', true,
+        false)
+| extend MediaStreamDirectionType = case(isIncoming == true, 'recv', "send")
+| summarize hint.strategy = shuffle arg_max(OperationName, *) by CallClientTimeStamp, MetricName, MediaStreamDirection, MediaStreamType, MediaStreamDirectionType
+| order by CallClientTimeStamp asc
+| summarize hint.strategy = shuffle arg_max(OperationName, *), newAverage = avg(Average) by CallClientTimeStamp, MetricName, MediaStreamDirection, MediaStreamType, MediaStreamDirectionType  
+| summarize hint.strategy = shuffle
+    Timestamps = make_list(CallClientTimeStamp), 
+    Values = make_list(newAverage), 
+    MediaStreamCodec = make_list(MediaStreamCodec) by MetricName, ParticipantId, MediaStreamDirection, MediaStreamType, MediaStreamDirectionType     
+| extend (Timestamps, Values, MediaStreamCodec) = array_sort_asc(Timestamps, Values, MediaStreamCodec)
+| project Timestamps, Values, MediaStreamCodec, MetricName, ParticipantId, MediaStreamDirection, MediaStreamType, MediaStreamDirectionType

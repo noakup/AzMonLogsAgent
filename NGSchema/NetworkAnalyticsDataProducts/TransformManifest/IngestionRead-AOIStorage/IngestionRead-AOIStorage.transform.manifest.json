@@ -1,0 +1,14 @@
+{
+    "name" : "IngestionRead",
+    "description": "These are Audit logs related to reads of files on the input storage account.",
+    "transformVersion" : "1",
+    "dataTypeId" : "MICROSOFTNETWORKANALYTICSDATAPRODUCTS_INGESTIONREAD",
+    "inputFilePath" : "IngestionRead-AOIStorage.json",
+    "transformState" : "Production",
+    "icmTeam" : "Azure Operator Insights/Triage",
+    "contactDL": "A4OAINASWE@microsoft.com",
+    "relatedTable" : "AOIStorage",
+    "kqlFilePath" : "KQL/IngestionReadTransform.kql",
+    "sampleInputRecordsFilePath" : "SampleInputRecords/IngestionReadSamples.json",
+    "sampleOutputRecordsFilePath" : "SampleOutputRecords/IngestionReadSamples.json"
+}

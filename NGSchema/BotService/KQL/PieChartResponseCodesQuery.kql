@@ -1,0 +1,4 @@
+// Display a Pie Chart showing requests response status codes.
+ABSBotRequests
+| summarize count() by tostring(ResultCode)      
+| render piechart

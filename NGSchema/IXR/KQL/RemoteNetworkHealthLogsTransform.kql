@@ -1,0 +1,13 @@
+﻿source
+| project
+    TimeGenerated = todatetime(["time"]),
+    CreatedDateTime = todatetime(properties.CreatedDateTime),
+    DestinationIp = tostring(properties.DestinationIp),
+    SourceIp = tostring(properties.SourceIp),
+    SentBytes = tolong(properties.SentBytes),
+    ReceivedBytes = tolong(properties.ReceivedBytes),
+    Description = tostring(properties.Description),
+    Id = tostring(properties.Id),
+    RemoteNetworkId = tostring(properties.RemoteNetworkId),
+    BgpRoutesAdvertisedCount = toint(properties.BgpRoutesAdvertisedCount),
+    Status = tostring(properties.Status)

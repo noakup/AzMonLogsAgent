@@ -1,0 +1,404 @@
+{
+    "type": "Microsoft.ToolchainOrchestrator/diagnostics",
+    "displayName": "Toolchain orchestrator",
+    "description": "Toolchain orchestrator is a cloud-native, cross-platform orchestrator that simplifies and streamlines the deployment, management, and update of different application solutions across different edge environments.",
+    "tags": {}, 
+    "properties": {}, 
+    "simplifiedSchemaVersion": "3", 
+    "icmTeam": "TOOLCHAINORCHESTRATOR/Triage",
+    "contactDL": "symphonycoreshteamsg@microsoft.com",
+    "relatedTables": [
+        "AzureActivity",
+        "AzureDiagnostics"
+    ],
+    "relatedFunctions": [],
+
+    "tables": [
+        {
+            "name": "TOUserAudits",
+            "description": "Contains all Toolchain orchestrator API Server audit logs including the events generated as a result of interactions with any external system or toolchain. These events are useful for monitoring all the interactions with the Toolchain orchestrator API server and between Toolchain orchestrator and external orchestrated targets, e.g. Kubernetes. Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "categories": [
+                "audit",
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "MICROSOFTTOOLCHAINORCHESTRATOR_USERAUDITS",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "operatingResourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operatingResourceK8SId",
+                    "type": "String"
+                },
+                {
+                    "name": "body",
+                    "type": "String"
+                },
+                {
+                    "name": "callerId",
+                    "type": "String"
+                },
+                {
+                    "name": "correlationId",
+                    "type": "String"
+                },
+                {
+                    "name": "service.name",
+                    "type": "String"
+                },
+                {
+                    "name": "instance",
+                    "type": "String"
+                },
+                {
+                    "name": "edgeLocation",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "Kql/TOUserAuditsTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "description": "Operation name of the event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "description": "Category of the event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "description": "Azure region in which the Toolchain orchestrator diagnostic resource is located.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Properties",
+                    "type": "Dynamic",
+                    "description": "Properties of the event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperatingResourceId",
+                    "type": "String",
+                    "description": "The operating resource id refers to the specific operational resource that the Toolchain orchestrator is managing when this event is triggered.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperatingResourceK8SId",
+                    "type": "String",
+                    "description": "The operating resource K8s id refers to K8s resource id (namespace/name) of the specific operational resource that the Toolchain orchestrator is managing when this event is triggered.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "The audit message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "User",
+                    "type": "Guid",
+                    "dataTypeHint": "GUID",
+                    "description": "The Microsoft Entra ID object Id of the requester.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "CorrelationId",
+                    "type": "Guid",
+                    "dataTypeHint": "GUID",
+                    "description": "Correlation ID of the operation.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TOServiceName",
+                    "type": "String",
+                    "description": "Toolchain orchestrator service name.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TOServiceInstance",
+                    "type": "String",
+                    "description": "Toolchain orchestrator service pod name.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "EdgeLocation",
+                    "type": "String",
+                    "description": "The Azure Edge custom location resource Id on which the operation happens.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/TOUserAuditsSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/TOUserAuditsSample.json"
+        },
+        {
+            "name": "TOUserDiagnostics",
+            "description": "Contains all Toolchain orchestrator API Server user diagnostics logs. These events are useful for diagnose failed requests on Toolchain orchestrator. Requires Diagnostic Settings to use the Resource Specific destination table.",
+            "categories": [
+                "resources"
+            ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 3,
+            "dataTypeId": "MICROSOFTTOOLCHAINORCHESTRATOR_USERDIAGNOSTICS",
+            "intelligencePacks": [],
+            "isResourceCentric": true,
+            "tableState": "Production",
+            "isLakeAllowed": true,
+            "isTroubleshootingAllowed": true,
+            "input": [
+                {
+                    "name": "time",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "operationName",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "type": "String"
+                },
+                {
+                    "name": "location",
+                    "type": "String"
+                },
+                {
+                    "name": "resourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "properties",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "operatingResourceId",
+                    "type": "String"
+                },
+                {
+                    "name": "operatingResourceK8SId",
+                    "type": "String"
+                },
+                {
+                    "name": "body",
+                    "type": "String"
+                },
+                {
+                    "name": "callerId",
+                    "type": "String"
+                },
+                {
+                    "name": "correlationId",
+                    "type": "String"
+                },
+                {
+                    "name": "service.name",
+                    "type": "String"
+                },
+                {
+                    "name": "instance",
+                    "type": "String"
+                },
+                {
+                    "name": "edgeLocation",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "Kql/TOUserDiagnosticsTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "Event generation time.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperationName",
+                    "type": "String",
+                    "description": "Operation name of the event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Category",
+                    "type": "String",
+                    "description": "Category of the event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Location",
+                    "type": "String",
+                    "description": "Azure region in which the Toolchain orchestrator diagnostic resource is located.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Properties",
+                    "type": "Dynamic",
+                    "description": "Properties of the event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperatingResourceId",
+                    "type": "String",
+                    "description": "The operating resource id refers to the specific operational resource that the Toolchain orchestrator is managing when this event is triggered.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperatingResourceK8SId",
+                    "type": "String",
+                    "description": "The operating resource K8s id refers to K8s resource id (namespace/name) of the specific operational resource that the Toolchain orchestrator is managing when this event is triggered.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Message",
+                    "type": "String",
+                    "description": "The diagnose message.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "User",
+                    "type": "Guid",
+                    "dataTypeHint": "GUID",
+                    "description": "The Microsoft Entra ID object Id of the requester.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "CorrelationId",
+                    "type": "Guid",
+                    "dataTypeHint": "GUID",
+                    "description": "Correlation ID of the operation.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TOServiceName",
+                    "type": "String",
+                    "description": "Toolchain orchestrator service name.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TOServiceInstance",
+                    "type": "String",
+                    "description": "Toolchain orchestrator service pod name.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "EdgeLocation",
+                    "type": "String",
+                    "description": "The Azure Edge custom location resource Id on which the operation happens.",
+                    "isDefaultDisplay": true
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/TOUserDiagnosticsSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/TOUserDiagnosticsSample.json"
+        }
+    ],
+
+    "functions": [],
+
+    "queries": [
+        {
+            "id": "681582c5-1c89-4701-a256-608e82cbd0aa",
+            "displayName": "Auditing ToolchainOrchestrator Operations",
+            "description": "Lists of audit Toolchain orchestrator operations.",
+            "bodyFilePath": "KQL/TOUserAuditsOperationsQuery.kql",
+            "categories": [
+                "resources",
+                "audit"
+            ],
+            "relatedTables": [
+                "TOUserAudits"
+            ],
+            "tags": {
+                "Topic": [
+                    "Audit"
+                ]
+            },
+            "properties": {
+              "ExampleQuery": true
+            }
+        },
+        {
+            "id": "c9ee41c4-5b23-4e04-a193-21ee5c4cfc8d",
+            "displayName": "Auditing ToolchainOrchestrator API requests",
+            "description": "Lists of audit Toolchain orchestrator api requests.",
+            "bodyFilePath": "KQL/TOUserAuditsAPIServerRequestsQuery.kql",
+            "categories": [
+                "resources",
+                "audit"
+            ],
+            "relatedTables": [
+                "TOUserAudits"
+            ],
+            "tags": {
+                "Topic": [
+                    "Audit"
+                ]
+            },
+            "properties": {
+              "ExampleQuery": true
+            }
+        },
+        {
+            "id": "03c620a0-e64b-46dd-8337-092d17106f96",
+            "displayName": "Toolchain orchestrator target provider and solution deployment failures",
+            "description": "Lists of Toolchain orchestrator target provider and solution deployment failures.",
+            "bodyFilePath": "KQL/TOUserDiagnosticsDeploymentApplyErrorsQuery.kql",
+            "categories": [
+                "resources"
+            ],
+            "relatedTables": [
+                "TOUserDiagnostics"
+            ],
+            "tags": {
+                "Topic": [
+                    "Usage and Diagnostics"
+                ]
+            },
+            "properties": {
+              "ExampleQuery": true
+            }
+        }
+    ]
+}

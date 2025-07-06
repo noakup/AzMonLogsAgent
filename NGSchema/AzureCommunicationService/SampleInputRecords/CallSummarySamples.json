@@ -1,0 +1,32 @@
+[
+    {
+        "time": "2021-07-16T15:46:22.998Z",
+        "resourceId": "SUBSCRIPTIONS/3029FF8E-D089-44B8-A90F-438A265A960B/RESOURCEGROUPS/ACS-PROD-CCTS-TESTS/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/ACS-PROD-CCTS-TESTS",
+        "operationName": "CallSummary",
+        "category": "CallSummaryPRIVATEPREVIEW",
+        "operationVersion": "1.0",
+        "correlationId": "23cb464f-1183-4a54-aa06-7adc0cd73336",
+        "properties": {
+            "participantId": " ",
+            "participantTenantId": "97e2533e-5f44-430f-9361-657317af01cb",
+            "teamsOrganizerId": "364300",
+            "callStartTime": "2021-07-15T09:20:01Z",
+            "callType": "P2P",
+            "callDuration": 7,
+            "participantStartTime": "2021-07-15T09:20:01Z",
+            "participantDuration": "4",
+            "participantEndReason": "0",
+            "endpointType": "VoIP",
+            "objectId": "acs:7af14122-9ac7-4b81-80a8-4bf3582b42d0_894d9aed-c20b-4c6d-98c3-672b28f1800a",
+            "endpointId": "8c2192f0-ed85-4acd-8c77-e62dede62ad2",
+            "osVersion": "Windows 10.0.17763 Arch: x64",
+            "pstnParticipantCallType": "Direct Routing Application Forwarding",
+            "participantType": "ACS as Microsoft 365 user",
+            "participantEndSubCode": "0",
+            "resultCategory": "Success",
+            "diagnosticOptions": "{'app_name': 'default', 'app_version': '1.0.2', 'tags': ['test1', 'test2']}",
+            "callDebuggingInfo": "{'callCorrelationId':'23cb464f-1183-4a54-aa06-7adc0cd73336','acsCallType': 'acs_app_si_out','trunkCallId': '340005773_89071172@216.82.227.211', 'immutableStableResourceId': '107fdf89-2008-47c1-92ad-6f2728f048ad'}",
+            "ops": true
+        }
+    }
+]

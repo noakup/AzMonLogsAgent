@@ -1,0 +1,1491 @@
+{
+    "type": "Microsoft.SecurityInsights/AuditEventNormalized",
+    "displayName": "Microsoft Sentinel Audit Event ASim schema",
+    "description": "The Microsoft Sentinel audit events normalized table stores events using the Audit Event ASIM normalized schema associated with the audit trail of information systems.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Microsoft Azure Sentinel/Data Collection and Processing",
+    "contactDL": "asipolarbearslive@microsoft.com",
+    "relatedTables": [],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "ASimAuditEventLogs",
+            "description": "Microsoft Sentinel normalized audit events table. Stores events associated with the audit trail of information systems and audit trail logs system configuration activities and policy changes. Such changes are often performed by system administrators, but can also be performed by users when configuring the settings of their own applications.",
+            "artifactVersion": 8,
+            "categories": [
+                "security"
+            ],
+            "tags": {},
+            "properties": {},
+            "dataTypeId": "SENTINEL_AUDIT_EVENTS",
+            "intelligencePacks": [
+                "SecurityInsights"
+            ],
+            "isResourceCentric": true,
+            "isTroubleshootingAllowed": true,
+            "tableState": "Production",
+            "isLakeAllowed": false,
+            "input": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "AdditionalFields",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "EventMessage",
+                    "type": "String"
+                },
+                {
+                    "name": "EventCount",
+                    "type": "Int"
+                },
+                {
+                    "name": "EventStartTime",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "EventEndTime",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "EventType",
+                    "type": "String"
+                },
+                {
+                    "name": "EventSubType",
+                    "type": "String"
+                },
+                {
+                    "name": "EventResult",
+                    "type": "String"
+                },
+                {
+                    "name": "EventResultDetails",
+                    "type": "String"
+                },
+                {
+                    "name": "EventOriginalUid",
+                    "type": "String"
+                },
+                {
+                    "name": "EventOriginalType",
+                    "type": "String"
+                },
+                {
+                    "name": "EventOriginalSubType",
+                    "type": "String"
+                },
+                {
+                    "name": "EventOriginalResultDetails",
+                    "type": "String"
+                },
+                {
+                    "name": "EventSeverity",
+                    "type": "String"
+                },
+                {
+                    "name": "EventOriginalSeverity",
+                    "type": "String"
+                },
+                {
+                    "name": "EventProduct",
+                    "type": "String"
+                },
+                {
+                    "name": "EventProductVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "EventVendor",
+                    "type": "String"
+                },
+                {
+                    "name": "EventSchemaVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "EventOwner",
+                    "type": "String"
+                },
+                {
+                    "name": "EventReportUrl",
+                    "type": "String"
+                },
+                {
+                    "name": "RuleName",
+                    "type": "String"
+                },
+                {
+                    "name": "RuleNumber",
+                    "type": "Int"
+                },
+                {
+                    "name": "ThreatId",
+                    "type": "String"
+                },
+                {
+                    "name": "ThreatName",
+                    "type": "String"
+                },
+                {
+                    "name": "ThreatCategory",
+                    "type": "String"
+                },
+                {
+                    "name": "ThreatRiskLevel",
+                    "type": "Int"
+                },
+                {
+                    "name": "ThreatOriginalRiskLevel",
+                    "type": "String"
+                },
+                {
+                    "name": "ThreatConfidence",
+                    "type": "Int"
+                },
+                {
+                    "name": "ThreatOriginalConfidence",
+                    "type": "String"
+                },
+                {
+                    "name": "ThreatIsActive",
+                    "type": "Bool"
+                },
+                {
+                    "name": "ThreatFirstReportedTime",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "ThreatLastReportedTime",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "ThreatField",
+                    "type": "String"
+                },
+                {
+                    "name": "ThreatIpAddr",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcIpAddr",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcHostname",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcDomain",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcDomainType",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcFQDN",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcDescription",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcId",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcIdType",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcMacAddr",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcZone",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcOs",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcOsVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcAction",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcOriginalAction",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcInterface",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcScopeId",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcScope",
+                    "type": "String"
+                },
+                {
+                    "name": "ActorUserId",
+                    "type": "String"
+                },
+                {
+                    "name": "ActorUserAadId",
+                    "type": "String"
+                },
+                {
+                    "name": "ActorUserSid",
+                    "type": "String"
+                },
+                {
+                    "name": "ActorUserIdType",
+                    "type": "String"
+                },
+                {
+                    "name": "ActorScopeId",
+                    "type": "String"
+                },
+                {
+                    "name": "ActorScope",
+                    "type": "String"
+                },
+                {
+                    "name": "ActorUsername",
+                    "type": "String"
+                },
+                {
+                    "name": "ActorUsernameType",
+                    "type": "String"
+                },
+                {
+                    "name": "ActorUserType",
+                    "type": "String"
+                },
+                {
+                    "name": "ActorOriginalUserType",
+                    "type": "String"
+                },
+                {
+                    "name": "ActorSessionId",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetAppId",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetAppName",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetAppType",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetOriginalAppType",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetUrl",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingAppId",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingAppName",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingAppType",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingOriginalAppType",
+                    "type": "String"
+                },
+                {
+                    "name": "HttpUserAgent",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcIpAddr",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcPortNumber",
+                    "type": "Int"
+                },
+                {
+                    "name": "SrcHostname",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcDomain",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcDomainType",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcFQDN",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcDescription",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcDvcId",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcDvcIdType",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcDvcScopeId",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcDvcScope",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcDeviceType",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcGeoCountry",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcGeoLatitude",
+                    "type": "Double"
+                },
+                {
+                    "name": "SrcGeoLongitude",
+                    "type": "Double"
+                },
+                {
+                    "name": "SrcGeoRegion",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcGeoCity",
+                    "type": "String"
+                },
+                {
+                    "name": "SrcRiskLevel",
+                    "type": "Int"
+                },
+                {
+                    "name": "SrcOriginalRiskLevel",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetIpAddr",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetPortNumber",
+                    "type": "Int"
+                },
+                {
+                    "name": "TargetHostname",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetDomain",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetDomainType",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetFQDN",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetDescription",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetDvcId",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetDvcIdType",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetDvcScopeId",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetDvcScope",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetDeviceType",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetGeoCountry",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetGeoLatitude",
+                    "type": "Double"
+                },
+                {
+                    "name": "TargetGeoLongitude",
+                    "type": "Double"
+                },
+                {
+                    "name": "TargetGeoRegion",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetGeoCity",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetRiskLevel",
+                    "type": "Int"
+                },
+                {
+                    "name": "TargetOriginalRiskLevel",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetDvcOs",
+                    "type": "String"
+                },
+                {
+                    "name": "Operation",
+                    "type": "String"
+                },
+                {
+                    "name": "ObjectId",
+                    "type": "String"
+                },
+                {
+                    "name": "Object",
+                    "type": "String"
+                },
+                {
+                    "name": "ObjectType",
+                    "type": "String"
+                },
+                {
+                    "name": "OriginalObjectType",
+                    "type": "String"
+                },
+                {
+                    "name": "OldValue",
+                    "type": "String"
+                },
+                {
+                    "name": "NewValue",
+                    "type": "String"
+                },
+                {
+                    "name": "ValueType",
+                    "type": "String"
+                }
+            ],
+            "transformFilePath": "KQL/AuditEvent/AuditEventTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "The timestamp (UTC) reflecting the time in which the event was generated."
+                },
+                {
+                    "name": "AdditionalFields",
+                    "type": "Dynamic",
+                    "description": "Additional information, represented using key/value pairs provided by the source which do not map to ASim."
+                },
+                {
+                    "name": "EventMessage",
+                    "type": "String",
+                    "description": "A general message or description."
+                },
+                {
+                    "name": "EventCount",
+                    "type": "Int",
+                    "description": "The number of events described by the record."
+                },
+                {
+                    "name": "EventStartTime",
+                    "type": "DateTime",
+                    "description": "The time (UTC) in which the event started. If the source supports aggregation and the record represents multiple events, the time that the first event was generated. If not provided by the source record, this field aliases the TimeGenerated field."
+                },
+                {
+                    "name": "EventEndTime",
+                    "type": "DateTime",
+                    "description": "The time (UTC) in which the event ended. If the source supports aggregation and the record represents multiple events, the time that the last event was generated. If not provided by the source record, this field aliases the TimeGenerated field."
+                },
+                {
+                    "name": "EventType",
+                    "type": "String",
+                    "description": "Describes the operation reported by the record"
+                },
+                {
+                    "name": "EventSubType",
+                    "type": "String",
+                    "description": "Describes a subdivision of the operation reported in the EventType field."
+                },
+                {
+                    "name": "EventResult",
+                    "type": "String",
+                    "description": "The outcome of the event, represented by one of the following values: Success, Partial, Failure, NA (Not Applicable). The value may not be provided directly by the sources, in which case it is derived from other event fields, for example, the EventResultDetails field."
+                },
+                {
+                    "name": "EventResultDetails",
+                    "type": "String",
+                    "description": "Reason or details for the result reported in the EventResult field."
+                },
+                {
+                    "name": "EventOriginalUid",
+                    "type": "String",
+                    "description": "A unique ID of the original record, if provided by the source."
+                },
+                {
+                    "name": "EventOriginalType",
+                    "type": "String",
+                    "description": "The original event type or ID, if provided by the source."
+                },
+                {
+                    "name": "EventOriginalSubType",
+                    "type": "String",
+                    "description": "The original event subtype or ID, if provided by the source."
+                },
+                {
+                    "name": "EventOriginalResultDetails",
+                    "type": "String",
+                    "description": "The original result details provided by the source."
+                },
+                {
+                    "name": "EventSeverity",
+                    "type": "String",
+                    "description": "The severity of the event. Valid values are: Informational, Low, Medium, or High."
+                },
+                {
+                    "name": "EventOriginalSeverity",
+                    "type": "String",
+                    "description": "The original severity as provided by the reporting device. "
+                },
+                {
+                    "name": "EventProduct",
+                    "type": "String",
+                    "description": "The product generating the event."
+                },
+                {
+                    "name": "EventProductVersion",
+                    "type": "String",
+                    "description": "The version of the product generating the event."
+                },
+                {
+                    "name": "EventVendor",
+                    "type": "String",
+                    "description": "The vendor of the product generating the event."
+                },
+                {
+                    "name": "EventSchemaVersion",
+                    "type": "String",
+                    "description": "The version of the schema."
+                },
+                {
+                    "name": "EventOwner",
+                    "type": "String",
+                    "description": "The owner of the event, which is usually the department or subsidiary in which it was generated."
+                },
+                {
+                    "name": "EventReportUrl",
+                    "type": "String",
+                    "description": "A URL provided in the event for a resource that provides more information about the event."
+                },
+                {
+                    "name": "RuleName",
+                    "type": "String",
+                    "description": "The name or ID of the rule associated with the inspection results."
+                },
+                {
+                    "name": "RuleNumber",
+                    "type": "Int",
+                    "description": "The number of the rule associated with the inspection results."
+                },
+                {
+                    "name": "ThreatId",
+                    "type": "String",
+                    "description": "The ID of the threat or malware identified in the audit activity."
+                },
+                {
+                    "name": "ThreatName",
+                    "type": "String",
+                    "description": "The name of the threat or malware identified in the audit activity."
+                },
+                {
+                    "name": "ThreatCategory",
+                    "type": "String",
+                    "description": "The category of the threat or malware identified in audit activity."
+                },
+                {
+                    "name": "ThreatRiskLevel",
+                    "type": "Int",
+                    "description": "The risk level associated with the identified threat. The level should be a number between 0 and 100."
+                },
+                {
+                    "name": "ThreatOriginalRiskLevel",
+                    "type": "String",
+                    "description": "The risk level as reported by the reporting device."
+                },
+                {
+                    "name": "ThreatConfidence",
+                    "type": "Int",
+                    "description": "The confidence level of the threat identified, normalized to a value between 0 and a 100."
+                },
+                {
+                    "name": "ThreatOriginalConfidence",
+                    "type": "String",
+                    "description": "The original confidence level of the threat identified, as reported by the reporting device."
+                },
+                {
+                    "name": "ThreatIsActive",
+                    "type": "Bool",
+                    "description": "True if the threat identified is considered an active threat."
+                },
+                {
+                    "name": "ThreatFirstReportedTime",
+                    "type": "DateTime",
+                    "description": "The first time the IP address or domain were identified as a threat."
+                },
+                {
+                    "name": "ThreatLastReportedTime",
+                    "type": "DateTime",
+                    "description": "The last time the IP address or domain were identified as a threat."
+                },
+                {
+                    "name": "ThreatField",
+                    "type": "String",
+                    "description": "The field for which a threat was identified."
+                },
+                {
+                    "name": "ThreatIpAddr",
+                    "type": "String",
+                    "description": "An IP address or Domain for which a threat was identified."
+                },
+                {
+                    "name": "DvcIpAddr",
+                    "type": "String",
+                    "description": "The IP Address of the device reporting the event."
+                },
+                {
+                    "name": "DvcHostname",
+                    "type": "String",
+                    "description": "The hostname of the device reporting the event."
+                },
+                {
+                    "name": "DvcDomain",
+                    "type": "String",
+                    "description": "The domain of the device reporting the event."
+                },
+                {
+                    "name": "DvcDomainType",
+                    "type": "String",
+                    "description": "The type of DvcDomain."
+                },
+                {
+                    "name": "DvcFQDN",
+                    "type": "String",
+                    "description": "The hostname of the device on which the event occurred or which reported the event."
+                },
+                {
+                    "name": "DvcDescription",
+                    "type": "String",
+                    "description": "A descriptive text associated with the device."
+                },
+                {
+                    "name": "DvcId",
+                    "type": "String",
+                    "description": "The unique ID of the device on which the event occurred or which reported the event."
+                },
+                {
+                    "name": "DvcIdType",
+                    "type": "String",
+                    "description": "The type of DvcId."
+                },
+                {
+                    "name": "DvcMacAddr",
+                    "type": "String",
+                    "description": "The MAC address of the device on which the event occurred or which reported the event."
+                },
+                {
+                    "name": "DvcZone",
+                    "type": "String",
+                    "description": "The network on which the event occurred or which reported the event."
+                },
+                {
+                    "name": "DvcOs",
+                    "type": "String",
+                    "description": "The operating system running on the device on which the event occurred or which reported the event."
+                },
+                {
+                    "name": "DvcOsVersion",
+                    "type": "String",
+                    "description": "The version of the operating system on the device on which the event occurred or which reported the event."
+                },
+                {
+                    "name": "DvcAction",
+                    "type": "String",
+                    "description": "For reporting security systems, the action taken by the system."
+                },
+                {
+                    "name": "DvcOriginalAction",
+                    "type": "String",
+                    "description": "The original DvcAction as provided by the reporting device."
+                },
+                {
+                    "name": "DvcInterface",
+                    "type": "String",
+                    "description": "The network interface on which data was captured."
+                },
+                {
+                    "name": "DvcScopeId",
+                    "type": "String",
+                    "description": "The cloud platform scope ID the device belongs to. DvcScopeId map to a subscription ID on Azure and to an account ID on AWS."
+                },
+                {
+                    "name": "DvcScope",
+                    "type": "String",
+                    "description": "The cloud platform scope the device belongs to. DvcScope map to a subscription ID on Azure and to an account ID on AWS."
+                },
+                {
+                    "name": "ActorUserId",
+                    "type": "String",
+                    "description": "A machine-readable, alphanumeric, unique representation of the actor."
+                },
+                {
+                    "name": "ActorUserAadId",
+                    "type": "String",
+                    "description": "The Azure Active Directory ID of the actor."
+                },
+                {
+                    "name": "ActorUserSid",
+                    "type": "String",
+                    "description": "The Windows user ID (SIDs) of the actor."
+                },
+                {
+                    "name": "ActorUserIdType",
+                    "type": "String",
+                    "description": "The type of the ID stored in the ActorUserId field."
+                },
+                {
+                    "name": "ActorScopeId",
+                    "type": "String",
+                    "description": "The scope ID, such as Azure AD tenant ID, in which ActorUserId and ActorUsername are defined."
+                },
+                {
+                    "name": "ActorScope",
+                    "type": "String",
+                    "description": "The scope, such as Azure AD tenant, in which ActorUserId and ActorUsername are defined."
+                },
+                {
+                    "name": "ActorUsername",
+                    "type": "String",
+                    "description": "The Actor's username, including domain information when available."
+                },
+                {
+                    "name": "ActorUsernameType",
+                    "type": "String",
+                    "description": "The type of the Actor's username specified in ActionUsername field"
+                },
+                {
+                    "name": "ActorUserType",
+                    "type": "String",
+                    "description": "The type of the Actor."
+                },
+                {
+                    "name": "ActorOriginalUserType",
+                    "type": "String",
+                    "description": "The user type as reported by the reporting device."
+                },
+                {
+                    "name": "ActorSessionId",
+                    "type": "String",
+                    "description": "The unique ID of the sign-in session of the Actor."
+                },
+                {
+                    "name": "TargetAppId",
+                    "type": "String",
+                    "description": "The ID of the application to which the event applies, including a process, browser, or service."
+                },
+                {
+                    "name": "TargetAppName",
+                    "type": "String",
+                    "description": "The name of the application to which event applies, including a service, a URL, or a SaaS application."
+                },
+                {
+                    "name": "TargetAppType",
+                    "type": "String",
+                    "description": "The type of the application authorizing on behalf of the Actor."
+                },
+                {
+                    "name": "TargetOriginalAppType",
+                    "type": "String",
+                    "description": "The target application type as reported by the reporting device."
+                },
+                {
+                    "name": "TargetUrl",
+                    "type": "String",
+                    "description": "A URL associated with the target application."
+                },
+                {
+                    "name": "ActingAppId",
+                    "type": "String",
+                    "description": "The ID of the application that initiated the activity reported, including a process, browser, or service."
+                },
+                {
+                    "name": "ActingAppName",
+                    "type": "String",
+                    "description": "The name of the application that initiated the activity reported, including a service, a URL, or a SaaS application."
+                },
+                {
+                    "name": "ActingAppType",
+                    "type": "String",
+                    "description": "The type of acting application."
+                },
+                {
+                    "name": "ActingOriginalAppType",
+                    "type": "String",
+                    "description": "The acting application type as reported by the reporting device."
+                },
+                {
+                    "name": "HttpUserAgent",
+                    "type": "String",
+                    "description": "When authentication is performed over HTTP or HTTPS, this field's value is the user_agent HTTP header provided by the acting application when performing the authentication."
+                },
+                {
+                    "name": "SrcIpAddr",
+                    "type": "String",
+                    "description": "The Source IP address from which the connection or session originated."
+                },
+                {
+                    "name": "SrcPortNumber",
+                    "type": "Int",
+                    "description": "The Source IP port from which the connection originated."
+                },
+                {
+                    "name": "SrcHostname",
+                    "type": "String",
+                    "description": "The source device hostname, excluding domain information."
+                },
+                {
+                    "name": "SrcDomain",
+                    "type": "String",
+                    "description": "The domain of the source device."
+                },
+                {
+                    "name": "SrcDomainType",
+                    "type": "String",
+                    "description": "The type of SrcDomain."
+                },
+                {
+                    "name": "SrcFQDN",
+                    "type": "String",
+                    "description": "The source device hostname, including domain information when available."
+                },
+                {
+                    "name": "SrcDescription",
+                    "type": "String",
+                    "description": "A descriptive text associated with the source device."
+                },
+                {
+                    "name": "SrcDvcId",
+                    "type": "String",
+                    "description": "The ID of the source device."
+                },
+                {
+                    "name": "SrcDvcIdType",
+                    "type": "String",
+                    "description": "The type of SrcDvcId."
+                },
+                {
+                    "name": "SrcDvcScopeId",
+                    "type": "String",
+                    "description": "The cloud platform scope ID the source device belongs to. SrcDvcScopeId map to a subscription ID on Azure and to an account ID on AWS."
+                },
+                {
+                    "name": "SrcDvcScope",
+                    "type": "String",
+                    "description": "The cloud platform scope the source device belongs to. SrcDvcScope map to a subscription ID on Azure and to an account ID on AWS."
+                },
+                {
+                    "name": "SrcDeviceType",
+                    "type": "String",
+                    "description": "The type of the source device."
+                },
+                {
+                    "name": "SrcGeoCountry",
+                    "type": "String",
+                    "description": "The country associated with the source IP address."
+                },
+                {
+                    "name": "SrcGeoLatitude",
+                    "type": "Double",
+                    "description": "The latitude of the geographical coordinate associated with the source IP address."
+                },
+                {
+                    "name": "SrcGeoLongitude",
+                    "type": "Double",
+                    "description": "The longitude of the geographical coordinate associated with the source IP address."
+                },
+                {
+                    "name": "SrcGeoRegion",
+                    "type": "String",
+                    "description": "The region within a country associated with the source IP address."
+                },
+                {
+                    "name": "SrcGeoCity",
+                    "type": "String",
+                    "description": "The city associated with the source IP address."
+                },
+                {
+                    "name": "SrcRiskLevel",
+                    "type": "Int",
+                    "description": "The risk level associated with the identified Source."
+                },
+                {
+                    "name": "SrcOriginalRiskLevel",
+                    "type": "String",
+                    "description": "The risk level associaeted with the identified Source as reported by the reporting device."
+                },
+                {
+                    "name": "TargetIpAddr",
+                    "type": "String",
+                    "description": "The Target IP address from which the connection or session originated."
+                },
+                {
+                    "name": "TargetPortNumber",
+                    "type": "Int",
+                    "description": "The Target IP port from which the connection originated."
+                },
+                {
+                    "name": "TargetHostname",
+                    "type": "String",
+                    "description": "The target device hostname, excluding domain information."
+                },
+                {
+                    "name": "TargetDomain",
+                    "type": "String",
+                    "description": "The domain of the target device."
+                },
+                {
+                    "name": "TargetDomainType",
+                    "type": "String",
+                    "description": "The type of TargetDomain."
+                },
+                {
+                    "name": "TargetFQDN",
+                    "type": "String",
+                    "description": "The target device hostname, including domain information when available."
+                },
+                {
+                    "name": "TargetDescription",
+                    "type": "String",
+                    "description": "A descriptive text associated with the target device."
+                },
+                {
+                    "name": "TargetDvcId",
+                    "type": "String",
+                    "description": "The ID of the target device."
+                },
+                {
+                    "name": "TargetDvcIdType",
+                    "type": "String",
+                    "description": "The type of TargetDvcId."
+                },
+                {
+                    "name": "TargetDvcScopeId",
+                    "type": "String",
+                    "description": "The cloud platform scope ID the target device belongs to. TargetDvcScopeId map to a subscription ID on Azure and to an account ID on AWS."
+                },
+                {
+                    "name": "TargetDvcScope",
+                    "type": "String",
+                    "description": "The cloud platform scope the target device belongs to. TargetDvcScope map to a subscription ID on Azure and to an account ID on AWS."
+                },
+                {
+                    "name": "TargetDeviceType",
+                    "type": "String",
+                    "description": "The type of the target device."
+                },
+                {
+                    "name": "TargetGeoCountry",
+                    "type": "String",
+                    "description": "The country associated with the target IP address."
+                },
+                {
+                    "name": "TargetGeoLatitude",
+                    "type": "Double",
+                    "description": "The latitude of the geographical coordinate associated with the target IP address."
+                },
+                {
+                    "name": "TargetGeoLongitude",
+                    "type": "Double",
+                    "description": "The longitude of the geographical coordinate associated with the target IP address."
+                },
+                {
+                    "name": "TargetGeoRegion",
+                    "type": "String",
+                    "description": "The region within a country associated with the target IP address."
+                },
+                {
+                    "name": "TargetGeoCity",
+                    "type": "String",
+                    "description": "The city associated with the target IP address."
+                },
+                {
+                    "name": "TargetRiskLevel",
+                    "type": "Int",
+                    "description": "The risk level associated with the target."
+                },
+                {
+                    "name": "TargetOriginalRiskLevel",
+                    "type": "String",
+                    "description": "The risk level associated with the target, as reported by the reporting device."
+                },
+                {
+                    "name": "TargetDvcOs",
+                    "type": "String",
+                    "description": "The OS of the target device."
+                },
+                {
+                    "name": "Operation",
+                    "type": "String",
+                    "description": "The operation audited as reported by the reporting device."
+                },
+                {
+                    "name": "ObjectId",
+                    "type": "String",
+                    "description": "The name of the object on which the operation identified by EventType is performed."
+                },
+                {
+                    "name": "Object",
+                    "type": "String",
+                    "description": "The name of the object on which the operation identified by EventType is performed."
+                },
+                {
+                    "name": "ObjectType",
+                    "type": "String",
+                    "description": "The type of Object."
+                },
+                {
+                    "name": "OriginalObjectType",
+                    "type": "String",
+                    "description": "The object type as reported by the reporting device."
+                },
+                {
+                    "name": "OldValue",
+                    "type": "String",
+                    "description": "The old value of Object prior to the operation."
+                },
+                {
+                    "name": "NewValue",
+                    "type": "String",
+                    "description": "The new value of Object after the operation was performed."
+                },
+                {
+                    "name": "ValueType",
+                    "type": "String",
+                    "description": "The type of the old and new values. "
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AuditEventSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/AuditEventSample.json"
+        }
+    ],
+    "functions": [
+        {
+            "id": "2e568486-7d77-5798-9dc5-433bb6562e68",
+            "name": "_ASim_AuditEvent",
+            "parameters": "pack:bool = false",
+            "description": "Audit event ASIM parser.",
+            "bodyFilePath": "KQL/AuditEvent/_ASim_AuditEvent.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "56612ec1-3218-5ec1-b32c-33c80359f1a0",
+            "name": "_ASim_AuditEventBuiltIn",
+            "parameters": "pack:bool = false",
+            "description": "Audit event ASIM built-in union parser.",
+            "bodyFilePath": "KQL/AuditEvent/_ASim_AuditEventBuiltIn.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "74fd6481-7b1b-59cf-9851-e52156150f78",
+            "name": "_ASim_AuditEvent_AzureActivityV01",
+            "parameters": "disabled:bool = false",
+            "description": "Audit Event ASIM parser for Azure administrative activity.",
+            "bodyFilePath": "KQL/AuditEvent/_ASim_AuditEvent_AzureActivityV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "7d890293-0dcb-5584-bf7b-d615f9cb7f70",
+            "name": "_ASim_AuditEvent_AzureActivityV02",
+            "parameters": "disabled:bool = false",
+            "description": "Audit Event ASIM parser for Azure administrative activity.",
+            "bodyFilePath": "KQL/AuditEvent/_ASim_AuditEvent_AzureActivityV02.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "02b4eeed-157c-5172-b75c-151fcfd068ac",
+            "name": "_ASim_AuditEvent_BarracudaWAFV01",
+            "parameters": "disabled:bool = false",
+            "description": "Audit Event ASIM parser for Barracuda WAF.",
+            "bodyFilePath": "KQL/AuditEvent/_ASim_AuditEvent_BarracudaWAFV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "cb8ce4aa-25e2-5141-a5b4-337c24285e3d",
+            "name": "_ASim_AuditEvent_CiscoISEV01",
+            "parameters": "disabled:bool = false",
+            "description": "Audit Event ASIM filtering parser for Cisco ISE.",
+            "bodyFilePath": "KQL/AuditEvent/_ASim_AuditEvent_CiscoISEV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "723f7b25-c699-5469-9ac6-1b5704a2b63a",
+            "name": "_ASim_AuditEvent_CiscoMerakiV01",
+            "parameters": "disabled:bool = false",
+            "description": "Audit Event ASIM parser for Cisco Meraki.",
+            "bodyFilePath": "KQL/AuditEvent/_ASim_AuditEvent_CiscoMerakiV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "e61fa185-7fbc-5367-a10c-45e05f1c7eee",
+            "name": "_ASim_AuditEvent_IllumioSaaSCoreV02",
+            "parameters": "disabled:bool = false",
+            "description": "Audit Event ASIM parser for Illumio SaaS Core audit events.",
+            "bodyFilePath": "KQL/AuditEvent/_ASim_AuditEvent_IllumioSaaSCoreV02.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "721cf9fc-2ce7-51fc-bf6b-da02a715fedc",
+            "name": "_ASim_AuditEvent_InfobloxBloxOneV01",
+            "parameters": "disabled:bool = false",
+            "description": "AuditEvent ASIM parser for Infoblox BloxOne.",
+            "bodyFilePath": "KQL/AuditEvent/_ASim_AuditEvent_InfobloxBloxOneV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "f1022015-c977-5720-9d94-b64c4a5d5636",
+            "name": "_ASim_AuditEvent_MicrosoftExchangeAdmin365V01",
+            "parameters": "disabled:bool = false",
+            "description": "Audit Event ASIM parser for Microsoft Exchange 365 administrative activity.",
+            "bodyFilePath": "KQL/AuditEvent/_ASim_AuditEvent_MicrosoftExchangeAdmin365V01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "d6bacb8f-166f-5712-9bbb-cffd517caf31",
+            "name": "_ASim_AuditEvent_MicrosoftExchangeAdmin365V02",
+            "parameters": "disabled:bool = false",
+            "description": "Audit Event ASIM parser for Microsoft Exchange 365 administrative activity.",
+            "bodyFilePath": "KQL/AuditEvent/_ASim_AuditEvent_MicrosoftExchangeAdmin365V02.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "719d3b89-0644-5cc5-ba2e-53eac0ee8207",
+            "name": "_ASim_AuditEvent_MicrosoftWindowsEventsV01",
+            "parameters": "disabled:bool = false",
+            "description": "Audit Event ASIM parser for Microsoft Windows Events audit events.",
+            "bodyFilePath": "KQL/AuditEvent/_ASim_AuditEvent_MicrosoftWindowsEventsV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "e0efc4c1-efd6-5481-a2b1-0e3fd1cb6684",
+            "name": "_ASim_AuditEvent_NativeV01",
+            "parameters": "disabled:bool = false",
+            "description": "Audit Event ASIM parser for Microsoft Sentinel native Audit Event table.",
+            "bodyFilePath": "KQL/AuditEvent/_ASim_AuditEvent_NativeV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "2ce6a16e-0477-5513-9727-033e4a21887a",
+            "name": "_ASim_AuditEvent_VectraXDRAuditV01",
+            "parameters": "disabled:bool = false",
+            "description": "Audit Event ASIM parser for Vectra XDR Audit Logs Event.",
+            "bodyFilePath": "KQL/AuditEvent/_ASim_AuditEvent_VectraXDRAuditV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "e40a1659-cd0a-5d18-bd5c-c02e366ae3ff",
+            "name": "_Im_AuditEvent",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr_has_any_prefix:dynamic = dynamic([]), actorusername_has_any:dynamic = dynamic([]), operation_has_any:dynamic = dynamic([]), eventtype_in:dynamic = dynamic([]), eventresult:string = '*', object_has_any:dynamic = dynamic([]), newvalue_has_any:dynamic = dynamic([]), pack:bool = false",
+            "description": "Audit event ASIM filtering parser.",
+            "bodyFilePath": "KQL/AuditEvent/_Im_AuditEvent.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "dd2fa0d1-84ff-519c-87d9-2dc811b31b69",
+            "name": "_Im_AuditEventBuiltIn",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr_has_any_prefix:dynamic = dynamic([]), actorusername_has_any:dynamic = dynamic([]), operation_has_any:dynamic = dynamic([]), eventtype_in:dynamic = dynamic([]), eventresult:string = '*', object_has_any:dynamic = dynamic([]), newvalue_has_any:dynamic = dynamic([]), pack:bool = false",
+            "description": "Audit event ASIM built-in union parser.",
+            "bodyFilePath": "KQL/AuditEvent/_Im_AuditEventBuiltIn.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "a9b3ece6-cc53-58e8-8516-1e91acd1879e",
+            "name": "_Im_AuditEvent_AzureActivityV01",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr_has_any_prefix:dynamic = dynamic([]), actorusername_has_any:dynamic = dynamic([]), operation_has_any:dynamic = dynamic([]), eventtype_in:dynamic = dynamic([]), eventresult:string = '*', object_has_any:dynamic = dynamic([]), newvalue_has_any:dynamic = dynamic([]), disabled:bool = false",
+            "description": "Audit Event ASIM filtering parser for Azure administrative activity.",
+            "bodyFilePath": "KQL/AuditEvent/_Im_AuditEvent_AzureActivityV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "0fbae1e3-fc59-5107-829b-378d2e27f899",
+            "name": "_Im_AuditEvent_AzureActivityV02",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr_has_any_prefix:dynamic = dynamic([]), actorusername_has_any:dynamic = dynamic([]), operation_has_any:dynamic = dynamic([]), eventtype_in:dynamic = dynamic([]), eventresult:string = '*', object_has_any:dynamic = dynamic([]), newvalue_has_any:dynamic = dynamic([]), disabled:bool = false",
+            "description": "Audit Event ASIM filtering parser for Azure administrative activity.",
+            "bodyFilePath": "KQL/AuditEvent/_Im_AuditEvent_AzureActivityV02.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "727bba25-3447-547a-b5c5-dcb64d01a803",
+            "name": "_Im_AuditEvent_BarracudaWAFV01",
+            "parameters": "disabled:bool = false, starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr_has_any_prefix:dynamic = dynamic([]), eventtype_in:dynamic = dynamic([]), eventresult:string = '*', newvalue_has_any:dynamic = dynamic([]), operation_has_any:dynamic = dynamic([])",
+            "description": "Audit Event ASIM parser for Barracuda WAF.",
+            "bodyFilePath": "KQL/AuditEvent/_Im_AuditEvent_BarracudaWAFV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "c66a7dfe-5675-523b-9456-e91ef524749a",
+            "name": "_Im_AuditEvent_CiscoISEV01",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr_has_any_prefix:dynamic = dynamic([]), actorusername_has_any:dynamic = dynamic([]), operation_has_any:dynamic = dynamic([]), eventtype_in:dynamic = dynamic([]), eventresult:string = '*', object_has_any:dynamic = dynamic([]), newvalue_has_any:dynamic = dynamic([]), disabled:bool = false",
+            "description": "Audit Event ASIM filtering parser for Cisco ISE.",
+            "bodyFilePath": "KQL/AuditEvent/_Im_AuditEvent_CiscoISEV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "cca20c2b-be0c-5a07-88d3-7fb44877fe15",
+            "name": "_Im_AuditEvent_CiscoMerakiV01",
+            "parameters": "disabled:bool = false, starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr_has_any_prefix:dynamic = dynamic([]), operation_has_any:dynamic = dynamic([]), eventtype_in:dynamic = dynamic([]), eventresult:string = '*', actorusername_has_any:dynamic = dynamic([]), object_has_any:dynamic = dynamic([]), newvalue_has_any:dynamic = dynamic([])",
+            "description": "Audit Event ASIM parser for Cisco Meraki.",
+            "bodyFilePath": "KQL/AuditEvent/_Im_AuditEvent_CiscoMerakiV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "781b072f-53cc-5e7e-8118-d227d0298aac",
+            "name": "_Im_AuditEvent_EmptyV01",
+            "parameters": "",
+            "description": "Audit event ASIM schema function.",
+            "bodyFilePath": "KQL/AuditEvent/_Im_AuditEvent_EmptyV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "dfa1aaf1-da4e-56a1-87c6-f18149b9ae4a",
+            "name": "_Im_AuditEvent_EmptyV02",
+            "parameters": "",
+            "description": "Audit event ASIM schema function.",
+            "bodyFilePath": "KQL/AuditEvent/_Im_AuditEvent_EmptyV02.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "6ed977f4-618e-5e00-bcad-8d4793548b0d",
+            "name": "_Im_AuditEvent_IllumioSaaSCoreV02",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr_has_any_prefix:dynamic = dynamic([]), actorusername_has_any:dynamic = dynamic([]), operation_has_any:dynamic = dynamic([]), eventtype_in:dynamic = dynamic([]), eventresult:string = '*', object_has_any:dynamic = dynamic([]), newvalue_has_any:dynamic = dynamic([]), disabled:bool = false",
+            "description": "Audit Event ASIM parser for Illumio SaaS Core audit events.",
+            "bodyFilePath": "KQL/AuditEvent/_Im_AuditEvent_IllumioSaaSCoreV02.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "71bc574f-91da-5cc1-833f-512b05ad4b20",
+            "name": "_Im_AuditEvent_InfobloxBloxOneV01",
+            "parameters": "disabled:bool = false, starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr_has_any_prefix:dynamic = dynamic([]), operation_has_any:dynamic = dynamic([]), eventtype_in:dynamic = dynamic([]), eventresult:string = '*', actorusername_has_any:dynamic = dynamic([]), object_has_any:dynamic = dynamic([]), newvalue_has_any:dynamic = dynamic([])",
+            "description": "AuditEvent ASIM parser for Infoblox BloxOne.",
+            "bodyFilePath": "KQL/AuditEvent/_Im_AuditEvent_InfobloxBloxOneV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "216c9995-fad4-5d6b-9ec2-0d5887731a81",
+            "name": "_Im_AuditEvent_MicrosoftExchangeAdmin365V01",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr_has_any_prefix:dynamic = dynamic([]), actorusername_has_any:dynamic = dynamic([]), operation_has_any:dynamic = dynamic([]), eventtype_in:dynamic = dynamic([]), eventresult:string = '*', object_has_any:dynamic = dynamic([]), newvalue_has_any:dynamic = dynamic([]), disabled:bool = false",
+            "description": "Audit Event ASIM filtering parser for Microsoft Exchange 365 administrative activity.",
+            "bodyFilePath": "KQL/AuditEvent/_Im_AuditEvent_MicrosoftExchangeAdmin365V01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "38ee78f3-fc07-5cdd-b0b6-cfd041f902c0",
+            "name": "_Im_AuditEvent_MicrosoftExchangeAdmin365V02",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr_has_any_prefix:dynamic = dynamic([]), actorusername_has_any:dynamic = dynamic([]), operation_has_any:dynamic = dynamic([]), eventtype_in:dynamic = dynamic([]), eventresult:string = '*', object_has_any:dynamic = dynamic([]), newvalue_has_any:dynamic = dynamic([]), disabled:bool = false",
+            "description": "Audit Event ASIM filtering parser for Microsoft Exchange 365 administrative activity.",
+            "bodyFilePath": "KQL/AuditEvent/_Im_AuditEvent_MicrosoftExchangeAdmin365V02.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "d1f104fb-fa94-5f31-a28f-62f72bc72797",
+            "name": "_Im_AuditEvent_MicrosoftWindowsEventsV01",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr_has_any_prefix:dynamic = dynamic([]), actorusername_has_any:dynamic = dynamic([]), operation_has_any:dynamic = dynamic([]), eventtype_in:dynamic = dynamic([]), eventresult:string = '*', object_has_any:dynamic = dynamic([]), newvalue_has_any:dynamic = dynamic([]), disabled:bool = false",
+            "description": "Audit Event ASIM filtering parser for Microsoft Windows Events audit events.",
+            "bodyFilePath": "KQL/AuditEvent/_Im_AuditEvent_MicrosoftWindowsEventsV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "7a9bcf3d-f393-5317-be98-05bce368ca2c",
+            "name": "_Im_AuditEvent_NativeV01",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), srcipaddr_has_any_prefix:dynamic = dynamic([]), actorusername_has_any:dynamic = dynamic([]), operation_has_any:dynamic = dynamic([]), eventtype_in:dynamic = dynamic([]), eventresult:string = '*', object_has_any:dynamic = dynamic([]), newvalue_has_any:dynamic = dynamic([]), disabled:bool = false",
+            "description": "Audit Event ASIM filtering parser for Microsoft Sentinel native Audit Event table.",
+            "bodyFilePath": "KQL/AuditEvent/_Im_AuditEvent_NativeV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "82914f3f-2b23-54fb-a3c8-9c2d318e8244",
+            "name": "_Im_AuditEvent_VectraXDRAuditV01",
+            "parameters": "disabled:bool = false, eventresult:string = '*', starttime:datetime = datetime(null), endtime:datetime = datetime(null), actorusername_has_any:dynamic = dynamic([]), operation_has_any:dynamic = dynamic([]), object_has_any:dynamic = dynamic([])",
+            "description": "Audit Event ASIM filtering parser for Vectra XDR Audit Logs Event.",
+            "bodyFilePath": "KQL/AuditEvent/_Im_AuditEvent_VectraXDRAuditV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        }
+    ],
+    "queries": []
+}

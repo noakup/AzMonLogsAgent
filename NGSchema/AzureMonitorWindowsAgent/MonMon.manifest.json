@@ -1,0 +1,675 @@
+{
+    "type": "Microsoft.AzureDataCollection/amaWindows",
+    "displayName": "Azure Monitor Agent (Windows)",
+    "description": "All tables related to AMA telemetry and diagnostics data.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Azure Monitor Data Collection/AMA Windows",
+    "contactDL": "gaalerts@microsoft.com",
+    "relatedTables": [],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "AMATelemetryEvents",
+            "description": "Telemetry logs for Azure Monitor Agent (Windows).",
+            "categories": [ "applications", "monitor" ],
+            "tags": {},
+            "properties": {},
+            "artifactVersion": 1,
+            "dataTypeId": "AMA_TELEMETRY_EVENTS",
+            "isResourceCentric": true,
+            "isTroubleshootingAllowed": true,
+            "tableState": "Validation",
+            "input": [
+                {
+                    "name": "TimeStamp",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "Operation",
+                    "type": "String"
+                },
+                {
+                    "name": "OperationValue",
+                    "type": "Long"
+                },
+                {
+                    "name": "EventName",
+                    "type": "String"
+                },
+                {
+                    "name": "DataRegion",
+                    "type": "String"
+                },
+                {
+                    "name": "LogsAccount",
+                    "type": "String"
+                },
+                {
+                    "name": "LogsEnvironment",
+                    "type": "String"
+                },
+                {
+                    "name": "ComponentName",
+                    "type": "String"
+                },
+                {
+                    "name": "ComponentCategory",
+                    "type": "String"
+                },
+                {
+                    "name": "ComponentVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "InputType",
+                    "type": "String"
+                },
+                {
+                    "name": "OS",
+                    "type": "String"
+                },
+                {
+                    "name": "OSVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "ProcessorArchitecture",
+                    "type": "String"
+                },
+                {
+                    "name": "Traceparent",
+                    "type": "String"
+                },
+                {
+                    "name": "TraceparentId",
+                    "type": "String"
+                },
+                {
+                    "name": "Priority",
+                    "type": "String"
+                },
+                {
+                    "name": "CloudType",
+                    "type": "String"
+                },
+                {
+                    "name": "Success",
+                    "type": "String"
+                },
+                {
+                    "name": "Reason",
+                    "type": "String"
+                },
+                {
+                    "name": "TotalRowsInCache",
+                    "type": "Long"
+                },
+                {
+                    "name": "TotalCacheSizeInBytes",
+                    "type": "Long"
+                },
+                {
+                    "name": "MaxRowsReceivedSizeInBytes",
+                    "type": "Long"
+                },
+                {
+                    "name": "DataStartTimeUtc",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "DataEndTimeUtc",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "OperationDurationMs",
+                    "type": "Long"
+                },
+                {
+                    "name": "DataAgeMs",
+                    "type": "Long"
+                },
+                {
+                    "name": "NextDestinationValue",
+                    "type": "String"
+                },
+                {
+                    "name": "MinLevel",
+                    "type": "Long"
+                },
+                {
+                    "name": "DataSizeInBytes",
+                    "type": "Long"
+                },
+                {
+                    "name": "HttpStatus",
+                    "type": "Long"
+                },
+                {
+                    "name": "RowsRead",
+                    "type": "Long"
+                },
+                {
+                    "name": "MemoryUseEstimateInBytes",
+                    "type": "Long"
+                },
+                {
+                    "name": "ResponseSizeInBytes",
+                    "type": "Long"
+                },
+                {
+                    "name": "FailureClass",
+                    "type": "String"
+                },
+                {
+                    "name": "ApiName",
+                    "type": "String"
+                },
+                {
+                    "name": "Url",
+                    "type": "String"
+                },
+                {
+                    "name": "AuthType",
+                    "type": "String"
+                },
+                {
+                    "name": "ErrorType",
+                    "type": "String"
+                },
+                {
+                    "name": "ErrorSubtype",
+                    "type": "String"
+                },
+                {
+                    "name": "HealthStatus",
+                    "type": "String"
+                },
+                {
+                    "name": "LimitProcessMemory",
+                    "type": "Long"
+                },
+                {
+                    "name": "LimitObjectMemory",
+                    "type": "Long"
+                },
+                {
+                    "name": "ProcessMemoryPeakUsed",
+                    "type": "Long"
+                },
+                {
+                    "name": "LimitObjectMemoryPeakUsed",
+                    "type": "Long"
+                },
+                {
+                    "name": "Description",
+                    "type": "String"
+                },
+                {
+                    "name": "HandleCount",
+                    "type": "Long"
+                },
+                {
+                    "name": "ConfiguredMemoryAllowance",
+                    "type": "Long"
+                },
+                {
+                    "name": "ProcessorCount",
+                    "type": "Long"
+                },
+                {
+                    "name": "LimitRate",
+                    "type": "Long"
+                },
+                {
+                    "name": "LimitWeight",
+                    "type": "Long"
+                },
+                {
+                    "name": "LimitParentRate",
+                    "type": "Long"
+                },
+                {
+                    "name": "LimitObjectActiveProcesses",
+                    "type": "Long"
+                },
+                {
+                    "name": "LimitObjectParentActiveProcesses",
+                    "type": "Long"
+                },
+                {
+                    "name": "LimitEffectiveRate",
+                    "type": "Long"
+                },
+                {
+                    "name": "IntervalSeconds",
+                    "type": "Long"
+                },
+                {
+                    "name": "ProcessorAffinity",
+                    "type": "Long"
+                },
+                {
+                    "name": "ConfiguredCpuThreshold",
+                    "type": "Long"
+                },
+                {
+                    "name": "ComponentUptimeSeconds",
+                    "type": "Long"
+                },
+                {
+                    "name": "ComponentCacheSizeInBytes",
+                    "type": "Long"
+                },
+                {
+                    "name": "ComponentCachePeakSizeInBytes",
+                    "type": "Long"
+                },
+                {
+                    "name": "ComponentCacheQuotaInBytes",
+                    "type": "Long"
+                },
+                {
+                    "name": "FreeAvailableInBytes",
+                    "type": "Long"
+                },
+                {
+                    "name": "TotalAvailableInBytes",
+                    "type": "Long"
+                }
+            ],
+            "transformFilePath": "KQL/AMATelemetryEventsTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "The time (UTC) when the event was generated.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Operation",
+                    "type": "String",
+                    "description": "The operation name.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OperationValue",
+                    "type": "BigInt",
+                    "description": "The value of the operation.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "EventName",
+                    "type": "String",
+                    "description": "The name of the event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "DataRegion",
+                    "type": "String",
+                    "description": "The data region of the logs.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "LogsWorkspace",
+                    "type": "String",
+                    "description": "The Log Analytics workspace ID of the logs.",
+                    "isDefaultDisplay": false,
+                    "dataTypeHint": "GUID"
+                },
+                {
+                    "name": "LogsEnvironment",
+                    "type": "String",
+                    "description": "The environment of the logs.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "ComponentName",
+                    "type": "String",
+                    "description": "The name of the component.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ComponentCategory",
+                    "type": "String",
+                    "description": "The category of the component.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ComponentVersion",
+                    "type": "String",
+                    "description": "The version of the component.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "InputType",
+                    "type": "String",
+                    "description": "The type of input.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OS",
+                    "type": "String",
+                    "description": "The operating system of the asset.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "OSVersion",
+                    "type": "String",
+                    "description": "The version of the operating system of the asset.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ProcessorArchitecture",
+                    "type": "String",
+                    "description": "The processor architecture of the asset.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Traceparent",
+                    "type": "String",
+                    "description": "The trace parent of the event.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "TraceparentId",
+                    "type": "String",
+                    "description": "The trace parent ID of the event.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "Priority",
+                    "type": "String",
+                    "description": "The priority of the event.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "CloudType",
+                    "type": "String",
+                    "description": "The cloud type of the event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Success",
+                    "type": "String",
+                    "description": "The success status of the event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "Reason",
+                    "type": "String",
+                    "description": "The reason of the event.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "TotalRowsInCache",
+                    "type": "BigInt",
+                    "description": "The total rows in cache.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "TotalCacheSizeInBytes",
+                    "type": "BigInt",
+                    "description": "The total cache size in bytes.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "MaxRowsReceivedSizeInBytes",
+                    "type": "BigInt",
+                    "description": "The maximum rows received size in bytes.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "DataStartTimeUtc",
+                    "type": "DateTime",
+                    "description": "The start time (UTC) of the data.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "DataEndTimeUtc",
+                    "type": "DateTime",
+                    "description": "The end time (UTC) of the data.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "OperationDurationMs",
+                    "type": "BigInt",
+                    "description": "The duration of the operation in milliseconds.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "DataAgeMs",
+                    "type": "BigInt",
+                    "description": "The age of the data in milliseconds.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "NextDestinationValue",
+                    "type": "String",
+                    "description": "The next destination value.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "MinLevel",
+                    "type": "BigInt",
+                    "description": "The minimum level.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "DataSizeInBytes",
+                    "type": "BigInt",
+                    "description": "The size of the data in bytes.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "HttpStatus",
+                    "type": "BigInt",
+                    "description": "The HTTP status.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "RowsRead",
+                    "type": "BigInt",
+                    "description": "The rows read.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "MemoryUseEstimateInBytes",
+                    "type": "BigInt",
+                    "description": "The memory use estimate in bytes.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ResponseSizeInBytes",
+                    "type": "BigInt",
+                    "description": "The response size in bytes.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "FailureClass",
+                    "type": "String",
+                    "description": "The failure class.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "ApiName",
+                    "type": "String",
+                    "description": "The API name.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "Url",
+                    "type": "String",
+                    "description": "The URL.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "AuthType",
+                    "type": "String",
+                    "description": "The authentication type.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "ErrorType",
+                    "type": "String",
+                    "description": "The error type.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "ErrorSubtype",
+                    "type": "String",
+                    "description": "The error subtype.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "HealthStatus",
+                    "type": "String",
+                    "description": "The health status.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LimitProcessMemory",
+                    "type": "BigInt",
+                    "description": "The limit of process memory.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "LimitObjectMemory",
+                    "type": "BigInt",
+                    "description": "The limit of object memory.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "ProcessMemoryPeakUsed",
+                    "type": "BigInt",
+                    "description": "The peak used process memory.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "LimitObjectMemoryPeakUsed",
+                    "type": "BigInt",
+                    "description": "The peak used object memory.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "Description",
+                    "type": "String",
+                    "description": "The description of the event.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "HandleCount",
+                    "type": "BigInt",
+                    "description": "The handle count.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "ConfiguredMemoryAllowance",
+                    "type": "BigInt",
+                    "description": "The configured memory allowance.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "ProcessorCount",
+                    "type": "BigInt",
+                    "description": "The processor count.",
+                    "isDefaultDisplay": true
+                },
+                {
+                    "name": "LimitRate",
+                    "type": "BigInt",
+                    "description": "The limit rate.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "LimitWeight",
+                    "type": "BigInt",
+                    "description": "The limit weight.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "LimitParentRate",
+                    "type": "BigInt",
+                    "description": "The limit parent rate.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "LimitObjectActiveProcesses",
+                    "type": "BigInt",
+                    "description": "The limit object active processes.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "LimitObjectParentActiveProcesses",
+                    "type": "BigInt",
+                    "description": "The limit object parent active processes.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "LimitEffectiveRate",
+                    "type": "BigInt",
+                    "description": "The effective rate limit.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "IntervalSeconds",
+                    "type": "BigInt",
+                    "description": "The interval in seconds.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "ProcessorAffinity",
+                    "type": "BigInt",
+                    "description": "The processor affinity.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "ConfiguredCpuThreshold",
+                    "type": "BigInt",
+                    "description": "The configured CPU threshold.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "ComponentUptimeSeconds",
+                    "type": "BigInt",
+                    "description": "The uptime of the component in seconds.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "ComponentCacheSizeInBytes",
+                    "type": "BigInt",
+                    "description": "The cache size of the component in bytes.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "ComponentCachePeakSizeInBytes",
+                    "type": "BigInt",
+                    "description": "The peak cache size of the component in bytes.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "ComponentCacheQuotaInBytes",
+                    "type": "BigInt",
+                    "description": "The cache quota of the component in bytes.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "FreeAvailableInBytes",
+                    "type": "BigInt",
+                    "description": "The free available memory in bytes.",
+                    "isDefaultDisplay": false
+                },
+                {
+                    "name": "TotalAvailableInBytes",
+                    "type": "BigInt",
+                    "description": "The total available memory in bytes.",
+                    "isDefaultDisplay": false
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/AMATelemetryEventsSample.json"
+        }
+    ],
+    "functions": [],
+    "queries": []
+}

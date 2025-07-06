@@ -1,0 +1,12 @@
+[
+  {
+    "TimeGenerated": "2022-03-14T00:05:38.552089493Z",
+    "ResourceId": "/SUBSCRIPTIONS/C99E2BF3-1777-412B-BABA-D823676589C2/RESOURCEGROUPS/AZURE-MONITOR-TESTING-ANKIT/PROVIDERS/MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/MONITORTEST",
+    "Location": "eastus",
+    "OperationName": "MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/UNIT/ACTION",
+    "Category": "UnitLogs",
+    "Message": "api-method=GET operation-name={GET [/_ah/readiness_check]} user-id= app-id=: unit.app End Web-API GET /_ah/readiness_check Headers: {correlation-id:587ea66d-1e1f-42cf-8e42-e912c0728678} status=200 time=0 ms {correlation-id=587ea66d-1e1f-42cf-8e42-e912c0728678}unit.app End Web-API GET /_ah/readiness_check Headers: {correlation-id:587ea66d-1e1f-42cf-8e42-e912c0728678} status=200 time=0 ms {correlation-id=587ea66d-1e1f-42cf-8e42-e912c0728678} ",
+    "LogLevel": "INFO",
+    "CorrelationId": "19135c66-d59c-4334-87d9-d9aaf3be48d5-0"
+    }
+]

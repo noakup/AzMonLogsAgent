@@ -1,0 +1,242 @@
+{
+	"type": "Microsoft.Network/dnsResolverPolicies",
+	"displayName": "DNS Resolver Policies",
+	"description": "DNS resolver policies allows you to monitor and manage resolution of DNS queries coming from virtual network.",
+	"tags": {},
+	"properties": {},
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "Cloudnet/Managed Resolver",
+	"relatedTables": [
+		"AzureActivity"
+	],
+	"relatedFunctions": [],
+	"tables": [
+		{
+			"name": "DNSQueryLogs",
+			"description": "DNS query logs enable customers to monitor the DNS traffic in their virtual networks and help securing their DNS infrastructure.",
+			"categories": [
+				"resources"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 2,
+			"dataTypeId": "DNSRESOLVERPOLICY_DNSRESPONSE",
+			"intelligencePacks": [],
+			"isResourceCentric": true,
+			"tableState": "Production",
+			"isLakeAllowed": true,
+			"isTroubleshootingAllowed": true,
+			"input": [
+				{
+					"name": "time",
+					"type": "DateTime"
+				},
+				{
+					"name": "resourceId",
+					"type": "String"
+				},
+				{
+					"name": "operationName",
+					"type": "String"
+				},
+				{
+					"name": "category",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "Dynamic"
+				}
+			],
+			"transformFilePath": "KQL/Transforms/DnsQueryLogsTransform.kql",
+			"columns": [
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"description": "Time (UTC) when the log was created.",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "OperationName",
+					"type": "String",
+					"description": "Name of the operation.",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Version",
+					"type": "String",
+					"description": "The version number of the query log format.",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "Region",
+					"type": "String",
+					"description": "The region where the virtual network was created in.",
+					"isDefaultDisplay": true
+				},
+				{
+					"name": "VirtualNetworkId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the virtual network that the query originated in.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "QueryName",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The domain name (contoso.com) or subdomain name (www.contoso.com) that was specified in the query.",
+					"dataTypeHint": "contoso.com."
+				},
+				{
+					"name": "QueryType",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Either the DNS record type that was specified in the request, or ANY."
+				},
+				{
+					"name": "QueryClass",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Specifies the protocol family. For example, IN for Internet."
+				},
+				{
+					"name": "ResponseCode",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "Response code that resolver returned in response to the DNS query."
+				},
+				{
+					"name": "Answer",
+					"type": "Dynamic",
+					"isDefaultDisplay": true,
+					"description": "Array of answers for DNS query."
+				},
+				{
+					"name": "Authority",
+					"type": "Dynamic",
+					"isDefaultDisplay": true,
+					"description": "Array of authority DNS servers for DNS query."
+				},
+				{
+					"name": "AdditionalRecords",
+					"type": "Dynamic",
+					"isDefaultDisplay": true,
+					"description": "Array of additional resource records."
+				},
+				{
+					"name": "SourceIpAddress",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The IP address of the instance that the query originated from.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "SourcePort",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The port on the instance that the query originated from."
+				},
+				{
+					"name": "DestinationIpAddress",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The IP address of the instance that the query was sent to (outbound endpoints).",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "DestinationPort",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "The port on the instance that the query was sent to."
+				},
+				{
+					"name": "Transport",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The protocol (UDP or TCP) used to submit the DNS query."
+				},
+				{
+					"name": "PrivateResolverEndpointId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the resolver endpoint. Can be inbound, or outbound.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "QueryResponseTime",
+					"type": "Int",
+					"isDefaultDisplay": true,
+					"description": "Response time for resolution of DNS query."
+				},
+				{
+					"name": "ResolutionPath",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Resolution path can be private zones, ruleset, or public DNS resolution."
+				},
+				{
+					"name": "ResolverPolicyId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the security policy which filtered the query.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "ResolverPolicyRuleAction",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "Result after evaluation of the policy rules."
+				},
+				{
+					"name": "ResolverPolicyDomainListId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the domain list which was hit.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "DnsForwardingRulesetId",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The ID of the DNS forwarding ruleset which was hit.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "DnsForwardingRulesetDomain",
+					"type": "String",
+					"isDefaultDisplay": true,
+					"description": "The domain which was hit in the DNS Forwarding ruleset."
+				}
+				
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/DnsQueryLogsInputSample.json"
+		}
+	],
+	"functions": [],
+	"queries": [
+		{
+			"id": "24310862-5ed4-41f6-b7b0-66176ac8a4f3",
+			"displayName": "DNS queries by virtual network and return code",
+			"description": "Summarize count of DNS queries by virtual network and return code.",
+			"bodyFilePath": "KQL/Queries/SummarizeDnsQueriesCount.kql",
+			"categories": [
+				"resources"
+			],
+			"relatedTables": [
+				"DNSQueryLogs"
+			],
+			"tags": {
+				"Topic": [
+					"Security"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": true
+				}
+			}
+		}
+	]
+}

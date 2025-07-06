@@ -1,0 +1,4 @@
+let nodeIPAddress = "10.0.0.0"; // Replace with your node IP address
+CassandraLogs
+| where AddressIP == nodeIPAddress
+| sort by TimeGenerated desc

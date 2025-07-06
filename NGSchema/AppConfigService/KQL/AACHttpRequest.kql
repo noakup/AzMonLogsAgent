@@ -1,0 +1,18 @@
+source 
+| project 
+    TimeGenerated = todatetime(["time"]),
+    Method = operationName,
+    Category = category,
+    CorrelationId = correlationId, 
+    RequestURI = uri,
+    ClientIPAddress = callerIPAddress,
+    ClientRequestId = tostring(properties.clientRequestId),
+    RequestId = tostring(properties.requestId),
+    DurationMs = toint(durationMs),
+    UserAgent = tostring(properties.userAgent),
+    StatusCode = toint(resultSignature), 
+    RequestLength = toint(0),
+    ResponseLength = toint(0),
+    BytesSent = toint(properties.bytesSent),
+    BytesReceived = toint(properties.bytesReceived),
+    HitCount = toint(properties.hitCount)

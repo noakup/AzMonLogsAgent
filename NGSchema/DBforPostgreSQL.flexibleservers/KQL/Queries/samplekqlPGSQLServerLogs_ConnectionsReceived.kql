@@ -1,0 +1,7 @@
+// To create an alert for this query, click '+ New alert rule'
+PGSQLServerLogs
+| where Message has "connection received"
+| extend allmatches=extract_all(@'host=(.+)port=(.+)', Message)
+| project TimeGenerated, host=allmatches[0][0], port=allmatches[0][1], Message,ProcessId,ErrorLevel, SqlErrorCode
+| order by TimeGenerated desc 
+| take 100

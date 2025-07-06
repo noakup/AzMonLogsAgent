@@ -1,0 +1,10 @@
+source
+| project
+    TimeGenerated = todatetime(['time']),
+	Category = category,
+	OperationName = operationName,
+	OperationType = tostring(properties.OperationType),
+	OperationStartTime = todatetime(properties.OperationStartTime),
+	SchemaVersion = tostring(properties.SchemaVersion),
+	ExtendedProperties = properties.ExtendedProperties,
+	BackupManagementType = tostring(properties.BackupManagementType)

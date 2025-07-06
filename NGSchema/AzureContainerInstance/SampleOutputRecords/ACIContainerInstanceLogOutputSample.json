@@ -1,0 +1,11 @@
+{
+    "TimeGenerated": "2023-07-13T22:55:49.3569674Z",
+    "ContainerGroup":"stagebytest5",
+	"ContainerID":"6314bfd097c23ad6b20526c4bb510bff450938d4d8a93e7dea68a1ee26cc44de",
+	"ContainerImage":"testimage",
+	"ContainerName":"stagebytest5",
+	"Location":"eastus2euap",
+	"Message":"07/12/2023 18:14:05 : This is an StdErr",
+	"OSType":"Linux",
+	"Source":"LoggingAgent"
+}

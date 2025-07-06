@@ -1,0 +1,54 @@
+[
+    {
+        "TimeGenerated": "2023-09-15T18:41:33.420Z",
+        "Location": "eastus",
+        "CorrelationId": "fcc4d0e5-2482-4eab-af79-469be4684f64",
+        "OperationName": "Microsoft.AzurePlaywrightService/accounts/write",
+        "OperationId": "AccessToken_PUT",
+        "MptWorkspaceId": "eastus_d7e00ff9-f2fe-4274-8057-4357f36e3700",
+        "ResultType": "Succeeded",
+        "RequestUri": "http://eastus.api.playwright.microsoft.com/accounts/eastus_d7e00ff9-f2fe-4274-8057-4357f36e3700/access-tokens/d8722eda-bdf1-4a77-8fb6-5646a27a1e5f?api-version=1.0",
+        "RequestMethod": "PUT",
+        "RequestBody": {
+            "name": "contoso",
+            "expiryAt": "2024-10-09T17:29:32.228Z"
+        },
+        "RequestUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 Edg/117.0.2045.60",
+        "HttpStatusCode": 200,
+        "DurationMs": 2219.0,
+        "Identity": {
+            "Claims": {
+                "tid": "eb037973-02ff-4abf-8162-1acb12ffdd3a",
+                "oid": "c1935ed3-bf58-416d-834e-65695d639774",
+                "name": "Siddharth Singha Roy",
+                "appid": "b1fd4ebf-2bed-4162-be84-97e0fe523f64"
+            }
+        },
+        "OperationVersion": "1.0",
+        "CallerIpAddress": "::ffff:172.18.64.15"
+    },
+    {
+        "TimeGenerated": "2023-09-15T18:43:11.610Z",
+        "Location": "eastus",
+        "CorrelationId": "34cfd17b-de36-4c07-ab86-359cbdab55f9",
+        "OperationName": "Microsoft.AzurePlaywrightService/accounts/write",
+        "OperationId": "AccessToken_DELETE",
+        "MptWorkspaceId": "eastus_d7e00ff9-f2fe-4274-8057-4357f36e3700",
+        "ResultType": "Succeeded",
+        "RequestUri": "http://eastus.api.playwright.microsoft.com/accounts/eastus_d7e00ff9-f2fe-4274-8057-4357f36e3700/access-tokens/500528ca-79d1-45d5-b582-6b01389680d6?api-version=1.0",
+        "RequestMethod": "DELETE",
+        "RequestUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 Edg/117.0.2045.60",
+        "HttpStatusCode": 204,
+        "DurationMs": 754.0,
+        "Identity": {
+            "Claims": {
+                "tid": "eb037973-02ff-4abf-8162-1acb12ffdd3a",
+                "oid": "c1935ed3-bf58-416d-834e-65695d639774",
+                "name": "Siddharth Singha Roy",
+                "appid": "b1fd4ebf-2bed-4162-be84-97e0fe523f64"
+            }
+        },
+        "OperationVersion": "1.0",
+        "CallerIpAddress": "::ffff:172.18.64.15"
+    }
+]

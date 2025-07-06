@@ -1,0 +1,4 @@
+StorageCacheUpgradeEvents
+| where Description contains "upgraded"
+| sort by TimeGenerated desc
+| take 100

@@ -1,0 +1,20 @@
+[
+    {
+        "time": "2022-08-10T21:00:17.6263600Z",
+        "resourceId": "/SUBSCRIPTIONS/4092FD42-145E-4E91-AA15-96F66D2B6DEB/RESOURCEGROUPS/ARTUNAKS6/PROVIDERS/MICROSOFT.HEALTHCAREAPIS/WORKSPACES/ARTUNCANADA/IOTCONNECTORS/ARTUNCANADA1",
+        "location": "canadacentral",
+        "operationName": "Normalization",
+        "category": "DiagnosticLogs",
+        "resultDescription": "The HealthCheck [ExternalEventHub:IsAuthenticated] did not pass",
+        "resultType": "Microsoft.Health.Fhir.Ingest.Console.PaaS.Exceptions.HealthCheckException"
+    },
+    {
+        "time": "2022-08-10T21:00:23.3534800Z",
+        "resourceId": "/SUBSCRIPTIONS/4092FD42-145E-4E91-AA15-96F66D2B6DEB/RESOURCEGROUPS/ARTUNAKS6/PROVIDERS/MICROSOFT.HEALTHCAREAPIS/WORKSPACES/ARTUNCANADA/IOTCONNECTORS/ARTUNCANADA1",
+        "location": "canadacentral",
+        "operationName": "FHIRConversion",
+        "category": "DiagnosticLogs",
+        "resultDescription": "The HealthCheck [FhirService:IsAuthenticated] did not pass",
+        "resultType": "Microsoft.Health.Fhir.Ingest.Console.PaaS.Exceptions.HealthCheckException"
+    }
+]

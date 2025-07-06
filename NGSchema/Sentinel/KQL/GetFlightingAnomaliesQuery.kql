@@ -1,0 +1,3 @@
+Anomalies
+| where TimeGenerated > ago(1d)
+| where RuleStatus == "Flighting"

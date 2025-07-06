@@ -1,0 +1,128 @@
+[
+  {
+    "level": "Informational",
+    "time": "2020-10-01T16:04:05.9992725Z",
+    "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/FANCHE-RG/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/CHAT-PROD-E2E",
+    "correlationId": "b6HGS52cBE684O+Fz/AF3g",
+    "category": "ChatOperational",
+    "operationName": "RemoveChatThreadParticipant",
+    "operationVersion": "2020-09-21-preview2",
+    "uri": "https://azurecommunicationservice.azurefd.net/chat/threads/19%3A533aa89f3a944ab7acf2c1c6ef63385b@thread.v2/members/8:acs:fa5c4fc3-a269-43e2-9eb6-0ca17b388993_00000001-2d59-1a90-b274-5a3a0d00003d?api-version=2020-09-21-preview2",
+    "resultType": "Succeeded",
+    "resultSignature": "204",
+    "durationMs": 372,
+    "callerIpAddress": "147.243.128.84",
+    "properties": {
+      "userId": "8:acs:fa5c4fc3-a269-43e2-9eb6-0ca17b388993_00000005-326b-a7b4-6a0b-343a0d000001",
+      "threadId": "19%3A533aa89f3a944ab7acf2c1c6ef63385b@thread.v2",
+      "messageId": null,
+      "sdkType": null,
+      "platformType": null
+    }
+  },
+  {
+    "level": "Informational",
+    "time": "2020-10-01T16:04:06.3993681Z",
+    "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/FANCHE-RG/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/CHAT-PROD-E2E",
+    "correlationId": "NO6u4KecY0yGAiCR05tsNQ",
+    "category": "ChatOperational",
+    "operationName": "RemoveChatThreadParticipant",
+    "operationVersion": "2020-09-21-preview2",
+    "uri": "https://azurecommunicationservice.azurefd.net/chat/threads/19%3A533aa89f3a944ab7acf2c1c6ef63385b@thread.v2/members/8:acs:fa5c4fc3-a269-43e2-9eb6-0ca17b388993_00000002-2d59-1a90-b274-5a3a0d00003d?api-version=2020-09-21-preview2",
+    "resultType": "Succeeded",
+    "resultSignature": "204",
+    "durationMs": 395,
+    "callerIpAddress": "147.243.128.84",
+    "properties": {
+      "userId": "8:acs:fa5c4fc3-a269-43e2-9eb6-0ca17b388993_00000005-326b-a7b4-6a0b-343a0d000001",
+      "threadId": "19%3A533aa89f3a944ab7acf2c1c6ef63385b@thread.v2",
+      "messageId": null,
+      "sdkType": "azsdk-js-communication-chat",
+      "platformType": "OS/Win32"
+    }
+  },
+  {
+    "level": "Informational",
+    "time": "2020-10-01T16:04:06.5433240Z",
+    "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/FANCHE-RG/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/CHAT-PROD-E2E",
+    "correlationId": "Vw61uLsIQ0CDb0rmddM5Dw",
+    "category": "ChatOperational",
+    "operationName": "ListChatThreadParticipants",
+    "operationVersion": "2020-09-21-preview2",
+    "uri": "https://azurecommunicationservice.azurefd.net/chat/threads/19%3A533aa89f3a944ab7acf2c1c6ef63385b@thread.v2/members?api-version=2020-09-21-preview2",
+    "resultType": "Succeeded",
+    "resultSignature": "200",
+    "durationMs": 136,
+    "callerIpAddress": "147.243.128.84",
+    "properties": {
+      "userId": "8:acs:fa5c4fc3-a269-43e2-9eb6-0ca17b388993_00000005-326b-a7b4-6a0b-343a0d000001",
+      "threadId": "19%3A533aa89f3a944ab7acf2c1c6ef63385b@thread.v2",
+      "messageId": null,
+      "sdkType": null,
+      "platformType": null
+    }
+  },
+  {
+    "level": "Informational",
+    "time": "2020-10-01T16:44:56.7852097Z",
+    "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/FANCHE-RG/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/CHAT-PROD-E2E",
+    "correlationId": "sNLX9S44DEGhIo2DsJhqbQ",
+    "category": "ChatOperational",
+    "operationName": "SendChatMessage",
+    "operationVersion": "2020-09-21-preview2",
+    "uri": "https://azurecommunicationservice.azurefd.net/chat/threads/19%3A229807e7e9cf490394df8071fa25b58c@thread.v2/messages?api-version=2020-09-21-preview2",
+    "resultType": "Succeeded",
+    "resultSignature": "201",
+    "durationMs": 166,
+    "callerIpAddress": "147.243.128.79",
+    "properties": {
+      "userId": "8:acs:fa5c4fc3-a269-43e2-9eb6-0ca17b388993_00000005-326b-a7b4-6a0b-343a0d000001",
+      "threadId": "19%3A229807e7e9cf490394df8071fa25b58c@thread.v2",
+      "messageId": "1601570696738",
+      "sdkType": null,
+      "platformType": null
+    }
+  },
+  {
+    "level": "Informational",
+    "time": "2020-10-01T16:44:56.9560845Z",
+    "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/FANCHE-RG/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/CHAT-PROD-E2E",
+    "correlationId": "vqOG1b9XWEKDK6rjPfZwZg",
+    "category": "ChatOperational",
+    "operationName": "DeleteChatMessage",
+    "operationVersion": "2020-09-21-preview2",
+    "uri": "https://azurecommunicationservice.azurefd.net/chat/threads/19%3A229807e7e9cf490394df8071fa25b58c@thread.v2/messages/1601570696738?api-version=2020-09-21-preview2",
+    "resultType": "Succeeded",
+    "resultSignature": "204",
+    "durationMs": 164,
+    "callerIpAddress": "147.243.128.79",
+    "properties": {
+      "userId": "8:acs:fa5c4fc3-a269-43e2-9eb6-0ca17b388993_00000005-326b-a7b4-6a0b-343a0d000001",
+      "threadId": "19%3A229807e7e9cf490394df8071fa25b58c@thread.v2",
+      "messageId": "1601570696738",
+      "sdkType": null,
+      "platformType": null
+    }
+  },
+  {
+    "level": "Informational",
+    "time": "2020-10-01T16:44:57.0190341Z",
+    "resourceId": "/SUBSCRIPTIONS/ED463725-1C38-43FC-BD8B-CAC509B41E96/RESOURCEGROUPS/FANCHE-RG/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/CHAT-PROD-E2E",
+    "correlationId": "0eO06VC3LkmXGDpMKnYt+A",
+    "category": "ChatOperational",
+    "operationName": "GetChatMessage",
+    "operationVersion": "2020-09-21-preview2",
+    "uri": "https://azurecommunicationservice.azurefd.net/chat/threads/19%3A229807e7e9cf490394df8071fa25b58c@thread.v2/messages/1601570696738?api-version=2020-09-21-preview2",
+    "resultType": "Succeeded",
+    "resultSignature": "200",
+    "durationMs": 57,
+    "callerIpAddress": "147.243.128.79",
+    "properties": {
+      "userId": "8:acs:fa5c4fc3-a269-43e2-9eb6-0ca17b388993_00000005-326b-a7b4-6a0b-343a0d000001",
+      "threadId": "19%3A229807e7e9cf490394df8071fa25b58c@thread.v2",
+      "messageId": "1601570696738",
+      "sdkType": null,
+      "platformType": null
+    }
+  }
+]

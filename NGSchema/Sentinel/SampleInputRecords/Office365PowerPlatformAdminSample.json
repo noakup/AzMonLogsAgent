@@ -1,0 +1,91 @@
+[
+  {
+    "PropertyCollection": [
+      {
+        "Name": "powerplatform.analytics.resource.environment.type",
+        "Value": "Production"
+      },
+      {
+        "Name": "powerplatform.analytics.resource.environment.region",
+        "Value": "unitedstates"
+      },
+      {
+        "Name": "powerplatform.analytics.resource.environment.name",
+        "Value": "3c67da1e-f86a-e6b4-9206-f9dafa09110c"
+      },
+      {
+        "Name": "powerplatform.analytics.resource.environment.url",
+        "Value": "https://org0103a4a3.crm.dynamics.com/"
+      },
+      {
+        "Name": "version",
+        "Value": "1.0"
+      },
+      {
+        "Name": "type",
+        "Value": "PowerPlatformAdministratorActivityRecord"
+      },
+      {
+        "Name": "powerplatform.analytics.activity.name",
+        "Value": "EnvironmentDelete"
+      },
+      {
+        "Name": "powerplatform.analytics.activity.id",
+        "Value": "01405b86-8b5e-43c3-9821-98d18341e015"
+      },
+      {
+        "Name": "powerplatform.analytics.resource.environment.id",
+        "Value": "3c67da1e-f86a-e6b4-9206-f9dafa09110c"
+      },
+      {
+        "Name": "powerplatform.analytics.resource.organization.id",
+        "Value": "bb9baa0d-8294-4ad9-aee9-72c778c51f58"
+      },
+      {
+        "Name": "enduser.id",
+        "Value": "f3ce6e7a-c3cc-45c5-8166-f8dfd58d870e"
+      },
+      {
+        "Name": "enduser.principal_name",
+        "Value": "wiking@sentinelbizapps.com"
+      },
+      {
+        "Name": "enduser.role",
+        "Value": "Admin"
+      },
+      {
+        "Name": "powerplatform.analytics.resource.tenant.id",
+        "Value": "f1a6e862-3f71-41bb-b287-8438309728a8"
+      }
+    ],
+    "JsonPropertyCollection": {
+      "powerplatform.analytics.resource.environment.type": "Production",
+      "powerplatform.analytics.resource.environment.region": "unitedstates",
+      "powerplatform.analytics.resource.environment.name": "3c67da1e-f86a-e6b4-9206-f9dafa09110c",
+      "powerplatform.analytics.resource.environment.url": "https://org0103a4a3.crm.dynamics.com/",
+      "version": "1.0",
+      "type": "PowerPlatformAdministratorActivityRecord",
+      "powerplatform.analytics.activity.name": "EnvironmentDelete",
+      "powerplatform.analytics.activity.id": "01405b86-8b5e-43c3-9821-98d18341e015",
+      "powerplatform.analytics.resource.environment.id": "3c67da1e-f86a-e6b4-9206-f9dafa09110c",
+      "powerplatform.analytics.resource.organization.id": "bb9baa0d-8294-4ad9-aee9-72c778c51f58",
+      "enduser.id": "f3ce6e7a-c3cc-45c5-8166-f8dfd58d870e",
+      "enduser.principal_name": "wiking@sentinelbizapps.com",
+      "enduser.role": "Admin",
+      "powerplatform.analytics.resource.tenant.id": "f1a6e862-3f71-41bb-b287-8438309728a8"
+    },
+    "UserId": "wiking@sentinelbizapps.com",
+    "Id": "01405b86-8b5e-43c3-9821-98d18341e015",
+    "EnvironmentId": "3c67da1e-f86a-e6b4-9206-f9dafa09110c",
+    "RecordType": 256,
+    "CreationTime": "2023-11-22T15:59:02",
+    "Operation": "EnvironmentDelete",
+    "OrganizationId": "f1a6e862-3f71-41bb-b287-8438309728a8",
+    "UserType": 2,
+    "UserKey": "f3ce6e7a-c3cc-45c5-8166-f8dfd58d870e",
+    "Workload": "PowerPlatform",
+    "ResultStatus": "Succeeded",
+    "Version": 0,
+    "RequiresCustomerKeyEncryption": false
+  }
+]

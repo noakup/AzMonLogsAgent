@@ -1,0 +1,45 @@
+[
+  {
+    "TimeGenerated": "2024-11-19T16:22:28.1552804Z",
+    "Timestamp": "2024-11-19T16:22:25.9388460Z",
+    "LogName": "projects/azure-sentinel-poc-436113/logs/requests",
+    "InsertId": "1sf2adbfqluq84",
+    "BackendTargetProjectNumber": "projects/145527844609",
+    "CacheDecision": [
+      "RESPONSE_HAS_CONTENT_TYPE",
+      "CACHE_MODE_CACHE_ALL_STATIC"
+    ],
+    "EnforcedSecurityPolicy": {
+      "configuredAction": "THROTTLE",
+      "name": "default-security-policy-for-backend-service-test-waf-logging-bs",
+      "outcome": "ACCEPT",
+      "priority": 2147483646,
+      "rateLimitAction": {
+        "outcome": "RATE_LIMIT_THRESHOLD_CONFORM"
+      }
+    },
+    "PreviewSecurityPolicy": null,
+    "EnforcedEdgeSecurityPolicy": null,
+    "PayloadRemoteIp": "87.120.115.119",
+    "SecurityPolicyRequestData": {
+      "remoteIpInfo": {
+        "regionCode": "US"
+      }
+    },
+    "PreviewEdgeSecurityPolicy": null,
+    "StatusDetails": "response_sent_by_backend",
+    "Latency": "0.280233s",
+    "RemoteIp": "87.120.115.119",
+    "RequestMethod": "GET",
+    "RequestSize": "244",
+    "RequestUrl": "http://34.149.80.175/_profiler/phpinfo",
+    "RequestStatus": "403",
+    "UserAgent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3947.100 Safari/537.36",
+    "BackendServiceName": "test-waf-logging-bs",
+    "ForwardingRuleName": "test-waf-front",
+    "ProjectId": "azure-sentinel-poc-436113",
+    "UrlMapName": "test-waf-lb",
+    "Zone": "global",
+    "Severity": "WARNING"
+  }
+]

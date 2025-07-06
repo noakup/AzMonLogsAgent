@@ -1,0 +1,73 @@
+[
+    {
+        "time": "2020-09-18T13:36:46.4823830Z",
+        "resourceId": "/SUBSCRIPTIONS/50AD1522-5C2C-4D9A-A6C8-67C11ECB75B8/RESOURCEGROUPS/ACSE2E/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/AZURECOMMUNICATIONSERVICES",
+        "operationName": "ACS/Billing",
+        "operationVersion": "1.0",
+        "category": "Usage",
+        "properties": {
+            "recordId": "353e7338-137d-0b7d-1e4b-b9cde1da03ca",
+            "startTime": "2020-09-18T13:35:01.2183774+00:00",
+            "endTime": null,
+            "usageType": "Chat",
+            "userIdA": "00000005-3e0d-e5aa-0e04-343a0d00037c",
+            "userIdB": null,
+            "unitType": "Count",
+            "quantity": 1.0
+        }
+    },
+    {
+        "time": "2020-09-18T13:58:39.5438818Z",
+        "resourceId": "/SUBSCRIPTIONS/50AD1522-5C2C-4D9A-A6C8-67C11ECB75B8/RESOURCEGROUPS/ACSE2E/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/AZURECOMMUNICATIONSERVICES",
+        "operationName": "ACS/Billing",
+        "operationVersion": "1.0",
+        "category": "Usage",
+        "properties": {
+            "recordId": "e92884f8-7520-0930-fce2-98140bfb5901",
+            "startTime": "2020-09-18T13:57:05.7777876+00:00",
+            "endTime": null,
+            "usageType": "Chat",
+            "userIdA": "00000005-414e-ed88-6a0b-343a0d000536",
+            "userIdB": null,
+            "unitType": "Count",
+            "quantity": 1.0
+        }
+    },
+  {
+    "time": "2020-09-18T15:44:09.2389398Z",
+    "resourceId": "/SUBSCRIPTIONS/50AD1522-5C2C-4D9A-A6C8-67C11ECB75B8/RESOURCEGROUPS/ACSE2E/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/AZURECOMMUNICATIONSERVICES",
+    "operationName": "ACS/Billing",
+    "operationVersion": "1.0",
+    "category": "Usage",
+    "correlationId": "adeb6078-898c-46d9-a0a7-968bfef62eeb",
+    "properties": {
+      "recordId": "0c668a46-d1f9-1d14-af21-cbb68f5c8ec6",
+      "startTime": "2020-09-18T15:31:47.8717193+00:00",
+      "endTime": "2020-09-18T15:36:04.3051353+00:00",
+      "usageType": "Audio",
+      "userIdA": "00000005-4162-7309-f40f-343a0d000492",
+      "userIdB": "00000005-4163-00e6-f40f-343a0d000493",
+      "unitType": "Milliseconds",
+      "quantity": 256433.416
+    }
+  },
+  {
+    "time": "2020-09-18T15:44:09.2389398Z",
+    "resourceId": "/SUBSCRIPTIONS/50AD1522-5C2C-4D9A-A6C8-67C11ECB75B8/RESOURCEGROUPS/ACSE2E/PROVIDERS/MICROSOFT.COMMUNICATION/COMMUNICATIONSERVICES/AZURECOMMUNICATIONSERVICES",
+    "operationName": "ACS/Billing",
+    "operationVersion": "1.0",
+    "category": "Usage",
+    "correlationId": "adeb6078-898c-46d9-a0a7-968bfef62eeb",
+    "properties": {
+      "recordId": "0c668a46-d1f9-1d14-af21-cbb68f5c8ec6",
+      "startTime": "2020-09-18T15:31:47.8717193+00:00",
+      "endTime": "2020-09-18T15:36:04.3051353+00:00",
+      "usageType": "Audio",
+      "userIdA": "00000005-4162-7309-f40f-343a0d000492",
+      "userIdB": "00000005-4163-00e6-f40f-343a0d000493",
+      "participantId": "00000005-4163-00e6-f40f-343a0d011532",
+      "unitType": "Milliseconds",
+      "quantity": 7433.416
+    }
+  }
+]

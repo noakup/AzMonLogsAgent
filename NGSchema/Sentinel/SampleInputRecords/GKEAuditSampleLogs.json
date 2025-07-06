@@ -1,0 +1,91 @@
+[
+    {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "system:anonymous"
+      },
+      "authorizationInfo": [
+        {
+          "granted": true,
+          "permission": "io.k8s.get",
+          "resource": "readyz"
+        }
+      ],
+      "methodName": "io.k8s.get",
+      "requestMetadata": {
+        "callerIp": "127.0.0.1",
+        "callerSuppliedUserAgent": "kube-probe/1.31"
+      },
+      "resourceName": "readyz",
+      "serviceName": "k8s.io",
+      "status": {
+        "code": 0
+      }
+    },
+    "insertId": "fc8c4193-4181-434e-a807-1d5d9d8bdad1",
+    "resource": {
+      "type": "k8s_cluster",
+      "labels": {
+        "location": "us-central1",
+        "cluster_name": "kubernetesalekhya",
+        "project_id": "msccp-test"
+      }
+    },
+    "timestamp": "2025-05-06T08:37:45.003649Z",
+    "labels": {
+      "authorization.k8s.io/reason": "RBAC: allowed by ClusterRoleBinding \"system:public-info-viewer\" of ClusterRole \"system:public-info-viewer\" to Group \"system:unauthenticated\"",
+      "authorization.k8s.io/decision": "allow"
+    },
+    "logName": "projects/msccp-test/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "fc8c4193-4181-434e-a807-1d5d9d8bdad1",
+      "producer": "k8s.io",
+      "first": true,
+      "last": true
+    },
+    "receiveTimestamp": "2025-05-06T08:37:46.410323550Z"
+  },
+  {
+    "insertId": "9391ddb1-f939-405b-9afe-498ef5e96b2a@a1",
+    "jsonPayload": {
+      "noDecisionStatus": {
+        "noScaleDown": {
+          "nodesTotalCount": 1,
+          "nodes": [
+            {
+              "reason": {
+                "messageId": "no.scale.down.node.pod.kube.system.unmovable",
+                "parameters": [
+                  "event-exporter-gke-69d9b8fddc-vv9g7"
+                ]
+              },
+               "node": {
+                "name": "gk3-kubernetesalekhya-pool-2-599bbf1f-awkz",
+                "memRatio": 53,
+                "cpuRatio": 72,
+                "mig": {
+                  "name": "gk3-kubernetesalekhya-pool-2-599bbf1f-grp",
+                  "zone": "us-central1-f",
+                  "nodepool": "pool-2"
+                }
+              }
+            }
+          ]
+        },
+        "measureTime": "1746520664"
+      }
+    },
+    "resource": {
+      "type": "k8s_cluster",
+      "labels": {
+        "location": "us-central1",
+        "cluster_name": "kubernetesalekhya",
+        "project_id": "msccp-test"
+      }
+    },
+    "timestamp": "2025-05-06T08:37:45.006636824Z",
+    "logName": "projects/msccp-test/logs/container.googleapis.com%2Fcluster-autoscaler-visibility",
+    "receiveTimestamp": "2025-05-06T08:37:45.171538004Z"
+  }
+]

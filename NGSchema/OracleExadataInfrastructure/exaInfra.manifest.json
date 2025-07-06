@@ -1,0 +1,134 @@
+{
+  "type": "Oracle.Database/cloudExadataInfrastructures",
+  "displayName": "Oracle Exadata Infrastructure",
+  "description": "Oracle Exadata Infrastructure logs.",
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Oracle Exadata On Azure",
+  "contactDL": "tycooncp@microsoft.com",
+  "tables": [
+    {
+      "name": "OracleExadataInfrastructure",
+      "description": "Oracle Exadata Infrastructure logs.",
+      "categories": ["audit"],
+      "artifactVersion": 1,
+      "dataTypeId": "ORACLE_DATABASE_CLOUDEXADATAINFRASTRUCTURES",
+      "isResourceCentric": true,
+      "tableState": "Validation",
+      "isTroubleshootingAllowed": true,
+			"isLakeAllowed": true,			
+      "input": [
+        {
+          "name": "time",
+          "type": "DateTime"
+        },
+        {
+          "name": "operationName",
+          "type": "String"
+        },
+        {
+          "name": "category",
+          "type": "String"
+        },
+        {
+          "name": "level",
+          "type": "String"
+        },
+        {
+          "name": "location",
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "type": "Dynamic"
+        }
+      ],
+      "transformFilePath": "KQL/ExaInfraTransform.kql",
+      "columns": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "Time Event Generated",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "OperationName",
+          "type": "String",
+          "description": "The name of the operation represented by this event",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "ResultDescription",
+          "type": "String",
+          "description": "The static text description of this operation",
+          "isDefaultDisplay": false,
+          "isHidden": true,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "Level",
+          "type": "String",
+          "description": "The severity level of the event",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "Location",
+          "type": "String",
+          "description": "Region of the resource",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "LifeCycleState",
+          "type": "String",
+          "description": "Current lifecyclestate of the resource generated event",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "DisplayName",
+          "type": "String",
+          "description": "Display name of the resource generated event",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        },
+        {
+          "name": "Shape",
+          "type": "String",
+          "description": "Shape of the resource generated event",
+          "isDefaultDisplay": true,
+          "isHidden": false,
+          "isPreferredFacet": false
+        }
+      ],
+      "sampleInputRecordsFilePath": "SampleInputRecords/ExaInfraInputSample.json",
+      "sampleOutputRecordsFilePath": "SampleOutputRecords/ExaInfraOutputSample.json"
+    }
+  ],
+  "functions": [],
+  "queries": [
+    { 
+      "id":"def050d2-9447-4229-8a62-b980bb38ca9a",
+      "displayName":"Number of Errors in last hour",
+      "description":"Number of Vm Cluster errors in last one hour.",
+      "bodyFilePath":"KQL/VmClusterNumberOfErrorsInLastHour.kql",
+      "categories":[ "audit" ],
+      "relatedTables": ["OracleCloudVMCluster"],
+      "tags":
+      {
+        "Topic":[ "Errors" ]
+      },
+      "properties": {
+        "ExampleQuery": true
+      }
+    }
+  ]
+}

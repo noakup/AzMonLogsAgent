@@ -1,0 +1,23 @@
+[
+	{
+		"TimeGenerated" : "2021-03-22T22:13:22.8876438Z",
+		"AccountName"  : "ACCNT-GREMLIN-TEST",
+		"OperationName" : "eval",
+		"UserAgent" : "<empty>",
+		"ErrorCode" : "200",
+		"AuthorizationTokenType" : "PrimaryMasterKey",
+		"RetryCount" : "0",
+		"Address" : "136.25.9.148",
+		"PIICommandText" : "<empty>",
+		"RateLimitingDelayMs" : "0",
+		"RetriedDueToRateLimiting" : "False",
+		"DatabaseName" : "testDatabase",
+		"CollectionName" : "testGraph",
+		"DurationMs" : "540.7002",
+		"RequestCharge" : "5.03",
+		"RequestLength" : "266",
+		"ResponseLength" : "776",
+		"RegionName" : "West US",
+		"ActivityId" : "6e4bbd5e-1956-434c-91b4-9f0808813310"     
+	}
+]

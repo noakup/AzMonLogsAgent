@@ -1,0 +1,9 @@
+source
+| extend Properties = parse_json(properties)
+| extend TimeGenerated = todatetime(["time"])
+| extend HealthEventType = trim('"', Properties.HealthEventType)
+| extend Severity = trim('"',Properties.Severity)
+| extend LoadBalancerResourceId = trim('"',Properties.LoadBalancerArmId)
+| extend Description = trim('"',Properties.Description)
+| extend FrontendIP = trim('"',Properties["Frontend Ip"])
+| project operationName, TimeGenerated, HealthEventType, Severity, LoadBalancerResourceId, FrontendIP, Description

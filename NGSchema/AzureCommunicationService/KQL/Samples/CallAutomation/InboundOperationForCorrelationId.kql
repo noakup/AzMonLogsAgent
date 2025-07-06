@@ -1,0 +1,4 @@
+ACSCallAutomationIncomingOperations
+//| where CorrelationId == "<correlation ID>" // This can be uncommented to filter on a specific correlation ID
+| project CorrelationId, OperationName, OperationVersion
+| limit 100

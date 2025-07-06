@@ -1,0 +1,7 @@
+ACSCallDiagnosticsUpdates
+// Classify the jitter quality as Poor or Good based on
+// whether the average jitter is higher than 30 milliseconds
+| project JitterQuality = iff(JitterAvg > 30, "Poor", "Good")
+// Counts the number of streams per jitter quality
+| summarize count() by JitterQuality
+| render piechart title="Jitter Quality"

@@ -1,0 +1,19 @@
+source
+| extend identity = parse_json(identity)
+| extend properties = parse_json(properties)
+| project
+TimeGenerated = todatetime(['time']),
+OperationName = operationName,
+RequestUri = tostring(properties.requestUri),
+RequestMethod = tostring(properties.requestMethod),
+HttpStatusCode = toint(properties.httpStatusCode),
+CorrelationId = correlationId,
+DurationMs = durationMs,
+RequestBody = todynamic(properties.requestBody),
+ResponseBody = todynamic(properties.responseBody),
+RequestId = tostring(properties.requestId),
+CustomRequestAttributes = todynamic(properties.customRequestAttributes),
+ClientTenantId = tostring(identity.claims.clientTenantId),
+ClientObjectId = tostring(identity.claims.clientObjectId),
+ClientName = tostring(identity.claims.clientName),
+ClientApplicationId = tostring(identity.claims.clientApplicationId)

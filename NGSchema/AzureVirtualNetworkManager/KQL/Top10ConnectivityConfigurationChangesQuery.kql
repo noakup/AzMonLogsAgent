@@ -1,0 +1,3 @@
+AVNMConnectivityConfigurationChange
+| top 10 by TimeGenerated desc
+| project TimeGenerated, NetworkResourceIds, AppliedConnectivityConfigurations, ResultType

@@ -1,0 +1,22 @@
+source 
+| extend properties = parse_json(properties)
+| extend resourceIdArray = split(resourceId, "/")
+| extend numElementsInResourceId = array_length(resourceIdArray)
+| extend clusterNameExtracted = resourceIdArray[numElementsInResourceId - 1]
+| project
+	TimeGenerated = todatetime(['time']),   
+	ClusterName = tostring(clusterNameExtracted),
+	OperationName = operationName,
+	ActivityId = tostring(properties.activityId),
+	ErrorCode = toint(properties.errorCode),
+	DurationMs = todouble(properties.duration),
+	DatabaseName = tostring(properties.databaseName),
+	CollectionName = tostring(properties.collectionName),
+	ClientIp = tostring(properties.address),
+	PiiCommandText = tostring(properties.piiCommandText),
+	RegionName = tostring(properties.region),
+	RequestLength = todouble(properties.requestLength),
+	ResponseLength = todouble(properties.responseLength),
+	TransportProtocol = tostring(properties.transportProtocol),
+	UserAgent = tostring(properties.userAgent),
+	UserId = tostring(properties.userId)

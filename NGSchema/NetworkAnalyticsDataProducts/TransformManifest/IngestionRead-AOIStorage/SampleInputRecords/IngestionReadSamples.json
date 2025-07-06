@@ -1,0 +1,42 @@
+[
+    {
+        "time": "2024-03-26T14:52:00.0307222Z",
+        "resourceId": "/SUBSCRIPTIONS/9A021C4C-DDCD-4E80-9155-A5B0E872F4C2/RESOURCEGROUPS/ALSTEST/PROVIDERS/MICROSOFT.NETWORKANALYTICS/DATAPRODUCTS/ALS",
+        "location": "eastus",
+        "category": "IngestionRead",
+        "operationName": "GetBlob",
+        "properties":
+        {
+            "accountName": "kvstest",
+            "userAgentHeader": "azsdk-net-Storage.Blobs/12.16.0 (.NET 7.0.15; Microsoft Windows 10.0.14393)",
+            "clientRequestId": "4e5ad569-2533-4add-bdf5-4346bb395849",
+            "etag": "\"0x8DC37BD1AEC2390\"",
+            "serviceType": "blob",
+            "objectKey": "/kvstest/internal/appConfig.json",
+        	"responseMd5": "Qlrwl1zA05cGE4iy7S7dCg==",
+            "lastModifiedTime": "2/27/2024 5:54:11 PM",
+            "metricResponseType": "Success",
+            "serverLatencyMs": 12,
+            "requestHeaderSize": 1844,
+        	"requestBodySize": 259915,
+            "responseHeaderSize": 508,
+        	"contentLengthHeader": 259915,
+            "tlsVersion": "TLS 1.2",
+            "operationVersion": "2022-11-02",
+            "schemaVersion": "1.0",
+            "statusCode": 206,
+            "statusText": "Success",
+            "durationMs": 23,
+            "callerIpAddress": "10.71.0.55:49958",
+            "correlationId": "48e21b48-401e-0004-498d-7f8166000000",
+            "identity":
+            {
+                "type": "SAS",
+                "tokenHash": "key1(436F1DF9C59772C18545C099A94D2442D2AAF4AE9842D9D631EFE4D7D1E89403),SasSignature(436F1DF9C59772C18545C099A94D2442D2AAF4AE9842D9D631EFE4D7D1E89403)"
+            },
+            "uri": "https://kvstest.blob.core.windows.net:443/internal/appConfig.json",
+            "protocol": "HTTPS",
+            "resourceType": "Microsoft.Storage/storageAccounts/blobServices"
+        }
+    }
+]

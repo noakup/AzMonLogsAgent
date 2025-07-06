@@ -1,0 +1,13 @@
+let DisabledParsers=materialize(_GetWatchlist('ASimDisabledParsers') 
+| where SearchKey in ('Any', 'Exclude_ASim_UserManagement') 
+| extend SourceSpecificParser=column_ifexists('SourceSpecificParser','') 
+| where isnotempty(SourceSpecificParser) 
+| summarize list = make_set(SourceSpecificParser));
+let builtInDisabled = 0 != array_length(set_intersect(toscalar(DisabledParsers),dynamic(['Exclude_ASim_UserManagementBuiltIn', 'Exclude_ASim_UserManagement', 'Any'])));
+union isfuzzy=true
+_ASim_UserManagement_CiscoISEV01(disabled= (builtInDisabled or('Exclude_ASim_UserManagement_CiscoISE' in (DisabledParsers)))),
+_ASim_UserManagement_LinuxAuthprivV01(disabled= (builtInDisabled or('Exclude_ASim_UserManagement_LinuxAuthpriv' in (DisabledParsers)))),
+_ASim_UserManagement_MicrosoftSecurityEventV01(disabled= (builtInDisabled or('Exclude_ASim_UserManagement_MicrosoftSecurityEvent' in (DisabledParsers)))),
+_ASim_UserManagement_NativeV01(disabled= (builtInDisabled or('Exclude_ASim_UserManagement_Native' in (DisabledParsers)))),
+_ASim_UserManagement_SentinelOneV01(disabled= (builtInDisabled or('Exclude_ASim_UserManagement_SentinelOne' in (DisabledParsers)))),
+_Im_UserManagement_EmptyV01

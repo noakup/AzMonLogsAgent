@@ -1,0 +1,128 @@
+{
+    "type": "Microsoft.Compute/VirtualMachines",
+    "displayName": "Virtual machines",
+    "description": "",
+    "tags": {}, 
+    "properties": {}, 
+    "simplifiedSchemaVersion": "3", 
+    "icmTeam": "Geneva Monitoring/Virtual machines",
+    "contactDL": "obsconsplat@microsoft.com",
+    "relatedTables": [],
+    "relatedFunctions": [],
+
+    "tables": [
+      {
+        "name": "PipelineTestVehicles",
+        "description": "Test table with made-up information about vehicles.",
+        "categories": [ "virtualmachines" ],
+        "artifactVersion": 1,
+        "dataTypeId": "PIPELINETEST_VEHICLEINFO",
+        "isResourceCentric": true,
+        "tableState": "Validation",
+        "isTroubleshootingAllowed": false,
+        "input": [
+          {
+            "name": "timeGenerated",
+            "type": "DateTime"
+          },
+          {
+            "name": "vin",
+            "type": "String"
+          },
+          {
+            "name": "mileage",
+            "type": "Int"
+          },
+          {
+            "name": "make",
+            "type": "String"
+          }
+        ],
+
+        "transformFilePath": "Kql/PipelineTestVehiclesTransform.kql",
+
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "description": "Timestamp when the event was generated.",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "VIN",
+            "type": "String",
+            "description": "Vehicle Identification Number.",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "Mileage",
+            "type": "Int",
+            "description": "Mileage of the vehicle.",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "Make",
+            "type": "String",
+            "description": "Make of the vehicle.",
+            "isDefaultDisplay": true
+          }
+        ],
+
+        "sampleInputRecordsFilePath": "SampleInputRecords/PipelineTestVehiclesSamples.json"
+      },
+      {
+        "name": "PipelineTestVehiclesInternalUseOnly",
+        "description": "For internal use only. Test table with made-up information about vehicles.",
+        "categories": [ "virtualmachines" ],
+        "artifactVersion": 1,
+        "dataTypeId": "PIPELINETEST_VEHICLEINFORAW",
+        "isHidden": true,
+        "isResourceCentric": true,
+        "tableState": "Validation",
+        "isTroubleshootingAllowed": false,
+        "input": [
+          {
+            "name": "timeGenerated",
+            "type": "DateTime"
+          },
+          {
+            "name": "vin",
+            "type": "String"
+          },
+          {
+            "name": "mileage",
+            "type": "Int"
+          }
+        ],
+
+        "transformFilePath": "Kql/PipelineTestVehiclesInternalTransform.kql",
+
+        "columns": [
+          {
+            "name": "TimeGenerated",
+            "type": "DateTime",
+            "description": "Timestamp when the event was generated.",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "VIN",
+            "type": "String",
+            "description": "Vehicle Identification Number.",
+            "isDefaultDisplay": true
+          },
+          {
+            "name": "Mileage",
+            "type": "Int",
+            "description": "Mileage of the vehicle.",
+            "isDefaultDisplay": true
+          }
+        ],
+
+        "sampleInputRecordsFilePath": "SampleInputRecords/PipelineTestVehiclesInternalSamples.json"
+      }
+    ],
+
+    "functions": [],
+
+    "queries": []
+}

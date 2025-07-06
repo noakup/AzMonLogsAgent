@@ -1,0 +1,14 @@
+{
+    "name" : "Guard",
+    "description": "Contains diagnostic logs for Guard.",
+    "transformVersion" : "1",
+    "dataTypeId" : "MICROSOFTKUBERNETESCONNECTEDCLUSTERS_GUARD",
+    "inputFilePath" : "Guard-ArcK8sControlPlane.json",
+    "transformState" : "Production",
+    "icmTeam" : "KUBERNETESCONNECTSERVICE/K8SConnectRP",
+    "contactDL": "k8connectsupport@microsoft.com",
+    "relatedTable" : "ArcK8sControlPlane",
+    "kqlFilePath" : "KQL/ArcK8sControlPlaneTransform.kql",
+    "sampleInputRecordsFilePath": "SampleInputRecords/ArcK8sControlPlaneGuardSample.json",
+    "sampleOutputRecordsFilePath": "SampleOutputRecords/ArcK8sControlPlaneGuardSample.json"
+}

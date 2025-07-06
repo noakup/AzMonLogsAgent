@@ -1,0 +1,15 @@
+OEPDataplaneLogs
+// Categorize messages based on HTTP response codes
+| extend ResponseCode = case(
+    Message has_any ("Status=500", "Internal Server Error"), "500",
+    Message has_any ("Status=401", "Unauthorized"), "401",
+    Message has_any ("Status=403", "Forbidden"), "403",
+    Message has_any ("Status=429", "RequestBodyTooLarge"), "429",
+    ""
+)
+// Filter out logs without a response code
+| where ResponseCode != ""
+// Summarize the count of each response code over a specified time range
+| summarize Count = count() by bin(TimeGenerated, 5m), ResponseCode
+// Render a column chart for visualization
+| render columnchart

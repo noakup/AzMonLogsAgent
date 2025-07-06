@@ -1,0 +1,42 @@
+[
+    {
+        "ReferencedItemId": "9706006a-7975-4d66-9ac8-e086d029fc59",
+        "SpanId": "75910886a9854139",
+        "TraceId": "31617d70ea7dba341c22b58e4dde9177",
+        "TimeGenerated": "2023-07-25T21:40:54.8363228Z",
+        "Name": "exception",
+        "DroppedAttributesCount": 0,
+        "ResourceAttributes": {
+            "timeUnixNano": 1690321254808000000,
+            "observedTimeUnixNano": 1690321254808000000,
+            "itemName": "OpenTelemetryEvents"
+        },
+        "ServiceNamespace": "my-namespace",
+        "ServiceName": "my-helloworld-service",
+        "ServiceInstanceId": "my-instance",
+        "Attributes": {},
+        "SDKVersion": "otlp:opentelemetry:nodejs:1.15.1",
+        "ServiceVersion": "",
+        "EndUserId": "",
+        "ClientType": "PC",
+        "UserId": "",
+        "UserAccountId": "",
+        "OperationName": "",
+        "ClientModel": "",
+        "SessionId": "",
+        "Measurements": {},
+        "SyntheticSource": "",
+        "ClientBrowser": "",
+        "ClientOS": "",
+        "ClientIP": "0.0.0.0",
+        "ClientCity": "",
+        "ClientStateOrProvince": "",
+        "ClientCountryOrRegion": "",
+        "ItemCount": 1,
+        "ExceptionProblem": "Error at Error: Exception!",
+        "ExceptionType": "Error",
+        "ExceptionMessage": "Exception!",
+        "ExceptionStackTrace": "Error: Exception!\n    at IncomingMessage.<anonymous> (C:\\OtelTest\\server.js:96:51)\n    at C:\\OtelTest\\node_modules\\@opentelemetry\\context-async-hooks\\build\\src\\AbstractAsyncHooksContextManager.js:50:55\n    at AsyncLocalStorage.run (node:async_hooks:322:14)\n    at AsyncLocalStorageContextManager.with (C:\\OtelTest\\node_modules\\@opentelemetry\\context-async-hooks\\build\\src\\AsyncLocalStorageContextManager.js:33:40)\n    at IncomingMessage.contextWrapper (C:\\OtelTest\\node_modules\\@opentelemetry\\context-async-hooks\\build\\src\\AbstractAsyncHooksContextManager.js:50:32)\n    at IncomingMessage.emit (node:events:532:35)\n    at endReadableNT (node:internal/streams/readable:1346:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
+        "RoleName": "[my-namespace]/my-helloworld-service"
+    }
+]

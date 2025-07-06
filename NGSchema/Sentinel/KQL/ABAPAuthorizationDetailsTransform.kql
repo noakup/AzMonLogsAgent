@@ -1,0 +1,22 @@
+source
+| project
+    TimeGenerated = now(),
+    Role,
+    RoleType,
+    UpdatedOn,
+    TypeOfChange,
+    Authorization,
+    AuthorizationGroup,
+    Object,
+    Field,
+    Low,
+    High,
+    ChildRole,
+    SystemId = SystemID,
+    ClientId = ClientID, 
+    SystemRole,
+    SystemUniqueId,
+    AgentId
+
+
+

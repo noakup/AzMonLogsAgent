@@ -1,0 +1,23 @@
+[
+  {
+    "time": "2020-11-17T03:57:05.1347932Z",
+    "resourceId": "/SUBSCRIPTIONS/2F4629DC-CF86-487D-B102-0EA629FD6EFB/RESOURCEGROUPS/NIMANDA-RG/PROVIDERS/MICROSOFT.SYNAPSE/WORKSPACES/NIMANDAWCUS/BIGDATAPOOLS/TESTPOOL",
+    "category": "BigDataPoolApplicationsEnded",
+    "operationName": "BigDataPoolApplicationsEnded",
+    "correlationId": "4",
+    "identity": "{\"objectId\":\"9b25480d-3d8c-4780-8c12-9e8680d24cd2\"}",
+    "properties": {
+      "livyId": "4",
+      "applicationId": "",
+      "applicationName": "Synapse_NBS_TestPool_1605585390",
+      "livyState": "error",
+      "schedulerState": "Scheduled",
+      "pluginState": "Ended",
+      "submitTime": "2020-11-17T03:56:30.6777652+00:00",
+      "startTime": "2020-11-17T03:56:32.6136891+00:00",
+      "endTime": "2020-11-17T03:57:05.1347737Z",
+      "incomingCorrelationId": "8054c15a-3534-4500-8422-bc0ffa3c7025",
+      "submitterId": "9b25480d-3d8c-4780-8c12-9e8680d24cd2"
+    }
+  }
+]

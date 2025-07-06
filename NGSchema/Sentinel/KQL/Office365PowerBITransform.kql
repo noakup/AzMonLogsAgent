@@ -1,0 +1,76 @@
+let recordTypeMap = parse_json('{ '
+' "1": "ExchangeAdmin", '
+' "2": "ExchangeItem", '
+' "3": "ExchangeItemGroup", '
+' "4": "SharePoint", '
+' "6": "SharePointFileOperation", '
+' "8": "AzureActiveDirectory", '
+' "9": "AzureActiveDirectoryAccountLogon",'
+' "10": "DataCenterSecurityCmdlet", '
+' "11": "ComplianceDLPSharePoint", '
+' "14": "SharePointSharingOperation", '
+' "15": "AzureActiveDirectoryStsLogon", '
+' "20": "PowerBIAudit", '
+' "25": "MicrosoftTeams", '
+' "35": "MicrosoftProjectEvents" '
+' }');
+let actorUserTypeMap = parse_json('{ '
+' "0": "Regular", '
+' "1": "Other" ,'
+' "2": "Admin", '
+' "3": "Admin", '
+' "4": "System", '
+' "5": "Application", '
+' "6": "Service Principal", '
+' "7": "Other", '
+' "8": "Other" '
+' }');
+let eventResultMap = parse_json('{ '
+' "Succeeded": "Success", '
+' "Failed": "Failure", '
+' "PartiallySucceeded ": "Partial" ,'
+' "": "" '
+' }');
+let scopeMap = parse_json('{ '
+' "0": "Online", '
+' "1": "Onprem" ,'
+' "": "" '
+' }');
+source
+| project
+ActorName = tostring(UserId),
+ActorUserId = tostring(UserKey),
+Workload = tostring(Workload),
+ActorUserType = tostring(actorUserTypeMap[tostring(UserType)]),
+DashboardName = tostring(DashboardName),
+DataClassification = tostring(DataClassification),
+DatasetName = tostring(DatasetName),
+EventOriginalType = tostring(Operation),
+EventOriginalUid = tostring(Id),
+EventProduct = "PowerBI",
+EventResult = tostring(eventResultMap[tostring(ResultStatus)]),
+EventVendor = "Microsoft",
+MembershipInformation = tostring(MembershipInformation),
+ObjectId = tostring(ObjectId),
+OrganizationId = tostring(OrganizationId),
+OrgAppPermission = tostring(OrgAppPermission),
+PbiWorkspaceName = tostring(WorkSpaceName),
+RecordType = tostring(recordTypeMap[tostring(RecordType)]),
+ReportName = tostring(ReportName),
+Scope = tostring(scopeMap[tostring(Scope)]),
+SharingInformation = tostring(SharingInformation),
+SrcIpAddr = tostring(ClientIP),
+SwitchState = tostring(SwitchState),
+TargetAppName = tostring(AppName),
+TimeGenerated = todatetime(CreationTime),
+UserType = tostring(UserType),
+UserAgent = tostring(UserAgent),
+Activity = tostring(Activity),
+ItemName = tostring(ItemName),
+WorkspaceId = tostring(WorkspaceId),
+DashboardId = tostring(DashboardId),
+IsSuccess = tostring(IsSuccess),
+RequestId = tostring(RequestId),
+ActivityId = tostring(ActivityId),
+DistributionMethod = tostring(DistributionMethod),
+FolderAccessRequests = todynamic(FolderAccessRequests)

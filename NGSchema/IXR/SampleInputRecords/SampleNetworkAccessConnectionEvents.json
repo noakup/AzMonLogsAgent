@@ -1,0 +1,18 @@
+[
+	{
+		"time": "2023-01-06T07:58:46.8346145Z",
+		"operationName": "MICROSOFT.AADIAM/SITES/WRITE",
+		"category": "NetworkAccessConnectionEvents",
+		"properties": "{\"CreatedDateTime\":\"2023-03-06T07:58:46.8346145Z\",\"TenantId\":\"cb9af522-39fe-4056-b879-e3200ff37b3d\",\"EventType\":\"ConnectionStarted\",\"RemoteNetworkSourceIp\":\"1.1.1.1\",\"ConnectionId\":\"6+Cy7aaBT+aGV+Ds.1\",\"TrafficType\":\"M365\",\"DeviceCategory\":\"Client\",\"DestinationIp\":\"100.64.0.239\",\"DestinationPort\":443,\"DestinationFqdn\":\"oneozco.sharepoint.com\",\"SourceIp\":\"20.51.192.19\",\"SourcePort\":63391,\"DeviceOperatingSystem\":\"Windows10Pro\",\"DeviceOperatingSystemVersion\":\"10.0.19044\",\"AgentVersion\":\"1.5.233\",\"DeviceId\":\"46bba529-d081-4cec-883b-4023b9bde1e0\",\"UserId\":\"ef147e40-db4c-40e4-9e63-f254f576421f\",\"UserPrincipalName\":\"User1@microsoft.com\",\"TransportProtocol\":\"TCP\",\"NetworkProtocol\":\"IPv4\",\"InitiatingProcessName\":\"test.exe\",\"ApplicationId\":\"cb9af522-39fe-4056-b879-e3200ff37b3d\",\"RemoteNetworkId\":\"4491c95f-cff8-4de2-bd34-68dc9d101515\",\"Token3PExpiry\":\"2023-01-06T09:58:46.8346145Z\",\"Token3PValidFrom\":\"2023-01-06T06:58:46.8346145Z\",\"Token3PIssuedAt\":\"2023-01-06T06:58:46.8346145Z\",\"Token3PUniqueId\":\"6Cy7aaBTaGVDs1\"}",
+		"location": "eastus",
+		"tenantId": "TENANT-ID"
+	},
+	{
+		"time": "2023-01-06T07:58:46.8346145Z",
+		"operationName": "MICROSOFT.AADIAM/SITES/WRITE",
+		"category": "NetworkAccessConnectionEvents",
+		"properties": "{\"CreatedDateTime\":\"2023-03-20T09:28:47.6448335Z\",\"TenantId\":\"cb9af522-39fe-4056-b879-e3200ff37b3d\",\"EventType\":\"ConnectionEnded\",\"ConnectionId\":\"6+Cy7aaBT+aGV+Ds.1\"}",
+		"location": "eastus",
+		"tenantId": "TENANT-ID"
+	}
+]

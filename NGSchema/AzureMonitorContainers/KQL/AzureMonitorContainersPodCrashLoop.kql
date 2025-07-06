@@ -1,0 +1,6 @@
+//Determines whether Pods/Containers has Crash-Loop phase
+KubePodInventory
+| where ContainerStatus  == 'waiting' 
+| where ContainerStatusReason == 'CrashLoopBackOff' or ContainerStatusReason == 'Error'
+| extend ContainerLastStatus=todynamic(ContainerLastStatus)
+| summarize RestartCount = arg_max(ContainerRestartCount, Computer, Namespace, ContainerLastStatus.reason) by Name

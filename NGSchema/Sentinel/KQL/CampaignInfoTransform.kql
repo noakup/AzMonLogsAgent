@@ -1,0 +1,11 @@
+source
+| project
+CampaignName = tostring(properties["CampaignName"]),
+CampaignId = tostring(properties["CampaignId"]),
+CampaignType = tostring(properties["CampaignType"]),
+CampaignSubType = tostring(properties["CampaignSubType"]),
+NetworkMessageId = tostring(properties["NetworkMessageId"]),
+RecipientEmailAddress = tostring(properties["RecipientEmailAddress"]),
+ReportId = tostring(properties["ReportId"]),
+TimeGenerated = todatetime(properties["Timestamp"]),
+Timestamp = todatetime(properties["Timestamp"])

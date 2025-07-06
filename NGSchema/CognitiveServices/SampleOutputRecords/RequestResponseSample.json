@@ -1,0 +1,20 @@
+[
+    {
+        "TimeGenerated": "2024-01-17T08:20:00.1510000Z",
+        "RequestTime": "2024-01-17T08:19:59.1091000Z",
+        "ResponseTime": "2024-01-17T08:19:59.3290000Z",
+        "ApiName": "Azure OpenAI API version 2023-09-15-preview",
+        "OperationName": "ChatCompletions_Create",
+        "ResponseCode": 200,
+        "DurationMs": 219,
+        "RequestLength": 3798,
+        "ResponseLength": 787,
+        "RequestId": "f717a8b8-ce73-4f7d-8277-39c8da78ff39",
+        "CallerIpAddress": "218.83.224.**",
+        "Location": "eastus",
+        "ModelName": "gpt-35-turbo",
+        "ModelVersion": "0613",
+        "ModelDeploymentName": "GPT-35",
+        "StreamType": "Non-Streaming"
+    }
+]

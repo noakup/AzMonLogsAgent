@@ -1,0 +1,25 @@
+[
+	{
+		"time": "2024-06-30T22:23:23.153Z",
+		"category": "HsmServiceOperations",
+		"operationName": "CN_GENERATE_KEY",
+		"resultType": "Success",
+		"callerIpAddress": "1.2.3.4",
+		"properties": {
+			"ClientSdkPackageVersion": "2.0.1.0",
+			"MemberId": "hsm1",
+			"Opcode": "17",
+			"PoolType": "cloudhsm",
+			"clientInfo": "ACCEPT_CONN_ONMAIN_CHN \/ 2.09.07.02",
+			"sku": {
+				"Family": "B",
+				"Name": "Standard_B1"
+			}
+		},
+		"resourceId": "/SUBSCRIPTIONS/361DA5D4-A47A-4C79-AFDD-XXXXXXXXXXXX/RESOURCEGROUPS/CONTOSOGROUP/PROVIDERS/MICROSOFT.HARDWARESECURITYMODULES/CLOUDHSMCLUSTERS/CONTOSOCLOUDHSM",
+		"operationVersion": "2022-11-01",
+		"resultSignature": "OK",
+		"resultDescription": "",
+		"durationMs": 221
+	}
+]

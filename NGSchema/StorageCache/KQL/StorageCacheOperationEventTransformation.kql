@@ -1,0 +1,11 @@
+source
+| project
+    TimeGenerated = todatetime(['time']),
+    OperationName = operationName,
+    CorrelationId = correlationId,
+    ResponseCode = toint(resultSignature),
+    ResultType = resultType,
+    ResultDescription = resultDescription,
+    Location = location,
+    StorageTargetName = tostring(properties.StorageTargetName),
+    PrimingJobName = tostring(properties.primingJobName)

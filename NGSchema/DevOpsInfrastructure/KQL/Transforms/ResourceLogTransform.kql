@@ -1,0 +1,6 @@
+source
+| project
+    TimeGenerated = todatetime(['time']),
+    Location = location,
+    OperationName = operationName,
+    Properties = properties

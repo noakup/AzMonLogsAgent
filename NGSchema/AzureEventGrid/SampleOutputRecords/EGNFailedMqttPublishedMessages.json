@@ -1,0 +1,13 @@
+[
+    {
+        "TimeGenerated": "2023-08-25T22:14:07.6738535Z",
+        "OperationName": "publish",
+        "ResultSignature": "AuthorizationError",
+        "ResultDescription": "Topic name 'testtopic/small4.0' does not match any topicspaces",
+        "ClientIdentity": "testclient-1",
+        "SessionName": "testclient1",
+        "Protocol": "MQTT5",
+        "Qos": 1,
+        "TopicName": "testtopic/small4.0"
+    }
+]

@@ -1,0 +1,818 @@
+{
+  "type": "Microsoft.SecurityInsights/dataCollection",
+  "displayName": "Azure Sentinel data collection",
+  "description": "All tables related to data collection in Sentinel.",
+  "simplifiedSchemaVersion": "3",
+  "icmTeam": "Microsoft Azure Sentinel/Data Collection",
+  "tags": {},
+  "properties": {},
+  "relatedTables": [],
+  "relatedFunctions": [],
+  "tables": [
+    {
+      "name": "NetworkSessions",
+      "description": "Network connections or sessions such as those logged by firewalls, Wire Data, NSG, Netflow, proxy systems and web security gateways.",
+      "categories": [
+        "security"
+      ],
+      "tags": {},
+      "properties": {},
+      "artifactVersion": 5,
+      "dataTypeId": "SENTINEL_NETWORKSESSIONS",
+      "intelligencePacks": [
+        "SecurityInsights"
+      ],
+      "isResourceCentric": false,
+      "isChangeColumnInternalNameAllowed": true,
+      "transformFilePath": "KQL/NetworkSessions.kql",
+      "sampleInputRecordsFilePath": "SampleInputRecords/NetworkSessionsSample.json",
+      "tableState": "Production",
+      "isLakeAllowed": false,
+      "isTroubleshootingAllowed": true,
+      "input": [
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime"
+        },
+        {
+          "name": "EventType",
+          "type": "String"
+        },
+        {
+          "name": "EventSubType",
+          "type": "String"
+        },
+        {
+          "name": "EventCount",
+          "type": "Int"
+        },
+        {
+          "name": "EventEndTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "EventMessage",
+          "type": "String"
+        },
+        {
+          "name": "EventProduct",
+          "type": "String"
+        },
+        {
+          "name": "EventProductVersion",
+          "type": "String"
+        },
+        {
+          "name": "EventResourceId",
+          "type": "String"
+        },
+        {
+          "name": "EventReportUrl",
+          "type": "String"
+        },
+        {
+          "name": "EventVendor",
+          "type": "String"
+        },
+        {
+          "name": "EventResult",
+          "type": "String"
+        },
+        {
+          "name": "EventResultDetails",
+          "type": "String"
+        },
+        {
+          "name": "EventSchemaVersion",
+          "type": "String"
+        },
+        {
+          "name": "EventSeverity",
+          "type": "String"
+        },
+        {
+          "name": "EventOriginalUid",
+          "type": "String"
+        },
+        {
+          "name": "EventStartTime",
+          "type": "DateTime"
+        },
+        {
+          "name": "EventTimeIngested",
+          "type": "DateTime"
+        },
+        {
+          "name": "EventUid",
+          "type": "String"
+        },
+        {
+          "name": "DvcIpAddr",
+          "type": "String"
+        },
+        {
+          "name": "DvcMacAddr",
+          "type": "String"
+        },
+        {
+          "name": "DvcHostname",
+          "type": "String"
+        },
+        {
+          "name": "DvcAction",
+          "type": "String"
+        },
+        {
+          "name": "DvcInboundInterface",
+          "type": "String"
+        },
+        {
+          "name": "DvcOutboundInterface",
+          "type": "String"
+        },
+        {
+          "name": "Fields",
+          "type": "String"
+        },
+        {
+          "name": "AdditionalFields",
+          "type": "String"
+        }
+      ],
+      "columns": [
+        {
+          "name": "EventType",
+          "type": "String",
+          "description": "Type of event being collected."
+        },
+        {
+          "name": "EventSubType",
+          "type": "String",
+          "description": "Additional description of type if applicable."
+        },
+        {
+          "name": "EventCount",
+          "type": "Int",
+          "description": "The number of events aggregated, if applicable."
+        },
+        {
+          "name": "EventEndTime",
+          "type": "DateTime",
+          "description": "The time in which the event ended."
+        },
+        {
+          "name": "EventMessage",
+          "type": "String",
+          "description": "A general message or description, either included in, or generated from the record."
+        },
+        {
+          "name": "DvcIpAddr",
+          "type": "String",
+          "description": "The IP address of the device generating the record.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "DvcMacAddr",
+          "type": "String",
+          "description": "The MAC address of the network interface of the reporting device from which the event was sent."
+        },
+        {
+          "name": "DvcHostname",
+          "type": "String",
+          "description": "The device name of the device generating the message."
+        },
+        {
+          "name": "EventProduct",
+          "type": "String",
+          "description": "The product generating the event."
+        },
+        {
+          "name": "EventProductVersion",
+          "type": "String",
+          "description": "The version of the product generating the event."
+        },
+        {
+          "name": "EventResourceId",
+          "type": "String",
+          "description": "The resource ID of the device generating the message."
+        },
+        {
+          "name": "EventReportUrl",
+          "type": "String",
+          "description": "A link to the full report created by the reporting device.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "EventVendor",
+          "type": "String",
+          "description": "The vendor of the product generating the event."
+        },
+        {
+          "name": "EventResult",
+          "type": "String",
+          "description": "The result reported for the activity. Empty value when not applicable."
+        },
+        {
+          "name": "EventResultDetails",
+          "type": "String",
+          "description": "Reason for the result reported in EventResult"
+        },
+        {
+          "name": "EventSchemaVersion",
+          "type": "String",
+          "description": "Azure Sentinel Schema Version."
+        },
+        {
+          "name": "EventSeverity",
+          "type": "String",
+          "description": "If the activity reported has a security impact, denotes the severity of the impact."
+        },
+        {
+          "name": "EventOriginalUid",
+          "type": "String",
+          "description": "The record ID from the reporting device."
+        },
+        {
+          "name": "EventStartTime",
+          "type": "DateTime",
+          "description": "The time in which the event stated."
+        },
+        {
+          "name": "TimeGenerated",
+          "type": "DateTime",
+          "description": "The time the event occurred, as reported by reporting source."
+        },
+        {
+          "name": "EventTimeIngested",
+          "type": "DateTime",
+          "description": "The time the event was ingested to Azure Sentinel. Will be added by Azure Sentinel."
+        },
+        {
+          "name": "EventUid",
+          "type": "String",
+          "description": "Unique identifier used by Sentinel to mark a row.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "NetworkApplicationProtocol",
+          "type": "String",
+          "description": "The application layer protocol used by the connection or session."
+        },
+        {
+          "transformName": "DstBytes",
+          "physicalName": "DstBytes_Long",
+          "logicalName": "DstBytes",
+          "type": "BigInt",
+          "description": "The number of bytes sent from the destination to the source for the connection or session."
+        },
+        {
+          "transformName": "SrcBytes",
+          "physicalName": "SrcBytes_Long",
+          "logicalName": "SrcBytes",
+          "type": "BigInt",
+          "description": "The number of bytes sent from the source to the destination for the connection or session."
+        },
+        {
+          "transformName": "NetworkBytes",
+          "physicalName": "NetworkBytes_Long",
+          "logicalName": "NetworkBytes",
+          "type": "BigInt",
+          "description": "Number of bytes sent in both directions. If both BytesReceived and BytesSent exist, BytesTotal should equal their sum."
+        },
+        {
+          "name": "NetworkDirection",
+          "type": "String",
+          "description": "The direction the connection or session, into or out of the organization."
+        },
+        {
+          "name": "DstGeoCity",
+          "type": "String",
+          "description": "The city associated with the destination IP address."
+        },
+        {
+          "name": "DstGeoCountry",
+          "type": "String",
+          "description": "The country associated with the source IP address."
+        },
+        {
+          "name": "DstDvcHostname",
+          "type": "String",
+          "description": "The device name of the destination device."
+        },
+        {
+          "name": "DstDvcFqdn",
+          "type": "String",
+          "description": "The fully qualified domain name of the host where the log was created."
+        },
+        {
+          "name": "DstDomainHostname",
+          "type": "String",
+          "description": "The domain of the destination host."
+        },
+        {
+          "name": "DstInterfaceName",
+          "type": "String",
+          "description": "The network interface used for the connection or session by the destination device."
+        },
+        {
+          "name": "DstInterfaceGuid",
+          "type": "String",
+          "description": "GUID of the network interface which was used for authentication request.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "DstIpAddr",
+          "type": "String",
+          "description": "The IP address of the connection or session destination.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "DstDvcIpAddr",
+          "type": "String",
+          "description": "The destination IP address of a device that is not directly associated with the network packet.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "DstGeoLatitude",
+          "type": "Double",
+          "description": "The latitude of the geographical coordinate associated with the destination IP address."
+        },
+        {
+          "name": "DstMacAddr",
+          "type": "String",
+          "description": "The MAC address of the network interface at which the connection or session terminated.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "DstDvcMacAddr",
+          "type": "String",
+          "description": "The destination MAC address of a device that is not directly associated with the network packet.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "DstDvcDomain",
+          "type": "String",
+          "description": "The Domain of the destination device."
+        },
+        {
+          "name": "DstPortNumber",
+          "type": "Int",
+          "description": "The destination IP port."
+        },
+        {
+          "name": "DstGeoRegion",
+          "type": "String",
+          "description": "The region within a country associated with the destination IP address."
+        },
+        {
+          "name": "DstResourceId",
+          "type": "String",
+          "description": "The resource Id of the destination device.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "DstNatIpAddr",
+          "type": "String",
+          "description": "If reported by an intermediary NAT device such as a firewall, the IP address used by the NAT device for communication with the source.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "DstNatPortNumber",
+          "type": "Int",
+          "description": "If reported by an intermediary NAT device such as a firewall, the port used by the NAT device for communication with the source."
+        },
+        {
+          "name": "DstUserSid",
+          "type": "String",
+          "description": "The User ID of the identity associated with the session's destination. Typically, the identity used to authenticate a server."
+        },
+        {
+          "name": "DstUserAadId",
+          "type": "String",
+          "description": "The Azure AD account object ID of the user at the destination end of the session.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "DstUserName",
+          "type": "String",
+          "description": "The username of the identity associated with the session’s destination."
+        },
+        {
+          "name": "DstUserUpn",
+          "type": "String",
+          "description": "The UPN of the identity associated with the session’s destination."
+        },
+        {
+          "name": "DstUserDomain",
+          "type": "String",
+          "description": "The domain or computer name of the account at the destination of the session."
+        },
+        {
+          "name": "DstZone",
+          "type": "String",
+          "description": "The network zone of the destination, as defined by the reporting device."
+        },
+        {
+          "name": "DstGeoLongitude",
+          "type": "Double",
+          "description": "The longitude of the geographical coordinate associated with the destination IP address"
+        },
+        {
+          "name": "DvcAction",
+          "type": "String",
+          "description": "If reported by an intermediary device such as a firewall, the action taken by device."
+        },
+        {
+          "name": "DvcInboundInterface",
+          "type": "String",
+          "description": "If reported by an intermediary device such as a firewall, the network interface used by it for the connection to the source device."
+        },
+        {
+          "name": "DvcOutboundInterface",
+          "type": "String",
+          "description": "If reported by an intermediary device such as a firewall, the network interface used by it for the connection to the destination device."
+        },
+        {
+          "name": "NetworkDuration",
+          "type": "Int",
+          "description": "The amount of time, in millisecond, for the completion of the network session or connection."
+        },
+        {
+          "name": "NetworkIcmpCode",
+          "type": "Int",
+          "description": "For an ICMP message, ICMP message type numeric value (RFC 2780 or RFC 4443)."
+        },
+        {
+          "name": "NetworkIcmpType",
+          "type": "String",
+          "description": "For an ICMP message, ICMP message type text representation (RFC 2780 or RFC 4443)."
+        },
+        {
+          "name": "DstPackets",
+          "type": "BigInt",
+          "description": "The number of packets sent from the destination to the source for the connection or session. The meaning of a packet is defined by the reporting device."
+        },
+        {
+          "name": "SrcPackets",
+          "type": "BigInt",
+          "description": "The number of packets sent from the source to the destination for the connection or session. The meaning of a packet is defined by the reporting device."
+        },
+        {
+          "name": "NetworkPackets",
+          "type": "BigInt",
+          "description": "Number of packets sent in both directions. If both PacketsReceived and PacketsSent exist, BytesTotal should equal their sum."
+        },
+        {
+          "name": "HttpRequestTime",
+          "type": "Int",
+          "description": "The amount of time it took to send the request to the server, if applicable."
+        },
+        {
+          "name": "HttpResponseTime",
+          "type": "Int",
+          "description": "The amount of time it took to receive a response in the server, if applicable."
+        },
+        {
+          "name": "NetworkRuleName",
+          "type": "String",
+          "description": "The name or ID of the rule by which DeviceAction was decided upon."
+        },
+        {
+          "name": "NetworkRuleNumber",
+          "type": "Int",
+          "description": "Matched rule number."
+        },
+        {
+          "name": "NetworkSessionId",
+          "type": "String",
+          "description": "The session identifier as reported by the reporting device."
+        },
+        {
+          "name": "SrcGeoCity",
+          "type": "String",
+          "description": "The city associated with the source IP address."
+        },
+        {
+          "name": "SrcGeoCountry",
+          "type": "String",
+          "description": "The country associated with the source IP address."
+        },
+        {
+          "name": "SrcDvcHostname",
+          "type": "String",
+          "description": "The device name of the source device."
+        },
+        {
+          "name": "SrcDvcFqdn",
+          "type": "String",
+          "description": "The fully qualified domain name of the host where the log was created."
+        },
+        {
+          "name": "SrcDvcDomain",
+          "type": "String",
+          "description": "Domain of the device from which session was initiated."
+        },
+        {
+          "name": "SrcDvcOs",
+          "type": "String",
+          "description": "The OS of the source device."
+        },
+        {
+          "name": "SrcDvcModelName",
+          "type": "String",
+          "description": "The model of the source device."
+        },
+        {
+          "name": "SrcDvcModelNumber",
+          "type": "String",
+          "description": "The model number of the source device."
+        },
+        {
+          "name": "SrcDvcType",
+          "type": "String",
+          "description": "The type of the source device."
+        },
+        {
+          "name": "SrcInterfaceName",
+          "type": "String",
+          "description": "The network interface used for the connection or session by the source device."
+        },
+        {
+          "name": "SrcInterfaceGuid",
+          "type": "String",
+          "description": "GUID of the network interface used.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "SrcIpAddr",
+          "type": "String",
+          "description": "The IP address from which the connection or session originated.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SrcDvcIpAddr",
+          "type": "String",
+          "description": "The source IP address of a device not directly associated with the network packet (collected by a provider or explicitly calculated).",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SrcGeoLatitude",
+          "type": "Double",
+          "description": "The latitude of the geographical coordinate associated with the source IP address."
+        },
+        {
+          "name": "SrcGeoLongitude",
+          "type": "Double",
+          "description": "The longitude of the geographical coordinate associated with the source IP address."
+        },
+        {
+          "name": "SrcMacAddr",
+          "type": "String",
+          "description": "The MAC address of the network interface from which the connection od session originated.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SrcDvcMacAddr",
+          "type": "String",
+          "description": "The source MAC address of a device that is not directly associated with the network packet."
+        },
+        {
+          "name": "SrcPortNumber",
+          "type": "Int",
+          "description": "The IP port from which the connection originated. May not be relevant for a session comprising multiple connections."
+        },
+        {
+          "name": "SrcGeoRegion",
+          "type": "String",
+          "description": "The region within a country associated with the source IP address."
+        },
+        {
+          "name": "SrcResourceId",
+          "type": "String",
+          "description": "The resource ID of the device generating the message."
+        },
+        {
+          "name": "SrcNatIpAddr",
+          "type": "String",
+          "description": "If reported by an intermediary NAT device such as a firewall, the IP address used by the NAT device for communication with the destination.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "SrcNatPortNumber",
+          "type": "Int",
+          "description": "If reported by an intermediary NAT device such as a firewall, the port used by the NAT device for communication with the destination."
+        },
+        {
+          "name": "SrcUserSid",
+          "type": "String",
+          "description": "The user ID of the identity associated with the sessions source. Typically, user performing an action on the client."
+        },
+        {
+          "name": "SrcUserAadId",
+          "type": "String",
+          "description": "The Azure AD account object ID of the user at the source end of the session.",
+          "dataTypeHint": "GUID"
+        },
+        {
+          "name": "SrcUserName",
+          "type": "String",
+          "description": "The username of the identity associated with the sessions source. Typically, user performing an action on the client."
+        },
+        {
+          "name": "SrcUserUpn",
+          "type": "String",
+          "description": "UPN of the account initiating the session."
+        },
+        {
+          "name": "SrcUserDomain",
+          "type": "String",
+          "description": "The domain for the account initiating the session."
+        },
+        {
+          "name": "SrcZone",
+          "type": "String",
+          "description": "The network zone of the source, as defined by the reporting device."
+        },
+        {
+          "name": "NetworkProtocol",
+          "type": "String",
+          "description": "The IP protocol used by the connection or session. Typically, TCP, UDP or ICMP."
+        },
+        {
+          "name": "CloudAppName",
+          "type": "String",
+          "description": "The name of the destination application for an HTTP application as identified by a proxy."
+        },
+        {
+          "name": "CloudAppId",
+          "type": "String",
+          "description": "The ID of the destination application for an HTTP application as identified by a proxy. This value is usually specific to the proxy used."
+        },
+        {
+          "name": "CloudAppOperation",
+          "type": "String",
+          "description": "The operation the user performed in the context of the destination application for an HTTP application as identified by a proxy. This value is usually specific to the proxy used."
+        },
+        {
+          "name": "CloudAppRiskLevel",
+          "type": "String",
+          "description": "The risk level associated with an HTTP application as identified by a proxy. This value is usually specific to the proxy used."
+        },
+        {
+          "name": "FileName",
+          "type": "String",
+          "description": "The filename transmitted over the network connections for protocols such as FTP and HTTP which provide the file name information."
+        },
+        {
+          "name": "FilePath",
+          "type": "String",
+          "description": "The full path, including file name, of the file."
+        },
+        {
+          "name": "FileHashMd5",
+          "type": "String",
+          "description": "The MD5 hash value of the file transmitted over the network connections for protocols."
+        },
+        {
+          "name": "FileHashSha1",
+          "type": "String",
+          "description": "The SHA1 hash value of the file transmitted over the network connections for protocols."
+        },
+        {
+          "name": "FileHashSha256",
+          "type": "String",
+          "description": "The SHA256 hash value of the file transmitted over the network connections for protocols."
+        },
+        {
+          "name": "FileHashSha512",
+          "type": "String",
+          "description": "The SHA512 hash value of the file transmitted over the network connections for protocols."
+        },
+        {
+          "name": "FileExtension",
+          "type": "String",
+          "description": "The type of the file transmitted over the network connections for protocols such as FTP and HTTP."
+        },
+        {
+          "name": "FileMimeType",
+          "type": "String",
+          "description": "The MIME type of the file transmitted over the network connections for protocols such as FTP and HTTP."
+        },
+        {
+          "name": "FileSize",
+          "type": "Int",
+          "description": "The file size, in bytes, of the file transmitted over the network connections for protocols."
+        },
+        {
+          "name": "HttpVersion",
+          "type": "String",
+          "description": "The HTTP Request Version for HTTP/HTTPS network connections."
+        },
+        {
+          "name": "HttpRequestMethod",
+          "type": "String",
+          "description": "The HTTP Method for HTTP/HTTPS network sessions."
+        },
+        {
+          "name": "HttpStatusCode",
+          "type": "String",
+          "description": "The HTTP Status Code for HTTP/HTTPS network sessions."
+        },
+        {
+          "name": "HttpContentType",
+          "type": "String",
+          "description": "The HTTP Response content type header for HTTP/HTTPS network sessions."
+        },
+        {
+          "name": "HttpReferrerOriginal",
+          "type": "String",
+          "description": "The HTTP referrer header for HTTP/HTTPS network sessions.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "HttpUserAgentOriginal",
+          "type": "String",
+          "description": "The HTTP user agent header for HTTP/HTTPS network sessions."
+        },
+        {
+          "name": "HttpRequestXff",
+          "type": "String",
+          "description": "The HTTP X-Forwarded-For header for HTTP/HTTPS network sessions.",
+          "dataTypeHint": "IP"
+        },
+        {
+          "name": "UrlCategory",
+          "type": "String",
+          "description": "The defined grouping of a URL (or could be just based on the domain in the URL) related to what it is (i.e.: adult, news, advertising, parked domains, etc.)."
+        },
+        {
+          "name": "UrlOriginal",
+          "type": "String",
+          "description": "The HTTP request URL for HTTP/HTTPS network sessions.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "UrlHostname",
+          "type": "String",
+          "description": "The domain part of an HTTP request URL for HTTP/HTTPS network sessions.",
+          "dataTypeHint": "URI"
+        },
+        {
+          "name": "ThreatCategory",
+          "type": "String",
+          "description": "The category of a threat identified by a security system such as Web Security Gateway of an IPS and is associated with this network session."
+        },
+        {
+          "name": "ThreatId",
+          "type": "String",
+          "description": "The ID of a threat identified by a security system such as Web Security Gateway of an IPS and is associated with this network session."
+        },
+        {
+          "name": "ThreatName",
+          "type": "String",
+          "description": "The name of the threat or malware identified."
+        },
+        {
+          "name": "AdditionalFields",
+          "type": "Dynamic",
+          "description": "When no respective column in the schema matches, additional fields can be stored in a JSON bag."
+        }
+      ]
+    }
+  ],
+  "functions": [],
+  "queries": [{
+    "id": "64ded722-608e-472b-a3dd-17f94b7cac07",
+    "displayName": "Get traffic to non standard ports",
+    "description":"This query identifies source IP addresses sending connection requests over multiple ports. This could be an indication of adversary attempts to list available services. References: MITRE Network Service Scanning (T1046)",
+    "bodyFilePath": "KQL/NetworkSessionsPossiblePortScanQuery.kql",
+    "categories": ["security"],
+    "relatedTables": ["NetworkSessions"],
+    "tags": {
+      "Topic": ["Security"]
+    },
+    "properties": {
+      "ExampleQuery": true,
+      "QueryAttributes": {
+        "IsMultiResource": false
+      }
+    }
+  },
+  {
+    "id": "6307514a-d00a-4ada-a0fb-087b72bee4f5",
+    "displayName":"High volume traffic to uncommon domains",
+    "description": "This query identifies domains receiving uncommon amount of data volume. This could be an indication of adversary attempts to steal and exfiltrate data.",
+    "bodyFilePath": "KQL/NetworkSessionsHighVolumeTrafficQuery.kql",
+    "categories": ["security"],
+    "relatedTables": ["NetworkSessions"],
+    "tags": {
+      "Topic": ["Security"]
+    },
+    "properties": {
+      "ExampleQuery": true,
+      "QueryAttributes": {
+        "IsMultiResource": false
+      }
+    }
+  }]
+}

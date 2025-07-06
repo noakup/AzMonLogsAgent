@@ -1,0 +1,35 @@
+[
+  {
+    "time": "2021-03-06T10:28:37.1702622Z",
+    "tenantId": "5b5a146c-eba8-46af-96f8-e31b50d15a3f",
+    "operationName": "Publish",
+    "category": "AdvancedHunting-IdentityQueryEvents",
+    "properties": {
+      "TimeGenerated": "2021-08-14T033610.718Z",
+      "ActionType": "PowerShell execution",
+      "Application": "Active Directory",
+      "TargetAccountUpn": "",
+      "TargetAccountDisplayName": "",
+      "TargetDeviceName": "",
+      "DestinationDeviceName": "domaincontroller.sentinele5.onmicrosoft.com",
+      "DestinationIPAddress": "",
+      "DestinationPort": null,
+      "Protocol": "WinRm",
+      "AccountName": "",
+      "AccountDomain": "",
+      "AccountUpn": "",
+      "AccountSid": "S-1-5-21-1490773159-3651626488-1398181232-500",
+      "AccountObjectId": "",
+      "AccountDisplayName": "",
+      "DeviceName": "client.sentinele5.onmicrosoft.com",
+      "IPAddress": "10.0.7.5",
+      "Port": null,
+      "Location": "",
+      "ISP": "INTERNAL_NETWORK",
+      "ReportId": "14decb1a-eb9d-4d0c-8edd-ef2cc3f3090b_116581783_1628912170718_20940",
+      "AdditionalFields": "{\"DestinationComputerOperatingSystemVersion\":\"6.3 (9600)\",\"DestinationComputerOperatingSystemType\":\"windows\",\"DestinationComputerOperatingSystem\":\"windows server 2012 r2 datacenter\",\"SourceComputerOperatingSystemType\":\"windows\",\"SourceComputerOperatingSystemVersion\":\"6.3 (9600)\",\"SourceComputerOperatingSystem\":\"windows server 2012 r2 datacenter\",\"IsResourceAccountTrustedForUnconstrainedDelegation\":\"False\",\"FROM.DEVICE\":\"CLIENT\",\"ACTOR.ACCOUNT\":\"aatp_admin\",\"TO.DEVICE\":\"DOMAINCONTROLLE\",\"Count\":\"1\",\"TARGET_OBJECT.ACCOUNT\":\"krbtgt\",\"TARGET_OBJECT.USER\":\"krbtgt\",\"Spns\":\"krbtgt/SENTINELE5.ONMICROSOFT.COM\"}\n"
+    },
+    "Tenant": "PRD",
+    "DC": "WEU"
+  }
+]

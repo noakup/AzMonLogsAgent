@@ -1,0 +1,4 @@
+MDCDetectionK8SApiEvents
+| where isnotempty(Payload)
+| order by Timestamp
+| limit 100

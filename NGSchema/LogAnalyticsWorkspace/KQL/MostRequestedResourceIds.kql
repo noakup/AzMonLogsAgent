@@ -1,0 +1,6 @@
+LAQueryLogs
+| extend reqContext = parse_json(RequestContext)
+| extend datasources = array_concat(reqContext["resources"], reqContext["workspaces"], reqContext["applications"])
+| mv-expand datasources
+| summarize reqCount = count() by tostring(datasources)
+| order by reqCount desc

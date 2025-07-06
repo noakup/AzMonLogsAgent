@@ -1,0 +1,17 @@
+source 
+| extend props = parse_json(properties)
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    OperationVersion = operationVersion,
+    Category = category,
+    CorrelationId = correlationId,
+    RecordId = tostring(props.recordId),
+    UsageType = tostring(props.usageType),
+    UnitType = tostring(props.unitType),
+    Quantity = todouble(props.quantity),
+    StartTime = todatetime(props.startTime),
+    EndTime = todatetime(props.endTime),
+    UserIdA = tostring(props.userIdA),
+    UserIdB = tostring(props.userIdB),
+    ParticipantId = tostring(props.participantId)

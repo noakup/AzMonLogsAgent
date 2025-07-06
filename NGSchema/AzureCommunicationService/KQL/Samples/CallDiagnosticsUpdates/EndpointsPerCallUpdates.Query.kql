@@ -1,0 +1,8 @@
+ACSCallSummaryUpdates
+// Get the distinct combinations of CorrelationId and EndpointId
+| summarize arg_max(CallUpdatesVersion, *) by CorrelationId, EndpointId
+// Count all endpoints and distinct calls
+| summarize num_endpoints=count(), num_calls=dcount(CorrelationId)
+// Calculate the average number of distinct endpoints per call
+| extend avg_endpoints = toreal(num_endpoints) / toreal(num_calls)
+| project num_endpoints, num_calls, avg_endpoints

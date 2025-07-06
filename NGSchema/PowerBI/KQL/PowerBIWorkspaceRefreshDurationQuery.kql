@@ -1,0 +1,8 @@
+// Refresh durations by workspace and dataset
+PowerBIDatasetsWorkspace
+| where OperationName == 'CommandEnd'
+| where EffectiveUsername contains 'system'
+| where TextData contains 'Batch Transaction'
+| where TextData contains 'refresh'
+| parse TextData with * '<DatabaseID>' DatasetId '</DatabaseID>' *
+| project TimeGenerated, WorkspaceId, DatasetId, DurationSeconds = Duration/1000

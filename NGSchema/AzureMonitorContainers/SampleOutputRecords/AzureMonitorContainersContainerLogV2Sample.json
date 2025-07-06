@@ -1,0 +1,29 @@
+[  
+  {
+    "LogMessage": "9809",
+    "LogSource": "stdout",
+    "TimeGenerated": "2021-01-12T00:30:13.206735456Z",
+    "ContainerId": "32135ec0d37c0bb3aec3dda045e54f778bd8e5386e4cfee203288ff6fa57786b",
+    "ContainerName": "ubuntu1804",
+    "PodName": "1logmin-linux-replicas-6cffbb9f97-qtnqh",
+    "Computer": "aks-lpool-39842404-vmss000000",
+    "PodNamespace": "linux-logs",
+    "KubernetesMetadata": {
+        "podUid": "93bf47d2-5c1a-42bc-9a22-481939a93a66",
+        "podLabels": {
+            "app":"defender",
+            "controller-revision-hash":"f48799794",
+            "dsName":"microsoft-defender-publisher-ds",
+            "kubernetes.azure.com/managedby":"aks",
+            "pod-template-generation":"2"
+        },
+        "podAnnotations": {
+            "kubernetes.io/config.seen":"2023-10-02T08:21:49.954540360Z",
+            "kubernetes.io/config.source":"api"
+        },
+        "image_hash": "mcr.microsoft.com/azuredefender/stable/security-publisher@sha256:1234566789",
+        "image": "mcr.microsoft.com/azuredefender/stable/security-publisher:6.6.66"    
+    },
+    "LogLevel": "DEBUG"
+  }
+]

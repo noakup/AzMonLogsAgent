@@ -1,0 +1,26 @@
+[
+    {
+        "operationName": "Microsoft.Kubernetes/connectedClusters/diagnosticLogs/Read",
+        "category": "kube-controller-manager",
+        "resourceId": "/SUBSCRIPTIONS/08CE8FA2-9E5E-4D66-AB08-C0C13F360144/RESOURCEGROUPS/MIKEKEESEY-TEST/PROVIDERS/MICROSOFT.KUBERNETES/CONNECTEDCLUSTERS/MIKEKEESEY-TEST",
+        "properties": {
+            "log": "I0110 23:13:02.552022       1 leaderelection.go:258] successfully acquired lease kube-system/kube-controller-manager\n",
+            "stream": "stderr",
+            "pod": "kube-controller-manager-v2-9d98f9ddc-l9hbc",
+            "containerID": "f6b91d47e6a48d80af340aa1e595703996c3783470721ce29fb0a7977a7ccc0a"
+        },
+        "time": "2023-01-10T23:13:02.0000000Z"
+    },
+    {
+        "operationName": "Microsoft.Kubernetes/connectedClusters/diagnosticLogs/Read",
+        "category": "kube-controller-manager",
+        "resourceId": "/SUBSCRIPTIONS/08CE8FA2-9E5E-4D66-AB08-C0C13F360144/RESOURCEGROUPS/MIKEKEESEY-TEST/PROVIDERS/MICROSOFT.KUBERNETES/CONNECTEDCLUSTERS/MIKEKEESEY-TEST",
+        "properties": {
+            "log": "I0110 23:13:02.552075       1 event.go:294] \"Event occurred\" object=\"kube-system/kube-controller-manager\" fieldPath=\"\" kind=\"Lease\" apiVersion=\"coordination.k8s.io/v1\" type=\"Normal\" reason=\"LeaderElection\" message=\"kube-controller-manager-v2-9d98f9ddc-l9hbc_63af96f4-bae8-48f3-99fa-d0176b105c01 became leader\"\n",
+            "stream": "stderr",
+            "pod": "kube-controller-manager-v2-9d98f9ddc-l9hbc",
+            "containerID": "f6b91d47e6a48d80af340aa1e595703996c3783470721ce29fb0a7977a7ccc0a"
+        },
+        "time": "2023-01-10T23:13:02.0000000Z"
+    }
+]

@@ -1,0 +1,826 @@
+{
+	"contactDL": "asipolarbearseng@microsoft.com",
+	"type": "Microsoft.SecurityInsights/Office365",
+	"displayName": "Azure Sentinel Office 365",
+	"description": "Audit logs for Office 365 collected by Azure Sentinel.",
+	"tags": {},
+	"properties": {},
+	"simplifiedSchemaVersion": "3",
+	"icmTeam": "Microsoft Azure Sentinel/Data Collection and Processing",
+	"relatedTables": [],
+	"relatedFunctions": [],
+	"tables": [
+		{
+			"name": "CommunicationComplianceActivity",
+			"description": "Office communication compliance audit logs. Used for monitoring policy compliance violation.",
+			"categories": [
+				"security",
+				"audit"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 3,
+			"dataTypeId": "OFFICECOMMUNICATIONCOMPLIANCE_RESTAPI",
+			"intelligencePacks": [
+				"SecurityInsights"
+			],
+			"isResourceCentric": false,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+			"input": [
+				{
+					"name": "CreationTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "Id",
+					"type": "String"
+				},
+				{
+					"name": "Operation",
+					"type": "String"
+				},
+				{
+					"name": "OrganizationId",
+					"type": "String"
+				},
+				{
+					"name": "RecordType",
+					"type": "Int"
+				},
+				{
+					"name": "ResultStatus",
+					"type": "String"
+				},
+				{
+					"name": "UserKey",
+					"type": "String"
+				},
+				{
+					"name": "UserType",
+					"type": "Int"
+				},
+				{
+					"name": "Version",
+					"type": "Int"
+				},
+				{
+					"name": "Workload",
+					"type": "String"
+				},
+				{
+					"name": "ObjectId",
+					"type": "String"
+				},
+				{
+					"name": "UserId",
+					"type": "String"
+				},
+				{
+					"name": "IsPolicyHit",
+					"type": "Bool"
+				},
+				{
+					"name": "SRPolicyMatchDetails",
+					"type": "Dynamic"
+				}
+			],
+			"transformFilePath": "KQL/Office365CommunicationComplianceTransform.kql",
+			"columns": [
+				{
+					"name": "EventOriginalUid",
+					"type": "String",
+					"description": "Unique identifier of an audit record.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "RecordType",
+					"type": "String",
+					"description": "The type of operation indicated by the record. See the AuditLogRecordType table for details on the types of audit log records."
+				},
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"description": "The date and time in UTC when the user performed the activity."
+				},
+				{
+					"name": "EventOriginalType",
+					"type": "String",
+					"description": "The name of the user or admin that performed the activity. For a description of the most common operations/activities, see \"Search the audit log\" in the Office 365 Protection Center. For Exchange admin activity, this property identifies the name of the cmdlet that was run. For Dlp events, this can be \"DlpRuleMatch\", \"DlpRuleUndo\" or \"DlpInfo\", which are described under \"DLP schema\" below."
+				},
+				{
+					"name": "OrganizationId",
+					"type": "String",
+					"description": "The GUID for your organization's Office 365 tenant. This value will always be the same for your organization, regardless of the Office 365 service in which it occurs.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "UserType",
+					"type": "String",
+					"description": "The type of user that performed the operation."
+				},
+				{
+					"name": "ActorUserType",
+					"type": "String",
+					"description": "The type of user that performed the operation. Possible types includes: Admin, System, Application, Service Principal and Other."
+				},
+				{
+					"name": "ActorUserId",
+					"type": "String",
+					"description": "An alternative ID for the user identified in the UserId property. For example, this property is populated with the passport unique ID (PUID) for events performed by users in SharePoint, OneDrive for Business, and Exchange. This property may also specify the same value as the UserID property for events occurring in other services and events performed by system accounts."
+				},
+				{
+					"name": "Workload",
+					"type": "String",
+					"description": "The Office 365 service where the activity occurred."
+				},
+				{
+					"name": "ObjectId",
+					"type": "String",
+					"description": "For SharePoint and OneDrive for business activity, the full path name of the file or folder accessed by the user. For Exchange admin audit logging, the name of the object that was modified by the cmdlet."
+				},
+				{
+					"name": "ActorName",
+					"type": "String",
+					"description": "The UPN (User Principal Name) of the user who performed the action (specified in the Operation property) that resulted in the record being logged; for example, my_name@my_domain_name. Note that records for activity performed by system accounts (such as SHAREPOINT\\system or NT AUTHORITY\\SYSTEM) are also included. In SharePoint, another value display in the UserId property is app@sharepoint. This indicates that the \"user\" who performed the activity was an application that has the necessary permissions in SharePoint to perform organization-wide actions (such as search a SharePoint site or OneDrive account) on behalf of a user, admin, or service. For more information, see the app@sharepoint user in audit records."
+				},
+				{
+					"name": "EventProduct",
+					"type": "String",
+					"description": "The Microsoft service name."
+				},
+				{
+					"name": "EventVendor",
+					"type": "String",
+					"description": "The vendor service name."
+				},
+				{
+					"name": "IsPolicyHit",
+					"type": "Bool",
+					"description": "Indication if the there is a hit on a defined policy."
+
+				},
+				{
+					"name": "SRPolicyId",
+					"type": "String",
+					"description": "Policy Id."
+				},
+				{
+					"name": "SRPolicyName",
+					"type": "String",
+					"description": "Policy name."
+				},
+				{
+					"name": "SRRuleMatchDetails",
+					"type": "Dynamic",
+					"description": "Policy matches."
+				}
+
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/Office365CommunicationComplianceSample.json"
+		},
+		{
+			"name": "ProjectActivity",
+			"description": "Contains your Microsoft Project audit logs in order to track your Project activities.",
+			"categories": [
+				"security"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 6,
+			"dataTypeId": "OFFICEPROJECT_RESTAPI",
+			"intelligencePacks": [
+				"SecurityInsights"
+			],
+			"isResourceCentric": false,
+			"tableState": "Production",
+      "isTroubleshootingAllowed": true,
+      "isLakeAllowed": true,
+			"input": [
+				{
+					"name": "AppAccessContext",
+					"type": "String"
+				},
+				{
+					"name": "CreationTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "Id",
+					"type": "String"
+				},
+				{
+					"name": "Operation",
+					"type": "String"
+				},
+				{
+					"name": "OrganizationId",
+					"type": "String"
+				},
+				{
+					"name": "ObjectId",
+					"type": "String"
+				},
+				{
+					"name": "RecordType",
+					"type": "Int"
+				},
+				{
+					"name": "UserKey",
+					"type": "String"
+				},
+				{
+					"name": "UserType",
+					"type": "Int"
+				},
+				{
+					"name": "Version",
+					"type": "Int"
+				},
+				{
+					"name": "ResultStatus",
+					"type": "String"
+				},
+				{
+					"name": "Workload",
+					"type": "String"
+				},
+				{
+					"name": "ClientIP",
+					"type": "String"
+				},
+				{
+					"name": "UserId",
+					"type": "String"
+				},
+				{
+					"name": "CorrelationId",
+					"type": "String"
+				},
+				{
+					"name": "EventSource",
+					"type": "String"
+				},
+				{
+					"name": "ItemType",
+					"type": "String"
+				},
+				{
+					"name": "UserAgent",
+					"type": "String"
+				},
+				{
+					"name": "Action",
+					"type": "String"
+				},
+				{
+					"name": "Entity",
+					"type": "String"
+				},
+				{
+					"name": "OnBehalfOfResId",
+					"type": "String"
+				},
+				{
+					"name": "Scope",
+					"type": "Int"
+				}
+			],
+			"transformFilePath": "KQL/Office365ProjectTransform.kql",
+			"columns": [
+				{
+					"name": "EventOriginalUid",
+					"type": "String",
+					"description": "Unique identifier of an audit record.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "RecordType",
+					"type": "String",
+					"description": "The type of operation indicated by the record. See the AuditLogRecordType table for details on the types of audit log records."
+				},
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"description": "The date and time in UTC when the user performed the activity."
+				},
+				{
+					"name": "EventOriginalType",
+					"type": "String",
+					"description": "The name of the user or admin activity that performed the activity. For a description of the most common operations/activities, see \"Search the audit log\" in the Office 365 Protection Center. For Exchange admin activity, this property identifies the name of the cmdlet that was run. For Dlp events, this can be \"DlpRuleMatch\", \"DlpRuleUndo\" or \"DlpInfo\", which are described under \"DLP schema\" below."
+				},
+				{
+					"name": "OrganizationId",
+					"type": "String",
+					"description": "The GUID for your organization's Office 365 tenant. This value will always be the same for your organization, regardless of the Office 365 service in which it occurs.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "UserType",
+					"type": "String",
+					"description": "The type of user that performed the operation."
+				},
+				{
+					"name": "ActorUserType",
+					"type": "String",
+					"description": "The type of user that performed the operation. Possible types are: Admin, System, Application, Service Principal and Other."
+				},
+				{
+					"name": "ActorUserId",
+					"type": "String",
+					"description": "An alternative ID for the user identified in the UserId property. For example, this property is populated with the passport unique ID (PUID) for events performed by users in SharePoint, OneDrive for Business, and Exchange. This property may also specify the same value as the UserID property for events occurring in other services and events performed by system accounts."
+				},
+				{
+					"name": "Workload",
+					"type": "String",
+					"description": "The Office 365 service where the activity occurred."
+				},
+				{
+					"name": "EventResult",
+					"type": "String",
+					"description": "Indicates whether the action (specified in the Operation property) was successful or not. Possible values are Succeeded, PartiallySucceeded, or Failed."
+				},
+				{
+					"name": "ObjectId",
+					"type": "String",
+					"description": "For SharePoint and OneDrive for business activity, the full path name of the file or folder accessed by the user. For Exchange admin audit logging, the name of the object that was modified by the cmdlet."
+				},
+				{
+					"name": "ActorName",
+					"type": "String",
+					"description": "The UPN (User Principal Name) of the user who performed the action (specified in the Operation property) that resulted in the record being logged; for example, my_name@my_domain_name. Note that records for activity performed by system accounts (such as SHAREPOINT\\system or NT AUTHORITY\\SYSTEM) are also included. In SharePoint, another value display in the UserId property is app@sharepoint. This indicates that the \"user\" who performed the activity was an application that has the necessary permissions in SharePoint to perform organization-wide actions (such as search a SharePoint site or OneDrive account) on behalf of a user, admin, or service. For more information, see the app@sharepoint user in audit records."
+				},
+				{
+					"name": "SrcIpAddr",
+					"type": "String",
+					"description": "The IP address of the device that was used when the activity was logged. The IP address is displayed in either an IPv4 or IPv6 address format. For some services, the value displayed in this property might be the IP address for a trusted application (for example, Office on the web apps) calling into the service on behalf of a user and not the IP address of the device used by person who performed the activity. Also, for Azure Active Directory-related events, the IP address isn't logged and the value for the ClientIP property is null.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "Scope",
+					"type": "String",
+					"description": "Event can be created by a hosted Office 365 service or an on-premises server. Possible values are online and onprem. Note that SharePoint is the only workload currently sending events from on-premises to Office 365."
+				},
+				{
+					"name": "ProjectEntity",
+					"type": "String",
+					"description": "The project entity the audit was for."
+				},
+				{
+					"name": "ProjectAction",
+					"type": "String",
+					"description": "The project action that was taken."
+				},
+				{
+					"name": "OnBehalfOfResId",
+					"type": "String",
+					"description": "The resource ID the action was taken on behalf of.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "EventProduct",
+					"type": "String",
+					"description": "The Microsoft service name."
+				},
+				{
+					"name": "EventVendor",
+					"type": "String",
+					"description": "The vendor service name."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/Office365ProjectSample.json"
+		},
+		{
+			"name": "PowerBIActivity",
+			"description": "Contains Microsoft PowerBI audit logs. It's typically used to track PowerBI activities.",
+			"categories": [
+				"security",
+				"audit"
+			],
+			"tags": {},
+			"properties": {},
+			"artifactVersion": 9,
+			"dataTypeId": "OFFICEPOWERBI_RESTAPI",
+			"intelligencePacks": [
+				"SecurityInsights"
+			],
+			"isResourceCentric": false,
+			"tableState": "Validation",
+			"isTroubleshootingAllowed": true,
+			"isLakeAllowed": true,
+			"input": [
+				{
+					"name": "Id",
+					"type": "String"
+				},
+				{
+					"name": "RecordType",
+					"type": "Int"
+				},
+				{
+					"name": "CreationTime",
+					"type": "DateTime"
+				},
+				{
+					"name": "Operation",
+					"type": "String"
+				},
+				{
+					"name": "ResultStatus",
+					"type": "String"
+				},
+				{
+					"name": "OrganizationId",
+					"type": "String"
+				},
+				{
+					"name": "UserType",
+					"type": "Int"
+				},
+				{
+					"name": "UserKey",
+					"type": "String"
+				},
+				{
+					"name": "Workload",
+					"type": "String"
+				},
+				{
+					"name": "UserId",
+					"type": "String"
+				},
+				{
+					"name": "ClientIP",
+					"type": "String"
+				},
+				{
+					"name": "DashboardName",
+					"type": "String"
+				},
+				{
+					"name": "UserAgent",
+					"type": "String"
+				},
+				{
+					"name": "Activity",
+					"type": "String"
+				},
+				{
+					"name": "ItemName",
+					"type": "String"
+				},
+				{
+					"name": "WorkSpaceName",
+					"type": "String"
+				},
+				{
+					"name": "DatasetName",
+					"type": "String"
+				},
+				{
+					"name": "ReportName",
+					"type": "String"
+				},
+				{
+					"name": "WorkspaceId",
+					"type": "String"
+				},
+				{
+					"name": "ObjectId",
+					"type": "String"
+				},
+				{
+					"name": "DatasetId",
+					"type": "String"
+				},
+				{
+					"name": "ReportId",
+					"type": "String"
+				},
+				{
+					"name": "IsSuccess",
+					"type": "Bool"
+				},
+				{
+					"name": "ReportType",
+					"type": "String"
+				},
+				{
+					"name": "RequestId",
+					"type": "String"
+				},
+				{
+					"name": "ActivityId",
+					"type": "String"
+				},
+				{
+					"name": "DataClassification",
+					"type": "String"
+				},
+				{
+					"name": "MembershipInformation",
+					"type": "String"
+				},
+				{
+					"name": "OrgAppPermission",
+					"type": "String"
+				},
+				{
+					"name": "SharingInformation",
+					"type": "String"
+				},
+				{
+					"name": "SwitchState",
+					"type": "String"
+				},
+				{
+					"name": "AppName",
+					"type": "String"
+				},
+				{
+					"name": "DashboardId",
+					"type": "String"
+				},
+				{
+					"name": "DistributionMethod",
+					"type": "String"
+				},
+				{
+					"name": "Scope",
+					"type": "Int"
+				},
+				{
+					"name": "FolderAccessRequests",
+					"type": "String"
+				}
+			],
+			"transformFilePath": "KQL/Office365PowerBITransform.kql",
+			"columns": [
+				{
+					"name": "EventOriginalUid",
+					"type": "String",
+					"description": "Unique identifier of an audit record.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "RecordType",
+					"type": "String",
+					"description": "The type of operation indicated by the record. See the AuditLogRecordType table for details on the types of audit log records."
+				},
+				{
+					"name": "TimeGenerated",
+					"type": "DateTime",
+					"description": "The date and time in (UTC) when the user performed the activity."
+				},
+				{
+					"name": "EventOriginalType",
+					"type": "String",
+					"description": "The name of the user or admin activity that performed the activity. For a description of the most common operations/activities, see \"Search the audit log\" in the Office 365 Protection Center. For Exchange admin activity, this property identifies the name of the cmdlet that was run. For Dlp events, this can be \"DlpRuleMatch\", \"DlpRuleUndo\" or \"DlpInfo\", which are described under \"DLP schema\" below."
+				},
+				{
+					"name": "OrganizationId",
+					"type": "String",
+					"description": "The GUID for your organization's Office 365 tenant. This value will always be the same for your organization, regardless of the Office 365 service in which it occurs.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "UserType",
+					"type": "String",
+					"description": "The type of user that performed the operation. Possible types are: Admin, System, Application, Service Principal and Other."
+				},
+				{
+					"name": "ActorUserType",
+					"type": "String",
+					"description": "The type of user that performed the operation. Possible types are: Admin, System, Application, Service Principal and Other."
+				},
+				{
+					"name": "ActorUserId",
+					"type": "String",
+					"description": "An alternative ID for the user identified in the UserId property. For example, this property is populated with the passport unique ID (PUID) for events performed by users in SharePoint, OneDrive for Business, and Exchange. This property may also specify the same value as the UserID property for events occurring in other services and events performed by system accounts."
+				},
+				{
+					"name": "EventResult",
+					"type": "String",
+					"description": "Indicates whether the action (specified in the Operation property) was successful or not. Possible values are Succeeded, PartiallySucceeded, or Failed."
+				},
+				{
+					"name": "ObjectId",
+					"type": "String",
+					"description": "The full path name of the file or folder accessed by the user. For Exchange admin audit logging, the name of the object that was modified by the cmdlet."
+				},
+				{
+					"name": "ActorName",
+					"type": "String",
+					"description": "The UPN (User Principal Name) of the user who performed the action (specified in the Operation property) that resulted in the record being logged; for example, my_name@my_domain_name. Note that records for activity performed by system accounts (such as SHAREPOINT\\system or NT AUTHORITY\\SYSTEM) are also included. In SharePoint, another value display in the UserId property is app@sharepoint. This indicates that the \"user\" who performed the activity was an application that has the necessary permissions in SharePoint to perform organization-wide actions (such as search a SharePoint site or OneDrive account) on behalf of a user, admin, or service. For more information, see the app@sharepoint user in audit records."
+				},
+				{
+					"name": "SrcIpAddr",
+					"type": "String",
+					"description": "The IP address of the device that was used when the activity was logged. The IP address is displayed in either an IPv4 or IPv6 address format. For some services, the value displayed in this property might be the IP address for a trusted application (for example, Office on the web apps) calling into the service on behalf of a user and not the IP address of the device used by person who performed the activity. Also, for Azure Active Directory-related events, the IP address isn't logged and the value for the ClientIP property is null.",
+					"dataTypeHint": "IP"
+				},
+				{
+					"name": "Scope",
+					"type": "String",
+					"description": "Event can be created by a hosted Office 365 service or an on-premises server. Possible values are online and onprem. Note that SharePoint is the only workload currently sending events from on-premises to Office 365."
+				},
+				{
+					"name": "TargetAppName",
+					"type": "String",
+					"description": "The name of the app where the event occurred."
+				},
+				{
+					"name": "DashboardName",
+					"type": "String",
+					"description": "The name of the dashboard where the event occurred."
+				},
+				{
+					"name": "DataClassification",
+					"type": "String",
+					"description": "The data classification, if exists, for the dashboard where the event occurred."
+				},
+				{
+					"name": "DatasetName",
+					"type": "String",
+					"description": "The name of the dataset where the event occurred."
+				},
+				{
+					"name": "MembershipInformation",
+					"type": "String",
+					"description": "Membership information about the group."
+				},
+				{
+					"name": "OrgAppPermission",
+					"type": "String",
+					"description": "Permissions list for an organizational app (entire organization, specific users, or specific groups)."
+				},
+				{
+					"name": "ReportName",
+					"type": "String",
+					"description": "The name of the report where the event occurred."
+				},
+				{
+					"name": "SharingInformation",
+					"type": "String",
+					"description": "Information about the person to whom a sharing invitation is sent."
+				},
+				{
+					"name": "SwitchState",
+					"type": "String",
+					"description": "Information about the state of various tenant level switches."
+				},
+				{
+					"name": "PbiWorkspaceName",
+					"type": "String",
+					"description": "The name of the PowerBI workspace where the event occurred."
+				},
+				{
+					"name": "EventProduct",
+					"type": "String",
+					"description": "The Microsoft product name (PowerBI)."
+				},
+				{
+					"name": "EventVendor",
+					"type": "String",
+					"description": "Service vendor name."
+				},
+				{
+					"name": "UserAgent",
+					"type": "String",
+					"description": "Information about the user's browser. This information is provided by the browser."
+				},
+				{
+					"name": "Activity",
+					"type": "String",
+					"description": "The name of the user or admin activity."
+				},
+				{
+					"name": "ItemName",
+					"type": "String",
+					"description": "The name of the item that the activity was performed on."
+				},
+				{
+					"name": "WorkspaceId",
+					"type": "String",
+					"description": "The ID of the PowerBI workspace.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "DashboardId",
+					"type": "String",
+					"description": "The ID of the dashboard that the activity was performed on.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "IsSuccess",
+					"type": "String",
+					"description": "Indicates whether the action was successful or not."
+				},
+				{
+					"name": "RequestId",
+					"type": "String",
+					"description": "A unique identifier for the request.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "Workload",
+					"type": "String",
+					"description": "The Office 365 service where the activity occurred."
+				},
+				{
+					"name": "ActivityId",
+					"type": "String",
+					"description": "A unique identifier for the activity.",
+					"dataTypeHint": "GUID"
+				},
+				{
+					"name": "DistributionMethod",
+					"type": "String",
+					"description": "Indicates the distribution method of the content."
+				},
+				{
+					"name": "FolderAccessRequests",
+					"type": "Dynamic",
+					"description": "List of users that requested access to the folder."
+				}
+			],
+			"sampleInputRecordsFilePath": "SampleInputRecords/Office365PowerBISample.json",
+			"sampleOutputRecordsFilePath": "SampleOutputRecords/Office365PowerBISample.json"
+		}
+	],
+	"functions": [],
+	"queries": [
+		{
+			"id": "8df595d6-7c32-4257-8280-90182a32c23a",
+			"displayName": "MS Project events filtered by organization ID",
+			"description": "Display events from more than one day ago, filtered by organization ID and summarized by user ID and result status.",
+			"bodyFilePath": "KQL/Ofiice365ProjectDifferentOrgIDSummarizedQuery.kql",
+			"categories": [
+				"security"
+			],
+			"relatedTables": [
+				"ProjectActivity"
+			],
+			"tags": {
+				"Topic": [
+					"Security"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": false
+				}
+			}
+		},
+		{
+			"id": "d5f248e0-45a6-45a7-9bd2-8ef963d39a05",
+			"displayName": "PowerBI events filtered by organization ID",
+			"description": "Display events from more than one day ago, filtered by organization ID and summarized by user ID and result status.",
+			"bodyFilePath": "KQL/Office365PowerBIDifferentOrgIDSummarizedQuery.kql",
+			"categories": [
+				"security",
+				"audit"
+			],
+			"relatedTables": [
+				"PowerBIActivity"
+			],
+			"tags": {
+				"Topic": [
+					"Security"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": false
+				}
+			}
+		},
+		{
+			"id": "d6a06676-95e8-4632-b949-44bc00f0793f",
+			"displayName": "Office Communication Compliance events filtered by organization ID",
+			"description": "Basic query for Office Communication Compliance event logs filtered by organization ID",
+			"bodyFilePath": "KQL/Office365CommunicationComplianceDifferentOrgIDSummarizedQuery.kql",
+			"categories": [
+				"security",
+				"audit"
+			],
+			"relatedTables": [
+				"CommunicationComplianceActivity"
+			],
+			"tags": {
+				"Topic": [
+					"Compliance"
+				]
+			},
+			"properties": {
+				"ExampleQuery": true,
+				"QueryAttributes": {
+					"IsMultiResource": false
+				}
+			}
+		}
+	]
+}

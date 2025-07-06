@@ -1,0 +1,10 @@
+[
+    {
+        "TimeGenerated": "2022-09-05T06:54:33.2132487Z",
+        "OperationName": "CUSTOMERMANAGEDKEY/READ",
+        "Level": "Error",
+        "Location": "US_West_Central",
+        "EventCode": "AccountKeyError",
+        "EventMessage": "Customer managed key is inaccessible. Key URI: https://contoso.vault.azure.net/keys/accountkey"
+    }
+]

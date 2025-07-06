@@ -1,0 +1,16 @@
+source
+| project
+    TimeGenerated = iff(isnull(CompletionTime), SubmissionTime, CompletionTime),
+    ApplicationId = ApplicationId,
+    JobId = JobId,
+    SubmissionTime = SubmissionTime,
+	CompletionTime = CompletionTime,
+	JobResult = JobResult,
+	StageIds = StageIds,
+    ClusterTenantId = Tenant,
+	Role = Role,
+	Host = iff(isempty(Host), RoleInstance, Host),
+	ClusterDnsName = ClusterDnsName,
+	Region = Region,
+	IpAddress = IpAddress,
+	UserSubscriptionId = UserSubscriptionId

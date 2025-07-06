@@ -1,0 +1,3 @@
+EventGridDataPlaneRequests
+| where OperationResult == "Unauthorized" or OperationResult == "Forbidden"
+| summarize count() by ClientIpAddress

@@ -1,0 +1,58 @@
+[
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "scuba@np-lab.co.il"
+      },
+      "requestMetadata": {
+        "callerIp": "152.57.172.157",
+        "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)",
+        "requestAttributes": {
+          "time": "2025-06-19T10:49:45.745282162Z",
+          "reason": "8uSywAYQGg5Db2xpc2V1bSBGbG93cw",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "cloudresourcemanager.googleapis.com",
+      "methodName": "google.cloud.resourcemanager.v3.Folders.CreateFolder",
+      "authorizationInfo": [
+        {
+          "resource": "organizations/1009039574349",
+          "permission": "resourcemanager.folders.create",
+          "granted": true,
+          "resourceAttributes": {
+            "service": "cloudresourcemanager.googleapis.com",
+            "type": "cloudresourcemanager.googleapis.com/Folder"
+          },
+          "permissionType": "ADMIN_WRITE"
+        }
+      ],
+      "resourceName": "organizations/1009039574349",
+      "request": {
+        "folder": {
+          "parent": "organizations/1009039574349"
+        },
+        "@type": "type.googleapis.com/google.cloud.resourcemanager.v3.CreateFolderRequest"
+      }
+    },
+    "insertId": "vnif3de38kt3",
+    "resource": {
+      "type": "audited_resource",
+      "labels": {
+        "service": "cloudresourcemanager.googleapis.com",
+        "method": "google.cloud.resourcemanager.v3.Folders.CreateFolder"
+      }
+    },
+    "timestamp": "2025-06-19T10:49:45.738147492Z",
+    "severity": "NOTICE",
+    "logName": "organizations/1009039574349/logs/cloudaudit.googleapis.com%2Factivity",
+    "operation": {
+      "id": "operations/cf.8286487613633686686",
+      "producer": "cloudresourcemanager.googleapis.com",
+      "first": true
+    },
+    "receiveTimestamp": "2025-06-19T10:49:46.199755851Z"
+  }
+]

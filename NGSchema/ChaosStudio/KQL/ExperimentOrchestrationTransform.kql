@@ -1,0 +1,15 @@
+source
+| extend properties = parse_json(properties)
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = operationName,
+    Location = location,
+    CorrelationId = correlationId,
+    SeverityLevel = level,
+    SpanType = tostring(properties.spanType),
+    Status = tostring(properties.status),
+    Error = tostring(properties.error),
+    Step = tostring(properties.spanId.stepId),
+    Branch = tostring(properties.spanId.branchId),
+    Action = tostring(properties.spanId.actionId),
+    Target = tostring(properties.targetId)

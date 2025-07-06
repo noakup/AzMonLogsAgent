@@ -1,0 +1,6 @@
+AZMSRunTimeAuditLogs 
+| extend NamespaceInfo = tostring(split(_ResourceId, "/")[8])
+| where Provider =~ "EventHub"
+| where isnotnull(NamespaceInfo) and Status != "Success" and ActivityName == "SendMessage"
+| project NamespaceInfo, ActivityName, Protocol, NetworkType, ClientIp, _ResourceId
+| summarize by NamespaceInfo, ActivityName

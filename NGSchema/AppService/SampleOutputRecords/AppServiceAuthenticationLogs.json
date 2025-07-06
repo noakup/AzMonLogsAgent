@@ -1,0 +1,98 @@
+[
+    {
+        "TimeGenerated": "2023-08-25T22:14:07.6738535Z",
+        "OperationName": "Microsoft.Web/sites/auth",
+        "TaskName": "MiddlewareWarning",
+        "Message": "Cannot deserialize app setting WEBSITE_AUTH_AAD_ACL, value is Microsoft.Web.Hosting.EasyAuth.JwtClaimChecksV1",
+        "SiteName": "azmon-test2",
+        "ModuleRuntimeVersion": ""
+    },
+    {
+        "TimeGenerated": "2023-08-25T22:14:08.1855576Z",
+        "OperationName": "Microsoft.Web/sites/auth",
+        "TaskName": "MiddlewareWarning",
+        "Message": "Cannot deserialize app setting WEBSITE_AUTH_AAD_ACL, value is Microsoft.Web.Hosting.EasyAuth.JwtClaimChecksV1",
+        "SiteName": "azmon-test2",
+        "ModuleRuntimeVersion": "1.6.19"
+    },
+    {
+        "TimeGenerated": "2023-08-25T22:14:40.1137943Z",
+        "OperationName": "Microsoft.Web/sites/auth",
+        "TaskName": "MiddlewareWarning",
+        "Message": "No providers are enabled. The request could not be authorized.",
+        "SiteName": "azmon-test2",
+        "ModuleRuntimeVersion": "1.6.19"
+    },
+    {
+        "TimeGenerated": "2023-08-25T22:14:40.3844810Z",
+        "OperationName": "Microsoft.Web/sites/auth",
+        "TaskName": "MiddlewareWarning",
+        "Message": "No providers are enabled. The request could not be authorized.",
+        "SiteName": "azmon-test2",
+        "ModuleRuntimeVersion": "1.6.19"
+    },
+    {
+        "TimeGenerated": "2023-08-25T22:14:41.7165947Z",
+        "OperationName": "Microsoft.Web/sites/auth",
+        "TaskName": "MiddlewareWarning",
+        "Message": "No providers are enabled. The request could not be authorized.",
+        "SiteName": "azmon-test2",
+        "ModuleRuntimeVersion": "1.6.19"
+    },
+    {
+        "TimeGenerated": "2023-08-25T22:14:42.2240959Z",
+        "OperationName": "Microsoft.Web/sites/auth",
+        "TaskName": "MiddlewareWarning",
+        "Message": "No providers are enabled. The request could not be authorized.",
+        "SiteName": "azmon-test2",
+        "ModuleRuntimeVersion": "1.6.19"
+    },
+    {
+        "TimeGenerated": "2023-08-25T22:14:42.3738588Z",
+        "OperationName": "Microsoft.Web/sites/auth",
+        "TaskName": "MiddlewareWarning",
+        "Message": "No providers are enabled. The request could not be authorized.",
+        "SiteName": "azmon-test2",
+        "ModuleRuntimeVersion": "1.6.19"
+    },
+    {
+        "TimeGenerated": "2023-08-25T22:14:42.4966117Z",
+        "OperationName": "Microsoft.Web/sites/auth",
+        "TaskName": "MiddlewareWarning",
+        "Message": "No providers are enabled. The request could not be authorized.",
+        "SiteName": "azmon-test2",
+        "ModuleRuntimeVersion": "1.6.19"
+    },
+    {
+        "TimeGenerated": "2023-08-25T22:14:42.9923713Z",
+        "OperationName": "Microsoft.Web/sites/auth",
+        "TaskName": "MiddlewareWarning",
+        "Message": "No providers are enabled. The request could not be authorized.",
+        "SiteName": "azmon-test2",
+        "ModuleRuntimeVersion": "1.6.19"
+    },
+    {
+        "TimeGenerated": "2023-08-25T22:14:43.1128577Z",
+        "OperationName": "Microsoft.Web/sites/auth",
+        "TaskName": "MiddlewareWarning",
+        "Message": "No providers are enabled. The request could not be authorized.",
+        "SiteName": "azmon-test2",
+        "ModuleRuntimeVersion": "1.6.19"
+    },
+    {
+        "TimeGenerated": "2023-08-25T22:14:43.5970836Z",
+        "OperationName": "Microsoft.Web/sites/auth",
+        "TaskName": "MiddlewareWarning",
+        "Message": "No providers are enabled. The request could not be authorized.",
+        "SiteName": "azmon-test2",
+        "ModuleRuntimeVersion": "1.6.19"
+    },
+    {
+        "TimeGenerated": "2023-08-25T22:14:43.7234746Z",
+        "OperationName": "Microsoft.Web/sites/auth",
+        "TaskName": "MiddlewareWarning",
+        "Message": "No providers are enabled. The request could not be authorized.",
+        "SiteName": "azmon-test2",
+        "ModuleRuntimeVersion": "1.6.19"
+    }
+]

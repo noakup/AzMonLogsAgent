@@ -1,0 +1,5 @@
+HDInsightHiveAndLLAPMetrics
+//| where ClusterName == '<your cluster name>' // remove the preceding "//" and specify your cluster name to see its logs
+| where TimeGenerated > ago(24h)
+| summarize any(*) by MetricName //displays each possible metric name and a value
+| project MetricName, any_MetricValue

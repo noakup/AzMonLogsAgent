@@ -1,0 +1,60 @@
+[
+{
+    "time":"2022-12-28T07:20:12.51047229Z",
+    "resourceId":"/SUBSCRIPTIONS/C99E2BF3-1777-412B-BABA-D823676589C2/RESOURCEGROUPS/AZURE-MONITOR-TESTING-ANKIT/PROVIDERS/MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/MONITORTEST",
+    "location":"eastus",
+    "operationName":"MICROSOFT.OPENENERGYPLATFORM/ENERGYSERVICES/AuditEvent/ACTION",
+    "category":"AuditEvent",
+    "properties":{
+        "OperationName":"Create Workflow",
+        "ResultType":"Success",
+        "AuditCategories":[
+        "ResourceManagement"
+        ],
+        "CallerIdentities":[
+        {
+            "CallerIdentityType":"PUID",
+            "CallerIdentityValue":"2f59abbc-7b40-4d0e-91b2-22ca3084bc84"
+        }
+        ],
+        "TargetResources":[
+        {
+            "TargetResourceType":"resources",
+            "TargetResourceName":"[WorkflowMetadata(workflowId=csv-parser, workflowName=csv-parser, description=This is csv parser workflow, createdBy=2f59abbc-7b40-4d0e-91b2-22ca3084bc84, creationTimestamp=1671536903568, version=1, isDeployedThroughWorkflowService=false, registrationInstructions={dagName=csv-parser}, isSystemWorkflow=false)]"
+        }
+        ],
+        "resultDescription":null,
+        "nCloud":null,
+        "requestId":"8205f465-80d9-4999-8370-aae2fdde203b-0",
+        "callerIpAddress":null,
+        "callerDisplayName":null,
+        "ServiceName":"workflow.audit",
+        "data-partition-id":"audittesting-dp1",
+        "message":"Successfully created workflow",
+        "action":"CREATE",
+        "actionId":"WF001",
+        "env_seqNum":52,
+        "env_time":"12/20/22 - 11:48AM",
+        "env_ver":2.1,
+        "env_cloud_ver":1,
+        "env_flags":257,
+        "env_os":"Linux",
+        "env_osVer":"#100~18.04.1-Ubuntu SMP Mon Oct 17 11:44:30 UTC 2022",
+        "env_epoch":"8OH4Y",
+        "env_popSample":0,
+        "env_appId":null,
+        "env_appVer":null,
+        "env_iKey":null,
+        "env_name":"#Ifx.AuditSchema",
+        "env_cloud_name":null,
+        "env_cloud_role":null,
+        "env_cloud_roleVer":null,
+        "env_cloud_roleInstance":null,
+        "env_cloud_environment":null,
+        "env_cloud_location":null,
+        "env_cloud_deploymentUnit":null,
+        "env_cv":"##00000000-0000-0000-0000-000000000000_00000000-0000-0000-0000-000000000000_00000000-0000-0000-0000-000000000000",
+        "AuditType":"ApplicationAuditLog"
+    }
+}
+]

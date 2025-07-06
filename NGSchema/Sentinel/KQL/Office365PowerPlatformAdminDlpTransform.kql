@@ -1,0 +1,47 @@
+let recordTypeMap = parse_json('{ '
+' "1": "ExchangeAdmin", '
+' "2": "ExchangeItem", '
+' "3": "ExchangeItemGroup", '
+' "4": "SharePoint", '
+' "6": "SharePointFileOperation", '
+' "8": "AzureActiveDirectory", '
+' "9": "AzureActiveDirectoryAccountLogon",'
+' "10": "DataCenterSecurityCmdlet", '
+' "11": "ComplianceDLPSharePoint", '
+' "14": "SharePointSharingOperation", '
+' "15": "AzureActiveDirectoryStsLogon", '
+' "20": "PowerBIAudit", '
+' "25": "MicrosoftTeams", '
+' "30": "MicrosoftFlow" '
+' "35": "MicrosoftProjectEvents" '
+' "79": "PowerPlatformAdminDlp" '
+' }');
+let actorUserTypeMap = parse_json('{ '
+' "0": "Regular", '
+' "1": "Other" ,'
+' "2": "Admin", '
+' "3": "DcAdmin", '
+' "4": "System", '
+' "5": "Application", '
+' "6": "ServicePrincipal", '
+' "7": "CustomPolicy", '
+' "8": "SystemPolicy", '
+' "9": "PartnerTechnician", '
+' "10": "Guest" '
+' }');
+source
+| project
+ActorName = tostring(UserId),
+ActorUserId = tostring(UserKey),
+Workload = tostring(Workload),
+ActorUserType = tostring(actorUserTypeMap[tostring(UserType)]),
+EventOriginalType = tostring(Operation),
+EventOriginalUid = tostring(Id),
+EventResult = tostring(ResultStatus),
+ObjectId = tostring(ObjectId),
+OrganizationId = tostring(OrganizationId),
+RecordType = tostring(recordTypeMap[tostring(RecordType)]),
+SrcIpAddr = tostring(ClientIP),
+TimeGenerated = todatetime(CreationTime),
+PolicyName = tostring(Name),
+AdditionalInfo

@@ -1,0 +1,5 @@
+ASCDeviceEvents
+| where OperationName == "DeviceCertificateEvent" or Properties.DeviceTelemetryEventCategory == "AppCrash" // Remove/Add filters to see all/specific events. Filter data by Device by adding " | where DeviceId == "Your Device ID" " 
+| project TimeGenerated, OperationName, ResultType, ResultDescription, Properties, Location
+| sort by TimeGenerated desc
+| limit 100

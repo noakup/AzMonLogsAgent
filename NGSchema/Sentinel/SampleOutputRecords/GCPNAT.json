@@ -1,0 +1,32 @@
+[
+  {
+    "TimeGenerated": "5/29/2025, 10:52:42.025 AM",
+    "InsertId": "15og6lef26pmr9",
+    "LogName": "projects/msccp-test/logs/compute.googleapis.com%2Fnat_flows",
+    "ReceiveTimestamp": "5/29/2025, 10:52:57.091 AM",
+    "ResourceType": "nat_gateway",
+    "ProjectId": "msccp-test",
+    "Region": "us-central1",
+    "RouterId": 4411441447715746000,
+    "GatewayName": "test-nat-config",
+    "AllocationStatus": "OK",
+    "SrcIp": "10.128.15.206",
+    "SrcPort": 58228,
+    "DestIp": "23.192.228.80",
+    "DestPort": 443,
+    "NatIp": "34.59.200.179",
+    "NatPort": 1571,
+    "Protocol": 6,
+    "VmName": "test-nat-vm",
+    "EndpointRegion": "us-central1",
+    "EndpointZone": "us-central1-a",
+    "ASN": 20940,
+    "Country": "usa",
+    "City": "San Jose",
+    "DestinationRegion": "California",
+    "Continent": "America",
+    "TenantId": "e288ca4a-cfcc-47b7-ba31-f2d5ad088d3d",
+    "Type": "GCP_NAT_CL",
+    "_ResourceId": ""
+  }
+]

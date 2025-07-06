@@ -1,0 +1,6 @@
+ACSCallSurvey
+//Uncomment the conditions below if you use different rating scale for the same category, which is uncommon. 
+//| where isempty(AudioRatingScoreLowerBound) or  AudioRatingScoreLowerBound >= 1
+//| where isempty(AudioRatingScoreUpperBound) or  AudioRatingScoreUpperBound <= 5
+| summarize count() by tostring(AudioRatingScore)
+| render piechart

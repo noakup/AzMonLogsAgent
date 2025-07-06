@@ -1,0 +1,16 @@
+source
+| project
+    TimeGenerated = todatetime(["time"]),
+    OperationName = tostring(split(operationName, "/MEDIASERVICES/")[1]),
+    OperationVersion = operationVersion,
+    ResultType = resultType,
+    ResultSignature = resultSignature,
+    DurationMs = durationMs,
+    Level = level,
+    Location = location,
+    RequestId = tostring(properties.requestId),
+    KeyType = tostring(properties.keyType),
+    KeyId = tostring(properties.keyId),
+    TokenType = tostring(properties.tokenType),
+    PolicyName = tostring(properties.policyName),
+    StatusMessage = tostring(properties.statusMessage)

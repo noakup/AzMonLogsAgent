@@ -1,0 +1,36 @@
+[
+  {
+    "TimeGenerated": "2024-11-06T12:34:56Z",
+    "BehaviorId": "123e4567-e89b-12d3-a456-426614174000",
+    "ActionType": "LoginAttempt",
+    "Description": "User attempted to log in from an unusual location.",
+    "Categories": "SuspiciousActivity",
+    "AttackTechniques": "T1078",
+    "ServiceSource": "AzureAD",
+    "DetectionSource": "IdentityProtection",
+    "DataSources": "AzureADLogs",
+    "DeviceId": "123e4567-e89b-12d3-a456-426614174001",
+    "AccountUpn": "user@example.com",
+    "AccountObjectId": "123e4567-e89b-12d3-a456-426614174002",
+    "StartTime": "2024-11-06T12:30:00Z",
+    "EndTime": "2024-11-06T12:35:00Z",
+    "AdditionalFields": "None"
+  },
+  {
+    "TimeGenerated": "2024-11-06T13:45:12Z",
+    "BehaviorId": "123e4567-e89b-12d3-a456-426614174003",
+    "ActionType": "FileDownload",
+    "Description": "User downloaded a sensitive file.",
+    "Categories": "DataExfiltration",
+    "AttackTechniques": "T1020",
+    "ServiceSource": "OneDrive",
+    "DetectionSource": "CloudAppSecurity",
+    "DataSources": "OneDriveLogs",
+    "DeviceId": "123e4567-e89b-12d3-a456-426614174004",
+    "AccountUpn": "user2@example.com",
+    "AccountObjectId": "123e4567-e89b-12d3-a456-426614174005",
+    "StartTime": "2024-11-06T13:40:00Z",
+    "EndTime": "2024-11-06T13:50:00Z",
+    "AdditionalFields": "None"
+  }
+]

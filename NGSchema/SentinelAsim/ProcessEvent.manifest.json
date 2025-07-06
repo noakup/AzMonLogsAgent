@@ -1,0 +1,1698 @@
+{
+    "type": "Microsoft.SecurityInsights/ProcessEventNormalized",
+    "displayName": "Microsoft Sentinel Process Event ASim schema",
+    "description": "The Microsoft Sentinel process events normalized table stores events using the Process Event ASIM normalized schema associated with creation or termination of a process.",
+    "tags": {},
+    "properties": {},
+    "simplifiedSchemaVersion": "3",
+    "icmTeam": "Microsoft Azure Sentinel/Data Collection and Processing",
+    "contactDL": "asipolarbearslive@microsoft.com",
+    "relatedTables": [],
+    "relatedFunctions": [],
+    "tables": [
+        {
+            "name": "ASimProcessEventLogs",
+            "description": "The Microsoft Sentinel process events normalized table stores events using the Process Event ASIM normalized schema associated with creation or termination of a process. Such events are reported by operating systems and security systems, such as EDR (End Point Detection and Response) systems.",
+            "artifactVersion": 6,
+            "categories": [
+                "security"
+            ],
+            "tags": {},
+            "properties": {},
+            "dataTypeId": "SENTINEL_PROCESS_EVENTS",
+            "intelligencePacks": [
+                "SecurityInsights"
+            ],
+            "isResourceCentric": true,
+            "isTroubleshootingAllowed": true,
+            "tableState": "Production",
+            "isLakeAllowed": false,
+            "input": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "AdditionalFields",
+                    "type": "Dynamic"
+                },
+                {
+                    "name": "EventMessage",
+                    "type": "String"
+                },
+                {
+                    "name": "EventCount",
+                    "type": "Int"
+                },
+                {
+                    "name": "EventStartTime",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "EventEndTime",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "EventType",
+                    "type": "String"
+                },
+                {
+                    "name": "EventSubType",
+                    "type": "String"
+                },
+                {
+                    "name": "EventResult",
+                    "type": "String"
+                },
+                {
+                    "name": "EventResultDetails",
+                    "type": "String"
+                },
+                {
+                    "name": "EventOriginalUid",
+                    "type": "String"
+                },
+                {
+                    "name": "EventOriginalType",
+                    "type": "String"
+                },
+                {
+                    "name": "EventOriginalSubType",
+                    "type": "String"
+                },
+                {
+                    "name": "EventOriginalResultDetails",
+                    "type": "String"
+                },
+                {
+                    "name": "EventSeverity",
+                    "type": "String"
+                },
+                {
+                    "name": "EventOriginalSeverity",
+                    "type": "String"
+                },
+                {
+                    "name": "EventProduct",
+                    "type": "String"
+                },
+                {
+                    "name": "EventProductVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "EventVendor",
+                    "type": "String"
+                },
+                {
+                    "name": "EventSchemaVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "EventOwner",
+                    "type": "String"
+                },
+                {
+                    "name": "EventReportUrl",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcIpAddr",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcHostname",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcDomain",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcDomainType",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcFQDN",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcDescription",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcId",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcIdType",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcMacAddr",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcZone",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcOs",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcOsVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcAction",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcOriginalAction",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcInterface",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcScopeId",
+                    "type": "String"
+                },
+                {
+                    "name": "DvcScope",
+                    "type": "String"
+                },
+                {
+                    "name": "ActorUserId",
+                    "type": "String"
+                },
+                {
+                    "name": "ActorUserIdType",
+                    "type": "String"
+                },
+                {
+                    "name": "ActorScopeId",
+                    "type": "String"
+                },
+                {
+                    "name": "ActorScope",
+                    "type": "String"
+                },
+                {
+                    "name": "ActorUsername",
+                    "type": "String"
+                },
+                {
+                    "name": "ActorUsernameType",
+                    "type": "String"
+                },
+                {
+                    "name": "ActorUserType",
+                    "type": "String"
+                },
+                {
+                    "name": "ActorOriginalUserType",
+                    "type": "String"
+                },
+                {
+                    "name": "ActorSessionId",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetUserId",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetUserIdType",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetScopeId",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetScope",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetUsername",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetUsernameType",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetUserType",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetOriginalUserType",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetUserSessionId",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetUserSessionGuid",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingProcessCommandLine",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingProcessName",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingProcessFileCompany",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingProcessFileDescription",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingProcessFileProduct",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingProcessFileVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingProcessFileInternalName",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingProcessFileOriginalName",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingProcessFilename",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingProcessIsHidden",
+                    "type": "Bool"
+                },
+                {
+                    "name": "ActingProcessInjectedAddress",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingProcessId",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingProcessGuid",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingProcessIntegrityLevel",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingProcessMD5",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingProcessSHA1",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingProcessSHA256",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingProcessSHA512",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingProcessIMPHASH",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingProcessCreationTime",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "ActingProcessTokenElevation",
+                    "type": "String"
+                },
+                {
+                    "name": "ActingProcessFileSize",
+                    "type": "Long"
+                },
+                {
+                    "name": "ParentProcessName",
+                    "type": "String"
+                },
+                {
+                    "name": "ParentProcessFileCompany",
+                    "type": "String"
+                },
+                {
+                    "name": "ParentProcessFileDescription",
+                    "type": "String"
+                },
+                {
+                    "name": "ParentProcessFileProduct",
+                    "type": "String"
+                },
+                {
+                    "name": "ParentProcessFileVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "ParentProcessIsHidden",
+                    "type": "Bool"
+                },
+                {
+                    "name": "ParentProcessInjectedAddress",
+                    "type": "String"
+                },
+                {
+                    "name": "ParentProcessId",
+                    "type": "String"
+                },
+                {
+                    "name": "ParentProcessGuid",
+                    "type": "String"
+                },
+                {
+                    "name": "ParentProcessIntegrityLevel",
+                    "type": "String"
+                },
+                {
+                    "name": "ParentProcessMD5",
+                    "type": "String"
+                },
+                {
+                    "name": "ParentProcessSHA1",
+                    "type": "String"
+                },
+                {
+                    "name": "ParentProcessSHA256",
+                    "type": "String"
+                },
+                {
+                    "name": "ParentProcessSHA512",
+                    "type": "String"
+                },
+                {
+                    "name": "ParentProcessIMPHASH",
+                    "type": "String"
+                },
+                {
+                    "name": "ParentProcessCreationTime",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "ParentProcessTokenElevation",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetProcessCommandLine",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetProcessName",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetProcessFileCompany",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetProcessFileDescription",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetProcessFileProduct",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetProcessFileVersion",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetProcessFileInternalName",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetProcessFileOriginalName",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetProcessFilename",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetProcessIsHidden",
+                    "type": "Bool"
+                },
+                {
+                    "name": "TargetProcessInjectedAddress",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetProcessId",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetProcessGuid",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetProcessIntegrityLevel",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetProcessMD5",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetProcessSHA1",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetProcessSHA256",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetProcessSHA512",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetProcessIMPHASH",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetProcessCreationTime",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "TargetProcessTokenElevation",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetProcessFileSize",
+                    "type": "Long"
+                },
+                {
+                    "name": "TargetProcessCurrentDirectory",
+                    "type": "String"
+                },
+                {
+                    "name": "TargetProcessStatusCode",
+                    "type": "String"
+                },
+                {
+                    "name": "RuleName",
+                    "type": "String"
+                },
+                {
+                    "name": "RuleNumber",
+                    "type": "Int"
+                },
+                {
+                    "name": "ThreatId",
+                    "type": "String"
+                },
+                {
+                    "name": "ThreatName",
+                    "type": "String"
+                },
+                {
+                    "name": "ThreatCategory",
+                    "type": "String"
+                },
+                {
+                    "name": "ThreatRiskLevel",
+                    "type": "Int"
+                },
+                {
+                    "name": "ThreatOriginalRiskLevel",
+                    "type": "String"
+                },
+                {
+                    "name": "ThreatField",
+                    "type": "String"
+                },
+                {
+                    "name": "ThreatConfidence",
+                    "type": "Int"
+                },
+                {
+                    "name": "ThreatOriginalConfidence",
+                    "type": "String"
+                },
+                {
+                    "name": "ThreatIsActive",
+                    "type": "Bool"
+                },
+                {
+                    "name": "ThreatFirstReportedTime",
+                    "type": "DateTime"
+                },
+                {
+                    "name": "ThreatLastReportedTime",
+                    "type": "DateTime"
+                }
+            ],
+            "transformFilePath": "KQL/ProcessEvent/ProcessEventTransform.kql",
+            "columns": [
+                {
+                    "name": "TimeGenerated",
+                    "type": "DateTime",
+                    "description": "The timestamp (UTC) reflecting the time in which the event was generated."
+                },
+                {
+                    "name": "AdditionalFields",
+                    "type": "Dynamic",
+                    "description": "Additional information, represented using key and value pairs provided by the source which do not map to ASim."
+                },
+                {
+                    "name": "EventMessage",
+                    "type": "String",
+                    "description": "A general message or description."
+                },
+                {
+                    "name": "EventCount",
+                    "type": "Int",
+                    "description": "The number of events described by the record."
+                },
+                {
+                    "name": "EventStartTime",
+                    "type": "DateTime",
+                    "description": "The time in which the event started. If the source supports aggregation and the record represents multiple events, the time that the first event was generated. If not provided by the source record, this field aliases the TimeGenerated field."
+                },
+                {
+                    "name": "EventEndTime",
+                    "type": "DateTime",
+                    "description": "The time in which the event ended. If the source supports aggregation and the record represents multiple events, the time that the last event was generated. If not provided by the source record, this field aliases the TimeGenerated field."
+                },
+                {
+                    "name": "EventType",
+                    "type": "String",
+                    "description": "Describes the operation reported by the record"
+                },
+                {
+                    "name": "EventSubType",
+                    "type": "String",
+                    "description": "Describes a subdivision of the operation reported in the EventType field."
+                },
+                {
+                    "name": "EventResult",
+                    "type": "String",
+                    "description": "The outcome of the event, represented by one of the following values: Success, Partial, Failure, NA (Not Applicable). The value may not be provided directly by the sources, in which case it is derived from other event fields, for example, the EventResultDetails field."
+                },
+                {
+                    "name": "EventResultDetails",
+                    "type": "String",
+                    "description": "Reason or details for the result reported in the EventResult field."
+                },
+                {
+                    "name": "EventOriginalUid",
+                    "type": "String",
+                    "description": "A unique ID of the original record, if provided by the source."
+                },
+                {
+                    "name": "EventOriginalType",
+                    "type": "String",
+                    "description": "The original event type or ID, if provided by the source."
+                },
+                {
+                    "name": "EventOriginalSubType",
+                    "type": "String",
+                    "description": "The original event subtype or ID, if provided by the source."
+                },
+                {
+                    "name": "EventOriginalResultDetails",
+                    "type": "String",
+                    "description": "The original result details provided by the source."
+                },
+                {
+                    "name": "EventSeverity",
+                    "type": "String",
+                    "description": "The severity of the event. Valid values are: Informational, Low, Medium, or High."
+                },
+                {
+                    "name": "EventOriginalSeverity",
+                    "type": "String",
+                    "description": "The original severity as provided by the reporting device. "
+                },
+                {
+                    "name": "EventProduct",
+                    "type": "String",
+                    "description": "The product generating the event."
+                },
+                {
+                    "name": "EventProductVersion",
+                    "type": "String",
+                    "description": "The version of the product generating the event."
+                },
+                {
+                    "name": "EventVendor",
+                    "type": "String",
+                    "description": "The vendor of the product generating the event."
+                },
+                {
+                    "name": "EventSchemaVersion",
+                    "type": "String",
+                    "description": "The version of the schema."
+                },
+                {
+                    "name": "EventOwner",
+                    "type": "String",
+                    "description": "The owner of the event, which is usually the department or subsidiary in which it was generated."
+                },
+                {
+                    "name": "EventReportUrl",
+                    "type": "String",
+                    "description": "A URL provided in the event for a resource that provides more information about the event."
+                },
+                {
+                    "name": "DvcIpAddr",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "description": "The IP Address of the device reporting the event."
+                },
+                {
+                    "name": "DvcHostname",
+                    "type": "String",
+                    "description": "The hostname of the device reporting the event."
+                },
+                {
+                    "name": "DvcDomain",
+                    "type": "String",
+                    "description": "The domain of the device reporting the event."
+                },
+                {
+                    "name": "DvcDomainType",
+                    "type": "String",
+                    "description": "The type of DvcDomain. Possible values include \"Windows\" and \"FQDN\"."
+                },
+                {
+                    "name": "DvcFQDN",
+                    "type": "String",
+                    "description": "The hostname of the device on which the event occurred or which reported the event."
+                },
+                {
+                    "name": "DvcDescription",
+                    "type": "String",
+                    "description": "A descriptive text associated with the device."
+                },
+                {
+                    "name": "DvcId",
+                    "type": "String",
+                    "description": "The unique ID of the device on which the event occurred or which reported the event."
+                },
+                {
+                    "name": "DvcIdType",
+                    "type": "String",
+                    "description": "The type of DvcId."
+                },
+                {
+                    "name": "DvcMacAddr",
+                    "type": "String",
+                    "dataTypeHint": "IP",
+                    "description": "The MAC address of the device on which the event occurred or which reported the event."
+                },
+                {
+                    "name": "DvcZone",
+                    "type": "String",
+                    "description": "The network on which the event occurred or which reported the event."
+                },
+                {
+                    "name": "DvcOs",
+                    "type": "String",
+                    "description": "The operating system running on the device on which the event occurred or which reported the event."
+                },
+                {
+                    "name": "DvcOsVersion",
+                    "type": "String",
+                    "description": "The version of the operating system on the device on which the event occurred or which reported the event."
+                },
+                {
+                    "name": "DvcAction",
+                    "type": "String",
+                    "description": "For reporting security systems, the action taken by the system."
+                },
+                {
+                    "name": "DvcOriginalAction",
+                    "type": "String",
+                    "description": "The original DvcAction as provided by the reporting device."
+                },
+                {
+                    "name": "DvcInterface",
+                    "type": "String",
+                    "description": "The network interface on which data was captured."
+                },
+                {
+                    "name": "DvcScopeId",
+                    "type": "String",
+                    "description": "The cloud platform scope ID the device belongs to. DvcScopeId map to a subscription ID on Azure and to an account ID on AWS."
+                },
+                {
+                    "name": "DvcScope",
+                    "type": "String",
+                    "description": "The cloud platform scope the device belongs to. DvcScope map to a subscription ID on Azure and to an account ID on AWS."
+                },
+                {
+                    "name": "ActorUserId",
+                    "type": "String",
+                    "description": "A machine-readable, alphanumeric, unique representation of the actor."
+                },
+                {
+                    "name": "ActorUserIdType",
+                    "type": "String",
+                    "description": "The type of the ID stored in the ActorUserId field."
+                },
+                {
+                    "name": "ActorScopeId",
+                    "type": "String",
+                    "description": "The scope ID, such as Azure AD tenant ID, in which ActorUserId and ActorUsername are defined."
+                },
+                {
+                    "name": "ActorScope",
+                    "type": "String",
+                    "description": "The scope, such as Azure AD tenant, in which ActorUserId and ActorUsername are defined."
+                },
+                {
+                    "name": "ActorUsername",
+                    "type": "String",
+                    "description": "The Actor's username, including domain information when available."
+                },
+                {
+                    "name": "ActorUsernameType",
+                    "type": "String",
+                    "description": "The type of the Actor's username specified in ActionUsername field"
+                },
+                {
+                    "name": "ActorUserType",
+                    "type": "String",
+                    "description": "The type of the Actor."
+                },
+                {
+                    "name": "ActorOriginalUserType",
+                    "type": "String",
+                    "description": "The user type as reported by the reporting device."
+                },
+                {
+                    "name": "ActorSessionId",
+                    "type": "String",
+                    "description": "The unique ID of the sign-in session of the Actor."
+                },
+                {
+                    "name": "TargetUserId",
+                    "type": "String",
+                    "description": "A machine-readable, alphanumeric, unique representation of the actor."
+                },
+                {
+                    "name": "TargetUserIdType",
+                    "type": "String",
+                    "description": "The type of the ID stored in the TargetUserId field."
+                },
+                {
+                    "name": "TargetScopeId",
+                    "type": "String",
+                    "description": "The scope ID, such as Azure AD tenant ID, in which TargetUserId and TargetUsername are defined."
+                },
+                {
+                    "name": "TargetScope",
+                    "type": "String",
+                    "description": "The scope, such as Azure AD tenant, in which TargetUserId and TargetUsername are defined."
+                },
+                {
+                    "name": "TargetUsername",
+                    "type": "String",
+                    "description": "The Target actor's username, including domain information when available."
+                },
+                {
+                    "name": "TargetUsernameType",
+                    "type": "String",
+                    "description": "The type of the Target actor's username specified in TargetUsername field"
+                },
+                {
+                    "name": "TargetUserType",
+                    "type": "String",
+                    "description": "The type of the Target actor."
+                },
+                {
+                    "name": "TargetOriginalUserType",
+                    "type": "String",
+                    "description": "The user type as reported by the reporting device."
+                },
+                {
+                    "name": "TargetUserSessionId",
+                    "type": "String",
+                    "description": "The unique ID of the sign-in session of the Target actor."
+                },
+                {
+                    "name": "TargetUserSessionGuid",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "description": "The unique guid of the sign-in session of the Target actor."
+                },
+                {
+                    "name": "ActingProcessCommandLine",
+                    "type": "String",
+                    "description": "The command line used to run the acting process."
+                },
+                {
+                    "name": "ActingProcessName",
+                    "type": "String",
+                    "description": "The name of the acting process."
+                },
+                {
+                    "name": "ActingProcessFileCompany",
+                    "type": "String",
+                    "description": "The company that created the acting process image file."
+                },
+                {
+                    "name": "ActingProcessFileDescription",
+                    "type": "String",
+                    "description": "The description embedded in the version information of the acting process image file."
+                },
+                {
+                    "name": "ActingProcessFileProduct",
+                    "type": "String",
+                    "description": "The product name from the version information in the acting process image file."
+                },
+                {
+                    "name": "ActingProcessFileVersion",
+                    "type": "String",
+                    "description": "The product version from the version information of the acting process image file."
+                },
+                {
+                    "name": "ActingProcessFileInternalName",
+                    "type": "String",
+                    "description": "The product internal file name from the version information of the acting process image file."
+                },
+                {
+                    "name": "ActingProcessFileOriginalName",
+                    "type": "String",
+                    "description": "The product original file name from the version information of the acting process image file."
+                },
+                {
+                    "name": "ActingProcessFilename",
+                    "type": "String",
+                    "description": "The product file name from the version information of the acting process image file."
+                },
+                {
+                    "name": "ActingProcessIsHidden",
+                    "type": "Bool",
+                    "description": "An indication of whether the acting process is in hidden mode."
+                },
+                {
+                    "name": "ActingProcessInjectedAddress",
+                    "type": "String",
+                    "description": "The memory address in which the responsible acting process is stored."
+                },
+                {
+                    "name": "ActingProcessId",
+                    "type": "String",
+                    "description": "The process ID of the acting process."
+                },
+                {
+                    "name": "ActingProcessGuid",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "description": "A GUID of the acting process."
+                },
+                {
+                    "name": "ActingProcessIntegrityLevel",
+                    "type": "String",
+                    "description": "Integrity Level for acting process."
+                },
+                {
+                    "name": "ActingProcessMD5",
+                    "type": "String",
+                    "description": "The MD5 hash of the acting process image file."
+                },
+                {
+                    "name": "ActingProcessSHA1",
+                    "type": "String",
+                    "description": "The SHA-1 hash of the acting process image file."
+                },
+                {
+                    "name": "ActingProcessSHA256",
+                    "type": "String",
+                    "description": "The SHA-256 hash of the acting process image file."
+                },
+                {
+                    "name": "ActingProcessSHA512",
+                    "type": "String",
+                    "description": "The SHA-512 hash of the acting process image file."
+                },
+                {
+                    "name": "ActingProcessIMPHASH",
+                    "type": "String",
+                    "description": "The Import Hash of all the library DLLs that are used by the acting process."
+                },
+                {
+                    "name": "ActingProcessCreationTime",
+                    "type": "DateTime",
+                    "description": "The date and time when the acting process was started."
+                },
+                {
+                    "name": "ActingProcessTokenElevation",
+                    "type": "String",
+                    "description": "A token indicating the presence or absence of User Access Control (UAC) privilege elevation applied to the acting process."
+                },
+                {
+                    "name": "ActingProcessFileSize",
+                    "type": "BigInt",
+                    "description": "The size of the file in bytes that ran the acting process."
+                },
+                {
+                    "name": "ParentProcessName",
+                    "type": "String",
+                    "description": "The name of the parent process."
+                },
+                {
+                    "name": "ParentProcessFileCompany",
+                    "type": "String",
+                    "description": "The company that created the parent process image file."
+                },
+                {
+                    "name": "ParentProcessFileDescription",
+                    "type": "String",
+                    "description": "The description from the version information of the parent process image file."
+                },
+                {
+                    "name": "ParentProcessFileProduct",
+                    "type": "String",
+                    "description": "The product name from the version information in the parent process image file."
+                },
+                {
+                    "name": "ParentProcessFileVersion",
+                    "type": "String",
+                    "description": "The product version from the version information of the parent process image file."
+                },
+                {
+                    "name": "ParentProcessIsHidden",
+                    "type": "Bool",
+                    "description": "An indication of whether the parent process is in hidden mode."
+                },
+                {
+                    "name": "ParentProcessInjectedAddress",
+                    "type": "String",
+                    "description": "The memory address in which the responsible parent process is stored."
+                },
+                {
+                    "name": "ParentProcessId",
+                    "type": "String",
+                    "description": "The process ID of the parent process."
+                },
+                {
+                    "name": "ParentProcessGuid",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "description": "A GUID of the parent process."
+                },
+                {
+                    "name": "ParentProcessIntegrityLevel",
+                    "type": "String",
+                    "description": "Integrity Level for parent process."
+                },
+                {
+                    "name": "ParentProcessMD5",
+                    "type": "String",
+                    "description": "The MD5 hash of the parent process image file."
+                },
+                {
+                    "name": "ParentProcessSHA1",
+                    "type": "String",
+                    "description": "The SHA-1 hash of the parent process image file."
+                },
+                {
+                    "name": "ParentProcessSHA256",
+                    "type": "String",
+                    "description": "The SHA-256 hash of the parent process image file."
+                },
+                {
+                    "name": "ParentProcessSHA512",
+                    "type": "String",
+                    "description": "The SHA-512 hash of the parent process image file."
+                },
+                {
+                    "name": "ParentProcessIMPHASH",
+                    "type": "String",
+                    "description": "The Import Hash of all the library DLLs that are used by the parent process."
+                },
+                {
+                    "name": "ParentProcessCreationTime",
+                    "type": "DateTime",
+                    "description": "The date and time when the parent process was started."
+                },
+                {
+                    "name": "ParentProcessTokenElevation",
+                    "type": "String",
+                    "description": "A token indicating the presence or absence of User Access Control (UAC) privilege elevation applied to the parent process."
+                },
+                {
+                    "name": "TargetProcessCommandLine",
+                    "type": "String",
+                    "description": "The command line used to run the target process."
+                },
+                {
+                    "name": "TargetProcessName",
+                    "type": "String",
+                    "description": "The name of the target process."
+                },
+                {
+                    "name": "TargetProcessFileCompany",
+                    "type": "String",
+                    "description": "The company that created the target process image file."
+                },
+                {
+                    "name": "TargetProcessFileDescription",
+                    "type": "String",
+                    "description": "The description from the version information of the target process image file."
+                },
+                {
+                    "name": "TargetProcessFileProduct",
+                    "type": "String",
+                    "description": "The product name from the version information in the target process image file."
+                },
+                {
+                    "name": "TargetProcessFileVersion",
+                    "type": "String",
+                    "description": "The product version from the version information of the target process image file."
+                },
+                {
+                    "name": "TargetProcessFileInternalName",
+                    "type": "String",
+                    "description": "The product internal file name from the version information of the target process image file."
+                },
+                {
+                    "name": "TargetProcessFileOriginalName",
+                    "type": "String",
+                    "description": "The product original file name from the version information of the target process image file."
+                },
+                {
+                    "name": "TargetProcessFilename",
+                    "type": "String",
+                    "description": "The product file name from the version information of the target process image file."
+                },
+                {
+                    "name": "TargetProcessIsHidden",
+                    "type": "Bool",
+                    "description": "An indication of whether the target process is in hidden mode."
+                },
+                {
+                    "name": "TargetProcessInjectedAddress",
+                    "type": "String",
+                    "description": "The memory address in which the responsible target process is stored."
+                },
+                {
+                    "name": "TargetProcessId",
+                    "type": "String",
+                    "description": "The process ID of the target process."
+                },
+                {
+                    "name": "TargetProcessGuid",
+                    "type": "String",
+                    "dataTypeHint": "GUID",
+                    "description": "A GUID of the target process."
+                },
+                {
+                    "name": "TargetProcessIntegrityLevel",
+                    "type": "String",
+                    "description": "Integrity Level for target process."
+                },
+                {
+                    "name": "TargetProcessMD5",
+                    "type": "String",
+                    "description": "The MD5 hash of the target process image file."
+                },
+                {
+                    "name": "TargetProcessSHA1",
+                    "type": "String",
+                    "description": "The SHA-1 hash of the target process image file."
+                },
+                {
+                    "name": "TargetProcessSHA256",
+                    "type": "String",
+                    "description": "The SHA-256 hash of the target process image file."
+                },
+                {
+                    "name": "TargetProcessSHA512",
+                    "type": "String",
+                    "description": "The SHA-512 hash of the target process image file."
+                },
+                {
+                    "name": "TargetProcessIMPHASH",
+                    "type": "String",
+                    "description": "The Import Hash of all the library DLLs that are used by the target process."
+                },
+                {
+                    "name": "TargetProcessCreationTime",
+                    "type": "DateTime",
+                    "description": "The date and time when the target process was started."
+                },
+                {
+                    "name": "TargetProcessTokenElevation",
+                    "type": "String",
+                    "description": "A token indicating the presence or absence of User Access Control (UAC) privilege elevation applied to the target process."
+                },
+                {
+                    "name": "TargetProcessFileSize",
+                    "type": "BigInt",
+                    "description": "Size of the file in bytes that ran the process responsible for the event."
+                },
+                {
+                    "name": "TargetProcessCurrentDirectory",
+                    "type": "String",
+                    "description": "The current directory in which the target process is executed."
+                },
+                {
+                    "name": "TargetProcessStatusCode",
+                    "type": "String",
+                    "description": "The exit code returned by the target process when terminated."
+                },
+                {
+                    "name": "RuleName",
+                    "type": "String",
+                    "description": "The name or ID of the rule by associated with the inspection results."
+                },
+                {
+                    "name": "RuleNumber",
+                    "type": "Int",
+                    "description": "The number of the rule associated with the inspection results."
+                },
+                {
+                    "name": "ThreatId",
+                    "type": "String",
+                    "description": "The ID of the threat or malware identified in the activity."
+                },
+                {
+                    "name": "ThreatName",
+                    "type": "String",
+                    "description": "The name of the threat or malware identified in the activity."
+                },
+                {
+                    "name": "ThreatCategory",
+                    "type": "String",
+                    "description": "The category of the threat or malware identified in activity."
+                },
+                {
+                    "name": "ThreatRiskLevel",
+                    "type": "Int",
+                    "description": "The risk level associated with the identified threat. The level should be a number between 0 and 100."
+                },
+                {
+                    "name": "ThreatOriginalRiskLevel",
+                    "type": "String",
+                    "description": "The risk level as reported by the reporting device."
+                },
+                {
+                    "name": "ThreatField",
+                    "type": "String",
+                    "description": "The field for which a threat was identified."
+                },
+                {
+                    "name": "ThreatConfidence",
+                    "type": "Int",
+                    "description": "The confidence level of the threat identified, normalized to a value between 0 and a 100."
+                },
+                {
+                    "name": "ThreatOriginalConfidence",
+                    "type": "String",
+                    "description": "The original confidence level of the threat identified, as reported by the reporting device."
+                },
+                {
+                    "name": "ThreatIsActive",
+                    "type": "Bool",
+                    "description": "True ID the threat identified is considered an active threat."
+                },
+                {
+                    "name": "ThreatFirstReportedTime",
+                    "type": "DateTime",
+                    "description": "The first time the IP address or domain were identified as a threat."
+                },
+                {
+                    "name": "ThreatLastReportedTime",
+                    "type": "DateTime",
+                    "description": "The last time the IP address or domain were identified as a threat."
+                }
+            ],
+            "sampleInputRecordsFilePath": "SampleInputRecords/ProcessEventSample.json",
+            "sampleOutputRecordsFilePath": "SampleOutputRecords/ProcessEventSample.json"
+        }
+    ],
+    "functions": [
+        {
+            "id": "bab3d2d1-014b-5126-86fd-c056a66f1135",
+            "name": "_ASim_ProcessEvent",
+            "parameters": "",
+            "description": "Process Event ASIM parser.",
+            "bodyFilePath": "KQL/ProcessEvent/_ASim_ProcessEvent.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "3e198abb-e072-54c4-9e43-cb58532c6c2a",
+            "name": "_ASim_ProcessEventBuiltIn",
+            "parameters": "",
+            "description": "Process Event ASIM built-in union parser.",
+            "bodyFilePath": "KQL/ProcessEvent/_ASim_ProcessEventBuiltIn.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "61274267-54b5-58aa-806f-04de1fef09d9",
+            "name": "_ASim_ProcessEvent_Create",
+            "parameters": "",
+            "description": "Process Create ASIM parser.",
+            "bodyFilePath": "KQL/ProcessEvent/_ASim_ProcessEvent_Create.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "1f4691cc-50e5-5a48-b6cc-386060a34432",
+            "name": "_ASim_ProcessEvent_CreateBuiltIn",
+            "parameters": "",
+            "description": "Process Create ASIM built-in union parser.",
+            "bodyFilePath": "KQL/ProcessEvent/_ASim_ProcessEvent_CreateBuiltIn.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "c56934e7-4163-5759-a386-bb5e45191eb0",
+            "name": "_ASim_ProcessEvent_CreateLinuxSysmonV02",
+            "parameters": "disabled:bool = false",
+            "description": "Process Create Event ASIM parser for Sysmon for Linux.",
+            "bodyFilePath": "KQL/ProcessEvent/_ASim_ProcessEvent_CreateLinuxSysmonV02.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "254ced33-035d-5472-8a2e-7d4824d4fcab",
+            "name": "_ASim_ProcessEvent_CreateMicrosoftSecurityEventsV01",
+            "parameters": "disabled:bool = false",
+            "description": "Process Create Event ASIM parser for Windows Security Events.",
+            "bodyFilePath": "KQL/ProcessEvent/_ASim_ProcessEvent_CreateMicrosoftSecurityEventsV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "19c7a3a2-0074-56fd-8c77-01417d1b69a5",
+            "name": "_ASim_ProcessEvent_CreateMicrosoftSysmonV03",
+            "parameters": "disabled:bool = false",
+            "description": "Process Create Event ASIM parser for Sysmon.",
+            "bodyFilePath": "KQL/ProcessEvent/_ASim_ProcessEvent_CreateMicrosoftSysmonV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "7e5a666f-961c-55cb-9e4a-fdf89c099447",
+            "name": "_ASim_ProcessEvent_CreateMicrosoftWindowsEventsV03",
+            "parameters": "disabled:bool = false",
+            "description": "Process Create Event ASIM parser for WEF Security Events.",
+            "bodyFilePath": "KQL/ProcessEvent/_ASim_ProcessEvent_CreateMicrosoftWindowsEventsV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "26baf752-5748-51f5-8eb7-83d85adf2cb8",
+            "name": "_ASim_ProcessEvent_MD4IoTV01",
+            "parameters": "disabled:bool = false",
+            "description": "Process Create Event ASIM parser for Microsoft Defender for IoT.",
+            "bodyFilePath": "KQL/ProcessEvent/_ASim_ProcessEvent_MD4IoTV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "e05b7046-f392-500f-9804-bea9748c51c1",
+            "name": "_ASim_ProcessEvent_Microsoft365DV01",
+            "parameters": "disabled:bool = false",
+            "description": "Process Create Event ASIM parser for Microsoft 365 Defender for endpoint.",
+            "bodyFilePath": "KQL/ProcessEvent/_ASim_ProcessEvent_Microsoft365DV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "7a91f3e8-0c29-57e1-b380-da2a801882e6",
+            "name": "_ASim_ProcessEvent_NativeV01",
+            "parameters": "disabled:bool = false",
+            "description": "Process Event ASIM parser for Microsoft Sentinel native Process Event table.",
+            "bodyFilePath": "KQL/ProcessEvent/_ASim_ProcessEvent_NativeV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "b34c18bf-43d0-5e28-83ed-deee72ee74ff",
+            "name": "_ASim_ProcessEvent_Terminate",
+            "parameters": "",
+            "description": "Process Terminate ASIM parser.",
+            "bodyFilePath": "KQL/ProcessEvent/_ASim_ProcessEvent_Terminate.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "5c84f668-05ab-5d6e-b390-c97ba4d10d34",
+            "name": "_ASim_ProcessEvent_TerminateBuiltIn",
+            "parameters": "",
+            "description": "Process Terminate ASIM built-in union parser.",
+            "bodyFilePath": "KQL/ProcessEvent/_ASim_ProcessEvent_TerminateBuiltIn.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "d0c84fb1-70c4-5f05-b9ea-ea264d3f91b8",
+            "name": "_ASim_ProcessEvent_TerminateLinuxSysmonV01",
+            "parameters": "disabled:bool = false",
+            "description": "Process Terminate Event ASIM parser for Sysmon for Linux.",
+            "bodyFilePath": "KQL/ProcessEvent/_ASim_ProcessEvent_TerminateLinuxSysmonV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "a981fd67-71ab-5e13-b87e-3632666d745f",
+            "name": "_ASim_ProcessEvent_TerminateMicrosoftSecurityEventsV02",
+            "parameters": "disabled:bool = false",
+            "description": "Process Terminate Event ASIM parser for Windows Security Events.",
+            "bodyFilePath": "KQL/ProcessEvent/_ASim_ProcessEvent_TerminateMicrosoftSecurityEventsV02.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "18e56d86-053e-549f-9c0d-c3970f46d478",
+            "name": "_ASim_ProcessEvent_TerminateMicrosoftSysmonV02",
+            "parameters": "disabled:bool = false",
+            "description": "Process Terminate Event ASIM parser for Microsoft Windows Security Events.",
+            "bodyFilePath": "KQL/ProcessEvent/_ASim_ProcessEvent_TerminateMicrosoftSysmonV02.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "7c617f08-970c-5884-9ea5-e07dd5c3dfe8",
+            "name": "_ASim_ProcessEvent_TerminateMicrosoftWindowsEventsV02",
+            "parameters": "disabled:bool = false",
+            "description": "Process Terminate Event ASIM parser for WEF Security Events.",
+            "bodyFilePath": "KQL/ProcessEvent/_ASim_ProcessEvent_TerminateMicrosoftWindowsEventsV02.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "9bb77b98-9da2-55c3-895c-c27feaccf670",
+            "name": "_Im_ProcessCreate",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), commandline_has_any:dynamic = dynamic([]), commandline_has_all:dynamic = dynamic([]), commandline_has_any_ip_prefix:dynamic = dynamic([]), actingprocess_has_any:dynamic = dynamic([]), targetprocess_has_any:dynamic = dynamic([]), parentprocess_has_any:dynamic = dynamic([]), targetusername:string = '*', dvcipaddr_has_any_prefix:dynamic = dynamic([]), dvcname_has_any:dynamic = dynamic([]), hashes_has_any:dynamic = dynamic([]), eventtype:string = '*'",
+            "description": "Process Create ASIM parser.",
+            "bodyFilePath": "KQL/ProcessEvent/_Im_ProcessCreate.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "92130422-ba25-5b51-b0b0-5b9b790e6ebb",
+            "name": "_Im_ProcessCreateBuiltIn",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), commandline_has_any:dynamic = dynamic([]), commandline_has_all:dynamic = dynamic([]), commandline_has_any_ip_prefix:dynamic = dynamic([]), actingprocess_has_any:dynamic = dynamic([]), targetprocess_has_any:dynamic = dynamic([]), parentprocess_has_any:dynamic = dynamic([]), targetusername:string = '*', dvcipaddr_has_any_prefix:dynamic = dynamic([]), dvcname_has_any:dynamic = dynamic([]), hashes_has_any:dynamic = dynamic([]), eventtype:string = '*'",
+            "description": "Process Create ASIM built-in union parser.",
+            "bodyFilePath": "KQL/ProcessEvent/_Im_ProcessCreateBuiltIn.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "c5f1b49b-1dfe-5d35-8ed5-09a816424ddf",
+            "name": "_Im_ProcessCreate_LinuxSysmonV03",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), commandline_has_any:dynamic = dynamic([]), commandline_has_all:dynamic = dynamic([]), commandline_has_any_ip_prefix:dynamic = dynamic([]), actingprocess_has_any:dynamic = dynamic([]), targetprocess_has_any:dynamic = dynamic([]), parentprocess_has_any:dynamic = dynamic([]), targetusername:string = '*', dvcipaddr_has_any_prefix:dynamic = dynamic([]), dvcname_has_any:dynamic = dynamic([]), eventtype:string = '*', disabled:bool = false",
+            "description": "Process Create Event ASIM filtering parser for Sysmon for Linux.",
+            "bodyFilePath": "KQL/ProcessEvent/_Im_ProcessCreate_LinuxSysmonV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "2f31c831-b45d-50f9-b4ef-fe4f5f39c044",
+            "name": "_Im_ProcessCreate_MD4IoTV01",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), commandline_has_any:dynamic = dynamic([]), commandline_has_all:dynamic = dynamic([]), commandline_has_any_ip_prefix:dynamic = dynamic([]), actingprocess_has_any:dynamic = dynamic([]), targetprocess_has_any:dynamic = dynamic([]), parentprocess_has_any:dynamic = dynamic([]), targetusername:string = '*', dvcipaddr_has_any_prefix:dynamic = dynamic([]), dvcname_has_any:dynamic = dynamic([]), eventtype:string = '*', disabled:bool = false",
+            "description": "Process Create Event ASIM parser for Microsoft Defender for IoT.",
+            "bodyFilePath": "KQL/ProcessEvent/_Im_ProcessCreate_MD4IoTV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "04d7a06e-8462-5f8a-bb07-2d7863c3122c",
+            "name": "_Im_ProcessCreate_MicrosoftSecurityEventsV02",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), commandline_has_any:dynamic = dynamic([]), commandline_has_all:dynamic = dynamic([]), commandline_has_any_ip_prefix:dynamic = dynamic([]), actingprocess_has_any:dynamic = dynamic([]), targetprocess_has_any:dynamic = dynamic([]), parentprocess_has_any:dynamic = dynamic([]), targetusername_has:string = '*', dvcipaddr_has_any_prefix:dynamic = dynamic([]), dvchostname_has_any:dynamic = dynamic([]), eventtype:string = '*', disabled:bool = false",
+            "description": "Process Create Event ASIM parser for Windows Security Events.",
+            "bodyFilePath": "KQL/ProcessEvent/_Im_ProcessCreate_MicrosoftSecurityEventsV02.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "d666a9f7-14e2-5924-b009-3a2db5f1ff02",
+            "name": "_Im_ProcessCreate_MicrosoftSysmonV04",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), commandline_has_any:dynamic = dynamic([]), commandline_has_all:dynamic = dynamic([]), commandline_has_any_ip_prefix:dynamic = dynamic([]), actingprocess_has_any:dynamic = dynamic([]), targetprocess_has_any:dynamic = dynamic([]), parentprocess_has_any:dynamic = dynamic([]), targetusername_has:string = '*', dvcipaddr_has_any_prefix:dynamic = dynamic([]), dvchostname_has_any:dynamic = dynamic([]), eventtype:string = '*', disabled:bool = false",
+            "description": "Process Create Event ASIM parser for Sysmon.",
+            "bodyFilePath": "KQL/ProcessEvent/_Im_ProcessCreate_MicrosoftSysmonV04.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "21828232-0edd-522c-bc39-43765d87aebe",
+            "name": "_Im_ProcessCreate_MicrosoftWindowsEventsV03",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), commandline_has_any:dynamic = dynamic([]), commandline_has_all:dynamic = dynamic([]), commandline_has_any_ip_prefix:dynamic = dynamic([]), actingprocess_has_any:dynamic = dynamic([]), targetprocess_has_any:dynamic = dynamic([]), parentprocess_has_any:dynamic = dynamic([]), targetusername_has:string = '*', dvcipaddr_has_any_prefix:dynamic = dynamic([]), dvchostname_has_any:dynamic = dynamic([]), eventtype:string = '*', hashes_has_any:dynamic = dynamic([]), disabled:bool = false",
+            "description": "Process Create Event ASIM parser for WEF Security Events.",
+            "bodyFilePath": "KQL/ProcessEvent/_Im_ProcessCreate_MicrosoftWindowsEventsV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "5e589d20-639d-51df-8cfc-6250ab0fe546",
+            "name": "_Im_ProcessEvent",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), commandline_has_any:dynamic = dynamic([]), commandline_has_all:dynamic = dynamic([]), commandline_has_any_ip_prefix:dynamic = dynamic([]), actingprocess_has_any:dynamic = dynamic([]), targetprocess_has_any:dynamic = dynamic([]), parentprocess_has_any:dynamic = dynamic([]), actorusername:string = '*', targetusername:string = '*', dvcipaddr_has_any_prefix:dynamic = dynamic([]), dvcname_has_any:dynamic = dynamic([]), hashes_has_any:dynamic = dynamic([]), eventtype:string = '*'",
+            "description": "Process Event filtering parser.",
+            "bodyFilePath": "KQL/ProcessEvent/_Im_ProcessEvent.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "ae009c38-3679-51d1-94c1-ecbb3a58fd77",
+            "name": "_Im_ProcessEventBuiltIn",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), commandline_has_any:dynamic = dynamic([]), commandline_has_all:dynamic = dynamic([]), commandline_has_any_ip_prefix:dynamic = dynamic([]), actingprocess_has_any:dynamic = dynamic([]), targetprocess_has_any:dynamic = dynamic([]), parentprocess_has_any:dynamic = dynamic([]), actorusername:string = '*', targetusername:string = '*', dvcipaddr_has_any_prefix:dynamic = dynamic([]), dvcname_has_any:dynamic = dynamic([]), hashes_has_any:dynamic = dynamic([]), eventtype:string = '*'",
+            "description": "Process Event filtering parser.",
+            "bodyFilePath": "KQL/ProcessEvent/_Im_ProcessEventBuiltIn.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "5613f237-db83-5a0f-8780-60bc6bdcb67a",
+            "name": "_Im_ProcessEvent_MD4IoTV02",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), commandline_has_any:dynamic = dynamic([]), commandline_has_all:dynamic = dynamic([]), commandline_has_any_ip_prefix:dynamic = dynamic([]), actingprocess_has_any:dynamic = dynamic([]), targetprocess_has_any:dynamic = dynamic([]), parentprocess_has_any:dynamic = dynamic([]), targetusername:string = '*', dvcipaddr_has_any_prefix:dynamic = dynamic([]), dvcname_has_any:dynamic = dynamic([]), eventtype:string = '*', disabled:bool = false",
+            "description": "Process Create Event ASIM parser for Microsoft Defender for IoT.",
+            "bodyFilePath": "KQL/ProcessEvent/_Im_ProcessEvent_MD4IoTV02.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "c4f57756-0989-52d2-b462-a0cdd592cc60",
+            "name": "_Im_ProcessEvent_Microsoft365DV02",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), commandline_has_any:dynamic = dynamic([]), commandline_has_all:dynamic = dynamic([]), commandline_has_any_ip_prefix:dynamic = dynamic([]), actingprocess_has_any:dynamic = dynamic([]), targetprocess_has_any:dynamic = dynamic([]), parentprocess_has_any:dynamic = dynamic([]), targetusername_has:string = '*', dvcipaddr_has_any_prefix:dynamic = dynamic([]), dvchostname_has_any:dynamic = dynamic([]), eventtype:string = '*', hashes_has_any:dynamic = dynamic([]), disabled:bool = false",
+            "description": "Process Create Event ASIM parser for Microsoft 365 Defender for endpoint.",
+            "bodyFilePath": "KQL/ProcessEvent/_Im_ProcessEvent_Microsoft365DV02.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "5af48b34-382c-5de9-b942-6a39d3e5ecc2",
+            "name": "_Im_ProcessEvent_NativeV01",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), commandline_has_any:dynamic = dynamic([]), commandline_has_all:dynamic = dynamic([]), commandline_has_any_ip_prefix:dynamic = dynamic([]), actingprocess_has_any:dynamic = dynamic([]), targetprocess_has_any:dynamic = dynamic([]), parentprocess_has_any:dynamic = dynamic([]), targetusername_has:string = '*', actorusername_has:string = '*', dvcipaddr_has_any_prefix:dynamic = dynamic([]), dvchostname_has_any:dynamic = dynamic([]), eventtype:string = '*', hashes_has_any:dynamic = dynamic([]), disabled:bool = false",
+            "description": "Process Event ASIM filtering parser for Microsoft Sentinel native Process Event table.",
+            "bodyFilePath": "KQL/ProcessEvent/_Im_ProcessEvent_NativeV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "f3aadd2e-71b1-5331-b9a4-bbffc003f778",
+            "name": "_Im_ProcessTerminate",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), commandline_has_any:dynamic = dynamic([]), commandline_has_all:dynamic = dynamic([]), commandline_has_any_ip_prefix:dynamic = dynamic([]), actingprocess_has_any:dynamic = dynamic([]), targetprocess_has_any:dynamic = dynamic([]), parentprocess_has_any:dynamic = dynamic([]), actorusername:string = '*', dvcipaddr_has_any_prefix:dynamic = dynamic([]), dvcname_has_any:dynamic = dynamic([]), eventtype:string = '*'",
+            "description": "Process Terminate ASIM parser.",
+            "bodyFilePath": "KQL/ProcessEvent/_Im_ProcessTerminate.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "1150e4b9-e0bf-5244-a32b-a4c6d16ad42a",
+            "name": "_Im_ProcessTerminateBuiltIn",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), commandline_has_any:dynamic = dynamic([]), commandline_has_all:dynamic = dynamic([]), commandline_has_any_ip_prefix:dynamic = dynamic([]), actingprocess_has_any:dynamic = dynamic([]), targetprocess_has_any:dynamic = dynamic([]), parentprocess_has_any:dynamic = dynamic([]), actorusername:string = '*', dvcipaddr_has_any_prefix:dynamic = dynamic([]), dvcname_has_any:dynamic = dynamic([]), eventtype:string = '*'",
+            "description": "Process Terminate ASIM built-in union parser.",
+            "bodyFilePath": "KQL/ProcessEvent/_Im_ProcessTerminateBuiltIn.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "130955c9-c74c-5779-a42a-cd24be011e4b",
+            "name": "_Im_ProcessTerminate_LinuxSysmonV02",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), commandline_has_any:dynamic = dynamic([]), commandline_has_all:dynamic = dynamic([]), commandline_has_any_ip_prefix:dynamic = dynamic([]), actingprocess_has_any:dynamic = dynamic([]), targetprocess_has_any:dynamic = dynamic([]), parentprocess_has_any:dynamic = dynamic([]), actorusername:string = '*', dvcipaddr_has_any_prefix:dynamic = dynamic([]), dvcname_has_any:dynamic = dynamic([]), eventtype:string = '*', disabled:bool = false",
+            "description": "Process Terminate Event ASIM parser for Sysmon for Linux.",
+            "bodyFilePath": "KQL/ProcessEvent/_Im_ProcessTerminate_LinuxSysmonV02.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "703b746a-1815-5a4f-b932-239289d4fa4f",
+            "name": "_Im_ProcessTerminate_MD4IoTV02",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), commandline_has_any:dynamic = dynamic([]), commandline_has_all:dynamic = dynamic([]), commandline_has_any_ip_prefix:dynamic = dynamic([]), actingprocess_has_any:dynamic = dynamic([]), targetprocess_has_any:dynamic = dynamic([]), parentprocess_has_any:dynamic = dynamic([]), actorusername:string = '*', dvcipaddr_has_any_prefix:dynamic = dynamic([]), dvcname_has_any:dynamic = dynamic([]), eventtype:string = '*', disabled:bool = false",
+            "description": "Process Terminate Event ASIM parser for Microsoft Defender for IoT.",
+            "bodyFilePath": "KQL/ProcessEvent/_Im_ProcessTerminate_MD4IoTV02.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "176a740a-4523-5f75-a135-3fb04cfbebf0",
+            "name": "_Im_ProcessTerminate_MicrosoftSecurityEventsV03",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), commandline_has_any:dynamic = dynamic([]), commandline_has_all:dynamic = dynamic([]), commandline_has_any_ip_prefix:dynamic = dynamic([]), actingprocess_has_any:dynamic = dynamic([]), targetprocess_has_any:dynamic = dynamic([]), parentprocess_has_any:dynamic = dynamic([]), actorusername:string = '*', dvcipaddr_has_any_prefix:dynamic = dynamic([]), dvcname_has_any:dynamic = dynamic([]), eventtype:string = '*', disabled:bool = false",
+            "description": "Process Terminate Event ASIM parser for Windows Security Events.",
+            "bodyFilePath": "KQL/ProcessEvent/_Im_ProcessTerminate_MicrosoftSecurityEventsV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "8126a19b-9eec-59a4-aa68-ca3199401d87",
+            "name": "_Im_ProcessTerminate_MicrosoftSysmonV03",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), commandline_has_any:dynamic = dynamic([]), commandline_has_all:dynamic = dynamic([]), commandline_has_any_ip_prefix:dynamic = dynamic([]), actingprocess_has_any:dynamic = dynamic([]), targetprocess_has_any:dynamic = dynamic([]), parentprocess_has_any:dynamic = dynamic([]), actorusername_has:string = '*', dvcipaddr_has_any_prefix:dynamic = dynamic([]), dvchostname_has_any:dynamic = dynamic([]), eventtype:string = '*', disabled:bool = false",
+            "description": "Process Terminate Event ASIM parser for Microsoft Windows Security Events.",
+            "bodyFilePath": "KQL/ProcessEvent/_Im_ProcessTerminate_MicrosoftSysmonV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "42f6b318-eefb-5436-9c4e-614bb78d905d",
+            "name": "_Im_ProcessTerminate_MicrosoftWindowsEventsV03",
+            "parameters": "starttime:datetime = datetime(null), endtime:datetime = datetime(null), commandline_has_any:dynamic = dynamic([]), commandline_has_all:dynamic = dynamic([]), commandline_has_any_ip_prefix:dynamic = dynamic([]), actingprocess_has_any:dynamic = dynamic([]), targetprocess_has_any:dynamic = dynamic([]), parentprocess_has_any:dynamic = dynamic([]), actorusername_has:string = '*', dvcipaddr_has_any_prefix:dynamic = dynamic([]), dvchostname_has_any:dynamic = dynamic([]), eventtype:string = '*', hashes_has_any:dynamic = dynamic([]), disabled:bool = false",
+            "description": "Process Terminate Event ASIM parser for WEF Security Events.",
+            "bodyFilePath": "KQL/ProcessEvent/_Im_ProcessTerminate_MicrosoftWindowsEventsV03.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "id": "78a1805f-dbe6-5fa4-92f1-8b25f20badfd",
+            "name": "_Im_Process_EmptyV01",
+            "parameters": "",
+            "description": "Process Event ASIM schema function.",
+            "bodyFilePath": "KQL/ProcessEvent/_Im_Process_EmptyV01.kql",
+            "solutions": [
+                "SecurityInsights"
+            ],
+            "tags": {},
+            "properties": {}
+        }
+    ],
+    "queries": []
+}

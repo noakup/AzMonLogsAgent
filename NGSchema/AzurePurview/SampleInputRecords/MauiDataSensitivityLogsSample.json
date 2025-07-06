@@ -1,0 +1,42 @@
+[{
+  "Id": "/subscriptions/a2ce32a8-f935-4bb6-8e96-2a5157672e2c/resourceGroups/AIP/providers/Microsoft.Storage/storageAccounts/aipclptest",
+  "Time": "2020-02-13T19:53:39.0000000Z",
+  "Category": "DataSensitivityLogEvent",
+  "Properties": {
+      "PurviewResourceId": "/subscriptions/30d9d527-c409-4507-b861-d60e7fe9e292/resourceGroups/AIP/providers/Microsoft.Purview/accounts/PurviewAIP",
+      "PurviewSubscriptionId": "30d9d527-c409-4507-b861-d60e7fe9e292",
+      "PurviewTenantId": "4ef9e0e5-c6c7-45db-a2ce-8d4cba813edf",
+      "PurviewAccountName": "PurviewAIP",
+      "PurviewRegion": "eastus",
+      "SourceName": "aipblobdatasource",
+      "SourceType": "AzureBlob",
+      "SourcePath": "/subscriptions/a2ce32a8-f935-4bb6-8e96-2a5157672e2c/resourceGroups/AIP/providers/Microsoft.Storage/storageAccounts/aipclptest",
+      "SourceSubscriptionId": "a2ce32a8-f935-4bb6-8e96-2a5157672e2c",
+      "SourceRegion": "westus2",
+      "SourceCollectionName": "collectionName",
+      "SourceScanId": "a2ce32a8-f935-4bb6-8e96-2a5157672e2c",
+      "AssetName": "denmark.txt",
+      "AssetPath": "https://aipclptest.blob.core.windows.net/testContainer/denmark.txt",
+      "AssetType": "File",
+      "AssetCreationTime": "",
+      "AssetModifiedTime": "2020-02-13T19:53:39.0000000Z",
+      "AssetLastScanTime": "2020-02-13T19:53:39.0000000Z",
+      "FileExtension": "txt",
+      "FileSize": 126,
+      "ActivityType": "Classification",
+      "ClassificationTrigger": "System",
+      "Classification": ["SSN"],
+      "ClassificationDetails": [{
+              "Id": "0ef9e0e5-c6c7-45db-a2ce-8d4cba813ed3",
+              "Name": "SSN",
+              "Confidence": 99,
+              "Count": 3,
+              "UniqueCount": 5
+          }
+      ],
+      "SensitivityLabelTrigger": "",
+      "SensitivityLabel": [],
+      "SensitivityLabelDetails": []
+  }
+}
+]

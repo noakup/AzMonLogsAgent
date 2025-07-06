@@ -1,0 +1,41 @@
+[
+    {
+      "AzureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm",
+      "ImageName": "busybox",
+      "Digest": "sha256:50aa4698fa6262977cff89181b2664b99d8a56dbca847bf62f2ef04854597cf8",
+      "ContainerId": "acdea168264aacdea168264a08f9aaca0dfc82ff3551418dfd22d02b713142a6843caa2f61bf",
+      "Region": "eastus2",
+      "ContainerName": "containername",
+      "PID": "17",
+      "Ppid": "1",
+      "TimeGenerated": "2019-03-01T00:00:00Z",
+      "Uid": "15",
+      "Gid": "12",
+      "Comm": "wget",
+      "PodName": "podname",
+      "NodeName": "computername",
+      "Namespace ": "mdc",
+      "Addresses": ["172.217.22.4"], 
+      "PacketId": "b2b7",
+      "Latency": "0.000000",
+      "NameServer": "172.19.176.1",
+      "QR": "R",
+      "Rcode": "No Error",
+      "Tid": "82304",
+      "Qtype": "A",
+      "Domain": "www.google.com",
+      "DataPipelineMetadata": {},
+      "AdditionalData": {
+        "CloudNativeIdentifiers": {
+          "clusterDistribution": "AKS"
+        }
+      },
+      "EventGuid": "28e7775a-3e58-45cc-ab16-0d99e8a36cd0",
+      "Exe": "/usr/bin/wget",
+      "Cwd": "/home/user",
+      "Pcomm": "/bin/bash"
+    },
+    {
+      "TimeGenerated": "2019-03-01T00:00:00Z"    
+    }
+  ]

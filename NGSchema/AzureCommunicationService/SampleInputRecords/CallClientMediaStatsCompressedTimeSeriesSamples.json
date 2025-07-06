@@ -1,0 +1,42 @@
+[
+    {
+        "time": "2023-10-24T21:16:09.435Z",
+        "operationName": "CallClientMediaStatsTimeSeries",
+        "operationVersion": "1.0",
+        "properties": {
+            "acsResourceId":"6aa1f50d-f09f-47d2-9a30-1a1ecb6a14df",
+            "callId":"895f6040-62df-45d8-a074-ff93b574d426",
+            "metricName":"RttInMs",
+            "mediaStreamDirection":"send",
+            "mediaStreamType":"audio",
+            "clientInstanceId":"9669d4b3-1152-47cb-ae2b-c7f20d5be517",
+            "participantId":"6ad60922-64fe-479d-b7ca-c5c9ce32fd42",
+            "endpointId":"",
+            "remoteParticipantId":"",
+            "remoteEndpointId":"",
+            "min_list":[
+               25.0
+            ],
+            "callClientTimeStamp_list":[
+               "2025-05-14T06:22:49.904+00:00"
+            ],
+            "max_list":[
+               25.0
+            ],
+            "sum_list":[
+               100.0
+            ],
+            "count_list":[
+               4
+            ],
+            "average_list":[
+               25.0
+            ],
+            "mediaStreamCodec_list":[
+               "G722"
+            ],
+            "aggregationIntervalSeconds":10,
+            "userAgent":"default/0.0.0 azsdk-js-communication-calling/1.24.3 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/125.0.6422.76 Safari/537.36"
+         }
+    }
+]

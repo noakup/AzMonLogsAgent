@@ -1,0 +1,3 @@
+ACSBillingUsage
+| summarize Occurences=dcount(RecordId) by UsageType, bin(TimeGenerated, 1h) // count the number of unique records for each type of usage, per hour
+| render columnchart
