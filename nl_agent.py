@@ -349,38 +349,65 @@ class KQLAgent:
                 'dependencies': 'app_dependencies_kql_examples.md',
                 'custom_events': 'app_custom_events_kql_examples.md',
                 'performance': 'app_performance_kql_examples.md',
-                'usage': 'usage_kql_examples.md'
+                'usage': 'usage_kql_examples.md',
+                'page_views': 'app_page_views_kql_examples.md'  # Added page_views mapping
             }
             
             filename = file_map.get(scenario)
             if not filename:
+                print(f"⚠️ No file mapping found for scenario: {scenario}")
                 return []
             
             filepath = os.path.join(os.path.dirname(__file__), filename)
             if not os.path.exists(filepath):
+                print(f"⚠️ Example file not found: {filepath}")
                 return []
             
             descriptions = []
             with open(filepath, 'r', encoding='utf-8') as f:
                 content = f.read()
             
+            print(f"📖 Processing example file: {filename}")
+            
             # Split by lines and look for patterns like "**Description**"
             lines = content.split('\n')
-            for line in lines:
+            for i, line in enumerate(lines):
                 line = line.strip()
                 # Look for lines that start with ** and end with ** (markdown bold)
                 if line.startswith('**') and line.endswith('**') and len(line) > 4:
                     # Remove the ** markers
                     description = line[2:-2].strip()
+                    
+                    # Handle special case for "Prompt:" - get the next non-empty line
+                    if description.lower() == "prompt:":
+                        # Look for the actual prompt in the next few lines
+                        for j in range(i + 1, min(i + 5, len(lines))):
+                            next_line = lines[j].strip()
+                            if next_line and not next_line.startswith('**') and not next_line.startswith('```'):
+                                descriptions.append(next_line)
+                                print(f"✅ Found prompt: {next_line}")
+                                break
+                        continue
+                    
                     # Skip if it looks like a header (contains words like "Example", "Analysis", etc.)
-                    skip_words = ['example', 'analysis', 'queries', 'insights', 'metadata', 'kql']
-                    if not any(skip_word in description.lower() for skip_word in skip_words):
+                    skip_words = ['example', 'analysis', 'queries', 'insights', 'metadata', 'kql', 'document', 'table']
+                    should_skip = any(skip_word in description.lower() for skip_word in skip_words)
+                    
+                    # Also skip very short descriptions (likely headers)
+                    if len(description) < 10:
+                        should_skip = True
+                    
+                    if not should_skip:
                         descriptions.append(description)
+                        print(f"✅ Found example: {description}")
+                    else:
+                        print(f"⏭️ Skipped header/short text: {description}")
             
+            print(f"📊 Found {len(descriptions)} example descriptions for {scenario}")
             return descriptions[:10]  # Limit to first 10 examples
             
         except Exception as e:
-            print(f"Error extracting examples: {e}")
+            print(f"❌ Error extracting examples for {scenario}: {e}")
             return []
 
     async def explain_results(self, query_result: Dict, original_question: str = "") -> str:

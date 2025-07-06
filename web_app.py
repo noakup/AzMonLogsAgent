@@ -143,27 +143,46 @@ def get_examples(scenario):
                 'error': 'Agent not initialized. Please setup workspace first.'
             })
         
-        # Run the async examples request
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
+        # Directly call the extract_example_descriptions method to avoid string responses
+        descriptions = agent.extract_example_descriptions(scenario)
         
-        try:
-            result = loop.run_until_complete(
-                agent.process_natural_language(f"show me examples for {scenario}")
-            )
-            return jsonify({
-                'success': True,
-                'result': result,
-                'scenario': scenario,
-                'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            })
-        finally:
-            loop.close()
+        if descriptions:
+            # Return structured data for suggestion buttons
+            result = {
+                "type": "example_suggestions",
+                "scenario": scenario,
+                "suggestions": descriptions,
+                "message": f"✅ Found {len(descriptions)} example suggestions for {scenario.title()}"
+            }
+        else:
+            # Return structured response even when no examples are found
+            result = {
+                "type": "example_suggestions", 
+                "scenario": scenario,
+                "suggestions": [],
+                "message": f"No examples available for {scenario} yet. Please check back later."
+            }
+            
+        return jsonify({
+            'success': True,
+            'result': result,
+            'scenario': scenario,
+            'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        })
             
     except Exception as e:
+        # Even for errors, return a structured response
+        result = {
+            "type": "example_suggestions",
+            "scenario": scenario, 
+            "suggestions": [],
+            "message": f"Error loading examples for {scenario}: {str(e)}"
+        }
         return jsonify({
-            'success': False,
-            'error': str(e)
+            'success': True,  # Set to True so frontend handles it properly
+            'result': result,
+            'scenario': scenario,
+            'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         })
 
 @app.route('/api/explain', methods=['POST'])
