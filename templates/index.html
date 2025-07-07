@@ -275,29 +275,38 @@
         }
 
         .results-section {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 25px;
-            margin-top: 20px;
-            min-height: 100px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 25px;
+            min-height: 120px;
             display: none;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e9ecef;
         }
 
         .results-section.visible {
             display: block;
+            animation: slideInFromTop 0.5s ease-out;
         }
 
         .results-section h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .result-content {
             background: white;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid #667eea;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 6px solid #667eea;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e9ecef;
             white-space: pre-wrap;
             font-family: 'Courier New', monospace;
             font-size: 0.9rem;
@@ -402,10 +411,15 @@
         }
 
         .timestamp {
-            font-size: 0.8rem;
-            color: #666;
-            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: 15px;
             text-align: right;
+            padding: 8px 15px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+            font-style: italic;
         }
 
         .progress-container {
@@ -442,32 +456,50 @@
         /* Table styling for query results */
         .result-table {
             width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
+            min-width: max-content;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 20px 0;
             background: white;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e9ecef;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         .result-table th {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 12px 15px;
+            padding: 16px 20px;
             text-align: left;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            white-space: nowrap;
+            min-width: 120px;
         }
 
         .result-table td {
-            padding: 10px 15px;
-            border-bottom: 1px solid #e9ecef;
-            font-size: 0.85rem;
-            line-height: 1.4;
+            padding: 14px 20px;
+            border-bottom: 1px solid #f1f3f4;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #2c3e50;
+            vertical-align: top;
+            white-space: nowrap;
+            min-width: 120px;
         }
 
         .result-table tr:hover {
-            background: #f8f9fa;
+            background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+            transform: scale(1.001);
+            transition: all 0.2s ease;
         }
 
         .result-table tr:last-child td {
@@ -478,55 +510,160 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 20px 0 10px 0;
-            padding: 10px 0;
-            border-bottom: 2px solid #e9ecef;
+            margin: 25px 0 15px 0;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
 
         .table-title {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            color: #333;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .table-info {
             font-size: 0.9rem;
-            color: #666;
-            background: #f8f9fa;
-            padding: 4px 8px;
+            color: #667eea;
+            background: linear-gradient(135deg, #e3f2fd 0%, #f8f9fa 100%);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 500;
+            border: 1px solid #bbdefb;
             border-radius: 4px;
         }
 
         .kql-query {
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
-            padding: 12px;
-            margin: 10px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.85rem;
-            color: #495057;
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #e2e8f0;
             white-space: pre-wrap;
+            line-height: 1.6;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .kql-query::before {
+            content: 'KQL';
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            background: rgba(102, 126, 234, 0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
         .query-header {
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: #667eea;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 0;
         }
 
         .no-data-message {
             text-align: center;
-            padding: 40px;
-            color: #666;
+            padding: 50px;
+            color: #6c757d;
             font-style: italic;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border: 2px dashed #dee2e6;
+            border-radius: 12px;
+            margin: 20px 0;
         }
 
         .result-container {
-            max-height: 500px;
-            overflow-y: auto;
-            border-radius: 8px;
+            max-height: 600px;
+            overflow: auto;
+            overflow-x: auto;
+            border-radius: 12px;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e9ecef;
+            scrollbar-width: thin;
+            scrollbar-color: #667eea #f1f1f1;
+            position: relative;
+            transition: max-height 0.3s ease;
+        }
+
+        /* Add a subtle gradient hint for horizontal scrolling */
+        .result-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 20px;
+            background: linear-gradient(to left, rgba(255,255,255,0.9), rgba(255,255,255,0));
+            pointer-events: none;
+            z-index: 5;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .result-container:hover::after {
+            opacity: 1;
+        }
+
+        .result-container.expanded {
+            max-height: 90vh;
+        }
+
+        .expand-toggle {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .expand-toggle:hover {
+            background: linear-gradient(135deg, #5a6fd8 0%, #654892 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .result-container::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        .result-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .result-container::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px;
+        }
+
+        .result-container::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #5a6fd8 0%, #654892 100%);
         }
 
         /* Enhanced responsive design for tables */
@@ -562,34 +699,53 @@
 
         .cell-number {
             text-align: right;
-            font-family: 'Courier New', monospace;
+            font-family: 'SF Mono', 'Monaco', 'Roboto Mono', 'Courier New', monospace;
+            font-weight: 500;
+            color: #2563eb;
+            background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%);
+            padding: 8px 12px !important;
+            border-radius: 4px;
         }
 
         .cell-boolean {
             text-align: center;
-            font-weight: 600;
+            font-weight: 700;
+            padding: 6px 12px !important;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
         }
 
         .cell-boolean.true {
-            color: #28a745;
+            color: white;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
         }
 
         .cell-boolean.false {
-            color: #dc3545;
+            color: white;
+            background: linear-gradient(135deg, #dc3545 0%, #e74c3c 100%);
         }
 
         .cell-null {
             color: #6c757d;
             font-style: italic;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 8px 12px !important;
+            border-radius: 4px;
+            text-align: center;
         }
 
         .table-stats {
-            margin-top: 10px;
-            padding: 8px 12px;
-            background: #e9ecef;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            color: #495057;
+            margin-top: 15px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
         }
 
         /* Explain button styling */
@@ -1244,9 +1400,15 @@
                         <!-- Workspace examples will be populated here -->
                     </div>
                     <div id="workspaceTimestamp" class="timestamp"></div>                </div>
-            </div><!-- Results Section -->
+            </div>            <!-- Results Section -->
             <div id="resultsSection" class="results-section">
-                <h3>📊 Results</h3>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3>📊 Results</h3>
+                    <button id="expandAllBtn" class="expand-toggle" style="position: static; display: none; font-size: 0.9rem;" 
+                            onclick="toggleAllTables()" title="Expand/Collapse All Tables">
+                        📈 Expand All
+                    </button>
+                </div>
                 <div id="resultContent" class="result-content"></div>
                 <div id="timestamp" class="timestamp"></div>
             </div>
@@ -1285,6 +1447,16 @@
             }
         }
         
+        function resetGoButton() {
+            const goButton = document.querySelector('.floating-go-btn');
+            if (goButton) {
+                goButton.textContent = 'Go!';
+                goButton.disabled = false;
+                goButton.style.opacity = '1';
+                goButton.style.pointerEvents = 'auto';
+            }
+        }
+
         function showLoading(step = 'Initializing...') {
             const resultsSection = document.getElementById('resultsSection');
             const resultContent = document.getElementById('resultContent');
@@ -1435,6 +1607,12 @@
             const timestampElement = document.getElementById('timestamp');
             const resultsSection = document.getElementById('resultsSection');
             
+            // Hide loading indicator
+            hideLoading();
+            
+            // Reset the Go button
+            resetGoButton();
+            
             // Make sure the results section is visible
             resultsSection.classList.add('visible');
             resultsSection.style.display = 'block';
@@ -1497,17 +1675,23 @@
             }
             
             timestampElement.textContent = `Response received at: ${timestamp}`;
+            
+            // Check if tables need expansion controls
+            checkTableOverflow();
         }
 
         function createTableHTML(table) {
             let html = '';
-              // Table header with info
+            const tableId = `table-${Math.random().toString(36).substr(2, 9)}`;
+            
+            // Table header with info
             html += `<div class="table-header">`;
+            html += `<div class="table-title">📊 Table ${table.table_number || 1}</div>`;
             html += `<div class="table-info">${table.row_count} rows</div>`;
             html += `</div>`;
             
             if (table.has_data && table.columns && table.rows) {
-                html += `<div class="result-container">`;
+                html += `<div class="result-container" id="${tableId}">`;
                 html += `<table class="result-table">`;
                 
                 // Table header
@@ -1516,7 +1700,8 @@
                     html += `<th>${escapeHtml(column)}</th>`;
                 });
                 html += `</tr></thead>`;
-                  // Table body
+                
+                // Table body
                 html += `<tbody>`;
                 table.rows.forEach(row => {
                     html += `<tr>`;
@@ -1528,7 +1713,8 @@
                     html += `</tr>`;
                 });
                 html += `</tbody>`;
-                  html += `</table>`;
+                
+                html += `</table>`;
                 html += `</div>`;
                 
                 // Add table statistics
@@ -1641,10 +1827,18 @@
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
-        }        function showError(error) {
+        }
+        
+        function showError(error) {
             const resultContent = document.getElementById('resultContent');
             const timestampElement = document.getElementById('timestamp');
             const resultsSection = document.getElementById('resultsSection');
+            
+            // Hide loading indicator
+            hideLoading();
+            
+            // Reset the Go button
+            resetGoButton();
             
             // Make sure the results section is visible
             resultsSection.classList.add('visible');
@@ -1655,7 +1849,9 @@
             
             // Hide explain section when showing errors
             hideExplainSection();
-        }async function setupWorkspace() {
+        }
+
+        async function setupWorkspace() {
             const workspaceId = document.getElementById('workspaceId').value.trim();
             
             if (!workspaceId) {
@@ -1793,6 +1989,14 @@
             // Store the original question for explain feature
             currentOriginalQuestion = question;
 
+            // Disable the Go button during processing
+            const goButton = document.querySelector('.floating-go-btn');
+            if (goButton) {
+                goButton.disabled = true;
+                goButton.textContent = 'Processing...';
+                goButton.style.opacity = '0.7';
+            }
+
             // Show initial loading
             showLoading('🚀 Preparing to process your question...');
             
@@ -1801,7 +2005,9 @@
                 updateLoadingStep('step-translate', 'active');
                 processQuestionWithRetry(question);
             }, 300);
-        }async function processQuestionWithRetry(question) {
+        }
+
+        async function processQuestionWithRetry(question) {
             let retryCount = 0;
             const maxRetries = 2;
             const startTime = Date.now();
@@ -2042,9 +2248,17 @@
             }
         }
 
+       
         function hideLoading() {
-            // This function isn't needed since showResult and showError handle hiding the loading state
-            // But we'll keep it for consistency with existing calls
+            // Hide the loading indicator by clearing the results section content
+            // This will be called from showResult() and showError() to ensure clean state
+            const resultsSection = document.getElementById('resultsSection');
+            const resultContent = document.getElementById('resultContent');
+            
+            // Clear any loading content
+            if (resultContent && resultContent.innerHTML.includes('loading')) {
+                resultContent.innerHTML = '';
+            }
         }
 
         function getCellClass(cell) {
@@ -2268,6 +2482,48 @@
             const chevronIcon = chevron.querySelector('.chevron-icon');
             chevron.classList.add('expanded');
             chevronIcon.style.transform = 'rotate(90deg)';
+        }
+
+        function toggleAllTables() {
+            const containers = document.querySelectorAll('.result-container');
+            const expandAllBtn = document.getElementById('expandAllBtn');
+            const hasExpanded = Array.from(containers).some(c => c.classList.contains('expanded'));
+            
+            containers.forEach(container => {
+                if (hasExpanded) {
+                    // Collapse all
+                    container.classList.remove('expanded');
+                } else {
+                    // Expand all
+                    container.classList.add('expanded');
+                }
+            });
+            
+            // Update button text
+            expandAllBtn.textContent = hasExpanded ? '📈 Expand All' : '📉 Collapse All';
+        }
+
+        function checkTableOverflow() {
+            // Check all result containers and show global expand button if needed
+            setTimeout(() => {
+                const containers = document.querySelectorAll('.result-container');
+                let hasOverflow = false;
+                
+                containers.forEach(container => {
+                    const table = container.querySelector('.result-table');
+                    if (table && (table.scrollHeight > container.clientHeight || table.scrollWidth > container.clientWidth)) {
+                        hasOverflow = true;
+                    }
+                });
+                
+                // Show/hide expand all button
+                const expandAllBtn = document.getElementById('expandAllBtn');
+                if (hasOverflow && containers.length > 0) {
+                    expandAllBtn.style.display = 'block';
+                } else {
+                    expandAllBtn.style.display = 'none';
+                }
+            }, 100); // Small delay to ensure DOM is rendered
         }
     </script>
 </body>
