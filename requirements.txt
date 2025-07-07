@@ -5,3 +5,4 @@ azure-monitor-query
 flask
 click
 openai>=1.0.0
+python-dotenv

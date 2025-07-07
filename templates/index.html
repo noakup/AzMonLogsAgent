@@ -196,6 +196,12 @@
             min-width: 60px;
         }
 
+        .floating-go-btn:disabled {
+            cursor: not-allowed;
+            transform: translateY(-50%);
+            box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
+        }
+
         .floating-go-btn:hover {
             background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
             transform: translateY(-50%) translateY(-2px);
@@ -204,6 +210,22 @@
 
         .floating-go-btn:active {
             transform: translateY(-50%) translateY(0px);
+        }
+
+        .button-spinner {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .suggestions {
@@ -879,6 +901,7 @@
             margin-top: 10px;
             padding-top: 10px;
             border-top: 1px solid #e0e0e0;
+            transition: opacity 0.3s ease-in-out;
         }
 
         .table-examples-list .example-suggestion {
@@ -1454,6 +1477,8 @@
                 goButton.disabled = false;
                 goButton.style.opacity = '1';
                 goButton.style.pointerEvents = 'auto';
+                goButton.style.background = 'linear-gradient(135deg, #28a745 0%, #20c997 100%)';
+                goButton.style.cursor = 'pointer';
             }
         }
 
@@ -1989,15 +2014,17 @@
             // Store the original question for explain feature
             currentOriginalQuestion = question;
 
-            // Disable the Go button during processing
+            // Enhanced button loading state with spinner
             const goButton = document.querySelector('.floating-go-btn');
             if (goButton) {
                 goButton.disabled = true;
-                goButton.textContent = 'Processing...';
-                goButton.style.opacity = '0.7';
+                goButton.innerHTML = '<div class="button-spinner"></div> Processing...';
+                goButton.style.opacity = '0.8';
+                goButton.style.background = 'linear-gradient(135deg, #6c757d 0%, #495057 100%)';
+                goButton.style.cursor = 'not-allowed';
             }
 
-            // Show initial loading
+            // Show the same nice loading as test connection
             showLoading('🚀 Preparing to process your question...');
             
             // Start with translation step
@@ -2207,13 +2234,15 @@
                 html += `                    <div class="table-card">
                         <div class="table-examples">
                             <div class="table-actions">
-                                <div class="examples-chevron" onclick="toggleExamples('${tableName}')" id="chevron-${tableName}">
-                                    <span class="chevron-icon">▶</span>
+                                <div class="examples-chevron expanded" onclick="toggleExamples('${tableName}')" id="chevron-${tableName}">
+                                    <span class="chevron-icon" style="transform: rotate(90deg);">▶</span>
                                     <span class="chevron-text">${displayName}</span>
                                 </div>
                             </div>
-                            <div id="examples-${tableName}" class="table-examples-list" style="display: none;">
-                                <!-- Examples will be populated here -->
+                            <div id="examples-${tableName}" class="table-examples-list" style="display: block;">
+                                <div style="text-align: center; padding: 10px; color: #999; font-size: 0.9rem;">
+                                    ⏳ Loading examples...
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2241,6 +2270,18 @@
                 workspaceSection.scrollIntoView({ behavior: 'smooth' });
                 console.log('📍 Scrolled to workspace section');
             }, 100);
+            
+            // Auto-load examples for all tables to show them expanded by default
+            setTimeout(() => {
+                console.log('🚀 Starting auto-load of examples for all tables...');
+                for (const tableName of Object.keys(data.available_examples)) {
+                    console.log(`🔄 Auto-loading examples for ${tableName}`);
+                    // Load examples for each table individually with a small delay
+                    setTimeout(() => {
+                        getExamplesForTable(tableName, true); // Silent loading
+                    }, 100 * Object.keys(data.available_examples).indexOf(tableName));
+                }
+            }, 200); // Reduced delay for faster loading
             
             } catch (error) {
                 console.error('💥 Error in showWorkspaceExamples:', error);
@@ -2272,29 +2313,48 @@
                 return `cell-boolean ${cell ? 'true' : 'false'}`;
             }
             return '';
-        }        function getExamples(scenario) {
-            if (!isConnected) {
+        }        function getExamples(scenario, silent = false) {
+            console.log(`🔍 getExamples called: scenario=${scenario}, silent=${silent}, isConnected=${isConnected}`);
+            
+            // Examples can be loaded even without connection since they're static files
+            // Only block if we're not in silent mode and not connected
+            if (!silent && !isConnected) {
+                console.log('❌ Blocking examples load - not connected and not silent');
                 showError('Please setup workspace first');
                 return;
             }
 
-            // Show loading in the dedicated section
-            showExampleSuggestionsLoading(scenario);
+            // Show loading in the dedicated section only if not silent
+            if (!silent) {
+                console.log('📊 Showing loading indicator');
+                showExampleSuggestionsLoading(scenario);
+            } else {
+                console.log('🔇 Silent mode - no loading indicator');
+            }
 
             try {
+                console.log(`📡 Fetching examples for scenario: ${scenario}`);
                 fetch(`/api/examples/${scenario}`)
-                    .then(response => response.json())
+                    .then(response => {
+                        console.log(`📡 Response received for ${scenario}:`, response.status);
+                        return response.json();
+                    })
                     .then(data => {
+                        console.log(`📊 Data received for ${scenario}:`, data);
                         if (data.success) {
+                            console.log(`✅ Success - showing examples for ${scenario}`);
                             showExampleSuggestions(data.result);
                         } else {
+                            console.log(`❌ Error in data for ${scenario}:`, data.error);
                             showExampleSuggestionsError(data.error);
                         }
                     })
                     .catch(error => {
+                        console.log(`❌ Fetch error for ${scenario}:`, error);
                         showExampleSuggestionsError(`Failed to get examples: ${error.message}`);
                     });
             } catch (error) {
+                console.log(`❌ Exception in getExamples for ${scenario}:`, error);
                 showExampleSuggestionsError(`Failed to get examples: ${error.message}`);
             }
         }
@@ -2304,7 +2364,12 @@
             const chevron = document.getElementById(`chevron-${tableName}`);
             const chevronIcon = chevron.querySelector('.chevron-icon');
             
-            if (examplesContainer.style.display === 'none' || examplesContainer.style.display === '') {
+            if (examplesContainer.style.display === 'block') {
+                // Collapsing
+                examplesContainer.style.display = 'none';
+                chevron.classList.remove('expanded');
+                chevronIcon.style.transform = 'rotate(0deg)';
+            } else {
                 // Expanding - check if examples are already loaded
                 if (examplesContainer.innerHTML.trim() === '' || examplesContainer.innerHTML.includes('<!-- Examples will be populated here -->')) {
                     // Examples not loaded yet, load them
@@ -2317,15 +2382,9 @@
                 // Update chevron appearance
                 chevron.classList.add('expanded');
                 chevronIcon.style.transform = 'rotate(90deg)';
-            } else {
-                // Collapsing
-                examplesContainer.style.display = 'none';
-                chevron.classList.remove('expanded');
-                chevronIcon.style.transform = 'rotate(0deg)';
             }
-        }        function getExamplesForTable(tableName) {
-            // Store the current table name for showing examples in the right place
-            window.currentExampleTable = tableName;
+        }        function getExamplesForTable(tableName, silent = false) {
+            console.log(`🔄 getExamplesForTable called for ${tableName}, silent=${silent}`);
             
             // Map table names to scenario names
             const tableToScenarioMap = {
@@ -2345,20 +2404,26 @@
             
             const scenario = tableToScenarioMap[tableName];
             if (scenario) {
-                getExamples(scenario);
+                console.log(`✅ Found scenario mapping: ${tableName} -> ${scenario}`);
                 
-                // Scroll to the example suggestions section after a short delay
-                setTimeout(() => {
-                    const exampleSuggestionsSection = document.getElementById('exampleSuggestionsSection');
-                    if (exampleSuggestionsSection) {
-                        exampleSuggestionsSection.scrollIntoView({ 
-                            behavior: 'smooth', 
-                            block: 'start' 
-                        });
-                    }
-                }, 500); // Small delay to ensure the examples are loaded first            } else {
+                // Load examples directly for this table
+                loadExamplesForSpecificTable(scenario, tableName, silent);
+                
+                // Only scroll if not silent (i.e., user explicitly requested)
+                if (!silent) {
+                    setTimeout(() => {
+                        const exampleSuggestionsSection = document.getElementById('exampleSuggestionsSection');
+                        if (exampleSuggestionsSection) {
+                            exampleSuggestionsSection.scrollIntoView({ 
+                                behavior: 'smooth', 
+                                block: 'start' 
+                            });
+                        }
+                    }, 500); // Small delay to ensure the examples are loaded first
+                }
+            } else {
                 // Handle tables without example scenarios gracefully
-                console.log(`No scenario mapping found for table: ${tableName}`);
+                console.log(`❌ No scenario mapping found for table: ${tableName}`);
                 const examplesContainer = document.getElementById(`examples-${tableName}`);
                 if (examplesContainer) {
                     examplesContainer.innerHTML = `
@@ -2378,21 +2443,115 @@
                     }
                 }
             }
-        }        function showExampleSuggestionsLoading(scenario) {
-            // Get the current table name that was stored when the button was clicked
-            const tableName = window.currentExampleTable;
-            if (!tableName) {
-                console.error('No current table name found');
+        }        function loadExamplesForSpecificTable(scenario, tableName, silent = false) {
+            console.log(`� loadExamplesForSpecificTable: ${scenario} for ${tableName}, silent=${silent}`);
+            
+            // Don't show loading spinner if silent
+            if (!silent) {
+                const examplesContainer = document.getElementById(`examples-${tableName}`);
+                if (examplesContainer) {
+                    examplesContainer.innerHTML = `
+                        <div style="text-align: center; padding: 15px; color: #666;">
+                            <div class="spinner" style="margin: 0 auto 10px;"></div>
+                            Loading ${scenario} examples...
+                        </div>
+                    `;
+                }
+            }
+            
+            fetch(`/api/examples/${scenario}`)
+                .then(response => {
+                    console.log(`📡 Response for ${scenario}:`, response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(`📊 Data for ${scenario}:`, data);
+                    if (data.success && data.result) {
+                        displayExamplesForTable(data.result, tableName);
+                    } else {
+                        showErrorForTable(data.error || 'Unknown error', tableName);
+                    }
+                })
+                .catch(error => {
+                    console.error(`❌ Error loading ${scenario}:`, error);
+                    showErrorForTable(`Failed to load examples: ${error.message}`, tableName);
+                });
+        }
+
+        function displayExamplesForTable(result, tableName) {
+            console.log(`📊 displayExamplesForTable for ${tableName}:`, result);
+            
+            const examplesContainer = document.getElementById(`examples-${tableName}`);
+            if (!examplesContainer) {
+                console.error(`❌ Container not found for ${tableName}`);
                 return;
             }
             
-            // Find the examples container for this specific table
+            if (result.suggestions && result.suggestions.length > 0) {
+                let html = '';
+                result.suggestions.forEach((suggestion, index) => {
+                    html += `<div class="example-suggestion" data-suggestion="${index}" data-table="${tableName}">${escapeHtml(suggestion)}</div>`;
+                });
+                html += `<div style="margin-top: 10px; font-size: 0.8rem; color: #666; text-align: center;">💡 Click any suggestion above to add it to your question box</div>`;
+                
+                examplesContainer.innerHTML = html;
+                examplesContainer.style.display = 'block';
+                
+                // Add click event listeners
+                examplesContainer.querySelectorAll('.example-suggestion').forEach((element, index) => {
+                    element.addEventListener('click', () => {
+                        const suggestion = result.suggestions[index];
+                        console.log('👆 Suggestion clicked:', suggestion);
+                        setQuestion(suggestion);
+                    });
+                });
+                
+                console.log(`✅ Examples displayed for ${tableName}`);
+            } else {
+                showErrorForTable('No examples available', tableName);
+            }
+            
+            // Update chevron to expanded state
+            const chevron = document.getElementById(`chevron-${tableName}`);
+            const chevronIcon = chevron.querySelector('.chevron-icon');
+            if (chevron) {
+                chevron.classList.add('expanded');
+                chevronIcon.style.transform = 'rotate(90deg)';
+            }
+        }
+
+        function showErrorForTable(error, tableName) {
+            console.log(`❌ showErrorForTable: ${error} for ${tableName}`);
+            
+            const examplesContainer = document.getElementById(`examples-${tableName}`);
+            if (examplesContainer) {
+                examplesContainer.innerHTML = `
+                    <div style="text-align: center; padding: 15px; color: #d32f2f;">
+                        ❌ ${error}
+                    </div>
+                `;
+                examplesContainer.style.display = 'block';
+                
+                // Update chevron to expanded state
+                const chevron = document.getElementById(`chevron-${tableName}`);
+                const chevronIcon = chevron.querySelector('.chevron-icon');
+                if (chevron) {
+                    chevron.classList.add('expanded');
+                    chevronIcon.style.transform = 'rotate(90deg)';
+                }
+            }
+        }
+
+        function showExampleSuggestionsLoadingForTable(scenario, tableName) {
+            console.log('⏳ showExampleSuggestionsLoadingForTable called for:', scenario, 'table:', tableName);
+            
             const examplesContainer = document.getElementById(`examples-${tableName}`);
             if (!examplesContainer) {
-                console.error(`Examples container not found for table: ${tableName}`);
+                console.error(`❌ Examples container not found for table: ${tableName}`);
                 return;
             }
-              examplesContainer.innerHTML = `
+            
+            examplesContainer.innerHTML = `
                 <div style="text-align: center; padding: 15px; color: #666;">
                     <div class="spinner" style="margin: 0 auto 10px;"></div>
                     Loading ${scenario} examples...
@@ -2400,32 +2559,38 @@
             `;
             examplesContainer.style.display = 'block';
             
-            // Update chevron to expanded state during loading
+            // Ensure chevron stays in expanded state during loading
             const chevron = document.getElementById(`chevron-${tableName}`);
             const chevronIcon = chevron.querySelector('.chevron-icon');
-            chevron.classList.add('expanded');
-            chevronIcon.style.transform = 'rotate(90deg)';
-        }function showExampleSuggestions(result) {
-            console.log('showExampleSuggestions called with:', result);
+            if (chevron) {
+                chevron.classList.add('expanded');
+                chevronIcon.style.transform = 'rotate(90deg)';
+            }
+        }        function showExampleSuggestions(result) {
+            console.log('📊 showExampleSuggestions called with:', result);
             
             if (result.type === 'example_suggestions') {
-                console.log('Showing example suggestions for scenario:', result.scenario);
+                console.log('✅ Showing example suggestions for scenario:', result.scenario);
                 
                 // Get the current table name that was stored when the button was clicked
                 const tableName = window.currentExampleTable;
+                console.log('🔍 Current table name:', tableName);
+                
                 if (!tableName) {
-                    console.error('No current table name found');
+                    console.error('❌ No current table name found');
                     return;
                 }
                 
                 // Find the examples container for this specific table
                 const examplesContainer = document.getElementById(`examples-${tableName}`);
+                console.log('🔍 Examples container found:', examplesContainer);
+                
                 if (!examplesContainer) {
-                    console.error(`Examples container not found for table: ${tableName}`);
+                    console.error(`❌ Examples container not found for table: ${tableName}`);
                     return;
                 }
                 
-                console.log('Found examples container for table:', tableName);
+                console.log('✅ Found examples container for table:', tableName);
                 
                 let html = '';
                 result.suggestions.forEach((suggestion, index) => {
@@ -2433,30 +2598,40 @@
                 });
                 html += `<div style="margin-top: 10px; font-size: 0.8rem; color: #666; text-align: center;">💡 Click any suggestion above to add it to your question box</div>`;
                 
-                console.log('Generated HTML:', html);
-                  examplesContainer.innerHTML = html;
+                console.log('📝 Generated HTML length:', html.length);
+                
+                // Add fade-in effect
+                examplesContainer.style.opacity = '0';
+                examplesContainer.innerHTML = html;
                 examplesContainer.style.display = 'block';
+                
+                // Trigger fade-in
+                setTimeout(() => {
+                    examplesContainer.style.opacity = '1';
+                    console.log('✨ Fade-in effect applied for:', tableName);
+                }, 50);
                 
                 // Update chevron to expanded state
                 const chevron = document.getElementById(`chevron-${tableName}`);
                 const chevronIcon = chevron.querySelector('.chevron-icon');
                 chevron.classList.add('expanded');
                 chevronIcon.style.transform = 'rotate(90deg)';
+                console.log('🔄 Chevron updated to expanded state for:', tableName);
                 
                 // Add click event listeners to suggestion elements
                 examplesContainer.querySelectorAll('.example-suggestion').forEach((element, index) => {
                     element.addEventListener('click', () => {
                         const suggestion = result.suggestions[index];
-                        console.log('Suggestion clicked:', suggestion);
+                        console.log('👆 Suggestion clicked:', suggestion);
                         setQuestion(suggestion);
                     });
                 });
                 
-                console.log('Example suggestions should now be visible for table:', tableName);
+                console.log('✅ Example suggestions should now be visible for table:', tableName);
             } else {
-                console.log('Result type is not example_suggestions:', result.type);
+                console.log('❌ Result type is not example_suggestions:', result.type);
             }
-        }        function showExampleSuggestionsError(error) {
+        }function showExampleSuggestionsError(error) {
             // Get the current table name that was stored when the button was clicked
             const tableName = window.currentExampleTable;
             if (!tableName) {
@@ -2472,16 +2647,18 @@
             }
               examplesContainer.innerHTML = `
                 <div style="text-align: center; padding: 15px; color: #dc3545;">
-                    ❌ Error: ${error}
+                    ❌ ${error}
                 </div>
             `;
             examplesContainer.style.display = 'block';
             
-            // Update chevron to expanded state to show the error
+            // Update chevron to expanded state
             const chevron = document.getElementById(`chevron-${tableName}`);
             const chevronIcon = chevron.querySelector('.chevron-icon');
-            chevron.classList.add('expanded');
-            chevronIcon.style.transform = 'rotate(90deg)';
+            if (chevron) {
+                chevron.classList.add('expanded');
+                chevronIcon.style.transform = 'rotate(90deg)';
+            }
         }
 
         function toggleAllTables() {

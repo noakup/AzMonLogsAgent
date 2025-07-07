@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UX Test - Example Suggestions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-btn {
+            background: #007acc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .test-btn:hover {
+            background: #005a9e;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 4px solid #007acc;
+            background: #f0f8ff;
+        }
+        .success {
+            border-left-color: #28a745;
+            background: #f0fff4;
+        }
+        .error {
+            border-left-color: #dc3545;
+            background: #fff5f5;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 UX Test: Example Suggestions Enhanced</h1>
+    <p>This page tests the enhanced example suggestions UX to ensure all sections are expanded by default.</p>
+
+    <div class="test-section">
+        <h2>📋 Test Instructions</h2>
+        <ol>
+            <li>Click the "Test API" button to verify the backend is working</li>
+            <li>Open the main web app in a new tab: <a href="http://localhost:8080" target="_blank">http://localhost:8080</a></li>
+            <li>Click the "🔍 More Suggestions" button</li>
+            <li>Verify that all example sections appear expanded by default</li>
+            <li>Try collapsing and expanding sections manually</li>
+        </ol>
+    </div>
+
+    <div class="test-section">
+        <h2>🔧 API Tests</h2>
+        <button class="test-btn" onclick="testWorkspaceAPI()">Test Workspace API</button>
+        <button class="test-btn" onclick="testExamplesAPI()">Test Examples API</button>
+        <button class="test-btn" onclick="openMainApp()">Open Main App</button>
+        <div id="apiResults"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>✅ Expected Behavior</h2>
+        <ul>
+            <li>All example sections should appear expanded by default</li>
+            <li>Chevron icons should point down (▼) indicating expanded state</li>
+            <li>Example suggestions should load automatically without manual clicks</li>
+            <li>No loading spinners should appear during auto-loading</li>
+            <li>Users can click chevrons to collapse sections</li>
+            <li>Smooth transitions when expanding/collapsing</li>
+        </ul>
+    </div>
+
+    <script>
+        async function testWorkspaceAPI() {
+            const resultsDiv = document.getElementById('apiResults');
+            resultsDiv.innerHTML = '<div class="result">Testing workspace API...</div>';
+            
+            try {
+                const response = await fetch('http://localhost:8080/api/workspace-examples', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'}
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const count = Object.keys(data.available_examples || {}).length;
+                    resultsDiv.innerHTML = `<div class="result success">✅ Workspace API working! Found ${count} table types</div>`;
+                } else {
+                    resultsDiv.innerHTML = `<div class="result error">❌ Workspace API failed: ${response.status}</div>`;
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="result error">❌ Error: ${error.message}</div>`;
+            }
+        }
+
+        async function testExamplesAPI() {
+            const resultsDiv = document.getElementById('apiResults');
+            resultsDiv.innerHTML = '<div class="result">Testing examples API...</div>';
+            
+            try {
+                const response = await fetch('http://localhost:8080/api/examples/requests');
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const count = data.result?.count || 0;
+                    resultsDiv.innerHTML = `<div class="result success">✅ Examples API working! Found ${count} request examples</div>`;
+                } else {
+                    resultsDiv.innerHTML = `<div class="result error">❌ Examples API failed: ${response.status}</div>`;
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="result error">❌ Error: ${error.message}</div>`;
+            }
+        }
+
+        function openMainApp() {
+            window.open('http://localhost:8080', '_blank');
+        }
+
+        // Auto-test on page load
+        window.onload = function() {
+            testWorkspaceAPI();
+        };
+    </script>
+</body>
+</html>
