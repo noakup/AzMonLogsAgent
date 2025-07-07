@@ -152,20 +152,17 @@ def explain_results():
         if not query_result:
             return jsonify({'success': False, 'error': 'Query result is required for explanation'})
         
-        # Create explanation prompt
-        explanation_prompt = f"Explain these query results for the question '{original_question}': {query_result}"
-        
-        # Run the async explanation
+        # Run the async explanation using the dedicated explain_results method
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         
         try:
-            result = loop.run_until_complete(
-                agent.process_natural_language(explanation_prompt)
+            explanation = loop.run_until_complete(
+                agent.explain_results(query_result, original_question)
             )
             return jsonify({
                 'success': True,
-                'explanation': result,
+                'explanation': explanation,
                 'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             })
         finally:
