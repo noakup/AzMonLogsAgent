@@ -73,15 +73,16 @@ instance/
 .azure/
 claude_desktop_config.json
 AI_INSTRUCTIONS.md
-azure_agent/__pycache__/__init__.cpython-312.pyc
-azure_agent/__pycache__/__init__.cpython-312.pyc
-azure_agent/__pycache__/monitor_client.cpython-312.pyc
-__pycache__/nl_agent.cpython-312.pyc
-__pycache__/web_app.cpython-312.pyc
-__pycache__/web_app.cpython-312.pyc
-__pycache__/nl_agent.cpython-312.pyc
-__pycache__/nl_agent.cpython-312.pyc
-__pycache__/web_app.cpython-312.pyc
-__pycache__/nl_agent.cpython-312.pyc
-__pycache__/web_app.cpython-312.pyc
+
+# Temporary files
+test_*.py
+debug_*.py
+demo_*.py
+verify_*.py
+diagnose_*.py
+demonstrate_*.py
+simple_test.py
 quick_test.py
+cleanup_*.py
+*.py.old
+*.old
