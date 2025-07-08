@@ -2133,9 +2133,6 @@
         function setQuestion(question) {
             document.getElementById('questionInput').value = question;
         }        async function discoverWorkspaceExamples() {
-            console.log('� More Suggestions button clicked');
-            console.log('isConnected:', isConnected);
-            
             // Add loading state to the workspace examples button
             const workspaceButton = document.querySelector('.workspace-examples');
             const originalText = workspaceButton.textContent;
@@ -2147,10 +2144,8 @@
             // since we're just showing available example files
             
             try {
-                console.log('📡 Starting workspace discovery...');
                 showLoading('Discovering workspace tables and available examples...');
                 
-                console.log('📡 Making fetch request to /api/workspace-examples');
                 const response = await fetch('/api/workspace-examples', {
                     method: 'POST',
                     headers: {
@@ -2158,26 +2153,17 @@
                     }
                 });
                 
-                console.log('📡 Response received:', response.status, response.statusText);
-                
                 if (!response.ok) {
                     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
                 
                 const data = await response.json();
-                console.log('📊 Response data:', data);
-                
                 if (data.success) {
-                    console.log('✅ Success, showing workspace examples');
-                    console.log('Available examples:', Object.keys(data.available_examples));
                     showWorkspaceExamples(data);
                 } else {
-                    console.log('❌ API error:', data.error);
                     showError(`Failed to discover examples: ${data.error}`);
                 }
             } catch (error) {
-                console.error('💥 Network error:', error);
-                console.error('Error stack:', error.stack);
                 showError(`Network error: ${error.message}`);            } finally {
                 // Restore button state
                 workspaceButton.textContent = '💡 More Suggestions';
@@ -2203,12 +2189,9 @@
         }
 
         function showWorkspaceExamples(data) {
-            console.log('📊 showWorkspaceExamples called with data:', data);
-            
             try {
                 // First, ensure the main results section is hidden
                 const resultsSection = document.getElementById('resultsSection');
-                console.log('🔍 Found resultsSection:', resultsSection);
                 if (resultsSection) {
                     resultsSection.classList.remove('visible');
                     resultsSection.style.display = 'none'; // Force hide
@@ -2216,13 +2199,10 @@
                 
                 const workspaceSection = document.getElementById('workspaceExamplesSection');
                 
-                console.log('🔍 Found workspace section:', workspaceSection);
-                
                 if (!workspaceSection) {
                     throw new Error('Workspace section not found');
                 }
-                  console.log('📝 Building HTML content...');
-                // Create simplified display with only tables
+                  // Create simplified display with only tables
                 let html = `
                 <div class="workspace-discovery-results">
                     <div class="tables-with-examples">
@@ -2262,20 +2242,14 @@
             workspaceSection.style.display = 'block';
             workspaceSection.classList.add('visible');
             
-            console.log('✅ Workspace examples displayed, section visibility:', workspaceSection.style.display);
-            console.log('✅ Workspace section classes:', workspaceSection.className);
-            
             // Scroll to workspace examples section
             setTimeout(() => {
                 workspaceSection.scrollIntoView({ behavior: 'smooth' });
-                console.log('📍 Scrolled to workspace section');
-            }, 100);
+                }, 100);
             
             // Auto-load examples for all tables to show them expanded by default
             setTimeout(() => {
-                console.log('🚀 Starting auto-load of examples for all tables...');
                 for (const tableName of Object.keys(data.available_examples)) {
-                    console.log(`🔄 Auto-loading examples for ${tableName}`);
                     // Load examples for each table individually with a small delay
                     setTimeout(() => {
                         getExamplesForTable(tableName, true); // Silent loading
@@ -2284,12 +2258,10 @@
             }, 200); // Reduced delay for faster loading
             
             } catch (error) {
-                console.error('💥 Error in showWorkspaceExamples:', error);
                 showError(`Failed to display workspace examples: ${error.message}`);
             }
         }
 
-       
         function hideLoading() {
             // Hide the loading indicator by clearing the results section content
             // This will be called from showResult() and showError() to ensure clean state
@@ -2314,47 +2286,35 @@
             }
             return '';
         }        function getExamples(scenario, silent = false) {
-            console.log(`🔍 getExamples called: scenario=${scenario}, silent=${silent}, isConnected=${isConnected}`);
-            
             // Examples can be loaded even without connection since they're static files
             // Only block if we're not in silent mode and not connected
             if (!silent && !isConnected) {
-                console.log('❌ Blocking examples load - not connected and not silent');
                 showError('Please setup workspace first');
                 return;
             }
 
             // Show loading in the dedicated section only if not silent
             if (!silent) {
-                console.log('📊 Showing loading indicator');
                 showExampleSuggestionsLoading(scenario);
             } else {
-                console.log('🔇 Silent mode - no loading indicator');
-            }
+                }
 
             try {
-                console.log(`📡 Fetching examples for scenario: ${scenario}`);
                 fetch(`/api/examples/${scenario}`)
                     .then(response => {
-                        console.log(`📡 Response received for ${scenario}:`, response.status);
                         return response.json();
                     })
                     .then(data => {
-                        console.log(`📊 Data received for ${scenario}:`, data);
                         if (data.success) {
-                            console.log(`✅ Success - showing examples for ${scenario}`);
                             showExampleSuggestions(data.result);
                         } else {
-                            console.log(`❌ Error in data for ${scenario}:`, data.error);
                             showExampleSuggestionsError(data.error);
                         }
                     })
                     .catch(error => {
-                        console.log(`❌ Fetch error for ${scenario}:`, error);
                         showExampleSuggestionsError(`Failed to get examples: ${error.message}`);
                     });
             } catch (error) {
-                console.log(`❌ Exception in getExamples for ${scenario}:`, error);
                 showExampleSuggestionsError(`Failed to get examples: ${error.message}`);
             }
         }
@@ -2384,8 +2344,6 @@
                 chevronIcon.style.transform = 'rotate(90deg)';
             }
         }        function getExamplesForTable(tableName, silent = false) {
-            console.log(`🔄 getExamplesForTable called for ${tableName}, silent=${silent}`);
-            
             // Map table names to scenario names
             const tableToScenarioMap = {
                 'AppRequests': 'requests',
@@ -2404,8 +2362,6 @@
             
             const scenario = tableToScenarioMap[tableName];
             if (scenario) {
-                console.log(`✅ Found scenario mapping: ${tableName} -> ${scenario}`);
-                
                 // Load examples directly for this table
                 loadExamplesForSpecificTable(scenario, tableName, silent);
                 
@@ -2423,7 +2379,6 @@
                 }
             } else {
                 // Handle tables without example scenarios gracefully
-                console.log(`❌ No scenario mapping found for table: ${tableName}`);
                 const examplesContainer = document.getElementById(`examples-${tableName}`);
                 if (examplesContainer) {
                     examplesContainer.innerHTML = `
@@ -2444,8 +2399,6 @@
                 }
             }
         }        function loadExamplesForSpecificTable(scenario, tableName, silent = false) {
-            console.log(`� loadExamplesForSpecificTable: ${scenario} for ${tableName}, silent=${silent}`);
-            
             // Don't show loading spinner if silent
             if (!silent) {
                 const examplesContainer = document.getElementById(`examples-${tableName}`);
@@ -2461,11 +2414,9 @@
             
             fetch(`/api/examples/${scenario}`)
                 .then(response => {
-                    console.log(`📡 Response for ${scenario}:`, response.status);
                     return response.json();
                 })
                 .then(data => {
-                    console.log(`📊 Data for ${scenario}:`, data);
                     if (data.success && data.result) {
                         displayExamplesForTable(data.result, tableName);
                     } else {
@@ -2473,17 +2424,13 @@
                     }
                 })
                 .catch(error => {
-                    console.error(`❌ Error loading ${scenario}:`, error);
                     showErrorForTable(`Failed to load examples: ${error.message}`, tableName);
                 });
         }
 
         function displayExamplesForTable(result, tableName) {
-            console.log(`📊 displayExamplesForTable for ${tableName}:`, result);
-            
             const examplesContainer = document.getElementById(`examples-${tableName}`);
             if (!examplesContainer) {
-                console.error(`❌ Container not found for ${tableName}`);
                 return;
             }
             
@@ -2501,13 +2448,11 @@
                 examplesContainer.querySelectorAll('.example-suggestion').forEach((element, index) => {
                     element.addEventListener('click', () => {
                         const suggestion = result.suggestions[index];
-                        console.log('👆 Suggestion clicked:', suggestion);
                         setQuestion(suggestion);
                     });
                 });
                 
-                console.log(`✅ Examples displayed for ${tableName}`);
-            } else {
+                } else {
                 showErrorForTable('No examples available', tableName);
             }
             
@@ -2521,8 +2466,6 @@
         }
 
         function showErrorForTable(error, tableName) {
-            console.log(`❌ showErrorForTable: ${error} for ${tableName}`);
-            
             const examplesContainer = document.getElementById(`examples-${tableName}`);
             if (examplesContainer) {
                 examplesContainer.innerHTML = `
@@ -2543,11 +2486,8 @@
         }
 
         function showExampleSuggestionsLoadingForTable(scenario, tableName) {
-            console.log('⏳ showExampleSuggestionsLoadingForTable called for:', scenario, 'table:', tableName);
-            
             const examplesContainer = document.getElementById(`examples-${tableName}`);
             if (!examplesContainer) {
-                console.error(`❌ Examples container not found for table: ${tableName}`);
                 return;
             }
             
@@ -2567,38 +2507,25 @@
                 chevronIcon.style.transform = 'rotate(90deg)';
             }
         }        function showExampleSuggestions(result) {
-            console.log('📊 showExampleSuggestions called with:', result);
-            
             if (result.type === 'example_suggestions') {
-                console.log('✅ Showing example suggestions for scenario:', result.scenario);
-                
                 // Get the current table name that was stored when the button was clicked
                 const tableName = window.currentExampleTable;
-                console.log('🔍 Current table name:', tableName);
-                
                 if (!tableName) {
-                    console.error('❌ No current table name found');
+
                     return;
                 }
                 
                 // Find the examples container for this specific table
                 const examplesContainer = document.getElementById(`examples-${tableName}`);
-                console.log('🔍 Examples container found:', examplesContainer);
-                
                 if (!examplesContainer) {
-                    console.error(`❌ Examples container not found for table: ${tableName}`);
                     return;
                 }
-                
-                console.log('✅ Found examples container for table:', tableName);
                 
                 let html = '';
                 result.suggestions.forEach((suggestion, index) => {
                     html += `<div class="example-suggestion" data-suggestion="${index}" data-table="${tableName}">${escapeHtml(suggestion)}</div>`;
                 });
                 html += `<div style="margin-top: 10px; font-size: 0.8rem; color: #666; text-align: center;">💡 Click any suggestion above to add it to your question box</div>`;
-                
-                console.log('📝 Generated HTML length:', html.length);
                 
                 // Add fade-in effect
                 examplesContainer.style.opacity = '0';
@@ -2608,41 +2535,34 @@
                 // Trigger fade-in
                 setTimeout(() => {
                     examplesContainer.style.opacity = '1';
-                    console.log('✨ Fade-in effect applied for:', tableName);
-                }, 50);
+                    }, 50);
                 
                 // Update chevron to expanded state
                 const chevron = document.getElementById(`chevron-${tableName}`);
                 const chevronIcon = chevron.querySelector('.chevron-icon');
                 chevron.classList.add('expanded');
                 chevronIcon.style.transform = 'rotate(90deg)';
-                console.log('🔄 Chevron updated to expanded state for:', tableName);
-                
                 // Add click event listeners to suggestion elements
                 examplesContainer.querySelectorAll('.example-suggestion').forEach((element, index) => {
                     element.addEventListener('click', () => {
                         const suggestion = result.suggestions[index];
-                        console.log('👆 Suggestion clicked:', suggestion);
                         setQuestion(suggestion);
                     });
                 });
                 
-                console.log('✅ Example suggestions should now be visible for table:', tableName);
-            } else {
-                console.log('❌ Result type is not example_suggestions:', result.type);
-            }
+                } else {
+                }
         }function showExampleSuggestionsError(error) {
             // Get the current table name that was stored when the button was clicked
             const tableName = window.currentExampleTable;
             if (!tableName) {
-                console.error('No current table name found');
+
                 return;
             }
             
             // Find the examples container for this specific table
             const examplesContainer = document.getElementById(`examples-${tableName}`);
             if (!examplesContainer) {
-                console.error(`Examples container not found for table: ${tableName}`);
                 return;
             }
               examplesContainer.innerHTML = `
