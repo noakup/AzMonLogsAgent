@@ -86,3 +86,4 @@ quick_test.py
 cleanup_*.py
 *.py.old
 *.old
+__pycache__/enhanced_translation.cpython-312.pyc
