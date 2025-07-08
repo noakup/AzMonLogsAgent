@@ -2132,6 +2132,15 @@
         
         function setQuestion(question) {
             document.getElementById('questionInput').value = question;
+            
+            // Scroll back to the question input area
+            const questionSection = document.querySelector('.query-section');
+            if (questionSection) {
+                questionSection.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }
         }        async function discoverWorkspaceExamples() {
             // Add loading state to the workspace examples button
             const workspaceButton = document.querySelector('.workspace-examples');
