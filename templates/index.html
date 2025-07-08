@@ -1486,7 +1486,10 @@
             const resultsSection = document.getElementById('resultsSection');
             const resultContent = document.getElementById('resultContent');
             
+            // Force the results section to be visible immediately
+            resultsSection.style.display = 'block';
             resultsSection.classList.add('visible');
+            
             resultContent.innerHTML = `
                 <div class="loading">
                     <div class="spinner"></div>
@@ -2001,20 +2004,7 @@
         function enhancedAskQuestion() {
             const question = document.getElementById('questionInput').value.trim();
             
-            if (!question) {
-                showError('Please enter a question');
-                return;
-            }
-
-            if (!isConnected) {
-                showError('Please setup workspace first');
-                return;
-            }
-
-            // Store the original question for explain feature
-            currentOriginalQuestion = question;
-
-            // Enhanced button loading state with spinner
+            // Enhanced button loading state with spinner - do this FIRST
             const goButton = document.querySelector('.floating-go-btn');
             if (goButton) {
                 goButton.disabled = true;
@@ -2024,8 +2014,26 @@
                 goButton.style.cursor = 'not-allowed';
             }
 
-            // Show the same nice loading as test connection
+            // Show the nice loading in results pane immediately
             showLoading('🚀 Preparing to process your question...');
+            
+            // Now do validation checks and show errors in the loading area if needed
+            if (!question) {
+                setTimeout(() => {
+                    showError('Please enter a question');
+                }, 500);
+                return;
+            }
+
+            if (!isConnected) {
+                setTimeout(() => {
+                    showError('Please setup workspace first');
+                }, 500);
+                return;
+            }
+
+            // Store the original question for explain feature
+            currentOriginalQuestion = question;
             
             // Start with translation step
             setTimeout(() => {
