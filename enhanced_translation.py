@@ -44,9 +44,36 @@ def translate_nl_to_kql_enhanced(nl_question, max_retries=2):
     except ImportError:
         pass
     
+    # Handle special queries that don't need AI translation
+    nl_lower = nl_question.lower()
+    
+    # Check for table listing queries
+    if any(keyword in nl_lower for keyword in ["list tables", "show tables", "available tables", "tables available", "what tables"]):
+        return """search *
+| distinct $table
+| order by $table asc"""
+    
+    # Check for schema queries
+    if any(keyword in nl_lower for keyword in ["schema", "columns", "structure"]):
+        # Extract table name if mentioned
+        table_keywords = ["apprequests", "appexceptions", "apptraces", "appdependencies", "apppageviews", "appcustomevents", "heartbeat", "usage"]
+        mentioned_table = None
+        for table in table_keywords:
+            if table in nl_lower:
+                mentioned_table = table.title()
+                break
+        
+        if mentioned_table:
+            return f"{mentioned_table} | getschema | project ColumnName, ColumnType"
+        else:
+            return "AppRequests | getschema | project ColumnName, ColumnType"
+    
     endpoint = os.environ.get("AZURE_OPENAI_ENDPOINT")
     api_key = os.environ.get("AZURE_OPENAI_KEY")
     deployment = os.environ.get("AZURE_OPENAI_DEPLOYMENT", "gpt-35-turbo")
+    
+    if not endpoint or not api_key:
+        return "// Error: AZURE_OPENAI_ENDPOINT and AZURE_OPENAI_KEY must be set"
     
     if not endpoint or not api_key:
         return "// Error: AZURE_OPENAI_ENDPOINT and AZURE_OPENAI_KEY must be set"
@@ -109,7 +136,10 @@ IMPORTANT RULES:
 4. Use correct table names (AppRequests, AppExceptions, AppTraces, etc.) and the correct columns (e.g., DurationMs for AppRequests)
 5. NEVER use the classic Application Insights query syntax (request, exception, traces, or duration columns)
 6. Include proper aggregations and sorting for meaningful results
-7. Consider performance by limiting results when appropriate (take, top)"""
+7. Consider performance by limiting results when appropriate (take, top)
+8. For table listing queries, use: search * | distinct $table | order by $table asc
+9. For schema queries, use: TableName | getschema | project ColumnName, ColumnType
+10. NEVER start a query with a dot (.) - this is invalid KQL syntax"""
 
     print(f"🔍 Loaded .env file")
     print(f"🔍 Endpoint: {endpoint}")
@@ -168,6 +198,10 @@ Based on the examples above, generate a KQL query. Response format: just the KQL
     # Basic validation - check if it looks like a valid KQL query
     if not kql or len(kql.strip()) < 5:
         return "// Error: Empty or invalid response from AI"
+    
+    # Check for invalid starting characters
+    if kql.strip().startswith('.'):
+        return "// Error: Invalid KQL query starting with '.'"
     
     # Check for common error indicators
     error_indicators = ["sorry", "cannot", "unable", "error", "apologize"]
