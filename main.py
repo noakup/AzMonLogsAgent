@@ -31,7 +31,7 @@ def query(workspace_id, query, ask, timespan):
     # If --ask is provided, use OpenAI to translate NL to KQL
     if ask:
         kql_query = translate_nl_to_kql_with_retries(ask, workspace_id)
-        click.echo({'generated_kql': kql_query})  # Show the generated KQL for debugging
+        click.echo({'generated_kql': kql_query})  # Show the generated KQL
         # Check if KQL is valid (not empty or error)
         if not kql_query or kql_query.strip() == '' or kql_query.strip().startswith('// Error'):
             click.echo({"error": "Failed to generate a valid KQL query from natural language input."})
@@ -212,7 +212,6 @@ def translate_nl_to_kql_with_retries(nl_question, workspace_id, max_attempts=3):
     """
     for attempt in range(max_attempts):
         kql_query = translate_nl_to_kql(nl_question)
-        print(f"[translate_nl_to_kql] Returned KQL: {kql_query}")
         if not kql_query or kql_query.strip() == '' or kql_query.strip().startswith('// Error'):
             continue
         if is_valid_kql(workspace_id, kql_query):

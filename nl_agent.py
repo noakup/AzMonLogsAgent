@@ -401,17 +401,12 @@ class KQLAgent:
             api_key = os.environ.get("AZURE_OPENAI_KEY")
             deployment = os.environ.get("AZURE_OPENAI_DEPLOYMENT", "gpt-35-turbo")
             
-            print(f"[DEBUG] Endpoint: {endpoint}")
-            print(f"[DEBUG] Deployment: {deployment}")
-            print(f"[DEBUG] API Key: {'SET' if api_key else 'NOT SET'}")
-            
             if not endpoint or not api_key:
                 return "❌ Azure OpenAI configuration missing. Please check your .env file."
             
             # Determine API version - use standard version for better compatibility
             api_version = "2024-12-01-preview"
             
-            print(f"[DEBUG] API Version: {api_version}")
             
             url = f"{endpoint}/openai/deployments/{deployment}/chat/completions?api-version={api_version}"
             headers = {
@@ -452,37 +447,25 @@ Provide a concise explanation focusing on the key insights and patterns in the d
             import requests
             import json
             
-            print(f"[DEBUG] URL: {url}")
-            print(f"[DEBUG] Request data: {json.dumps(data, indent=2)}")
             
             response = requests.post(url, headers=headers, data=json.dumps(data))
-            
-            print(f"[DEBUG] Response status: {response.status_code}")
-            print(f"[DEBUG] Response headers: {dict(response.headers)}")
-            print(f"[DEBUG] Raw response: {response.text}")
             
             response.raise_for_status()
             
             result = response.json()
-            print(f"[DEBUG] Response JSON: {json.dumps(result, indent=2)}")
             
             # Check if response has the expected structure
             if 'choices' not in result:
-                print(f"[DEBUG] No 'choices' in response: {result}")
                 return "❌ Azure OpenAI API returned unexpected format"
             
             if not result['choices'] or len(result['choices']) == 0:
-                print(f"[DEBUG] Empty choices array: {result}")
                 return "❌ Azure OpenAI API returned no response choices"
             
             choice = result['choices'][0]
             if 'message' not in choice:
-                print(f"[DEBUG] No 'message' in choice: {choice}")
                 return "❌ Azure OpenAI API response missing message"
             
             content = choice['message'].get('content', '').strip()
-            print(f"[DEBUG] Extracted explanation: '{content}'")
-            print(f"[DEBUG] Content length: {len(content)}")
             
             if not content:
                 return "❌ Azure OpenAI API returned empty explanation"
@@ -490,9 +473,6 @@ Provide a concise explanation focusing on the key insights and patterns in the d
             return content
             
         except Exception as e:
-            print(f"[DEBUG] Exception in _call_openai_for_explanation: {e}")
-            import traceback
-            traceback.print_exc()
             return f"Failed to generate explanation: {str(e)}"
 
 async def main():
