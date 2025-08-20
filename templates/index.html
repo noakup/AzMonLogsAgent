@@ -284,14 +284,14 @@
             transform: translateY(-1px);
         }
 
-        .example-btn.workspace-examples {
+        .suggestion-pill.workspace-examples {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
             font-weight: 500;
         }
 
-        .example-btn.workspace-examples:hover {
+        .suggestion-pill.workspace-examples:hover {
             background: linear-gradient(135deg, #5a6fd8 0%, #654892 100%);
             transform: translateY(-1px);
         }
@@ -522,19 +522,42 @@
             background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
             transform: scale(1.001);
             transition: all 0.2s ease;
-        }        .result-table tr:last-child td {
+        }
+
+        .result-table tr:last-child td {
             border-bottom: none;
-        }        .table-stats {
-            padding: 8px 15px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            color: #495057;
-            font-size: 0.8rem;
-            text-align: center;
-            border-top: 1px solid #e9ecef;
-            border-radius: 0 0 12px 12px;
-            margin: 0 0 20px 0;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 25px 0 15px 0;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 10px;
             border: 1px solid #e9ecef;
-            border-top: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .table-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .table-info {
+            font-size: 0.9rem;
+            color: #667eea;
+            background: linear-gradient(135deg, #e3f2fd 0%, #f8f9fa 100%);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 500;
+            border: 1px solid #bbdefb;
+            border-radius: 4px;
         }
 
         .kql-query {
@@ -724,13 +747,27 @@
         .cell-boolean.false {
             color: white;
             background: linear-gradient(135deg, #dc3545 0%, #e74c3c 100%);
-        }        .cell-null {
+        }
+
+        .cell-null {
             color: #6c757d;
             font-style: italic;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             padding: 8px 12px !important;
             border-radius: 4px;
             text-align: center;
+        }
+
+        .table-stats {
+            margin-top: 15px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
         }
 
         /* Explain button styling */
@@ -1369,8 +1406,8 @@
                         <div class="suggestion-pill" onclick="setQuestion('Show me failed requests from the last hour')">Failed Requests</div>
                         <div class="suggestion-pill" onclick="setQuestion('What are the top 5 slowest API calls?')">Slowest APIs</div>
                         <div class="suggestion-pill" onclick="setQuestion('Get heartbeat data from the last 30 minutes')">Heartbeat Data</div>
-                    </div>                </div>                <div class="examples-section">
-                    <div class="example-btn workspace-examples" onclick="discoverWorkspaceExamples()">� More Suggestions</div>
+                        <div class="suggestion-pill workspace-examples" onclick="discoverWorkspaceExamples()">💡 More Suggestions</div>
+                    </div>
                 </div>
 
                 <!-- Example Suggestions Section -->
@@ -1668,9 +1705,17 @@
             
             // Check if tables need expansion controls
             checkTableOverflow();
-        }        function createTableHTML(table) {
+        }
+
+        function createTableHTML(table) {
             let html = '';
             const tableId = `table-${Math.random().toString(36).substr(2, 9)}`;
+            
+            // Table header with info
+            html += `<div class="table-header">`;
+            html += `<div class="table-title">📊 Table ${table.table_number || 1}</div>`;
+            html += `<div class="table-info">${table.row_count} rows</div>`;
+            html += `</div>`;
             
             if (table.has_data && table.columns && table.rows) {
                 html += `<div class="result-container" id="${tableId}">`;
@@ -1693,14 +1738,21 @@
                         html += `<td class="${cellClass}">${escapeHtml(cellValue)}</td>`;
                     });
                     html += `</tr>`;
-                });                html += `</tbody>`;
+                });
+                html += `</tbody>`;
+                
                 html += `</table>`;
                 html += `</div>`;
                 
-                // Table stats - moved outside result-container to avoid overflow clipping
-                const rowCount = table.row_count || table.rows.length;
-                html += `<div class="table-stats">📊 ${table.columns.length} columns • ${rowCount} rows</div>`;
-                
+                // Add table statistics
+                if (table.has_data) {
+                    html += `<div class="table-stats">`;
+                    html += `📊 ${table.columns.length} columns • ${table.row_count} rows`;
+                    if (table.row_count !== table.rows.length) {
+                        html += ` • Showing ${table.rows.length} of ${table.row_count}`;
+                    }
+                    html += `</div>`;
+                }
             } else {
                 html += `<div class="no-data-message">No data in this table</div>`;
             }
@@ -1881,7 +1933,63 @@
                 showError(`Connection test failed: ${error.message}`);
             }
         }
-  
+        
+        async function askQuestion() {
+            const question = document.getElementById('questionInput').value.trim();
+            
+            if (!question) {
+                showError('Please enter a question');
+                return;
+            }
+
+            if (!isConnected) {
+                showError('Please setup workspace first');
+                return;
+            }
+
+            // Show initial loading
+            showLoading('🚀 Starting query process...');
+            
+            // Simulate progress steps
+            setTimeout(() => updateLoadingStep('step-translate', 'active'), 200);
+            
+            try {
+                const response = await fetch('/api/query', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question: question })
+                });
+
+                // Show validation step
+                updateLoadingStep('step-translate', 'completed');
+                updateLoadingStep('step-validate', 'active');
+                
+                const data = await response.json();
+                
+                // Show execution step
+                updateLoadingStep('step-validate', 'completed');
+                updateLoadingStep('step-execute', 'active');
+                
+                // Small delay to show execution step
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
+                // Show formatting step
+                updateLoadingStep('step-execute', 'completed');
+                updateLoadingStep('step-format', 'active');
+                
+                // Small delay to show formatting step
+                await new Promise(resolve => setTimeout(resolve, 300));
+                
+                if (data.success) {
+                    updateLoadingStep('step-format', 'completed');
+                    showResult(data.result, data.timestamp);
+                } else {
+                    showError(data.error);
+                }
+            } catch (error) {
+                showError(`Query failed: ${error.message}`);
+            }
+        }
 
         function simulateRetry() {
             // Show retry indication
