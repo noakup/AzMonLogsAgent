@@ -148,6 +148,69 @@ curl -X POST http://localhost:8080/query \
 - **REST API** (`my-first-mcp-server/rest_api.py`): HTTP API server
 - **MCP Server** (`my-first-mcp-server/mcp_server.py`): AI assistant integration
 
+### High-Level Architecture Diagram
+```mermaid
+%% See project_summary/01_high_level_architecture.mmd for source
+flowchart LR
+   subgraph Interfaces
+      UI[Flask Web UI]
+      REST[REST API]
+      CLI[CLI / Server Manager]
+      MCP[MCP Server]
+   end
+   subgraph Core Agent
+      AGENT[KQLAgent]
+      TRANS[NL→KQL]
+      KQLC[KQL Client]
+      MONC[Monitor Client]
+   end
+   subgraph Azure
+      AOAI[Azure OpenAI]
+      AMON[Azure Monitor Logs]
+   end
+   subgraph Knowledge
+      EX[Examples]
+      META[Metadata]
+      CFG[Config]
+   end
+   Interfaces --> AGENT
+   AGENT --> TRANS --> AOAI
+   AGENT --> KQLC --> MONC --> AMON
+   AGENT --> EX
+   AGENT --> META
+   CFG --> AGENT
+```
+
+### Request Sequence Diagram
+```mermaid
+%% See project_summary/04_sequence_diagram.mmd for source
+sequenceDiagram
+   participant U as User
+   participant I as Interface
+   participant A as Agent
+   participant T as Translator
+   participant O as Azure OpenAI
+   participant K as KQL Client
+   participant M as Monitor Client
+   participant L as Logs API
+   U->>I: Ask question
+   I->>A: send(nl_query)
+   A->>T: translate()
+   T->>O: prompt
+   O-->>T: KQL
+   T-->>A: candidate
+   A->>K: normalize
+   K->>M: execute
+   M->>L: query
+   L-->>M: results
+   M-->>K: structured
+   K-->>A: dataset
+   A-->>I: formatted response
+   I-->>U: display
+```
+
+More docs & modular diagrams: see `project_summary/` directory.
+
 ### Smart Features
 - **Intelligent Timespan Detection**: Automatically detects time filters in queries
 - **Example-Driven Translation**: Uses curated KQL examples for accurate translations
@@ -209,6 +272,27 @@ python logs_agent.py                  # Start CLI agent directly
 3. Make your changes
 4. Add tests for new functionality
 5. Submit a pull request
+
+### Documentation & Diagram Workflow
+- Edit individual section files under `project_summary/`.
+- Mermaid sources live as `.mmd` files for portability and tooling.
+- (Optional) Export SVG/PNG for embedding (see script below).
+
+#### Why export to SVG?
+While GitHub renders Mermaid blocks, exporting to SVG provides:
+- Stable artifacts for wikis, slide decks, PDFs, or external portals lacking Mermaid support.
+- Version-controlled visuals immune to renderer changes.
+- Faster load in environments that block client-side Mermaid rendering.
+- Ability to annotate or post-process (e.g., add callouts in vector editors).
+
+#### Quick Export (requires Node.js)
+```powershell
+npm install -g @mermaid-js/mermaid-cli
+mmdc -i project_summary/01_high_level_architecture.mmd -o project_summary/01_high_level_architecture.svg
+mmdc -i project_summary/04_sequence_diagram.mmd -o project_summary/04_sequence_diagram.svg
+```
+
+Or run the helper script (after creation): `powershell -ExecutionPolicy Bypass -File scripts/export-diagrams.ps1`.
 
 ## 📝 License
 MIT License - see LICENSE file for details

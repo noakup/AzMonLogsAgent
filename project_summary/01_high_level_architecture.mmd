@@ -1,0 +1,39 @@
+%% High-Level Architecture Diagram (Mermaid)
+flowchart LR
+    subgraph Interfaces
+        UI[Flask Web UI (web_app.py)]
+        REST[REST API (rest_api.py)]
+        CLI[CLI / Legacy CLI (main.py, server_manager.py)]
+        MCP[MCP Server (my-first-mcp-server/mcp_server.py)]
+    end
+
+    subgraph Core_Agent[Core Agent Layer]
+        AGENT[KQLAgent (logs_agent.py)]
+        TRANSLATE[NL→KQL Engine (nl_to_kql.py)]
+        KQLCLIENT[Kusto Query Orchestrator (kql_client.py)]
+        MONCLIENT[Azure Monitor Client (azure_agent/monitor_client.py)]
+    end
+
+    subgraph Azure[Azure Services]
+        AOAI[Azure OpenAI\n(model inference)]
+        AMON[Azure Monitor Logs API]
+    end
+
+    subgraph Knowledge_Assets[Knowledge & Domain Assets]
+        EXAMPLES[Examples & Capsules\n(app_insights_* , kql_examples/)]
+        METADATA[Workspace / Schema Metadata\n(app_insights_metadata/ , NGSchema/)]
+        CONFIG[Configuration (setup_azure_openai.py, .env)]
+    end
+
+    Interfaces --> AGENT
+    AGENT --> TRANSLATE
+    TRANSLATE --> AOAI
+    AGENT --> KQLCLIENT
+    KQLCLIENT --> MONCLIENT
+    MONCLIENT --> AMON
+    AGENT --> EXAMPLES
+    AGENT --> METADATA
+    CONFIG --> TRANSLATE
+    CONFIG --> AGENT
+
+    AMON --> MONCLIENT --> KQLCLIENT --> AGENT --> Interfaces

@@ -1,0 +1,27 @@
+%% Request Handling Sequence Diagram
+sequenceDiagram
+    participant U as User
+    participant IF as Interface (Web/REST/CLI/MCP)
+    participant AG as KQLAgent (logs_agent.py)
+    participant TR as Translator (nl_to_kql.py)
+    participant AO as Azure OpenAI
+    participant KC as KQL Client (kql_client.py)
+    participant MC as Monitor Client (monitor_client.py)
+    participant AM as Azure Monitor Logs
+
+    U->>IF: Natural language query
+    IF->>AG: request(nl_query, context)
+    AG->>AG: Infer timespan / detect intent
+    AG->>TR: translate(nl_query, schema/examples)
+    TR->>AO: prompt(composed)
+    AO-->>TR: KQL candidate(s)
+    TR-->>AG: KQL + rationale
+    AG->>KC: normalize/validate(KQL)
+    KC->>MC: execute(KQL, timespan)
+    MC->>AM: POST query
+    AM-->>MC: result tables
+    MC-->>KC: structured results
+    KC-->>AG: result set
+    AG->>AG: post-process (format, summary, truncation)
+    AG-->>IF: response(JSON / HTML)
+    IF-->>U: Display

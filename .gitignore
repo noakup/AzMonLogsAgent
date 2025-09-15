@@ -87,3 +87,8 @@ cleanup_*.py
 *.py.old
 *.old
 __pycache__/nl_to_kql.cpython-312.pyc
+
+# Generated diagram assets
+project_summary/*.svg
+project_summary/*.png
+
