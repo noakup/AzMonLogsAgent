@@ -216,13 +216,13 @@ async def handle_call_tool(name: str, arguments: dict) -> list[TextContent | Ima
             
             # Map scenarios to example files
             example_files = {
-                "requests": "app_requests_kql_examples.md",
-                "exceptions": "app_exceptions_kql_examples.md", 
-                "traces": "app_traces_kql_examples.md",
-                "dependencies": "app_dependencies_kql_examples.md",
-                "custom_events": "app_custom_events_kql_examples.md",
-                "performance": "app_performance_kql_examples.md",
-                "usage": "usage_kql_examples.md"
+                "requests": "../app_insights_capsule/kql_examples/app_requests_kql_examples.md",
+                "exceptions": "../app_insights_capsule/kql_examples/app_exceptions_kql_examples.md", 
+                "traces": "../app_insights_capsule/kql_examples/app_traces_kql_examples.md",
+                "dependencies": "../app_insights_capsule/kql_examples/app_dependencies_kql_examples.md",
+                "custom_events": "../app_insights_capsule/kql_examples/app_custom_events_kql_examples.md",
+                "performance": "../app_insights_capsule/kql_examples/app_performance_kql_examples.md",
+                "usage": "../usage_kql_examples.md"
             }
             
             filename = example_files.get(scenario)

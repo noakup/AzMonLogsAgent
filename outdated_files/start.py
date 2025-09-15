@@ -57,11 +57,11 @@ import os
 print("📚 Available Example Categories:")
 print()
 examples = [
-    ("app_requests_kql_examples.md", "HTTP Requests Analysis"),
-    ("app_exceptions_kql_examples.md", "Error & Exception Tracking"),
-    ("app_traces_kql_examples.md", "Application Trace Analysis"),
-    ("app_dependencies_kql_examples.md", "External Service Monitoring"),
-    ("app_performance_kql_examples.md", "Performance Metrics"),
+    ("app_insights_capsule/kql_examples/app_requests_kql_examples.md", "HTTP Requests Analysis"),
+    ("app_insights_capsule/kql_examples/app_exceptions_kql_examples.md", "Error & Exception Tracking"),
+    ("app_insights_capsule/kql_examples/app_traces_kql_examples.md", "Application Trace Analysis"),
+    ("app_insights_capsule/kql_examples/app_dependencies_kql_examples.md", "External Service Monitoring"),
+    ("app_insights_capsule/kql_examples/app_performance_kql_examples.md", "Performance Metrics"),
     ("usage_kql_examples.md", "Usage Analytics")
 ]
 

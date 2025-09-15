@@ -24,7 +24,7 @@ def http():
     click.echo("Press Ctrl+C to stop the server")
     
     try:
-        subprocess.run([sys.executable, "my-first-mcp-server/main_new.py"])
+        subprocess.run([sys.executable, "my-first-mcp-server/rest_api.py"])
     except KeyboardInterrupt:
         click.echo("\n🛑 HTTP Server stopped")
 
@@ -89,7 +89,7 @@ def agent():
     click.echo()
     
     try:
-        subprocess.run([sys.executable, "nl_agent.py"])
+        subprocess.run([sys.executable, "logs_agent.py"])
     except KeyboardInterrupt:
         click.echo("\n🛑 Agent stopped")
     except Exception as e:
@@ -115,7 +115,7 @@ def web():
     click.echo("  - Real-time query results")
     click.echo("  - Example queries for different scenarios")
     click.echo()
-    click.echo("📍 Web interface will be available at: http://localhost:5000")
+    click.echo("📍 Web interface will be available at: http://localhost:8080")
     click.echo("🤖 Ready to process natural language KQL questions!")
     click.echo()
     click.echo("Press Ctrl+C to stop the server")

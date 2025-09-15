@@ -11,13 +11,13 @@ import json
 def load_examples_and_metadata():
     """Load KQL examples and metadata for better translation context"""
     context_files = {
-        "requests_examples": "app_requests_kql_examples.md",
-        "requests_metadata": "app_requests_metadata.md", 
-        "exceptions_examples": "app_exceptions_kql_examples.md",
-        "exceptions_metadata": "app_exceptions_metadata.md",
-        "traces_examples": "app_traces_kql_examples.md",
-        "traces_metadata": "app_traces_metadata.md",
-        "performance_examples": "app_performance_kql_examples.md"
+        "requests_examples": "app_insights_capsule/kql_examples/app_requests_kql_examples.md",
+        "requests_metadata": "app_insights_capsule/metadata/app_requests_metadata.md", 
+        "exceptions_examples": "app_insights_capsule/kql_examples/app_exceptions_kql_examples.md",
+        "exceptions_metadata": "app_insights_capsule/metadata/app_exceptions_metadata.md",
+        "traces_examples": "app_insights_capsule/kql_examples/app_traces_kql_examples.md",
+        "traces_metadata": "app_insights_capsule/metadata/app_traces_metadata.md",
+        "performance_examples": "app_insights_capsule/kql_examples/app_performance_kql_examples.md"
     }
     
     context = {}

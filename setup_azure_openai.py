@@ -86,7 +86,7 @@ if __name__ == "__main__":
         if test_configuration():
             print("\n🎉 Azure OpenAI is configured and working!")
             print("\nYou can now use the natural language agent:")
-            print("  python nl_agent.py")
+            print("  python logs_agent.py")
             print("  python server_manager.py agent")
         else:
             print("\n⚠️  Configuration saved but test failed.")

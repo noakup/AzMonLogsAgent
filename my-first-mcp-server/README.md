@@ -27,9 +27,14 @@ This is a Model Context Protocol (MCP) server that allows you to execute KQL que
 
 ## Usage
 
-1. Start the server:
+1. Start the MCP server:
    ```bash
-   python main.py
+   python mcp_server.py
+   ```
+
+   Or start the HTTP REST API server:
+   ```bash
+   python rest_api.py
    ```
 
 2. The server will listen on `http://localhost:8080`

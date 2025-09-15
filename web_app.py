@@ -16,7 +16,7 @@ from datetime import datetime
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # Import the KQL agent
-from nl_agent import KQLAgent
+from logs_agent import KQLAgent
 
 app = Flask(__name__)
 
@@ -180,13 +180,13 @@ def get_examples(scenario):
         import os
           # Map scenarios to example files
         scenario_files = {
-            'requests': 'app_requests_kql_examples.md',
-            'exceptions': 'app_exceptions_kql_examples.md',
-            'traces': 'app_traces_kql_examples.md',
-            'dependencies': 'app_dependencies_kql_examples.md',
-            'custom_events': 'app_custom_events_kql_examples.md',
-            'page_views': 'app_page_views_kql_examples.md',
-            'performance': 'app_performance_kql_examples.md',
+            'requests': 'app_insights_capsule/kql_examples/app_requests_kql_examples.md',
+            'exceptions': 'app_insights_capsule/kql_examples/app_exceptions_kql_examples.md',
+            'traces': 'app_insights_capsule/kql_examples/app_traces_kql_examples.md',
+            'dependencies': 'app_insights_capsule/kql_examples/app_dependencies_kql_examples.md',
+            'custom_events': 'app_insights_capsule/kql_examples/app_custom_events_kql_examples.md',
+            'page_views': 'app_insights_capsule/kql_examples/app_page_views_kql_examples.md',
+            'performance': 'app_insights_capsule/kql_examples/app_performance_kql_examples.md',
             'usage': 'usage_kql_examples.md'
         }
         
@@ -322,37 +322,37 @@ def discover_workspace_examples():
         # Define table mappings to example files
         table_examples_map = {
             'AppRequests': {
-                'file': 'app_requests_kql_examples.md',
+                'file': 'app_insights_capsule/kql_examples/app_requests_kql_examples.md',
                 'category': 'Application Insights',
                 'description': 'HTTP requests to your application'
             },
             'AppExceptions': {
-                'file': 'app_exceptions_kql_examples.md', 
+                'file': 'app_insights_capsule/kql_examples/app_exceptions_kql_examples.md', 
                 'category': 'Application Insights',
                 'description': 'Exceptions thrown by your application'
             },
             'AppTraces': {
-                'file': 'app_traces_kql_examples.md',
+                'file': 'app_insights_capsule/kql_examples/app_traces_kql_examples.md',
                 'category': 'Application Insights', 
                 'description': 'Custom trace logs from your application'
             },
             'AppDependencies': {
-                'file': 'app_dependencies_kql_examples.md',
+                'file': 'app_insights_capsule/kql_examples/app_dependencies_kql_examples.md',
                 'category': 'Application Insights',
                 'description': 'External dependencies called by your application'
             },
             'AppPageViews': {
-                'file': 'app_page_views_kql_examples.md',
+                'file': 'app_insights_capsule/kql_examples/app_page_views_kql_examples.md',
                 'category': 'Application Insights',
                 'description': 'Page views in your web application'
             },
             'AppCustomEvents': {
-                'file': 'app_custom_events_kql_examples.md',
+                'file': 'app_insights_capsule/kql_examples/app_custom_events_kql_examples.md',
                 'category': 'Application Insights', 
                 'description': 'Custom events tracked by your application'
             },
             'AppPerformanceCounters': {
-                'file': 'app_performance_kql_examples.md',
+                'file': 'app_insights_capsule/kql_examples/app_performance_kql_examples.md',
                 'category': 'Application Insights',
                 'description': 'Performance counters and metrics'
             },

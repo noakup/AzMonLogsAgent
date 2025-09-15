@@ -143,9 +143,9 @@ def translate_nl_to_kql(nl_question):
     - When a user provides a natural language (NL) question, you should:
       1. Analyze the NL question to determine which Application Insights entity or scenario it relates to (e.g., requests, exceptions, traces).
       2. Route the NL question to the appropriate specialized NL-to-KQL tool:
-         - For requests-related questions query the AppRequests table. Use the details and examples `app_requests_metadata.md` and `app_requests_kql_examples.md`.
-         - For exceptions-related questions query the AppExceptions table. Use the details and examples from `app_exceptions_metadata.md` and `app_exceptions_kql_examples.md`.
-         - For traces/logs-related questions query the AppTraces table. Use the details and examples from `app_traces_metadata.md` and `app_traces_kql_examples.md`.
+         - For requests-related questions query the AppRequests table. Use the details and examples `app_insights_capsule/metadata/app_requests_metadata.md` and `app_insights_capsule/kql_examples/app_requests_kql_examples.md`.
+         - For exceptions-related questions query the AppExceptions table. Use the details and examples from `app_insights_capsule/metadata/app_exceptions_metadata.md` and `app_insights_capsule/kql_examples/app_exceptions_kql_examples.md`.
+         - For traces/logs-related questions query the AppTraces table. Use the details and examples from `app_insights_capsule/metadata/app_traces_metadata.md` and `app_insights_capsule/kql_examples/app_traces_kql_examples.md`.
          - NEVER use the classic Application Insights tables (requests, exceptions, traces) as they are not compatible with the new Application Insights data model.
          - Never use the classic Application Insights columns, as they are not compatible with the new Application Insights data model.
          - Only use the new Application Insights tables and columns as defined in the metadata files.
@@ -156,8 +156,8 @@ def translate_nl_to_kql(nl_question):
     - Do NOT implement the routing logic in code unless specifically requested. These are instructions for future maintainers and agent developers.
     - Always return a valid KQL query that can be run against a Log Analytics workspace.
     - Do not return any explanations, comments, or additional text in the response.
-    - Use the metadata files (e.g., `app_exceptions_metadata.md`) to understand the structure of the Application Insights tables and columns.
-    - Use the KQL examples files (e.g., `app_requests_kql_examples.md`, `app_exceptions_kql_examples.md`, `app_traces_kql_examples.md`) to understand how to construct queries for specific scenarios.
+    - Use the metadata files (e.g., `app_insights_capsule/metadata/app_exceptions_metadata.md`) to understand the structure of the Application Insights tables and columns.
+    - Use the KQL examples files (e.g., `app_insights_capsule/kql_examples/app_requests_kql_examples.md`, `app_insights_capsule/kql_examples/app_exceptions_kql_examples.md`, `app_insights_capsule/kql_examples/app_traces_kql_examples.md`) to understand how to construct queries for specific scenarios.
     - some tables have a column named 'ItemCount' which denotes the number of telemetry items represented by a single sample item. When performing aggregations, you should sum by ItemCount to get the total number of items. """
 
     prompt = f"""

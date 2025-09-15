@@ -9,7 +9,7 @@ echo   - Quick suggestion pills
 echo   - Real-time query results
 echo   - Example queries for different scenarios
 echo.
-echo 📍 Web interface will be available at: http://localhost:5000
+echo 📍 Web interface will be available at: http://localhost:8080
 echo 🤖 Ready to process natural language KQL questions!
 echo.
 echo Press Ctrl+C to stop the server

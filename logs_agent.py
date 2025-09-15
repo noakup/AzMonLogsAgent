@@ -23,7 +23,7 @@ except ImportError:
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # Import enhanced translation function
-from enhanced_translation import translate_nl_to_kql_enhanced as translate_nl_to_kql
+from nl_to_kql import translate_nl_to_kql_enhanced as translate_nl_to_kql
 
 class KQLAgent:
     """Agent that processes natural language and calls MCP server tools"""
@@ -141,12 +141,12 @@ class KQLAgent:
                 
                 # Map scenarios to example files
                 example_files = {
-                    "requests": "app_requests_kql_examples.md",
-                    "exceptions": "app_exceptions_kql_examples.md", 
-                    "traces": "app_traces_kql_examples.md",
-                    "dependencies": "app_dependencies_kql_examples.md",
-                    "custom_events": "app_custom_events_kql_examples.md",
-                    "performance": "app_performance_kql_examples.md",
+                    "requests": "app_insights_capsule/kql_examples/app_requests_kql_examples.md",
+                    "exceptions": "app_insights_capsule/kql_examples/app_exceptions_kql_examples.md", 
+                    "traces": "app_insights_capsule/kql_examples/app_traces_kql_examples.md",
+                    "dependencies": "app_insights_capsule/kql_examples/app_dependencies_kql_examples.md",
+                    "custom_events": "app_insights_capsule/kql_examples/app_custom_events_kql_examples.md",
+                    "performance": "app_insights_capsule/kql_examples/app_performance_kql_examples.md",
                     "usage": "usage_kql_examples.md"
                 }
                 

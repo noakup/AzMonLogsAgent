@@ -49,7 +49,7 @@ LOG_ANALYTICS_WORKSPACE_ID=your-workspace-guid-here
 # Start the web application
 python web_app.py
 
-# Open browser to http://localhost:5000
+# Open browser to http://localhost:8080
 # Test with your Log Analytics Workspace ID
 ```
 
@@ -92,7 +92,7 @@ python web_app.py
 
 ```
 ├── web_app.py              # Main web application
-├── nl_agent.py             # Natural language processing
+├── logs_agent.py             # Natural language processing
 ├── templates/              # Web UI templates
 │   └── index.html          # Main web interface
 ├── azure_agent/            # Azure integration
@@ -128,7 +128,7 @@ python web_app.py
 1. **Web Interface:**
    ```bash
    python web_app.py
-   # Test at http://localhost:5000
+   # Test at http://localhost:8080
    ```
 
 2. **Natural Language Translation:**

@@ -42,10 +42,10 @@ The easiest way to get started with a beautiful, interactive web interface:
 pip install -r requirements.txt
 
 # Launch web interface
-python launch_web.py
+python web_app.py
 ```
 
-Then open your browser to **http://localhost:5000** and enjoy the modern web UI!
+Then open your browser to **http://localhost:8080** and enjoy the modern web UI!
 
 **Web Interface Features:**
 - 🎨 Beautiful, responsive design
@@ -79,7 +79,7 @@ python server_manager.py mcp
 ## 💻 Usage Examples
 
 ### Web Interface
-1. Start the web interface: `python launch_web.py`
+1. Start the web interface: `python web_app.py`
 2. Enter your Log Analytics Workspace ID
 3. Click "Connect" to setup the workspace
 4. Ask questions like:
@@ -143,9 +143,9 @@ curl -X POST http://localhost:8080/query \
 
 ### Components
 - **Web Interface** (`web_app.py`): Modern Flask-based web UI
-- **CLI Agent** (`nl_agent.py`): Command-line natural language interface
-- **Translation Engine** (`enhanced_translation.py`): NL-to-KQL conversion
-- **REST API** (`my-first-mcp-server/main_new.py`): HTTP API server
+- **CLI Agent** (`logs_agent.py`): Command-line natural language interface
+- **Translation Engine** (`nl_to_kql.py`): NL-to-KQL conversion
+- **REST API** (`my-first-mcp-server/rest_api.py`): HTTP API server
 - **MCP Server** (`my-first-mcp-server/mcp_server.py`): AI assistant integration
 
 ### Smart Features
@@ -175,8 +175,8 @@ python server_manager.py mcp        # Start MCP server
 python server_manager.py test       # Test functionality
 
 # Direct launchers
-python launch_web.py                # Launch web interface
-python nl_agent.py                  # Start CLI agent directly
+python web_app.py                   # Launch web interface
+python logs_agent.py                  # Start CLI agent directly
 ```
 
 ## 🔍 Troubleshooting
