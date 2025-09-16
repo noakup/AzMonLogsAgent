@@ -1386,7 +1386,15 @@
                 </div>
                 <div id="setupStatus">
                     <!-- Status messages will appear here -->
-                </div>            </div><!-- Query Section -->
+                </div>            </div>
+
+            <!-- KQL Query Section -->
+            <div class="kql-query-section">
+                <h3>📝 Generated KQL Query</h3>
+                <div class="kql-query" id="kqlQuery"></div>
+            </div>
+
+            <!-- Query Section -->
             <div class="query-section">
                 <h2>💬 Ask Your Question</h2>
                 <div class="question-container">
@@ -1630,527 +1638,507 @@
             }
         }
           function showResult(result, timestamp) {
-            const resultContent = document.getElementById('resultContent');
-            const timestampElement = document.getElementById('timestamp');
-            const resultsSection = document.getElementById('resultsSection');
-            
-            // Hide loading indicator
-            hideLoading();
-            
-            // Reset the Go button
-            resetGoButton();
-            
-            // Make sure the results section is visible
-            resultsSection.classList.add('visible');
-            resultsSection.style.display = 'block';
-            
-            // Store current result for explain feature
-            currentQueryResult = result;
-            
-            // Handle both old text format and new structured format
-            if (typeof result === 'string') {
-                // Legacy text format
-                resultContent.innerHTML = `<pre style="white-space: pre-wrap; font-family: 'Courier New', monospace;">${result}</pre>`;
-                // Hide explain section for legacy format
-                hideExplainSection();
-            } else if (result && typeof result === 'object') {
-                // New structured format
+    const resultContent = document.getElementById('resultContent');
+    const timestampElement = document.getElementById('timestamp');
+    const resultsSection = document.getElementById('resultsSection');
+    const kqlQueryElement = document.getElementById('kqlQuery');
+
+    // Hide loading indicator
+    hideLoading();
+
+    // Reset the Go button
+    resetGoButton();
+
+    // Make sure the results section is visible
+    resultsSection.classList.add('visible');
+    resultsSection.style.display = 'block';
+
+    // Store current result for explain feature
+    currentQueryResult = result;
+
+    if (result.type === 'query_success') {
+        // Show the generated KQL query in the new section
+        kqlQueryElement.textContent = result.kql_query;
+
+        // Show the data tables
+        if (result.data && result.data.type === 'table_data') {
+            const tables = result.data.tables;
+            if (tables && tables.length > 0) {
                 let html = '';
-                
-                if (result.type === 'query_success') {
-                    // Show the generated KQL query
-                    html += `<div class="query-header">📝 Generated KQL Query:</div>`;
-                    html += `<div class="kql-query">${result.kql_query}</div>`;
-                    
-                    // Show the data tables
-                    if (result.data && result.data.type === 'table_data') {
-                        const tables = result.data.tables;
-                          if (tables && tables.length > 0) {
-                            tables.forEach(table => {
-                                html += createTableHTML(table);
-                            });
-                            
-                            // Show explain section for successful queries with data
-                            showExplainSection();                        } else {
-                            html += `<div class="no-data-message">No data returned from query</div>`;
-                            // Hide explain section for no data
-                            hideExplainSection();
-                        }                    } else if (result.data && result.data.type === 'no_data') {
-                        html += `<div class="no-data-message">${result.data.message}</div>`;
-                        // Hide explain section for no data
-                        hideExplainSection();
-                    }
-                } else if (result.type === 'query_error') {
-                    html += `<div class="query-header">📝 Generated KQL Query:</div>`;
-                    html += `<div class="kql-query">${result.kql_query}</div>`;
-                    html += `<div class="error">❌ Error: ${result.error}</div>`;
-                    // Hide explain section for errors
-                    hideExplainSection();
-                } else {
-                    // Fallback for other structured data
-                    html += `<pre style="white-space: pre-wrap;">${JSON.stringify(result, null, 2)}</pre>`;
-                    // Hide explain section for unknown formats
-                    hideExplainSection();
-                }
-                
+                tables.forEach(table => {
+                    html += createTableHTML(table);
+                });
                 resultContent.innerHTML = html;
+
+                // Show explain section for successful queries with data
+                showExplainSection();
             } else {
-                // Fallback for unexpected formats
-                resultContent.innerHTML = `<pre style="white-space: pre-wrap;">${String(result)}</pre>`;
-                // Hide explain section for unexpected formats
+                resultContent.innerHTML = `<div class="no-data-message">No data returned from query</div>`;
                 hideExplainSection();
             }
-            
-            timestampElement.textContent = `Response received at: ${timestamp}`;
-            
-            // Check if tables need expansion controls
-            checkTableOverflow();
-        }
-
-        function createTableHTML(table) {
-            let html = '';
-            const tableId = `table-${Math.random().toString(36).substr(2, 9)}`;
-            
-            // Table header with info
-            html += `<div class="table-header">`;
-            html += `<div class="table-title">📊 Table ${table.table_number || 1}</div>`;
-            html += `<div class="table-info">${table.row_count} rows</div>`;
-            html += `</div>`;
-            
-            if (table.has_data && table.columns && table.rows) {
-                html += `<div class="result-container" id="${tableId}">`;
-                html += `<table class="result-table">`;
-                
-                // Table header
-                html += `<thead><tr>`;
-                table.columns.forEach(column => {
-                    html += `<th>${escapeHtml(column)}</th>`;
-                });
-                html += `</tr></thead>`;
-                
-                // Table body
-                html += `<tbody>`;
-                table.rows.forEach(row => {
-                    html += `<tr>`;
-                    row.forEach((cell, index) => {
-                        const cellValue = cell === null || cell === undefined ? 'NULL' : String(cell);
-                        const cellClass = getCellClass(cell);
-                        html += `<td class="${cellClass}">${escapeHtml(cellValue)}</td>`;
-                    });
-                    html += `</tr>`;
-                });
-                html += `</tbody>`;
-                
-                html += `</table>`;
-                html += `</div>`;
-                
-                // Add table statistics
-                if (table.has_data) {
-                    html += `<div class="table-stats">`;
-                    html += `📊 ${table.columns.length} columns • ${table.row_count} rows`;
-                    if (table.row_count !== table.rows.length) {
-                        html += ` • Showing ${table.rows.length} of ${table.row_count}`;
-                    }
-                    html += `</div>`;
-                }
-            } else {
-                html += `<div class="no-data-message">No data in this table</div>`;
-            }
-            
-            return html;
-        }
-        
-        function createExplainSection() {
-            return `
-                <div class="explain-section">
-                    <button class="btn-explain" onclick="explainResults()" id="explainBtn">
-                        🧠 Explain Results
-                    </button>
-                    <div id="explainContent"></div>
-                </div>
-            `;
-        }
-
-        function showExplainSection() {
-            const explainSection = document.getElementById('explainResultsSection');
-            const explainContent = document.getElementById('explainContent');
-            
-            // Clear any previous content
-            explainContent.innerHTML = '';
-            
-            // Show the explain section
-            explainSection.style.display = 'block';
-        }
-
-        function hideExplainSection() {
-            const explainSection = document.getElementById('explainResultsSection');
-            if (explainSection) {
-                explainSection.style.display = 'none';
-            }
-        }
-
-        async function explainResults() {
-            const explainBtn = document.getElementById('explainBtn');
-            const explainContent = document.getElementById('explainContent');
-            
-            // Check if we have current results to explain
-            if (!currentQueryResult || currentQueryResult.type !== 'query_success') {
-                explainContent.innerHTML = `<div class="explain-result"><h4>❌ No Results to Explain</h4><p>Please run a successful query first.</p></div>`;
-                return;
-            }
-            
-            // Disable button and show loading
-            explainBtn.disabled = true;
-            explainContent.innerHTML = `
-                <div class="explain-loading">
-                    <div class="explain-spinner"></div>
-                    Analyzing query results with AI...
-                </div>
-            `;
-            
-            try {
-                // Make API call to explain endpoint
-                const response = await fetch('/api/explain', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        query_result: currentQueryResult,
-                        original_question: currentOriginalQuestion
-                    })
-                });
-                
-                const data = await response.json();
-                
-                if (data.success) {
-                    explainContent.innerHTML = `
-                        <div class="explain-result">
-                            <h4>🧠 AI Analysis</h4>
-                            <p>${data.explanation.replace(/\n/g, '<br>')}</p>
-                            <small style="color: #666;">Analysis generated at: ${data.timestamp}</small>
-                        </div>
-                    `;
-                } else {
-                    explainContent.innerHTML = `
-                        <div class="explain-result">
-                            <h4>❌ Explanation Failed</h4>
-                            <p>${data.error}</p>
-                        </div>
-                    `;
-                }
-                
-            } catch (error) {
-                explainContent.innerHTML = `
-                    <div class="explain-result">
-                        <h4>❌ Error</h4>
-                        <p>Failed to explain results: ${error.message}</p>
-                    </div>
-                `;            } finally {
-                // Re-enable the button
-                explainBtn.disabled = false;
-            }
-        }
-
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-        
-        function showError(error) {
-            const resultContent = document.getElementById('resultContent');
-            const timestampElement = document.getElementById('timestamp');
-            const resultsSection = document.getElementById('resultsSection');
-            
-            // Hide loading indicator
-            hideLoading();
-            
-            // Reset the Go button
-            resetGoButton();
-            
-            // Make sure the results section is visible
-            resultsSection.classList.add('visible');
-            resultsSection.style.display = 'block';
-            
-            resultContent.innerHTML = `<div class="error">❌ Error: ${error}</div>`;
-            timestampElement.textContent = `Error occurred at: ${new Date().toLocaleString()}`;
-            
-            // Hide explain section when showing errors
+        } else if (result.data && result.data.type === 'no_data') {
+            resultContent.innerHTML = `<div class="no-data-message">${result.data.message}</div>`;
             hideExplainSection();
         }
+    } else if (result.type === 'query_error') {
+        resultContent.innerHTML = `<div class="error">❌ Error: ${result.error}</div>`;
+        hideExplainSection();
+    } else {
+        resultContent.innerHTML = `<pre style="white-space: pre-wrap;">${JSON.stringify(result, null, 2)}</pre>`;
+        hideExplainSection();
+    }
 
-        async function setupWorkspace() {
-            const workspaceId = document.getElementById('workspaceId').value.trim();
+    timestampElement.textContent = `Response received at: ${timestamp}`;
+    
+    // Check if tables need expansion controls
+    checkTableOverflow();
+}
 
-            if (!workspaceId) {
-                const statusElement = document.getElementById('setupStatus');
-                statusElement.innerHTML = `<div class="error">Please enter a workspace ID</div>`;
-                return;
+function createTableHTML(table) {
+    let html = '';
+    const tableId = `table-${Math.random().toString(36).substr(2, 9)}`;
+    
+    // Table header with info
+    html += `<div class="table-header">`;
+    html += `<div class="table-title">📊 Table ${table.table_number || 1}</div>`;
+    html += `<div class="table-info">${table.row_count} rows</div>`;
+    html += `</div>`;
+    
+    if (table.has_data && table.columns && table.rows) {
+        html += `<div class="result-container" id="${tableId}">`;
+        html += `<table class="result-table">`;
+        
+        // Table header
+        html += `<thead><tr>`;
+        table.columns.forEach(column => {
+            html += `<th>${escapeHtml(column)}</th>`;
+        });
+        html += `</tr></thead>`;
+        
+        // Table body
+        html += `<tbody>`;
+        table.rows.forEach(row => {
+            html += `<tr>`;
+            row.forEach((cell, index) => {
+                const cellValue = cell === null || cell === undefined ? 'NULL' : String(cell);
+                const cellClass = getCellClass(cell);
+                html += `<td class="${cellClass}">${escapeHtml(cellValue)}</td>`;
+            });
+            html += `</tr>`;
+        });
+        html += `</tbody>`;
+        
+        html += `</table>`;
+        html += `</div>`;
+        
+        // Add table statistics
+        if (table.has_data) {
+            html += `<div class="table-stats">`;
+            html += `📊 ${table.columns.length} columns • ${table.row_count} rows`;
+            if (table.row_count !== table.rows.length) {
+                html += ` • Showing ${table.rows.length} of ${table.row_count}`;
             }
-
-            // Show indicating message
-            const statusElement = document.getElementById('setupStatus');
-            statusElement.innerHTML = `<div class="loading">Setting up workspace...</div>`;
-
-            try {
-                const response = await fetch('/api/setup', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ workspace_id: workspaceId })
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    isConnected = true;
-                    statusElement.innerHTML = `<span class="status-indicator status-connected">Checking connection to workspace...</span>`;
-
-                    // Automatically check connection
-                    const connectionResponse = await fetch('/api/test-connection', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' }
-                    });
-
-                    const connectionData = await connectionResponse.json();
-
-                    if (connectionData.success) {
-                        statusElement.innerHTML = `<span class="status-indicator status-connected">Connected successfully</span>`;
-                    } else {
-                        updateStatus(false, connectionData.error);
-                    }
-                } else {
-                    updateStatus(false, data.error);
-                }
-            } catch (error) {
-                updateStatus(false, `Connection failed: ${error.message}`);
-            }
+            html += `</div>`;
         }
+    } else {
+        html += `<div class="no-data-message">No data in this table</div>`;
+    }
+    
+    return html;
+}
+        
+function createExplainSection() {
+    return `
+        <div class="explain-section">
+            <button class="btn-explain" onclick="explainResults()" id="explainBtn">
+                🧠 Explain Results
+            </button>
+            <div id="explainContent"></div>
+        </div>
+    `;
+}
 
-        async function testConnection() {
-            if (!isConnected) {
-                updateStatus(false, 'Please setup workspace first');
-                return;
-            }
+function showExplainSection() {
+    const explainSection = document.getElementById('explainResultsSection');
+    const explainContent = document.getElementById('explainContent');
+    
+    // Clear any previous content
+    explainContent.innerHTML = '';
+    
+    // Show the explain section
+    explainSection.style.display = 'block';
+}
 
-            showLoading();
+function hideExplainSection() {
+    const explainSection = document.getElementById('explainResultsSection');
+    if (explainSection) {
+        explainSection.style.display = 'none';
+    }
+}
 
-            try {
-                const response = await fetch('/api/test-connection', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' }
-                });
-
-                const data = await response.json();
-                
-                if (data.success) {
-                    showResult(data.result, data.timestamp);
-                } else {
-                    showError(data.error);
-                }
-            } catch (error) {
-                showError(`Connection test failed: ${error.message}`);
-            }
+async function explainResults() {
+    const explainBtn = document.getElementById('explainBtn');
+    const explainContent = document.getElementById('explainContent');
+    
+    // Check if we have current results to explain
+    if (!currentQueryResult || currentQueryResult.type !== 'query_success') {
+        explainContent.innerHTML = `<div class="explain-result"><h4>❌ No Results to Explain</h4><p>Please run a successful query first.</p></div>`;
+        return;
+    }
+    
+    // Disable button and show loading
+    explainBtn.disabled = true;
+    explainContent.innerHTML = `
+        <div class="explain-loading">
+            <div class="explain-spinner"></div>
+            Analyzing query results with AI...
+        </div>
+    `;
+    
+    try {
+        // Make API call to explain endpoint
+        const response = await fetch('/api/explain', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                query_result: currentQueryResult,
+                original_question: currentOriginalQuestion
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            explainContent.innerHTML = `
+                <div class="explain-result">
+                    <h4>🧠 AI Analysis</h4>
+                    <p>${data.explanation.replace(/\n/g, '<br>')}</p>
+                    <small style="color: #666;">Analysis generated at: ${data.timestamp}</small>
+                </div>
+            `;
+        } else {
+            explainContent.innerHTML = `
+                <div class="explain-result">
+                    <h4>❌ Explanation Failed</h4>
+                    <p>${data.error}</p>
+                </div>
+            `;
         }
         
-        async function askQuestion() {
-            const question = document.getElementById('questionInput').value.trim();
-            
-            if (!question) {
-                showError('Please enter a question');
-                return;
+    } catch (error) {
+        explainContent.innerHTML = `
+            <div class="explain-result">
+                <h4>❌ Error</h4>
+                <p>Failed to explain results: ${error.message}</p>
+            </div>
+        `;            } finally {
+        // Re-enable the button
+        explainBtn.disabled = false;
+    }
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+function showError(error) {
+    const resultContent = document.getElementById('resultContent');
+    const timestampElement = document.getElementById('timestamp');
+    const resultsSection = document.getElementById('resultsSection');
+    
+    // Hide loading indicator
+    hideLoading();
+    
+    // Reset the Go button
+    resetGoButton();
+    
+    // Make sure the results section is visible
+    resultsSection.classList.add('visible');
+    resultsSection.style.display = 'block';
+    
+    resultContent.innerHTML = `<div class="error">❌ Error: ${error}</div>`;
+    timestampElement.textContent = `Error occurred at: ${new Date().toLocaleString()}`;
+    
+    // Hide explain section when showing errors
+    hideExplainSection();
+}
+
+async function setupWorkspace() {
+    const workspaceId = document.getElementById('workspaceId').value.trim();
+
+    if (!workspaceId) {
+        const statusElement = document.getElementById('setupStatus');
+        statusElement.innerHTML = `<div class="error">Please enter a workspace ID</div>`;
+        return;
+    }
+
+    // Show indicating message
+    const statusElement = document.getElementById('setupStatus');
+    statusElement.innerHTML = `<div class="loading">Setting up workspace...</div>`;
+
+    try {
+        const response = await fetch('/api/setup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ workspace_id: workspaceId })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            isConnected = true;
+            statusElement.innerHTML = `<span class="status-indicator status-connected">Checking connection to workspace...</span>`;
+
+            // Automatically check connection
+            const connectionResponse = await fetch('/api/test-connection', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            const connectionData = await connectionResponse.json();
+
+            if (connectionData.success) {
+                statusElement.innerHTML = `<span class="status-indicator status-connected">Connected successfully</span>`;
+            } else {
+                updateStatus(false, connectionData.error);
             }
+        } else {
+            updateStatus(false, data.error);
+        }
+    } catch (error) {
+        updateStatus(false, `Connection failed: ${error.message}`);
+    }
+}
 
-            if (!isConnected) {
-                showError('Please setup workspace first');
-                return;
+async function testConnection() {
+    if (!isConnected) {
+        updateStatus(false, 'Please setup workspace first');
+        return;
+    }
+
+    showLoading();
+
+    try {
+        const response = await fetch('/api/test-connection', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        const data = await response.json();
+        
+        if (data.success) {
+            showResult(data.result, data.timestamp);
+        } else {
+            showError(data.error);
+        }
+    } catch (error) {
+        showError(`Connection test failed: ${error.message}`);
+    }
+    
+}
+
+async function askQuestion() {
+    const question = document.getElementById('questionInput').value.trim();
+    
+    if (!question) {
+        showError('Please enter a question');
+        return;
+    }
+
+    if (!isConnected) {
+        showError('Please setup workspace first');
+        return;
+    }
+
+    // Show initial loading
+    showLoading('🚀 Starting query process...');
+    
+    // Simulate progress steps
+    setTimeout(() => updateLoadingStep('step-translate', 'active'), 200);
+    
+    try {
+        const response = await fetch('/api/query', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ question: question })
+        });
+
+        // Show validation step
+        updateLoadingStep('step-translate', 'completed');
+        updateLoadingStep('step-validate', 'active');
+        
+        const data = await response.json();
+        
+        // Show execution step
+        updateLoadingStep('step-validate', 'completed');
+        updateLoadingStep('step-execute', 'active');
+        
+        // Small delay to show execution step
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        // Show formatting step
+        updateLoadingStep('step-execute', 'completed');
+        updateLoadingStep('step-format', 'active');
+        
+        // Small delay to show formatting step
+        await new Promise(resolve => setTimeout(resolve, 300));
+        
+        if (data.success) {
+            updateLoadingStep('step-format', 'completed');
+            showResult(data.result, data.timestamp);
+        } else {
+            showError(data.error);
+        }
+    } catch (error) {
+        showError(`Query failed: ${error.message}`);
+    }
+}
+
+function simulateRetry() {
+    // Show retry indication
+    updateLoadingStep('step-translate', 'retry');
+      setTimeout(() => {
+        updateLoadingStep('step-translate', 'completed');
+        updateLoadingStep('step-validate', 'active');
+    }, 1500);
+}
+
+function enhancedAskQuestion() {
+    const question = document.getElementById('questionInput').value.trim();
+    
+    // Enhanced button loading state with spinner - do this FIRST
+    const goButton = document.querySelector('.floating-go-btn');
+    if (goButton) {
+        goButton.disabled = true;
+        goButton.innerHTML = '<div class="button-spinner"></div> Processing...';
+        goButton.style.opacity = '0.8';
+        goButton.style.background = 'linear-gradient(135deg, #6c757d 0%, #495057 100%)';
+        goButton.style.cursor = 'not-allowed';
+    }
+
+    // Show the nice loading in results pane immediately
+    showLoading('🚀 Preparing to process your question...');
+    
+    // Now do validation checks and show errors in the loading area if needed
+    if (!question) {
+        setTimeout(() => {
+            showError('Please enter a question');
+        }, 500);
+        return;
+    }
+
+    if (!isConnected) {
+        setTimeout(() => {
+            showError('Please setup workspace first');
+        }, 500);
+        return;
+    }
+
+    // Store the original question for explain feature
+    currentOriginalQuestion = question;
+    
+    // Start with translation step
+    setTimeout(() => {
+        updateLoadingStep('step-translate', 'active');
+        processQuestionWithRetry(question);
+    }, 300);
+}
+
+async function processQuestionWithRetry(question) {
+    let retryCount = 0;
+    const maxRetries = 2;
+    const startTime = Date.now();
+    
+    // Initialize progress
+    updateProgress(10, '🔄 Starting translation process...');
+    updateEstimatedTime(8);
+    
+    while (retryCount <= maxRetries) {
+        try {
+            if (retryCount > 0) {
+                // Show retry indication
+                updateProgress(15 + (retryCount * 5), `🔄 Retry attempt ${retryCount}...`);
+                updateLoadingStep('step-translate', 'retry');
+                await new Promise(resolve => setTimeout(resolve, 1000));
             }
-
-            // Show initial loading
-            showLoading('🚀 Starting query process...');
             
-            // Simulate progress steps
-            setTimeout(() => updateLoadingStep('step-translate', 'active'), 200);
+            // Translation phase
+            updateProgress(25, '🔄 Translating to KQL...');
+            updateLoadingStep('step-translate', 'active');
+            updateEstimatedTime(6);
             
-            try {
-                const response = await fetch('/api/query', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ question: question })
-                });
+            // Simulate translation time
+            await new Promise(resolve => setTimeout(resolve, 800 + (retryCount * 500)));
+            
+            // Make the actual API call
+            updateProgress(40, '📡 Sending request to server...');
+            const response = await fetch('/api/query', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ question: question })
+            });
 
-                // Show validation step
-                updateLoadingStep('step-translate', 'completed');
-                updateLoadingStep('step-validate', 'active');
+            // Validation phase
+            updateProgress(60, '✅ Validating generated query...');
+            updateLoadingStep('step-translate', 'completed');
+            updateLoadingStep('step-validate', 'active');
+            updateEstimatedTime(4);
+            await new Promise(resolve => setTimeout(resolve, 400));
+            
+            const data = await response.json();
+            
+            // Check if we need to retry (simulate retry logic)
+            if (!data.success && retryCount < maxRetries && data.error.includes('translation')) {
+                retryCount++;
+                updateLoadingStep('step-validate', 'retry');
+                continue;
+            }
+            
+            // Execution phase
+            updateProgress(80, '⚡ Executing query on Azure...');
+            updateLoadingStep('step-validate', 'completed');
+            updateLoadingStep('step-execute', 'active');
+            updateEstimatedTime(2);
+            await new Promise(resolve => setTimeout(resolve, 600));
+            
+            // Formatting phase
+            updateProgress(95, '📊 Formatting results...');
+            updateLoadingStep('step-execute', 'completed');
+            updateLoadingStep('step-format', 'active');
+            updateEstimatedTime(1);
+            await new Promise(resolve => setTimeout(resolve, 300));
+            
+            // Complete
+            updateProgress(100, '✅ Complete!');
+            updateEstimatedTime(0);
+            
+            if (data.success) {
+                updateLoadingStep('step-format', 'completed');
+                const totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
                 
-                const data = await response.json();
-                
-                // Show execution step
-                updateLoadingStep('step-validate', 'completed');
-                updateLoadingStep('step-execute', 'active');
-                
-                // Small delay to show execution step
-                await new Promise(resolve => setTimeout(resolve, 500));
-                
-                // Show formatting step
-                updateLoadingStep('step-execute', 'completed');
-                updateLoadingStep('step-format', 'active');
-                
-                // Small delay to show formatting step
-                await new Promise(resolve => setTimeout(resolve, 300));
-                
-                if (data.success) {
-                    updateLoadingStep('step-format', 'completed');
+                // Show completion with stats
+                setTimeout(() => {
                     showResult(data.result, data.timestamp);
-                } else {
-                    showError(data.error);
-                }
-            } catch (error) {
-                showError(`Query failed: ${error.message}`);
-            }
-        }
-
-        function simulateRetry() {
-            // Show retry indication
-            updateLoadingStep('step-translate', 'retry');
-              setTimeout(() => {
-                updateLoadingStep('step-translate', 'completed');
-                updateLoadingStep('step-validate', 'active');
-            }, 1500);
-        }
-
-        function enhancedAskQuestion() {
-            const question = document.getElementById('questionInput').value.trim();
-            
-            // Enhanced button loading state with spinner - do this FIRST
-            const goButton = document.querySelector('.floating-go-btn');
-            if (goButton) {
-                goButton.disabled = true;
-                goButton.innerHTML = '<div class="button-spinner"></div> Processing...';
-                goButton.style.opacity = '0.8';
-                goButton.style.background = 'linear-gradient(135deg, #6c757d 0%, #495057 100%)';
-                goButton.style.cursor = 'not-allowed';
-            }
-
-            // Show the nice loading in results pane immediately
-            showLoading('🚀 Preparing to process your question...');
-            
-            // Now do validation checks and show errors in the loading area if needed
-            if (!question) {
-                setTimeout(() => {
-                    showError('Please enter a question');
                 }, 500);
-                return;
+            } else {
+                showError(data.error);
             }
-
-            if (!isConnected) {
-                setTimeout(() => {
-                    showError('Please setup workspace first');
-                }, 500);
-                return;
-            }
-
-            // Store the original question for explain feature
-            currentOriginalQuestion = question;
+            break;
             
-            // Start with translation step
-            setTimeout(() => {
-                updateLoadingStep('step-translate', 'active');
-                processQuestionWithRetry(question);
-            }, 300);
-        }
-
-        async function processQuestionWithRetry(question) {
-            let retryCount = 0;
-            const maxRetries = 2;
-            const startTime = Date.now();
-            
-            // Initialize progress
-            updateProgress(10, '🔄 Starting translation process...');
-            updateEstimatedTime(8);
-            
-            while (retryCount <= maxRetries) {
-                try {
-                    if (retryCount > 0) {
-                        // Show retry indication
-                        updateProgress(15 + (retryCount * 5), `🔄 Retry attempt ${retryCount}...`);
-                        updateLoadingStep('step-translate', 'retry');
-                        await new Promise(resolve => setTimeout(resolve, 1000));
-                    }
-                    
-                    // Translation phase
-                    updateProgress(25, '🔄 Translating to KQL...');
-                    updateLoadingStep('step-translate', 'active');
-                    updateEstimatedTime(6);
-                    
-                    // Simulate translation time
-                    await new Promise(resolve => setTimeout(resolve, 800 + (retryCount * 500)));
-                    
-                    // Make the actual API call
-                    updateProgress(40, '📡 Sending request to server...');
-                    const response = await fetch('/api/query', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ question: question })
-                    });
-
-                    // Validation phase
-                    updateProgress(60, '✅ Validating generated query...');
-                    updateLoadingStep('step-translate', 'completed');
-                    updateLoadingStep('step-validate', 'active');
-                    updateEstimatedTime(4);
-                    await new Promise(resolve => setTimeout(resolve, 400));
-                    
-                    const data = await response.json();
-                    
-                    // Check if we need to retry (simulate retry logic)
-                    if (!data.success && retryCount < maxRetries && data.error.includes('translation')) {
-                        retryCount++;
-                        updateLoadingStep('step-validate', 'retry');
-                        continue;
-                    }
-                    
-                    // Execution phase
-                    updateProgress(80, '⚡ Executing query on Azure...');
-                    updateLoadingStep('step-validate', 'completed');
-                    updateLoadingStep('step-execute', 'active');
-                    updateEstimatedTime(2);
-                    await new Promise(resolve => setTimeout(resolve, 600));
-                    
-                    // Formatting phase
-                    updateProgress(95, '📊 Formatting results...');
-                    updateLoadingStep('step-execute', 'completed');
-                    updateLoadingStep('step-format', 'active');
-                    updateEstimatedTime(1);
-                    await new Promise(resolve => setTimeout(resolve, 300));
-                    
-                    // Complete
-                    updateProgress(100, '✅ Complete!');
-                    updateEstimatedTime(0);
-                    
-                    if (data.success) {
-                        updateLoadingStep('step-format', 'completed');
-                        const totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
-                        
-                        // Show completion with stats
-                        setTimeout(() => {
-                            showResult(data.result, data.timestamp);
-                        }, 500);
-                    } else {
-                        showError(data.error);
-                    }
-                    break;
-                    
-                } catch (error) {
-                    if (retryCount < maxRetries) {
-                        retryCount++;
-                        updateProgress(20 + (retryCount * 5), `🔄 Retrying... (${retryCount}/${maxRetries})`);
-                        updateLoadingStep('step-translate', 'retry');
-                        continue;
-                    } else {
-                        showError(`Query failed after ${maxRetries + 1} attempts: ${error.message}`);
-                        break;
-                    }                }
-            }
-        }
+        } catch (error) {
+            if (retryCount < maxRetries) {
+                retryCount++;
+                updateProgress(20 + (retryCount * 5), `🔄 Retrying... (${retryCount}/${maxRetries})`);
+                updateLoadingStep('step-translate', 'retry');
+                continue;
+            } else {
+                showError(`Query failed after ${maxRetries + 1} attempts: ${error.message}`);
+                break;
+            }                }
+    }
+}
 
         // Category example suggestion functions removed - examples now used internally for AI translation only
         
@@ -2236,6 +2224,7 @@
                     throw new Error('Workspace section not found');
                 }
                   // Create simplified display with only tables
+
                 let html = `
                 <div class="workspace-discovery-results">
                     <div class="tables-with-examples">
@@ -2263,7 +2252,7 @@
             }
               html += `
                         </div>
-                    </div>
+                                       </div>
                 </div>
                 <div class="timestamp">Last updated: ${data.timestamp}</div>
             `;
@@ -2655,6 +2644,9 @@
                 }
             }, 100); // Small delay to ensure DOM is rendered
         }
+
+        // Attach setupWorkspace to the global window object to ensure accessibility
+        window.setupWorkspace = setupWorkspace;
     </script>
 </body>
 </html>
