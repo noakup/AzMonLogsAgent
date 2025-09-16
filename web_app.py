@@ -9,20 +9,210 @@ import asyncio
 import os
 import sys
 import traceback
-from datetime import datetime
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
+import threading
 
 # Add the project root to Python path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # Import the KQL agent
 from logs_agent import KQLAgent
+try:
+    from azure.identity import DefaultAzureCredential  # type: ignore
+    from azure.monitor.query import LogsQueryClient  # type: ignore
+except Exception:  # Library might not be installed yet; schema fetch will be skipped
+    DefaultAzureCredential = None  # type: ignore
+    LogsQueryClient = None  # type: ignore
+from example_catalog import load_example_catalog
+
 
 app = Flask(__name__)
+
+
+# Generic examples fallback
+GENERIC_EXAMPLES = {
+    'Application Insights': [
+        'Show me failed requests from the last hour',
+        'Show me recent exceptions',
+        'Show me recent trace logs',
+        'Show me dependency failures',
+        'Show me page views from the last hour',
+        'Show me performance counters',
+    ],
+    'Usage Analytics': [
+        'Show me user activity patterns',
+        'Get daily active users',
+        'Show me usage statistics by region',
+        'Show me usage trends over time',
+    ],
+}
+
+# New endpoint: Suggest example queries based on resource type (dynamic mapping)
+@app.route('/api/resource-examples', methods=['POST'])
+def resource_examples():
+    """Suggest example queries for a given resource type, dynamically discovered from NGSchema and app_insights_capsule."""
+    try:
+        import glob
+        data = request.get_json()
+        resource_type = data.get('resource_type', '').strip()
+        if not resource_type:
+            return jsonify({'success': False, 'error': 'Resource type is required'})
+
+        # Dynamically build mapping: resource_type -> example file
+        example_file = None
+        # 1. Search NGSchema for resource type folders with kql_examples.md
+        ngschema_dir = os.path.join(os.path.dirname(__file__), 'NGSchema')
+        if os.path.exists(ngschema_dir):
+            for root, dirs, files in os.walk(ngschema_dir):
+                for d in dirs:
+                    if d.lower() == resource_type.replace(' ', '').lower():
+                        kql_files = glob.glob(os.path.join(root, d, '*_kql_examples.md'))
+                        if kql_files:
+                            example_file = kql_files[0]
+                            break
+                if example_file:
+                    break
+        # 2. Fallback: search app_insights_capsule/kql_examples
+        if not example_file:
+            capsule_dir = os.path.join(os.path.dirname(__file__), 'app_insights_capsule', 'kql_examples')
+            if os.path.exists(capsule_dir):
+                kql_files = glob.glob(os.path.join(capsule_dir, '*_kql_examples.md'))
+                for f in kql_files:
+                    # Try to match resource_type in filename
+                    if resource_type.replace(' ', '').lower() in os.path.basename(f).lower():
+                        example_file = f
+                        break
+        # 3. Fallback: usage_kql_examples.md for Usage Analytics
+        if not example_file and resource_type.lower() == 'usage analytics':
+            usage_file = os.path.join(os.path.dirname(__file__), 'usage_kql_examples.md')
+            if os.path.exists(usage_file):
+                example_file = usage_file
+
+        examples = []
+        if example_file and os.path.exists(example_file):
+            with open(example_file, 'r', encoding='utf-8') as f:
+                content = f.read()
+            lines = content.split('\n')
+            for line in lines:
+                line = line.strip()
+                if line.startswith('- '):
+                    examples.append(line[2:].strip())
+                elif line.startswith('# '):
+                    continue
+            # Fallback to generic if not enough
+            if len(examples) < 5:
+                examples.extend(GENERIC_EXAMPLES.get(resource_type, [])[:5-len(examples)])
+        else:
+            # Use generic examples if file not found
+            examples = GENERIC_EXAMPLES.get(resource_type, [])
+
+        examples = examples[:8]
+
+        return jsonify({
+            'success': True,
+            'resource_type': resource_type,
+            'examples': examples,
+            'count': len(examples),
+            'source_file': example_file or 'generic',
+        })
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+
+# New endpoint to fetch and print workspace schema on demand
+@app.route('/api/fetch-workspace-schema', methods=['POST'])
+def fetch_workspace_schema():
+    """Fetch workspace schema and print to console only."""
+    global workspace_id
+    try:
+        data = request.get_json()
+        workspace = data.get('workspace_id', '').strip()
+        if not workspace:
+            return jsonify({'success': False, 'error': 'Workspace ID is required'})
+        threading.Thread(target=_fetch_workspace_tables, args=(workspace,), daemon=True).start()
+        return jsonify({'success': True, 'message': f'Workspace schema fetch started for {workspace}'})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
 
 # Global agent instance
 agent = None
 workspace_id = None
+_workspace_schema_cache = {}
+
+
+def _fetch_workspace_tables(workspace: str):
+    """Fetch and print workspace table list (best-effort, console only).
+
+    Uses a broad union query over last 7 days to enumerate tables that emitted data.
+    This can be expensive in very large workspaces; consider optimization later.
+    Results are cached for the process lifetime to avoid repeated cost.
+    """
+    if not workspace:
+        print("[Workspace Schema] No workspace ID provided.")
+        return
+    if workspace in _workspace_schema_cache:
+        print(f"[Workspace Schema] Cached tables for {workspace}: {_workspace_schema_cache[workspace]['count']} tables")
+        return
+    if LogsQueryClient is None or DefaultAzureCredential is None:
+        print("[Workspace Schema] Azure Monitor SDK not available; skipping schema fetch.")
+        return
+    try:
+        print(f"[Workspace Schema] Starting fetch for workspace: {workspace}")
+        credential = DefaultAzureCredential(exclude_interactive_browser_credential=False)
+        print(f"[Workspace Schema] Credential type: {type(credential).__name__}")
+        client = LogsQueryClient(credential)
+        query = "union withsource=__KQLAgentTableName__ * | summarize RowCount=count() by __KQLAgentTableName__ | sort by __KQLAgentTableName__ asc"
+        resp = client.query_workspace(workspace_id=workspace, query=query, timespan=timedelta(days=7))
+        print(f"[Workspace Schema] API response status: {getattr(resp, 'status', 'N/A')}")
+        if hasattr(resp, 'error') and resp.error:
+            print(f"[Workspace Schema] API error: {resp.error}")
+        tables = []
+        table_resource_map = {}
+        # Try to parse manifest for resource type info
+        manifest_path = os.path.join(os.path.dirname(__file__), 'NGSchema', 'LogAnalyticsWorkspace', 'WorkspaceManifest.manifest.json')
+        if os.path.exists(manifest_path):
+            try:
+                import json
+                with open(manifest_path, 'r', encoding='utf-8') as mf:
+                    manifest = json.load(mf)
+                for tbl in manifest.get('tables', []):
+                    tname = tbl.get('name')
+                    dtype = tbl.get('dataTypeId', '')
+                    cats = tbl.get('categories', [])
+                    # Prefer dataTypeId, fallback to first category
+                    resource_type = dtype or (cats[0] if cats else '')
+                    table_resource_map[tname] = resource_type
+            except Exception as e:
+                print(f"[Workspace Schema] Manifest parse error: {e}")
+        if hasattr(resp, 'tables') and resp.tables:
+            first = resp.tables[0]
+            rows = getattr(first, 'rows', [])
+            print(f"[Workspace Schema] Raw rows returned: {len(rows)}")
+            for row in rows:
+                if row and row[0]:
+                    tname = str(row[0])
+                    tables.append(tname)
+        else:
+            print(f"[Workspace Schema] No tables found in response for workspace {workspace}")
+        # Build enriched table info
+        enriched_tables = []
+        for t in tables:
+            enriched_tables.append({
+                "name": t,
+                "resource_type": table_resource_map.get(t, "Unknown")
+            })
+        _workspace_schema_cache[workspace] = {
+            "tables": enriched_tables,
+            "count": len(enriched_tables),
+            "retrieved_at": datetime.now(timezone.utc).isoformat()
+        }
+        print(f"[Workspace Schema] Retrieved {len(enriched_tables)} tables for {workspace}")
+        if enriched_tables:
+            for info in enriched_tables:
+                print(f"  - {info['name']} [{info['resource_type']}]")
+    except Exception as e:
+        print(f"[Workspace Schema] Exception during table enumeration for {workspace}: {e}")
+        import traceback as tb
+        print(tb.format_exc())
 
 @app.route('/')
 def index():
@@ -43,6 +233,8 @@ def setup_workspace():
         
         # Initialize agent
         agent = KQLAgent(workspace_id)
+        # Fire background thread to enumerate workspace tables (console only)
+        threading.Thread(target=_fetch_workspace_tables, args=(workspace_id,), daemon=True).start()
         
         return jsonify({
             'success': True, 
@@ -171,14 +363,15 @@ def explain_results():
     except Exception as e:
         return jsonify({
             'success': False,
-            'error': str(e)        })
+            'error': str(e)
+        })
 
 @app.route('/api/examples/<scenario>')
 def get_examples(scenario):
     """Get example queries for a specific scenario"""
     try:
         import os
-          # Map scenarios to example files
+    # Map scenarios to example files
         scenario_files = {
             'requests': 'app_insights_capsule/kql_examples/app_requests_kql_examples.md',
             'exceptions': 'app_insights_capsule/kql_examples/app_exceptions_kql_examples.md',
@@ -224,7 +417,7 @@ def get_examples(scenario):
                 if example_text:
                     examples.append(example_text)
                     current_example = None
-          # If we have fewer than 5 examples, add some generic ones
+    # If we have fewer than 5 examples, add some generic ones
         if len(examples) < 5:
             generic_examples = {
                 'requests': [
@@ -398,7 +591,8 @@ def discover_workspace_examples():
                         'record_count': 10000,  # Simulated count, would be real in production
                         'category': info['category'],
                         'description': info['description']
-                    },                    'examples': [
+                    },
+                    'examples': [
                         {
                             'source': '',
                             'description': '',  # Remove duplicate description (now shown in table header)
@@ -413,8 +607,30 @@ def discover_workspace_examples():
             'available_examples': available_examples_formatted,
             'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         })
-        
+
     except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        })
+
+@app.route('/api/example-catalog', methods=['POST'])
+def example_catalog():
+    """Return unified example + (optional) live schema catalog.
+
+    Expects JSON body: {"include_schema": bool, "force": bool}
+    """
+    global workspace_id
+    try:
+        req = request.get_json(silent=True) or {}
+        include_schema = bool(req.get('include_schema', True))
+        force = bool(req.get('force', False))
+        catalog = load_example_catalog(workspace_id, include_schema=include_schema, force=force)
+        return jsonify({
+            'success': True,
+            'catalog': catalog
+        })
+    except Exception as e:  # Broad catch acceptable for endpoint boundary
         return jsonify({
             'success': False,
             'error': str(e)

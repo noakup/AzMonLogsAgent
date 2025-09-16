@@ -1,0 +1,46 @@
+/* Basic reset and layout CSS (single clean block) */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+.container { max-width: 1200px; margin: 0 auto; background: rgba(255, 255, 255, 0.95); border-radius: 20px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); overflow: hidden; }
+.la-grid { display: grid; grid-template-rows: auto 1fr 2fr; gap: 0; }
+.la-setup-bar { display: flex; align-items: center; padding: 18px 30px 12px 30px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-bottom: 1px solid #e9ecef; }
+.la-query-editor { background: #fff; padding: 0 30px 18px 30px; border-bottom: 1px solid #e9ecef; }
+.la-query-toolbar { display: flex; align-items: center; gap: 18px; padding: 18px 0 8px 0; }
+.la-query-input { width: 100%; min-height: 70px; font-size: 1.1rem; border: 2px solid #e9ecef; border-radius: 10px; padding: 15px; margin-bottom: 10px; resize: vertical; transition: border-color 0.3s ease; }
+.la-query-input:focus { outline: none; border-color: #667eea; }
+.la-suggestions-bar { margin-bottom: 0; }
+.la-results-area { padding: 30px; }
+@media (max-width: 900px) { .container { max-width: 100vw; border-radius: 0; } .la-setup-bar, .la-query-editor, .la-results-area { padding: 10px; } }
+
+.status-connected {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-disconnected {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.query-section {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.query-section h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.question-container {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.question-input {
+    width: 100%;
+}

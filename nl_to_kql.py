@@ -26,6 +26,8 @@ def load_examples_and_metadata():
             with open(filename, "r", encoding="utf-8") as f:
                 content = f.read()
                 # Take first 2000 characters to avoid token limits
+                if len(content) > 2000:
+                        print(f"NOTE: reading only part of context file: {filename}")
                 context[key] = content[:2000] + "..." if len(content) > 2000 else content
         else:
             context[key] = "File not found"
@@ -107,7 +109,7 @@ def _attempt_translation(nl_question, endpoint, api_key, deployment, attempt_num
     """
     Single translation attempt - separated for retry logic
     """
-    print(f"🔍 Enhanced translation called with: '{nl_question}' (attempt {attempt_number + 1})")
+    print(f"🔍 Generating KQL for this user prompt: '{nl_question}' (attempt {attempt_number + 1})")
     
     # Load context from example files
     context = load_examples_and_metadata()
