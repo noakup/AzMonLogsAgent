@@ -1383,7 +1383,7 @@
                 <h2>🔧 Workspace Setup</h2>                <div class="input-group">
                     <input type="text" id="workspaceId" placeholder="Enter your Log Analytics Workspace ID" value="">
                     <button class="btn btn-primary" onclick="setupWorkspace()">Set workspace</button>
-                    <button class="btn btn-secondary" onclick="testConnection()">Test Connection</button>                </div>
+                </div>
                 <div id="setupStatus">
                     <!-- Status messages will appear here -->
                 </div>            </div><!-- Query Section -->
@@ -1880,26 +1880,43 @@
 
         async function setupWorkspace() {
             const workspaceId = document.getElementById('workspaceId').value.trim();
-            
+
             if (!workspaceId) {
-                // Show only the error message without "Not Connected" status
                 const statusElement = document.getElementById('setupStatus');
                 statusElement.innerHTML = `<div class="error">Please enter a workspace ID</div>`;
                 return;
             }
+
+            // Show indicating message
+            const statusElement = document.getElementById('setupStatus');
+            statusElement.innerHTML = `<div class="loading">Setting up workspace...</div>`;
 
             try {
                 const response = await fetch('/api/setup', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ workspace_id: workspaceId })
-                });                const data = await response.json();
-                
+                });
+
+                const data = await response.json();
+
                 if (data.success) {
-                    // Set the connected state and show custom status message
                     isConnected = true;
-                    const statusElement = document.getElementById('setupStatus');
-                    statusElement.innerHTML = `<span class="status-indicator status-connected">Agent set to use workspace ${workspaceId}</span>`;
+                    statusElement.innerHTML = `<span class="status-indicator status-connected">Checking connection to workspace...</span>`;
+
+                    // Automatically check connection
+                    const connectionResponse = await fetch('/api/test-connection', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+
+                    const connectionData = await connectionResponse.json();
+
+                    if (connectionData.success) {
+                        statusElement.innerHTML = `<span class="status-indicator status-connected">Connected successfully</span>`;
+                    } else {
+                        updateStatus(false, connectionData.error);
+                    }
                 } else {
                     updateStatus(false, data.error);
                 }
