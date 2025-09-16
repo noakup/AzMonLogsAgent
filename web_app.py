@@ -133,6 +133,21 @@ def fetch_workspace_schema():
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
 
+@app.route('/api/resource-schema', methods=['GET'])
+def resource_schema():
+    """Return cached resource type -> tables mapping (triggers scan if needed)."""
+    try:
+        data = _scan_manifest_resource_types()
+        return jsonify({
+            'success': True,
+            'counts': data.get('counts', {}),
+            'resource_types': data.get('resource_types', []),
+            'providers': data.get('providers', []),
+            'resource_type_tables': data.get('resource_type_tables', {})
+        })
+    except Exception as e:  # noqa: BLE001
+        return jsonify({'success': False, 'error': str(e)})
+
 # Global agent instance
 agent = None
 workspace_id = None

@@ -1368,6 +1368,29 @@
             box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
             animation: slideInFromTop 0.5s ease-out;
         }
+        /* Schema tree styles */
+        .schema-controls { margin-top: 15px; display:flex; gap:10px; flex-wrap:wrap; }
+        .schema-tree-container { margin-top:20px; background:#ffffff; border:1px solid #e0e6ed; border-radius:10px; padding:18px; max-height:500px; overflow:auto; font-family:'Segoe UI', Tahoma, sans-serif; display:none; }
+        .schema-tree { list-style:none; padding-left:0; font-size:0.9rem; }
+        .schema-tree li { margin:2px 0; line-height:1.4; }
+        .schema-group { margin-top:12px; }
+        .schema-group-title { font-weight:600; background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); -webkit-background-clip:text; color:transparent; cursor:pointer; user-select:none; display:flex; align-items:center; gap:6px; }
+        .schema-resource-type { cursor:pointer; padding:2px 4px; border-radius:4px; transition:background .2s; display:flex; align-items:center; gap:4px; }
+        .schema-resource-type:hover { background:#f1f4fb; }
+        .schema-table-list { margin-left:18px; margin-top:4px; }
+        .schema-table { padding:1px 4px; border-radius:4px; display:inline-block; margin:1px 4px 3px 0; background:#eef2ff; color:#394867; font-size:0.75rem; font-weight:500; }
+        .schema-badge { background:#e3ebff; color:#31456a; border-radius:12px; padding:0 8px; font-size:0.65rem; font-weight:600; }
+        .schema-toggle { font-size:0.7rem; opacity:0.8; }
+        .schema-search { flex:1; min-width:220px; }
+        .schema-search input { width:100%; padding:8px 10px; border:1px solid #ccd4dd; border-radius:6px; font-size:0.85rem; }
+        .schema-search input:focus { outline:none; border-color:#667eea; box-shadow:0 0 0 2px rgba(102,126,234,0.25); }
+        .schema-stats { font-size:0.75rem; color:#555; background:#f3f6fa; padding:6px 10px; border-radius:20px; display:inline-flex; gap:8px; align-items:center; }
+        .schema-provider { font-weight:600; margin-top:18px; font-size:0.95rem; display:flex; align-items:center; gap:6px; }
+        .schema-provider + .schema-provider { border-top:1px dashed #e0e6ed; padding-top:14px; }
+        .schema-empty { font-style:italic; font-size:0.8rem; color:#777; }
+        .schema-expand-all { background:#f1f4fb; color:#334; }
+        .schema-expand-all:hover { background:#e3ebff; }
+        @media (max-width:768px){ .schema-tree-container{max-height:60vh;} }
     </style>
 </head>
 <body>
@@ -1386,7 +1409,23 @@
                 </div>
                 <div id="setupStatus">
                     <!-- Status messages will appear here -->
-                </div>            </div>
+                </div>
+                <div class="schema-controls">
+                    <button class="btn btn-secondary" id="showSchemaBtn" onclick="toggleSchema()">📘 Show Schema</button>
+                    <div class="schema-search"><input type="text" id="schemaSearch" placeholder="Filter resource types or tables..." oninput="filterSchema()" disabled></div>
+                    <div id="schemaStats" class="schema-stats" style="display:none;"></div>
+                </div>
+                <div id="schemaTreeContainer" class="schema-tree-container">
+                    <div style="font-size:0.8rem; color:#666; margin-bottom:8px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+                        <span>Resource Types & Tables (from manifests)</span>
+                        <div>
+                            <button class="btn btn-small schema-expand-all" onclick="expandAllSchema(true)">Expand All</button>
+                            <button class="btn btn-small schema-expand-all" onclick="expandAllSchema(false)">Collapse All</button>
+                        </div>
+                    </div>
+                    <ul id="schemaTree" class="schema-tree"></ul>
+                </div>
+            </div>
 
             <!-- Query Section -->
             <div class="query-section">
@@ -2649,6 +2688,68 @@ async function processQuestionWithRetry(question) {
 
         // Attach setupWorkspace to the global window object to ensure accessibility
         window.setupWorkspace = setupWorkspace;
+        // Schema rendering logic
+        let schemaDataCache = null;
+        let schemaExpanded = false;
+        function toggleSchema(){
+            const container = document.getElementById('schemaTreeContainer');
+            const btn = document.getElementById('showSchemaBtn');
+            if(container.style.display === 'block'){ container.style.display='none'; btn.textContent='📘 Show Schema'; return; }
+            container.style.display='block'; btn.textContent='📕 Hide Schema';
+            if(!schemaDataCache){ fetchSchema(); }
+        }
+        async function fetchSchema(){
+            const btn = document.getElementById('showSchemaBtn');
+            const tree = document.getElementById('schemaTree');
+            const stats = document.getElementById('schemaStats');
+            const search = document.getElementById('schemaSearch');
+            tree.innerHTML = '<li class="schema-empty">Loading schema...</li>';
+            try{
+                const resp = await fetch('/api/resource-schema');
+                const data = await resp.json();
+                if(!data.success) throw new Error(data.error || 'Failed to load');
+                schemaDataCache = data;
+                renderSchemaTree(data);
+                stats.style.display='inline-flex';
+                stats.textContent = `${data.counts.resource_types} resource types • ${data.counts.providers} providers • ${data.counts.tables} tables`;
+                search.disabled = false;
+            }catch(e){
+                tree.innerHTML = `<li class='schema-empty'>Error: ${e.message}</li>`;
+            }
+        }
+        function groupByProvider(resourceTypes){
+            const map = {}; resourceTypes.forEach(rt=>{ const p = rt.split('/')[0]; (map[p]=map[p]||[]).push(rt); }); return map;
+        }
+        function renderSchemaTree(data, filterText=''){
+            const tree = document.getElementById('schemaTree');
+            if(!data) return; const {resource_types, resource_type_tables} = data; const providers = groupByProvider(resource_types);
+            const ft = filterText.trim().toLowerCase();
+            let html='';
+            Object.keys(providers).sort().forEach(provider=>{
+                const rts = providers[provider].sort();
+                // Filter provider if none of its rts or tables match
+                const providerMatches = rts.some(rt=> matchRtOrTables(rt, resource_type_tables[rt]||[], ft));
+                if(!providerMatches) return;
+                html += `<li class='schema-provider'>${provider} <span class='schema-badge'>${rts.length}</span></li>`;
+                rts.forEach(rt=>{
+                    const tables = resource_type_tables[rt]||[];
+                    if(!matchRtOrTables(rt, tables, ft)) return;
+                    const collapsed = ft? '' : 'style="display:none"';
+                    html += `<li><div class='schema-resource-type' onclick='toggleSchemaTables(this)'>
+                        <span class='schema-toggle'>▶</span>${rt} <span class='schema-badge'>${tables.length}</span></div>`;
+                    if(tables.length){
+                        html += `<ul class='schema-table-list' ${schemaExpanded? '' : collapsed}>` + tables.sort().map(t=> ft && !t.toLowerCase().includes(ft) && !rt.toLowerCase().includes(ft) ? '' : `<li class='schema-table' title='${t}'>${t}</li>`).join('') + `</ul>`;
+                    }
+                    html += `</li>`;
+                });
+            });
+            if(!html) html = `<li class='schema-empty'>No matches.</li>`;
+            tree.innerHTML = html;
+        }
+        function matchRtOrTables(rt, tables, ft){ if(!ft) return true; if(rt.toLowerCase().includes(ft)) return true; return tables.some(t=> t.toLowerCase().includes(ft)); }
+        window.toggleSchemaTables = function(el){ const list = el.nextElementSibling; if(!list) return; const icon = el.querySelector('.schema-toggle'); if(list.style.display==='none'){ list.style.display='block'; icon.textContent='▼'; } else { list.style.display='none'; icon.textContent='▶'; } };
+        function filterSchema(){ const val = document.getElementById('schemaSearch').value; renderSchemaTree(schemaDataCache, val); }
+        function expandAllSchema(expand){ schemaExpanded = expand; const searchVal = document.getElementById('schemaSearch').value; renderSchemaTree(schemaDataCache, searchVal); if(expand){ document.querySelectorAll('.schema-toggle').forEach(i=> i.textContent='▼'); } }
     </script>
 </body>
 </html>
