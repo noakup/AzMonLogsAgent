@@ -137,6 +137,121 @@ def fetch_workspace_schema():
 agent = None
 workspace_id = None
 _workspace_schema_cache = {}
+_workspace_resource_types_cache = {}
+
+
+def _scan_manifest_resource_types() -> dict:
+    """Scan NGSchema manifest files to enumerate resource types/providers and map tables.
+
+    Returns a dict with keys:
+      resource_types: List[str]
+      providers: List[str]
+      counts: { 'resource_types': int, 'providers': int, 'tables': int }
+      resource_type_tables: { resource_type: [tableName, ...] }
+      table_resource_type: { tableName: resource_type }
+      retrieved_at: ISO timestamp
+
+    Console output only; heavy parsing errors are logged and skipped.
+    Result cached for lifetime of process.
+    """
+    if _workspace_resource_types_cache.get('resource_types') and _workspace_resource_types_cache.get('resource_type_tables'):
+        return _workspace_resource_types_cache
+
+    base_dir = os.path.join(os.path.dirname(__file__), 'NGSchema')
+    if not os.path.isdir(base_dir):
+        print('[Manifest Scan] NGSchema directory not found; skipping.')
+        _workspace_resource_types_cache.update({
+            'resource_types': [],
+            'providers': [],
+            'counts': {'resource_types': 0, 'providers': 0, 'tables': 0},
+            'resource_type_tables': {},
+            'table_resource_type': {},
+            'retrieved_at': datetime.now(timezone.utc).isoformat()
+        })
+        return _workspace_resource_types_cache
+
+    import json
+    resource_types = set()
+    resource_type_tables = {}
+    table_resource_type = {}
+    manifest_files = []
+    for root, _, files in os.walk(base_dir):
+        for fname in files:
+            if fname.endswith('.manifest.json'):
+                manifest_files.append(os.path.join(root, fname))
+
+    print(f'[Manifest Scan] Found {len(manifest_files)} manifest files. Parsing...')
+
+    def _extract_types(obj, current_resource_type=None):
+        if isinstance(obj, dict):
+            tval = obj.get('type')
+            if isinstance(tval, str) and '/' in tval:
+                resource_types.add(tval)
+                current_resource_type = tval
+                resource_type_tables.setdefault(current_resource_type, [])
+            if 'tables' in obj and isinstance(obj['tables'], list):
+                for tbl in obj['tables']:
+                    if isinstance(tbl, dict):
+                        tname = tbl.get('name') or tbl.get('tableName')
+                        if tname and current_resource_type:
+                            if tname not in resource_type_tables[current_resource_type]:
+                                resource_type_tables[current_resource_type].append(tname)
+                                table_resource_type.setdefault(tname, current_resource_type)
+            for v in obj.values():
+                _extract_types(v, current_resource_type=current_resource_type)
+        elif isinstance(obj, list):
+            for item in obj:
+                _extract_types(item, current_resource_type=current_resource_type)
+
+    for mpath in manifest_files:
+        try:
+            with open(mpath, 'r', encoding='utf-8') as mf:
+                data = json.load(mf)
+            _extract_types(data)
+        except Exception as e:  # noqa: BLE001
+            print(f'[Manifest Scan] Error parsing {mpath}: {e}')
+
+    providers = {rt.split('/')[0] for rt in resource_types}
+    resource_types_list = sorted(resource_types)
+    providers_list = sorted(providers)
+
+    _workspace_resource_types_cache.update({
+        'resource_types': resource_types_list,
+        'providers': providers_list,
+        'counts': {
+            'resource_types': len(resource_types_list),
+            'providers': len(providers_list),
+            'tables': sum(len(v) for v in resource_type_tables.values())
+        },
+        'resource_type_tables': resource_type_tables,
+        'table_resource_type': table_resource_type,
+        'retrieved_at': datetime.now(timezone.utc).isoformat()
+    })
+
+    print('[Manifest Scan] Summary:')
+    print(f"  Resource Types: {len(resource_types_list)}")
+    print(f"  Providers: {len(providers_list)}")
+    total_tables = sum(len(v) for v in resource_type_tables.values())
+    print(f"  Tables (mapped): {total_tables}")
+    preview_types = resource_types_list[:20]
+    if preview_types:
+        print('  Sample Resource Types:')
+        for t in preview_types:
+            print(f'    - {t}')
+        if len(resource_types_list) > len(preview_types):
+            print(f'    ... (+{len(resource_types_list) - len(preview_types)} more)')
+    print('  Providers: ' + ', '.join(providers_list[:15]) + (' ...' if len(providers_list) > 15 else ''))
+    print('  Sample Resource Type -> Tables:')
+    shown = 0
+    for rt in preview_types:
+        tables_preview = resource_type_tables.get(rt, [])[:5]
+        if tables_preview:
+            print(f'    * {rt}: {", ".join(tables_preview)}' + (' ...' if len(resource_type_tables.get(rt, [])) > 5 else ''))
+            shown += 1
+        if shown >= 8:
+            break
+
+    return _workspace_resource_types_cache
 
 
 def _fetch_workspace_tables(workspace: str):
@@ -151,12 +266,17 @@ def _fetch_workspace_tables(workspace: str):
         return
     if workspace in _workspace_schema_cache:
         print(f"[Workspace Schema] Cached tables for {workspace}: {_workspace_schema_cache[workspace]['count']} tables")
+        # Ensure manifest scan still runs once
+        _scan_manifest_resource_types()
         return
     if LogsQueryClient is None or DefaultAzureCredential is None:
-        print("[Workspace Schema] Azure Monitor SDK not available; skipping schema fetch.")
+        print("[Workspace Schema] Azure Monitor SDK not available; skipping table fetch but scanning manifests.")
+        _scan_manifest_resource_types()
         return
     try:
         print(f"[Workspace Schema] Starting fetch for workspace: {workspace}")
+        # Kick off manifest scan early (independent of Azure query success)
+        _scan_manifest_resource_types()
         credential = DefaultAzureCredential(exclude_interactive_browser_credential=False)
         print(f"[Workspace Schema] Credential type: {type(credential).__name__}")
         client = LogsQueryClient(credential)
