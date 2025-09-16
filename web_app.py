@@ -156,6 +156,107 @@ _workspace_resource_types_cache = {}
 _workspace_queries_cache = {}
 
 
+@app.route('/api/workspace-schema', methods=['GET'])
+def workspace_schema():
+    """Return workspace-specific table information, intersected with manifest catalog.
+
+    Response structure:
+      success: bool
+      status: 'ready'|'pending'|'uninitialized'
+      workspace_id: str|None
+      counts: {
+         workspace_tables: int,
+         manifest_tables: int,
+         matched_tables: int,
+         unmatched_tables: int,
+         resource_types_with_data: int
+      }
+      tables: [
+         { name, workspace_resource_type, in_manifest, manifest_resource_type, provider }
+      ]
+      resource_type_tables: { resource_type: [tableName,...] }  # only those present in workspace
+      providers: { provider: { 'tables': int, 'resource_types': int } }
+      unmatched_tables: [tableName,...]  # tables seen in workspace but not in manifests
+
+    Pending scenarios:
+      - If no workspace has been set up -> status=uninitialized
+      - If workspace set but enumeration not yet cached -> status=pending (kick off background fetch if not running)
+    """
+    global workspace_id
+    if not workspace_id:
+        return jsonify({'success': False, 'status': 'uninitialized', 'error': 'Workspace not initialized via /api/setup'})
+
+    # Ensure manifest catalog is available
+    manifest_data = _scan_manifest_resource_types()
+    manifest_tables_index = {}
+    for rt, tbls in manifest_data.get('resource_type_tables', {}).items():
+        for t in tbls:
+            manifest_tables_index.setdefault(t, []).append(rt)
+
+    ws_cache = _workspace_schema_cache.get(workspace_id)
+    if not ws_cache:
+        # Background fetch may still be running or not started; start it.
+        threading.Thread(target=_fetch_workspace_tables, args=(workspace_id,), daemon=True).start()
+        return jsonify({'success': False, 'status': 'pending', 'workspace_id': workspace_id})
+
+    workspace_tables = ws_cache.get('tables', [])
+    enriched = []
+    matched = 0
+    unmatched = []
+    resource_type_subset = {}
+    provider_summary = {}
+
+    for entry in workspace_tables:
+        tname = entry.get('name')
+        ws_rt = entry.get('resource_type') or 'Unknown'
+        manifest_rts = manifest_tables_index.get(tname, [])
+        in_manifest = bool(manifest_rts)
+        if in_manifest:
+            matched += 1
+            # Build subset mapping: include table under each manifest resource type it appears in
+            for mrt in manifest_rts:
+                resource_type_subset.setdefault(mrt, []).append(tname)
+                provider = mrt.split('/')[0]
+                provider_summary.setdefault(provider, {'tables': 0, 'resource_types': set()})
+                provider_summary[provider]['tables'] += 1
+                provider_summary[provider]['resource_types'].add(mrt)
+        else:
+            unmatched.append(tname)
+        enriched.append({
+            'name': tname,
+            'workspace_resource_type': ws_rt,
+            'in_manifest': in_manifest,
+            'manifest_resource_type': manifest_rts[0] if manifest_rts else None,
+            'manifest_resource_types': manifest_rts,
+            'provider': (manifest_rts[0].split('/')[0] if manifest_rts else None)
+        })
+
+    # Normalize provider summary sets to counts
+    provider_summary_out = {
+        prov: {'tables': info['tables'], 'resource_types': len(info['resource_types'])}
+        for prov, info in provider_summary.items()
+    }
+
+    response = {
+        'success': True,
+        'status': 'ready',
+        'workspace_id': workspace_id,
+        'counts': {
+            'workspace_tables': len(workspace_tables),
+            'manifest_tables': sum(len(v) for v in manifest_data.get('resource_type_tables', {}).values()),
+            'matched_tables': matched,
+            'unmatched_tables': len(unmatched),
+            'resource_types_with_data': len(resource_type_subset)
+        },
+        'tables': enriched,
+        'resource_type_tables': resource_type_subset,
+        'providers': provider_summary_out,
+        'unmatched_tables': unmatched,
+        'retrieved_at': ws_cache.get('retrieved_at')
+    }
+    return jsonify(response)
+
+
 def _scan_manifest_resource_types() -> dict:
     """Scan NGSchema manifest files to enumerate resource types/providers, map tables, and pick up query definitions.
 
