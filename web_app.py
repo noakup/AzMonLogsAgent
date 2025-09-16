@@ -11,6 +11,9 @@ import sys
 import traceback
 from datetime import datetime, timedelta, timezone
 import threading
+import re
+from urllib import request as urlrequest
+from urllib.error import URLError, HTTPError
 
 # Add the project root to Python path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -154,6 +157,77 @@ workspace_id = None
 _workspace_schema_cache = {}
 _workspace_resource_types_cache = {}
 _workspace_queries_cache = {}
+_ms_docs_table_resource_type_cache = {}  # table_name -> resource_type | 'unknown resource type'
+
+# Static fallback map for common Application Insights (Azure Monitor 'classic' AI) derived tables
+_STATIC_FALLBACK_TABLE_RESOURCE_TYPES = {
+    # App Insights standard tables
+    'AppRequests': 'microsoft.insights/components',
+    'AppDependencies': 'microsoft.insights/components',
+    'AppTraces': 'microsoft.insights/components',
+    'AppExceptions': 'microsoft.insights/components',
+    'AppAvailabilityResults': 'microsoft.insights/components',
+    'AppPageViews': 'microsoft.insights/components',
+    'AppPerformanceCounters': 'microsoft.insights/components',
+    'AppBrowserTimings': 'microsoft.insights/components',
+    'AppCustomEvents': 'microsoft.insights/components',
+    'AppCustomMetrics': 'microsoft.insights/components',
+    'AppMetric': 'microsoft.insights/components',
+    'AppMetrics': 'microsoft.insights/components',
+    'AppSessions': 'microsoft.insights/components',
+    'AppEvents': 'microsoft.insights/components',
+    'AppPageViewPerformance': 'microsoft.insights/components'
+}
+
+
+def _lookup_table_resource_type_doc(table_name: str, timeout: float = 4.0) -> str:
+    """Best-effort lookup of resource type for a given table via public Microsoft Docs.
+
+    Tries https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/{table}
+    Table pages typically include a "Resource type:" label followed by a provider/resourceType value.
+    Returns discovered resource type string or 'unknown resource type'.
+    Caches results per process. Keeps failures cached to avoid repeated outbound calls.
+    """
+    if not table_name:
+        return 'unknown resource type'
+    cache_key = table_name
+    # Static fallback first (case-insensitive)
+    for k, v in _STATIC_FALLBACK_TABLE_RESOURCE_TYPES.items():
+        if k.lower() == table_name.lower():
+            return v
+    if cache_key in _ms_docs_table_resource_type_cache:
+        return _ms_docs_table_resource_type_cache[cache_key]
+    slug = table_name.lower()
+    url = f"https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/{slug}"
+    try:
+        req = urlrequest.Request(url, headers={
+            'User-Agent': 'AzMonLogsAgent/1.0 (+https://github.com/noakup)'
+        })
+        with urlrequest.urlopen(req, timeout=timeout) as resp:
+            if resp.status != 200:
+                _ms_docs_table_resource_type_cache[cache_key] = 'unknown resource type'
+                return 'unknown resource type'
+            content = resp.read().decode('utf-8', errors='ignore')
+            # Heuristic: look for 'Resource type' line then capture next provider/resourceType token
+            # Common patterns: <strong>Resource type:</strong> Microsoft.Insights/components
+            # or visible text 'Resource type: microsoft.operationalinsights/workspaces'
+            m = re.search(r'Resource\s*type:?\s*</?strong>[^A-Za-z0-9/]*([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)', content, re.IGNORECASE)
+            if not m:
+                # Fallback: search anywhere for microsoft.<provider>/<resourcetype> preceded by 'Resource type'
+                m = re.search(r'Resource\s*type:?[^\n]{0,120}?([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)', content, re.IGNORECASE)
+            if m:
+                rtype = m.group(1)
+                # Normalize provider casing (Microsoft.*) if missing capital M
+                if rtype.lower().startswith('microsoft.') and not rtype.startswith('Microsoft.'):
+                    rtype = 'Microsoft.' + rtype.split('.', 1)[1]
+                _ms_docs_table_resource_type_cache[cache_key] = rtype
+                return rtype
+    except (HTTPError, URLError, TimeoutError, ValueError) as e:  # noqa: PERF203 - broad acceptable for network
+        print(f"[Docs Enrichment] Failed to fetch {url}: {e}")
+    except Exception as e:  # noqa: BLE001
+        print(f"[Docs Enrichment] Unexpected error for {url}: {e}")
+    _ms_docs_table_resource_type_cache[cache_key] = 'unknown resource type'
+    return 'unknown resource type'
 
 
 @app.route('/api/workspace-schema', methods=['GET'])
@@ -231,9 +305,49 @@ def workspace_schema():
             'provider': (manifest_rts[0].split('/')[0] if manifest_rts else None)
         })
 
-    # Normalize provider summary sets to counts
+    # Enrich unmatched tables using Microsoft Docs table pages (best-effort)
+    doc_enriched = 0
+    if unmatched:
+        for table in unmatched:
+            doc_rtype = _lookup_table_resource_type_doc(table)
+            # Normalize to lowercase provider/resource type to be consistent (as per docs examples)
+            if doc_rtype != 'unknown resource type':
+                doc_rtype = doc_rtype.strip()
+                # Ensure pattern provider/resourceType; if uppercase Microsoft.* keep as-is else lowercase
+                if '/' in doc_rtype:
+                    parts = doc_rtype.split('/')
+                    if len(parts) == 2:
+                        # Keep original provider case if startswith Microsoft., else lowercase both
+                        if not parts[0].startswith('Microsoft.'):
+                            doc_rtype = f"{parts[0].lower()}/{parts[1].lower()}"
+                else:
+                    # Not a recognized pattern, mark unknown
+                    doc_rtype = 'unknown resource type'
+            # Update enriched list entry
+            for e in enriched:
+                if e['name'] == table:
+                    e['doc_resource_type'] = doc_rtype
+                    if doc_rtype != 'unknown resource type' and not e.get('provider'):
+                        e['provider'] = doc_rtype.split('/')[0]
+                    break
+            # If a resource type was found (not unknown), include in subset; otherwise bucket under 'unknown resource type'
+            target_rtype = doc_rtype if doc_rtype != 'unknown resource type' else 'unknown resource type'
+            if target_rtype not in resource_type_subset:
+                resource_type_subset[target_rtype] = []
+            resource_type_subset[target_rtype].append(table)
+            if target_rtype != 'unknown resource type':
+                provider = target_rtype.split('/')[0]
+            else:
+                provider = 'unknown'
+            provider_summary.setdefault(provider, {'tables': 0, 'resource_types': set()})
+            provider_summary[provider]['tables'] += 1
+            if target_rtype != 'unknown resource type':
+                provider_summary[provider]['resource_types'].add(target_rtype)
+            doc_enriched += 1
+
+    # Normalize provider summary sets to counts (after enrichment)
     provider_summary_out = {
-        prov: {'tables': info['tables'], 'resource_types': len(info['resource_types'])}
+        prov: {'tables': info['tables'], 'resource_types': len(info['resource_types']) if isinstance(info['resource_types'], set) else info['resource_types']}
         for prov, info in provider_summary.items()
     }
 
@@ -252,7 +366,12 @@ def workspace_schema():
         'resource_type_tables': resource_type_subset,
         'providers': provider_summary_out,
         'unmatched_tables': unmatched,
-        'retrieved_at': ws_cache.get('retrieved_at')
+        'retrieved_at': ws_cache.get('retrieved_at'),
+        'doc_enrichment': {
+            'performed': bool(unmatched),
+            'enriched_tables': doc_enriched,
+            'cache_size': len(_ms_docs_table_resource_type_cache)
+        }
     }
     return jsonify(response)
 

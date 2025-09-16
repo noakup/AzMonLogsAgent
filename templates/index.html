@@ -2688,15 +2688,218 @@ async function processQuestionWithRetry(question) {
 
         // Attach setupWorkspace to the global window object to ensure accessibility
         window.setupWorkspace = setupWorkspace;
-        // Schema rendering logic
-        let schemaDataCache = null;
+
+        // --- Workspace-aware schema + queries prefetch & filtering additions ---
+        // Caches
+        let manifestSchemaCache = null;          // Raw /api/resource-schema
+        let manifestQueriesCache = null;         // Raw /api/resource-queries (future use in UI)
+        let workspaceSchemaCache = null;         // Result from /api/workspace-schema (status=ready)
+        let schemaDataCache = null;              // Currently rendered (may be filtered)
         let schemaExpanded = false;
+        let workspacePollingInterval = null;
+
+        // Prefetch manifest schema & queries as soon as DOM is ready (before user sets workspace)
+        document.addEventListener('DOMContentLoaded', () => {
+            prefetchManifestAssets();
+        });
+
+        async function prefetchManifestAssets(){
+            try {
+                // Parallel fetch for schema & queries
+                const [schemaResp, queriesResp] = await Promise.all([
+                    fetch('/api/resource-schema').then(r=>r.json()).catch(()=>null),
+                    fetch('/api/resource-queries').then(r=>r.json()).catch(()=>null)
+                ]);
+                if(schemaResp && schemaResp.success){
+                    manifestSchemaCache = schemaResp;
+                }
+                if(queriesResp && queriesResp.success){
+                    manifestQueriesCache = queriesResp; // reserved for future UI (query suggestions per resource type)
+                }
+                // If user opens schema before workspace set, render manifest directly
+                if(!schemaDataCache && manifestSchemaCache){
+                    schemaDataCache = manifestSchemaCache;
+                }
+            } catch(e){
+                console.warn('Manifest prefetch failed', e);
+            }
+        }
+
+        function showWorkspaceLoading(message){
+            const statusElement = document.getElementById('setupStatus');
+            statusElement.innerHTML = `\n                <div class="workspace-loading">\n                    <div class="breathing-dot"></div>\n                    <span>${message || 'Fetching workspace schema...'}</span>\n                </div>`;
+        }
+
+        function clearWorkspaceLoading(successMsg){
+            const statusElement = document.getElementById('setupStatus');
+            if(successMsg){
+                statusElement.innerHTML = `<span class="status-indicator status-connected">${successMsg}</span>`;
+            }
+        }
+
+    function startWorkspaceSchemaPolling(){
+            if(workspacePollingInterval){
+                clearInterval(workspacePollingInterval);
+            }
+            let attempts = 0;
+            showWorkspaceLoading('Discovering active tables in workspace...');
+            workspacePollingInterval = setInterval(async () => {
+                attempts++;
+                try {
+                    const resp = await fetch('/api/workspace-schema');
+                    const data = await resp.json();
+                    if(data.status === 'ready' && data.success){
+                        workspaceSchemaCache = data;
+                        window.workspaceSchemaCache = data; // expose globally for debugging / fallback
+                        clearInterval(workspacePollingInterval); workspacePollingInterval = null;
+                        clearWorkspaceLoading('Workspace schema ready');
+                        // Build filtered schema immediately if manifest already loaded
+                        if(manifestSchemaCache){
+                            schemaDataCache = buildFilteredSchema(manifestSchemaCache, workspaceSchemaCache);
+                        } else {
+                            schemaDataCache = buildWorkspaceOnlySchema(workspaceSchemaCache);
+                        }
+                        console.log('[Schema] Workspace schema ready', {
+                            resourceTypes: schemaDataCache.resource_types?.length,
+                            tables: schemaDataCache.counts?.tables,
+                            workspaceResourceTypes: Object.keys(workspaceSchemaCache.resource_type_tables || {}).length,
+                            unmatched: workspaceSchemaCache.unmatched_tables?.length
+                        });
+                        // If schema panel already open, re-render
+                        const container = document.getElementById('schemaTreeContainer');
+                        if(container && container.style.display === 'block'){
+                            const searchVal = document.getElementById('schemaSearch').value;
+                            renderSchemaTree(schemaDataCache, searchVal);
+                            const stats = document.getElementById('schemaStats');
+                            if(stats){
+                                stats.style.display='inline-flex';
+                                stats.textContent = `${schemaDataCache.counts.resource_types} resource types • ${schemaDataCache.counts.providers} providers • ${schemaDataCache.counts.tables} tables` + (manifestSchemaCache ? ' (filtered)' : '');
+                            }
+                        }
+                    } else if(data.status === 'pending') {
+                        // Update subtle cycling message every few attempts
+                        if(attempts % 5 === 0){
+                            showWorkspaceLoading('Still fetching workspace tables...');
+                        }
+                    } else if(data.status === 'uninitialized') {
+                        // Should not happen after setup, but break to avoid infinite loop
+                        clearInterval(workspacePollingInterval); workspacePollingInterval = null;
+                        clearWorkspaceLoading('Workspace not initialized');
+                    }
+                } catch(err){
+                    if(attempts > 20){
+                        clearInterval(workspacePollingInterval); workspacePollingInterval = null;
+                        clearWorkspaceLoading('Workspace schema fetch failed');
+                    }
+                }
+                // Safety stop after ~60s (30 * 2s) if not ready
+                if(attempts >= 30 && workspacePollingInterval){
+                    clearInterval(workspacePollingInterval); workspacePollingInterval = null;
+                    clearWorkspaceLoading('Workspace schema timeout');
+                }
+            }, 2000);
+        }
+
+        function buildFilteredSchema(manifest, workspace){
+            if(!manifest) return null;
+            if(!workspace || !workspace.success) return manifest; // fallback
+            let wsRtTables = workspace.resource_type_tables || {};
+            // Safety: if backend returned no resource_type_tables but tables exist, synthesize them
+            if(Object.keys(wsRtTables).length === 0 && Array.isArray(workspace.tables)){
+                wsRtTables = {};
+                workspace.tables.forEach(t=>{
+                    const docRt = (t.doc_resource_type && t.doc_resource_type !== 'unknown resource type') ? t.doc_resource_type : (t.manifest_resource_type || 'unknown resource type');
+                    wsRtTables[docRt] = wsRtTables[docRt] || [];
+                    if(!wsRtTables[docRt].includes(t.name)) wsRtTables[docRt].push(t.name);
+                });
+            }
+            const filteredResourceTypes = Object.keys(wsRtTables).sort();
+            const providersSet = new Set(filteredResourceTypes.map(rt=> rt.split('/')[0]));
+            // Only include tables actually present in workspace subset
+            const filteredResourceTypeTables = {};
+            filteredResourceTypes.forEach(rt => { filteredResourceTypeTables[rt] = [...new Set(wsRtTables[rt])]; });
+            const totalTables = Object.values(filteredResourceTypeTables).reduce((acc, arr)=> acc + arr.length, 0);
+            return {
+                ...manifest,
+                resource_types: filteredResourceTypes,
+                providers: Array.from(providersSet).sort(),
+                resource_type_tables: filteredResourceTypeTables,
+                counts: {
+                    resource_types: filteredResourceTypes.length,
+                    providers: providersSet.size,
+                    tables: totalTables
+                }
+            };
+        }
+
+        function buildWorkspaceOnlySchema(workspace){
+            const wsRtTables = {...(workspace.resource_type_tables || {})};
+            // Add synthetic resource types for unmatched tables with doc_resource_type (or unknown)
+            if(Array.isArray(workspace.tables)){
+                workspace.tables.forEach(t => {
+                    if(!t.in_manifest){
+                        const docRt = (t.doc_resource_type && t.doc_resource_type !== 'unknown resource type') ? t.doc_resource_type : 'unknown resource type';
+                        wsRtTables[docRt] = wsRtTables[docRt] || [];
+                        if(!wsRtTables[docRt].includes(t.name)) wsRtTables[docRt].push(t.name);
+                    }
+                });
+            }
+            const resource_types = Object.keys(wsRtTables).sort();
+            const providers = Array.from(new Set(resource_types.map(rt=> rt.split('/')[0]))).sort();
+            const totalTables = Object.values(wsRtTables).reduce((a, arr)=> a + arr.length, 0);
+            return {
+                resource_types,
+                providers,
+                resource_type_tables: wsRtTables,
+                counts: { resource_types: resource_types.length, providers: providers.length, tables: totalTables }
+            };
+        }
+
+        // Modified setupWorkspace to initiate polling instead of immediate test-connection
+        const originalSetupWorkspace = setupWorkspace; // keep reference if needed
+        async function setupWorkspace(){
+            const workspaceId = document.getElementById('workspaceId').value.trim();
+            const statusElement = document.getElementById('setupStatus');
+            if(!workspaceId){
+                statusElement.innerHTML = `<div class="error">Please enter a workspace ID</div>`; return;
+            }
+            statusElement.innerHTML = `<div class="loading">Setting up workspace...</div>`;
+            try {
+                const response = await fetch('/api/setup', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ workspace_id: workspaceId }) });
+                const data = await response.json();
+                if(data.success){
+                    isConnected = true;
+                    // Start polling workspace schema instead of test-connection
+                    startWorkspaceSchemaPolling();
+                } else {
+                    updateStatus(false, data.error);
+                }
+            } catch(err){
+                updateStatus(false, `Connection failed: ${err.message}`);
+            }
+        }
+        window.setupWorkspace = setupWorkspace; // reassign with enhanced version
+
         function toggleSchema(){
             const container = document.getElementById('schemaTreeContainer');
             const btn = document.getElementById('showSchemaBtn');
             if(container.style.display === 'block'){ container.style.display='none'; btn.textContent='📘 Show Schema'; return; }
             container.style.display='block'; btn.textContent='📕 Hide Schema';
-            if(!schemaDataCache){ fetchSchema(); }
+            const tree = document.getElementById('schemaTree');
+            if(!schemaDataCache){
+                fetchSchema();
+            } else {
+                // If cache exists but tree is empty or still showing a loading/empty placeholder, render from cache
+                if(!tree || !tree.children.length || /Loading schema|No matches|Error:/i.test(tree.innerHTML)){
+                    console.log('[Schema] Rendering from existing cache');
+                    renderSchemaTree(schemaDataCache);
+                    const stats = document.getElementById('schemaStats');
+                    if(stats && schemaDataCache.counts){
+                        stats.style.display='inline-flex';
+                        stats.textContent = `${schemaDataCache.counts.resource_types} resource types • ${schemaDataCache.counts.providers} providers • ${schemaDataCache.counts.tables} tables${workspaceSchemaCache ? (manifestSchemaCache ? ' (filtered)' : '') : ''}`;
+                    }
+                }
+            }
         }
         async function fetchSchema(){
             const btn = document.getElementById('showSchemaBtn');
@@ -2705,13 +2908,19 @@ async function processQuestionWithRetry(question) {
             const search = document.getElementById('schemaSearch');
             tree.innerHTML = '<li class="schema-empty">Loading schema...</li>';
             try{
-                const resp = await fetch('/api/resource-schema');
-                const data = await resp.json();
-                if(!data.success) throw new Error(data.error || 'Failed to load');
-                schemaDataCache = data;
-                renderSchemaTree(data);
+                // Use prefetched manifest if available
+                if(manifestSchemaCache){
+                    schemaDataCache = workspaceSchemaCache ? buildFilteredSchema(manifestSchemaCache, workspaceSchemaCache) : manifestSchemaCache;
+                } else {
+                    const resp = await fetch('/api/resource-schema');
+                    const data = await resp.json();
+                    if(!data.success) throw new Error(data.error || 'Failed to load');
+                    manifestSchemaCache = data;
+                    schemaDataCache = workspaceSchemaCache ? buildFilteredSchema(manifestSchemaCache, workspaceSchemaCache) : manifestSchemaCache;
+                }
+                renderSchemaTree(schemaDataCache);
                 stats.style.display='inline-flex';
-                stats.textContent = `${data.counts.resource_types} resource types • ${data.counts.providers} providers • ${data.counts.tables} tables`;
+                stats.textContent = `${schemaDataCache.counts.resource_types} resource types • ${schemaDataCache.counts.providers} providers • ${schemaDataCache.counts.tables} tables${workspaceSchemaCache ? ' (filtered)' : ''}`;
                 search.disabled = false;
             }catch(e){
                 tree.innerHTML = `<li class='schema-empty'>Error: ${e.message}</li>`;
@@ -2744,6 +2953,15 @@ async function processQuestionWithRetry(question) {
                 });
             });
             if(!html) html = `<li class='schema-empty'>No matches.</li>`;
+            // Fallback: if still empty (no resource types) but workspace schema has unmatched tables, list them
+            if(resource_types.length === 0 && window.workspaceSchemaCache && Array.isArray(window.workspaceSchemaCache.unmatched_tables) && window.workspaceSchemaCache.unmatched_tables.length){
+                const unmatchedList = window.workspaceSchemaCache.tables || [];
+                if(unmatchedList.length){
+                    html = `<li class='schema-provider'>Unclassified Tables <span class='schema-badge'>${unmatchedList.length}</span></li>`;
+                    html += unmatchedList.map(t=>`<li><div class='schema-resource-type'>${t.name || t} <span class='schema-badge'>${(t.doc_resource_type || t.manifest_resource_type || t.workspace_resource_type || 'unknown').split('/')[0]}</span></div></li>`).join('');
+                    html += `<li class='schema-empty'>These tables were not found in NGSchema. Resource types derived from docs or fallback mapping.</li>`;
+                }
+            }
             tree.innerHTML = html;
         }
         function matchRtOrTables(rt, tables, ft){ if(!ft) return true; if(rt.toLowerCase().includes(ft)) return true; return tables.some(t=> t.toLowerCase().includes(ft)); }
@@ -2753,3 +2971,9 @@ async function processQuestionWithRetry(question) {
     </script>
 </body>
 </html>
+    <style>
+    /* Workspace schema loading breathing dot */
+    .workspace-loading{display:flex;align-items:center;gap:8px;font-size:0.9rem;color:#2c3e50;background:#f5f8fa;padding:6px 10px;border-radius:6px;border:1px solid #e1e8ed;}
+    .breathing-dot{width:12px;height:12px;border-radius:50%;background:#0078d4;animation:breathing 1.6s ease-in-out infinite;box-shadow:0 0 0 0 rgba(0,120,212,0.4);} 
+    @keyframes breathing{0%{transform:scale(0.6);opacity:.4}50%{transform:scale(1);opacity:1}100%{transform:scale(0.6);opacity:.4}}
+    </style>
