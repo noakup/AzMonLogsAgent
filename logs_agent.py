@@ -338,6 +338,162 @@ class KQLAgent:
         except Exception as e:
             return f"❌ Error processing question: {str(e)}"
 
+    async def explain_results(self, query_result: Dict, original_question: str = "") -> str:
+        """
+        Use OpenAI to analyze and explain query results
+        Only works for results with 1-1000 records
+        """
+        try:
+            # Check if result format is valid
+            if not query_result or query_result.get("type") != "query_success":
+                return "❌ Cannot explain results: Invalid or failed query result"
+            
+            # Get the tables data
+            data = query_result.get("data", {})
+            if data.get("type") != "table_data":
+                return "❌ Cannot explain results: No table data found"
+            
+            tables = data.get("tables", [])
+            if not tables:
+                return "❌ Cannot explain results: No tables in result"
+            
+            # Count total records across all tables
+            total_records = sum(table.get("row_count", 0) for table in tables)
+            
+            # Check record count constraints
+            if total_records == 0:
+                return "📊 No records to explain - the query returned empty results."
+            elif total_records > 1000:
+                return f"📊 Cannot explain results: Too many records ({total_records}). Results explanation is only available for queries returning 1-1000 records."
+            
+            # Prepare data summary for OpenAI
+            data_summary = self._format_data_for_explanation(tables, query_result.get("kql_query", ""))
+            
+            # Call OpenAI to explain the results
+            explanation = await self._call_openai_for_explanation(data_summary, original_question)
+            
+            return explanation
+            
+        except Exception as e:
+            return f"❌ Error explaining results: {str(e)}"
+    
+    def _format_data_for_explanation(self, tables: List[Dict], kql_query: str) -> str:
+        """Format query results data for OpenAI analysis"""
+        summary = f"KQL Query: {kql_query}\n\n"
+        
+        for i, table in enumerate(tables, 1):
+            summary += f"Table {i}:\n"
+            summary += f"- Columns: {', '.join(table.get('columns', []))}\n"
+            summary += f"- Row count: {table.get('row_count', 0)}\n"
+            
+            # Add sample of data (first few rows)
+            rows = table.get('rows', [])
+            columns = table.get('columns', [])
+            
+            if rows and columns:
+                summary += f"- Sample data:\n"
+                for j, row in enumerate(rows[:5]):  # Show first 5 rows max
+                    row_data = []
+                    for k, cell in enumerate(row):
+                        if k < len(columns):
+                            row_data.append(f"{columns[k]}: {cell}")
+                    summary += f"  Row {j+1}: {', '.join(row_data)}\n"
+                
+                if len(rows) > 5:
+                    summary += f"  ... and {len(rows) - 5} more rows\n"
+            
+            summary += "\n"
+        
+        return summary
+
+    async def _call_openai_for_explanation(self, data_summary: str, original_question: str) -> str:
+        """Call OpenAI to generate explanation of the query results"""
+        try:
+            # Load environment variables
+            try:
+                from dotenv import load_dotenv
+                load_dotenv()
+            except ImportError:
+                pass
+            
+            endpoint = os.environ.get("AZURE_OPENAI_ENDPOINT")
+            api_key = os.environ.get("AZURE_OPENAI_KEY")
+            deployment = os.environ.get("AZURE_OPENAI_DEPLOYMENT", "gpt-35-turbo")
+            
+            if not endpoint or not api_key:
+                return "❌ Azure OpenAI configuration missing. Please check your .env file."
+            
+            # Determine API version - use standard version for better compatibility
+            api_version = "2024-12-01-preview"
+            
+            
+            url = f"{endpoint}/openai/deployments/{deployment}/chat/completions?api-version={api_version}"
+            headers = {
+                "Content-Type": "application/json",
+                "api-key": api_key
+            }
+            
+            # Create system prompt for explanation
+            system_prompt = """You are a data analyst expert. Your task is to analyze query results and provide clear, concise explanations.
+
+For the provided query results, analyze the data and provide:
+1. A brief summary of what the data shows
+2. Key patterns, trends, or insights
+3. Notable values, outliers, or anomalies
+
+Keep your explanation concise (2-3 sentences) and focus on the most important insights. Use plain English and avoid technical jargon."""
+
+            user_prompt = f"""Please analyze these query results and provide a clear explanation:
+
+Original Question: {original_question if original_question else 'Not provided'}
+
+Query Results:
+{data_summary}
+
+Provide a concise explanation focusing on the key insights and patterns in the data."""
+
+            # Use standard message format for all models for better compatibility
+            data = {
+                "messages": [
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt}
+                ],
+                #"temperature": 0.3,
+                "max_completion_tokens": 300
+            }
+            
+            # Make API call
+            import requests
+            import json
+            
+            
+            response = requests.post(url, headers=headers, data=json.dumps(data))
+            
+            response.raise_for_status()
+            
+            result = response.json()
+            
+            # Check if response has the expected structure
+            if 'choices' not in result:
+                return "❌ Azure OpenAI API returned unexpected format"
+            
+            if not result['choices'] or len(result['choices']) == 0:
+                return "❌ Azure OpenAI API returned no response choices"
+            
+            choice = result['choices'][0]
+            if 'message' not in choice:
+                return "❌ Azure OpenAI API response missing message"
+            
+            content = choice['message'].get('content', '').strip()
+            
+            if not content:
+                return "❌ Azure OpenAI API returned empty explanation"
+            
+            return content
+            
+        except Exception as e:
+            return f"Failed to generate explanation: {str(e)}"
+
 async def main():
     """Main interactive loop"""
     
