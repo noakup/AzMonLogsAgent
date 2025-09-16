@@ -153,21 +153,27 @@ agent = None
 workspace_id = None
 _workspace_schema_cache = {}
 _workspace_resource_types_cache = {}
+_workspace_queries_cache = {}
 
 
 def _scan_manifest_resource_types() -> dict:
-    """Scan NGSchema manifest files to enumerate resource types/providers and map tables.
+    """Scan NGSchema manifest files to enumerate resource types/providers, map tables, and pick up query definitions.
 
     Returns a dict with keys:
-      resource_types: List[str]
-      providers: List[str]
-      counts: { 'resource_types': int, 'providers': int, 'tables': int }
-      resource_type_tables: { resource_type: [tableName, ...] }
-      table_resource_type: { tableName: resource_type }
-      retrieved_at: ISO timestamp
+        resource_types: List[str]
+        providers: List[str]
+        counts: { 'resource_types': int, 'providers': int, 'tables': int }
+        resource_type_tables: { resource_type: [tableName, ...] }
+        table_resource_type: { tableName: resource_type }
+        queries: [ { 'resource_type': str, 'provider': str, 'name': str, 'description': str, 'table': str|None, 'path': str|None, 'manifest_file': str } ]
+        queries_by_provider: { provider: [query, ...] }
+        queries_by_resource_type: { resource_type: [query, ...] }
+        retrieved_at: ISO timestamp
 
-    Console output only; heavy parsing errors are logged and skipped.
-    Result cached for lifetime of process.
+    Query extraction heuristics:
+        - Look for top-level or nested keys named 'queries', 'sampleQueries', 'queryExamples'
+        - Each item may include name/description/table/path or similar fields
+        - Record path relative to repo if provided or attempt to infer when key 'file'/'path' present
     """
     if _workspace_resource_types_cache.get('resource_types') and _workspace_resource_types_cache.get('resource_type_tables'):
         return _workspace_resource_types_cache
@@ -189,6 +195,7 @@ def _scan_manifest_resource_types() -> dict:
     resource_types = set()
     resource_type_tables = {}
     table_resource_type = {}
+    extracted_queries = []  # flat list
     manifest_files = []
     for root, _, files in os.walk(base_dir):
         for fname in files:
@@ -197,13 +204,32 @@ def _scan_manifest_resource_types() -> dict:
 
     print(f'[Manifest Scan] Found {len(manifest_files)} manifest files. Parsing...')
 
-    def _extract_types(obj, current_resource_type=None):
+    def _extract_types(obj, current_resource_type=None, manifest_path=None):
         if isinstance(obj, dict):
             tval = obj.get('type')
             if isinstance(tval, str) and '/' in tval:
                 resource_types.add(tval)
                 current_resource_type = tval
                 resource_type_tables.setdefault(current_resource_type, [])
+            # Possible query collections
+            for qkey in ('queries', 'sampleQueries', 'queryExamples'):
+                if qkey in obj and isinstance(obj[qkey], list):
+                    for q in obj[qkey]:
+                        if isinstance(q, dict):
+                            q_name = q.get('name') or q.get('title') or q.get('queryName')
+                            q_desc = q.get('description') or q.get('summary') or ''
+                            q_table = q.get('table') or q.get('tableName') or q.get('primaryTable')
+                            q_path = q.get('path') or q.get('file') or q.get('kqlFile') or q.get('kql_path')
+                            if q_name:
+                                extracted_queries.append({
+                                    'resource_type': current_resource_type,
+                                    'provider': (current_resource_type.split('/')[0] if current_resource_type else None),
+                                    'name': q_name,
+                                    'description': q_desc,
+                                    'table': q_table,
+                                    'path': q_path,
+                                    'manifest_file': manifest_path
+                                })
             if 'tables' in obj and isinstance(obj['tables'], list):
                 for tbl in obj['tables']:
                     if isinstance(tbl, dict):
@@ -213,22 +239,31 @@ def _scan_manifest_resource_types() -> dict:
                                 resource_type_tables[current_resource_type].append(tname)
                                 table_resource_type.setdefault(tname, current_resource_type)
             for v in obj.values():
-                _extract_types(v, current_resource_type=current_resource_type)
+                _extract_types(v, current_resource_type=current_resource_type, manifest_path=manifest_path)
         elif isinstance(obj, list):
             for item in obj:
-                _extract_types(item, current_resource_type=current_resource_type)
+                _extract_types(item, current_resource_type=current_resource_type, manifest_path=manifest_path)
 
     for mpath in manifest_files:
         try:
             with open(mpath, 'r', encoding='utf-8') as mf:
                 data = json.load(mf)
-            _extract_types(data)
+            _extract_types(data, manifest_path=mpath)
         except Exception as e:  # noqa: BLE001
             print(f'[Manifest Scan] Error parsing {mpath}: {e}')
 
     providers = {rt.split('/')[0] for rt in resource_types}
     resource_types_list = sorted(resource_types)
     providers_list = sorted(providers)
+
+    # Organize queries by provider and resource type
+    queries_by_provider = {}
+    queries_by_resource_type = {}
+    for q in extracted_queries:
+        prov = q.get('provider') or 'Unknown'
+        rt = q.get('resource_type') or 'Unknown'
+        queries_by_provider.setdefault(prov, []).append(q)
+        queries_by_resource_type.setdefault(rt, []).append(q)
 
     _workspace_resource_types_cache.update({
         'resource_types': resource_types_list,
@@ -240,6 +275,9 @@ def _scan_manifest_resource_types() -> dict:
         },
         'resource_type_tables': resource_type_tables,
         'table_resource_type': table_resource_type,
+        'queries': extracted_queries,
+        'queries_by_provider': queries_by_provider,
+        'queries_by_resource_type': queries_by_resource_type,
         'retrieved_at': datetime.now(timezone.utc).isoformat()
     })
 
@@ -248,6 +286,8 @@ def _scan_manifest_resource_types() -> dict:
     print(f"  Providers: {len(providers_list)}")
     total_tables = sum(len(v) for v in resource_type_tables.values())
     print(f"  Tables (mapped): {total_tables}")
+    if extracted_queries:
+        print(f"  Queries extracted: {len(extracted_queries)}")
     preview_types = resource_types_list[:20]
     if preview_types:
         print('  Sample Resource Types:')
@@ -267,6 +307,33 @@ def _scan_manifest_resource_types() -> dict:
             break
 
     return _workspace_resource_types_cache
+
+
+@app.route('/api/resource-queries', methods=['GET'])
+def resource_queries():
+    """Return query metadata extracted from manifests.
+
+    Structure:
+      success: bool
+      counts: { providers:int, resource_types:int, queries:int }
+      queries_by_provider: { provider: [ {name,description,table,path,resource_type,manifest_file}, ... ] }
+      queries_by_resource_type: { resource_type: [ ... ] }
+    """
+    try:
+        data = _scan_manifest_resource_types()  # ensures queries present
+        queries = data.get('queries', [])
+        return jsonify({
+            'success': True,
+            'counts': {
+                'providers': len(data.get('providers', [])),
+                'resource_types': len(data.get('resource_types', [])),
+                'queries': len(queries)
+            },
+            'queries_by_provider': data.get('queries_by_provider', {}),
+            'queries_by_resource_type': data.get('queries_by_resource_type', {}),
+        })
+    except Exception as e:  # noqa: BLE001
+        return jsonify({'success': False, 'error': str(e)})
 
 
 def _fetch_workspace_tables(workspace: str):
