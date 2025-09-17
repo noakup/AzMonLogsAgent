@@ -341,30 +341,52 @@ class KQLAgent:
     async def explain_results(self, query_result: Dict, original_question: str = "") -> str:
         """
         Use OpenAI to analyze and explain query results
-        Only works for results with 1-1000 records
+        Enhanced with better error handling and data validation
         """
         try:
             # Check if result format is valid
-            if not query_result or query_result.get("type") != "query_success":
-                return "❌ Cannot explain results: Invalid or failed query result"
+            if not query_result or not isinstance(query_result, dict):
+                return "❌ Cannot explain results: Invalid query result format"
             
-            # Get the tables data
+            if query_result.get("type") != "query_success":
+                if query_result.get("type") == "query_error":
+                    return f"❌ Cannot explain results: Query failed with error: {query_result.get('error', 'Unknown error')}"
+                return "❌ Cannot explain results: Query did not succeed"
+            
+            # Get the tables data with improved validation
             data = query_result.get("data", {})
+            if not isinstance(data, dict):
+                return "❌ Cannot explain results: Invalid data format"
+            
+            if data.get("type") == "no_data":
+                return f"📊 Query explanation: The query executed successfully but returned no data. {data.get('message', '')}"
+            
             if data.get("type") != "table_data":
-                return "❌ Cannot explain results: No table data found"
+                return "❌ Cannot explain results: Expected table data but got different format"
             
             tables = data.get("tables", [])
-            if not tables:
-                return "❌ Cannot explain results: No tables in result"
+            if not tables or not isinstance(tables, list):
+                return "📊 Query explanation: The query executed successfully but returned no table data."
             
-            # Count total records across all tables
-            total_records = sum(table.get("row_count", 0) for table in tables)
+            # Enhanced record counting with validation
+            total_records = 0
+            valid_tables = 0
             
-            # Check record count constraints
+            for table in tables:
+                if isinstance(table, dict) and table.get("has_data", False):
+                    row_count = table.get("row_count", 0)
+                    if isinstance(row_count, int) and row_count > 0:
+                        total_records += row_count
+                        valid_tables += 1
+            
+            # Check record count constraints with better messaging
             if total_records == 0:
-                return "📊 No records to explain - the query returned empty results."
+                if valid_tables == 0:
+                    return "📊 Query explanation: The query executed successfully but all tables are empty."
+                else:
+                    return "📊 Query explanation: The query executed successfully but returned no data rows."
             elif total_records > 1000:
-                return f"📊 Cannot explain results: Too many records ({total_records}). Results explanation is only available for queries returning 1-1000 records."
+                return f"📊 Cannot explain results: Too many records ({total_records:,}). Explanation is available for queries returning 1-1000 records. Consider adding filters to reduce the result size."
             
             # Prepare data summary for OpenAI
             data_summary = self._format_data_for_explanation(tables, query_result.get("kql_query", ""))
@@ -375,6 +397,9 @@ class KQLAgent:
             return explanation
             
         except Exception as e:
+            import traceback
+            error_details = traceback.format_exc()
+            print(f"[Explain Error] {error_details}")
             return f"❌ Error explaining results: {str(e)}"
     
     def _format_data_for_explanation(self, tables: List[Dict], kql_query: str) -> str:
@@ -421,11 +446,15 @@ class KQLAgent:
             deployment = os.environ.get("AZURE_OPENAI_DEPLOYMENT", "gpt-35-turbo")
             
             if not endpoint or not api_key:
-                return "❌ Azure OpenAI configuration missing. Please check your .env file."
+                return "❌ Azure OpenAI configuration missing. Please check your .env file for AZURE_OPENAI_ENDPOINT and AZURE_OPENAI_KEY."
             
-            # Determine API version - use standard version for better compatibility
-            api_version = "2024-12-01-preview"
+            # Clean endpoint URL
+            if not endpoint.startswith('http'):
+                endpoint = f"https://{endpoint}"
+            endpoint = endpoint.rstrip('/')
             
+            # Use a stable API version that supports both GPT-3.5 and GPT-4
+            api_version = "2024-02-01"
             
             url = f"{endpoint}/openai/deployments/{deployment}/chat/completions?api-version={api_version}"
             headers = {
@@ -433,66 +462,130 @@ class KQLAgent:
                 "api-key": api_key
             }
             
-            # Create system prompt for explanation
-            system_prompt = """You are a data analyst expert. Your task is to analyze query results and provide clear, concise explanations.
+            # Create enhanced system prompt for better explanations
+            system_prompt = """You are an expert data analyst specializing in Azure Log Analytics and KQL query results. Your task is to provide clear, actionable insights from data.
 
-For the provided query results, analyze the data and provide:
-1. A brief summary of what the data shows
-2. Key patterns, trends, or insights
-3. Notable values, outliers, or anomalies
+When analyzing query results:
+1. Identify the main finding or pattern in simple terms
+2. Highlight any concerning trends, anomalies, or notable values  
+3. Provide context about what the data means from a business or operational perspective
+4. Keep explanations concise but insightful (2-4 sentences)
+5. Use plain English and avoid technical jargon
 
-Keep your explanation concise (2-3 sentences) and focus on the most important insights. Use plain English and avoid technical jargon."""
+Focus on what the data tells us and what actions might be needed."""
 
-            user_prompt = f"""Please analyze these query results and provide a clear explanation:
+            user_prompt = f"""Analyze these Azure Log Analytics query results:
 
-Original Question: {original_question if original_question else 'Not provided'}
+Original Question: {original_question if original_question else 'Not specified'}
 
-Query Results:
 {data_summary}
 
-Provide a concise explanation focusing on the key insights and patterns in the data."""
+Please provide a clear, actionable explanation of what this data shows and its significance."""
 
-            # Use standard message format for all models for better compatibility
-            data = {
+            # Optimize request parameters for reliability
+            request_data = {
                 "messages": [
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt}
                 ],
-                #"temperature": 0.3,
-                "max_completion_tokens": 300
+                "temperature": 0.3,
+                "max_tokens": 400,
+                "top_p": 0.9,
+                "frequency_penalty": 0.0,
+                "presence_penalty": 0.0
             }
             
-            # Make API call
+            # Make API call with timeout and retries
             import requests
             import json
+            import time
             
+            max_retries = 3
+            base_delay = 1
             
-            response = requests.post(url, headers=headers, data=json.dumps(data))
+            for attempt in range(max_retries):
+                try:
+                    response = requests.post(
+                        url, 
+                        headers=headers, 
+                        data=json.dumps(request_data),
+                        timeout=30
+                    )
+                    
+                    # Handle specific HTTP errors
+                    if response.status_code == 429:
+                        if attempt < max_retries - 1:
+                            delay = base_delay * (2 ** attempt)
+                            print(f"[Explain] Rate limited, retrying in {delay}s...")
+                            time.sleep(delay)
+                            continue
+                        else:
+                            return "❌ Azure OpenAI service is currently busy. Please try explaining the results again in a few moments."
+                    
+                    if response.status_code == 401:
+                        return "❌ Azure OpenAI authentication failed. Please check your API key in the .env file."
+                    
+                    if response.status_code == 404:
+                        return f"❌ Azure OpenAI deployment '{deployment}' not found. Please check your deployment name in the .env file."
+                    
+                    response.raise_for_status()
+                    
+                    result = response.json()
+                    
+                    # Enhanced response validation
+                    if 'error' in result:
+                        error_msg = result['error'].get('message', 'Unknown API error')
+                        return f"❌ Azure OpenAI API error: {error_msg}"
+                    
+                    if 'choices' not in result or not result['choices']:
+                        return "❌ Azure OpenAI API returned no response choices"
+                    
+                    choice = result['choices'][0]
+                    
+                    # Check for content filtering
+                    if choice.get('finish_reason') == 'content_filter':
+                        return "❌ Response was filtered due to content policy. Please try with different query results."
+                    
+                    if 'message' not in choice:
+                        return "❌ Azure OpenAI API response missing message content"
+                    
+                    content = choice['message'].get('content', '').strip()
+                    
+                    if not content:
+                        return "❌ Azure OpenAI API returned empty explanation"
+                    
+                    # Success - return the explanation
+                    return content
+                    
+                except requests.exceptions.Timeout:
+                    if attempt < max_retries - 1:
+                        print(f"[Explain] Request timeout, retrying...")
+                        time.sleep(base_delay * (attempt + 1))
+                        continue
+                    else:
+                        return "❌ Azure OpenAI request timed out. Please try again."
+                        
+                except requests.exceptions.ConnectionError:
+                    if attempt < max_retries - 1:
+                        print(f"[Explain] Connection error, retrying...")
+                        time.sleep(base_delay * (attempt + 1))
+                        continue
+                    else:
+                        return "❌ Unable to connect to Azure OpenAI. Please check your network connection."
+                        
+                except requests.exceptions.HTTPError as e:
+                    return f"❌ Azure OpenAI API error: HTTP {e.response.status_code}"
+                    
+                except json.JSONDecodeError:
+                    return "❌ Invalid response from Azure OpenAI API"
             
-            response.raise_for_status()
-            
-            result = response.json()
-            
-            # Check if response has the expected structure
-            if 'choices' not in result:
-                return "❌ Azure OpenAI API returned unexpected format"
-            
-            if not result['choices'] or len(result['choices']) == 0:
-                return "❌ Azure OpenAI API returned no response choices"
-            
-            choice = result['choices'][0]
-            if 'message' not in choice:
-                return "❌ Azure OpenAI API response missing message"
-            
-            content = choice['message'].get('content', '').strip()
-            
-            if not content:
-                return "❌ Azure OpenAI API returned empty explanation"
-            
-            return content
+            return "❌ Failed to get explanation after multiple attempts"
             
         except Exception as e:
-            return f"Failed to generate explanation: {str(e)}"
+            import traceback
+            error_details = traceback.format_exc()
+            print(f"[Explain API Error] {error_details}")
+            return f"❌ Unexpected error generating explanation: {str(e)}"
 
 async def main():
     """Main interactive loop"""
