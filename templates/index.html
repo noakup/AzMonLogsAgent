@@ -1474,9 +1474,7 @@
                 <div class="suggestions">
                     <h3>💡 Quick Suggestions:</h3>
                     <div class="suggestion-pills">
-                        <div class="suggestion-pill" onclick="setQuestion('Show me failed requests from the last hour')">Failed Requests</div>
-                        <div class="suggestion-pill" onclick="setQuestion('What are the top 5 slowest API calls?')">Slowest APIs</div>
-                        <div class="suggestion-pill" onclick="setQuestion('Get heartbeat data from the last 30 minutes')">Heartbeat Data</div>
+                        <div id="quickSuggestions"></div>
                         <div class="suggestion-pill workspace-examples" onclick="discoverWorkspaceExamples()">💡 More Suggestions</div>
                     </div>
                 </div>
@@ -2701,9 +2699,9 @@ async function processQuestionWithRetry(question) {
         // --- Workspace-aware schema + queries prefetch & filtering additions ---
         // Caches
         let manifestSchemaCache = null;          // Raw /api/resource-schema
-        let manifestQueriesCache = null;         // Raw /api/resource-queries (future use in UI)
+        let manifestQueriesCache = null;         // Raw /api/resource-queries (used for quick suggestions)
         let workspaceSchemaCache = null;         // Result from /api/workspace-schema (status=ready)
-        let schemaDataCache = null;              // Currently rendered (may be filtered)
+        let schemaDataCache = null;              // Active (possibly filtered) schema object used for rendering
         let schemaExpanded = false;
         let workspacePollingInterval = null;
 
@@ -2752,7 +2750,9 @@ async function processQuestionWithRetry(question) {
                     manifestSchemaCache = schemaResp;
                 }
                 if(queriesResp && queriesResp.success){
-                    manifestQueriesCache = queriesResp; // reserved for future UI (query suggestions per resource type)
+                    manifestQueriesCache = queriesResp; // now used for quick suggestions
+                    // If workspace schema is already available, update quick suggestions now
+                    if(workspaceSchemaCache){ renderQuickSuggestions(); }
                 }
                 // If user opens schema before workspace set, render manifest directly
                 if(!schemaDataCache && manifestSchemaCache){
@@ -2761,6 +2761,51 @@ async function processQuestionWithRetry(question) {
             } catch(e){
                 console.warn('Manifest prefetch failed', e);
             }
+        }
+
+        function renderQuickSuggestions(){
+            const container = document.getElementById('quickSuggestions');
+            if(!container) return;
+            container.innerHTML = '';
+            // Need workspace resource types and manifest queries
+            const queriesByRt = manifestQueriesCache && manifestQueriesCache.queries_by_resource_type;
+            const wsRtTables = workspaceSchemaCache && workspaceSchemaCache.resource_type_tables;
+            if(!queriesByRt || !wsRtTables) return;
+            // Build a pool of suggestions mapped to present resource types
+            const presentRts = Object.keys(wsRtTables || {});
+            const pool = [];
+            presentRts.forEach(rt => {
+                const qlist = queriesByRt[rt] || [];
+                qlist.forEach(q => {
+                    // pick a friendly label: prefer q.description or q.name
+                    const label = (q.description || q.name || '').trim();
+                    if(!label) return;
+                    // Optionally bias by table presence if q.table exists
+                    if(q.table){
+                        const tables = wsRtTables[rt] || [];
+                        if(!tables.includes(q.table)){
+                            // If the referenced table isn't present, still allow but with lower priority
+                            pool.push({label, weight:0.5});
+                            return;
+                        }
+                    }
+                    pool.push({label, weight:1});
+                });
+            });
+            if(pool.length === 0) return;
+            // Sort by weight (present tables first), then stable order; pick top 3 unique labels
+            pool.sort((a,b)=> b.weight - a.weight);
+            const seen = new Set();
+            const picks = [];
+            for(const item of pool){
+                const key = item.label.toLowerCase();
+                if(seen.has(key)) continue;
+                seen.add(key);
+                picks.push(item.label);
+                if(picks.length >= 3) break;
+            }
+            // Render
+            container.innerHTML = picks.map(text => `<div class="suggestion-pill" onclick="setQuestion(${JSON.stringify(text)})">${escapeHtml(text)}</div>`).join('');
         }
 
         function showWorkspaceLoading(message){ /* no-op: status panel hidden */ }
@@ -2822,6 +2867,8 @@ async function processQuestionWithRetry(question) {
                                 stats.textContent = `${schemaDataCache.counts.resource_types} resource types • ${schemaDataCache.counts.providers} providers • ${schemaDataCache.counts.tables} tables`;
                             }
                         }
+                        // Update quick suggestions now that workspace schema is ready
+                        renderQuickSuggestions();
                     } else if(data.status === 'pending') {
                         // Update subtle cycling message every few attempts
                         if(attempts % 5 === 0){
@@ -2990,6 +3037,8 @@ async function processQuestionWithRetry(question) {
                 stats.style.display='inline-flex';
                 stats.textContent = `${schemaDataCache.counts.resource_types} resource types • ${schemaDataCache.counts.providers} providers • ${schemaDataCache.counts.tables} tables`;
                 search.disabled = false;
+                // Also attempt to render suggestions if workspace cache already exists
+                renderQuickSuggestions();
             }catch(e){
                 tree.innerHTML = `<li class='schema-empty'>Error: ${e.message}</li>`;
             }
