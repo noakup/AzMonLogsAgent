@@ -1597,58 +1597,74 @@
         };
 
         function initializeMetrics() {
-            loadingMetrics.startTime = Date.now();
-            loadingMetrics.retryCount = 0;
-            loadingMetrics.currentStep = 0;
-        }
-
-        function trackRetry() {
-            loadingMetrics.retryCount++;
-            // Adjust estimated duration based on retries
-            loadingMetrics.estimatedDuration += 2000; // Add 2s per retry
-        }
-
-        function calculateProgress(phase) {
-            const phaseProgress = {
-                'translate': 25,
-                'validate': 60, 
-                'execute': 80,
-                'format': 95,
-                'complete': 100
-            };
-            
-            let baseProgress = phaseProgress[phase] || 0;
-            
-            // Adjust for retries
-            if (loadingMetrics.retryCount > 0) {
-                baseProgress = Math.max(15, baseProgress - (loadingMetrics.retryCount * 5));
+            const container = document.getElementById('quickSuggestions');
+            if(!container) return;
+            container.innerHTML = '';
+            // Gate: only proceed when all three caches present
+            if(!(manifestSchemaCache && manifestQueriesCache && workspaceSchemaCache)) return;
+            debugLogSchemaIntersection();
+            const queriesByRt = manifestQueriesCache.queries_by_resource_type || {};
+            const wsRtTables = workspaceSchemaCache.resource_type_tables || {};
+            const queriesRtLower = {};
+            Object.entries(queriesByRt).forEach(([k,v])=>{ queriesRtLower[k.toLowerCase()] = v; });
+            const pool = [];
+            Object.keys(wsRtTables).forEach(rt => {
+                const qlist = queriesRtLower[rt.toLowerCase()] || [];
+                if(!qlist.length) return;
+                const wsTables = wsRtTables[rt] || [];
+                // Determine intersection of tables referenced in queries and workspace tables
+                const referencedTables = [];
+                qlist.forEach(q => { if(q.table) referencedTables.push(q.table); });
+                const intersectTables = wsTables.filter(t => referencedTables.includes(t));
+                qlist.forEach(q => {
+                    const label = (q.description || q.name || '').trim();
+                    if(!label) return;
+                    let weight = 1;
+                    if(q.table && intersectTables.includes(q.table)) weight += 2;
+                    pool.push({label, weight});
+                });
+            });
+            if(pool.length === 0){
+                console.log('[QuickSuggestions] No intersecting queries after gating – no pills rendered.');
+                return;
             }
-            
-            return Math.min(100, baseProgress);
-        }
+            pool.sort((a,b)=> b.weight - a.weight);
+            const _qsSeen = new Set();
+            const _qsPicks = [];
+            for(const item of pool){
+                const key = item.label.toLowerCase();
+                if(_qsSeen.has(key)) continue;
+                _qsSeen.add(key);
+                _qsPicks.push(item.label);
+                if(_qsPicks.length >= 3) break;
+            }
+            if(_qsPicks.length === 0){
+                console.log('[QuickSuggestions] Pool built but produced zero unique picks – nothing rendered.');
+                return;
+            }
+            container.innerHTML = _qsPicks.map(text => `<div class=\"suggestion-pill\" onclick=\"setQuestion(${JSON.stringify(text)})\">${escapeHtml(text)}</div>`).join('');
 
-        function getSmartEstimate() {
-            const elapsed = Date.now() - loadingMetrics.startTime;
-            const remaining = Math.max(0, loadingMetrics.estimatedDuration - elapsed);
-            return Math.ceil(remaining / 1000);
-        }
+            if(pool.length === 0){
+                // Nothing to suggest (empty intersection); leave container empty for now
+                console.log('[QuickSuggestions][Debug] No intersecting queries to suggest.');
+                return;
+            }
 
-        function updateProgress(percentage, stepName = '') {
-            const progressBar = document.getElementById('progressBar');
-            const progressPercent = document.getElementById('progressPercent');
-            const currentStep = document.getElementById('currentStep');
-            
-            if (progressBar) {
-                progressBar.style.width = `${percentage}%`;
+            pool.sort((a,b)=> b.weight - a.weight);
+            const picks = [];
+            const seen = new Set();
+            for(const item of pool){
+                const key = item.label.toLowerCase();
+                if(seen.has(key)) continue;
+                seen.add(key);
+                picks.push(item.label);
+                if(picks.length >= 3) break;
             }
-            
-            if (progressPercent) {
-                progressPercent.textContent = `${percentage}%`;
+            if(picks.length === 0){
+                console.log('[QuickSuggestions][Debug] Pool built but no unique picks produced.');
+                return;
             }
-            
-            if (stepName && currentStep) {
-                currentStep.textContent = stepName;
-            }
+            container.innerHTML = picks.map(text => `<div class="suggestion-pill" onclick="setQuestion(${JSON.stringify(text)})">${escapeHtml(text)}</div>`).join('');
         }
 
         function updateEstimatedTime(seconds) {
@@ -2748,6 +2764,8 @@ async function processQuestionWithRetry(question) {
                 ]);
                 if(schemaResp && schemaResp.success){
                     manifestSchemaCache = schemaResp;
+                    // If workspace already known, log intersection now
+                    if(workspaceSchemaCache){ debugLogSchemaIntersection(); }
                 }
                 if(queriesResp && queriesResp.success){
                     manifestQueriesCache = queriesResp; // now used for quick suggestions
@@ -2763,6 +2781,41 @@ async function processQuestionWithRetry(question) {
             }
         }
 
+        // Debug helper: log intersection of resource types & tables between manifest (universal) and workspace schemas
+        function debugLogSchemaIntersection(){
+            if(!(manifestSchemaCache && workspaceSchemaCache)) return; // Need both
+            const uni = manifestSchemaCache.resource_type_tables || {};
+            const ws = workspaceSchemaCache.resource_type_tables || {};
+            const uniRts = Object.keys(uni);
+            const wsRts = Object.keys(ws);
+            const rtIntersection = wsRts.filter(r => uniRts.includes(r));
+            const rtOnlyWorkspace = wsRts.filter(r => !uniRts.includes(r));
+            const rtOnlyUniversal = uniRts.filter(r => !wsRts.includes(r));
+            const perRt = {};
+            let totalTableIntersections = 0;
+            rtIntersection.forEach(rt => {
+                const uniTables = Array.isArray(uni[rt]) ? uni[rt] : [];
+                const wsTables = Array.isArray(ws[rt]) ? ws[rt] : [];
+                const tableIntersection = wsTables.filter(t => uniTables.includes(t));
+                totalTableIntersections += tableIntersection.length;
+                perRt[rt] = {
+                    workspaceTablesCount: wsTables.length,
+                    universalTablesCount: uniTables.length,
+                    intersectionCount: tableIntersection.length,
+                    intersectionTables: tableIntersection.slice(0, 30) // cap to avoid huge logs
+                };
+            });
+            console.log('[SchemaIntersection] Summary', {
+                workspaceResourceTypes: wsRts.length,
+                universalResourceTypes: uniRts.length,
+                intersectionResourceTypes: rtIntersection.length,
+                totalTableIntersections,
+                resourceTypesOnlyInWorkspace: rtOnlyWorkspace.slice(0,50),
+                resourceTypesOnlyInUniversal: rtOnlyUniversal.slice(0,50)
+            });
+            console.log('[SchemaIntersection] Per Resource Type (capped)', perRt);
+        }
+
         function renderQuickSuggestions(){
             const container = document.getElementById('quickSuggestions');
             if(!container) return;
@@ -2770,21 +2823,30 @@ async function processQuestionWithRetry(question) {
             // Need workspace resource types and manifest queries
             const queriesByRt = manifestQueriesCache && manifestQueriesCache.queries_by_resource_type;
             const wsRtTables = workspaceSchemaCache && workspaceSchemaCache.resource_type_tables;
-            if(!queriesByRt || !wsRtTables) return;
-            // Build a pool of suggestions mapped to present resource types
+            if(!queriesByRt){
+                // Manifest queries not yet loaded – show passive placeholder (optional)
+                container.innerHTML = '<div style="opacity:0.6;font-size:0.8rem;">(loading suggestions...)</div>';
+                return;
+            }
+            if(!wsRtTables){
+                // Workspace not set yet – fallback to first few generic queries across all resource types
+                const fallback = buildGlobalQueryFallback(queriesByRt, 3);
+                container.innerHTML = fallback.map(text => `<div class="suggestion-pill" onclick="setQuestion(${JSON.stringify(text)})">${escapeHtml(text)}</div>`).join('');
+                return;
+            }
+            // Case-insensitive map of queries by resource type
+            const queriesRtLower = {};
+            Object.entries(queriesByRt).forEach(([k,v])=>{ queriesRtLower[k.toLowerCase()] = v; });
             const presentRts = Object.keys(wsRtTables || {});
             const pool = [];
             presentRts.forEach(rt => {
-                const qlist = queriesByRt[rt] || [];
+                const qlist = queriesRtLower[rt.toLowerCase()] || [];
                 qlist.forEach(q => {
-                    // pick a friendly label: prefer q.description or q.name
                     const label = (q.description || q.name || '').trim();
                     if(!label) return;
-                    // Optionally bias by table presence if q.table exists
                     if(q.table){
                         const tables = wsRtTables[rt] || [];
                         if(!tables.includes(q.table)){
-                            // If the referenced table isn't present, still allow but with lower priority
                             pool.push({label, weight:0.5});
                             return;
                         }
@@ -2792,20 +2854,51 @@ async function processQuestionWithRetry(question) {
                     pool.push({label, weight:1});
                 });
             });
-            if(pool.length === 0) return;
-            // Sort by weight (present tables first), then stable order; pick top 3 unique labels
-            pool.sort((a,b)=> b.weight - a.weight);
-            const seen = new Set();
-            const picks = [];
-            for(const item of pool){
-                const key = item.label.toLowerCase();
-                if(seen.has(key)) continue;
-                seen.add(key);
-                picks.push(item.label);
-                if(picks.length >= 3) break;
+            let picks = [];
+            if(pool.length > 0){
+                pool.sort((a,b)=> b.weight - a.weight);
+                const seen = new Set();
+                for(const item of pool){
+                    const key = item.label.toLowerCase();
+                    if(seen.has(key)) continue;
+                    seen.add(key);
+                    picks.push(item.label);
+                    if(picks.length >= 3) break;
+                }
             }
-            // Render
+            // Fallback if still empty (e.g., resource types have no query definitions)
+            if(picks.length === 0){
+                picks = buildGlobalQueryFallback(queriesByRt, 3);
+                if(picks.length === 0){
+                    container.innerHTML = '<div style="opacity:0.6;font-size:0.8rem;">(no query suggestions found)</div>';
+                    return;
+                }
+            }
             container.innerHTML = picks.map(text => `<div class="suggestion-pill" onclick="setQuestion(${JSON.stringify(text)})">${escapeHtml(text)}</div>`).join('');
+        }
+
+        // Helper: build global fallback suggestions from the full manifest query set
+        function buildGlobalQueryFallback(queriesByRt, limit){
+            // NOTE: Currently not used since we gate suggestions strictly on full intersection readiness.
+            // Retained temporarily for potential future UX where early generic hints are desirable.
+            const agg = [];
+            Object.values(queriesByRt||{}).forEach(list => {
+                if(!Array.isArray(list)) return;
+                list.forEach(q => {
+                    const label = (q.description || q.name || '').trim();
+                    if(label) agg.push(label);
+                });
+            });
+            const uniq = [];
+            const seen = new Set();
+            for(const l of agg){
+                const k = l.toLowerCase();
+                if(seen.has(k)) continue;
+                seen.add(k);
+                uniq.push(l);
+                if(uniq.length >= limit) break;
+            }
+            return uniq;
         }
 
         function showWorkspaceLoading(message){ /* no-op: status panel hidden */ }
@@ -2856,6 +2949,8 @@ async function processQuestionWithRetry(question) {
                             workspaceResourceTypes: Object.keys(workspaceSchemaCache.resource_type_tables || {}).length,
                             unmatched: workspaceSchemaCache.unmatched_tables?.length
                         });
+                        // Log intersection with universal schema (if already loaded)
+                        debugLogSchemaIntersection();
                         // If schema panel already open, re-render
                         const container = document.getElementById('schemaTreeContainer');
                         if(container && container.style.display === 'block'){
