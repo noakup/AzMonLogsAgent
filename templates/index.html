@@ -66,15 +66,20 @@
         .input-group {
             display: flex;
             gap: 10px;
+            align-items: center;
             margin-bottom: 15px;
         }
 
+        :root{ --control-height:44px; }
         .input-group input {
             flex: 1;
-            padding: 12px 15px;
+            padding: 0 15px; /* vertical padding removed for precise centering */
             border: 2px solid #e9ecef;
             border-radius: 8px;
             font-size: 1rem;
+            line-height: calc(var(--control-height) - 4px); /* height minus 2*border */
+            height: var(--control-height); /* Match workspace button explicit height */
+            box-sizing: border-box;
             transition: border-color 0.3s ease;
         }
 
@@ -1368,8 +1373,13 @@
             box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
             animation: slideInFromTop 0.5s ease-out;
         }
-        /* Schema tree styles */
-        .schema-controls { margin-top: 15px; display:flex; gap:10px; flex-wrap:wrap; }
+    /* Schema tree styles */
+    .schema-controls { margin-top: 15px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    .schema-primary-btn { display:inline-flex; align-items:center; gap:8px; background:#0078d4; color:#fff; border:none; padding:8px 12px; border-radius:6px; font-weight:600; font-size:0.85rem; box-shadow:0 1px 2px rgba(0,0,0,0.1); cursor:pointer; height:36px; }
+    .schema-primary-btn:hover{ background:#106ebe; }
+    .schema-primary-btn:active{ background:#005a9e; }
+    .schema-primary-btn .icon{ width:16px; height:16px; display:inline-block; border:2px solid currentColor; border-left-color:transparent; border-bottom-color:transparent; transform:rotate(45deg); border-radius:2px; }
+    .schema-primary-btn[aria-expanded="true"] .icon{ transform:rotate(225deg); }
         .schema-tree-container { margin-top:20px; background:#ffffff; border:1px solid #e0e6ed; border-radius:10px; padding:18px; max-height:500px; overflow:auto; font-family:'Segoe UI', Tahoma, sans-serif; display:none; }
         .schema-tree { list-style:none; padding-left:0; font-size:0.9rem; }
         .schema-tree li { margin:2px 0; line-height:1.4; }
@@ -1382,8 +1392,11 @@
         .schema-badge { background:#e3ebff; color:#31456a; border-radius:12px; padding:0 8px; font-size:0.65rem; font-weight:600; }
         .schema-toggle { font-size:0.7rem; opacity:0.8; }
         .schema-search { flex:1; min-width:220px; }
-        .schema-search input { width:100%; padding:8px 10px; border:1px solid #ccd4dd; border-radius:6px; font-size:0.85rem; }
-        .schema-search input:focus { outline:none; border-color:#667eea; box-shadow:0 0 0 2px rgba(102,126,234,0.25); }
+    .schema-search input { width:100%; padding:8px 10px; border:1px solid #ccd4dd; border-radius:6px; font-size:0.85rem; }
+    .schema-search input:focus { outline:none; border-color:#667eea; box-shadow:0 0 0 2px rgba(102,126,234,0.25); }
+    /* New location for search inside the schema panel */
+    .schema-tree-search input { width:100%; padding:8px 10px; border:1px solid #ccd4dd; border-radius:6px; font-size:0.85rem; }
+    .schema-tree-search input:focus { outline:none; border-color:#667eea; box-shadow:0 0 0 2px rgba(102,126,234,0.25); }
         .schema-stats { font-size:0.75rem; color:#555; background:#f3f6fa; padding:6px 10px; border-radius:20px; display:inline-flex; gap:8px; align-items:center; }
         .schema-provider { font-weight:600; margin-top:18px; font-size:0.95rem; display:flex; align-items:center; gap:6px; }
         .schema-provider + .schema-provider { border-top:1px dashed #e0e6ed; padding-top:14px; }
@@ -1391,6 +1404,21 @@
         .schema-expand-all { background:#f1f4fb; color:#334; }
         .schema-expand-all:hover { background:#e3ebff; }
         @media (max-width:768px){ .schema-tree-container{max-height:60vh;} }
+    /* Set workspace button states */
+    .workspace-btn{position:relative;display:inline-flex;align-items:center;gap:8px;min-width:190px;justify-content:center;white-space:nowrap;height:var(--control-height);padding:0 18px;line-height: calc(var(--control-height) - 4px); font-size:0.9rem;box-sizing:border-box;border:2px solid transparent;border-radius:8px;margin:0;}
+    .workspace-btn .ws-icon-slot{width:20px;display:inline-flex;align-items:center;justify-content:center;position:relative;height:100%;}
+    .workspace-btn .ws-label{display:inline-block;}
+    .workspace-btn .ws-spinner, .workspace-btn .ws-success{vertical-align:middle;}
+    .workspace-btn .ws-spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,0.45);border-top-color:#fff;}
+    .workspace-btn .ws-spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:ws-spin 0.8s linear infinite;display:none;}
+    .workspace-btn.loading .ws-spinner{display:inline-block;}
+    .workspace-btn .ws-success{display:none;font-size:0.95rem;line-height:1;color:#2e8b57;font-weight:600;}
+    .workspace-btn.success .ws-success{display:inline-block;}
+    .workspace-btn.success .ws-spinner{display:none !important;}
+    /* success state keeps original primary colors; indicator handled by .ws-success visibility */
+    .workspace-btn.loading .ws-label{opacity:0.7;}
+    .workspace-btn.success .ws-label{opacity:0.95;}
+    @keyframes ws-spin{to{transform:rotate(360deg);}}
     </style>
 </head>
 <body>
@@ -1405,23 +1433,25 @@
             <div class="setup-section">
                 <h2>🔧 Workspace Setup</h2>                <div class="input-group">
                     <input type="text" id="workspaceId" placeholder="Enter your Log Analytics Workspace ID" value="">
-                    <button class="btn btn-primary" onclick="setupWorkspace()">Set workspace</button>
+                    <button id="setWorkspaceBtn" class="btn btn-primary workspace-btn" onclick="setupWorkspace()" aria-live="polite" aria-label="Set workspace">
+                        <span class="ws-icon-slot" aria-hidden="true">
+                            <span class="ws-spinner"></span>
+                            <span class="ws-success">✔</span>
+                        </span>
+                        <span class="ws-label">Set workspace</span>
+                    </button>
                 </div>
-                <div id="setupStatus">
-                    <!-- Status messages will appear here -->
-                </div>
+                <div id="setupStatus" style="display:none"></div>
                 <div class="schema-controls">
-                    <button class="btn btn-secondary" id="showSchemaBtn" onclick="toggleSchema()">📘 Show Schema</button>
-                    <div class="schema-search"><input type="text" id="schemaSearch" placeholder="Filter resource types or tables..." oninput="filterSchema()" disabled></div>
+                    <button class="schema-primary-btn" id="showSchemaBtn" onclick="toggleSchema()" aria-expanded="false" aria-controls="schemaTreeContainer">
+                        <span class="icon" aria-hidden="true"></span>
+                        <span>Schema</span>
+                    </button>
                     <div id="schemaStats" class="schema-stats" style="display:none;"></div>
                 </div>
                 <div id="schemaTreeContainer" class="schema-tree-container">
-                    <div style="font-size:0.8rem; color:#666; margin-bottom:8px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;">
-                        <span>Resource Types & Tables (from manifests)</span>
-                        <div>
-                            <button class="btn btn-small schema-expand-all" onclick="expandAllSchema(true)">Expand All</button>
-                            <button class="btn btn-small schema-expand-all" onclick="expandAllSchema(false)">Collapse All</button>
-                        </div>
+                    <div class="schema-tree-search" style="margin-bottom:10px;">
+                        <input type="text" id="schemaSearch" placeholder="Filter resource types or tables..." oninput="filterSchema()" disabled>
                     </div>
                     <ul id="schemaTree" class="schema-tree"></ul>
                 </div>
@@ -1499,23 +1529,10 @@
     <script>
         let isConnected = false;
         let currentQueryResult = null; // Store current query result for explain feature
-        let currentOriginalQuestion = '';        function updateStatus(connected, message = '') {
+        let currentOriginalQuestion = '';
+        function updateStatus(connected, message = '') {
+            // Keep state but do not render any status indicator UI.
             isConnected = connected;
-            const statusElement = document.getElementById('setupStatus');
-            
-            if (connected) {
-                statusElement.innerHTML = `<span class="status-indicator status-connected">✅ Connected</span>`;
-                if (message) {
-                    statusElement.innerHTML += `<div class="success">${message}</div>`;
-                }
-            } else {
-                // Only show error message if there's an actual message, don't show "Not Connected"
-                if (message) {
-                    statusElement.innerHTML = `<div class="error">${message}</div>`;
-                } else {
-                    statusElement.innerHTML = '';
-                }
-            }
         }
         
         function resetGoButton() {
@@ -1910,14 +1927,9 @@ async function setupWorkspace() {
     const workspaceId = document.getElementById('workspaceId').value.trim();
 
     if (!workspaceId) {
-        const statusElement = document.getElementById('setupStatus');
-        statusElement.innerHTML = `<div class="error">Please enter a workspace ID</div>`;
+        // No inline status indicator; keep silent
         return;
     }
-
-    // Show indicating message
-    const statusElement = document.getElementById('setupStatus');
-    statusElement.innerHTML = `<div class="loading">Setting up workspace...</div>`;
 
     try {
         const response = await fetch('/api/setup', {
@@ -1930,7 +1942,6 @@ async function setupWorkspace() {
 
         if (data.success) {
             isConnected = true;
-            statusElement.innerHTML = `<span class="status-indicator status-connected">Checking connection to workspace...</span>`;
 
             // Automatically check connection
             const connectionResponse = await fetch('/api/test-connection', {
@@ -1940,9 +1951,7 @@ async function setupWorkspace() {
 
             const connectionData = await connectionResponse.json();
 
-            if (connectionData.success) {
-                statusElement.innerHTML = `<span class="status-indicator status-connected">Connected successfully</span>`;
-            } else {
+            if (!connectionData.success) {
                 updateStatus(false, connectionData.error);
             }
         } else {
@@ -2700,8 +2709,37 @@ async function processQuestionWithRetry(question) {
 
         // Prefetch manifest schema & queries as soon as DOM is ready (before user sets workspace)
         document.addEventListener('DOMContentLoaded', () => {
+            initWorkspaceButtonSizing();
             prefetchManifestAssets();
         });
+
+        function initWorkspaceButtonSizing(){
+            const btn = document.getElementById('setWorkspaceBtn');
+            if(!btn) return;
+            const labelEl = btn.querySelector('.ws-label');
+            if(!labelEl) return;
+            const originalText = labelEl.textContent;
+            const stateLabels = ['Set workspace','Setting up...','Workspace set'];
+            let maxWidth = 0;
+            // Ensure icon slot participates in measurement
+            const iconSlot = btn.querySelector('.ws-icon-slot');
+            const originalClasses = btn.className;
+            stateLabels.forEach(text => {
+                labelEl.textContent = text;
+                // Simulate widest state (spinner showing + longest text)
+                btn.classList.add('loading');
+                const w = btn.offsetWidth;
+                if(w > maxWidth) maxWidth = w;
+                btn.classList.remove('loading');
+            });
+            // Restore
+            labelEl.textContent = originalText;
+            btn.className = originalClasses;
+            // Apply locked width with small buffer to avoid sub-pixel wrap
+            // Instead of locking explicit width, ensure min-width covers widest state to avoid vertical expansion
+            btn.style.minWidth = (maxWidth + 4) + 'px';
+            btn.dataset.lockedWidth = '1';
+        }
 
         async function prefetchManifestAssets(){
             try {
@@ -2725,17 +2763,9 @@ async function processQuestionWithRetry(question) {
             }
         }
 
-        function showWorkspaceLoading(message){
-            const statusElement = document.getElementById('setupStatus');
-            statusElement.innerHTML = `\n                <div class="workspace-loading">\n                    <div class="breathing-dot"></div>\n                    <span>${message || 'Fetching workspace schema...'}</span>\n                </div>`;
-        }
+        function showWorkspaceLoading(message){ /* no-op: status panel hidden */ }
 
-        function clearWorkspaceLoading(successMsg){
-            const statusElement = document.getElementById('setupStatus');
-            if(successMsg){
-                statusElement.innerHTML = `<span class="status-indicator status-connected">${successMsg}</span>`;
-            }
-        }
+        function clearWorkspaceLoading(successMsg){ /* no-op: status panel hidden */ }
 
     function startWorkspaceSchemaPolling(){
             if(workspacePollingInterval){
@@ -2753,6 +2783,22 @@ async function processQuestionWithRetry(question) {
                         window.workspaceSchemaCache = data; // expose globally for debugging / fallback
                         clearInterval(workspacePollingInterval); workspacePollingInterval = null;
                         clearWorkspaceLoading('Workspace schema ready');
+                        // Update button to success state
+                        const btn = document.getElementById('setWorkspaceBtn');
+                        if(btn){
+                            btn.classList.remove('loading');
+                            btn.classList.add('success'); // only toggles icon visibility
+                            btn.disabled = false;
+                            const label = btn.querySelector('.ws-label');
+                            if(label){
+                                // Keep original button width; avoid longer text expanding width
+                                if(!btn.dataset.originalLabel){ btn.dataset.originalLabel = label.textContent; }
+                                label.textContent = 'Workspace set';
+                                if(btn.dataset.lockedWidth){
+                                    btn.style.width = btn.style.width; // no-op ensures width stays fixed
+                                }
+                            }
+                        }
                         // Build filtered schema immediately if manifest already loaded
                         if(manifestSchemaCache){
                             schemaDataCache = buildFilteredSchema(manifestSchemaCache, workspaceSchemaCache);
@@ -2773,7 +2819,7 @@ async function processQuestionWithRetry(question) {
                             const stats = document.getElementById('schemaStats');
                             if(stats){
                                 stats.style.display='inline-flex';
-                                stats.textContent = `${schemaDataCache.counts.resource_types} resource types • ${schemaDataCache.counts.providers} providers • ${schemaDataCache.counts.tables} tables` + (manifestSchemaCache ? ' (filtered)' : '');
+                                stats.textContent = `${schemaDataCache.counts.resource_types} resource types • ${schemaDataCache.counts.providers} providers • ${schemaDataCache.counts.tables} tables`;
                             }
                         }
                     } else if(data.status === 'pending') {
@@ -2859,11 +2905,17 @@ async function processQuestionWithRetry(question) {
         const originalSetupWorkspace = setupWorkspace; // keep reference if needed
         async function setupWorkspace(){
             const workspaceId = document.getElementById('workspaceId').value.trim();
-            const statusElement = document.getElementById('setupStatus');
+            const btn = document.getElementById('setWorkspaceBtn');
             if(!workspaceId){
-                statusElement.innerHTML = `<div class="error">Please enter a workspace ID</div>`; return;
+                // No status panel messages; focus input and exit
+                const input = document.getElementById('workspaceId');
+                if(input) input.focus();
+                return;
             }
-            statusElement.innerHTML = `<div class="loading">Setting up workspace...</div>`;
+            // Reset states
+            btn.classList.remove('success');
+            btn.classList.add('loading');
+            btn.disabled = true;
             try {
                 const response = await fetch('/api/setup', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ workspace_id: workspaceId }) });
                 const data = await response.json();
@@ -2873,9 +2925,13 @@ async function processQuestionWithRetry(question) {
                     startWorkspaceSchemaPolling();
                 } else {
                     updateStatus(false, data.error);
+                    btn.disabled = false;
+                    btn.classList.remove('loading');
                 }
             } catch(err){
                 updateStatus(false, `Connection failed: ${err.message}`);
+                btn.disabled = false;
+                btn.classList.remove('loading');
             }
         }
         window.setupWorkspace = setupWorkspace; // reassign with enhanced version
@@ -2883,8 +2939,17 @@ async function processQuestionWithRetry(question) {
         function toggleSchema(){
             const container = document.getElementById('schemaTreeContainer');
             const btn = document.getElementById('showSchemaBtn');
-            if(container.style.display === 'block'){ container.style.display='none'; btn.textContent='📘 Show Schema'; return; }
-            container.style.display='block'; btn.textContent='📕 Hide Schema';
+            const isOpen = container.style.display === 'block';
+            if(isOpen){
+                container.style.display='none';
+                if(btn){ btn.setAttribute('aria-expanded','false'); btn.classList.remove('active'); }
+                return;
+            }
+            container.style.display='block';
+            if(btn){ btn.setAttribute('aria-expanded','true'); btn.classList.add('active'); }
+            // Enable search if schema is already cached
+            const searchInput = document.getElementById('schemaSearch');
+            if(searchInput && schemaDataCache){ searchInput.disabled = false; }
             const tree = document.getElementById('schemaTree');
             if(!schemaDataCache){
                 fetchSchema();
@@ -2893,10 +2958,13 @@ async function processQuestionWithRetry(question) {
                 if(!tree || !tree.children.length || /Loading schema|No matches|Error:/i.test(tree.innerHTML)){
                     console.log('[Schema] Rendering from existing cache');
                     renderSchemaTree(schemaDataCache);
+                    // Ensure search becomes interactive when using cached data
+                    const search = document.getElementById('schemaSearch');
+                    if(search) search.disabled = false;
                     const stats = document.getElementById('schemaStats');
                     if(stats && schemaDataCache.counts){
                         stats.style.display='inline-flex';
-                        stats.textContent = `${schemaDataCache.counts.resource_types} resource types • ${schemaDataCache.counts.providers} providers • ${schemaDataCache.counts.tables} tables${workspaceSchemaCache ? (manifestSchemaCache ? ' (filtered)' : '') : ''}`;
+                        stats.textContent = `${schemaDataCache.counts.resource_types} resource types • ${schemaDataCache.counts.providers} providers • ${schemaDataCache.counts.tables} tables`;
                     }
                 }
             }
@@ -2920,7 +2988,7 @@ async function processQuestionWithRetry(question) {
                 }
                 renderSchemaTree(schemaDataCache);
                 stats.style.display='inline-flex';
-                stats.textContent = `${schemaDataCache.counts.resource_types} resource types • ${schemaDataCache.counts.providers} providers • ${schemaDataCache.counts.tables} tables${workspaceSchemaCache ? ' (filtered)' : ''}`;
+                stats.textContent = `${schemaDataCache.counts.resource_types} resource types • ${schemaDataCache.counts.providers} providers • ${schemaDataCache.counts.tables} tables`;
                 search.disabled = false;
             }catch(e){
                 tree.innerHTML = `<li class='schema-empty'>Error: ${e.message}</li>`;
@@ -2939,7 +3007,7 @@ async function processQuestionWithRetry(question) {
                 // Filter provider if none of its rts or tables match
                 const providerMatches = rts.some(rt=> matchRtOrTables(rt, resource_type_tables[rt]||[], ft));
                 if(!providerMatches) return;
-                html += `<li class='schema-provider'>${provider} <span class='schema-badge'>${rts.length}</span></li>`;
+                html += `<li class='schema-provider'>${provider}</li>`;
                 rts.forEach(rt=>{
                     const tables = resource_type_tables[rt]||[];
                     if(!matchRtOrTables(rt, tables, ft)) return;
@@ -2957,7 +3025,7 @@ async function processQuestionWithRetry(question) {
             if(resource_types.length === 0 && window.workspaceSchemaCache && Array.isArray(window.workspaceSchemaCache.unmatched_tables) && window.workspaceSchemaCache.unmatched_tables.length){
                 const unmatchedList = window.workspaceSchemaCache.tables || [];
                 if(unmatchedList.length){
-                    html = `<li class='schema-provider'>Unclassified Tables <span class='schema-badge'>${unmatchedList.length}</span></li>`;
+                    html = `<li class='schema-provider'>Unclassified Tables</li>`;
                     html += unmatchedList.map(t=>`<li><div class='schema-resource-type'>${t.name || t} <span class='schema-badge'>${(t.doc_resource_type || t.manifest_resource_type || t.workspace_resource_type || 'unknown').split('/')[0]}</span></div></li>`).join('');
                     html += `<li class='schema-empty'>These tables were not found in NGSchema. Resource types derived from docs or fallback mapping.</li>`;
                 }
