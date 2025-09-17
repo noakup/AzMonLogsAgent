@@ -1,0 +1,40 @@
+# Deployment files
+.deployment
+Procfile
+package.json
+requirements-azure.txt
+main_azure.py
+app.py
+AZURE_DEPLOYMENT.md
+
+# Development files
+.env
+.env.local
+.vscode/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env
+venv/
+.venv
+ENV/
+env.bak/
+venv.bak/
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Azure specific
+.azure/
