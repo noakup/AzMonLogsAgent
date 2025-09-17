@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Natural Language KQL Agent</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='15' fill='url(%23grad)'/%3E%3Ctext x='50' y='35' font-family='Arial,sans-serif' font-size='24' font-weight='bold' text-anchor='middle' fill='white'%3EKQL%3C/text%3E%3Ctext x='50' y='65' font-family='Arial,sans-serif' font-size='36' text-anchor='middle' fill='white'%3E🤖%3C/text%3E%3C/svg%3E">
+    <link rel="shortcut icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='15' fill='url(%23grad)'/%3E%3Ctext x='50' y='35' font-family='Arial,sans-serif' font-size='24' font-weight='bold' text-anchor='middle' fill='white'%3EKQL%3C/text%3E%3Ctext x='50' y='65' font-family='Arial,sans-serif' font-size='36' text-anchor='middle' fill='white'%3E🤖%3C/text%3E%3C/svg%3E">
     <style>
         * {
             margin: 0;
@@ -1750,6 +1752,36 @@
     
     // Check if tables need expansion controls
     checkTableOverflow();
+    
+    // Auto-scroll to results section after query completion
+    setTimeout(() => {
+        const resultsSection = document.getElementById('resultsSection');
+        console.log('Auto-scrolling to results section:', resultsSection); // Debug log
+        if (resultsSection) {
+            // Try multiple scroll approaches for better compatibility
+            try {
+                resultsSection.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+                console.log('Scroll initiated with scrollIntoView'); // Debug log
+            } catch (e) {
+                // Fallback for browsers that don't support smooth scrolling
+                resultsSection.scrollIntoView(true);
+                console.log('Fallback scroll used'); // Debug log
+            }
+            
+            // Additional fallback - scroll to a specific position
+            const rect = resultsSection.getBoundingClientRect();
+            if (rect.top > window.innerHeight || rect.top < 0) {
+                window.scrollTo({
+                    top: window.pageYOffset + rect.top - 20,
+                    behavior: 'smooth'
+                });
+                console.log('Additional fallback scroll used'); // Debug log
+            }
+        }
+    }, 300); // Further increased delay to account for the 500ms delay in enhancedAskQuestion
 }
 
 function createTableHTML(table) {
@@ -1921,6 +1953,32 @@ function showError(error) {
     
     // Hide explain section when showing errors
     hideExplainSection();
+    
+    // Auto-scroll to results section after error
+    setTimeout(() => {
+        const resultsSection = document.getElementById('resultsSection');
+        if (resultsSection) {
+            // Try multiple scroll approaches for better compatibility
+            try {
+                resultsSection.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            } catch (e) {
+                // Fallback for browsers that don't support smooth scrolling
+                resultsSection.scrollIntoView(true);
+            }
+            
+            // Additional fallback - scroll to a specific position
+            const rect = resultsSection.getBoundingClientRect();
+            if (rect.top > window.innerHeight || rect.top < 0) {
+                window.scrollTo({
+                    top: window.pageYOffset + rect.top - 20,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    }, 200); // Increased delay to ensure content is rendered
 }
 
 async function setupWorkspace() {
@@ -2071,6 +2129,18 @@ function enhancedAskQuestion() {
     // Show the nice loading in results pane immediately
     showLoading('🚀 Preparing to process your question...');
     
+    // Scroll to results section immediately when loading starts
+    setTimeout(() => {
+        const resultsSection = document.getElementById('resultsSection');
+        console.log('Immediate scroll to results section on Go click'); // Debug
+        if (resultsSection) {
+            resultsSection.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        }
+    }, 200); // Small delay to ensure showLoading has rendered
+    
     // Now do validation checks and show errors in the loading area if needed
     if (!question) {
         setTimeout(() => {
@@ -2171,9 +2241,33 @@ async function processQuestionWithRetry(question) {
                 // Show completion with stats
                 setTimeout(() => {
                     showResult(data.result, data.timestamp);
+                    
+                    // Auto-scroll to results after showing them
+                    setTimeout(() => {
+                        const resultsSection = document.getElementById('resultsSection');
+                        console.log('Scrolling to results section after showResult'); // Debug
+                        if (resultsSection) {
+                            resultsSection.scrollIntoView({ 
+                                behavior: 'smooth', 
+                                block: 'start' 
+                            });
+                        }
+                    }, 100); // Short delay after showResult completes
                 }, 500);
             } else {
                 showError(data.error);
+                
+                // Auto-scroll to error results
+                setTimeout(() => {
+                    const resultsSection = document.getElementById('resultsSection');
+                    console.log('Scrolling to results section after showError'); // Debug
+                    if (resultsSection) {
+                        resultsSection.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start' 
+                        });
+                    }
+                }, 100);
             }
             break;
             
@@ -2185,6 +2279,18 @@ async function processQuestionWithRetry(question) {
                 continue;
             } else {
                 showError(`Query failed after ${maxRetries + 1} attempts: ${error.message}`);
+                
+                // Auto-scroll to error results
+                setTimeout(() => {
+                    const resultsSection = document.getElementById('resultsSection');
+                    console.log('Scrolling to results section after catch error'); // Debug
+                    if (resultsSection) {
+                        resultsSection.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start' 
+                        });
+                    }
+                }, 100);
                 break;
             }                }
     }

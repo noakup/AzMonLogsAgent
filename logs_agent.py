@@ -385,14 +385,25 @@ class KQLAgent:
                     return "📊 Query explanation: The query executed successfully but all tables are empty."
                 else:
                     return "📊 Query explanation: The query executed successfully but returned no data rows."
-            elif total_records > 1000:
-                return f"📊 Cannot explain results: Too many records ({total_records:,}). Explanation is available for queries returning 1-1000 records. Consider adding filters to reduce the result size."
+            
+            # Handle case where we have more than 1000 records
+            truncated_tables = tables
+            truncation_note = ""
+            
+            if total_records > 1000:
+                # Truncate tables to first 1000 records total
+                truncated_tables = self._truncate_tables_to_limit(tables, 1000)
+                truncation_note = f" (Note: Results truncated to first 1000 records out of {total_records:,} total records for explanation purposes.)"
             
             # Prepare data summary for OpenAI
-            data_summary = self._format_data_for_explanation(tables, query_result.get("kql_query", ""))
+            data_summary = self._format_data_for_explanation(truncated_tables, query_result.get("kql_query", ""))
             
             # Call OpenAI to explain the results
             explanation = await self._call_openai_for_explanation(data_summary, original_question)
+            
+            # Add truncation note if applicable
+            if truncation_note:
+                explanation = explanation + truncation_note
             
             return explanation
             
@@ -401,6 +412,44 @@ class KQLAgent:
             error_details = traceback.format_exc()
             print(f"[Explain Error] {error_details}")
             return f"❌ Error explaining results: {str(e)}"
+    
+    def _truncate_tables_to_limit(self, tables: List[Dict], limit: int) -> List[Dict]:
+        """
+        Truncate tables to contain at most 'limit' total records
+        Returns a new list of tables with truncated data
+        """
+        truncated_tables = []
+        records_included = 0
+        
+        for table in tables:
+            if records_included >= limit:
+                break
+                
+            table_copy = table.copy()
+            rows = table.get('rows', [])
+            row_count = table.get('row_count', len(rows))
+            
+            if not table.get("has_data", False) or row_count == 0:
+                # Include empty tables as-is
+                truncated_tables.append(table_copy)
+                continue
+            
+            records_remaining = limit - records_included
+            
+            if row_count <= records_remaining:
+                # Include entire table
+                truncated_tables.append(table_copy)
+                records_included += row_count
+            else:
+                # Truncate table to fit remaining limit
+                truncated_rows = rows[:records_remaining]
+                table_copy['rows'] = truncated_rows
+                table_copy['row_count'] = len(truncated_rows)
+                truncated_tables.append(table_copy)
+                records_included += len(truncated_rows)
+                break
+        
+        return truncated_tables
     
     def _format_data_for_explanation(self, tables: List[Dict], kql_query: str) -> str:
         """Format query results data for OpenAI analysis"""
