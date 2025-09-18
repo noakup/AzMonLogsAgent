@@ -247,18 +247,21 @@
         .suggestion-pills {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px 12px; /* more breathing room */
+            align-items: flex-start;
         }
 
         .suggestion-pill {
             background: #e9f4ff;
             color: #0066cc;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            padding: 6px 14px;
+            border-radius: 18px;
+            font-size: 0.85rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
             border: 1px solid #b3d9ff;
+            line-height: 1.2;
+            margin: 5px; /* added per request */
         }
 
         .suggestion-pill:hover {
@@ -289,17 +292,27 @@
             transform: translateY(-1px);
         }
 
-        .suggestion-pill.workspace-examples {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+        /* "More Suggestions" now a link-like element */
+        .more-suggestions-link {
+            background: transparent;
+            color: #8057c7;
             border: none;
-            font-weight: 500;
+            padding: 4px 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 4px;
+            align-self: center;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
-
-        .suggestion-pill.workspace-examples:hover {
-            background: linear-gradient(135deg, #5a6fd8 0%, #654892 100%);
-            transform: translateY(-1px);
+        .more-suggestions-link:hover {
+            text-decoration: underline;
+            color: #5e33a9;
+            background: rgba(128,87,199,0.06);
         }
+        .more-suggestions-link:active { color:#4b278d; }
 
         .results-section {
             background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
@@ -1471,11 +1484,11 @@
                     </button>
                 </div>
 
-                <div class="suggestions">
+                <div class="suggestions" id="suggestionsContainer" style="display:none;">
                     <h3>💡 Quick Suggestions:</h3>
                     <div class="suggestion-pills">
                         <div id="quickSuggestions"></div>
-                        <div class="suggestion-pill workspace-examples" onclick="discoverWorkspaceExamples()">💡 More Suggestions</div>
+                        <button type="button" class="more-suggestions-link" onclick="discoverWorkspaceExamples()" aria-label="Show more suggestions">💡 More Suggestions</button>
                     </div>
                 </div>
 
@@ -2776,12 +2789,13 @@ async function processQuestionWithRetry(question) {
 
         function renderQuickSuggestions(){
             const container = document.getElementById('quickSuggestions');
+            const wrapper = document.getElementById('suggestionsContainer');
             if(!container) return;
             container.innerHTML = '';
             const wsQueries = (workspaceSchemaCache && workspaceSchemaCache.table_queries) || {};
             const debugInfo = { source:'workspaceOnly', tables:Object.keys(wsQueries).length };
             if(!Object.keys(wsQueries).length){
-                container.innerHTML = '<div style="opacity:0.6;font-size:0.8rem;">(no query suggestions found)</div>';
+                if(wrapper){ wrapper.style.display = 'none'; }
                 console.log('[QuickSuggestions]', { ...debugInfo, poolSize:0, picks:[] });
                 return;
             }
@@ -2794,11 +2808,7 @@ async function processQuestionWithRetry(question) {
                     pool.push({label, weight: q.code ? 1.2 : 1});
                 });
             });
-            if(!pool.length){
-                container.innerHTML = '<div style="opacity:0.6;font-size:0.8rem;">(no query suggestions found)</div>';
-                console.log('[QuickSuggestions]', { ...debugInfo, poolSize:0, picks:[] });
-                return;
-            }
+            if(!pool.length){ if(wrapper){ wrapper.style.display = 'none'; } console.log('[QuickSuggestions]', { ...debugInfo, poolSize:0, picks:[] }); return; }
             pool.sort((a,b)=> b.weight - a.weight);
             const seen = new Set();
             const picks = [];
@@ -2810,6 +2820,7 @@ async function processQuestionWithRetry(question) {
                 if(picks.length >= 3) break;
             }
             container.innerHTML = picks.map(text => `<div class=\"suggestion-pill\" data-question=\"${encodeHtmlAttribute(text)}\">${escapeHtml(text)}</div>`).join('');
+            if(wrapper){ wrapper.style.display = picks.length ? 'block' : 'none'; }
             console.log('[QuickSuggestions]', { ...debugInfo, poolSize: pool.length, picks });
         }
 
