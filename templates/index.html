@@ -249,18 +249,21 @@
         .suggestion-pills {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px 12px; /* more breathing room */
+            align-items: flex-start;
         }
 
         .suggestion-pill {
             background: #e9f4ff;
             color: #0066cc;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            padding: 6px 14px;
+            border-radius: 18px;
+            font-size: 0.85rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
             border: 1px solid #b3d9ff;
+            line-height: 1.2;
+            margin: 5px; /* added per request */
         }
 
         .suggestion-pill:hover {
@@ -291,17 +294,27 @@
             transform: translateY(-1px);
         }
 
-        .suggestion-pill.workspace-examples {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+        /* "More Suggestions" now a link-like element */
+        .more-suggestions-link {
+            background: transparent;
+            color: #8057c7;
             border: none;
-            font-weight: 500;
+            padding: 4px 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 4px;
+            align-self: center;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
-
-        .suggestion-pill.workspace-examples:hover {
-            background: linear-gradient(135deg, #5a6fd8 0%, #654892 100%);
-            transform: translateY(-1px);
+        .more-suggestions-link:hover {
+            text-decoration: underline;
+            color: #5e33a9;
+            background: rgba(128,87,199,0.06);
         }
+        .more-suggestions-link:active { color:#4b278d; }
 
         .results-section {
             background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
@@ -1386,7 +1399,7 @@
         .schema-tree { list-style:none; padding-left:0; font-size:0.9rem; }
         .schema-tree li { margin:2px 0; line-height:1.4; }
         .schema-group { margin-top:12px; }
-        .schema-group-title { font-weight:600; background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); -webkit-background-clip:text; color:transparent; cursor:pointer; user-select:none; display:flex; align-items:center; gap:6px; }
+    .schema-group-title { font-weight:600; background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); -webkit-background-clip:text; background-clip:text; color:transparent; cursor:pointer; user-select:none; display:flex; align-items:center; gap:6px; }
         .schema-resource-type { cursor:pointer; padding:2px 4px; border-radius:4px; transition:background .2s; display:flex; align-items:center; gap:4px; }
         .schema-resource-type:hover { background:#f1f4fb; }
         .schema-table-list { margin-left:18px; margin-top:4px; }
@@ -1473,13 +1486,11 @@
                     </button>
                 </div>
 
-                <div class="suggestions">
+                <div class="suggestions" id="suggestionsContainer" style="display:none;">
                     <h3>💡 Quick Suggestions:</h3>
                     <div class="suggestion-pills">
-                        <div class="suggestion-pill" onclick="setQuestion('Show me failed requests from the last hour')">Failed Requests</div>
-                        <div class="suggestion-pill" onclick="setQuestion('What are the top 5 slowest API calls?')">Slowest APIs</div>
-                        <div class="suggestion-pill" onclick="setQuestion('Get heartbeat data from the last 30 minutes')">Heartbeat Data</div>
-                        <div class="suggestion-pill workspace-examples" onclick="discoverWorkspaceExamples()">💡 More Suggestions</div>
+                        <div id="quickSuggestions"></div>
+                        <button type="button" class="more-suggestions-link" onclick="discoverWorkspaceExamples()" aria-label="Show more suggestions">💡 More Suggestions</button>
                     </div>
                 </div>
 
@@ -1537,132 +1548,90 @@
             isConnected = connected;
         }
         
-        function resetGoButton() {
-            const goButton = document.querySelector('.floating-go-btn');
-            if (goButton) {
-                goButton.textContent = 'Go!';
-                goButton.disabled = false;
-                goButton.style.opacity = '1';
-                goButton.style.pointerEvents = 'auto';
-                goButton.style.background = 'linear-gradient(135deg, #28a745 0%, #20c997 100%)';
-                goButton.style.cursor = 'pointer';
+        function startWorkspaceSchemaPolling(){
+            // Cancel any prior strategy
+            if(workspacePollingInterval){
+                clearTimeout(workspacePollingInterval);
+                workspacePollingInterval = null;
             }
-        }
+            showWorkspaceLoading('Discovering active tables in workspace...');
+            let attempt = 0;
+            const maxAttempts = 40; // soft cap
+            const baseDelay = 800;   // ms
 
-        function showLoading(step = 'Initializing...') {
-            const resultsSection = document.getElementById('resultsSection');
-            const resultContent = document.getElementById('resultContent');
-            
-            // Force the results section to be visible immediately
-            resultsSection.style.display = 'block';
-            resultsSection.classList.add('visible');
-            
-            resultContent.innerHTML = `
-                <div class="loading">
-                    <div class="spinner"></div>
-                    <div class="loading-steps">
-                        <div id="currentStep" class="current-step">${step}</div>
-                        
-                        <div class="progress-container">
-                            <div id="progressBar" class="progress-bar"></div>
-                        </div>
-                        
-                        <div class="timing-info">
-                            <span id="progressPercent">0%</span>
-                            <span id="estimatedTime">Estimating...</span>
-                        </div>
-                        
-                        <div class="progress-steps">
-                            <div class="step" id="step-translate">🔄 Translating to KQL...</div>
-                            <div class="step" id="step-validate">✅ Validating query...</div>
-                            <div class="step" id="step-execute">⚡ Executing query...</div>
-                            <div class="step" id="step-format">📊 Formatting results...</div>
-                        </div>
-                        
-                        <div class="loading-stats">
-                            <div>✨ <strong>Smart Retry Logic:</strong> Automatic retries for better results</div>
-                            <div>🕐 <strong>Timespan Detection:</strong> Intelligent time filter handling</div>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            // Hide explain section during loading
-            hideExplainSection();
-        }
-
-        // Analytics and metrics for enhanced loading
-        let loadingMetrics = {
-            startTime: null,
-            retryCount: 0,
-            totalSteps: 4,
-            currentStep: 0,
-            estimatedDuration: 8000 // 8 seconds baseline
-        };
-
-        function initializeMetrics() {
-            loadingMetrics.startTime = Date.now();
-            loadingMetrics.retryCount = 0;
-            loadingMetrics.currentStep = 0;
-        }
-
-        function trackRetry() {
-            loadingMetrics.retryCount++;
-            // Adjust estimated duration based on retries
-            loadingMetrics.estimatedDuration += 2000; // Add 2s per retry
-        }
-
-        function calculateProgress(phase) {
-            const phaseProgress = {
-                'translate': 25,
-                'validate': 60, 
-                'execute': 80,
-                'format': 95,
-                'complete': 100
-            };
-            
-            let baseProgress = phaseProgress[phase] || 0;
-            
-            // Adjust for retries
-            if (loadingMetrics.retryCount > 0) {
-                baseProgress = Math.max(15, baseProgress - (loadingMetrics.retryCount * 5));
-            }
-            
-            return Math.min(100, baseProgress);
-        }
-
-        function getSmartEstimate() {
-            const elapsed = Date.now() - loadingMetrics.startTime;
-            const remaining = Math.max(0, loadingMetrics.estimatedDuration - elapsed);
-            return Math.ceil(remaining / 1000);
-        }
-
-        function updateProgress(percentage, stepName = '') {
-            const progressBar = document.getElementById('progressBar');
-            const progressPercent = document.getElementById('progressPercent');
-            const currentStep = document.getElementById('currentStep');
-            
-            if (progressBar) {
-                progressBar.style.width = `${percentage}%`;
-            }
-            
-            if (progressPercent) {
-                progressPercent.textContent = `${percentage}%`;
-            }
-            
-            if (stepName && currentStep) {
-                currentStep.textContent = stepName;
-            }
-        }
-
-        function updateEstimatedTime(seconds) {
-            const estimatedTime = document.getElementById('estimatedTime');
-            if (estimatedTime) {
-                if (seconds > 0) {
-                    estimatedTime.textContent = `~${seconds}s remaining`;
-                } else {
-                    estimatedTime.textContent = 'Almost done...';
+            const poll = async () => {
+                attempt++;
+                try {
+                    const resp = await fetch('/api/workspace-schema');
+                    const data = await resp.json();
+                    if(data.status === 'ready' && data.success){
+                        workspaceSchemaCache = data;
+                        window.workspaceSchemaCache = data;
+                        clearWorkspaceLoading('Workspace schema ready');
+                        const btn = document.getElementById('setWorkspaceBtn');
+                        if(btn){
+                            btn.classList.remove('loading');
+                            btn.classList.add('success');
+                            btn.disabled = false;
+                            const label = btn.querySelector('.ws-label');
+                            if(label){
+                                if(!btn.dataset.originalLabel){ btn.dataset.originalLabel = label.textContent; }
+                                label.textContent = 'Workspace set';
+                            }
+                        }
+                        if(manifestSchemaCache){
+                            schemaDataCache = buildFilteredSchema(manifestSchemaCache, workspaceSchemaCache);
+                        } else {
+                            schemaDataCache = buildWorkspaceOnlySchema(workspaceSchemaCache);
+                        }
+                        console.log('[Schema] Workspace schema ready', {
+                            resourceTypes: schemaDataCache.resource_types?.length,
+                            tables: schemaDataCache.counts?.tables,
+                            workspaceResourceTypes: Object.keys(workspaceSchemaCache.resource_type_tables || {}).length,
+                            unmatched: workspaceSchemaCache.unmatched_tables?.length
+                        });
+                        debugLogSchemaIntersection();
+                        if(document.getElementById('schemaTreeContainer')?.style.display === 'block'){
+                            renderSchemaTree();
+                        }
+                        renderQuickSuggestions();
+                        return; // stop polling
+                    }
+                    if(data.status === 'uninitialized'){
+                        console.warn('[SchemaPolling] Uninitialized; aborting.');
+                        return;
+                    }
+                    if(attempt % 5 === 0){
+                        console.log('[SchemaPolling] Pending (attempt ' + attempt + ')');
+                    }
+                } catch(err){
+                    if(attempt % 3 === 0){ console.warn('[SchemaPolling] Error', err); }
                 }
+                if(attempt >= maxAttempts){
+                    console.warn('[SchemaPolling] Reached max attempts; giving up.');
+                    return;
+                }
+                // Exponential backoff with cap (0.8s,1.2s,1.8s,2.7s,... up to ~10s)
+                const delay = Math.min(10000, Math.round(baseDelay * Math.pow(1.5, attempt-1)));
+                workspacePollingInterval = setTimeout(poll, delay);
+            };
+            poll();
+        }
+
+        // Reintroduced after polling refactor (was accidentally broken by patch)
+        function updateProgress(percent, message){
+            try {
+                const bar = document.getElementById('progressBar');
+                if(bar){
+                    bar.style.width = Math.min(100, Math.max(0, percent)) + '%';
+                }
+                const statusEl = document.getElementById('progressStatus');
+                if(statusEl && message){
+                    statusEl.textContent = message;
+                }
+                window.__lastProgressUpdate = { t: Date.now(), percent, message };
+            } catch(e){
+                console.warn('updateProgress failed', e);
             }
         }
 
@@ -1695,6 +1664,20 @@
                         currentStepElement.textContent += ' (retrying for better results...)';
                     }
                 }
+            }
+        }
+        // Restore missing helper to reset the floating Go button after query completes or errors
+        function resetGoButton(){
+            try {
+                const goButton = document.querySelector('.floating-go-btn');
+                if(!goButton) return;
+                goButton.disabled = false;
+                goButton.innerHTML = 'Go!';
+                goButton.style.opacity = '1';
+                goButton.style.background = '';
+                goButton.style.cursor = 'pointer';
+            } catch(e){
+                console.warn('resetGoButton failed', e);
             }
         }
           function showResult(result, timestamp) {
@@ -2173,7 +2156,6 @@ async function processQuestionWithRetry(question) {
     
     // Initialize progress
     updateProgress(10, '🔄 Starting translation process...');
-    updateEstimatedTime(8);
     
     while (retryCount <= maxRetries) {
         try {
@@ -2187,7 +2169,6 @@ async function processQuestionWithRetry(question) {
             // Translation phase
             updateProgress(25, '🔄 Translating to KQL...');
             updateLoadingStep('step-translate', 'active');
-            updateEstimatedTime(6);
             
             // Simulate translation time
             await new Promise(resolve => setTimeout(resolve, 800 + (retryCount * 500)));
@@ -2204,7 +2185,6 @@ async function processQuestionWithRetry(question) {
             updateProgress(60, '✅ Validating generated query...');
             updateLoadingStep('step-translate', 'completed');
             updateLoadingStep('step-validate', 'active');
-            updateEstimatedTime(4);
             await new Promise(resolve => setTimeout(resolve, 400));
             
             const data = await response.json();
@@ -2220,19 +2200,16 @@ async function processQuestionWithRetry(question) {
             updateProgress(80, '⚡ Executing query on Azure...');
             updateLoadingStep('step-validate', 'completed');
             updateLoadingStep('step-execute', 'active');
-            updateEstimatedTime(2);
             await new Promise(resolve => setTimeout(resolve, 600));
             
             // Formatting phase
             updateProgress(95, '📊 Formatting results...');
             updateLoadingStep('step-execute', 'completed');
             updateLoadingStep('step-format', 'active');
-            updateEstimatedTime(1);
             await new Promise(resolve => setTimeout(resolve, 300));
             
             // Complete
             updateProgress(100, '✅ Complete!');
-            updateEstimatedTime(0);
             
             if (data.success) {
                 updateLoadingStep('step-format', 'completed');
@@ -2449,6 +2426,24 @@ async function processQuestionWithRetry(question) {
             // Clear any loading content
             if (resultContent && resultContent.innerHTML.includes('loading')) {
                 resultContent.innerHTML = '';
+            }
+        }
+
+        // Show a loading panel in the results area with optional message
+        function showLoading(message){
+            const resultsSection = document.getElementById('resultsSection');
+            const resultContent = document.getElementById('resultContent');
+            if(resultsSection){
+                resultsSection.classList.add('visible');
+                resultsSection.style.display = 'block';
+            }
+            if(resultContent){
+                const msg = message || '⏳ Loading...';
+                resultContent.innerHTML = `
+                    <div class="loading-container">
+                        <div class="spinner" style="margin-bottom:8px;"></div>
+                        <div class="loading-message">${escapeHtml(msg)}</div>
+                    </div>`;
             }
         }
 
@@ -2806,10 +2801,9 @@ async function processQuestionWithRetry(question) {
 
         // --- Workspace-aware schema + queries prefetch & filtering additions ---
         // Caches
-        let manifestSchemaCache = null;          // Raw /api/resource-schema
-        let manifestQueriesCache = null;         // Raw /api/resource-queries (future use in UI)
+    let manifestSchemaCache = null;          // Raw /api/resource-schema
         let workspaceSchemaCache = null;         // Result from /api/workspace-schema (status=ready)
-        let schemaDataCache = null;              // Currently rendered (may be filtered)
+        let schemaDataCache = null;              // Active (possibly filtered) schema object used for rendering
         let schemaExpanded = false;
         let workspacePollingInterval = null;
 
@@ -2849,29 +2843,118 @@ async function processQuestionWithRetry(question) {
 
         async function prefetchManifestAssets(){
             try {
-                // Parallel fetch for schema & queries
-                const [schemaResp, queriesResp] = await Promise.all([
-                    fetch('/api/resource-schema').then(r=>r.json()).catch(()=>null),
-                    fetch('/api/resource-queries').then(r=>r.json()).catch(()=>null)
-                ]);
+                const schemaResp = await fetch('/api/resource-schema').then(r=>r.json()).catch(()=>null);
                 if(schemaResp && schemaResp.success){
                     manifestSchemaCache = schemaResp;
+                    if(workspaceSchemaCache){ debugLogSchemaIntersection(); }
                 }
-                if(queriesResp && queriesResp.success){
-                    manifestQueriesCache = queriesResp; // reserved for future UI (query suggestions per resource type)
-                }
-                // If user opens schema before workspace set, render manifest directly
                 if(!schemaDataCache && manifestSchemaCache){
                     schemaDataCache = manifestSchemaCache;
                 }
+                // Attempt early suggestions (will no-op until workspace schema ready)
+                renderQuickSuggestions();
             } catch(e){
                 console.warn('Manifest prefetch failed', e);
             }
         }
 
+        // Debug helper: log intersection of resource types & tables between manifest (universal) and workspace schemas
+        function debugLogSchemaIntersection(){
+            if(!(manifestSchemaCache && workspaceSchemaCache)) return; // Need both
+            const uni = manifestSchemaCache.resource_type_tables || {};
+            const ws = workspaceSchemaCache.resource_type_tables || {};
+            const uniRts = Object.keys(uni);
+            const wsRts = Object.keys(ws);
+            const rtIntersection = wsRts.filter(r => uniRts.includes(r));
+            const rtOnlyWorkspace = wsRts.filter(r => !uniRts.includes(r));
+            const rtOnlyUniversal = uniRts.filter(r => !wsRts.includes(r));
+            const perRt = {};
+            let totalTableIntersections = 0;
+            rtIntersection.forEach(rt => {
+                const uniTables = Array.isArray(uni[rt]) ? uni[rt] : [];
+                const wsTables = Array.isArray(ws[rt]) ? ws[rt] : [];
+                const tableIntersection = wsTables.filter(t => uniTables.includes(t));
+                totalTableIntersections += tableIntersection.length;
+                perRt[rt] = {
+                    workspaceTablesCount: wsTables.length,
+                    universalTablesCount: uniTables.length,
+                    intersectionCount: tableIntersection.length,
+                    intersectionTables: tableIntersection.slice(0, 30) // cap to avoid huge logs
+                };
+            });
+            console.log('[SchemaIntersection] Summary', {
+                workspaceResourceTypes: wsRts.length,
+                universalResourceTypes: uniRts.length,
+                intersectionResourceTypes: rtIntersection.length,
+                totalTableIntersections,
+                resourceTypesOnlyInWorkspace: rtOnlyWorkspace.slice(0,50),
+                resourceTypesOnlyInUniversal: rtOnlyUniversal.slice(0,50)
+            });
+            console.log('[SchemaIntersection] Per Resource Type (capped)', perRt);
+        }
+
+        function renderQuickSuggestions(){
+            const container = document.getElementById('quickSuggestions');
+            const wrapper = document.getElementById('suggestionsContainer');
+            if(!container) return;
+            container.innerHTML = '';
+            const wsQueries = (workspaceSchemaCache && workspaceSchemaCache.table_queries) || {};
+            const debugInfo = { source:'workspaceOnly', tables:Object.keys(wsQueries).length };
+            if(!Object.keys(wsQueries).length){
+                if(wrapper){ wrapper.style.display = 'none'; }
+                console.log('[QuickSuggestions]', { ...debugInfo, poolSize:0, picks:[] });
+                return;
+            }
+            const pool = [];
+            Object.values(wsQueries).forEach(qlist => {
+                if(!Array.isArray(qlist)) return;
+                qlist.forEach(q => {
+                    const label = (q.description || q.name || '').trim();
+                    if(!label) return;
+                    pool.push({label, weight: q.code ? 1.2 : 1});
+                });
+            });
+            if(!pool.length){ if(wrapper){ wrapper.style.display = 'none'; } console.log('[QuickSuggestions]', { ...debugInfo, poolSize:0, picks:[] }); return; }
+            pool.sort((a,b)=> b.weight - a.weight);
+            const seen = new Set();
+            const picks = [];
+            for(const item of pool){
+                const k = item.label.toLowerCase();
+                if(seen.has(k)) continue;
+                seen.add(k);
+                picks.push(item.label);
+                if(picks.length >= 3) break;
+            }
+            container.innerHTML = picks.map(text => `<div class=\"suggestion-pill\" data-question=\"${encodeHtmlAttribute(text)}\">${escapeHtml(text)}</div>`).join('');
+            if(wrapper){ wrapper.style.display = picks.length ? 'block' : 'none'; }
+            console.log('[QuickSuggestions]', { ...debugInfo, poolSize: pool.length, picks });
+        }
+
+        // Removed buildGlobalQueryFallback: /api/resource-queries retired.
+
         function showWorkspaceLoading(message){ /* no-op: status panel hidden */ }
 
         function clearWorkspaceLoading(successMsg){ /* no-op: status panel hidden */ }
+
+        // Encode attribute values to avoid breaking HTML when using data-question
+        function encodeHtmlAttribute(str){
+            if(str==null) return '';
+            return String(str)
+                .replace(/&/g,'&amp;')
+                .replace(/"/g,'&quot;')
+                .replace(/</g,'&lt;')
+                .replace(/>/g,'&gt;');
+        }
+
+        // Delegate click handling for suggestion pills
+        document.addEventListener('click', function(e){
+            const pill = e.target.closest('.suggestion-pill');
+            if(!pill) return;
+            const q = pill.getAttribute('data-question');
+            if(q){
+                setQuestion(q);
+            }
+        });
 
     function startWorkspaceSchemaPolling(){
             if(workspacePollingInterval){
@@ -2917,6 +3000,8 @@ async function processQuestionWithRetry(question) {
                             workspaceResourceTypes: Object.keys(workspaceSchemaCache.resource_type_tables || {}).length,
                             unmatched: workspaceSchemaCache.unmatched_tables?.length
                         });
+                        // Log intersection with universal schema (if already loaded)
+                        debugLogSchemaIntersection();
                         // If schema panel already open, re-render
                         const container = document.getElementById('schemaTreeContainer');
                         if(container && container.style.display === 'block'){
@@ -2928,6 +3013,8 @@ async function processQuestionWithRetry(question) {
                                 stats.textContent = `${schemaDataCache.counts.resource_types} resource types • ${schemaDataCache.counts.providers} providers • ${schemaDataCache.counts.tables} tables`;
                             }
                         }
+                        // Update quick suggestions now that workspace schema is ready
+                        renderQuickSuggestions();
                     } else if(data.status === 'pending') {
                         // Update subtle cycling message every few attempts
                         if(attempts % 5 === 0){
@@ -3096,6 +3183,8 @@ async function processQuestionWithRetry(question) {
                 stats.style.display='inline-flex';
                 stats.textContent = `${schemaDataCache.counts.resource_types} resource types • ${schemaDataCache.counts.providers} providers • ${schemaDataCache.counts.tables} tables`;
                 search.disabled = false;
+                // Also attempt to render suggestions if workspace cache already exists
+                renderQuickSuggestions();
             }catch(e){
                 tree.innerHTML = `<li class='schema-empty'>Error: ${e.message}</li>`;
             }

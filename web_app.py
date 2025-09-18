@@ -138,15 +138,37 @@ def fetch_workspace_schema():
 
 @app.route('/api/resource-schema', methods=['GET'])
 def resource_schema():
-    """Return cached resource type -> tables mapping (triggers scan if needed)."""
+    """Return manifest-derived schema plus per-table metadata (with docs fallback)."""
     try:
         data = _scan_manifest_resource_types()
+        manifest_meta = data.get('table_metadata', {}) or {}
+        table_queries = data.get('table_queries', {}) or {}
+        enriched_meta = {}
+        # Do NOT fetch docs queries broadly here to avoid 404 spam; only manifest queries retained.
+        augmented_table_queries = table_queries  # legacy key name preserved for response shape
+        for t in sorted({tbl for tbls in data.get('resource_type_tables', {}).values() for tbl in tbls}):
+            meta = manifest_meta.get(t, {}).copy()
+            # If missing description or columns, attempt docs enrichment
+            need_desc = not meta.get('description')
+            need_cols = not meta.get('columns')
+            if need_desc or need_cols:
+                docs_meta = _fetch_table_docs_full(t)
+                if docs_meta:
+                    if need_desc and docs_meta.get('description'):
+                        meta['description'] = docs_meta['description']
+                    if need_cols and docs_meta.get('columns'):
+                        # Align doc columns shape (already name/type/description)
+                        meta['columns'] = docs_meta['columns']
+            enriched_meta[t] = meta
         return jsonify({
             'success': True,
             'counts': data.get('counts', {}),
             'resource_types': data.get('resource_types', []),
             'providers': data.get('providers', []),
-            'resource_type_tables': data.get('resource_type_tables', {})
+            'resource_type_tables': data.get('resource_type_tables', {}),
+            'table_queries': augmented_table_queries,
+            'table_metadata': enriched_meta,
+            'retrieved_at': data.get('retrieved_at')
         })
     except Exception as e:  # noqa: BLE001
         return jsonify({'success': False, 'error': str(e)})
@@ -158,6 +180,8 @@ _workspace_schema_cache = {}
 _workspace_resource_types_cache = {}
 _workspace_queries_cache = {}
 _ms_docs_table_resource_type_cache = {}  # table_name -> resource_type | 'unknown resource type'
+_ms_docs_table_full_cache = {}           # table_name -> { description, columns:[{name,type,description}], fetched_at }
+_ms_docs_table_queries_cache = {}        # table_name -> [ { name, description } ]
 
 # Static fallback map for common Application Insights (Azure Monitor 'classic' AI) derived tables
 _STATIC_FALLBACK_TABLE_RESOURCE_TYPES = {
@@ -228,6 +252,128 @@ def _lookup_table_resource_type_doc(table_name: str, timeout: float = 4.0) -> st
         print(f"[Docs Enrichment] Unexpected error for {url}: {e}")
     _ms_docs_table_resource_type_cache[cache_key] = 'unknown resource type'
     return 'unknown resource type'
+
+
+def _fetch_table_docs_full(table_name: str, timeout: float = 6.0) -> dict:
+    """Fetch table description and columns from Microsoft Docs table reference page.
+
+    Caches results in _ms_docs_table_full_cache. Returns a dict:
+      { description:str, columns:[{name,type,description}], fetched_at:str }
+    """
+    if not table_name:
+        return {}
+    if table_name in _ms_docs_table_full_cache:
+        return _ms_docs_table_full_cache[table_name]
+    slug = table_name.lower()
+    url = f"https://learn.microsoft.com/azure/azure-monitor/reference/tables/{slug}"
+    try:
+        req = urlrequest.Request(url, headers={'User-Agent': 'AzMonLogsAgent/1.0 (+https://github.com/noakup)'})
+        with urlrequest.urlopen(req, timeout=timeout) as resp:
+            if resp.status != 200:
+                return {}
+            html = resp.read().decode('utf-8', errors='ignore')
+        # Very lightweight parsing heuristics (avoid full HTML parser to keep deps minimal)
+        # Description: first <p> after <h1> or meta description
+        desc_match = re.search(r'<h1[^>]*>.*?</h1>\s*<p>(.*?)</p>', html, re.IGNORECASE | re.DOTALL)
+        description = ''
+        if desc_match:
+            description = re.sub(r'<[^>]+>', '', desc_match.group(1)).strip()
+        # Columns: look for markdown-like table rendered as HTML <table> with column headers Name, Type
+        columns = []
+        table_sections = re.findall(r'<table.*?>.*?</table>', html, re.IGNORECASE | re.DOTALL)
+        for sect in table_sections:
+            if re.search(r'<th[^>]*>\s*Name\s*</th>', sect, re.IGNORECASE) and re.search(r'<th[^>]*>\s*Type\s*</th>', sect, re.IGNORECASE):
+                # Extract rows
+                rows = re.findall(r'<tr>(.*?)</tr>', sect, re.IGNORECASE | re.DOTALL)
+                for r in rows[1:]:  # skip header
+                    cols = re.findall(r'<t[dh][^>]*>(.*?)</t[dh]>', r, re.IGNORECASE | re.DOTALL)
+                    if len(cols) >= 2:
+                        cname = re.sub(r'<[^>]+>', '', cols[0]).strip()
+                        ctype = re.sub(r'<[^>]+>', '', cols[1]).strip()
+                        cdesc = ''
+                        if len(cols) >= 3:
+                            cdesc = re.sub(r'<[^>]+>', '', cols[2]).strip()
+                        if cname:
+                            columns.append({'name': cname, 'type': ctype, 'description': cdesc})
+                if columns:
+                    break
+        record = {
+            'description': description,
+            'columns': columns,
+            'fetched_at': datetime.now(timezone.utc).isoformat()
+        }
+        _ms_docs_table_full_cache[table_name] = record
+        return record
+    except Exception as e:  # noqa: BLE001
+        print(f"[Docs Enrichment] Failed full table fetch for {table_name}: {e}")
+        return {}
+
+
+def _fetch_table_docs_queries(table_name: str, timeout: float = 6.0) -> list:
+    """Fetch example queries for a table from Microsoft Docs queries page.
+
+    Heuristic extraction pattern:
+      <h3>Query Title</h3> (sometimes h2)
+      <p>Short description sentence.</p>
+      <pre><code class="lang-kusto">KQL HERE</code></pre>
+
+    Returns list of { name, description, code, source='docs' }.
+    Caches results per table.
+    """
+    if not table_name:
+        return []
+    if table_name in _ms_docs_table_queries_cache:
+        return _ms_docs_table_queries_cache[table_name]
+    slug = table_name.lower()
+    url = f"https://learn.microsoft.com/azure/azure-monitor/reference/queries/{slug}"
+    try:
+        req = urlrequest.Request(url, headers={'User-Agent': 'AzMonLogsAgent/1.0 (+https://github.com/noakup)'})
+        with urlrequest.urlopen(req, timeout=timeout) as resp:
+            if resp.status != 200:
+                return []
+            html_text = resp.read().decode('utf-8', errors='ignore')
+        import html as html_lib  # local import to avoid global namespace clutter
+        queries = []
+        # Find all h2/h3 headings as potential query titles
+        heading_iter = list(re.finditer(r'<h[23][^>]*>(.*?)</h[23]>', html_text, re.IGNORECASE | re.DOTALL))
+        for idx, match in enumerate(heading_iter):
+            raw_title = match.group(1)
+            title_clean = re.sub(r'<[^>]+>', '', raw_title).strip()
+            if not title_clean:
+                continue
+            # Slice segment until next heading or limited length
+            start = match.end()
+            end = heading_iter[idx + 1].start() if idx + 1 < len(heading_iter) else len(html_text)
+            segment = html_text[start:end]
+            # Description: first <p>...</p>
+            desc_match = re.search(r'<p>(.*?)</p>', segment, re.IGNORECASE | re.DOTALL)
+            desc_clean = ''
+            if desc_match:
+                desc_clean = re.sub(r'<[^>]+>', '', desc_match.group(1)).strip()
+            # Code: prefer <pre><code ...>...</code></pre>
+            code_match = re.search(r'<pre[^>]*>\s*<code[^>]*>([\s\S]*?)</code>\s*</pre>', segment, re.IGNORECASE)
+            if not code_match:
+                # fallback single code tag
+                code_match = re.search(r'<code[^>]*>([\s\S]*?)</code>', segment, re.IGNORECASE)
+            code_text = ''
+            if code_match:
+                code_text = code_match.group(1)
+                # Remove HTML tags inside code (rare) and unescape entities
+                code_text = re.sub(r'<[^>]+>', '', code_text)
+                code_text = html_lib.unescape(code_text).strip()
+            # Only record if we have at least a code block (to ensure it's an actual query example)
+            if code_text:
+                queries.append({
+                    'name': title_clean,
+                    'description': desc_clean,
+                    'code': code_text,
+                    'source': 'docs'
+                })
+        _ms_docs_table_queries_cache[table_name] = queries
+        return queries
+    except Exception as e:  # noqa: BLE001
+        print(f"[Docs Enrichment] Failed table queries fetch for {table_name}: {e}")
+        return []
 
 
 @app.route('/api/workspace-schema', methods=['GET'])
@@ -351,6 +497,33 @@ def workspace_schema():
         for prov, info in provider_summary.items()
     }
 
+    # Build per-table queries mapping (manifest first, docs fallback)
+    manifest_table_queries = manifest_data.get('table_queries', {}) or {}
+    workspace_table_queries = {}
+    tables_with_manifest_queries = 0
+    tables_with_docs_queries = 0
+    for tinfo in enriched:
+        tname = tinfo['name']
+        m_list = manifest_table_queries.get(tname)
+        if m_list:
+            workspace_table_queries[tname] = m_list
+            tables_with_manifest_queries += 1
+        else:
+            # Attempt docs query enrichment only if not in manifest
+            docs_q = _fetch_table_docs_queries(tname)
+            if docs_q:
+                workspace_table_queries[tname] = []
+                for q in docs_q:
+                    if q.get('name') and q.get('code'):
+                        workspace_table_queries[tname].append({
+                            'name': q.get('name'),
+                            'description': q.get('description'),
+                            'code': q.get('code'),
+                            'source': 'docs'
+                        })
+                if workspace_table_queries.get(tname):
+                    tables_with_docs_queries += 1
+
     response = {
         'success': True,
         'status': 'ready',
@@ -371,8 +544,41 @@ def workspace_schema():
             'performed': bool(unmatched),
             'enriched_tables': doc_enriched,
             'cache_size': len(_ms_docs_table_resource_type_cache)
+        },
+        # Workspace scoped table metadata (manifest first, docs fallback)
+        'table_metadata': {},
+        'table_queries': workspace_table_queries,
+        'query_enrichment': {
+            'tables_with_manifest_queries': tables_with_manifest_queries,
+            'tables_with_docs_queries': tables_with_docs_queries
         }
     }
+    try:
+        manifest_meta = manifest_data.get('table_metadata', {}) or {}
+        for tinfo in enriched:
+            tname = tinfo['name']
+            meta = manifest_meta.get(tname, {}).copy()
+            if not meta.get('description') or not meta.get('columns'):
+                docs_meta = _fetch_table_docs_full(tname)
+                if docs_meta:
+                    if not meta.get('description') and docs_meta.get('description'):
+                        meta['description'] = docs_meta['description']
+                    if not meta.get('columns') and docs_meta.get('columns'):
+                        meta['columns'] = docs_meta['columns']
+            response['table_metadata'][tname] = meta
+    except Exception as e:  # noqa: BLE001
+        print(f"[Workspace Schema] Metadata enrichment error: {e}")
+    # Print final enriched workspace schema to console (pretty JSON)
+    try:
+        import json as _json
+        print('[Workspace Schema] Final enriched schema (truncated to 20000 chars if large):')
+        schema_str = _json.dumps(response, indent=2)
+        if len(schema_str) > 20000:
+            print(schema_str[:20000] + '\n...<truncated>...')
+        else:
+            print(schema_str)
+    except Exception as e:  # noqa: BLE001
+        print(f"[Workspace Schema] Failed to print final schema: {e}")
     return jsonify(response)
 
 
@@ -415,7 +621,9 @@ def _scan_manifest_resource_types() -> dict:
     resource_types = set()
     resource_type_tables = {}
     table_resource_type = {}
-    extracted_queries = []  # flat list
+    table_metadata = {}  # table_name -> { description, columns: [ {name,type,description?} ], resource_types:[...] }
+    extracted_queries = []  # flat list of query metadata
+    table_queries = {}      # table_name -> [ { name, description, resource_type, provider, manifest_file } ]
     manifest_files = []
     for root, _, files in os.walk(base_dir):
         for fname in files:
@@ -440,16 +648,37 @@ def _scan_manifest_resource_types() -> dict:
                             q_desc = q.get('description') or q.get('summary') or ''
                             q_table = q.get('table') or q.get('tableName') or q.get('primaryTable')
                             q_path = q.get('path') or q.get('file') or q.get('kqlFile') or q.get('kql_path')
+                            # Collect additional related tables arrays if present
+                            related_tables = set()
+                            for rt_key in ('relatedTables', 'related_tables', 'tables', 'relatedTableNames'):
+                                val = q.get(rt_key)
+                                if isinstance(val, list):
+                                    for tval in val:
+                                        if isinstance(tval, str) and tval:
+                                            related_tables.add(tval)
+                            if q_table:
+                                related_tables.add(q_table)
                             if q_name:
-                                extracted_queries.append({
+                                q_record = {
                                     'resource_type': current_resource_type,
                                     'provider': (current_resource_type.split('/')[0] if current_resource_type else None),
                                     'name': q_name,
                                     'description': q_desc,
                                     'table': q_table,
                                     'path': q_path,
-                                    'manifest_file': manifest_path
-                                })
+                                    'manifest_file': manifest_path,
+                                    'related_tables': sorted(related_tables) if related_tables else []
+                                }
+                                extracted_queries.append(q_record)
+                                # Index by each related table
+                                for rt_table in related_tables:
+                                    table_queries.setdefault(rt_table, []).append({
+                                        'name': q_name,
+                                        'description': q_desc,
+                                        'resource_type': current_resource_type,
+                                        'provider': (current_resource_type.split('/')[0] if current_resource_type else None),
+                                        'manifest_file': manifest_path
+                                    })
             if 'tables' in obj and isinstance(obj['tables'], list):
                 for tbl in obj['tables']:
                     if isinstance(tbl, dict):
@@ -458,6 +687,30 @@ def _scan_manifest_resource_types() -> dict:
                             if tname not in resource_type_tables[current_resource_type]:
                                 resource_type_tables[current_resource_type].append(tname)
                                 table_resource_type.setdefault(tname, current_resource_type)
+                            # Capture table metadata
+                            tdesc = tbl.get('description') or tbl.get('summary') or ''
+                            columns = []
+                            raw_cols = tbl.get('columns') or tbl.get('schema') or []
+                            if isinstance(raw_cols, list):
+                                for c in raw_cols:
+                                    if isinstance(c, dict):
+                                        cname = c.get('name') or c.get('columnName')
+                                        ctype = c.get('type') or c.get('dataType')
+                                        cdesc = c.get('description') or ''
+                                        if cname:
+                                            columns.append({'name': cname, 'type': ctype, 'description': cdesc})
+                            meta = table_metadata.setdefault(tname, {'descriptions': set(), 'columns': {}, 'resource_types': set()})
+                            if tdesc:
+                                meta['descriptions'].add(tdesc)
+                            meta['resource_types'].add(current_resource_type)
+                            for col in columns:
+                                existing = meta['columns'].get(col['name'])
+                                if not existing:
+                                    meta['columns'][col['name']] = {'type': col['type'], 'descriptions': set()}
+                                if col.get('type') and not meta['columns'][col['name']]['type']:
+                                    meta['columns'][col['name']]['type'] = col['type']
+                                if col.get('description'):
+                                    meta['columns'][col['name']]['descriptions'].add(col['description'])
             for v in obj.values():
                 _extract_types(v, current_resource_type=current_resource_type, manifest_path=manifest_path)
         elif isinstance(obj, list):
@@ -498,6 +751,21 @@ def _scan_manifest_resource_types() -> dict:
         'queries': extracted_queries,
         'queries_by_provider': queries_by_provider,
         'queries_by_resource_type': queries_by_resource_type,
+        'table_queries': table_queries,
+        'table_metadata': {
+            t: {
+                'description': next(iter(m['descriptions'])) if m['descriptions'] else '',
+                'all_descriptions': sorted(m['descriptions']),
+                'columns': [
+                    {
+                        'name': cname,
+                        'type': cinfo.get('type'),
+                        'descriptions': sorted(cinfo.get('descriptions'))
+                    } for cname, cinfo in sorted(m['columns'].items())
+                ],
+                'resource_types': sorted(m['resource_types'])
+            } for t, m in table_metadata.items()
+        },
         'retrieved_at': datetime.now(timezone.utc).isoformat()
     })
 
@@ -508,6 +776,9 @@ def _scan_manifest_resource_types() -> dict:
     print(f"  Tables (mapped): {total_tables}")
     if extracted_queries:
         print(f"  Queries extracted: {len(extracted_queries)}")
+        print(f"  Tables with query references: {len(table_queries)}")
+    if table_metadata:
+        print(f"  Tables with metadata: {len(table_metadata)}")
     preview_types = resource_types_list[:20]
     if preview_types:
         print('  Sample Resource Types:')
@@ -528,32 +799,6 @@ def _scan_manifest_resource_types() -> dict:
 
     return _workspace_resource_types_cache
 
-
-@app.route('/api/resource-queries', methods=['GET'])
-def resource_queries():
-    """Return query metadata extracted from manifests.
-
-    Structure:
-      success: bool
-      counts: { providers:int, resource_types:int, queries:int }
-      queries_by_provider: { provider: [ {name,description,table,path,resource_type,manifest_file}, ... ] }
-      queries_by_resource_type: { resource_type: [ ... ] }
-    """
-    try:
-        data = _scan_manifest_resource_types()  # ensures queries present
-        queries = data.get('queries', [])
-        return jsonify({
-            'success': True,
-            'counts': {
-                'providers': len(data.get('providers', [])),
-                'resource_types': len(data.get('resource_types', [])),
-                'queries': len(queries)
-            },
-            'queries_by_provider': data.get('queries_by_provider', {}),
-            'queries_by_resource_type': data.get('queries_by_resource_type', {}),
-        })
-    except Exception as e:  # noqa: BLE001
-        return jsonify({'success': False, 'error': str(e)})
 
 
 def _fetch_workspace_tables(workspace: str):
