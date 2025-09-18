@@ -800,32 +800,6 @@ def _scan_manifest_resource_types() -> dict:
     return _workspace_resource_types_cache
 
 
-@app.route('/api/resource-queries', methods=['GET'])
-def resource_queries():
-    """Return query metadata extracted from manifests.
-
-    Structure:
-      success: bool
-      counts: { providers:int, resource_types:int, queries:int }
-      queries_by_provider: { provider: [ {name,description,table,path,resource_type,manifest_file}, ... ] }
-      queries_by_resource_type: { resource_type: [ ... ] }
-    """
-    try:
-        data = _scan_manifest_resource_types()  # ensures queries present
-        queries = data.get('queries', [])
-        return jsonify({
-            'success': True,
-            'counts': {
-                'providers': len(data.get('providers', [])),
-                'resource_types': len(data.get('resource_types', [])),
-                'queries': len(queries)
-            },
-            'queries_by_provider': data.get('queries_by_provider', {}),
-            'queries_by_resource_type': data.get('queries_by_resource_type', {}),
-        })
-    except Exception as e:  # noqa: BLE001
-        return jsonify({'success': False, 'error': str(e)})
-
 
 def _fetch_workspace_tables(workspace: str):
     """Fetch and print workspace table list (best-effort, console only).
