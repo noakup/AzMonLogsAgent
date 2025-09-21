@@ -490,7 +490,7 @@ class KQLAgent:
             except ImportError:
                 pass
             
-            from azure_openai_utils import load_config, build_payload, debug_print_config, _is_o_model
+            from azure_openai_utils import load_config, build_payload, debug_print_config, _is_o_model, get_env_int
             cfg = load_config()
             if not cfg:
                 return "❌ Azure OpenAI configuration missing. Please check your .env file for AZURE_OPENAI_ENDPOINT and AZURE_OPENAI_KEY."
@@ -535,23 +535,25 @@ Original Question: {original_question if original_question else 'Not specified'}
 
 Please provide a clear, actionable explanation of what this data shows and its significance."""
 
-            # Truncate data_summary if excessively large to avoid 400s due to payload size
-            MAX_DATA_SUMMARY_CHARS = 8000
-            if len(data_summary) > MAX_DATA_SUMMARY_CHARS:
-                print(f"[Explain Debug] Truncating data_summary from {len(data_summary)} to {MAX_DATA_SUMMARY_CHARS} chars")
-                data_summary = data_summary[:MAX_DATA_SUMMARY_CHARS] + "\n...TRUNCATED..."
+            # Configurable limits via env
+            max_data_chars = get_env_int("AZURE_OPENAI_EXPLAIN_MAX_DATA_CHARS", 8000, min_value=1000, max_value=20000)
+            max_tokens_standard = get_env_int("AZURE_OPENAI_EXPLAIN_MAX_TOKENS", 400, min_value=50, max_value=4000)
+            max_tokens_o = get_env_int("AZURE_OPENAI_EXPLAIN_MAX_TOKENS", 500, min_value=50, max_value=4000)  # same var reused intentionally
+            if len(data_summary) > max_data_chars:
+                print(f"[Explain Debug] Truncating data_summary from {len(data_summary)} to {max_data_chars} chars")
+                data_summary = data_summary[:max_data_chars] + "\n...TRUNCATED..."
             # Build request payload via shared utility
             if _is_o_model(deployment):
                 messages = [
                     {"role": "user", "content": f"{system_prompt}\n\n{user_prompt}"}
                 ]
-                request_data = build_payload(messages, is_o_model=True, max_output_tokens=500)
+                request_data = build_payload(messages, is_o_model=True, max_output_tokens=max_tokens_o)
             else:
                 messages = [
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt}
                 ]
-                request_data = build_payload(messages, is_o_model=False, max_output_tokens=400, temperature=0.3, top_p=0.9)
+                request_data = build_payload(messages, is_o_model=False, max_output_tokens=max_tokens_standard, temperature=0.3, top_p=0.9)
             
             # Make API call with timeout and retries
             import requests

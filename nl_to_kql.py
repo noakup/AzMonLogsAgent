@@ -13,7 +13,8 @@ from azure_openai_utils import (
     load_config,
     build_payload,
     debug_print_config,
-    _is_o_model  # internal helper acceptable for now; could wrap later
+    _is_o_model,  # internal helper acceptable for now; could wrap later
+    get_env_int
 )
 
 def load_examples_and_metadata():
@@ -171,12 +172,14 @@ Question: {nl_question}
 Based on the examples above, generate a KQL query. Response format: just the KQL query, nothing else.
 """
 
+    # Configurable max tokens for translation
+    translate_max_tokens = get_env_int("AZURE_OPENAI_TRANSLATE_MAX_TOKENS", 500, min_value=50, max_value=4000)
     is_o = _is_o_model(deployment)
     if is_o:
         messages = [
             {"role": "user", "content": f"{system_prompt}\n\n{user_prompt}"}
         ]
-        data = build_payload(messages, is_o_model=True, max_output_tokens=500)
+        data = build_payload(messages, is_o_model=True, max_output_tokens=translate_max_tokens)
     else:
         messages = [
             {"role": "system", "content": system_prompt},
@@ -184,7 +187,7 @@ Based on the examples above, generate a KQL query. Response format: just the KQL
         ]
         # Maintain incremental temperature for retries
         temp = 0.1 + (attempt_number * 0.05)
-        data = build_payload(messages, is_o_model=False, max_output_tokens=500, temperature=temp, top_p=0.9)
+        data = build_payload(messages, is_o_model=False, max_output_tokens=translate_max_tokens, temperature=temp, top_p=0.9)
     
     response = requests.post(url, headers=headers, data=json.dumps(data))
     response.raise_for_status()

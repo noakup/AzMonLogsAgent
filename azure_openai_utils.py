@@ -97,3 +97,18 @@ def debug_print_config(prefix: str, cfg: AzureOpenAIConfig):
         print(f"[{prefix}] API Key Present: {'YES' if cfg.api_key else 'NO'} ({mask_key(cfg.api_key)})")
     except Exception as e:
         print(f"[{prefix}] Failed to print config: {e}")
+
+def get_env_int(name: str, default: int, min_value: int | None = None, max_value: int | None = None) -> int:
+    """Fetch an integer environment variable with validation and fallback."""
+    raw = os.environ.get(name)
+    if raw is None or raw.strip() == "":
+        return default
+    try:
+        val = int(raw)
+        if min_value is not None and val < min_value:
+            return default
+        if max_value is not None and val > max_value:
+            return default
+        return val
+    except ValueError:
+        return default
