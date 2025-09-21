@@ -272,6 +272,19 @@
             transform: translateY(-1px);
         }
 
+        .suggestion-pill.disabled {
+            background: #f3f3f3;
+            color: #999;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .suggestion-pill.disabled:hover {
+            background: #f3f3f3;
+            color: #999;
+            transform: none;
+        }
+
         .examples-section {
             display: flex;
             gap: 10px;
@@ -315,6 +328,44 @@
             background: rgba(128,87,199,0.06);
         }
         .more-suggestions-link:active { color:#4b278d; }
+        
+        /* Disabled states for when workspace is not connected */
+        .more-suggestions-link:disabled,
+        .more-suggestions-link.disabled {
+            background: #f3f4f6 !important;
+            color: #9ca3af !important;
+            cursor: not-allowed !important;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        
+        .floating-go-btn.disabled {
+            background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%) !important;
+            color: #d1d5db !important;
+            cursor: not-allowed !important;
+            opacity: 0.6;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(156, 163, 175, 0.2) !important;
+        }
+        
+        .floating-go-btn.disabled:hover {
+            transform: none !important;
+            box-shadow: 0 2px 8px rgba(156, 163, 175, 0.2) !important;
+        }
+        
+        textarea:disabled,
+        textarea.disabled {
+            background-color: #f9fafb !important;
+            color: #9ca3af !important;
+            cursor: not-allowed !important;
+            opacity: 0.6;
+            border-color: #d1d5db !important;
+        }
+        
+        textarea:disabled::placeholder,
+        textarea.disabled::placeholder {
+            color: #9ca3af !important;
+        }
 
         .results-section {
             background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
@@ -1134,6 +1185,20 @@
             border-color: #667eea;
             transform: translateX(3px);
         }
+
+        .example-item.disabled {
+            background: #f3f3f3;
+            color: #999;
+            cursor: not-allowed;
+            opacity: 0.6;
+            border-color: #ddd;
+        }
+
+        .example-item.disabled:hover {
+            background: #f3f3f3;
+            border-color: #ddd;
+            transform: none;
+        }
         
         .example-source {
             font-weight: 600;
@@ -1388,27 +1453,325 @@
             box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
             animation: slideInFromTop 0.5s ease-out;
         }
-    /* Schema tree styles */
-    .schema-controls { margin-top: 15px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
-    .schema-primary-btn { display:inline-flex; align-items:center; gap:8px; background:#0078d4; color:#fff; border:none; padding:8px 12px; border-radius:6px; font-weight:600; font-size:0.85rem; box-shadow:0 1px 2px rgba(0,0,0,0.1); cursor:pointer; height:36px; }
-    .schema-primary-btn:hover{ background:#106ebe; }
-    .schema-primary-btn:active{ background:#005a9e; }
-    .schema-primary-btn .icon{ width:16px; height:16px; display:inline-block; border:2px solid currentColor; border-left-color:transparent; border-bottom-color:transparent; transform:rotate(45deg); border-radius:2px; }
-    .schema-primary-btn[aria-expanded="true"] .icon{ transform:rotate(225deg); }
-        .schema-tree-container { margin-top:20px; background:#ffffff; border:1px solid #e0e6ed; border-radius:10px; padding:18px; max-height:500px; overflow:auto; font-family:'Segoe UI', Tahoma, sans-serif; display:none; }
-        .schema-tree { list-style:none; padding-left:0; font-size:0.9rem; }
-        .schema-tree li { margin:2px 0; line-height:1.4; }
-        .schema-group { margin-top:12px; }
-    .schema-group-title { font-weight:600; background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); -webkit-background-clip:text; background-clip:text; color:transparent; cursor:pointer; user-select:none; display:flex; align-items:center; gap:6px; }
-        .schema-resource-type { cursor:pointer; padding:2px 4px; border-radius:4px; transition:background .2s; display:flex; align-items:center; gap:4px; }
-        .schema-resource-type:hover { background:#f1f4fb; }
-        .schema-table-list { margin-left:18px; margin-top:4px; }
-        .schema-table { padding:1px 4px; border-radius:4px; display:inline-block; margin:1px 4px 3px 0; background:#eef2ff; color:#394867; font-size:0.75rem; font-weight:500; }
-        .schema-badge { background:#e3ebff; color:#31456a; border-radius:12px; padding:0 8px; font-size:0.65rem; font-weight:600; }
-        .schema-toggle { font-size:0.7rem; opacity:0.8; }
-        .schema-search { flex:1; min-width:220px; }
-    .schema-search input { width:100%; padding:8px 10px; border:1px solid #ccd4dd; border-radius:6px; font-size:0.85rem; }
-    .schema-search input:focus { outline:none; border-color:#667eea; box-shadow:0 0 0 2px rgba(102,126,234,0.25); }
+    /* Enhanced Schema Tree Styles */
+    .schema-controls { 
+        margin-top: 20px; 
+        display: flex; 
+        gap: 15px; 
+        flex-wrap: wrap; 
+        align-items: center;
+        background: linear-gradient(135deg, #f8f9fb 0%, #e9ecef 100%);
+        padding: 15px 20px;
+        border-radius: 12px;
+        border: 1px solid #e0e6ed;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+    
+    .schema-primary-btn { 
+        display: inline-flex; 
+        align-items: center; 
+        gap: 10px; 
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+        color: #fff; 
+        border: none; 
+        padding: 12px 20px; 
+        border-radius: 8px; 
+        font-weight: 600; 
+        font-size: 0.9rem; 
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3); 
+        cursor: pointer; 
+        height: 44px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .schema-primary-btn:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: left 0.5s;
+    }
+    
+    .schema-primary-btn:hover {
+        background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        transform: translateY(-2px);
+    }
+    
+    .schema-primary-btn:hover:before {
+        left: 100%;
+    }
+    
+    .schema-primary-btn:active { 
+        background: linear-gradient(135deg, #4e5bc6 0%, #5e377e 100%); 
+        transform: translateY(0px);
+    }
+    
+    .schema-primary-btn:disabled,
+    .schema-primary-btn.disabled {
+        background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+        color: #d1d5db;
+        cursor: not-allowed;
+        box-shadow: 0 2px 8px rgba(156, 163, 175, 0.2);
+        transform: none;
+        opacity: 0.6;
+    }
+    
+    .schema-primary-btn:disabled:hover,
+    .schema-primary-btn.disabled:hover {
+        background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+        transform: none;
+        box-shadow: 0 2px 8px rgba(156, 163, 175, 0.2);
+    }
+    
+    .schema-primary-btn:disabled:before,
+    .schema-primary-btn.disabled:before {
+        display: none;
+    }
+    
+    .schema-primary-btn .icon { 
+        width: 18px; 
+        height: 18px; 
+        display: inline-block; 
+        border: 2px solid currentColor; 
+        border-left-color: transparent; 
+        border-bottom-color: transparent; 
+        transform: rotate(45deg); 
+        border-radius: 3px; 
+        transition: transform 0.3s ease;
+    }
+    
+    .schema-primary-btn[aria-expanded="true"] .icon { 
+        transform: rotate(225deg); 
+    }
+
+    .schema-tree-container { 
+        margin-top: 20px; 
+        background: #ffffff; 
+        border: 1px solid #e0e6ed; 
+        border-radius: 12px; 
+        padding: 0; 
+        max-height: 600px; 
+        overflow: hidden;
+        font-family: 'Segoe UI', Tahoma, sans-serif; 
+        display: none;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+    }
+    
+    .schema-tree-search {
+        background: linear-gradient(135deg, #f8f9fb 0%, #e9ecef 100%);
+        padding: 20px;
+        border-bottom: 1px solid #e0e6ed;
+        border-radius: 12px 12px 0 0;
+    }
+    
+    .schema-tree { 
+        list-style: none; 
+        padding: 20px; 
+        margin: 0;
+        font-size: 0.9rem; 
+        max-height: 480px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #667eea #f1f3f4;
+    }
+    
+    .schema-tree::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    .schema-tree::-webkit-scrollbar-track {
+        background: #f1f3f4;
+        border-radius: 4px;
+    }
+    
+    .schema-tree::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 4px;
+    }
+    
+    .schema-tree li { 
+        margin: 8px 0; 
+        line-height: 1.5; 
+    }
+    
+    .schema-group { 
+        margin: 20px 0;
+        padding: 16px;
+        background: linear-gradient(135deg, #f8f9fb 0%, #ffffff 100%);
+        border-radius: 10px;
+        border: 1px solid #e8ecf0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .schema-group-title { 
+        font-weight: 700; 
+        font-size: 1.1rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+        -webkit-background-clip: text; 
+        background-clip: text; 
+        color: transparent; 
+        cursor: pointer; 
+        user-select: none; 
+        display: flex; 
+        align-items: center; 
+        gap: 10px;
+        padding: 8px 0;
+        border-bottom: 2px solid #f0f0f0;
+        margin-bottom: 12px;
+        transition: all 0.3s ease;
+    }
+    
+    .schema-group-title:hover {
+        transform: translateX(5px);
+    }
+    
+    .schema-resource-type { 
+        cursor: pointer; 
+        padding: 10px 12px; 
+        border-radius: 8px; 
+        transition: all 0.3s ease; 
+        display: flex; 
+        align-items: center; 
+        gap: 8px;
+        margin: 4px 0;
+        background: #ffffff;
+        border: 1px solid #e8ecf0;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .schema-resource-type:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 4px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        transform: scaleY(0);
+        transition: transform 0.3s ease;
+    }
+    
+    .schema-resource-type:hover { 
+        background: linear-gradient(135deg, #f1f4fb 0%, #e8f0fe 100%);
+        border-color: #667eea;
+        transform: translateX(8px);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.15);
+    }
+    
+    .schema-resource-type:hover:before {
+        transform: scaleY(1);
+    }
+    
+    .schema-table-list { 
+        margin-left: 24px; 
+        margin-top: 12px;
+        padding: 12px;
+        background: linear-gradient(135deg, #fafbfc 0%, #f5f7fa 100%);
+        border-radius: 8px;
+        border: 1px solid #e8ecf0;
+    }
+    
+    .schema-table { 
+        padding: 6px 12px; 
+        border-radius: 20px; 
+        display: inline-block; 
+        margin: 3px 6px 6px 0; 
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+        color: #ffffff; 
+        font-size: 0.8rem; 
+        font-weight: 600;
+        border: none;
+        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.25);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .schema-table:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.35);
+    }
+    
+    .schema-badge { 
+        background: linear-gradient(135deg, #e3ebff 0%, #d1e3ff 100%); 
+        color: #2c5aa0; 
+        border-radius: 15px; 
+        padding: 4px 12px; 
+        font-size: 0.7rem; 
+        font-weight: 700;
+        border: 1px solid #c1d5f0;
+        box-shadow: 0 1px 3px rgba(44, 90, 160, 0.15);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .schema-toggle { 
+        font-size: 0.8rem; 
+        opacity: 0.8;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-weight: 600;
+    }
+    
+    .schema-search { 
+        flex: 1; 
+        min-width: 280px;
+        position: relative;
+    }
+    
+    .schema-search input { 
+        width: 100%; 
+        padding: 12px 16px 12px 45px; 
+        border: 1px solid #d0d7de; 
+        border-radius: 10px; 
+        font-size: 0.9rem;
+        background: #ffffff;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+    
+    .schema-search:before {
+        content: '🔍';
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.1rem;
+        opacity: 0.6;
+        z-index: 1;
+    }
+    
+    .schema-search input:focus { 
+        outline: none; 
+        border-color: #667eea; 
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2), 0 4px 15px rgba(0, 0, 0, 0.1);
+        transform: translateY(-1px);
+    }
+    
+    .schema-search input::placeholder {
+        color: #8b949e;
+        font-style: italic;
+    }
+    
+    .schema-stats {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fb 100%);
+        padding: 8px 16px;
+        border-radius: 8px;
+        border: 1px solid #e8ecf0;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #667eea;
+        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+    }
     /* New location for search inside the schema panel */
     .schema-tree-search input { width:100%; padding:8px 10px; border:1px solid #ccd4dd; border-radius:6px; font-size:0.85rem; }
     .schema-tree-search input:focus { outline:none; border-color:#667eea; box-shadow:0 0 0 2px rgba(102,126,234,0.25); }
@@ -1546,6 +1909,109 @@
         function updateStatus(connected, message = '') {
             // Keep state but do not render any status indicator UI.
             isConnected = connected;
+            updateUIElementsState();
+        }
+        
+        function updateUIElementsState() {
+            // Update all interactive UI elements based on connection status
+            updateSchemaButtonState();
+            updateGoButtonState();
+            updateQuestionInputState();
+            updateMoreSuggestionsButtonState();
+            updateSuggestionPillsState();
+            updateExampleItemsState();
+        }
+        
+        function updateSchemaButtonState() {
+            const schemaBtn = document.getElementById('showSchemaBtn');
+            if (!schemaBtn) return;
+            
+            if (isConnected) {
+                schemaBtn.disabled = false;
+                schemaBtn.classList.remove('disabled');
+                schemaBtn.onclick = toggleSchema;
+                schemaBtn.title = 'Show workspace schema and available tables';
+            } else {
+                schemaBtn.disabled = true;
+                schemaBtn.classList.add('disabled');
+                schemaBtn.onclick = null;
+                schemaBtn.title = 'Connect to a workspace first to view schema';
+            }
+        }
+        
+        function updateGoButtonState() {
+            const goBtn = document.querySelector('.floating-go-btn');
+            if (!goBtn) return;
+            
+            if (isConnected) {
+                goBtn.disabled = false;
+                goBtn.classList.remove('disabled');
+                goBtn.onclick = enhancedAskQuestion;
+                goBtn.title = 'Submit your question';
+            } else {
+                goBtn.disabled = true;
+                goBtn.classList.add('disabled');
+                goBtn.onclick = null;
+                goBtn.title = 'Connect to a workspace first to ask questions';
+            }
+        }
+        
+        function updateQuestionInputState() {
+            const questionInput = document.getElementById('questionInput');
+            if (!questionInput) return;
+            
+            if (isConnected) {
+                questionInput.disabled = false;
+                questionInput.classList.remove('disabled');
+                questionInput.placeholder = 'Ask your question about Azure Monitor logs...';
+            } else {
+                questionInput.disabled = true;
+                questionInput.classList.add('disabled');
+                questionInput.placeholder = 'Connect to a workspace first to ask questions...';
+            }
+        }
+        
+        function updateMoreSuggestionsButtonState() {
+            const moreSuggestionsBtn = document.querySelector('.more-suggestions-link');
+            if (!moreSuggestionsBtn) return;
+            
+            if (isConnected) {
+                moreSuggestionsBtn.disabled = false;
+                moreSuggestionsBtn.classList.remove('disabled');
+                moreSuggestionsBtn.onclick = discoverWorkspaceExamples;
+                moreSuggestionsBtn.title = 'Discover more query suggestions for your workspace';
+            } else {
+                moreSuggestionsBtn.disabled = true;
+                moreSuggestionsBtn.classList.add('disabled');
+                moreSuggestionsBtn.onclick = null;
+                moreSuggestionsBtn.title = 'Connect to a workspace first to get personalized suggestions';
+            }
+        }
+
+        function updateSuggestionPillsState() {
+            const pills = document.querySelectorAll('.suggestion-pill');
+            pills.forEach(pill => {
+                if (isConnected) {
+                    pill.classList.remove('disabled');
+                    pill.style.pointerEvents = 'auto';
+                } else {
+                    pill.classList.add('disabled');
+                    pill.style.pointerEvents = 'none';
+                }
+            });
+        }
+
+        function updateExampleItemsState() {
+            const examples = document.querySelectorAll('.example-item');
+            examples.forEach(example => {
+                if (isConnected) {
+                    example.classList.remove('disabled');
+                    example.style.pointerEvents = 'auto';
+                } else {
+                    example.classList.add('disabled');
+                    example.style.pointerEvents = 'none';
+                }
+            });
         }
         
         function startWorkspaceSchemaPolling(){
@@ -1982,7 +2448,7 @@ async function setupWorkspace() {
         const data = await response.json();
 
         if (data.success) {
-            isConnected = true;
+            updateStatus(true);
 
             // Automatically check connection
             const connectionResponse = await fetch('/api/test-connection', {
@@ -2097,6 +2563,12 @@ function simulateRetry() {
 }
 
 function enhancedAskQuestion() {
+    // Check if workspace is connected first
+    if (!isConnected) {
+        console.log('Workspace not connected, ignoring request');
+        return;
+    }
+    
     const question = document.getElementById('questionInput').value.trim();
     
     // Enhanced button loading state with spinner - do this FIRST
@@ -2287,19 +2759,36 @@ async function processQuestionWithRetry(question) {
                 });
             }
         }        async function discoverWorkspaceExamples() {
-            // Add loading state to the workspace examples button
-            const workspaceButton = document.querySelector('.workspace-examples');
+            console.log('More Suggestions button clicked'); // Debug log
+            
+            // Check if workspace is connected first
+            if (!isConnected) {
+                console.log('Workspace not connected, ignoring request');
+                return;
+            }
+            
+            // Add loading state to the more suggestions button
+            const workspaceButton = document.querySelector('.more-suggestions-link');
+            if (!workspaceButton) {
+                console.error('More suggestions button not found');
+                showError('More suggestions button not found');
+                return;
+            }
+            
             const originalText = workspaceButton.textContent;
             workspaceButton.textContent = '⏳ Loading...';
             workspaceButton.style.opacity = '0.7';
             workspaceButton.style.pointerEvents = 'none';
+            workspaceButton.disabled = true;
             
             // Allow workspace examples discovery even without connection
             // since we're just showing available example files
             
             try {
+                console.log('Showing loading state...'); // Debug log
                 showLoading('Discovering workspace tables and available examples...');
                 
+                console.log('Making API request to /api/workspace-examples...'); // Debug log
                 const response = await fetch('/api/workspace-examples', {
                     method: 'POST',
                     headers: {
@@ -2307,22 +2796,33 @@ async function processQuestionWithRetry(question) {
                     }
                 });
                 
+                console.log('API response received:', response.status); // Debug log
+                
                 if (!response.ok) {
                     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
                 
                 const data = await response.json();
+                console.log('API data received:', data); // Debug log
+                
                 if (data.success) {
+                    console.log('Showing workspace examples...'); // Debug log
                     showWorkspaceExamples(data);
                 } else {
+                    console.error('API returned error:', data.error); // Debug log
                     showError(`Failed to discover examples: ${data.error}`);
                 }
             } catch (error) {
+                console.error('Network error occurred:', error); // Debug log
                 showError(`Network error: ${error.message}`);            } finally {
                 // Restore button state
-                workspaceButton.textContent = '💡 More Suggestions';
-                workspaceButton.style.opacity = '1';
-                workspaceButton.style.pointerEvents = 'auto';
+                const workspaceButton = document.querySelector('.more-suggestions-link');
+                if (workspaceButton) {
+                    workspaceButton.textContent = '💡 More Suggestions';
+                    workspaceButton.style.opacity = '1';
+                    workspaceButton.style.pointerEvents = 'auto';
+                    workspaceButton.disabled = false;
+                }
             }
         }        function getDisplayName(tableName) {
             const displayNameMap = {
@@ -2620,6 +3120,7 @@ async function processQuestionWithRetry(question) {
                 // Add click event listeners
                 examplesContainer.querySelectorAll('.example-suggestion').forEach((element, index) => {
                     element.addEventListener('click', () => {
+                        if (!isConnected) return;
                         const suggestion = result.suggestions[index];
                         setQuestion(suggestion);
                     });
@@ -2718,6 +3219,7 @@ async function processQuestionWithRetry(question) {
                 // Add click event listeners to suggestion elements
                 examplesContainer.querySelectorAll('.example-suggestion').forEach((element, index) => {
                     element.addEventListener('click', () => {
+                        if (!isConnected) return;
                         const suggestion = result.suggestions[index];
                         setQuestion(suggestion);
                     });
@@ -2811,6 +3313,7 @@ async function processQuestionWithRetry(question) {
         document.addEventListener('DOMContentLoaded', () => {
             initWorkspaceButtonSizing();
             prefetchManifestAssets();
+            updateUIElementsState(); // Initialize all UI element states
         });
 
         function initWorkspaceButtonSizing(){
@@ -2901,7 +3404,8 @@ async function processQuestionWithRetry(question) {
             const wsQueries = (workspaceSchemaCache && workspaceSchemaCache.table_queries) || {};
             const debugInfo = { source:'workspaceOnly', tables:Object.keys(wsQueries).length };
             if(!Object.keys(wsQueries).length){
-                if(wrapper){ wrapper.style.display = 'none'; }
+                // Always show the suggestions container for the "More Suggestions" button
+                if(wrapper){ wrapper.style.display = 'block'; }
                 console.log('[QuickSuggestions]', { ...debugInfo, poolSize:0, picks:[] });
                 return;
             }
@@ -2926,7 +3430,8 @@ async function processQuestionWithRetry(question) {
                 if(picks.length >= 3) break;
             }
             container.innerHTML = picks.map(text => `<div class=\"suggestion-pill\" data-question=\"${encodeHtmlAttribute(text)}\">${escapeHtml(text)}</div>`).join('');
-            if(wrapper){ wrapper.style.display = picks.length ? 'block' : 'none'; }
+            // Always show the wrapper since it contains the "More Suggestions" button
+            if(wrapper){ wrapper.style.display = 'block'; }
             console.log('[QuickSuggestions]', { ...debugInfo, poolSize: pool.length, picks });
         }
 
@@ -2949,7 +3454,7 @@ async function processQuestionWithRetry(question) {
         // Delegate click handling for suggestion pills
         document.addEventListener('click', function(e){
             const pill = e.target.closest('.suggestion-pill');
-            if(!pill) return;
+            if(!pill || pill.classList.contains('disabled')) return;
             const q = pill.getAttribute('data-question');
             if(q){
                 setQuestion(q);
@@ -3113,7 +3618,7 @@ async function processQuestionWithRetry(question) {
                 const response = await fetch('/api/setup', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ workspace_id: workspaceId }) });
                 const data = await response.json();
                 if(data.success){
-                    isConnected = true;
+                    updateStatus(true);
                     // Start polling workspace schema instead of test-connection
                     startWorkspaceSchemaPolling();
                 } else {
@@ -3130,6 +3635,11 @@ async function processQuestionWithRetry(question) {
         window.setupWorkspace = setupWorkspace; // reassign with enhanced version
 
         function toggleSchema(){
+            // Don't allow toggling if not connected
+            if (!isConnected) {
+                return;
+            }
+            
             const container = document.getElementById('schemaTreeContainer');
             const btn = document.getElementById('showSchemaBtn');
             const isOpen = container.style.display === 'block';
