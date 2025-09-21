@@ -7,6 +7,14 @@ This version actually uses the example files to provide context to the AI
 import os
 import requests
 import json
+from typing import List
+
+from azure_openai_utils import (
+    load_config,
+    build_payload,
+    debug_print_config,
+    _is_o_model  # internal helper acceptable for now; could wrap later
+)
 
 def load_examples_and_metadata():
     """Load KQL examples and metadata for better translation context"""
@@ -70,20 +78,17 @@ def translate_nl_to_kql_enhanced(nl_question, max_retries=2):
         else:
             return "AppRequests | getschema | project ColumnName, ColumnType"
     
-    endpoint = os.environ.get("AZURE_OPENAI_ENDPOINT")
-    api_key = os.environ.get("AZURE_OPENAI_KEY")
-    deployment = os.environ.get("AZURE_OPENAI_DEPLOYMENT", "gpt-35-turbo")
-    
-    if not endpoint or not api_key:
+    cfg = load_config()
+    if not cfg:
         return "// Error: AZURE_OPENAI_ENDPOINT and AZURE_OPENAI_KEY must be set"
-    
-    if not endpoint or not api_key:
-        return "// Error: AZURE_OPENAI_ENDPOINT and AZURE_OPENAI_KEY must be set"
+    endpoint = cfg.endpoint
+    api_key = cfg.api_key
+    deployment = cfg.deployment
     
     # Try translation with retries
     for attempt in range(max_retries + 1):
         try:
-            result = _attempt_translation(nl_question, endpoint, api_key, deployment, attempt)
+            result = _attempt_translation(nl_question, cfg, attempt)
             
             # Check if the result is a valid KQL query (not an error)
             if not result.startswith("// Error"):
@@ -105,11 +110,14 @@ def translate_nl_to_kql_enhanced(nl_question, max_retries=2):
     
     return "// Error: All translation attempts failed"
 
-def _attempt_translation(nl_question, endpoint, api_key, deployment, attempt_number):
+def _attempt_translation(nl_question, cfg, attempt_number):
     """
     Single translation attempt - separated for retry logic
     """
     print(f"🔍 Generating KQL for this user prompt: '{nl_question}' (attempt {attempt_number + 1})")
+    endpoint = cfg.endpoint
+    api_key = cfg.api_key
+    deployment = cfg.deployment
     
     # Load context from example files
     context = load_examples_and_metadata()
@@ -148,16 +156,10 @@ IMPORTANT RULES:
     print(f"🔍 Deployment: {deployment}")
     print(f"🔍 API Key: {'Set' if api_key else 'Not set'}")
     
-    # Determine API version based on model
-    if "o1" in deployment.lower() or "o4" in deployment.lower():
-        api_version = "2024-12-01-preview"  # Newer API version for o1/o4 models
-    else:
-        api_version = "2024-09-01-preview"   # Standard API version
-    
+    api_version = cfg.api_version
+    debug_print_config("Translate Debug", cfg)
     print(f"🔄 Making API call to: {endpoint}/openai/deployments/{deployment}/chat/completions?api-version={api_version}")
-    print(f"🔄 Using deployment: {deployment}")
-    
-    url = f"{endpoint}/openai/deployments/{deployment}/chat/completions?api-version={api_version}"
+    url = cfg.chat_completions_url()
     headers = {
         "Content-Type": "application/json",
         "api-key": api_key
@@ -169,24 +171,20 @@ Question: {nl_question}
 Based on the examples above, generate a KQL query. Response format: just the KQL query, nothing else.
 """
 
-    # o1-mini models have different parameter requirements
-    if "o1" in deployment.lower() or "o4" in deployment.lower():
-        data = {
-            "messages": [
-                {"role": "user", "content": f"{system_prompt}\n\n{user_prompt}"}
-            ],
-            "max_completion_tokens": 500
-            # Note: o1 models don't support temperature, system messages, or streaming
-        }
+    is_o = _is_o_model(deployment)
+    if is_o:
+        messages = [
+            {"role": "user", "content": f"{system_prompt}\n\n{user_prompt}"}
+        ]
+        data = build_payload(messages, is_o_model=True, max_output_tokens=500)
     else:
-        data = {
-            "messages": [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ],
-            "temperature": 0.1 + (attempt_number * 0.05),  # Slightly increase temperature on retries
-            "max_tokens": 500
-        }    
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt}
+        ]
+        # Maintain incremental temperature for retries
+        temp = 0.1 + (attempt_number * 0.05)
+        data = build_payload(messages, is_o_model=False, max_output_tokens=500, temperature=temp, top_p=0.9)
     
     response = requests.post(url, headers=headers, data=json.dumps(data))
     response.raise_for_status()

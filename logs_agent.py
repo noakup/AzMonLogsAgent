@@ -490,42 +490,21 @@ class KQLAgent:
             except ImportError:
                 pass
             
-            endpoint = os.environ.get("AZURE_OPENAI_ENDPOINT")
-            api_key = os.environ.get("AZURE_OPENAI_KEY")
-            deployment = os.environ.get("AZURE_OPENAI_DEPLOYMENT", "gpt-35-turbo")
-            api_version_override = os.environ.get("AZURE_OPENAI_API_VERSION")
+            from azure_openai_utils import load_config, build_payload, debug_print_config, _is_o_model
+            cfg = load_config()
+            if not cfg:
+                return "❌ Azure OpenAI configuration missing. Please check your .env file for AZURE_OPENAI_ENDPOINT and AZURE_OPENAI_KEY."
+            endpoint = cfg.endpoint
+            api_key = cfg.api_key
+            deployment = cfg.deployment
 
             # Debug: Print configuration (masked key) to help diagnose HTTP 400 issues
             try:
-                masked_key = None
-                if api_key:
-                    masked_key = f"{api_key[:4]}***len={len(api_key)}"
-                print("[Explain Debug] Azure OpenAI Config:")
-                print(f"  Endpoint: {endpoint}")
-                print(f"  Deployment: {deployment}")
-                print(f"  API Key Present: {'YES' if api_key else 'NO'} ({masked_key if masked_key else ''})")
-                if api_version_override:
-                    print(f"  API Version Override: {api_version_override}")
+                debug_print_config("Explain Debug", cfg)
             except Exception as dbg_e:
                 print(f"[Explain Debug] Failed to print config: {dbg_e}")
             
-            if not endpoint or not api_key:
-                return "❌ Azure OpenAI configuration missing. Please check your .env file for AZURE_OPENAI_ENDPOINT and AZURE_OPENAI_KEY."
-            
-            # Clean endpoint URL
-            if not endpoint.startswith('http'):
-                endpoint = f"https://{endpoint}"
-            endpoint = endpoint.rstrip('/')
-            
-            # Determine API version (override wins, else adaptive like translation path)
-            if api_version_override:
-                api_version = api_version_override
-            else:
-                if "o1" in deployment.lower() or "o4" in deployment.lower():
-                    api_version = "2024-12-01-preview"
-                else:
-                    api_version = "2024-09-01-preview"
-            print(f"[Explain Debug] Using api-version: {api_version} (override={'YES' if api_version_override else 'NO'})")
+            api_version = cfg.api_version
             
             url = f"{endpoint}/openai/deployments/{deployment}/chat/completions?api-version={api_version}"
             headers = {
@@ -561,31 +540,18 @@ Please provide a clear, actionable explanation of what this data shows and its s
             if len(data_summary) > MAX_DATA_SUMMARY_CHARS:
                 print(f"[Explain Debug] Truncating data_summary from {len(data_summary)} to {MAX_DATA_SUMMARY_CHARS} chars")
                 data_summary = data_summary[:MAX_DATA_SUMMARY_CHARS] + "\n...TRUNCATED..."
-
-            # Build request payload (o-models use different parameter surface)
-            lower_deployment = deployment.lower()
-            if "o1" in lower_deployment or "o4" in lower_deployment:
-                # For o-models: single user message combining system + user; use max_completion_tokens
-                combined_content = f"{system_prompt}\n\n{user_prompt}"
-                request_data = {
-                    "messages": [
-                        {"role": "user", "content": combined_content}
-                    ],
-                    "max_completion_tokens": 500
-                }
+            # Build request payload via shared utility
+            if _is_o_model(deployment):
+                messages = [
+                    {"role": "user", "content": f"{system_prompt}\n\n{user_prompt}"}
+                ]
+                request_data = build_payload(messages, is_o_model=True, max_output_tokens=500)
             else:
-                # Standard chat completion payload
-                request_data = {
-                    "messages": [
-                        {"role": "system", "content": system_prompt},
-                        {"role": "user", "content": user_prompt}
-                    ],
-                    "temperature": 0.3,
-                    "max_tokens": 400,
-                    "top_p": 0.9,
-                    "frequency_penalty": 0.0,
-                    "presence_penalty": 0.0
-                }
+                messages = [
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt}
+                ]
+                request_data = build_payload(messages, is_o_model=False, max_output_tokens=400, temperature=0.3, top_p=0.9)
             
             # Make API call with timeout and retries
             import requests
