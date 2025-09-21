@@ -481,186 +481,129 @@ class KQLAgent:
         return summary
 
     async def _call_openai_for_explanation(self, data_summary: str, original_question: str) -> str:
-        """Call OpenAI to generate explanation of the query results"""
+        """Call Azure OpenAI using centralized helpers to generate an explanation.
+
+        Uses the shared chat_completion flow so behavior stays aligned with translation.
+        Adds defensive extraction to reduce false 'empty explanation' cases.
+        """
         try:
-            # Load environment variables
             try:
                 from dotenv import load_dotenv
                 load_dotenv()
             except ImportError:
                 pass
-            
-            from azure_openai_utils import load_config, build_payload, debug_print_config, _is_o_model, get_env_int
+
+            from azure_openai_utils import (
+                load_config,
+                debug_print_config,
+                build_messages,
+                build_chat_request,
+                chat_completion,
+                _is_o_model,
+                get_env_int
+            )
+
             cfg = load_config()
             if not cfg:
-                return "❌ Azure OpenAI configuration missing. Please check your .env file for AZURE_OPENAI_ENDPOINT and AZURE_OPENAI_KEY."
-            endpoint = cfg.endpoint
-            api_key = cfg.api_key
-            deployment = cfg.deployment
+                return "❌ Azure OpenAI configuration missing. Please set AZURE_OPENAI_ENDPOINT and AZURE_OPENAI_KEY."
 
-            # Debug: Print configuration (masked key) to help diagnose HTTP 400 issues
             try:
                 debug_print_config("Explain Debug", cfg)
             except Exception as dbg_e:
                 print(f"[Explain Debug] Failed to print config: {dbg_e}")
-            
-            api_version = cfg.api_version
-            
-            url = f"{endpoint}/openai/deployments/{deployment}/chat/completions?api-version={api_version}"
-            headers = {
-                "Content-Type": "application/json",
-                "api-key": api_key
-            }
 
-            # Debug: Show final request URL (without key)
-            print(f"[Explain Debug] Request URL: {url}")
-            
-            # Create enhanced system prompt for better explanations
-            system_prompt = """You are an expert data analyst specializing in Azure Log Analytics and KQL query results. Your task is to provide clear, actionable insights from data.
+            # Prompts
+            system_prompt = (
+                "You are an expert data analyst specializing in Azure Log Analytics and KQL query results. "
+                "Provide clear, actionable insights from the provided summarized query output."
+            )
+            user_prompt = (
+                f"Analyze these Azure Log Analytics query results.\n\n"
+                f"Original Question: {original_question if original_question else 'Not specified'}\n\n"
+                f"{data_summary}\n\n"
+                "Return 2-4 concise sentences focusing on:\n"
+                "1) Key patterns or anomalies\n"
+                "2) Business/operational significance\n"
+                "3) Any suggested next step if appropriate."
+            )
 
-When analyzing query results:
-1. Identify the main finding or pattern in simple terms
-2. Highlight any concerning trends, anomalies, or notable values  
-3. Provide context about what the data means from a business or operational perspective
-4. Keep explanations concise but insightful (2-4 sentences)
-5. Use plain English and avoid technical jargon
-
-Focus on what the data tells us and what actions might be needed."""
-
-            user_prompt = f"""Analyze these Azure Log Analytics query results:
-
-Original Question: {original_question if original_question else 'Not specified'}
-
-{data_summary}
-
-Please provide a clear, actionable explanation of what this data shows and its significance."""
-
-            # Configurable limits via env
+            # Limits
             max_data_chars = get_env_int("AZURE_OPENAI_EXPLAIN_MAX_DATA_CHARS", 8000, min_value=1000, max_value=20000)
-            max_tokens_standard = get_env_int("AZURE_OPENAI_EXPLAIN_MAX_TOKENS", 400, min_value=50, max_value=4000)
-            max_tokens_o = get_env_int("AZURE_OPENAI_EXPLAIN_MAX_TOKENS", 500, min_value=50, max_value=4000)  # same var reused intentionally
             if len(data_summary) > max_data_chars:
                 print(f"[Explain Debug] Truncating data_summary from {len(data_summary)} to {max_data_chars} chars")
                 data_summary = data_summary[:max_data_chars] + "\n...TRUNCATED..."
-            # Build request payload via shared utility
-            if _is_o_model(deployment):
-                messages = [
-                    {"role": "user", "content": f"{system_prompt}\n\n{user_prompt}"}
-                ]
-                request_data = build_payload(messages, is_o_model=True, max_output_tokens=max_tokens_o)
-            else:
-                messages = [
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt}
-                ]
-                request_data = build_payload(messages, is_o_model=False, max_output_tokens=max_tokens_standard, temperature=0.3, top_p=0.9)
-            
-            # Make API call with timeout and retries
-            import requests
-            import json
-            import time
-            
-            max_retries = 3
-            base_delay = 1
-            
-            for attempt in range(max_retries):
-                try:
-                    response = requests.post(
-                        url, 
-                        headers=headers, 
-                        data=json.dumps(request_data),
-                        timeout=30
+
+            max_tokens = get_env_int("AZURE_OPENAI_EXPLAIN_MAX_TOKENS", 400, min_value=50, max_value=4000)
+            is_o = _is_o_model(cfg.deployment)
+
+            messages = build_messages(system_prompt, user_prompt, is_o_model=is_o)
+            payload = build_chat_request(messages, is_o_model=is_o, max_tokens=max_tokens, temperature=0.3, top_p=0.9)
+
+            content, error_msg, raw, finish_reason = chat_completion(cfg, payload, debug_prefix="Explain")
+
+            if error_msg:
+                # If pure empty content error, attempt a fallback retry with heavier truncation
+                if "Empty completion content" in error_msg:
+                    print("[Explain Debug] First attempt empty. Retrying with aggressive truncation and higher max_tokens.")
+                    # Aggressive truncation: keep only first 3000 chars of data_summary body (after prompts)
+                    simple_summary = data_summary[:3000] + ("\n...TRUNCATED AGAIN..." if len(data_summary) > 3000 else "")
+                    # Rebuild a leaner user prompt focusing only on table shapes
+                    lean_user_prompt = (
+                        f"Summarize these Azure Log Analytics results in 2-3 sentences focusing on key anomalies and trends.\n\n"
+                        f"Original Question: {original_question if original_question else 'Not specified'}\n\n"
+                        f"{simple_summary}"
                     )
-                    
-                    # Handle specific HTTP errors
-                    if response.status_code == 429:
-                        if attempt < max_retries - 1:
-                            delay = base_delay * (2 ** attempt)
-                            print(f"[Explain] Rate limited, retrying in {delay}s...")
-                            time.sleep(delay)
-                            continue
-                        else:
-                            return "❌ Azure OpenAI service is currently busy. Please try explaining the results again in a few moments."
-                    
-                    if response.status_code == 401:
-                        return "❌ Azure OpenAI authentication failed. Please check your API key in the .env file."
-                    
-                    if response.status_code == 404:
-                        return f"❌ Azure OpenAI deployment '{deployment}' not found. Please check your deployment name in the .env file."
-                    
-                    if response.status_code == 400:
-                        # Capture body for diagnostics
-                        body_text = None
-                        try:
-                            body_text = response.text[:1000]
-                        except Exception:
-                            body_text = '<unavailable>'
-                        print(f"[Explain Debug] HTTP 400 Body Snippet: {body_text}")
-                    response.raise_for_status()
-                    
-                    result = response.json()
-                    
-                    # Enhanced response validation
-                    if 'error' in result:
-                        error_msg = result['error'].get('message', 'Unknown API error')
-                        return f"❌ Azure OpenAI API error: {error_msg}"
-                    
-                    if 'choices' not in result or not result['choices']:
-                        return "❌ Azure OpenAI API returned no response choices"
-                    
-                    choice = result['choices'][0]
-                    
-                    # Check for content filtering
-                    if choice.get('finish_reason') == 'content_filter':
-                        return "❌ Response was filtered due to content policy. Please try with different query results."
-                    
-                    if 'message' not in choice:
-                        return "❌ Azure OpenAI API response missing message content"
-                    
-                    content = choice['message'].get('content', '').strip()
-                    
-                    if not content:
-                        return "❌ Azure OpenAI API returned empty explanation"
-                    
-                    # Success - return the explanation
-                    return content
-                    
-                except requests.exceptions.Timeout:
-                    if attempt < max_retries - 1:
-                        print(f"[Explain] Request timeout, retrying...")
-                        time.sleep(base_delay * (attempt + 1))
-                        continue
-                    else:
-                        return "❌ Azure OpenAI request timed out. Please try again."
-                        
-                except requests.exceptions.ConnectionError:
-                    if attempt < max_retries - 1:
-                        print(f"[Explain] Connection error, retrying...")
-                        time.sleep(base_delay * (attempt + 1))
-                        continue
-                    else:
-                        return "❌ Unable to connect to Azure OpenAI. Please check your network connection."
-                        
-                except requests.exceptions.HTTPError as e:
-                    status = e.response.status_code if e.response is not None else 'Unknown'
-                    detail_snip = ''
-                    try:
-                        txt = e.response.text if e.response is not None else ''
-                        detail_snip = (txt[:300] + '...') if len(txt) > 300 else txt
-                    except Exception:
-                        pass
-                    return f"❌ Azure OpenAI API error: HTTP {status}. {detail_snip}"
-                    
-                except json.JSONDecodeError:
-                    return "❌ Invalid response from Azure OpenAI API"
-            
-            return "❌ Failed to get explanation after multiple attempts"
-            
+                    lean_messages = build_messages(system_prompt, lean_user_prompt, is_o_model=is_o)
+                    # Increase tokens modestly to give space in case prior attempt was squeezed
+                    fallback_tokens = min(int(max_tokens * 1.5), 600)
+                    fallback_payload = build_chat_request(lean_messages, is_o_model=is_o, max_tokens=fallback_tokens, temperature=0.35, top_p=0.9)
+                    content2, error_msg2, raw2, finish_reason2 = chat_completion(cfg, fallback_payload, debug_prefix="Explain-Fallback")
+                    if error_msg2:
+                        return f"❌ Azure OpenAI API error: {error_msg2}"
+                    if not content2:
+                        return "❌ Azure OpenAI API returned empty explanation (after fallback retry)"
+                    content = content2
+                else:
+                    return f"❌ Azure OpenAI API error: {error_msg}"
+            elif not content:
+                # Attempt fallback extraction from raw JSON structure then retry if still empty
+                extracted = None
+                try:
+                    if raw and isinstance(raw, dict):
+                        ch = raw.get('choices', [])
+                        if ch:
+                            m = ch[0].get('message', {})
+                            extracted = (m.get('content') or '').strip()
+                except Exception:
+                    pass
+                if extracted:
+                    content = extracted
+                else:
+                    print("[Explain Debug] Empty content with no explicit error, performing retry.")
+                    lean_user_prompt = (
+                        f"Provide a concise (max 3 sentences) explanation of the key trends.\n\n{data_summary[:2500]}"
+                        + ("\n...TRUNCATED AGAIN..." if len(data_summary) > 2500 else "")
+                    )
+                    lean_messages = build_messages(system_prompt, lean_user_prompt, is_o_model=is_o)
+                    fallback_tokens = min(int(max_tokens * 1.4), 550)
+                    fallback_payload = build_chat_request(lean_messages, is_o_model=is_o, max_tokens=fallback_tokens, temperature=0.35, top_p=0.9)
+                    content2, error_msg2, raw2, finish_reason2 = chat_completion(cfg, fallback_payload, debug_prefix="Explain-Fallback2")
+                    if error_msg2:
+                        return f"❌ Azure OpenAI API error: {error_msg2}"
+                    if not content2:
+                        return "❌ Azure OpenAI API returned empty explanation (after secondary fallback)"
+                    content = content2
+
+            # Light post-processing: remove accidental markdown fences
+            if content.startswith("```"):
+                content = content.strip().strip('`')
+
+            return content.strip()
+
         except Exception as e:
             import traceback
-            error_details = traceback.format_exc()
-            print(f"[Explain API Error] {error_details}")
-            return f"❌ Unexpected error generating explanation: {str(e)}"
+            print(f"[Explain API Error] {traceback.format_exc()}")
+            return f"❌ Unexpected error generating explanation: {e}" 
 
 async def main():
     """Main interactive loop"""

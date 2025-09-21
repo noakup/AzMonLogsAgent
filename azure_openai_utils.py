@@ -3,7 +3,10 @@ payload construction, and URL building for both translation and explanation path
 """
 from __future__ import annotations
 import os
-from typing import Dict, Tuple, Any
+from typing import Dict, Tuple, Any, List, Optional
+import json
+import time
+import requests
 
 try:  # Optional dependency; don't fail if missing
     from dotenv import load_dotenv  # type: ignore
@@ -55,8 +58,17 @@ def load_config() -> AzureOpenAIConfig | None:
     return AzureOpenAIConfig(endpoint, api_key, deployment, api_version, is_override)
 
 def _is_o_model(deployment: str) -> bool:
+    """Return True only for explicitly named o-model family deployments.
+
+    We intentionally avoid matching generic 'gpt-4o' (the mainstream 4o models)
+    because they use the standard chat payload shape. We treat as o-model only if
+    the deployment name clearly starts with one of the specialized research/optimized
+    families like 'o1', 'o1-', 'o4', 'o4-'. Case-insensitive.
+    """
+    if not deployment:
+        return False
     d = deployment.lower()
-    return ("o1" in d) or ("o4" in d)
+    return d == "o1" or d == "o4" or d.startswith("o1-") or d.startswith("o4-")
 
 def build_payload(messages: list[Dict[str, str]], *, is_o_model: bool, max_output_tokens: int = 500, temperature: float | None = 0.3, top_p: float | None = 0.9) -> Dict[str, Any]:
     """Return a properly shaped payload for Azure OpenAI Chat Completions.
@@ -112,3 +124,112 @@ def get_env_int(name: str, default: int, min_value: int | None = None, max_value
         return val
     except ValueError:
         return default
+
+# === Shared Chat Helper Layer (restored) ===
+
+def build_messages(system_prompt: str, user_prompt: str, *, is_o_model: bool) -> List[Dict[str, str]]:
+    """Return message list formatted per model type."""
+    if is_o_model:
+        return [{"role": "user", "content": f"{system_prompt}\n\n{user_prompt}"}]
+    return [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt}
+    ]
+
+def build_chat_request(messages: List[Dict[str, str]], *, is_o_model: bool, max_tokens: int, temperature: Optional[float] = 0.3, top_p: Optional[float] = 0.9) -> Dict[str, Any]:
+    if is_o_model:
+        return build_payload(messages, is_o_model=True, max_output_tokens=max_tokens)
+    return build_payload(messages, is_o_model=False, max_output_tokens=max_tokens, temperature=temperature, top_p=top_p)
+
+def chat_completion(cfg: AzureOpenAIConfig, payload: Dict[str, Any], *, max_retries: int = 3, base_delay: float = 1.0, timeout: int = 30, debug_prefix: str = "Chat") -> Tuple[Optional[str], Optional[str], Optional[Dict[str, Any]], Optional[str]]:
+    """Execute chat completion with retries.
+
+    Returns (content, error_message, raw_json, finish_reason)
+    """
+    url = cfg.chat_completions_url()
+    headers = {"Content-Type": "application/json", "api-key": cfg.api_key}
+    for attempt in range(max_retries):
+        try:
+            resp = requests.post(url, headers=headers, data=json.dumps(payload), timeout=timeout)
+            if resp.status_code == 429 and attempt < max_retries - 1:
+                delay = base_delay * (2 ** attempt)
+                print(f"[{debug_prefix}] 429 rate limit; retrying in {delay}s")
+                time.sleep(delay)
+                continue
+            if resp.status_code == 401:
+                return None, "Authentication failed (401)", None, None
+            if resp.status_code == 404:
+                return None, f"Deployment not found (404): {cfg.deployment}", None, None
+            if resp.status_code == 400:
+                print(f"[{debug_prefix}] 400 body snippet: {resp.text[:400] if hasattr(resp,'text') else ''}")
+            resp.raise_for_status()
+            try:
+                data = resp.json()
+            except json.JSONDecodeError:
+                return None, "Invalid JSON response", None, None
+            if 'error' in data:
+                return None, data['error'].get('message', 'Unknown API error'), data, None
+            if 'choices' not in data or not data['choices']:
+                return None, "No choices returned", data, None
+            choice = data['choices'][0]
+            if choice.get('finish_reason') == 'content_filter':
+                return None, "Response filtered (content policy)", data, choice.get('finish_reason')
+            msg = choice.get('message', {})
+            content_field = msg.get('content')
+            extracted_text = ""
+            # Azure sometimes returns a list of content parts; handle string or list
+            if isinstance(content_field, str):
+                extracted_text = content_field
+            elif isinstance(content_field, list):
+                parts: List[str] = []
+                for part in content_field:
+                    # Common shapes: {"type":"text","text":"..."} or direct strings
+                    if isinstance(part, str):
+                        if part.strip():
+                            parts.append(part.strip())
+                    elif isinstance(part, dict):
+                        txt = part.get('text') or part.get('content') or ''
+                        if isinstance(txt, str) and txt.strip():
+                            parts.append(txt.strip())
+                extracted_text = "\n".join(p for p in parts if p)
+            # Fallback: attempt to pull from alternative keys
+            if not extracted_text:
+                alt = msg.get('alternate') or msg.get('response')
+                if isinstance(alt, str):
+                    extracted_text = alt
+            if not extracted_text.strip():
+                # Extra fallback: sometimes Azure may put text at choice level (rare)
+                choice_level_text = choice.get('text') or choice.get('content')
+                if isinstance(choice_level_text, str) and choice_level_text.strip():
+                    extracted_text = choice_level_text.strip()
+                if not extracted_text.strip():
+                    # Provide rich debug context
+                    print(f"[{debug_prefix}] Empty content debug: msg_keys={list(msg.keys())}; choice_keys={list(choice.keys())}; raw_message={msg}; choice={choice}")
+                    return None, "Empty completion content", data, choice.get('finish_reason')
+            return extracted_text.strip(), None, data, choice.get('finish_reason')
+        except requests.exceptions.Timeout:
+            if attempt < max_retries - 1:
+                delay = base_delay * (attempt + 1)
+                print(f"[{debug_prefix}] Timeout; retrying in {delay}s")
+                time.sleep(delay)
+                continue
+            return None, "Request timed out", None, None
+        except requests.exceptions.ConnectionError:
+            if attempt < max_retries - 1:
+                delay = base_delay * (attempt + 1)
+                print(f"[{debug_prefix}] Connection error; retrying in {delay}s")
+                time.sleep(delay)
+                continue
+            return None, "Connection error", None, None
+        except requests.exceptions.HTTPError as e:
+            status = e.response.status_code if getattr(e, 'response', None) else 'Unknown'
+            snippet = ''
+            try:
+                body = e.response.text if e.response is not None else ''
+                snippet = (body[:300] + '...') if len(body) > 300 else body
+            except Exception:
+                pass
+            return None, f"HTTP error {status}: {snippet}", None, None
+        except Exception as ex:
+            return None, f"Unexpected exception: {ex}", None, None
+    return None, "Exceeded retries", None, None
