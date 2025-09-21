@@ -493,6 +493,21 @@ class KQLAgent:
             endpoint = os.environ.get("AZURE_OPENAI_ENDPOINT")
             api_key = os.environ.get("AZURE_OPENAI_KEY")
             deployment = os.environ.get("AZURE_OPENAI_DEPLOYMENT", "gpt-35-turbo")
+            api_version_override = os.environ.get("AZURE_OPENAI_API_VERSION")
+
+            # Debug: Print configuration (masked key) to help diagnose HTTP 400 issues
+            try:
+                masked_key = None
+                if api_key:
+                    masked_key = f"{api_key[:4]}***len={len(api_key)}"
+                print("[Explain Debug] Azure OpenAI Config:")
+                print(f"  Endpoint: {endpoint}")
+                print(f"  Deployment: {deployment}")
+                print(f"  API Key Present: {'YES' if api_key else 'NO'} ({masked_key if masked_key else ''})")
+                if api_version_override:
+                    print(f"  API Version Override: {api_version_override}")
+            except Exception as dbg_e:
+                print(f"[Explain Debug] Failed to print config: {dbg_e}")
             
             if not endpoint or not api_key:
                 return "❌ Azure OpenAI configuration missing. Please check your .env file for AZURE_OPENAI_ENDPOINT and AZURE_OPENAI_KEY."
@@ -502,14 +517,24 @@ class KQLAgent:
                 endpoint = f"https://{endpoint}"
             endpoint = endpoint.rstrip('/')
             
-            # Use a stable API version that supports both GPT-3.5 and GPT-4
-            api_version = "2024-02-01"
+            # Determine API version (override wins, else adaptive like translation path)
+            if api_version_override:
+                api_version = api_version_override
+            else:
+                if "o1" in deployment.lower() or "o4" in deployment.lower():
+                    api_version = "2024-12-01-preview"
+                else:
+                    api_version = "2024-09-01-preview"
+            print(f"[Explain Debug] Using api-version: {api_version} (override={'YES' if api_version_override else 'NO'})")
             
             url = f"{endpoint}/openai/deployments/{deployment}/chat/completions?api-version={api_version}"
             headers = {
                 "Content-Type": "application/json",
                 "api-key": api_key
             }
+
+            # Debug: Show final request URL (without key)
+            print(f"[Explain Debug] Request URL: {url}")
             
             # Create enhanced system prompt for better explanations
             system_prompt = """You are an expert data analyst specializing in Azure Log Analytics and KQL query results. Your task is to provide clear, actionable insights from data.
@@ -531,18 +556,36 @@ Original Question: {original_question if original_question else 'Not specified'}
 
 Please provide a clear, actionable explanation of what this data shows and its significance."""
 
-            # Optimize request parameters for reliability
-            request_data = {
-                "messages": [
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt}
-                ],
-                "temperature": 0.3,
-                "max_tokens": 400,
-                "top_p": 0.9,
-                "frequency_penalty": 0.0,
-                "presence_penalty": 0.0
-            }
+            # Truncate data_summary if excessively large to avoid 400s due to payload size
+            MAX_DATA_SUMMARY_CHARS = 8000
+            if len(data_summary) > MAX_DATA_SUMMARY_CHARS:
+                print(f"[Explain Debug] Truncating data_summary from {len(data_summary)} to {MAX_DATA_SUMMARY_CHARS} chars")
+                data_summary = data_summary[:MAX_DATA_SUMMARY_CHARS] + "\n...TRUNCATED..."
+
+            # Build request payload (o-models use different parameter surface)
+            lower_deployment = deployment.lower()
+            if "o1" in lower_deployment or "o4" in lower_deployment:
+                # For o-models: single user message combining system + user; use max_completion_tokens
+                combined_content = f"{system_prompt}\n\n{user_prompt}"
+                request_data = {
+                    "messages": [
+                        {"role": "user", "content": combined_content}
+                    ],
+                    "max_completion_tokens": 500
+                }
+            else:
+                # Standard chat completion payload
+                request_data = {
+                    "messages": [
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_prompt}
+                    ],
+                    "temperature": 0.3,
+                    "max_tokens": 400,
+                    "top_p": 0.9,
+                    "frequency_penalty": 0.0,
+                    "presence_penalty": 0.0
+                }
             
             # Make API call with timeout and retries
             import requests
@@ -577,6 +620,14 @@ Please provide a clear, actionable explanation of what this data shows and its s
                     if response.status_code == 404:
                         return f"❌ Azure OpenAI deployment '{deployment}' not found. Please check your deployment name in the .env file."
                     
+                    if response.status_code == 400:
+                        # Capture body for diagnostics
+                        body_text = None
+                        try:
+                            body_text = response.text[:1000]
+                        except Exception:
+                            body_text = '<unavailable>'
+                        print(f"[Explain Debug] HTTP 400 Body Snippet: {body_text}")
                     response.raise_for_status()
                     
                     result = response.json()
@@ -623,7 +674,14 @@ Please provide a clear, actionable explanation of what this data shows and its s
                         return "❌ Unable to connect to Azure OpenAI. Please check your network connection."
                         
                 except requests.exceptions.HTTPError as e:
-                    return f"❌ Azure OpenAI API error: HTTP {e.response.status_code}"
+                    status = e.response.status_code if e.response is not None else 'Unknown'
+                    detail_snip = ''
+                    try:
+                        txt = e.response.text if e.response is not None else ''
+                        detail_snip = (txt[:300] + '...') if len(txt) > 300 else txt
+                    except Exception:
+                        pass
+                    return f"❌ Azure OpenAI API error: HTTP {status}. {detail_snip}"
                     
                 except json.JSONDecodeError:
                     return "❌ Invalid response from Azure OpenAI API"
