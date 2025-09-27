@@ -5,16 +5,17 @@ This version actually uses the example files to provide context to the AI
 """
 
 import os
-import requests
 import json
-from typing import List
+from typing import List, Optional
 
 from azure_openai_utils import (
     load_config,
-    build_payload,
     debug_print_config,
-    _is_o_model,  # internal helper acceptable for now; could wrap later
-    get_env_int
+    _is_o_model,
+    get_env_int,
+    build_messages,
+    build_chat_request,
+    chat_completion
 )
 
 def load_examples_and_metadata():
@@ -159,12 +160,7 @@ IMPORTANT RULES:
     
     api_version = cfg.api_version
     debug_print_config("Translate Debug", cfg)
-    print(f"🔄 Making API call to: {endpoint}/openai/deployments/{deployment}/chat/completions?api-version={api_version}")
-    url = cfg.chat_completions_url()
-    headers = {
-        "Content-Type": "application/json",
-        "api-key": api_key
-    }
+    print(f"🔄 Using chat helper endpoint (api-version={api_version})")
 
     user_prompt = f"""
 Question: {nl_question}
@@ -172,31 +168,32 @@ Question: {nl_question}
 Based on the examples above, generate a KQL query. Response format: just the KQL query, nothing else.
 """
 
-    # Configurable max tokens for translation
-    translate_max_tokens = get_env_int("AZURE_OPENAI_TRANSLATE_MAX_TOKENS", 500, min_value=50, max_value=4000)
-    is_o = _is_o_model(deployment)
-    if is_o:
-        messages = [
-            {"role": "user", "content": f"{system_prompt}\n\n{user_prompt}"}
-        ]
-        data = build_payload(messages, is_o_model=True, max_output_tokens=translate_max_tokens)
-    else:
-        messages = [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt}
-        ]
-        # Maintain incremental temperature for retries
-        temp = 0.1 + (attempt_number * 0.05)
-        data = build_payload(messages, is_o_model=False, max_output_tokens=translate_max_tokens, temperature=temp, top_p=0.9)
+    # Configurable max tokens & temperature strategy
     
-    response = requests.post(url, headers=headers, data=json.dumps(data))
-    response.raise_for_status()
-    result = response.json()
-    kql = result["choices"][0]["message"]["content"].strip()
+    # temperature_increment = float(os.environ.get("AZURE_OPENAI_TRANSLATE_TEMP_INCREMENT", "0.05"))
+    # hard_cap_tokens = get_env_int("AZURE_OPENAI_TRANSLATE_MAX_TOKENS_CAP", 800, min_value=translate_max_tokens, max_value=4000)
+    is_o = _is_o_model(deployment)
+
+    # temperature = base_temperature + (attempt_number * temperature_increment)
+    messages = build_messages(system_prompt, user_prompt, is_o_model=is_o)
+    payload = build_chat_request(messages, is_o_model=is_o)
+
+    content, error, raw, finish_reason = chat_completion(cfg, payload, debug_prefix="Translate")
+
+    # handle errors
+    if error:
+        return f"// Error translating NL to KQL: {error}"
+
+    if not content:
+        return "// Error: Empty or invalid response from AI"
+
+    kql = content.strip()
     
     # Clean up the response
     if kql.startswith("```kql"):
         kql = kql.replace("```kql", "").replace("```", "").strip()
+    elif kql.startswith("```") and kql.endswith("```"):
+        kql = kql.strip('`').strip()
     
     # Basic validation - check if it looks like a valid KQL query
     if not kql or len(kql.strip()) < 5:

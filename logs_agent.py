@@ -460,13 +460,15 @@ class KQLAgent:
             summary += f"- Columns: {', '.join(table.get('columns', []))}\n"
             summary += f"- Row count: {table.get('row_count', 0)}\n"
             
-            # Add sample of data (first few rows)
+            # Add sample of data (first 50 rows)
+            # TBD: send all data if under limit (currently 1000 rows)
+
             rows = table.get('rows', [])
             columns = table.get('columns', [])
             
             if rows and columns:
                 summary += f"- Sample data:\n"
-                for j, row in enumerate(rows[:5]):  # Show first 5 rows max
+                for j, row in enumerate(rows[:50]):  # Show first 50 rows max
                     row_data = []
                     for k, cell in enumerate(row):
                         if k < len(columns):
@@ -533,11 +535,10 @@ class KQLAgent:
                 print(f"[Explain Debug] Truncating data_summary from {len(data_summary)} to {max_data_chars} chars")
                 data_summary = data_summary[:max_data_chars] + "\n...TRUNCATED..."
 
-            max_tokens = get_env_int("AZURE_OPENAI_EXPLAIN_MAX_TOKENS", 400, min_value=50, max_value=4000)
             is_o = _is_o_model(cfg.deployment)
 
             messages = build_messages(system_prompt, user_prompt, is_o_model=is_o)
-            payload = build_chat_request(messages, is_o_model=is_o, max_tokens=max_tokens, temperature=0.3, top_p=0.9)
+            payload = build_chat_request(messages, is_o_model=is_o)
 
             content, error_msg, raw, finish_reason = chat_completion(cfg, payload, debug_prefix="Explain")
 

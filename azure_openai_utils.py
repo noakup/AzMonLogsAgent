@@ -29,15 +29,20 @@ class AzureOpenAIConfig:
         return f"{self.endpoint}/openai/deployments/{self.deployment}"
 
     def chat_completions_url(self) -> str:
+        print(f"[debug:] Chat completions URL: {self.base_url()}/chat/completions?api-version={self.api_version}")
         return f"{self.base_url()}/chat/completions?api-version={self.api_version}"
 
 def load_config() -> AzureOpenAIConfig | None:
     endpoint = os.environ.get("AZURE_OPENAI_ENDPOINT")
+    print(f"[debug:] Loaded AZURE_OPENAI_ENDPOINT: {endpoint}")
     api_key = os.environ.get("AZURE_OPENAI_KEY")
     deployment = os.environ.get("AZURE_OPENAI_DEPLOYMENT", "gpt-35-turbo")
+    print(f"[debug:] Loaded AZURE_OPENAI_DEPLOYMENT: {deployment}")
     api_version_override = os.environ.get("AZURE_OPENAI_API_VERSION")
+    print(f"[debug:] Loaded AZURE_OPENAI_API_VERSION: {api_version_override}")
 
     if not endpoint or not api_key:
+        print("[debug:] Missing endpoint or API key in environment variables.")
         return None
 
     if not endpoint.startswith("http"):
@@ -47,6 +52,7 @@ def load_config() -> AzureOpenAIConfig | None:
     if api_version_override:
         api_version = api_version_override
         is_override = True
+        print(f"[debug:] Using overridden API version: {api_version}")
     else:
         # Adaptive selection
         if _is_o_model(deployment):
@@ -54,6 +60,7 @@ def load_config() -> AzureOpenAIConfig | None:
         else:
             api_version = DEFAULT_STANDARD_API_VERSION
         is_override = False
+        print(f"[debug:] Selected API version: {api_version} (o-model={_is_o_model(deployment)})")
 
     return AzureOpenAIConfig(endpoint, api_key, deployment, api_version, is_override)
 
@@ -130,16 +137,22 @@ def get_env_int(name: str, default: int, min_value: int | None = None, max_value
 def build_messages(system_prompt: str, user_prompt: str, *, is_o_model: bool) -> List[Dict[str, str]]:
     """Return message list formatted per model type."""
     if is_o_model:
+        print(f"[debug:] {{\"role\":\"user\", \"content\":\"{system_prompt}\n\n{user_prompt}\"}}")
         return [{"role": "user", "content": f"{system_prompt}\n\n{user_prompt}"}]
+    print(f"[debug:] {{\"role\":\"system\", \"content\":\"{system_prompt}\"}}")
+    print(f"[debug:] {{\"role\":\"user\", \"content\":\"{user_prompt}\"}}")
     return [
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_prompt}
     ]
 
-def build_chat_request(messages: List[Dict[str, str]], *, is_o_model: bool, max_tokens: int, temperature: Optional[float] = 0.3, top_p: Optional[float] = 0.9) -> Dict[str, Any]:
+def build_chat_request(messages: List[Dict[str, str]], *, is_o_model: bool) -> Dict[str, Any]:
+    max_output_tokens = get_env_int("AZURE_OPENAI_MAX_OUTPUT_TOKENS", 500, min_value=50, max_value=4000)
     if is_o_model:
-        return build_payload(messages, is_o_model=True, max_output_tokens=max_tokens)
-    return build_payload(messages, is_o_model=False, max_output_tokens=max_tokens, temperature=temperature, top_p=top_p)
+        return build_payload(messages, is_o_model=True, max_output_tokens=max_output_tokens)
+    
+    base_temperature = float(os.environ.get("AZURE_OPENAI_TRANSLATE_BASE_TEMP", "0.1"))
+    return build_payload(messages, is_o_model=False, max_output_tokens=max_output_tokens, temperature=base_temperature, top_p=0.9)
 
 def chat_completion(cfg: AzureOpenAIConfig, payload: Dict[str, Any], *, max_retries: int = 3, base_delay: float = 1.0, timeout: int = 30, debug_prefix: str = "Chat") -> Tuple[Optional[str], Optional[str], Optional[Dict[str, Any]], Optional[str]]:
     """Execute chat completion with retries.
@@ -147,6 +160,7 @@ def chat_completion(cfg: AzureOpenAIConfig, payload: Dict[str, Any], *, max_retr
     Returns (content, error_message, raw_json, finish_reason)
     """
     url = cfg.chat_completions_url()
+    print(f"[debug {debug_prefix}] URL: {url}")
     headers = {"Content-Type": "application/json", "api-key": cfg.api_key}
     for attempt in range(max_retries):
         try:
