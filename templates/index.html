@@ -2045,6 +2045,14 @@
                                 label.textContent = 'Workspace set';
                             }
                         }
+                        // Enable schema button now that setup and polling are complete
+                        const schemaBtn = document.getElementById('showSchemaBtn');
+                        if(schemaBtn){
+                            schemaBtn.disabled = false;
+                            schemaBtn.classList.remove('disabled');
+                            schemaBtn.onclick = toggleSchema;
+                            schemaBtn.title = 'Show workspace schema and available tables';
+                        }
                         if(manifestSchemaCache){
                             schemaDataCache = buildFilteredSchema(manifestSchemaCache, workspaceSchemaCache);
                         } else {
@@ -2438,6 +2446,15 @@ async function setupWorkspace() {
         return;
     }
 
+    // Disable schema button until setup and polling are complete
+    const schemaBtn = document.getElementById('showSchemaBtn');
+    if(schemaBtn){
+        schemaBtn.disabled = true;
+        schemaBtn.classList.add('disabled');
+        schemaBtn.onclick = null;
+        schemaBtn.title = 'Workspace setup in progress...';
+    }
+
     try {
         const response = await fetch('/api/setup', {
             method: 'POST',
@@ -2450,17 +2467,8 @@ async function setupWorkspace() {
         if (data.success) {
             updateStatus(true);
 
-            // Automatically check connection
-            const connectionResponse = await fetch('/api/test-connection', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' }
-            });
-
-            const connectionData = await connectionResponse.json();
-
-            if (!connectionData.success) {
-                updateStatus(false, connectionData.error);
-            }
+            // Start polling workspace schema instead of test-connection
+            startWorkspaceSchemaPolling();
         } else {
             updateStatus(false, data.error);
         }
@@ -3493,7 +3501,14 @@ async function processQuestionWithRetry(question) {
                                 }
                             }
                         }
-                        // Build filtered schema immediately if manifest already loaded
+                        // Enable schema button now that setup and polling are complete
+                        const schemaBtn = document.getElementById('showSchemaBtn');
+                        if(schemaBtn){
+                            schemaBtn.disabled = false;
+                            schemaBtn.classList.remove('disabled');
+                            schemaBtn.onclick = toggleSchema;
+                            schemaBtn.title = 'Show workspace schema and available tables';
+                        }
                         if(manifestSchemaCache){
                             schemaDataCache = buildFilteredSchema(manifestSchemaCache, workspaceSchemaCache);
                         } else {
@@ -3505,248 +3520,671 @@ async function processQuestionWithRetry(question) {
                             workspaceResourceTypes: Object.keys(workspaceSchemaCache.resource_type_tables || {}).length,
                             unmatched: workspaceSchemaCache.unmatched_tables?.length
                         });
-                        // Log intersection with universal schema (if already loaded)
                         debugLogSchemaIntersection();
-                        // If schema panel already open, re-render
-                        const container = document.getElementById('schemaTreeContainer');
-                        if(container && container.style.display === 'block'){
-                            const searchVal = document.getElementById('schemaSearch').value;
-                            renderSchemaTree(schemaDataCache, searchVal);
-                            const stats = document.getElementById('schemaStats');
-                            if(stats){
-                                stats.style.display='inline-flex';
-                                stats.textContent = `${schemaDataCache.counts.resource_types} resource types • ${schemaDataCache.counts.providers} providers • ${schemaDataCache.counts.tables} tables`;
-                            }
+                        if(document.getElementById('schemaTreeContainer')?.style.display === 'block'){
+                            renderSchemaTree();
                         }
-                        // Update quick suggestions now that workspace schema is ready
                         renderQuickSuggestions();
-                    } else if(data.status === 'pending') {
-                        // Update subtle cycling message every few attempts
-                        if(attempts % 5 === 0){
-                            showWorkspaceLoading('Still fetching workspace tables...');
-                        }
-                    } else if(data.status === 'uninitialized') {
-                        // Should not happen after setup, but break to avoid infinite loop
-                        clearInterval(workspacePollingInterval); workspacePollingInterval = null;
-                        clearWorkspaceLoading('Workspace not initialized');
+                        return; // stop polling
+                    }
+                    if(data.status === 'uninitialized'){
+                        console.warn('[SchemaPolling] Uninitialized; aborting.');
+                        return;
+                    }
+                    if(attempt % 5 === 0){
+                        console.log('[SchemaPolling] Pending (attempt ' + attempt + ')');
                     }
                 } catch(err){
-                    if(attempts > 20){
-                        clearInterval(workspacePollingInterval); workspacePollingInterval = null;
-                        clearWorkspaceLoading('Workspace schema fetch failed');
-                    }
+                    if(attempt % 3 === 0){ console.warn('[SchemaPolling] Error', err); }
                 }
-                // Safety stop after ~60s (30 * 2s) if not ready
-                if(attempts >= 30 && workspacePollingInterval){
-                    clearInterval(workspacePollingInterval); workspacePollingInterval = null;
-                    clearWorkspaceLoading('Workspace schema timeout');
+                if(attempt >= maxAttempts){
+                    console.warn('[SchemaPolling] Reached max attempts; giving up.');
+                    return;
                 }
-            }, 2000);
-        }
-
-        function buildFilteredSchema(manifest, workspace){
-            if(!manifest) return null;
-            if(!workspace || !workspace.success) return manifest; // fallback
-            let wsRtTables = workspace.resource_type_tables || {};
-            // Safety: if backend returned no resource_type_tables but tables exist, synthesize them
-            if(Object.keys(wsRtTables).length === 0 && Array.isArray(workspace.tables)){
-                wsRtTables = {};
-                workspace.tables.forEach(t=>{
-                    const docRt = (t.doc_resource_type && t.doc_resource_type !== 'unknown resource type') ? t.doc_resource_type : (t.manifest_resource_type || 'unknown resource type');
-                    wsRtTables[docRt] = wsRtTables[docRt] || [];
-                    if(!wsRtTables[docRt].includes(t.name)) wsRtTables[docRt].push(t.name);
-                });
-            }
-            const filteredResourceTypes = Object.keys(wsRtTables).sort();
-            const providersSet = new Set(filteredResourceTypes.map(rt=> rt.split('/')[0]));
-            // Only include tables actually present in workspace subset
-            const filteredResourceTypeTables = {};
-            filteredResourceTypes.forEach(rt => { filteredResourceTypeTables[rt] = [...new Set(wsRtTables[rt])]; });
-            const totalTables = Object.values(filteredResourceTypeTables).reduce((acc, arr)=> acc + arr.length, 0);
-            return {
-                ...manifest,
-                resource_types: filteredResourceTypes,
-                providers: Array.from(providersSet).sort(),
-                resource_type_tables: filteredResourceTypeTables,
-                counts: {
-                    resource_types: filteredResourceTypes.length,
-                    providers: providersSet.size,
-                    tables: totalTables
-                }
+                // Exponential backoff with cap (0.8s,1.2s,1.8s,2.7s,... up to ~10s)
+                const delay = Math.min(10000, Math.round(baseDelay * Math.pow(1.5, attempt-1)));
+                workspacePollingInterval = setTimeout(poll, delay);
             };
+            poll();
         }
 
-        function buildWorkspaceOnlySchema(workspace){
-            const wsRtTables = {...(workspace.resource_type_tables || {})};
-            // Add synthetic resource types for unmatched tables with doc_resource_type (or unknown)
-            if(Array.isArray(workspace.tables)){
-                workspace.tables.forEach(t => {
-                    if(!t.in_manifest){
-                        const docRt = (t.doc_resource_type && t.doc_resource_type !== 'unknown resource type') ? t.doc_resource_type : 'unknown resource type';
-                        wsRtTables[docRt] = wsRtTables[docRt] || [];
-                        if(!wsRtTables[docRt].includes(t.name)) wsRtTables[docRt].push(t.name);
-                    }
-                });
-            }
-            const resource_types = Object.keys(wsRtTables).sort();
-            const providers = Array.from(new Set(resource_types.map(rt=> rt.split('/')[0]))).sort();
-            const totalTables = Object.values(wsRtTables).reduce((a, arr)=> a + arr.length, 0);
-            return {
-                resource_types,
-                providers,
-                resource_type_tables: wsRtTables,
-                counts: { resource_types: resource_types.length, providers: providers.length, tables: totalTables }
-            };
-        }
-
-        // Modified setupWorkspace to initiate polling instead of immediate test-connection
-        const originalSetupWorkspace = setupWorkspace; // keep reference if needed
-        async function setupWorkspace(){
-            const workspaceId = document.getElementById('workspaceId').value.trim();
-            const btn = document.getElementById('setWorkspaceBtn');
-            if(!workspaceId){
-                // No status panel messages; focus input and exit
-                const input = document.getElementById('workspaceId');
-                if(input) input.focus();
-                return;
-            }
-            // Reset states
-            btn.classList.remove('success');
-            btn.classList.add('loading');
-            btn.disabled = true;
+        // Reintroduced after polling refactor (was accidentally broken by patch)
+        function updateProgress(percent, message){
             try {
-                const response = await fetch('/api/setup', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ workspace_id: workspaceId }) });
-                const data = await response.json();
-                if(data.success){
-                    updateStatus(true);
-                    // Start polling workspace schema instead of test-connection
-                    startWorkspaceSchemaPolling();
-                } else {
-                    updateStatus(false, data.error);
-                    btn.disabled = false;
-                    btn.classList.remove('loading');
+                const bar = document.getElementById('progressBar');
+                if(bar){
+                    bar.style.width = Math.min(100, Math.max(0, percent)) + '%';
                 }
-            } catch(err){
-                updateStatus(false, `Connection failed: ${err.message}`);
-                btn.disabled = false;
-                btn.classList.remove('loading');
+                const statusEl = document.getElementById('progressStatus');
+                if(statusEl && message){
+                    statusEl.textContent = message;
+                }
+                window.__lastProgressUpdate = { t: Date.now(), percent, message };
+            } catch(e){
+                console.warn('updateProgress failed', e);
             }
         }
-        window.setupWorkspace = setupWorkspace; // reassign with enhanced version
 
-        function toggleSchema(){
-            // Don't allow toggling if not connected
-            if (!isConnected) {
-                return;
+        function updateLoadingStep(stepId, status = 'active') {
+            const stepElement = document.getElementById(stepId);
+            const currentStepElement = document.getElementById('currentStep');
+            
+            if (stepElement) {
+                // Remove previous status classes
+                document.querySelectorAll('.step').forEach(step => {
+                    step.classList.remove('active', 'completed', 'retry');
+                });
+                
+                // Update current step
+                stepElement.classList.add(status);
+                
+                // Update current step text
+                const stepTexts = {
+                    'step-translate': '🔄 Translating your question to KQL...',
+                    'step-validate': '✅ Validating generated query...',
+                    'step-execute': '⚡ Executing query on Azure Log Analytics...',
+                    'step-format': '📊 Formatting results for display...'
+                };
+                
+                if (currentStepElement && stepTexts[stepId]) {
+                    currentStepElement.textContent = stepTexts[stepId];
+                    
+                    // Add retry indication if needed
+                    if (status === 'retry') {
+                        currentStepElement.textContent += ' (retrying for better results...)';
+                    }
+                }
+            }
+        }
+        // Restore missing helper to reset the floating Go button after query completes or errors
+        function resetGoButton(){
+            try {
+                const goButton = document.querySelector('.floating-go-btn');
+                if(!goButton) return;
+                goButton.disabled = false;
+                goButton.innerHTML = 'Go!';
+                goButton.style.opacity = '1';
+                goButton.style.background = '';
+                goButton.style.cursor = 'pointer';
+            } catch(e){
+                console.warn('resetGoButton failed', e);
+            }
+        }
+          function showResult(result, timestamp) {
+    const resultContent = document.getElementById('resultContent');
+    const timestampElement = document.getElementById('timestamp');
+    const resultsSection = document.getElementById('resultsSection');
+    const kqlQueryElement = document.getElementById('kqlQuery');
+
+    // Hide loading indicator
+    hideLoading();
+
+    // Reset the Go button
+    resetGoButton();
+
+    // Make sure the results section is visible
+    resultsSection.classList.add('visible');
+    resultsSection.style.display = 'block';
+
+    // Store current result for explain feature
+    currentQueryResult = result;
+
+    if (result.type === 'query_success') {
+        // Show the generated KQL query in the new section
+        kqlQueryElement.textContent = result.kql_query;
+
+        // Show the data tables
+        if (result.data && result.data.type === 'table_data') {
+            const tables = result.data.tables;
+            if (tables && tables.length > 0) {
+                let html = '';
+                tables.forEach(table => {
+                    html += createTableHTML(table);
+                });
+                resultContent.innerHTML = html;
+
+                // Show explain section for successful queries with data
+                showExplainSection();
+            } else {
+                resultContent.innerHTML = `<div class="no-data-message">No data returned from query</div>`;
+                hideExplainSection();
+            }
+        } else if (result.data && result.data.type === 'no_data') {
+            resultContent.innerHTML = `<div class="no-data-message">${result.data.message}</div>`;
+            hideExplainSection();
+        }
+    } else if (result.type === 'query_error') {
+        resultContent.innerHTML = `<div class="error">❌ Error: ${result.error}</div>`;
+        hideExplainSection();
+    } else {
+        resultContent.innerHTML = `<pre style="white-space: pre-wrap;">${JSON.stringify(result, null, 2)}</pre>`;
+        hideExplainSection();
+    }
+
+    timestampElement.textContent = `Response received at: ${timestamp}`;
+    
+    // Check if tables need expansion controls
+    checkTableOverflow();
+    
+    // Auto-scroll to results section after query completion
+    setTimeout(() => {
+        const resultsSection = document.getElementById('resultsSection');
+        console.log('Auto-scrolling to results section:', resultsSection); // Debug log
+        if (resultsSection) {
+            // Try multiple scroll approaches for better compatibility
+            try {
+                resultsSection.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+                console.log('Scroll initiated with scrollIntoView'); // Debug log
+            } catch (e) {
+                // Fallback for browsers that don't support smooth scrolling
+                resultsSection.scrollIntoView(true);
+                console.log('Fallback scroll used'); // Debug log
             }
             
-            const container = document.getElementById('schemaTreeContainer');
-            const btn = document.getElementById('showSchemaBtn');
-            const isOpen = container.style.display === 'block';
-            if(isOpen){
-                container.style.display='none';
-                if(btn){ btn.setAttribute('aria-expanded','false'); btn.classList.remove('active'); }
-                return;
-            }
-            container.style.display='block';
-            if(btn){ btn.setAttribute('aria-expanded','true'); btn.classList.add('active'); }
-            // Enable search if schema is already cached
-            const searchInput = document.getElementById('schemaSearch');
-            if(searchInput && schemaDataCache){ searchInput.disabled = false; }
-            const tree = document.getElementById('schemaTree');
-            if(!schemaDataCache){
-                fetchSchema();
-            } else {
-                // If cache exists but tree is empty or still showing a loading/empty placeholder, render from cache
-                if(!tree || !tree.children.length || /Loading schema|No matches|Error:/i.test(tree.innerHTML)){
-                    console.log('[Schema] Rendering from existing cache');
-                    renderSchemaTree(schemaDataCache);
-                    // Ensure search becomes interactive when using cached data
-                    const search = document.getElementById('schemaSearch');
-                    if(search) search.disabled = false;
-                    const stats = document.getElementById('schemaStats');
-                    if(stats && schemaDataCache.counts){
-                        stats.style.display='inline-flex';
-                        stats.textContent = `${schemaDataCache.counts.resource_types} resource types • ${schemaDataCache.counts.providers} providers • ${schemaDataCache.counts.tables} tables`;
-                    }
-                }
-            }
-        }
-        async function fetchSchema(){
-            const btn = document.getElementById('showSchemaBtn');
-            const tree = document.getElementById('schemaTree');
-            const stats = document.getElementById('schemaStats');
-            const search = document.getElementById('schemaSearch');
-            tree.innerHTML = '<li class="schema-empty">Loading schema...</li>';
-            try{
-                // Use prefetched manifest if available
-                if(manifestSchemaCache){
-                    schemaDataCache = workspaceSchemaCache ? buildFilteredSchema(manifestSchemaCache, workspaceSchemaCache) : manifestSchemaCache;
-                } else {
-                    const resp = await fetch('/api/resource-schema');
-                    const data = await resp.json();
-                    if(!data.success) throw new Error(data.error || 'Failed to load');
-                    manifestSchemaCache = data;
-                    schemaDataCache = workspaceSchemaCache ? buildFilteredSchema(manifestSchemaCache, workspaceSchemaCache) : manifestSchemaCache;
-                }
-                renderSchemaTree(schemaDataCache);
-                stats.style.display='inline-flex';
-                stats.textContent = `${schemaDataCache.counts.resource_types} resource types • ${schemaDataCache.counts.providers} providers • ${schemaDataCache.counts.tables} tables`;
-                search.disabled = false;
-                // Also attempt to render suggestions if workspace cache already exists
-                renderQuickSuggestions();
-            }catch(e){
-                tree.innerHTML = `<li class='schema-empty'>Error: ${e.message}</li>`;
-            }
-        }
-        function groupByProvider(resourceTypes){
-            const map = {}; resourceTypes.forEach(rt=>{ const p = rt.split('/')[0]; (map[p]=map[p]||[]).push(rt); }); return map;
-        }
-        function renderSchemaTree(data, filterText=''){
-            const tree = document.getElementById('schemaTree');
-            if(!data) return; const {resource_types, resource_type_tables} = data; const providers = groupByProvider(resource_types);
-            const ft = filterText.trim().toLowerCase();
-            let html='';
-            Object.keys(providers).sort().forEach(provider=>{
-                const rts = providers[provider].sort();
-                // Filter provider if none of its rts or tables match
-                const providerMatches = rts.some(rt=> matchRtOrTables(rt, resource_type_tables[rt]||[], ft));
-                if(!providerMatches) return;
-                html += `<li class='schema-provider'>${provider}</li>`;
-                rts.forEach(rt=>{
-                    const tables = resource_type_tables[rt]||[];
-                    if(!matchRtOrTables(rt, tables, ft)) return;
-                    const collapsed = ft? '' : 'style="display:none"';
-                    html += `<li><div class='schema-resource-type' onclick='toggleSchemaTables(this)'>
-                        <span class='schema-toggle'>▶</span>${rt} <span class='schema-badge'>${tables.length}</span></div>`;
-                    if(tables.length){
-                        html += `<ul class='schema-table-list' ${schemaExpanded? '' : collapsed}>` + tables.sort().map(t=> ft && !t.toLowerCase().includes(ft) && !rt.toLowerCase().includes(ft) ? '' : `<li class='schema-table' title='${t}'>${t}</li>`).join('') + `</ul>`;
-                    }
-                    html += `</li>`;
+            // Additional fallback - scroll to a specific position
+            const rect = resultsSection.getBoundingClientRect();
+            if (rect.top > window.innerHeight || rect.top < 0) {
+                window.scrollTo({
+                    top: window.pageYOffset + rect.top - 20,
+                    behavior: 'smooth'
                 });
-            });
-            if(!html) html = `<li class='schema-empty'>No matches.</li>`;
-            // Fallback: if still empty (no resource types) but workspace schema has unmatched tables, list them
-            if(resource_types.length === 0 && window.workspaceSchemaCache && Array.isArray(window.workspaceSchemaCache.unmatched_tables) && window.workspaceSchemaCache.unmatched_tables.length){
-                const unmatchedList = window.workspaceSchemaCache.tables || [];
-                if(unmatchedList.length){
-                    html = `<li class='schema-provider'>Unclassified Tables</li>`;
-                    html += unmatchedList.map(t=>`<li><div class='schema-resource-type'>${t.name || t} <span class='schema-badge'>${(t.doc_resource_type || t.manifest_resource_type || t.workspace_resource_type || 'unknown').split('/')[0]}</span></div></li>`).join('');
-                    html += `<li class='schema-empty'>These tables were not found in NGSchema. Resource types derived from docs or fallback mapping.</li>`;
-                }
+                console.log('Additional fallback scroll used'); // Debug log
             }
-            tree.innerHTML = html;
         }
-        function matchRtOrTables(rt, tables, ft){ if(!ft) return true; if(rt.toLowerCase().includes(ft)) return true; return tables.some(t=> t.toLowerCase().includes(ft)); }
-        window.toggleSchemaTables = function(el){ const list = el.nextElementSibling; if(!list) return; const icon = el.querySelector('.schema-toggle'); if(list.style.display==='none'){ list.style.display='block'; icon.textContent='▼'; } else { list.style.display='none'; icon.textContent='▶'; } };
-        function filterSchema(){ const val = document.getElementById('schemaSearch').value; renderSchemaTree(schemaDataCache, val); }
-        function expandAllSchema(expand){ schemaExpanded = expand; const searchVal = document.getElementById('schemaSearch').value; renderSchemaTree(schemaDataCache, searchVal); if(expand){ document.querySelectorAll('.schema-toggle').forEach(i=> i.textContent='▼'); } }
-    </script>
-</body>
-</html>
-    <style>
-    /* Workspace schema loading breathing dot */
-    .workspace-loading{display:flex;align-items:center;gap:8px;font-size:0.9rem;color:#2c3e50;background:#f5f8fa;padding:6px 10px;border-radius:6px;border:1px solid #e1e8ed;}
-    .breathing-dot{width:12px;height:12px;border-radius:50%;background:#0078d4;animation:breathing 1.6s ease-in-out infinite;box-shadow:0 0 0 0 rgba(0,120,212,0.4);} 
-    @keyframes breathing{0%{transform:scale(0.6);opacity:.4}50%{transform:scale(1);opacity:1}100%{transform:scale(0.6);opacity:.4}}
-    </style>
+    }, 300); // Further increased delay to account for the 500ms delay in enhancedAskQuestion
+}
+
+function createTableHTML(table) {
+    let html = '';
+    const tableId = `table-${Math.random().toString(36).substr(2, 9)}`;
+    
+    // Table header with info
+    html += `<div class="table-header">`;
+    html += `<div class="table-title">📊 Table ${table.table_number || 1}</div>`;
+    html += `<div class="table-info">${table.row_count} rows</div>`;
+    html += `</div>`;
+    
+    if (table.has_data && table.columns && table.rows) {
+        html += `<div class="result-container" id="${tableId}">`;
+        html += `<table class="result-table">`;
+        
+        // Table header
+        html += `<thead><tr>`;
+        table.columns.forEach(column => {
+            html += `<th>${escapeHtml(column)}</th>`;
+        });
+        html += `</tr></thead>`;
+        
+        // Table body
+        html += `<tbody>`;
+        table.rows.forEach(row => {
+            html += `<tr>`;
+            row.forEach((cell, index) => {
+                const cellValue = cell === null || cell === undefined ? 'NULL' : String(cell);
+                const cellClass = getCellClass(cell);
+                html += `<td class="${cellClass}">${escapeHtml(cellValue)}</td>`;
+            });
+            html += `</tr>`;
+        });
+        html += `</tbody>`;
+        
+        html += `</table>`;
+        html += `</div>`;
+        
+        // Add table statistics
+        if (table.has_data) {
+            html += `<div class="table-stats">`;
+            html += `📊 ${table.columns.length} columns • ${table.row_count} rows`;
+            if (table.row_count !== table.rows.length) {
+                html += ` • Showing ${table.rows.length} of ${table.row_count}`;
+            }
+            html += `</div>`;
+        }
+    } else {
+        html += `<div class="no-data-message">No data in this table</div>`;
+    }
+    
+    return html;
+}
+        
+function createExplainSection() {
+    return `
+        <div class="explain-section">
+            <button class="btn-explain" onclick="explainResults()" id="explainBtn">
+                🧠 Explain Results
+            </button>
+            <div id="explainContent"></div>
+        </div>
+    `;
+}
+
+function showExplainSection() {
+    const explainSection = document.getElementById('explainResultsSection');
+    const explainContent = document.getElementById('explainContent');
+    
+    // Clear any previous content
+    explainContent.innerHTML = '';
+    
+    // Show the explain section
+    explainSection.style.display = 'block';
+}
+
+function hideExplainSection() {
+    const explainSection = document.getElementById('explainResultsSection');
+    if (explainSection) {
+        explainSection.style.display = 'none';
+    }
+}
+
+async function explainResults() {
+    const explainBtn = document.getElementById('explainBtn');
+    const explainContent = document.getElementById('explainContent');
+    
+    // Check if we have current results to explain
+    if (!currentQueryResult || currentQueryResult.type !== 'query_success') {
+        explainContent.innerHTML = `<div class="explain-result"><h4>❌ No Results to Explain</h4><p>Please run a successful query first.</p></div>`;
+        return;
+    }
+    
+    // Disable button and show loading
+    explainBtn.disabled = true;
+    explainContent.innerHTML = `
+        <div class="explain-loading">
+            <div class="explain-spinner"></div>
+            Analyzing query results with AI...
+        </div>
+    `;
+    
+    try {
+        // Make API call to explain endpoint
+        const response = await fetch('/api/explain', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                query_result: currentQueryResult,
+                original_question: currentOriginalQuestion
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            explainContent.innerHTML = `
+                <div class="explain-result">
+                    <h4>🧠 AI Analysis</h4>
+                    <p>${data.explanation.replace(/\n/g, '<br>')}</p>
+                    <small style="color: #666;">Analysis generated at: ${data.timestamp}</small>
+                </div>
+            `;
+        } else {
+            explainContent.innerHTML = `
+                <div class="explain-result">
+                    <h4>❌ Explanation Failed</h4>
+                    <p>${data.error}</p>
+                </div>
+            `;
+        }
+        
+    } catch (error) {
+        explainContent.innerHTML = `
+            <div class="explain-result">
+                <h4>❌ Error</h4>
+                <p>Failed to explain results: ${error.message}</p>
+            </div>
+        `;            } finally {
+        // Re-enable the button
+        explainBtn.disabled = false;
+    }
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+function showError(error) {
+    const resultContent = document.getElementById('resultContent');
+    const timestampElement = document.getElementById('timestamp');
+    const resultsSection = document.getElementById('resultsSection');
+    
+    // Hide loading indicator
+    hideLoading();
+    
+    // Reset the Go button
+    resetGoButton();
+    
+    // Make sure the results section is visible
+    resultsSection.classList.add('visible');
+    resultsSection.style.display = 'block';
+    
+    resultContent.innerHTML = `<div class="error">❌ Error: ${error}</div>`;
+    timestampElement.textContent = `Error occurred at: ${new Date().toLocaleString()}`;
+    
+    // Hide explain section when showing errors
+    hideExplainSection();
+    
+    // Auto-scroll to results section after error
+    setTimeout(() => {
+        const resultsSection = document.getElementById('resultsSection');
+        if (resultsSection) {
+            // Try multiple scroll approaches for better compatibility
+            try {
+                resultsSection.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            } catch (e) {
+                // Fallback for browsers that don't support smooth scrolling
+                resultsSection.scrollIntoView(true);
+            }
+            
+            // Additional fallback - scroll to a specific position
+            const rect = resultsSection.getBoundingClientRect();
+            if (rect.top > window.innerHeight || rect.top < 0) {
+                window.scrollTo({
+                    top: window.pageYOffset + rect.top - 20,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    }, 200); // Increased delay to ensure content is rendered
+}
+
+async function setupWorkspace() {
+    const workspaceId = document.getElementById('workspaceId').value.trim();
+
+    if (!workspaceId) {
+        // No inline status indicator; keep silent
+        return;
+    }
+
+    // Disable schema button until setup and polling are complete
+    const schemaBtn = document.getElementById('showSchemaBtn');
+    if(schemaBtn){
+        schemaBtn.disabled = true;
+        schemaBtn.classList.add('disabled');
+        schemaBtn.onclick = null;
+        schemaBtn.title = 'Workspace setup in progress...';
+    }
+
+    try {
+        const response = await fetch('/api/setup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ workspace_id: workspaceId })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            updateStatus(true);
+
+            // Start polling workspace schema instead of test-connection
+            startWorkspaceSchemaPolling();
+        } else {
+            updateStatus(false, data.error);
+        }
+    } catch (error) {
+        updateStatus(false, `Connection failed: ${error.message}`);
+    }
+}
+
+async function testConnection() {
+    if (!isConnected) {
+        updateStatus(false, 'Please setup workspace first');
+        return;
+    }
+
+    showLoading();
+
+    try {
+        const response = await fetch('/api/test-connection', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        const data = await response.json();
+        
+        if (data.success) {
+            showResult(data.result, data.timestamp);
+        } else {
+            showError(data.error);
+        }
+    } catch (error) {
+        showError(`Connection test failed: ${error.message}`);
+    }
+    
+}
+
+async function askQuestion() {
+    const question = document.getElementById('questionInput').value.trim();
+    
+    if (!question) {
+        showError('Please enter a question');
+        return;
+    }
+
+    if (!isConnected) {
+        showError('Please setup workspace first');
+        return;
+    }
+
+    // Show initial loading
+    showLoading('🚀 Starting query process...');
+    
+    // Simulate progress steps
+    setTimeout(() => updateLoadingStep('step-translate', 'active'), 200);
+    
+    try {
+        const response = await fetch('/api/query', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ question: question })
+        });
+
+        // Show validation step
+        updateLoadingStep('step-translate', 'completed');
+        updateLoadingStep('step-validate', 'active');
+        
+        const data = await response.json();
+        
+        // Show execution step
+        updateLoadingStep('step-validate', 'completed');
+        updateLoadingStep('step-execute', 'active');
+        
+        // Small delay to show execution step
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        // Show formatting step
+        updateLoadingStep('step-execute', 'completed');
+        updateLoadingStep('step-format', 'active');
+        
+        // Small delay to show formatting step
+        await new Promise(resolve => setTimeout(resolve, 300));
+        
+        if (data.success) {
+            updateLoadingStep('step-format', 'completed');
+            showResult(data.result, data.timestamp);
+        } else {
+            showError(data.error);
+        }
+    } catch (error) {
+        showError(`Query failed: ${error.message}`);
+    }
+}
+
+function simulateRetry() {
+    // Show retry indication
+    updateLoadingStep('step-translate', 'retry');
+      setTimeout(() => {
+        updateLoadingStep('step-translate', 'completed');
+        updateLoadingStep('step-validate', 'active');
+    }, 1500);
+}
+
+function enhancedAskQuestion() {
+    // Check if workspace is connected first
+    if (!isConnected) {
+        console.log('Workspace not connected, ignoring request');
+        return;
+    }
+    
+    const question = document.getElementById('questionInput').value.trim();
+    
+    // Enhanced button loading state with spinner - do this FIRST
+    const goButton = document.querySelector('.floating-go-btn');
+    if (goButton) {
+        goButton.disabled = true;
+        goButton.innerHTML = '<div class="button-spinner"></div> Processing...';
+        goButton.style.opacity = '0.8';
+        goButton.style.background = 'linear-gradient(135deg, #6c757d 0%, #495057 100%)';
+        goButton.style.cursor = 'not-allowed';
+    }
+
+    // Show the nice loading in results pane immediately
+    showLoading('🚀 Preparing to process your question...');
+    
+    // Scroll to results section immediately when loading starts
+    setTimeout(() => {
+        const resultsSection = document.getElementById('resultsSection');
+        console.log('Immediate scroll to results section on Go click'); // Debug
+        if (resultsSection) {
+            resultsSection.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        }
+    }, 200); // Small delay to ensure showLoading has rendered
+    
+    // Now do validation checks and show errors in the loading area if needed
+    if (!question) {
+        setTimeout(() => {
+            showError('Please enter a question');
+        }, 500);
+        return;
+    }
+
+    if (!isConnected) {
+        setTimeout(() => {
+            showError('Please setup workspace first');
+        }, 500);
+        return;
+    }
+
+    // Store the original question for explain feature
+    currentOriginalQuestion = question;
+    
+    // Start with translation step
+    setTimeout(() => {
+        updateLoadingStep('step-translate', 'active');
+        processQuestionWithRetry(question);
+    }, 300);
+}
+
+async function processQuestionWithRetry(question) {
+    let retryCount = 0;
+    const maxRetries = 2;
+    const startTime = Date.now();
+    
+    // Initialize progress
+    updateProgress(10, '🔄 Starting translation process...');
+    
+    while (retryCount <= maxRetries) {
+        try {
+            if (retryCount > 0) {
+                // Show retry indication
+                updateProgress(15 + (retryCount * 5), `🔄 Retry attempt ${retryCount}...`);
+                updateLoadingStep('step-translate', 'retry');
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+            
+            // Translation phase
+            updateProgress(25, '🔄 Translating to KQL...');
+            updateLoadingStep('step-translate', 'active');
+            
+            // Simulate translation time
+            await new Promise(resolve => setTimeout(resolve, 800 + (retryCount * 500)));
+            
+            // Make the actual API call
+            updateProgress(40, '📡 Sending request to server...');
+            const response = await fetch('/api/query', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ question: question })
+            });
+
+            // Validation phase
+            updateProgress(60, '✅ Validating generated query...');
+            updateLoadingStep('step-translate', 'completed');
+            updateLoadingStep('step-validate', 'active');
+            await new Promise(resolve => setTimeout(resolve, 400));
+            
+            const data = await response.json();
+            
+            // Check if we need to retry (simulate retry logic)
+            if (!data.success && retryCount < maxRetries && data.error.includes('translation')) {
+                retryCount++;
+                updateLoadingStep('step-validate', 'retry');
+                continue;
+            }
+            
+            // Execution phase
+            updateProgress(80, '⚡ Executing query on Azure...');
+            updateLoadingStep('step-validate', 'completed');
+            updateLoadingStep('step-execute', 'active');
+            await new Promise(resolve => setTimeout(resolve, 600));
+            
+            // Formatting phase
+            updateProgress(95, '📊 Formatting results...');
+            updateLoadingStep('step-execute', 'completed');
+            updateLoadingStep('step-format', 'active');
+            await new Promise(resolve => setTimeout(resolve, 300));
+            
+            // Complete
+            updateProgress(100, '✅ Complete!');
+            
+            if (data.success) {
+                updateLoadingStep('step-format', 'completed');
+                const totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
+                
+                // Show completion with stats
+                setTimeout(() => {
+                    showResult(data.result, data.timestamp);
+                    
+                    // Auto-scroll to results after showing them
+                    setTimeout(() => {
+                        const resultsSection = document.getElementById('resultsSection');
+                        console.log('Scrolling to results section after showResult'); // Debug
+                        if (resultsSection) {
+                            resultsSection.scrollIntoView({ 
+                                behavior: 'smooth', 
+                                block: 'start' 
+                            });
+                        }
+                    }, 100); // Short delay after showResult completes
+                }, 500);
+            } else {
+                showError(data.error);
+                
+                // Auto-scroll to error results
+                setTimeout(() => {
+                    const resultsSection = document.getElementById('resultsSection');
+                    console.log('Scrolling to results section after showError'); // Debug
+                    if (resultsSection) {
+                        resultsSection.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start' 
+                        });
+                    }
+                }, 100);
+            }
+            break;
+            
+        } catch (error) {
+            if (retryCount < maxRetries) {
+                retryCount++;
+                updateProgress(20 + (retryCount * 5), `🔄 Retrying... (${retryCount}/${maxRetries
