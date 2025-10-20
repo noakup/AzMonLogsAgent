@@ -2045,7 +2045,11 @@
                                 label.textContent = 'Workspace set';
                             }
                         }
-                        // Enable schema button now that setup and polling are complete
+                        // Update connection status and enable all UI elements now that setup is complete
+                        updateStatus(true);
+                        
+                        // Schema button should already be enabled by updateStatus -> updateUIElementsState
+                        // But ensure it's explicitly enabled as a safety measure
                         const schemaBtn = document.getElementById('showSchemaBtn');
                         if(schemaBtn){
                             schemaBtn.disabled = false;
@@ -2465,15 +2469,32 @@ async function setupWorkspace() {
         const data = await response.json();
 
         if (data.success) {
-            updateStatus(true);
-
+            // Don't call updateStatus(true) yet - wait for schema polling to complete
+            // The schema polling function will handle enabling UI elements when ready
+            
             // Start polling workspace schema instead of test-connection
             startWorkspaceSchemaPolling();
         } else {
             updateStatus(false, data.error);
+            // Re-enable schema button on error
+            const schemaBtn = document.getElementById('showSchemaBtn');
+            if(schemaBtn){
+                schemaBtn.disabled = false;
+                schemaBtn.classList.remove('disabled');
+                schemaBtn.onclick = toggleSchema;
+                schemaBtn.title = 'Show workspace schema and available tables';
+            }
         }
     } catch (error) {
         updateStatus(false, `Connection failed: ${error.message}`);
+        // Re-enable schema button on error
+        const schemaBtn = document.getElementById('showSchemaBtn');
+        if(schemaBtn){
+            schemaBtn.disabled = false;
+            schemaBtn.classList.remove('disabled');
+            schemaBtn.onclick = toggleSchema;
+            schemaBtn.title = 'Show workspace schema and available tables';
+        }
     }
 }
 
@@ -3501,7 +3522,11 @@ async function processQuestionWithRetry(question) {
                                 }
                             }
                         }
-                        // Enable schema button now that setup and polling are complete
+                        // Update connection status and enable all UI elements now that setup is complete
+                        updateStatus(true);
+                        
+                        // Schema button should already be enabled by updateStatus -> updateUIElementsState
+                        // But ensure it's explicitly enabled as a safety measure
                         const schemaBtn = document.getElementById('showSchemaBtn');
                         if(schemaBtn){
                             schemaBtn.disabled = false;
@@ -3921,15 +3946,32 @@ async function setupWorkspace() {
         const data = await response.json();
 
         if (data.success) {
-            updateStatus(true);
-
+            // Don't call updateStatus(true) yet - wait for schema polling to complete
+            // The schema polling function will handle enabling UI elements when ready
+            
             // Start polling workspace schema instead of test-connection
             startWorkspaceSchemaPolling();
         } else {
             updateStatus(false, data.error);
+            // Re-enable schema button on error
+            const schemaBtn = document.getElementById('showSchemaBtn');
+            if(schemaBtn){
+                schemaBtn.disabled = false;
+                schemaBtn.classList.remove('disabled');
+                schemaBtn.onclick = toggleSchema;
+                schemaBtn.title = 'Show workspace schema and available tables';
+            }
         }
     } catch (error) {
         updateStatus(false, `Connection failed: ${error.message}`);
+        // Re-enable schema button on error
+        const schemaBtn = document.getElementById('showSchemaBtn');
+        if(schemaBtn){
+            schemaBtn.disabled = false;
+            schemaBtn.classList.remove('disabled');
+            schemaBtn.onclick = toggleSchema;
+            schemaBtn.title = 'Show workspace schema and available tables';
+        }
     }
 }
 
