@@ -2022,7 +2022,7 @@
             }
             showWorkspaceLoading('Discovering active tables in workspace...');
             let attempt = 0;
-            const maxAttempts = 40; // soft cap
+            const maxAttempts = 2; // Limited to 2 retries to avoid multiple az login prompts
             const baseDelay = 800;   // ms
 
             const poll = async () => {
