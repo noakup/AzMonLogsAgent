@@ -73,6 +73,10 @@ class SchemaManager:
         self._manifest_cache: Dict[str, Any] = {}
         self._manifest_last_fetch: float = 0.0
         self._ttl_minutes = int(os.environ.get("SCHEMA_TTL_MINUTES", "20"))
+        # Global refresh lock: ensures only one enumeration/refresh runs at a time.
+        # This prevents duplicate union enumeration prints and redundant REST calls
+        # when multiple threads request the schema simultaneously on cold start.
+        self._refresh_lock = threading.Lock()
 
     @staticmethod
     def get() -> "SchemaManager":
@@ -85,24 +89,26 @@ class SchemaManager:
     def get_workspace_schema(self, workspace_id: str) -> Dict[str, Any]:
         if not workspace_id:
             return {"error": "workspace_id required"}
-        now = time.time()
-        ttl_seconds = self._ttl_minutes * 60
-        cache = self._cache.get(workspace_id)
-        refreshed = False
-        if cache and cache.expires_at > now:
-            # Ensure manifest present
+        # Serialize refresh logic to avoid duplicate enumeration in concurrent requests.
+        with self._refresh_lock:
+            now = time.time()
+            ttl_seconds = self._ttl_minutes * 60
+            cache = self._cache.get(workspace_id)
+            refreshed = False
+            if cache and cache.expires_at > now:
+                # Ensure manifest present
+                self._ensure_manifest(ttl_seconds)
+                return {
+                    "tables": cache.tables,
+                    "count": len(cache.tables),
+                    "manifest": self._manifest_cache,
+                    "retrieved_at": cache.retrieved_at,
+                    "source": cache.source,
+                    "refreshed": False,
+                }
+            # Refresh path (only one thread reaches here at a time)
+            tables, source = self._retrieve_tables(workspace_id)
             self._ensure_manifest(ttl_seconds)
-            return {
-                "tables": cache.tables,
-                "count": len(cache.tables),
-                "manifest": self._manifest_cache,
-                "retrieved_at": cache.retrieved_at,
-                "source": cache.source,
-                "refreshed": False,
-            }
-        # Refresh path
-        tables, source = self._retrieve_tables(workspace_id)
-        self._ensure_manifest(ttl_seconds)
         # self._enrich_table_metadata
         # Try to parse manifest for resource type info
         table_resource_map = {}
@@ -128,19 +134,14 @@ class SchemaManager:
         for tbl in tables:
             if isinstance(tbl, dict):
                 name_val = tbl.get("name") or tbl.get("tableName") or str(tbl)
-                # Preserve original metadata (e.g., columns) if present
                 metadata_copy = {k: v for k, v in tbl.items() if k != "name"}
             else:
                 name_val = str(tbl)
                 metadata_copy = {}
             if not name_val:
-                continue  # skip malformed
+                continue
             resource_type = table_resource_map.get(name_val, "Unknown")
-            enriched_tables.append({
-                "name": name_val,
-                "resource_type": resource_type,
-                **metadata_copy
-            })
+            enriched_tables.append({"name": name_val, "resource_type": resource_type, **metadata_copy})
 
         cache = WorkspaceSchemaCache(
             tables=enriched_tables,
