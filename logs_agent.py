@@ -496,23 +496,11 @@ class KQLAgent:
                 pass
 
             from azure_openai_utils import (
-                load_config,
-                debug_print_config,
-                build_messages,
-                build_chat_request,
-                chat_completion,
-                _is_o_model,
-                get_env_int
+                run_chat,
+                emit_chat_event,
+                truncate_text,
+                get_env_int,
             )
-
-            cfg = load_config()
-            if not cfg:
-                return "❌ Azure OpenAI configuration missing. Please set AZURE_OPENAI_ENDPOINT and AZURE_OPENAI_KEY."
-
-            try:
-                debug_print_config("Explain Debug", cfg)
-            except Exception as dbg_e:
-                print(f"[Explain Debug] Failed to print config: {dbg_e}")
 
             # Prompts
             system_prompt = (
@@ -535,71 +523,22 @@ class KQLAgent:
                 print(f"[Explain Debug] Truncating data_summary from {len(data_summary)} to {max_data_chars} chars")
                 data_summary = data_summary[:max_data_chars] + "\n...TRUNCATED..."
 
-            is_o = _is_o_model(cfg.deployment)
+            # Use run_chat (no escalation needed for summary, but could enable later)
+            chat_res = run_chat(
+                system_prompt=system_prompt,
+                user_prompt=user_prompt,
+                purpose="explain",
+                allow_escalation=True,  # allow in case of truncation
+                debug_prefix="Explain",
+            )
 
-            messages = build_messages(system_prompt, user_prompt, is_o_model=is_o)
-            payload = build_chat_request(messages, is_o_model=is_o)
+            emit_chat_event(chat_res, extra={"phase": "explanation"})
 
-            content, error_msg, raw, finish_reason = chat_completion(cfg, payload, debug_prefix="Explain")
-
-            if error_msg:
-                # If pure empty content error, attempt a fallback retry with heavier truncation
-                if "Empty completion content" in error_msg:
-                    print("[Explain Debug] First attempt empty. Retrying with aggressive truncation and higher max_tokens.")
-                    # Aggressive truncation: keep only first 3000 chars of data_summary body (after prompts)
-                    simple_summary = data_summary[:3000] + ("\n...TRUNCATED AGAIN..." if len(data_summary) > 3000 else "")
-                    # Rebuild a leaner user prompt focusing only on table shapes
-                    lean_user_prompt = (
-                        f"Summarize these Azure Log Analytics results in 2-3 sentences focusing on key anomalies and trends.\n\n"
-                        f"Original Question: {original_question if original_question else 'Not specified'}\n\n"
-                        f"{simple_summary}"
-                    )
-                    lean_messages = build_messages(system_prompt, lean_user_prompt, is_o_model=is_o)
-                    # Increase tokens modestly to give space in case prior attempt was squeezed
-                    fallback_tokens = min(int(max_tokens * 1.5), 600)
-                    fallback_payload = build_chat_request(lean_messages, is_o_model=is_o, max_tokens=fallback_tokens, temperature=0.35, top_p=0.9)
-                    content2, error_msg2, raw2, finish_reason2 = chat_completion(cfg, fallback_payload, debug_prefix="Explain-Fallback")
-                    if error_msg2:
-                        return f"❌ Azure OpenAI API error: {error_msg2}"
-                    if not content2:
-                        return "❌ Azure OpenAI API returned empty explanation (after fallback retry)"
-                    content = content2
-                else:
-                    return f"❌ Azure OpenAI API error: {error_msg}"
-            elif not content:
-                # Attempt fallback extraction from raw JSON structure then retry if still empty
-                extracted = None
-                try:
-                    if raw and isinstance(raw, dict):
-                        ch = raw.get('choices', [])
-                        if ch:
-                            m = ch[0].get('message', {})
-                            extracted = (m.get('content') or '').strip()
-                except Exception:
-                    pass
-                if extracted:
-                    content = extracted
-                else:
-                    print("[Explain Debug] Empty content with no explicit error, performing retry.")
-                    lean_user_prompt = (
-                        f"Provide a concise (max 3 sentences) explanation of the key trends.\n\n{data_summary[:2500]}"
-                        + ("\n...TRUNCATED AGAIN..." if len(data_summary) > 2500 else "")
-                    )
-                    lean_messages = build_messages(system_prompt, lean_user_prompt, is_o_model=is_o)
-                    fallback_tokens = min(int(max_tokens * 1.4), 550)
-                    fallback_payload = build_chat_request(lean_messages, is_o_model=is_o, max_tokens=fallback_tokens, temperature=0.35, top_p=0.9)
-                    content2, error_msg2, raw2, finish_reason2 = chat_completion(cfg, fallback_payload, debug_prefix="Explain-Fallback2")
-                    if error_msg2:
-                        return f"❌ Azure OpenAI API error: {error_msg2}"
-                    if not content2:
-                        return "❌ Azure OpenAI API returned empty explanation (after secondary fallback)"
-                    content = content2
-
-            # Light post-processing: remove accidental markdown fences
-            if content.startswith("```"):
-                content = content.strip().strip('`')
-
-            return content.strip()
+            if chat_res.error:
+                return f"❌ Azure OpenAI API error: {chat_res.error}"
+            if not chat_res.content:
+                return "❌ Azure OpenAI API returned empty explanation"
+            return chat_res.content
 
         except Exception as e:
             import traceback
