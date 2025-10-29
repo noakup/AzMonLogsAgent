@@ -35,6 +35,7 @@ except Exception:  # pragma: no cover - requests may not yet be installed
     requests = None  # type: ignore
 
 _credential_creation_lock = threading.Lock()
+_azure_credential = None
 
 _MANAGER_SINGLETON: "SchemaManager" | None = None
 
@@ -120,15 +121,29 @@ class SchemaManager:
                     table_resource_map[tname] = resource_type
             except Exception as e:
                 print(f"[Workspace Schema] Manifest parse error: {e}")
-        enriched_tables = []
-        for table_name in tables:
+        # Normalize table entries (REST API returns list of dicts with metadata; union fallback returns dicts with only name).
+        # Previous implementation used the raw table object as the key into table_resource_map which caused
+        # TypeError: unhashable type: 'dict' when table_name was a dict. We now extract a string name first.
+        enriched_tables: List[Dict[str, Any]] = []
+        for tbl in tables:
+            if isinstance(tbl, dict):
+                name_val = tbl.get("name") or tbl.get("tableName") or str(tbl)
+                # Preserve original metadata (e.g., columns) if present
+                metadata_copy = {k: v for k, v in tbl.items() if k != "name"}
+            else:
+                name_val = str(tbl)
+                metadata_copy = {}
+            if not name_val:
+                continue  # skip malformed
+            resource_type = table_resource_map.get(name_val, "Unknown")
             enriched_tables.append({
-                "name": table_name,
-                "resource_type": table_resource_map.get(table_name, "Unknown")
+                "name": name_val,
+                "resource_type": resource_type,
+                **metadata_copy
             })
 
         cache = WorkspaceSchemaCache(
-            tables=tables,
+            tables=enriched_tables,
             manifest=self._manifest_cache,
             retrieved_at=datetime.now(timezone.utc).isoformat(),
             source=source,
@@ -228,6 +243,7 @@ class SchemaManager:
             return []
 
     def _union_enumerate_tables(self, workspace_id: str) -> list[Dict[str, Any]]:
+        _azure_credential= _get_azure_credential()
         if LogsQueryClient is None or _azure_credential is None:
             return []
         try:
