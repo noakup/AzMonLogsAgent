@@ -184,6 +184,10 @@ _ms_docs_table_resource_type_cache = {}  # table_name -> resource_type | 'unknow
 _ms_docs_table_full_cache = {}           # table_name -> { description, columns:[{name,type,description}], fetched_at }
 _ms_docs_table_queries_cache = {}        # table_name -> [ { name, description } ]
 
+# Shared Azure credential (created once to avoid multiple az login prompts)
+_azure_credential = None
+_credential_creation_lock = threading.Lock()
+
 # Static fallback map for common Application Insights (Azure Monitor 'classic' AI) derived tables
 _STATIC_FALLBACK_TABLE_RESOURCE_TYPES = {
     # App Insights standard tables
@@ -806,6 +810,25 @@ def _scan_manifest_resource_types() -> dict:
     return _workspace_resource_types_cache
 
 
+def _get_azure_credential():
+    """Get or create shared Azure credential (thread-safe, created only once)."""
+    global _azure_credential
+    if _azure_credential is not None:
+        return _azure_credential
+    
+    with _credential_creation_lock:
+        # Double-check after acquiring lock
+        if _azure_credential is not None:
+            return _azure_credential
+        
+        if DefaultAzureCredential is None:
+            return None
+        
+        print("[Credential] Creating Azure credential (will trigger az login if needed)...")
+        _azure_credential = DefaultAzureCredential(exclude_interactive_browser_credential=False)
+        print(f"[Credential] Credential created: {type(_azure_credential).__name__}")
+        return _azure_credential
+
 
 def _fetch_workspace_tables(workspace: str):
     """Unified workspace table/manifest retrieval via SchemaManager.
@@ -836,6 +859,7 @@ def _fetch_workspace_tables(workspace: str):
         "retrieved_at": result.get("retrieved_at"),
         "source": source,
     }
+
 
 @app.route('/')
 def index():

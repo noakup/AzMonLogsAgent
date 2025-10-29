@@ -4,68 +4,66 @@
 
 ```mermaid
 flowchart TD
-    %% User Interfaces Layer
-    subgraph UI["🌐 Multi-Modal User Interfaces"]
-        WebUI["🖥️ Modern Web UI<br/>(Flask + Interactive Tables)"]
-        CLI["💻 CLI Agent<br/>(Interactive Terminal)"]
-        API["🔌 REST API<br/>(Integration Layer)"]
-        MCP["🤖 MCP Server<br/>(AI Assistant Integration)"]
-    end
-
-    %% Core Processing Engine
-    subgraph CORE["🧠 Intelligent Processing Core"]
-        NLAgent["🎯 Natural Language Agent<br/>(Context-Aware Translation)"]
-        Translator["⚡ NL→KQL Engine<br/>(GPT-4 + Pattern Matching)"]
-        QueryEngine["🔍 Query Execution Engine<br/>(Validation + Retry Logic)"]
-        SchemaEngine["📊 Workspace Schema Discovery<br/>(Dynamic Table Analysis)"]
-    end
-
-    %% External Services
-    subgraph AZURE["☁️ Azure Cloud Services"]
-        OpenAI["🤖 Azure OpenAI GPT-4<br/>(Smart Translation)"]
-        LogAnalytics["📈 Azure Log Analytics<br/>(KQL Query Execution)"]
-        Monitor["📡 Azure Monitor APIs<br/>(Workspace Management)"]
-    end
-
-    %% Knowledge Base
-    subgraph KB["📚 Intelligent Knowledge Base"]
-        Examples["💡 Curated Query Examples<br/>(100+ Patterns Across 8+ Services)"]
-        Schemas["🗂️ NGSchema Repository<br/>(Table Metadata & Relationships)"]
-        Context["🎯 Context Engine<br/>(Workspace-Aware Suggestions)"]
-    end
-
-    %% Data Flow
-    UI --> NLAgent
-    NLAgent --> Translator
-    NLAgent --> SchemaEngine
-    Translator --> OpenAI
-    NLAgent --> QueryEngine
-    QueryEngine --> LogAnalytics
-    SchemaEngine --> Monitor
+    %% User Layer
+    USER["👤 User Input<br/>(Natural Language)"]
     
-    %% Knowledge Integration
-    NLAgent --> Examples
-    NLAgent --> Schemas
-    SchemaEngine --> Context
-    Context --> NLAgent
+    %% Interface Layer
+    subgraph UI["🌐 User Interfaces"]
+        WEB["📱 Web UI<br/>Dashboard"]
+        CLI["💻 CLI Agent<br/>Terminal"]
+        API["🔌 REST API<br/>Integration"]
+        MCP["🤖 MCP Server<br/>AI Bridge"]
+    end
+    
+    %% Processing Core
+    subgraph CORE["🧠 Processing Core"]
+        NL["⚡ NL Engine<br/>Translation"]
+        QE["🔍 Query Engine<br/>Execution"]
+        SE["📊 Schema Engine<br/>Discovery"]
+    end
+    
+    %% External Services
+    subgraph EXT["☁️ External Services"]
+        OPENAI["🤖 Azure OpenAI<br/>GPT-4"]
+        LOGS["📈 Log Analytics<br/>KQL Execution"]
+    end
+    
+    %% Knowledge Layer
+    subgraph KB["📚 Knowledge Base"]
+        EXAMPLES["💡 Examples<br/>100+ Patterns"]
+        SCHEMAS["🗂️ Schemas<br/>Repository"]
+    end
+    
+    RESULTS["📊 Query Results<br/>(Tables + Charts)"]
 
-    %% Response Flow
-    LogAnalytics --> QueryEngine
-    QueryEngine --> NLAgent
-    OpenAI --> Translator
-    Monitor --> SchemaEngine
-    NLAgent --> UI
+    %% Main Flow
+    USER --> UI
+    UI --> CORE
+    CORE --> EXT
+    CORE <--> KB
+    EXT --> CORE
+    CORE --> UI
+    UI --> RESULTS
+    RESULTS --> USER
 
-    %% Styling
-    classDef userInterface fill:#e1f5fe,stroke:#01579b,stroke-width:2px
-    classDef coreEngine fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
-    classDef azureService fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
-    classDef knowledge fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    %% Internal Connections
+    NL --> OPENAI
+    QE --> LOGS
+    SE <--> SCHEMAS
+    NL <--> EXAMPLES
 
-    class WebUI,CLI,API,MCP userInterface
-    class NLAgent,Translator,QueryEngine,SchemaEngine coreEngine
-    class OpenAI,LogAnalytics,Monitor azureService
-    class Examples,Schemas,Context knowledge
+    %% Large, Readable Styling
+    classDef interface fill:#f8f9ff,stroke:#4285f4,stroke-width:3px,font-size:16px,font-weight:bold
+    classDef core fill:#fff8f0,stroke:#ff6b35,stroke-width:3px,font-size:16px,font-weight:bold
+    classDef external fill:#f0fff0,stroke:#32cd32,stroke-width:3px,font-size:16px,font-weight:bold
+    classDef knowledge fill:#fef7ff,stroke:#9c27b0,stroke-width:3px,font-size:16px,font-weight:bold
+    classDef userResult fill:#f0f8ff,stroke:#1976d2,stroke-width:4px,font-size:18px,font-weight:bold
+
+    class WEB,CLI,API,MCP interface
+    class NL,QE,SE core
+    class OPENAI,LOGS external
+    class EXAMPLES,SCHEMAS knowledge
+    class USER,RESULTS userResult
 ```
 
 ## 🎯 Key Architecture Highlights
