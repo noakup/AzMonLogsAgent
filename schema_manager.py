@@ -89,14 +89,26 @@ class SchemaManager:
     def get_workspace_schema(self, workspace_id: str) -> Dict[str, Any]:
         if not workspace_id:
             return {"error": "workspace_id required"}
-        # Serialize refresh logic to avoid duplicate enumeration in concurrent requests.
+        # Fast path without lock if cache is warm
+        now = time.time()
+        ttl_seconds = self._ttl_minutes * 60
+        cache = self._cache.get(workspace_id)
+        if cache and cache.expires_at > now:
+            self._ensure_manifest(ttl_seconds)
+            return {
+                "tables": cache.tables,
+                "count": len(cache.tables),
+                "manifest": self._manifest_cache,
+                "retrieved_at": cache.retrieved_at,
+                "source": cache.source,
+                "refreshed": False,
+            }
+
+        # Slow path: acquire lock and re-check to avoid duplicate work
         with self._refresh_lock:
             now = time.time()
-            ttl_seconds = self._ttl_minutes * 60
             cache = self._cache.get(workspace_id)
-            refreshed = False
             if cache and cache.expires_at > now:
-                # Ensure manifest present
                 self._ensure_manifest(ttl_seconds)
                 return {
                     "tables": cache.tables,
@@ -106,60 +118,54 @@ class SchemaManager:
                     "source": cache.source,
                     "refreshed": False,
                 }
-            # Refresh path (only one thread reaches here at a time)
+            # Retrieve fresh data (single thread only)
             tables, source = self._retrieve_tables(workspace_id)
             self._ensure_manifest(ttl_seconds)
-        # self._enrich_table_metadata
-        # Try to parse manifest for resource type info
-        table_resource_map = {}
-        manifest_path = os.path.join(os.path.dirname(__file__), 'NGSchema', 'LogAnalyticsWorkspace', 'WorkspaceManifest.manifest.json')
-        if os.path.exists(manifest_path):
-            try:
-                import json
-                with open(manifest_path, 'r', encoding='utf-8') as mf:
-                    manifest = json.load(mf)
-                for tbl in manifest.get('tables', []):
-                    tname = tbl.get('name')
-                    dtype = tbl.get('dataTypeId', '')
-                    cats = tbl.get('categories', [])
-                    # Prefer dataTypeId, fallback to first category
-                    resource_type = dtype or (cats[0] if cats else '')
-                    table_resource_map[tname] = resource_type
-            except Exception as e:
-                print(f"[Workspace Schema] Manifest parse error: {e}")
-        # Normalize table entries (REST API returns list of dicts with metadata; union fallback returns dicts with only name).
-        # Previous implementation used the raw table object as the key into table_resource_map which caused
-        # TypeError: unhashable type: 'dict' when table_name was a dict. We now extract a string name first.
-        enriched_tables: List[Dict[str, Any]] = []
-        for tbl in tables:
-            if isinstance(tbl, dict):
-                name_val = tbl.get("name") or tbl.get("tableName") or str(tbl)
-                metadata_copy = {k: v for k, v in tbl.items() if k != "name"}
-            else:
-                name_val = str(tbl)
-                metadata_copy = {}
-            if not name_val:
-                continue
-            resource_type = table_resource_map.get(name_val, "Unknown")
-            enriched_tables.append({"name": name_val, "resource_type": resource_type, **metadata_copy})
-
-        cache = WorkspaceSchemaCache(
-            tables=enriched_tables,
-            manifest=self._manifest_cache,
-            retrieved_at=datetime.now(timezone.utc).isoformat(),
-            source=source,
-            expires_at=now + ttl_seconds,
-        )
-        self._cache[workspace_id] = cache
-        refreshed = True
-        return {
-            "tables": cache.tables,
-            "count": len(cache.tables),
-            "manifest": self._manifest_cache,
-            "retrieved_at": cache.retrieved_at,
-            "source": cache.source,
-            "refreshed": refreshed,
-        }
+            # Manifest resource-type mapping
+            table_resource_map: Dict[str, str] = {}
+            manifest_path = os.path.join(os.path.dirname(__file__), 'NGSchema', 'LogAnalyticsWorkspace', 'WorkspaceManifest.manifest.json')
+            if os.path.exists(manifest_path):
+                try:
+                    import json
+                    with open(manifest_path, 'r', encoding='utf-8') as mf:
+                        manifest = json.load(mf)
+                    for tbl in manifest.get('tables', []):
+                        tname = tbl.get('name')
+                        dtype = tbl.get('dataTypeId', '')
+                        cats = tbl.get('categories', [])
+                        resource_type = dtype or (cats[0] if cats else '')
+                        table_resource_map[tname] = resource_type
+                except Exception as e:  # pragma: no cover
+                    print(f"[Workspace Schema] Manifest parse error: {e}")
+            # Enrichment
+            enriched_tables: List[Dict[str, Any]] = []
+            for tbl in tables:
+                if isinstance(tbl, dict):
+                    name_val = tbl.get("name") or tbl.get("tableName") or str(tbl)
+                    metadata_copy = {k: v for k, v in tbl.items() if k != "name"}
+                else:
+                    name_val = str(tbl)
+                    metadata_copy = {}
+                if not name_val:
+                    continue
+                resource_type = table_resource_map.get(name_val, "Unknown")
+                enriched_tables.append({"name": name_val, "resource_type": resource_type, **metadata_copy})
+            cache = WorkspaceSchemaCache(
+                tables=enriched_tables,
+                manifest=self._manifest_cache,
+                retrieved_at=datetime.now(timezone.utc).isoformat(),
+                source=source,
+                expires_at=time.time() + ttl_seconds,
+            )
+            self._cache[workspace_id] = cache
+            return {
+                "tables": cache.tables,
+                "count": len(cache.tables),
+                "manifest": self._manifest_cache,
+                "retrieved_at": cache.retrieved_at,
+                "source": cache.source,
+                "refreshed": True,
+            }
 
     # ----------------- Internal: Manifest ----------------- #
     def _ensure_manifest(self, ttl_seconds: int) -> None:
