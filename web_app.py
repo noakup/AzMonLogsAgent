@@ -27,6 +27,7 @@ except Exception:  # Library might not be installed yet; schema fetch will be sk
     DefaultAzureCredential = None  # type: ignore
     LogsQueryClient = None  # type: ignore
 from example_catalog import load_example_catalog
+from schema_manager import get_workspace_schema
 
 
 app = Flask(__name__)
@@ -176,8 +177,8 @@ def resource_schema():
 # Global agent instance
 agent = None
 workspace_id = None
-_workspace_schema_cache = {}
-_workspace_resource_types_cache = {}
+_workspace_schema_cache = {}  # legacy reference retained (now thin wrapper around SchemaManager)
+_workspace_resource_types_cache = {}  # deprecated: manifest data now supplied via SchemaManager
 _workspace_queries_cache = {}
 _ms_docs_table_resource_type_cache = {}  # table_name -> resource_type | 'unknown resource type'
 _ms_docs_table_full_cache = {}           # table_name -> { description, columns:[{name,type,description}], fetched_at }
@@ -419,9 +420,14 @@ def workspace_schema():
 
     ws_cache = _workspace_schema_cache.get(workspace_id)
     if not ws_cache:
-        # Background fetch may still be running or not started; start it.
-        threading.Thread(target=_fetch_workspace_tables, args=(workspace_id,), daemon=True).start()
-        return jsonify({'success': False, 'status': 'pending', 'workspace_id': workspace_id})
+        # Instead of returning 'pending' (which forced the UI to poll and showed an empty schema),
+        # perform a synchronous fetch once so the first response can already be 'ready'.
+        # This avoids the scenario where the console shows enumeration success but the UI remains empty.
+        _fetch_workspace_tables(workspace_id)
+        ws_cache = _workspace_schema_cache.get(workspace_id)
+        if not ws_cache:  # Still unavailable (unexpected)
+            threading.Thread(target=_fetch_workspace_tables, args=(workspace_id,), daemon=True).start()
+            return jsonify({'success': False, 'status': 'pending', 'workspace_id': workspace_id})
 
     workspace_tables = ws_cache.get('tables', [])
     enriched = []
@@ -825,89 +831,35 @@ def _get_azure_credential():
 
 
 def _fetch_workspace_tables(workspace: str):
-    """Fetch and print workspace table list (best-effort, console only).
+    """Unified workspace table/manifest retrieval via SchemaManager.
 
-    Uses a broad union query over last 7 days to enumerate tables that emitted data.
-    This can be expensive in very large workspaces; consider optimization later.
-    Results are cached for the process lifetime to avoid repeated cost.
+    Prints a concise summary only when refreshed to reduce log noise.
     """
     if not workspace:
         print("[Workspace Schema] No workspace ID provided.")
         return
-    if workspace in _workspace_schema_cache:
-        print(f"[Workspace Schema] Cached tables for {workspace}: {_workspace_schema_cache[workspace]['count']} tables")
-        # Ensure manifest scan still runs once
-        _scan_manifest_resource_types()
+    result = get_workspace_schema(workspace)
+    if result.get("error"):
+        print(f"[Workspace Schema] Error: {result['error']}")
         return
-    if LogsQueryClient is None or DefaultAzureCredential is None:
-        print("[Workspace Schema] Azure Monitor SDK not available; skipping table fetch but scanning manifests.")
-        _scan_manifest_resource_types()
-        return
-    try:
-        print(f"[Workspace Schema] Starting fetch for workspace: {workspace}")
-        # Kick off manifest scan early (independent of Azure query success)
-        _scan_manifest_resource_types()
-        
-        # Use shared credential to avoid multiple az login prompts
-        credential = _get_azure_credential()
-        if credential is None:
-            print("[Workspace Schema] Could not create Azure credential")
-            return
-        
-        client = LogsQueryClient(credential)
-        query = "union withsource=__KQLAgentTableName__ * | summarize RowCount=count() by __KQLAgentTableName__ | sort by __KQLAgentTableName__ asc"
-        resp = client.query_workspace(workspace_id=workspace, query=query, timespan=timedelta(days=7))
-        print(f"[Workspace Schema] API response status: {getattr(resp, 'status', 'N/A')}")
-        if hasattr(resp, 'error') and resp.error:
-            print(f"[Workspace Schema] API error: {resp.error}")
-        tables = []
-        table_resource_map = {}
-        # Try to parse manifest for resource type info
-        manifest_path = os.path.join(os.path.dirname(__file__), 'NGSchema', 'LogAnalyticsWorkspace', 'WorkspaceManifest.manifest.json')
-        if os.path.exists(manifest_path):
-            try:
-                import json
-                with open(manifest_path, 'r', encoding='utf-8') as mf:
-                    manifest = json.load(mf)
-                for tbl in manifest.get('tables', []):
-                    tname = tbl.get('name')
-                    dtype = tbl.get('dataTypeId', '')
-                    cats = tbl.get('categories', [])
-                    # Prefer dataTypeId, fallback to first category
-                    resource_type = dtype or (cats[0] if cats else '')
-                    table_resource_map[tname] = resource_type
-            except Exception as e:
-                print(f"[Workspace Schema] Manifest parse error: {e}")
-        if hasattr(resp, 'tables') and resp.tables:
-            first = resp.tables[0]
-            rows = getattr(first, 'rows', [])
-            print(f"[Workspace Schema] Raw rows returned: {len(rows)}")
-            for row in rows:
-                if row and row[0]:
-                    tname = str(row[0])
-                    tables.append(tname)
-        else:
-            print(f"[Workspace Schema] No tables found in response for workspace {workspace}")
-        # Build enriched table info
-        enriched_tables = []
-        for t in tables:
-            enriched_tables.append({
-                "name": t,
-                "resource_type": table_resource_map.get(t, "Unknown")
-            })
-        _workspace_schema_cache[workspace] = {
-            "tables": enriched_tables,
-            "count": len(enriched_tables),
-            "retrieved_at": datetime.now(timezone.utc).isoformat()
-        }
-        print(f"[Workspace Schema] Retrieved {len(enriched_tables)} tables for {workspace}")
-        if enriched_tables:
-            for info in enriched_tables:
-                print(f"  - {info['name']} [{info['resource_type']}]")
-    except Exception as e:
-        print(f"[Workspace Schema] Exception during table enumeration for {workspace}: {e}")
-        import traceback as tb
-        print(tb.format_exc())
+    refreshed = result.get("refreshed")
+    tables = result.get("tables", [])
+    source = result.get("source")
+    print(f"[Workspace Schema] Source={source} tables={len(tables)} refreshed={refreshed}")
+    if refreshed:
+        # Only enumerate on refresh to avoid duplication
+        for t in tables[:50]:  # cap enumeration to first 50 for brevity
+            name = t.get("name")
+            rtype = t.get("resource_type") or t.get("retentionInDays")  # placeholder
+            print(f"  - {name} {('(rtype=' + rtype + ')') if rtype else ''}")
+    # Maintain legacy cache shape for any downstream callers expecting it
+    _workspace_schema_cache[workspace] = {
+        "tables": tables,
+        "count": len(tables),
+        "retrieved_at": result.get("retrieved_at"),
+        "source": source,
+    }
+
 
 @app.route('/')
 def index():

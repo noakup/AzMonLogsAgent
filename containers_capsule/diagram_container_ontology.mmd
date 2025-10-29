@@ -1,0 +1,13 @@
+%% Mermaid diagram for container ontology
+
+graph TD
+  A[Cluster] --> B[Node / Computer]
+  B --> C[Pod]
+  C --> D[Container]
+  D --> E[LogEntry]
+  E --> F[Severity]
+  E --> G[StructuredPayload]
+  E --> H[StackTrace]
+  C --> I[ApplicationComponent]
+  C --> J[CrashLoopSignal]
+  E --> K[AnomalyEvent]

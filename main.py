@@ -141,11 +141,10 @@ def translate_nl_to_kql(nl_question):
     Scenario-Specific NL-to-KQL Routing:
     ------------------------------------
     - When a user provides a natural language (NL) question, you should:
-      1. Analyze the NL question to determine which Application Insights entity or scenario it relates to (e.g., requests, exceptions, traces).
-      2. Route the NL question to the appropriate specialized NL-to-KQL tool:
-         - For requests-related questions query the AppRequests table. Use the details and examples `app_insights_capsule/metadata/app_requests_metadata.md` and `app_insights_capsule/kql_examples/app_requests_kql_examples.md`.
-         - For exceptions-related questions query the AppExceptions table. Use the details and examples from `app_insights_capsule/metadata/app_exceptions_metadata.md` and `app_insights_capsule/kql_examples/app_exceptions_kql_examples.md`.
-         - For traces/logs-related questions query the AppTraces table. Use the details and examples from `app_insights_capsule/metadata/app_traces_metadata.md` and `app_insights_capsule/kql_examples/app_traces_kql_examples.md`.
+      1. Analyze the NL question to determine which resource type / domain it relates to (e.g., Application Insights, VMs, Container Insights).
+      2. Analyze the NL question to determine the specific entity or scenario it relates to (e.g., Application Insights requests, Container logs).
+      3. Route the NL question to the appropriate specialized NL-to-KQL tool:
+         - Refer to the ontology, query examples and general guidelines or the domain and entity you previously identified.
          - NEVER use the classic Application Insights tables (requests, exceptions, traces) as they are not compatible with the new Application Insights data model.
          - Never use the classic Application Insights columns, as they are not compatible with the new Application Insights data model.
          - Only use the new Application Insights tables and columns as defined in the metadata files.

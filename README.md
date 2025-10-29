@@ -139,6 +139,24 @@ curl -X POST http://localhost:8080/query \
    python setup_azure_openai.py
    ```
 
+### Unified Schema Caching & Table Listing (Optional)
+The agent can enumerate workspace tables using the official Log Analytics Tables REST API for faster and more complete schema hydration. Provide these environment variables (PowerShell shown):
+
+```powershell
+$env:LOG_SUBSCRIPTION_ID = "<subscription-guid>"
+$env:LOG_RESOURCE_GROUP  = "<resource-group-name>"
+$env:LOG_WORKSPACE_NAME  = "<workspace-resource-name>"  # This is the workspace resource name, not the GUID workspace ID
+# Optional: override default 20 minute cache TTL
+$env:SCHEMA_TTL_MINUTES  = "20"
+```
+
+Behavior:
+- If the REST call succeeds, schema source is reported as `rest-api`.
+- If REST fails or required vars are missing, it falls back once to a lightweight union query enumeration (`union-query`).
+- Results (table list + manifest map) are cached for the TTL to avoid repeated enumeration.
+
+You can safely omit these vars for development; the fallback still works, just with slightly more overhead.
+
 ## 🏗️ Architecture
 
 ### Components
@@ -265,6 +283,32 @@ python logs_agent.py                  # Start CLI agent directly
 - **[Web Interface Guide](WEB_INTERFACE_GUIDE.md)**: Comprehensive web UI documentation
 - **[KQL Examples](app_requests_kql_examples.md)**: Browse curated query examples
 - **Setup Guides**: Step-by-step configuration instructions
+
+### Prompting & Ontology (AKS / Container Logs)
+The project now includes a structured prompt system for AKS container log analytics:
+
+- Core system prompt: `prompts/system_base.txt`
+- Domain capsule (compressed ontology): `prompts/domain_capsule_containerlogs.txt`
+- Few-shot examples: `prompts/fewshots_containerlogs.txt`
+ - KQL helper functions: `docs/containers_capsule/kql_functions_containerlogs.kql`
+ - Ontology & semantic model: `docs/containers_capsule/container_ontology.md`
+- Prompt builder utility: `prompt_builder.py`
+
+Build a composite prompt from a natural language query:
+```powershell
+python prompt_builder.py "why are there so many errors in payments last 2h?"
+```
+Output includes assembled prompt + JSON metadata (schema version, hashes, output mode).
+
+Prompt layering reduces token usage and prevents knowledge drift by separating:
+1. System safety rules
+2. Domain capsule summary
+3. Function index (names only)
+4. Dynamic context addendum (keyword heuristics)
+5. Clarified user query
+6. Output directive (KQL-only vs Explanation+KQL)
+
+Regenerate / adjust capsule or few-shots as ontology evolves.
 
 ## 🤝 Contributing
 1. Fork the repository

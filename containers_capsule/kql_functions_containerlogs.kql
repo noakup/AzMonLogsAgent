@@ -1,0 +1,38 @@
+// Reusable KQL functions for ContainerLogV2 scenarios.
+
+// Extract latency in ms from log message (string or dynamic)
+let ExtractLatency = (msg: dynamic) {
+    let plain = iff(typeof(msg)=="string", tostring(msg), tostring(msg.message));
+    toint(extract("latency[=:]\\s?([0-9]+)ms", 1, plain))
+};
+
+// Determine if log is error severity (stderr or explicit level)
+let IsErrorLog = (logLevel:string, logSource:string) {
+    logLevel in~ ("CRITICAL","ERROR") or logSource == "stderr"
+};
+
+// Normalize workload name from labels or pod/container fields
+let WorkloadName = (labels:dynamic, podName:string, containerName:string) {
+    tostring(coalesce(labels['app.kubernetes.io/name'], labels['app'], labels['service'], podName, containerName))
+};
+
+// Classify presence of stack trace markers
+let HasStackTrace = (msg: dynamic) {
+    let plain = iff(typeof(msg)=="string", tostring(msg), tostring(msg.message));
+    plain has_any ("Exception","Traceback"," at ")
+};
+
+// Return JSON status code if available else empty
+let JsonStatus = (msg: dynamic) {
+    iff(typeof(msg)=="dynamic" and msg.status != '', tostring(msg.status), '')
+};
+
+// Compute error rate percentage safely
+let ErrorRatePct = (errors: long, total: long) {
+    100.0 * errors / iff(total==0, 1.0, todouble(total))
+};
+
+// Compute pending minutes between two timestamps
+let PendingMinutes = (first: datetime, last: datetime) {
+    datetime_diff('minute', last, first)
+};
