@@ -21,24 +21,41 @@ NOTE: workspace_id (GUID used for query operations) is still required for union 
 from __future__ import annotations
 
 import os
+import threading
 import time
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
 from typing import Dict, Any, Optional, List
+from azure.identity import DefaultAzureCredential
+from azure.monitor.query import LogsQueryClient
 
 try:
     import requests  # type: ignore
 except Exception:  # pragma: no cover - requests may not yet be installed
     requests = None  # type: ignore
 
-try:
-    from azure.identity import DefaultAzureCredential  # type: ignore
-    from azure.monitor.query import LogsQueryClient  # type: ignore
-except Exception:  # pragma: no cover
-    DefaultAzureCredential = None  # type: ignore
-    LogsQueryClient = None  # type: ignore
+_credential_creation_lock = threading.Lock()
 
 _MANAGER_SINGLETON: "SchemaManager" | None = None
+
+def _get_azure_credential():
+    """Get or create shared Azure credential (thread-safe, created only once)."""
+    global _azure_credential
+    if _azure_credential is not None:
+        return _azure_credential
+    
+    with _credential_creation_lock:
+        # Double-check after acquiring lock
+        if _azure_credential is not None:
+            return _azure_credential
+        
+        if DefaultAzureCredential is None:
+            return None
+        
+        print("[Credential] Creating Azure credential (will trigger az login if needed)...")
+        _azure_credential = DefaultAzureCredential(exclude_interactive_browser_credential=False)
+        print(f"[Credential] Credential created: {type(_azure_credential).__name__}")
+        return _azure_credential
 
 @dataclass
 class WorkspaceSchemaCache:
@@ -85,6 +102,31 @@ class SchemaManager:
         # Refresh path
         tables, source = self._retrieve_tables(workspace_id)
         self._ensure_manifest(ttl_seconds)
+        # self._enrich_table_metadata
+        # Try to parse manifest for resource type info
+        table_resource_map = {}
+        manifest_path = os.path.join(os.path.dirname(__file__), 'NGSchema', 'LogAnalyticsWorkspace', 'WorkspaceManifest.manifest.json')
+        if os.path.exists(manifest_path):
+            try:
+                import json
+                with open(manifest_path, 'r', encoding='utf-8') as mf:
+                    manifest = json.load(mf)
+                for tbl in manifest.get('tables', []):
+                    tname = tbl.get('name')
+                    dtype = tbl.get('dataTypeId', '')
+                    cats = tbl.get('categories', [])
+                    # Prefer dataTypeId, fallback to first category
+                    resource_type = dtype or (cats[0] if cats else '')
+                    table_resource_map[tname] = resource_type
+            except Exception as e:
+                print(f"[Workspace Schema] Manifest parse error: {e}")
+        enriched_tables = []
+        for table_name in tables:
+            enriched_tables.append({
+                "name": table_name,
+                "resource_type": table_resource_map.get(table_name, "Unknown")
+            })
+
         cache = WorkspaceSchemaCache(
             tables=tables,
             manifest=self._manifest_cache,
@@ -144,11 +186,11 @@ class SchemaManager:
         workspace_name = os.environ.get("LOG_WORKSPACE_NAME")
         if not (subscription_id and resource_group and workspace_name):
             return []
-        if requests is None or DefaultAzureCredential is None:
+        _azure_credential= _get_azure_credential()
+        if requests is None or _azure_credential is None:
             return []
         try:
-            credential = DefaultAzureCredential(exclude_interactive_browser_credential=False)
-            token = credential.get_token("https://management.azure.com/.default").token
+            token = _azure_credential.get_token("https://management.azure.com/.default").token
             api_version = os.environ.get("LOG_TABLES_API_VERSION", "2022-10-01")
             url = (
                 f"https://management.azure.com/subscriptions/{subscription_id}/resourceGroups/{resource_group}/"
@@ -186,11 +228,10 @@ class SchemaManager:
             return []
 
     def _union_enumerate_tables(self, workspace_id: str) -> list[Dict[str, Any]]:
-        if LogsQueryClient is None or DefaultAzureCredential is None:
+        if LogsQueryClient is None or _azure_credential is None:
             return []
         try:
-            credential = DefaultAzureCredential(exclude_interactive_browser_credential=False)
-            client = LogsQueryClient(credential)
+            client = LogsQueryClient(_azure_credential)
             query = (
                 "union withsource=__KQLAgentTableName__ * | summarize RowCount=count() by __KQLAgentTableName__ | "
                 "sort by __KQLAgentTableName__ asc"
