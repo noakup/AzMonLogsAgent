@@ -6,6 +6,7 @@ A Flask web application that provides a user-friendly interface for the KQL agen
 
 from flask import Flask, render_template, request, jsonify, send_from_directory
 import asyncio
+import time  # needed for docs enrichment timing budget
 import os
 import sys
 import traceback
@@ -31,6 +32,61 @@ from schema_manager import get_workspace_schema
 
 
 app = Flask(__name__)
+# Ensure workspace_id is defined before any early cache load attempts to avoid NameError
+workspace_id = None
+
+# Initialize workspace schema cache EARLY so helper functions (_persist_workspace_cache, _load_workspace_cache)
+# can reference it safely during module import. Previously this was defined later, causing a NameError when
+# _load_workspace_cache() executed before the variable existed.
+_workspace_schema_cache: dict[str, dict] = {}
+
+# Optional simple persistence for workspace schema across debug reloads.
+SCHEMA_CACHE_FILE = os.environ.get("WORKSPACE_SCHEMA_CACHE_FILE", "workspace_schema_cache.json")
+def _persist_workspace_cache():
+    global workspace_id, _workspace_schema_cache
+    if not workspace_id:
+        return
+    data = {
+        "workspace_id": workspace_id,
+        "cache": _workspace_schema_cache.get(workspace_id)
+    }
+    try:
+        import json as _json
+        with open(SCHEMA_CACHE_FILE, 'w', encoding='utf-8') as f:
+            _json.dump(data, f)
+    except Exception as e:  # noqa: BLE001
+        print(f"[Workspace Schema] Persist failed: {e}")
+
+def _load_workspace_cache():
+    global workspace_id, _workspace_schema_cache
+    if not os.path.exists(SCHEMA_CACHE_FILE):
+        return
+    try:
+        import json as _json
+        with open(SCHEMA_CACHE_FILE, 'r', encoding='utf-8') as f:
+            data = _json.load(f)
+        wid = data.get("workspace_id")
+        cache = data.get("cache")
+        if wid and cache:
+            workspace_id = workspace_id or wid  # keep existing if already set via setup
+            _workspace_schema_cache[wid] = cache
+            print(f"[Workspace Schema] Loaded persisted cache for workspace {wid} tables={len(cache.get('tables', []))}")
+    except Exception as e:  # noqa: BLE001
+        print(f"[Workspace Schema] Load persisted cache failed: {e}")
+
+# Attempt load at module import (only effective on debug reloads)
+_load_workspace_cache()
+
+# Docs enrichment tuning (env configurable to avoid UI stalls from slow/blocked Microsoft Docs fetches)
+DOCS_ENRICH_DISABLE = bool(os.environ.get("DOCS_ENRICH_DISABLE"))  # "1" or any non-empty string disables
+WORKSPACE_SCHEMA_SYNC_FETCH = os.environ.get("WORKSPACE_SCHEMA_SYNC_FETCH", "0") == "1"  # allow reverting to old synchronous behavior
+DOCS_META_MAX_SECONDS = float(os.environ.get("DOCS_META_MAX_SECONDS", "4"))  # cumulative time budget for metadata enrichment
+_workspace_schema_refresh_flags: dict[str, bool] = {}
+_workspace_schema_refresh_errors: dict[str, str] = {}
+_workspace_schema_refresh_lock = threading.Lock()
+DOCS_ENRICH_MAX_TABLES = int(os.environ.get("DOCS_ENRICH_MAX_TABLES", "8"))  # cap number of unmatched tables to enrich per request
+DOCS_ENRICH_MAX_SECONDS = float(os.environ.get("DOCS_ENRICH_MAX_SECONDS", "5"))  # cumulative time budget per request
+DOCS_ENRICH_COLUMN_FETCH = bool(os.environ.get("DOCS_ENRICH_COLUMN_FETCH", "1"))  # allow disabling column scraping (heavier)
 
 
 # Generic examples fallback
@@ -132,7 +188,9 @@ def fetch_workspace_schema():
         workspace = data.get('workspace_id', '').strip()
         if not workspace:
             return jsonify({'success': False, 'error': 'Workspace ID is required'})
-        threading.Thread(target=_fetch_workspace_tables, args=(workspace,), daemon=True).start()
+        print("[Workspace Schema] scheduling background fetch (on-demand endpoint)")
+        threading.Thread(target=_background_fetch_workspace_tables, args=(workspace,), daemon=True).start()
+        print("[Workspace Schema] background thread started")
         return jsonify({'success': True, 'message': f'Workspace schema fetch started for {workspace}'})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
@@ -176,8 +234,6 @@ def resource_schema():
 
 # Global agent instance
 agent = None
-workspace_id = None
-_workspace_schema_cache = {}  # legacy reference retained (now thin wrapper around SchemaManager)
 _workspace_resource_types_cache = {}  # deprecated: manifest data now supplied via SchemaManager
 _workspace_queries_cache = {}
 _ms_docs_table_resource_type_cache = {}  # table_name -> resource_type | 'unknown resource type'
@@ -217,6 +273,8 @@ def _lookup_table_resource_type_doc(table_name: str, timeout: float = 4.0) -> st
     Returns discovered resource type string or 'unknown resource type'.
     Caches results per process. Keeps failures cached to avoid repeated outbound calls.
     """
+    if DOCS_ENRICH_DISABLE:
+        return 'unknown resource type'
     if not table_name:
         return 'unknown resource type'
     cache_key = table_name
@@ -265,6 +323,8 @@ def _fetch_table_docs_full(table_name: str, timeout: float = 6.0) -> dict:
     Caches results in _ms_docs_table_full_cache. Returns a dict:
       { description:str, columns:[{name,type,description}], fetched_at:str }
     """
+    if DOCS_ENRICH_DISABLE:
+        return {}
     if not table_name:
         return {}
     if table_name in _ms_docs_table_full_cache:
@@ -286,22 +346,23 @@ def _fetch_table_docs_full(table_name: str, timeout: float = 6.0) -> dict:
         # Columns: look for markdown-like table rendered as HTML <table> with column headers Name, Type
         columns = []
         table_sections = re.findall(r'<table.*?>.*?</table>', html, re.IGNORECASE | re.DOTALL)
-        for sect in table_sections:
-            if re.search(r'<th[^>]*>\s*Name\s*</th>', sect, re.IGNORECASE) and re.search(r'<th[^>]*>\s*Type\s*</th>', sect, re.IGNORECASE):
-                # Extract rows
-                rows = re.findall(r'<tr>(.*?)</tr>', sect, re.IGNORECASE | re.DOTALL)
-                for r in rows[1:]:  # skip header
-                    cols = re.findall(r'<t[dh][^>]*>(.*?)</t[dh]>', r, re.IGNORECASE | re.DOTALL)
-                    if len(cols) >= 2:
-                        cname = re.sub(r'<[^>]+>', '', cols[0]).strip()
-                        ctype = re.sub(r'<[^>]+>', '', cols[1]).strip()
-                        cdesc = ''
-                        if len(cols) >= 3:
-                            cdesc = re.sub(r'<[^>]+>', '', cols[2]).strip()
-                        if cname:
-                            columns.append({'name': cname, 'type': ctype, 'description': cdesc})
-                if columns:
-                    break
+        if DOCS_ENRICH_COLUMN_FETCH:
+            for sect in table_sections:
+                if re.search(r'<th[^>]*>\s*Name\s*</th>', sect, re.IGNORECASE) and re.search(r'<th[^>]*>\s*Type\s*</th>', sect, re.IGNORECASE):
+                    # Extract rows
+                    rows = re.findall(r'<tr>(.*?)</tr>', sect, re.IGNORECASE | re.DOTALL)
+                    for r in rows[1:]:  # skip header
+                        cols = re.findall(r'<t[dh][^>]*>(.*?)</t[dh]>', r, re.IGNORECASE | re.DOTALL)
+                        if len(cols) >= 2:
+                            cname = re.sub(r'<[^>]+>', '', cols[0]).strip()
+                            ctype = re.sub(r'<[^>]+>', '', cols[1]).strip()
+                            cdesc = ''
+                            if len(cols) >= 3:
+                                cdesc = re.sub(r'<[^>]+>', '', cols[2]).strip()
+                            if cname:
+                                columns.append({'name': cname, 'type': ctype, 'description': cdesc})
+                    if columns:
+                        break
         record = {
             'description': description,
             'columns': columns,
@@ -325,6 +386,8 @@ def _fetch_table_docs_queries(table_name: str, timeout: float = 6.0) -> list:
     Returns list of { name, description, code, source='docs' }.
     Caches results per table.
     """
+    if DOCS_ENRICH_DISABLE:
+        return []
     if not table_name:
         return []
     if table_name in _ms_docs_table_queries_cache:
@@ -420,14 +483,33 @@ def workspace_schema():
 
     ws_cache = _workspace_schema_cache.get(workspace_id)
     if not ws_cache:
-        # Instead of returning 'pending' (which forced the UI to poll and showed an empty schema),
-        # perform a synchronous fetch once so the first response can already be 'ready'.
-        # This avoids the scenario where the console shows enumeration success but the UI remains empty.
-        _fetch_workspace_tables(workspace_id)
-        ws_cache = _workspace_schema_cache.get(workspace_id)
-        if not ws_cache:  # Still unavailable (unexpected)
-            threading.Thread(target=_fetch_workspace_tables, args=(workspace_id,), daemon=True).start()
-            return jsonify({'success': False, 'status': 'pending', 'workspace_id': workspace_id})
+        if WORKSPACE_SCHEMA_SYNC_FETCH:
+            print("[Workspace Schema] Performing synchronous initial fetch.")
+            _background_fetch_workspace_tables(workspace_id)
+            ws_cache = _workspace_schema_cache.get(workspace_id)
+        else:
+            with _workspace_schema_refresh_lock:
+                in_progress = _workspace_schema_refresh_flags.get(workspace_id, False)
+                last_err = _workspace_schema_refresh_errors.get(workspace_id)
+                if not in_progress:
+                    print("[Workspace Schema] Starting background fetch thread.")
+                    threading.Thread(target=_background_fetch_workspace_tables, args=(workspace_id,), daemon=True).start()
+                    _workspace_schema_refresh_flags[workspace_id] = True
+                    in_progress = True
+            # Adaptive race mitigation: brief wait loop to catch ultra-fast completion (configurable)
+            ws_cache_fast = _workspace_schema_cache.get(workspace_id)
+            if not ws_cache_fast:
+                race_wait_ms = int(os.environ.get("WORKSPACE_SCHEMA_RACE_WAIT_MS", "150"))
+                deadline = time.time() + (race_wait_ms / 1000.0)
+                while time.time() < deadline:
+                    ws_cache_fast = _workspace_schema_cache.get(workspace_id)
+                    if ws_cache_fast:
+                        break
+                    time.sleep(0.01)
+            if ws_cache_fast:
+                ws_cache = ws_cache_fast
+            else:
+                return jsonify({'success': False, 'status': 'pending', 'workspace_id': workspace_id, 'in_progress': in_progress, 'error': last_err})
 
     workspace_tables = ws_cache.get('tables', [])
     enriched = []
@@ -463,43 +545,49 @@ def workspace_schema():
 
     # Enrich unmatched tables using Microsoft Docs table pages (best-effort)
     doc_enriched = 0
-    if unmatched:
-        for table in unmatched:
-            doc_rtype = _lookup_table_resource_type_doc(table)
-            # Normalize to lowercase provider/resource type to be consistent (as per docs examples)
-            if doc_rtype != 'unknown resource type':
-                doc_rtype = doc_rtype.strip()
-                # Ensure pattern provider/resourceType; if uppercase Microsoft.* keep as-is else lowercase
-                if '/' in doc_rtype:
-                    parts = doc_rtype.split('/')
-                    if len(parts) == 2:
-                        # Keep original provider case if startswith Microsoft., else lowercase both
-                        if not parts[0].startswith('Microsoft.'):
-                            doc_rtype = f"{parts[0].lower()}/{parts[1].lower()}"
-                else:
-                    # Not a recognized pattern, mark unknown
-                    doc_rtype = 'unknown resource type'
-            # Update enriched list entry
-            for e in enriched:
-                if e['name'] == table:
-                    e['doc_resource_type'] = doc_rtype
-                    if doc_rtype != 'unknown resource type' and not e.get('provider'):
-                        e['provider'] = doc_rtype.split('/')[0]
-                    break
-            # If a resource type was found (not unknown), include in subset; otherwise bucket under 'unknown resource type'
-            target_rtype = doc_rtype if doc_rtype != 'unknown resource type' else 'unknown resource type'
-            if target_rtype not in resource_type_subset:
-                resource_type_subset[target_rtype] = []
-            resource_type_subset[target_rtype].append(table)
-            if target_rtype != 'unknown resource type':
-                provider = target_rtype.split('/')[0]
-            else:
-                provider = 'unknown'
-            provider_summary.setdefault(provider, {'tables': 0, 'resource_types': set()})
-            provider_summary[provider]['tables'] += 1
-            if target_rtype != 'unknown resource type':
-                provider_summary[provider]['resource_types'].add(target_rtype)
-            doc_enriched += 1
+    # if unmatched and not DOCS_ENRICH_DISABLE:
+        # # Bound number of tables & cumulative time to keep endpoint responsive
+        # t_docs_start = time.time()
+        # for table in unmatched[:DOCS_ENRICH_MAX_TABLES]:
+        #     doc_rtype = _lookup_table_resource_type_doc(table)
+        #     # Normalize to lowercase provider/resource type to be consistent (as per docs examples)
+        #     if doc_rtype != 'unknown resource type':
+        #         doc_rtype = doc_rtype.strip()
+        #         # Ensure pattern provider/resourceType; if uppercase Microsoft.* keep as-is else lowercase
+        #         if '/' in doc_rtype:
+        #             parts = doc_rtype.split('/')
+        #             if len(parts) == 2:
+        #                 # Keep original provider case if startswith Microsoft., else lowercase both
+        #                 if not parts[0].startswith('Microsoft.'):
+        #                     doc_rtype = f"{parts[0].lower()}/{parts[1].lower()}"
+        #         else:
+        #             # Not a recognized pattern, mark unknown
+        #             doc_rtype = 'unknown resource type'
+        #     # Update enriched list entry
+        #     for e in enriched:
+        #         if e['name'] == table:
+        #             e['doc_resource_type'] = doc_rtype
+        #             if doc_rtype != 'unknown resource type' and not e.get('provider'):
+        #                 e['provider'] = doc_rtype.split('/')[0]
+        #             break
+        #     # If a resource type was found (not unknown), include in subset; otherwise bucket under 'unknown resource type'
+        #     target_rtype = doc_rtype if doc_rtype != 'unknown resource type' else 'unknown resource type'
+        #     if target_rtype not in resource_type_subset:
+        #         resource_type_subset[target_rtype] = []
+        #     resource_type_subset[target_rtype].append(table)
+        #     if target_rtype != 'unknown resource type':
+        #         provider = target_rtype.split('/')[0]
+        #     else:
+        #         provider = 'unknown'
+        #     provider_summary.setdefault(provider, {'tables': 0, 'resource_types': set()})
+        #     provider_summary[provider]['tables'] += 1
+        #     if target_rtype != 'unknown resource type':
+        #         provider_summary[provider]['resource_types'].add(target_rtype)
+        #     doc_enriched += 1
+        #     if (time.time() - t_docs_start) > DOCS_ENRICH_MAX_SECONDS:
+        #         print(f"[Docs Enrichment] Cumulative time budget exceeded ({DOCS_ENRICH_MAX_SECONDS}s); skipping remaining tables.")
+        #         break
+    
 
     # Normalize provider summary sets to counts (after enrichment)
     provider_summary_out = {
@@ -519,20 +607,20 @@ def workspace_schema():
             workspace_table_queries[tname] = m_list
             tables_with_manifest_queries += 1
         else:
-            # Attempt docs query enrichment only if not in manifest
-            docs_q = _fetch_table_docs_queries(tname)
-            if docs_q:
-                workspace_table_queries[tname] = []
-                for q in docs_q:
-                    if q.get('name') and q.get('code'):
-                        workspace_table_queries[tname].append({
-                            'name': q.get('name'),
-                            'description': q.get('description'),
-                            'code': q.get('code'),
-                            'source': 'docs'
-                        })
-                if workspace_table_queries.get(tname):
-                    tables_with_docs_queries += 1
+            if not DOCS_ENRICH_DISABLE:
+                docs_q = _fetch_table_docs_queries(tname)
+                if docs_q:
+                    workspace_table_queries[tname] = []
+                    for q in docs_q:
+                        if q.get('name') and q.get('code'):
+                            workspace_table_queries[tname].append({
+                                'name': q.get('name'),
+                                'description': q.get('description'),
+                                'code': q.get('code'),
+                                'source': 'docs'
+                            })
+                    if workspace_table_queries.get(tname):
+                        tables_with_docs_queries += 1
 
     response = {
         'success': True,
@@ -551,9 +639,15 @@ def workspace_schema():
         'unmatched_tables': unmatched,
         'retrieved_at': ws_cache.get('retrieved_at'),
         'doc_enrichment': {
-            'performed': bool(unmatched),
+            'performed': bool(unmatched) and not DOCS_ENRICH_DISABLE,
             'enriched_tables': doc_enriched,
-            'cache_size': len(_ms_docs_table_resource_type_cache)
+            'cache_size': len(_ms_docs_table_resource_type_cache),
+            'disabled': DOCS_ENRICH_DISABLE,
+            'limits': {
+                'max_tables': DOCS_ENRICH_MAX_TABLES,
+                'max_seconds': DOCS_ENRICH_MAX_SECONDS,
+                'column_fetch': DOCS_ENRICH_COLUMN_FETCH
+            }
         },
         # Workspace scoped table metadata (manifest first, docs fallback)
         'table_metadata': {},
@@ -565,10 +659,14 @@ def workspace_schema():
     }
     try:
         manifest_meta = manifest_data.get('table_metadata', {}) or {}
+        t_meta_start = time.time()
         for tinfo in enriched:
+            if (time.time() - t_meta_start) > DOCS_META_MAX_SECONDS:
+                print(f"[Workspace Schema] Metadata enrichment time budget exceeded ({DOCS_META_MAX_SECONDS}s); truncating.")
+                break
             tname = tinfo['name']
             meta = manifest_meta.get(tname, {}).copy()
-            if not meta.get('description') or not meta.get('columns'):
+            if not DOCS_ENRICH_DISABLE and (not meta.get('description') or not meta.get('columns')):
                 docs_meta = _fetch_table_docs_full(tname)
                 if docs_meta:
                     if not meta.get('description') and docs_meta.get('description'):
@@ -578,18 +676,62 @@ def workspace_schema():
             response['table_metadata'][tname] = meta
     except Exception as e:  # noqa: BLE001
         print(f"[Workspace Schema] Metadata enrichment error: {e}")
-    # Print final enriched workspace schema to console (pretty JSON)
-    try:
-        import json as _json
-        print('[Workspace Schema] Final enriched schema (truncated to 20000 chars if large):')
-        schema_str = _json.dumps(response, indent=2)
-        if len(schema_str) > 20000:
-            print(schema_str[:20000] + '\n...<truncated>...')
-        else:
-            print(schema_str)
-    except Exception as e:  # noqa: BLE001
-        print(f"[Workspace Schema] Failed to print final schema: {e}")
+    # Verbose schema dump removed per request to reduce console noise.
     return jsonify(response)
+
+@app.route('/api/workspace-schema-status', methods=['GET'])
+def workspace_schema_status():
+    """Lightweight status endpoint for workspace schema refresh state.
+
+    Returns JSON:
+      success: bool
+      status: 'uninitialized' | 'pending' | 'ready'
+      workspace_id: str|None
+      in_progress: bool
+      error: str|None
+      cached_tables: int
+      last_retrieved_at: str|None
+    """
+    global workspace_id
+    if not workspace_id:
+        return jsonify({
+            'success': False,
+            'status': 'uninitialized',
+            'workspace_id': None,
+            'in_progress': False,
+            'error': 'Workspace not initialized',
+            'cached_tables': 0,
+            'last_retrieved_at': None
+        })
+    # Auto-start background fetch if no cache and not already in progress (status-based kickoff)
+    cache = _workspace_schema_cache.get(workspace_id)
+    with _workspace_schema_refresh_lock:
+        in_progress = _workspace_schema_refresh_flags.get(workspace_id, False)
+        error = _workspace_schema_refresh_errors.get(workspace_id)
+        if not cache and not in_progress:
+            # Kick off background thread here to avoid needing a separate /api/workspace-schema call
+            print("[Workspace Schema Status] Auto-starting background fetch thread.")
+            threading.Thread(target=_background_fetch_workspace_tables, args=(workspace_id,), daemon=True).start()
+            _workspace_schema_refresh_flags[workspace_id] = True
+            in_progress = True
+    cache = _workspace_schema_cache.get(workspace_id)
+    if cache:
+        status = 'ready'
+        count = len(cache.get('tables', []))
+        last_retrieved = cache.get('retrieved_at')
+    else:
+        status = 'pending'
+        count = 0
+        last_retrieved = None
+    return jsonify({
+        'success': status == 'ready',
+        'status': status,
+        'workspace_id': workspace_id,
+        'in_progress': in_progress,
+        'error': error,
+        'cached_tables': count,
+        'last_retrieved_at': last_retrieved
+    })
 
 
 def _scan_manifest_resource_types() -> dict:
@@ -846,19 +988,64 @@ def _fetch_workspace_tables(workspace: str):
     tables = result.get("tables", [])
     source = result.get("source")
     print(f"[Workspace Schema] Source={source} tables={len(tables)} refreshed={refreshed}")
+    print(f"[Workspace Schema] debug print 1")
     if refreshed:
+        print(f"in refreshed")
         # Only enumerate on refresh to avoid duplication
         for t in tables[:50]:  # cap enumeration to first 50 for brevity
             name = t.get("name")
             rtype = t.get("resource_type") or t.get("retentionInDays")  # placeholder
             print(f"  - {name} {('(rtype=' + rtype + ')') if rtype else ''}")
     # Maintain legacy cache shape for any downstream callers expecting it
+    print(f"[Workspace Schema] debug print 2")
     _workspace_schema_cache[workspace] = {
         "tables": tables,
         "count": len(tables),
         "retrieved_at": result.get("retrieved_at"),
         "source": source,
     }
+    print(f"[Workspace Schema] debug print 3")
+
+
+def _background_fetch_workspace_tables(workspace: str):
+    """Background wrapper that populates workspace schema cache and updates refresh flags.
+
+    Ensures flags reset even if an exception occurs so client polling can retry.
+    """
+    if not workspace:
+        return
+    with _workspace_schema_refresh_lock:
+        _workspace_schema_refresh_flags[workspace] = True
+        _workspace_schema_refresh_errors.pop(workspace, None)
+    try:
+        print(f"[Workspace Schema] Background fetch starting get_workspace_schema(workspace={workspace})")
+        result = get_workspace_schema(workspace)
+        print(f"[Workspace Schema] Background fetch returned source={result.get('source')} table_count={len(result.get('tables', []))} refreshed={result.get('refreshed')} error={result.get('error')}")
+        if result.get("error"):
+            raise RuntimeError(result["error"])
+        refreshed = result.get("refreshed")
+        tables = result.get("tables", [])
+        source = result.get("source")
+        print(f"[Workspace Schema] BG Source={source} tables={len(tables)} refreshed={refreshed}")
+        if refreshed:
+            for t in tables[:50]:
+                name = t.get("name")
+                rtype = t.get("resource_type") or t.get("retentionInDays")
+                print(f"  (bg) - {name} {( '(rtype=' + rtype + ')' ) if rtype else ''}")
+        _workspace_schema_cache[workspace] = {
+            "tables": tables,
+            "count": len(tables),
+            "retrieved_at": result.get("retrieved_at"),
+            "source": source,
+        }
+        _persist_workspace_cache()
+    except Exception as e:  # noqa: BLE001
+        print(f"[Workspace Schema] Background fetch error workspace={workspace}: {e}")
+        with _workspace_schema_refresh_lock:
+            _workspace_schema_refresh_errors[workspace] = str(e)
+    finally:
+        with _workspace_schema_refresh_lock:
+            _workspace_schema_refresh_flags[workspace] = False
 
 
 @app.route('/')
@@ -880,8 +1067,9 @@ def setup_workspace():
         
         # Initialize agent
         agent = KQLAgent(workspace_id)
-        # Fire background thread to enumerate workspace tables (console only)
-        threading.Thread(target=_fetch_workspace_tables, args=(workspace_id,), daemon=True).start()
+        # Intentionally do NOT start schema fetch here to allow client to trigger and observe pending state
+        print("[Setup] Workspace initialized; schema fetch will start on first /api/workspace-schema request.")
+        _persist_workspace_cache()  # persist workspace id early (empty cache)
         
         return jsonify({
             'success': True, 
@@ -918,11 +1106,21 @@ def process_query():
         
         try:
             result = loop.run_until_complete(agent.process_natural_language(question))
-            return jsonify({
+            response_payload = {
                 'success': True,
                 'result': result,
                 'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            })
+            }
+            # Expose examples_error and candidate scores when container selection failed
+            if isinstance(result, str) and result.startswith('// Error') and 'domain=containers' in result and 'selected_example_count=0' in result:
+                try:
+                    from nl_to_kql import load_container_examples
+                    ctx = load_container_examples(question)
+                    response_payload['examples_error'] = ctx.get('examples_error')
+                    response_payload['top_candidate_scores'] = ctx.get('top_candidate_scores')
+                except Exception as expose_exc:
+                    response_payload['examples_error'] = f'expose_failed: {expose_exc}'
+            return jsonify(response_payload)
         finally:
             loop.close()
             
@@ -1296,10 +1494,10 @@ if __name__ == '__main__':
     print("   - Query execution and results display")
     print("   - Example queries and suggestions")
     print("   - Workspace table discovery")
-    print("🚀 Starting server on http://localhost:8080")
-    
+    debug_mode = os.environ.get('FLASK_DEBUG','0') == '1'
+    print(f"🚀 Starting server on http://localhost:8080 (debug={debug_mode})")
     try:
-        app.run(debug=True, host='0.0.0.0', port=8080)
+        app.run(debug=debug_mode, host='0.0.0.0', port=8080)
     except KeyboardInterrupt:
         print("\n🛑 Web Interface stopped")
     except Exception as e:

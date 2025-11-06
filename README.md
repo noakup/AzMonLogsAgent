@@ -155,7 +155,73 @@ Behavior:
 - If REST fails or required vars are missing, it falls back once to a lightweight union query enumeration (`union-query`).
 - Results (table list + manifest map) are cached for the TTL to avoid repeated enumeration.
 
+### Workspace Schema Polling & Status
+The web UI and API use a non-blocking pattern for initial workspace schema enumeration to prevent long request hangs during Azure authentication or large table scans.
+
+Endpoints:
+- `GET /api/workspace-schema` – Returns either `status="pending"` (schema still loading) or `status="ready"` with full table + enrichment data.
+- `GET /api/workspace-schema-status` – Lightweight health/status check with: `status`, `in_progress`, `error`, `cached_tables`, and `last_retrieved_at`.
+
+Polling Contract:
+1. Call `/api/setup` to initialize the agent for a workspace.
+2. Immediately call `/api/workspace-schema` – expect `{"success": false, "status": "pending"}` if first fetch not complete.
+3. Poll `/api/workspace-schema-status` every ~500–1000 ms until `status == "ready"` or `error` is populated.
+4. Once ready, switch to a slower refresh cadence (e.g. every few minutes) since schema is cached (default TTL ~20 minutes unless overridden).
+
+Environment Flags:
+- `WORKSPACE_SCHEMA_SYNC_FETCH=1` – Force legacy synchronous behavior (single request blocks until schema loaded). Use only for debugging; can trigger long waits.
+- `DOCS_ENRICH_DISABLE=1` – Skip Microsoft Docs enrichment (faster; no external calls).
+- `DOCS_META_MAX_SECONDS` – Per-request time budget for metadata enrichment phase.
+- `DOCS_ENRICH_MAX_TABLES` / `DOCS_ENRICH_MAX_SECONDS` – Bounds for docs table enrichment to keep endpoint responsive.
+
+Error Handling:
+- If background enumeration fails, `/api/workspace-schema` remains `pending` but `/api/workspace-schema-status` includes `error` text (e.g. authentication failures).
+- Client may trigger a manual retry by re-calling `/api/workspace-schema` (starts a new background thread if none in progress).
+
+Best Practices:
+- Prefer status endpoint for UI spinners to avoid large JSON payload churn during pending state.
+- Always respect time budgets; do not extend enrichment loops beyond configured limits.
+- For automation, set a max overall wait (e.g. 30 seconds) before surfacing an operational alert.
+
+Synchronous Mode Use Cases:
+- Local debugging of schema retrieval logic.
+- Profiling retrieval timings without polling overhead.
+
+Do NOT enable synchronous mode in production or shared demos; it can degrade perceived responsiveness.
+
 You can safely omit these vars for development; the fallback still works, just with slightly more overhead.
+
+### Few-Shot Example Selection
+
+The NL→KQL translation uses a relevance-ranked subset of curated examples ("few-shots") to guide generation.
+
+Configuration:
+
+- `FEWSHOT_TOP_K` – (optional) Maximum number of few-shot examples to include. Defaults to `4` if unset or invalid.
+   - Guard rails: clamped between `1` and `12`.
+   - Applies to both container and Application Insights domains.
+   - If an on-disk embedding index is available (`embedding_index.select_with_index`), it drives selection; otherwise a hybrid heuristic + lightweight embedding fallback decides.
+
+Behavior Notes:
+- Increasing this value can improve accuracy for complex queries at the cost of more tokens and slightly higher latency.
+- Decrease (e.g. `FEWSHOT_TOP_K=2`) for very constrained environments or to minimize prompt size.
+- All internal call sites now rely on this environment variable; no direct `top_k` parameter is passed in code anymore.
+
+Example (PowerShell):
+```powershell
+$env:FEWSHOT_TOP_K = "2"  # Use only two examples
+python web_app.py
+```
+
+If unset:
+```powershell
+Remove-Item Env:FEWSHOT_TOP_K -ErrorAction SilentlyContinue
+python web_app.py  # Defaults to 4 examples
+```
+
+Troubleshooting:
+- If logs show `[fewshot-select] used_index=True ... returned=3` while `FEWSHOT_TOP_K=4`, the index may contain fewer highly scoring examples above threshold or be built with a legacy default; rebuild the index to refresh scores.
+- To force heuristic path, temporarily rename or remove the `embedding_index` JSON files.
 
 ## 🏗️ Architecture
 
@@ -294,6 +360,26 @@ The project now includes a structured prompt system for AKS container log analyt
  - Ontology & semantic model: `docs/containers_capsule/container_ontology.md`
 - Prompt builder utility: `prompt_builder.py`
 
+#### Container Examples Source Migration
+Container domain examples now load **exclusively** from the CSV file:
+`containers_capsule/kql_examples/public_shots.csv`
+
+The previous markdown / text fallback files have been removed from runtime selection logic to ensure:
+1. Consistent schema for parsing and deduplication.
+2. Deterministic hashing for the persistent embedding index.
+3. Lower maintenance overhead (single authoritative source).
+
+If the CSV is missing, the system logs a warning and proceeds with an empty example set (the embedding index builds as an empty stub). This guarantees predictable behavior in minimal or air‑gapped environments.
+
+To rebuild the embedding index after editing the CSV:
+```powershell
+python server_manager.py embed-index-rebuild --domain containers
+```
+If you intentionally need to clear cached vectors:
+```powershell
+python server_manager.py embed-index-purge --domain containers
+```
+
 Build a composite prompt from a natural language query:
 ```powershell
 python prompt_builder.py "why are there so many errors in payments last 2h?"
@@ -394,3 +480,75 @@ API2 | False   | 5000
 - Color-coded data types
 
 **📚 See:** `TABLE_DISPLAY_GUIDE.md` for complete documentation
+
+## 🔒 Persistent Embedding Index (Experimental)
+
+Large example corpora previously required re-embedding all examples on every NL→KQL translation. The agent now supports a **per-domain persistent embedding index** that stores precomputed vectors for example questions, dramatically reducing latency and token usage for selection.
+
+### How It Works
+1. On first use (or when examples change), the agent embeds all example questions for a domain and writes a JSON index under `./embedding_index/` (override with `EMBED_INDEX_DIR`).
+2. Each subsequent translation only embeds the incoming user question (single vector) and performs hybrid scoring (heuristic + cosine) against cached example vectors.
+3. If the example source files change (hash mismatch) or `EMBED_INDEX_FORCE_REBUILD=1` is set, the index is rebuilt automatically.
+
+### Index File Schema (version 1)
+```jsonc
+{
+   "schema_version": 1,
+   "domain": "containers",
+   "created_at": "2025-11-06T12:34:56Z",
+   "embedding_model": "text-embedding-3-small",
+   "embedding_deployment": "text-embedding-3-small",
+   "vector_dim": 1536,
+   "examples_hash": "<sha256-32>",
+   "examples": [
+      {"id":0, "question":"Show container error logs", "kql":"...", "question_hash":"<sha16>", "vector":[0.01, ...]}
+   ]
+}
+```
+
+### Environment Variables
+| Variable | Purpose | Default |
+|----------|---------|---------|
+| `EMBED_INDEX_DIR` | Directory for index JSON files | `embedding_index` |
+| `EMBED_INDEX_FORCE_REBUILD` | Force rebuild on next load | `0` |
+| `REQUIRE_EMBEDDINGS` | If `1`, missing embeddings raise errors | `0` |
+| `AZURE_OPENAI_EMBEDDING_ENDPOINT` | Endpoint for embeddings (can match chat) | (required for embeddings) |
+| `AZURE_OPENAI_EMBEDDING_API_KEY` | API key for embedding deployment | (required for embeddings) |
+| `AZURE_OPENAI_EMBEDDING_DEPLOYMENT` | Embedding deployment name (e.g. text-embedding-3-small) | (required) |
+| `AZURE_OPENAI_EMBEDDING_API_VERSION` | API version for embeddings | Inherits or explicit |
+| `AZURE_OPENAI_EMBEDDING_MODEL` | Optional model override if API expects 'model' field | (optional) |
+
+### Fallback Behavior
+If embeddings are unavailable and `REQUIRE_EMBEDDINGS!=1`, selection degrades gracefully to heuristic-only matching (token overlap, keyword boosts). A warning is logged with `[embed-index]` prefix.
+
+### Debugging
+- Successful build: `[embed-index] built domain=containers examples=42 dim=1536 path=embedding_index/domain_containers_embedding_index.json`
+- Loaded from cache: `[embed-index] loaded domain=containers examples=42 dim=1536 path=...`
+- Rebuild trigger (hash change): `[embed-index] examples changed; rebuilding domain=...`
+
+### Benefits
+- Faster translation attempts (only one embedding call per query).
+- Lower cost and reduced rate-limit pressure on embedding deployments.
+- Deterministic example scoring across requests.
+
+### Roadmap
+- Binary / compressed vector storage (e.g., float16 / int8) for very large corpora.
+- Optional approximate nearest neighbor (ANN) search for >10k examples.
+- CLI maintenance command to purge or rebuild all indexes.
+
+### Usage
+No additional code required—`nl_to_kql.py` automatically attempts indexed selection and falls back to legacy path if the index is unavailable.
+
+> Set `EMBED_INDEX_FORCE_REBUILD=1` temporarily after adding or editing example markdown files to ensure a fresh index.
+
+### Maintenance CLI
+Use the server manager to purge or rebuild indexes:
+```powershell
+python server_manager.py embed-index-rebuild --domain containers
+python server_manager.py embed-index-rebuild --domain appinsights
+python server_manager.py embed-index-rebuild --domain all
+python server_manager.py embed-index-purge --domain all
+```
+
+Rebuild automatically detects current example content; purge deletes cached JSON so next translation triggers a fresh build.
+

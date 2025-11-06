@@ -2015,100 +2015,103 @@
         }
         
         function startWorkspaceSchemaPolling(){
-            // Cancel any prior strategy
-            if(workspacePollingInterval){
-                clearTimeout(workspacePollingInterval);
-                workspacePollingInterval = null;
-            }
+            // Cancel prior polling if any
+            if(workspacePollingInterval){ clearTimeout(workspacePollingInterval); workspacePollingInterval=null; }
             showWorkspaceLoading('Discovering active tables in workspace...');
             let attempt = 0;
-            const maxAttempts = 2; // Limited to 2 retries to avoid multiple az login prompts
-            const baseDelay = 800;   // ms
+            const maxAttempts = parseInt(window.WORKSPACE_SCHEMA_MAX_POLL_ATTEMPTS || '60', 10); // up to ~60 polls
+            const baseDelay = 1000; // start at 1s
+            const startTime = Date.now();
+            const maxTotalMs = parseInt(window.WORKSPACE_SCHEMA_MAX_TOTAL_MS || '300000', 10); // 5 minutes cap
+
+            const finishReady = (data) => {
+                workspaceSchemaCache = data;
+                window.workspaceSchemaCache = data;
+                clearWorkspaceLoading('Workspace schema ready');
+                const btn = document.getElementById('setWorkspaceBtn');
+                if(btn){
+                    btn.classList.remove('loading');
+                    btn.classList.add('success');
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                    btn.style.cursor = 'pointer';
+                    const label = btn.querySelector('.ws-label');
+                    if(label){
+                        if(!btn.dataset.originalLabel){ btn.dataset.originalLabel = label.textContent; }
+                        label.textContent = 'Workspace set';
+                    }
+                }
+                const setupStatus = document.getElementById('setupStatus');
+                if (setupStatus) {
+                    setupStatus.innerHTML = `
+                        <div style="margin-top: 10px; padding: 8px 12px; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 6px; color: #155724; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
+                            <span>✅ Workspace connected successfully! Tables discovered and ready for queries.</span>
+                        </div>
+                    `;
+                    setTimeout(()=>{ if(setupStatus){ setupStatus.style.display='none'; } }, 3000);
+                }
+                updateStatus(true);
+                const schemaBtn = document.getElementById('showSchemaBtn');
+                if(schemaBtn){
+                    schemaBtn.disabled = false;
+                    schemaBtn.classList.remove('disabled');
+                    schemaBtn.onclick = toggleSchema;
+                    schemaBtn.title = 'Show workspace schema and available tables';
+                }
+                if(manifestSchemaCache){
+                    schemaDataCache = buildFilteredSchema(manifestSchemaCache, workspaceSchemaCache);
+                } else {
+                    schemaDataCache = buildWorkspaceOnlySchema(workspaceSchemaCache);
+                }
+                console.log('[SchemaPolling] READY after attempts', attempt, 'elapsed_ms', Date.now()-startTime);
+                debugLogSchemaIntersection();
+                if(document.getElementById('schemaTreeContainer')?.style.display === 'block'){ renderSchemaTree(); }
+                renderQuickSuggestions();
+            };
 
             const poll = async () => {
                 attempt++;
+                const elapsed = Date.now() - startTime;
+                if(elapsed > maxTotalMs){ console.warn('[SchemaPolling] Total timeout exceeded; aborting.'); return; }
+                let statusData = null;
                 try {
-                    const resp = await fetch('/api/workspace-schema');
-                    const data = await resp.json();
-                    if(data.status === 'ready' && data.success){
-                        workspaceSchemaCache = data;
-                        window.workspaceSchemaCache = data;
-                        clearWorkspaceLoading('Workspace schema ready');
-                        const btn = document.getElementById('setWorkspaceBtn');
-                        if(btn){
-                            btn.classList.remove('loading');
-                            btn.classList.add('success');
-                            btn.disabled = false;
-                            btn.style.opacity = '1';
-                            btn.style.cursor = 'pointer';
-                            const label = btn.querySelector('.ws-label');
-                            if(label){
-                                if(!btn.dataset.originalLabel){ btn.dataset.originalLabel = label.textContent; }
-                                label.textContent = 'Workspace set';
-                            }
-                        }
-                        
-                        // Hide the loading status message
-                        const setupStatus = document.getElementById('setupStatus');
-                        if (setupStatus) {
-                            setupStatus.innerHTML = `
-                                <div style="margin-top: 10px; padding: 8px 12px; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 6px; color: #155724; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
-                                    <span>✅ Workspace connected successfully! Tables discovered and ready for queries.</span>
-                                </div>
-                            `;
-                            // Auto-hide the success message after 3 seconds
-                            setTimeout(() => {
-                                if (setupStatus) {
-                                    setupStatus.style.display = 'none';
-                                }
-                            }, 3000);
-                        }
-                        // Update connection status and enable all UI elements now that setup is complete
-                        updateStatus(true);
-                        
-                        // Schema button should already be enabled by updateStatus -> updateUIElementsState
-                        // But ensure it's explicitly enabled as a safety measure
-                        const schemaBtn = document.getElementById('showSchemaBtn');
-                        if(schemaBtn){
-                            schemaBtn.disabled = false;
-                            schemaBtn.classList.remove('disabled');
-                            schemaBtn.onclick = toggleSchema;
-                            schemaBtn.title = 'Show workspace schema and available tables';
-                        }
-                        if(manifestSchemaCache){
-                            schemaDataCache = buildFilteredSchema(manifestSchemaCache, workspaceSchemaCache);
+                    // Light status check first to avoid heavy payload until ready
+                    const statusResp = await fetch('/api/workspace-schema-status');
+                    statusData = await statusResp.json();
+                } catch(e){
+                    if(attempt % 5 === 0){ console.warn('[SchemaPolling] Status error', e); }
+                }
+                // On first attempt if status pending, prime full endpoint once (harmless if already started by status auto-kickoff)
+                if(attempt === 1 && statusData && statusData.status === 'pending'){
+                    try { await fetch('/api/workspace-schema'); } catch(_) {}
+                }
+                if(statusData && statusData.status === 'ready'){
+                    // Fetch full schema payload once status flips to ready
+                    try {
+                        const fullResp = await fetch('/api/workspace-schema');
+                        const fullData = await fullResp.json();
+                        if(fullData.status === 'ready' && fullData.success){
+                            finishReady(fullData);
+                            return;
                         } else {
-                            schemaDataCache = buildWorkspaceOnlySchema(workspaceSchemaCache);
+                            console.warn('[SchemaPolling] Ready status but full fetch not successful; retrying');
                         }
-                        console.log('[Schema] Workspace schema ready', {
-                            resourceTypes: schemaDataCache.resource_types?.length,
-                            tables: schemaDataCache.counts?.tables,
-                            workspaceResourceTypes: Object.keys(workspaceSchemaCache.resource_type_tables || {}).length,
-                            unmatched: workspaceSchemaCache.unmatched_tables?.length
-                        });
-                        debugLogSchemaIntersection();
-                        if(document.getElementById('schemaTreeContainer')?.style.display === 'block'){
-                            renderSchemaTree();
-                        }
-                        renderQuickSuggestions();
-                        return; // stop polling
+                    } catch(err){
+                        console.warn('[SchemaPolling] Full fetch error after ready status', err);
                     }
-                    if(data.status === 'uninitialized'){
-                        console.warn('[SchemaPolling] Uninitialized; aborting.');
-                        return;
+                } else if(statusData && statusData.status === 'uninitialized'){
+                    console.warn('[SchemaPolling] Workspace uninitialized; aborting.');
+                    return;
+                } else {
+                    if(attempt % 10 === 0){
+                        console.log('[SchemaPolling] Pending attempt', attempt, 'elapsed_ms', elapsed);
                     }
-                    if(attempt % 5 === 0){
-                        console.log('[SchemaPolling] Pending (attempt ' + attempt + ')');
-                    }
-                } catch(err){
-                    if(attempt % 3 === 0){ console.warn('[SchemaPolling] Error', err); }
                 }
                 if(attempt >= maxAttempts){
-                    console.warn('[SchemaPolling] Reached max attempts; giving up.');
+                    console.warn('[SchemaPolling] Reached max attempts', maxAttempts, 'without ready; continue manual refresh or increase WORKSPACE_SCHEMA_MAX_POLL_ATTEMPTS');
                     return;
                 }
-                // Exponential backoff with cap (0.8s,1.2s,1.8s,2.7s,... up to ~10s)
-                const delay = Math.min(10000, Math.round(baseDelay * Math.pow(1.5, attempt-1)));
+                const delay = Math.min(10000, Math.round(baseDelay * Math.pow(1.3, attempt-1))); // gentler curve
                 workspacePollingInterval = setTimeout(poll, delay);
             };
             poll();
