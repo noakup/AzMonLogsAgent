@@ -23,7 +23,7 @@ except ImportError:
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # Import enhanced translation function
-from nl_to_kql import translate_nl_to_kql_enhanced as translate_nl_to_kql
+from nl_to_kql import translate_nl_to_kql as translate_nl_to_kql
 
 class KQLAgent:
     """Agent that processes natural language and calls MCP server tools"""

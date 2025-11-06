@@ -36,12 +36,40 @@ def select_api_version(deployment: str, api_version_override: Optional[str]) -> 
     return DEFAULT_STANDARD_API_VERSION, False
 
 class AzureOpenAIConfig:
-    def __init__(self, endpoint: str, api_key: str, deployment: str, api_version: str, is_override: bool):
-        self.endpoint = endpoint
+    def __init__(
+        self,
+        endpoint: str,
+        api_key: str,
+        deployment: str,
+        api_version: str,
+        is_override: bool,
+        embedding_endpoint: Optional[str] = None,
+        embedding_model: Optional[str] = None,
+        embedding_deployment: Optional[str] = None,
+        embedding_api_version: Optional[str] = None,
+        embedding_api_key: Optional[str] = None,
+    ):
+        """Configuration holder.
+
+        Backwards compatibility: older tests construct AzureOpenAIConfig without embedding_* params.
+        We now allow those to be omitted; sensible defaults are inferred:
+          - embedding_endpoint: falls back to endpoint
+          - embedding_model / deployment: fallback to 'text-embedding-3-large' if not supplied
+          - embedding_api_version: defaults to 2024-02-01 (public preview standard embeddings)
+          - embedding_api_key: falls back to api_key
+        """
+        self.endpoint = endpoint.rstrip('/')
         self.api_key = api_key
         self.deployment = deployment
         self.api_version = api_version
         self.is_override = is_override
+        # Embedding fallbacks
+        self.embedding_endpoint = (embedding_endpoint or endpoint).rstrip('/')
+        default_embed_model = "text-embedding-3-large"
+        self.embedding_model = embedding_model or default_embed_model
+        self.embedding_deployment = embedding_deployment or self.embedding_model
+        self.embedding_api_version = embedding_api_version or "2024-02-01"
+        self.embedding_api_key = embedding_api_key or api_key
 
     def base_url(self) -> str:
         return f"{self.endpoint}/openai/deployments/{self.deployment}"
@@ -58,6 +86,16 @@ def load_config() -> AzureOpenAIConfig | None:
     print(f"[debug:] Loaded AZURE_OPENAI_DEPLOYMENT: {deployment}")
     api_version_override = os.environ.get("AZURE_OPENAI_API_VERSION")
     print(f"[debug:] Loaded AZURE_OPENAI_API_VERSION: {api_version_override}")
+    # --- embeddings config ---
+    embedding_endpoint = os.environ.get("AZURE_OPENAI_EMBEDDING_ENDPOINT")
+    print(f"[debug:] Loaded AZURE_OPENAI_EMBEDDING_ENDPOINT: {embedding_endpoint}")
+    embedding_model = os.environ.get("AZURE_OPENAI_EMBEDDING_MODEL")
+    print(f"[debug:] Loaded AZURE_OPENAI_EMBEDDING_MODEL: {embedding_model}")
+    embedding_deployment = os.environ.get("AZURE_OPENAI_EMBEDDING_DEPLOYMENT")
+    print(f"[debug:] Loaded AZURE_OPENAI_EMBEDDING_DEPLOYMENT: {embedding_deployment}")
+    embedding_api_version = os.environ.get("AZURE_OPENAI_EMBEDDING_API_VERSION")
+    print(f"[debug:] Loaded AZURE_OPENAI_EMBEDDING_API_VERSION: {embedding_api_version}")
+    embedding_api_key = os.environ.get("AZURE_OPENAI_EMBEDDING_API_KEY")
 
     if not endpoint or not api_key:
         print("[debug:] Missing endpoint or API key in environment variables.")
@@ -73,7 +111,7 @@ def load_config() -> AzureOpenAIConfig | None:
     else:
         print(f"[debug:] Selected API version: {api_version} (o-model={_is_o_model(deployment)})")
 
-    return AzureOpenAIConfig(endpoint, api_key, deployment, api_version, is_override)
+    return AzureOpenAIConfig(endpoint, api_key, deployment, api_version, is_override, embedding_endpoint, embedding_model, embedding_deployment, embedding_api_version, embedding_api_key)
 
 def _is_o_model(deployment: str) -> bool:
     """Return True only for explicitly named o-model family deployments.
@@ -125,6 +163,11 @@ def debug_print_config(prefix: str, cfg: AzureOpenAIConfig):
         print(f"[{prefix}] Deployment: {cfg.deployment}")
         print(f"[{prefix}] API Version: {cfg.api_version} (override={'YES' if cfg.is_override else 'NO'})")
         print(f"[{prefix}] API Key Present: {'YES' if cfg.api_key else 'NO'} ({mask_key(cfg.api_key)})")
+        print(f"[{prefix}] Embedding Endpoint: {cfg.embedding_endpoint}")
+        print(f"[{prefix}] Embedding Model: {cfg.embedding_model}")
+        print(f"[{prefix}] Embedding Deployment: {cfg.embedding_deployment}")
+        print(f"[{prefix}] Embedding API Version: {cfg.embedding_api_version}")
+        print(f"[{prefix}] Embedding API Key Present: {'YES' if cfg.embedding_api_key else 'NO'} ({mask_key(cfg.embedding_api_key)})")
     except Exception as e:
         print(f"[{prefix}] Failed to print config: {e}")
 
@@ -169,7 +212,8 @@ def build_chat_request(
 
     Backwards compatible: if overrides not provided, env/defaults are used.
     """
-    env_max = get_env_int("AZURE_OPENAI_MAX_OUTPUT_TOKENS", 500, min_value=50, max_value=4000)
+    # Default increased from 500 -> 1000 to allow more reasoning/output without requiring env override.
+    env_max = get_env_int("AZURE_OPENAI_MAX_OUTPUT_TOKENS", 1000, min_value=50, max_value=4000)
     out_tokens = max_tokens if max_tokens is not None else env_max
     if is_o_model:
         return build_payload(messages, is_o_model=True, max_output_tokens=out_tokens)
@@ -242,9 +286,19 @@ def chat_completion(cfg: AzureOpenAIConfig, payload: Dict[str, Any], *, max_retr
                 if isinstance(choice_level_text, str) and choice_level_text.strip():
                     extracted_text = choice_level_text.strip()
                 if not extracted_text.strip():
-                    # Provide rich debug context
-                    print(f"[{debug_prefix}] Empty content debug: msg_keys={list(msg.keys())}; choice_keys={list(choice.keys())}; raw_message={msg}; choice={choice}")
-                    return None, "Empty completion content", data, choice.get('finish_reason')
+                    # Provide richer diagnostics (Suggestion B)
+                    msg_keys = list(msg.keys())
+                    choice_keys = list(choice.keys())
+                    finish = choice.get('finish_reason')
+                    usage = data.get('usage') if isinstance(data, dict) else None
+                    print(
+                        f"[{debug_prefix}] Empty content debug: finish_reason={finish} attempts={attempt+1}/{max_retries} "
+                        f"msg_keys={msg_keys} choice_keys={choice_keys} usage={usage} raw_message={msg} choice_obj={choice}"
+                    )
+                    err_detail = (
+                        f"Empty completion content (finish_reason={finish} msg_keys={msg_keys} choice_keys={choice_keys})"
+                    )
+                    return None, err_detail, data, finish
             return extracted_text.strip(), None, data, choice.get('finish_reason')
         except requests.exceptions.Timeout:
             if attempt < max_retries - 1:
@@ -456,9 +510,10 @@ def run_chat(
     is_o = _is_o_model(cfg.deployment)
     initial_tokens = max_tokens
     if initial_tokens is None:
-        # Mirror logic inside build_chat_request
-        initial_tokens = get_env_int("AZURE_OPENAI_MAX_OUTPUT_TOKENS", 500, min_value=50, max_value=4000)
-    ceiling = escalation_ceiling or get_env_int("AZURE_OPENAI_ESCALATION_CEILING", 1200, min_value=initial_tokens, max_value=4000)
+        # Mirror logic inside build_chat_request (updated default 1000)
+        initial_tokens = get_env_int("AZURE_OPENAI_MAX_OUTPUT_TOKENS", 1000, min_value=50, max_value=4000)
+    # Escalation ceiling default raised from 1200 -> 2000 to permit one or two larger expansions.
+    ceiling = escalation_ceiling or get_env_int("AZURE_OPENAI_ESCALATION_CEILING", 2000, min_value=initial_tokens, max_value=4000)
 
     attempts = 0
     escalated = False
@@ -608,3 +663,94 @@ class OpenAIClient:
 
     def explain(self, system_prompt: str, summary: str, **kwargs) -> ChatResult:
         return self.chat(system_prompt=system_prompt, user_prompt=summary, purpose="explain", **kwargs)
+
+# ---------------------------------------------------------------------------
+# Embeddings Helper (Azure + fallback)
+# ---------------------------------------------------------------------------
+def run_embeddings(texts: List[str], *, cfg: AzureOpenAIConfig | None = None, model: Optional[str] = None, timeout: int = 30) -> Tuple[Optional[List[List[float]]], Optional[str]]:
+    """Obtain embedding vectors from Azure OpenAI for the provided list of texts.
+
+    Returns (vectors, error). Each vector is L2-normalized. On any failure returns (None, error_message).
+
+    Environment / selection:
+      - Uses existing AzureOpenAIConfig (endpoint, deployment, api_version).
+      - If EMBEDDING_DEPLOYMENT env var set, overrides deployment for embeddings only.
+      - If model param provided, include it; otherwise rely on deployment name. Some previews require 'model'.
+    """
+    if not texts:
+        return [], None
+    cfg = cfg or load_config()
+    if not cfg:
+        return None, "Missing Azure OpenAI configuration"
+    embedding_deployment = cfg.embedding_deployment
+
+    # If the base chat deployment is an o-model family (o1/o4) and the user did NOT provide
+    # an explicit embedding deployment, embeddings will fail (HTTP 400 OperationNotSupported).
+    # Proactively surface a clear error instead of making the HTTP call.
+    if embedding_deployment == cfg.deployment and _is_o_model(cfg.deployment):
+        return None, (
+            f"Embeddings not supported for o-model deployment '{cfg.deployment}'. "
+            "Create a separate embedding deployment (e.g. text-embedding-3-small) and set AZURE_OPENAI_EMBED_DEPLOYMENT."
+        )
+
+    # Optional explicit embedding model override (Azure sometimes requires 'model' field for certain API versions)
+    explicit_model = cfg.embedding_model or model
+    embedding_api_version = cfg.embedding_api_version
+    embeddings_base_endpoint = cfg.embedding_endpoint.rstrip('/')
+    url = f"{embeddings_base_endpoint}/openai/deployments/{embedding_deployment}/embeddings?api-version={embedding_api_version}"
+    headers = {"Content-Type": "application/json", "api-key": cfg.embedding_api_key}
+    payload: Dict[str, Any] = {"input": texts}
+    if explicit_model:
+        payload["model"] = explicit_model
+    try:
+        resp = requests.post(url, headers=headers, data=json.dumps(payload), timeout=timeout)
+        if resp.status_code == 401:
+            return None, "Authentication failed (401) for embeddings"
+        if resp.status_code == 404:
+            return None, f"Embeddings deployment not found (404): {embedding_deployment}"
+        if resp.status_code == 429:
+            return None, "Rate limited (429) for embeddings"
+        if resp.status_code >= 400:
+            snippet = resp.text[:300] if hasattr(resp, 'text') else ''
+            return None, f"HTTP {resp.status_code}: {snippet}"
+        data = resp.json()
+        if 'error' in data:
+            raw_err = data['error'].get('message', 'Unknown embeddings error')
+            # Augment common OperationNotSupported with guidance
+            if 'OperationNotSupported' in raw_err or 'does not work with the specified model' in raw_err:
+                raw_err += (
+                    " | Hint: Ensure AZURE_OPENAI_EMBED_DEPLOYMENT references a dedicated embedding model "
+                    "(e.g. text-embedding-3-small, text-embedding-3-large, text-embedding-ada-002)."
+                )
+            return None, raw_err
+        items = data.get('data') or []
+        vectors: List[List[float]] = []
+        for item in items:
+            vec = item.get('embedding') or []
+            if not isinstance(vec, list):
+                continue
+            norm = (sum(v*v for v in vec) ** 0.5) or 1.0
+            vectors.append([v / norm for v in vec])
+        if not vectors:
+            return None, "No embedding vectors returned"
+        return vectors, None
+    except requests.exceptions.Timeout:
+        return None, "Embeddings request timed out"
+    except Exception as e:
+        return None, f"Embeddings unexpected error: {e}"
+
+def create_embeddings(texts: List[str]) -> Optional[List[List[float]]]:
+    """Return Azure embeddings for provided texts (Azure-only).
+
+    If Azure configuration or embedding retrieval fails, returns None.
+    Public OpenAI fallback removed by design to ensure single provider semantics.
+    """
+    azure_cfg = load_config()
+    if not azure_cfg:
+        return None
+    vectors, err = run_embeddings(texts, cfg=azure_cfg)
+    if vectors is not None:
+        print(f"[embeddings] provider=azure deployment={azure_cfg.embedding_deployment} count={len(vectors)}")
+        return vectors
+    print(f"[embeddings] azure_failed error='{err}' (Azure-only, no fallback)")
+    return None

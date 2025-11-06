@@ -94,6 +94,7 @@ class SchemaManager:
         ttl_seconds = self._ttl_minutes * 60
         cache = self._cache.get(workspace_id)
         if cache and cache.expires_at > now:
+            print(f"[SchemaManager] Cache hit workspace={workspace_id} age_ms={int((time.time()-cache.expires_at+ttl_seconds)*1000)}")
             self._ensure_manifest(ttl_seconds)
             return {
                 "tables": cache.tables,
@@ -109,6 +110,7 @@ class SchemaManager:
             now = time.time()
             cache = self._cache.get(workspace_id)
             if cache and cache.expires_at > now:
+                print(f"[SchemaManager] Cache hit-after-lock workspace={workspace_id} age_ms={int((time.time()-cache.expires_at+ttl_seconds)*1000)}")
                 self._ensure_manifest(ttl_seconds)
                 return {
                     "tables": cache.tables,
@@ -119,8 +121,18 @@ class SchemaManager:
                     "refreshed": False,
                 }
             # Retrieve fresh data (single thread only)
+            t_refresh_start = time.time()
+            print(f"[SchemaManager] Refresh start workspace={workspace_id} ttl_min={self._ttl_minutes}")
+            t_retrieve_start = time.time()
             tables, source = self._retrieve_tables(workspace_id)
+            retrieve_dur = time.time() - t_retrieve_start
+            print(f"[SchemaManager] Phase retrieval_done workspace={workspace_id} source={source} duration_s={retrieve_dur:.3f} table_count={len(tables)}")
+            # Backward-compatible log line for tests expecting legacy prefix
+            print(f"[SchemaManager] Refresh retrieval_done workspace={workspace_id} source={source} duration_s={retrieve_dur:.3f}")
+            t_manifest_start = time.time()
             self._ensure_manifest(ttl_seconds)
+            manifest_dur = time.time() - t_manifest_start
+            print(f"[SchemaManager] Phase manifest_done workspace={workspace_id} duration_s={manifest_dur:.3f} tables_index={len(self._manifest_cache.get('resource_type_tables', {}))}")
             # Manifest resource-type mapping
             table_resource_map: Dict[str, str] = {}
             manifest_path = os.path.join(os.path.dirname(__file__), 'NGSchema', 'LogAnalyticsWorkspace', 'WorkspaceManifest.manifest.json')
@@ -138,6 +150,7 @@ class SchemaManager:
                 except Exception as e:  # pragma: no cover
                     print(f"[Workspace Schema] Manifest parse error: {e}")
             # Enrichment
+            t_enrich_start = time.time()
             enriched_tables: List[Dict[str, Any]] = []
             for tbl in tables:
                 if isinstance(tbl, dict):
@@ -150,6 +163,10 @@ class SchemaManager:
                     continue
                 resource_type = table_resource_map.get(name_val, "Unknown")
                 enriched_tables.append({"name": name_val, "resource_type": resource_type, **metadata_copy})
+            enrich_dur = time.time() - t_enrich_start
+            total_dur = time.time() - t_refresh_start
+            print(f"[SchemaManager] Phase enrich_done workspace={workspace_id} duration_s={enrich_dur:.3f} enriched_count={len(enriched_tables)} total_refresh_s={total_dur:.3f}")
+            print(f"creating WorkspaceSchemaCache")
             cache = WorkspaceSchemaCache(
                 tables=enriched_tables,
                 manifest=self._manifest_cache,
@@ -157,7 +174,10 @@ class SchemaManager:
                 source=source,
                 expires_at=time.time() + ttl_seconds,
             )
+            print(f"WorkspaceSchemaCache created")
+            print(f"[SchemaManager] debug print 1")
             self._cache[workspace_id] = cache
+            print(f"[SchemaManager] debug print 2")
             return {
                 "tables": cache.tables,
                 "count": len(cache.tables),
@@ -212,6 +232,8 @@ class SchemaManager:
         if requests is None or _azure_credential is None:
             return []
         try:
+            t0 = time.time()
+            print("[SchemaManager] REST list start")
             token = _azure_credential.get_token("https://management.azure.com/.default").token
             api_version = os.environ.get("LOG_TABLES_API_VERSION", "2022-10-01")
             url = (
@@ -243,7 +265,7 @@ class SchemaManager:
                     "retentionInDays": props.get("retentionInDays"),
                     "totalRetentionInDays": props.get("totalRetentionInDays"),
                 })
-            print(f"[SchemaManager] REST API returned {len(tables)} tables")
+            print(f"[SchemaManager] REST list done tables={len(tables)} duration_s={time.time()-t0:.3f}")
             return tables
         except Exception as e:  # pragma: no cover
             print(f"[SchemaManager] REST list tables exception: {e}")
@@ -259,6 +281,8 @@ class SchemaManager:
                 "union withsource=__KQLAgentTableName__ * | summarize RowCount=count() by __KQLAgentTableName__ | "
                 "sort by __KQLAgentTableName__ asc"
             )
+            t0 = time.time()
+            print(f"[SchemaManager] Union enumeration start workspace={workspace_id} timespan_days=7")
             resp = client.query_workspace(workspace_id=workspace_id, query=query, timespan=timedelta(days=7))
             tables: list[Dict[str, Any]] = []
             if hasattr(resp, "tables") and resp.tables:
@@ -266,7 +290,7 @@ class SchemaManager:
                 for row in getattr(first, "rows", []):
                     if row and row[0]:
                         tables.append({"name": str(row[0])})
-            print(f"[SchemaManager] Union enumeration returned {len(tables)} tables")
+            print(f"[SchemaManager] Union enumeration done tables={len(tables)} duration_s={time.time()-t0:.3f}")
             return tables
         except Exception as e:  # pragma: no cover
             print(f"[SchemaManager] Union enumeration error: {e}")

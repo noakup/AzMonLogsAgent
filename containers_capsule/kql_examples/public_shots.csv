@@ -1,0 +1,384 @@
+﻿Prompt,Query
+Check for failed pods from the last 1 hour,"KubePodInventory
+| where TimeGenerated > ago(1h)
+| where PodStatus == ""Failed""
+| project Name, PodUid, ServiceName, Namespace, ContainerStatusReason"
+List pods that have failed recently,"KubePodInventory
+| where TimeGenerated > ago(1h)
+| where PodStatus == ""Failed""
+| project Name, PodUid, ServiceName, Namespace, ContainerStatusReason"
+Identify pods that have restarted recently,"KubePodInventory
+| where TimeGenerated > ago(1h)
+| summarize arg_max(TimeGenerated, *) by PodUid
+| where PodRestartCount > 0
+| project TimeGenerated, Name, PodUid, Namespace, PodStartTime, PodRestartCount, PodStatus, ContainerStatus"
+"Logs of container ""abc"" from the last 2 days","ContainerLogV2
+| where TimeGenerated > ago(2d)
+| where ContainerName == ""abc"""
+"ordered logs of pods with ""agent"" in the last 5 minutes","ContainerLogV2
+| where TimeGenerated > ago(5m)
+| where PodName has ""agent""
+| order by TimeGenerated"
+"Show errors for container ""mycontainer""","ContainerLogV2
+| where ContainerName == ""mycontainer""
+| where LogSource == ""stderr"" 
+| project TimeGenerated, LogMessage"
+"Monitor events in namespaces ""default"" and ""minecraft"", from new to old","KubeEvents
+| where Namespace in (""default"", ""minecraft"")
+| project TimeGenerated, Name, Namespace, KubeEventType, Message
+| sort by TimeGenerated desc"
+In which namespace are containers restarts most frequent?,"KubePodInventory
+| summarize TotalContainerRestarts = sum(ContainerRestartCount) by Namespace
+| sort by TotalContainerRestarts"
+Identify the most recent events for each pod over the last day,"KubeEvents
+| where TimeGenerated > ago(24h)
+| where ObjectKind == ""Pod""
+| summarize arg_max(TimeGenerated, *) by Name, Namespace
+| project TimeGenerated, Name, Namespace, KubeEventType, Reason, Message"
+Find pods running on a node starting with aks-linuxpool-1,"KubePodInventory
+| where Computer startswith ""aks-linuxpool-1""
+| project Name, Namespace, Computer, ClusterId"
+Listing of pods operating on a node with name aks-linuxpool-1*,"KubePodInventory
+| where Computer startswith ""aks-linuxpool-1""
+| project Name, Namespace, Computer, ClusterId"
+Find pods assigned to computers starting with aks-linuxpool-1,"KubePodInventory
+| where Computer startswith ""aks-linuxpool-1""
+| project Name, Namespace, Computer, ClusterId"
+Which pods are currently running on nodes called aks-linuxpool-1*,"KubePodInventory
+| where Computer startswith ""aks-linuxpool-1""
+| project Name, Namespace, Computer, ClusterId"
+Find the top 5 nodes with the most running pods,"KubePodInventory
+| where PodStatus == ""Running""
+| extend NodeId = strcat(ClusterId, '/', Computer)
+| summarize Count = count() by NodeId
+| top 5 by Count"
+Nodes with the highest active pod numbers,"KubePodInventory
+| where PodStatus == ""Running""
+| extend NodeId = strcat(ClusterId, '/', Computer)
+| summarize Count = count() by NodeId
+| top 5 by Count"
+Count pod restarts by namespace,"KubePodInventory
+| summarize TotalPodRestarts = sum(PodRestartCount) by Namespace
+| sort by TotalPodRestarts"
+"Show events for resources that are not pods, and that have ""linuxpool"" in the name","KubeEvents
+| where ObjectKind != ""Pod""
+| where Name has ""linuxpool""
+| project TimeGenerated, ObjectKind, Name, Namespace, KubeEventType, Reason, Message"
+"Search for ""fail"" in container logs","ContainerLogV2
+| where LogMessage has ""error"""
+"Search for ""fail"" within container logs","ContainerLogV2
+| where LogMessage has ""error"""
+"Find ""fail"" in container log entries","ContainerLogV2
+| where LogMessage has ""error"""
+"show logs containing ""fail""","ContainerLogV2
+| where LogMessage has ""error"""
+"Show status over time for node ""abc""","KubeNodeInventory
+| where Computer == ""abc""
+| order by TimeGenerated
+| extend PreviousStatus = prev(Status), NextStatus=next(Status)
+| where Status!=PreviousStatus or Status!=NextStatus
+| project TimeGenerated, Computer, Status, PreviousStatus, NextStatus, ClusterId, Labels"
+"Timeline of node status changes for node ""abc""","KubeNodeInventory
+| where Computer == ""abc""
+| order by TimeGenerated
+| extend PreviousStatus = prev(Status), NextStatus=next(Status)
+| where Status!=PreviousStatus or Status!=NextStatus
+| project TimeGenerated, Computer, Status, PreviousStatus, NextStatus, ClusterId, Labels"
+Chronological overview of node conditions for node abc,"KubeNodeInventory
+| where Computer == ""abc""
+| order by TimeGenerated
+| extend PreviousStatus = prev(Status), NextStatus=next(Status)
+| where Status!=PreviousStatus or Status!=NextStatus
+| project TimeGenerated, Computer, Status, PreviousStatus, NextStatus, ClusterId, Labels"
+Has the state of node abc changed over time?,"KubeNodeInventory
+| where Computer == ""abc""
+| order by TimeGenerated
+| extend PreviousStatus = prev(Status), NextStatus=next(Status)
+| where Status!=PreviousStatus or Status!=NextStatus
+| project TimeGenerated, Computer, Status, PreviousStatus, NextStatus, ClusterId, Labels"
+Find containers exceeding memory usage of 500000000,"KubePodMetrics| where MemoryRssBytes > 500000000\n| project ContainerID, PodName, Namespace, MemoryRssBytes"
+Containers that surpass a 500000000 bytes memory limit,"KubePodMetrics| where MemoryRssBytes > 500000000\n| project ContainerID, PodName, Namespace, MemoryRssBytes"
+Track containers with high memory usage,"KubePodMetrics| where MemoryRssBytes > 500000000\n| project ContainerID, PodName, Namespace, MemoryRssBytes"
+Which containers are using more memory than allocated?,"KubePodMetrics| where MemoryRssBytes > 500000000\n| project ContainerID, PodName, Namespace, MemoryRssBytes"
+Aggregate CPU usage by pod and container,"KubePodMetrics| summarize TotalCPUUsageMillicores = sum(CPUUsageMillicores) by PodName, ContainerName\n| sort by TotalCPUUsageMillicores desc"
+Total CPU usage breakdown by pod and container,"KubePodMetrics| summarize TotalCPUUsageMillicores = sum(CPUUsageMillicores) by PodName, ContainerName\n| sort by TotalCPUUsageMillicores desc"
+Summarize CPU consumption for each pod and container,"KubePodMetrics| summarize TotalCPUUsageMillicores = sum(CPUUsageMillicores) by PodName, ContainerName\n| sort by TotalCPUUsageMillicores desc"
+Which pods and containers are using the most CPU resources?,"KubePodMetrics| summarize TotalCPUUsageMillicores = sum(CPUUsageMillicores) by PodName, ContainerName\n| sort by TotalCPUUsageMillicores desc"
+Show logs of containers 123 and 456 from the last 30 minutes,"ContainerLogV2
+| where TimeGenerated > ago (30m) 
+| where ContainerId == ""123"" or ContainerId == ""456"" or ContainerName == ""123"" or ContainerName == ""456"""
+Show the latest logs of containers 123 and 456,"ContainerLogV2
+| where TimeGenerated > ago (30m) 
+| where ContainerId == ""123"" or ContainerId == ""456"" or ContainerName == ""123"" or ContainerName == ""456"""
+Display the log records for containers 123 or 456 from the last half-hour,"ContainerLogV2
+| where TimeGenerated > ago (30m) 
+| where ContainerId == ""123"" or ContainerId == ""456"" or ContainerName == ""123"" or ContainerName == ""456"""
+What logs were sent recently from containers 123 and 456?,"ContainerLogV2
+| where TimeGenerated > ago (30m) 
+| where ContainerId == ""123"" or ContainerId == ""456"" or ContainerName == ""123"" or ContainerName == ""456"""
+"Show logs of container ""abc"" from the last half hour, order from old to new","ContainerLogV2
+| where TimeGenerated > ago (30m) 
+| where ContainerName == ""abc"" 
+| order by TimeGenerated asc"
+Show recent logs of container name abc in chronological order,"ContainerLogV2
+| where TimeGenerated > ago (30m) 
+| where ContainerName == ""abc"" 
+| order by TimeGenerated asc"
+"Display the log records for container abc today, show the earliest first","ContainerLogV2
+| where TimeGenerated > startofday(now()) 
+| where ContainerName == ""abc"" 
+| order by TimeGenerated asc"
+What logs were sent today from container 'abc',"ContainerLogV2
+| where TimeGenerated > startofday(now()) 
+| where ContainerName == ""abc"" "
+"Show all container logs mentioning restart, include the time, container name and log text","ContainerLogV2
+| where LogMessage has ""restart""
+| project TimeGenerated, ContainerName, LogMessage"
+"Find container restart logs,  show th time, container name and log message, from last to first","ContainerLogV2
+| where LogMessage has ""restart"" 
+| project TimeGenerated, ContainerName, LogMessage 
+| order by TimeGenerated desc"
+"Show 100 logs of pods starting with ""prod-""","ContainerLogV2 
+| where PodName startswith ""prod-""
+| take 100"
+logs of pods with names starting with prod- ?,"ContainerLogV2 
+| where PodName startswith ""prod-"""
+"Display log records for all pods that begin with ""prod-"".","ContainerLogV2 
+| where PodName startswith ""prod-"""
+"For pods in namespace ""dev"", find all container logs with ""connection failure""","ContainerLogV2 | where PodNamespace == ""default"" | where LogMessage has ""connection failure"""
+"For pods in namespace ""dev"", find all container logs with text ""connection failure"" starting April 2, 2024","ContainerLogV2 | where TimeGenerated >= todatetime(""2024-04-02"") | where PodNamespace == ""dev"" | where LogMessage has ""connection failure"""
+"For pods in namespace ""dev"" with name ""demo"", find all container logs with ""connection failure"" or ""overflow"" starting April 2, 2024","ContainerLogV2 | where TimeGenerated >= todatetime(""2024-04-02"") | where PodNamespace == ""dev"" and PodName==""demo"" | where LogMessage has ""connection failure"" or LogMessage has ""overflow"""
+"For containers in namespace ""dev"" and pod name ""demo"", find all error logs with ""connection failure"" or ""overflow"" starting on April 2, 2024","ContainerLogV2 
+| where TimeGenerated >= todatetime(""2024-04-02"") 
+| where PodNamespace == ""dev"" and PodName==""demo"" 
+| where LogMessage has ""connection failure"" or LogMessage has ""overflow"""
+"For containers in podnamespace ""dev"" and container name ""demo"", show all logs from April 2 until now and, and extract the json fields in LogMessage","ContainerLogV2
+| where TimeGenerated >= todatetime('2024-04-01')
+| where PodNamespace ==""dev"" and ContainerName == ""demo"" 
+| extend parsed_LogMessage = parse_json(LogMessage)
+| evaluate bag_unpack(parsed_LogMessage, 'LogMessage_')"
+"Show logs of terminated containers with namespace ""tigera-operator""","KubePodInventory
+| where Namespace == ""tigera-operator""
+| where ContainerStatus == ""terminated""
+| join kind=inner (
+    ContainerLogV2
+    | where PodNamespace has ""tigera-operator""
+)
+    on $left.Name == $right.PodName, $left.ContainerID == $right.ContainerId"
+"Show logs of terminated containers with namespace tigera-operator, and project TimeGenerated, LogMessage, LogSource, ContainerName, ContainerId, PodName, PodIp and PodLabel ","KubePodInventory
+| where Namespace == ""tigera-operator""
+| where ContainerStatus == ""terminated""
+| join kind=inner (
+    ContainerLogV2
+    | where PodNamespace has ""tigera-operator""
+)
+    on $left.Name == $right.PodName, $left.ContainerID == $right.ContainerId
+| project TimeGenerated, LogMessage, LogSource, ContainerName, ContainerId, PodName, PodIp, PodLabel"
+"Show error logs from the recent hour of pods with namespaces that start with ""tigera"" and with pod label containing ""app.kubernetes.io""","KubePodInventory 
+| where TimeGenerated > ago(1h)
+| where Namespace startswith ""tigera""
+| where PodLabel has ""k8s-app""
+| join kind=innerunique  (
+    ContainerLogV2
+    | where TimeGenerated > ago(1h)
+    | where PodNamespace startswith ""tigera""
+    | where LogSource == ""stderr""
+)
+    on $left.Name == $right.PodName, $left.ContainerID == $right.ContainerId"
+Which containers keeps restarting in my pods?,"KubePodInventory
+| where ContainerStatus != 'terminated' 
+| where PodRestartCount > 1
+| extend ContainerLastStatus=todynamic(ContainerLastStatus)
+| summarize RestartCount = arg_max(ContainerRestartCount, Computer, Namespace, ContainerLastStatus.reason, ContainerStatusReason, ContainerStatus) by Name
+| sort by RestartCount"
+Count the waiting containers in namespace minecraft,"KubePodInventory
+| where Namespace == ""minecraft""
+| where ContainerStatus == 'waiting' 
+| count "
+Which of my pods are in pending phase and for how long?,"KubePodInventory
+| summarize arg_max(TimeGenerated, *) by PodUid
+| where PodStatus == ""Pending""
+| project pending_time_hours=round((TimeGenerated-PodCreationTimeStamp)/1h,2), PodUid, Name, ContainerID, Namespace, ClusterName, ServiceName"
+What is the average CPU usage of each of my nodes in the past hour?,"Perf 
+| where TimeGenerated > ago(1h) 
+| where ObjectName == ""K8SNode"" 
+| extend NodeId = InstanceName
+| where CounterName == ""cpuUsageNanoCores""
+| summarize AverageCpuUsageNanoCores = avg(CounterValue) by NodeId
+| project NodeId, AverageCpuUsageNanoCores"
+Show the median CPU nano cores per node over the last 12 hours,"Perf 
+| where TimeGenerated > ago(12h) 
+| where ObjectName == ""K8SNode"" 
+| extend NodeId = InstanceName
+| where CounterName == ""cpuUsageNanoCores""
+| summarize MedianCpuUsageNanoCores=percentile(CounterValue, 50) by NodeId
+| project NodeId, MedianCpuUsageNanoCores"
+Chart the 95 percentile of CPU usage nano cored per node ID over last day,"Perf 
+| where TimeGenerated > ago(24h) 
+| where ObjectName == ""K8SNode"" 
+| extend NodeId = InstanceName
+| where CounterName == ""cpuUsageNanoCores""
+| summarize 95_percentileCpuUsageNanoCores=percentile(CounterValue, 95) by NodeId, bin(TimeGenerated, 15m)
+| render timechart "
+What is the average memory usage of each nodes?,"KubeNodeInventory
+| where TimeGenerated > ago(1h)
+// cluster filter would go here if multiple clusters are reporting to the same Log Analytics workspace
+| distinct ClusterName, Computer, _ResourceId
+| join hint.strategy=shuffle (
+  Perf
+  | where TimeGenerated > ago(1h)
+  | where ObjectName == 'K8SNode'
+  | where CounterName == ""memoryCapacityBytes""
+  | summarize LimitValue = max(CounterValue) by Computer, CounterName
+  | project Computer, LimitValue
+) on Computer
+| join kind=inner hint.strategy=shuffle (
+  Perf
+  | where TimeGenerated > ago(1h)
+  | where ObjectName == 'K8SNode'
+  | where CounterName == ""memoryRssBytes""
+  | project Computer, UsageValue = CounterValue, TimeGenerated
+) on Computer
+| where TimeGenerated > ago(1h)
+| project ClusterName, Computer, TimeGenerated, UsagePercent = UsageValue * 100.0 / LimitValue, NodeId=strcat(_ResourceId, ""/"", Computer)
+| summarize AverageUsagePercent = round(avg(UsagePercent),2) by ClusterName, NodeId"
+Chart node memory usage percentage every minute over the last 4 hours,"let binSize = 1m;   // 1 minute
+KubeNodeInventory
+| where TimeGenerated > ago(4h)
+// cluster filter would go here if required
+| distinct ClusterName, Computer, _ResourceId
+| join hint.strategy=shuffle (
+  Perf
+  | where TimeGenerated > ago(4h)
+  | where ObjectName == 'K8SNode'
+  | where CounterName == ""memoryCapacityBytes""
+  | summarize LimitValue = max(CounterValue) by Computer, CounterName, bin(TimeGenerated, binSize)
+  | project Computer, TimeGenerated, LimitValue
+) on Computer
+| join kind=inner hint.strategy=shuffle (
+  Perf
+  | where TimeGenerated > ago(4h)
+  | where ObjectName == 'K8SNode'
+  | where CounterName == ""memoryRssBytes""
+  | summarize UsageValue = max(CounterValue) by Computer, CounterName, bin(TimeGenerated, binSize)
+  | project Computer, TimeGenerated, UsageValue
+) on Computer
+| where TimeGenerated > ago(4h)
+| project TimeGenerated, Computer, ClusterName, UsageValue, UsagePercent = UsageValue * 100.0 / LimitValue, NodeId=strcat(_ResourceId, ""/"", Computer)
+| project TimeGenerated, UsagePercent, Computer
+| render timechart 
+
+| summarize any(UsageValue) by bin(TimeGenerated, binSize)
+
+| render timechart  
+
+KubeNodeInventory
+| where TimeGenerated > ago(1h)
+// cluster filter would go here if multiple clusters are reporting to the same Log Analytics workspace
+| distinct ClusterName, Computer, _ResourceId
+| join hint.strategy=shuffle (
+  Perf
+  | where TimeGenerated > ago(1h)
+  | where ObjectName == 'K8SNode'
+  | where CounterName == ""memoryCapacityBytes""
+  | summarize LimitValue = max(CounterValue) by Computer, CounterName
+  | project Computer, LimitValue
+) on Computer
+| join kind=inner hint.strategy=shuffle (
+  Perf
+  | where TimeGenerated > ago(1h)
+  | where ObjectName == 'K8SNode'
+  | where CounterName == ""memoryRssBytes""
+  | project Computer, UsageValue = CounterValue, TimeGenerated
+) on Computer
+| where TimeGenerated > ago(1h)
+| project ClusterName, Computer, TimeGenerated, UsagePercent = UsageValue * 100.0 / LimitValue, NodeId=strcat(_ResourceId, ""/"", Computer)
+| summarize AverageUsagePercent = round(avg(UsagePercent),2) by ClusterName, NodeId"
+Show me the readiness of each node in my cluster,"// Readiness status per node 
+// For all your cluster view count of all the nodes by readiness. 
+// To create an alert for this query, click '+ New alert rule'
+//Customize startDateTime, endDateTime to select custom time range
+let endDateTime = now();
+let startDateTime = ago(1h);
+let trendBinSize = 1m;
+KubeNodeInventory
+| where TimeGenerated < endDateTime
+| where TimeGenerated >= startDateTime
+| distinct ClusterName, Computer, _ResourceId,TimeGenerated
+| summarize ClusterSnapshotCount = count() by bin(TimeGenerated, trendBinSize), ClusterName, Computer, _ResourceId
+| join hint.strategy=broadcast kind=inner (
+    KubeNodeInventory //this calculating ready node count.
+    | where TimeGenerated < endDateTime
+    | where TimeGenerated >= startDateTime
+    | summarize TotalCount = count(), ReadyCount = sumif(1, Status contains ('Ready'))
+                by ClusterName, Computer,  bin(TimeGenerated, trendBinSize), _ResourceId //calculating NotReadyCount
+    | extend NotReadyCount = TotalCount - ReadyCount
+) on ClusterName, Computer, _ResourceId, TimeGenerated
+ //projecting all the fields
+| project   TimeGenerated, ClusterName, Computer, ReadyCount = todouble(ReadyCount) / ClusterSnapshotCount, 
+            NotReadyCount = todouble(NotReadyCount) / ClusterSnapshotCount, _ResourceId
+| order by ClusterName asc, Computer asc, TimeGenerated desc, _ResourceId"
+"Show me container logs where the pod names and pod namespaces start with tigera ""my_pod"", and container name contains ""tigera""","ContainerLogV2
+| where PodNamespace startswith ""tigera""
+| where PodName startswith ""tigera""
+| where ContainerName has ""tigera"""
+"Find container logs for pods with namspace ""calico-system, controller kind ""ReplicaSet"" and service name ""calico-kube-controllers-metrics"" from the last 2 hours","KubePodInventory
+| where TimeGenerated > ago(2h)
+| where Namespace == ""calico-system""
+| where ControllerKind == ""ReplicaSet""
+| where ServiceName == ""calico-kube-controllers-metrics""
+| join
+(
+    ContainerLogV2
+    | where TimeGenerated > ago(2h)
+    | where PodNamespace == ""calico-system""
+) on $left.ContainerID == $right.ContainerId, $left.Name == $right.PodName"
+"List all container logs for any terminating pods with namespace ""default"" from April 1, 2024","KubePodInventory
+| where TimeGenerated between (datetime(""2024-04-01T00:00:00Z"") .. datetime(""2024-04-01T23:59:59Z""))
+| where Namespace == ""default""
+| where PodStatus == ""Terminating""
+| join kind=innerunique 
+(
+    ContainerLogV2
+    | where TimeGenerated between (datetime(""2024-04-01T00:00:00Z"") .. datetime(""2024-04-01T23:59:59Z""))
+    | where PodNamespace == ""default""
+) on $left.ContainerID == $right.ContainerId, $left.Name == $right.PodName"
+"Show pod inventory details for all pods in cluster ""xyz"" between December 23, 2023 and December 26, 2023","KubePodInventory 
+| where TimeGenerated between (todatetime(""2023-12-23"") .. todatetime(""2023-12-26""))
+| where ClusterName == 'xyz'
+| project TimeGenerated, PodUid, Name, Namespace, PodStatus, PodCreationTimeStamp, PodStartTime, PodIp, PodLabel, PodRestartCount"
+latest pod details of all pods in cluster XYZ,"KubePodInventory 
+| where ClusterName == 'xyz'
+| project TimeGenerated, PodUid, Name, Namespace, PodStatus, PodCreationTimeStamp, PodStartTime, PodIp, PodLabel, PodRestartCount
+| summarize arg_max(TimeGenerated, *) by PodUid"
+"Latest container details of all containers in cluster ""ABC""","KubePodInventory 
+| where ClusterName == 'ABC'
+| where isnotempty(ClusterId) and isnotempty(ContainerName) and isnotempty(Computer)
+| summarize arg_max(TimeGenerated, *) by ContainerID
+| project TimeGenerated, ContainerID, ContainerName, ContainerStatus, ContainerStatusReason, ContainerLastStatus, ContainerRestartCount"
+Count the containers per node in cluster ABC from the last 3 hours,"KubePodInventory 
+| where TimeGenerated > ago(3h)
+| where ClusterName == 'ABC'
+| where isnotempty(ClusterId) and isnotempty(Computer)
+| extend NodeId = strcat(ClusterId, '/', Computer)
+| distinct NodeId, ContainerName
+| summarize ContainerCount = count() by NodeId
+| sort by ContainerCount"
+"Which nodes have highest number of containers, in each cluster","KubePodInventory 
+| where TimeGenerated > ago(24h)
+| where isnotempty(ClusterId) and isnotempty(Computer)
+| extend NodeId = strcat(ClusterId, '/', Computer)
+| distinct NodeId, ContainerName, ClusterId
+| summarize ContainerCount = count() by ClusterId, NodeId
+| top 10 by ContainerCount"
+"How many pods run on each node in ""my-cluster""","KubePodInventory 
+| where TimeGenerated > ago(24h)
+| where isnotempty(ClusterId) and isnotempty(Computer)
+| extend NodeId = strcat(ClusterId, '/', Computer)
+| summarize arg_max(TimeGenerated, *) by PodUid
+| distinct NodeId, PodUid
+| summarize count() by NodeId"
+Show all failed pods in namespace default,"KubePodInventory 
+| where Namespace ==""default""
+| summarize arg_max(TimeGenerated, *) by PodUid
+| where PodStatus == ""Failed"""

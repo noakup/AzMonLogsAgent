@@ -15,7 +15,121 @@ from prompt_builder import build_prompt, stable_hash  # type: ignore
 from azure_openai_utils import (
     run_chat,
     emit_chat_event,
+    create_embeddings,
 )
+
+# ---------------- Intent Extraction & Enforcement (A-C) ---------------- #
+_TIME_REGEX = re.compile(r"(last|past)\s+(\d+)\s+(minute|minutes|hour|hours|day|days|week|weeks)", re.IGNORECASE)
+_SINGULAR_MAP = {
+    "minutes": "m", "minute": "m",
+    "hours": "h", "hour": "h",
+    "days": "d", "day": "d",
+    "weeks": "d"  # convert weeks -> days (approx, 1 week -> 7d later)
+}
+
+def _extract_time_and_metric_intent(nl_question: str) -> Dict[str, str]:
+    """Parse timeframe & metric intent from natural language.
+
+    Returns dict keys:
+      timeframe_window: e.g. '1d', '30m', '' if unspecified
+      timeframe_phrase: original matched phrase or heuristic
+      metric_mode: 'count' | 'rate' | 'duration' | 'unknown'
+      raw_metric_hint: matched keyword triggering metric_mode
+    Heuristics:
+      - 'last X <unit>' explicit regex
+      - 'today' -> 1d, 'yesterday' -> 1d (different day but treat as day scope)
+      - 'last hour' / 'past hour' etc.
+      - Metric keywords: count(number,total,"how many"), rate(rate, per second, throughput, percent, percentage, ratio), duration(latency, duration, time taken, response time)
+    """
+    lower = nl_question.lower()
+    timeframe_window = ''
+    timeframe_phrase = ''
+    m = _TIME_REGEX.search(lower)
+    if m:
+        qty = int(m.group(2))
+        unit = m.group(3).lower()
+        # weeks -> qty*7 days
+        if unit.startswith('week'):
+            qty = qty * 7
+            unit = 'day'
+        suffix = _SINGULAR_MAP.get(unit, '')
+        if suffix:
+            timeframe_window = f"{qty}{suffix}"
+            timeframe_phrase = m.group(0)
+    else:
+        # Simple heuristics
+        if 'last hour' in lower or 'past hour' in lower:
+            timeframe_window, timeframe_phrase = '1h', 'last hour'
+        elif 'last day' in lower or 'past day' in lower or 'today' in lower:
+            timeframe_window, timeframe_phrase = '1d', 'last day'
+        elif 'last 30 minutes' in lower or 'past 30 minutes' in lower:
+            timeframe_window, timeframe_phrase = '30m', 'last 30 minutes'
+
+    metric_mode = 'unknown'
+    raw_metric_hint = ''
+    # Order matters: count before rate to respect 'error count' vs 'error rate'
+    count_terms = ['count', 'number', 'total', 'how many']
+    rate_terms = ['rate', 'per second', 'throughput', 'percent', 'percentage', 'ratio']
+    duration_terms = ['duration', 'latency', 'time taken', 'response time']
+    for term in count_terms:
+        if term in lower:
+            metric_mode = 'count'
+            raw_metric_hint = term
+            break
+    if metric_mode == 'unknown':
+        for term in rate_terms:
+            if term in lower:
+                metric_mode = 'rate'
+                raw_metric_hint = term
+                break
+    if metric_mode == 'unknown':
+        for term in duration_terms:
+            if term in lower:
+                metric_mode = 'duration'
+                raw_metric_hint = term
+                break
+    # Disambiguation: if both 'error rate' and 'error count' present pick last explicit
+    if 'error count' in lower:
+        metric_mode = 'count'
+        raw_metric_hint = 'error count'
+    elif 'error rate' in lower and metric_mode != 'count':
+        metric_mode = 'rate'
+        raw_metric_hint = 'error rate'
+
+    return {
+        'timeframe_window': timeframe_window,
+        'timeframe_phrase': timeframe_phrase,
+        'metric_mode': metric_mode,
+        'raw_metric_hint': raw_metric_hint
+    }
+
+def _inject_intent_directive(system_prompt: str, intent: Dict[str, str], domain: str) -> str:
+    """Append parsed intent directive comments and strict requirement block to system prompt."""
+    tf = intent['timeframe_window'] or 'unspecified'
+    mm = intent['metric_mode']
+    phrase = intent['timeframe_phrase'] or ''
+    directive_lines = [
+        f"// ParsedIntent: timeframe_window={tf} phrase='{phrase}' metric_mode={mm} raw_metric_hint='{intent['raw_metric_hint']}'",
+        "// Guidance: If metric_mode=count avoid rate/percent; produce raw counts (ErrorCount) not ratios.",
+        "// Guidance: Use TimeGenerated >= ago(" + (tf if tf != 'unspecified' else '1d') + ") if timeframe specified.",
+    ]
+    # Strict block to bias generation
+    strict_req = ["// STRICT REQUIREMENTS:"]
+    if tf != 'unspecified':
+        strict_req.append(f"// 1. Must constrain timeframe to exactly ago({tf}) NOT a shorter window.")
+    if mm == 'count':
+        strict_req.append("// 2. Must output an error COUNT (alias ErrorCount) not a rate or percentage.")
+        strict_req.append("// 3. Do NOT include 'rate(' functions or divide countif() by count().")
+    strict_req.append("// 4. Return ONLY KQL (no prose).")
+    # Domain-tailored skeleton (non-binding but strong hint)
+    skeleton = []
+    if domain == 'containers' and mm == 'count' and tf != 'unspecified':
+        skeleton.append("// SkeletonExampleAligned:\n// ContainerLogV2\n// | where TimeGenerated >= ago(" + tf + ")\n// | where Level == 'Error'\n// | summarize ErrorCount=count() by Workload")
+    block = "\n" + "\n".join(directive_lines + strict_req + skeleton) + "\n"
+    return system_prompt + block
+
+_AGO_REGEX = re.compile(r"ago\((\d+)([mhd])\)")
+
 
 # ---------------- Token & Embedding Utilities ---------------- #
 def _count_tokens(text: str) -> int:
@@ -37,18 +151,8 @@ def _maybe_embed_texts(texts: List[str]) -> Optional[List[List[float]]]:
     OpenAI credentials or model are not available. Keeps behavior non-fatal for
     offline / test environments.
     """
-    model_name = os.getenv("EMBEDDING_MODEL", "text-embedding-3-small")
     try:
-        # OpenAI python SDK v1.x style
-        from openai import OpenAI  # type: ignore
-        client = OpenAI()
-        resp = client.embeddings.create(model=model_name, input=texts)
-        vectors: List[List[float]] = []
-        for item in resp.data:
-            vec = item.embedding
-            # L2 normalize
-            norm = sum(v * v for v in vec) ** 0.5 or 1.0
-            vectors.append([v / norm for v in vec])
+        vectors = create_embeddings(texts)
         return vectors
     except Exception as exc:
         print(f"[embeddings] disabled (error: {exc})")
@@ -92,7 +196,7 @@ def load_domain_context(domain: str, nl_question: Optional[str] = None) -> Dict[
     if domain == "containers":
         return load_container_examples(nl_question)
 
-    # Application Insights domain
+    # Application Insights domain processing
     example_files = [
         "app_insights_capsule/kql_examples/app_requests_kql_examples.md",
         "app_insights_capsule/kql_examples/app_exceptions_kql_examples.md",
@@ -105,7 +209,8 @@ def load_domain_context(domain: str, nl_question: Optional[str] = None) -> Dict[
             parsed_examples.extend(_parse_container_fewshots(path))  # Reuse same parser (bold+fence format)
     selected: List[Dict[str, str]] = []
     if nl_question and parsed_examples:
-        selected = _select_relevant_fewshots(nl_question, parsed_examples, top_k=3)
+        # top_k now sourced internally from FEWSHOT_TOP_K env var (default 4)
+        selected = _select_relevant_fewshots(nl_question, parsed_examples)
     if selected:
         blocks = [f"Q: {ex['question']}\nKQL:\n{ex['kql']}" for ex in selected]
         fewshots_block = "\n\n".join(blocks)
@@ -117,10 +222,8 @@ def load_domain_context(domain: str, nl_question: Optional[str] = None) -> Dict[
                 raw_concat.append(_read_file(path, limit=900))
         fewshots_block = "\n\n".join(raw_concat)[:1600]
 
-    # Capsule for app insights (optional) - attempt read
     capsule_path = "app_insights_capsule/README.md"
     capsule_excerpt = _read_file(capsule_path, limit=600) if os.path.exists(capsule_path) else "(No capsule)"
-    # No dedicated function signatures currently for app insights domain
     return {
         "fewshots": fewshots_block,
         "capsule": capsule_excerpt,
@@ -152,32 +255,19 @@ _CONTAINER_TABLE_REGEX = _re.compile(r"\b(containerlogv2|containerlog|kubepodinv
 _APP_TABLE_REGEX = _re.compile(r"\b(apprequests|appexceptions|apptraces|appdependencies|apppageviews|appcustomevents)\b", _re.IGNORECASE)
 
 def detect_domain(nl_question: str) -> str:
-    """Heuristic domain detection with explicit Application Insights keyword set.
-
-    Logic:
-      1. Collect matched container keywords & app insights keywords.
-      2. Add table regex matches to respective sets.
-      3. Container special heuristic: if ("pod" or "pods") AND "pending" present -> force containers.
-      4. Resolution:
-         - If only one side has matches -> choose that domain.
-         - If both have matches -> prefer containers if container table names present, else prefer appinsights.
-         - If neither side matched -> raise ValueError to notify caller (no silent default).
-    """
+    # Determine domain for natural language question.
+    # Returns 'containers' or 'appinsights'; raises ValueError if no indicators found.
     q = nl_question.lower()
     matched_container = {kw for kw in CONTAINER_KEYWORDS if kw in q}
     matched_app = {kw for kw in APPINSIGHTS_KEYWORDS if kw in q}
 
-    # Table regex matches
     if _CONTAINER_TABLE_REGEX.search(q):
         matched_container.add("<table-match>")
     if _APP_TABLE_REGEX.search(q):
         matched_app.add("<table-match>")
-
-    # Container special heuristic: pods pending scenario
     if ("pod" in q or "pods" in q) and "pending" in q:
         matched_container.add("<pods-pending>")
 
-    # Log diagnostic info
     print(f"[domain-detect] q='{nl_question}' container_matches={sorted(matched_container)} app_matches={sorted(matched_app)}")
 
     if matched_container and not matched_app:
@@ -187,15 +277,13 @@ def detect_domain(nl_question: str) -> str:
         print("[domain-detect] chosen=appinsights (exclusive app matches)")
         return "appinsights"
     if matched_container and matched_app:
-        # Prefer containers if a container table or pods-pending signal present
         if any(sig in matched_container for sig in ("<table-match>", "<pods-pending>")):
             print("[domain-detect] chosen=containers (conflict; container strong signal)")
             return "containers"
         print("[domain-detect] chosen=appinsights (conflict; default to appinsights)")
         return "appinsights"
 
-    # No matches; raise explicit exception
-    raise ValueError("Unable to classify domain. Please include explicit domain indicators (e.g. 'pod', 'containerlogv2' or 'request', 'apprequests').")
+    raise ValueError("Unable to classify domain. Include explicit indicators like 'pod', 'containerlogv2', 'request', or 'apprequests'.")
 
 def _read_file(path: str, limit: int = 1600) -> str:
     if not os.path.exists(path):
@@ -207,20 +295,16 @@ def _read_file(path: str, limit: int = 1600) -> str:
     return data
 
 def parse_container_function_signatures(kql_text: str) -> List[str]:
-    """Backward-compatible thin wrapper returning only signature strings.
-    Internally uses the richer parser with descriptions.
-    """
+    # Backward-compatible thin wrapper returning only signature strings.
+    # Internally uses the richer parser with descriptions.
     return [s for s, _ in parse_container_function_signatures_with_docs(kql_text)]
 
 def parse_container_function_signatures_with_docs(kql_text: str) -> List[Tuple[str, str]]:
-    """Parse function signatures with brief description (taken from preceding // comment).
-
-    Supports multi-line declarations of the form:
-        let FuncName =\n    (Param1:type, Param2:type)\n    {
-    or single-line: let FuncName = (Param1:type){
-
-    Returns list of tuples: ("FuncName(paramlist)", "Description or empty").
-    """
+    # Parse function signatures with brief description (taken from preceding // comment).
+    # Supports multi-line declarations of the form:
+    #   let FuncName =\n    (Param1:type, Param2:type)\n    {
+    # or single-line: let FuncName = (Param1:type){
+    # Returns list of tuples: ("FuncName(paramlist)", "Description or empty").
     lines = kql_text.splitlines()
     results: List[Tuple[str, str]] = []
     i = 0
@@ -352,15 +436,79 @@ def _parse_container_fewshots(path: str) -> List[Dict[str, str]]:
         blocks.append({"question": current_q.strip(), "kql": "\n".join(current_kql_lines).strip()})
     return blocks
 
-def _select_relevant_fewshots(nl_question: str, examples: List[Dict[str, str]], top_k: int = 3) -> List[Dict[str, str]]:
-    """Hybrid relevance selection combining heuristic & embedding similarity when available.
+def _parse_container_csv_examples(path: str) -> List[Dict[str, str]]:
+    """Parse container examples from a CSV file with columns (Prompt, Query).
 
-    Embeddings are attempted by default. Final score (if embeddings present):
-      0.55 * heuristic_norm + 0.45 * cosine_sim.
-    Falls back to heuristic-only if embedding call fails or returns None.
+    Supports multi-line KQL queries enclosed in quotes. Minimal validation:
+      - Skips rows where prompt or query is empty.
+      - Normalizes Windows CRLF line endings.
+    """
+    if not os.path.exists(path):
+        return []
+    results: List[Dict[str, str]] = []
+    try:
+        import csv
+        with open(path, "r", encoding="utf-8") as f:
+            reader = csv.reader(f)
+            header: List[str] = []
+            first = True
+            for row in reader:
+                # Detect header row
+                if first:
+                    header = [h.strip().lower() for h in row]
+                    first = False
+                    # If header matches expected, continue to next row
+                    if set(header) >= {"prompt", "query"}:
+                        continue
+                    else:
+                        # Treat first row as data if header not recognized
+                        header = []
+                if not row or len(row) < 2:
+                    continue
+                prompt = row[0].strip()
+                query = row[1].strip()
+                if not prompt or not query:
+                    continue
+                # Normalize embedded double-double quotes that represent escaped quotes
+                query = query.replace('""', '"')
+                results.append({"question": prompt, "kql": query})
+    except Exception as csv_exc:
+        print(f"[csv-parse] failed path={path} error={csv_exc}")
+    return results
+
+def _select_relevant_fewshots(nl_question: str, examples: List[Dict[str, str]]) -> List[Dict[str, str]]:
+    """Select relevant few-shot examples.
+
+    top_k now driven by environment variable FEWSHOT_TOP_K (default=4). Call sites no longer pass top_k.
+    Selection strategy:
+      1. Try persistent index (embedding_index.select_with_index).
+      2. Fall back to hybrid heuristic + embeddings.
+    Raises RuntimeError if embeddings explicitly required and unavailable (legacy behavior retained).
     """
     if not examples:
         return []
+    try:
+        top_k_env = int(os.getenv("FEWSHOT_TOP_K", "4"))
+    except ValueError:
+        top_k_env = 4
+    top_k = max(1, min(top_k_env, 12))  # guardrails
+    # Attempt indexed selection (import deferred to avoid circular during startup)
+    try:
+        from embedding_index import select_with_index  # type: ignore
+        # We don't know domain here directly; caller supplies examples already domain-specific.
+        # Heuristic: infer domain by presence of canonical table tokens in example KQL.
+        domain_guess = "containers"
+        sample_text = "\n".join(ex.get("kql", "") for ex in examples[:4]).lower()
+        if any(tok in sample_text for tok in ["apprequests", "apptraces", "appexceptions", "appdependencies"]):
+            domain_guess = "appinsights"
+        indexed = select_with_index(nl_question, examples, domain_guess, top_k=top_k)
+        if indexed:
+            print(f"[fewshot-select] used_index=True domain={domain_guess} returned={len(indexed)}")
+            return indexed
+    except Exception as idx_exc:
+        print(f"[fewshot-select] index_unavailable fallback_legacy error={idx_exc}")
+
+    # Legacy path
     q_low = nl_question.lower()
 
     typo_map = {"calcualte": "calculate", "latncy": "latency"}
@@ -395,33 +543,38 @@ def _select_relevant_fewshots(nl_question: str, examples: List[Dict[str, str]], 
 
     max_h = max((s for s, _ in heuristic_records), default=0)
 
-    # Attempt embeddings
+    # Apply embeddings
+    # Logging embedding input set (question + candidate example questions)
+    try:
+        _embed_inputs_preview = [nl_question] + [ex["question"] for _, ex in heuristic_records]
+        print("[embed-inputs] total_inputs=" + str(len(_embed_inputs_preview)) +
+              " preview=" + json.dumps(_embed_inputs_preview[:8], ensure_ascii=False)[:800])
+    except Exception as _embed_log_exc:  # defensive; never block selection
+        print(f"[embed-inputs] logging_failed error={_embed_log_exc}")
     try:
         embeddings = _maybe_embed_texts([nl_question] + [ex["question"] for _, ex in heuristic_records])
-    except Exception:
+    except Exception as embed_exc:
+        print(f"[fewshot-select] embedding_exception={embed_exc}")
         embeddings = None
+    if (not embeddings or len(embeddings) != len(heuristic_records) + 1):
+        # no embeddings -> raise explicit error to caller for deterministic failure.
+        raise RuntimeError("Embeddings required but unavailable.")
+    
     hybrid_rows: List[Tuple[float, Dict[str, str]]] = []
-    if embeddings and len(embeddings) == len(heuristic_records) + 1:
-        q_vec = embeddings[0]
-        ex_vecs = embeddings[1:]
-        for (h_score, ex), vec in zip(heuristic_records, ex_vecs):
-            cosine_sim = _cosine(q_vec, vec)
-            h_norm = (h_score / max_h) if max_h > 0 else 0.0
-            final = 0.55 * h_norm + 0.45 * cosine_sim
-            hybrid_rows.append((final, ex))
-        hybrid_rows.sort(key=lambda x: x[0], reverse=True)
-        selected = [ex for s, ex in hybrid_rows if s > 0][:top_k]
-        if not selected:
-            selected = [ex for _, ex in hybrid_rows[: min(2, len(hybrid_rows))]]
-        print(f"[fewshot-select] embeddings_used=True max_h={max_h} top_scores={[round(s,4) for s,_ in hybrid_rows[:3]]}")
-        return selected
-    else:
-        heuristic_records.sort(key=lambda x: x[0], reverse=True)
-        selected = [ex for s, ex in heuristic_records if s > 0][:top_k]
-        if not selected:
-            selected = [ex for _, ex in heuristic_records[: min(2, len(heuristic_records))]]
-        print(f"[fewshot-select] embeddings_used=False max_h={max_h} top_scores={[s for s,_ in heuristic_records[:3]]}")
-        return selected
+
+    q_vec = embeddings[0]
+    ex_vecs = embeddings[1:]
+    for (h_score, ex), vec in zip(heuristic_records, ex_vecs):
+        cosine_sim = _cosine(q_vec, vec)
+        h_norm = (h_score / max_h) if max_h > 0 else 0.0
+        final = 0.55 * h_norm + 0.45 * cosine_sim
+        hybrid_rows.append((final, ex))
+    hybrid_rows.sort(key=lambda x: x[0], reverse=True)
+    best_matching_examples = [ex for s, ex in hybrid_rows if s > 0][:top_k]
+    if not best_matching_examples:
+        best_matching_examples = [ex for _, ex in hybrid_rows[: min(2, len(hybrid_rows))]]
+    print(f"[fewshot-select] embeddings_used=True (legacy) max_h={max_h} top_scores={[round(s,4) for s,_ in hybrid_rows[:3]]}")
+    return best_matching_examples
 
 def _approx_close(a: str, b: str, max_dist: int = 2) -> bool:
     if a == b:
@@ -448,74 +601,77 @@ def _approx_close(a: str, b: str, max_dist: int = 2) -> bool:
     return dp_prev[-1] <= max_dist
 
 def load_container_examples(nl_question: Optional[str] = None) -> Dict[str, str]:
-    """Load container capsule, function signatures, and dynamically selected few-shots.
+    """Load container examples (CSV only) without duplicating capsule or function signatures.
 
-    If nl_question provided, perform relevance filtering to include only top matches.
+    Rules:
+      - Do NOT return capsule/function signature text (already included via build_prompt).
+      - If no relevant selected examples found (selection empty), return an error indicator and no fallback examples.
     """
     root = os.path.dirname(os.path.abspath(__file__))
-    # Relocated few-shots & capsule: prefer containers_capsule versions with fallback to legacy prompts
-    # Updated few-shots location (markdown examples). Prefer new kql_examples file, fallback to old paths for compatibility.
-    fewshots_path_primary = os.path.join(root, "containers_capsule", "kql_examples", "container_logs_kql_examples.md")
-    fewshots_path_new = os.path.join(root, "containers_capsule", "fewshots_containerlogs.txt")  # deprecated legacy
-    fewshots_path_legacy = os.path.join(root, "prompts", "fewshots_containerlogs.txt")  # original legacy
-    if os.path.exists(fewshots_path_primary):
-        fewshots_path = fewshots_path_primary
-    elif os.path.exists(fewshots_path_new):
-        fewshots_path = fewshots_path_new
+    csv_path = os.path.join(root, "containers_capsule", "kql_examples", "public_shots.csv")
+    if os.path.exists(csv_path):
+        examples_struct = _parse_container_csv_examples(csv_path)
+        print(f"[container-examples] source=csv path={csv_path} count={len(examples_struct)}")
     else:
-        fewshots_path = fewshots_path_legacy
-
-    capsule_path_new = os.path.join(root, "containers_capsule", "domain_capsule_containerlogs.txt")
-    capsule_path_legacy = os.path.join(root, "prompts", "domain_capsule_containerlogs.txt")
-    capsule_path = capsule_path_new if os.path.exists(capsule_path_new) else capsule_path_legacy
-    # Prefer new top-level relocated capsule path; maintain backward compatibility fallbacks
-    functions_path_new = os.path.join(root, "containers_capsule", "kql_functions_containerlogs.kql")
-    functions_path_legacy = os.path.join(root, "docs", "containers_capsule", "kql_functions_containerlogs.kql")
-    functions_path_old = os.path.join(root, "docs", "kql_functions_containerlogs.kql")
-    if os.path.exists(functions_path_new):
-        functions_path = functions_path_new
-    elif os.path.exists(functions_path_legacy):
-        functions_path = functions_path_legacy
-    else:
-        functions_path = functions_path_old
-
-    examples_struct = _parse_container_fewshots(fewshots_path)
+        print(f"[container-examples] WARNING: CSV examples file missing at {csv_path}; proceeding with empty examples list")
+        examples_struct = []
     selected_examples: List[Dict[str, str]] = []
-    if nl_question:
+    if nl_question and examples_struct:
         selected_examples = _select_relevant_fewshots(nl_question, examples_struct)
-    # Format selected examples block
-    if selected_examples:
-        fewshots_block_parts = []
-        for ex in selected_examples:
-            fewshots_block_parts.append(f"Q: {ex['question']}\nKQL:\n{ex['kql']}")
-        fewshots_block = "\n\n".join(fewshots_block_parts)
-    else:
-        # Fallback: include first ~1.4k chars of raw file (legacy)
-        fewshots_block = _read_file(fewshots_path, limit=1400)
 
-    capsule = _read_file(capsule_path, limit=800)
-    functions_raw = _read_file(functions_path, limit=4000)
-    fn_pairs = parse_container_function_signatures_with_docs(functions_raw)
-    if fn_pairs:
-        formatted = []
-        for sig, desc in fn_pairs:
-            line = f"- {sig}"
-            if desc:
-                line += f"  // {desc}"
-            formatted.append(line)
-        fn_list = "\n".join(formatted)
+    if selected_examples:
+        fewshots_block = "\n\n".join(
+            [f"Q: {ex['question']}\nKQL:\n{ex['kql']}" for ex in selected_examples]
+        )
     else:
-        fn_list = "(No function signatures)"
+        # Per requirement: do NOT include fallback examples; return error indicator.
+        fewshots_block = ""
+        examples_error = "No relevant container examples selected (index empty or low relevance)."
+        # Compute top candidate scores (cosine only) for diagnostics if embeddings available
+        top_scores: List[Tuple[float, str]] = []
+        try:
+            if examples_struct and nl_question:
+                questions = [nl_question] + [ex['question'] for ex in examples_struct]
+                vecs = _maybe_embed_texts(questions)
+                if vecs and len(vecs) == len(questions):
+                    q_vec = vecs[0]
+                    ex_vecs = vecs[1:]
+                    scored: List[Tuple[float, str]] = []
+                    for ex, v in zip(examples_struct, ex_vecs):
+                        score = _cosine(q_vec, v)
+                        scored.append((score, ex['question']))
+                    scored.sort(key=lambda x: x[0], reverse=True)
+                    top_scores = scored[:5]
+        except Exception as diag_exc:
+            print(f"[container-examples] candidate-score-diagnostics failed error={diag_exc}")
+        # Log diagnostic summary
+        if top_scores:
+            printable = [round(s,4) for s,_ in top_scores]
+            print(f"[container-examples] no-selection error='{examples_error}' top_candidate_scores={printable} total_available={len(examples_struct)}")
+        else:
+            print(f"[container-examples] no-selection error='{examples_error}' top_candidate_scores=[] total_available={len(examples_struct)}")
+        return {
+            "fewshots": fewshots_block,
+            "capsule": "",  # suppressed
+            "function_signatures": "",  # suppressed
+            "function_count": "0",
+            "selected_example_count": "0",
+            "selected_examples_present": "False",
+            "examples_error": examples_error,
+            "top_candidate_scores": json.dumps([{"score": round(s,6), "question": q} for s, q in top_scores])
+        }
+
     return {
         "fewshots": fewshots_block,
-        "capsule": capsule,
-        "function_signatures": fn_list,
-        "function_count": str(len(fn_pairs)),
+        "capsule": "",  # suppress duplicate capsule
+        "function_signatures": "",  # suppress duplicate functions
+        "function_count": "0",
         "selected_example_count": str(len(selected_examples)),
-        "selected_examples_present": str(bool(selected_examples))
+        "selected_examples_present": str(bool(selected_examples)),
+        "top_candidate_scores": ""  # intentionally empty when selection succeeded
     }
 
-def translate_nl_to_kql_enhanced(nl_question, max_retries=2):
+def translate_nl_to_kql(nl_question, max_retries=2):
     """Enhanced translation with actual multi-attempt retry and prompt slimming.
 
     Retry strategy:
@@ -541,29 +697,46 @@ def translate_nl_to_kql_enhanced(nl_question, max_retries=2):
 
     last_error = None
     for attempt in range(max_retries):
-        slim = attempt > 0
-        result = _attempt_translation(nl_question, slim=slim)
+        use_slim_prompt = attempt > 0
+        result = _attempt_translation(nl_question, use_slim_prompt)
         if not result.startswith("// Error"):
-            if attempt > 0:
-                print(f"[retry] succeeded on attempt {attempt} with slim={slim}")
+            print(f"[retry] succeeded on attempt {attempt} with slim_prompt={use_slim_prompt}")
             return result
         last_error = result
-        print(f"[retry] attempt={attempt} failed: {result[:120]}")
-    # Final fallback: attempt direct example reuse if domain is containers and we have a close example
-    fallback = _example_fallback(nl_question)
-    if fallback:
-        return fallback
+        print(f"[retry] attempt={attempt} failed: {result[:240]}")
+    
     return f"// Error: Could not translate question to KQL after retries: {nl_question}\n{last_error or ''}".strip()
 
-def _attempt_translation(nl_question, slim: bool = False):
+def _attempt_translation(nl_question, use_slim_prompt: bool = False):
     print(f"🔍 Generating KQL for prompt: '{nl_question}'")
+    # Align naming with existing internal references expecting 'slim_prompt'
+    slim_prompt = use_slim_prompt
     
     # Load context from example files
     try:
         domain = detect_domain(nl_question)
     except ValueError as dom_exc:
         return f"// Error: {dom_exc}"  # Early exit with explicit domain classification error
-    ctx = load_domain_context(domain, nl_question)
+    try:
+        ctx = load_domain_context(domain, nl_question)
+    except RuntimeError as embed_exc:
+        # Hard enforcement failure (e.g., REQUIRE_EMBEDDINGS=1 but embeddings unavailable)
+        return f"// Error: {embed_exc}"
+
+    # Early abort for containers domain if no selected examples (per new rule)
+    if domain == "containers" and ctx.get("selected_example_count") == "0":
+        err_msg = ctx.get("examples_error", "No relevant container examples available.")
+        # Emit telemetry event before returning to surface examples_error
+        try:
+            emit_chat_event(None, extra={
+                "phase": "translation-abort",
+                "domain": domain,
+                "examples_error": err_msg,
+                "selected_example_count": ctx.get("selected_example_count"),
+            })
+        except Exception as log_exc:
+            print(f"[translate-abort] logging emit failed: {log_exc}")
+        return f"// Error: {err_msg} [domain=containers selected_example_count=0]"
     
     # Build layered prompt (force KQL-only) then append domain-specific examples.
     layered_prompt, layered_meta = build_prompt(nl_question, force_kql_only=True)
@@ -572,26 +745,26 @@ def _attempt_translation(nl_question, slim: bool = False):
     fn_text_full = ctx.get("function_signatures", "")
     capsule_full = ctx.get("capsule", "")
 
-    # Initial assembly (non-slim)
-    if slim:
+    # Initial assembly (non-slim prompt)
+    if slim_prompt:
         split_parts = fewshots_text.split("\n\n")
         slim_block = split_parts[0] if split_parts else fewshots_text
-        examples_section = f"\n\nFewShot (slim domain={domain}):\n" + slim_block
-        compression_meta = "slim=true"
+        examples_section = f"\n\nFewShot (slim for domain={domain}):\n" + slim_block
+        compression_meta = "slim_prompt=true"
     else:
         examples_section = (
             f"\n\nFewShotsSelected ({ctx.get('selected_example_count','0')}):\n" + fewshots_text +
             f"\n\nFunctionSignatures ({ctx.get('function_count','0')} detected):\n" + fn_text_full[:1000] +
             "\n\nCapsuleSummaryExcerpt:\n" + capsule_full[:600]
         )
-        compression_meta = "slim=false"
+        compression_meta = "slim_prompt=false"
 
     # ---------------- Token-based dynamic compression ---------------- #
     tentative_prompt = layered_prompt + examples_section
-    TOKEN_LIMIT = int(os.getenv("PROMPT_TOKEN_LIMIT", "6000"))
+    TOKEN_LIMIT = int(os.getenv("PROMPT_TOKEN_LIMIT", "4000"))
     token_count = _count_tokens(tentative_prompt)
     compression_stage = "none"
-    if token_count > TOKEN_LIMIT and not slim:
+    if token_count > TOKEN_LIMIT and not slim_prompt:
         # Stage 1: remove capsule entirely
         compression_stage = "capsule-removed"
         examples_section = (
@@ -600,7 +773,7 @@ def _attempt_translation(nl_question, slim: bool = False):
         )
         tentative_prompt = layered_prompt + examples_section
         token_count = _count_tokens(tentative_prompt)
-    if token_count > TOKEN_LIMIT and not slim:
+    if token_count > TOKEN_LIMIT and not slim_prompt:
         # Stage 2: truncate function signatures
         compression_stage = compression_stage + "+fn-trunc"
         examples_section = (
@@ -609,7 +782,7 @@ def _attempt_translation(nl_question, slim: bool = False):
         )
         tentative_prompt = layered_prompt + examples_section
         token_count = _count_tokens(tentative_prompt)
-    if token_count > TOKEN_LIMIT and not slim:
+    if token_count > TOKEN_LIMIT and not slim_prompt:
         # Stage 3: truncate fewshots to first block
         compression_stage = compression_stage + "+fewshots-trunc"
         first_block = fewshots_text.split("\n\n")[0] if fewshots_text else ""
@@ -619,10 +792,23 @@ def _attempt_translation(nl_question, slim: bool = False):
         )
         tentative_prompt = layered_prompt + examples_section
         token_count = _count_tokens(tentative_prompt)
-    if slim:
-        compression_stage = "slim"
+    if slim_prompt:
+        compression_stage = "slim_prompt"
     compression_meta = f"token_limit={TOKEN_LIMIT} tokens={token_count} stage={compression_stage}"
-    system_prompt = layered_prompt + examples_section + f"\n\n// prompt-meta {compression_meta} size_chars={len(layered_prompt + examples_section)}"
+    # (A) Extract intent, (B) inject directive into system prompt before final meta
+    _intent = _extract_time_and_metric_intent(nl_question)
+    system_prompt_core = layered_prompt + examples_section
+    system_prompt_core = _inject_intent_directive(system_prompt_core, _intent, domain)
+    system_prompt = system_prompt_core + f"\n\n// prompt-meta {compression_meta} size_chars={len(system_prompt_core)}"
+    # Log full layered prompt (truncated) for debugging prompt construction
+    try:
+        _prompt_tokens_est = _count_tokens(system_prompt)
+        _prompt_preview = system_prompt[:1500]
+        if len(system_prompt) > 1500:
+            _prompt_preview += "...(truncated)"
+        print(f"[full-prompt] slim_prompt={slim_prompt} chars={len(system_prompt)} tokens~={_prompt_tokens_est} preview_start={json.dumps(_prompt_preview)[:1600]}")
+    except Exception as _prompt_log_exc:
+        print(f"[full-prompt] logging_failed error={_prompt_log_exc}")
     # Debug: assert whether canonical example phrase present (case-insensitive)
     print(f"[prompt-debug] domain={domain} selected_examples={ctx.get('selected_example_count','0')} fn_count={ctx.get('function_count','0')}")
     print(f"[prompt] schema_version={layered_meta.get('schema_version')} output_mode={layered_meta.get('output_mode')} system_hash={layered_meta.get('system_hash')} fn_index_hash={layered_meta.get('function_index_hash')}")
@@ -659,15 +845,17 @@ def _attempt_translation(nl_question, slim: bool = False):
             "prompt_hash": stable_hash(layered_prompt),
             "fn_index_hash": layered_meta.get("function_index_hash"),
             "schema_version": layered_meta.get("schema_version"),
+            "selected_example_count": ctx.get("selected_example_count"),
+            "examples_error": ctx.get("examples_error"),
         })
     except Exception as log_exc:  # defensive, translation should not fail due to logging
         print(f"[translate] logging emit failed: {log_exc}")
 
     examples_included = ctx.get("selected_example_count") not in (None, "0")
     if chat_res.error:
-        return f"// Error translating NL to KQL: {chat_res.error} [domain={domain} examples_included={examples_included} slim={slim}]"
+        return f"// Error translating NL to KQL: {chat_res.error} [domain={domain} examples_included={examples_included} slim_prompt={slim_prompt}]"
     if not chat_res.content:
-        return f"// Error: Empty or invalid response from AI [domain={domain} examples_included={examples_included} slim={slim}]"
+        return f"// Error: Empty or invalid response from AI [domain={domain} examples_included={examples_included} slim_prompt={slim_prompt}]"
 
     kql = chat_res.content.strip()
     
@@ -679,47 +867,26 @@ def _attempt_translation(nl_question, slim: bool = False):
     
     # Basic validation - check if it looks like a valid KQL query
     if not kql or len(kql.strip()) < 5:
-        return f"// Error: Empty or invalid response from AI [domain={domain} examples_included={examples_included} slim={slim}]"
+        return f"// Error: Empty or invalid response from AI [domain={domain} examples_included={examples_included} slim_prompt={slim_prompt}]"
     
     # Check for invalid starting characters
     if kql.strip().startswith('.'):
         return "// Error: Invalid KQL query starting with '.'"
     
     # Check for common error indicators
-    error_indicators = ["sorry", "cannot", "unable", "error", "apologize"]
-    if any(indicator in kql.lower() for indicator in error_indicators):
-        return f"// Error: AI returned error response: {kql} [domain={domain} examples_included={examples_included} slim={slim}]"
+    # Refined error heuristics: avoid treating legitimate 'Error' token filters as failures.
+    content_lower = kql.lower()
+    error_phrases = [
+        "an error occurred", "error: ", "unable to", "cannot ", "can't ",
+        "i cannot", "i can't", "sorry", "apologize", "could not"
+    ]
+    if any(p in content_lower for p in error_phrases):
+        return f"// Error: AI returned error response: {kql} [domain={domain} examples_included={examples_included} slim_prompt={slim_prompt}]"
     
     # Successful translation; prepend structured telemetry meta as comment
-    meta_prefix = f"// meta: domain={domain} slim={slim} examples_included={examples_included} selected_examples={ctx.get('selected_example_count','0')} {compression_meta}\n"
+    # Intent enforcement removed per user request (was corrupting generated KQL).
+    meta_prefix = f"// meta: domain={domain} slim_prompt={slim_prompt} examples_included={examples_included} selected_examples={ctx.get('selected_example_count','0')} {compression_meta}\n"
     return meta_prefix + kql
-
-def _example_fallback(nl_question: str) -> Optional[str]:
-    """If translation failed, attempt to return top matching example KQL.
-
-    Strategy: reuse relevance selection; if first example shares >=2 tokens with query, return it.
-    """
-    try:
-        domain = detect_domain(nl_question)
-    except Exception:
-        return None
-    ctx = load_domain_context(domain, nl_question)
-    fewshots_raw = ctx.get("fewshots", "")
-    # Parse back examples from block format (Q: ...\nKQL:) for reliability
-    pattern = re.compile(r"Q:\s*(.+?)\nKQL:\n(.*?)(?=(\n\nQ:|$))", re.DOTALL)
-    matches = pattern.findall(fewshots_raw)
-    if not matches:
-        return None
-    q_low = nl_question.lower()
-    def score_example(q_text: str) -> int:
-        q_tokens = {t for t in re.split(r"[^a-z0-9]+", q_low) if t}
-        ex_tokens = {t for t in re.split(r"[^a-z0-9]+", q_text.lower()) if t}
-        return len(q_tokens & ex_tokens) + (10 if q_text.lower() in q_low or q_low in q_text.lower() else 0)
-    ranked = sorted(matches, key=lambda m: score_example(m[0]), reverse=True)
-    best_q, best_kql = ranked[0][0], ranked[0][1].strip()
-    if score_example(best_q) < 2:
-        return None
-    return f"// meta: domain={domain} fallback=example reused_question='{best_q}'\n" + best_kql
 
 if __name__ == "__main__":
     # Test the enhanced translation
@@ -735,6 +902,6 @@ if __name__ == "__main__":
     
     for question in test_questions:
         print(f"\n❓ Question: {question}")
-        result = translate_nl_to_kql_enhanced(question)
+        result = translate_nl_to_kql(question)
         print(f"📝 KQL: {result}")
         print("-" * 30)
