@@ -504,6 +504,12 @@ def _fetch_table_docs_queries(table_name: str, timeout: float = 6.0) -> list:
             'provider': (manifest_rts[0].split('/')[0] if manifest_rts else None)
         })
 
+    # NOTE: Synthetic fallback grouping for unmatched tables removed per user request.
+    # Unmatched tables will no longer be assigned to a synthetic resource type; they remain
+    # visible only in the 'unmatched_tables' list. This keeps the UI honest about mapping
+    # completeness and allows the frontend to surface an explicit error state when
+    # workspace tables exist but no resource types are mapped.
+
     # Enrich unmatched tables using Microsoft Docs table pages (best-effort)
     doc_enriched = 0
     # if unmatched and not DOCS_ENRICH_DISABLE:
@@ -758,21 +764,26 @@ def resource_schema():
 
     # If no workspace selected yet, return manifest-only payload (no error)
     if not workspace_id:
+        # Provide explicit top-level lists for frontend convenience (resource_types/providers)
+        _rt_tables = manifest_data.get('resource_type_tables', {}) or {}
+        _resource_types_list = sorted(_rt_tables.keys())
+        _providers_list = sorted({rt.split('/')[0] for rt in _rt_tables})
         return jsonify({
             'success': True,
             'status': 'manifest-only',
             'workspace_id': None,
             'manifest': {
-                'resource_type_tables': manifest_data.get('resource_type_tables', {}),
+                'resource_type_tables': _rt_tables,
                 'table_resource_types': manifest_data.get('table_resource_types', {}),
+                'resource_types': _resource_types_list,
+                'providers': _providers_list,
                 'fetched_at': manifest_data.get('fetched_at'),
                 'manifests_scanned': manifest_data.get('manifests_scanned'),
                 'counts': {
-                    'resource_types': len(manifest_data.get('resource_type_tables', {})),
-                    'providers': len({rt.split('/')[0] for rt in manifest_data.get('resource_type_tables', {})}),
-                    'tables': sum(len(v) for v in manifest_data.get('resource_type_tables', {}).values())
-                },
-                'providers': sorted({rt.split('/')[0] for rt in manifest_data.get('resource_type_tables', {})})
+                    'resource_types': len(_resource_types_list),
+                    'providers': len(_providers_list),
+                    'tables': sum(len(v) for v in _rt_tables.values())
+                }
             },
             'workspace': {
                 'tables': [], 'retrieved_at': None, 'count': 0, 'source': None
@@ -787,21 +798,25 @@ def resource_schema():
         if not in_progress:
             threading.Thread(target=_background_fetch_workspace_tables, args=(workspace_id,), daemon=True).start()
             _workspace_schema_refresh_flags[workspace_id] = True
+        _rt_tables = manifest_data.get('resource_type_tables', {}) or {}
+        _resource_types_list = sorted(_rt_tables.keys())
+        _providers_list = sorted({rt.split('/')[0] for rt in _rt_tables})
         return jsonify({
             'success': False,
             'status': 'pending',
             'workspace_id': workspace_id,
             'manifest': {
-                'resource_type_tables': manifest_data.get('resource_type_tables', {}),
+                'resource_type_tables': _rt_tables,
                 'table_resource_types': manifest_data.get('table_resource_types', {}),
+                'resource_types': _resource_types_list,
+                'providers': _providers_list,
                 'fetched_at': manifest_data.get('fetched_at'),
                 'manifests_scanned': manifest_data.get('manifests_scanned'),
                 'counts': {
-                    'resource_types': len(manifest_data.get('resource_type_tables', {})),
-                    'providers': len({rt.split('/')[0] for rt in manifest_data.get('resource_type_tables', {})}),
-                    'tables': sum(len(v) for v in manifest_data.get('resource_type_tables', {}).values())
-                },
-                'providers': sorted({rt.split('/')[0] for rt in manifest_data.get('resource_type_tables', {})})
+                    'resource_types': len(_resource_types_list),
+                    'providers': len(_providers_list),
+                    'tables': sum(len(v) for v in _rt_tables.values())
+                }
             },
             'workspace': {
                 'tables': [], 'retrieved_at': None, 'count': 0, 'source': None
@@ -823,21 +838,25 @@ def resource_schema():
         m_rts = reverse_index.get(tname, [])
         join.append({'name': tname, 'workspace_resource_type': w_rt, 'manifest_resource_types': m_rts})
 
+    _rt_tables = manifest_data.get('resource_type_tables', {}) or {}
+    _resource_types_list = sorted(_rt_tables.keys())
+    _providers_list = sorted({rt.split('/')[0] for rt in _rt_tables})
     return jsonify({
         'success': True,
         'status': 'ready',
         'workspace_id': workspace_id,
         'manifest': {
-            'resource_type_tables': manifest_data.get('resource_type_tables', {}),
+            'resource_type_tables': _rt_tables,
             'table_resource_types': manifest_data.get('table_resource_types', {}),
+            'resource_types': _resource_types_list,
+            'providers': _providers_list,
             'fetched_at': manifest_data.get('fetched_at'),
             'manifests_scanned': manifest_data.get('manifests_scanned'),
             'counts': {
-                'resource_types': len(manifest_data.get('resource_type_tables', {})),
-                'providers': len({rt.split('/')[0] for rt in manifest_data.get('resource_type_tables', {})}),
-                'tables': sum(len(v) for v in manifest_data.get('resource_type_tables', {}).values())
-            },
-            'providers': sorted({rt.split('/')[0] for rt in manifest_data.get('resource_type_tables', {})})
+                'resource_types': len(_resource_types_list),
+                'providers': len(_providers_list),
+                'tables': sum(len(v) for v in _rt_tables.values())
+            }
         },
         'workspace': {
             'tables': [{'name': e.get('name'), 'resource_type': e.get('resource_type') or 'Unknown', 'manifest_resource_types': e.get('manifest_resource_types', [])} for e in workspace_tables],

@@ -3346,7 +3346,8 @@ async function processQuestionWithRetry(question) {
             try {
                 const schemaResp = await fetch('/api/resource-schema').then(r=>r.json()).catch(()=>null);
                 if(schemaResp && schemaResp.success){
-                    manifestSchemaCache = schemaResp;
+                    // Normalize manifest schema shape (flatten nested manifest block)
+                    manifestSchemaCache = normalizeManifestSchema(schemaResp);
                     if(workspaceSchemaCache){ debugLogSchemaIntersection(); }
                 }
                 if(!schemaDataCache && manifestSchemaCache){
@@ -4143,19 +4144,39 @@ async function processQuestionWithRetry(question) {
 
         // Workspace examples and schema functions
         function buildFilteredSchema(manifest, workspace) {
-            const wsRts = Object.keys(workspace.resource_type_tables || {});
+            // Only include resource types that actually have >=1 table mapped for this workspace
+            let wsRtTables = workspace.resource_type_tables || {};
+
+            // If workspace response (e.g. from /api/resource-schema) did not include resource_type_tables,
+            // reconstruct mapping from workspace.tables + their manifest_resource_types.
+            if (!Object.keys(wsRtTables).length && Array.isArray(workspace.tables)) {
+                const rebuilt = {};
+                workspace.tables.forEach(t => {
+                    const tname = t.name;
+                    const rts = Array.isArray(t.manifest_resource_types) ? t.manifest_resource_types : [];
+                    rts.forEach(rt => {
+                        if (!rt || rt.toLowerCase() === 'unknown') return; // skip unknown placeholder
+                        (rebuilt[rt] = rebuilt[rt] || []).push(tname);
+                    });
+                });
+                wsRtTables = rebuilt;
+            }
+            const wsRts = Object.keys(wsRtTables).filter(rt => Array.isArray(wsRtTables[rt]) && wsRtTables[rt].length > 0);
+            // No fallback to manifest resource types; if none yet, we return empty and UI will show message
+            const effectiveRts = wsRts;
             const filtered = {
-                resource_types: wsRts,
-                providers: [...new Set(wsRts.map(rt => rt.split('/')[0]))],
-                resource_type_tables: workspace.resource_type_tables,
+                resource_types: effectiveRts,
+                providers: [...new Set(effectiveRts.map(rt => rt.split('/')[0]))],
+                // Filter mapping to only those RTs we kept
+                resource_type_tables: effectiveRts.reduce((acc, rt) => { acc[rt] = wsRtTables[rt]; return acc; }, {}),
                 table_metadata: {},
                 table_queries: workspace.table_queries || {},
                 counts: workspace.counts || {}
             };
             // Include manifest metadata for matched tables
             const manifestMeta = manifest.table_metadata || {};
-            Object.keys(workspace.resource_type_tables || {}).forEach(rt => {
-                (workspace.resource_type_tables[rt] || []).forEach(table => {
+            effectiveRts.forEach(rt => {
+                (wsRtTables[rt] || []).forEach(table => {
                     if (manifestMeta[table]) {
                         filtered.table_metadata[table] = manifestMeta[table];
                     }
@@ -4165,10 +4186,14 @@ async function processQuestionWithRetry(question) {
         }
 
         function buildWorkspaceOnlySchema(workspace) {
+            const rtTablesRaw = workspace.resource_type_tables || {};
+            // Keep only RTs with at least one table
+            const rts = Object.keys(rtTablesRaw).filter(rt => Array.isArray(rtTablesRaw[rt]) && rtTablesRaw[rt].length > 0);
+            const rtTables = rts.reduce((acc, rt) => { acc[rt] = rtTablesRaw[rt]; return acc; }, {});
             return {
-                resource_types: Object.keys(workspace.resource_type_tables || {}),
-                providers: [...new Set(Object.keys(workspace.resource_type_tables || {}).map(rt => rt.split('/')[0]))],
-                resource_type_tables: workspace.resource_type_tables || {},
+                resource_types: rts,
+                providers: [...new Set(rts.map(rt => rt.split('/')[0]))],
+                resource_type_tables: rtTables,
                 table_metadata: workspace.table_metadata || {},
                 table_queries: workspace.table_queries || {},
                 counts: workspace.counts || {}
@@ -4197,18 +4222,29 @@ async function processQuestionWithRetry(question) {
             const tree = document.getElementById('schemaTree');
             const stats = document.getElementById('schemaStats');
             if (!tree || !schemaDataCache) return;
-            
-            const resourceTypes = schemaDataCache.resource_types || [];
+            // Support both flattened and original shapes, but only keep RTs with >=1 table
+            const allResourceTypes = (schemaDataCache.resource_types && schemaDataCache.resource_types.length)
+                ? schemaDataCache.resource_types
+                : (Object.keys(schemaDataCache.resource_type_tables || {}) || []);
             const rtTables = schemaDataCache.resource_type_tables || {};
-            const providers = schemaDataCache.providers || [];
+            const resourceTypes = allResourceTypes.filter(rt => Array.isArray(rtTables[rt]) && rtTables[rt].length > 0);
+            const providersRaw = schemaDataCache.providers;
+            // Derive providers only from kept resource types
+            const providers = [...new Set(resourceTypes.map(rt => rt.split('/')[0]))];
             
             if (stats) {
                 stats.innerHTML = `${resourceTypes.length} types, ${providers.length} providers`;
                 stats.style.display = resourceTypes.length > 0 ? 'inline-block' : 'none';
             }
             
+            // Explicit error state: workspace has tables but none mapped to resource types
+            const workspaceHasTables = !!(workspaceSchemaCache && Array.isArray(workspaceSchemaCache.tables) && workspaceSchemaCache.tables.length);
             if (resourceTypes.length === 0) {
-                tree.innerHTML = '<li class="schema-empty">No schema data available</li>';
+                if (workspaceHasTables) {
+                    tree.innerHTML = '<li class="schema-empty" style="color:#d9534f;font-weight:600;">⚠ Workspace tables discovered (' + workspaceSchemaCache.tables.length + ') but no resource type mappings found. This indicates manifest mapping did not match any tables. Try refreshing manifests or inspect enrichment logic.</li>';
+                } else {
+                    tree.innerHTML = '<li class="schema-empty">No schema data available yet. Connect a workspace and wait for discovery to complete.</li>';
+                }
                 return;
             }
             
@@ -4238,6 +4274,25 @@ async function processQuestionWithRetry(question) {
             });
             
             tree.innerHTML = html;
+        }
+
+        // Normalization helper to flatten /api/resource-schema payloads
+        function normalizeManifestSchema(resp){
+            if(!resp) return resp;
+            if(resp.manifest){
+                const m = resp.manifest;
+                return {
+                    resource_types: m.resource_types || Object.keys(m.resource_type_tables || {}),
+                    providers: m.providers || [],
+                    resource_type_tables: m.resource_type_tables || {},
+                    table_metadata: m.table_metadata || {},
+                    table_queries: m.table_queries || {},
+                    counts: m.counts || {},
+                    fetched_at: m.fetched_at,
+                    manifests_scanned: m.manifests_scanned
+                };
+            }
+            return resp;
         }
 
         function toggleResourceType(resourceType) {
