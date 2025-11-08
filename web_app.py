@@ -63,6 +63,7 @@ def _load_workspace_cache():
         return
     try:
         import json as _json
+        print("loading schema cashe from: " + os.path(SCHEMA_CACHE_FILE))
         with open(SCHEMA_CACHE_FILE, 'r', encoding='utf-8') as f:
             data = _json.load(f)
         wid = data.get("workspace_id")
@@ -195,42 +196,28 @@ def fetch_workspace_schema():
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
 
-@app.route('/api/resource-schema', methods=['GET'])
-def resource_schema():
-    """Return manifest-derived schema plus per-table metadata (with docs fallback)."""
-    try:
-        data = _scan_manifest_resource_types()
-        manifest_meta = data.get('table_metadata', {}) or {}
-        table_queries = data.get('table_queries', {}) or {}
-        enriched_meta = {}
-        # Do NOT fetch docs queries broadly here to avoid 404 spam; only manifest queries retained.
-        augmented_table_queries = table_queries  # legacy key name preserved for response shape
-        for t in sorted({tbl for tbls in data.get('resource_type_tables', {}).values() for tbl in tbls}):
-            meta = manifest_meta.get(t, {}).copy()
-            # If missing description or columns, attempt docs enrichment
-            need_desc = not meta.get('description')
-            need_cols = not meta.get('columns')
-            if need_desc or need_cols:
-                docs_meta = _fetch_table_docs_full(t)
-                if docs_meta:
-                    if need_desc and docs_meta.get('description'):
-                        meta['description'] = docs_meta['description']
-                    if need_cols and docs_meta.get('columns'):
-                        # Align doc columns shape (already name/type/description)
-                        meta['columns'] = docs_meta['columns']
-            enriched_meta[t] = meta
-        return jsonify({
-            'success': True,
-            'counts': data.get('counts', {}),
-            'resource_types': data.get('resource_types', []),
-            'providers': data.get('providers', []),
-            'resource_type_tables': data.get('resource_type_tables', {}),
-            'table_queries': augmented_table_queries,
-            'table_metadata': enriched_meta,
-            'retrieved_at': data.get('retrieved_at')
-        })
-    except Exception as e:  # noqa: BLE001
-        return jsonify({'success': False, 'error': str(e)})
+@app.route('/api/workspace-schema', methods=['GET'])
+def workspace_schema():
+    """Return workspace schema including inferred resource types even on first fetch.
+
+    Behavior:
+      - If refresh in progress and cache exists -> return cache with status=refreshing
+      - If refresh in progress and no cache -> return pending
+      - If no cache -> trigger refresh and return pending
+      - On success -> status=ready with tables (each has name, resource_type)
+    """
+    global workspace_id, _workspace_schema_cache
+    if not workspace_id:
+        return jsonify({'success': False, 'error': 'Workspace not initialized. Call /api/setup first.', 'status': 'uninitialized'})
+    in_progress = _workspace_schema_refresh_flags.get(workspace_id, False)
+    if workspace_id in _workspace_schema_cache:
+        cached = _workspace_schema_cache[workspace_id]
+        status = 'ready' if not in_progress else 'refreshing'
+        return jsonify({'success': True, 'status': status, **cached})
+    if not in_progress:
+        threading.Thread(target=_background_fetch_workspace_tables, args=(workspace_id,), daemon=True).start()
+        _workspace_schema_refresh_flags[workspace_id] = True
+    return jsonify({'success': False, 'status': 'pending', 'in_progress': True})
 
 # Global agent instance
 agent = None
@@ -444,33 +431,7 @@ def _fetch_table_docs_queries(table_name: str, timeout: float = 6.0) -> list:
         return []
 
 
-@app.route('/api/workspace-schema', methods=['GET'])
-def workspace_schema():
-    """Return workspace-specific table information, intersected with manifest catalog.
-
-    Response structure:
-      success: bool
-      status: 'ready'|'pending'|'uninitialized'
-      workspace_id: str|None
-      counts: {
-         workspace_tables: int,
-         manifest_tables: int,
-         matched_tables: int,
-         unmatched_tables: int,
-         resource_types_with_data: int
-      }
-      tables: [
-         { name, workspace_resource_type, in_manifest, manifest_resource_type, provider }
-      ]
-      resource_type_tables: { resource_type: [tableName,...] }  # only those present in workspace
-      providers: { provider: { 'tables': int, 'resource_types': int } }
-      unmatched_tables: [tableName,...]  # tables seen in workspace but not in manifests
-
-    Pending scenarios:
-      - If no workspace has been set up -> status=uninitialized
-      - If workspace set but enumeration not yet cached -> status=pending (kick off background fetch if not running)
-    """
-    global workspace_id
+## (Removed duplicate workspace_schema endpoint definition to prevent Flask route conflict)
     if not workspace_id:
         return jsonify({'success': False, 'status': 'uninitialized', 'error': 'Workspace not initialized via /api/setup'})
 
@@ -733,6 +694,160 @@ def workspace_schema_status():
         'last_retrieved_at': last_retrieved
     })
 
+@app.route('/api/refresh-manifest', methods=['POST'])
+def refresh_manifest():
+    """Force a rescan of NGSchema manifests and update persisted manifest cache.
+
+    This endpoint is explicit and not part of normal UI flow. Returns summary counts.
+    """
+    try:
+        from schema_manager import SchemaManager
+        mgr = SchemaManager.get()
+        mgr.load_manifest(force=True)
+        manifest = mgr._manifest_cache
+        return jsonify({
+            'success': True,
+            'forced': True,
+            'resource_type_count': len(manifest.get('resource_type_tables', {})),
+            'total_table_mappings': sum(len(v) for v in manifest.get('resource_type_tables', {}).values()),
+            'fetched_at': manifest.get('fetched_at'),
+            'manifests_scanned': manifest.get('manifests_scanned')
+        })
+    except Exception as e:  # noqa: BLE001
+        return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/api/resource-schema', methods=['GET'])
+def resource_schema():
+    """Return manifest-derived resource schema merged with any cached workspace tables.
+
+    This endpoint restores the previous /api/resource-schema functionality (now missing) so
+    UI callers expecting it no longer receive a 404. It focuses on resource types and
+    manifest metadata while optionally enriching with currently cached workspace tables.
+
+    Response JSON includes:
+      success: bool
+      status: 'uninitialized' | 'pending' | 'ready'
+      workspace_id: str|None
+      manifest: {
+        resource_types: [str],
+        providers: [str],
+        counts: { resource_types:int, providers:int, tables:int },
+        resource_type_tables: { resource_type: [tableName] },
+        table_metadata: { tableName: { description:str, columns:[{name,type,descriptions:[str]}], resource_types:[str] } },
+        queries: [ { name, description, resource_type, provider, table, manifest_file, related_tables:[...] } ]
+      }
+      workspace: {
+        tables: [ { name, resource_type } ],
+        retrieved_at: str|None,
+        count: int,
+        source: str|None
+      }
+      table_join: [ { name, workspace_resource_type, manifest_resource_types:[str] } ]
+    """
+    global workspace_id, _workspace_schema_cache
+
+    # Persistent manifest load via SchemaManager (decoupled from workspace fetch)
+    try:
+        from schema_manager import SchemaManager
+        mgr = SchemaManager.get()
+        mgr.load_manifest(force=False)
+        manifest_data = mgr._manifest_cache
+    except Exception as e:  # pragma: no cover
+        print(f"[ResourceSchema] Manifest load error: {e}")
+        manifest_data = {}
+
+    # If no workspace selected yet, return manifest-only payload (no error)
+    if not workspace_id:
+        return jsonify({
+            'success': True,
+            'status': 'manifest-only',
+            'workspace_id': None,
+            'manifest': {
+                'resource_type_tables': manifest_data.get('resource_type_tables', {}),
+                'table_resource_types': manifest_data.get('table_resource_types', {}),
+                'fetched_at': manifest_data.get('fetched_at'),
+                'manifests_scanned': manifest_data.get('manifests_scanned'),
+                'counts': {
+                    'resource_types': len(manifest_data.get('resource_type_tables', {})),
+                    'providers': len({rt.split('/')[0] for rt in manifest_data.get('resource_type_tables', {})}),
+                    'tables': sum(len(v) for v in manifest_data.get('resource_type_tables', {}).values())
+                },
+                'providers': sorted({rt.split('/')[0] for rt in manifest_data.get('resource_type_tables', {})})
+            },
+            'workspace': {
+                'tables': [], 'retrieved_at': None, 'count': 0, 'source': None
+            },
+            'table_join': []
+        })
+
+    # Workspace tables (may be absent if not yet fetched)
+    ws_cache = _workspace_schema_cache.get(workspace_id)
+    if not ws_cache:
+        in_progress = _workspace_schema_refresh_flags.get(workspace_id, False)
+        if not in_progress:
+            threading.Thread(target=_background_fetch_workspace_tables, args=(workspace_id,), daemon=True).start()
+            _workspace_schema_refresh_flags[workspace_id] = True
+        return jsonify({
+            'success': False,
+            'status': 'pending',
+            'workspace_id': workspace_id,
+            'manifest': {
+                'resource_type_tables': manifest_data.get('resource_type_tables', {}),
+                'table_resource_types': manifest_data.get('table_resource_types', {}),
+                'fetched_at': manifest_data.get('fetched_at'),
+                'manifests_scanned': manifest_data.get('manifests_scanned'),
+                'counts': {
+                    'resource_types': len(manifest_data.get('resource_type_tables', {})),
+                    'providers': len({rt.split('/')[0] for rt in manifest_data.get('resource_type_tables', {})}),
+                    'tables': sum(len(v) for v in manifest_data.get('resource_type_tables', {}).values())
+                },
+                'providers': sorted({rt.split('/')[0] for rt in manifest_data.get('resource_type_tables', {})})
+            },
+            'workspace': {
+                'tables': [], 'retrieved_at': None, 'count': 0, 'source': None
+            },
+            'table_join': []
+        })
+
+    workspace_tables = ws_cache.get('tables', [])
+    join = []
+    manifest_tables_index = manifest_data.get('resource_type_tables', {})
+    # Build reverse index table -> list(resource_types)
+    reverse_index = {}
+    for rt, tbls in manifest_tables_index.items():
+        for t in tbls:
+            reverse_index.setdefault(t, []).append(rt)
+    for entry in workspace_tables:
+        tname = entry.get('name')
+        w_rt = entry.get('resource_type') or 'Unknown'
+        m_rts = reverse_index.get(tname, [])
+        join.append({'name': tname, 'workspace_resource_type': w_rt, 'manifest_resource_types': m_rts})
+
+    return jsonify({
+        'success': True,
+        'status': 'ready',
+        'workspace_id': workspace_id,
+        'manifest': {
+            'resource_type_tables': manifest_data.get('resource_type_tables', {}),
+            'table_resource_types': manifest_data.get('table_resource_types', {}),
+            'fetched_at': manifest_data.get('fetched_at'),
+            'manifests_scanned': manifest_data.get('manifests_scanned'),
+            'counts': {
+                'resource_types': len(manifest_data.get('resource_type_tables', {})),
+                'providers': len({rt.split('/')[0] for rt in manifest_data.get('resource_type_tables', {})}),
+                'tables': sum(len(v) for v in manifest_data.get('resource_type_tables', {}).values())
+            },
+            'providers': sorted({rt.split('/')[0] for rt in manifest_data.get('resource_type_tables', {})})
+        },
+        'workspace': {
+            'tables': [{'name': e.get('name'), 'resource_type': e.get('resource_type') or 'Unknown', 'manifest_resource_types': e.get('manifest_resource_types', [])} for e in workspace_tables],
+            'retrieved_at': ws_cache.get('retrieved_at'),
+            'count': len(workspace_tables),
+            'source': ws_cache.get('source')
+        },
+        'table_join': join
+    })
+
 
 def _scan_manifest_resource_types() -> dict:
     """Scan NGSchema manifest files to enumerate resource types/providers, map tables, and pick up query definitions.
@@ -921,33 +1036,33 @@ def _scan_manifest_resource_types() -> dict:
         'retrieved_at': datetime.now(timezone.utc).isoformat()
     })
 
-    print('[Manifest Scan] Summary:')
-    print(f"  Resource Types: {len(resource_types_list)}")
-    print(f"  Providers: {len(providers_list)}")
-    total_tables = sum(len(v) for v in resource_type_tables.values())
-    print(f"  Tables (mapped): {total_tables}")
-    if extracted_queries:
-        print(f"  Queries extracted: {len(extracted_queries)}")
-        print(f"  Tables with query references: {len(table_queries)}")
-    if table_metadata:
-        print(f"  Tables with metadata: {len(table_metadata)}")
-    preview_types = resource_types_list[:20]
-    if preview_types:
-        print('  Sample Resource Types:')
-        for t in preview_types:
-            print(f'    - {t}')
-        if len(resource_types_list) > len(preview_types):
-            print(f'    ... (+{len(resource_types_list) - len(preview_types)} more)')
-    print('  Providers: ' + ', '.join(providers_list[:15]) + (' ...' if len(providers_list) > 15 else ''))
-    print('  Sample Resource Type -> Tables:')
-    shown = 0
-    for rt in preview_types:
-        tables_preview = resource_type_tables.get(rt, [])[:5]
-        if tables_preview:
-            print(f'    * {rt}: {", ".join(tables_preview)}' + (' ...' if len(resource_type_tables.get(rt, [])) > 5 else ''))
-            shown += 1
-        if shown >= 8:
-            break
+    # print('[Manifest Scan] Summary:')
+    # print(f"  Resource Types: {len(resource_types_list)}")
+    # print(f"  Providers: {len(providers_list)}")
+    # total_tables = sum(len(v) for v in resource_type_tables.values())
+    # print(f"  Tables (mapped): {total_tables}")
+    # if extracted_queries:
+        # print(f"  Queries extracted: {len(extracted_queries)}")
+        # print(f"  Tables with query references: {len(table_queries)}")
+    # if table_metadata:
+        # print(f"  Tables with metadata: {len(table_metadata)}")
+    # preview_types = resource_types_list[:20]
+    # if preview_types:
+    #     print('  Sample Resource Types:')
+    #     for t in preview_types:
+    #         print(f'    - {t}')
+    #     if len(resource_types_list) > len(preview_types):
+    #         print(f'    ... (+{len(resource_types_list) - len(preview_types)} more)')
+    # print('  Providers: ' + ', '.join(providers_list[:15]) + (' ...' if len(providers_list) > 15 else ''))
+    # print('  Sample Resource Type -> Tables:')
+    # shown = 0
+    # for rt in preview_types:
+    #     tables_preview = resource_type_tables.get(rt, [])[:5]
+    #     if tables_preview:
+    #         print(f'    * {rt}: {", ".join(tables_preview)}' + (' ...' if len(resource_type_tables.get(rt, [])) > 5 else ''))
+    #         shown += 1
+    #     if shown >= 8:
+    #         break
 
     return _workspace_resource_types_cache
 

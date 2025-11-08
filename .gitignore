@@ -96,3 +96,5 @@ docs/chat_session_summary.md
 workspace_schema_cache.json
 embedding_index/domain_appinsights_embedding_index.json
 embedding_index/domain_containers_embedding_index.json
+manifest_cache.json.backup
+manifest_cache.json
