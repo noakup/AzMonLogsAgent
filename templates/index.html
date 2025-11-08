@@ -1550,19 +1550,28 @@
         transform: rotate(225deg); 
     }
 
+    :root { --schema-max-height: clamp(300px, 55vh, 520px); }
     .schema-tree-container { 
         margin-top: 20px; 
         background: #ffffff; 
         border: 1px solid #e0e6ed; 
         border-radius: 12px; 
         padding: 0; 
-        max-height: 600px; 
-        overflow: hidden;
+        max-height: var(--schema-max-height); /* responsive capped height */
+        overflow-y: auto; /* enable vertical scroll */
+        overflow-x: hidden; /* hide horizontal overflow */
         font-family: 'Segoe UI', Tahoma, sans-serif; 
         display: none;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         backdrop-filter: blur(10px);
+        scrollbar-width: thin; /* Firefox */
+        scrollbar-color: #667eea #f1f3f4; /* Firefox */
+        position: relative; /* establish containing block */
     }
+    .schema-tree-container::-webkit-scrollbar { width: 8px; }
+    .schema-tree-container::-webkit-scrollbar-track { background: #f1f3f4; border-radius: 4px; }
+    .schema-tree-container::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 4px; }
+    .schema-tree-container::-webkit-scrollbar-thumb:hover { background: linear-gradient(135deg, #5a6fd8, #6a4190); }
     
     .schema-tree-search {
         background: linear-gradient(135deg, #f8f9fb 0%, #e9ecef 100%);
@@ -1576,10 +1585,8 @@
         padding: 20px; 
         margin: 0;
         font-size: 0.9rem; 
-        max-height: 480px;
-        overflow-y: auto;
-        scrollbar-width: thin;
-        scrollbar-color: #667eea #f1f3f4;
+        /* Removed max-height & overflow to let parent container control scrolling */
+        box-sizing: border-box;
     }
     
     .schema-tree::-webkit-scrollbar {
