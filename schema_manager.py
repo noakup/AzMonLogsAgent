@@ -69,9 +69,12 @@ class WorkspaceSchemaCache:
 class SchemaManager:
     def __init__(self):
         self._cache: Dict[str, WorkspaceSchemaCache] = {}
-        # Manifest cached globally; TTL aligned with table TTL
+        # Manifest cached globally; now persistent & loaded explicitly (not tied to workspace TTL)
         self._manifest_cache: Dict[str, Any] = {}
-        self._manifest_last_fetch: float = 0.0
+        self._manifest_loaded: bool = False
+        self._manifest_lock = threading.Lock()
+        self._manifest_cache_file = os.environ.get("MANIFEST_CACHE_FILE", "manifest_cache.json")
+        self._manifest_last_scan: float = 0.0
         self._ttl_minutes = int(os.environ.get("SCHEMA_TTL_MINUTES", "20"))
         # Global refresh lock: ensures only one enumeration/refresh runs at a time.
         # This prevents duplicate union enumeration prints and redundant REST calls
@@ -89,17 +92,19 @@ class SchemaManager:
     def get_workspace_schema(self, workspace_id: str) -> Dict[str, Any]:
         if not workspace_id:
             return {"error": "workspace_id required"}
+        
+        print(f"[SchemaManager] getting workspace schema for workspace={workspace_id}")
         # Fast path without lock if cache is warm
         now = time.time()
         ttl_seconds = self._ttl_minutes * 60
         cache = self._cache.get(workspace_id)
         if cache and cache.expires_at > now:
             print(f"[SchemaManager] Cache hit workspace={workspace_id} age_ms={int((time.time()-cache.expires_at+ttl_seconds)*1000)}")
-            self._ensure_manifest(ttl_seconds)
+            # Do NOT auto-load manifest here; manifest is explicitly loaded via /api/resource-schema or refresh endpoint.
             return {
                 "tables": cache.tables,
                 "count": len(cache.tables),
-                "manifest": self._manifest_cache,
+                "manifest": self._manifest_cache if self._manifest_loaded else {},
                 "retrieved_at": cache.retrieved_at,
                 "source": cache.source,
                 "refreshed": False,
@@ -111,11 +116,11 @@ class SchemaManager:
             cache = self._cache.get(workspace_id)
             if cache and cache.expires_at > now:
                 print(f"[SchemaManager] Cache hit-after-lock workspace={workspace_id} age_ms={int((time.time()-cache.expires_at+ttl_seconds)*1000)}")
-                self._ensure_manifest(ttl_seconds)
+                # Skip manifest auto-load on workspace fetch.
                 return {
                     "tables": cache.tables,
                     "count": len(cache.tables),
-                    "manifest": self._manifest_cache,
+                    "manifest": self._manifest_cache if self._manifest_loaded else {},
                     "retrieved_at": cache.retrieved_at,
                     "source": cache.source,
                     "refreshed": False,
@@ -129,88 +134,170 @@ class SchemaManager:
             print(f"[SchemaManager] Phase retrieval_done workspace={workspace_id} source={source} duration_s={retrieve_dur:.3f} table_count={len(tables)}")
             # Backward-compatible log line for tests expecting legacy prefix
             print(f"[SchemaManager] Refresh retrieval_done workspace={workspace_id} source={source} duration_s={retrieve_dur:.3f}")
-            t_manifest_start = time.time()
-            self._ensure_manifest(ttl_seconds)
-            manifest_dur = time.time() - t_manifest_start
-            print(f"[SchemaManager] Phase manifest_done workspace={workspace_id} duration_s={manifest_dur:.3f} tables_index={len(self._manifest_cache.get('resource_type_tables', {}))}")
-            # Manifest resource-type mapping
-            table_resource_map: Dict[str, str] = {}
-            manifest_path = os.path.join(os.path.dirname(__file__), 'NGSchema', 'LogAnalyticsWorkspace', 'WorkspaceManifest.manifest.json')
-            if os.path.exists(manifest_path):
-                try:
-                    import json
-                    with open(manifest_path, 'r', encoding='utf-8') as mf:
-                        manifest = json.load(mf)
-                    for tbl in manifest.get('tables', []):
-                        tname = tbl.get('name')
-                        dtype = tbl.get('dataTypeId', '')
-                        cats = tbl.get('categories', [])
-                        resource_type = dtype or (cats[0] if cats else '')
-                        table_resource_map[tname] = resource_type
-                except Exception as e:  # pragma: no cover
-                    print(f"[Workspace Schema] Manifest parse error: {e}")
+            # Manifest loading deferred; log current state summary only.
+            print(f"[SchemaManager] Manifest deferred loaded={self._manifest_loaded} tables_index={len(self._manifest_cache.get('resource_type_tables', {}))}")
+            # Manifest resource-type mapping (expanded): use cached manifest scan of ALL NGSchema manifests
+            # self._manifest_cache now (after _ensure_manifest) may contain:
+            #   resource_type_tables: { resource_type: [tableName] }
+            #   table_resource_types: { tableName: [resource_type, ...] }
+            table_resource_types: Dict[str, List[str]] = self._manifest_cache.get('table_resource_types', {}) if self._manifest_loaded else {}
+            # For backward compatibility provide a simple primary map: choose the first manifest resource type if any
+            table_primary_resource_type: Dict[str, str] = {
+                t: (rts[0] if rts else 'Unknown') for t, rts in table_resource_types.items()
+            }
             # Enrichment
             t_enrich_start = time.time()
             enriched_tables: List[Dict[str, Any]] = []
             for tbl in tables:
+                print(f"[Workspace Schema] Starting enrich loop for table: {tbl}")
                 if isinstance(tbl, dict):
                     name_val = tbl.get("name") or tbl.get("tableName") or str(tbl)
+                    print(f"[Workspace Schema] Enriching table: {name_val}")
                     metadata_copy = {k: v for k, v in tbl.items() if k != "name"}
+                    print(f"[Workspace Schema] Enriched table: {name_val} metadata={metadata_copy}")
                 else:
                     name_val = str(tbl)
+                    print(f"[Workspace Schema] Enriching table: {name_val}")
                     metadata_copy = {}
+                    print(f"[Workspace Schema] Enriched table: {name_val} metadata={metadata_copy}")
                 if not name_val:
+                    print(f"[Workspace Schema] Skipping table with no name")
                     continue
-                resource_type = table_resource_map.get(name_val, "Unknown")
-                enriched_tables.append({"name": name_val, "resource_type": resource_type, **metadata_copy})
+                resource_types = table_resource_types.get(name_val, [])
+                resource_type = table_primary_resource_type.get(name_val, "Unknown")
+                print(f"[Workspace Schema] Enriching table: {name_val} with resource types: {resource_types or ['Unknown']}")
+                enriched_entry = {"name": name_val, "resource_type": resource_type, **metadata_copy}
+                if resource_types:
+                    enriched_entry["manifest_resource_types"] = resource_types
+                enriched_tables.append(enriched_entry)
             enrich_dur = time.time() - t_enrich_start
             total_dur = time.time() - t_refresh_start
             print(f"[SchemaManager] Phase enrich_done workspace={workspace_id} duration_s={enrich_dur:.3f} enriched_count={len(enriched_tables)} total_refresh_s={total_dur:.3f}")
+            # Print out workspace tables (name + resource_type) after enrichment
+            try:
+                sample_list = [f"{t.get('name')}({t.get('resource_type')})" for t in enriched_tables]
+                joined = ", ".join(sample_list)
+                print(f"[WorkspaceTables] --------- workspace={workspace_id} total={len(enriched_tables)} tables={joined}")
+            except Exception as tbl_print_exc:  # defensive; never block refresh
+                print(f"[WorkspaceTables] --------- print_failed error={tbl_print_exc}")
             print(f"creating WorkspaceSchemaCache")
             cache = WorkspaceSchemaCache(
                 tables=enriched_tables,
-                manifest=self._manifest_cache,
+                manifest=self._manifest_cache if self._manifest_loaded else {},
                 retrieved_at=datetime.now(timezone.utc).isoformat(),
                 source=source,
                 expires_at=time.time() + ttl_seconds,
             )
             print(f"WorkspaceSchemaCache created")
-            print(f"[SchemaManager] debug print 1")
             self._cache[workspace_id] = cache
-            print(f"[SchemaManager] debug print 2")
             return {
                 "tables": cache.tables,
                 "count": len(cache.tables),
-                "manifest": self._manifest_cache,
+                "manifest": self._manifest_cache if self._manifest_loaded else {},
                 "retrieved_at": cache.retrieved_at,
                 "source": cache.source,
                 "refreshed": True,
             }
 
-    # ----------------- Internal: Manifest ----------------- #
-    def _ensure_manifest(self, ttl_seconds: int) -> None:
-        now = time.time()
-        if self._manifest_cache and (now - self._manifest_last_fetch) < ttl_seconds:
-            return
-        # Lightweight scan of NGSchema tree for resource type -> tables mapping
-        base_dir = os.path.join(os.path.dirname(__file__), "NGSchema")
-        mapping: Dict[str, List[str]] = {}
-        if os.path.exists(base_dir):
-            for root, dirs, files in os.walk(base_dir):  # type: ignore[attr-defined]
-                for f in files:
-                    if f.endswith(".manifest.json"):
-                        # Could parse manifest here for future enrichment; keep simple for now
-                        pass
-                # Simple heuristic: tables might be described in *_kql_examples.md
-                for f in files:
-                    if f.endswith("_kql_examples.md"):
-                        rtype = os.path.basename(root)
-                        mapping.setdefault(rtype, []).append(f.replace("_kql_examples.md", ""))
-        self._manifest_cache = {
-            "resource_type_tables": mapping,
-            "fetched_at": datetime.now(timezone.utc).isoformat(),
-        }
-        self._manifest_last_fetch = now
+    # ----------------- Internal: Manifest (explicit load & refresh) ----------------- #
+    def load_manifest(self, force: bool = False) -> None:
+        with self._manifest_lock:
+            if self._manifest_loaded and not force:
+                return
+            # Try loading persisted cache first (unless forcing)
+            if not force and os.path.exists(self._manifest_cache_file):
+                try:
+                    import json
+                    with open(self._manifest_cache_file, 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                    if isinstance(data, dict) and data.get('resource_type_tables'):
+                        self._manifest_cache = data
+                        self._manifest_loaded = True
+                        print(f"[Manifest] Loaded persisted manifest cache file={self._manifest_cache_file} resource_types={len(data.get('resource_type_tables', {}))}")
+                        return
+                except Exception as e:  # pragma: no cover
+                    print(f"[Manifest] Failed loading persisted manifest: {e}")
+            # Perform fresh scan
+            print(f"[Manifest] Scanning NGSchema manifests force={force}")
+            base_dir = os.path.join(os.path.dirname(__file__), "NGSchema")
+            mapping: Dict[str, List[str]] = {}
+            table_resource_types: Dict[str, List[str]] = {}
+            manifests_scanned = 0
+            if os.path.exists(base_dir):
+                for root, dirs, files in os.walk(base_dir):  # type: ignore[attr-defined]
+                    for f in files:
+                        if f.endswith('.manifest.json'):
+                            manifest_path = os.path.join(root, f)
+                            try:
+                                import json
+                                with open(manifest_path, 'r', encoding='utf-8') as mf:
+                                    mdata = json.load(mf)
+                                rtype = mdata.get('type') or os.path.basename(root)
+                                tbls = []
+                                for key in ('tables', 'Tables', 'tableList', 'relatedTables'):
+                                    val = mdata.get(key)
+                                    if isinstance(val, list):
+                                        for t in val:
+                                            if isinstance(t, dict):
+                                                tname = t.get('name') or t.get('tableName')
+                                            elif isinstance(t, str):
+                                                tname = t
+                                            else:
+                                                tname = None
+                                            if tname:
+                                                tbls.append(tname)
+                                def _walk(obj):
+                                    if isinstance(obj, dict):
+                                        for k, v in obj.items():
+                                            if k.lower() == 'tables' and isinstance(v, list):
+                                                for t in v:
+                                                    if isinstance(t, dict):
+                                                        nm = t.get('name') or t.get('tableName')
+                                                    elif isinstance(t, str):
+                                                        nm = t
+                                                    else:
+                                                        nm = None
+                                                    if nm:
+                                                        tbls.append(nm)
+                                            _walk(v)
+                                    elif isinstance(obj, list):
+                                        for it in obj:
+                                            _walk(it)
+                                _walk(mdata)
+                                if isinstance(rtype, str) and '/' in rtype:
+                                    mapping.setdefault(rtype, [])
+                                    for tname in sorted(set(tbls)):
+                                        if tname not in mapping[rtype]:
+                                            mapping[rtype].append(tname)
+                                        table_resource_types.setdefault(tname, []).append(rtype)
+                                manifests_scanned += 1
+                            except Exception as e:
+                                print(f"[Manifest] Parse error {manifest_path}: {e}")
+                    # Example-based heuristic still supported
+                    for f in files:
+                        if f.endswith('_kql_examples.md'):
+                            rtype = os.path.basename(root)
+                            mapping.setdefault(rtype, []).append(f.replace('_kql_examples.md', ''))
+            for rt, lst in mapping.items():
+                mapping[rt] = sorted(set(lst))
+            for t, lst in table_resource_types.items():
+                table_resource_types[t] = sorted(set(lst))
+            self._manifest_cache = {
+                'resource_type_tables': mapping,
+                'table_resource_types': table_resource_types,
+                'fetched_at': datetime.now(timezone.utc).isoformat(),
+                'manifests_scanned': manifests_scanned
+            }
+            self._manifest_loaded = True
+            self._manifest_last_scan = time.time()
+            # Persist
+            try:
+                import json
+                with open(self._manifest_cache_file, 'w', encoding='utf-8') as pf:
+                    json.dump(self._manifest_cache, pf)
+                print(f"[Manifest] Persisted manifest cache file={self._manifest_cache_file} size_rt={len(mapping)} tables={len(table_resource_types)}")
+            except Exception as e:  # pragma: no cover
+                print(f"[Manifest] Persist failed: {e}")
 
     # ----------------- Internal: Table Retrieval ----------------- #
     def _retrieve_tables(self, workspace_id: str) -> tuple[list[Dict[str, Any]], str]:
