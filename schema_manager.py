@@ -58,24 +58,25 @@ def _get_azure_credential():
         print(f"[Credential] Credential created: {type(_azure_credential).__name__}")
         return _azure_credential
 
-@dataclass
-class WorkspaceSchemaCache:
-    tables: List[Dict[str, Any]] = field(default_factory=list)
-    manifest: Dict[str, Any] = field(default_factory=dict)
-    retrieved_at: str = ""
-    source: str = ""
-    expires_at: float = 0.0
+# @dataclass
+# class WorkspaceSchemaCache:
+#     tables: List[Dict[str, Any]] = field(default_factory=list)
+#     manifest: Dict[str, Any] = field(default_factory=dict)
+#     retrieved_at: str = ""
+#     source: str = ""
+#     expires_at: float = 0.0
 
 class SchemaManager:
     def __init__(self):
-        self._cache: Dict[str, WorkspaceSchemaCache] = {}
+        #self._cache: Dict[str, WorkspaceSchemaCache] = {}
         # Manifest cached globally; now persistent & loaded explicitly (not tied to workspace TTL)
         self._manifest_cache: Dict[str, Any] = {}
         self._manifest_loaded: bool = False
         self._manifest_lock = threading.Lock()
         self._manifest_cache_file = os.environ.get("MANIFEST_CACHE_FILE", "manifest_cache.json")
         self._manifest_last_scan: float = 0.0
-        self._ttl_minutes = int(os.environ.get("SCHEMA_TTL_MINUTES", "20"))
+        # TTL disabled (stateless model) -> always refresh
+        self._ttl_minutes = 0
         # Global refresh lock: ensures only one enumeration/refresh runs at a time.
         # This prevents duplicate union enumeration prints and redundant REST calls
         # when multiple threads request the schema simultaneously on cold start.
@@ -95,36 +96,16 @@ class SchemaManager:
         
         print(f"[SchemaManager] getting workspace schema for workspace={workspace_id}")
         # Fast path without lock if cache is warm
-        now = time.time()
-        ttl_seconds = self._ttl_minutes * 60
-        cache = self._cache.get(workspace_id)
-        if cache and cache.expires_at > now:
-            print(f"[SchemaManager] Cache hit workspace={workspace_id} age_ms={int((time.time()-cache.expires_at+ttl_seconds)*1000)}")
-            # Do NOT auto-load manifest here; manifest is explicitly loaded via /api/resource-schema or refresh endpoint.
-            return {
-                "tables": cache.tables,
-                "count": len(cache.tables),
-                "manifest": self._manifest_cache if self._manifest_loaded else {},
-                "retrieved_at": cache.retrieved_at,
-                "source": cache.source,
-                "refreshed": False,
-            }
+        # now = time.time()
+        # ttl_seconds = self._ttl_minutes * 60
+        # cache = self._cache.get(workspace_id)
+        # Disabled fast-path cache reuse (stateless fetch always refreshes)
 
         # Slow path: acquire lock and re-check to avoid duplicate work
         with self._refresh_lock:
             now = time.time()
-            cache = self._cache.get(workspace_id)
-            if cache and cache.expires_at > now:
-                print(f"[SchemaManager] Cache hit-after-lock workspace={workspace_id} age_ms={int((time.time()-cache.expires_at+ttl_seconds)*1000)}")
-                # Skip manifest auto-load on workspace fetch.
-                return {
-                    "tables": cache.tables,
-                    "count": len(cache.tables),
-                    "manifest": self._manifest_cache if self._manifest_loaded else {},
-                    "retrieved_at": cache.retrieved_at,
-                    "source": cache.source,
-                    "refreshed": False,
-                }
+            # cache = self._cache.get(workspace_id)
+            # Disabled second chance cache reuse
             # Retrieve fresh data (single thread only)
             t_refresh_start = time.time()
             print(f"[SchemaManager] Refresh start workspace={workspace_id} ttl_min={self._ttl_minutes}")
@@ -180,22 +161,22 @@ class SchemaManager:
                 print(f"[WorkspaceTables] --------- workspace={workspace_id} total={len(enriched_tables)} tables={joined}")
             except Exception as tbl_print_exc:  # defensive; never block refresh
                 print(f"[WorkspaceTables] --------- print_failed error={tbl_print_exc}")
-            print(f"creating WorkspaceSchemaCache")
-            cache = WorkspaceSchemaCache(
-                tables=enriched_tables,
-                manifest=self._manifest_cache if self._manifest_loaded else {},
-                retrieved_at=datetime.now(timezone.utc).isoformat(),
-                source=source,
-                expires_at=time.time() + ttl_seconds,
-            )
-            print(f"WorkspaceSchemaCache created")
-            self._cache[workspace_id] = cache
+            # print(f"creating WorkspaceSchemaCache")
+            # cache = WorkspaceSchemaCache(
+            #     tables=enriched_tables,
+            #     manifest=self._manifest_cache if self._manifest_loaded else {},
+            #     retrieved_at=datetime.now(timezone.utc).isoformat(),
+            #     source=source,
+            #     expires_at=time.time() + ttl_seconds,
+            # )
+            # print(f"WorkspaceSchemaCache created")
+            # self._cache[workspace_id] = cache
             return {
-                "tables": cache.tables,
-                "count": len(cache.tables),
+                "tables": enriched_tables,
+                "count": len(enriched_tables),
                 "manifest": self._manifest_cache if self._manifest_loaded else {},
-                "retrieved_at": cache.retrieved_at,
-                "source": cache.source,
+                "retrieved_at": datetime.now(timezone.utc).isoformat(),
+                "source": source,
                 "refreshed": True,
             }
 

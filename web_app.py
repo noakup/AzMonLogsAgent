@@ -36,45 +36,20 @@ app = Flask(__name__)
 # Ensure workspace_id is defined before any early cache load attempts to avoid NameError
 workspace_id = None
 
-# Initialize workspace schema cache EARLY so helper functions (_persist_workspace_cache, _load_workspace_cache)
-# can reference it safely during module import. Previously this was defined later, causing a NameError when
-# _load_workspace_cache() executed before the variable existed.
-_workspace_schema_cache: dict[str, dict] = {}
+# Legacy compatibility globals (removed caching logic, retained empty structures for tests/UI expecting them)
+_workspace_schema_cache = {}
+_workspace_schema_refresh_flags = {}
+_workspace_schema_refresh_errors = {}
+
+# Workspace schema cache removed; all schema requests now perform a fresh fetch via get_workspace_schema().
 
 # Optional simple persistence for workspace schema across debug reloads.
-SCHEMA_CACHE_FILE = os.environ.get("WORKSPACE_SCHEMA_CACHE_FILE", "workspace_schema_cache.json")
+SCHEMA_CACHE_FILE = None  # caching disabled
 def _persist_workspace_cache():
-    global workspace_id, _workspace_schema_cache
-    if not workspace_id:
-        return
-    data = {
-        "workspace_id": workspace_id,
-        "cache": _workspace_schema_cache.get(workspace_id)
-    }
-    try:
-        import json as _json
-        with open(SCHEMA_CACHE_FILE, 'w', encoding='utf-8') as f:
-            _json.dump(data, f)
-    except Exception as e:  # noqa: BLE001
-        print(f"[Workspace Schema] Persist failed: {e}")
+    return  # no-op (caching disabled)
 
 def _load_workspace_cache():
-    global workspace_id, _workspace_schema_cache
-    if not os.path.exists(SCHEMA_CACHE_FILE):
-        return
-    try:
-        import json as _json
-        print("loading schema cashe from: " + os.path(SCHEMA_CACHE_FILE))
-        with open(SCHEMA_CACHE_FILE, 'r', encoding='utf-8') as f:
-            data = _json.load(f)
-        wid = data.get("workspace_id")
-        cache = data.get("cache")
-        if wid and cache:
-            workspace_id = workspace_id or wid  # keep existing if already set via setup
-            _workspace_schema_cache[wid] = cache
-            print(f"[Workspace Schema] Loaded persisted cache for workspace {wid} tables={len(cache.get('tables', []))}")
-    except Exception as e:  # noqa: BLE001
-        print(f"[Workspace Schema] Load persisted cache failed: {e}")
+    return  # no-op (caching disabled)
 
 # Attempt load at module import (only effective on debug reloads)
 _load_workspace_cache()
@@ -82,10 +57,8 @@ _load_workspace_cache()
 # Docs enrichment tuning (env configurable to avoid UI stalls from slow/blocked Microsoft Docs fetches)
 DOCS_ENRICH_DISABLE = bool(os.environ.get("DOCS_ENRICH_DISABLE"))  # "1" or any non-empty string disables
 WORKSPACE_SCHEMA_SYNC_FETCH = os.environ.get("WORKSPACE_SCHEMA_SYNC_FETCH", "0") == "1"  # allow reverting to old synchronous behavior
-DOCS_META_MAX_SECONDS = float(os.environ.get("DOCS_META_MAX_SECONDS", "4"))  # cumulative time budget for metadata enrichment
-_workspace_schema_refresh_flags: dict[str, bool] = {}
-_workspace_schema_refresh_errors: dict[str, str] = {}
-_workspace_schema_refresh_lock = threading.Lock()
+DOCS_META_MAX_SECONDS = float(os.environ.get("DOCS_META_MAX_SECONDS", "10"))  # cumulative time budget for metadata enrichment (raised from 4s to 10s)
+# Removed legacy refresh flags and lock (stateless schema fetch)
 DOCS_ENRICH_MAX_TABLES = int(os.environ.get("DOCS_ENRICH_MAX_TABLES", "8"))  # cap number of unmatched tables to enrich per request
 DOCS_ENRICH_MAX_SECONDS = float(os.environ.get("DOCS_ENRICH_MAX_SECONDS", "5"))  # cumulative time budget per request
 DOCS_ENRICH_COLUMN_FETCH = bool(os.environ.get("DOCS_ENRICH_COLUMN_FETCH", "1"))  # allow disabling column scraping (heavier)
@@ -112,338 +85,108 @@ GENERIC_EXAMPLES = {
 # New endpoint: Suggest example queries based on resource type (dynamic mapping)
 @app.route('/api/resource-examples', methods=['POST'])
 def resource_examples():
-    """Suggest example queries for a given resource type, dynamically discovered from NGSchema and app_insights_capsule."""
+    """Suggest example queries for a given resource type.
+
+    Strategy:
+      1. Attempt to locate an *_kql_examples.md file matching the resource_type inside NGSchema.
+      2. Fallback to app_insights_capsule/kql_examples directory.
+      3. If none found, return generic examples if available.
+    """
     try:
         import glob
-        data = request.get_json()
+        data = request.get_json(silent=True) or {}
         resource_type = data.get('resource_type', '').strip()
         if not resource_type:
             return jsonify({'success': False, 'error': 'Resource type is required'})
 
-        # Dynamically build mapping: resource_type -> example file
+        def _normalize(s: str) -> str:
+            return s.replace(' ', '').lower()
+
         example_file = None
-        # 1. Search NGSchema for resource type folders with kql_examples.md
         ngschema_dir = os.path.join(os.path.dirname(__file__), 'NGSchema')
         if os.path.exists(ngschema_dir):
-            for root, dirs, files in os.walk(ngschema_dir):
+            for root, dirs, _ in os.walk(ngschema_dir):
                 for d in dirs:
-                    if d.lower() == resource_type.replace(' ', '').lower():
+                    if _normalize(d) == _normalize(resource_type):
                         kql_files = glob.glob(os.path.join(root, d, '*_kql_examples.md'))
                         if kql_files:
                             example_file = kql_files[0]
                             break
                 if example_file:
                     break
-        # 2. Fallback: search app_insights_capsule/kql_examples
         if not example_file:
             capsule_dir = os.path.join(os.path.dirname(__file__), 'app_insights_capsule', 'kql_examples')
             if os.path.exists(capsule_dir):
                 kql_files = glob.glob(os.path.join(capsule_dir, '*_kql_examples.md'))
                 for f in kql_files:
-                    # Try to match resource_type in filename
-                    if resource_type.replace(' ', '').lower() in os.path.basename(f).lower():
+                    base = os.path.basename(f).lower()
+                    if _normalize(resource_type) in base:
                         example_file = f
                         break
-        # 3. Fallback: usage_kql_examples.md for Usage Analytics
-        if not example_file and resource_type.lower() == 'usage analytics':
-            usage_file = os.path.join(os.path.dirname(__file__), 'usage_kql_examples.md')
-            if os.path.exists(usage_file):
-                example_file = usage_file
 
         examples = []
-        if example_file and os.path.exists(example_file):
-            with open(example_file, 'r', encoding='utf-8') as f:
-                content = f.read()
-            lines = content.split('\n')
-            for line in lines:
-                line = line.strip()
-                if line.startswith('- '):
-                    examples.append(line[2:].strip())
-                elif line.startswith('# '):
-                    continue
-            # Fallback to generic if not enough
-            if len(examples) < 5:
-                examples.extend(GENERIC_EXAMPLES.get(resource_type, [])[:5-len(examples)])
-        else:
-            # Use generic examples if file not found
-            examples = GENERIC_EXAMPLES.get(resource_type, [])
+        if example_file:
+            try:
+                with open(example_file, 'r', encoding='utf-8') as ef:
+                    content = ef.read()
+                # Simple heuristic: lines starting with "#" are titles, code blocks are fenced ``` lines
+                current_title = None
+                current_code = []
+                for line in content.splitlines():
+                    if line.startswith('#'):
+                        if current_title and current_code:
+                            examples.append({'title': current_title.strip('# ').strip(), 'query': '\n'.join(current_code).strip()})
+                        current_title = line
+                        current_code = []
+                    elif line.startswith('```'):
+                        # Toggle collection; naive approach: start capturing after opening fence until closing
+                        if current_code and current_code[-1] == '__END_FENCE__':
+                            current_code.pop()  # remove marker
+                        else:
+                            current_code.append('__END_FENCE__')
+                    else:
+                        if current_title:
+                            current_code.append(line)
+                if current_title and current_code:
+                    if current_code and current_code[-1] == '__END_FENCE__':
+                        current_code.pop()
+                    examples.append({'title': current_title.strip('# ').strip(), 'query': '\n'.join(current_code).strip()})
+            except Exception as ex:  # noqa: BLE001
+                print(f"[Examples] Failed parsing examples file {example_file}: {ex}")
 
-        examples = examples[:8]
+        # Fallback generic examples
+        if not examples:
+            generic = GENERIC_EXAMPLES.get(resource_type) or GENERIC_EXAMPLES.get('Application Insights') or []
+            examples = [{'title': f'Example {i+1}', 'query': q} for i, q in enumerate(generic)]
 
+        return jsonify({'success': True, 'resource_type': resource_type, 'example_file': example_file, 'examples': examples})
+    except Exception as e:  # noqa: BLE001
+        return jsonify({'success': False, 'error': str(e)})
+
+
+@app.route('/api/fetch-workspace-schema', methods=['GET', 'POST'])
+def fetch_workspace_schema():
+    """Direct, stateless workspace schema retrieval (lightweight summary).
+
+    Returns JSON:
+      success, workspace_id, table_count, retrieved_at, source, error (optional)
+    """
+    global workspace_id
+    if not workspace_id:
+        return jsonify({'success': False, 'workspace_id': None, 'table_count': 0, 'error': 'Workspace not initialized'}), 200
+    try:
+        result = get_workspace_schema(workspace_id)
+        if result.get('error'):
+            return jsonify({'success': False, 'workspace_id': workspace_id, 'table_count': 0, 'error': result.get('error')}), 200
         return jsonify({
             'success': True,
-            'resource_type': resource_type,
-            'examples': examples,
-            'count': len(examples),
-            'source_file': example_file or 'generic',
-        })
-    except Exception as e:
-        return jsonify({'success': False, 'error': str(e)})
-
-# New endpoint to fetch and print workspace schema on demand
-@app.route('/api/fetch-workspace-schema', methods=['POST'])
-def fetch_workspace_schema():
-    """Fetch workspace schema and print to console only."""
-    global workspace_id
-    try:
-        data = request.get_json()
-        workspace = data.get('workspace_id', '').strip()
-        if not workspace:
-            return jsonify({'success': False, 'error': 'Workspace ID is required'})
-        print("[Workspace Schema] scheduling background fetch (on-demand endpoint)")
-        threading.Thread(target=_background_fetch_workspace_tables, args=(workspace,), daemon=True).start()
-        print("[Workspace Schema] background thread started")
-        return jsonify({'success': True, 'message': f'Workspace schema fetch started for {workspace}'})
-    except Exception as e:
-        return jsonify({'success': False, 'error': str(e)})
-
-@app.route('/api/workspace-schema', methods=['GET'])
-def workspace_schema():
-    """Return (and lazily enrich) the workspace schema.
-
-    Polling contract with frontend:
-      /api/workspace-schema-status returns status=ready once raw table list is cached.
-      Frontend then calls /api/workspace-schema and expects success=true & status=ready.
-
-    Bug fix: Previously we returned success=false (pending) even after status endpoint flipped
-    to ready because enrichment code lived in an unreachable duplicate route block. That caused
-    the UI polling loop: "Ready status but full fetch not successful; retrying".
-
-    Logic now:
-      - If no workspace set -> uninitialized
-      - If raw cache present but not enriched -> perform enrichment synchronously on this request
-      - If enriched cache present -> return immediately
-      - If no cache & not in progress -> start background fetch and return pending
-    """
-    global workspace_id, _workspace_schema_cache
-    if not workspace_id:
-        return jsonify({'success': False, 'status': 'uninitialized', 'error': 'Workspace not initialized. Call /api/setup first.'})
-
-    in_progress = _workspace_schema_refresh_flags.get(workspace_id, False)
-    cached = _workspace_schema_cache.get(workspace_id)
-
-    # If we already enriched, fast path
-    if cached and cached.get('enriched') and 'table_queries' in cached:
-        tq_count = sum(len(v) for v in cached.get('table_queries', {}).values())
-        print(f"[Workspace Schema] Returning enriched cached schema tables={len(cached.get('tables', []))} table_queries_total={tq_count}")
-        return jsonify({'success': True, 'status': 'ready' if not in_progress else 'refreshing', **cached})
-
-    # If raw cache exists but not enriched yet, enrich now (was previously unreachable)
-    if cached and not cached.get('enriched'):
-        print("[Workspace Schema] Raw cache present (no enrichment); performing enrichment now")
-        # Manifest scan
-        manifest_data = _scan_manifest_resource_types()
-        # Build case-insensitive manifest table index so workspace table name case differences don't prevent matches
-        manifest_tables_index: dict[str, list[str]] = {}
-        manifest_tables_index_lc: dict[str, list[str]] = {}
-        for rt, tbls in manifest_data.get('resource_type_tables', {}).items():
-            for t in tbls:
-                manifest_tables_index.setdefault(t, []).append(rt)
-                manifest_tables_index_lc.setdefault(t.lower(), []).append(rt)
-        workspace_tables = cached.get('tables', [])
-        enriched = []
-        matched = 0
-        unmatched = []
-        resource_type_subset = {}
-        provider_summary = {}
-        for entry in workspace_tables:
-            tname = entry.get('name')
-            ws_rt = entry.get('resource_type') or 'Unknown'
-            # Try exact match first, then case-insensitive match
-            manifest_rts = manifest_tables_index.get(tname, []) or manifest_tables_index_lc.get(tname.lower(), [])
-            in_manifest = bool(manifest_rts)
-            if in_manifest:
-                matched += 1
-                for mrt in manifest_rts:
-                    resource_type_subset.setdefault(mrt, []).append(tname)
-                    provider = mrt.split('/')[0]
-                    provider_summary.setdefault(provider, {'tables': 0, 'resource_types': set()})
-                    provider_summary[provider]['tables'] += 1
-                    provider_summary[provider]['resource_types'].add(mrt)
-            else:
-                unmatched.append(tname)
-            enriched.append({
-                'name': tname,
-                'workspace_resource_type': ws_rt,
-                'in_manifest': in_manifest,
-                'manifest_resource_type': manifest_rts[0] if manifest_rts else None,
-                'manifest_resource_types': manifest_rts,
-                'provider': (manifest_rts[0].split('/')[0] if manifest_rts else None)
-            })
-        # Fallback: if a workspace table has a resource_type pattern provider/type and wasn't matched to manifest, include it
-        for e in enriched:
-            if (not e['in_manifest']) and e.get('workspace_resource_type') and '/' in e['workspace_resource_type'] and e['workspace_resource_type'].lower() != 'unknown':
-                rt_fallback = e['workspace_resource_type']  # Fallback mapping for non-manifest tables using workspace_resource_type
-                resource_type_subset.setdefault(rt_fallback, []).append(e['name'])
-                provider = rt_fallback.split('/')[0]
-                provider_summary.setdefault(provider, {'tables': 0, 'resource_types': set()})
-                provider_summary[provider]['tables'] += 1
-                provider_summary[provider]['resource_types'].add(rt_fallback)
-        # Recompute unmatched AFTER fallback mappings to avoid dual classification.
-        mapped_tables = set()
-        for rt, tbls in resource_type_subset.items():
-            # Exclude any existing synthetic group from mapped calc (will rebuild)
-            if rt == 'unknown/unmatched':
-                continue
-            for t in tbls:
-                mapped_tables.add(t)
-        unmatched_final = [t for t in unmatched if t not in mapped_tables]
-        # Add synthetic grouping exactly once (only truly unmapped tables)
-        if unmatched_final:
-            resource_type_subset['unknown/unmatched'] = list(unmatched_final)
-            provider_summary.setdefault('unknown', {'tables': 0, 'resource_types': set()})
-            provider_summary['unknown']['tables'] += len(unmatched_final)
-            provider_summary['unknown']['resource_types'].add('unknown/unmatched')
-        provider_summary_out = {
-            prov: {
-                'tables': info['tables'],
-                'resource_types': len(info['resource_types']) if isinstance(info['resource_types'], set) else info['resource_types']
-            } for prov, info in provider_summary.items()
-        }
-        # Build per-table query list: manifest > capsule CSV > docs
-        manifest_table_queries = manifest_data.get('table_queries', {}) or {}
-        capsule_csv_queries = {}
-        try:
-            capsule_csv_queries = load_capsule_csv_queries()
-            total_capsule = sum(len(v) for v in capsule_csv_queries.values())
-            print(f"[Capsule CSV] tables={list(capsule_csv_queries.keys())} total_queries={total_capsule}")
-        except Exception as e:  # noqa: BLE001
-            print(f"[Workspace Schema] Capsule CSV ingestion error: {e}")
-
-        def _normalize_code(code: str) -> str:
-            if not isinstance(code, str):
-                return ''
-            c = code.replace('\r\n', '\n').replace('\r', '\n').strip()
-            while '\n\n' in c:
-                c = c.replace('\n\n', '\n')
-            return c
-
-        workspace_table_queries = {}
-        tables_with_manifest_queries = 0
-        tables_with_capsule_queries = 0
-        tables_with_docs_queries = 0
-        for tinfo in enriched:
-            tname = tinfo['name']
-            combined = []
-            m_list = manifest_table_queries.get(tname) or []
-            if m_list:
-                for q in m_list:
-                    if q.get('name'):
-                        combined.append({
-                            'name': q.get('name'),
-                            'description': q.get('description'),
-                            'code': q.get('code') if q.get('code') else None,
-                            'source': 'manifest'
-                        })
-                tables_with_manifest_queries += 1
-            c_list = capsule_csv_queries.get(tname) or []
-            if c_list:
-                for q in c_list:
-                    if q.get('name') and q.get('code'):
-                        norm_code = _normalize_code(q.get('code'))
-                        if not any(_normalize_code(existing.get('code')) == norm_code for existing in combined if existing.get('code')):
-                            combined.append({
-                                'name': q.get('name'),
-                                'description': q.get('description') or '',
-                                'code': q.get('code'),
-                                'source': q.get('source') or 'capsule-csv',
-                                'file': q.get('file')
-                            })
-                tables_with_capsule_queries += 1
-            if not DOCS_ENRICH_DISABLE:
-                docs_q = _fetch_table_docs_queries(tname)
-                if docs_q:
-                    added_docs = 0
-                    for q in docs_q:
-                        if q.get('name') and q.get('code'):
-                            norm_code = _normalize_code(q.get('code'))
-                            if not any(_normalize_code(existing.get('code')) == norm_code for existing in combined if existing.get('code')):
-                                combined.append({
-                                    'name': q.get('name'),
-                                    'description': q.get('description'),
-                                    'code': q.get('code'),
-                                    'source': 'docs'
-                                })
-                                added_docs += 1
-                    if added_docs:
-                        tables_with_docs_queries += 1
-            if combined:
-                workspace_table_queries[tname] = combined
-                src_counts = {
-                    'manifest': sum(1 for q in combined if q.get('source') == 'manifest'),
-                    'capsule-csv': sum(1 for q in combined if q.get('source') == 'capsule-csv'),
-                    'docs': sum(1 for q in combined if q.get('source') == 'docs')
-                }
-                print(f"[QueryMerge] table={tname} total={len(combined)} breakdown={src_counts}")
-            else:
-                print(f"[QueryMerge] table={tname} no queries merged (manifest={len(m_list)} capsule={len(capsule_csv_queries.get(tname, []))})")
-
-        response = {
-            'success': True,
-            'status': 'ready',
             'workspace_id': workspace_id,
-            'counts': {
-                'workspace_tables': len(workspace_tables),
-                'manifest_tables': sum(len(v) for v in manifest_data.get('resource_type_tables', {}).values()),
-                'matched_tables': matched,
-                'unmatched_tables': len(unmatched_final),
-                'resource_types_with_data': len(resource_type_subset)
-            },
-            'tables': enriched,
-            'resource_type_tables': resource_type_subset,
-            'providers': provider_summary_out,
-            'unmatched_tables': unmatched_final,
-            'retrieved_at': cached.get('retrieved_at'),
-            'doc_enrichment': {
-                'performed': False,  # doc enrichment of resource type disabled in current flow
-                'enriched_tables': 0,
-                'cache_size': len(_ms_docs_table_resource_type_cache),
-                'disabled': DOCS_ENRICH_DISABLE,
-                'limits': {
-                    'max_tables': DOCS_ENRICH_MAX_TABLES,
-                    'max_seconds': DOCS_ENRICH_MAX_SECONDS,
-                    'column_fetch': DOCS_ENRICH_COLUMN_FETCH
-                }
-            },
-            'table_metadata': {},
-            'table_queries': workspace_table_queries,
-            'query_enrichment': {
-                'tables_with_manifest_queries': tables_with_manifest_queries,
-                'tables_with_capsule_csv_queries': tables_with_capsule_queries,
-                'tables_with_docs_queries': tables_with_docs_queries
-            }
-        }
-        # Metadata enrichment (description/columns) with time budget
-        try:
-            manifest_meta = manifest_data.get('table_metadata', {}) or {}
-            t_meta_start = time.time()
-            for tinfo in enriched:
-                if (time.time() - t_meta_start) > DOCS_META_MAX_SECONDS:
-                    print(f"[Workspace Schema] Metadata enrichment time budget exceeded ({DOCS_META_MAX_SECONDS}s); truncating.")
-                    break
-                tname = tinfo['name']
-                meta = manifest_meta.get(tname, {}).copy()
-                if not DOCS_ENRICH_DISABLE and (not meta.get('description') or not meta.get('columns')):
-                    docs_meta = _fetch_table_docs_full(tname)
-                    if docs_meta:
-                        if not meta.get('description') and docs_meta.get('description'):
-                            meta['description'] = docs_meta['description']
-                        if not meta.get('columns') and docs_meta.get('columns'):
-                            meta['columns'] = docs_meta['columns']
-                response['table_metadata'][tname] = meta
-        except Exception as e:  # noqa: BLE001
-            print(f"[Workspace Schema] Metadata enrichment error: {e}")
-        enriched_cache = {k: v for k, v in response.items() if k not in ('success', 'status')}
-        enriched_cache['enriched'] = True
-        _workspace_schema_cache[workspace_id] = {**cached, **enriched_cache}
-        print(f"[Workspace Schema] Enrichment complete cached_update tables={len(enriched_cache.get('tables', []))} table_queries_total={sum(len(v) for v in enriched_cache.get('table_queries', {}).values())}")
-        return jsonify(response)
-
-    # No cache yet: ensure background fetch started
-    if not cached and not in_progress:
-        threading.Thread(target=_background_fetch_workspace_tables, args=(workspace_id,), daemon=True).start()
-        _workspace_schema_refresh_flags[workspace_id] = True
-    return jsonify({'success': False, 'status': 'pending', 'in_progress': True})
+            'table_count': len(result.get('tables', [])),
+            'retrieved_at': result.get('retrieved_at'),
+            'source': result.get('source')
+        })
+    except Exception as e:  # noqa: BLE001
+        return jsonify({'success': False, 'workspace_id': workspace_id, 'table_count': 0, 'error': str(e)}), 200
 
 # Global agent instance
 agent = None
@@ -657,53 +400,7 @@ def _fetch_table_docs_queries(table_name: str, timeout: float = 6.0) -> list:
         return []
 
 
-## (Removed duplicate workspace_schema endpoint definition to prevent Flask route conflict)
-    if not workspace_id:
-        return jsonify({'success': False, 'status': 'uninitialized', 'error': 'Workspace not initialized via /api/setup'})
-
-    # Ensure manifest catalog is available
-    manifest_data = _scan_manifest_resource_types()
-    manifest_tables_index = {}
-    for rt, tbls in manifest_data.get('resource_type_tables', {}).items():
-        for t in tbls:
-            manifest_tables_index.setdefault(t, []).append(rt)
-
-    ws_cache = _workspace_schema_cache.get(workspace_id)
-    if not ws_cache:
-        if WORKSPACE_SCHEMA_SYNC_FETCH:
-            print("[Workspace Schema] Performing synchronous initial fetch.")
-            _background_fetch_workspace_tables(workspace_id)
-            ws_cache = _workspace_schema_cache.get(workspace_id)
-        else:
-            with _workspace_schema_refresh_lock:
-                in_progress = _workspace_schema_refresh_flags.get(workspace_id, False)
-                last_err = _workspace_schema_refresh_errors.get(workspace_id)
-                if not in_progress:
-                    print("[Workspace Schema] Starting background fetch thread.")
-                    threading.Thread(target=_background_fetch_workspace_tables, args=(workspace_id,), daemon=True).start()
-                    _workspace_schema_refresh_flags[workspace_id] = True
-                    in_progress = True
-            # Adaptive race mitigation: brief wait loop to catch ultra-fast completion (configurable)
-            ws_cache_fast = _workspace_schema_cache.get(workspace_id)
-            if not ws_cache_fast:
-                race_wait_ms = int(os.environ.get("WORKSPACE_SCHEMA_RACE_WAIT_MS", "150"))
-                deadline = time.time() + (race_wait_ms / 1000.0)
-                while time.time() < deadline:
-                    ws_cache_fast = _workspace_schema_cache.get(workspace_id)
-                    if ws_cache_fast:
-                        break
-                    time.sleep(0.01)
-            if ws_cache_fast:
-                ws_cache = ws_cache_fast
-            else:
-                return jsonify({'success': False, 'status': 'pending', 'workspace_id': workspace_id, 'in_progress': in_progress, 'error': last_err})
-
-    workspace_tables = ws_cache.get('tables', [])
-    enriched = []
-    matched = 0
-    unmatched = []
-    resource_type_subset = {}
-    provider_summary = {}
+    # Legacy cache-based workspace schema block removed.
 
     for entry in workspace_tables:
         tname = entry.get('name')
@@ -944,65 +641,71 @@ def _fetch_table_docs_queries(table_name: str, timeout: float = 6.0) -> list:
         print(f"[Workspace Schema] Metadata enrichment error: {e}")
     # Verbose schema dump removed per request to reduce console noise.
     # Persist enriched response back into cache (exclude success/status to keep shape stable for early return)
-    enriched_cache = {k: v for k, v in response.items() if k not in ('success', 'status')}
-    enriched_cache['enriched'] = True
-    _workspace_schema_cache[workspace_id] = {**_workspace_schema_cache.get(workspace_id, {}), **enriched_cache}
-    print(f"[Workspace Schema] Enrichment complete cached_update tables={len(enriched_cache.get('tables', []))} table_queries_total={sum(len(v) for v in enriched_cache.get('table_queries', {}).values())}")
+    # Caching disabled: do not persist enriched workspace schema response.
+    print(f"[Workspace Schema] Enrichment complete (no persistence) tables={len(response.get('tables', []))} table_queries_total={sum(len(v) for v in response.get('table_queries', {}).values())}")
     return jsonify(response)
 
 @app.route('/api/workspace-schema-status', methods=['GET'])
 def workspace_schema_status():
-    """Lightweight status endpoint for workspace schema refresh state.
+    """Stateless status endpoint (cache removed).
 
     Returns JSON:
       success: bool
-      status: 'uninitialized' | 'pending' | 'ready'
+      status: 'uninitialized' | 'ready' | 'empty'
       workspace_id: str|None
-      in_progress: bool
-      error: str|None
-      cached_tables: int
-      last_retrieved_at: str|None
+      table_count: int
+      retrieved_at: str|None
+      source: str|None
     """
     global workspace_id
     if not workspace_id:
-        return jsonify({
-            'success': False,
-            'status': 'uninitialized',
-            'workspace_id': None,
-            'in_progress': False,
-            'error': 'Workspace not initialized',
-            'cached_tables': 0,
-            'last_retrieved_at': None
-        })
-    # Auto-start background fetch if no cache and not already in progress (status-based kickoff)
-    cache = _workspace_schema_cache.get(workspace_id)
-    with _workspace_schema_refresh_lock:
-        in_progress = _workspace_schema_refresh_flags.get(workspace_id, False)
-        error = _workspace_schema_refresh_errors.get(workspace_id)
-        if not cache and not in_progress:
-            # Kick off background thread here to avoid needing a separate /api/workspace-schema call
-            print("[Workspace Schema Status] Auto-starting background fetch thread.")
-            threading.Thread(target=_background_fetch_workspace_tables, args=(workspace_id,), daemon=True).start()
-            _workspace_schema_refresh_flags[workspace_id] = True
-            in_progress = True
-    cache = _workspace_schema_cache.get(workspace_id)
-    if cache:
-        status = 'ready'
-        count = len(cache.get('tables', []))
-        last_retrieved = cache.get('retrieved_at')
-    else:
-        status = 'pending'
-        count = 0
-        last_retrieved = None
+        return jsonify({'success': False, 'status': 'uninitialized', 'workspace_id': None, 'table_count': 0, 'retrieved_at': None, 'source': None})
+    result = get_workspace_schema(workspace_id)
+    if result.get('error'):
+        return jsonify({'success': False, 'status': 'error', 'workspace_id': workspace_id, 'error': result.get('error'), 'table_count': 0, 'retrieved_at': None, 'source': None})
+    tables = result.get('tables', [])
+    status = 'ready' if tables else 'empty'
     return jsonify({
-        'success': status == 'ready',
+        'success': True,
         'status': status,
         'workspace_id': workspace_id,
-        'in_progress': in_progress,
-        'error': error,
-        'cached_tables': count,
-        'last_retrieved_at': last_retrieved
+        'table_count': len(tables),
+        'retrieved_at': result.get('retrieved_at'),
+        'source': result.get('source')
     })
+
+# ---------------------------------------------------------------------------
+# Compatibility workspace schema endpoint (previously removed). Front-end and
+# tests poll this path; we now serve immediate ready state with stateless fetch.
+# ---------------------------------------------------------------------------
+@app.route('/api/workspace-schema', methods=['GET'])
+def workspace_schema():
+    global workspace_id
+    if not workspace_id:
+        return jsonify({'success': False, 'status': 'uninitialized', 'workspace_id': None, 'error': 'Workspace not initialized'}), 400
+    try:
+        result = get_workspace_schema(workspace_id)
+        if result.get('error'):
+            return jsonify({'success': False, 'status': 'error', 'workspace_id': workspace_id, 'error': result.get('error')}), 500
+        tables = result.get('tables', [])
+        return jsonify({
+            'success': True,
+            'status': 'ready',  # legacy clients expect 'ready' after pending; we simplify to immediate ready
+            'workspace_id': workspace_id,
+            'tables': tables,
+            'counts': {
+                'workspace_tables': len(tables)
+            },
+            'retrieved_at': result.get('retrieved_at'),
+            'source': result.get('source'),
+            'doc_enrichment': {
+                'disabled': bool(os.environ.get('DOCS_ENRICH_DISABLE')),
+                'performed': False
+            },
+            'error': None
+        })
+    except Exception as e:  # noqa: BLE001
+        return jsonify({'success': False, 'status': 'error', 'workspace_id': workspace_id, 'error': str(e)}), 500
 
 @app.route('/api/refresh-manifest', methods=['POST'])
 def refresh_manifest():
@@ -1054,7 +757,7 @@ def resource_schema():
       }
       table_join: [ { name, workspace_resource_type, manifest_resource_types:[str] } ]
     """
-    global workspace_id, _workspace_schema_cache
+    global workspace_id
 
     # Persistent manifest load via SchemaManager (decoupled from workspace fetch)
     try:
@@ -1096,39 +799,19 @@ def resource_schema():
         })
 
     # Workspace tables (may be absent if not yet fetched)
-    ws_cache = _workspace_schema_cache.get(workspace_id)
-    if not ws_cache:
-        in_progress = _workspace_schema_refresh_flags.get(workspace_id, False)
-        if not in_progress:
-            threading.Thread(target=_background_fetch_workspace_tables, args=(workspace_id,), daemon=True).start()
-            _workspace_schema_refresh_flags[workspace_id] = True
-        _rt_tables = manifest_data.get('resource_type_tables', {}) or {}
-        _resource_types_list = sorted(_rt_tables.keys())
-        _providers_list = sorted({rt.split('/')[0] for rt in _rt_tables})
-        return jsonify({
-            'success': False,
-            'status': 'pending',
-            'workspace_id': workspace_id,
-            'manifest': {
-                'resource_type_tables': _rt_tables,
-                'table_resource_types': manifest_data.get('table_resource_types', {}),
-                'resource_types': _resource_types_list,
-                'providers': _providers_list,
-                'fetched_at': manifest_data.get('fetched_at'),
-                'manifests_scanned': manifest_data.get('manifests_scanned'),
-                'counts': {
-                    'resource_types': len(_resource_types_list),
-                    'providers': len(_providers_list),
-                    'tables': sum(len(v) for v in _rt_tables.values())
-                }
-            },
-            'workspace': {
-                'tables': [], 'retrieved_at': None, 'count': 0, 'source': None
-            },
-            'table_join': []
-        })
+    # Fresh fetch of workspace tables (cache removed)
+    ws_result = get_workspace_schema(workspace_id)
+    if ws_result.get('error'):
+        print(f"[ResourceSchema] workspace fetch error: {ws_result.get('error')}")
+        workspace_tables = []
+        ws_retrieved = None
+        ws_source = None
+    else:
+        workspace_tables = ws_result.get('tables', [])
+        ws_retrieved = ws_result.get('retrieved_at')
+        ws_source = ws_result.get('source')
 
-    workspace_tables = ws_cache.get('tables', [])
+    # workspace_tables already set above
     join = []
     manifest_tables_index = manifest_data.get('resource_type_tables', {})
     # Build reverse index table -> list(resource_types)
@@ -1164,9 +847,9 @@ def resource_schema():
         },
         'workspace': {
             'tables': [{'name': e.get('name'), 'resource_type': e.get('resource_type') or 'Unknown', 'manifest_resource_types': e.get('manifest_resource_types', [])} for e in workspace_tables],
-            'retrieved_at': ws_cache.get('retrieved_at'),
+            'retrieved_at': ws_retrieved,
             'count': len(workspace_tables),
-            'source': ws_cache.get('source')
+            'source': ws_source
         },
         'table_join': join
     })
@@ -1411,10 +1094,7 @@ def _get_azure_credential():
 
 
 def _fetch_workspace_tables(workspace: str):
-    """Unified workspace table/manifest retrieval via SchemaManager.
-
-    Prints a concise summary only when refreshed to reduce log noise.
-    """
+    """Deprecated (cache removed). Kept for backward compatibility; now just performs a direct fetch and logs summary."""
     if not workspace:
         print("[Workspace Schema] No workspace ID provided.")
         return
@@ -1422,68 +1102,22 @@ def _fetch_workspace_tables(workspace: str):
     if result.get("error"):
         print(f"[Workspace Schema] Error: {result['error']}")
         return
-    refreshed = result.get("refreshed")
     tables = result.get("tables", [])
-    source = result.get("source")
-    print(f"[Workspace Schema] Source={source} tables={len(tables)} refreshed={refreshed}")
-    print(f"[Workspace Schema] debug print 1")
-    if refreshed:
-        print(f"in refreshed")
-        # Only enumerate on refresh to avoid duplication
-        for t in tables[:50]:  # cap enumeration to first 50 for brevity
-            name = t.get("name")
-            rtype = t.get("resource_type") or t.get("retentionInDays")  # placeholder
-            print(f"  - {name} {('(rtype=' + rtype + ')') if rtype else ''}")
-    # Maintain legacy cache shape for any downstream callers expecting it
-    print(f"[Workspace Schema] debug print 2")
-    _workspace_schema_cache[workspace] = {
-        "tables": tables,
-        "count": len(tables),
-        "retrieved_at": result.get("retrieved_at"),
-        "source": source,
-    }
-    print(f"[Workspace Schema] debug print 3")
+    print(f"[Workspace Schema] Direct fetch tables={len(tables)} source={result.get('source')} refreshed={result.get('refreshed')}")
 
 
 def _background_fetch_workspace_tables(workspace: str):
-    """Background wrapper that populates workspace schema cache and updates refresh flags.
-
-    Ensures flags reset even if an exception occurs so client polling can retry.
-    """
+    """Deprecated shim retained for compatibility; just calls get_workspace_schema and logs summary."""
     if not workspace:
         return
-    with _workspace_schema_refresh_lock:
-        _workspace_schema_refresh_flags[workspace] = True
-        _workspace_schema_refresh_errors.pop(workspace, None)
     try:
-        print(f"[Workspace Schema] Background fetch starting get_workspace_schema(workspace={workspace})")
         result = get_workspace_schema(workspace)
-        print(f"[Workspace Schema] Background fetch returned source={result.get('source')} table_count={len(result.get('tables', []))} refreshed={result.get('refreshed')} error={result.get('error')}")
-        if result.get("error"):
-            raise RuntimeError(result["error"])
-        refreshed = result.get("refreshed")
-        tables = result.get("tables", [])
-        source = result.get("source")
-        print(f"[Workspace Schema] BG Source={source} tables={len(tables)} refreshed={refreshed}")
-        if refreshed:
-            for t in tables[:50]:
-                name = t.get("name")
-                rtype = t.get("resource_type") or t.get("retentionInDays")
-                print(f"  (bg) - {name} {( '(rtype=' + rtype + ')' ) if rtype else ''}")
-        _workspace_schema_cache[workspace] = {
-            "tables": tables,
-            "count": len(tables),
-            "retrieved_at": result.get("retrieved_at"),
-            "source": source,
-        }
-        _persist_workspace_cache()
+        if result.get('error'):
+            print(f"[Workspace Schema] Background fetch error workspace={workspace}: {result['error']}")
+        else:
+            print(f"[Workspace Schema] Background direct fetch tables={len(result.get('tables', []))} source={result.get('source')} refreshed={result.get('refreshed')}")
     except Exception as e:  # noqa: BLE001
-        print(f"[Workspace Schema] Background fetch error workspace={workspace}: {e}")
-        with _workspace_schema_refresh_lock:
-            _workspace_schema_refresh_errors[workspace] = str(e)
-    finally:
-        with _workspace_schema_refresh_lock:
-            _workspace_schema_refresh_flags[workspace] = False
+        print(f"[Workspace Schema] Background fetch unexpected error workspace={workspace}: {e}")
 
 
 @app.route('/')
@@ -1507,7 +1141,7 @@ def setup_workspace():
         agent = KQLAgent(workspace_id)
         # Intentionally do NOT start schema fetch here to allow client to trigger and observe pending state
         print("[Setup] Workspace initialized; schema fetch will start on first /api/workspace-schema request.")
-        _persist_workspace_cache()  # persist workspace id early (empty cache)
+    # Skip early persistence; we'll persist only once tables or enrichment are available.
         
         return jsonify({
             'success': True, 
@@ -1519,6 +1153,14 @@ def setup_workspace():
             'success': False, 
             'error': f'Failed to setup workspace: {str(e)}'
         })
+
+@app.route('/api/clear-workspace-cache', methods=['POST'])
+def clear_workspace_cache():
+    """Deprecated: cache removed. Always returns success without side effects."""
+    global workspace_id
+    if not workspace_id:
+        return jsonify({'success': False, 'error': 'Workspace not initialized'}), 400
+    return jsonify({'success': True, 'workspace_id': workspace_id, 'cache_cleared': False, 'message': 'Schema caching removed; nothing to clear.'})
 
 @app.route('/api/query', methods=['POST'])
 def process_query():
@@ -1572,113 +1214,34 @@ def process_query():
             'traceback': traceback_str
         })
 
-@app.route('/api/test-connection', methods=['POST'])
-def test_connection():
-    """Test the workspace connection"""
-    global agent
-    
+@app.route('/api/refresh-workspace-schema', methods=['GET', 'POST'])
+def refresh_workspace_schema():
+    """Compatibility refresh endpoint (stateless model).
+
+    Accepts optional JSON {"refetch": bool}. Always returns 200 with summary.
+    If workspace not initialized, returns success=False but does not error.
+    """
+    global workspace_id
+    if not workspace_id:
+        return jsonify({'success': False, 'workspace_id': None, 'message': 'Workspace not initialized', 'table_count': 0}), 200
     try:
-        if not agent:
-            return jsonify({
-                'success': False, 
-                'error': 'Agent not initialized. Please setup workspace first.'
-            })
-        
-        # Run the async connection test
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        
-        try:
-            result = loop.run_until_complete(
-                agent.process_natural_language("test my workspace connection")
-            )
-            return jsonify({
-                'success': True,
-                'result': result,
-                'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            })
-        finally:
-            loop.close()
-            
-    except Exception as e:
+        payload = request.get_json(silent=True) or {}
+        if not payload.get('refetch', True):
+            return jsonify({'success': True, 'workspace_id': workspace_id, 'message': 'No refetch requested', 'table_count': 0}), 200
+        result = get_workspace_schema(workspace_id)
+        if result.get('error'):
+            return jsonify({'success': False, 'workspace_id': workspace_id, 'error': result.get('error'), 'table_count': 0}), 200
+        tables = result.get('tables', [])
         return jsonify({
-            'success': False,
-            'error': str(e)
-        })
-
-# Category-specific examples route removed - examples now used internally for AI translation only
-
-@app.route('/api/explain', methods=['POST'])
-def explain_results():
-    """Explain the results of a previous query"""
-    global agent
-    
-    try:
-        if not agent:
-            return jsonify({
-                'success': False, 
-                'error': 'Agent not initialized. Please setup workspace first.'
-            })
-        
-        data = request.get_json()
-        query_result = data.get('query_result', '')
-        original_question = data.get('original_question', '')
-        
-        if not query_result:
-            return jsonify({'success': False, 'error': 'Query result is required for explanation'})
-        
-        # Run the async explanation using the dedicated explain_results method
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        
-        try:
-            explanation = loop.run_until_complete(
-                agent.explain_results(query_result, original_question)
-            )
-            return jsonify({
-                'success': True,
-                'explanation': explanation,
-                'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            })
-        finally:
-            loop.close()
-            
-    except Exception as e:
-        return jsonify({
-            'success': False,
-            'error': str(e)
-        })
-
-@app.route('/api/examples/<scenario>')
-def get_examples(scenario):
-    """Get example queries for a specific scenario"""
-    try:
-        import os
-    # Map scenarios to example files
-        scenario_files = {
-            'requests': 'app_insights_capsule/kql_examples/app_requests_kql_examples.md',
-            'exceptions': 'app_insights_capsule/kql_examples/app_exceptions_kql_examples.md',
-            'traces': 'app_insights_capsule/kql_examples/app_traces_kql_examples.md',
-            'dependencies': 'app_insights_capsule/kql_examples/app_dependencies_kql_examples.md',
-            'custom_events': 'app_insights_capsule/kql_examples/app_custom_events_kql_examples.md',
-            'page_views': 'app_insights_capsule/kql_examples/app_page_views_kql_examples.md',
-            'performance': 'app_insights_capsule/kql_examples/app_performance_kql_examples.md',
-            'usage': 'usage_kql_examples.md'
-        }
-        
-        if scenario not in scenario_files:
-            return jsonify({
-                'success': False,
-                'error': f'Unknown scenario: {scenario}'
-            })
-        
-        filename = scenario_files[scenario]
-        
-        if not os.path.exists(filename):
-            return jsonify({
-                'success': False,
-                'error': f'Example file not found: {filename}'
-            })
+            'success': True,
+            'workspace_id': workspace_id,
+            'refetched': True,
+            'table_count': len(tables),
+            'retrieved_at': result.get('retrieved_at'),
+            'source': result.get('source')
+        }), 200
+    except Exception as e:  # noqa: BLE001
+        return jsonify({'success': False, 'workspace_id': workspace_id, 'error': str(e), 'table_count': 0}), 200
         
         # Read and parse the example file
         with open(filename, 'r', encoding='utf-8') as file:
