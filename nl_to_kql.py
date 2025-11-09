@@ -608,7 +608,8 @@ def load_container_examples(nl_question: Optional[str] = None) -> Dict[str, str]
       - If no relevant selected examples found (selection empty), return an error indicator and no fallback examples.
     """
     root = os.path.dirname(os.path.abspath(__file__))
-    csv_path = os.path.join(root, "containers_capsule", "kql_examples", "public_shots.csv")
+    # Updated location: public_shots.csv moved one level up (embeddings only; not for suggestions)
+    csv_path = os.path.join(root, "containers_capsule", "public_shots.csv")
     if os.path.exists(csv_path):
         examples_struct = _parse_container_csv_examples(csv_path)
         print(f"[container-examples] source=csv path={csv_path} count={len(examples_struct)}")

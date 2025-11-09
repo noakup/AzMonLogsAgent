@@ -311,6 +311,51 @@ The system includes curated examples for:
 - **Performance** (`app_performance_kql_examples.md`): Performance metrics
 - **Usage Analytics** (`usage_kql_examples.md`): Usage patterns and statistics
 
+### 📦 Container & AKS CSV Example Ingestion
+
+Container-focused query examples (AKS pods, logs, events, nodes, metrics) are now ingested from **CSV files** instead of ad‑hoc markdown parsing for consistent structure and fast dedup:
+
+Source directory: `containers_capsule/kql_examples/`
+
+Files (used for suggestions):
+| File | Primary Table | Notes |
+|------|---------------|-------|
+| `ContainerLogV2_kql_examples.csv` | `ContainerLogV2` | Curated prompt→query pairs for container logs |
+| `KubePodInventory_kql_examples.csv` | `KubePodInventory` | Pod lifecycle / restart / scheduling examples |
+
+Embeddings-only corpus (NOT used for UI suggestions):
+| File | Purpose |
+|------|---------|
+| `containers_capsule/public_shots.csv` | Larger mixed container queries leveraged solely for NL→KQL embedding index construction.
+
+Loader module: `examples_loader.py`
+
+Behavior:
+1. Parses suggestion CSVs (`*_kql_examples.csv`) with columns: `Prompt`, `Query`.
+2. Normalizes query text (line endings, trims, collapses blank lines).
+3. Maps rows to their single primary table (based on filename).
+4. Deduplicates queries per table by normalized code.
+5. Caches parsed results using file mtimes (fast repeat calls on `/api/workspace-schema`).
+6. Merges into enrichment pipeline (precedence: `manifest > capsule-csv > docs`).
+
+The `public_shots.csv` file is intentionally excluded from suggestion ingestion to avoid overwhelming UI panels; it remains an embedding-only asset improving semantic few-shot selection quality.
+
+Returned queries include a `source` field (`capsule-csv`) and `file` for provenance, enabling the UI or downstream tooling to show origin badges.
+
+To refresh after editing a CSV, simply touch or save the file; the next request to `/api/workspace-schema` re-parses it automatically. Force rebuild logic can be added later if needed.
+
+Edge Cases & Safeguards:
+- Rows lacking a `Query` cell are skipped.
+- Queries with no detected table (in `public_shots.csv`) are ignored to avoid noisy unrelated suggestions.
+- Multi-table references (joins) are attached to every detected table so each table’s suggestion panel gains visibility.
+
+Future Improvements (Ideas):
+- Add lightweight semantic tagging (e.g. performance vs reliability) to each row.
+- Enable filtering by time-range intent (e.g. last 1h vs historical window) via regex hints.
+- Provide a `/api/capsule-queries` endpoint for direct inspection.
+
+This enhancement significantly improves container domain coverage and aligns ingestion with embedding index determinism and maintainability.
+
 ## 🛠️ Available Commands
 
 ```powershell

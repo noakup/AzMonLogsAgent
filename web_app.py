@@ -29,6 +29,7 @@ except Exception:  # Library might not be installed yet; schema fetch will be sk
     LogsQueryClient = None  # type: ignore
 from example_catalog import load_example_catalog
 from schema_manager import get_workspace_schema
+from examples_loader import load_capsule_csv_queries  # CSV capsule queries
 
 
 app = Flask(__name__)
@@ -198,23 +199,248 @@ def fetch_workspace_schema():
 
 @app.route('/api/workspace-schema', methods=['GET'])
 def workspace_schema():
-    """Return workspace schema including inferred resource types even on first fetch.
+    """Return (and lazily enrich) the workspace schema.
 
-    Behavior:
-      - If refresh in progress and cache exists -> return cache with status=refreshing
-      - If refresh in progress and no cache -> return pending
-      - If no cache -> trigger refresh and return pending
-      - On success -> status=ready with tables (each has name, resource_type)
+    Polling contract with frontend:
+      /api/workspace-schema-status returns status=ready once raw table list is cached.
+      Frontend then calls /api/workspace-schema and expects success=true & status=ready.
+
+    Bug fix: Previously we returned success=false (pending) even after status endpoint flipped
+    to ready because enrichment code lived in an unreachable duplicate route block. That caused
+    the UI polling loop: "Ready status but full fetch not successful; retrying".
+
+    Logic now:
+      - If no workspace set -> uninitialized
+      - If raw cache present but not enriched -> perform enrichment synchronously on this request
+      - If enriched cache present -> return immediately
+      - If no cache & not in progress -> start background fetch and return pending
     """
     global workspace_id, _workspace_schema_cache
     if not workspace_id:
-        return jsonify({'success': False, 'error': 'Workspace not initialized. Call /api/setup first.', 'status': 'uninitialized'})
+        return jsonify({'success': False, 'status': 'uninitialized', 'error': 'Workspace not initialized. Call /api/setup first.'})
+
     in_progress = _workspace_schema_refresh_flags.get(workspace_id, False)
-    if workspace_id in _workspace_schema_cache:
-        cached = _workspace_schema_cache[workspace_id]
-        status = 'ready' if not in_progress else 'refreshing'
-        return jsonify({'success': True, 'status': status, **cached})
-    if not in_progress:
+    cached = _workspace_schema_cache.get(workspace_id)
+
+    # If we already enriched, fast path
+    if cached and cached.get('enriched') and 'table_queries' in cached:
+        tq_count = sum(len(v) for v in cached.get('table_queries', {}).values())
+        print(f"[Workspace Schema] Returning enriched cached schema tables={len(cached.get('tables', []))} table_queries_total={tq_count}")
+        return jsonify({'success': True, 'status': 'ready' if not in_progress else 'refreshing', **cached})
+
+    # If raw cache exists but not enriched yet, enrich now (was previously unreachable)
+    if cached and not cached.get('enriched'):
+        print("[Workspace Schema] Raw cache present (no enrichment); performing enrichment now")
+        # Manifest scan
+        manifest_data = _scan_manifest_resource_types()
+        # Build case-insensitive manifest table index so workspace table name case differences don't prevent matches
+        manifest_tables_index: dict[str, list[str]] = {}
+        manifest_tables_index_lc: dict[str, list[str]] = {}
+        for rt, tbls in manifest_data.get('resource_type_tables', {}).items():
+            for t in tbls:
+                manifest_tables_index.setdefault(t, []).append(rt)
+                manifest_tables_index_lc.setdefault(t.lower(), []).append(rt)
+        workspace_tables = cached.get('tables', [])
+        enriched = []
+        matched = 0
+        unmatched = []
+        resource_type_subset = {}
+        provider_summary = {}
+        for entry in workspace_tables:
+            tname = entry.get('name')
+            ws_rt = entry.get('resource_type') or 'Unknown'
+            # Try exact match first, then case-insensitive match
+            manifest_rts = manifest_tables_index.get(tname, []) or manifest_tables_index_lc.get(tname.lower(), [])
+            in_manifest = bool(manifest_rts)
+            if in_manifest:
+                matched += 1
+                for mrt in manifest_rts:
+                    resource_type_subset.setdefault(mrt, []).append(tname)
+                    provider = mrt.split('/')[0]
+                    provider_summary.setdefault(provider, {'tables': 0, 'resource_types': set()})
+                    provider_summary[provider]['tables'] += 1
+                    provider_summary[provider]['resource_types'].add(mrt)
+            else:
+                unmatched.append(tname)
+            enriched.append({
+                'name': tname,
+                'workspace_resource_type': ws_rt,
+                'in_manifest': in_manifest,
+                'manifest_resource_type': manifest_rts[0] if manifest_rts else None,
+                'manifest_resource_types': manifest_rts,
+                'provider': (manifest_rts[0].split('/')[0] if manifest_rts else None)
+            })
+        # Fallback: if a workspace table has a resource_type pattern provider/type and wasn't matched to manifest, include it
+        for e in enriched:
+            if (not e['in_manifest']) and e.get('workspace_resource_type') and '/' in e['workspace_resource_type'] and e['workspace_resource_type'].lower() != 'unknown':
+                rt_fallback = e['workspace_resource_type']  # Fallback mapping for non-manifest tables using workspace_resource_type
+                resource_type_subset.setdefault(rt_fallback, []).append(e['name'])
+                provider = rt_fallback.split('/')[0]
+                provider_summary.setdefault(provider, {'tables': 0, 'resource_types': set()})
+                provider_summary[provider]['tables'] += 1
+                provider_summary[provider]['resource_types'].add(rt_fallback)
+        # Recompute unmatched AFTER fallback mappings to avoid dual classification.
+        mapped_tables = set()
+        for rt, tbls in resource_type_subset.items():
+            # Exclude any existing synthetic group from mapped calc (will rebuild)
+            if rt == 'unknown/unmatched':
+                continue
+            for t in tbls:
+                mapped_tables.add(t)
+        unmatched_final = [t for t in unmatched if t not in mapped_tables]
+        # Add synthetic grouping exactly once (only truly unmapped tables)
+        if unmatched_final:
+            resource_type_subset['unknown/unmatched'] = list(unmatched_final)
+            provider_summary.setdefault('unknown', {'tables': 0, 'resource_types': set()})
+            provider_summary['unknown']['tables'] += len(unmatched_final)
+            provider_summary['unknown']['resource_types'].add('unknown/unmatched')
+        provider_summary_out = {
+            prov: {
+                'tables': info['tables'],
+                'resource_types': len(info['resource_types']) if isinstance(info['resource_types'], set) else info['resource_types']
+            } for prov, info in provider_summary.items()
+        }
+        # Build per-table query list: manifest > capsule CSV > docs
+        manifest_table_queries = manifest_data.get('table_queries', {}) or {}
+        capsule_csv_queries = {}
+        try:
+            capsule_csv_queries = load_capsule_csv_queries()
+            total_capsule = sum(len(v) for v in capsule_csv_queries.values())
+            print(f"[Capsule CSV] tables={list(capsule_csv_queries.keys())} total_queries={total_capsule}")
+        except Exception as e:  # noqa: BLE001
+            print(f"[Workspace Schema] Capsule CSV ingestion error: {e}")
+
+        def _normalize_code(code: str) -> str:
+            if not isinstance(code, str):
+                return ''
+            c = code.replace('\r\n', '\n').replace('\r', '\n').strip()
+            while '\n\n' in c:
+                c = c.replace('\n\n', '\n')
+            return c
+
+        workspace_table_queries = {}
+        tables_with_manifest_queries = 0
+        tables_with_capsule_queries = 0
+        tables_with_docs_queries = 0
+        for tinfo in enriched:
+            tname = tinfo['name']
+            combined = []
+            m_list = manifest_table_queries.get(tname) or []
+            if m_list:
+                for q in m_list:
+                    if q.get('name'):
+                        combined.append({
+                            'name': q.get('name'),
+                            'description': q.get('description'),
+                            'code': q.get('code') if q.get('code') else None,
+                            'source': 'manifest'
+                        })
+                tables_with_manifest_queries += 1
+            c_list = capsule_csv_queries.get(tname) or []
+            if c_list:
+                for q in c_list:
+                    if q.get('name') and q.get('code'):
+                        norm_code = _normalize_code(q.get('code'))
+                        if not any(_normalize_code(existing.get('code')) == norm_code for existing in combined if existing.get('code')):
+                            combined.append({
+                                'name': q.get('name'),
+                                'description': q.get('description') or '',
+                                'code': q.get('code'),
+                                'source': q.get('source') or 'capsule-csv',
+                                'file': q.get('file')
+                            })
+                tables_with_capsule_queries += 1
+            if not DOCS_ENRICH_DISABLE:
+                docs_q = _fetch_table_docs_queries(tname)
+                if docs_q:
+                    added_docs = 0
+                    for q in docs_q:
+                        if q.get('name') and q.get('code'):
+                            norm_code = _normalize_code(q.get('code'))
+                            if not any(_normalize_code(existing.get('code')) == norm_code for existing in combined if existing.get('code')):
+                                combined.append({
+                                    'name': q.get('name'),
+                                    'description': q.get('description'),
+                                    'code': q.get('code'),
+                                    'source': 'docs'
+                                })
+                                added_docs += 1
+                    if added_docs:
+                        tables_with_docs_queries += 1
+            if combined:
+                workspace_table_queries[tname] = combined
+                src_counts = {
+                    'manifest': sum(1 for q in combined if q.get('source') == 'manifest'),
+                    'capsule-csv': sum(1 for q in combined if q.get('source') == 'capsule-csv'),
+                    'docs': sum(1 for q in combined if q.get('source') == 'docs')
+                }
+                print(f"[QueryMerge] table={tname} total={len(combined)} breakdown={src_counts}")
+            else:
+                print(f"[QueryMerge] table={tname} no queries merged (manifest={len(m_list)} capsule={len(capsule_csv_queries.get(tname, []))})")
+
+        response = {
+            'success': True,
+            'status': 'ready',
+            'workspace_id': workspace_id,
+            'counts': {
+                'workspace_tables': len(workspace_tables),
+                'manifest_tables': sum(len(v) for v in manifest_data.get('resource_type_tables', {}).values()),
+                'matched_tables': matched,
+                'unmatched_tables': len(unmatched_final),
+                'resource_types_with_data': len(resource_type_subset)
+            },
+            'tables': enriched,
+            'resource_type_tables': resource_type_subset,
+            'providers': provider_summary_out,
+            'unmatched_tables': unmatched_final,
+            'retrieved_at': cached.get('retrieved_at'),
+            'doc_enrichment': {
+                'performed': False,  # doc enrichment of resource type disabled in current flow
+                'enriched_tables': 0,
+                'cache_size': len(_ms_docs_table_resource_type_cache),
+                'disabled': DOCS_ENRICH_DISABLE,
+                'limits': {
+                    'max_tables': DOCS_ENRICH_MAX_TABLES,
+                    'max_seconds': DOCS_ENRICH_MAX_SECONDS,
+                    'column_fetch': DOCS_ENRICH_COLUMN_FETCH
+                }
+            },
+            'table_metadata': {},
+            'table_queries': workspace_table_queries,
+            'query_enrichment': {
+                'tables_with_manifest_queries': tables_with_manifest_queries,
+                'tables_with_capsule_csv_queries': tables_with_capsule_queries,
+                'tables_with_docs_queries': tables_with_docs_queries
+            }
+        }
+        # Metadata enrichment (description/columns) with time budget
+        try:
+            manifest_meta = manifest_data.get('table_metadata', {}) or {}
+            t_meta_start = time.time()
+            for tinfo in enriched:
+                if (time.time() - t_meta_start) > DOCS_META_MAX_SECONDS:
+                    print(f"[Workspace Schema] Metadata enrichment time budget exceeded ({DOCS_META_MAX_SECONDS}s); truncating.")
+                    break
+                tname = tinfo['name']
+                meta = manifest_meta.get(tname, {}).copy()
+                if not DOCS_ENRICH_DISABLE and (not meta.get('description') or not meta.get('columns')):
+                    docs_meta = _fetch_table_docs_full(tname)
+                    if docs_meta:
+                        if not meta.get('description') and docs_meta.get('description'):
+                            meta['description'] = docs_meta['description']
+                        if not meta.get('columns') and docs_meta.get('columns'):
+                            meta['columns'] = docs_meta['columns']
+                response['table_metadata'][tname] = meta
+        except Exception as e:  # noqa: BLE001
+            print(f"[Workspace Schema] Metadata enrichment error: {e}")
+        enriched_cache = {k: v for k, v in response.items() if k not in ('success', 'status')}
+        enriched_cache['enriched'] = True
+        _workspace_schema_cache[workspace_id] = {**cached, **enriched_cache}
+        print(f"[Workspace Schema] Enrichment complete cached_update tables={len(enriched_cache.get('tables', []))} table_queries_total={sum(len(v) for v in enriched_cache.get('table_queries', {}).values())}")
+        return jsonify(response)
+
+    # No cache yet: ensure background fetch started
+    if not cached and not in_progress:
         threading.Thread(target=_background_fetch_workspace_tables, args=(workspace_id,), daemon=True).start()
         _workspace_schema_refresh_flags[workspace_id] = True
     return jsonify({'success': False, 'status': 'pending', 'in_progress': True})
@@ -564,30 +790,102 @@ def _fetch_table_docs_queries(table_name: str, timeout: float = 6.0) -> list:
 
     # Build per-table queries mapping (manifest first, docs fallback)
     manifest_table_queries = manifest_data.get('table_queries', {}) or {}
+    capsule_csv_queries = {}
+    try:
+        capsule_csv_queries = load_capsule_csv_queries()
+        # Debug summary of capsule CSV ingestion
+        total_capsule_query_count = sum(len(v) for v in capsule_csv_queries.values())
+        print(f"[Capsule CSV] tables={list(capsule_csv_queries.keys())} total_queries={total_capsule_query_count}")
+        for tbl, qlist in capsule_csv_queries.items():
+            preview = [q.get('name','<noname>')[:60] for q in qlist[:5]]
+            print(f"[Capsule CSV] table={tbl} count={len(qlist)} preview={preview}")
+    except Exception as e:  # noqa: BLE001
+        print(f"[Workspace Schema] Capsule CSV ingestion error: {e}")
+
+    def _normalize_code(code: str) -> str:
+        if not isinstance(code, str):
+            return ''
+        c = code.replace('\r\n', '\n').replace('\r', '\n').strip()
+        while '\n\n' in c:
+            c = c.replace('\n\n', '\n')
+        return c
+
     workspace_table_queries = {}
     tables_with_manifest_queries = 0
+    tables_with_capsule_queries = 0
     tables_with_docs_queries = 0
     for tinfo in enriched:
         tname = tinfo['name']
-        m_list = manifest_table_queries.get(tname)
+        combined: list[dict] = []
+        # 1. Manifest queries (highest precedence)
+        m_list = manifest_table_queries.get(tname) or []
         if m_list:
-            workspace_table_queries[tname] = m_list
+            for q in m_list:
+                # Ensure uniform shape; manifest queries already include name/description
+                if q.get('name'):
+                    combined.append({
+                        'name': q.get('name'),
+                        'description': q.get('description'),
+                        'code': q.get('code') if q.get('code') else None,
+                        'source': 'manifest'
+                    })
             tables_with_manifest_queries += 1
-        else:
-            if not DOCS_ENRICH_DISABLE:
-                docs_q = _fetch_table_docs_queries(tname)
-                if docs_q:
-                    workspace_table_queries[tname] = []
-                    for q in docs_q:
-                        if q.get('name') and q.get('code'):
-                            workspace_table_queries[tname].append({
+        # 2. Capsule CSV queries (second precedence)
+        c_list = capsule_csv_queries.get(tname) or []
+        if c_list:
+            for q in c_list:
+                if q.get('name') and q.get('code'):
+                    norm_code = _normalize_code(q.get('code'))
+                    if not any(_normalize_code(existing.get('code')) == norm_code for existing in combined if existing.get('code')):
+                        combined.append({
+                            'name': q.get('name'),
+                            'description': q.get('description') or '',
+                            'code': q.get('code'),
+                            'source': q.get('source') or 'capsule-csv',
+                            'file': q.get('file')
+                        })
+            tables_with_capsule_queries += 1
+        # 3. Docs queries (fallback only adds if new code)
+        if not DOCS_ENRICH_DISABLE:
+            docs_q = _fetch_table_docs_queries(tname)
+            if docs_q:
+                added_docs = 0
+                for q in docs_q:
+                    if q.get('name') and q.get('code'):
+                        norm_code = _normalize_code(q.get('code'))
+                        if not any(_normalize_code(existing.get('code')) == norm_code for existing in combined if existing.get('code')):
+                            combined.append({
                                 'name': q.get('name'),
                                 'description': q.get('description'),
                                 'code': q.get('code'),
                                 'source': 'docs'
                             })
-                    if workspace_table_queries.get(tname):
-                        tables_with_docs_queries += 1
+                            added_docs += 1
+                if added_docs:
+                    tables_with_docs_queries += 1
+        if combined:
+            workspace_table_queries[tname] = combined
+            # Debug per-table merged result
+            src_counts = {
+                'manifest': sum(1 for q in combined if q.get('source') == 'manifest'),
+                'capsule-csv': sum(1 for q in combined if q.get('source') == 'capsule-csv'),
+                'docs': sum(1 for q in combined if q.get('source') == 'docs')
+            }
+            print(f"[QueryMerge] table={tname} total={len(combined)} breakdown={src_counts}")
+        else:
+            print(f"[QueryMerge] table={tname} no queries merged (manifest={len(m_list)} capsule={len(capsule_csv_queries.get(tname, []))})")
+
+    # Final debug: any query objects missing required fields
+    missing_fields_total = 0
+    for tbl, qlist in workspace_table_queries.items():
+        for q in qlist:
+            if not q.get('name') or not q.get('code'):
+                print(f"[QueryMerge][WARN] table={tbl} query missing name/code -> {q}")
+                missing_fields_total += 1
+    if missing_fields_total:
+        print(f"[QueryMerge][WARN] total_incomplete_queries={missing_fields_total}")
+    else:
+        print("[QueryMerge] all merged queries have name & code")
 
     response = {
         'success': True,
@@ -621,6 +919,7 @@ def _fetch_table_docs_queries(table_name: str, timeout: float = 6.0) -> list:
         'table_queries': workspace_table_queries,
         'query_enrichment': {
             'tables_with_manifest_queries': tables_with_manifest_queries,
+            'tables_with_capsule_csv_queries': tables_with_capsule_queries,
             'tables_with_docs_queries': tables_with_docs_queries
         }
     }
@@ -644,6 +943,11 @@ def _fetch_table_docs_queries(table_name: str, timeout: float = 6.0) -> list:
     except Exception as e:  # noqa: BLE001
         print(f"[Workspace Schema] Metadata enrichment error: {e}")
     # Verbose schema dump removed per request to reduce console noise.
+    # Persist enriched response back into cache (exclude success/status to keep shape stable for early return)
+    enriched_cache = {k: v for k, v in response.items() if k not in ('success', 'status')}
+    enriched_cache['enriched'] = True
+    _workspace_schema_cache[workspace_id] = {**_workspace_schema_cache.get(workspace_id, {}), **enriched_cache}
+    print(f"[Workspace Schema] Enrichment complete cached_update tables={len(enriched_cache.get('tables', []))} table_queries_total={sum(len(v) for v in enriched_cache.get('table_queries', {}).values())}")
     return jsonify(response)
 
 @app.route('/api/workspace-schema-status', methods=['GET'])

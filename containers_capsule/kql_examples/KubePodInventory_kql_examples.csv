@@ -1,0 +1,2 @@
+Prompt,Query
+How long are pods pending in finance namespace?, "KubePodInventory | where TimeGenerated > ago(1h) | where Namespace == 'finance' and PodStatus == 'Pending' | summarize FirstSeen=min(TimeGenerated), LastSeen=max(TimeGenerated), Samples=count() by PodName | extend PendingMinutes = datetime_diff('minute', LastSeen, FirstSeen) | order by PendingMinutes desc"

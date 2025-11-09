@@ -17,7 +17,8 @@ except Exception:
 
 def _collect_container_examples() -> list[dict[str,str]]:
     """Load container domain examples strictly from CSV; no markdown fallback."""
-    csv_path = os.path.join(os.getcwd(), "containers_capsule", "kql_examples", "public_shots.csv")
+    # Updated path: embeddings-only corpus moved outside kql_examples
+    csv_path = os.path.join(os.getcwd(), "containers_capsule", "public_shots.csv")
     import csv
     out: list[dict[str,str]] = []
     if not os.path.exists(csv_path):
