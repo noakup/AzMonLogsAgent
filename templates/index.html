@@ -3419,7 +3419,8 @@ async function processQuestionWithRetry(question) {
             Object.values(wsQueries).forEach(qlist => {
                 if(!Array.isArray(qlist)) return;
                 qlist.forEach(q => {
-                    const label = (q.description || q.name || '').trim();
+                    // Prefer explicit prompt if present; fallback to legacy name
+                    const label = (q.prompt || q.name || q.description || '').trim();
                     if(!label) return;
                     pool.push({label, weight: q.code ? 1.2 : 1});
                 });

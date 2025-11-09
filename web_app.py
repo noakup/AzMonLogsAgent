@@ -680,27 +680,166 @@ def workspace_schema_status():
 # ---------------------------------------------------------------------------
 @app.route('/api/workspace-schema', methods=['GET'])
 def workspace_schema():
+    """Enriched workspace schema (stateless) with merged query suggestions.
+
+    Returns:
+      success: bool
+      status: ready|empty|uninitialized|error
+      workspace_id: str|None
+      tables: [ { name, resource_type, manifest_resource_types? } ]
+      counts: { workspace_tables, tables_with_manifest_queries, tables_with_capsule_csv_queries, tables_with_docs_queries }
+      table_queries: { tableName: [ { name, description, code, source, file? } ] }
+      table_metadata: { tableName: { description, columns:[{name,type,description}] } }
+      doc_enrichment: { disabled: bool }
+    """
     global workspace_id
     if not workspace_id:
-        return jsonify({'success': False, 'status': 'uninitialized', 'workspace_id': None, 'error': 'Workspace not initialized'}), 400
+        return jsonify({'success': False, 'status': 'uninitialized', 'workspace_id': None, 'tables': [], 'counts': {}, 'table_queries': {}, 'table_metadata': {}, 'error': 'Workspace not initialized'}), 400
     try:
-        result = get_workspace_schema(workspace_id)
-        if result.get('error'):
-            return jsonify({'success': False, 'status': 'error', 'workspace_id': workspace_id, 'error': result.get('error')}), 500
-        tables = result.get('tables', [])
+        # Fetch workspace tables
+        ws_result = get_workspace_schema(workspace_id)
+        if ws_result.get('error'):
+            return jsonify({'success': False, 'status': 'error', 'workspace_id': workspace_id, 'error': ws_result.get('error'), 'tables': [], 'table_queries': {}, 'table_metadata': {}}), 500
+        workspace_tables = ws_result.get('tables', [])
+
+        # Load manifest (resource types + manifest queries)
+        manifest_tables_index = {}
+        manifest_table_queries = {}
+        manifest_table_metadata = {}
+        try:
+            from schema_manager import SchemaManager
+            mgr = SchemaManager.get()
+            mgr.load_manifest(force=False)
+            manifest_cache = mgr._manifest_cache or {}
+            manifest_tables_index = manifest_cache.get('resource_type_tables', {}) or {}
+            # Build reverse index for resource types per table
+            reverse_index = {}
+            for rt, tbls in manifest_tables_index.items():
+                for t in tbls:
+                    reverse_index.setdefault(t, []).append(rt)
+            manifest_table_queries = manifest_cache.get('table_queries', {}) or {}
+            manifest_table_metadata = manifest_cache.get('table_metadata', {}) or {}
+        except Exception as me:  # noqa: BLE001
+            print(f"[WorkspaceSchema] Manifest load error: {me}")
+            reverse_index = {}
+
+        # Capsule CSV queries
+        try:
+            from examples_loader import load_capsule_csv_queries
+            capsule_csv_queries = load_capsule_csv_queries()
+        except Exception as ce:  # noqa: BLE001
+            print(f"[WorkspaceSchema] Capsule CSV ingestion error: {ce}")
+            capsule_csv_queries = {}
+
+        # Docs queries (optional, only if not disabled)
+        tables_with_docs_queries = 0
+        def _normalize_code(code: str) -> str:
+            if not isinstance(code, str):
+                return ''
+            c = code.replace('\r\n', '\n').replace('\r', '\n').strip()
+            while '\n\n' in c:
+                c = c.replace('\n\n', '\n')
+            return c
+
+        table_queries = {}
+        tables_with_manifest_queries = 0
+        tables_with_capsule_queries = 0
+        for entry in workspace_tables:
+            tname = entry.get('name')
+            combined = []
+            # Manifest queries first
+            m_list = manifest_table_queries.get(tname) or []
+            if m_list:
+                for q in m_list:
+                    if q.get('name'):
+                        combined.append({
+                            'name': q.get('name'),
+                            'description': q.get('description'),
+                            'code': q.get('code') if q.get('code') else None,
+                            'source': 'manifest'
+                        })
+                tables_with_manifest_queries += 1
+            # Capsule CSV queries second
+            c_list = capsule_csv_queries.get(tname) or []
+            if c_list:
+                for q in c_list:
+                    if q.get('name') and q.get('code'):
+                        norm_code = _normalize_code(q.get('code'))
+                        if not any(_normalize_code(existing.get('code')) == norm_code for existing in combined if existing.get('code')):
+                            combined.append({
+                                'name': q.get('name'),
+                                'description': q.get('description') or '',
+                                'code': q.get('code'),
+                                'source': q.get('source') or 'capsule-csv',
+                                'file': q.get('file')
+                            })
+                tables_with_capsule_queries += 1
+            # Docs queries third (only if enabled)
+            if not DOCS_ENRICH_DISABLE:
+                docs_q = _fetch_table_docs_queries(tname)
+                if docs_q:
+                    added_docs = 0
+                    for q in docs_q:
+                        if q.get('name') and q.get('code'):
+                            norm_code = _normalize_code(q.get('code'))
+                            if not any(_normalize_code(existing.get('code')) == norm_code for existing in combined if existing.get('code')):
+                                combined.append({
+                                    'name': q.get('name'),
+                                    'description': q.get('description'),
+                                    'code': q.get('code'),
+                                    'source': 'docs'
+                                })
+                                added_docs += 1
+                    if added_docs:
+                        tables_with_docs_queries += 1
+            if combined:
+                table_queries[tname] = combined
+
+        # Attach manifest resource type info to tables
+        reverse_index = {}
+        for rt, tbls in manifest_tables_index.items():
+            for t in tbls:
+                reverse_index.setdefault(t, []).append(rt)
+        enriched_tables = []
+        for entry in workspace_tables:
+            tname = entry.get('name')
+            enriched_tables.append({
+                'name': tname,
+                'resource_type': entry.get('resource_type') or 'Unknown',
+                'manifest_resource_types': reverse_index.get(tname, [])
+            })
+
+        # Build minimal table metadata (manifest first, docs fallback if enabled)
+        table_metadata_out = {}
+        for tname in [e['name'] for e in enriched_tables]:
+            meta = manifest_table_metadata.get(tname, {}).copy()
+            if not DOCS_ENRICH_DISABLE and (not meta.get('description') or not meta.get('columns')):
+                docs_meta = _fetch_table_docs_full(tname)
+                if docs_meta:
+                    if not meta.get('description') and docs_meta.get('description'):
+                        meta['description'] = docs_meta['description']
+                    if not meta.get('columns') and docs_meta.get('columns'):
+                        meta['columns'] = docs_meta['columns']
+            table_metadata_out[tname] = meta
+
+        status = 'ready' if enriched_tables else 'empty'
         return jsonify({
             'success': True,
-            'status': 'ready',  # legacy clients expect 'ready' after pending; we simplify to immediate ready
+            'status': status,
             'workspace_id': workspace_id,
-            'tables': tables,
+            'tables': enriched_tables,
             'counts': {
-                'workspace_tables': len(tables)
+                'workspace_tables': len(enriched_tables),
+                'tables_with_manifest_queries': tables_with_manifest_queries,
+                'tables_with_capsule_csv_queries': tables_with_capsule_queries,
+                'tables_with_docs_queries': tables_with_docs_queries
             },
-            'retrieved_at': result.get('retrieved_at'),
-            'source': result.get('source'),
+            'table_queries': table_queries,
+            'table_metadata': table_metadata_out,
+            'retrieved_at': ws_result.get('retrieved_at'),
+            'source': ws_result.get('source'),
             'doc_enrichment': {
-                'disabled': bool(os.environ.get('DOCS_ENRICH_DISABLE')),
-                'performed': False
+                'disabled': DOCS_ENRICH_DISABLE
             },
             'error': None
         })
@@ -912,46 +1051,43 @@ def _scan_manifest_resource_types() -> dict:
                 resource_types.add(tval)
                 current_resource_type = tval
                 resource_type_tables.setdefault(current_resource_type, [])
-            # Possible query collections
-            for qkey in ('queries', 'sampleQueries', 'queryExamples'):
-                if qkey in obj and isinstance(obj[qkey], list):
-                    for q in obj[qkey]:
-                        if isinstance(q, dict):
-                            q_name = q.get('name') or q.get('title') or q.get('queryName')
-                            q_desc = q.get('description') or q.get('summary') or ''
-                            q_table = q.get('table') or q.get('tableName') or q.get('primaryTable')
-                            q_path = q.get('path') or q.get('file') or q.get('kqlFile') or q.get('kql_path')
-                            # Collect additional related tables arrays if present
-                            related_tables = set()
-                            for rt_key in ('relatedTables', 'related_tables', 'tables', 'relatedTableNames'):
-                                val = q.get(rt_key)
-                                if isinstance(val, list):
-                                    for tval in val:
-                                        if isinstance(tval, str) and tval:
-                                            related_tables.add(tval)
-                            if q_table:
-                                related_tables.add(q_table)
-                            if q_name:
-                                q_record = {
-                                    'resource_type': current_resource_type,
-                                    'provider': (current_resource_type.split('/')[0] if current_resource_type else None),
-                                    'name': q_name,
-                                    'description': q_desc,
-                                    'table': q_table,
-                                    'path': q_path,
-                                    'manifest_file': manifest_path,
-                                    'related_tables': sorted(related_tables) if related_tables else []
-                                }
-                                extracted_queries.append(q_record)
-                                # Index by each related table
-                                for rt_table in related_tables:
-                                    table_queries.setdefault(rt_table, []).append({
-                                        'name': q_name,
-                                        'description': q_desc,
-                                        'resource_type': current_resource_type,
-                                        'provider': (current_resource_type.split('/')[0] if current_resource_type else None),
-                                        'manifest_file': manifest_path
-                                    })
+            # Strict query collection: ONLY process items under a 'queries' list.
+            # Each query's related tables come EXCLUSIVELY from its 'relatedTables' array.
+            if 'queries' in obj and isinstance(obj['queries'], list):
+                for q in obj['queries']:
+                    if not isinstance(q, dict):
+                        continue
+                    q_name = q.get('name') or q.get('title') or q.get('queryName')
+                    if not q_name:
+                        continue  # skip nameless entries
+                    q_desc = q.get('description') or q.get('summary') or ''
+                    q_path = q.get('path') or q.get('file') or q.get('kqlFile') or q.get('kql_path')
+                    # Only consider 'relatedTables' as authoritative mapping
+                    related_list = q.get('relatedTables')
+                    if not isinstance(related_list, list) or not related_list:
+                        # If no relatedTables provided, we treat it as global (no table association)
+                        related_tables = []
+                    else:
+                        # Filter to non-empty string table names
+                        related_tables = [t for t in related_list if isinstance(t, str) and t]
+                    q_record = {
+                        'resource_type': current_resource_type,
+                        'provider': (current_resource_type.split('/')[0] if current_resource_type else None),
+                        'name': q_name,
+                        'description': q_desc,
+                        'path': q_path,
+                        'manifest_file': manifest_path,
+                        'related_tables': sorted(related_tables)
+                    }
+                    extracted_queries.append(q_record)
+                    for rt_table in related_tables:
+                        table_queries.setdefault(rt_table, []).append({
+                            'name': q_name,
+                            'description': q_desc,
+                            'resource_type': current_resource_type,
+                            'provider': (current_resource_type.split('/')[0] if current_resource_type else None),
+                            'manifest_file': manifest_path
+                        })
             if 'tables' in obj and isinstance(obj['tables'], list):
                 for tbl in obj['tables']:
                     if isinstance(tbl, dict):

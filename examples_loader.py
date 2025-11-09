@@ -68,11 +68,13 @@ def _parse_csv_file(path: str, primary_table: str | None, multi_detect: bool) ->
     if not os.path.exists(path):
         return results
     try:
-        with open(path, 'r', encoding='utf-8') as f:
+        with open(path, 'r', encoding='utf-8-sig') as f:
             reader = csv.DictReader(f)
             for row in reader:
-                prompt = (row.get('Prompt') or '').strip()
+                print(f"[ExamplesLoader] Parsed entry for row: {row}")
+                prompt = row.get('Prompt')
                 query = row.get('Query')
+                print(f"row: {row}, prompt: {prompt}, query: {query}")
                 if query is None:
                     # Some rows might have differently cased headers; attempt fallback
                     query = row.get('query') or ''
@@ -89,9 +91,12 @@ def _parse_csv_file(path: str, primary_table: str | None, multi_detect: bool) ->
                     tables = []
                 if not tables:
                     continue  # skip entries with no detected tables for public shots
-                # Build entry (Prompt becomes display name; fallback to first line snippet)
-                name = prompt or query.split('\n', 1)[0][:120]
+                # Build entry (Prompt becomes display name)
+                name = prompt
+                # Preserve both 'prompt' (original human-friendly text) and 'name' (legacy display fallback)
+                print(f"[ExamplesLoader] Parsed entry for name: {name}, prompt: {prompt}, code: {query}")
                 entry = {
+                    'prompt': prompt,  # may be empty string if not provided
                     'name': name,
                     'code': query,
                     'source': 'capsule-csv',

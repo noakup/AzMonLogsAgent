@@ -59,69 +59,7 @@ graph TD
 | LatencyMs | `toint(extract('latency[=:]\\s?([0-9]+)ms',1,Plain))` |
 | StackTracePresent | Keywords or JSON key 'stack' |
 
-## 5. Sample KQL Blocks
-### Error Rate Per Workload
-```kusto
-ContainerLogV2
-| where TimeGenerated > ago(1h)
-| extend Labels = KubernetesMetadata.podLabels
-| extend WorkloadName = tostring(coalesce(Labels['app.kubernetes.io/name'], Labels['app'], PodName))
-| extend IsError = LogLevel in~ ('CRITICAL','ERROR') or LogSource == 'stderr'
-| summarize Errors=countif(IsError), Total=count() by WorkloadName, PodNamespace
-| extend ErrorRatePct = 100.0 * Errors / iff(Total==0,1,Total)
-| top 20 by ErrorRatePct desc
-```
-
-### Latency Extraction (>500ms)
-```kusto
-ContainerLogV2
-| where TimeGenerated > ago(1h)
-| extend Plain = tostring(LogMessage)
-| extend LatencyMs = toint(extract('latency[=:]\\s?([0-9]+)ms',1, Plain))
-| where LatencyMs > 500
-| project TimeGenerated, PodName, ContainerName, LatencyMs, Plain
-```
-
-### Structured JSON Status Filtering
-```kusto
-ContainerLogV2
-| where typeof(LogMessage)=='dynamic'
-| where tostring(LogMessage.status) == '500'
-| project TimeGenerated, PodName, ContainerName, LogMessage
-```
-
-### Stack Trace Detection
-```kusto
-ContainerLogV2
-| where TimeGenerated > ago(1d)
-| extend Plain = tostring(LogMessage)
-| where Plain has_any ('Exception','Traceback',' at ')
-| summarize TraceLines=count() by ContainerName, PodNamespace
-```
-
-### Noisy Containers (Top Log Volume)
-```kusto
-ContainerLogV2
-| where TimeGenerated > ago(1h)
-| summarize Lines=count() by ContainerName, PodNamespace
-| top 20 by Lines desc
-```
-
-## 6. Crash Loop Correlation Example
-```kusto
-KubePodInventory
-| where TimeGenerated > ago(1h)
-| summarize MaxRestarts=max(RestartCount) by PodName, Namespace
-| join kind=inner (
-  ContainerLogV2
-  | where TimeGenerated > ago(1h)
-  | extend IsError = LogLevel in~ ('CRITICAL','ERROR') or LogSource=='stderr'
-  | summarize RecentErrors=countif(IsError) by PodName, PodNamespace
-) on $left.PodName == $right.PodName and $left.Namespace == $right.PodNamespace
-| order by RecentErrors desc
-```
-
-## 7. Intent Mapping
+## 5. Intent Mapping
 | Intent | Indicators | Strategy |
 |--------|-----------|----------|
 | Error Rate | "error rate", "failures" | Aggregate IsError by workload/time bucket |
@@ -131,7 +69,7 @@ KubePodInventory
 | Stack Traces | "exceptions" | Pattern match / keyword heuristic |
 | Status Code | "500 errors" | JSON field filter |
 
-## 8. Heuristics Checklist
+## 6. Heuristics Checklist
 1. Default timeframe last 1h.
 2. Derive workload name via labels priority.
 3. Distinguish structured vs plain.
