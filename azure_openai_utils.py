@@ -36,40 +36,18 @@ def select_api_version(deployment: str, api_version_override: Optional[str]) -> 
     return DEFAULT_STANDARD_API_VERSION, False
 
 class AzureOpenAIConfig:
-    def __init__(
-        self,
-        endpoint: str,
-        api_key: str,
-        deployment: str,
-        api_version: str,
-        is_override: bool,
-        embedding_endpoint: Optional[str] = None,
-        embedding_model: Optional[str] = None,
-        embedding_deployment: Optional[str] = None,
-        embedding_api_version: Optional[str] = None,
-        embedding_api_key: Optional[str] = None,
-    ):
-        """Configuration holder.
-
-        Backwards compatibility: older tests construct AzureOpenAIConfig without embedding_* params.
-        We now allow those to be omitted; sensible defaults are inferred:
-          - embedding_endpoint: falls back to endpoint
-          - embedding_model / deployment: fallback to 'text-embedding-3-large' if not supplied
-          - embedding_api_version: defaults to 2024-02-01 (public preview standard embeddings)
-          - embedding_api_key: falls back to api_key
-        """
-        self.endpoint = endpoint.rstrip('/')
+    def __init__(self, endpoint: str, api_key: str, deployment: str, api_version: str, is_override: bool,
+                 embedding_endpoint: str, embedding_model: str, embedding_deployment: str, embedding_api_version: str, embedding_api_key: str):
+        self.endpoint = endpoint
         self.api_key = api_key
         self.deployment = deployment
         self.api_version = api_version
         self.is_override = is_override
-        # Embedding fallbacks
-        self.embedding_endpoint = (embedding_endpoint or endpoint).rstrip('/')
-        default_embed_model = "text-embedding-3-large"
-        self.embedding_model = embedding_model or default_embed_model
-        self.embedding_deployment = embedding_deployment or self.embedding_model
-        self.embedding_api_version = embedding_api_version or "2024-02-01"
-        self.embedding_api_key = embedding_api_key or api_key
+        self.embedding_endpoint = embedding_endpoint
+        self.embedding_model = embedding_model
+        self.embedding_deployment = embedding_deployment
+        self.embedding_api_version = embedding_api_version
+        self.embedding_api_key = embedding_api_key
 
     def base_url(self) -> str:
         return f"{self.endpoint}/openai/deployments/{self.deployment}"
