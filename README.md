@@ -155,41 +155,34 @@ Behavior:
 - If REST fails or required vars are missing, it falls back once to a lightweight union query enumeration (`union-query`).
 - Results (table list + manifest map) are cached for the TTL to avoid repeated enumeration.
 
-### Workspace Schema Polling & Status
-The web UI and API use a non-blocking pattern for initial workspace schema enumeration to prevent long request hangs during Azure authentication or large table scans.
+### Workspace Schema (Stateless Fetch Model)
+The workspace schema subsystem has been simplified: all requests now perform a **fresh, stateless fetch** using `get_workspace_schema()` with no in‑process cache, no background polling threads, and no refresh flags.
 
-Endpoints:
-- `GET /api/workspace-schema` – Returns either `status="pending"` (schema still loading) or `status="ready"` with full table + enrichment data.
-- `GET /api/workspace-schema-status` – Lightweight health/status check with: `status`, `in_progress`, `error`, `cached_tables`, and `last_retrieved_at`.
+Current Endpoints:
+- `GET /api/workspace-schema` – Returns the enriched schema immediately (or an error). Response includes `status="ready"` and enrichment data; pending states were removed.
+- `GET /api/workspace-schema-status` – Lightweight stateless check. Returns `status` of `uninitialized`, `ready` (tables found) or `empty` (no tables). No long‑running flags or cached counts.
+- `POST /api/refresh-workspace-schema` – Optional direct refetch (primarily for manual user-triggered refreshes); accepts `{ "refetch": true }` body. No background threading.
+- `POST /api/clear-workspace-cache` – Kept for backward compatibility; always returns success (cache was removed).
 
-Polling Contract:
-1. Call `/api/setup` to initialize the agent for a workspace.
-2. Immediately call `/api/workspace-schema` – expect `{"success": false, "status": "pending"}` if first fetch not complete.
-3. Poll `/api/workspace-schema-status` every ~500–1000 ms until `status == "ready"` or `error` is populated.
-4. Once ready, switch to a slower refresh cadence (e.g. every few minutes) since schema is cached (default TTL ~20 minutes unless overridden).
+Removed Concepts:
+- Background fetch threads & race mitigation loops.
+- Refresh flag dictionaries (`_workspace_schema_refresh_flags`, `_workspace_schema_refresh_errors`) and lock.
+- Cached workspace schema object & enrichment persistence.
 
-Environment Flags:
-- `WORKSPACE_SCHEMA_SYNC_FETCH=1` – Force legacy synchronous behavior (single request blocks until schema loaded). Use only for debugging; can trigger long waits.
-- `DOCS_ENRICH_DISABLE=1` – Skip Microsoft Docs enrichment (faster; no external calls).
-- `DOCS_META_MAX_SECONDS` – Per-request time budget for metadata enrichment phase.
-- `DOCS_ENRICH_MAX_TABLES` / `DOCS_ENRICH_MAX_SECONDS` – Bounds for docs table enrichment to keep endpoint responsive.
+Environment Variables Still Relevant:
+- `DOCS_ENRICH_DISABLE=1` – Disable Microsoft Docs enrichment for queries & table metadata.
+- `DOCS_META_MAX_SECONDS` – Time budget for metadata enrichment pass.
+- `DOCS_ENRICH_MAX_TABLES` / `DOCS_ENRICH_MAX_SECONDS` – Limits for docs table enrichment phase.
 
-Error Handling:
-- If background enumeration fails, `/api/workspace-schema` remains `pending` but `/api/workspace-schema-status` includes `error` text (e.g. authentication failures).
-- Client may trigger a manual retry by re-calling `/api/workspace-schema` (starts a new background thread if none in progress).
+Upgrade Notes:
+- If you previously polled until `status="pending"` flipped to `ready`, switch to using `workspace-schema-status` once and then call `workspace-schema` directly.
+- Client code relying on `in_progress`, `cached_tables`, or `last_retrieved_at` from the old status endpoint should be updated to use `table_count` and `retrieved_at` (if provided) or adapt to the simplified model.
+- Feature toggles related to synchronous vs asynchronous fetch (`WORKSPACE_SCHEMA_SYNC_FETCH`) are deprecated and ignored.
 
-Best Practices:
-- Prefer status endpoint for UI spinners to avoid large JSON payload churn during pending state.
-- Always respect time budgets; do not extend enrichment loops beyond configured limits.
-- For automation, set a max overall wait (e.g. 30 seconds) before surfacing an operational alert.
-
-Synchronous Mode Use Cases:
-- Local debugging of schema retrieval logic.
-- Profiling retrieval timings without polling overhead.
-
-Do NOT enable synchronous mode in production or shared demos; it can degrade perceived responsiveness.
-
-You can safely omit these vars for development; the fallback still works, just with slightly more overhead.
+Benefits:
+- Reduced complexity & fewer edge cases.
+- Immediate clarity for UI (no transitional polling loop).
+- Simpler error surface—any retrieval issue appears directly in the schema or status response.
 
 ### Few-Shot Example Selection
 
@@ -310,6 +303,51 @@ The system includes curated examples for:
 - **App Dependencies** (`app_dependencies_kql_examples.md`): External service monitoring
 - **Performance** (`app_performance_kql_examples.md`): Performance metrics
 - **Usage Analytics** (`usage_kql_examples.md`): Usage patterns and statistics
+
+### 📦 Container & AKS CSV Example Ingestion
+
+Container-focused query examples (AKS pods, logs, events, nodes, metrics) are now ingested from **CSV files** instead of ad‑hoc markdown parsing for consistent structure and fast dedup:
+
+Source directory: `containers_capsule/kql_examples/`
+
+Files (used for suggestions):
+| File | Primary Table | Notes |
+|------|---------------|-------|
+| `ContainerLogV2_kql_examples.csv` | `ContainerLogV2` | Curated prompt→query pairs for container logs |
+| `KubePodInventory_kql_examples.csv` | `KubePodInventory` | Pod lifecycle / restart / scheduling examples |
+
+Embeddings-only corpus (NOT used for UI suggestions):
+| File | Purpose |
+|------|---------|
+| `containers_capsule/public_shots.csv` | Larger mixed container queries leveraged solely for NL→KQL embedding index construction.
+
+Loader module: `examples_loader.py`
+
+Behavior:
+1. Parses suggestion CSVs (`*_kql_examples.csv`) with columns: `Prompt`, `Query`.
+2. Normalizes query text (line endings, trims, collapses blank lines).
+3. Maps rows to their single primary table (based on filename).
+4. Deduplicates queries per table by normalized code.
+5. Caches parsed results using file mtimes (fast repeat calls on `/api/workspace-schema`).
+6. Merges into enrichment pipeline (precedence: `manifest > capsule-csv > docs`).
+
+The `public_shots.csv` file is intentionally excluded from suggestion ingestion to avoid overwhelming UI panels; it remains an embedding-only asset improving semantic few-shot selection quality.
+
+Returned queries include a `source` field (`capsule-csv`) and `file` for provenance, enabling the UI or downstream tooling to show origin badges.
+
+To refresh after editing a CSV, simply touch or save the file; the next request to `/api/workspace-schema` re-parses it automatically. Force rebuild logic can be added later if needed.
+
+Edge Cases & Safeguards:
+- Rows lacking a `Query` cell are skipped.
+- Queries with no detected table (in `public_shots.csv`) are ignored to avoid noisy unrelated suggestions.
+- Multi-table references (joins) are attached to every detected table so each table’s suggestion panel gains visibility.
+
+Future Improvements (Ideas):
+- Add lightweight semantic tagging (e.g. performance vs reliability) to each row.
+- Enable filtering by time-range intent (e.g. last 1h vs historical window) via regex hints.
+- Provide a `/api/capsule-queries` endpoint for direct inspection.
+
+This enhancement significantly improves container domain coverage and aligns ingestion with embedding index determinism and maintainability.
 
 ## 🛠️ Available Commands
 

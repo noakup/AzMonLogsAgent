@@ -1,0 +1,4 @@
+﻿Prompt,Query
+calculate error rate by workload in the last 30m,"ContainerLogV2 | where TimeGenerated > ago(30m) | extend Labels = KubernetesMetadata.podLabels | extend WorkloadName = tostring(coalesce(Labels[""app.kubernetes.io/name""], Labels[""app""], PodName)) | extend IsError = LogLevel in~ (""CRITICAL"",""ERROR"") or LogSource==""stderr"" | summarize Errors=countif(IsError), Total=count() by WorkloadName, PodNamespace | extend ErrorRatePct = 100.0 * Errors / iff(Total==0,1,Total) | order by ErrorRatePct desc"
+List noisy Containers (Container with the highest log volume), "ContainerLogV2 | where TimeGenerated > ago(1h) | summarize logs_count=count() by ContainerName | top 20 by logs_count desc"
+Show logs of containers that terminated in the last hour,"KubePodInventory | where TimeGenerated > ago(1h) | where ContainerStatus == ""terminated"" | join kind=inner (    ContainerLogV2) on $left.Name == $right.PodName, $left.ContainerID == $right.ContainerId"

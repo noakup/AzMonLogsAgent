@@ -64,8 +64,9 @@ def _examples_hash(examples: List[Dict[str,str]]) -> str:
 
 # --------------------- Index Build --------------------- #
 
-def build_domain_index(domain: str, examples: List[Dict[str,str]]) -> Dict:
-    questions = [ex.get("question", "") for ex in examples]
+def build_domain_index(domain: str, public_shots: List[Dict[str,str]]) -> Dict:
+    questions = [shot.get("question", "") for shot in public_shots]
+    print(f"[embed-index] building domain={domain}")
     if not questions:
         return {
             "schema_version": SCHEMA_VERSION,
@@ -74,38 +75,26 @@ def build_domain_index(domain: str, examples: List[Dict[str,str]]) -> Dict:
             "embedding_model": None,
             "embedding_deployment": None,
             "vector_dim": 0,
-            "examples_hash": _examples_hash(examples),
+            "examples_hash": _examples_hash(public_shots),
             "examples": []
         }
     cfg = load_config()
     vectors = create_embeddings(questions)
     if vectors is None or not vectors:
-        if os.environ.get("REQUIRE_EMBEDDINGS", "0") == "1":
-            raise RuntimeError("Embeddings required but unavailable for index build.")
-        print(f"[embed-index] build skipped (no vectors) domain={domain}")
-        return {
-            "schema_version": SCHEMA_VERSION,
-            "domain": domain,
-            "created_at": datetime.utcnow().isoformat() + "Z",
-            "embedding_model": cfg.embedding_model if cfg else None,
-            "embedding_deployment": cfg.embedding_deployment if cfg else None,
-            "vector_dim": 0,
-            "examples_hash": _examples_hash(examples),
-            "examples": []
-        }
+        raise RuntimeError("Embeddings required but unavailable for index build.")
     dim = len(vectors[0]) if vectors and vectors[0] else 0
-    examples_hash = _examples_hash(examples)
+    examples_hash = _examples_hash(public_shots)
     payload = {
         "schema_version": SCHEMA_VERSION,
         "domain": domain,
         "created_at": datetime.utcnow().isoformat() + "Z",
-        "embedding_model": cfg.embedding_model if cfg else None,
-        "embedding_deployment": cfg.embedding_deployment if cfg else None,
+        "embedding_model": cfg.embedding_model,
+        "embedding_deployment": cfg.embedding_deployment,
         "vector_dim": dim,
         "examples_hash": examples_hash,
         "examples": []
     }
-    for i, ex in enumerate(examples):
+    for i, ex in enumerate(public_shots):
         payload["examples"].append({
             "id": i,
             "question": ex.get("question", ""),
@@ -118,36 +107,36 @@ def build_domain_index(domain: str, examples: List[Dict[str,str]]) -> Dict:
     with open(tmp_path, "w", encoding="utf-8") as f:
         json.dump(payload, f)
     os.replace(tmp_path, final_path)
-    print(f"[embed-index] built domain={domain} examples={len(examples)} dim={dim} path={final_path}")
+    print(f"[embed-index] built domain={domain} examples={len(public_shots)} dim={dim} path={final_path}")
     return payload
 
 # --------------------- Load or Build --------------------- #
 
-def load_or_build_domain_index(domain: str, examples: List[Dict[str,str]]) -> Dict:
+def load_or_build_domain_index(domain: str, public_shots: List[Dict[str,str]]) -> Dict:
     path = _index_path(domain)
     force = os.environ.get("EMBED_INDEX_FORCE_REBUILD", "0") == "1"
-    current_hash = _examples_hash(examples)
+    current_hash = _examples_hash(public_shots)
     if force:
         print(f"[embed-index] force rebuild domain={domain}")
-        return build_domain_index(domain, examples)
+        return build_domain_index(domain, public_shots)
     if not os.path.exists(path):
-        return build_domain_index(domain, examples)
+        return build_domain_index(domain, public_shots)
     try:
         with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
     except Exception as e:
         print(f"[embed-index] corrupt or unreadable index; rebuilding domain={domain} err={e}")
-        return build_domain_index(domain, examples)
+        return build_domain_index(domain, public_shots)
     if data.get("schema_version") != SCHEMA_VERSION:
         print(f"[embed-index] schema_version mismatch; rebuilding domain={domain}")
-        return build_domain_index(domain, examples)
+        return build_domain_index(domain, public_shots)
     if data.get("examples_hash") != current_hash:
         print(f"[embed-index] examples changed; rebuilding domain={domain}")
-        return build_domain_index(domain, examples)
+        return build_domain_index(domain, public_shots)
     # Basic sanity
     if not isinstance(data.get("examples"), list):
         print(f"[embed-index] malformed examples list; rebuilding domain={domain}")
-        return build_domain_index(domain, examples)
+        return build_domain_index(domain, public_shots)
     print(f"[embed-index] loaded domain={domain} examples={len(data['examples'])} dim={data.get('vector_dim')} path={path}")
     return data
 

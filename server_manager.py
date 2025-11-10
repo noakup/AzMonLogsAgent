@@ -15,9 +15,9 @@ except Exception:
     build_domain_index = None  # type: ignore
     load_or_build_domain_index = None  # type: ignore
 
-def _collect_container_examples() -> list[dict[str,str]]:
-    """Load container domain examples strictly from CSV; no markdown fallback."""
-    csv_path = os.path.join(os.getcwd(), "containers_capsule", "kql_examples", "public_shots.csv")
+def _collect_container_public_shots() -> list[dict[str,str]]:
+    """Load container public shots."""
+    csv_path = os.path.join(os.getcwd(), "containers_capsule", "public_shots.csv")
     import csv
     out: list[dict[str,str]] = []
     if not os.path.exists(csv_path):
@@ -232,11 +232,12 @@ def embed_index_rebuild(domain: str):
         return
     total = 0
     if domain in ("containers","all"):
-        ex_cont = _collect_container_examples()
-        if not ex_cont:
+        container_public_shots = _collect_container_public_shots()
+        if not container_public_shots:
             click.echo("⚠️ Containers CSV missing or empty; building an empty containers index (no examples).")
-        build_domain_index("containers", ex_cont)
-        click.echo(f"🔄 Rebuilt containers index with {len(ex_cont)} examples (empty OK).")
+        print(f"---------------- [embed-index] building containers index with: {container_public_shots} examples")
+        build_domain_index("containers", container_public_shots)
+        click.echo(f"🔄 Rebuilt containers index with {len(container_public_shots)} examples (empty OK).")
         total += 1
     if domain in ("appinsights","all"):
         ex_app = _collect_appinsights_examples()

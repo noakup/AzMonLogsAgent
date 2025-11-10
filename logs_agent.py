@@ -295,7 +295,51 @@ class KQLAgent:
             else:
                 return f"❌ Connection test failed: {result['error']}"
         
-        # Step 3: Translate natural language to KQL
+        # Step 3: Direct match against curated capsule CSV examples (skip model translation if exact prompt match)
+        # try:
+        #     from examples_loader import load_capsule_csv_queries  # local import to avoid hard dependency if module missing
+        #     capsule_map = load_capsule_csv_queries()  # { table: [ { name, prompt, code, ... } ] }
+        #     # Flatten prompt->code mapping
+        #     prompt_lookup = {}
+        #     for entries in capsule_map.values():
+        #         for e in entries:
+        #             # Prefer explicit prompt field; fallback to legacy name
+        #             prompt_val = (e.get('prompt') or e.get('name') or '').strip()
+        #             code_val = e.get('code') or ''
+        #             if prompt_val and code_val:
+        #                 prompt_lookup.setdefault(prompt_val, code_val)
+        #     # Exact match (case-insensitive)
+        #     for prompt_key, kql_direct in prompt_lookup.items():
+        #         if prompt_key.lower() == question.lower().strip():
+        #             print("⚡ Exact prompt match found in capsule examples; skipping model translation.")
+        #             kql_query = kql_direct
+        #             # Detect timespan from query
+        #             timespan_hours = self.detect_query_timespan(kql_query)
+        #             result = await self.call_mcp_tool("execute_kql_query", {
+        #                 "workspace_id": self.workspace_id,
+        #                 "query": kql_query,
+        #                 "timespan_hours": timespan_hours
+        #             })
+        #             if result.get("success"):
+        #                 tables = result.get("tables")
+        #                 formatted_results = self.format_table_results(tables)
+        #                 return {
+        #                     "type": "query_success",
+        #                     "kql_query": kql_query,
+        #                     "data": formatted_results,
+        #                     "message": "✅ Query executed successfully (direct example)"
+        #                 }
+        #             else:
+        #                 return {
+        #                     "type": "query_error",
+        #                     "kql_query": kql_query,
+        #                     "error": result.get('error'),
+        #                     "message": f"❌ Query execution failed (direct example): {result.get('error')}"
+        #                 }
+        # except Exception as direct_exc:  # noqa: BLE001
+        #     print(f"[DirectExample] Lookup failed (will fall back to translation): {direct_exc}")
+
+        # Step 4: Translate natural language to KQL
         print("🔄 Translating natural language to KQL (with retry logic)...")
         
         try:
