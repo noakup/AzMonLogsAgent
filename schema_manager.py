@@ -130,23 +130,17 @@ class SchemaManager:
             t_enrich_start = time.time()
             enriched_tables: List[Dict[str, Any]] = []
             for tbl in tables:
-                print(f"[Workspace Schema] Starting enrich loop for table: {tbl}")
                 if isinstance(tbl, dict):
                     name_val = tbl.get("name") or tbl.get("tableName") or str(tbl)
-                    print(f"[Workspace Schema] Enriching table: {name_val}")
                     metadata_copy = {k: v for k, v in tbl.items() if k != "name"}
-                    print(f"[Workspace Schema] Enriched table: {name_val} metadata={metadata_copy}")
                 else:
                     name_val = str(tbl)
-                    print(f"[Workspace Schema] Enriching table: {name_val}")
                     metadata_copy = {}
-                    print(f"[Workspace Schema] Enriched table: {name_val} metadata={metadata_copy}")
                 if not name_val:
                     print(f"[Workspace Schema] Skipping table with no name")
                     continue
                 resource_types = table_resource_types.get(name_val, [])
                 resource_type = table_primary_resource_type.get(name_val, "Unknown")
-                print(f"[Workspace Schema] Enriching table: {name_val} with resource types: {resource_types or ['Unknown']}")
                 enriched_entry = {"name": name_val, "resource_type": resource_type, **metadata_copy}
                 if resource_types:
                     enriched_entry["manifest_resource_types"] = resource_types

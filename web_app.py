@@ -1330,8 +1330,8 @@ def process_query():
             # Expose examples_error and candidate scores when container selection failed
             if isinstance(result, str) and result.startswith('// Error') and 'domain=containers' in result and 'selected_example_count=0' in result:
                 try:
-                    from nl_to_kql import load_container_examples
-                    ctx = load_container_examples(question)
+                    from nl_to_kql import load_container_shots
+                    ctx = load_container_shots(question)
                     response_payload['examples_error'] = ctx.get('examples_error')
                     response_payload['top_candidate_scores'] = ctx.get('top_candidate_scores')
                 except Exception as expose_exc:

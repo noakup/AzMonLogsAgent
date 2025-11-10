@@ -94,7 +94,7 @@ def derive_context_addendum(user_query: str) -> str:
             hits.append(snippet)
     hits = list(dict.fromkeys(hits))  # de-duplicate preserving order
     if not hits:
-        return "(No additional context deemed necessary)"
+        return ""
     return "\n".join(f"- {h}" for h in hits)
 
 
@@ -194,7 +194,7 @@ def build_prompt(
         functions_kql_path = functions_kql_path_fallback_old
     function_raw = _safe_read(functions_kql_path)
     fn_index = extract_function_index(function_raw)
-    fn_index_block = "\n".join(f"- {f}" for f in fn_index) if fn_index else "(No functions detected)"
+    fn_index_block = "\n".join(f"- {f}" for f in fn_index) if fn_index else ""
 
     # L3 Retrieval
     addendum = derive_context_addendum(user_query)
@@ -214,8 +214,10 @@ def build_prompt(
     parts: List[str] = [system_text]
     if capsule_included:
         parts.append("Domain Capsule:\n" + capsule_text)
-    parts.append("Functions:\n" + fn_index_block)
-    parts.append("Context Addendum:\n" + addendum)
+    if fn_index_block:
+        parts.append("Functions:\n" + fn_index_block)
+    if addendum:
+        parts.append("Context Addendum:\n" + addendum)
     parts.append("User Query (clarified):\n" + clarified)
     parts.append(directive)
 

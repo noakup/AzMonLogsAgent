@@ -191,7 +191,7 @@ def build_chat_request(
     Backwards compatible: if overrides not provided, env/defaults are used.
     """
     # Default increased from 500 -> 1000 to allow more reasoning/output without requiring env override.
-    env_max = get_env_int("AZURE_OPENAI_MAX_OUTPUT_TOKENS", 1000, min_value=50, max_value=4000)
+    env_max = get_env_int("AZURE_OPENAI_MAX_OUTPUT_TOKENS", 2000, min_value=50, max_value=4000)
     out_tokens = max_tokens if max_tokens is not None else env_max
     if is_o_model:
         return build_payload(messages, is_o_model=True, max_output_tokens=out_tokens)

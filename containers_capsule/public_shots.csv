@@ -12,9 +12,25 @@ Identify pods that have restarted recently,"KubePodInventory
 | summarize arg_max(TimeGenerated, *) by PodUid
 | where PodRestartCount > 0
 | project TimeGenerated, Name, PodUid, Namespace, PodStartTime, PodRestartCount, PodStatus, ContainerStatus"
+Logs of terminated containers from the last 24 hours,"KubePodInventory 
+| where TimeGenerated > ago(24h) 
+| where ContainerStatus == ""terminated"" 
+| join kind=inner (ContainerLogV2) on $left.Name == $right.PodName, $left.ContainerID == $right.ContainerId"
 "Logs of container ""abc"" from the last 2 days","ContainerLogV2
 | where TimeGenerated > ago(2d)
 | where ContainerName == ""abc"""
+calculate error rate by workload last 30m,"ContainerLogV2
+| where TimeGenerated > ago(30m)
+| extend Labels = KubernetesMetadata.podLabels
+| extend WorkloadName = tostring(coalesce(Labels[""app.kubernetes.io/name""], Labels[""app""], PodName))
+| extend IsError = LogLevel in~ (""CRITICAL"",""ERROR"") or LogSource==""stderr""
+| summarize Errors=countif(IsError), Total=count() by WorkloadName, PodNamespace
+| extend ErrorRatePct = 100.0 * Errors / iff(Total==0,1,Total)
+| order by ErrorRatePct desc"
+Noisy Containers (Container with the highest log volume),"ContainerLogV2
+| where TimeGenerated > ago(1h)
+| summarize logs_count=count() by ContainerName, PodNamespace
+| top 20 by logs_count desc"
 "ordered logs of pods with ""agent"" in the last 5 minutes","ContainerLogV2
 | where TimeGenerated > ago(5m)
 | where PodName has ""agent""
@@ -222,7 +238,6 @@ Chart the 95 percentile of CPU usage nano cored per node ID over last day,"Perf
 | render timechart "
 What is the average memory usage of each nodes?,"KubeNodeInventory
 | where TimeGenerated > ago(1h)
-// cluster filter would go here if multiple clusters are reporting to the same Log Analytics workspace
 | distinct ClusterName, Computer, _ResourceId
 | join hint.strategy=shuffle (
   Perf
@@ -266,34 +281,7 @@ KubeNodeInventory
 | where TimeGenerated > ago(4h)
 | project TimeGenerated, Computer, ClusterName, UsageValue, UsagePercent = UsageValue * 100.0 / LimitValue, NodeId=strcat(_ResourceId, ""/"", Computer)
 | project TimeGenerated, UsagePercent, Computer
-| render timechart 
-
-| summarize any(UsageValue) by bin(TimeGenerated, binSize)
-
-| render timechart  
-
-KubeNodeInventory
-| where TimeGenerated > ago(1h)
-// cluster filter would go here if multiple clusters are reporting to the same Log Analytics workspace
-| distinct ClusterName, Computer, _ResourceId
-| join hint.strategy=shuffle (
-  Perf
-  | where TimeGenerated > ago(1h)
-  | where ObjectName == 'K8SNode'
-  | where CounterName == ""memoryCapacityBytes""
-  | summarize LimitValue = max(CounterValue) by Computer, CounterName
-  | project Computer, LimitValue
-) on Computer
-| join kind=inner hint.strategy=shuffle (
-  Perf
-  | where TimeGenerated > ago(1h)
-  | where ObjectName == 'K8SNode'
-  | where CounterName == ""memoryRssBytes""
-  | project Computer, UsageValue = CounterValue, TimeGenerated
-) on Computer
-| where TimeGenerated > ago(1h)
-| project ClusterName, Computer, TimeGenerated, UsagePercent = UsageValue * 100.0 / LimitValue, NodeId=strcat(_ResourceId, ""/"", Computer)
-| summarize AverageUsagePercent = round(avg(UsagePercent),2) by ClusterName, NodeId"
+| render timechart" 
 Show me the readiness of each node in my cluster,"// Readiness status per node 
 // For all your cluster view count of all the nodes by readiness. 
 // To create an alert for this query, click '+ New alert rule'
