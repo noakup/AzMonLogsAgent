@@ -1,0 +1,100 @@
+flowchart TD
+    %% Core user entry
+    U[User Browser / Frontend] -->|HTTP| WA[Flask Web App]
+
+    %% Web App endpoints cluster
+    subgraph Endpoints
+        WS[/GET /api/workspace-schema/]
+        QRY[/POST /api/query/]
+        EXPL[/POST /api/explain/]
+        SETUP[/POST /api/setup/]
+        REFRESH[/POST /api/refresh-manifest/]
+    end
+
+    WA --> WS
+    WA --> QRY
+    WA --> EXPL
+    WA --> SETUP
+    WA --> REFRESH
+
+    %% Manifest & schema
+    subgraph Schema Layer
+        SM[SchemaManager]
+        NG[NGSchema *.manifest.json]
+    end
+    SETUP --> SM
+    REFRESH --> SM
+    SM --> NG
+
+    %% Workspace schema fetch
+    WS --> SM
+    SM -->|tables + resource types| WA
+
+    %% Query enrichment sources
+    subgraph Enrichment Sources
+        CAPSULE_CSV[Capsule CSV Examples]
+        DOCS[Microsoft Docs (Table & Query Pages)]
+        MANIFEST_Q[Manifest Table Queries]
+    end
+
+    WS --> CAPSULE_CSV
+    WS --> MANIFEST_Q
+    WS --> DOCS
+
+    %% Examples & embeddings selection
+    subgraph Examples & Index
+        EXL[Examples Loader]
+        IDX[Embedding Index]
+    end
+
+    CAPSULE_CSV --> EXL
+    MANIFEST_Q --> EXL
+    DOCS --> EXL
+    EXL --> IDX
+
+    %% KQL Agent internals
+    subgraph KQL Agent
+        AG[KQLAgent]
+        DETECT[Domain Detection]
+        PROMPT[Prompt Builder]
+        FEWSHOT[Few-shot Selector]
+        EXEC[Query Executor]
+        EXPLAIN[Result Explainer]
+    end
+
+    QRY --> AG
+    AG --> DETECT
+    AG --> FEWSHOT
+    FEWSHOT --> EXL
+    FEWSHOT --> IDX
+    AG --> PROMPT
+
+    %% Azure OpenAI usage
+    PROMPT --> AOAI[Azure OpenAI]
+    FEWSHOT --> AOAI
+    EXPLAIN --> AOAI
+
+    %% Logs execution
+    EXEC --> LA[Azure Monitor Logs (Log Analytics)]
+    AG --> EXEC
+    LA --> AG
+
+    %% Explain flow
+    EXPL --> AG
+    AG --> EXPLAIN
+    EXPLAIN --> AOAI
+
+    %% Data returns
+    AG -->|query_success + results| QRY
+    AG -->|explanation| EXPL
+    WS -->|merged schema JSON| U
+    QRY -->|results JSON| U
+    EXPL -->|explanation JSON| U
+
+    %% Caching / persistence notes
+    SM -. no cache (stateless fetch) .- WA
+    IDX -. persisted embedding vectors .- FEWSHOT
+
+    %% Styling hints (optional)
+    classDef ext fill:#f7f7ff,stroke:#4a6,stroke-width:1px;
+    class NG,DOCS,CAPSULE_CSV,LA,AOAI ext;

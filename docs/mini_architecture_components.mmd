@@ -1,0 +1,89 @@
+# Minimal Sequence Diagram (Core Flows)
+
+This diagram captures the principal runtime interactions of the AzMon Logs Agent service.
+
+Actors / Components:
+- User Browser (Front-End UI)
+- Flask Web App (`web_app.py` endpoints)
+- SchemaManager (manifest + workspace schema loader)
+- Examples Loader (capsule CSV + markdown few-shots)
+- Embedding Index (optional relevance selection)
+- KQLAgent (`logs_agent.py` translation + execution + explanation)
+- Azure OpenAI (embeddings + chat completion)
+- Azure Monitor Logs (Log Analytics / `LogsQueryClient`)  
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant U as User Browser
+    participant W as Flask Web App
+    participant S as SchemaManager
+    participant E as Examples Loader / Embedding Index
+    participant A as KQLAgent
+    participant OAI as Azure OpenAI
+    participant LA as Azure Monitor Logs
+
+    %% 1. Workspace Setup
+    U->>W: POST /api/setup (workspace_id)
+    W->>S: load_manifest() & get_workspace_schema(workspace_id)
+    S-->>W: tables + resource types + metadata
+    W-->>U: setup confirmation (workspace_id)
+
+    %% 2. Fetch Enriched Workspace Schema
+    U->>W: GET /api/workspace-schema
+    W->>S: get_workspace_schema(workspace_id)
+    S-->>W: workspace tables
+    W->>E: load_capsule_csv_queries() (CSV prompts)
+    W->>S: (manifest table_queries, table_metadata)
+    alt Docs enrichment enabled
+        W->>W: _fetch_table_docs_queries()/full() (best-effort)
+    end
+    W-->>U: merged schema + table_queries (manifest + capsule CSV + docs)
+
+    %% 3. Translate & Execute Query
+    U->>W: POST /api/query { nl_question }
+    W->>A: translate_and_execute(nl_question)
+    A->>A: detect_domain(nl_question)
+    A->>E: load_domain_context(domain, nl_question)
+    A->>OAI: create_embeddings() (if index selection needed)
+    A->>OAI: chat_completion() (generate KQL)
+    OAI-->>A: KQL query
+    A->>LA: execute KQL (LogsQueryClient)
+    LA-->>A: query results
+    A-->>W: { query_success, kql, results }
+    W-->>U: structured query response
+
+    %% 4. Explain Results
+    U->>W: POST /api/explain { query_success }
+    W->>A: explain_results(query_success)
+    A->>OAI: chat_completion() (explanation prompt)
+    OAI-->>A: explanation text
+    A-->>W: { explanation, tables_summary }
+    W-->>U: explanation JSON
+
+    %% 5. Error Path (Example)
+    U->>W: POST /api/query { nl_question }
+    W->>A: translate_nl_to_kql()
+    A->>E: select few-shots (embeddings)
+    A->>OAI: chat_completion() (attempt 1)
+    OAI-->>A: // Error ...
+    A->>OAI: chat_completion() (slim retry)
+    OAI-->>A: final KQL or error
+    A-->>W: response (success or error)
+    W-->>U: display error state
+```
+
+## Flow Notes
+- Capsule text for containers domain is injected in the base layered prompt (avoid duplication); App Insights capsule added only on non-slim first attempt.
+- Token pressure triggers staged compression: (1) remove capsule, (2) truncate function signatures, (3) truncate few-shots.
+- Embedding Index is used opportunistically; if unavailable selection falls back to heuristic scoring. For containers, absence of selected examples aborts translation.
+- `/api/workspace-schema` is stateless; no persistent cache layer remains.
+- Docs enrichment is best-effort and bounded by time & table count; disabled via `DOCS_ENRICH_DISABLE`.
+
+## Potential Extensions
+- Add async execution queue for large result sets.
+- Pre-warm embedding indexes at setup for lower first-query latency.
+- Streaming token generation for long explanations.
+
+---
+Last updated: 2025-11-10
