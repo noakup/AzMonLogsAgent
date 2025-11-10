@@ -504,7 +504,6 @@ class KQLAgent:
             summary += f"- Columns: {', '.join(table.get('columns', []))}\n"
             summary += f"- Row count: {table.get('row_count', 0)}\n"
             
-            # Add sample of data (first 50 rows)
             # TBD: send all data if under limit (currently 1000 rows)
 
             rows = table.get('rows', [])
@@ -512,7 +511,7 @@ class KQLAgent:
             
             if rows and columns:
                 summary += f"- Sample data:\n"
-                for j, row in enumerate(rows[:50]):  # Show first 50 rows max
+                for j, row in enumerate(rows[:500]):  # Show first 500 rows max
                     row_data = []
                     for k, cell in enumerate(row):
                         if k < len(columns):
