@@ -73,7 +73,9 @@ At runtime:
 1. Extract intent keywords (e.g., error rate, crash loop, latency > 400ms, status=500).
 2. Select relevant functions by keyword match (error -> ContainerErrorRate; crash -> CrashLoopCorrelation; latency -> HighLatencyLogs).
 3. Pull only *relevant lines* from `containers_capsule/container_ontology.md` (section describing entity or pattern) if disambiguation needed.
-4. User Query Layer (L4)
+
+---
+## 6. User Query Layer (L4)
 Optionally rewrite for clarity (NOT altering semantic intent):
 ```
 Original: "why payment svc so many errs?"
@@ -81,13 +83,15 @@ Clarified: "Explain elevated error rate for payments workload last 2h and show t
 ```
 Add note if timeframe assumed: “Assuming last 1h (user unspecified).”
 
-5. Chain-of-Thought Guardrail (L5)
+---
+## 6. Chain-of-Thought Guardrail (L5)
 Internal reasoning instruction (NOT shown to user output):
 ```
 Think step-by-step silently; produce final answer in required format only. Do not expose internal reasoning.
 ```
 
-6. Output Format Directive (L6)
+---
+## 7. Output Format Directive (L6)
 Decision rules:
 | Situation | Output |
 |-----------|--------|
@@ -102,7 +106,8 @@ Add standard postamble for multi-query responses:
 -- Query 2: Detailed latency outliers
 ```
 
-7. Few-Shot Prompt Augmentation (Optional)
+---
+## 8. Few-Shot Prompt Augmentation (Optional)
 Include 2–3 minimal exemplars to anchor style:
 ```
 Q: Show error rate by workload last 30m.
@@ -112,7 +117,8 @@ A: Short cause hypothesis (uses KubePodInventory) + KQL.
 ```
 Ensure total tokens remain under system threshold.
 
-8. Safety & Data Minimization Additions
+---
+## 9. Safety & Data Minimization Additions
 Add to system layer:
 ```
 If logs appear to contain secrets (patterns: 'AKIA', 'Bearer ', '-----BEGIN'), mask value with '[REDACTED]'.
@@ -122,7 +128,8 @@ Add to domain capsule:
 Do not re-emit full stack traces longer than 40 lines; truncate with '[TRUNCATED]'.
 ```
 
- 9. Integrating with Existing Code
+---
+## 10. Integrating with Existing Code
 Where to store new prompts:
 - System template: `prompts/system_base.txt`
 - Domain capsule auto-gen: `prompts/domain_capsule_containerlogs.txt`
@@ -145,12 +152,14 @@ def build_prompt(user_query: str, intent_meta: dict) -> str:
     directive = decide_output_mode(clarified, intent_meta)
     return f"{system}\n\n{capsule}\n\nFunctions:\n{functions}\n\nContext Addendum:\n{retrieval}\n\nUser Request:\n{clarified}\n\n{directive}"
 ```
-10. Versioning & Drift Control
+---
+## 11. Versioning & Drift Control
 - Maintain `PROMPT_SCHEMA_VERSION` constant; increment if structure changes.
 - Include version at top of system prompt: `# PromptSchemaVersion:2`.
 - Log prompt hash with each AI invocation for reproducibility.
 
-11. Metrics for Prompt Effectiveness
+---
+## 12. Metrics for Prompt Effectiveness
 Track (store per invocation):
 - Token count (system vs user portion)
 - Query success (no syntax error / execution ok)

@@ -1,0 +1,55 @@
+sequenceDiagram
+    autonumber
+    participant U as User Browser
+    participant W as Flask Web App
+    participant S as SchemaManager
+    participant E as Examples Loader / Embedding Index
+    participant A as KQLAgent
+    participant OAI as Azure OpenAI
+    participant LA as Azure Monitor Logs
+
+    %% Workspace setup
+    U->>W: POST /api/setup (workspace_id)
+    W->>S: load_manifest() & get_workspace_schema()
+    S-->>W: tables + resource types
+    W-->>U: setup ack
+
+    %% Enriched schema fetch
+    U->>W: GET /api/workspace-schema
+    W->>S: get_workspace_schema()
+    W->>E: load_capsule_csv_queries()
+    alt Docs enrichment enabled
+        W->>W: _fetch_table_docs_queries()/full()
+    end
+    W-->>U: merged table_queries (manifest + capsule CSV + docs)
+
+    %% Query translation & execution
+    U->>W: POST /api/query { nl_question }
+    W->>A: translate_and_execute(nl_question)
+    A->>A: detect_domain()
+    A->>E: load_domain_context(domain, nl_question)
+    A->>OAI: create_embeddings() (optional)
+    A->>OAI: chat_completion() -> KQL
+    OAI-->>A: KQL
+    A->>LA: execute KQL
+    LA-->>A: results
+    A-->>W: query_success payload
+    W-->>U: results JSON
+
+    %% Explain results
+    U->>W: POST /api/explain { query_success }
+    W->>A: explain_results()
+    A->>OAI: chat_completion() (explanation)
+    OAI-->>A: explanation text
+    A-->>W: explanation JSON
+    W-->>U: explanation
+
+    %% Error + retry
+    U->>W: POST /api/query { nl_question }
+    W->>A: translate_nl_to_kql()
+    A->>OAI: chat_completion() attempt 1
+    OAI-->>A: // Error ...
+    A->>OAI: chat_completion() slim retry
+    OAI-->>A: KQL or error
+    A-->>W: final response
+    W-->>U: display error state
