@@ -1350,6 +1350,51 @@ def process_query():
             'traceback': traceback_str
         })
 
+@app.route('/api/explain', methods=['POST'])
+def explain_query_result():
+    """Explain previously returned query results.
+
+    Expects JSON body:
+      {
+        "query_result": <result object returned by /api/query>,
+        "original_question": "string"
+      }
+
+    Returns JSON:
+      success: bool
+      explanation: str (present on success)
+      error: str (present on failure)
+      timestamp: ISO8601
+    """
+    global agent
+    try:
+        if not agent:
+            return jsonify({'success': False, 'error': 'Agent not initialized'}), 400
+        payload = request.get_json(silent=True) or {}
+        query_result = payload.get('query_result')
+        original_question = payload.get('original_question', '')
+        if not query_result:
+            return jsonify({'success': False, 'error': 'query_result is required'}), 400
+        # Ensure result structure minimally matches expectations
+        if not isinstance(query_result, dict) or query_result.get('type') != 'query_success':
+            return jsonify({'success': False, 'error': 'query_result must be a successful query response'}), 400
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        try:
+            explanation = loop.run_until_complete(agent.explain_results(query_result, original_question))
+        finally:
+            loop.close()
+        if isinstance(explanation, str) and explanation.startswith('❌'):
+            return jsonify({'success': False, 'error': explanation}), 200
+        return jsonify({
+            'success': True,
+            'explanation': explanation,
+            'timestamp': datetime.now(timezone.utc).isoformat()
+        })
+    except Exception as e:  # noqa: BLE001
+        print(f"[Explain] Unexpected error: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
 @app.route('/api/refresh-workspace-schema', methods=['GET', 'POST'])
 def refresh_workspace_schema():
     """Compatibility refresh endpoint (stateless model).
