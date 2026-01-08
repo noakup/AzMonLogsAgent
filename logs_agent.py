@@ -365,7 +365,14 @@ class KQLAgent:
                 formatted_results = self.format_table_results(tables)
                 
                 # Format KQL with line breaks after each pipe for better readability
-                formatted_kql = kql_query.replace(' | ', '\n| ')
+                # Split into lines, find where actual KQL starts (after metadata comment)
+                lines = kql_query.split('\n')
+                metadata_lines = [line for line in lines if line.strip().startswith('//')]
+                kql_lines = [line for line in lines if not line.strip().startswith('//')]
+                
+                # Join KQL lines and format with line breaks after pipes
+                actual_kql = '\n'.join(kql_lines).strip()
+                formatted_kql = actual_kql.replace(' | ', '\n| ')
                 
                 # Return structured data for web interface
                 return {
