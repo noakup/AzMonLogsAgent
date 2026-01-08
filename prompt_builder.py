@@ -174,27 +174,34 @@ def build_prompt(
         system_text = _fallback_system_prompt()
 
     # L1 Capsule
-    capsule_path_new = os.path.join(REPO_ROOT, "containers_capsule", "domain_capsule_containerlogs.txt")
-    capsule_path_legacy = os.path.join(REPO_ROOT, "prompts", "domain_capsule_containerlogs.txt")
-    if os.path.exists(capsule_path_new):
-        capsule_text = _safe_read(capsule_path_new)
-    else:
-        capsule_text = _safe_read(capsule_path_legacy)
-    capsule_included = bool(capsule_text and include_capsule)
+    # Disabled: ignoring domain_capsule_containerlogs.txt
+    capsule_text = ""
+    capsule_included = False
+    # capsule_path_new = os.path.join(REPO_ROOT, "containers_capsule", "domain_capsule_containerlogs.txt")
+    # capsule_path_legacy = os.path.join(REPO_ROOT, "prompts", "domain_capsule_containerlogs.txt")
+    # if os.path.exists(capsule_path_new):
+    #     capsule_text = _safe_read(capsule_path_new)
+    # else:
+    #     capsule_text = _safe_read(capsule_path_legacy)
+    # capsule_included = bool(capsule_text and include_capsule)
 
     # L2 Function Index: new top-level capsule path first, fallback to legacy docs path for backward compatibility
-    functions_kql_path_new = os.path.join(REPO_ROOT, "containers_capsule", "kql_functions_containerlogs.kql")
-    functions_kql_path_legacy = os.path.join(REPO_ROOT, "docs", "containers_capsule", "kql_functions_containerlogs.kql")
-    functions_kql_path_fallback_old = os.path.join(REPO_ROOT, "docs", "kql_functions_containerlogs.kql")  # very old layout
-    if os.path.exists(functions_kql_path_new):
-        functions_kql_path = functions_kql_path_new
-    elif os.path.exists(functions_kql_path_legacy):
-        functions_kql_path = functions_kql_path_legacy
-    else:
-        functions_kql_path = functions_kql_path_fallback_old
-    function_raw = _safe_read(functions_kql_path)
-    fn_index = extract_function_index(function_raw)
-    fn_index_block = "\n".join(f"- {f}" for f in fn_index) if fn_index else ""
+    # Disabled: ignoring kql_functions_containerlogs.kql
+    function_raw = ""
+    fn_index = []
+    fn_index_block = ""
+    # functions_kql_path_new = os.path.join(REPO_ROOT, "containers_capsule", "kql_functions_containerlogs.kql")
+    # functions_kql_path_legacy = os.path.join(REPO_ROOT, "docs", "containers_capsule", "kql_functions_containerlogs.kql")
+    # functions_kql_path_fallback_old = os.path.join(REPO_ROOT, "docs", "kql_functions_containerlogs.kql")  # very old layout
+    # if os.path.exists(functions_kql_path_new):
+    #     functions_kql_path = functions_kql_path_new
+    # elif os.path.exists(functions_kql_path_legacy):
+    #     functions_kql_path = functions_kql_path_legacy
+    # else:
+    #     functions_kql_path = functions_kql_path_fallback_old
+    # function_raw = _safe_read(functions_kql_path)
+    # fn_index = extract_function_index(function_raw)
+    # fn_index_block = "\n".join(f"- {f}" for f in fn_index) if fn_index else ""
 
     # L3 Retrieval
     addendum = derive_context_addendum(user_query)
