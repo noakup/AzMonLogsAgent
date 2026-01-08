@@ -521,8 +521,13 @@ def _select_relevant_fewshots(nl_question: str, examples: List[Dict[str, str]]) 
         print(f"[fewshot-select] embedding_exception={embed_exc}")
         embeddings = None
     if (not embeddings or len(embeddings) != len(heuristic_records) + 1):
-        # no embeddings -> raise explicit error to caller for deterministic failure.
-        raise RuntimeError("Embeddings required but unavailable.")
+        # no embeddings -> fallback to heuristic-only selection
+        print(f"[fewshot-select] embeddings_unavailable fallback_to_heuristic_only")
+        best_matching_examples = [ex for _, ex in heuristic_records[:top_k]]
+        if not best_matching_examples and heuristic_records:
+            best_matching_examples = [ex for _, ex in heuristic_records[:min(2, len(heuristic_records))]]
+        print(f"[fewshot-select] heuristic_only=True selected={len(best_matching_examples)}")
+        return best_matching_examples
     
     hybrid_rows: List[Tuple[float, Dict[str, str]]] = []
 
