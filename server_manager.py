@@ -17,6 +17,9 @@ except Exception:
 
 def _collect_container_public_shots() -> list[dict[str,str]]:
     """Load container public shots."""
+    # Disabled: ignoring public_shots.csv file
+    return []
+    
     csv_path = os.path.join(os.getcwd(), "containers_capsule", "public_shots.csv")
     import csv
     out: list[dict[str,str]] = []
