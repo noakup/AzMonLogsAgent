@@ -103,8 +103,9 @@ def resource_examples():
             return s.replace(' ', '').lower()
 
         example_file = None
+        # Disabled: ignoring NGSchema directory
         ngschema_dir = os.path.join(os.path.dirname(__file__), 'NGSchema')
-        if os.path.exists(ngschema_dir):
+        if False:  # Disabled NGSchema scanning
             for root, dirs, _ in os.walk(ngschema_dir):
                 for d in dirs:
                     if _normalize(d) == _normalize(resource_type):
@@ -1016,9 +1017,10 @@ def _scan_manifest_resource_types() -> dict:
     if _workspace_resource_types_cache.get('resource_types') and _workspace_resource_types_cache.get('resource_type_tables'):
         return _workspace_resource_types_cache
 
+    # Disabled: ignoring NGSchema directory
     base_dir = os.path.join(os.path.dirname(__file__), 'NGSchema')
-    if not os.path.isdir(base_dir):
-        print('[Manifest Scan] NGSchema directory not found; skipping.')
+    if True:  # Disabled NGSchema scanning
+        print('[Manifest Scan] NGSchema scanning disabled.')
         _workspace_resource_types_cache.update({
             'resource_types': [],
             'providers': [],

@@ -193,12 +193,13 @@ class SchemaManager:
                 except Exception as e:  # pragma: no cover
                     print(f"[Manifest] Failed loading persisted manifest: {e}")
             # Perform fresh scan
-            print(f"[Manifest] Scanning NGSchema manifests force={force}")
+            # Disabled: ignoring NGSchema directory
+            print(f"[Manifest] NGSchema scanning disabled")
             base_dir = os.path.join(os.path.dirname(__file__), "NGSchema")
             mapping: Dict[str, List[str]] = {}
             table_resource_types: Dict[str, List[str]] = {}
             manifests_scanned = 0
-            if os.path.exists(base_dir):
+            if False:  # Disabled NGSchema scanning
                 for root, dirs, files in os.walk(base_dir):  # type: ignore[attr-defined]
                     for f in files:
                         if f.endswith('.manifest.json'):
