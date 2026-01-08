@@ -661,6 +661,28 @@
             letter-spacing: 0.5px;
         }
 
+        .copy-kql-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .copy-kql-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .copy-kql-btn:active {
+            transform: translateY(0);
+        }
+
         .query-header {
             font-size: 1.1rem;
             font-weight: 600;
@@ -1881,8 +1903,13 @@
               
             <!-- KQL Query Section -->
             <div class="kql-query-section">
-                <h3>📝 Generated KQL Query</h3>
-                <div class="kql-query" id="kqlQuery"></div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <h3>📝 Generated KQL Query</h3>
+                    <button onclick="copyKqlQuery()" class="copy-kql-btn" title="Copy to clipboard">
+                        📋 Copy
+                    </button>
+                </div>
+                <pre class="kql-query" id="kqlQuery"></pre>
             </div>
 
             <!-- Results Section -->
@@ -1913,6 +1940,29 @@
         let isConnected = false;
         let currentQueryResult = null; // Store current query result for explain feature
         let currentOriginalQuestion = '';
+        
+        // Copy KQL query to clipboard
+        function copyKqlQuery() {
+            const kqlElement = document.getElementById('kqlQuery');
+            if (!kqlElement || !kqlElement.textContent) return;
+            
+            const text = kqlElement.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                // Visual feedback
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✓ Copied!';
+                btn.style.background = 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy to clipboard');
+            });
+        }
+        
         function updateStatus(connected, message = '') {
             // Keep state but do not render any status indicator UI.
             isConnected = connected;
