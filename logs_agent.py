@@ -364,10 +364,13 @@ class KQLAgent:
                 tables = result["tables"]
                 formatted_results = self.format_table_results(tables)
                 
+                # Format KQL with line breaks after each pipe for better readability
+                formatted_kql = kql_query.replace(' | ', '\n| ')
+                
                 # Return structured data for web interface
                 return {
                     "type": "query_success",
-                    "kql_query": kql_query,
+                    "kql_query": formatted_kql,
                     "data": formatted_results,
                     "message": "✅ Query executed successfully"
                 }
